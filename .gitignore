@@ -3,6 +3,9 @@
 # dependencies
 /node_modules
 
+#build
+/dist
+
 #library-zips
 ng-uikit-pro-standard-6.1.0.tgz
 
