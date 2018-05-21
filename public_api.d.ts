@@ -1,1 +1,1 @@
-export * from './src/index';
+export * from './ng-uikit-pro-standard/index';
