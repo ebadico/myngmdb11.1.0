@@ -4,8 +4,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Observable, Subject, timer } from 'rxjs';
 import { DOCUMENT, DomSanitizer } from '@angular/platform-browser';
 import { FormControl, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
-import { Headers, Http, HttpModule, RequestOptions } from '@angular/http';
 import { catchError, map } from 'rxjs/operators';
+import { Headers, Http, HttpModule, RequestOptions } from '@angular/http';
 import 'hammerjs';
 import { NavigationCancel, NavigationEnd, NavigationError, Router, RouterLinkWithHref } from '@angular/router';
 import { __decorate, __metadata } from 'tslib';
@@ -109,6 +109,39 @@ SBItemComponent.propDecorators = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+class SBItemHeadComponent {
+    /**
+     * @param {?} sbItem
+     */
+    constructor(sbItem) {
+        this.sbItem = sbItem;
+    }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    toggleClick(event) {
+        event.preventDefault();
+        this.sbItem.collapsed = !this.sbItem.collapsed;
+        this.sbItem.toggle(this.sbItem.collapsed);
+    }
+}
+SBItemHeadComponent.decorators = [
+    { type: Component, args: [{
+                exportAs: 'sbItemHead',
+                selector: 'mdb-item-head',
+                template: "<div class=\"card-header\"> <a role=\"button\" (click)=\"toggleClick($event)\"> <h5 class=\"mb-0\"> <ng-content></ng-content> <i class=\"fa fa-angle-down rotate-icon\"></i> </h5> </a> </div>"
+            },] },
+];
+/** @nocollapse */
+SBItemHeadComponent.ctorParameters = () => [
+    { type: SBItemComponent, },
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 class SqueezeBoxComponent {
     constructor() {
         this.multiple = true;
@@ -147,39 +180,6 @@ SqueezeBoxComponent.propDecorators = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-class SBItemHeadComponent {
-    /**
-     * @param {?} sbItem
-     */
-    constructor(sbItem) {
-        this.sbItem = sbItem;
-    }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    toggleClick(event) {
-        event.preventDefault();
-        this.sbItem.collapsed = !this.sbItem.collapsed;
-        this.sbItem.toggle(this.sbItem.collapsed);
-    }
-}
-SBItemHeadComponent.decorators = [
-    { type: Component, args: [{
-                exportAs: 'sbItemHead',
-                selector: 'mdb-item-head',
-                template: "<div class=\"card-header\"> <a role=\"button\" (click)=\"toggleClick($event)\"> <h5 class=\"mb-0\"> <ng-content></ng-content> <i class=\"fa fa-angle-down rotate-icon\"></i> </h5> </a> </div>"
-            },] },
-];
-/** @nocollapse */
-SBItemHeadComponent.ctorParameters = () => [
-    { type: SBItemComponent, },
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
 const SQUEEZEBOX_COMPONENTS = [SqueezeBoxComponent, SBItemComponent, SBItemHeadComponent, SBItemBodyComponent];
 class AccordionModule {
 }
@@ -190,6 +190,72 @@ AccordionModule.decorators = [
                 exports: [SQUEEZEBOX_COMPONENTS]
             },] },
 ];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * The OverlayContainer is the container in which all overlays will load.
+ * It should be provided in the root component to ensure it is properly shared.
+ */
+class OverlayContainer {
+    /**
+     * This method returns the overlay container element.  It will lazily
+     * create the element the first time  it is called to facilitate using
+     * the container in non-browser environments.
+     * @return {?} the container element
+     */
+    getContainerElement() {
+        if (!this._containerElement) {
+            this._createContainer();
+        }
+        return this._containerElement;
+    }
+    /**
+     * Create the overlay container element, which is simply a div
+     * with the 'cdk-overlay-container' class on the document body.
+     * @return {?}
+     */
+    _createContainer() {
+        const /** @type {?} */ container = document.createElement('div');
+        container.classList.add('overlay-container');
+        document.body.appendChild(container);
+        this._containerElement = container;
+    }
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * Reference to an overlay that has been created with the Overlay service.
+ * Used to manipulate or dispose of said overlay.
+ */
+class OverlayRef {
+    /**
+     * @param {?} _portalHost
+     */
+    constructor(_portalHost) {
+        this._portalHost = _portalHost;
+    }
+    /**
+     * @param {?} portal
+     * @param {?} newestOnTop
+     * @return {?}
+     */
+    attach(portal, newestOnTop) {
+        return this._portalHost.attach(portal, newestOnTop);
+    }
+    /**
+     * Detaches an overlay from a portal.
+     * @return {?} Resolves when the overlay has been detached.
+     */
+    detach() {
+        return this._portalHost.detach();
+    }
+}
 
 /**
  * @fileoverview added by tsickle
@@ -362,72 +428,6 @@ class DomPortalHost extends BasePortalHost {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * Reference to an overlay that has been created with the Overlay service.
- * Used to manipulate or dispose of said overlay.
- */
-class OverlayRef {
-    /**
-     * @param {?} _portalHost
-     */
-    constructor(_portalHost) {
-        this._portalHost = _portalHost;
-    }
-    /**
-     * @param {?} portal
-     * @param {?} newestOnTop
-     * @return {?}
-     */
-    attach(portal, newestOnTop) {
-        return this._portalHost.attach(portal, newestOnTop);
-    }
-    /**
-     * Detaches an overlay from a portal.
-     * @return {?} Resolves when the overlay has been detached.
-     */
-    detach() {
-        return this._portalHost.detach();
-    }
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * The OverlayContainer is the container in which all overlays will load.
- * It should be provided in the root component to ensure it is properly shared.
- */
-class OverlayContainer {
-    /**
-     * This method returns the overlay container element.  It will lazily
-     * create the element the first time  it is called to facilitate using
-     * the container in non-browser environments.
-     * @return {?} the container element
-     */
-    getContainerElement() {
-        if (!this._containerElement) {
-            this._createContainer();
-        }
-        return this._containerElement;
-    }
-    /**
-     * Create the overlay container element, which is simply a div
-     * with the 'cdk-overlay-container' class on the document body.
-     * @return {?}
-     */
-    _createContainer() {
-        const /** @type {?} */ container = document.createElement('div');
-        container.classList.add('overlay-container');
-        document.body.appendChild(container);
-        this._containerElement = container;
-    }
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
  * Service to create Overlays. Overlays are dynamically added pieces of floating UI, meant to be
  * used as a low-level building building block for other components. Dialogs, tooltips, menus,
  * selects, etc. can all be built using overlays. The service should primarily be used by authors
@@ -518,52 +518,6 @@ Overlay.ctorParameters = () => [
 const OVERLAY_PROVIDERS = [
     Overlay,
     OverlayContainer,
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class ToastContainerDirective {
-    /**
-     * @param {?} el
-     */
-    constructor(el) {
-        this.el = el;
-    }
-    /**
-     * @return {?}
-     */
-    getContainerElement() {
-        return this.el.nativeElement;
-    }
-}
-ToastContainerDirective.decorators = [
-    { type: Directive, args: [{
-                selector: '[mdbToastContainer]',
-                exportAs: 'mdb-toast-container',
-            },] },
-];
-/** @nocollapse */
-ToastContainerDirective.ctorParameters = () => [
-    { type: ElementRef, },
-];
-class ToastContainerModule {
-    /**
-     * @return {?}
-     */
-    static forRoot() {
-        return {
-            ngModule: ToastContainerModule,
-            providers: []
-        };
-    }
-}
-ToastContainerModule.decorators = [
-    { type: NgModule, args: [{
-                exports: [ToastContainerDirective],
-                declarations: [ToastContainerDirective],
-            },] },
 ];
 
 /**
@@ -803,6 +757,52 @@ ToastComponent.propDecorators = {
     "stickAround": [{ type: HostListener, args: ['mouseenter',] },],
     "delayedHideToast": [{ type: HostListener, args: ['mouseleave',] },],
 };
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class ToastContainerDirective {
+    /**
+     * @param {?} el
+     */
+    constructor(el) {
+        this.el = el;
+    }
+    /**
+     * @return {?}
+     */
+    getContainerElement() {
+        return this.el.nativeElement;
+    }
+}
+ToastContainerDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[mdbToastContainer]',
+                exportAs: 'mdb-toast-container',
+            },] },
+];
+/** @nocollapse */
+ToastContainerDirective.ctorParameters = () => [
+    { type: ElementRef, },
+];
+class ToastContainerModule {
+    /**
+     * @return {?}
+     */
+    static forRoot() {
+        return {
+            ngModule: ToastContainerModule,
+            providers: []
+        };
+    }
+}
+ToastContainerModule.decorators = [
+    { type: NgModule, args: [{
+                exports: [ToastContainerDirective],
+                declarations: [ToastContainerDirective],
+            },] },
+];
 
 /**
  * @fileoverview added by tsickle
@@ -1242,11 +1242,6 @@ ToastModule.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
 // SideNav
 const slideIn = trigger('slideIn', [
     state('inactive', style({ opacity: 0, transform: 'translateX(-300%)' })),
@@ -1307,6 +1302,62 @@ const flyInOut = trigger('flyInOut', [
     transition('inactive => active', animate('300ms ease-in')),
     transition('active => removed', animate('300ms ease-in')),
 ]);
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @record
+ */
+
+class CompleterListItemComponent {
+    constructor() {
+        this.parts = [];
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        if (!this.searchStr) {
+            this.parts.push({ isMatch: false, text: this.text });
+            return;
+        }
+        const /** @type {?} */ matchStr = this.text.toLowerCase();
+        let /** @type {?} */ matchPos = matchStr.indexOf(this.searchStr.toLowerCase());
+        let /** @type {?} */ startIndex = 0;
+        while (matchPos >= 0) {
+            const /** @type {?} */ matchText = this.text.slice(matchPos, matchPos + this.searchStr.length);
+            if (matchPos === 0) {
+                this.parts.push({ isMatch: true, text: matchText });
+                startIndex += this.searchStr.length;
+            }
+            else if (matchPos > 0) {
+                const /** @type {?} */ matchPart = this.text.slice(startIndex, matchPos);
+                this.parts.push({ isMatch: false, text: matchPart });
+                this.parts.push({ isMatch: true, text: matchText });
+                startIndex += this.searchStr.length + matchPart.length;
+            }
+            matchPos = matchStr.indexOf(this.searchStr.toLowerCase(), startIndex);
+        }
+        if (startIndex < this.text.length) {
+            this.parts.push({ isMatch: false, text: this.text.slice(startIndex, this.text.length) });
+        }
+    }
+}
+CompleterListItemComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-completer-list-item',
+                template: "<span class=\"completer-list-item-holder\" [ngClass]=\"{'completer-title': type === 'title', 'completer-description': type === 'description'}\" > <span class=\"completer-list-item\" *ngFor=\"let part of parts\" [ngClass]=\"part.isMatch ? matchClass : null\">{{part.text}}</span> </span> "
+            },] },
+];
+/** @nocollapse */
+CompleterListItemComponent.propDecorators = {
+    "text": [{ type: Input },],
+    "searchStr": [{ type: Input },],
+    "matchClass": [{ type: Input },],
+    "type": [{ type: Input },],
+};
 
 /**
  * @fileoverview added by tsickle
@@ -2198,86 +2249,6 @@ CompleterComponent.propDecorators = {
  * @record
  */
 
-class CompleterListItemComponent {
-    constructor() {
-        this.parts = [];
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        if (!this.searchStr) {
-            this.parts.push({ isMatch: false, text: this.text });
-            return;
-        }
-        const /** @type {?} */ matchStr = this.text.toLowerCase();
-        let /** @type {?} */ matchPos = matchStr.indexOf(this.searchStr.toLowerCase());
-        let /** @type {?} */ startIndex = 0;
-        while (matchPos >= 0) {
-            const /** @type {?} */ matchText = this.text.slice(matchPos, matchPos + this.searchStr.length);
-            if (matchPos === 0) {
-                this.parts.push({ isMatch: true, text: matchText });
-                startIndex += this.searchStr.length;
-            }
-            else if (matchPos > 0) {
-                const /** @type {?} */ matchPart = this.text.slice(startIndex, matchPos);
-                this.parts.push({ isMatch: false, text: matchPart });
-                this.parts.push({ isMatch: true, text: matchText });
-                startIndex += this.searchStr.length + matchPart.length;
-            }
-            matchPos = matchStr.indexOf(this.searchStr.toLowerCase(), startIndex);
-        }
-        if (startIndex < this.text.length) {
-            this.parts.push({ isMatch: false, text: this.text.slice(startIndex, this.text.length) });
-        }
-    }
-}
-CompleterListItemComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'mdb-completer-list-item',
-                template: "<span class=\"completer-list-item-holder\" [ngClass]=\"{'completer-title': type === 'title', 'completer-description': type === 'description'}\" > <span class=\"completer-list-item\" *ngFor=\"let part of parts\" [ngClass]=\"part.isMatch ? matchClass : null\">{{part.text}}</span> </span> "
-            },] },
-];
-/** @nocollapse */
-CompleterListItemComponent.propDecorators = {
-    "text": [{ type: Input },],
-    "searchStr": [{ type: Input },],
-    "matchClass": [{ type: Input },],
-    "type": [{ type: Input },],
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @return {?}
- */
-function localDataFactory() {
-    return () => {
-        return new LocalData();
-    };
-}
-/**
- * @param {?} http
- * @return {?}
- */
-function remoteDataFactory(http$$1) {
-    return () => {
-        return new RemoteData(http$$1);
-    };
-}
-let LocalDataFactoryProvider = { provide: LocalData, useFactory: localDataFactory };
-let RemoteDataFactoryProvider = { provide: RemoteData, useFactory: remoteDataFactory, deps: [Http] };
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @record
- */
-
 class CtrRowItem {
     /**
      * @param {?} row
@@ -3039,6 +3010,30 @@ MdbRowDirective.propDecorators = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+/**
+ * @return {?}
+ */
+function localDataFactory() {
+    return () => {
+        return new LocalData();
+    };
+}
+/**
+ * @param {?} http
+ * @return {?}
+ */
+function remoteDataFactory(http$$1) {
+    return () => {
+        return new RemoteData(http$$1);
+    };
+}
+let LocalDataFactoryProvider = { provide: LocalData, useFactory: localDataFactory };
+let RemoteDataFactoryProvider = { provide: RemoteData, useFactory: remoteDataFactory, deps: [Http] };
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 class AutocompleteModule {
 }
 AutocompleteModule.decorators = [
@@ -3073,11 +3068,6 @@ AutocompleteModule.decorators = [
                 ]
             },] },
 ];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
 
 /**
  * @fileoverview added by tsickle
@@ -3141,6 +3131,171 @@ CardsModule.decorators = [
                 exports: [CardRevealComponent, CardRotatingComponent]
             },] },
 ];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/** @enum {number} */
+const KeyCode = { backspace: 8, delete: 46, };
+KeyCode[KeyCode.backspace] = "backspace";
+KeyCode[KeyCode.delete] = "delete";
+class InputAutoFillDirective {
+    /**
+     * @param {?} el
+     * @param {?} rndr
+     */
+    constructor(el, rndr) {
+        this.el = el;
+        this.rndr = rndr;
+    }
+    /**
+     * @param {?} evt
+     * @return {?}
+     */
+    onKeyUp(evt) {
+        if (!this.opts.enabled || evt.keyCode === KeyCode.backspace || evt.keyCode === KeyCode.delete) {
+            return;
+        }
+        const /** @type {?} */ val = this.getInputValue();
+        const /** @type {?} */ ews = this.endsWith(val, this.opts.separator);
+        const /** @type {?} */ parts = val.split(this.opts.separator);
+        const /** @type {?} */ idx = parts.length - 1;
+        if (val.indexOf(this.opts.separator + this.opts.separator) !== -1 || idx > 2) {
+            return;
+        }
+        if (!ews &&
+            (val.length === this.getPartLength(0) ||
+                val.length === this.getPartLength(0) + this.getPartLength(1) + this.opts.separator.length)) {
+            this.setInputValue(val + this.opts.separator);
+        }
+        else if (ews &&
+            parts[idx - 1].length < this.getPartLength(idx - 1) &&
+            this.isNumber(parts[idx - 1]) && (this.isDay(idx - 1) || this.isMonth(idx - 1))) {
+            this.setInputValue(this.insertPos(val, val.length - 2, '0'));
+        }
+        else if (parts[idx].length < this.getPartLength(idx) &&
+            this.isNumber(parts[idx]) &&
+            (Number(parts[idx]) > 3 &&
+                this.isDay(idx) ||
+                Number(parts[idx]) > 1 &&
+                    this.isMonth(idx))) {
+            this.setInputValue(this.insertPos(val, val.length - 1, '0') + (idx < 2 ? this.opts.separator : ''));
+        }
+    }
+    /**
+     * @param {?} val
+     * @param {?} suffix
+     * @return {?}
+     */
+    endsWith(val, suffix) {
+        return val.indexOf(suffix, val.length - suffix.length) !== -1;
+    }
+    /**
+     * @param {?} str
+     * @param {?} idx
+     * @param {?} val
+     * @return {?}
+     */
+    insertPos(str, idx, val) {
+        return str.substr(0, idx) + val + str.substr(idx);
+    }
+    /**
+     * @param {?} idx
+     * @return {?}
+     */
+    getPartLength(idx) {
+        return this.opts.formatParts[idx].length;
+    }
+    /**
+     * @param {?} val
+     * @return {?}
+     */
+    isNumber(val) {
+        return val.match(/[1-9]/) !== null;
+    }
+    /**
+     * @param {?} idx
+     * @return {?}
+     */
+    isDay(idx) {
+        return this.opts.formatParts[idx].indexOf('d') !== -1;
+    }
+    /**
+     * @param {?} idx
+     * @return {?}
+     */
+    isMonth(idx) {
+        return this.opts.formatParts[idx].indexOf('m') !== -1 && this.opts.formatParts[idx].length === 2;
+    }
+    /**
+     * @return {?}
+     */
+    getInputValue() {
+        return this.el.nativeElement.value;
+    }
+    /**
+     * @param {?} val
+     * @return {?}
+     */
+    setInputValue(val) {
+        this.rndr.setProperty(this.el.nativeElement, 'value', val);
+    }
+}
+InputAutoFillDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[mdbInputAutoFill]'
+            },] },
+];
+/** @nocollapse */
+InputAutoFillDirective.ctorParameters = () => [
+    { type: ElementRef, },
+    { type: Renderer2, },
+];
+InputAutoFillDirective.propDecorators = {
+    "opts": [{ type: Input },],
+    "onKeyUp": [{ type: HostListener, args: ['keyup', ['$event'],] },],
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class FocusDirective {
+    /**
+     * @param {?} el
+     */
+    constructor(el) {
+        this.el = el;
+    }
+    /**
+     * @return {?}
+     */
+    ngAfterViewInit() {
+        // if (this.value === "0") {
+        //     return;
+        // }
+        // this.renderer.invokeElementMethod(this.el.nativeElement, 'focus', []);
+        this.el.nativeElement.focus();
+        // // Set cursor position at the end of text if input element
+        // if (this.value === "2") {
+        //     let len = this.el.nativeElement.value.length;
+        //     this.el.nativeElement.setSelectionRange(len, len);
+        // }
+    }
+}
+FocusDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[mdbDpFocus]'
+            },] },
+];
+/** @nocollapse */
+FocusDirective.ctorParameters = () => [
+    { type: ElementRef, },
+];
+FocusDirective.propDecorators = {
+    "value": [{ type: Input },],
+};
 
 /**
  * @fileoverview added by tsickle
@@ -3503,9 +3658,9 @@ const InputFocusBlur = { focus: 1, blur: 2, };
 InputFocusBlur[InputFocusBlur.focus] = "focus";
 InputFocusBlur[InputFocusBlur.blur] = "blur";
 /** @enum {number} */
-const KeyCode = { enter: 13, space: 32, };
-KeyCode[KeyCode.enter] = "enter";
-KeyCode[KeyCode.space] = "space";
+const KeyCode$1 = { enter: 13, space: 32, };
+KeyCode$1[KeyCode$1.enter] = "enter";
+KeyCode$1[KeyCode$1.space] = "space";
 /** @enum {number} */
 const MonthId = { prev: 1, curr: 2, next: 3, };
 MonthId[MonthId.prev] = "prev";
@@ -4088,7 +4243,7 @@ class MDBDatePickerComponent {
      */
     cellKeyDown(event, cell) {
         // Cell keyboard handling
-        if ((event.keyCode === KeyCode.enter || event.keyCode === KeyCode.space) && !cell.disabled) {
+        if ((event.keyCode === KeyCode$1.enter || event.keyCode === KeyCode$1.space) && !cell.disabled) {
             event.preventDefault();
             this.cellClicked(cell);
         }
@@ -4528,171 +4683,6 @@ MDBDatePickerComponent.propDecorators = {
     "calendarToggle": [{ type: Output },],
     "inputFocusBlur": [{ type: Output },],
     "divFocus": [{ type: ViewChild, args: ['divFocus',] },],
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class FocusDirective {
-    /**
-     * @param {?} el
-     */
-    constructor(el) {
-        this.el = el;
-    }
-    /**
-     * @return {?}
-     */
-    ngAfterViewInit() {
-        // if (this.value === "0") {
-        //     return;
-        // }
-        // this.renderer.invokeElementMethod(this.el.nativeElement, 'focus', []);
-        this.el.nativeElement.focus();
-        // // Set cursor position at the end of text if input element
-        // if (this.value === "2") {
-        //     let len = this.el.nativeElement.value.length;
-        //     this.el.nativeElement.setSelectionRange(len, len);
-        // }
-    }
-}
-FocusDirective.decorators = [
-    { type: Directive, args: [{
-                selector: '[mdbDpFocus]'
-            },] },
-];
-/** @nocollapse */
-FocusDirective.ctorParameters = () => [
-    { type: ElementRef, },
-];
-FocusDirective.propDecorators = {
-    "value": [{ type: Input },],
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/** @enum {number} */
-const KeyCode$1 = { backspace: 8, delete: 46, };
-KeyCode$1[KeyCode$1.backspace] = "backspace";
-KeyCode$1[KeyCode$1.delete] = "delete";
-class InputAutoFillDirective {
-    /**
-     * @param {?} el
-     * @param {?} rndr
-     */
-    constructor(el, rndr) {
-        this.el = el;
-        this.rndr = rndr;
-    }
-    /**
-     * @param {?} evt
-     * @return {?}
-     */
-    onKeyUp(evt) {
-        if (!this.opts.enabled || evt.keyCode === KeyCode$1.backspace || evt.keyCode === KeyCode$1.delete) {
-            return;
-        }
-        const /** @type {?} */ val = this.getInputValue();
-        const /** @type {?} */ ews = this.endsWith(val, this.opts.separator);
-        const /** @type {?} */ parts = val.split(this.opts.separator);
-        const /** @type {?} */ idx = parts.length - 1;
-        if (val.indexOf(this.opts.separator + this.opts.separator) !== -1 || idx > 2) {
-            return;
-        }
-        if (!ews &&
-            (val.length === this.getPartLength(0) ||
-                val.length === this.getPartLength(0) + this.getPartLength(1) + this.opts.separator.length)) {
-            this.setInputValue(val + this.opts.separator);
-        }
-        else if (ews &&
-            parts[idx - 1].length < this.getPartLength(idx - 1) &&
-            this.isNumber(parts[idx - 1]) && (this.isDay(idx - 1) || this.isMonth(idx - 1))) {
-            this.setInputValue(this.insertPos(val, val.length - 2, '0'));
-        }
-        else if (parts[idx].length < this.getPartLength(idx) &&
-            this.isNumber(parts[idx]) &&
-            (Number(parts[idx]) > 3 &&
-                this.isDay(idx) ||
-                Number(parts[idx]) > 1 &&
-                    this.isMonth(idx))) {
-            this.setInputValue(this.insertPos(val, val.length - 1, '0') + (idx < 2 ? this.opts.separator : ''));
-        }
-    }
-    /**
-     * @param {?} val
-     * @param {?} suffix
-     * @return {?}
-     */
-    endsWith(val, suffix) {
-        return val.indexOf(suffix, val.length - suffix.length) !== -1;
-    }
-    /**
-     * @param {?} str
-     * @param {?} idx
-     * @param {?} val
-     * @return {?}
-     */
-    insertPos(str, idx, val) {
-        return str.substr(0, idx) + val + str.substr(idx);
-    }
-    /**
-     * @param {?} idx
-     * @return {?}
-     */
-    getPartLength(idx) {
-        return this.opts.formatParts[idx].length;
-    }
-    /**
-     * @param {?} val
-     * @return {?}
-     */
-    isNumber(val) {
-        return val.match(/[1-9]/) !== null;
-    }
-    /**
-     * @param {?} idx
-     * @return {?}
-     */
-    isDay(idx) {
-        return this.opts.formatParts[idx].indexOf('d') !== -1;
-    }
-    /**
-     * @param {?} idx
-     * @return {?}
-     */
-    isMonth(idx) {
-        return this.opts.formatParts[idx].indexOf('m') !== -1 && this.opts.formatParts[idx].length === 2;
-    }
-    /**
-     * @return {?}
-     */
-    getInputValue() {
-        return this.el.nativeElement.value;
-    }
-    /**
-     * @param {?} val
-     * @return {?}
-     */
-    setInputValue(val) {
-        this.rndr.setProperty(this.el.nativeElement, 'value', val);
-    }
-}
-InputAutoFillDirective.decorators = [
-    { type: Directive, args: [{
-                selector: '[mdbInputAutoFill]'
-            },] },
-];
-/** @nocollapse */
-InputAutoFillDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
-];
-InputAutoFillDirective.propDecorators = {
-    "opts": [{ type: Input },],
-    "onKeyUp": [{ type: HostListener, args: ['keyup', ['$event'],] },],
 };
 
 /**
@@ -5570,47 +5560,6 @@ LightBoxModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-class Option {
-    /**
-     * @param {?} option
-     */
-    constructor(option) {
-        this.wrappedOption = option;
-        this.disabled = false;
-        this.highlighted = false;
-        this.selected = false;
-        this.shown = true;
-        this.group = false;
-    }
-    /**
-     * @return {?}
-     */
-    get value() {
-        return this.wrappedOption.value;
-    }
-    /**
-     * @return {?}
-     */
-    get label() {
-        return this.wrappedOption.label;
-    }
-    /**
-     * @return {?}
-     */
-    get icon() {
-        if (this.wrappedOption.icon !== '' && this.wrappedOption.icon !== undefined) {
-            return this.wrappedOption.icon;
-        }
-        else {
-            return '';
-        }
-    }
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
 class Diacritics {
     /**
      * @param {?} text
@@ -6464,6 +6413,47 @@ Diacritics.DIACRITICS = {
     '\u03C9': '\u03C9',
     '\u03C2': '\u03C3'
 };
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class Option {
+    /**
+     * @param {?} option
+     */
+    constructor(option) {
+        this.wrappedOption = option;
+        this.disabled = false;
+        this.highlighted = false;
+        this.selected = false;
+        this.shown = true;
+        this.group = false;
+    }
+    /**
+     * @return {?}
+     */
+    get value() {
+        return this.wrappedOption.value;
+    }
+    /**
+     * @return {?}
+     */
+    get label() {
+        return this.wrappedOption.label;
+    }
+    /**
+     * @return {?}
+     */
+    get icon() {
+        if (this.wrappedOption.icon !== '' && this.wrappedOption.icon !== undefined) {
+            return this.wrappedOption.icon;
+        }
+        else {
+            return '';
+        }
+    }
+}
 
 /**
  * @fileoverview added by tsickle
@@ -7671,282 +7661,91 @@ MDBSpinningPreloader.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-class ProgressDirective {
+/**
+ * <md-progress-bar> component.
+ */
+class ProgressBarComponent {
     constructor() {
-        this.addClass = true;
-        this.bars = [];
-        this._max = 100;
+        /**
+         * Color of the progress bar.
+         */
+        this.color = 'primary';
+        this._value = 0;
+        this._bufferValue = 0;
+        /**
+         * Mode of the progress bar.
+         *
+         * Input must be one of these values: determinate, indeterminate, buffer, query, defaults to
+         * 'determinate'.
+         * Mirrored to mode attribute.
+         */
+        this.mode = 'determinate';
     }
     /**
-     * maximum total value of progress element
+     * Value of the progressbar. Defaults to zero. Mirrored to aria-valuenow.
      * @return {?}
      */
-    get max() {
-        return this._max;
-    }
+    get value() { return this._value; }
     /**
      * @param {?} v
      * @return {?}
      */
-    set max(v) {
-        this._max = v;
-        this.bars.forEach((bar) => {
-            bar.recalculatePercentage();
-        });
-    }
+    set value(v) { this._value = clamp(v || 0); }
     /**
-     * @param {?} bar
+     * Buffer value of the progress bar. Defaults to zero.
      * @return {?}
      */
-    addBar(bar) {
-        if (!this.animate) {
-            bar.transition = 'none';
-        }
-        this.bars.push(bar);
-    }
-    /**
-     * @param {?} bar
-     * @return {?}
-     */
-    removeBar(bar) {
-        this.bars.splice(this.bars.indexOf(bar), 1);
-    }
-}
-ProgressDirective.decorators = [
-    { type: Directive, args: [{ selector: 'mdbProgress, [mdbProgress]' },] },
-];
-/** @nocollapse */
-ProgressDirective.propDecorators = {
-    "animate": [{ type: Input },],
-    "max": [{ type: HostBinding, args: ['attr.max',] }, { type: Input },],
-    "addClass": [{ type: HostBinding, args: ['class.progress',] },],
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class BarComponent {
-    /**
-     * @param {?} progress
-     */
-    constructor(progress) {
-        this.percent = 0;
-        this.progress = progress;
-    }
-    /**
-     * current value of progress bar
-     * @return {?}
-     */
-    get value() {
-        return this._value;
-    }
+    get bufferValue() { return this._bufferValue; }
     /**
      * @param {?} v
      * @return {?}
      */
-    set value(v) {
-        if (!v && v !== 0) {
-            return;
-        }
-        this._value = v;
-        this.recalculatePercentage();
-    }
+    set bufferValue(v) { this._bufferValue = clamp(v || 0); }
     /**
+     * Gets the current transform value for the progress bar's primary indicator.
      * @return {?}
      */
-    ngOnInit() {
-        this.progress.addBar(this);
+    _primaryTransform() {
+        const /** @type {?} */ scale = this.value / 100;
+        return { transform: `scaleX(${scale})` };
     }
     /**
+     * Gets the current transform value for the progress bar's buffer indicator.  Only used if the
+     * progress mode is set to buffer, otherwise returns an undefined, causing no transformation.
      * @return {?}
      */
-    ngOnDestroy() {
-        this.progress.removeBar(this);
-    }
-    /**
-     * @return {?}
-     */
-    recalculatePercentage() {
-        this.percent = +(100 * this.value / this.progress.max).toFixed(2);
-        const /** @type {?} */ totalPercentage = this.progress.bars.reduce(function (total, bar) {
-            return total + bar.percent;
-        }, 0);
-        if (totalPercentage > 100) {
-            this.percent -= totalPercentage - 100;
+    _bufferTransform() {
+        if (this.mode === 'buffer') {
+            const /** @type {?} */ scale = this.bufferValue / 100;
+            return { transform: `scaleX(${scale})` };
         }
     }
 }
-BarComponent.decorators = [
+ProgressBarComponent.decorators = [
     { type: Component, args: [{
-                selector: 'mdb-bar',
-                template: "<div class=\"progress-bar\" style=\"min-width: 0;\" role=\"progressbar\" [ngClass]=\"type && 'progress-bar-' + type\" [ngStyle]=\"{width: (percent < 100 ? percent : 100) + '%', transition: transition}\" aria-valuemin=\"0\" [attr.aria-valuenow]=\"value\" [attr.aria-valuetext]=\"percent.toFixed(0) + '%'\" [attr.aria-valuemax]=\"max\"> <ng-content></ng-content> </div> "
+                selector: 'mdb-progress-bar, mat-progress-bar',
+                template: "<!-- The background div is named as such because it appears below the other divs and is not sized based on values. --> <div class=\"mat-progress-bar-background mat-progress-bar-element\"></div> <div class=\"mat-progress-bar-buffer mat-progress-bar-element\" [ngStyle]=\"_bufferTransform()\"></div> <div class=\"mat-progress-bar-primary mat-progress-bar-fill mat-progress-bar-element\" [ngStyle]=\"_primaryTransform()\"></div> <div class=\"mat-progress-bar-secondary mat-progress-bar-fill mat-progress-bar-element\"></div> ",
+                styles: [":host { display:block; height:5px; overflow:hidden; position:relative; transform:translateZ(0); transition:opacity 250ms linear; width:100%; } :host .mat-progress-bar-element,:host .mat-progress-bar-fill::after { height:100%; position:absolute; width:100%; } :host .mat-progress-bar-background { background-repeat:repeat-x; background-size:10px 4px; display:none; } :host .mat-progress-bar-buffer { transform-origin:top left; transition:transform 250ms ease,stroke .3s cubic-bezier(.35,0,.25,1); } :host .mat-progress-bar-secondary { display:none; }  :host .mat-progress-bar-fill { animation:none; transform-origin:top left; transition:transform 250ms ease,stroke .3s cubic-bezier(.35,0,.25,1); } :host .mat-progress-bar-fill::after { animation:none; content:''; display:inline-block; left:0; } :host[mode=query] { transform:rotateZ(180deg); } :host[mode=indeterminate] .mat-progress-bar-fill,:host[mode=query] .mat-progress-bar-fill { transition:none; } :host[mode=indeterminate] .mat-progress-bar-primary,:host[mode=query] .mat-progress-bar-primary { animation:mat-progress-bar-primary-indeterminate-translate 2s infinite linear; left:-145.166611%; } :host[mode=indeterminate] .mat-progress-bar-primary.mat-progress-bar-fill::after,:host[mode=query]  .mat-progress-bar-primary.mat-progress-bar-fill::after { animation:mat-progress-bar-primary-indeterminate-scale 2s infinite linear; } :host[mode=indeterminate] .mat-progress-bar-secondary,:host[mode=query] .mat-progress-bar-secondary { animation:mat-progress-bar-secondary-indeterminate-translate 2s infinite linear; left:-54.888891%; display:block; } :host[mode=indeterminate] .mat-progress-bar-secondary.mat-progress-bar-fill::after,:host[mode=query]  .mat-progress-bar-secondary.mat-progress-bar-fill::after { animation:mat-progress-bar-secondary-indeterminate-scale 2s infinite linear; } :host[mode=buffer] .mat-progress-bar-background { animation:mat-progress-bar-background-scroll 250ms infinite linear; display:block; } :host-context([dir=rtl]) { transform:rotateY(180deg); } @keyframes mat-progress-bar-primary-indeterminate-translate { 0% { transform:translateX(0); } 20% { animation-timing-function:cubic-bezier(.5,0,.70173,.49582); transform:translateX(0); } 59.15% { animation-timing-function:cubic-bezier(.30244,.38135,.55,.95635); transform:translateX(83.67142%); } 100% { transform:translateX(200.61106%); } } @keyframes mat-progress-bar-primary-indeterminate-scale { 0% { transform:scaleX(.08); } 36.65% { animation-timing-function:cubic-bezier(.33473,.12482,.78584,1); transform:scaleX(.08); } 69.15% { animation-timing-function:cubic-bezier(.06,.11,.6,1); transform:scaleX(.66148); }  100% { transform:scaleX(.08); } } @keyframes mat-progress-bar-secondary-indeterminate-translate { 0% { animation-timing-function:cubic-bezier(.15,0,.51506,.40969); transform:translateX(0); } 25% { animation-timing-function:cubic-bezier(.31033,.28406,.8,.73371); transform:translateX(37.65191%); } 48.35% { animation-timing-function:cubic-bezier(.4,.62704,.6,.90203); transform:translateX(84.38617%); } 100% { transform:translateX(160.27778%); } } @keyframes mat-progress-bar-secondary-indeterminate-scale { 0% { animation-timing-function:cubic-bezier(.15,0,.51506,.40969); transform:scaleX(.08); } 19.15% { animation-timing-function:cubic-bezier(.31033,.28406,.8,.73371); transform:scaleX(.4571) }  44.15% { animation-timing-function:cubic-bezier(.4,.62704,.6,.90203); transform:scaleX(.72796); } 100% { transform:scaleX(.08); } } @keyframes mat-progress-bar-background-scroll { to { transform:translateX(-10px) } }  "],
+                changeDetection: ChangeDetectionStrategy.OnPush,
             },] },
 ];
 /** @nocollapse */
-BarComponent.ctorParameters = () => [
-    { type: ProgressDirective, decorators: [{ type: Host },] },
-];
-BarComponent.propDecorators = {
-    "type": [{ type: Input },],
-    "value": [{ type: Input },],
+ProgressBarComponent.propDecorators = {
+    "color": [{ type: Input },],
+    "value": [{ type: Input }, { type: HostBinding, args: ['attr.aria-valuenow',] },],
+    "bufferValue": [{ type: Input },],
+    "mode": [{ type: Input }, { type: HostBinding, args: ['attr.mode',] },],
 };
-
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * Clamps a value to be between two numbers, by default 0 and 100.
+ * @param {?} v
+ * @param {?=} min
+ * @param {?=} max
+ * @return {?}
  */
-class ProgressbarConfigComponent {
-    constructor() {
-        /**
-         * if `true` changing value of progress bar will be animated (note: not supported by Bootstrap 4)
-         */
-        this.animate = true;
-        /**
-         * maximum total value of progress element
-         */
-        this.max = 100;
-    }
+function clamp(v, min = 0, max = 100) {
+    return Math.max(min, Math.min(max, v));
 }
-ProgressbarConfigComponent.decorators = [
-    { type: Injectable },
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class ProgressbarComponent {
-    /**
-     * @param {?} config
-     */
-    constructor(config) {
-        Object.assign(this, config);
-    }
-}
-ProgressbarComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'mdb-progressbar',
-                template: "<div mdbProgress [animate]=\"animate\" [max]=\"max\"> <mdb-bar [type]=\"type\" [value]=\"value\"> <ng-content></ng-content> </mdb-bar> </div> "
-            },] },
-];
-/** @nocollapse */
-ProgressbarComponent.ctorParameters = () => [
-    { type: ProgressbarConfigComponent, },
-];
-ProgressbarComponent.propDecorators = {
-    "animate": [{ type: Input },],
-    "max": [{ type: Input },],
-    "type": [{ type: Input },],
-    "value": [{ type: Input },],
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class ProgressbarModule {
-    /**
-     * @return {?}
-     */
-    static forRoot() {
-        return { ngModule: ProgressbarModule, providers: [ProgressbarConfigComponent] };
-    }
-}
-ProgressbarModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [CommonModule],
-                declarations: [ProgressDirective, BarComponent, ProgressbarComponent],
-                exports: [ProgressDirective, BarComponent, ProgressbarComponent]
-            },] },
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class ProgressSpinnerComponent {
-    /**
-     * @param {?} el
-     */
-    constructor(el) {
-        this.addClass = 'spinner-blue-only';
-        this.spinnerType = '';
-        this.spinnerColor = 'rainbow';
-        this.el = el;
-    }
-    /**
-     * @return {?}
-     */
-    ngAfterViewInit() {
-        const /** @type {?} */ hostElem = this.el.nativeElement;
-        const /** @type {?} */ colorClass = this.spinnerColor;
-        this.addClass = 'spinner-rainbow';
-        switch (colorClass) {
-            case 'green':
-                this.addClass = 'spinner-green-only';
-                break;
-            case 'blue':
-                this.addClass = 'spinner-blue-only';
-                break;
-            case 'yellow':
-                this.addClass = 'spinner-yellow-only';
-                break;
-            case 'red':
-                this.addClass = 'spinner-red-only';
-                break;
-            case 'rainbow':
-                this.addClass = 'spinner-rainbow spinner-blue-only mat-progress-spinner';
-                this.spinerRun();
-                break;
-        }
-        hostElem.children[0].children[0].className += ' ' + this.addClass;
-    }
-    /**
-     * @return {?}
-     */
-    spinerRun() {
-        let /** @type {?} */ counter = 0;
-        const /** @type {?} */ hostElem = this.el.nativeElement;
-        setInterval(() => {
-            switch (counter) {
-                case 0:
-                    this.addClass = 'spinner-red-only mat-progress-spinner ';
-                    break;
-                case 1:
-                    this.addClass = 'spinner-yellow-only mat-progress-spinner';
-                    break;
-                case 2:
-                    this.addClass = 'spinner-blue-only mat-progress-spinner';
-                    break;
-                case 3:
-                    this.addClass = 'spinner-green-only mat-progress-spinner';
-                    break;
-            }
-            hostElem.children[0].children[0].className = ' ' + this.addClass;
-            if (counter < 3) {
-                counter++;
-            }
-            else {
-                counter = 0;
-            }
-        }, 1333);
-    }
-}
-ProgressSpinnerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'mdb-spinner',
-                template: "<div class=\"preloader-wrapper active  {{spinnerType}}\"> <mdb-Spinners mdbSpinners mode=\"indeterminate\"></mdb-Spinners> </div>"
-            },] },
-];
-/** @nocollapse */
-ProgressSpinnerComponent.ctorParameters = () => [
-    { type: ElementRef, },
-];
-ProgressSpinnerComponent.propDecorators = {
-    "spinnerType": [{ type: Input },],
-    "spinnerColor": [{ type: Input },],
-};
 
 /**
  * @fileoverview added by tsickle
@@ -8078,7 +7877,7 @@ class MdProgressSpinnerComponent {
      */
     set value(v) {
         if (v != null && this.mode === 'determinate') {
-            const /** @type {?} */ newValue = clamp(v);
+            const /** @type {?} */ newValue = clamp$1(v);
             this._animateCircle(this.value || 0, newValue);
             this._value = newValue;
         }
@@ -8284,7 +8083,7 @@ MdSpinnerComponent.propDecorators = {
  * @param {?} v
  * @return {?}
  */
-function clamp(v) {
+function clamp$1(v) {
     return Math.max(0, Math.min(100, v));
 }
 /**
@@ -8358,6 +8157,287 @@ function getSvgArc(currentValue, rotation) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+class ProgressDirective {
+    constructor() {
+        this.addClass = true;
+        this.bars = [];
+        this._max = 100;
+    }
+    /**
+     * maximum total value of progress element
+     * @return {?}
+     */
+    get max() {
+        return this._max;
+    }
+    /**
+     * @param {?} v
+     * @return {?}
+     */
+    set max(v) {
+        this._max = v;
+        this.bars.forEach((bar) => {
+            bar.recalculatePercentage();
+        });
+    }
+    /**
+     * @param {?} bar
+     * @return {?}
+     */
+    addBar(bar) {
+        if (!this.animate) {
+            bar.transition = 'none';
+        }
+        this.bars.push(bar);
+    }
+    /**
+     * @param {?} bar
+     * @return {?}
+     */
+    removeBar(bar) {
+        this.bars.splice(this.bars.indexOf(bar), 1);
+    }
+}
+ProgressDirective.decorators = [
+    { type: Directive, args: [{ selector: 'mdbProgress, [mdbProgress]' },] },
+];
+/** @nocollapse */
+ProgressDirective.propDecorators = {
+    "animate": [{ type: Input },],
+    "max": [{ type: HostBinding, args: ['attr.max',] }, { type: Input },],
+    "addClass": [{ type: HostBinding, args: ['class.progress',] },],
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class BarComponent {
+    /**
+     * @param {?} progress
+     */
+    constructor(progress) {
+        this.percent = 0;
+        this.progress = progress;
+    }
+    /**
+     * current value of progress bar
+     * @return {?}
+     */
+    get value() {
+        return this._value;
+    }
+    /**
+     * @param {?} v
+     * @return {?}
+     */
+    set value(v) {
+        if (!v && v !== 0) {
+            return;
+        }
+        this._value = v;
+        this.recalculatePercentage();
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.progress.addBar(this);
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        this.progress.removeBar(this);
+    }
+    /**
+     * @return {?}
+     */
+    recalculatePercentage() {
+        this.percent = +(100 * this.value / this.progress.max).toFixed(2);
+        const /** @type {?} */ totalPercentage = this.progress.bars.reduce(function (total, bar) {
+            return total + bar.percent;
+        }, 0);
+        if (totalPercentage > 100) {
+            this.percent -= totalPercentage - 100;
+        }
+    }
+}
+BarComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-bar',
+                template: "<div class=\"progress-bar\" style=\"min-width: 0;\" role=\"progressbar\" [ngClass]=\"type && 'progress-bar-' + type\" [ngStyle]=\"{width: (percent < 100 ? percent : 100) + '%', transition: transition}\" aria-valuemin=\"0\" [attr.aria-valuenow]=\"value\" [attr.aria-valuetext]=\"percent.toFixed(0) + '%'\" [attr.aria-valuemax]=\"max\"> <ng-content></ng-content> </div> "
+            },] },
+];
+/** @nocollapse */
+BarComponent.ctorParameters = () => [
+    { type: ProgressDirective, decorators: [{ type: Host },] },
+];
+BarComponent.propDecorators = {
+    "type": [{ type: Input },],
+    "value": [{ type: Input },],
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class ProgressSpinnerComponent {
+    /**
+     * @param {?} el
+     */
+    constructor(el) {
+        this.addClass = 'spinner-blue-only';
+        this.spinnerType = '';
+        this.spinnerColor = 'rainbow';
+        this.el = el;
+    }
+    /**
+     * @return {?}
+     */
+    ngAfterViewInit() {
+        const /** @type {?} */ hostElem = this.el.nativeElement;
+        const /** @type {?} */ colorClass = this.spinnerColor;
+        this.addClass = 'spinner-rainbow';
+        switch (colorClass) {
+            case 'green':
+                this.addClass = 'spinner-green-only';
+                break;
+            case 'blue':
+                this.addClass = 'spinner-blue-only';
+                break;
+            case 'yellow':
+                this.addClass = 'spinner-yellow-only';
+                break;
+            case 'red':
+                this.addClass = 'spinner-red-only';
+                break;
+            case 'rainbow':
+                this.addClass = 'spinner-rainbow spinner-blue-only mat-progress-spinner';
+                this.spinerRun();
+                break;
+        }
+        hostElem.children[0].children[0].className += ' ' + this.addClass;
+    }
+    /**
+     * @return {?}
+     */
+    spinerRun() {
+        let /** @type {?} */ counter = 0;
+        const /** @type {?} */ hostElem = this.el.nativeElement;
+        setInterval(() => {
+            switch (counter) {
+                case 0:
+                    this.addClass = 'spinner-red-only mat-progress-spinner ';
+                    break;
+                case 1:
+                    this.addClass = 'spinner-yellow-only mat-progress-spinner';
+                    break;
+                case 2:
+                    this.addClass = 'spinner-blue-only mat-progress-spinner';
+                    break;
+                case 3:
+                    this.addClass = 'spinner-green-only mat-progress-spinner';
+                    break;
+            }
+            hostElem.children[0].children[0].className = ' ' + this.addClass;
+            if (counter < 3) {
+                counter++;
+            }
+            else {
+                counter = 0;
+            }
+        }, 1333);
+    }
+}
+ProgressSpinnerComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-spinner',
+                template: "<div class=\"preloader-wrapper active  {{spinnerType}}\"> <mdb-Spinners mdbSpinners mode=\"indeterminate\"></mdb-Spinners> </div>"
+            },] },
+];
+/** @nocollapse */
+ProgressSpinnerComponent.ctorParameters = () => [
+    { type: ElementRef, },
+];
+ProgressSpinnerComponent.propDecorators = {
+    "spinnerType": [{ type: Input },],
+    "spinnerColor": [{ type: Input },],
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class ProgressbarConfigComponent {
+    constructor() {
+        /**
+         * if `true` changing value of progress bar will be animated (note: not supported by Bootstrap 4)
+         */
+        this.animate = true;
+        /**
+         * maximum total value of progress element
+         */
+        this.max = 100;
+    }
+}
+ProgressbarConfigComponent.decorators = [
+    { type: Injectable },
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class ProgressbarComponent {
+    /**
+     * @param {?} config
+     */
+    constructor(config) {
+        Object.assign(this, config);
+    }
+}
+ProgressbarComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-progressbar',
+                template: "<div mdbProgress [animate]=\"animate\" [max]=\"max\"> <mdb-bar [type]=\"type\" [value]=\"value\"> <ng-content></ng-content> </mdb-bar> </div> "
+            },] },
+];
+/** @nocollapse */
+ProgressbarComponent.ctorParameters = () => [
+    { type: ProgressbarConfigComponent, },
+];
+ProgressbarComponent.propDecorators = {
+    "animate": [{ type: Input },],
+    "max": [{ type: Input },],
+    "type": [{ type: Input },],
+    "value": [{ type: Input },],
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class ProgressbarModule {
+    /**
+     * @return {?}
+     */
+    static forRoot() {
+        return { ngModule: ProgressbarModule, providers: [ProgressbarConfigComponent] };
+    }
+}
+ProgressbarModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule],
+                declarations: [ProgressDirective, BarComponent, ProgressbarComponent],
+                exports: [ProgressDirective, BarComponent, ProgressbarComponent]
+            },] },
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 class MdProgressSpinnerModule {
     /**
      * @deprecated
@@ -8386,96 +8466,6 @@ MdProgressSpinnerModule.decorators = [
                 ],
             },] },
 ];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * <md-progress-bar> component.
- */
-class ProgressBarComponent {
-    constructor() {
-        /**
-         * Color of the progress bar.
-         */
-        this.color = 'primary';
-        this._value = 0;
-        this._bufferValue = 0;
-        /**
-         * Mode of the progress bar.
-         *
-         * Input must be one of these values: determinate, indeterminate, buffer, query, defaults to
-         * 'determinate'.
-         * Mirrored to mode attribute.
-         */
-        this.mode = 'determinate';
-    }
-    /**
-     * Value of the progressbar. Defaults to zero. Mirrored to aria-valuenow.
-     * @return {?}
-     */
-    get value() { return this._value; }
-    /**
-     * @param {?} v
-     * @return {?}
-     */
-    set value(v) { this._value = clamp$1(v || 0); }
-    /**
-     * Buffer value of the progress bar. Defaults to zero.
-     * @return {?}
-     */
-    get bufferValue() { return this._bufferValue; }
-    /**
-     * @param {?} v
-     * @return {?}
-     */
-    set bufferValue(v) { this._bufferValue = clamp$1(v || 0); }
-    /**
-     * Gets the current transform value for the progress bar's primary indicator.
-     * @return {?}
-     */
-    _primaryTransform() {
-        const /** @type {?} */ scale = this.value / 100;
-        return { transform: `scaleX(${scale})` };
-    }
-    /**
-     * Gets the current transform value for the progress bar's buffer indicator.  Only used if the
-     * progress mode is set to buffer, otherwise returns an undefined, causing no transformation.
-     * @return {?}
-     */
-    _bufferTransform() {
-        if (this.mode === 'buffer') {
-            const /** @type {?} */ scale = this.bufferValue / 100;
-            return { transform: `scaleX(${scale})` };
-        }
-    }
-}
-ProgressBarComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'mdb-progress-bar, mat-progress-bar',
-                template: "<!-- The background div is named as such because it appears below the other divs and is not sized based on values. --> <div class=\"mat-progress-bar-background mat-progress-bar-element\"></div> <div class=\"mat-progress-bar-buffer mat-progress-bar-element\" [ngStyle]=\"_bufferTransform()\"></div> <div class=\"mat-progress-bar-primary mat-progress-bar-fill mat-progress-bar-element\" [ngStyle]=\"_primaryTransform()\"></div> <div class=\"mat-progress-bar-secondary mat-progress-bar-fill mat-progress-bar-element\"></div> ",
-                styles: [":host { display:block; height:5px; overflow:hidden; position:relative; transform:translateZ(0); transition:opacity 250ms linear; width:100%; } :host .mat-progress-bar-element,:host .mat-progress-bar-fill::after { height:100%; position:absolute; width:100%; } :host .mat-progress-bar-background { background-repeat:repeat-x; background-size:10px 4px; display:none; } :host .mat-progress-bar-buffer { transform-origin:top left; transition:transform 250ms ease,stroke .3s cubic-bezier(.35,0,.25,1); } :host .mat-progress-bar-secondary { display:none; }  :host .mat-progress-bar-fill { animation:none; transform-origin:top left; transition:transform 250ms ease,stroke .3s cubic-bezier(.35,0,.25,1); } :host .mat-progress-bar-fill::after { animation:none; content:''; display:inline-block; left:0; } :host[mode=query] { transform:rotateZ(180deg); } :host[mode=indeterminate] .mat-progress-bar-fill,:host[mode=query] .mat-progress-bar-fill { transition:none; } :host[mode=indeterminate] .mat-progress-bar-primary,:host[mode=query] .mat-progress-bar-primary { animation:mat-progress-bar-primary-indeterminate-translate 2s infinite linear; left:-145.166611%; } :host[mode=indeterminate] .mat-progress-bar-primary.mat-progress-bar-fill::after,:host[mode=query]  .mat-progress-bar-primary.mat-progress-bar-fill::after { animation:mat-progress-bar-primary-indeterminate-scale 2s infinite linear; } :host[mode=indeterminate] .mat-progress-bar-secondary,:host[mode=query] .mat-progress-bar-secondary { animation:mat-progress-bar-secondary-indeterminate-translate 2s infinite linear; left:-54.888891%; display:block; } :host[mode=indeterminate] .mat-progress-bar-secondary.mat-progress-bar-fill::after,:host[mode=query]  .mat-progress-bar-secondary.mat-progress-bar-fill::after { animation:mat-progress-bar-secondary-indeterminate-scale 2s infinite linear; } :host[mode=buffer] .mat-progress-bar-background { animation:mat-progress-bar-background-scroll 250ms infinite linear; display:block; } :host-context([dir=rtl]) { transform:rotateY(180deg); } @keyframes mat-progress-bar-primary-indeterminate-translate { 0% { transform:translateX(0); } 20% { animation-timing-function:cubic-bezier(.5,0,.70173,.49582); transform:translateX(0); } 59.15% { animation-timing-function:cubic-bezier(.30244,.38135,.55,.95635); transform:translateX(83.67142%); } 100% { transform:translateX(200.61106%); } } @keyframes mat-progress-bar-primary-indeterminate-scale { 0% { transform:scaleX(.08); } 36.65% { animation-timing-function:cubic-bezier(.33473,.12482,.78584,1); transform:scaleX(.08); } 69.15% { animation-timing-function:cubic-bezier(.06,.11,.6,1); transform:scaleX(.66148); }  100% { transform:scaleX(.08); } } @keyframes mat-progress-bar-secondary-indeterminate-translate { 0% { animation-timing-function:cubic-bezier(.15,0,.51506,.40969); transform:translateX(0); } 25% { animation-timing-function:cubic-bezier(.31033,.28406,.8,.73371); transform:translateX(37.65191%); } 48.35% { animation-timing-function:cubic-bezier(.4,.62704,.6,.90203); transform:translateX(84.38617%); } 100% { transform:translateX(160.27778%); } } @keyframes mat-progress-bar-secondary-indeterminate-scale { 0% { animation-timing-function:cubic-bezier(.15,0,.51506,.40969); transform:scaleX(.08); } 19.15% { animation-timing-function:cubic-bezier(.31033,.28406,.8,.73371); transform:scaleX(.4571) }  44.15% { animation-timing-function:cubic-bezier(.4,.62704,.6,.90203); transform:scaleX(.72796); } 100% { transform:scaleX(.08); } } @keyframes mat-progress-bar-background-scroll { to { transform:translateX(-10px) } }  "],
-                changeDetection: ChangeDetectionStrategy.OnPush,
-            },] },
-];
-/** @nocollapse */
-ProgressBarComponent.propDecorators = {
-    "color": [{ type: Input },],
-    "value": [{ type: Input }, { type: HostBinding, args: ['attr.aria-valuenow',] },],
-    "bufferValue": [{ type: Input },],
-    "mode": [{ type: Input }, { type: HostBinding, args: ['attr.mode',] },],
-};
-/**
- * Clamps a value to be between two numbers, by default 0 and 100.
- * @param {?} v
- * @param {?=} min
- * @param {?=} max
- * @return {?}
- */
-function clamp$1(v, min = 0, max = 100) {
-    return Math.max(min, Math.min(max, v));
-}
 
 /**
  * @fileoverview added by tsickle
@@ -8757,9 +8747,54 @@ SidenavModule.decorators = [
  * @suppress {checkTypes} checked by tsc
  */
 /**
+ * Created by sebastianfuss on 02.09.16.
+ */
+class PageScrollUtilService {
+    /**
+     * Util method to check whether a given variable is either undefined or null
+     * @param {?} variable
+     * true the variable is undefined or null
+     * @return {?}
+     */
+    static isUndefinedOrNull(variable) {
+        return (typeof variable === 'undefined') || variable === undefined || variable === null;
+    }
+    /**
+     * @param {?} document
+     * @param {?} scrollTargetElement
+     * @return {?}
+     */
+    static extractElementPosition(document, scrollTargetElement) {
+        const /** @type {?} */ body = document.body;
+        const /** @type {?} */ docEl = document.documentElement;
+        // const windowPageYOffset: number = document.defaultView && document.defaultView.pageYOffset || undefined;
+        const /** @type {?} */ windowPageYOffset = document.defaultView && /** @type {?} */ (document.defaultView.pageYOffset) || undefined;
+        // const windowPageXOffset: number = document.defaultView && document.defaultView.pageXOffset || undefined;
+        const /** @type {?} */ windowPageXOffset = document.defaultView && /** @type {?} */ (document.defaultView.pageXOffset) || undefined;
+        const /** @type {?} */ scrollTop = windowPageYOffset || docEl.scrollTop || body.scrollTop;
+        const /** @type {?} */ scrollLeft = windowPageXOffset || docEl.scrollLeft || body.scrollLeft;
+        const /** @type {?} */ clientTop = docEl.clientTop || body.clientTop || 0;
+        const /** @type {?} */ clientLeft = docEl.clientLeft || body.clientLeft || 0;
+        if (PageScrollUtilService.isUndefinedOrNull(scrollTargetElement)) {
+            // No element found, so return the current position to not cause any change in scroll position
+            return { top: scrollTop, left: scrollLeft };
+        }
+        const /** @type {?} */ box = scrollTargetElement.getBoundingClientRect();
+        const /** @type {?} */ top = box.top + scrollTop - clientTop;
+        const /** @type {?} */ left = box.left + scrollLeft - clientLeft;
+        return { top: Math.round(top), left: Math.round(left) };
+    }
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
  * @abstract
  */
-
+class EasingLogic {
+}
 class PageScrollConfig {
     /**
      * @return {?}
@@ -8842,50 +8877,6 @@ PageScrollConfig._easingLogic = {
         return c * t / d + b;
     }
 };
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * Created by sebastianfuss on 02.09.16.
- */
-class PageScrollUtilService {
-    /**
-     * Util method to check whether a given variable is either undefined or null
-     * @param {?} variable
-     * true the variable is undefined or null
-     * @return {?}
-     */
-    static isUndefinedOrNull(variable) {
-        return (typeof variable === 'undefined') || variable === undefined || variable === null;
-    }
-    /**
-     * @param {?} document
-     * @param {?} scrollTargetElement
-     * @return {?}
-     */
-    static extractElementPosition(document, scrollTargetElement) {
-        const /** @type {?} */ body = document.body;
-        const /** @type {?} */ docEl = document.documentElement;
-        // const windowPageYOffset: number = document.defaultView && document.defaultView.pageYOffset || undefined;
-        const /** @type {?} */ windowPageYOffset = document.defaultView && /** @type {?} */ (document.defaultView.pageYOffset) || undefined;
-        // const windowPageXOffset: number = document.defaultView && document.defaultView.pageXOffset || undefined;
-        const /** @type {?} */ windowPageXOffset = document.defaultView && /** @type {?} */ (document.defaultView.pageXOffset) || undefined;
-        const /** @type {?} */ scrollTop = windowPageYOffset || docEl.scrollTop || body.scrollTop;
-        const /** @type {?} */ scrollLeft = windowPageXOffset || docEl.scrollLeft || body.scrollLeft;
-        const /** @type {?} */ clientTop = docEl.clientTop || body.clientTop || 0;
-        const /** @type {?} */ clientLeft = docEl.clientLeft || body.clientLeft || 0;
-        if (PageScrollUtilService.isUndefinedOrNull(scrollTargetElement)) {
-            // No element found, so return the current position to not cause any change in scroll position
-            return { top: scrollTop, left: scrollLeft };
-        }
-        const /** @type {?} */ box = scrollTargetElement.getBoundingClientRect();
-        const /** @type {?} */ top = box.top + scrollTop - clientTop;
-        const /** @type {?} */ left = box.left + scrollLeft - clientLeft;
-        return { top: Math.round(top), left: Math.round(left) };
-    }
-}
 
 /**
  * @fileoverview added by tsickle
@@ -10003,47 +9994,6 @@ StickyContentModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-class NgTranscludeDirective {
-    /**
-     * @param {?} viewRef
-     */
-    constructor(viewRef) {
-        this.viewRef = viewRef;
-    }
-    /**
-     * @param {?} templateRef
-     * @return {?}
-     */
-    set mdbNgTransclude(templateRef) {
-        this._ngTransclude = templateRef;
-        if (templateRef) {
-            this.viewRef.createEmbeddedView(templateRef);
-        }
-    }
-    /**
-     * @return {?}
-     */
-    get mdbNgTransclude() {
-        return this._ngTransclude;
-    }
-}
-NgTranscludeDirective.decorators = [
-    { type: Directive, args: [{
-                selector: '[mdbNgTransclude]'
-            },] },
-];
-/** @nocollapse */
-NgTranscludeDirective.ctorParameters = () => [
-    { type: ViewContainerRef, },
-];
-NgTranscludeDirective.propDecorators = {
-    "mdbNgTransclude": [{ type: Input },],
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
 class TabsetConfig {
     constructor() {
         /**
@@ -10530,6 +10480,47 @@ TabHeadingDirective.ctorParameters = () => [
     { type: TemplateRef, },
     { type: TabDirective, },
 ];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class NgTranscludeDirective {
+    /**
+     * @param {?} viewRef
+     */
+    constructor(viewRef) {
+        this.viewRef = viewRef;
+    }
+    /**
+     * @param {?} templateRef
+     * @return {?}
+     */
+    set mdbNgTransclude(templateRef) {
+        this._ngTransclude = templateRef;
+        if (templateRef) {
+            this.viewRef.createEmbeddedView(templateRef);
+        }
+    }
+    /**
+     * @return {?}
+     */
+    get mdbNgTransclude() {
+        return this._ngTransclude;
+    }
+}
+NgTranscludeDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[mdbNgTransclude]'
+            },] },
+];
+/** @nocollapse */
+NgTranscludeDirective.ctorParameters = () => [
+    { type: ViewContainerRef, },
+];
+NgTranscludeDirective.propDecorators = {
+    "mdbNgTransclude": [{ type: Input },],
+};
 
 /**
  * @fileoverview added by tsickle
@@ -11140,33 +11131,276 @@ TimePickerModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+// TODO: config: activeClass - Class to apply to the checked buttons
+const CHECKBOX_CONTROL_VALUE_ACCESSOR = {
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => ButtonCheckboxDirective),
+    multi: true
+};
+/**
+ * Add checkbox functionality to any element
+ */
+class ButtonCheckboxDirective {
+    constructor() {
+        /**
+         * Truthy value, will be set to ngModel
+         */
+        this.btnCheckboxTrue = true;
+        /**
+         * Falsy value, will be set to ngModel
+         */
+        this.btnCheckboxFalse = false;
+        this.state = false;
+        this.onChange = Function.prototype;
+        this.onTouched = Function.prototype;
+    }
+    /**
+     * @return {?}
+     */
+    onClick() {
+        if (this.isDisabled) {
+            return;
+        }
+        this.toggle(!this.state);
+        this.onChange(this.value);
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.toggle(this.trueValue === this.value);
+    }
+    /**
+     * @return {?}
+     */
+    get trueValue() {
+        return typeof this.btnCheckboxTrue !== 'undefined'
+            ? this.btnCheckboxTrue
+            : true;
+    }
+    /**
+     * @return {?}
+     */
+    get falseValue() {
+        return typeof this.btnCheckboxFalse !== 'undefined'
+            ? this.btnCheckboxFalse
+            : false;
+    }
+    /**
+     * @param {?} state
+     * @return {?}
+     */
+    toggle(state$$1) {
+        this.state = state$$1;
+        this.value = this.state ? this.trueValue : this.falseValue;
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    writeValue(value) {
+        this.state = this.trueValue === value;
+        this.value = value ? this.trueValue : this.falseValue;
+    }
+    /**
+     * @param {?} isDisabled
+     * @return {?}
+     */
+    setDisabledState(isDisabled) {
+        this.isDisabled = isDisabled;
+    }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    registerOnChange(fn) {
+        this.onChange = fn;
+    }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    registerOnTouched(fn) {
+        this.onTouched = fn;
+    }
+}
+ButtonCheckboxDirective.decorators = [
+    { type: Directive, args: [{ selector: '[mdbCheckbox]', providers: [CHECKBOX_CONTROL_VALUE_ACCESSOR] },] },
+];
+/** @nocollapse */
+ButtonCheckboxDirective.propDecorators = {
+    "btnCheckboxTrue": [{ type: Input },],
+    "btnCheckboxFalse": [{ type: Input },],
+    "state": [{ type: HostBinding, args: ['class.active',] },],
+    "onClick": [{ type: HostListener, args: ['click',] },],
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+const RADIO_CONTROL_VALUE_ACCESSOR = {
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => ButtonRadioDirective),
+    multi: true
+};
+/**
+ * Create radio buttons or groups of buttons.
+ * A value of a selected button is bound to a variable specified via ngModel.
+ */
+class ButtonRadioDirective {
+    /**
+     * @param {?} el
+     * @param {?} renderer
+     */
+    constructor(el, renderer) {
+        this.renderer = renderer;
+        this.onChange = Function.prototype;
+        this.onTouched = Function.prototype;
+        this.radioElementsArray = [];
+        this.el = el;
+    }
+    /**
+     * @return {?}
+     */
+    get isActive() {
+        return this.mdbRadio === this.value;
+    }
+    /**
+     * @param {?=} event
+     * @return {?}
+     */
+    onClick(event) {
+        try {
+            this.el.nativeElement.parentElement.childNodes.forEach(element => {
+                this.radioElementsArray.push(element);
+            });
+            this.radioElementsArray.forEach(element => {
+                this.renderer.removeClass(element, 'active');
+            });
+            this.renderer.addClass(event.target, 'active');
+        }
+        catch (/** @type {?} */ error) {
+        }
+        if (this.el.nativeElement.attributes.disabled) {
+            return;
+        }
+        if (this.uncheckable && this.mdbRadio === this.value) {
+            this.value = undefined;
+        }
+        else {
+            this.value = this.mdbRadio;
+        }
+        this.onTouched();
+        this.onChange(this.value);
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.uncheckable = typeof this.uncheckable !== 'undefined';
+    }
+    /**
+     * @return {?}
+     */
+    onBlur() {
+        this.onTouched();
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    writeValue(value) {
+        this.value = value;
+    }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    registerOnChange(fn) {
+        this.onChange = fn;
+    }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    registerOnTouched(fn) {
+        this.onTouched = fn;
+    }
+}
+ButtonRadioDirective.decorators = [
+    { type: Directive, args: [{ selector: '[mdbRadio]', providers: [RADIO_CONTROL_VALUE_ACCESSOR] },] },
+];
+/** @nocollapse */
+ButtonRadioDirective.ctorParameters = () => [
+    { type: ElementRef, },
+    { type: Renderer2, },
+];
+ButtonRadioDirective.propDecorators = {
+    "mdbRadio": [{ type: Input },],
+    "uncheckable": [{ type: Input },],
+    "value": [{ type: Input },],
+    "isActive": [{ type: HostBinding, args: ['class.active',] },],
+    "onClick": [{ type: HostListener, args: ['click', ['$event'],] },],
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class ButtonsModule {
+    /**
+     * @return {?}
+     */
+    static forRoot() {
+        return { ngModule: ButtonsModule, providers: [] };
+    }
+}
+ButtonsModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [ButtonCheckboxDirective, ButtonRadioDirective],
+                exports: [ButtonCheckboxDirective, ButtonRadioDirective]
+            },] },
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/*tslint:disable */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * JS version of browser APIs. This library can only run in the browser.
+ */
+var win = typeof window !== 'undefined' && window || /** @type {?} */ ({});
+var document$1 = win.document;
+var location = win.location;
+var gc = win['gc'] ? () => win['gc']() : () => null;
+var performance = win['performance'] ? win['performance'] : null;
+const Event = win['Event'];
+const MouseEvent = win['MouseEvent'];
+const KeyboardEvent = win['KeyboardEvent'];
+const EventTarget = win['EventTarget'];
+const History = win['History'];
+const Location = win['Location'];
+const EventListener = win['EventListener'];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @return {?}
  */
-function OnChange() {
-    const /** @type {?} */ sufix = 'Change';
-    return function OnChangeHandler(target, propertyKey) {
-        const /** @type {?} */ _key = ` __${propertyKey}Value`;
-        Object.defineProperty(target, propertyKey, {
-            /**
-             * @return {?}
-             */
-            get() { return this[_key]; },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
-            set(value) {
-                const /** @type {?} */ prevValue = this[_key];
-                this[_key] = value;
-                if (prevValue !== value && this[propertyKey + sufix]) {
-                    this[propertyKey + sufix].emit(value);
-                }
-            }
-        });
-    };
+function isBs3() {
+    return win.__theme === 'bs4';
 }
-/* tslint:enable */
 
 /**
  * @fileoverview added by tsickle
@@ -11475,337 +11709,6 @@ class LinkedList {
         return result;
     }
 }
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/*tslint:disable */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * JS version of browser APIs. This library can only run in the browser.
- */
-var win = typeof window !== 'undefined' && window || /** @type {?} */ ({});
-var document$1 = win.document;
-var location = win.location;
-var gc = win['gc'] ? () => win['gc']() : () => null;
-var performance = win['performance'] ? win['performance'] : null;
-const Event = win['Event'];
-const MouseEvent = win['MouseEvent'];
-const KeyboardEvent = win['KeyboardEvent'];
-const EventTarget = win['EventTarget'];
-const History = win['History'];
-const Location = win['Location'];
-const EventListener = win['EventListener'];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @return {?}
- */
-function isBs3() {
-    return win.__theme === 'bs4';
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @copyright Valor Software
- * @copyright Angular ng-bootstrap team
- */
-class Trigger {
-    /**
-     * @param {?} open
-     * @param {?=} close
-     */
-    constructor(open, close) {
-        this.open = open;
-        this.close = close || open;
-    }
-    /**
-     * @return {?}
-     */
-    isManual() { return this.open === 'manual' || this.close === 'manual'; }
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class Utils {
-    /**
-     * @param {?} element
-     * @return {?}
-     */
-    static reflow(element) {
-        ((bs) => bs)(element.offsetHeight);
-    }
-    /**
-     * @param {?} elem
-     * @return {?}
-     */
-    static getStyles(elem) {
-        // Support: IE <=11 only, Firefox <=30 (#15098, #14150)
-        // IE throws on elements created in popups
-        // FF meanwhile throws on frame elements through "defaultView.getComputedStyle"
-        let /** @type {?} */ view = elem.ownerDocument.defaultView;
-        if (!view || !view.opener) {
-            view = win;
-        }
-        return view.getComputedStyle(elem);
-    }
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-// TODO: config: activeClass - Class to apply to the checked buttons
-const CHECKBOX_CONTROL_VALUE_ACCESSOR = {
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => ButtonCheckboxDirective),
-    multi: true
-};
-/**
- * Add checkbox functionality to any element
- */
-class ButtonCheckboxDirective {
-    constructor() {
-        /**
-         * Truthy value, will be set to ngModel
-         */
-        this.btnCheckboxTrue = true;
-        /**
-         * Falsy value, will be set to ngModel
-         */
-        this.btnCheckboxFalse = false;
-        this.state = false;
-        this.onChange = Function.prototype;
-        this.onTouched = Function.prototype;
-    }
-    /**
-     * @return {?}
-     */
-    onClick() {
-        if (this.isDisabled) {
-            return;
-        }
-        this.toggle(!this.state);
-        this.onChange(this.value);
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.toggle(this.trueValue === this.value);
-    }
-    /**
-     * @return {?}
-     */
-    get trueValue() {
-        return typeof this.btnCheckboxTrue !== 'undefined'
-            ? this.btnCheckboxTrue
-            : true;
-    }
-    /**
-     * @return {?}
-     */
-    get falseValue() {
-        return typeof this.btnCheckboxFalse !== 'undefined'
-            ? this.btnCheckboxFalse
-            : false;
-    }
-    /**
-     * @param {?} state
-     * @return {?}
-     */
-    toggle(state$$1) {
-        this.state = state$$1;
-        this.value = this.state ? this.trueValue : this.falseValue;
-    }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    writeValue(value) {
-        this.state = this.trueValue === value;
-        this.value = value ? this.trueValue : this.falseValue;
-    }
-    /**
-     * @param {?} isDisabled
-     * @return {?}
-     */
-    setDisabledState(isDisabled) {
-        this.isDisabled = isDisabled;
-    }
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    registerOnChange(fn) {
-        this.onChange = fn;
-    }
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    registerOnTouched(fn) {
-        this.onTouched = fn;
-    }
-}
-ButtonCheckboxDirective.decorators = [
-    { type: Directive, args: [{ selector: '[mdbCheckbox]', providers: [CHECKBOX_CONTROL_VALUE_ACCESSOR] },] },
-];
-/** @nocollapse */
-ButtonCheckboxDirective.propDecorators = {
-    "btnCheckboxTrue": [{ type: Input },],
-    "btnCheckboxFalse": [{ type: Input },],
-    "state": [{ type: HostBinding, args: ['class.active',] },],
-    "onClick": [{ type: HostListener, args: ['click',] },],
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-const RADIO_CONTROL_VALUE_ACCESSOR = {
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => ButtonRadioDirective),
-    multi: true
-};
-/**
- * Create radio buttons or groups of buttons.
- * A value of a selected button is bound to a variable specified via ngModel.
- */
-class ButtonRadioDirective {
-    /**
-     * @param {?} el
-     * @param {?} renderer
-     */
-    constructor(el, renderer) {
-        this.renderer = renderer;
-        this.onChange = Function.prototype;
-        this.onTouched = Function.prototype;
-        this.radioElementsArray = [];
-        this.el = el;
-    }
-    /**
-     * @return {?}
-     */
-    get isActive() {
-        return this.mdbRadio === this.value;
-    }
-    /**
-     * @param {?=} event
-     * @return {?}
-     */
-    onClick(event) {
-        try {
-            this.el.nativeElement.parentElement.childNodes.forEach(element => {
-                this.radioElementsArray.push(element);
-            });
-            this.radioElementsArray.forEach(element => {
-                this.renderer.removeClass(element, 'active');
-            });
-            this.renderer.addClass(event.target, 'active');
-        }
-        catch (/** @type {?} */ error) {
-        }
-        if (this.el.nativeElement.attributes.disabled) {
-            return;
-        }
-        if (this.uncheckable && this.mdbRadio === this.value) {
-            this.value = undefined;
-        }
-        else {
-            this.value = this.mdbRadio;
-        }
-        this.onTouched();
-        this.onChange(this.value);
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.uncheckable = typeof this.uncheckable !== 'undefined';
-    }
-    /**
-     * @return {?}
-     */
-    onBlur() {
-        this.onTouched();
-    }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    writeValue(value) {
-        this.value = value;
-    }
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    registerOnChange(fn) {
-        this.onChange = fn;
-    }
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    registerOnTouched(fn) {
-        this.onTouched = fn;
-    }
-}
-ButtonRadioDirective.decorators = [
-    { type: Directive, args: [{ selector: '[mdbRadio]', providers: [RADIO_CONTROL_VALUE_ACCESSOR] },] },
-];
-/** @nocollapse */
-ButtonRadioDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
-];
-ButtonRadioDirective.propDecorators = {
-    "mdbRadio": [{ type: Input },],
-    "uncheckable": [{ type: Input },],
-    "value": [{ type: Input },],
-    "isActive": [{ type: HostBinding, args: ['class.active',] },],
-    "onClick": [{ type: HostListener, args: ['click', ['$event'],] },],
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class ButtonsModule {
-    /**
-     * @return {?}
-     */
-    static forRoot() {
-        return { ngModule: ButtonsModule, providers: [] };
-    }
-}
-ButtonsModule.decorators = [
-    { type: NgModule, args: [{
-                declarations: [ButtonCheckboxDirective, ButtonRadioDirective],
-                exports: [ButtonCheckboxDirective, ButtonRadioDirective]
-            },] },
-];
 
 /**
  * @fileoverview added by tsickle
@@ -12916,6 +12819,232 @@ CollapseModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+class BsDropdownState {
+    constructor() {
+        this.direction = 'down';
+        this.isOpenChange = new EventEmitter();
+        this.isDisabledChange = new EventEmitter();
+        this.toggleClick = new EventEmitter();
+        this.dropdownMenu = new Promise((resolve) => {
+            this.resolveDropdownMenu = resolve;
+        });
+    }
+}
+BsDropdownState.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+BsDropdownState.ctorParameters = () => [];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class BsDropdownContainerComponent {
+    /**
+     * @param {?} _state
+     */
+    constructor(_state) {
+        this._state = _state;
+        this.isOpen = false;
+        this.display = 'block';
+        this.position = 'absolute';
+        this._subscription = _state.isOpenChange.subscribe((value) => {
+            this.isOpen = value;
+        });
+    }
+    /**
+     * @return {?}
+     */
+    get direction() {
+        return this._state.direction;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        this._subscription.unsubscribe();
+    }
+}
+BsDropdownContainerComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-dropdown-container',
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                template: `
+  <div [class.dropup]="direction === 'up'"
+  [class.dropdown]="direction === 'down'"
+  [class.show]="isOpen"
+  [class.open]="isOpen">
+    <ng-content></ng-content>
+  </div>
+  `
+            },] },
+];
+/** @nocollapse */
+BsDropdownContainerComponent.ctorParameters = () => [
+    { type: BsDropdownState, },
+];
+BsDropdownContainerComponent.propDecorators = {
+    "display": [{ type: HostBinding, args: ['style.display',] },],
+    "position": [{ type: HostBinding, args: ['style.position',] },],
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class BsDropdownMenuDirective {
+    /**
+     * @param {?} _state
+     * @param {?} _viewContainer
+     * @param {?} _templateRef
+     */
+    constructor(_state, _viewContainer, _templateRef) {
+        _state.resolveDropdownMenu({
+            templateRef: _templateRef,
+            viewContainer: _viewContainer
+        });
+    }
+}
+BsDropdownMenuDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[mdbDropdownMenu],[dropdownMenu]',
+                exportAs: 'bs-dropdown-menu'
+            },] },
+];
+/** @nocollapse */
+BsDropdownMenuDirective.ctorParameters = () => [
+    { type: BsDropdownState, },
+    { type: ViewContainerRef, },
+    { type: TemplateRef, },
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class BsDropdownToggleDirective {
+    /**
+     * @param {?} _state
+     * @param {?} _element
+     */
+    constructor(_state, _element) {
+        this._state = _state;
+        this._element = _element;
+        this._subscriptions = [];
+        this.ariaHaspopup = true;
+        // @HostBinding('attr.disabled') isDisabled: boolean = null;
+        this.isDisabled = null;
+        // sync is open value with state
+        this._subscriptions.push(this._state
+            .isOpenChange.subscribe((value) => this.isOpen = value));
+        // populate disabled state
+        this._subscriptions.push(this._state
+            .isDisabledChange
+            .subscribe((value) => this.isDisabled = value || null));
+    }
+    /**
+     * @return {?}
+     */
+    onClick() {
+        if (this.isDisabled) {
+            return;
+        }
+        this._state.toggleClick.emit();
+    }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    onDocumentClick(event) {
+        if (this._state.autoClose && event.button !== 2 &&
+            !this._element.nativeElement.contains(event.target)) {
+            this._state.toggleClick.emit(false);
+        }
+    }
+    /**
+     * @return {?}
+     */
+    onEsc() {
+        if (this._state.autoClose) {
+            this._state.toggleClick.emit(false);
+        }
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        for (const /** @type {?} */ sub of this._subscriptions) {
+            sub.unsubscribe();
+        }
+    }
+}
+BsDropdownToggleDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[mdbDropdownToggle],[dropdownToggle]',
+                exportAs: 'bs-dropdown-toggle'
+            },] },
+];
+/** @nocollapse */
+BsDropdownToggleDirective.ctorParameters = () => [
+    { type: BsDropdownState, },
+    { type: ElementRef, },
+];
+BsDropdownToggleDirective.propDecorators = {
+    "ariaHaspopup": [{ type: HostBinding, args: ['attr.aria-haspopup',] },],
+    "isDisabled": [{ type: HostBinding, args: ['attr.disabled',] },],
+    "isOpen": [{ type: HostBinding, args: ['attr.aria-expanded',] },],
+    "onClick": [{ type: HostListener, args: ['click',] },],
+    "onDocumentClick": [{ type: HostListener, args: ['document:click', ['$event'],] },],
+    "onEsc": [{ type: HostListener, args: ['keyup.esc',] },],
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * Default dropdown configuration
+ */
+class BsDropdownConfig {
+    constructor() {
+        /**
+         * default dropdown auto closing behavior
+         */
+        this.autoClose = true;
+    }
+}
+BsDropdownConfig.decorators = [
+    { type: Injectable },
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @copyright Valor Software
+ * @copyright Angular ng-bootstrap team
+ */
+class Trigger {
+    /**
+     * @param {?} open
+     * @param {?=} close
+     */
+    constructor(open, close) {
+        this.open = open;
+        this.close = close || open;
+    }
+    /**
+     * @return {?}
+     */
+    isManual() { return this.open === 'manual' || this.close === 'manual'; }
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 const DEFAULT_ALIASES = {
     hover: ['mouseover', 'mouseout'],
     focus: ['focusin', 'focusout']
@@ -13512,209 +13641,6 @@ ComponentLoaderFactory.ctorParameters = () => [
     { type: Injector, },
     { type: PositioningService, },
     { type: ApplicationRef, },
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class BsDropdownState {
-    constructor() {
-        this.direction = 'down';
-        this.isOpenChange = new EventEmitter();
-        this.isDisabledChange = new EventEmitter();
-        this.toggleClick = new EventEmitter();
-        this.dropdownMenu = new Promise((resolve) => {
-            this.resolveDropdownMenu = resolve;
-        });
-    }
-}
-BsDropdownState.decorators = [
-    { type: Injectable },
-];
-/** @nocollapse */
-BsDropdownState.ctorParameters = () => [];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class BsDropdownContainerComponent {
-    /**
-     * @param {?} _state
-     */
-    constructor(_state) {
-        this._state = _state;
-        this.isOpen = false;
-        this.display = 'block';
-        this.position = 'absolute';
-        this._subscription = _state.isOpenChange.subscribe((value) => {
-            this.isOpen = value;
-        });
-    }
-    /**
-     * @return {?}
-     */
-    get direction() {
-        return this._state.direction;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnDestroy() {
-        this._subscription.unsubscribe();
-    }
-}
-BsDropdownContainerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'mdb-dropdown-container',
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                template: `
-  <div [class.dropup]="direction === 'up'"
-  [class.dropdown]="direction === 'down'"
-  [class.show]="isOpen"
-  [class.open]="isOpen">
-    <ng-content></ng-content>
-  </div>
-  `
-            },] },
-];
-/** @nocollapse */
-BsDropdownContainerComponent.ctorParameters = () => [
-    { type: BsDropdownState, },
-];
-BsDropdownContainerComponent.propDecorators = {
-    "display": [{ type: HostBinding, args: ['style.display',] },],
-    "position": [{ type: HostBinding, args: ['style.position',] },],
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class BsDropdownMenuDirective {
-    /**
-     * @param {?} _state
-     * @param {?} _viewContainer
-     * @param {?} _templateRef
-     */
-    constructor(_state, _viewContainer, _templateRef) {
-        _state.resolveDropdownMenu({
-            templateRef: _templateRef,
-            viewContainer: _viewContainer
-        });
-    }
-}
-BsDropdownMenuDirective.decorators = [
-    { type: Directive, args: [{
-                selector: '[mdbDropdownMenu],[dropdownMenu]',
-                exportAs: 'bs-dropdown-menu'
-            },] },
-];
-/** @nocollapse */
-BsDropdownMenuDirective.ctorParameters = () => [
-    { type: BsDropdownState, },
-    { type: ViewContainerRef, },
-    { type: TemplateRef, },
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class BsDropdownToggleDirective {
-    /**
-     * @param {?} _state
-     * @param {?} _element
-     */
-    constructor(_state, _element) {
-        this._state = _state;
-        this._element = _element;
-        this._subscriptions = [];
-        this.ariaHaspopup = true;
-        // @HostBinding('attr.disabled') isDisabled: boolean = null;
-        this.isDisabled = null;
-        // sync is open value with state
-        this._subscriptions.push(this._state
-            .isOpenChange.subscribe((value) => this.isOpen = value));
-        // populate disabled state
-        this._subscriptions.push(this._state
-            .isDisabledChange
-            .subscribe((value) => this.isDisabled = value || null));
-    }
-    /**
-     * @return {?}
-     */
-    onClick() {
-        if (this.isDisabled) {
-            return;
-        }
-        this._state.toggleClick.emit();
-    }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    onDocumentClick(event) {
-        if (this._state.autoClose && event.button !== 2 &&
-            !this._element.nativeElement.contains(event.target)) {
-            this._state.toggleClick.emit(false);
-        }
-    }
-    /**
-     * @return {?}
-     */
-    onEsc() {
-        if (this._state.autoClose) {
-            this._state.toggleClick.emit(false);
-        }
-    }
-    /**
-     * @return {?}
-     */
-    ngOnDestroy() {
-        for (const /** @type {?} */ sub of this._subscriptions) {
-            sub.unsubscribe();
-        }
-    }
-}
-BsDropdownToggleDirective.decorators = [
-    { type: Directive, args: [{
-                selector: '[mdbDropdownToggle],[dropdownToggle]',
-                exportAs: 'bs-dropdown-toggle'
-            },] },
-];
-/** @nocollapse */
-BsDropdownToggleDirective.ctorParameters = () => [
-    { type: BsDropdownState, },
-    { type: ElementRef, },
-];
-BsDropdownToggleDirective.propDecorators = {
-    "ariaHaspopup": [{ type: HostBinding, args: ['attr.aria-haspopup',] },],
-    "isDisabled": [{ type: HostBinding, args: ['attr.disabled',] },],
-    "isOpen": [{ type: HostBinding, args: ['attr.aria-expanded',] },],
-    "onClick": [{ type: HostListener, args: ['click',] },],
-    "onDocumentClick": [{ type: HostListener, args: ['document:click', ['$event'],] },],
-    "onEsc": [{ type: HostListener, args: ['keyup.esc',] },],
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * Default dropdown configuration
- */
-class BsDropdownConfig {
-    constructor() {
-        /**
-         * default dropdown auto closing behavior
-         */
-        this.autoClose = true;
-    }
-}
-BsDropdownConfig.decorators = [
-    { type: Injectable },
 ];
 
 /**
@@ -14907,6 +14833,34 @@ ActiveModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+class Utils {
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    static reflow(element) {
+        ((bs) => bs)(element.offsetHeight);
+    }
+    /**
+     * @param {?} elem
+     * @return {?}
+     */
+    static getStyles(elem) {
+        // Support: IE <=11 only, Firefox <=30 (#15098, #14150)
+        // IE throws on elements created in popups
+        // FF meanwhile throws on frame elements through "defaultView.getComputedStyle"
+        let /** @type {?} */ view = elem.ownerDocument.defaultView;
+        if (!view || !view.opener) {
+            view = win;
+        }
+        return view.getComputedStyle(elem);
+    }
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 class ModalOptions {
 }
 ModalOptions.decorators = [
@@ -14940,7 +14894,12 @@ const ClassName = {
     // bs3
     SHOW: 'show' // bs4
 };
-
+const Selector = {
+    DIALOG: '.modal-dialog',
+    DATA_TOGGLE: '[data-toggle="modal"]',
+    DATA_DISMISS: '[data-dismiss="modal"]',
+    FIXED_CONTENT: '.navbar-fixed-top, .navbar-fixed-bottom, .is-fixed'
+};
 const TransitionDurations = {
     MODAL: 300,
     BACKDROP: 150
@@ -14954,7 +14913,15 @@ const DISMISS_REASONS = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-
+class ModalBackdropOptions {
+    /**
+     * @param {?} options
+     */
+    constructor(options) {
+        this.animate = true;
+        Object.assign(this, options);
+    }
+}
 /**
  * This component will be added as background layout for modals if enabled
  */
@@ -16511,6 +16478,38 @@ TooltipContainerComponent.propDecorators = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+/**
+ * @return {?}
+ */
+function OnChange() {
+    const /** @type {?} */ sufix = 'Change';
+    return function OnChangeHandler(target, propertyKey) {
+        const /** @type {?} */ _key = ` __${propertyKey}Value`;
+        Object.defineProperty(target, propertyKey, {
+            /**
+             * @return {?}
+             */
+            get() { return this[_key]; },
+            /**
+             * @param {?} value
+             * @return {?}
+             */
+            set(value) {
+                const /** @type {?} */ prevValue = this[_key];
+                this[_key] = value;
+                if (prevValue !== value && this[propertyKey + sufix]) {
+                    this[propertyKey + sufix].emit(value);
+                }
+            }
+        });
+    };
+}
+/* tslint:enable */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 class TooltipDirective {
     /**
      * @param {?} _viewContainerRef
@@ -16686,6 +16685,16 @@ TooltipModule.decorators = [
                 entryComponents: [TooltipContainerComponent]
             },] },
 ];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @template T
+ */
+class BsComponentRef {
+}
 
 /**
  * @fileoverview added by tsickle
@@ -16867,6 +16876,11 @@ MDBBootstrapModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 const MODULES$1 = [
     AutocompleteModule,
     CardsModule,
@@ -16960,6 +16974,8 @@ MDBBootstrapModulesPro.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+// NG-UIKIT-PRO-STANDARD
+// Accordion
 
 /**
  * @fileoverview added by tsickle
@@ -16974,5 +16990,5 @@ MDBBootstrapModulesPro.decorators = [
  * Generated bundle index. Do not edit.
  */
 
-export { SQUEEZEBOX_COMPONENTS, SBItemComponent, SBItemHeadComponent, SBItemBodyComponent, SqueezeBoxComponent, AccordionModule, ComponentPortal, BasePortalHost, Overlay, OVERLAY_PROVIDERS, OverlayContainer, OverlayRef, ToastContainerDirective, ToastContainerModule, ToastComponent, ToastService, GlobalConfig, ToastPackage, tsConfig, ToastModule, ToastRef, ToastInjector, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, AutocompleteModule, CompleterComponent, CompleterListItemComponent, CompleterService, localDataFactory, LocalDataFactoryProvider, remoteDataFactory, RemoteDataFactoryProvider, LocalData, RemoteData, CompleterBaseData, MdbCompleterDirective, MdbDropdownDirective, MdbInputCompleteDirective, MdbListDirective, MdbRowDirective, CardsModule, DatepickerModule, ChartSimpleModule, FileInputModule, CharCounterModule, LightBoxModule, SELECT_VALUE_ACCESSOR, SelectComponent, SelectModule, MDBSpinningPreloader, BarComponent, ProgressDirective, ProgressbarComponent, ProgressbarModule, ProgressbarConfigComponent, ProgressSpinnerComponent, PreloadersModule, ProgressBars, SidenavModule, SmoothscrollModule, MdbStickyDirective, StickyContentModule, TabsModule, MaterialChipsModule, TimePickerModule, OnChange, LinkedList, isBs3, Trigger, Utils, ButtonsModule, CarouselModule, ChartsModule, CollapseModule, DropdownModule, InputsModule, DeepModule, DeepDirective, MdbInputDirective, InputValidateDirective, EqualValidatorDirective, ActiveDirective, ActiveModule, ModalModule, NavbarModule, PopoverModule, RippleModule, WavesModule, TooltipModule, MDBBootstrapModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, ButtonsModule as ɵbo1, ButtonCheckboxDirective as ɵck1, CHECKBOX_CONTROL_VALUE_ACCESSOR as ɵcj1, ButtonRadioDirective as ɵci1, RADIO_CONTROL_VALUE_ACCESSOR as ɵch1, CarouselComponent as ɵcu1, CarouselConfig as ɵcw1, CarouselModule as ɵbp1, SlideComponent as ɵcv1, BaseChartDirective as ɵcx1, ChartsModule as ɵbq1, CollapseDirective as ɵcy1, CollapseModule as ɵbr1, BsDropdownContainerComponent as ɵcr1, BsDropdownMenuDirective as ɵcp1, BsDropdownToggleDirective as ɵcq1, BsDropdownConfig as ɵct1, BsDropdownDirective as ɵco1, DropdownModule as ɵbs1, BsDropdownState as ɵcs1, ActiveDirective as ɵby1, ActiveModule as ɵbz1, DeepDirective as ɵbv1, DeepModule as ɵbu1, InputValidateDirective as ɵbx1, InputsModule as ɵbt1, MdbInputDirective as ɵbw1, MDBRootModule as ɵcg1, ModalDirective as ɵdb1, ModalModule as ɵca1, ModalOptions as ɵda1, MDBModalService as ɵdc1, ModalBackdropComponent as ɵcz1, ModalContainerComponent as ɵdd1, LinksComponent as ɵex1, LogoComponent as ɵey1, NavbarComponent as ɵcn1, NavbarModule as ɵcb1, NavbarService as ɵew1, NavlinksComponent as ɵez1, PopoverContainerComponent as ɵdj1, PopoverConfig as ɵdi1, PopoverDirective as ɵdh1, PopoverModule as ɵcc1, RippleDirective as ɵcl1, RippleModule as ɵcd1, TooltipContainerComponent as ɵde1, TooltipDirective as ɵdf1, TooltipModule as ɵcf1, TooltipConfig as ɵdg1, ComponentLoaderFactory as ɵeu1, win as ɵet1, PositioningService as ɵev1, WavesDirective as ɵcm1, WavesModule as ɵce1, SBItemComponent as ɵb1, SBItemBodyComponent as ɵd1, SBItemHeadComponent as ɵc1, SqueezeBoxComponent as ɵe1, AccordionModule as ɵa1, TOAST_CONFIG as ɵem1, CompleterListItemComponent as ɵh1, CompleterComponent as ɵg1, MdbCompleterDirective as ɵl1, MdbDropdownDirective as ɵm1, MdbInputCompleteDirective as ɵn1, CtrListContext as ɵo1, MdbListDirective as ɵp1, MdbRowDirective as ɵq1, AutocompleteModule as ɵf1, CompleterService as ɵi1, LocalDataFactoryProvider as ɵj1, RemoteDataFactoryProvider as ɵk1, CardRevealComponent as ɵdl1, CardRotatingComponent as ɵdm1, CardsModule as ɵr1, MDBDatePickerComponent as ɵea1, MYDP_VALUE_ACCESSOR as ɵdz1, DatepickerModule as ɵs1, InputAutoFillDirective as ɵdy1, FocusDirective as ɵdx1, LocaleService as ɵdv1, UtilService as ɵdw1, SimpleChartComponent as ɵef1, ChartSimpleModule as ɵt1, EasyPieChartComponent as ɵeg1, MDBFileDropDirective as ɵel1, MDBFileSelectDirective as ɵek1, FileInputModule as ɵu1, CharCounterDirective as ɵej1, CharCounterModule as ɵv1, ImageModalComponent as ɵed1, LightBoxModule as ɵw1, SelectDropdownComponent as ɵdu1, SELECT_VALUE_ACCESSOR as ɵy1, SelectComponent as ɵz1, SelectModule as ɵx1, MDBRootModulePro as ɵdk1, BarComponent as ɵbb1, ProgressBars as ɵba1, MdProgressBarModule as ɵen1, ProgressBarComponent as ɵeo1, MdProgressSpinnerModule as ɵep1, MdProgressSpinnerComponent as ɵer1, MdProgressSpinnerCssMatStylerDirective as ɵeq1, MdSpinnerComponent as ɵes1, ProgressSpinnerComponent as ɵbg1, ProgressDirective as ɵbc1, ProgressbarComponent as ɵbd1, ProgressbarConfigComponent as ɵbf1, ProgressbarModule as ɵbe1, SidenavComponent as ɵee1, SidenavModule as ɵbh1, PageScrollDirective as ɵeh1, SmoothscrollModule as ɵbi1, PageScrollService as ɵei1, MdbStickyDirective as ɵbj1, StickyContentModule as ɵbk1, TabHeadingDirective as ɵdr1, TabDirective as ɵdq1, TabsetComponent as ɵds1, TabsetConfig as ɵdt1, TabsModule as ɵbl1, NgTranscludeDirective as ɵdp1, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR as ɵdn1, MaterialChipsComponent as ɵdo1, MaterialChipsModule as ɵbm1, ClockPickerComponent as ɵec1, TIME_PIRCKER_VALUE_ACCESSOT as ɵeb1, TimePickerModule as ɵbn1 };
+export { SBItemBodyComponent, SBItemHeadComponent, SBItemComponent, sbConfig, SqueezeBoxComponent, SQUEEZEBOX_COMPONENTS, AccordionModule, OverlayContainer, OverlayRef, Overlay, OVERLAY_PROVIDERS, DomPortalHost, ComponentPortal, BasePortalHost, ToastComponent, GlobalConfig, ToastPackage, tsConfig, ToastContainerDirective, ToastContainerModule, ToastRef, ToastInjector, ToastModule, ToastService, TOAST_CONFIG, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, CompleterListItemComponent, CompleterComponent, MdbCompleterDirective, CtrRowItem, MdbDropdownDirective, MdbInputCompleteDirective, CtrListContext, MdbListDirective, MdbRowDirective, CompleterBaseData, CompleterService, localDataFactory, remoteDataFactory, LocalDataFactoryProvider, RemoteDataFactoryProvider, LocalData, RemoteData, MAX_CHARS, MIN_SEARCH_LENGTH, PAUSE, TEXT_SEARCHING, TEXT_NO_RESULTS, CLEAR_TIMEOUT, isNil, AutocompleteModule, CardRevealComponent, CardRotatingComponent, CardsModule, InputAutoFillDirective, FocusDirective, LocaleService, UtilService, DatepickerModule, MYDP_VALUE_ACCESSOR, MDBDatePickerComponent, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, UploadStatus, humanizeBytes, MDBUploaderService, MDBFileDropDirective, MDBFileSelectDirective, FileInputModule, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, OptionList, Option, SelectDropdownComponent, SELECT_VALUE_ACCESSOR, SelectComponent, SelectModule, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, MDBSpinningPreloader, ProgressBarComponent, MdProgressSpinnerCssMatStylerDirective, MdProgressSpinnerComponent, MdSpinnerComponent, BarComponent, ProgressSpinnerComponent, ProgressDirective, ProgressbarComponent, ProgressbarConfigComponent, ProgressbarModule, PreloadersModule, ProgressBars, SidenavComponent, SidenavModule, PageScrollUtilService, EasingLogic, PageScrollConfig, PageScrollDirective, PageScrollInstance, SmoothscrollModule, PageScrollService, computedStyle, MdbStickyDirective, StickyContentModule, TabHeadingDirective, TabDirective, TabsetComponent, TabsetConfig, NgTranscludeDirective, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TimePickerModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, ButtonsModule, CHECKBOX_CONTROL_VALUE_ACCESSOR, ButtonCheckboxDirective, RADIO_CONTROL_VALUE_ACCESSOR, ButtonRadioDirective, Direction, CarouselComponent, CarouselConfig, SlideComponent, CarouselModule, BaseChartDirective, ChartsModule, CollapseDirective, CollapseModule, BsDropdownContainerComponent, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownConfig, BsDropdownDirective, BsDropdownState, DropdownModule, InputsModule, MdbInputDirective, DeepModule, DeepDirective, InputValidateDirective, EqualValidatorDirective, ActiveDirective, ActiveModule, ModalDirective, ModalOptions, MDBModalRef, modalConfigDefaults, ClassName, Selector, TransitionDurations, DISMISS_REASONS, MDBModalService, ModalBackdropOptions, ModalBackdropComponent, ModalContainerComponent, msConfig, ModalModule, LinksComponent, LogoComponent, NavbarComponent, NavbarService, NavlinksComponent, NavbarModule, PopoverContainerComponent, PopoverConfig, PopoverDirective, PopoverModule, RippleDirective, RippleModule, WavesDirective, WavesModule, TooltipContainerComponent, TooltipDirective, TooltipConfig, TooltipModule, BsComponentRef, ComponentLoader, ComponentLoaderFactory, ContentRef, win as window, document$1 as document, location, gc, performance, Event, MouseEvent, KeyboardEvent, EventTarget, History, Location, EventListener, Positioning, positionElements, PositioningService, OnChange, LinkedList, isBs3, Trigger, parseTriggers, listenToTriggers, Utils, MDBBootstrapModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, ButtonsModule as ɵcq1, ButtonCheckboxDirective as ɵcr1, ButtonRadioDirective as ɵcs1, CarouselComponent as ɵct1, CarouselConfig as ɵcu1, CarouselModule as ɵcw1, SlideComponent as ɵcv1, BaseChartDirective as ɵcx1, ChartsModule as ɵcy1, CollapseDirective as ɵcz1, CollapseModule as ɵda1, BsDropdownContainerComponent as ɵdb1, BsDropdownMenuDirective as ɵdc1, BsDropdownToggleDirective as ɵdd1, BsDropdownConfig as ɵde1, BsDropdownDirective as ɵdf1, DropdownModule as ɵdh1, BsDropdownState as ɵdg1, ActiveDirective as ɵdn1, ActiveModule as ɵdo1, DeepDirective as ɵdl1, DeepModule as ɵdk1, InputValidateDirective as ɵdm1, InputsModule as ɵdi1, MdbInputDirective as ɵdj1, MDBRootModule as ɵek1, ModalDirective as ɵdp1, ModalModule as ɵdv1, ModalOptions as ɵdq1, MDBModalService as ɵdr1, ModalBackdropComponent as ɵdt1, ModalBackdropOptions as ɵds1, ModalContainerComponent as ɵdu1, NavbarComponent as ɵdw1, NavbarModule as ɵdx1, PopoverContainerComponent as ɵdy1, PopoverConfig as ɵdz1, PopoverDirective as ɵea1, PopoverModule as ɵeb1, RippleDirective as ɵec1, RippleModule as ɵed1, TooltipContainerComponent as ɵeg1, TooltipDirective as ɵeh1, TooltipModule as ɵej1, TooltipConfig as ɵei1, WavesDirective as ɵee1, WavesModule as ɵef1, SBItemComponent as ɵc1, SBItemBodyComponent as ɵa1, SBItemHeadComponent as ɵb1, SqueezeBoxComponent as ɵd1, AccordionModule as ɵe1, CompleterListItemComponent as ɵf1, CompleterComponent as ɵg1, MdbCompleterDirective as ɵh1, MdbDropdownDirective as ɵi1, MdbInputCompleteDirective as ɵj1, MdbListDirective as ɵk1, MdbRowDirective as ɵl1, AutocompleteModule as ɵp1, CompleterService as ɵm1, LocalDataFactoryProvider as ɵn1, RemoteDataFactoryProvider as ɵo1, CardRevealComponent as ɵq1, CardRotatingComponent as ɵr1, CardsModule as ɵs1, MDBDatePickerComponent as ɵz1, MYDP_VALUE_ACCESSOR as ɵy1, DatepickerModule as ɵx1, InputAutoFillDirective as ɵt1, FocusDirective as ɵu1, LocaleService as ɵv1, UtilService as ɵw1, SimpleChartComponent as ɵba1, ChartSimpleModule as ɵbc1, EasyPieChartComponent as ɵbb1, MDBFileDropDirective as ɵbd1, MDBFileSelectDirective as ɵbe1, FileInputModule as ɵbf1, CharCounterDirective as ɵbg1, CharCounterModule as ɵbh1, ImageModalComponent as ɵbi1, LightBoxModule as ɵbj1, SelectDropdownComponent as ɵbl1, SELECT_VALUE_ACCESSOR as ɵbm1, SelectComponent as ɵbn1, SelectModule as ɵbo1, MDBRootModulePro as ɵel1, BarComponent as ɵbp1, ProgressBars as ɵbv1, MdProgressBarModule as ɵem1, MdProgressSpinnerModule as ɵen1, ProgressSpinnerComponent as ɵbq1, ProgressDirective as ɵbr1, ProgressbarComponent as ɵbs1, ProgressbarConfigComponent as ɵbt1, ProgressbarModule as ɵbu1, SidenavComponent as ɵbw1, SidenavModule as ɵbx1, PageScrollDirective as ɵby1, PageScrollInstance as ɵbz1, SmoothscrollModule as ɵca1, PageScrollService as ɵcb1, MdbStickyDirective as ɵcc1, StickyContentModule as ɵcd1, TabHeadingDirective as ɵce1, TabDirective as ɵcf1, TabsetComponent as ɵcg1, TabsetConfig as ɵch1, TabsModule as ɵcj1, NgTranscludeDirective as ɵci1, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR as ɵck1, MaterialChipsComponent as ɵcl1, MaterialChipsModule as ɵcm1, ClockPickerComponent as ɵcp1, TIME_PIRCKER_VALUE_ACCESSOT as ɵco1, TimePickerModule as ɵcn1 };
 //# sourceMappingURL=ng-uikit-pro-standard.js.map
