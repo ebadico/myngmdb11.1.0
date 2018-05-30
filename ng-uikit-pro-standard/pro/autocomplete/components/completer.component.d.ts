@@ -7,6 +7,7 @@ import { CompleterItem } from './completer-item.component';
 export declare class CompleterComponent implements OnInit, ControlValueAccessor, AfterViewChecked, AfterViewInit {
     private completerService;
     private renderer;
+    private el;
     dataService: CompleterData;
     inputName: string;
     inputId: string;
@@ -48,9 +49,11 @@ export declare class CompleterComponent implements OnInit, ControlValueAccessor,
     _open: boolean;
     _textNoResults: string;
     _textSearching: string;
-    constructor(completerService: CompleterService, renderer: Renderer2);
+    constructor(completerService: CompleterService, renderer: Renderer2, el: ElementRef);
     onkeyup(event: any): void;
     onclick(event: any): void;
+    onFocusIn(event: any): void;
+    onFocusOut(event: any): void;
     value: any;
     ngAfterViewInit(): void;
     ngAfterViewChecked(): void;

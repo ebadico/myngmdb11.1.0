@@ -22,8 +22,10 @@ export declare class TabDirective implements OnInit {
     headingRef: TemplateRef<any>;
     tabset: TabsetComponent;
     el: ElementRef | any;
+    thus: this;
     protected _active: boolean;
-    constructor(tabset: TabsetComponent, el: ElementRef);
+    isBrowser: any;
+    constructor(platformId: string, tabset: TabsetComponent, el: ElementRef);
     ngOnInit(): void;
     protected hasClass(el: any, className: any): any;
     protected classAdd(el: any, className: any): void;
