@@ -51,3 +51,7 @@ input.counter-danger~span.text-danger {
 input.counter-success~span.text-success {
 	visibility: visible !important;
 }
+
+.md-form textarea.md-textarea {
+	overflow-y: auto !important;
+}

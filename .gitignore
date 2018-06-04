@@ -7,7 +7,7 @@
 /dist
 
 #library-zips
-ng-uikit-pro-standard-6.1.0.tgz
+ng-uikit-pro-standard-6.*.tgz
 
 # IDEs and editors
 /.idea

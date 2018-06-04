@@ -1,8 +1,10 @@
-import { AfterViewInit, EventEmitter, OnChanges, OnInit, ElementRef } from '@angular/core';
+import { AfterViewInit, EventEmitter, OnChanges, OnInit, ElementRef, Renderer2, ChangeDetectorRef } from '@angular/core';
 import { Option } from './option';
 import { OptionList } from './option-list';
 export declare class SelectDropdownComponent implements AfterViewInit, OnChanges, OnInit {
     private _elementRef;
+    private _renderer;
+    private cdRef;
     filterEnabled: boolean;
     highlightColor: string;
     highlightTextColor: string;
@@ -13,6 +15,7 @@ export declare class SelectDropdownComponent implements AfterViewInit, OnChanges
     top: number;
     width: number;
     placeholder: string;
+    customClass: string;
     close: EventEmitter<boolean>;
     optionClicked: EventEmitter<Option>;
     singleFilterClick: EventEmitter<null>;
@@ -20,10 +23,14 @@ export declare class SelectDropdownComponent implements AfterViewInit, OnChanges
     singleFilterKeydown: EventEmitter<any>;
     filterInput: any;
     optionsList: any;
+    dropdownContent: ElementRef;
     disabledColor: string;
     disabledTextColor: string;
+    state: string;
+    startHeight: any;
+    endHeight: any;
     hasOptionsItems: boolean;
-    constructor(_elementRef: ElementRef);
+    constructor(_elementRef: ElementRef, _renderer: Renderer2, cdRef: ChangeDetectorRef);
     /** Event handlers. **/
     onkeyup(): void;
     ngOnInit(): void;

@@ -1943,10 +1943,12 @@ class CompleterComponent {
     /**
      * @param {?} completerService
      * @param {?} renderer
+     * @param {?} el
      */
-    constructor(completerService, renderer) {
+    constructor(completerService, renderer, el) {
         this.completerService = completerService;
         this.renderer = renderer;
+        this.el = el;
         this.inputName = '';
         this.inputId = '';
         this.pause = PAUSE;
@@ -2007,6 +2009,28 @@ class CompleterComponent {
         }
     }
     /**
+     * @param {?} event
+     * @return {?}
+     */
+    onFocusIn(event) {
+        try {
+            this.renderer.addClass(this.el.nativeElement.firstChild.children[2], 'active');
+        }
+        catch (/** @type {?} */ error) { }
+    }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    onFocusOut(event) {
+        try {
+            if (event.target.value == '') {
+                this.renderer.removeClass(this.el.nativeElement.firstChild.children[2], 'active');
+            }
+        }
+        catch (/** @type {?} */ error) { }
+    }
+    /**
      * @return {?}
      */
     get value() { return this.searchStr; }
@@ -2025,6 +2049,10 @@ class CompleterComponent {
      * @return {?}
      */
     ngAfterViewInit() {
+        try {
+            this.renderer.removeClass(this.el.nativeElement.firstChild.children[2], 'active');
+        }
+        catch (/** @type {?} */ error) { }
         if (this.autofocus) {
             this._focus = true;
         }
@@ -2202,6 +2230,7 @@ CompleterComponent.decorators = [
 CompleterComponent.ctorParameters = () => [
     { type: CompleterService, },
     { type: Renderer2, },
+    { type: ElementRef, },
 ];
 CompleterComponent.propDecorators = {
     "dataService": [{ type: Input },],
@@ -2236,6 +2265,8 @@ CompleterComponent.propDecorators = {
     "mdbInput": [{ type: ViewChild, args: ['mdbInput',] },],
     "onkeyup": [{ type: HostListener, args: ['keyup', ['$event'],] },],
     "onclick": [{ type: HostListener, args: ['click', ['$event'],] },],
+    "onFocusIn": [{ type: HostListener, args: ['focusin', ['$event'],] },],
+    "onFocusOut": [{ type: HostListener, args: ['focusout', ['$event'],] },],
     "datasource": [{ type: Input },],
     "textNoResults": [{ type: Input },],
     "textSearching": [{ type: Input },],
@@ -3304,59 +3335,17 @@ FocusDirective.propDecorators = {
 class LocaleService {
     constructor() {
         this.locales = {
-            'en': {
-                dayLabelsFull: {
-                    su: 'Sunday',
-                    mo: 'Monday',
-                    tu: 'Tuesday',
-                    we: 'Wednesday',
-                    th: 'Thursday',
-                    fr: 'Friday',
-                    sa: 'Saturday'
-                },
-                dayLabels: {
-                    su: 'Sun',
-                    mo: 'Mon',
-                    tu: 'Tue',
-                    we: 'Wed',
-                    th: 'Thu',
-                    fr: 'Fri',
-                    sa: 'Sat'
-                },
-                monthLabelsFull: {
-                    1: 'January',
-                    2: 'February',
-                    3: 'March',
-                    4: 'April',
-                    5: 'May',
-                    6: 'June',
-                    7: 'July',
-                    8: 'August',
-                    9: 'September',
-                    10: 'October',
-                    11: 'November',
-                    12: 'December'
-                },
-                monthLabels: {
-                    1: 'Jan',
-                    2: 'Feb',
-                    3: 'Mar',
-                    4: 'Apr',
-                    5: 'May',
-                    6: 'Jun',
-                    7: 'Jul',
-                    8: 'Aug',
-                    9: 'Sep',
-                    10: 'Oct',
-                    11: 'Nov',
-                    12: 'Dec'
-                },
-                dateFormat: 'yyyy-mm-dd',
-                todayBtnTxt: 'Today',
-                clearBtnTxt: 'Clear',
-                closeBtnTxt: 'Close',
-                firstDayOfWeek: 'mo',
-                sunHighlight: true,
+            "en": {
+                dayLabelsFull: { su: "Sunday", mo: "Monday", tu: "Tuesday", we: "Wednesday", th: "Thursday", fr: "Friday", sa: "Saturday" },
+                dayLabels: { su: "Sun", mo: "Mon", tu: "Tue", we: "Wed", th: "Thu", fr: "Fri", sa: "Sat" },
+                monthLabelsFull: { 1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June", 7: "July", 8: "August", 9: "September", 10: "October", 11: "November", 12: "December" },
+                monthLabels: { 1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "May", 6: "Jun", 7: "Jul", 8: "Aug", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dec" },
+                dateFormat: "yyyy-mm-dd",
+                todayBtnTxt: "Today",
+                clearBtnTxt: "Clear",
+                closeBtnTxt: "Close",
+                firstDayOfWeek: "mo",
+                sunHighlight: false,
             }
         };
     }
@@ -3672,8 +3661,9 @@ class MDBDatePickerComponent {
      * @param {?} renderer
      * @param {?} localeService
      * @param {?} utilService
+     * @param {?} platformId
      */
-    constructor(elem, renderer, localeService, utilService) {
+    constructor(elem, renderer, localeService, utilService, platformId) {
         this.elem = elem;
         this.renderer = renderer;
         this.localeService = localeService;
@@ -3750,9 +3740,16 @@ class MDBDatePickerComponent {
         this.months = [];
         this.years = [];
         this.elements = document.getElementsByClassName('mydp picker');
-        this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        this.firstTimeOpenedModal = true;
+        this.modalHeightBefore = null;
+        this.isMobile = null;
+        this.isBrowser = false;
         this.onChangeCb = () => { };
         this.onTouchedCb = () => { };
+        this.isBrowser = isPlatformBrowser(platformId);
+        if (this.isBrowser) {
+            this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        }
         this.setLocaleOptions();
         renderer.listen(this.elem.nativeElement, 'click', (event) => {
             if (this.showSelector &&
@@ -3789,6 +3786,13 @@ class MDBDatePickerComponent {
      */
     removeInlineStyle() {
         this.removeZIndex();
+        try {
+            if (this.elem.nativeElement.parentElement.parentElement.classList.contains('modal-content')) {
+                this.renderer.setStyle(this.elem.nativeElement.parentElement.parentElement, 'transition', 'height 0.3s');
+                this.elem.nativeElement.parentElement.parentElement.style.height = this.modalHeightBefore + 'px';
+            }
+        }
+        catch (/** @type {?} */ error) { }
         setTimeout(() => {
             document.documentElement.style.removeProperty('overflow');
         }, 155);
@@ -3801,6 +3805,16 @@ class MDBDatePickerComponent {
         Object.keys(opts).forEach((k) => {
             this.opts[k] = opts[k];
         });
+    }
+    /**
+     * @param {?} locale
+     * @return {?}
+     */
+    addLocale(locale) {
+        this.localeService.locales = Object.assign({}, this.localeService.locales, locale);
+        setTimeout(() => {
+            this.setLocaleOptions();
+        }, 0);
     }
     /**
      * @return {?}
@@ -4096,6 +4110,18 @@ class MDBDatePickerComponent {
      * @return {?}
      */
     openBtnClicked() {
+        try {
+            if (this.elem.nativeElement.parentElement.parentElement.classList.contains('modal-content')) {
+                if (this.firstTimeOpenedModal) {
+                    this.modalHeightBefore = this.elem.nativeElement.parentElement.parentElement.offsetHeight;
+                }
+                this.firstTimeOpenedModal = false;
+                this.renderer.setStyle(this.elem.nativeElement.parentElement.parentElement, 'transition', 'height 0.3s');
+                // tslint:disable-next-line:max-line-length
+                this.elem.nativeElement.parentElement.parentElement.style.height = this.modalHeightBefore + this.pickerFrame.nativeElement.offsetHeight + 'px';
+            }
+        }
+        catch (/** @type {?} */ error) { }
         // Open selector button clicked
         this.showSelector = !this.showSelector;
         if (this.showSelector) {
@@ -4656,7 +4682,7 @@ MDBDatePickerComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-date-picker',
                 exportAs: 'mdbdatepicker',
-                template: "<!-- Line 27: Deleted (focus)=\"onFocusInput($event)\" for better use in Firefox. If other strange problems will occur, please paste it in line 27. --> <div class=\"mydp picker\" [ngClass]=\"{'picker--opened': showSelector}\" [ngStyle]=\"{'width': opts.width}\"> <div class=\"md-form\"> <label *ngIf=\"label.length > 0\"  [ngClass]=\"{ 'active': checkActive(), 'disabled': opts.componentDisabled }\">{{ label }}</label> <input  type=\"text\"  class=\"form-control mydp-date\"  [attr.aria-label]=\"opts.ariaLabelInputField\"  (click)=\"openBtnClicked()\"  [attr.maxlength]=\"opts.dateFormat.length\"  [ngClass]=\"{ 'selectiondisabled': opts.componentDisabled, 'disabled': opts.componentDisabled }\" placeholder=\"{{ placeholder }}\"  [ngModel]=\"selectionDayTxt\"  (ngModelChange)=\"onUserDateInput($event)\"  [value]=\"selectionDayTxt\"  [ngStyle]=\"{ 'height': opts.height,  'font-size': opts.selectionTxtFontSize }\" (blur)=\"onBlurInput($event)\"  [disabled]=\"opts.componentDisabled\"  autocomplete=\"off\"> </div> <div class=\"selector picker__holder selectorarrow selectorarrowleft selectorarrowright\" #divFocus [ngClass]=\"{'alignselectorright': opts.alignSelectorRight}\" tabindex=\"0\"> <div class=\"picker__frame picker__box\"> <div class=\"picker__header\"> <div class=\"picker__date-display\"> <div class=\"picker__weekday-display\"> {{ weekText(getWeekday(tmp)) }} </div> <div class=\"picker__month-display\"> <div>{{ monthText(tmp.month) }}</div> </div> <div class=\"picker__day-display\"> <div>{{ tmp.day }}</div> </div> <div class=\"picker__year-display\"> <div>{{ tmp.year }}</div> </div> </div> <select class=\"picker__select--year\" [(ngModel)]=\"visibleMonth.year\" (ngModelChange)=\"onUserYearInput($event)\" role=\"menu\" aria-label=\"Year selector\"> <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option> </select> <select class=\"picker__select--month\" [(ngModel)]=\"visibleMonth.monthTxt\" (ngModelChange)=\"onUserMonthInput($event)\" role=\"menu\" aria-label=\"Month selector\"> <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option> </select> <button class=\"picker__nav--prev\" data-nav=\"-1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Previous month\" (click)=\"prevMonth()\" [disabled]=\"prevMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled}\"></button> <button class=\"picker__nav--next\" data-nav=\"1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Next month\" (click)=\"nextMonth()\" [disabled]=\"nextMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled}\"></button> </div> <table class=\"picker__table\"> <thead><tr><th class=\"picker__weekday weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#</th><th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th></tr></thead> <tbody> <tr *ngFor=\"let w of dates\"> <td class=\"picker__day daycellweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td> <td class=\"picker__day\" *ngFor=\"let d of w.week\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId&&!d.disabled, 'disabled': d.disabled, 'tablesingleday': d.cmo===currMonthId&&!d.disabled}\"> <div *ngIf=\"d.markedDate.marked\" class=\"markdate\" [ngStyle]=\"{'background-color': d.markedDate.color}\"></div> <div class=\"picker__day\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId,'picker__day--outfocus': (d.cmo===nextMonthId || d.cmo===prevMonthId), 'picker__day--today':d.currDay&&opts.markCurrentDay, 'picker__day--selected picker__day--highlighted':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId}\" (click)=\"!d.disabled&&cellClicked(d);$event.stopPropagation()\" (keydown)=\"cellKeyDown($event, d)\" tabindex=\"0\"> {{d.dateObj.day}} </div> </td> </tr> </tbody> </table> <div class=\"picker__footer\"> <button type=\"button\"  *ngIf=\"opts.showTodayBtn\"  class=\"picker__button--today\" (click)=\"todayClicked()\" role=\"button\" [attr.aria-label]=\"opts.todayBtnTxt\"> {{opts.todayBtnTxt}} </button> <button type=\"button\" *ngIf=\"opts.showClearDateBtn\" class=\"picker__button--clear\" (click)=\"removeBtnClicked()\" role=\"button\" [attr.aria-label]=\"opts.clearBtnTxt\"> {{opts.clearBtnTxt}} </button> <button type=\"button\" [ngClass]=\"{'ml-auto': !opts.showTodayBtn}\" class=\"picker__button--close\" (click)=\"showSelector = false; removeInlineStyle();\" role=\"button\" [attr.aria-label]=\"opts.closeBtnTxt\"> {{opts.closeBtnTxt}} </button> </div> </div> </div> </div> ",
+                template: "<!-- Line 27: Deleted (focus)=\"onFocusInput($event)\" for better use in Firefox. If other strange problems will occur, please paste it in line 27. --> <div class=\"mydp picker\" [ngClass]=\"{'picker--opened': showSelector}\" [ngStyle]=\"{'width': opts.width}\"> <div class=\"md-form\"> <label *ngIf=\"label.length > 0\"  [ngClass]=\"{ 'active': checkActive(), 'disabled': opts.componentDisabled }\">{{ label }}</label> <input  type=\"text\"  class=\"form-control mydp-date\"  [attr.aria-label]=\"opts.ariaLabelInputField\"  (click)=\"openBtnClicked()\"  [attr.maxlength]=\"opts.dateFormat.length\"  [ngClass]=\"{ 'selectiondisabled': opts.componentDisabled, 'disabled': opts.componentDisabled }\" placeholder=\"{{ placeholder }}\"  [ngModel]=\"selectionDayTxt\"  (ngModelChange)=\"onUserDateInput($event)\"  [value]=\"selectionDayTxt\"  [ngStyle]=\"{ 'height': opts.height,  'font-size': opts.selectionTxtFontSize }\" (blur)=\"onBlurInput($event)\"  [disabled]=\"opts.componentDisabled\"  autocomplete=\"off\"> </div> <div class=\"selector picker__holder selectorarrow selectorarrowleft selectorarrowright\" #divFocus [ngClass]=\"{'alignselectorright': opts.alignSelectorRight}\" tabindex=\"0\"> <div class=\"picker__frame picker__box\" #pickerFrame> <div class=\"picker__header\"> <div class=\"picker__date-display\"> <div class=\"picker__weekday-display\"> {{ weekText(getWeekday(tmp)) }} </div> <div class=\"picker__month-display\"> <div>{{ monthText(tmp.month) }}</div> </div> <div class=\"picker__day-display\"> <div>{{ tmp.day }}</div> </div> <div class=\"picker__year-display\"> <div>{{ tmp.year }}</div> </div> </div> <select class=\"picker__select--year\" [(ngModel)]=\"visibleMonth.year\" (ngModelChange)=\"onUserYearInput($event)\" role=\"menu\" aria-label=\"Year selector\"> <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option> </select> <select class=\"picker__select--month\" [(ngModel)]=\"visibleMonth.monthTxt\" (ngModelChange)=\"onUserMonthInput($event)\" role=\"menu\" aria-label=\"Month selector\"> <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option> </select> <button class=\"picker__nav--prev\" data-nav=\"-1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Previous month\" (click)=\"prevMonth()\" [disabled]=\"prevMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled}\"></button> <button class=\"picker__nav--next\" data-nav=\"1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Next month\" (click)=\"nextMonth()\" [disabled]=\"nextMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled}\"></button> </div> <table class=\"picker__table\"> <thead><tr><th class=\"picker__weekday weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#</th><th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th></tr></thead> <tbody> <tr *ngFor=\"let w of dates\"> <td class=\"picker__day daycellweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td> <td class=\"picker__day\" *ngFor=\"let d of w.week\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId&&!d.disabled, 'disabled': d.disabled, 'tablesingleday': d.cmo===currMonthId&&!d.disabled}\"> <div *ngIf=\"d.markedDate.marked\" class=\"markdate\" [ngStyle]=\"{'background-color': d.markedDate.color}\"></div> <div class=\"picker__day\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId,'picker__day--outfocus': (d.cmo===nextMonthId || d.cmo===prevMonthId), 'picker__day--today':d.currDay&&opts.markCurrentDay, 'picker__day--selected picker__day--highlighted':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId}\" (click)=\"!d.disabled&&cellClicked(d);$event.stopPropagation()\" (keydown)=\"cellKeyDown($event, d)\" tabindex=\"0\"> {{d.dateObj.day}} </div> </td> </tr> </tbody> </table> <div class=\"picker__footer\"> <button type=\"button\"  *ngIf=\"opts.showTodayBtn\"  class=\"picker__button--today\" (click)=\"todayClicked()\" role=\"button\" [attr.aria-label]=\"opts.todayBtnTxt\"> {{opts.todayBtnTxt}} </button> <button type=\"button\" *ngIf=\"opts.showClearDateBtn\" class=\"picker__button--clear\" (click)=\"removeBtnClicked()\" role=\"button\" [attr.aria-label]=\"opts.clearBtnTxt\"> {{opts.clearBtnTxt}} </button> <button type=\"button\" [ngClass]=\"{'ml-auto': !opts.showTodayBtn}\" class=\"picker__button--close\" (click)=\"showSelector = false; removeInlineStyle();\" role=\"button\" [attr.aria-label]=\"opts.closeBtnTxt\"> {{opts.closeBtnTxt}} </button> </div> </div> </div> </div> ",
                 providers: [LocaleService, UtilService, MYDP_VALUE_ACCESSOR],
                 encapsulation: ViewEncapsulation.None
             },] },
@@ -4667,6 +4693,7 @@ MDBDatePickerComponent.ctorParameters = () => [
     { type: Renderer2, },
     { type: LocaleService, },
     { type: UtilService, },
+    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
 ];
 MDBDatePickerComponent.propDecorators = {
     "options": [{ type: Input },],
@@ -4683,6 +4710,7 @@ MDBDatePickerComponent.propDecorators = {
     "calendarToggle": [{ type: Output },],
     "inputFocusBlur": [{ type: Output },],
     "divFocus": [{ type: ViewChild, args: ['divFocus',] },],
+    "pickerFrame": [{ type: ViewChild, args: ['pickerFrame',] },],
 };
 
 /**
@@ -4935,12 +4963,21 @@ class MDBUploaderService {
         // input.subscribe((event: UploadInput) => {
         input.subscribe((event) => {
             switch (event.type) {
+                // case 'uploadFile':
+                //   this.serviceEvents.emit({ type: 'start', file: event.file });
+                //   const sub = this.uploadFile(event.file, event).subscribe((data: any) => {
+                //     this.serviceEvents.emit(data);
+                //   });
+                //   this.uploads.push({ file: event.file, sub: sub });
+                // break;
+                // Fix from user: https://mdbootstrap.com/support/input-file-no-trabaja-correctamente-mdbfileselect/
                 case 'uploadFile':
                     this.serviceEvents.emit({ type: 'start', file: event.file });
-                    const /** @type {?} */ sub = this.uploadFile(event.file, event).subscribe((data) => {
+                    const /** @type {?} */ sub = this.uploadFile(event.file, event);
+                    this.uploads.push({ file: event.file, sub: sub });
+                    sub.subscribe((data) => {
                         this.serviceEvents.emit(data);
                     });
-                    this.uploads.push({ file: event.file, sub: sub });
                     break;
                 case 'uploadAll':
                     // Lines 118, 121 and 129 commented due to ts comipilator check “noUnusedLocals”: true, “noUnusedParameters”: true,
@@ -6735,9 +6772,14 @@ class OptionList {
 class SelectDropdownComponent {
     /**
      * @param {?} _elementRef
+     * @param {?} _renderer
+     * @param {?} cdRef
      */
-    constructor(_elementRef) {
+    constructor(_elementRef, _renderer, cdRef) {
         this._elementRef = _elementRef;
+        this._renderer = _renderer;
+        this.cdRef = cdRef;
+        this.customClass = '';
         this.close = new EventEmitter();
         this.optionClicked = new EventEmitter();
         this.singleFilterClick = new EventEmitter();
@@ -6745,6 +6787,10 @@ class SelectDropdownComponent {
         this.singleFilterKeydown = new EventEmitter();
         this.disabledColor = '#fff';
         this.disabledTextColor = '9e9e9e';
+        // Used in sliding-down animation
+        this.state = 'invisible';
+        this.startHeight = 0;
+        this.endHeight = 45;
         this.hasOptionsItems = true;
     }
     /**
@@ -6775,6 +6821,25 @@ class SelectDropdownComponent {
      * @return {?}
      */
     ngAfterViewInit() {
+        // Sliding-down animation
+        this.endHeight = this.dropdownContent.nativeElement.clientHeight;
+        this.state = (this.state === 'invisible' ? 'visible' : 'invisible');
+        this.cdRef.detectChanges();
+        // Dropping up dropdown content of Material Select when near bottom edge of the screen
+        // Need fix to proper work with sliding animation
+        // tslint:disable-next-line:max-line-length
+        // if (window.innerHeight - this._elementRef.nativeElement.getBoundingClientRect().bottom < this.dropdownContent.nativeElement.clientHeight) {
+        //   this._renderer.setStyle(this.dropdownContent.nativeElement, 'top', - this.dropdownContent.nativeElement.clientHeight + 'px');
+        // }
+        try {
+            setTimeout(() => {
+                if (this._elementRef.nativeElement.parentElement.attributes.customClass !== undefined) {
+                    this.customClass = this._elementRef.nativeElement.parentElement.attributes.customClass.value;
+                }
+            }, 0);
+        }
+        catch (/** @type {?} */ error) {
+        }
         this.moveHighlightedIntoView();
         if (!this.multiple && this.filterEnabled) {
             this.filterInput.nativeElement.focus();
@@ -6898,13 +6963,21 @@ class SelectDropdownComponent {
 SelectDropdownComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-select-dropdown',
-                template: "<div class=\"dropdown-content\" [ngStyle]=\"{'top.px': top, 'left.px': left, 'width.px': width}\"> <div class=\"filter\" *ngIf=\"!multiple && filterEnabled\"> <input #filterInput autocomplete=\"on\" [placeholder]=\"placeholder\" (click)=\"onSingleFilterClick($event)\" (input)=\"onSingleFilterInput($event)\" (keydown)=\"onSingleFilterKeydown($event)\"> </div> <div class=\"options\" #optionsList> <ul class=\"select-dropdown\" [ngClass]=\"{'multiple-select-dropdown': multiple}\" (wheel)=\"onOptionsWheel($event)\"> <li *ngFor=\"let option of optionList.filtered\" [ngClass]=\"{'active': option.highlighted, 'selected': option.selected, 'disabled': option.disabled, 'optgroup': option.group}\" [ngStyle]=\"getOptionStyle(option)\" (click)=\"onOptionClick(option)\" (mouseover)=\"onOptionMouseover(option)\"> <img class=\"rounded-circle\" [src]=\"option.icon\" *ngIf=\"option.icon !== ''\"> <span class=\"select-option\" *ngIf=\"!multiple\">{{option.label}}</span> <span class=\"filtrable\" *ngIf=\"multiple\"> <input type=\"checkbox\" [checked]=\"option.selected\"> <label></label> {{option.label}} </span> </li> <li *ngIf=\"!this.hasOptionsItems\" class=\"message disabled\"> <span>{{notFoundMsg}}</span> </li> </ul> </div> </div>",
-                encapsulation: ViewEncapsulation.None
+                template: "<div class=\"dropdown-content\" #dropdownContent [ngStyle]=\"{'top.px': top, 'left.px': left, 'width.px': width}\"  [@dropdownAnimation]=\"{value: state, params: {startHeight: startHeight, endHeight: endHeight}}\"> <div class=\"filter\" *ngIf=\"!multiple && filterEnabled\"> <input #filterInput autocomplete=\"on\" [placeholder]=\"placeholder\" (click)=\"onSingleFilterClick($event)\" (input)=\"onSingleFilterInput($event)\" (keydown)=\"onSingleFilterKeydown($event)\"> </div> <div class=\"options\" #optionsList> <ul class=\"select-dropdown\" [ngClass]=\"{'multiple-select-dropdown': multiple}\" (wheel)=\"onOptionsWheel($event)\"> <li *ngFor=\"let option of optionList.filtered\" [ngClass]=\"{'active': option.highlighted, 'selected': option.selected, 'disabled': option.disabled, 'optgroup': option.group}\" [ngStyle]=\"getOptionStyle(option)\" (click)=\"onOptionClick(option)\" (mouseover)=\"onOptionMouseover(option)\"> <img class=\"rounded-circle\" [src]=\"option.icon\" *ngIf=\"option.icon !== ''\"> <span class=\"select-option\" *ngIf=\"!multiple\">{{option.label}}</span> <span class=\"filtrable\" *ngIf=\"multiple\"> <input type=\"checkbox\" [checked]=\"option.selected\" class=\"{{customClass}}\"> <label></label> {{option.label}} </span> </li> <li *ngIf=\"!this.hasOptionsItems\" class=\"message disabled\"> <span>{{notFoundMsg}}</span> </li> </ul> </div> </div>",
+                encapsulation: ViewEncapsulation.None,
+                animations: [trigger('dropdownAnimation', [
+                        state('invisible', style({ height: '{{startHeight}}', }), { params: { startHeight: 0 } }),
+                        state('visible', style({ height: '{{endHeight}}', }), { params: { endHeight: 45 + 'px' } }),
+                        transition('invisible => visible', animate('200ms ease-in', style({ height: '{{endHeight}}px' }))),
+                        transition('visible => invisible', animate('200ms ease-in', style({ height: '{{startHeight}}px' })))
+                    ])]
             },] },
 ];
 /** @nocollapse */
 SelectDropdownComponent.ctorParameters = () => [
     { type: ElementRef, },
+    { type: Renderer2, },
+    { type: ChangeDetectorRef, },
 ];
 SelectDropdownComponent.propDecorators = {
     "filterEnabled": [{ type: Input },],
@@ -6917,6 +6990,7 @@ SelectDropdownComponent.propDecorators = {
     "top": [{ type: Input },],
     "width": [{ type: Input },],
     "placeholder": [{ type: Input },],
+    "customClass": [{ type: Input },],
     "close": [{ type: Output },],
     "optionClicked": [{ type: Output },],
     "singleFilterClick": [{ type: Output },],
@@ -6924,6 +6998,7 @@ SelectDropdownComponent.propDecorators = {
     "singleFilterKeydown": [{ type: Output },],
     "filterInput": [{ type: ViewChild, args: ['filterInput',] },],
     "optionsList": [{ type: ViewChild, args: ['optionsList',] },],
+    "dropdownContent": [{ type: ViewChild, args: ['dropdownContent',] },],
     "onkeyup": [{ type: HostListener, args: ['keyup', ['$event'],] },],
 };
 
@@ -6944,6 +7019,7 @@ class SelectComponent {
     constructor(el, renderer) {
         this.el = el;
         this.renderer = renderer;
+        this.customClass = '';
         this.allowClear = false;
         this.disabled = false;
         this.multiple = false;
@@ -7550,6 +7626,7 @@ SelectComponent.ctorParameters = () => [
 ];
 SelectComponent.propDecorators = {
     "options": [{ type: Input },],
+    "customClass": [{ type: Input },],
     "allowClear": [{ type: Input },],
     "disabled": [{ type: Input },],
     "highlightColor": [{ type: Input },],
@@ -8546,6 +8623,7 @@ class SidenavComponent {
         this.renderer = renderer;
         this.isBrowser = false;
         this.fixed = true;
+        this.sidenavBreakpoint = null;
         this.isBrowser = isPlatformBrowser(platformId);
     }
     /**
@@ -8557,7 +8635,7 @@ class SidenavComponent {
             this.windwosWidth = window.innerWidth;
             if (this.fixed) {
                 this.renderer.addClass(document.body, 'fixed-sn');
-                if (this.windwosWidth < 1441) {
+                if (this.windwosWidth < this.sidenavBreakpoint + 1) {
                     this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
                     this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
                     this.setShown(false);
@@ -8583,18 +8661,18 @@ class SidenavComponent {
         if (this.isBrowser) {
             this.windwosWidth = window.innerWidth;
             if (this.fixed) {
-                if (this.windwosWidth < 1441) {
+                if (this.windwosWidth < this.sidenavBreakpoint + 1) {
                     this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
                     this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
                     this.setShown(false);
                 }
-                if (this.windwosWidth > 1440 && this.shown) {
+                if (this.windwosWidth > this.sidenavBreakpoint && this.shown) {
                     this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
                     this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
                     this.hideOverlay();
                     this.setShown(true);
                 }
-                else if (this.windwosWidth > 1440) {
+                else if (this.windwosWidth > this.sidenavBreakpoint) {
                     this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
                     this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
                     this.hideOverlay();
@@ -8602,7 +8680,7 @@ class SidenavComponent {
                 }
             }
             else {
-                if (this.windwosWidth > 1440) {
+                if (this.windwosWidth > this.sidenavBreakpoint) {
                     this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
                     this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
                     this.hideOverlay();
@@ -8617,7 +8695,7 @@ class SidenavComponent {
     show() {
         if (this.isBrowser) {
             if (this.fixed) {
-                if (this.windwosWidth < 1441) {
+                if (this.windwosWidth < this.sidenavBreakpoint + 1) {
                     this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
                     this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
                     this.setShown(true);
@@ -8643,7 +8721,7 @@ class SidenavComponent {
     hide() {
         if (this.isBrowser) {
             if (this.fixed) {
-                if (this.windwosWidth < 1441) {
+                if (this.windwosWidth < this.sidenavBreakpoint + 1) {
                     this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
                     this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
                     this.setShown(false);
@@ -8717,6 +8795,7 @@ SidenavComponent.ctorParameters = () => [
 SidenavComponent.propDecorators = {
     "class": [{ type: Input },],
     "fixed": [{ type: Input },],
+    "sidenavBreakpoint": [{ type: Input },],
     "sideNav": [{ type: ViewChild, args: ['sidenav',] },],
     "overlay": [{ type: ViewChild, args: ['overlay',] },],
     "windwosResize": [{ type: HostListener, args: ['window:resize',] },],
@@ -10081,18 +10160,21 @@ WavesDirective.propDecorators = {
  */
 class TabsetComponent {
     /**
+     * @param {?} platformId
      * @param {?} config
      * @param {?} ripple
      */
-    constructor(config, ripple) {
+    constructor(platformId, config, ripple) {
         this.ripple = ripple;
         this.tabs = [];
         this.classMap = {};
+        this.isBrowser = null;
         this.clazz = true;
         this.showBsTab = new EventEmitter();
         this.shownBsTab = new EventEmitter();
         this.hideBsTab = new EventEmitter();
         this.hiddenBsTab = new EventEmitter();
+        this.isBrowser = isPlatformBrowser(platformId);
         Object.assign(this, config);
     }
     /**
@@ -10308,6 +10390,7 @@ TabsetComponent.decorators = [
 ];
 /** @nocollapse */
 TabsetComponent.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
     { type: TabsetConfig, },
     { type: WavesDirective, },
 ];
@@ -10331,10 +10414,11 @@ TabsetComponent.propDecorators = {
  */
 class TabDirective {
     /**
+     * @param {?} platformId
      * @param {?} tabset
      * @param {?} el
      */
-    constructor(tabset, el) {
+    constructor(platformId, tabset, el) {
         /**
          * fired when tab became active, $event:Tab equals to selected instance of Tab component
          */
@@ -10350,6 +10434,8 @@ class TabDirective {
         this.addClass = true;
         this.test = true;
         this.el = null;
+        this.isBrowser = null;
+        this.isBrowser = isPlatformBrowser(platformId);
         this.el = el;
         this.tabset = tabset;
         this.tabset.addTab(this);
@@ -10418,7 +10504,6 @@ class TabDirective {
         else if (!this.hasClass(el, className)) {
             el.className += ' ' + className;
         }
-        
     }
     /**
      * @param {?} el
@@ -10440,6 +10525,7 @@ TabDirective.decorators = [
 ];
 /** @nocollapse */
 TabDirective.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
     { type: TabsetComponent, },
     { type: ElementRef, },
 ];
@@ -10673,8 +10759,9 @@ class ClockPickerComponent {
     /**
      * @param {?} elem
      * @param {?} renderer
+     * @param {?} platformId
      */
-    constructor(elem, renderer) {
+    constructor(elem, renderer, platformId) {
         this.elem = elem;
         this.renderer = renderer;
         this.twelvehour = false;
@@ -10683,7 +10770,7 @@ class ClockPickerComponent {
         this.label = '';
         this.duration = 300;
         this.showClock = false;
-        this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        this.isMobile = null;
         this.touchDevice = ('ontouchstart' in document.documentElement);
         this.showHours = false;
         this.dialRadius = 135;
@@ -10691,6 +10778,7 @@ class ClockPickerComponent {
         this.innerRadius = 80;
         this.tickRadius = 20;
         this.diameter = this.dialRadius * 2;
+        this.isBrowser = false;
         this.hoursTicks = [];
         this.minutesTicks = [];
         this.selectedHours = { 'h': '12', 'm': '00', 'ampm': 'AM' };
@@ -10701,6 +10789,7 @@ class ClockPickerComponent {
         this.mouseupEvent = 'mouseup' + (this.touchSupported ? ' touchend' : '');
         this.onChangeCb = () => { };
         this.onTouchedCb = () => { };
+        this.isBrowser = isPlatformBrowser(platformId);
         renderer.listen(this.elem.nativeElement, 'click', (event) => {
             if (this.showClock &&
                 event.target &&
@@ -10718,6 +10807,9 @@ class ClockPickerComponent {
      */
     ngOnInit() {
         this.generateTick();
+        if (this.isBrowser) {
+            this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        }
     }
     /**
      * @return {?}
@@ -11093,6 +11185,7 @@ ClockPickerComponent.decorators = [
 ClockPickerComponent.ctorParameters = () => [
     { type: ElementRef, },
     { type: Renderer2, },
+    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
 ];
 ClockPickerComponent.propDecorators = {
     "hoursPlate": [{ type: ViewChild, args: ['hoursPlate',] },],

@@ -416,52 +416,52 @@ mdb-select+label {
 }
 
 //select animation
-mdb-select {
-  ul.select-dropdown li {
-    @keyframes dropdown-animation {
-      0% {
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.1;
-      }
-      20% {
-        opacity: 0.2;
-      }
-      30% {
-        opacity: 0.3;
-      }
-      40% {
-        opacity: 0.4;
-      }
-      50% {
-        opacity: 0.5;
-      }
-      60% {
-        opacity: 0.6;
-      }
-      70% {
-        opacity: 0.7;
-      }
-      80% {
-        opacity: 0.8;
-      }
-      90% {
-        opacity: 0.9;
-      }
-      100% {
-        opacity: 1.0;
-      }
-    }
-  }
-  mdb-select-dropdown {
-    display: block;
-    animation: dropdown-animation 0.55s;
-  }
-  .fadeInSelect {
-    opacity: 1;
-  }
-}
+// mdb-select {
+//   ul.select-dropdown li {
+//     @keyframes dropdown-animation {
+//       0% {
+//         opacity: 0;
+//       }
+//       10% {
+//         opacity: 0.1;
+//       }
+//       20% {
+//         opacity: 0.2;
+//       }
+//       30% {
+//         opacity: 0.3;
+//       }
+//       40% {
+//         opacity: 0.4;
+//       }
+//       50% {
+//         opacity: 0.5;
+//       }
+//       60% {
+//         opacity: 0.6;
+//       }
+//       70% {
+//         opacity: 0.7;
+//       }
+//       80% {
+//         opacity: 0.8;
+//       }
+//       90% {
+//         opacity: 0.9;
+//       }
+//       100% {
+//         opacity: 1.0;
+//       }
+//     }
+//   }
+//   mdb-select-dropdown {
+//     display: block;
+//     animation: dropdown-animation 0.55s;
+//   }
+//   .fadeInSelect {
+//     opacity: 1;
+//   }
+// }
 
 .multiple-select-dropdown li [type="checkbox"]+label {
   height: 10px;

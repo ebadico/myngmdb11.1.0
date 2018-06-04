@@ -9,6 +9,7 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     el: ElementRef;
     renderer: Renderer2;
     options: Array<IOption>;
+    customClass: string;
     allowClear: boolean;
     disabled: boolean;
     highlightColor: string;

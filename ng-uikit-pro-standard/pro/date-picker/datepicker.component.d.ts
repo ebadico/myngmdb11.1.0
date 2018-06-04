@@ -1,3 +1,4 @@
+import { IMyLocales } from './interfaces/locale.interface';
 import { EventEmitter, OnChanges, SimpleChanges, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { IMyDate, IMyMonth, IMyWeek, IMyInputFieldChanged, IMyCalendarViewChanged, IMyInputFocusBlur } from './interfaces/index';
@@ -23,6 +24,7 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     calendarToggle: EventEmitter<number>;
     inputFocusBlur: EventEmitter<IMyInputFocusBlur>;
     divFocus: any;
+    pickerFrame: ElementRef;
     showSelector: boolean;
     visibleMonth: IMyMonth;
     selectedMonth: IMyMonth;
@@ -51,13 +53,17 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     years: any;
     elements: HTMLCollectionOf<Element>;
     elementNumber: any;
-    isMobile: boolean;
-    constructor(elem: ElementRef, renderer: Renderer2, localeService: LocaleService, utilService: UtilService);
+    firstTimeOpenedModal: boolean;
+    modalHeightBefore: any;
+    isMobile: any;
+    isBrowser: any;
+    constructor(elem: ElementRef, renderer: Renderer2, localeService: LocaleService, utilService: UtilService, platformId: string);
     ngAfterViewInit(): void;
     onChangeCb: (_: any) => void;
     onTouchedCb: () => void;
     removeInlineStyle(): void;
     setLocaleOptions(): void;
+    addLocale(locale: IMyLocales): void;
     setOptions(): void;
     resetMonthYearEdit(): void;
     onUserDateInput(value: string): void;

@@ -12,6 +12,7 @@ export declare class TabsetComponent implements OnDestroy, OnInit {
     protected _type: string;
     listGetClass: String;
     tabsGetClass: String;
+    isBrowser: any;
     clazz: boolean;
     buttonClass: String;
     contentClass: String;
@@ -27,7 +28,7 @@ export declare class TabsetComponent implements OnDestroy, OnInit {
     justified: boolean;
     /** navigation context class: 'tabs' or 'pills' */
     type: string;
-    constructor(config: TabsetConfig, ripple: WavesDirective);
+    constructor(platformId: string, config: TabsetConfig, ripple: WavesDirective);
     click(event: any, index: any): void;
     ngOnDestroy(): void;
     getActive(): any;

@@ -20,7 +20,7 @@ export declare class ClockPickerComponent implements OnInit, AfterViewInit, Cont
     duration: number;
     showClock: boolean;
     buttonLabel: string;
-    isMobile: boolean;
+    isMobile: any;
     touchDevice: boolean;
     showHours: boolean;
     dialRadius: number;
@@ -28,6 +28,7 @@ export declare class ClockPickerComponent implements OnInit, AfterViewInit, Cont
     innerRadius: number;
     tickRadius: number;
     diameter: number;
+    isBrowser: any;
     hoursTicks: any;
     minutesTicks: any;
     selectedHours: any;
@@ -36,7 +37,7 @@ export declare class ClockPickerComponent implements OnInit, AfterViewInit, Cont
     mousedownEvent: any;
     mousemoveEvent: any;
     mouseupEvent: any;
-    constructor(elem: ElementRef, renderer: Renderer2);
+    constructor(elem: ElementRef, renderer: Renderer2, platformId: string);
     ngOnInit(): void;
     ngAfterViewInit(): void;
     checkDraw(): void;
