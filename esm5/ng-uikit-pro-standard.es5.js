@@ -8880,24 +8880,47 @@ var SidenavComponent = /** @class */ (function () {
         if (this.isBrowser) {
             // pobraneie szerokosci okna po init
             this.windwosWidth = window.innerWidth;
-            if (this.fixed) {
-                this.renderer.addClass(document.body, 'fixed-sn');
-                if (this.windwosWidth < this.sidenavBreakpoint + 1) {
+            if (this.sidenavBreakpoint) {
+                if (this.fixed) {
+                    this.renderer.addClass(document.body, 'fixed-sn');
+                    if (this.windwosWidth < this.sidenavBreakpoint + 1) {
+                        this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
+                        this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
+                        this.setShown(false);
+                    }
+                    else {
+                        this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
+                        this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
+                        this.setShown(true);
+                    }
+                }
+                else {
+                    this.renderer.addClass(document.body, 'hidden-sn');
                     this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
                     this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
                     this.setShown(false);
                 }
-                else {
-                    this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
-                    this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
-                    this.setShown(true);
-                }
             }
             else {
-                this.renderer.addClass(document.body, 'hidden-sn');
-                this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
-                this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
-                this.setShown(false);
+                if (this.fixed) {
+                    this.renderer.addClass(document.body, 'fixed-sn');
+                    if (this.windwosWidth < 1441) {
+                        this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
+                        this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
+                        this.setShown(false);
+                    }
+                    else {
+                        this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
+                        this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
+                        this.setShown(true);
+                    }
+                }
+                else {
+                    this.renderer.addClass(document.body, 'hidden-sn');
+                    this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
+                    this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
+                    this.setShown(false);
+                }
             }
         }
     };
@@ -8907,31 +8930,62 @@ var SidenavComponent = /** @class */ (function () {
     SidenavComponent.prototype.windwosResize = function () {
         if (this.isBrowser) {
             this.windwosWidth = window.innerWidth;
-            if (this.fixed) {
-                if (this.windwosWidth < this.sidenavBreakpoint + 1) {
-                    this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
-                    this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
-                    this.setShown(false);
+            if (this.sidenavBreakpoint) {
+                if (this.fixed) {
+                    if (this.windwosWidth < this.sidenavBreakpoint + 1) {
+                        this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
+                        this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
+                        this.setShown(false);
+                    }
+                    if (this.windwosWidth > this.sidenavBreakpoint && this.shown) {
+                        this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
+                        this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
+                        this.hideOverlay();
+                        this.setShown(true);
+                    }
+                    else if (this.windwosWidth > this.sidenavBreakpoint) {
+                        this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
+                        this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
+                        this.hideOverlay();
+                        this.setShown(true);
+                    }
                 }
-                if (this.windwosWidth > this.sidenavBreakpoint && this.shown) {
-                    this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
-                    this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
-                    this.hideOverlay();
-                    this.setShown(true);
-                }
-                else if (this.windwosWidth > this.sidenavBreakpoint) {
-                    this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
-                    this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
-                    this.hideOverlay();
-                    this.setShown(true);
+                else {
+                    if (this.windwosWidth > this.sidenavBreakpoint) {
+                        this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
+                        this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
+                        this.hideOverlay();
+                        this.setShown(false);
+                    }
                 }
             }
             else {
-                if (this.windwosWidth > this.sidenavBreakpoint) {
-                    this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
-                    this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
-                    this.hideOverlay();
-                    this.setShown(false);
+                if (this.fixed) {
+                    if (this.windwosWidth < 1441) {
+                        this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
+                        this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
+                        this.setShown(false);
+                    }
+                    if (this.windwosWidth > 1440 && this.shown) {
+                        this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
+                        this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
+                        this.hideOverlay();
+                        this.setShown(true);
+                    }
+                    else if (this.windwosWidth > 1440) {
+                        this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
+                        this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
+                        this.hideOverlay();
+                        this.setShown(true);
+                    }
+                }
+                else {
+                    if (this.windwosWidth > 1440) {
+                        this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
+                        this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
+                        this.hideOverlay();
+                        this.setShown(false);
+                    }
                 }
             }
         }
@@ -8941,24 +8995,47 @@ var SidenavComponent = /** @class */ (function () {
      */
     SidenavComponent.prototype.show = function () {
         if (this.isBrowser) {
-            if (this.fixed) {
-                if (this.windwosWidth < this.sidenavBreakpoint + 1) {
-                    this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
-                    this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
-                    this.setShown(true);
-                    this.showOverlay();
+            if (this.sidenavBreakpoint) {
+                if (this.fixed) {
+                    if (this.windwosWidth < this.sidenavBreakpoint + 1) {
+                        this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
+                        this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
+                        this.setShown(true);
+                        this.showOverlay();
+                    }
+                    else {
+                        this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
+                        this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
+                        this.setShown(true);
+                    }
                 }
                 else {
                     this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
                     this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
                     this.setShown(true);
+                    this.showOverlay();
                 }
             }
             else {
-                this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
-                this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
-                this.setShown(true);
-                this.showOverlay();
+                if (this.fixed) {
+                    if (this.windwosWidth < this.sidenavBreakpoint + 1) {
+                        this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
+                        this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
+                        this.setShown(true);
+                        this.showOverlay();
+                    }
+                    else {
+                        this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
+                        this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
+                        this.setShown(true);
+                    }
+                }
+                else {
+                    this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
+                    this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
+                    this.setShown(true);
+                    this.showOverlay();
+                }
             }
         }
     };
@@ -8967,24 +9044,47 @@ var SidenavComponent = /** @class */ (function () {
      */
     SidenavComponent.prototype.hide = function () {
         if (this.isBrowser) {
-            if (this.fixed) {
-                if (this.windwosWidth < this.sidenavBreakpoint + 1) {
-                    this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
-                    this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
-                    this.setShown(false);
-                    this.hideOverlay();
+            if (this.sidenavBreakpoint) {
+                if (this.fixed) {
+                    if (this.windwosWidth < this.sidenavBreakpoint + 1) {
+                        this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
+                        this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
+                        this.setShown(false);
+                        this.hideOverlay();
+                    }
+                    else {
+                        this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
+                        this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
+                        this.setShown(false);
+                    }
                 }
                 else {
                     this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
                     this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
                     this.setShown(false);
+                    this.hideOverlay();
                 }
             }
             else {
-                this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
-                this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
-                this.setShown(false);
-                this.hideOverlay();
+                if (this.fixed) {
+                    if (this.windwosWidth < 1441) {
+                        this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
+                        this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
+                        this.setShown(false);
+                        this.hideOverlay();
+                    }
+                    else {
+                        this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
+                        this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
+                        this.setShown(false);
+                    }
+                }
+                else {
+                    this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
+                    this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
+                    this.setShown(false);
+                    this.hideOverlay();
+                }
             }
         }
     };
