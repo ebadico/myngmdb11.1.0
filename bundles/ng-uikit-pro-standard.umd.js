@@ -41,10 +41,10 @@ SBItemBodyComponent.decorators = [
 ];
 /** @nocollapse */
 SBItemBodyComponent.ctorParameters = function () { return [
-    { type: core.Renderer2, },
+    { type: core.Renderer2 }
 ]; };
 SBItemBodyComponent.propDecorators = {
-    "bodyEl": [{ type: core.ViewChild, args: ['body',] },],
+    bodyEl: [{ type: core.ViewChild, args: ['body',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -96,8 +96,8 @@ SBItemComponent.decorators = [
 /** @nocollapse */
 SBItemComponent.ctorParameters = function () { return []; };
 SBItemComponent.propDecorators = {
-    "collapsed": [{ type: core.Input },],
-    "body": [{ type: core.ContentChild, args: [SBItemBodyComponent,] },],
+    collapsed: [{ type: core.Input }],
+    body: [{ type: core.ContentChild, args: [SBItemBodyComponent,] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -130,7 +130,7 @@ SBItemHeadComponent.decorators = [
 ];
 /** @nocollapse */
 SBItemHeadComponent.ctorParameters = function () { return [
-    { type: SBItemComponent, },
+    { type: SBItemComponent }
 ]; };
 /**
  * @fileoverview added by tsickle
@@ -167,8 +167,8 @@ SqueezeBoxComponent.decorators = [
 /** @nocollapse */
 SqueezeBoxComponent.ctorParameters = function () { return []; };
 SqueezeBoxComponent.propDecorators = {
-    "multiple": [{ type: core.Input },],
-    "items": [{ type: core.ContentChildren, args: [core.forwardRef(function () { return SBItemComponent; }),] },],
+    multiple: [{ type: core.Input }],
+    items: [{ type: core.ContentChildren, args: [core.forwardRef(function () { return SBItemComponent; }),] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -514,9 +514,9 @@ Overlay.decorators = [
 ];
 /** @nocollapse */
 Overlay.ctorParameters = function () { return [
-    { type: OverlayContainer, },
-    { type: core.ComponentFactoryResolver, },
-    { type: core.ApplicationRef, },
+    { type: OverlayContainer },
+    { type: core.ComponentFactoryResolver },
+    { type: core.ApplicationRef }
 ]; };
 /**
  * Providers for Overlay and its related injectables.
@@ -758,15 +758,15 @@ ToastComponent.decorators = [
 ];
 /** @nocollapse */
 ToastComponent.ctorParameters = function () { return [
-    { type: ToastPackage, },
-    { type: core.ApplicationRef, },
+    { type: ToastPackage },
+    { type: core.ApplicationRef }
 ]; };
 ToastComponent.propDecorators = {
-    "toastClasses": [{ type: core.HostBinding, args: ['class',] },],
-    "state": [{ type: core.HostBinding, args: ['@flyInOut',] },],
-    "tapToast": [{ type: core.HostListener, args: ['click',] },],
-    "stickAround": [{ type: core.HostListener, args: ['mouseenter',] },],
-    "delayedHideToast": [{ type: core.HostListener, args: ['mouseleave',] },],
+    toastClasses: [{ type: core.HostBinding, args: ['class',] }],
+    state: [{ type: core.HostBinding, args: ['@flyInOut',] }],
+    tapToast: [{ type: core.HostListener, args: ['click',] }],
+    stickAround: [{ type: core.HostListener, args: ['mouseenter',] }],
+    delayedHideToast: [{ type: core.HostListener, args: ['mouseleave',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -795,7 +795,7 @@ ToastContainerDirective.decorators = [
 ];
 /** @nocollapse */
 ToastContainerDirective.ctorParameters = function () { return [
-    { type: core.ElementRef, },
+    { type: core.ElementRef }
 ]; };
 var ToastContainerModule = /** @class */ (function () {
     function ToastContainerModule() {
@@ -1207,10 +1207,10 @@ ToastService.decorators = [
 ];
 /** @nocollapse */
 ToastService.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: core.Inject, args: [TOAST_CONFIG,] },] },
-    { type: Overlay, },
-    { type: core.Injector, },
-    { type: platformBrowser.DomSanitizer, },
+    { type: undefined, decorators: [{ type: core.Inject, args: [TOAST_CONFIG,] }] },
+    { type: Overlay },
+    { type: core.Injector },
+    { type: platformBrowser.DomSanitizer }
 ]; };
 /**
  * @fileoverview added by tsickle
@@ -1252,7 +1252,7 @@ ToastModule.decorators = [
 ];
 /** @nocollapse */
 ToastModule.ctorParameters = function () { return [
-    { type: ToastModule, decorators: [{ type: core.Optional }, { type: core.SkipSelf },] },
+    { type: ToastModule, decorators: [{ type: core.Optional }, { type: core.SkipSelf }] }
 ]; };
 /**
  * @fileoverview added by tsickle
@@ -1366,12 +1366,11 @@ CompleterListItemComponent.decorators = [
                 template: "<span class=\"completer-list-item-holder\" [ngClass]=\"{'completer-title': type === 'title', 'completer-description': type === 'description'}\" > <span class=\"completer-list-item\" *ngFor=\"let part of parts\" [ngClass]=\"part.isMatch ? matchClass : null\">{{part.text}}</span> </span> "
             },] },
 ];
-/** @nocollapse */
 CompleterListItemComponent.propDecorators = {
-    "text": [{ type: core.Input },],
-    "searchStr": [{ type: core.Input },],
-    "matchClass": [{ type: core.Input },],
-    "type": [{ type: core.Input },],
+    text: [{ type: core.Input }],
+    searchStr: [{ type: core.Input }],
+    matchClass: [{ type: core.Input }],
+    type: [{ type: core.Input }]
 };
 /**
  * @fileoverview added by tsickle
@@ -1565,11 +1564,10 @@ MdbCompleterDirective.decorators = [
                 selector: '[mdbCompleter]',
             },] },
 ];
-/** @nocollapse */
 MdbCompleterDirective.propDecorators = {
-    "selected": [{ type: core.Output },],
-    "highlighted": [{ type: core.Output },],
-    "opened": [{ type: core.Output },],
+    selected: [{ type: core.Output }],
+    highlighted: [{ type: core.Output }],
+    opened: [{ type: core.Output }]
 };
 /**
  * @fileoverview added by tsickle
@@ -1918,12 +1916,12 @@ var CompleterService = /** @class */ (function () {
      * @param {?} localDataFactory
      * @param {?} remoteDataFactory
      */
-    function CompleterService(localDataFactory, 
+    function CompleterService(localDataFactory, // Using any instead of () => LocalData because on AoT errors
     // Using any instead of () => LocalData because on AoT errors
     remoteDataFactory // Using any instead of () => LocalData because on AoT errors
     ) {
         this.localDataFactory = localDataFactory;
-        this.remoteDataFactory = remoteDataFactory;
+        this.remoteDataFactory = remoteDataFactory; // Using any instead of () => LocalData because on AoT errors
     }
     /**
      * @param {?} data
@@ -1962,8 +1960,8 @@ CompleterService.decorators = [
 ];
 /** @nocollapse */
 CompleterService.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: core.Inject, args: [LocalData,] },] },
-    { type: undefined, decorators: [{ type: core.Inject, args: [RemoteData,] },] },
+    { type: undefined, decorators: [{ type: core.Inject, args: [LocalData,] }] },
+    { type: undefined, decorators: [{ type: core.Inject, args: [RemoteData,] }] }
 ]; };
 /**
  * @fileoverview added by tsickle
@@ -2282,48 +2280,48 @@ CompleterComponent.decorators = [
 ];
 /** @nocollapse */
 CompleterComponent.ctorParameters = function () { return [
-    { type: CompleterService, },
-    { type: core.Renderer2, },
-    { type: core.ElementRef, },
+    { type: CompleterService },
+    { type: core.Renderer2 },
+    { type: core.ElementRef }
 ]; };
 CompleterComponent.propDecorators = {
-    "dataService": [{ type: core.Input },],
-    "inputName": [{ type: core.Input },],
-    "inputId": [{ type: core.Input },],
-    "pause": [{ type: core.Input },],
-    "minSearchLength": [{ type: core.Input },],
-    "maxChars": [{ type: core.Input },],
-    "overrideSuggested": [{ type: core.Input },],
-    "clearSelected": [{ type: core.Input },],
-    "clearUnselected": [{ type: core.Input },],
-    "fillHighlighted": [{ type: core.Input },],
-    "placeholder": [{ type: core.Input },],
-    "matchClass": [{ type: core.Input },],
-    "fieldTabindex": [{ type: core.Input },],
-    "autoMatch": [{ type: core.Input },],
-    "disableInput": [{ type: core.Input },],
-    "inputClass": [{ type: core.Input },],
-    "autofocus": [{ type: core.Input },],
-    "openOnFocus": [{ type: core.Input },],
-    "initialValue": [{ type: core.Input },],
-    "autoHighlight": [{ type: core.Input },],
-    "label": [{ type: core.Input },],
-    "selected": [{ type: core.Output },],
-    "highlighted": [{ type: core.Output },],
-    "blur": [{ type: core.Output },],
-    "focusEvent": [{ type: core.Output },],
-    "opened": [{ type: core.Output },],
-    "keyup": [{ type: core.Output },],
-    "keydown": [{ type: core.Output },],
-    "completer": [{ type: core.ViewChild, args: [MdbCompleterDirective,] },],
-    "mdbInput": [{ type: core.ViewChild, args: ['mdbInput',] },],
-    "onkeyup": [{ type: core.HostListener, args: ['keyup', ['$event'],] },],
-    "onclick": [{ type: core.HostListener, args: ['click', ['$event'],] },],
-    "onFocusIn": [{ type: core.HostListener, args: ['focusin', ['$event'],] },],
-    "onFocusOut": [{ type: core.HostListener, args: ['focusout', ['$event'],] },],
-    "datasource": [{ type: core.Input },],
-    "textNoResults": [{ type: core.Input },],
-    "textSearching": [{ type: core.Input },],
+    dataService: [{ type: core.Input }],
+    inputName: [{ type: core.Input }],
+    inputId: [{ type: core.Input }],
+    pause: [{ type: core.Input }],
+    minSearchLength: [{ type: core.Input }],
+    maxChars: [{ type: core.Input }],
+    overrideSuggested: [{ type: core.Input }],
+    clearSelected: [{ type: core.Input }],
+    clearUnselected: [{ type: core.Input }],
+    fillHighlighted: [{ type: core.Input }],
+    placeholder: [{ type: core.Input }],
+    matchClass: [{ type: core.Input }],
+    fieldTabindex: [{ type: core.Input }],
+    autoMatch: [{ type: core.Input }],
+    disableInput: [{ type: core.Input }],
+    inputClass: [{ type: core.Input }],
+    autofocus: [{ type: core.Input }],
+    openOnFocus: [{ type: core.Input }],
+    initialValue: [{ type: core.Input }],
+    autoHighlight: [{ type: core.Input }],
+    label: [{ type: core.Input }],
+    selected: [{ type: core.Output }],
+    highlighted: [{ type: core.Output }],
+    blur: [{ type: core.Output }],
+    focusEvent: [{ type: core.Output }],
+    opened: [{ type: core.Output }],
+    keyup: [{ type: core.Output }],
+    keydown: [{ type: core.Output }],
+    completer: [{ type: core.ViewChild, args: [MdbCompleterDirective,] }],
+    mdbInput: [{ type: core.ViewChild, args: ['mdbInput',] }],
+    onkeyup: [{ type: core.HostListener, args: ['keyup', ['$event'],] }],
+    onclick: [{ type: core.HostListener, args: ['click', ['$event'],] }],
+    onFocusIn: [{ type: core.HostListener, args: ['focusin', ['$event'],] }],
+    onFocusOut: [{ type: core.HostListener, args: ['focusout', ['$event'],] }],
+    datasource: [{ type: core.Input }],
+    textNoResults: [{ type: core.Input }],
+    textSearching: [{ type: core.Input }]
 };
 /**
  * @fileoverview added by tsickle
@@ -2528,11 +2526,11 @@ MdbDropdownDirective.decorators = [
 ];
 /** @nocollapse */
 MdbDropdownDirective.ctorParameters = function () { return [
-    { type: MdbCompleterDirective, decorators: [{ type: core.Host },] },
-    { type: core.ElementRef, },
+    { type: MdbCompleterDirective, decorators: [{ type: core.Host }] },
+    { type: core.ElementRef }
 ]; };
 MdbDropdownDirective.propDecorators = {
-    "onMouseDown": [{ type: core.HostListener, args: ['mousedown', ['$event'],] },],
+    onMouseDown: [{ type: core.HostListener, args: ['mousedown', ['$event'],] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -2752,21 +2750,21 @@ MdbInputCompleteDirective.decorators = [
 ];
 /** @nocollapse */
 MdbInputCompleteDirective.ctorParameters = function () { return [
-    { type: MdbCompleterDirective, decorators: [{ type: core.Host },] },
-    { type: forms.NgModel, },
-    { type: core.ElementRef, },
+    { type: MdbCompleterDirective, decorators: [{ type: core.Host }] },
+    { type: forms.NgModel },
+    { type: core.ElementRef }
 ]; };
 MdbInputCompleteDirective.propDecorators = {
-    "clearSelected": [{ type: core.Input, args: ['clearSelected',] },],
-    "clearUnselected": [{ type: core.Input, args: ['clearUnselected',] },],
-    "overrideSuggested": [{ type: core.Input, args: ['overrideSuggested',] },],
-    "fillHighlighted": [{ type: core.Input, args: ['fillHighlighted',] },],
-    "openOnFocus": [{ type: core.Input, args: ['openOnFocus',] },],
-    "ngModelChange": [{ type: core.Output },],
-    "keyupHandler": [{ type: core.HostListener, args: ['keyup', ['$event'],] },],
-    "keydownHandler": [{ type: core.HostListener, args: ['keydown', ['$event'],] },],
-    "onBlur": [{ type: core.HostListener, args: ['blur', ['$event'],] },],
-    "onfocus": [{ type: core.HostListener, args: ['focus', ['$event'],] },],
+    clearSelected: [{ type: core.Input, args: ['clearSelected',] }],
+    clearUnselected: [{ type: core.Input, args: ['clearUnselected',] }],
+    overrideSuggested: [{ type: core.Input, args: ['overrideSuggested',] }],
+    fillHighlighted: [{ type: core.Input, args: ['fillHighlighted',] }],
+    openOnFocus: [{ type: core.Input, args: ['openOnFocus',] }],
+    ngModelChange: [{ type: core.Output }],
+    keyupHandler: [{ type: core.HostListener, args: ['keyup', ['$event'],] }],
+    keydownHandler: [{ type: core.HostListener, args: ['keydown', ['$event'],] }],
+    onBlur: [{ type: core.HostListener, args: ['blur', ['$event'],] }],
+    onfocus: [{ type: core.HostListener, args: ['focus', ['$event'],] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -3007,18 +3005,18 @@ MdbListDirective.decorators = [
 ];
 /** @nocollapse */
 MdbListDirective.ctorParameters = function () { return [
-    { type: MdbCompleterDirective, decorators: [{ type: core.Host },] },
-    { type: core.TemplateRef, },
-    { type: core.ViewContainerRef, },
-    { type: core.ChangeDetectorRef, },
+    { type: MdbCompleterDirective, decorators: [{ type: core.Host }] },
+    { type: core.TemplateRef },
+    { type: core.ViewContainerRef },
+    { type: core.ChangeDetectorRef }
 ]; };
 MdbListDirective.propDecorators = {
-    "mdbListMinSearchLength": [{ type: core.Input },],
-    "mdbListPause": [{ type: core.Input },],
-    "mdbListAutoMatch": [{ type: core.Input },],
-    "mdbListAutoHighlight": [{ type: core.Input },],
-    "dataService": [{ type: core.Input, args: ['mdbList',] },],
-    "initialValue": [{ type: core.Input, args: ['mdbListInitialValue',] },],
+    mdbListMinSearchLength: [{ type: core.Input }],
+    mdbListPause: [{ type: core.Input }],
+    mdbListAutoMatch: [{ type: core.Input }],
+    mdbListAutoHighlight: [{ type: core.Input }],
+    dataService: [{ type: core.Input, args: ['mdbList',] }],
+    initialValue: [{ type: core.Input, args: ['mdbListInitialValue',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -3110,15 +3108,15 @@ MdbRowDirective.decorators = [
 ];
 /** @nocollapse */
 MdbRowDirective.ctorParameters = function () { return [
-    { type: core.ElementRef, },
-    { type: core.Renderer2, },
-    { type: MdbDropdownDirective, decorators: [{ type: core.Host },] },
+    { type: core.ElementRef },
+    { type: core.Renderer2 },
+    { type: MdbDropdownDirective, decorators: [{ type: core.Host }] }
 ]; };
 MdbRowDirective.propDecorators = {
-    "mdbRow": [{ type: core.Input },],
-    "dataItem": [{ type: core.Input },],
-    "onClick": [{ type: core.HostListener, args: ['click', ['$event'],] },],
-    "onMouseEnter": [{ type: core.HostListener, args: ['mouseenter', ['$event'],] },],
+    mdbRow: [{ type: core.Input }],
+    dataItem: [{ type: core.Input }],
+    onClick: [{ type: core.HostListener, args: ['click', ['$event'],] }],
+    onMouseEnter: [{ type: core.HostListener, args: ['mouseenter', ['$event'],] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -3369,12 +3367,12 @@ InputAutoFillDirective.decorators = [
 ];
 /** @nocollapse */
 InputAutoFillDirective.ctorParameters = function () { return [
-    { type: core.ElementRef, },
-    { type: core.Renderer2, },
+    { type: core.ElementRef },
+    { type: core.Renderer2 }
 ]; };
 InputAutoFillDirective.propDecorators = {
-    "opts": [{ type: core.Input },],
-    "onKeyUp": [{ type: core.HostListener, args: ['keyup', ['$event'],] },],
+    opts: [{ type: core.Input }],
+    onKeyUp: [{ type: core.HostListener, args: ['keyup', ['$event'],] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -3411,10 +3409,10 @@ FocusDirective.decorators = [
 ];
 /** @nocollapse */
 FocusDirective.ctorParameters = function () { return [
-    { type: core.ElementRef, },
+    { type: core.ElementRef }
 ]; };
 FocusDirective.propDecorators = {
-    "value": [{ type: core.Input },],
+    value: [{ type: core.Input }]
 };
 /**
  * @fileoverview added by tsickle
@@ -4792,28 +4790,30 @@ MDBDatePickerComponent.decorators = [
 ];
 /** @nocollapse */
 MDBDatePickerComponent.ctorParameters = function () { return [
-    { type: core.ElementRef, },
-    { type: core.Renderer2, },
-    { type: LocaleService, },
-    { type: UtilService, },
-    { type: undefined, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] },] },
+    { type: core.ElementRef },
+    { type: 
+        // ChangeDetectorRef,
+        core.Renderer2 },
+    { type: LocaleService },
+    { type: UtilService },
+    { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
 ]; };
 MDBDatePickerComponent.propDecorators = {
-    "options": [{ type: core.Input },],
-    "locale": [{ type: core.Input },],
-    "defaultMonth": [{ type: core.Input },],
-    "selDate": [{ type: core.Input },],
-    "label": [{ type: core.Input },],
-    "placeholder": [{ type: core.Input },],
-    "selector": [{ type: core.Input },],
-    "disabled": [{ type: core.Input },],
-    "dateChanged": [{ type: core.Output },],
-    "inputFieldChanged": [{ type: core.Output },],
-    "calendarViewChanged": [{ type: core.Output },],
-    "calendarToggle": [{ type: core.Output },],
-    "inputFocusBlur": [{ type: core.Output },],
-    "divFocus": [{ type: core.ViewChild, args: ['divFocus',] },],
-    "pickerFrame": [{ type: core.ViewChild, args: ['pickerFrame',] },],
+    options: [{ type: core.Input }],
+    locale: [{ type: core.Input }],
+    defaultMonth: [{ type: core.Input }],
+    selDate: [{ type: core.Input }],
+    label: [{ type: core.Input }],
+    placeholder: [{ type: core.Input }],
+    selector: [{ type: core.Input }],
+    disabled: [{ type: core.Input }],
+    dateChanged: [{ type: core.Output }],
+    inputFieldChanged: [{ type: core.Output }],
+    calendarViewChanged: [{ type: core.Output }],
+    calendarToggle: [{ type: core.Output }],
+    inputFocusBlur: [{ type: core.Output }],
+    divFocus: [{ type: core.ViewChild, args: ['divFocus',] }],
+    pickerFrame: [{ type: core.ViewChild, args: ['pickerFrame',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -4883,17 +4883,17 @@ SimpleChartComponent.decorators = [
 /** @nocollapse */
 SimpleChartComponent.ctorParameters = function () { return []; };
 SimpleChartComponent.propDecorators = {
-    "percent": [{ type: core.Input, args: ['percent',] },],
-    "barColor": [{ type: core.Input, args: ['barColor',] },],
-    "trackColor": [{ type: core.Input, args: ['trackColor',] },],
-    "scaleColor": [{ type: core.Input, args: ['scaleColor',] },],
-    "scaleLength": [{ type: core.Input, args: ['scaleLength',] },],
-    "lineCap": [{ type: core.Input, args: ['lineCap',] },],
-    "lineWidth": [{ type: core.Input, args: ['lineWidth',] },],
-    "trackWidth": [{ type: core.Input, args: ['trackWidth',] },],
-    "size": [{ type: core.Input, args: ['size',] },],
-    "rotate": [{ type: core.Input, args: ['rotate',] },],
-    "animate": [{ type: core.Input, args: ['animate',] },],
+    percent: [{ type: core.Input, args: ['percent',] }],
+    barColor: [{ type: core.Input, args: ['barColor',] }],
+    trackColor: [{ type: core.Input, args: ['trackColor',] }],
+    scaleColor: [{ type: core.Input, args: ['scaleColor',] }],
+    scaleLength: [{ type: core.Input, args: ['scaleLength',] }],
+    lineCap: [{ type: core.Input, args: ['lineCap',] }],
+    lineWidth: [{ type: core.Input, args: ['lineWidth',] }],
+    trackWidth: [{ type: core.Input, args: ['trackWidth',] }],
+    size: [{ type: core.Input, args: ['size',] }],
+    rotate: [{ type: core.Input, args: ['rotate',] }],
+    animate: [{ type: core.Input, args: ['animate',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -4953,12 +4953,12 @@ EasyPieChartComponent.decorators = [
 ];
 /** @nocollapse */
 EasyPieChartComponent.ctorParameters = function () { return [
-    { type: core.ElementRef, },
-    { type: undefined, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] },] },
+    { type: core.ElementRef },
+    { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
 ]; };
 EasyPieChartComponent.propDecorators = {
-    "percent": [{ type: core.Input, args: ['percent',] },],
-    "options": [{ type: core.Input, args: ['options',] },],
+    percent: [{ type: core.Input, args: ['percent',] }],
+    options: [{ type: core.Input, args: ['options',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -5302,15 +5302,15 @@ MDBFileDropDirective.decorators = [
 ];
 /** @nocollapse */
 MDBFileDropDirective.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] },] },
-    { type: core.ElementRef, },
+    { type: undefined, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] },
+    { type: core.ElementRef }
 ]; };
 MDBFileDropDirective.propDecorators = {
-    "uploadInput": [{ type: core.Input },],
-    "uploadOutput": [{ type: core.Output },],
-    "onDrop": [{ type: core.HostListener, args: ['drop', ['$event'],] },],
-    "onDragOver": [{ type: core.HostListener, args: ['dragover', ['$event'],] },],
-    "onDragLeave": [{ type: core.HostListener, args: ['dragleave', ['$event'],] },],
+    uploadInput: [{ type: core.Input }],
+    uploadOutput: [{ type: core.Output }],
+    onDrop: [{ type: core.HostListener, args: ['drop', ['$event'],] }],
+    onDragOver: [{ type: core.HostListener, args: ['dragover', ['$event'],] }],
+    onDragLeave: [{ type: core.HostListener, args: ['dragleave', ['$event'],] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -5368,12 +5368,12 @@ MDBFileSelectDirective.decorators = [
 ];
 /** @nocollapse */
 MDBFileSelectDirective.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] },] },
-    { type: core.ElementRef, },
+    { type: undefined, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] },
+    { type: core.ElementRef }
 ]; };
 MDBFileSelectDirective.propDecorators = {
-    "uploadInput": [{ type: core.Input },],
-    "uploadOutput": [{ type: core.Output },],
+    uploadInput: [{ type: core.Input }],
+    uploadOutput: [{ type: core.Output }]
 };
 /**
  * @fileoverview added by tsickle
@@ -5455,14 +5455,14 @@ CharCounterDirective.decorators = [
 ];
 /** @nocollapse */
 CharCounterDirective.ctorParameters = function () { return [
-    { type: core.ElementRef, },
-    { type: core.Renderer2, },
+    { type: core.ElementRef },
+    { type: core.Renderer2 }
 ]; };
 CharCounterDirective.propDecorators = {
-    "length": [{ type: core.Input },],
-    "onKeyUp": [{ type: core.HostListener, args: ['input', ['$event'],] },],
-    "hide": [{ type: core.HostListener, args: ['blur', ['$event'],] },],
-    "show": [{ type: core.HostListener, args: ['focus', ['$event'],] },],
+    length: [{ type: core.Input }],
+    onKeyUp: [{ type: core.HostListener, args: ['input', ['$event'],] }],
+    hide: [{ type: core.HostListener, args: ['blur', ['$event'],] }],
+    show: [{ type: core.HostListener, args: ['focus', ['$event'],] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -5682,19 +5682,19 @@ ImageModalComponent.decorators = [
 ];
 /** @nocollapse */
 ImageModalComponent.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] },] },
-    { type: core.ElementRef, },
-    { type: core.Renderer2, },
+    { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] },
+    { type: core.ElementRef },
+    { type: core.Renderer2 }
 ]; };
 ImageModalComponent.propDecorators = {
-    "modalImages": [{ type: core.Input, args: ['modalImages',] },],
-    "imagePointer": [{ type: core.Input, args: ['imagePointer',] },],
-    "fullscreen": [{ type: core.Input, args: ['fullscreen',] },],
-    "zoom": [{ type: core.Input, args: ['zoom',] },],
-    "smooth": [{ type: core.Input, args: ['smooth',] },],
-    "type": [{ type: core.Input, args: ['type',] },],
-    "cancelEvent": [{ type: core.Output, args: ['cancelEvent',] },],
-    "keyboardControl": [{ type: core.HostListener, args: ['document:keyup', ['$event'],] },],
+    modalImages: [{ type: core.Input, args: ['modalImages',] }],
+    imagePointer: [{ type: core.Input, args: ['imagePointer',] }],
+    fullscreen: [{ type: core.Input, args: ['fullscreen',] }],
+    zoom: [{ type: core.Input, args: ['zoom',] }],
+    smooth: [{ type: core.Input, args: ['smooth',] }],
+    type: [{ type: core.Input, args: ['type',] }],
+    cancelEvent: [{ type: core.Output, args: ['cancelEvent',] }],
+    keyboardControl: [{ type: core.HostListener, args: ['document:keyup', ['$event'],] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -7137,31 +7137,31 @@ SelectDropdownComponent.decorators = [
 ];
 /** @nocollapse */
 SelectDropdownComponent.ctorParameters = function () { return [
-    { type: core.ElementRef, },
-    { type: core.Renderer2, },
-    { type: core.ChangeDetectorRef, },
+    { type: core.ElementRef },
+    { type: core.Renderer2 },
+    { type: core.ChangeDetectorRef }
 ]; };
 SelectDropdownComponent.propDecorators = {
-    "filterEnabled": [{ type: core.Input },],
-    "highlightColor": [{ type: core.Input },],
-    "highlightTextColor": [{ type: core.Input },],
-    "left": [{ type: core.Input },],
-    "multiple": [{ type: core.Input },],
-    "notFoundMsg": [{ type: core.Input },],
-    "optionList": [{ type: core.Input },],
-    "top": [{ type: core.Input },],
-    "width": [{ type: core.Input },],
-    "placeholder": [{ type: core.Input },],
-    "customClass": [{ type: core.Input },],
-    "close": [{ type: core.Output },],
-    "optionClicked": [{ type: core.Output },],
-    "singleFilterClick": [{ type: core.Output },],
-    "singleFilterInput": [{ type: core.Output },],
-    "singleFilterKeydown": [{ type: core.Output },],
-    "filterInput": [{ type: core.ViewChild, args: ['filterInput',] },],
-    "optionsList": [{ type: core.ViewChild, args: ['optionsList',] },],
-    "dropdownContent": [{ type: core.ViewChild, args: ['dropdownContent',] },],
-    "onkeyup": [{ type: core.HostListener, args: ['keyup', ['$event'],] },],
+    filterEnabled: [{ type: core.Input }],
+    highlightColor: [{ type: core.Input }],
+    highlightTextColor: [{ type: core.Input }],
+    left: [{ type: core.Input }],
+    multiple: [{ type: core.Input }],
+    notFoundMsg: [{ type: core.Input }],
+    optionList: [{ type: core.Input }],
+    top: [{ type: core.Input }],
+    width: [{ type: core.Input }],
+    placeholder: [{ type: core.Input }],
+    customClass: [{ type: core.Input }],
+    close: [{ type: core.Output }],
+    optionClicked: [{ type: core.Output }],
+    singleFilterClick: [{ type: core.Output }],
+    singleFilterInput: [{ type: core.Output }],
+    singleFilterKeydown: [{ type: core.Output }],
+    filterInput: [{ type: core.ViewChild, args: ['filterInput',] }],
+    optionsList: [{ type: core.ViewChild, args: ['optionsList',] }],
+    dropdownContent: [{ type: core.ViewChild, args: ['dropdownContent',] }],
+    onkeyup: [{ type: core.HostListener, args: ['keyup', ['$event'],] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -7792,32 +7792,32 @@ SelectComponent.decorators = [
 ];
 /** @nocollapse */
 SelectComponent.ctorParameters = function () { return [
-    { type: core.ElementRef, },
-    { type: core.Renderer2, },
+    { type: core.ElementRef },
+    { type: core.Renderer2 }
 ]; };
 SelectComponent.propDecorators = {
-    "options": [{ type: core.Input },],
-    "customClass": [{ type: core.Input },],
-    "allowClear": [{ type: core.Input },],
-    "disabled": [{ type: core.Input },],
-    "highlightColor": [{ type: core.Input },],
-    "highlightTextColor": [{ type: core.Input },],
-    "multiple": [{ type: core.Input },],
-    "noFilter": [{ type: core.Input },],
-    "notFoundMsg": [{ type: core.Input },],
-    "placeholder": [{ type: core.Input },],
-    "filterPlaceholder": [{ type: core.Input },],
-    "label": [{ type: core.Input },],
-    "filterEnabled": [{ type: core.Input },],
-    "opened": [{ type: core.Output },],
-    "closed": [{ type: core.Output },],
-    "selected": [{ type: core.Output },],
-    "deselected": [{ type: core.Output },],
-    "noOptionsFound": [{ type: core.Output },],
-    "selectionSpan": [{ type: core.ViewChild, args: ['selection',] },],
-    "dropdown": [{ type: core.ViewChild, args: ['dropdown',] },],
-    "filterInput": [{ type: core.ViewChild, args: ['filterInput',] },],
-    "closeSelect": [{ type: core.HostListener, args: ['document:click', ['$event'],] },],
+    options: [{ type: core.Input }],
+    customClass: [{ type: core.Input }],
+    allowClear: [{ type: core.Input }],
+    disabled: [{ type: core.Input }],
+    highlightColor: [{ type: core.Input }],
+    highlightTextColor: [{ type: core.Input }],
+    multiple: [{ type: core.Input }],
+    noFilter: [{ type: core.Input }],
+    notFoundMsg: [{ type: core.Input }],
+    placeholder: [{ type: core.Input }],
+    filterPlaceholder: [{ type: core.Input }],
+    label: [{ type: core.Input }],
+    filterEnabled: [{ type: core.Input }],
+    opened: [{ type: core.Output }],
+    closed: [{ type: core.Output }],
+    selected: [{ type: core.Output }],
+    deselected: [{ type: core.Output }],
+    noOptionsFound: [{ type: core.Output }],
+    selectionSpan: [{ type: core.ViewChild, args: ['selection',] }],
+    dropdown: [{ type: core.ViewChild, args: ['dropdown',] }],
+    filterInput: [{ type: core.ViewChild, args: ['filterInput',] }],
+    closeSelect: [{ type: core.HostListener, args: ['document:click', ['$event'],] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -7907,7 +7907,7 @@ MDBSpinningPreloader.decorators = [
 ];
 /** @nocollapse */
 MDBSpinningPreloader.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: core.Inject, args: [platformBrowser.DOCUMENT,] },] },
+    { type: undefined, decorators: [{ type: core.Inject, args: [platformBrowser.DOCUMENT,] }] }
 ]; };
 /**
  * @fileoverview added by tsickle
@@ -7990,12 +7990,11 @@ ProgressBarComponent.decorators = [
                 changeDetection: core.ChangeDetectionStrategy.OnPush,
             },] },
 ];
-/** @nocollapse */
 ProgressBarComponent.propDecorators = {
-    "color": [{ type: core.Input },],
-    "value": [{ type: core.Input }, { type: core.HostBinding, args: ['attr.aria-valuenow',] },],
-    "bufferValue": [{ type: core.Input },],
-    "mode": [{ type: core.Input }, { type: core.HostBinding, args: ['attr.mode',] },],
+    color: [{ type: core.Input }],
+    value: [{ type: core.Input }, { type: core.HostBinding, args: ['attr.aria-valuenow',] }],
+    bufferValue: [{ type: core.Input }],
+    mode: [{ type: core.Input }, { type: core.HostBinding, args: ['attr.mode',] }]
 };
 /**
  * Clamps a value to be between two numbers, by default 0 and 100.
@@ -8049,9 +8048,8 @@ MdProgressSpinnerCssMatStylerDirective.decorators = [
                 selector: '[mdbSpinners], mat-progress-spinner'
             },] },
 ];
-/** @nocollapse */
 MdProgressSpinnerCssMatStylerDirective.propDecorators = {
-    "true": [{ type: core.HostBinding, args: ['class.mat-progress-spinner',] },],
+    true: [{ type: core.HostBinding, args: ['class.mat-progress-spinner',] }]
 };
 /**
  * <md-progress-spinner> component.
@@ -8322,16 +8320,16 @@ MdProgressSpinnerComponent.decorators = [
 ];
 /** @nocollapse */
 MdProgressSpinnerComponent.ctorParameters = function () { return [
-    { type: core.NgZone, },
-    { type: core.ElementRef, },
-    { type: core.Renderer2, },
-    { type: undefined, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] },] },
+    { type: core.NgZone },
+    { type: core.ElementRef },
+    { type: core.Renderer2 },
+    { type: undefined, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
 ]; };
 MdProgressSpinnerComponent.propDecorators = {
-    "platformId": [{ type: core.Inject, args: [core.PLATFORM_ID,] },],
-    "color": [{ type: core.Input },],
-    "value": [{ type: core.Input }, { type: core.HostBinding, args: ['attr.aria-valuenow',] },],
-    "mode": [{ type: core.HostBinding, args: ['attr.mode',] }, { type: core.Input },],
+    platformId: [{ type: core.Inject, args: [core.PLATFORM_ID,] }],
+    color: [{ type: core.Input }],
+    value: [{ type: core.Input }, { type: core.HostBinding, args: ['attr.aria-valuenow',] }],
+    mode: [{ type: core.HostBinding, args: ['attr.mode',] }, { type: core.Input }]
 };
 /**
  * <md-spinner> component.
@@ -8370,12 +8368,12 @@ MdSpinnerComponent.decorators = [
 ];
 /** @nocollapse */
 MdSpinnerComponent.ctorParameters = function () { return [
-    { type: core.ElementRef, },
-    { type: core.NgZone, },
-    { type: core.Renderer2, },
+    { type: core.ElementRef },
+    { type: core.NgZone },
+    { type: core.Renderer2 }
 ]; };
 MdSpinnerComponent.propDecorators = {
-    "true": [{ type: core.HostBinding, args: ['class.mat-spinner',] },],
+    true: [{ type: core.HostBinding, args: ['class.mat-spinner',] }]
 };
 /**
  * Clamps a value to be between 0 and 100.
@@ -8504,11 +8502,10 @@ var ProgressDirective = /** @class */ (function () {
 ProgressDirective.decorators = [
     { type: core.Directive, args: [{ selector: 'mdbProgress, [mdbProgress]' },] },
 ];
-/** @nocollapse */
 ProgressDirective.propDecorators = {
-    "animate": [{ type: core.Input },],
-    "max": [{ type: core.HostBinding, args: ['attr.max',] }, { type: core.Input },],
-    "addClass": [{ type: core.HostBinding, args: ['class.progress',] },],
+    animate: [{ type: core.Input }],
+    max: [{ type: core.HostBinding, args: ['attr.max',] }, { type: core.Input }],
+    addClass: [{ type: core.HostBinding, args: ['class.progress',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -8578,11 +8575,11 @@ BarComponent.decorators = [
 ];
 /** @nocollapse */
 BarComponent.ctorParameters = function () { return [
-    { type: ProgressDirective, decorators: [{ type: core.Host },] },
+    { type: ProgressDirective, decorators: [{ type: core.Host }] }
 ]; };
 BarComponent.propDecorators = {
-    "type": [{ type: core.Input },],
-    "value": [{ type: core.Input },],
+    type: [{ type: core.Input }],
+    value: [{ type: core.Input }]
 };
 /**
  * @fileoverview added by tsickle
@@ -8666,11 +8663,11 @@ ProgressSpinnerComponent.decorators = [
 ];
 /** @nocollapse */
 ProgressSpinnerComponent.ctorParameters = function () { return [
-    { type: core.ElementRef, },
+    { type: core.ElementRef }
 ]; };
 ProgressSpinnerComponent.propDecorators = {
-    "spinnerType": [{ type: core.Input },],
-    "spinnerColor": [{ type: core.Input },],
+    spinnerType: [{ type: core.Input }],
+    spinnerColor: [{ type: core.Input }]
 };
 /**
  * @fileoverview added by tsickle
@@ -8713,13 +8710,13 @@ ProgressbarComponent.decorators = [
 ];
 /** @nocollapse */
 ProgressbarComponent.ctorParameters = function () { return [
-    { type: ProgressbarConfigComponent, },
+    { type: ProgressbarConfigComponent }
 ]; };
 ProgressbarComponent.propDecorators = {
-    "animate": [{ type: core.Input },],
-    "max": [{ type: core.Input },],
-    "type": [{ type: core.Input },],
-    "value": [{ type: core.Input },],
+    animate: [{ type: core.Input }],
+    max: [{ type: core.Input }],
+    type: [{ type: core.Input }],
+    value: [{ type: core.Input }]
 };
 /**
  * @fileoverview added by tsickle
@@ -9133,17 +9130,17 @@ SidenavComponent.decorators = [
 ];
 /** @nocollapse */
 SidenavComponent.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] },] },
-    { type: core.ElementRef, },
-    { type: core.Renderer2, },
+    { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] },
+    { type: core.ElementRef },
+    { type: core.Renderer2 }
 ]; };
 SidenavComponent.propDecorators = {
-    "class": [{ type: core.Input },],
-    "fixed": [{ type: core.Input },],
-    "sidenavBreakpoint": [{ type: core.Input },],
-    "sideNav": [{ type: core.ViewChild, args: ['sidenav',] },],
-    "overlay": [{ type: core.ViewChild, args: ['overlay',] },],
-    "windwosResize": [{ type: core.HostListener, args: ['window:resize',] },],
+    class: [{ type: core.Input }],
+    fixed: [{ type: core.Input }],
+    sidenavBreakpoint: [{ type: core.Input }],
+    sideNav: [{ type: core.ViewChild, args: ['sidenav',] }],
+    overlay: [{ type: core.ViewChild, args: ['overlay',] }],
+    windwosResize: [{ type: core.HostListener, args: ['window:resize',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -10225,23 +10222,23 @@ PageScrollDirective.decorators = [
 ];
 /** @nocollapse */
 PageScrollDirective.ctorParameters = function () { return [
-    { type: PageScrollService, },
-    { type: router.Router, decorators: [{ type: core.Optional },] },
-    { type: undefined, decorators: [{ type: core.Inject, args: [platformBrowser.DOCUMENT,] },] },
+    { type: PageScrollService },
+    { type: router.Router, decorators: [{ type: core.Optional }] },
+    { type: undefined, decorators: [{ type: core.Inject, args: [platformBrowser.DOCUMENT,] }] }
 ]; };
 PageScrollDirective.propDecorators = {
-    "routerLink": [{ type: core.Input },],
-    "href": [{ type: core.Input },],
-    "pageScrollHorizontal": [{ type: core.Input },],
-    "pageScrollOffset": [{ type: core.Input },],
-    "pageScrollDuration": [{ type: core.Input },],
-    "pageScrollSpeed": [{ type: core.Input },],
-    "pageScrollEasing": [{ type: core.Input },],
-    "pageScrollInterruptible": [{ type: core.Input },],
-    "pageScrollAdjustHash": [{ type: core.Input },],
-    "pageScroll": [{ type: core.Input },],
-    "pageScrollFinish": [{ type: core.Output },],
-    "handleClick": [{ type: core.HostListener, args: ['click', ['$event'],] },],
+    routerLink: [{ type: core.Input }],
+    href: [{ type: core.Input }],
+    pageScrollHorizontal: [{ type: core.Input }],
+    pageScrollOffset: [{ type: core.Input }],
+    pageScrollDuration: [{ type: core.Input }],
+    pageScrollSpeed: [{ type: core.Input }],
+    pageScrollEasing: [{ type: core.Input }],
+    pageScrollInterruptible: [{ type: core.Input }],
+    pageScrollAdjustHash: [{ type: core.Input }],
+    pageScroll: [{ type: core.Input }],
+    pageScrollFinish: [{ type: core.Output }],
+    handleClick: [{ type: core.HostListener, args: ['click', ['$event'],] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -10476,11 +10473,11 @@ MdbStickyDirective.decorators = [
 ];
 /** @nocollapse */
 MdbStickyDirective.ctorParameters = function () { return [
-    { type: core.ElementRef, },
-    { type: undefined, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] },] },
+    { type: core.ElementRef },
+    { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
 ]; };
 MdbStickyDirective.propDecorators = {
-    "stickyAfter": [{ type: core.Input },],
+    stickyAfter: [{ type: core.Input }]
 };
 /**
  * @fileoverview added by tsickle
@@ -10578,10 +10575,10 @@ WavesDirective.decorators = [
 ];
 /** @nocollapse */
 WavesDirective.ctorParameters = function () { return [
-    { type: core.ElementRef, },
+    { type: core.ElementRef }
 ]; };
 WavesDirective.propDecorators = {
-    "click": [{ type: core.HostListener, args: ['click', ['$event'],] },],
+    click: [{ type: core.HostListener, args: ['click', ['$event'],] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -10833,22 +10830,22 @@ TabsetComponent.decorators = [
 ];
 /** @nocollapse */
 TabsetComponent.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] },] },
-    { type: TabsetConfig, },
-    { type: WavesDirective, },
+    { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] },
+    { type: TabsetConfig },
+    { type: WavesDirective }
 ]; };
 TabsetComponent.propDecorators = {
-    "clazz": [{ type: core.HostBinding, args: ['class.tab-container',] },],
-    "buttonClass": [{ type: core.Input },],
-    "contentClass": [{ type: core.Input },],
-    "tabEl": [{ type: core.ViewChildren, args: ['tabEl', { read: core.ElementRef },] },],
-    "showBsTab": [{ type: core.Output },],
-    "shownBsTab": [{ type: core.Output },],
-    "hideBsTab": [{ type: core.Output },],
-    "hiddenBsTab": [{ type: core.Output },],
-    "vertical": [{ type: core.Input },],
-    "justified": [{ type: core.Input },],
-    "type": [{ type: core.Input },],
+    clazz: [{ type: core.HostBinding, args: ['class.tab-container',] }],
+    buttonClass: [{ type: core.Input }],
+    contentClass: [{ type: core.Input }],
+    tabEl: [{ type: core.ViewChildren, args: ['tabEl', { read: core.ElementRef },] }],
+    showBsTab: [{ type: core.Output }],
+    shownBsTab: [{ type: core.Output }],
+    hideBsTab: [{ type: core.Output }],
+    hiddenBsTab: [{ type: core.Output }],
+    vertical: [{ type: core.Input }],
+    justified: [{ type: core.Input }],
+    type: [{ type: core.Input }]
 };
 /**
  * @fileoverview added by tsickle
@@ -10973,21 +10970,21 @@ TabDirective.decorators = [
 ];
 /** @nocollapse */
 TabDirective.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] },] },
-    { type: TabsetComponent, },
-    { type: core.ElementRef, },
+    { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] },
+    { type: TabsetComponent },
+    { type: core.ElementRef }
 ]; };
 TabDirective.propDecorators = {
-    "heading": [{ type: core.Input },],
-    "disabled": [{ type: core.Input },],
-    "removable": [{ type: core.Input },],
-    "customClass": [{ type: core.Input },],
-    "active": [{ type: core.HostBinding, args: ['class.active',] }, { type: core.Input },],
-    "select": [{ type: core.Output },],
-    "deselect": [{ type: core.Output },],
-    "removed": [{ type: core.Output },],
-    "addClass": [{ type: core.HostBinding, args: ['class.tab-pane',] },],
-    "test": [{ type: core.HostBinding, args: ['class.fade',] },],
+    heading: [{ type: core.Input }],
+    disabled: [{ type: core.Input }],
+    removable: [{ type: core.Input }],
+    customClass: [{ type: core.Input }],
+    active: [{ type: core.HostBinding, args: ['class.active',] }, { type: core.Input }],
+    select: [{ type: core.Output }],
+    deselect: [{ type: core.Output }],
+    removed: [{ type: core.Output }],
+    addClass: [{ type: core.HostBinding, args: ['class.tab-pane',] }],
+    test: [{ type: core.HostBinding, args: ['class.fade',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -11011,8 +11008,8 @@ TabHeadingDirective.decorators = [
 ];
 /** @nocollapse */
 TabHeadingDirective.ctorParameters = function () { return [
-    { type: core.TemplateRef, },
-    { type: TabDirective, },
+    { type: core.TemplateRef },
+    { type: TabDirective }
 ]; };
 /**
  * @fileoverview added by tsickle
@@ -11054,10 +11051,10 @@ NgTranscludeDirective.decorators = [
 ];
 /** @nocollapse */
 NgTranscludeDirective.ctorParameters = function () { return [
-    { type: core.ViewContainerRef, },
+    { type: core.ViewContainerRef }
 ]; };
 NgTranscludeDirective.propDecorators = {
-    "mdbNgTransclude": [{ type: core.Input },],
+    mdbNgTransclude: [{ type: core.Input }]
 };
 /**
  * @fileoverview added by tsickle
@@ -11184,10 +11181,10 @@ MaterialChipsComponent.decorators = [
 /** @nocollapse */
 MaterialChipsComponent.ctorParameters = function () { return []; };
 MaterialChipsComponent.propDecorators = {
-    "placeholder": [{ type: core.Input, args: ['placeholder',] },],
-    "tagsfocusedChange": [{ type: core.Output },],
-    "labelsChange": [{ type: core.Output },],
-    "tagsfocused": [{ type: core.Input },],
+    placeholder: [{ type: core.Input, args: ['placeholder',] }],
+    tagsfocusedChange: [{ type: core.Output }],
+    labelsChange: [{ type: core.Output }],
+    tagsfocused: [{ type: core.Input }]
 };
 /**
  * @fileoverview added by tsickle
@@ -11631,27 +11628,27 @@ ClockPickerComponent.decorators = [
 ];
 /** @nocollapse */
 ClockPickerComponent.ctorParameters = function () { return [
-    { type: core.ElementRef, },
-    { type: core.Renderer2, },
-    { type: undefined, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] },] },
+    { type: core.ElementRef },
+    { type: core.Renderer2 },
+    { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
 ]; };
 ClockPickerComponent.propDecorators = {
-    "hoursPlate": [{ type: core.ViewChild, args: ['hoursPlate',] },],
-    "minutesPlate": [{ type: core.ViewChild, args: ['minutesPlate',] },],
-    "plate": [{ type: core.ViewChild, args: ['plate',] },],
-    "svg": [{ type: core.ViewChild, args: ['svg',] },],
-    "g": [{ type: core.ViewChild, args: ['g',] },],
-    "hand": [{ type: core.ViewChild, args: ['hand',] },],
-    "fg": [{ type: core.ViewChild, args: ['fg',] },],
-    "bg": [{ type: core.ViewChild, args: ['bg',] },],
-    "bearing": [{ type: core.ViewChild, args: ['bearing',] },],
-    "twelvehour": [{ type: core.Input, args: ['twelvehour',] },],
-    "darktheme": [{ type: core.Input, args: ['darktheme',] },],
-    "placeholder": [{ type: core.Input, args: ['placeholder',] },],
-    "label": [{ type: core.Input, args: ['label',] },],
-    "duration": [{ type: core.Input, args: ['duration',] },],
-    "showClock": [{ type: core.Input, args: ['showClock',] },],
-    "buttonLabel": [{ type: core.Input, args: ['buttonlabel',] },],
+    hoursPlate: [{ type: core.ViewChild, args: ['hoursPlate',] }],
+    minutesPlate: [{ type: core.ViewChild, args: ['minutesPlate',] }],
+    plate: [{ type: core.ViewChild, args: ['plate',] }],
+    svg: [{ type: core.ViewChild, args: ['svg',] }],
+    g: [{ type: core.ViewChild, args: ['g',] }],
+    hand: [{ type: core.ViewChild, args: ['hand',] }],
+    fg: [{ type: core.ViewChild, args: ['fg',] }],
+    bg: [{ type: core.ViewChild, args: ['bg',] }],
+    bearing: [{ type: core.ViewChild, args: ['bearing',] }],
+    twelvehour: [{ type: core.Input, args: ['twelvehour',] }],
+    darktheme: [{ type: core.Input, args: ['darktheme',] }],
+    placeholder: [{ type: core.Input, args: ['placeholder',] }],
+    label: [{ type: core.Input, args: ['label',] }],
+    duration: [{ type: core.Input, args: ['duration',] }],
+    showClock: [{ type: core.Input, args: ['showClock',] }],
+    buttonLabel: [{ type: core.Input, args: ['buttonlabel',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -11778,12 +11775,11 @@ var ButtonCheckboxDirective = /** @class */ (function () {
 ButtonCheckboxDirective.decorators = [
     { type: core.Directive, args: [{ selector: '[mdbCheckbox]', providers: [CHECKBOX_CONTROL_VALUE_ACCESSOR] },] },
 ];
-/** @nocollapse */
 ButtonCheckboxDirective.propDecorators = {
-    "btnCheckboxTrue": [{ type: core.Input },],
-    "btnCheckboxFalse": [{ type: core.Input },],
-    "state": [{ type: core.HostBinding, args: ['class.active',] },],
-    "onClick": [{ type: core.HostListener, args: ['click',] },],
+    btnCheckboxTrue: [{ type: core.Input }],
+    btnCheckboxFalse: [{ type: core.Input }],
+    state: [{ type: core.HostBinding, args: ['class.active',] }],
+    onClick: [{ type: core.HostListener, args: ['click',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -11889,15 +11885,15 @@ ButtonRadioDirective.decorators = [
 ];
 /** @nocollapse */
 ButtonRadioDirective.ctorParameters = function () { return [
-    { type: core.ElementRef, },
-    { type: core.Renderer2, },
+    { type: core.ElementRef },
+    { type: core.Renderer2 }
 ]; };
 ButtonRadioDirective.propDecorators = {
-    "mdbRadio": [{ type: core.Input },],
-    "uncheckable": [{ type: core.Input },],
-    "value": [{ type: core.Input },],
-    "isActive": [{ type: core.HostBinding, args: ['class.active',] },],
-    "onClick": [{ type: core.HostListener, args: ['click', ['$event'],] },],
+    mdbRadio: [{ type: core.Input }],
+    uncheckable: [{ type: core.Input }],
+    value: [{ type: core.Input }],
+    isActive: [{ type: core.HostBinding, args: ['class.active',] }],
+    onClick: [{ type: core.HostListener, args: ['click', ['$event'],] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -12318,14 +12314,16 @@ var CarouselComponent = /** @class */ (function () {
     /**
      * @param {?} config
      * @param {?} el
+     * @param {?} platformId
      */
-    function CarouselComponent(config, el) {
+    function CarouselComponent(config, el, platformId) {
         this.SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
         this._slides = new LinkedList();
         this.destroyed = false;
         // protected el: ElementRef = null;
         this.el = null;
         this.animationEnd = true;
+        this.isBrowser = false;
         this.isControls = true;
         this.class = '';
         this.type = '';
@@ -12334,6 +12332,7 @@ var CarouselComponent = /** @class */ (function () {
          * Will be emitted when active slide has been changed. Part of two-way-bindable [(activeSlide)] property
          */
         this.activeSlideChange = new core.EventEmitter(false);
+        this.isBrowser = common.isPlatformBrowser(platformId);
         Object.assign(this, config);
         this.el = el;
     }
@@ -12538,12 +12537,14 @@ var CarouselComponent = /** @class */ (function () {
         if (this.animationEnd) {
             this.animationEnd = false;
             goToSlide.directionNext = true;
-            setTimeout(function () {
-                goToSlide.directionNext = false;
-                _this.animationEnd = true;
-                _this.activeSlide = goToIndex;
-                _this.play();
-            }, 100);
+            if (this.isBrowser) {
+                setTimeout(function () {
+                    goToSlide.directionNext = false;
+                    _this.animationEnd = true;
+                    _this.activeSlide = goToIndex;
+                    _this.play();
+                }, 100);
+            }
         }
     };
     /**
@@ -12559,40 +12560,46 @@ var CarouselComponent = /** @class */ (function () {
             if (direction === Direction.NEXT) {
                 this.animationEnd = false;
                 goToSlide.directionNext = true;
-                setTimeout(function () {
-                    goToSlide.directionLeft = true;
-                    currentSlide.directionLeft = true;
-                }, 100);
+                if (this.isBrowser) {
+                    setTimeout(function () {
+                        goToSlide.directionLeft = true;
+                        currentSlide.directionLeft = true;
+                    }, 100);
+                }
             }
             if (direction === Direction.PREV) {
                 this.animationEnd = false;
                 goToSlide.directionPrev = true;
-                setTimeout(function () {
-                    goToSlide.directionRight = true;
-                    currentSlide.directionRight = true;
-                }, 100);
+                if (this.isBrowser) {
+                    setTimeout(function () {
+                        goToSlide.directionRight = true;
+                        currentSlide.directionRight = true;
+                    }, 100);
+                }
             }
-            setTimeout(function () {
-                goToSlide.directionLeft = false;
-                goToSlide.directionNext = false;
-                currentSlide.directionLeft = false;
-                currentSlide.directionNext = false;
-                goToSlide.directionRight = false;
-                goToSlide.directionPrev = false;
-                currentSlide.directionRight = false;
-                currentSlide.directionPrev = false;
-                _this.animationEnd = true;
-                _this.activeSlide = goToIndex;
-                var /** @type {?} */ directionName;
-                if (direction === Direction.NEXT) {
-                    directionName = 'Next';
-                }
-                else if (direction === Direction.PREV) {
-                    directionName = 'Prev';
-                }
-                _this.activeSlideChange.emit({ 'direction': directionName, 'relatedTarget': _this.activeSlide });
-                _this.play();
-            }, 700);
+            if (this.isBrowser) {
+                setTimeout(function () {
+                    goToSlide.directionLeft = false;
+                    goToSlide.directionNext = false;
+                    currentSlide.directionLeft = false;
+                    currentSlide.directionNext = false;
+                    goToSlide.directionRight = false;
+                    goToSlide.directionPrev = false;
+                    currentSlide.directionRight = false;
+                    currentSlide.directionPrev = false;
+                    _this.animationEnd = true;
+                    _this.activeSlide = goToIndex;
+                    var /** @type {?} */ directionName;
+                    if (direction === Direction.NEXT) {
+                        directionName = 'Next';
+                    }
+                    else if (direction === Direction.PREV) {
+                        directionName = 'Prev';
+                    }
+                    _this.activeSlideChange.emit({ 'direction': directionName, 'relatedTarget': _this.activeSlide });
+                    _this.play();
+                }, 700);
+            }
         }
     };
     /**
@@ -12708,17 +12715,19 @@ var CarouselComponent = /** @class */ (function () {
     CarouselComponent.prototype.restartTimer = function () {
         var _this = this;
         this.resetTimer();
-        var /** @type {?} */ interval = +this.interval;
-        if (!isNaN(interval) && interval > 0) {
-            this.currentInterval = setInterval(function () {
-                var /** @type {?} */ nInterval = +_this.interval;
-                if (_this.isPlaying && !isNaN(_this.interval) && nInterval > 0 && _this.slides.length) {
-                    _this.nextSlide();
-                }
-                else {
-                    _this.pause();
-                }
-            }, interval);
+        if (this.isBrowser) {
+            var /** @type {?} */ interval = +this.interval;
+            if (!isNaN(interval) && interval > 0) {
+                this.currentInterval = setInterval(function () {
+                    var /** @type {?} */ nInterval = +_this.interval;
+                    if (_this.isPlaying && !isNaN(_this.interval) && nInterval > 0 && _this.slides.length) {
+                        _this.nextSlide();
+                    }
+                    else {
+                        _this.pause();
+                    }
+                }, interval);
+            }
         }
     };
     /**
@@ -12726,9 +12735,11 @@ var CarouselComponent = /** @class */ (function () {
      * @return {?}
      */
     CarouselComponent.prototype.resetTimer = function () {
-        if (this.currentInterval) {
-            clearInterval(this.currentInterval);
-            this.currentInterval = void 0;
+        if (this.isBrowser) {
+            if (this.currentInterval) {
+                clearInterval(this.currentInterval);
+                this.currentInterval = void 0;
+            }
         }
     };
     /**
@@ -12801,24 +12812,25 @@ CarouselComponent.decorators = [
 ];
 /** @nocollapse */
 CarouselComponent.ctorParameters = function () { return [
-    { type: CarouselConfig, },
-    { type: core.ElementRef, },
+    { type: CarouselConfig },
+    { type: core.ElementRef },
+    { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
 ]; };
 CarouselComponent.propDecorators = {
-    "noWrap": [{ type: core.Input },],
-    "noPause": [{ type: core.Input },],
-    "isControls": [{ type: core.Input, args: ['isControls',] },],
-    "keyboard": [{ type: core.Input },],
-    "class": [{ type: core.Input, args: ['class',] },],
-    "type": [{ type: core.Input, args: ['type',] },],
-    "animation": [{ type: core.Input, args: ['animation',] },],
-    "activeSlideChange": [{ type: core.Output },],
-    "activeSlide": [{ type: core.Input },],
-    "interval": [{ type: core.Input },],
-    "play": [{ type: core.HostListener, args: ['mouseleave',] },],
-    "pause": [{ type: core.HostListener, args: ['mouseenter',] },],
-    "keyboardControl": [{ type: core.HostListener, args: ['keyup', ['$event'],] },],
-    "focus": [{ type: core.HostListener, args: ['click', ['$event'],] },],
+    noWrap: [{ type: core.Input }],
+    noPause: [{ type: core.Input }],
+    isControls: [{ type: core.Input, args: ['isControls',] }],
+    keyboard: [{ type: core.Input }],
+    class: [{ type: core.Input, args: ['class',] }],
+    type: [{ type: core.Input, args: ['type',] }],
+    animation: [{ type: core.Input, args: ['animation',] }],
+    activeSlideChange: [{ type: core.Output }],
+    activeSlide: [{ type: core.Input }],
+    interval: [{ type: core.Input }],
+    play: [{ type: core.HostListener, args: ['mouseleave',] }],
+    pause: [{ type: core.HostListener, args: ['mouseenter',] }],
+    keyboardControl: [{ type: core.HostListener, args: ['keyup', ['$event'],] }],
+    focus: [{ type: core.HostListener, args: ['click', ['$event'],] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -12863,17 +12875,17 @@ SlideComponent.decorators = [
 ];
 /** @nocollapse */
 SlideComponent.ctorParameters = function () { return [
-    { type: CarouselComponent, },
-    { type: core.ElementRef, },
+    { type: CarouselComponent },
+    { type: core.ElementRef }
 ]; };
 SlideComponent.propDecorators = {
-    "active": [{ type: core.HostBinding, args: ['class.active',] }, { type: core.Input },],
-    "animated": [{ type: core.HostBinding, args: ['class.animated',] },],
-    "directionNext": [{ type: core.HostBinding, args: ['class.carousel-item-next',] },],
-    "directionLeft": [{ type: core.HostBinding, args: ['class.carousel-item-left',] },],
-    "directionPrev": [{ type: core.HostBinding, args: ['class.carousel-item-prev',] },],
-    "directionRight": [{ type: core.HostBinding, args: ['class.carousel-item-right',] },],
-    "carousel": [{ type: core.HostBinding, args: ['class.carousel-item',] },],
+    active: [{ type: core.HostBinding, args: ['class.active',] }, { type: core.Input }],
+    animated: [{ type: core.HostBinding, args: ['class.animated',] }],
+    directionNext: [{ type: core.HostBinding, args: ['class.carousel-item-next',] }],
+    directionLeft: [{ type: core.HostBinding, args: ['class.carousel-item-left',] }],
+    directionPrev: [{ type: core.HostBinding, args: ['class.carousel-item-prev',] }],
+    directionRight: [{ type: core.HostBinding, args: ['class.carousel-item-right',] }],
+    carousel: [{ type: core.HostBinding, args: ['class.carousel-item',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -13080,19 +13092,19 @@ BaseChartDirective.decorators = [
 ];
 /** @nocollapse */
 BaseChartDirective.ctorParameters = function () { return [
-    { type: core.ElementRef, },
-    { type: undefined, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] },] },
+    { type: core.ElementRef },
+    { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
 ]; };
 BaseChartDirective.propDecorators = {
-    "data": [{ type: core.Input },],
-    "datasets": [{ type: core.Input },],
-    "labels": [{ type: core.Input },],
-    "options": [{ type: core.Input },],
-    "chartType": [{ type: core.Input },],
-    "colors": [{ type: core.Input },],
-    "legend": [{ type: core.Input },],
-    "chartClick": [{ type: core.Output },],
-    "chartHover": [{ type: core.Output },],
+    data: [{ type: core.Input }],
+    datasets: [{ type: core.Input }],
+    labels: [{ type: core.Input }],
+    options: [{ type: core.Input }],
+    chartType: [{ type: core.Input }],
+    colors: [{ type: core.Input }],
+    legend: [{ type: core.Input }],
+    chartClick: [{ type: core.Output }],
+    chartHover: [{ type: core.Output }]
 };
 /**
  * @param {?} colour
@@ -13378,18 +13390,18 @@ CollapseDirective.decorators = [
 ];
 /** @nocollapse */
 CollapseDirective.ctorParameters = function () { return [
-    { type: core.ElementRef, },
-    { type: core.Renderer2, },
+    { type: core.ElementRef },
+    { type: core.Renderer2 }
 ]; };
 CollapseDirective.propDecorators = {
-    "showBsCollapse": [{ type: core.Output, args: ['showBsCollapse',] },],
-    "shownBsCollapse": [{ type: core.Output, args: ['shownBsCollapse',] },],
-    "hideBsCollapse": [{ type: core.Output, args: ['hideBsCollapse',] },],
-    "hiddenBsCollapse": [{ type: core.Output, args: ['hiddenBsCollapse',] },],
-    "collapsed": [{ type: core.Output },],
-    "expanded": [{ type: core.Output },],
-    "collapse": [{ type: core.Input },],
-    "animationTime": [{ type: core.Input },],
+    showBsCollapse: [{ type: core.Output, args: ['showBsCollapse',] }],
+    shownBsCollapse: [{ type: core.Output, args: ['shownBsCollapse',] }],
+    hideBsCollapse: [{ type: core.Output, args: ['hideBsCollapse',] }],
+    hiddenBsCollapse: [{ type: core.Output, args: ['hiddenBsCollapse',] }],
+    collapsed: [{ type: core.Output }],
+    expanded: [{ type: core.Output }],
+    collapse: [{ type: core.Input }],
+    animationTime: [{ type: core.Input }]
 };
 /**
  * @fileoverview added by tsickle
@@ -13479,11 +13491,11 @@ BsDropdownContainerComponent.decorators = [
 ];
 /** @nocollapse */
 BsDropdownContainerComponent.ctorParameters = function () { return [
-    { type: BsDropdownState, },
+    { type: BsDropdownState }
 ]; };
 BsDropdownContainerComponent.propDecorators = {
-    "display": [{ type: core.HostBinding, args: ['style.display',] },],
-    "position": [{ type: core.HostBinding, args: ['style.position',] },],
+    display: [{ type: core.HostBinding, args: ['style.display',] }],
+    position: [{ type: core.HostBinding, args: ['style.position',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -13511,9 +13523,9 @@ BsDropdownMenuDirective.decorators = [
 ];
 /** @nocollapse */
 BsDropdownMenuDirective.ctorParameters = function () { return [
-    { type: BsDropdownState, },
-    { type: core.ViewContainerRef, },
-    { type: core.TemplateRef, },
+    { type: BsDropdownState },
+    { type: core.ViewContainerRef },
+    { type: core.TemplateRef }
 ]; };
 /**
  * @fileoverview added by tsickle
@@ -13586,16 +13598,16 @@ BsDropdownToggleDirective.decorators = [
 ];
 /** @nocollapse */
 BsDropdownToggleDirective.ctorParameters = function () { return [
-    { type: BsDropdownState, },
-    { type: core.ElementRef, },
+    { type: BsDropdownState },
+    { type: core.ElementRef }
 ]; };
 BsDropdownToggleDirective.propDecorators = {
-    "ariaHaspopup": [{ type: core.HostBinding, args: ['attr.aria-haspopup',] },],
-    "isDisabled": [{ type: core.HostBinding, args: ['attr.disabled',] },],
-    "isOpen": [{ type: core.HostBinding, args: ['attr.aria-expanded',] },],
-    "onClick": [{ type: core.HostListener, args: ['click',] },],
-    "onDocumentClick": [{ type: core.HostListener, args: ['document:click', ['$event'],] },],
-    "onEsc": [{ type: core.HostListener, args: ['keyup.esc',] },],
+    ariaHaspopup: [{ type: core.HostBinding, args: ['attr.aria-haspopup',] }],
+    isDisabled: [{ type: core.HostBinding, args: ['attr.disabled',] }],
+    isOpen: [{ type: core.HostBinding, args: ['attr.aria-expanded',] }],
+    onClick: [{ type: core.HostListener, args: ['click',] }],
+    onDocumentClick: [{ type: core.HostListener, args: ['document:click', ['$event'],] }],
+    onEsc: [{ type: core.HostListener, args: ['keyup.esc',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -14246,11 +14258,11 @@ ComponentLoaderFactory.decorators = [
 ];
 /** @nocollapse */
 ComponentLoaderFactory.ctorParameters = function () { return [
-    { type: core.ComponentFactoryResolver, },
-    { type: core.NgZone, },
-    { type: core.Injector, },
-    { type: PositioningService, },
-    { type: core.ApplicationRef, },
+    { type: core.ComponentFactoryResolver },
+    { type: core.NgZone },
+    { type: core.Injector },
+    { type: PositioningService },
+    { type: core.ApplicationRef }
 ]; };
 /**
  * @fileoverview added by tsickle
@@ -14511,24 +14523,24 @@ BsDropdownDirective.decorators = [
 ];
 /** @nocollapse */
 BsDropdownDirective.ctorParameters = function () { return [
-    { type: core.ElementRef, },
-    { type: core.Renderer2, },
-    { type: core.ViewContainerRef, },
-    { type: ComponentLoaderFactory, },
-    { type: BsDropdownConfig, },
-    { type: BsDropdownState, },
+    { type: core.ElementRef },
+    { type: core.Renderer2 },
+    { type: core.ViewContainerRef },
+    { type: ComponentLoaderFactory },
+    { type: BsDropdownConfig },
+    { type: BsDropdownState }
 ]; };
 BsDropdownDirective.propDecorators = {
-    "placement": [{ type: core.Input },],
-    "triggers": [{ type: core.Input },],
-    "container": [{ type: core.Input },],
-    "dropup": [{ type: core.HostBinding, args: ['class.dropup',] }, { type: core.Input },],
-    "autoClose": [{ type: core.Input },],
-    "isDisabled": [{ type: core.Input },],
-    "isOpen": [{ type: core.HostBinding, args: ['class.open',] }, { type: core.HostBinding, args: ['class.show',] }, { type: core.Input },],
-    "isOpenChange": [{ type: core.Output },],
-    "onShown": [{ type: core.Output },],
-    "onHidden": [{ type: core.Output },],
+    placement: [{ type: core.Input }],
+    triggers: [{ type: core.Input }],
+    container: [{ type: core.Input }],
+    dropup: [{ type: core.HostBinding, args: ['class.dropup',] }, { type: core.Input }],
+    autoClose: [{ type: core.Input }],
+    isDisabled: [{ type: core.Input }],
+    isOpen: [{ type: core.HostBinding, args: ['class.open',] }, { type: core.HostBinding, args: ['class.show',] }, { type: core.Input }],
+    isOpenChange: [{ type: core.Output }],
+    onShown: [{ type: core.Output }],
+    onHidden: [{ type: core.Output }]
 };
 /**
  * @fileoverview added by tsickle
@@ -14715,12 +14727,12 @@ var MdbInputDirective = /** @class */ (function () {
                             this.renderer.removeClass(this.el.nativeElement, 'counter-success');
                             // tslint:disable-next-line:max-line-length
                         }
-                        else if (this.el.nativeElement.value.match(/^[a-zA-Z0-9]+$/g) && this.el.nativeElement.value.length >= this.minLength && this.el.nativeElement.value.length <= this.maxLength) {
+                        else if (this.el.nativeElement.value.match(/^[a-zA-Z0-9!@#$%\^&*:;)(+=._-\s]+$/g) && this.el.nativeElement.value.length >= this.minLength && this.el.nativeElement.value.length <= this.maxLength) {
                             this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
                             this.renderer.addClass(this.el.nativeElement, 'counter-success');
                             // tslint:disable-next-line:max-line-length
                         }
-                        else if (!this.el.nativeElement.value.match(/^[a-zA-Z0-9]+$/g) || this.el.nativeElement.value.length < this.minLength || this.el.nativeElement.value.length > this.maxLength) {
+                        else if (!this.el.nativeElement.value.match(/^[a-zA-Z0-9!@#$%\^&*:;)(+=._-\s]+$/g) || this.el.nativeElement.value.length < this.minLength || this.el.nativeElement.value.length > this.maxLength) {
                             this.renderer.addClass(this.el.nativeElement, 'counter-danger');
                             this.renderer.removeClass(this.el.nativeElement, 'counter-success');
                         }
@@ -14924,22 +14936,22 @@ MdbInputDirective.decorators = [
 ];
 /** @nocollapse */
 MdbInputDirective.ctorParameters = function () { return [
-    { type: core.ElementRef, },
-    { type: core.Renderer2, },
-    { type: undefined, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] },] },
+    { type: core.ElementRef },
+    { type: core.Renderer2 },
+    { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
 ]; };
 MdbInputDirective.propDecorators = {
-    "mdbInputDirective": [{ type: core.Input, args: ['mdbInputDirective',] },],
-    "placeholder": [{ type: core.Input, args: ['placeholder',] },],
-    "minLength": [{ type: core.Input, args: ['minLength',] },],
-    "maxLength": [{ type: core.Input, args: ['maxLength',] },],
-    "customRegex": [{ type: core.Input, args: ['customRegex',] },],
-    "mdbValidate": [{ type: core.Input, args: ['mdbValidate',] },],
-    "focusCheckbox": [{ type: core.Input, args: ['focusCheckbox',] },],
-    "focusRadio": [{ type: core.Input, args: ['focusRadio',] },],
-    "onfocus": [{ type: core.HostListener, args: ['focus',] },],
-    "onBlur": [{ type: core.HostListener, args: ['blur',] },],
-    "onchange": [{ type: core.HostListener, args: ['change',] },],
+    mdbInputDirective: [{ type: core.Input, args: ['mdbInputDirective',] }],
+    placeholder: [{ type: core.Input, args: ['placeholder',] }],
+    minLength: [{ type: core.Input, args: ['minLength',] }],
+    maxLength: [{ type: core.Input, args: ['maxLength',] }],
+    customRegex: [{ type: core.Input, args: ['customRegex',] }],
+    mdbValidate: [{ type: core.Input, args: ['mdbValidate',] }],
+    focusCheckbox: [{ type: core.Input, args: ['focusCheckbox',] }],
+    focusRadio: [{ type: core.Input, args: ['focusRadio',] }],
+    onfocus: [{ type: core.HostListener, args: ['focus',] }],
+    onBlur: [{ type: core.HostListener, args: ['blur',] }],
+    onchange: [{ type: core.HostListener, args: ['change',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -15010,8 +15022,8 @@ EqualValidatorDirective.decorators = [
 ];
 /** @nocollapse */
 EqualValidatorDirective.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: core.Attribute, args: ['validateEqual',] },] },
-    { type: undefined, decorators: [{ type: core.Attribute, args: ['reverse',] },] },
+    { type: String, decorators: [{ type: core.Attribute, args: ['validateEqual',] }] },
+    { type: String, decorators: [{ type: core.Attribute, args: ['reverse',] }] }
 ]; };
 /**
  * @fileoverview added by tsickle
@@ -15062,8 +15074,8 @@ DeepDirective.decorators = [
 ];
 /** @nocollapse */
 DeepDirective.ctorParameters = function () { return [
-    { type: core.ElementRef, },
-    { type: core.Renderer2, },
+    { type: core.ElementRef },
+    { type: core.Renderer2 }
 ]; };
 /**
  * @fileoverview added by tsickle
@@ -15315,15 +15327,15 @@ InputValidateDirective.decorators = [
 ];
 /** @nocollapse */
 InputValidateDirective.ctorParameters = function () { return [
-    { type: core.ElementRef, },
-    { type: core.Renderer, },
+    { type: core.ElementRef },
+    { type: core.Renderer }
 ]; };
 InputValidateDirective.propDecorators = {
-    "value": [{ type: core.Input },],
-    "minLength": [{ type: core.Input, args: ['minLength',] },],
-    "maxLength": [{ type: core.Input, args: ['maxLength',] },],
-    "customRegex": [{ type: core.Input, args: ['customRegex',] },],
-    "onBlur": [{ type: core.HostListener, args: ['blur', ['$event'],] },],
+    value: [{ type: core.Input }],
+    minLength: [{ type: core.Input, args: ['minLength',] }],
+    maxLength: [{ type: core.Input, args: ['maxLength',] }],
+    customRegex: [{ type: core.Input, args: ['customRegex',] }],
+    onBlur: [{ type: core.HostListener, args: ['blur', ['$event'],] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -15435,15 +15447,15 @@ ActiveDirective.decorators = [
 ];
 /** @nocollapse */
 ActiveDirective.ctorParameters = function () { return [
-    { type: core.ElementRef, },
-    { type: core.Renderer2, },
-    { type: undefined, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] },] },
+    { type: core.ElementRef },
+    { type: core.Renderer2 },
+    { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
 ]; };
 ActiveDirective.propDecorators = {
-    "mdbActive": [{ type: core.Input },],
-    "onClick": [{ type: core.HostListener, args: ['focus', ['$event'],] },],
-    "Click": [{ type: core.HostListener, args: ['click', ['$event'],] },],
-    "onBlur": [{ type: core.HostListener, args: ['blur', ['$event'],] },],
+    mdbActive: [{ type: core.Input }],
+    onClick: [{ type: core.HostListener, args: ['focus', ['$event'],] }],
+    Click: [{ type: core.HostListener, args: ['click', ['$event'],] }],
+    onBlur: [{ type: core.HostListener, args: ['blur', ['$event'],] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -15643,11 +15655,11 @@ ModalBackdropComponent.decorators = [
 ];
 /** @nocollapse */
 ModalBackdropComponent.ctorParameters = function () { return [
-    { type: core.ElementRef, },
-    { type: core.Renderer, },
+    { type: core.ElementRef },
+    { type: core.Renderer }
 ]; };
 ModalBackdropComponent.propDecorators = {
-    "classNameBackDrop": [{ type: core.HostBinding, args: ['class.modal-backdrop',] },],
+    classNameBackDrop: [{ type: core.HostBinding, args: ['class.modal-backdrop',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -15839,7 +15851,7 @@ var ModalDirective = /** @class */ (function () {
     };
     /**
      *  Show dialog
-     *  \@internal
+     * \@internal
      * @return {?}
      */
     ModalDirective.prototype.showElement = function () {
@@ -16010,19 +16022,19 @@ ModalDirective.decorators = [
 ];
 /** @nocollapse */
 ModalDirective.ctorParameters = function () { return [
-    { type: core.ElementRef, },
-    { type: core.ViewContainerRef, },
-    { type: core.Renderer2, },
-    { type: ComponentLoaderFactory, },
+    { type: core.ElementRef },
+    { type: core.ViewContainerRef },
+    { type: core.Renderer2 },
+    { type: ComponentLoaderFactory }
 ]; };
 ModalDirective.propDecorators = {
-    "config": [{ type: core.Input },],
-    "onShow": [{ type: core.Output },],
-    "onShown": [{ type: core.Output },],
-    "onHide": [{ type: core.Output },],
-    "onHidden": [{ type: core.Output },],
-    "onClick": [{ type: core.HostListener, args: ['click', ['$event'],] },],
-    "onEsc": [{ type: core.HostListener, args: ['keydown.esc',] },],
+    config: [{ type: core.Input }],
+    onShow: [{ type: core.Output }],
+    onShown: [{ type: core.Output }],
+    onHide: [{ type: core.Output }],
+    onHidden: [{ type: core.Output }],
+    onClick: [{ type: core.HostListener, args: ['click', ['$event'],] }],
+    onEsc: [{ type: core.HostListener, args: ['keydown.esc',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -16130,16 +16142,16 @@ ModalContainerComponent.decorators = [
 ];
 /** @nocollapse */
 ModalContainerComponent.ctorParameters = function () { return [
-    { type: ModalOptions, },
-    { type: core.ElementRef, },
-    { type: core.Renderer, },
+    { type: ModalOptions },
+    { type: core.ElementRef },
+    { type: core.Renderer }
 ]; };
 ModalContainerComponent.propDecorators = {
-    "tabindex": [{ type: core.HostBinding, args: ['tabindex',] },],
-    "role": [{ type: core.HostBinding, args: ['role',] },],
-    "modla": [{ type: core.HostBinding, args: ['class.modal',] },],
-    "onClick": [{ type: core.HostListener, args: ['click', ['$event'],] },],
-    "onEsc": [{ type: core.HostListener, args: ['window:keydown.esc',] },],
+    tabindex: [{ type: core.HostBinding, args: ['tabindex',] }],
+    role: [{ type: core.HostBinding, args: ['role',] }],
+    modla: [{ type: core.HostBinding, args: ['class.modal',] }],
+    onClick: [{ type: core.HostListener, args: ['click', ['$event'],] }],
+    onEsc: [{ type: core.HostListener, args: ['window:keydown.esc',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -16358,10 +16370,10 @@ MDBModalService.decorators = [
 ];
 /** @nocollapse */
 MDBModalService.ctorParameters = function () { return [
-    { type: ComponentLoaderFactory, },
-    { type: core.ElementRef, },
-    { type: core.ViewContainerRef, },
-    { type: core.Renderer2, },
+    { type: ComponentLoaderFactory },
+    { type: core.ElementRef },
+    { type: core.ViewContainerRef },
+    { type: core.Renderer2 }
 ]; };
 /**
  * @fileoverview added by tsickle
@@ -16451,11 +16463,11 @@ LinksComponent.decorators = [
 ];
 /** @nocollapse */
 LinksComponent.ctorParameters = function () { return [
-    { type: NavbarService, },
+    { type: NavbarService }
 ]; };
 LinksComponent.propDecorators = {
-    "links": [{ type: core.ContentChildren, args: [router.RouterLinkWithHref, { read: core.ElementRef, descendants: true },] },],
-    "linkClick": [{ type: core.Output },],
+    links: [{ type: core.ContentChildren, args: [router.RouterLinkWithHref, { read: core.ElementRef, descendants: true },] }],
+    linkClick: [{ type: core.Output }]
 };
 /**
  * @fileoverview added by tsickle
@@ -16667,18 +16679,18 @@ NavbarComponent.decorators = [
 ];
 /** @nocollapse */
 NavbarComponent.ctorParameters = function () { return [
-    { type: core.Renderer2, },
-    { type: NavbarService, },
+    { type: core.Renderer2 },
+    { type: NavbarService }
 ]; };
 NavbarComponent.propDecorators = {
-    "SideClass": [{ type: core.Input },],
-    "containerInside": [{ type: core.Input },],
-    "el": [{ type: core.ViewChild, args: ['navbar',] },],
-    "mobile": [{ type: core.ViewChild, args: ['mobile',] },],
-    "navbar": [{ type: core.ViewChild, args: ['nav',] },],
-    "container": [{ type: core.ViewChild, args: ['container',] },],
-    "onResize": [{ type: core.HostListener, args: ['window:resize', ['$event'],] },],
-    "onScroll": [{ type: core.HostListener, args: ['document:scroll', ['$event'],] },],
+    SideClass: [{ type: core.Input }],
+    containerInside: [{ type: core.Input }],
+    el: [{ type: core.ViewChild, args: ['navbar',] }],
+    mobile: [{ type: core.ViewChild, args: ['mobile',] }],
+    navbar: [{ type: core.ViewChild, args: ['nav',] }],
+    container: [{ type: core.ViewChild, args: ['container',] }],
+    onResize: [{ type: core.HostListener, args: ['window:resize', ['$event'],] }],
+    onScroll: [{ type: core.HostListener, args: ['document:scroll', ['$event'],] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -16720,11 +16732,11 @@ NavlinksComponent.decorators = [
 ];
 /** @nocollapse */
 NavlinksComponent.ctorParameters = function () { return [
-    { type: NavbarService, },
+    { type: NavbarService }
 ]; };
 NavlinksComponent.propDecorators = {
-    "links": [{ type: core.ContentChildren, args: [router.RouterLinkWithHref, { read: core.ElementRef, descendants: true },] },],
-    "linkClick": [{ type: core.Output },],
+    links: [{ type: core.ContentChildren, args: [router.RouterLinkWithHref, { read: core.ElementRef, descendants: true },] }],
+    linkClick: [{ type: core.Output }]
 };
 /**
  * @fileoverview added by tsickle
@@ -16810,14 +16822,14 @@ PopoverContainerComponent.decorators = [
 ];
 /** @nocollapse */
 PopoverContainerComponent.ctorParameters = function () { return [
-    { type: PopoverConfig, },
+    { type: PopoverConfig }
 ]; };
 PopoverContainerComponent.propDecorators = {
-    "placement": [{ type: core.Input },],
-    "title": [{ type: core.Input },],
-    "show": [{ type: core.HostBinding, args: ['class.show',] },],
-    "role": [{ type: core.HostBinding, args: ['attr.role',] },],
-    "class": [{ type: core.HostBinding, args: ['class',] },],
+    placement: [{ type: core.Input }],
+    title: [{ type: core.Input }],
+    show: [{ type: core.HostBinding, args: ['class.show',] }],
+    role: [{ type: core.HostBinding, args: ['attr.role',] }],
+    class: [{ type: core.HostBinding, args: ['class',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -16934,21 +16946,21 @@ PopoverDirective.decorators = [
 ];
 /** @nocollapse */
 PopoverDirective.ctorParameters = function () { return [
-    { type: core.ElementRef, },
-    { type: core.Renderer2, },
-    { type: core.ViewContainerRef, },
-    { type: PopoverConfig, },
-    { type: ComponentLoaderFactory, },
+    { type: core.ElementRef },
+    { type: core.Renderer2 },
+    { type: core.ViewContainerRef },
+    { type: PopoverConfig },
+    { type: ComponentLoaderFactory }
 ]; };
 PopoverDirective.propDecorators = {
-    "mdbPopover": [{ type: core.Input },],
-    "popoverTitle": [{ type: core.Input },],
-    "placement": [{ type: core.Input },],
-    "triggers": [{ type: core.Input },],
-    "container": [{ type: core.Input },],
-    "isOpen": [{ type: core.Input },],
-    "onShown": [{ type: core.Output },],
-    "onHidden": [{ type: core.Output },],
+    mdbPopover: [{ type: core.Input }],
+    popoverTitle: [{ type: core.Input }],
+    placement: [{ type: core.Input }],
+    triggers: [{ type: core.Input }],
+    container: [{ type: core.Input }],
+    isOpen: [{ type: core.Input }],
+    onShown: [{ type: core.Output }],
+    onHidden: [{ type: core.Output }]
 };
 /**
  * @fileoverview added by tsickle
@@ -17040,10 +17052,10 @@ RippleDirective.decorators = [
 ];
 /** @nocollapse */
 RippleDirective.ctorParameters = function () { return [
-    { type: core.ElementRef, },
+    { type: core.ElementRef }
 ]; };
 RippleDirective.propDecorators = {
-    "click": [{ type: core.HostListener, args: ['click', ['$event'],] },],
+    click: [{ type: core.HostListener, args: ['click', ['$event'],] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -17162,10 +17174,10 @@ TooltipContainerComponent.decorators = [
 ];
 /** @nocollapse */
 TooltipContainerComponent.ctorParameters = function () { return [
-    { type: TooltipConfig, },
+    { type: TooltipConfig }
 ]; };
 TooltipContainerComponent.propDecorators = {
-    "show": [{ type: core.HostBinding, args: ['class.show',] },],
+    show: [{ type: core.HostBinding, args: ['class.show',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -17337,24 +17349,24 @@ TooltipDirective.decorators = [
 ];
 /** @nocollapse */
 TooltipDirective.ctorParameters = function () { return [
-    { type: core.ViewContainerRef, },
-    { type: core.Renderer2, },
-    { type: core.ElementRef, },
-    { type: ComponentLoaderFactory, },
-    { type: TooltipConfig, },
+    { type: core.ViewContainerRef },
+    { type: core.Renderer2 },
+    { type: core.ElementRef },
+    { type: ComponentLoaderFactory },
+    { type: TooltipConfig }
 ]; };
 TooltipDirective.propDecorators = {
-    "mdbTooltip": [{ type: core.Input },],
-    "tooltipChange": [{ type: core.Output },],
-    "placement": [{ type: core.Input },],
-    "triggers": [{ type: core.Input },],
-    "container": [{ type: core.Input },],
-    "isOpen": [{ type: core.Input },],
-    "isDisabled": [{ type: core.Input },],
-    "onShown": [{ type: core.Output },],
-    "onHidden": [{ type: core.Output },],
-    "delay": [{ type: core.Input },],
-    "fadeDuration": [{ type: core.Input },],
+    mdbTooltip: [{ type: core.Input }],
+    tooltipChange: [{ type: core.Output }],
+    placement: [{ type: core.Input }],
+    triggers: [{ type: core.Input }],
+    container: [{ type: core.Input }],
+    isOpen: [{ type: core.Input }],
+    isDisabled: [{ type: core.Input }],
+    onShown: [{ type: core.Output }],
+    onHidden: [{ type: core.Output }],
+    delay: [{ type: core.Input }],
+    fadeDuration: [{ type: core.Input }]
 };
 tslib_1.__decorate([
     OnChange(),

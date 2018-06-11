@@ -45,10 +45,10 @@ SBItemBodyComponent.decorators = [
 ];
 /** @nocollapse */
 SBItemBodyComponent.ctorParameters = () => [
-    { type: Renderer2, },
+    { type: Renderer2 }
 ];
 SBItemBodyComponent.propDecorators = {
-    "bodyEl": [{ type: ViewChild, args: ['body',] },],
+    bodyEl: [{ type: ViewChild, args: ['body',] }]
 };
 
 /**
@@ -101,8 +101,8 @@ SBItemComponent.decorators = [
 /** @nocollapse */
 SBItemComponent.ctorParameters = () => [];
 SBItemComponent.propDecorators = {
-    "collapsed": [{ type: Input },],
-    "body": [{ type: ContentChild, args: [SBItemBodyComponent,] },],
+    collapsed: [{ type: Input }],
+    body: [{ type: ContentChild, args: [SBItemBodyComponent,] }]
 };
 
 /**
@@ -135,7 +135,7 @@ SBItemHeadComponent.decorators = [
 ];
 /** @nocollapse */
 SBItemHeadComponent.ctorParameters = () => [
-    { type: SBItemComponent, },
+    { type: SBItemComponent }
 ];
 
 /**
@@ -172,8 +172,8 @@ SqueezeBoxComponent.decorators = [
 /** @nocollapse */
 SqueezeBoxComponent.ctorParameters = () => [];
 SqueezeBoxComponent.propDecorators = {
-    "multiple": [{ type: Input },],
-    "items": [{ type: ContentChildren, args: [forwardRef(() => SBItemComponent),] },],
+    multiple: [{ type: Input }],
+    items: [{ type: ContentChildren, args: [forwardRef(() => SBItemComponent),] }]
 };
 
 /**
@@ -508,9 +508,9 @@ Overlay.decorators = [
 ];
 /** @nocollapse */
 Overlay.ctorParameters = () => [
-    { type: OverlayContainer, },
-    { type: ComponentFactoryResolver, },
-    { type: ApplicationRef, },
+    { type: OverlayContainer },
+    { type: ComponentFactoryResolver },
+    { type: ApplicationRef }
 ];
 /**
  * Providers for Overlay and its related injectables.
@@ -747,15 +747,15 @@ ToastComponent.decorators = [
 ];
 /** @nocollapse */
 ToastComponent.ctorParameters = () => [
-    { type: ToastPackage, },
-    { type: ApplicationRef, },
+    { type: ToastPackage },
+    { type: ApplicationRef }
 ];
 ToastComponent.propDecorators = {
-    "toastClasses": [{ type: HostBinding, args: ['class',] },],
-    "state": [{ type: HostBinding, args: ['@flyInOut',] },],
-    "tapToast": [{ type: HostListener, args: ['click',] },],
-    "stickAround": [{ type: HostListener, args: ['mouseenter',] },],
-    "delayedHideToast": [{ type: HostListener, args: ['mouseleave',] },],
+    toastClasses: [{ type: HostBinding, args: ['class',] }],
+    state: [{ type: HostBinding, args: ['@flyInOut',] }],
+    tapToast: [{ type: HostListener, args: ['click',] }],
+    stickAround: [{ type: HostListener, args: ['mouseenter',] }],
+    delayedHideToast: [{ type: HostListener, args: ['mouseleave',] }]
 };
 
 /**
@@ -784,7 +784,7 @@ ToastContainerDirective.decorators = [
 ];
 /** @nocollapse */
 ToastContainerDirective.ctorParameters = () => [
-    { type: ElementRef, },
+    { type: ElementRef }
 ];
 class ToastContainerModule {
     /**
@@ -1190,10 +1190,10 @@ ToastService.decorators = [
 ];
 /** @nocollapse */
 ToastService.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [TOAST_CONFIG,] },] },
-    { type: Overlay, },
-    { type: Injector, },
-    { type: DomSanitizer, },
+    { type: undefined, decorators: [{ type: Inject, args: [TOAST_CONFIG,] }] },
+    { type: Overlay },
+    { type: Injector },
+    { type: DomSanitizer }
 ];
 
 /**
@@ -1235,7 +1235,7 @@ ToastModule.decorators = [
 ];
 /** @nocollapse */
 ToastModule.ctorParameters = () => [
-    { type: ToastModule, decorators: [{ type: Optional }, { type: SkipSelf },] },
+    { type: ToastModule, decorators: [{ type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -1351,12 +1351,11 @@ CompleterListItemComponent.decorators = [
                 template: "<span class=\"completer-list-item-holder\" [ngClass]=\"{'completer-title': type === 'title', 'completer-description': type === 'description'}\" > <span class=\"completer-list-item\" *ngFor=\"let part of parts\" [ngClass]=\"part.isMatch ? matchClass : null\">{{part.text}}</span> </span> "
             },] },
 ];
-/** @nocollapse */
 CompleterListItemComponent.propDecorators = {
-    "text": [{ type: Input },],
-    "searchStr": [{ type: Input },],
-    "matchClass": [{ type: Input },],
-    "type": [{ type: Input },],
+    text: [{ type: Input }],
+    searchStr: [{ type: Input }],
+    matchClass: [{ type: Input }],
+    type: [{ type: Input }]
 };
 
 /**
@@ -1539,11 +1538,10 @@ MdbCompleterDirective.decorators = [
                 selector: '[mdbCompleter]',
             },] },
 ];
-/** @nocollapse */
 MdbCompleterDirective.propDecorators = {
-    "selected": [{ type: Output },],
-    "highlighted": [{ type: Output },],
-    "opened": [{ type: Output },],
+    selected: [{ type: Output }],
+    highlighted: [{ type: Output }],
+    opened: [{ type: Output }]
 };
 
 /**
@@ -1886,12 +1884,12 @@ class CompleterService {
      * @param {?} localDataFactory
      * @param {?} remoteDataFactory
      */
-    constructor(localDataFactory, 
+    constructor(localDataFactory, // Using any instead of () => LocalData because on AoT errors
     // Using any instead of () => LocalData because on AoT errors
     remoteDataFactory // Using any instead of () => LocalData because on AoT errors
     ) {
         this.localDataFactory = localDataFactory;
-        this.remoteDataFactory = remoteDataFactory;
+        this.remoteDataFactory = remoteDataFactory; // Using any instead of () => LocalData because on AoT errors
     }
     /**
      * @param {?} data
@@ -1925,8 +1923,8 @@ CompleterService.decorators = [
 ];
 /** @nocollapse */
 CompleterService.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [LocalData,] },] },
-    { type: undefined, decorators: [{ type: Inject, args: [RemoteData,] },] },
+    { type: undefined, decorators: [{ type: Inject, args: [LocalData,] }] },
+    { type: undefined, decorators: [{ type: Inject, args: [RemoteData,] }] }
 ];
 
 /**
@@ -2228,48 +2226,48 @@ CompleterComponent.decorators = [
 ];
 /** @nocollapse */
 CompleterComponent.ctorParameters = () => [
-    { type: CompleterService, },
-    { type: Renderer2, },
-    { type: ElementRef, },
+    { type: CompleterService },
+    { type: Renderer2 },
+    { type: ElementRef }
 ];
 CompleterComponent.propDecorators = {
-    "dataService": [{ type: Input },],
-    "inputName": [{ type: Input },],
-    "inputId": [{ type: Input },],
-    "pause": [{ type: Input },],
-    "minSearchLength": [{ type: Input },],
-    "maxChars": [{ type: Input },],
-    "overrideSuggested": [{ type: Input },],
-    "clearSelected": [{ type: Input },],
-    "clearUnselected": [{ type: Input },],
-    "fillHighlighted": [{ type: Input },],
-    "placeholder": [{ type: Input },],
-    "matchClass": [{ type: Input },],
-    "fieldTabindex": [{ type: Input },],
-    "autoMatch": [{ type: Input },],
-    "disableInput": [{ type: Input },],
-    "inputClass": [{ type: Input },],
-    "autofocus": [{ type: Input },],
-    "openOnFocus": [{ type: Input },],
-    "initialValue": [{ type: Input },],
-    "autoHighlight": [{ type: Input },],
-    "label": [{ type: Input },],
-    "selected": [{ type: Output },],
-    "highlighted": [{ type: Output },],
-    "blur": [{ type: Output },],
-    "focusEvent": [{ type: Output },],
-    "opened": [{ type: Output },],
-    "keyup": [{ type: Output },],
-    "keydown": [{ type: Output },],
-    "completer": [{ type: ViewChild, args: [MdbCompleterDirective,] },],
-    "mdbInput": [{ type: ViewChild, args: ['mdbInput',] },],
-    "onkeyup": [{ type: HostListener, args: ['keyup', ['$event'],] },],
-    "onclick": [{ type: HostListener, args: ['click', ['$event'],] },],
-    "onFocusIn": [{ type: HostListener, args: ['focusin', ['$event'],] },],
-    "onFocusOut": [{ type: HostListener, args: ['focusout', ['$event'],] },],
-    "datasource": [{ type: Input },],
-    "textNoResults": [{ type: Input },],
-    "textSearching": [{ type: Input },],
+    dataService: [{ type: Input }],
+    inputName: [{ type: Input }],
+    inputId: [{ type: Input }],
+    pause: [{ type: Input }],
+    minSearchLength: [{ type: Input }],
+    maxChars: [{ type: Input }],
+    overrideSuggested: [{ type: Input }],
+    clearSelected: [{ type: Input }],
+    clearUnselected: [{ type: Input }],
+    fillHighlighted: [{ type: Input }],
+    placeholder: [{ type: Input }],
+    matchClass: [{ type: Input }],
+    fieldTabindex: [{ type: Input }],
+    autoMatch: [{ type: Input }],
+    disableInput: [{ type: Input }],
+    inputClass: [{ type: Input }],
+    autofocus: [{ type: Input }],
+    openOnFocus: [{ type: Input }],
+    initialValue: [{ type: Input }],
+    autoHighlight: [{ type: Input }],
+    label: [{ type: Input }],
+    selected: [{ type: Output }],
+    highlighted: [{ type: Output }],
+    blur: [{ type: Output }],
+    focusEvent: [{ type: Output }],
+    opened: [{ type: Output }],
+    keyup: [{ type: Output }],
+    keydown: [{ type: Output }],
+    completer: [{ type: ViewChild, args: [MdbCompleterDirective,] }],
+    mdbInput: [{ type: ViewChild, args: ['mdbInput',] }],
+    onkeyup: [{ type: HostListener, args: ['keyup', ['$event'],] }],
+    onclick: [{ type: HostListener, args: ['click', ['$event'],] }],
+    onFocusIn: [{ type: HostListener, args: ['focusin', ['$event'],] }],
+    onFocusOut: [{ type: HostListener, args: ['focusout', ['$event'],] }],
+    datasource: [{ type: Input }],
+    textNoResults: [{ type: Input }],
+    textSearching: [{ type: Input }]
 };
 
 /**
@@ -2472,11 +2470,11 @@ MdbDropdownDirective.decorators = [
 ];
 /** @nocollapse */
 MdbDropdownDirective.ctorParameters = () => [
-    { type: MdbCompleterDirective, decorators: [{ type: Host },] },
-    { type: ElementRef, },
+    { type: MdbCompleterDirective, decorators: [{ type: Host }] },
+    { type: ElementRef }
 ];
 MdbDropdownDirective.propDecorators = {
-    "onMouseDown": [{ type: HostListener, args: ['mousedown', ['$event'],] },],
+    onMouseDown: [{ type: HostListener, args: ['mousedown', ['$event'],] }]
 };
 
 /**
@@ -2690,21 +2688,21 @@ MdbInputCompleteDirective.decorators = [
 ];
 /** @nocollapse */
 MdbInputCompleteDirective.ctorParameters = () => [
-    { type: MdbCompleterDirective, decorators: [{ type: Host },] },
-    { type: NgModel, },
-    { type: ElementRef, },
+    { type: MdbCompleterDirective, decorators: [{ type: Host }] },
+    { type: NgModel },
+    { type: ElementRef }
 ];
 MdbInputCompleteDirective.propDecorators = {
-    "clearSelected": [{ type: Input, args: ['clearSelected',] },],
-    "clearUnselected": [{ type: Input, args: ['clearUnselected',] },],
-    "overrideSuggested": [{ type: Input, args: ['overrideSuggested',] },],
-    "fillHighlighted": [{ type: Input, args: ['fillHighlighted',] },],
-    "openOnFocus": [{ type: Input, args: ['openOnFocus',] },],
-    "ngModelChange": [{ type: Output },],
-    "keyupHandler": [{ type: HostListener, args: ['keyup', ['$event'],] },],
-    "keydownHandler": [{ type: HostListener, args: ['keydown', ['$event'],] },],
-    "onBlur": [{ type: HostListener, args: ['blur', ['$event'],] },],
-    "onfocus": [{ type: HostListener, args: ['focus', ['$event'],] },],
+    clearSelected: [{ type: Input, args: ['clearSelected',] }],
+    clearUnselected: [{ type: Input, args: ['clearUnselected',] }],
+    overrideSuggested: [{ type: Input, args: ['overrideSuggested',] }],
+    fillHighlighted: [{ type: Input, args: ['fillHighlighted',] }],
+    openOnFocus: [{ type: Input, args: ['openOnFocus',] }],
+    ngModelChange: [{ type: Output }],
+    keyupHandler: [{ type: HostListener, args: ['keyup', ['$event'],] }],
+    keydownHandler: [{ type: HostListener, args: ['keydown', ['$event'],] }],
+    onBlur: [{ type: HostListener, args: ['blur', ['$event'],] }],
+    onfocus: [{ type: HostListener, args: ['focus', ['$event'],] }]
 };
 
 /**
@@ -2931,18 +2929,18 @@ MdbListDirective.decorators = [
 ];
 /** @nocollapse */
 MdbListDirective.ctorParameters = () => [
-    { type: MdbCompleterDirective, decorators: [{ type: Host },] },
-    { type: TemplateRef, },
-    { type: ViewContainerRef, },
-    { type: ChangeDetectorRef, },
+    { type: MdbCompleterDirective, decorators: [{ type: Host }] },
+    { type: TemplateRef },
+    { type: ViewContainerRef },
+    { type: ChangeDetectorRef }
 ];
 MdbListDirective.propDecorators = {
-    "mdbListMinSearchLength": [{ type: Input },],
-    "mdbListPause": [{ type: Input },],
-    "mdbListAutoMatch": [{ type: Input },],
-    "mdbListAutoHighlight": [{ type: Input },],
-    "dataService": [{ type: Input, args: ['mdbList',] },],
-    "initialValue": [{ type: Input, args: ['mdbListInitialValue',] },],
+    mdbListMinSearchLength: [{ type: Input }],
+    mdbListPause: [{ type: Input }],
+    mdbListAutoMatch: [{ type: Input }],
+    mdbListAutoHighlight: [{ type: Input }],
+    dataService: [{ type: Input, args: ['mdbList',] }],
+    initialValue: [{ type: Input, args: ['mdbListInitialValue',] }]
 };
 
 /**
@@ -3026,15 +3024,15 @@ MdbRowDirective.decorators = [
 ];
 /** @nocollapse */
 MdbRowDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
-    { type: MdbDropdownDirective, decorators: [{ type: Host },] },
+    { type: ElementRef },
+    { type: Renderer2 },
+    { type: MdbDropdownDirective, decorators: [{ type: Host }] }
 ];
 MdbRowDirective.propDecorators = {
-    "mdbRow": [{ type: Input },],
-    "dataItem": [{ type: Input },],
-    "onClick": [{ type: HostListener, args: ['click', ['$event'],] },],
-    "onMouseEnter": [{ type: HostListener, args: ['mouseenter', ['$event'],] },],
+    mdbRow: [{ type: Input }],
+    dataItem: [{ type: Input }],
+    onClick: [{ type: HostListener, args: ['click', ['$event'],] }],
+    onMouseEnter: [{ type: HostListener, args: ['mouseenter', ['$event'],] }]
 };
 
 /**
@@ -3280,12 +3278,12 @@ InputAutoFillDirective.decorators = [
 ];
 /** @nocollapse */
 InputAutoFillDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
+    { type: ElementRef },
+    { type: Renderer2 }
 ];
 InputAutoFillDirective.propDecorators = {
-    "opts": [{ type: Input },],
-    "onKeyUp": [{ type: HostListener, args: ['keyup', ['$event'],] },],
+    opts: [{ type: Input }],
+    onKeyUp: [{ type: HostListener, args: ['keyup', ['$event'],] }]
 };
 
 /**
@@ -3322,10 +3320,10 @@ FocusDirective.decorators = [
 ];
 /** @nocollapse */
 FocusDirective.ctorParameters = () => [
-    { type: ElementRef, },
+    { type: ElementRef }
 ];
 FocusDirective.propDecorators = {
-    "value": [{ type: Input },],
+    value: [{ type: Input }]
 };
 
 /**
@@ -4689,28 +4687,30 @@ MDBDatePickerComponent.decorators = [
 ];
 /** @nocollapse */
 MDBDatePickerComponent.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
-    { type: LocaleService, },
-    { type: UtilService, },
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
+    { type: ElementRef },
+    { type: 
+        // ChangeDetectorRef,
+        Renderer2 },
+    { type: LocaleService },
+    { type: UtilService },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
 ];
 MDBDatePickerComponent.propDecorators = {
-    "options": [{ type: Input },],
-    "locale": [{ type: Input },],
-    "defaultMonth": [{ type: Input },],
-    "selDate": [{ type: Input },],
-    "label": [{ type: Input },],
-    "placeholder": [{ type: Input },],
-    "selector": [{ type: Input },],
-    "disabled": [{ type: Input },],
-    "dateChanged": [{ type: Output },],
-    "inputFieldChanged": [{ type: Output },],
-    "calendarViewChanged": [{ type: Output },],
-    "calendarToggle": [{ type: Output },],
-    "inputFocusBlur": [{ type: Output },],
-    "divFocus": [{ type: ViewChild, args: ['divFocus',] },],
-    "pickerFrame": [{ type: ViewChild, args: ['pickerFrame',] },],
+    options: [{ type: Input }],
+    locale: [{ type: Input }],
+    defaultMonth: [{ type: Input }],
+    selDate: [{ type: Input }],
+    label: [{ type: Input }],
+    placeholder: [{ type: Input }],
+    selector: [{ type: Input }],
+    disabled: [{ type: Input }],
+    dateChanged: [{ type: Output }],
+    inputFieldChanged: [{ type: Output }],
+    calendarViewChanged: [{ type: Output }],
+    calendarToggle: [{ type: Output }],
+    inputFocusBlur: [{ type: Output }],
+    divFocus: [{ type: ViewChild, args: ['divFocus',] }],
+    pickerFrame: [{ type: ViewChild, args: ['pickerFrame',] }]
 };
 
 /**
@@ -4778,17 +4778,17 @@ SimpleChartComponent.decorators = [
 /** @nocollapse */
 SimpleChartComponent.ctorParameters = () => [];
 SimpleChartComponent.propDecorators = {
-    "percent": [{ type: Input, args: ['percent',] },],
-    "barColor": [{ type: Input, args: ['barColor',] },],
-    "trackColor": [{ type: Input, args: ['trackColor',] },],
-    "scaleColor": [{ type: Input, args: ['scaleColor',] },],
-    "scaleLength": [{ type: Input, args: ['scaleLength',] },],
-    "lineCap": [{ type: Input, args: ['lineCap',] },],
-    "lineWidth": [{ type: Input, args: ['lineWidth',] },],
-    "trackWidth": [{ type: Input, args: ['trackWidth',] },],
-    "size": [{ type: Input, args: ['size',] },],
-    "rotate": [{ type: Input, args: ['rotate',] },],
-    "animate": [{ type: Input, args: ['animate',] },],
+    percent: [{ type: Input, args: ['percent',] }],
+    barColor: [{ type: Input, args: ['barColor',] }],
+    trackColor: [{ type: Input, args: ['trackColor',] }],
+    scaleColor: [{ type: Input, args: ['scaleColor',] }],
+    scaleLength: [{ type: Input, args: ['scaleLength',] }],
+    lineCap: [{ type: Input, args: ['lineCap',] }],
+    lineWidth: [{ type: Input, args: ['lineWidth',] }],
+    trackWidth: [{ type: Input, args: ['trackWidth',] }],
+    size: [{ type: Input, args: ['size',] }],
+    rotate: [{ type: Input, args: ['rotate',] }],
+    animate: [{ type: Input, args: ['animate',] }]
 };
 
 /**
@@ -4848,12 +4848,12 @@ EasyPieChartComponent.decorators = [
 ];
 /** @nocollapse */
 EasyPieChartComponent.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
+    { type: ElementRef },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
 ];
 EasyPieChartComponent.propDecorators = {
-    "percent": [{ type: Input, args: ['percent',] },],
-    "options": [{ type: Input, args: ['options',] },],
+    percent: [{ type: Input, args: ['percent',] }],
+    options: [{ type: Input, args: ['options',] }]
 };
 
 /**
@@ -5195,15 +5195,15 @@ MDBFileDropDirective.decorators = [
 ];
 /** @nocollapse */
 MDBFileDropDirective.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
-    { type: ElementRef, },
+    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+    { type: ElementRef }
 ];
 MDBFileDropDirective.propDecorators = {
-    "uploadInput": [{ type: Input },],
-    "uploadOutput": [{ type: Output },],
-    "onDrop": [{ type: HostListener, args: ['drop', ['$event'],] },],
-    "onDragOver": [{ type: HostListener, args: ['dragover', ['$event'],] },],
-    "onDragLeave": [{ type: HostListener, args: ['dragleave', ['$event'],] },],
+    uploadInput: [{ type: Input }],
+    uploadOutput: [{ type: Output }],
+    onDrop: [{ type: HostListener, args: ['drop', ['$event'],] }],
+    onDragOver: [{ type: HostListener, args: ['dragover', ['$event'],] }],
+    onDragLeave: [{ type: HostListener, args: ['dragleave', ['$event'],] }]
 };
 
 /**
@@ -5259,12 +5259,12 @@ MDBFileSelectDirective.decorators = [
 ];
 /** @nocollapse */
 MDBFileSelectDirective.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
-    { type: ElementRef, },
+    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+    { type: ElementRef }
 ];
 MDBFileSelectDirective.propDecorators = {
-    "uploadInput": [{ type: Input },],
-    "uploadOutput": [{ type: Output },],
+    uploadInput: [{ type: Input }],
+    uploadOutput: [{ type: Output }]
 };
 
 /**
@@ -5344,14 +5344,14 @@ CharCounterDirective.decorators = [
 ];
 /** @nocollapse */
 CharCounterDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
+    { type: ElementRef },
+    { type: Renderer2 }
 ];
 CharCounterDirective.propDecorators = {
-    "length": [{ type: Input },],
-    "onKeyUp": [{ type: HostListener, args: ['input', ['$event'],] },],
-    "hide": [{ type: HostListener, args: ['blur', ['$event'],] },],
-    "show": [{ type: HostListener, args: ['focus', ['$event'],] },],
+    length: [{ type: Input }],
+    onKeyUp: [{ type: HostListener, args: ['input', ['$event'],] }],
+    hide: [{ type: HostListener, args: ['blur', ['$event'],] }],
+    show: [{ type: HostListener, args: ['focus', ['$event'],] }]
 };
 
 /**
@@ -5564,19 +5564,19 @@ ImageModalComponent.decorators = [
 ];
 /** @nocollapse */
 ImageModalComponent.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
-    { type: ElementRef, },
-    { type: Renderer2, },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+    { type: ElementRef },
+    { type: Renderer2 }
 ];
 ImageModalComponent.propDecorators = {
-    "modalImages": [{ type: Input, args: ['modalImages',] },],
-    "imagePointer": [{ type: Input, args: ['imagePointer',] },],
-    "fullscreen": [{ type: Input, args: ['fullscreen',] },],
-    "zoom": [{ type: Input, args: ['zoom',] },],
-    "smooth": [{ type: Input, args: ['smooth',] },],
-    "type": [{ type: Input, args: ['type',] },],
-    "cancelEvent": [{ type: Output, args: ['cancelEvent',] },],
-    "keyboardControl": [{ type: HostListener, args: ['document:keyup', ['$event'],] },],
+    modalImages: [{ type: Input, args: ['modalImages',] }],
+    imagePointer: [{ type: Input, args: ['imagePointer',] }],
+    fullscreen: [{ type: Input, args: ['fullscreen',] }],
+    zoom: [{ type: Input, args: ['zoom',] }],
+    smooth: [{ type: Input, args: ['smooth',] }],
+    type: [{ type: Input, args: ['type',] }],
+    cancelEvent: [{ type: Output, args: ['cancelEvent',] }],
+    keyboardControl: [{ type: HostListener, args: ['document:keyup', ['$event'],] }]
 };
 
 /**
@@ -6975,31 +6975,31 @@ SelectDropdownComponent.decorators = [
 ];
 /** @nocollapse */
 SelectDropdownComponent.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
-    { type: ChangeDetectorRef, },
+    { type: ElementRef },
+    { type: Renderer2 },
+    { type: ChangeDetectorRef }
 ];
 SelectDropdownComponent.propDecorators = {
-    "filterEnabled": [{ type: Input },],
-    "highlightColor": [{ type: Input },],
-    "highlightTextColor": [{ type: Input },],
-    "left": [{ type: Input },],
-    "multiple": [{ type: Input },],
-    "notFoundMsg": [{ type: Input },],
-    "optionList": [{ type: Input },],
-    "top": [{ type: Input },],
-    "width": [{ type: Input },],
-    "placeholder": [{ type: Input },],
-    "customClass": [{ type: Input },],
-    "close": [{ type: Output },],
-    "optionClicked": [{ type: Output },],
-    "singleFilterClick": [{ type: Output },],
-    "singleFilterInput": [{ type: Output },],
-    "singleFilterKeydown": [{ type: Output },],
-    "filterInput": [{ type: ViewChild, args: ['filterInput',] },],
-    "optionsList": [{ type: ViewChild, args: ['optionsList',] },],
-    "dropdownContent": [{ type: ViewChild, args: ['dropdownContent',] },],
-    "onkeyup": [{ type: HostListener, args: ['keyup', ['$event'],] },],
+    filterEnabled: [{ type: Input }],
+    highlightColor: [{ type: Input }],
+    highlightTextColor: [{ type: Input }],
+    left: [{ type: Input }],
+    multiple: [{ type: Input }],
+    notFoundMsg: [{ type: Input }],
+    optionList: [{ type: Input }],
+    top: [{ type: Input }],
+    width: [{ type: Input }],
+    placeholder: [{ type: Input }],
+    customClass: [{ type: Input }],
+    close: [{ type: Output }],
+    optionClicked: [{ type: Output }],
+    singleFilterClick: [{ type: Output }],
+    singleFilterInput: [{ type: Output }],
+    singleFilterKeydown: [{ type: Output }],
+    filterInput: [{ type: ViewChild, args: ['filterInput',] }],
+    optionsList: [{ type: ViewChild, args: ['optionsList',] }],
+    dropdownContent: [{ type: ViewChild, args: ['dropdownContent',] }],
+    onkeyup: [{ type: HostListener, args: ['keyup', ['$event'],] }]
 };
 
 /**
@@ -7621,32 +7621,32 @@ SelectComponent.decorators = [
 ];
 /** @nocollapse */
 SelectComponent.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
+    { type: ElementRef },
+    { type: Renderer2 }
 ];
 SelectComponent.propDecorators = {
-    "options": [{ type: Input },],
-    "customClass": [{ type: Input },],
-    "allowClear": [{ type: Input },],
-    "disabled": [{ type: Input },],
-    "highlightColor": [{ type: Input },],
-    "highlightTextColor": [{ type: Input },],
-    "multiple": [{ type: Input },],
-    "noFilter": [{ type: Input },],
-    "notFoundMsg": [{ type: Input },],
-    "placeholder": [{ type: Input },],
-    "filterPlaceholder": [{ type: Input },],
-    "label": [{ type: Input },],
-    "filterEnabled": [{ type: Input },],
-    "opened": [{ type: Output },],
-    "closed": [{ type: Output },],
-    "selected": [{ type: Output },],
-    "deselected": [{ type: Output },],
-    "noOptionsFound": [{ type: Output },],
-    "selectionSpan": [{ type: ViewChild, args: ['selection',] },],
-    "dropdown": [{ type: ViewChild, args: ['dropdown',] },],
-    "filterInput": [{ type: ViewChild, args: ['filterInput',] },],
-    "closeSelect": [{ type: HostListener, args: ['document:click', ['$event'],] },],
+    options: [{ type: Input }],
+    customClass: [{ type: Input }],
+    allowClear: [{ type: Input }],
+    disabled: [{ type: Input }],
+    highlightColor: [{ type: Input }],
+    highlightTextColor: [{ type: Input }],
+    multiple: [{ type: Input }],
+    noFilter: [{ type: Input }],
+    notFoundMsg: [{ type: Input }],
+    placeholder: [{ type: Input }],
+    filterPlaceholder: [{ type: Input }],
+    label: [{ type: Input }],
+    filterEnabled: [{ type: Input }],
+    opened: [{ type: Output }],
+    closed: [{ type: Output }],
+    selected: [{ type: Output }],
+    deselected: [{ type: Output }],
+    noOptionsFound: [{ type: Output }],
+    selectionSpan: [{ type: ViewChild, args: ['selection',] }],
+    dropdown: [{ type: ViewChild, args: ['dropdown',] }],
+    filterInput: [{ type: ViewChild, args: ['filterInput',] }],
+    closeSelect: [{ type: HostListener, args: ['document:click', ['$event'],] }]
 };
 
 /**
@@ -7731,7 +7731,7 @@ MDBSpinningPreloader.decorators = [
 ];
 /** @nocollapse */
 MDBSpinningPreloader.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] },] },
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
 ];
 
 /**
@@ -7806,12 +7806,11 @@ ProgressBarComponent.decorators = [
                 changeDetection: ChangeDetectionStrategy.OnPush,
             },] },
 ];
-/** @nocollapse */
 ProgressBarComponent.propDecorators = {
-    "color": [{ type: Input },],
-    "value": [{ type: Input }, { type: HostBinding, args: ['attr.aria-valuenow',] },],
-    "bufferValue": [{ type: Input },],
-    "mode": [{ type: Input }, { type: HostBinding, args: ['attr.mode',] },],
+    color: [{ type: Input }],
+    value: [{ type: Input }, { type: HostBinding, args: ['attr.aria-valuenow',] }],
+    bufferValue: [{ type: Input }],
+    mode: [{ type: Input }, { type: HostBinding, args: ['attr.mode',] }]
 };
 /**
  * Clamps a value to be between two numbers, by default 0 and 100.
@@ -7861,9 +7860,8 @@ MdProgressSpinnerCssMatStylerDirective.decorators = [
                 selector: '[mdbSpinners], mat-progress-spinner'
             },] },
 ];
-/** @nocollapse */
 MdProgressSpinnerCssMatStylerDirective.propDecorators = {
-    "true": [{ type: HostBinding, args: ['class.mat-progress-spinner',] },],
+    true: [{ type: HostBinding, args: ['class.mat-progress-spinner',] }]
 };
 /**
  * <md-progress-spinner> component.
@@ -8103,16 +8101,16 @@ MdProgressSpinnerComponent.decorators = [
 ];
 /** @nocollapse */
 MdProgressSpinnerComponent.ctorParameters = () => [
-    { type: NgZone, },
-    { type: ElementRef, },
-    { type: Renderer2, },
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
+    { type: NgZone },
+    { type: ElementRef },
+    { type: Renderer2 },
+    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
 ];
 MdProgressSpinnerComponent.propDecorators = {
-    "platformId": [{ type: Inject, args: [PLATFORM_ID,] },],
-    "color": [{ type: Input },],
-    "value": [{ type: Input }, { type: HostBinding, args: ['attr.aria-valuenow',] },],
-    "mode": [{ type: HostBinding, args: ['attr.mode',] }, { type: Input },],
+    platformId: [{ type: Inject, args: [PLATFORM_ID,] }],
+    color: [{ type: Input }],
+    value: [{ type: Input }, { type: HostBinding, args: ['attr.aria-valuenow',] }],
+    mode: [{ type: HostBinding, args: ['attr.mode',] }, { type: Input }]
 };
 /**
  * <md-spinner> component.
@@ -8148,12 +8146,12 @@ MdSpinnerComponent.decorators = [
 ];
 /** @nocollapse */
 MdSpinnerComponent.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: NgZone, },
-    { type: Renderer2, },
+    { type: ElementRef },
+    { type: NgZone },
+    { type: Renderer2 }
 ];
 MdSpinnerComponent.propDecorators = {
-    "true": [{ type: HostBinding, args: ['class.mat-spinner',] },],
+    true: [{ type: HostBinding, args: ['class.mat-spinner',] }]
 };
 /**
  * Clamps a value to be between 0 and 100.
@@ -8278,11 +8276,10 @@ class ProgressDirective {
 ProgressDirective.decorators = [
     { type: Directive, args: [{ selector: 'mdbProgress, [mdbProgress]' },] },
 ];
-/** @nocollapse */
 ProgressDirective.propDecorators = {
-    "animate": [{ type: Input },],
-    "max": [{ type: HostBinding, args: ['attr.max',] }, { type: Input },],
-    "addClass": [{ type: HostBinding, args: ['class.progress',] },],
+    animate: [{ type: Input }],
+    max: [{ type: HostBinding, args: ['attr.max',] }, { type: Input }],
+    addClass: [{ type: HostBinding, args: ['class.progress',] }]
 };
 
 /**
@@ -8348,11 +8345,11 @@ BarComponent.decorators = [
 ];
 /** @nocollapse */
 BarComponent.ctorParameters = () => [
-    { type: ProgressDirective, decorators: [{ type: Host },] },
+    { type: ProgressDirective, decorators: [{ type: Host }] }
 ];
 BarComponent.propDecorators = {
-    "type": [{ type: Input },],
-    "value": [{ type: Input },],
+    type: [{ type: Input }],
+    value: [{ type: Input }]
 };
 
 /**
@@ -8435,11 +8432,11 @@ ProgressSpinnerComponent.decorators = [
 ];
 /** @nocollapse */
 ProgressSpinnerComponent.ctorParameters = () => [
-    { type: ElementRef, },
+    { type: ElementRef }
 ];
 ProgressSpinnerComponent.propDecorators = {
-    "spinnerType": [{ type: Input },],
-    "spinnerColor": [{ type: Input },],
+    spinnerType: [{ type: Input }],
+    spinnerColor: [{ type: Input }]
 };
 
 /**
@@ -8482,13 +8479,13 @@ ProgressbarComponent.decorators = [
 ];
 /** @nocollapse */
 ProgressbarComponent.ctorParameters = () => [
-    { type: ProgressbarConfigComponent, },
+    { type: ProgressbarConfigComponent }
 ];
 ProgressbarComponent.propDecorators = {
-    "animate": [{ type: Input },],
-    "max": [{ type: Input },],
-    "type": [{ type: Input },],
-    "value": [{ type: Input },],
+    animate: [{ type: Input }],
+    max: [{ type: Input }],
+    type: [{ type: Input }],
+    value: [{ type: Input }]
 };
 
 /**
@@ -8888,17 +8885,17 @@ SidenavComponent.decorators = [
 ];
 /** @nocollapse */
 SidenavComponent.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
-    { type: ElementRef, },
-    { type: Renderer2, },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+    { type: ElementRef },
+    { type: Renderer2 }
 ];
 SidenavComponent.propDecorators = {
-    "class": [{ type: Input },],
-    "fixed": [{ type: Input },],
-    "sidenavBreakpoint": [{ type: Input },],
-    "sideNav": [{ type: ViewChild, args: ['sidenav',] },],
-    "overlay": [{ type: ViewChild, args: ['overlay',] },],
-    "windwosResize": [{ type: HostListener, args: ['window:resize',] },],
+    class: [{ type: Input }],
+    fixed: [{ type: Input }],
+    sidenavBreakpoint: [{ type: Input }],
+    sideNav: [{ type: ViewChild, args: ['sidenav',] }],
+    overlay: [{ type: ViewChild, args: ['overlay',] }],
+    windwosResize: [{ type: HostListener, args: ['window:resize',] }]
 };
 
 /**
@@ -9899,23 +9896,23 @@ PageScrollDirective.decorators = [
 ];
 /** @nocollapse */
 PageScrollDirective.ctorParameters = () => [
-    { type: PageScrollService, },
-    { type: Router, decorators: [{ type: Optional },] },
-    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] },] },
+    { type: PageScrollService },
+    { type: Router, decorators: [{ type: Optional }] },
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
 ];
 PageScrollDirective.propDecorators = {
-    "routerLink": [{ type: Input },],
-    "href": [{ type: Input },],
-    "pageScrollHorizontal": [{ type: Input },],
-    "pageScrollOffset": [{ type: Input },],
-    "pageScrollDuration": [{ type: Input },],
-    "pageScrollSpeed": [{ type: Input },],
-    "pageScrollEasing": [{ type: Input },],
-    "pageScrollInterruptible": [{ type: Input },],
-    "pageScrollAdjustHash": [{ type: Input },],
-    "pageScroll": [{ type: Input },],
-    "pageScrollFinish": [{ type: Output },],
-    "handleClick": [{ type: HostListener, args: ['click', ['$event'],] },],
+    routerLink: [{ type: Input }],
+    href: [{ type: Input }],
+    pageScrollHorizontal: [{ type: Input }],
+    pageScrollOffset: [{ type: Input }],
+    pageScrollDuration: [{ type: Input }],
+    pageScrollSpeed: [{ type: Input }],
+    pageScrollEasing: [{ type: Input }],
+    pageScrollInterruptible: [{ type: Input }],
+    pageScrollAdjustHash: [{ type: Input }],
+    pageScroll: [{ type: Input }],
+    pageScrollFinish: [{ type: Output }],
+    handleClick: [{ type: HostListener, args: ['click', ['$event'],] }]
 };
 
 /**
@@ -10148,11 +10145,11 @@ MdbStickyDirective.decorators = [
 ];
 /** @nocollapse */
 MdbStickyDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
+    { type: ElementRef },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
 ];
 MdbStickyDirective.propDecorators = {
-    "stickyAfter": [{ type: Input },],
+    stickyAfter: [{ type: Input }]
 };
 
 /**
@@ -10248,10 +10245,10 @@ WavesDirective.decorators = [
 ];
 /** @nocollapse */
 WavesDirective.ctorParameters = () => [
-    { type: ElementRef, },
+    { type: ElementRef }
 ];
 WavesDirective.propDecorators = {
-    "click": [{ type: HostListener, args: ['click', ['$event'],] },],
+    click: [{ type: HostListener, args: ['click', ['$event'],] }]
 };
 
 /**
@@ -10490,22 +10487,22 @@ TabsetComponent.decorators = [
 ];
 /** @nocollapse */
 TabsetComponent.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
-    { type: TabsetConfig, },
-    { type: WavesDirective, },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+    { type: TabsetConfig },
+    { type: WavesDirective }
 ];
 TabsetComponent.propDecorators = {
-    "clazz": [{ type: HostBinding, args: ['class.tab-container',] },],
-    "buttonClass": [{ type: Input },],
-    "contentClass": [{ type: Input },],
-    "tabEl": [{ type: ViewChildren, args: ['tabEl', { read: ElementRef },] },],
-    "showBsTab": [{ type: Output },],
-    "shownBsTab": [{ type: Output },],
-    "hideBsTab": [{ type: Output },],
-    "hiddenBsTab": [{ type: Output },],
-    "vertical": [{ type: Input },],
-    "justified": [{ type: Input },],
-    "type": [{ type: Input },],
+    clazz: [{ type: HostBinding, args: ['class.tab-container',] }],
+    buttonClass: [{ type: Input }],
+    contentClass: [{ type: Input }],
+    tabEl: [{ type: ViewChildren, args: ['tabEl', { read: ElementRef },] }],
+    showBsTab: [{ type: Output }],
+    shownBsTab: [{ type: Output }],
+    hideBsTab: [{ type: Output }],
+    hiddenBsTab: [{ type: Output }],
+    vertical: [{ type: Input }],
+    justified: [{ type: Input }],
+    type: [{ type: Input }]
 };
 
 /**
@@ -10625,21 +10622,21 @@ TabDirective.decorators = [
 ];
 /** @nocollapse */
 TabDirective.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
-    { type: TabsetComponent, },
-    { type: ElementRef, },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+    { type: TabsetComponent },
+    { type: ElementRef }
 ];
 TabDirective.propDecorators = {
-    "heading": [{ type: Input },],
-    "disabled": [{ type: Input },],
-    "removable": [{ type: Input },],
-    "customClass": [{ type: Input },],
-    "active": [{ type: HostBinding, args: ['class.active',] }, { type: Input },],
-    "select": [{ type: Output },],
-    "deselect": [{ type: Output },],
-    "removed": [{ type: Output },],
-    "addClass": [{ type: HostBinding, args: ['class.tab-pane',] },],
-    "test": [{ type: HostBinding, args: ['class.fade',] },],
+    heading: [{ type: Input }],
+    disabled: [{ type: Input }],
+    removable: [{ type: Input }],
+    customClass: [{ type: Input }],
+    active: [{ type: HostBinding, args: ['class.active',] }, { type: Input }],
+    select: [{ type: Output }],
+    deselect: [{ type: Output }],
+    removed: [{ type: Output }],
+    addClass: [{ type: HostBinding, args: ['class.tab-pane',] }],
+    test: [{ type: HostBinding, args: ['class.fade',] }]
 };
 
 /**
@@ -10663,8 +10660,8 @@ TabHeadingDirective.decorators = [
 ];
 /** @nocollapse */
 TabHeadingDirective.ctorParameters = () => [
-    { type: TemplateRef, },
-    { type: TabDirective, },
+    { type: TemplateRef },
+    { type: TabDirective }
 ];
 
 /**
@@ -10702,10 +10699,10 @@ NgTranscludeDirective.decorators = [
 ];
 /** @nocollapse */
 NgTranscludeDirective.ctorParameters = () => [
-    { type: ViewContainerRef, },
+    { type: ViewContainerRef }
 ];
 NgTranscludeDirective.propDecorators = {
-    "mdbNgTransclude": [{ type: Input },],
+    mdbNgTransclude: [{ type: Input }]
 };
 
 /**
@@ -10826,10 +10823,10 @@ MaterialChipsComponent.decorators = [
 /** @nocollapse */
 MaterialChipsComponent.ctorParameters = () => [];
 MaterialChipsComponent.propDecorators = {
-    "placeholder": [{ type: Input, args: ['placeholder',] },],
-    "tagsfocusedChange": [{ type: Output },],
-    "labelsChange": [{ type: Output },],
-    "tagsfocused": [{ type: Input },],
+    placeholder: [{ type: Input, args: ['placeholder',] }],
+    tagsfocusedChange: [{ type: Output }],
+    labelsChange: [{ type: Output }],
+    tagsfocused: [{ type: Input }]
 };
 
 /**
@@ -11283,27 +11280,27 @@ ClockPickerComponent.decorators = [
 ];
 /** @nocollapse */
 ClockPickerComponent.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
+    { type: ElementRef },
+    { type: Renderer2 },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
 ];
 ClockPickerComponent.propDecorators = {
-    "hoursPlate": [{ type: ViewChild, args: ['hoursPlate',] },],
-    "minutesPlate": [{ type: ViewChild, args: ['minutesPlate',] },],
-    "plate": [{ type: ViewChild, args: ['plate',] },],
-    "svg": [{ type: ViewChild, args: ['svg',] },],
-    "g": [{ type: ViewChild, args: ['g',] },],
-    "hand": [{ type: ViewChild, args: ['hand',] },],
-    "fg": [{ type: ViewChild, args: ['fg',] },],
-    "bg": [{ type: ViewChild, args: ['bg',] },],
-    "bearing": [{ type: ViewChild, args: ['bearing',] },],
-    "twelvehour": [{ type: Input, args: ['twelvehour',] },],
-    "darktheme": [{ type: Input, args: ['darktheme',] },],
-    "placeholder": [{ type: Input, args: ['placeholder',] },],
-    "label": [{ type: Input, args: ['label',] },],
-    "duration": [{ type: Input, args: ['duration',] },],
-    "showClock": [{ type: Input, args: ['showClock',] },],
-    "buttonLabel": [{ type: Input, args: ['buttonlabel',] },],
+    hoursPlate: [{ type: ViewChild, args: ['hoursPlate',] }],
+    minutesPlate: [{ type: ViewChild, args: ['minutesPlate',] }],
+    plate: [{ type: ViewChild, args: ['plate',] }],
+    svg: [{ type: ViewChild, args: ['svg',] }],
+    g: [{ type: ViewChild, args: ['g',] }],
+    hand: [{ type: ViewChild, args: ['hand',] }],
+    fg: [{ type: ViewChild, args: ['fg',] }],
+    bg: [{ type: ViewChild, args: ['bg',] }],
+    bearing: [{ type: ViewChild, args: ['bearing',] }],
+    twelvehour: [{ type: Input, args: ['twelvehour',] }],
+    darktheme: [{ type: Input, args: ['darktheme',] }],
+    placeholder: [{ type: Input, args: ['placeholder',] }],
+    label: [{ type: Input, args: ['label',] }],
+    duration: [{ type: Input, args: ['duration',] }],
+    showClock: [{ type: Input, args: ['showClock',] }],
+    buttonLabel: [{ type: Input, args: ['buttonlabel',] }]
 };
 
 /**
@@ -11420,12 +11417,11 @@ class ButtonCheckboxDirective {
 ButtonCheckboxDirective.decorators = [
     { type: Directive, args: [{ selector: '[mdbCheckbox]', providers: [CHECKBOX_CONTROL_VALUE_ACCESSOR] },] },
 ];
-/** @nocollapse */
 ButtonCheckboxDirective.propDecorators = {
-    "btnCheckboxTrue": [{ type: Input },],
-    "btnCheckboxFalse": [{ type: Input },],
-    "state": [{ type: HostBinding, args: ['class.active',] },],
-    "onClick": [{ type: HostListener, args: ['click',] },],
+    btnCheckboxTrue: [{ type: Input }],
+    btnCheckboxFalse: [{ type: Input }],
+    state: [{ type: HostBinding, args: ['class.active',] }],
+    onClick: [{ type: HostListener, args: ['click',] }]
 };
 
 /**
@@ -11526,15 +11522,15 @@ ButtonRadioDirective.decorators = [
 ];
 /** @nocollapse */
 ButtonRadioDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
+    { type: ElementRef },
+    { type: Renderer2 }
 ];
 ButtonRadioDirective.propDecorators = {
-    "mdbRadio": [{ type: Input },],
-    "uncheckable": [{ type: Input },],
-    "value": [{ type: Input },],
-    "isActive": [{ type: HostBinding, args: ['class.active',] },],
-    "onClick": [{ type: HostListener, args: ['click', ['$event'],] },],
+    mdbRadio: [{ type: Input }],
+    uncheckable: [{ type: Input }],
+    value: [{ type: Input }],
+    isActive: [{ type: HostBinding, args: ['class.active',] }],
+    onClick: [{ type: HostListener, args: ['click', ['$event'],] }]
 };
 
 /**
@@ -11944,14 +11940,16 @@ class CarouselComponent {
     /**
      * @param {?} config
      * @param {?} el
+     * @param {?} platformId
      */
-    constructor(config, el) {
+    constructor(config, el, platformId) {
         this.SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
         this._slides = new LinkedList();
         this.destroyed = false;
         // protected el: ElementRef = null;
         this.el = null;
         this.animationEnd = true;
+        this.isBrowser = false;
         this.isControls = true;
         this.class = '';
         this.type = '';
@@ -11960,6 +11958,7 @@ class CarouselComponent {
          * Will be emitted when active slide has been changed. Part of two-way-bindable [(activeSlide)] property
          */
         this.activeSlideChange = new EventEmitter(false);
+        this.isBrowser = isPlatformBrowser(platformId);
         Object.assign(this, config);
         this.el = el;
     }
@@ -12143,12 +12142,14 @@ class CarouselComponent {
         if (this.animationEnd) {
             this.animationEnd = false;
             goToSlide.directionNext = true;
-            setTimeout(() => {
-                goToSlide.directionNext = false;
-                this.animationEnd = true;
-                this.activeSlide = goToIndex;
-                this.play();
-            }, 100);
+            if (this.isBrowser) {
+                setTimeout(() => {
+                    goToSlide.directionNext = false;
+                    this.animationEnd = true;
+                    this.activeSlide = goToIndex;
+                    this.play();
+                }, 100);
+            }
         }
     }
     /**
@@ -12163,40 +12164,46 @@ class CarouselComponent {
             if (direction === Direction.NEXT) {
                 this.animationEnd = false;
                 goToSlide.directionNext = true;
-                setTimeout(() => {
-                    goToSlide.directionLeft = true;
-                    currentSlide.directionLeft = true;
-                }, 100);
+                if (this.isBrowser) {
+                    setTimeout(() => {
+                        goToSlide.directionLeft = true;
+                        currentSlide.directionLeft = true;
+                    }, 100);
+                }
             }
             if (direction === Direction.PREV) {
                 this.animationEnd = false;
                 goToSlide.directionPrev = true;
-                setTimeout(() => {
-                    goToSlide.directionRight = true;
-                    currentSlide.directionRight = true;
-                }, 100);
+                if (this.isBrowser) {
+                    setTimeout(() => {
+                        goToSlide.directionRight = true;
+                        currentSlide.directionRight = true;
+                    }, 100);
+                }
             }
-            setTimeout(() => {
-                goToSlide.directionLeft = false;
-                goToSlide.directionNext = false;
-                currentSlide.directionLeft = false;
-                currentSlide.directionNext = false;
-                goToSlide.directionRight = false;
-                goToSlide.directionPrev = false;
-                currentSlide.directionRight = false;
-                currentSlide.directionPrev = false;
-                this.animationEnd = true;
-                this.activeSlide = goToIndex;
-                let /** @type {?} */ directionName;
-                if (direction === Direction.NEXT) {
-                    directionName = 'Next';
-                }
-                else if (direction === Direction.PREV) {
-                    directionName = 'Prev';
-                }
-                this.activeSlideChange.emit({ 'direction': directionName, 'relatedTarget': this.activeSlide });
-                this.play();
-            }, 700);
+            if (this.isBrowser) {
+                setTimeout(() => {
+                    goToSlide.directionLeft = false;
+                    goToSlide.directionNext = false;
+                    currentSlide.directionLeft = false;
+                    currentSlide.directionNext = false;
+                    goToSlide.directionRight = false;
+                    goToSlide.directionPrev = false;
+                    currentSlide.directionRight = false;
+                    currentSlide.directionPrev = false;
+                    this.animationEnd = true;
+                    this.activeSlide = goToIndex;
+                    let /** @type {?} */ directionName;
+                    if (direction === Direction.NEXT) {
+                        directionName = 'Next';
+                    }
+                    else if (direction === Direction.PREV) {
+                        directionName = 'Prev';
+                    }
+                    this.activeSlideChange.emit({ 'direction': directionName, 'relatedTarget': this.activeSlide });
+                    this.play();
+                }, 700);
+            }
         }
     }
     /**
@@ -12311,17 +12318,19 @@ class CarouselComponent {
      */
     restartTimer() {
         this.resetTimer();
-        const /** @type {?} */ interval = +this.interval;
-        if (!isNaN(interval) && interval > 0) {
-            this.currentInterval = setInterval(() => {
-                const /** @type {?} */ nInterval = +this.interval;
-                if (this.isPlaying && !isNaN(this.interval) && nInterval > 0 && this.slides.length) {
-                    this.nextSlide();
-                }
-                else {
-                    this.pause();
-                }
-            }, interval);
+        if (this.isBrowser) {
+            const /** @type {?} */ interval = +this.interval;
+            if (!isNaN(interval) && interval > 0) {
+                this.currentInterval = setInterval(() => {
+                    const /** @type {?} */ nInterval = +this.interval;
+                    if (this.isPlaying && !isNaN(this.interval) && nInterval > 0 && this.slides.length) {
+                        this.nextSlide();
+                    }
+                    else {
+                        this.pause();
+                    }
+                }, interval);
+            }
         }
     }
     /**
@@ -12329,9 +12338,11 @@ class CarouselComponent {
      * @return {?}
      */
     resetTimer() {
-        if (this.currentInterval) {
-            clearInterval(this.currentInterval);
-            this.currentInterval = void 0;
+        if (this.isBrowser) {
+            if (this.currentInterval) {
+                clearInterval(this.currentInterval);
+                this.currentInterval = void 0;
+            }
         }
     }
     /**
@@ -12403,24 +12414,25 @@ CarouselComponent.decorators = [
 ];
 /** @nocollapse */
 CarouselComponent.ctorParameters = () => [
-    { type: CarouselConfig, },
-    { type: ElementRef, },
+    { type: CarouselConfig },
+    { type: ElementRef },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
 ];
 CarouselComponent.propDecorators = {
-    "noWrap": [{ type: Input },],
-    "noPause": [{ type: Input },],
-    "isControls": [{ type: Input, args: ['isControls',] },],
-    "keyboard": [{ type: Input },],
-    "class": [{ type: Input, args: ['class',] },],
-    "type": [{ type: Input, args: ['type',] },],
-    "animation": [{ type: Input, args: ['animation',] },],
-    "activeSlideChange": [{ type: Output },],
-    "activeSlide": [{ type: Input },],
-    "interval": [{ type: Input },],
-    "play": [{ type: HostListener, args: ['mouseleave',] },],
-    "pause": [{ type: HostListener, args: ['mouseenter',] },],
-    "keyboardControl": [{ type: HostListener, args: ['keyup', ['$event'],] },],
-    "focus": [{ type: HostListener, args: ['click', ['$event'],] },],
+    noWrap: [{ type: Input }],
+    noPause: [{ type: Input }],
+    isControls: [{ type: Input, args: ['isControls',] }],
+    keyboard: [{ type: Input }],
+    class: [{ type: Input, args: ['class',] }],
+    type: [{ type: Input, args: ['type',] }],
+    animation: [{ type: Input, args: ['animation',] }],
+    activeSlideChange: [{ type: Output }],
+    activeSlide: [{ type: Input }],
+    interval: [{ type: Input }],
+    play: [{ type: HostListener, args: ['mouseleave',] }],
+    pause: [{ type: HostListener, args: ['mouseenter',] }],
+    keyboardControl: [{ type: HostListener, args: ['keyup', ['$event'],] }],
+    focus: [{ type: HostListener, args: ['click', ['$event'],] }]
 };
 
 /**
@@ -12467,17 +12479,17 @@ SlideComponent.decorators = [
 ];
 /** @nocollapse */
 SlideComponent.ctorParameters = () => [
-    { type: CarouselComponent, },
-    { type: ElementRef, },
+    { type: CarouselComponent },
+    { type: ElementRef }
 ];
 SlideComponent.propDecorators = {
-    "active": [{ type: HostBinding, args: ['class.active',] }, { type: Input },],
-    "animated": [{ type: HostBinding, args: ['class.animated',] },],
-    "directionNext": [{ type: HostBinding, args: ['class.carousel-item-next',] },],
-    "directionLeft": [{ type: HostBinding, args: ['class.carousel-item-left',] },],
-    "directionPrev": [{ type: HostBinding, args: ['class.carousel-item-prev',] },],
-    "directionRight": [{ type: HostBinding, args: ['class.carousel-item-right',] },],
-    "carousel": [{ type: HostBinding, args: ['class.carousel-item',] },],
+    active: [{ type: HostBinding, args: ['class.active',] }, { type: Input }],
+    animated: [{ type: HostBinding, args: ['class.animated',] }],
+    directionNext: [{ type: HostBinding, args: ['class.carousel-item-next',] }],
+    directionLeft: [{ type: HostBinding, args: ['class.carousel-item-left',] }],
+    directionPrev: [{ type: HostBinding, args: ['class.carousel-item-prev',] }],
+    directionRight: [{ type: HostBinding, args: ['class.carousel-item-right',] }],
+    carousel: [{ type: HostBinding, args: ['class.carousel-item',] }]
 };
 
 /**
@@ -12681,19 +12693,19 @@ BaseChartDirective.decorators = [
 ];
 /** @nocollapse */
 BaseChartDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
+    { type: ElementRef },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
 ];
 BaseChartDirective.propDecorators = {
-    "data": [{ type: Input },],
-    "datasets": [{ type: Input },],
-    "labels": [{ type: Input },],
-    "options": [{ type: Input },],
-    "chartType": [{ type: Input },],
-    "colors": [{ type: Input },],
-    "legend": [{ type: Input },],
-    "chartClick": [{ type: Output },],
-    "chartHover": [{ type: Output },],
+    data: [{ type: Input }],
+    datasets: [{ type: Input }],
+    labels: [{ type: Input }],
+    options: [{ type: Input }],
+    chartType: [{ type: Input }],
+    colors: [{ type: Input }],
+    legend: [{ type: Input }],
+    chartClick: [{ type: Output }],
+    chartHover: [{ type: Output }]
 };
 /**
  * @param {?} colour
@@ -12975,18 +12987,18 @@ CollapseDirective.decorators = [
 ];
 /** @nocollapse */
 CollapseDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
+    { type: ElementRef },
+    { type: Renderer2 }
 ];
 CollapseDirective.propDecorators = {
-    "showBsCollapse": [{ type: Output, args: ['showBsCollapse',] },],
-    "shownBsCollapse": [{ type: Output, args: ['shownBsCollapse',] },],
-    "hideBsCollapse": [{ type: Output, args: ['hideBsCollapse',] },],
-    "hiddenBsCollapse": [{ type: Output, args: ['hiddenBsCollapse',] },],
-    "collapsed": [{ type: Output },],
-    "expanded": [{ type: Output },],
-    "collapse": [{ type: Input },],
-    "animationTime": [{ type: Input },],
+    showBsCollapse: [{ type: Output, args: ['showBsCollapse',] }],
+    shownBsCollapse: [{ type: Output, args: ['shownBsCollapse',] }],
+    hideBsCollapse: [{ type: Output, args: ['hideBsCollapse',] }],
+    hiddenBsCollapse: [{ type: Output, args: ['hiddenBsCollapse',] }],
+    collapsed: [{ type: Output }],
+    expanded: [{ type: Output }],
+    collapse: [{ type: Input }],
+    animationTime: [{ type: Input }]
 };
 
 /**
@@ -13075,11 +13087,11 @@ BsDropdownContainerComponent.decorators = [
 ];
 /** @nocollapse */
 BsDropdownContainerComponent.ctorParameters = () => [
-    { type: BsDropdownState, },
+    { type: BsDropdownState }
 ];
 BsDropdownContainerComponent.propDecorators = {
-    "display": [{ type: HostBinding, args: ['style.display',] },],
-    "position": [{ type: HostBinding, args: ['style.position',] },],
+    display: [{ type: HostBinding, args: ['style.display',] }],
+    position: [{ type: HostBinding, args: ['style.position',] }]
 };
 
 /**
@@ -13107,9 +13119,9 @@ BsDropdownMenuDirective.decorators = [
 ];
 /** @nocollapse */
 BsDropdownMenuDirective.ctorParameters = () => [
-    { type: BsDropdownState, },
-    { type: ViewContainerRef, },
-    { type: TemplateRef, },
+    { type: BsDropdownState },
+    { type: ViewContainerRef },
+    { type: TemplateRef }
 ];
 
 /**
@@ -13180,16 +13192,16 @@ BsDropdownToggleDirective.decorators = [
 ];
 /** @nocollapse */
 BsDropdownToggleDirective.ctorParameters = () => [
-    { type: BsDropdownState, },
-    { type: ElementRef, },
+    { type: BsDropdownState },
+    { type: ElementRef }
 ];
 BsDropdownToggleDirective.propDecorators = {
-    "ariaHaspopup": [{ type: HostBinding, args: ['attr.aria-haspopup',] },],
-    "isDisabled": [{ type: HostBinding, args: ['attr.disabled',] },],
-    "isOpen": [{ type: HostBinding, args: ['attr.aria-expanded',] },],
-    "onClick": [{ type: HostListener, args: ['click',] },],
-    "onDocumentClick": [{ type: HostListener, args: ['document:click', ['$event'],] },],
-    "onEsc": [{ type: HostListener, args: ['keyup.esc',] },],
+    ariaHaspopup: [{ type: HostBinding, args: ['attr.aria-haspopup',] }],
+    isDisabled: [{ type: HostBinding, args: ['attr.disabled',] }],
+    isOpen: [{ type: HostBinding, args: ['attr.aria-expanded',] }],
+    onClick: [{ type: HostListener, args: ['click',] }],
+    onDocumentClick: [{ type: HostListener, args: ['document:click', ['$event'],] }],
+    onEsc: [{ type: HostListener, args: ['keyup.esc',] }]
 };
 
 /**
@@ -13829,11 +13841,11 @@ ComponentLoaderFactory.decorators = [
 ];
 /** @nocollapse */
 ComponentLoaderFactory.ctorParameters = () => [
-    { type: ComponentFactoryResolver, },
-    { type: NgZone, },
-    { type: Injector, },
-    { type: PositioningService, },
-    { type: ApplicationRef, },
+    { type: ComponentFactoryResolver },
+    { type: NgZone },
+    { type: Injector },
+    { type: PositioningService },
+    { type: ApplicationRef }
 ];
 
 /**
@@ -14074,24 +14086,24 @@ BsDropdownDirective.decorators = [
 ];
 /** @nocollapse */
 BsDropdownDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
-    { type: ViewContainerRef, },
-    { type: ComponentLoaderFactory, },
-    { type: BsDropdownConfig, },
-    { type: BsDropdownState, },
+    { type: ElementRef },
+    { type: Renderer2 },
+    { type: ViewContainerRef },
+    { type: ComponentLoaderFactory },
+    { type: BsDropdownConfig },
+    { type: BsDropdownState }
 ];
 BsDropdownDirective.propDecorators = {
-    "placement": [{ type: Input },],
-    "triggers": [{ type: Input },],
-    "container": [{ type: Input },],
-    "dropup": [{ type: HostBinding, args: ['class.dropup',] }, { type: Input },],
-    "autoClose": [{ type: Input },],
-    "isDisabled": [{ type: Input },],
-    "isOpen": [{ type: HostBinding, args: ['class.open',] }, { type: HostBinding, args: ['class.show',] }, { type: Input },],
-    "isOpenChange": [{ type: Output },],
-    "onShown": [{ type: Output },],
-    "onHidden": [{ type: Output },],
+    placement: [{ type: Input }],
+    triggers: [{ type: Input }],
+    container: [{ type: Input }],
+    dropup: [{ type: HostBinding, args: ['class.dropup',] }, { type: Input }],
+    autoClose: [{ type: Input }],
+    isDisabled: [{ type: Input }],
+    isOpen: [{ type: HostBinding, args: ['class.open',] }, { type: HostBinding, args: ['class.show',] }, { type: Input }],
+    isOpenChange: [{ type: Output }],
+    onShown: [{ type: Output }],
+    onHidden: [{ type: Output }]
 };
 
 /**
@@ -14277,12 +14289,12 @@ class MdbInputDirective {
                             this.renderer.removeClass(this.el.nativeElement, 'counter-success');
                             // tslint:disable-next-line:max-line-length
                         }
-                        else if (this.el.nativeElement.value.match(/^[a-zA-Z0-9]+$/g) && this.el.nativeElement.value.length >= this.minLength && this.el.nativeElement.value.length <= this.maxLength) {
+                        else if (this.el.nativeElement.value.match(/^[a-zA-Z0-9!@#$%\^&*:;)(+=._-\s]+$/g) && this.el.nativeElement.value.length >= this.minLength && this.el.nativeElement.value.length <= this.maxLength) {
                             this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
                             this.renderer.addClass(this.el.nativeElement, 'counter-success');
                             // tslint:disable-next-line:max-line-length
                         }
-                        else if (!this.el.nativeElement.value.match(/^[a-zA-Z0-9]+$/g) || this.el.nativeElement.value.length < this.minLength || this.el.nativeElement.value.length > this.maxLength) {
+                        else if (!this.el.nativeElement.value.match(/^[a-zA-Z0-9!@#$%\^&*:;)(+=._-\s]+$/g) || this.el.nativeElement.value.length < this.minLength || this.el.nativeElement.value.length > this.maxLength) {
                             this.renderer.addClass(this.el.nativeElement, 'counter-danger');
                             this.renderer.removeClass(this.el.nativeElement, 'counter-success');
                         }
@@ -14485,22 +14497,22 @@ MdbInputDirective.decorators = [
 ];
 /** @nocollapse */
 MdbInputDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
+    { type: ElementRef },
+    { type: Renderer2 },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
 ];
 MdbInputDirective.propDecorators = {
-    "mdbInputDirective": [{ type: Input, args: ['mdbInputDirective',] },],
-    "placeholder": [{ type: Input, args: ['placeholder',] },],
-    "minLength": [{ type: Input, args: ['minLength',] },],
-    "maxLength": [{ type: Input, args: ['maxLength',] },],
-    "customRegex": [{ type: Input, args: ['customRegex',] },],
-    "mdbValidate": [{ type: Input, args: ['mdbValidate',] },],
-    "focusCheckbox": [{ type: Input, args: ['focusCheckbox',] },],
-    "focusRadio": [{ type: Input, args: ['focusRadio',] },],
-    "onfocus": [{ type: HostListener, args: ['focus',] },],
-    "onBlur": [{ type: HostListener, args: ['blur',] },],
-    "onchange": [{ type: HostListener, args: ['change',] },],
+    mdbInputDirective: [{ type: Input, args: ['mdbInputDirective',] }],
+    placeholder: [{ type: Input, args: ['placeholder',] }],
+    minLength: [{ type: Input, args: ['minLength',] }],
+    maxLength: [{ type: Input, args: ['maxLength',] }],
+    customRegex: [{ type: Input, args: ['customRegex',] }],
+    mdbValidate: [{ type: Input, args: ['mdbValidate',] }],
+    focusCheckbox: [{ type: Input, args: ['focusCheckbox',] }],
+    focusRadio: [{ type: Input, args: ['focusRadio',] }],
+    onfocus: [{ type: HostListener, args: ['focus',] }],
+    onBlur: [{ type: HostListener, args: ['blur',] }],
+    onchange: [{ type: HostListener, args: ['change',] }]
 };
 
 /**
@@ -14567,8 +14579,8 @@ EqualValidatorDirective.decorators = [
 ];
 /** @nocollapse */
 EqualValidatorDirective.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Attribute, args: ['validateEqual',] },] },
-    { type: undefined, decorators: [{ type: Attribute, args: ['reverse',] },] },
+    { type: String, decorators: [{ type: Attribute, args: ['validateEqual',] }] },
+    { type: String, decorators: [{ type: Attribute, args: ['reverse',] }] }
 ];
 
 /**
@@ -14617,8 +14629,8 @@ DeepDirective.decorators = [
 ];
 /** @nocollapse */
 DeepDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
+    { type: ElementRef },
+    { type: Renderer2 }
 ];
 
 /**
@@ -14868,15 +14880,15 @@ InputValidateDirective.decorators = [
 ];
 /** @nocollapse */
 InputValidateDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer, },
+    { type: ElementRef },
+    { type: Renderer }
 ];
 InputValidateDirective.propDecorators = {
-    "value": [{ type: Input },],
-    "minLength": [{ type: Input, args: ['minLength',] },],
-    "maxLength": [{ type: Input, args: ['maxLength',] },],
-    "customRegex": [{ type: Input, args: ['customRegex',] },],
-    "onBlur": [{ type: HostListener, args: ['blur', ['$event'],] },],
+    value: [{ type: Input }],
+    minLength: [{ type: Input, args: ['minLength',] }],
+    maxLength: [{ type: Input, args: ['maxLength',] }],
+    customRegex: [{ type: Input, args: ['customRegex',] }],
+    onBlur: [{ type: HostListener, args: ['blur', ['$event'],] }]
 };
 
 /**
@@ -14987,15 +14999,15 @@ ActiveDirective.decorators = [
 ];
 /** @nocollapse */
 ActiveDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
+    { type: ElementRef },
+    { type: Renderer2 },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
 ];
 ActiveDirective.propDecorators = {
-    "mdbActive": [{ type: Input },],
-    "onClick": [{ type: HostListener, args: ['focus', ['$event'],] },],
-    "Click": [{ type: HostListener, args: ['click', ['$event'],] },],
-    "onBlur": [{ type: HostListener, args: ['blur', ['$event'],] },],
+    mdbActive: [{ type: Input }],
+    onClick: [{ type: HostListener, args: ['focus', ['$event'],] }],
+    Click: [{ type: HostListener, args: ['click', ['$event'],] }],
+    onBlur: [{ type: HostListener, args: ['blur', ['$event'],] }]
 };
 
 /**
@@ -15178,11 +15190,11 @@ ModalBackdropComponent.decorators = [
 ];
 /** @nocollapse */
 ModalBackdropComponent.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer, },
+    { type: ElementRef },
+    { type: Renderer }
 ];
 ModalBackdropComponent.propDecorators = {
-    "classNameBackDrop": [{ type: HostBinding, args: ['class.modal-backdrop',] },],
+    classNameBackDrop: [{ type: HostBinding, args: ['class.modal-backdrop',] }]
 };
 
 /**
@@ -15364,7 +15376,7 @@ class ModalDirective {
     }
     /**
      *  Show dialog
-     *  \@internal
+     * \@internal
      * @return {?}
      */
     showElement() {
@@ -15531,19 +15543,19 @@ ModalDirective.decorators = [
 ];
 /** @nocollapse */
 ModalDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: ViewContainerRef, },
-    { type: Renderer2, },
-    { type: ComponentLoaderFactory, },
+    { type: ElementRef },
+    { type: ViewContainerRef },
+    { type: Renderer2 },
+    { type: ComponentLoaderFactory }
 ];
 ModalDirective.propDecorators = {
-    "config": [{ type: Input },],
-    "onShow": [{ type: Output },],
-    "onShown": [{ type: Output },],
-    "onHide": [{ type: Output },],
-    "onHidden": [{ type: Output },],
-    "onClick": [{ type: HostListener, args: ['click', ['$event'],] },],
-    "onEsc": [{ type: HostListener, args: ['keydown.esc',] },],
+    config: [{ type: Input }],
+    onShow: [{ type: Output }],
+    onShown: [{ type: Output }],
+    onHide: [{ type: Output }],
+    onHidden: [{ type: Output }],
+    onClick: [{ type: HostListener, args: ['click', ['$event'],] }],
+    onEsc: [{ type: HostListener, args: ['keydown.esc',] }]
 };
 
 /**
@@ -15653,16 +15665,16 @@ ModalContainerComponent.decorators = [
 ];
 /** @nocollapse */
 ModalContainerComponent.ctorParameters = () => [
-    { type: ModalOptions, },
-    { type: ElementRef, },
-    { type: Renderer, },
+    { type: ModalOptions },
+    { type: ElementRef },
+    { type: Renderer }
 ];
 ModalContainerComponent.propDecorators = {
-    "tabindex": [{ type: HostBinding, args: ['tabindex',] },],
-    "role": [{ type: HostBinding, args: ['role',] },],
-    "modla": [{ type: HostBinding, args: ['class.modal',] },],
-    "onClick": [{ type: HostListener, args: ['click', ['$event'],] },],
-    "onEsc": [{ type: HostListener, args: ['window:keydown.esc',] },],
+    tabindex: [{ type: HostBinding, args: ['tabindex',] }],
+    role: [{ type: HostBinding, args: ['role',] }],
+    modla: [{ type: HostBinding, args: ['class.modal',] }],
+    onClick: [{ type: HostListener, args: ['click', ['$event'],] }],
+    onEsc: [{ type: HostListener, args: ['window:keydown.esc',] }]
 };
 
 /**
@@ -15878,10 +15890,10 @@ MDBModalService.decorators = [
 ];
 /** @nocollapse */
 MDBModalService.ctorParameters = () => [
-    { type: ComponentLoaderFactory, },
-    { type: ElementRef, },
-    { type: ViewContainerRef, },
-    { type: Renderer2, },
+    { type: ComponentLoaderFactory },
+    { type: ElementRef },
+    { type: ViewContainerRef },
+    { type: Renderer2 }
 ];
 
 /**
@@ -15971,11 +15983,11 @@ LinksComponent.decorators = [
 ];
 /** @nocollapse */
 LinksComponent.ctorParameters = () => [
-    { type: NavbarService, },
+    { type: NavbarService }
 ];
 LinksComponent.propDecorators = {
-    "links": [{ type: ContentChildren, args: [RouterLinkWithHref, { read: ElementRef, descendants: true },] },],
-    "linkClick": [{ type: Output },],
+    links: [{ type: ContentChildren, args: [RouterLinkWithHref, { read: ElementRef, descendants: true },] }],
+    linkClick: [{ type: Output }]
 };
 
 /**
@@ -16178,18 +16190,18 @@ NavbarComponent.decorators = [
 ];
 /** @nocollapse */
 NavbarComponent.ctorParameters = () => [
-    { type: Renderer2, },
-    { type: NavbarService, },
+    { type: Renderer2 },
+    { type: NavbarService }
 ];
 NavbarComponent.propDecorators = {
-    "SideClass": [{ type: Input },],
-    "containerInside": [{ type: Input },],
-    "el": [{ type: ViewChild, args: ['navbar',] },],
-    "mobile": [{ type: ViewChild, args: ['mobile',] },],
-    "navbar": [{ type: ViewChild, args: ['nav',] },],
-    "container": [{ type: ViewChild, args: ['container',] },],
-    "onResize": [{ type: HostListener, args: ['window:resize', ['$event'],] },],
-    "onScroll": [{ type: HostListener, args: ['document:scroll', ['$event'],] },],
+    SideClass: [{ type: Input }],
+    containerInside: [{ type: Input }],
+    el: [{ type: ViewChild, args: ['navbar',] }],
+    mobile: [{ type: ViewChild, args: ['mobile',] }],
+    navbar: [{ type: ViewChild, args: ['nav',] }],
+    container: [{ type: ViewChild, args: ['container',] }],
+    onResize: [{ type: HostListener, args: ['window:resize', ['$event'],] }],
+    onScroll: [{ type: HostListener, args: ['document:scroll', ['$event'],] }]
 };
 
 /**
@@ -16233,11 +16245,11 @@ NavlinksComponent.decorators = [
 ];
 /** @nocollapse */
 NavlinksComponent.ctorParameters = () => [
-    { type: NavbarService, },
+    { type: NavbarService }
 ];
 NavlinksComponent.propDecorators = {
-    "links": [{ type: ContentChildren, args: [RouterLinkWithHref, { read: ElementRef, descendants: true },] },],
-    "linkClick": [{ type: Output },],
+    links: [{ type: ContentChildren, args: [RouterLinkWithHref, { read: ElementRef, descendants: true },] }],
+    linkClick: [{ type: Output }]
 };
 
 /**
@@ -16321,14 +16333,14 @@ PopoverContainerComponent.decorators = [
 ];
 /** @nocollapse */
 PopoverContainerComponent.ctorParameters = () => [
-    { type: PopoverConfig, },
+    { type: PopoverConfig }
 ];
 PopoverContainerComponent.propDecorators = {
-    "placement": [{ type: Input },],
-    "title": [{ type: Input },],
-    "show": [{ type: HostBinding, args: ['class.show',] },],
-    "role": [{ type: HostBinding, args: ['attr.role',] },],
-    "class": [{ type: HostBinding, args: ['class',] },],
+    placement: [{ type: Input }],
+    title: [{ type: Input }],
+    show: [{ type: HostBinding, args: ['class.show',] }],
+    role: [{ type: HostBinding, args: ['attr.role',] }],
+    class: [{ type: HostBinding, args: ['class',] }]
 };
 
 /**
@@ -16440,21 +16452,21 @@ PopoverDirective.decorators = [
 ];
 /** @nocollapse */
 PopoverDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
-    { type: ViewContainerRef, },
-    { type: PopoverConfig, },
-    { type: ComponentLoaderFactory, },
+    { type: ElementRef },
+    { type: Renderer2 },
+    { type: ViewContainerRef },
+    { type: PopoverConfig },
+    { type: ComponentLoaderFactory }
 ];
 PopoverDirective.propDecorators = {
-    "mdbPopover": [{ type: Input },],
-    "popoverTitle": [{ type: Input },],
-    "placement": [{ type: Input },],
-    "triggers": [{ type: Input },],
-    "container": [{ type: Input },],
-    "isOpen": [{ type: Input },],
-    "onShown": [{ type: Output },],
-    "onHidden": [{ type: Output },],
+    mdbPopover: [{ type: Input }],
+    popoverTitle: [{ type: Input }],
+    placement: [{ type: Input }],
+    triggers: [{ type: Input }],
+    container: [{ type: Input }],
+    isOpen: [{ type: Input }],
+    onShown: [{ type: Output }],
+    onHidden: [{ type: Output }]
 };
 
 /**
@@ -16544,10 +16556,10 @@ RippleDirective.decorators = [
 ];
 /** @nocollapse */
 RippleDirective.ctorParameters = () => [
-    { type: ElementRef, },
+    { type: ElementRef }
 ];
 RippleDirective.propDecorators = {
-    "click": [{ type: HostListener, args: ['click', ['$event'],] },],
+    click: [{ type: HostListener, args: ['click', ['$event'],] }]
 };
 
 /**
@@ -16661,10 +16673,10 @@ TooltipContainerComponent.decorators = [
 ];
 /** @nocollapse */
 TooltipContainerComponent.ctorParameters = () => [
-    { type: TooltipConfig, },
+    { type: TooltipConfig }
 ];
 TooltipContainerComponent.propDecorators = {
-    "show": [{ type: HostBinding, args: ['class.show',] },],
+    show: [{ type: HostBinding, args: ['class.show',] }]
 };
 
 /**
@@ -16830,24 +16842,24 @@ TooltipDirective.decorators = [
 ];
 /** @nocollapse */
 TooltipDirective.ctorParameters = () => [
-    { type: ViewContainerRef, },
-    { type: Renderer2, },
-    { type: ElementRef, },
-    { type: ComponentLoaderFactory, },
-    { type: TooltipConfig, },
+    { type: ViewContainerRef },
+    { type: Renderer2 },
+    { type: ElementRef },
+    { type: ComponentLoaderFactory },
+    { type: TooltipConfig }
 ];
 TooltipDirective.propDecorators = {
-    "mdbTooltip": [{ type: Input },],
-    "tooltipChange": [{ type: Output },],
-    "placement": [{ type: Input },],
-    "triggers": [{ type: Input },],
-    "container": [{ type: Input },],
-    "isOpen": [{ type: Input },],
-    "isDisabled": [{ type: Input },],
-    "onShown": [{ type: Output },],
-    "onHidden": [{ type: Output },],
-    "delay": [{ type: Input },],
-    "fadeDuration": [{ type: Input },],
+    mdbTooltip: [{ type: Input }],
+    tooltipChange: [{ type: Output }],
+    placement: [{ type: Input }],
+    triggers: [{ type: Input }],
+    container: [{ type: Input }],
+    isOpen: [{ type: Input }],
+    isDisabled: [{ type: Input }],
+    onShown: [{ type: Output }],
+    onHidden: [{ type: Output }],
+    delay: [{ type: Input }],
+    fadeDuration: [{ type: Input }]
 };
 __decorate([
     OnChange(),

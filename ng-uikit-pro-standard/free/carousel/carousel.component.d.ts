@@ -22,6 +22,7 @@ export declare class CarouselComponent implements OnDestroy {
     protected destroyed: boolean;
     protected el: ElementRef | any;
     protected animationEnd: boolean;
+    isBrowser: any;
     /** If `true` — carousel will not cycle continuously and will have hard stops (prevent looping) */
     noWrap: boolean;
     /**  If `true` — will disable pausing on carousel mouse hover */
@@ -45,7 +46,7 @@ export declare class CarouselComponent implements OnDestroy {
      */
     interval: number;
     readonly isBs4: boolean;
-    constructor(config: CarouselConfig, el: ElementRef);
+    constructor(config: CarouselConfig, el: ElementRef, platformId: string);
     ngOnDestroy(): void;
     /**
      * Adds new slide. If this slide is first in collection - set it as active and starts auto changing
