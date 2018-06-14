@@ -8861,7 +8861,6 @@ var SidenavComponent = /** @class */ (function () {
         this.renderer = renderer;
         this.isBrowser = false;
         this.fixed = true;
-        this.sidenavBreakpoint = null;
         this.isBrowser = common.isPlatformBrowser(platformId);
     }
     /**
@@ -8874,7 +8873,7 @@ var SidenavComponent = /** @class */ (function () {
             if (this.sidenavBreakpoint) {
                 if (this.fixed) {
                     this.renderer.addClass(document.body, 'fixed-sn');
-                    if (this.windwosWidth < this.sidenavBreakpoint + 1) {
+                    if (this.windwosWidth < +this.sidenavBreakpoint + 1) {
                         this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
                         this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
                         this.setShown(false);
@@ -8923,18 +8922,18 @@ var SidenavComponent = /** @class */ (function () {
             this.windwosWidth = window.innerWidth;
             if (this.sidenavBreakpoint) {
                 if (this.fixed) {
-                    if (this.windwosWidth < this.sidenavBreakpoint + 1) {
+                    if (this.windwosWidth < +this.sidenavBreakpoint + 1) {
                         this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
                         this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
                         this.setShown(false);
                     }
-                    if (this.windwosWidth > this.sidenavBreakpoint && this.shown) {
+                    if (this.windwosWidth > +this.sidenavBreakpoint && this.shown) {
                         this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
                         this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
                         this.hideOverlay();
                         this.setShown(true);
                     }
-                    else if (this.windwosWidth > this.sidenavBreakpoint) {
+                    else if (this.windwosWidth > +this.sidenavBreakpoint) {
                         this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
                         this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
                         this.hideOverlay();
@@ -8942,7 +8941,7 @@ var SidenavComponent = /** @class */ (function () {
                     }
                 }
                 else {
-                    if (this.windwosWidth > this.sidenavBreakpoint) {
+                    if (this.windwosWidth > +this.sidenavBreakpoint) {
                         this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
                         this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
                         this.hideOverlay();
@@ -8988,7 +8987,7 @@ var SidenavComponent = /** @class */ (function () {
         if (this.isBrowser) {
             if (this.sidenavBreakpoint) {
                 if (this.fixed) {
-                    if (this.windwosWidth < this.sidenavBreakpoint + 1) {
+                    if (this.windwosWidth < +this.sidenavBreakpoint + 1) {
                         this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
                         this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
                         this.setShown(true);
@@ -9009,7 +9008,7 @@ var SidenavComponent = /** @class */ (function () {
             }
             else {
                 if (this.fixed) {
-                    if (this.windwosWidth < this.sidenavBreakpoint + 1) {
+                    if (this.windwosWidth < 1441) {
                         this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
                         this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
                         this.setShown(true);
@@ -9037,7 +9036,7 @@ var SidenavComponent = /** @class */ (function () {
         if (this.isBrowser) {
             if (this.sidenavBreakpoint) {
                 if (this.fixed) {
-                    if (this.windwosWidth < this.sidenavBreakpoint + 1) {
+                    if (this.windwosWidth < +this.sidenavBreakpoint + 1) {
                         this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
                         this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
                         this.setShown(false);
@@ -14586,33 +14585,74 @@ DropdownModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+var MdbIconComponent = /** @class */ (function () {
+    function MdbIconComponent() {
+    }
+    return MdbIconComponent;
+}());
+MdbIconComponent.decorators = [
+    { type: core.Component, args: [{
+                selector: 'mdb-icon',
+                template: "<i class=\"fa fa-{{icon}} fa-{{size}} {{class}} prefix\"></i>"
+            },] },
+];
+MdbIconComponent.propDecorators = {
+    iconEl: [{ type: core.ViewChild, args: ['iconEl',] }],
+    icon: [{ type: core.Input }],
+    size: [{ type: core.Input }],
+    class: [{ type: core.Input }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var IconsModule = /** @class */ (function () {
+    function IconsModule() {
+    }
+    return IconsModule;
+}());
+IconsModule.decorators = [
+    { type: core.NgModule, args: [{
+                declarations: [MdbIconComponent],
+                exports: [MdbIconComponent]
+            },] },
+];
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var MdbInputDirective = /** @class */ (function () {
     /**
-     * @param {?} el
-     * @param {?} renderer
+     * @param {?} _elRef
+     * @param {?} _renderer
      * @param {?} platformId
      */
-    function MdbInputDirective(el, renderer, platformId) {
-        this.renderer = renderer;
-        this.minLength = '0';
-        this.maxLength = '524288';
+    function MdbInputDirective(_elRef, _renderer, platformId) {
+        this._elRef = _elRef;
+        this._renderer = _renderer;
+        this.el = null;
+        this.elLabel = null;
+        this.elIcon = null;
         this.mdbValidate = true;
         this.focusCheckbox = true;
         this.focusRadio = true;
         this.isBrowser = false;
         this.isClicked = false;
-        this.el = null;
-        this.elLabel = null;
-        this.elIcon = null;
-        this.el = el;
+        this.el = _elRef;
         this.isBrowser = common.isPlatformBrowser(platformId);
     }
     /**
      * @return {?}
      */
+    MdbInputDirective.prototype.ngOnDestroy = function () {
+        this.changes.disconnect();
+    };
+    /**
+     * @return {?}
+     */
     MdbInputDirective.prototype.onfocus = function () {
         try {
-            this.renderer.addClass(this.elLabel, 'active');
+            this._renderer.addClass(this.elLabel, 'active');
             this.isClicked = true;
         }
         catch (error) {
@@ -14621,200 +14661,12 @@ var MdbInputDirective = /** @class */ (function () {
     /**
      * @return {?}
      */
-    MdbInputDirective.prototype.onBlur = function () {
+    MdbInputDirective.prototype.onblur = function () {
         try {
             if (this.el.nativeElement.value === '') {
-                this.renderer.removeClass(this.elLabel, 'active');
+                this._renderer.removeClass(this.elLabel, 'active');
             }
             this.isClicked = false;
-        }
-        catch (error) {
-        }
-        try {
-            // Validation:
-            if (this.mdbValidate) {
-                var /** @type {?} */ inputType = this.el.nativeElement.type;
-                if (inputType === 'email') {
-                    if (this.customRegex) {
-                        var /** @type {?} */ re = new RegExp(this.el.nativeElement.getAttribute('customRegex'));
-                        if (this.el.nativeElement.length === 0) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                            /*tslint:disable:max-line-length*/
-                        }
-                        else if (re.test(this.el.nativeElement.value) && this.el.nativeElement.value.length >= this.minLength && this.el.nativeElement.value.length <= this.maxLength) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.addClass(this.el.nativeElement, 'counter-success');
-                        }
-                        else if (!re.test(this.el.nativeElement.value) || this.el.nativeElement.value.length < this.minLength || this.el.nativeElement.value.length > this.maxLength) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                            this.renderer.addClass(this.el.nativeElement, 'counter-danger');
-                        }
-                    }
-                    else if (!this.customRegex) {
-                        /*tslint:disable:max-line-length*/
-                        var /** @type {?} */ re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                        if (this.el.nativeElement.length === 0) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                        else if (re.test(this.el.nativeElement.value) && this.el.nativeElement.value.length >= this.minLength && this.el.nativeElement.value.length <= this.maxLength) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.addClass(this.el.nativeElement, 'counter-success');
-                        }
-                        else if (!re.test(this.el.nativeElement.value) || this.el.nativeElement.value.length < this.minLength || this.el.nativeElement.value.length > this.maxLength) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                            this.renderer.addClass(this.el.nativeElement, 'counter-danger');
-                        }
-                    }
-                }
-                else if (inputType === 'password') {
-                    if (this.customRegex) {
-                        var /** @type {?} */ re = new RegExp(this.el.nativeElement.getAttribute('customRegex'));
-                        if (this.el.nativeElement.length === 0) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                            // tslint:disable-next-line:max-line-length
-                        }
-                        else if (this.el.nativeElement.value.match(re) && this.el.nativeElement.value.length >= this.minLength && this.el.nativeElement.value.length <= this.maxLength) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.addClass(this.el.nativeElement, 'counter-success');
-                            // tslint:disable-next-line:max-line-length
-                        }
-                        else if (!this.el.nativeElement.value.match(re) || this.el.nativeElement.value.length < this.minLength || this.el.nativeElement.value.length > this.maxLength) {
-                            this.renderer.addClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                    }
-                    else if (!this.customRegex) {
-                        if (this.el.nativeElement.length === 0) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                            // tslint:disable-next-line:max-line-length
-                        }
-                        else if (this.el.nativeElement.value.match(/^(?=(.*\d){1})(.*\S)(?=.*[a-zA-Z\S])[0-9a-zA-Z\S]/g) && this.el.nativeElement.value.length >= this.minLength && this.el.nativeElement.value.length <= this.maxLength) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.addClass(this.el.nativeElement, 'counter-success');
-                            // tslint:disable-next-line:max-line-length
-                        }
-                        else if (!this.el.nativeElement.value.match(/^(?=(.*\d){1})(.*\S)(?=.*[a-zA-Z\S])[0-9a-zA-Z\S]/g) || this.el.nativeElement.value.length < this.minLength || this.el.nativeElement.value.length > this.maxLength) {
-                            this.renderer.addClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                    }
-                }
-                else if (inputType === 'text') {
-                    if (this.customRegex) {
-                        var /** @type {?} */ re = new RegExp(this.el.nativeElement.getAttribute('customRegex'));
-                        if (this.el.nativeElement.length === 0) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                            // tslint:disable-next-line:max-line-length
-                        }
-                        else if (this.el.nativeElement.value.match(re) && this.el.nativeElement.value.length >= this.minLength && this.el.nativeElement.value.length <= this.maxLength) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.addClass(this.el.nativeElement, 'counter-success');
-                            // tslint:disable-next-line:max-line-length
-                        }
-                        else if (!this.el.nativeElement.value.match(re) || this.el.nativeElement.value.length < this.minLength || this.el.nativeElement.value.length > this.maxLength) {
-                            this.renderer.addClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                    }
-                    else if (!this.customRegex) {
-                        if (this.el.nativeElement.length === 0) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                            // tslint:disable-next-line:max-line-length
-                        }
-                        else if (this.el.nativeElement.value.match(/^[a-zA-Z0-9!@#$%\^&*:;)(+=._-\s]+$/g) && this.el.nativeElement.value.length >= this.minLength && this.el.nativeElement.value.length <= this.maxLength) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.addClass(this.el.nativeElement, 'counter-success');
-                            // tslint:disable-next-line:max-line-length
-                        }
-                        else if (!this.el.nativeElement.value.match(/^[a-zA-Z0-9!@#$%\^&*:;)(+=._-\s]+$/g) || this.el.nativeElement.value.length < this.minLength || this.el.nativeElement.value.length > this.maxLength) {
-                            this.renderer.addClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                    }
-                }
-                else if (inputType === 'submit') {
-                    for (var /** @type {?} */ i = 0; i < this.el.nativeElement.parentElement.length; i++) {
-                        if (this.el.nativeElement.parentElement[i].value == null || this.el.nativeElement.parentElement[i].value === '') {
-                            this.renderer.addClass(this.el.nativeElement.parentElement[i], 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement.parentElement[i], 'counter-success');
-                        }
-                        else if (!this.el.nativeElement.parentElement[i].value == null) {
-                            this.renderer.addClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                    }
-                }
-                else if (inputType === 'tel') {
-                    if (this.customRegex) {
-                        var /** @type {?} */ re = new RegExp(this.el.nativeElement.getAttribute('customRegex'));
-                        if (this.el.nativeElement.length === 0) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                        else if (re.test(this.el.nativeElement.value) && this.el.nativeElement.value.length >= 8 && this.el.nativeElement.value.length <= 20) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.addClass(this.el.nativeElement, 'counter-success');
-                        }
-                        else if (!re.test(this.el.nativeElement.value) || this.el.nativeElement.value.length > 20) {
-                            this.renderer.addClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                    }
-                    else if (!this.customRegex) {
-                        var /** @type {?} */ re = /^(1[ \-\+]{0,3}|\+1[ -\+]{0,3}|\+1|\+)?((\(\+?1-[2-9][0-9]{1,2}\))|(\(\+?[2-8][0-9][0-9]\))|(\(\+?[1-9][0-9]\))|(\(\+?[17]\))|(\([2-9][2-9]\))|([ \-\.]{0,3}[0-9]{2,4}))?([ \-\.][0-9])?([ \-\.]{0,3}[0-9]{2,4}){2,3}$/;
-                        if (this.el.nativeElement.length === 0) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                        else if (re.test(this.el.nativeElement.value) && this.el.nativeElement.value.length >= 8 && this.el.nativeElement.value.length <= 20) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.addClass(this.el.nativeElement, 'counter-success');
-                        }
-                        else if (!re.test(this.el.nativeElement.value) || this.el.nativeElement.value.length > 20) {
-                            this.renderer.addClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                    }
-                }
-                else if (inputType === 'number') {
-                    if (this.customRegex) {
-                        var /** @type {?} */ re = new RegExp(this.el.nativeElement.getAttribute('customRegex'));
-                        if (this.el.nativeElement.length === 0) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                        else if (re.test(this.el.nativeElement.value) && this.el.nativeElement.value.length > 0) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.addClass(this.el.nativeElement, 'counter-success');
-                        }
-                        else if (!re.test(this.el.nativeElement.value) || this.el.nativeElement.value.length < 1) {
-                            this.renderer.addClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                    }
-                    else if (!this.customRegex) {
-                        var /** @type {?} */ re = /^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:(\.|,)\d+)?$/;
-                        if (this.el.nativeElement.length === 0) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                        else if (re.test(this.el.nativeElement.value) && this.el.nativeElement.value.length > 0) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.addClass(this.el.nativeElement, 'counter-success');
-                        }
-                        else if (!re.test(this.el.nativeElement.value) || this.el.nativeElement.value.length < 1) {
-                            this.renderer.addClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                    }
-                }
-            }
         }
         catch (error) {
         }
@@ -14830,27 +14682,82 @@ var MdbInputDirective = /** @class */ (function () {
         }
     };
     /**
+     * @param {?} event
+     * @return {?}
+     */
+    MdbInputDirective.prototype.onkeydown = function (event) {
+        try {
+            if (event.target.type === 'number') {
+                if (event.shiftKey) {
+                    switch (event.keyCode) {
+                        case 38:
+                            event.target.value = +event.target.value + 10;
+                            break;
+                        case 40:
+                            event.target.value = +event.target.value - 10;
+                            break;
+                    }
+                }
+                if (event.altKey) {
+                    switch (event.keyCode) {
+                        case 38:
+                            event.target.value = +event.target.value + 0.1;
+                            break;
+                        case 40:
+                            event.target.value = +event.target.value - 0.1;
+                            break;
+                    }
+                }
+            }
+        }
+        catch (error) { }
+    };
+    /**
      * @return {?}
      */
     MdbInputDirective.prototype.ngOnInit = function () {
+        var _this = this;
         if (this.mdbValidate) {
             // Inititalise a new <span> wrong/right elements and render it below the host component.
-            // this.wrongTextContainer = this.renderer.createElement(this.el.nativeElement.parentElement, 'span');
-            this.wrongTextContainer = this.renderer.createElement('span');
-            this.renderer.addClass(this.wrongTextContainer, 'inputVal');
-            this.renderer.addClass(this.wrongTextContainer, 'text-danger');
-            this.renderer.appendChild(this.el.nativeElement.parentElement, this.wrongTextContainer);
-            var /** @type {?} */ textWrong = this.el.nativeElement.getAttribute('data-error');
+            // this.wrongTextContainer = this._renderer.createElement(this.el.nativeElement.parentElement, 'span');
+            this.wrongTextContainer = this._renderer.createElement('span');
+            this._renderer.addClass(this.wrongTextContainer, 'inputVal');
+            this._renderer.addClass(this.wrongTextContainer, 'text-danger');
+            this._renderer.appendChild(this._elRef.nativeElement.parentElement, this.wrongTextContainer);
+            var /** @type {?} */ textWrong = this._elRef.nativeElement.getAttribute('data-error');
             this.wrongTextContainer.innerHTML = (textWrong ? textWrong : 'wrong');
-            this.renderer.setStyle(this.wrongTextContainer, 'visibility', 'hidden');
-            // this.rightTextContainer = this.renderer.createElement(this.el.nativeElement.parentElement, 'span');
-            this.rightTextContainer = this.renderer.createElement('span');
-            this.renderer.addClass(this.rightTextContainer, 'inputVal');
-            this.renderer.addClass(this.rightTextContainer, 'text-success');
-            this.renderer.appendChild(this.el.nativeElement.parentElement, this.rightTextContainer);
-            var /** @type {?} */ textSuccess = this.el.nativeElement.getAttribute('data-success');
+            this._renderer.setStyle(this.wrongTextContainer, 'visibility', 'hidden');
+            // this.rightTextContainer = this._renderer.createElement(this.el.nativeElement.parentElement, 'span');
+            this.rightTextContainer = this._renderer.createElement('span');
+            this._renderer.addClass(this.rightTextContainer, 'inputVal');
+            this._renderer.addClass(this.rightTextContainer, 'text-success');
+            this._renderer.appendChild(this._elRef.nativeElement.parentElement, this.rightTextContainer);
+            var /** @type {?} */ textSuccess = this._elRef.nativeElement.getAttribute('data-success');
             this.rightTextContainer.innerHTML = (textSuccess ? textSuccess : 'success');
-            this.renderer.setStyle(this.rightTextContainer, 'visibility', 'hidden');
+            this._renderer.setStyle(this.rightTextContainer, 'visibility', 'hidden');
+            this.changes = new MutationObserver(function (mutations) {
+                mutations.forEach(function (mutation) {
+                    if ((mutation.target['classList'].contains('ng-touched')) && /** @type {?} */ (mutation.target['classList'].contains('ng-invalid')) && !(mutation.target['classList'].contains('counter-danger'))) {
+                        _this._renderer.addClass(_this._elRef.nativeElement, 'counter-danger');
+                        _this._renderer.removeClass(_this._elRef.nativeElement, 'counter-success');
+                        _this._renderer.setStyle(_this.rightTextContainer, 'visibility', 'hidden');
+                        _this._renderer.setStyle(_this.wrongTextContainer, 'visibility', 'visible');
+                        _this._renderer.setStyle(_this.rightTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
+                        _this._renderer.setStyle(_this.wrongTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
+                    }
+                    else if ((mutation.target['classList'].contains('ng-touched')) && /** @type {?} */ (mutation.target['classList'].contains('ng-valid')) && !(mutation.target['classList'].contains('counter-success'))) {
+                        _this._renderer.removeClass(_this._elRef.nativeElement, 'counter-danger');
+                        _this._renderer.addClass(_this._elRef.nativeElement, 'counter-success');
+                        _this._renderer.setStyle(_this.rightTextContainer, 'visibility', 'visible');
+                        _this._renderer.setStyle(_this.wrongTextContainer, 'visibility', 'hidden');
+                        _this._renderer.setStyle(_this.rightTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
+                        _this._renderer.setStyle(_this.wrongTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
+                    }
+                });
+            });
+            this.changes.observe(this._elRef.nativeElement, {
+                attributes: true,
+            });
         }
     };
     /**
@@ -14859,10 +14766,10 @@ var MdbInputDirective = /** @class */ (function () {
     MdbInputDirective.prototype.ngAfterViewInit = function () {
         var /** @type {?} */ type = this.el.nativeElement.type;
         if (this.focusCheckbox && type === 'checkbox') {
-            this.renderer.addClass(this.el.nativeElement, 'onFocusSelect');
+            this._renderer.addClass(this.el.nativeElement, 'onFocusSelect');
         }
         if (this.focusRadio && type === 'radio') {
-            this.renderer.addClass(this.el.nativeElement, 'onFocusSelect');
+            this._renderer.addClass(this.el.nativeElement, 'onFocusSelect');
         }
     };
     /**
@@ -14873,7 +14780,7 @@ var MdbInputDirective = /** @class */ (function () {
         this.checkValue();
         // tslint:disable-next-line:max-line-length
         if (this.el.nativeElement.tagName === 'MDB-COMPLETER' && this.el.nativeElement.getAttribute('ng-reflect-model') == null && !this.isClicked) {
-            this.renderer.removeClass(this.elLabel, 'active');
+            this._renderer.removeClass(this.elLabel, 'active');
         }
     };
     /**
@@ -14893,11 +14800,11 @@ var MdbInputDirective = /** @class */ (function () {
             catch (err) { }
             this.elLabel = inputP.querySelector('label[for="' + inputId + '"]') || inputP.querySelector('label');
             if (this.elLabel && this.el.nativeElement.value !== '') {
-                this.renderer.addClass(this.elLabel, 'active');
+                this._renderer.addClass(this.elLabel, 'active');
             }
             this.elIcon = inputP.querySelector('i') || false;
             if (this.elIcon) {
-                this.renderer.addClass(this.elIcon, 'active');
+                this._renderer.addClass(this.elIcon, 'active');
             }
         }
     };
@@ -14909,20 +14816,21 @@ var MdbInputDirective = /** @class */ (function () {
         if (this.elLabel != null) {
             value = this.el.nativeElement.value || '';
             if (value === '') {
-                this.renderer.removeClass(this.elLabel, 'active');
+                this._renderer.removeClass(this.elLabel, 'active');
                 if (this.elIcon) {
-                    this.renderer.removeClass(this.elIcon, 'active');
+                    this._renderer.removeClass(this.elIcon, 'active');
                 }
                 // tslint:disable-next-line:max-line-length
             }
             if (value === '' && this.isClicked ||
                 value === '' && this.el.nativeElement.placeholder ||
                 value === '' && this.el.nativeElement.attributes.placeholder) {
-                this.renderer.addClass(this.elLabel, 'active');
+                this._renderer.addClass(this.elLabel, 'active');
             }
             if (this.el.nativeElement.getAttribute('ng-reflect-model') != null) {
+                // tslint:disable-next-line:max-line-length
                 if (this.el.nativeElement.tagName === 'MDB-COMPLETER' && this.el.nativeElement.getAttribute('ng-reflect-model').length !== 0) {
-                    this.renderer.addClass(this.elLabel, 'active');
+                    this._renderer.addClass(this.elLabel, 'active');
                 }
             }
         }
@@ -14943,15 +14851,14 @@ MdbInputDirective.ctorParameters = function () { return [
 MdbInputDirective.propDecorators = {
     mdbInputDirective: [{ type: core.Input, args: ['mdbInputDirective',] }],
     placeholder: [{ type: core.Input, args: ['placeholder',] }],
-    minLength: [{ type: core.Input, args: ['minLength',] }],
-    maxLength: [{ type: core.Input, args: ['maxLength',] }],
     customRegex: [{ type: core.Input, args: ['customRegex',] }],
     mdbValidate: [{ type: core.Input, args: ['mdbValidate',] }],
     focusCheckbox: [{ type: core.Input, args: ['focusCheckbox',] }],
     focusRadio: [{ type: core.Input, args: ['focusRadio',] }],
     onfocus: [{ type: core.HostListener, args: ['focus',] }],
-    onBlur: [{ type: core.HostListener, args: ['blur',] }],
-    onchange: [{ type: core.HostListener, args: ['change',] }]
+    onblur: [{ type: core.HostListener, args: ['blur',] }],
+    onchange: [{ type: core.HostListener, args: ['change',] }],
+    onkeydown: [{ type: core.HostListener, args: ['keydown', ['$event'],] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -15043,439 +14950,8 @@ var InputsModule = /** @class */ (function () {
 InputsModule.decorators = [
     { type: core.NgModule, args: [{
                 declarations: [MdbInputDirective, EqualValidatorDirective],
-                exports: [MdbInputDirective, EqualValidatorDirective]
-            },] },
-];
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-var DeepDirective = /** @class */ (function () {
-    /**
-     * @param {?} el
-     * @param {?} renderer
-     */
-    function DeepDirective(el, renderer) {
-        this.el = el;
-        this.renderer = renderer;
-    }
-    /**
-     * @return {?}
-     */
-    DeepDirective.prototype.ngAfterViewInit = function () {
-        this.renderer.addClass(this.el.nativeElement, 'onFocusSelect');
-    };
-    return DeepDirective;
-}());
-DeepDirective.decorators = [
-    { type: core.Directive, args: [{
-                selector: '[mdbDeepDirective]',
-            },] },
-];
-/** @nocollapse */
-DeepDirective.ctorParameters = function () { return [
-    { type: core.ElementRef },
-    { type: core.Renderer2 }
-]; };
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-var DeepModule = /** @class */ (function () {
-    function DeepModule() {
-    }
-    /**
-     * @return {?}
-     */
-    DeepModule.forRoot = function () {
-        return { ngModule: DeepModule, providers: [] };
-    };
-    return DeepModule;
-}());
-DeepModule.decorators = [
-    { type: core.NgModule, args: [{
-                declarations: [DeepDirective],
-                exports: [DeepDirective]
-            },] },
-];
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-var InputValidateDirective = /** @class */ (function () {
-    /**
-     * @param {?} _elRef
-     * @param {?} _renderer
-     */
-    function InputValidateDirective(_elRef, _renderer) {
-        this._elRef = _elRef;
-        this._renderer = _renderer;
-        this.value = '';
-        this.minLength = '0';
-        this.maxLength = '524288';
-    }
-    /**
-     * @return {?}
-     */
-    InputValidateDirective.prototype.ngOnInit = function () {
-        // Inititalise a new <span> wrong/right elements and render it below the host component.
-        this.wrongTextContainer = this._renderer.createElement(this._elRef.nativeElement.parentElement, 'span');
-        this._renderer.setElementClass(this.wrongTextContainer, 'inputVal', true);
-        this._renderer.setElementClass(this.wrongTextContainer, 'text-danger', true);
-        var /** @type {?} */ textWrong = this._elRef.nativeElement.getAttribute('data-error');
-        this.wrongTextContainer.innerHTML = (textWrong ? textWrong : 'wrong');
-        this._renderer.setElementStyle(this.wrongTextContainer, 'visibility', 'hidden');
-        this.rightTextContainer = this._renderer.createElement(this._elRef.nativeElement.parentElement, 'span');
-        this._renderer.setElementClass(this.rightTextContainer, 'inputVal', true);
-        this._renderer.setElementClass(this.rightTextContainer, 'text-success', true);
-        var /** @type {?} */ textSuccess = this._elRef.nativeElement.getAttribute('data-success');
-        this.rightTextContainer.innerHTML = (textSuccess ? textSuccess : 'success');
-        this._renderer.setElementStyle(this.rightTextContainer, 'visibility', 'hidden');
-    };
-    /**
-     * @return {?}
-     */
-    InputValidateDirective.prototype.onBlur = function () {
-        var /** @type {?} */ inputType = this._elRef.nativeElement.type;
-        if (inputType === 'email') {
-            if (this.customRegex) {
-                var /** @type {?} */ re = new RegExp(this._elRef.nativeElement.getAttribute('customRegex'));
-                if (this._elRef.nativeElement.length === 0) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                    /*tslint:disable:max-line-length*/
-                }
-                else if (re.test(this._elRef.nativeElement.value) && this._elRef.nativeElement.value.length >= this.minLength && this._elRef.nativeElement.value.length <= this.maxLength) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', true);
-                }
-                else if (!re.test(this._elRef.nativeElement.value) || this._elRef.nativeElement.value.length < this.minLength || this._elRef.nativeElement.value.length > this.maxLength) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', true);
-                }
-            }
-            else if (!this.customRegex) {
-                /*tslint:disable:max-line-length*/
-                var /** @type {?} */ re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                if (this._elRef.nativeElement.length === 0) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-                else if (re.test(this._elRef.nativeElement.value) && this._elRef.nativeElement.value.length >= this.minLength && this._elRef.nativeElement.value.length <= this.maxLength) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', true);
-                }
-                else if (!re.test(this._elRef.nativeElement.value) || this._elRef.nativeElement.value.length < this.minLength || this._elRef.nativeElement.value.length > this.maxLength) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', true);
-                }
-            }
-        }
-        else if (inputType === 'password') {
-            if (this.customRegex) {
-                var /** @type {?} */ re = new RegExp(this._elRef.nativeElement.getAttribute('customRegex'));
-                if (this._elRef.nativeElement.length === 0) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                    // tslint:disable-next-line:max-line-length
-                }
-                else if (this._elRef.nativeElement.value.match(re) && this._elRef.nativeElement.value.length >= this.minLength && this._elRef.nativeElement.value.length <= this.maxLength) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', true);
-                    // tslint:disable-next-line:max-line-length
-                }
-                else if (!this._elRef.nativeElement.value.match(re) || this._elRef.nativeElement.value.length < this.minLength || this._elRef.nativeElement.value.length > this.maxLength) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', true);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-            }
-            else if (!this.customRegex) {
-                if (this._elRef.nativeElement.length === 0) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                    // tslint:disable-next-line:max-line-length
-                }
-                else if (this._elRef.nativeElement.value.match(/^(?=(.*\d){1})(.*\S)(?=.*[a-zA-Z\S])[0-9a-zA-Z\S]/g) && this._elRef.nativeElement.value.length >= this.minLength && this._elRef.nativeElement.value.length <= this.maxLength) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', true);
-                    // tslint:disable-next-line:max-line-length
-                }
-                else if (!this._elRef.nativeElement.value.match(/^(?=(.*\d){1})(.*\S)(?=.*[a-zA-Z\S])[0-9a-zA-Z\S]/g) || this._elRef.nativeElement.value.length < this.minLength || this._elRef.nativeElement.value.length > this.maxLength) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', true);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-            }
-        }
-        else if (inputType === 'text') {
-            if (this.customRegex) {
-                var /** @type {?} */ re = new RegExp(this._elRef.nativeElement.getAttribute('customRegex'));
-                if (this._elRef.nativeElement.length === 0) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                    // tslint:disable-next-line:max-line-length
-                }
-                else if (this._elRef.nativeElement.value.match(re) && this._elRef.nativeElement.value.length >= this.minLength && this._elRef.nativeElement.value.length <= this.maxLength) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', true);
-                    // tslint:disable-next-line:max-line-length
-                }
-                else if (!this._elRef.nativeElement.value.match(re) || this._elRef.nativeElement.value.length < this.minLength || this._elRef.nativeElement.value.length > this.maxLength) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', true);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-            }
-            else if (!this.customRegex) {
-                if (this._elRef.nativeElement.length === 0) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                    // tslint:disable-next-line:max-line-length
-                }
-                else if (this._elRef.nativeElement.value.match(/^[a-zA-Z0-9]+$/g) && this._elRef.nativeElement.value.length >= this.minLength && this._elRef.nativeElement.value.length <= this.maxLength) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', true);
-                    // tslint:disable-next-line:max-line-length
-                }
-                else if (!this._elRef.nativeElement.value.match(/^[a-zA-Z0-9]+$/g) || this._elRef.nativeElement.value.length < this.minLength || this._elRef.nativeElement.value.length > this.maxLength) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', true);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-            }
-        }
-        else if (inputType === 'submit') {
-            for (var /** @type {?} */ i = 0; i < this._elRef.nativeElement.parentElement.length; i++) {
-                if (this._elRef.nativeElement.parentElement[i].value == null || this._elRef.nativeElement.parentElement[i].value === '') {
-                    this._renderer.setElementClass(this._elRef.nativeElement.parentElement[i], 'counter-danger', true);
-                    this._renderer.setElementClass(this._elRef.nativeElement.parentElement[i], 'counter-success', false);
-                }
-                else if (!this._elRef.nativeElement.parentElement[i].value == null) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', true);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-            }
-        }
-        else if (inputType === 'tel') {
-            if (this.customRegex) {
-                var /** @type {?} */ re = new RegExp(this._elRef.nativeElement.getAttribute('customRegex'));
-                if (this._elRef.nativeElement.length === 0) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-                else if (re.test(this._elRef.nativeElement.value) && this._elRef.nativeElement.value.length >= 8 && this._elRef.nativeElement.value.length <= 20) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', true);
-                }
-                else if (!re.test(this._elRef.nativeElement.value) || this._elRef.nativeElement.value.length > 20) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', true);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-            }
-            else if (!this.customRegex) {
-                var /** @type {?} */ re = /^(1[ \-\+]{0,3}|\+1[ -\+]{0,3}|\+1|\+)?((\(\+?1-[2-9][0-9]{1,2}\))|(\(\+?[2-8][0-9][0-9]\))|(\(\+?[1-9][0-9]\))|(\(\+?[17]\))|(\([2-9][2-9]\))|([ \-\.]{0,3}[0-9]{2,4}))?([ \-\.][0-9])?([ \-\.]{0,3}[0-9]{2,4}){2,3}$/;
-                if (this._elRef.nativeElement.length === 0) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-                else if (re.test(this._elRef.nativeElement.value) && this._elRef.nativeElement.value.length >= 8 && this._elRef.nativeElement.value.length <= 20) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', true);
-                }
-                else if (!re.test(this._elRef.nativeElement.value) || this._elRef.nativeElement.value.length > 20) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', true);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-            }
-        }
-        else if (inputType === 'number') {
-            if (this.customRegex) {
-                var /** @type {?} */ re = new RegExp(this._elRef.nativeElement.getAttribute('customRegex'));
-                if (this._elRef.nativeElement.length === 0) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-                else if (re.test(this._elRef.nativeElement.value) && this._elRef.nativeElement.value.length > 0) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', true);
-                }
-                else if (!re.test(this._elRef.nativeElement.value) || this._elRef.nativeElement.value.length < 1) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', true);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-            }
-            else if (!this.customRegex) {
-                var /** @type {?} */ re = /^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:(\.|,)\d+)?$/;
-                if (this._elRef.nativeElement.length === 0) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-                else if (re.test(this._elRef.nativeElement.value) && this._elRef.nativeElement.value.length > 0) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', true);
-                }
-                else if (!re.test(this._elRef.nativeElement.value) || this._elRef.nativeElement.value.length < 1) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', true);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-            }
-        }
-    };
-    return InputValidateDirective;
-}());
-InputValidateDirective.decorators = [
-    { type: core.Directive, args: [{
-                selector: '[mdbInputValidate]',
-            },] },
-];
-/** @nocollapse */
-InputValidateDirective.ctorParameters = function () { return [
-    { type: core.ElementRef },
-    { type: core.Renderer }
-]; };
-InputValidateDirective.propDecorators = {
-    value: [{ type: core.Input }],
-    minLength: [{ type: core.Input, args: ['minLength',] }],
-    maxLength: [{ type: core.Input, args: ['maxLength',] }],
-    customRegex: [{ type: core.Input, args: ['customRegex',] }],
-    onBlur: [{ type: core.HostListener, args: ['blur', ['$event'],] }]
-};
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-var ActiveDirective = /** @class */ (function () {
-    /**
-     * @param {?} el
-     * @param {?} renderer
-     * @param {?} platformId
-     */
-    function ActiveDirective(el, renderer, platformId) {
-        this.renderer = renderer;
-        this.isBrowser = false;
-        this.isClicked = false;
-        this.el = null;
-        this.elLabel = null;
-        this.elIcon = null;
-        this.el = el;
-        this.isBrowser = common.isPlatformBrowser(platformId);
-    }
-    /**
-     * @return {?}
-     */
-    ActiveDirective.prototype.onClick = function () {
-        this.initComponent();
-        this.isClicked = true;
-    };
-    /**
-     * @return {?}
-     */
-    ActiveDirective.prototype.Click = function () {
-        this.isClicked = true;
-    };
-    /**
-     * @return {?}
-     */
-    ActiveDirective.prototype.onBlur = function () {
-        this.checkValue();
-        this.isClicked = false;
-    };
-    /**
-     * @return {?}
-     */
-    ActiveDirective.prototype.ngAfterViewInit = function () {
-        var _this = this;
-        this.initComponent();
-        setTimeout(function () {
-            _this.checkValue();
-        }, 0);
-    };
-    /**
-     * @return {?}
-     */
-    ActiveDirective.prototype.ngAfterViewChecked = function () {
-        this.initComponent();
-        this.checkValue();
-    };
-    /**
-     * @return {?}
-     */
-    ActiveDirective.prototype.initComponent = function () {
-        var /** @type {?} */ inputId;
-        var /** @type {?} */ inputP;
-        if (this.isBrowser) {
-            try {
-                inputId = this.el.nativeElement.id;
-            }
-            catch (err) { }
-            try {
-                inputP = this.el.nativeElement.parentNode;
-            }
-            catch (err) { }
-            this.elLabel = inputP.querySelector('label[for="' + inputId + '"]') || inputP.querySelector('label');
-            if (this.elLabel != null) {
-                this.renderer.addClass(this.elLabel, 'active');
-            }
-            this.elIcon = inputP.querySelector('i') || false;
-            if (this.elIcon) {
-                this.renderer.addClass(this.elIcon, 'active');
-            }
-        }
-    };
-    /**
-     * @return {?}
-     */
-    ActiveDirective.prototype.checkValue = function () {
-        var /** @type {?} */ value = '';
-        if (this.elLabel != null) {
-            value = this.el.nativeElement.value || '';
-            if (value === '') {
-                this.renderer.removeClass(this.elLabel, 'active');
-                if (this.elIcon) {
-                    this.renderer.removeClass(this.elIcon, 'active');
-                }
-                // tslint:disable-next-line:max-line-length
-            }
-            if (value === '' && this.isClicked || value === '' && this.el.nativeElement.placeholder || value === '' && this.el.nativeElement.attributes.placeholder) {
-                this.renderer.addClass(this.elLabel, 'active');
-            }
-        }
-    };
-    return ActiveDirective;
-}());
-ActiveDirective.decorators = [
-    { type: core.Directive, args: [{
-                selector: '[mdbActive]'
-            },] },
-];
-/** @nocollapse */
-ActiveDirective.ctorParameters = function () { return [
-    { type: core.ElementRef },
-    { type: core.Renderer2 },
-    { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
-]; };
-ActiveDirective.propDecorators = {
-    mdbActive: [{ type: core.Input }],
-    onClick: [{ type: core.HostListener, args: ['focus', ['$event'],] }],
-    Click: [{ type: core.HostListener, args: ['click', ['$event'],] }],
-    onBlur: [{ type: core.HostListener, args: ['blur', ['$event'],] }]
-};
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-var ActiveModule = /** @class */ (function () {
-    function ActiveModule() {
-    }
-    /**
-     * @return {?}
-     */
-    ActiveModule.forRoot = function () {
-        return { ngModule: ActiveModule, providers: [] };
-    };
-    return ActiveModule;
-}());
-ActiveModule.decorators = [
-    { type: core.NgModule, args: [{
-                declarations: [ActiveDirective, InputValidateDirective],
-                exports: [ActiveDirective, InputValidateDirective]
+                exports: [MdbInputDirective, EqualValidatorDirective],
+                schemas: [core.NO_ERRORS_SCHEMA],
             },] },
 ];
 /**
@@ -17459,13 +16935,15 @@ var BsComponentRef = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var MODULES = [
-    DeepModule,
     ButtonsModule,
     RippleModule,
     WavesModule,
     InputsModule,
-    ActiveModule,
     NavbarModule,
     DropdownModule,
     CarouselModule,
@@ -17474,6 +16952,7 @@ var MODULES = [
     ModalModule,
     TooltipModule,
     PopoverModule,
+    IconsModule
 ];
 var MDBRootModule = /** @class */ (function () {
     function MDBRootModule() {
@@ -17484,11 +16963,9 @@ MDBRootModule.decorators = [
     { type: core.NgModule, args: [{
                 imports: [
                     ButtonsModule,
-                    DeepModule,
                     RippleModule.forRoot(),
                     WavesModule.forRoot(),
                     InputsModule.forRoot(),
-                    ActiveModule.forRoot(),
                     NavbarModule,
                     DropdownModule.forRoot(),
                     CarouselModule.forRoot(),
@@ -17497,6 +16974,7 @@ MDBRootModule.decorators = [
                     ModalModule.forRoot(),
                     TooltipModule.forRoot(),
                     PopoverModule.forRoot(),
+                    IconsModule
                 ],
                 exports: MODULES,
                 schemas: [core.NO_ERRORS_SCHEMA]
@@ -17592,7 +17070,7 @@ var MODULES$1 = [
     AccordionModule,
     StickyContentModule,
     SmoothscrollModule,
-    CharCounterModule
+    CharCounterModule,
 ];
 var MDBRootModulePro = /** @class */ (function () {
     function MDBRootModulePro() {
@@ -17616,7 +17094,7 @@ MDBRootModulePro.decorators = [
                     AccordionModule,
                     StickyContentModule,
                     SmoothscrollModule.forRoot(),
-                    CharCounterModule.forRoot()
+                    CharCounterModule.forRoot(),
                 ],
                 exports: [MODULES$1],
                 providers: [],
@@ -17828,14 +17306,11 @@ exports.BsDropdownConfig = BsDropdownConfig;
 exports.BsDropdownDirective = BsDropdownDirective;
 exports.BsDropdownState = BsDropdownState;
 exports.DropdownModule = DropdownModule;
+exports.IconsModule = IconsModule;
+exports.MdbIconComponent = MdbIconComponent;
 exports.InputsModule = InputsModule;
 exports.MdbInputDirective = MdbInputDirective;
-exports.DeepModule = DeepModule;
-exports.DeepDirective = DeepDirective;
-exports.InputValidateDirective = InputValidateDirective;
 exports.EqualValidatorDirective = EqualValidatorDirective;
-exports.ActiveDirective = ActiveDirective;
-exports.ActiveModule = ActiveModule;
 exports.ModalDirective = ModalDirective;
 exports.ModalOptions = ModalOptions;
 exports.MDBModalRef = MDBModalRef;
@@ -17916,35 +17391,32 @@ exports.ɵde1 = BsDropdownConfig;
 exports.ɵdf1 = BsDropdownDirective;
 exports.ɵdh1 = DropdownModule;
 exports.ɵdg1 = BsDropdownState;
-exports.ɵdn1 = ActiveDirective;
-exports.ɵdo1 = ActiveModule;
-exports.ɵdl1 = DeepDirective;
-exports.ɵdk1 = DeepModule;
-exports.ɵdm1 = InputValidateDirective;
-exports.ɵdi1 = InputsModule;
-exports.ɵdj1 = MdbInputDirective;
-exports.ɵek1 = MDBRootModule;
-exports.ɵdp1 = ModalDirective;
-exports.ɵdv1 = ModalModule;
-exports.ɵdq1 = ModalOptions;
-exports.ɵdr1 = MDBModalService;
-exports.ɵdt1 = ModalBackdropComponent;
-exports.ɵds1 = ModalBackdropOptions;
-exports.ɵdu1 = ModalContainerComponent;
-exports.ɵdw1 = NavbarComponent;
-exports.ɵdx1 = NavbarModule;
-exports.ɵdy1 = PopoverContainerComponent;
-exports.ɵdz1 = PopoverConfig;
-exports.ɵea1 = PopoverDirective;
-exports.ɵeb1 = PopoverModule;
-exports.ɵec1 = RippleDirective;
-exports.ɵed1 = RippleModule;
-exports.ɵeg1 = TooltipContainerComponent;
-exports.ɵeh1 = TooltipDirective;
-exports.ɵej1 = TooltipModule;
-exports.ɵei1 = TooltipConfig;
-exports.ɵee1 = WavesDirective;
-exports.ɵef1 = WavesModule;
+exports.ɵdj1 = MdbIconComponent;
+exports.ɵdi1 = IconsModule;
+exports.ɵdk1 = InputsModule;
+exports.ɵdl1 = MdbInputDirective;
+exports.ɵeh1 = MDBRootModule;
+exports.ɵdm1 = ModalDirective;
+exports.ɵds1 = ModalModule;
+exports.ɵdn1 = ModalOptions;
+exports.ɵdo1 = MDBModalService;
+exports.ɵdq1 = ModalBackdropComponent;
+exports.ɵdp1 = ModalBackdropOptions;
+exports.ɵdr1 = ModalContainerComponent;
+exports.ɵdt1 = NavbarComponent;
+exports.ɵdu1 = NavbarModule;
+exports.ɵdv1 = PopoverContainerComponent;
+exports.ɵdw1 = PopoverConfig;
+exports.ɵdx1 = PopoverDirective;
+exports.ɵdy1 = PopoverModule;
+exports.ɵdz1 = RippleDirective;
+exports.ɵea1 = RippleModule;
+exports.ɵed1 = TooltipContainerComponent;
+exports.ɵee1 = TooltipDirective;
+exports.ɵeg1 = TooltipModule;
+exports.ɵef1 = TooltipConfig;
+exports.ɵeb1 = WavesDirective;
+exports.ɵec1 = WavesModule;
 exports.ɵc1 = SBItemComponent;
 exports.ɵa1 = SBItemBodyComponent;
 exports.ɵb1 = SBItemHeadComponent;
@@ -17985,11 +17457,11 @@ exports.ɵbl1 = SelectDropdownComponent;
 exports.ɵbm1 = SELECT_VALUE_ACCESSOR;
 exports.ɵbn1 = SelectComponent;
 exports.ɵbo1 = SelectModule;
-exports.ɵel1 = MDBRootModulePro;
+exports.ɵei1 = MDBRootModulePro;
 exports.ɵbp1 = BarComponent;
 exports.ɵbv1 = ProgressBars;
-exports.ɵem1 = MdProgressBarModule;
-exports.ɵen1 = MdProgressSpinnerModule;
+exports.ɵej1 = MdProgressBarModule;
+exports.ɵek1 = MdProgressSpinnerModule;
 exports.ɵbq1 = ProgressSpinnerComponent;
 exports.ɵbr1 = ProgressDirective;
 exports.ɵbs1 = ProgressbarComponent;

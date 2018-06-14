@@ -7,7 +7,7 @@ export declare class SidenavComponent implements AfterViewInit {
     isBrowser: any;
     class: string;
     fixed: boolean;
-    sidenavBreakpoint: number;
+    sidenavBreakpoint: any;
     sideNav: ElementRef;
     overlay: any;
     constructor(platformId: string, el: ElementRef, renderer: Renderer2);

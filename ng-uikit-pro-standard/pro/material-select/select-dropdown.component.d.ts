@@ -3,7 +3,7 @@ import { Option } from './option';
 import { OptionList } from './option-list';
 export declare class SelectDropdownComponent implements AfterViewInit, OnChanges, OnInit {
     private _elementRef;
-    private _renderer;
+    _renderer: Renderer2;
     private cdRef;
     filterEnabled: boolean;
     highlightColor: string;
