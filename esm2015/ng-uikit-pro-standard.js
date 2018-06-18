@@ -45,10 +45,10 @@ SBItemBodyComponent.decorators = [
 ];
 /** @nocollapse */
 SBItemBodyComponent.ctorParameters = () => [
-    { type: Renderer2, },
+    { type: Renderer2 }
 ];
 SBItemBodyComponent.propDecorators = {
-    "bodyEl": [{ type: ViewChild, args: ['body',] },],
+    bodyEl: [{ type: ViewChild, args: ['body',] }]
 };
 
 /**
@@ -101,8 +101,8 @@ SBItemComponent.decorators = [
 /** @nocollapse */
 SBItemComponent.ctorParameters = () => [];
 SBItemComponent.propDecorators = {
-    "collapsed": [{ type: Input },],
-    "body": [{ type: ContentChild, args: [SBItemBodyComponent,] },],
+    collapsed: [{ type: Input }],
+    body: [{ type: ContentChild, args: [SBItemBodyComponent,] }]
 };
 
 /**
@@ -135,7 +135,7 @@ SBItemHeadComponent.decorators = [
 ];
 /** @nocollapse */
 SBItemHeadComponent.ctorParameters = () => [
-    { type: SBItemComponent, },
+    { type: SBItemComponent }
 ];
 
 /**
@@ -172,8 +172,8 @@ SqueezeBoxComponent.decorators = [
 /** @nocollapse */
 SqueezeBoxComponent.ctorParameters = () => [];
 SqueezeBoxComponent.propDecorators = {
-    "multiple": [{ type: Input },],
-    "items": [{ type: ContentChildren, args: [forwardRef(() => SBItemComponent),] },],
+    multiple: [{ type: Input }],
+    items: [{ type: ContentChildren, args: [forwardRef(() => SBItemComponent),] }]
 };
 
 /**
@@ -508,9 +508,9 @@ Overlay.decorators = [
 ];
 /** @nocollapse */
 Overlay.ctorParameters = () => [
-    { type: OverlayContainer, },
-    { type: ComponentFactoryResolver, },
-    { type: ApplicationRef, },
+    { type: OverlayContainer },
+    { type: ComponentFactoryResolver },
+    { type: ApplicationRef }
 ];
 /**
  * Providers for Overlay and its related injectables.
@@ -747,15 +747,15 @@ ToastComponent.decorators = [
 ];
 /** @nocollapse */
 ToastComponent.ctorParameters = () => [
-    { type: ToastPackage, },
-    { type: ApplicationRef, },
+    { type: ToastPackage },
+    { type: ApplicationRef }
 ];
 ToastComponent.propDecorators = {
-    "toastClasses": [{ type: HostBinding, args: ['class',] },],
-    "state": [{ type: HostBinding, args: ['@flyInOut',] },],
-    "tapToast": [{ type: HostListener, args: ['click',] },],
-    "stickAround": [{ type: HostListener, args: ['mouseenter',] },],
-    "delayedHideToast": [{ type: HostListener, args: ['mouseleave',] },],
+    toastClasses: [{ type: HostBinding, args: ['class',] }],
+    state: [{ type: HostBinding, args: ['@flyInOut',] }],
+    tapToast: [{ type: HostListener, args: ['click',] }],
+    stickAround: [{ type: HostListener, args: ['mouseenter',] }],
+    delayedHideToast: [{ type: HostListener, args: ['mouseleave',] }]
 };
 
 /**
@@ -784,7 +784,7 @@ ToastContainerDirective.decorators = [
 ];
 /** @nocollapse */
 ToastContainerDirective.ctorParameters = () => [
-    { type: ElementRef, },
+    { type: ElementRef }
 ];
 class ToastContainerModule {
     /**
@@ -1190,10 +1190,10 @@ ToastService.decorators = [
 ];
 /** @nocollapse */
 ToastService.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [TOAST_CONFIG,] },] },
-    { type: Overlay, },
-    { type: Injector, },
-    { type: DomSanitizer, },
+    { type: undefined, decorators: [{ type: Inject, args: [TOAST_CONFIG,] }] },
+    { type: Overlay },
+    { type: Injector },
+    { type: DomSanitizer }
 ];
 
 /**
@@ -1235,7 +1235,7 @@ ToastModule.decorators = [
 ];
 /** @nocollapse */
 ToastModule.ctorParameters = () => [
-    { type: ToastModule, decorators: [{ type: Optional }, { type: SkipSelf },] },
+    { type: ToastModule, decorators: [{ type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -1351,12 +1351,11 @@ CompleterListItemComponent.decorators = [
                 template: "<span class=\"completer-list-item-holder\" [ngClass]=\"{'completer-title': type === 'title', 'completer-description': type === 'description'}\" > <span class=\"completer-list-item\" *ngFor=\"let part of parts\" [ngClass]=\"part.isMatch ? matchClass : null\">{{part.text}}</span> </span> "
             },] },
 ];
-/** @nocollapse */
 CompleterListItemComponent.propDecorators = {
-    "text": [{ type: Input },],
-    "searchStr": [{ type: Input },],
-    "matchClass": [{ type: Input },],
-    "type": [{ type: Input },],
+    text: [{ type: Input }],
+    searchStr: [{ type: Input }],
+    matchClass: [{ type: Input }],
+    type: [{ type: Input }]
 };
 
 /**
@@ -1539,11 +1538,10 @@ MdbCompleterDirective.decorators = [
                 selector: '[mdbCompleter]',
             },] },
 ];
-/** @nocollapse */
 MdbCompleterDirective.propDecorators = {
-    "selected": [{ type: Output },],
-    "highlighted": [{ type: Output },],
-    "opened": [{ type: Output },],
+    selected: [{ type: Output }],
+    highlighted: [{ type: Output }],
+    opened: [{ type: Output }]
 };
 
 /**
@@ -1886,12 +1884,12 @@ class CompleterService {
      * @param {?} localDataFactory
      * @param {?} remoteDataFactory
      */
-    constructor(localDataFactory, 
+    constructor(localDataFactory, // Using any instead of () => LocalData because on AoT errors
     // Using any instead of () => LocalData because on AoT errors
     remoteDataFactory // Using any instead of () => LocalData because on AoT errors
     ) {
         this.localDataFactory = localDataFactory;
-        this.remoteDataFactory = remoteDataFactory;
+        this.remoteDataFactory = remoteDataFactory; // Using any instead of () => LocalData because on AoT errors
     }
     /**
      * @param {?} data
@@ -1925,8 +1923,8 @@ CompleterService.decorators = [
 ];
 /** @nocollapse */
 CompleterService.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [LocalData,] },] },
-    { type: undefined, decorators: [{ type: Inject, args: [RemoteData,] },] },
+    { type: undefined, decorators: [{ type: Inject, args: [LocalData,] }] },
+    { type: undefined, decorators: [{ type: Inject, args: [RemoteData,] }] }
 ];
 
 /**
@@ -2228,48 +2226,48 @@ CompleterComponent.decorators = [
 ];
 /** @nocollapse */
 CompleterComponent.ctorParameters = () => [
-    { type: CompleterService, },
-    { type: Renderer2, },
-    { type: ElementRef, },
+    { type: CompleterService },
+    { type: Renderer2 },
+    { type: ElementRef }
 ];
 CompleterComponent.propDecorators = {
-    "dataService": [{ type: Input },],
-    "inputName": [{ type: Input },],
-    "inputId": [{ type: Input },],
-    "pause": [{ type: Input },],
-    "minSearchLength": [{ type: Input },],
-    "maxChars": [{ type: Input },],
-    "overrideSuggested": [{ type: Input },],
-    "clearSelected": [{ type: Input },],
-    "clearUnselected": [{ type: Input },],
-    "fillHighlighted": [{ type: Input },],
-    "placeholder": [{ type: Input },],
-    "matchClass": [{ type: Input },],
-    "fieldTabindex": [{ type: Input },],
-    "autoMatch": [{ type: Input },],
-    "disableInput": [{ type: Input },],
-    "inputClass": [{ type: Input },],
-    "autofocus": [{ type: Input },],
-    "openOnFocus": [{ type: Input },],
-    "initialValue": [{ type: Input },],
-    "autoHighlight": [{ type: Input },],
-    "label": [{ type: Input },],
-    "selected": [{ type: Output },],
-    "highlighted": [{ type: Output },],
-    "blur": [{ type: Output },],
-    "focusEvent": [{ type: Output },],
-    "opened": [{ type: Output },],
-    "keyup": [{ type: Output },],
-    "keydown": [{ type: Output },],
-    "completer": [{ type: ViewChild, args: [MdbCompleterDirective,] },],
-    "mdbInput": [{ type: ViewChild, args: ['mdbInput',] },],
-    "onkeyup": [{ type: HostListener, args: ['keyup', ['$event'],] },],
-    "onclick": [{ type: HostListener, args: ['click', ['$event'],] },],
-    "onFocusIn": [{ type: HostListener, args: ['focusin', ['$event'],] },],
-    "onFocusOut": [{ type: HostListener, args: ['focusout', ['$event'],] },],
-    "datasource": [{ type: Input },],
-    "textNoResults": [{ type: Input },],
-    "textSearching": [{ type: Input },],
+    dataService: [{ type: Input }],
+    inputName: [{ type: Input }],
+    inputId: [{ type: Input }],
+    pause: [{ type: Input }],
+    minSearchLength: [{ type: Input }],
+    maxChars: [{ type: Input }],
+    overrideSuggested: [{ type: Input }],
+    clearSelected: [{ type: Input }],
+    clearUnselected: [{ type: Input }],
+    fillHighlighted: [{ type: Input }],
+    placeholder: [{ type: Input }],
+    matchClass: [{ type: Input }],
+    fieldTabindex: [{ type: Input }],
+    autoMatch: [{ type: Input }],
+    disableInput: [{ type: Input }],
+    inputClass: [{ type: Input }],
+    autofocus: [{ type: Input }],
+    openOnFocus: [{ type: Input }],
+    initialValue: [{ type: Input }],
+    autoHighlight: [{ type: Input }],
+    label: [{ type: Input }],
+    selected: [{ type: Output }],
+    highlighted: [{ type: Output }],
+    blur: [{ type: Output }],
+    focusEvent: [{ type: Output }],
+    opened: [{ type: Output }],
+    keyup: [{ type: Output }],
+    keydown: [{ type: Output }],
+    completer: [{ type: ViewChild, args: [MdbCompleterDirective,] }],
+    mdbInput: [{ type: ViewChild, args: ['mdbInput',] }],
+    onkeyup: [{ type: HostListener, args: ['keyup', ['$event'],] }],
+    onclick: [{ type: HostListener, args: ['click', ['$event'],] }],
+    onFocusIn: [{ type: HostListener, args: ['focusin', ['$event'],] }],
+    onFocusOut: [{ type: HostListener, args: ['focusout', ['$event'],] }],
+    datasource: [{ type: Input }],
+    textNoResults: [{ type: Input }],
+    textSearching: [{ type: Input }]
 };
 
 /**
@@ -2472,11 +2470,11 @@ MdbDropdownDirective.decorators = [
 ];
 /** @nocollapse */
 MdbDropdownDirective.ctorParameters = () => [
-    { type: MdbCompleterDirective, decorators: [{ type: Host },] },
-    { type: ElementRef, },
+    { type: MdbCompleterDirective, decorators: [{ type: Host }] },
+    { type: ElementRef }
 ];
 MdbDropdownDirective.propDecorators = {
-    "onMouseDown": [{ type: HostListener, args: ['mousedown', ['$event'],] },],
+    onMouseDown: [{ type: HostListener, args: ['mousedown', ['$event'],] }]
 };
 
 /**
@@ -2690,21 +2688,21 @@ MdbInputCompleteDirective.decorators = [
 ];
 /** @nocollapse */
 MdbInputCompleteDirective.ctorParameters = () => [
-    { type: MdbCompleterDirective, decorators: [{ type: Host },] },
-    { type: NgModel, },
-    { type: ElementRef, },
+    { type: MdbCompleterDirective, decorators: [{ type: Host }] },
+    { type: NgModel },
+    { type: ElementRef }
 ];
 MdbInputCompleteDirective.propDecorators = {
-    "clearSelected": [{ type: Input, args: ['clearSelected',] },],
-    "clearUnselected": [{ type: Input, args: ['clearUnselected',] },],
-    "overrideSuggested": [{ type: Input, args: ['overrideSuggested',] },],
-    "fillHighlighted": [{ type: Input, args: ['fillHighlighted',] },],
-    "openOnFocus": [{ type: Input, args: ['openOnFocus',] },],
-    "ngModelChange": [{ type: Output },],
-    "keyupHandler": [{ type: HostListener, args: ['keyup', ['$event'],] },],
-    "keydownHandler": [{ type: HostListener, args: ['keydown', ['$event'],] },],
-    "onBlur": [{ type: HostListener, args: ['blur', ['$event'],] },],
-    "onfocus": [{ type: HostListener, args: ['focus', ['$event'],] },],
+    clearSelected: [{ type: Input, args: ['clearSelected',] }],
+    clearUnselected: [{ type: Input, args: ['clearUnselected',] }],
+    overrideSuggested: [{ type: Input, args: ['overrideSuggested',] }],
+    fillHighlighted: [{ type: Input, args: ['fillHighlighted',] }],
+    openOnFocus: [{ type: Input, args: ['openOnFocus',] }],
+    ngModelChange: [{ type: Output }],
+    keyupHandler: [{ type: HostListener, args: ['keyup', ['$event'],] }],
+    keydownHandler: [{ type: HostListener, args: ['keydown', ['$event'],] }],
+    onBlur: [{ type: HostListener, args: ['blur', ['$event'],] }],
+    onfocus: [{ type: HostListener, args: ['focus', ['$event'],] }]
 };
 
 /**
@@ -2931,18 +2929,18 @@ MdbListDirective.decorators = [
 ];
 /** @nocollapse */
 MdbListDirective.ctorParameters = () => [
-    { type: MdbCompleterDirective, decorators: [{ type: Host },] },
-    { type: TemplateRef, },
-    { type: ViewContainerRef, },
-    { type: ChangeDetectorRef, },
+    { type: MdbCompleterDirective, decorators: [{ type: Host }] },
+    { type: TemplateRef },
+    { type: ViewContainerRef },
+    { type: ChangeDetectorRef }
 ];
 MdbListDirective.propDecorators = {
-    "mdbListMinSearchLength": [{ type: Input },],
-    "mdbListPause": [{ type: Input },],
-    "mdbListAutoMatch": [{ type: Input },],
-    "mdbListAutoHighlight": [{ type: Input },],
-    "dataService": [{ type: Input, args: ['mdbList',] },],
-    "initialValue": [{ type: Input, args: ['mdbListInitialValue',] },],
+    mdbListMinSearchLength: [{ type: Input }],
+    mdbListPause: [{ type: Input }],
+    mdbListAutoMatch: [{ type: Input }],
+    mdbListAutoHighlight: [{ type: Input }],
+    dataService: [{ type: Input, args: ['mdbList',] }],
+    initialValue: [{ type: Input, args: ['mdbListInitialValue',] }]
 };
 
 /**
@@ -3026,15 +3024,15 @@ MdbRowDirective.decorators = [
 ];
 /** @nocollapse */
 MdbRowDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
-    { type: MdbDropdownDirective, decorators: [{ type: Host },] },
+    { type: ElementRef },
+    { type: Renderer2 },
+    { type: MdbDropdownDirective, decorators: [{ type: Host }] }
 ];
 MdbRowDirective.propDecorators = {
-    "mdbRow": [{ type: Input },],
-    "dataItem": [{ type: Input },],
-    "onClick": [{ type: HostListener, args: ['click', ['$event'],] },],
-    "onMouseEnter": [{ type: HostListener, args: ['mouseenter', ['$event'],] },],
+    mdbRow: [{ type: Input }],
+    dataItem: [{ type: Input }],
+    onClick: [{ type: HostListener, args: ['click', ['$event'],] }],
+    onMouseEnter: [{ type: HostListener, args: ['mouseenter', ['$event'],] }]
 };
 
 /**
@@ -3280,12 +3278,12 @@ InputAutoFillDirective.decorators = [
 ];
 /** @nocollapse */
 InputAutoFillDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
+    { type: ElementRef },
+    { type: Renderer2 }
 ];
 InputAutoFillDirective.propDecorators = {
-    "opts": [{ type: Input },],
-    "onKeyUp": [{ type: HostListener, args: ['keyup', ['$event'],] },],
+    opts: [{ type: Input }],
+    onKeyUp: [{ type: HostListener, args: ['keyup', ['$event'],] }]
 };
 
 /**
@@ -3322,10 +3320,10 @@ FocusDirective.decorators = [
 ];
 /** @nocollapse */
 FocusDirective.ctorParameters = () => [
-    { type: ElementRef, },
+    { type: ElementRef }
 ];
 FocusDirective.propDecorators = {
-    "value": [{ type: Input },],
+    value: [{ type: Input }]
 };
 
 /**
@@ -4689,28 +4687,30 @@ MDBDatePickerComponent.decorators = [
 ];
 /** @nocollapse */
 MDBDatePickerComponent.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
-    { type: LocaleService, },
-    { type: UtilService, },
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
+    { type: ElementRef },
+    { type: 
+        // ChangeDetectorRef,
+        Renderer2 },
+    { type: LocaleService },
+    { type: UtilService },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
 ];
 MDBDatePickerComponent.propDecorators = {
-    "options": [{ type: Input },],
-    "locale": [{ type: Input },],
-    "defaultMonth": [{ type: Input },],
-    "selDate": [{ type: Input },],
-    "label": [{ type: Input },],
-    "placeholder": [{ type: Input },],
-    "selector": [{ type: Input },],
-    "disabled": [{ type: Input },],
-    "dateChanged": [{ type: Output },],
-    "inputFieldChanged": [{ type: Output },],
-    "calendarViewChanged": [{ type: Output },],
-    "calendarToggle": [{ type: Output },],
-    "inputFocusBlur": [{ type: Output },],
-    "divFocus": [{ type: ViewChild, args: ['divFocus',] },],
-    "pickerFrame": [{ type: ViewChild, args: ['pickerFrame',] },],
+    options: [{ type: Input }],
+    locale: [{ type: Input }],
+    defaultMonth: [{ type: Input }],
+    selDate: [{ type: Input }],
+    label: [{ type: Input }],
+    placeholder: [{ type: Input }],
+    selector: [{ type: Input }],
+    disabled: [{ type: Input }],
+    dateChanged: [{ type: Output }],
+    inputFieldChanged: [{ type: Output }],
+    calendarViewChanged: [{ type: Output }],
+    calendarToggle: [{ type: Output }],
+    inputFocusBlur: [{ type: Output }],
+    divFocus: [{ type: ViewChild, args: ['divFocus',] }],
+    pickerFrame: [{ type: ViewChild, args: ['pickerFrame',] }]
 };
 
 /**
@@ -4778,17 +4778,17 @@ SimpleChartComponent.decorators = [
 /** @nocollapse */
 SimpleChartComponent.ctorParameters = () => [];
 SimpleChartComponent.propDecorators = {
-    "percent": [{ type: Input, args: ['percent',] },],
-    "barColor": [{ type: Input, args: ['barColor',] },],
-    "trackColor": [{ type: Input, args: ['trackColor',] },],
-    "scaleColor": [{ type: Input, args: ['scaleColor',] },],
-    "scaleLength": [{ type: Input, args: ['scaleLength',] },],
-    "lineCap": [{ type: Input, args: ['lineCap',] },],
-    "lineWidth": [{ type: Input, args: ['lineWidth',] },],
-    "trackWidth": [{ type: Input, args: ['trackWidth',] },],
-    "size": [{ type: Input, args: ['size',] },],
-    "rotate": [{ type: Input, args: ['rotate',] },],
-    "animate": [{ type: Input, args: ['animate',] },],
+    percent: [{ type: Input, args: ['percent',] }],
+    barColor: [{ type: Input, args: ['barColor',] }],
+    trackColor: [{ type: Input, args: ['trackColor',] }],
+    scaleColor: [{ type: Input, args: ['scaleColor',] }],
+    scaleLength: [{ type: Input, args: ['scaleLength',] }],
+    lineCap: [{ type: Input, args: ['lineCap',] }],
+    lineWidth: [{ type: Input, args: ['lineWidth',] }],
+    trackWidth: [{ type: Input, args: ['trackWidth',] }],
+    size: [{ type: Input, args: ['size',] }],
+    rotate: [{ type: Input, args: ['rotate',] }],
+    animate: [{ type: Input, args: ['animate',] }]
 };
 
 /**
@@ -4848,12 +4848,12 @@ EasyPieChartComponent.decorators = [
 ];
 /** @nocollapse */
 EasyPieChartComponent.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
+    { type: ElementRef },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
 ];
 EasyPieChartComponent.propDecorators = {
-    "percent": [{ type: Input, args: ['percent',] },],
-    "options": [{ type: Input, args: ['options',] },],
+    percent: [{ type: Input, args: ['percent',] }],
+    options: [{ type: Input, args: ['options',] }]
 };
 
 /**
@@ -5195,15 +5195,15 @@ MDBFileDropDirective.decorators = [
 ];
 /** @nocollapse */
 MDBFileDropDirective.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
-    { type: ElementRef, },
+    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+    { type: ElementRef }
 ];
 MDBFileDropDirective.propDecorators = {
-    "uploadInput": [{ type: Input },],
-    "uploadOutput": [{ type: Output },],
-    "onDrop": [{ type: HostListener, args: ['drop', ['$event'],] },],
-    "onDragOver": [{ type: HostListener, args: ['dragover', ['$event'],] },],
-    "onDragLeave": [{ type: HostListener, args: ['dragleave', ['$event'],] },],
+    uploadInput: [{ type: Input }],
+    uploadOutput: [{ type: Output }],
+    onDrop: [{ type: HostListener, args: ['drop', ['$event'],] }],
+    onDragOver: [{ type: HostListener, args: ['dragover', ['$event'],] }],
+    onDragLeave: [{ type: HostListener, args: ['dragleave', ['$event'],] }]
 };
 
 /**
@@ -5259,12 +5259,12 @@ MDBFileSelectDirective.decorators = [
 ];
 /** @nocollapse */
 MDBFileSelectDirective.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
-    { type: ElementRef, },
+    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+    { type: ElementRef }
 ];
 MDBFileSelectDirective.propDecorators = {
-    "uploadInput": [{ type: Input },],
-    "uploadOutput": [{ type: Output },],
+    uploadInput: [{ type: Input }],
+    uploadOutput: [{ type: Output }]
 };
 
 /**
@@ -5344,14 +5344,14 @@ CharCounterDirective.decorators = [
 ];
 /** @nocollapse */
 CharCounterDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
+    { type: ElementRef },
+    { type: Renderer2 }
 ];
 CharCounterDirective.propDecorators = {
-    "length": [{ type: Input },],
-    "onKeyUp": [{ type: HostListener, args: ['input', ['$event'],] },],
-    "hide": [{ type: HostListener, args: ['blur', ['$event'],] },],
-    "show": [{ type: HostListener, args: ['focus', ['$event'],] },],
+    length: [{ type: Input }],
+    onKeyUp: [{ type: HostListener, args: ['input', ['$event'],] }],
+    hide: [{ type: HostListener, args: ['blur', ['$event'],] }],
+    show: [{ type: HostListener, args: ['focus', ['$event'],] }]
 };
 
 /**
@@ -5564,19 +5564,19 @@ ImageModalComponent.decorators = [
 ];
 /** @nocollapse */
 ImageModalComponent.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
-    { type: ElementRef, },
-    { type: Renderer2, },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+    { type: ElementRef },
+    { type: Renderer2 }
 ];
 ImageModalComponent.propDecorators = {
-    "modalImages": [{ type: Input, args: ['modalImages',] },],
-    "imagePointer": [{ type: Input, args: ['imagePointer',] },],
-    "fullscreen": [{ type: Input, args: ['fullscreen',] },],
-    "zoom": [{ type: Input, args: ['zoom',] },],
-    "smooth": [{ type: Input, args: ['smooth',] },],
-    "type": [{ type: Input, args: ['type',] },],
-    "cancelEvent": [{ type: Output, args: ['cancelEvent',] },],
-    "keyboardControl": [{ type: HostListener, args: ['document:keyup', ['$event'],] },],
+    modalImages: [{ type: Input, args: ['modalImages',] }],
+    imagePointer: [{ type: Input, args: ['imagePointer',] }],
+    fullscreen: [{ type: Input, args: ['fullscreen',] }],
+    zoom: [{ type: Input, args: ['zoom',] }],
+    smooth: [{ type: Input, args: ['smooth',] }],
+    type: [{ type: Input, args: ['type',] }],
+    cancelEvent: [{ type: Output, args: ['cancelEvent',] }],
+    keyboardControl: [{ type: HostListener, args: ['document:keyup', ['$event'],] }]
 };
 
 /**
@@ -6975,31 +6975,31 @@ SelectDropdownComponent.decorators = [
 ];
 /** @nocollapse */
 SelectDropdownComponent.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
-    { type: ChangeDetectorRef, },
+    { type: ElementRef },
+    { type: Renderer2 },
+    { type: ChangeDetectorRef }
 ];
 SelectDropdownComponent.propDecorators = {
-    "filterEnabled": [{ type: Input },],
-    "highlightColor": [{ type: Input },],
-    "highlightTextColor": [{ type: Input },],
-    "left": [{ type: Input },],
-    "multiple": [{ type: Input },],
-    "notFoundMsg": [{ type: Input },],
-    "optionList": [{ type: Input },],
-    "top": [{ type: Input },],
-    "width": [{ type: Input },],
-    "placeholder": [{ type: Input },],
-    "customClass": [{ type: Input },],
-    "close": [{ type: Output },],
-    "optionClicked": [{ type: Output },],
-    "singleFilterClick": [{ type: Output },],
-    "singleFilterInput": [{ type: Output },],
-    "singleFilterKeydown": [{ type: Output },],
-    "filterInput": [{ type: ViewChild, args: ['filterInput',] },],
-    "optionsList": [{ type: ViewChild, args: ['optionsList',] },],
-    "dropdownContent": [{ type: ViewChild, args: ['dropdownContent',] },],
-    "onkeyup": [{ type: HostListener, args: ['keyup', ['$event'],] },],
+    filterEnabled: [{ type: Input }],
+    highlightColor: [{ type: Input }],
+    highlightTextColor: [{ type: Input }],
+    left: [{ type: Input }],
+    multiple: [{ type: Input }],
+    notFoundMsg: [{ type: Input }],
+    optionList: [{ type: Input }],
+    top: [{ type: Input }],
+    width: [{ type: Input }],
+    placeholder: [{ type: Input }],
+    customClass: [{ type: Input }],
+    close: [{ type: Output }],
+    optionClicked: [{ type: Output }],
+    singleFilterClick: [{ type: Output }],
+    singleFilterInput: [{ type: Output }],
+    singleFilterKeydown: [{ type: Output }],
+    filterInput: [{ type: ViewChild, args: ['filterInput',] }],
+    optionsList: [{ type: ViewChild, args: ['optionsList',] }],
+    dropdownContent: [{ type: ViewChild, args: ['dropdownContent',] }],
+    onkeyup: [{ type: HostListener, args: ['keyup', ['$event'],] }]
 };
 
 /**
@@ -7621,32 +7621,32 @@ SelectComponent.decorators = [
 ];
 /** @nocollapse */
 SelectComponent.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
+    { type: ElementRef },
+    { type: Renderer2 }
 ];
 SelectComponent.propDecorators = {
-    "options": [{ type: Input },],
-    "customClass": [{ type: Input },],
-    "allowClear": [{ type: Input },],
-    "disabled": [{ type: Input },],
-    "highlightColor": [{ type: Input },],
-    "highlightTextColor": [{ type: Input },],
-    "multiple": [{ type: Input },],
-    "noFilter": [{ type: Input },],
-    "notFoundMsg": [{ type: Input },],
-    "placeholder": [{ type: Input },],
-    "filterPlaceholder": [{ type: Input },],
-    "label": [{ type: Input },],
-    "filterEnabled": [{ type: Input },],
-    "opened": [{ type: Output },],
-    "closed": [{ type: Output },],
-    "selected": [{ type: Output },],
-    "deselected": [{ type: Output },],
-    "noOptionsFound": [{ type: Output },],
-    "selectionSpan": [{ type: ViewChild, args: ['selection',] },],
-    "dropdown": [{ type: ViewChild, args: ['dropdown',] },],
-    "filterInput": [{ type: ViewChild, args: ['filterInput',] },],
-    "closeSelect": [{ type: HostListener, args: ['document:click', ['$event'],] },],
+    options: [{ type: Input }],
+    customClass: [{ type: Input }],
+    allowClear: [{ type: Input }],
+    disabled: [{ type: Input }],
+    highlightColor: [{ type: Input }],
+    highlightTextColor: [{ type: Input }],
+    multiple: [{ type: Input }],
+    noFilter: [{ type: Input }],
+    notFoundMsg: [{ type: Input }],
+    placeholder: [{ type: Input }],
+    filterPlaceholder: [{ type: Input }],
+    label: [{ type: Input }],
+    filterEnabled: [{ type: Input }],
+    opened: [{ type: Output }],
+    closed: [{ type: Output }],
+    selected: [{ type: Output }],
+    deselected: [{ type: Output }],
+    noOptionsFound: [{ type: Output }],
+    selectionSpan: [{ type: ViewChild, args: ['selection',] }],
+    dropdown: [{ type: ViewChild, args: ['dropdown',] }],
+    filterInput: [{ type: ViewChild, args: ['filterInput',] }],
+    closeSelect: [{ type: HostListener, args: ['document:click', ['$event'],] }]
 };
 
 /**
@@ -7731,7 +7731,7 @@ MDBSpinningPreloader.decorators = [
 ];
 /** @nocollapse */
 MDBSpinningPreloader.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] },] },
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
 ];
 
 /**
@@ -7806,12 +7806,11 @@ ProgressBarComponent.decorators = [
                 changeDetection: ChangeDetectionStrategy.OnPush,
             },] },
 ];
-/** @nocollapse */
 ProgressBarComponent.propDecorators = {
-    "color": [{ type: Input },],
-    "value": [{ type: Input }, { type: HostBinding, args: ['attr.aria-valuenow',] },],
-    "bufferValue": [{ type: Input },],
-    "mode": [{ type: Input }, { type: HostBinding, args: ['attr.mode',] },],
+    color: [{ type: Input }],
+    value: [{ type: Input }, { type: HostBinding, args: ['attr.aria-valuenow',] }],
+    bufferValue: [{ type: Input }],
+    mode: [{ type: Input }, { type: HostBinding, args: ['attr.mode',] }]
 };
 /**
  * Clamps a value to be between two numbers, by default 0 and 100.
@@ -7861,9 +7860,8 @@ MdProgressSpinnerCssMatStylerDirective.decorators = [
                 selector: '[mdbSpinners], mat-progress-spinner'
             },] },
 ];
-/** @nocollapse */
 MdProgressSpinnerCssMatStylerDirective.propDecorators = {
-    "true": [{ type: HostBinding, args: ['class.mat-progress-spinner',] },],
+    true: [{ type: HostBinding, args: ['class.mat-progress-spinner',] }]
 };
 /**
  * <md-progress-spinner> component.
@@ -8103,16 +8101,16 @@ MdProgressSpinnerComponent.decorators = [
 ];
 /** @nocollapse */
 MdProgressSpinnerComponent.ctorParameters = () => [
-    { type: NgZone, },
-    { type: ElementRef, },
-    { type: Renderer2, },
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
+    { type: NgZone },
+    { type: ElementRef },
+    { type: Renderer2 },
+    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
 ];
 MdProgressSpinnerComponent.propDecorators = {
-    "platformId": [{ type: Inject, args: [PLATFORM_ID,] },],
-    "color": [{ type: Input },],
-    "value": [{ type: Input }, { type: HostBinding, args: ['attr.aria-valuenow',] },],
-    "mode": [{ type: HostBinding, args: ['attr.mode',] }, { type: Input },],
+    platformId: [{ type: Inject, args: [PLATFORM_ID,] }],
+    color: [{ type: Input }],
+    value: [{ type: Input }, { type: HostBinding, args: ['attr.aria-valuenow',] }],
+    mode: [{ type: HostBinding, args: ['attr.mode',] }, { type: Input }]
 };
 /**
  * <md-spinner> component.
@@ -8148,12 +8146,12 @@ MdSpinnerComponent.decorators = [
 ];
 /** @nocollapse */
 MdSpinnerComponent.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: NgZone, },
-    { type: Renderer2, },
+    { type: ElementRef },
+    { type: NgZone },
+    { type: Renderer2 }
 ];
 MdSpinnerComponent.propDecorators = {
-    "true": [{ type: HostBinding, args: ['class.mat-spinner',] },],
+    true: [{ type: HostBinding, args: ['class.mat-spinner',] }]
 };
 /**
  * Clamps a value to be between 0 and 100.
@@ -8278,11 +8276,10 @@ class ProgressDirective {
 ProgressDirective.decorators = [
     { type: Directive, args: [{ selector: 'mdbProgress, [mdbProgress]' },] },
 ];
-/** @nocollapse */
 ProgressDirective.propDecorators = {
-    "animate": [{ type: Input },],
-    "max": [{ type: HostBinding, args: ['attr.max',] }, { type: Input },],
-    "addClass": [{ type: HostBinding, args: ['class.progress',] },],
+    animate: [{ type: Input }],
+    max: [{ type: HostBinding, args: ['attr.max',] }, { type: Input }],
+    addClass: [{ type: HostBinding, args: ['class.progress',] }]
 };
 
 /**
@@ -8348,11 +8345,11 @@ BarComponent.decorators = [
 ];
 /** @nocollapse */
 BarComponent.ctorParameters = () => [
-    { type: ProgressDirective, decorators: [{ type: Host },] },
+    { type: ProgressDirective, decorators: [{ type: Host }] }
 ];
 BarComponent.propDecorators = {
-    "type": [{ type: Input },],
-    "value": [{ type: Input },],
+    type: [{ type: Input }],
+    value: [{ type: Input }]
 };
 
 /**
@@ -8435,11 +8432,11 @@ ProgressSpinnerComponent.decorators = [
 ];
 /** @nocollapse */
 ProgressSpinnerComponent.ctorParameters = () => [
-    { type: ElementRef, },
+    { type: ElementRef }
 ];
 ProgressSpinnerComponent.propDecorators = {
-    "spinnerType": [{ type: Input },],
-    "spinnerColor": [{ type: Input },],
+    spinnerType: [{ type: Input }],
+    spinnerColor: [{ type: Input }]
 };
 
 /**
@@ -8482,13 +8479,13 @@ ProgressbarComponent.decorators = [
 ];
 /** @nocollapse */
 ProgressbarComponent.ctorParameters = () => [
-    { type: ProgressbarConfigComponent, },
+    { type: ProgressbarConfigComponent }
 ];
 ProgressbarComponent.propDecorators = {
-    "animate": [{ type: Input },],
-    "max": [{ type: Input },],
-    "type": [{ type: Input },],
-    "value": [{ type: Input },],
+    animate: [{ type: Input }],
+    max: [{ type: Input }],
+    type: [{ type: Input }],
+    value: [{ type: Input }]
 };
 
 /**
@@ -8623,7 +8620,6 @@ class SidenavComponent {
         this.renderer = renderer;
         this.isBrowser = false;
         this.fixed = true;
-        this.sidenavBreakpoint = null;
         this.isBrowser = isPlatformBrowser(platformId);
     }
     /**
@@ -8636,7 +8632,7 @@ class SidenavComponent {
             if (this.sidenavBreakpoint) {
                 if (this.fixed) {
                     this.renderer.addClass(document.body, 'fixed-sn');
-                    if (this.windwosWidth < this.sidenavBreakpoint + 1) {
+                    if (this.windwosWidth < +this.sidenavBreakpoint + 1) {
                         this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
                         this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
                         this.setShown(false);
@@ -8685,18 +8681,18 @@ class SidenavComponent {
             this.windwosWidth = window.innerWidth;
             if (this.sidenavBreakpoint) {
                 if (this.fixed) {
-                    if (this.windwosWidth < this.sidenavBreakpoint + 1) {
+                    if (this.windwosWidth < +this.sidenavBreakpoint + 1) {
                         this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
                         this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
                         this.setShown(false);
                     }
-                    if (this.windwosWidth > this.sidenavBreakpoint && this.shown) {
+                    if (this.windwosWidth > +this.sidenavBreakpoint && this.shown) {
                         this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
                         this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
                         this.hideOverlay();
                         this.setShown(true);
                     }
-                    else if (this.windwosWidth > this.sidenavBreakpoint) {
+                    else if (this.windwosWidth > +this.sidenavBreakpoint) {
                         this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
                         this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
                         this.hideOverlay();
@@ -8704,7 +8700,7 @@ class SidenavComponent {
                     }
                 }
                 else {
-                    if (this.windwosWidth > this.sidenavBreakpoint) {
+                    if (this.windwosWidth > +this.sidenavBreakpoint) {
                         this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
                         this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
                         this.hideOverlay();
@@ -8750,7 +8746,7 @@ class SidenavComponent {
         if (this.isBrowser) {
             if (this.sidenavBreakpoint) {
                 if (this.fixed) {
-                    if (this.windwosWidth < this.sidenavBreakpoint + 1) {
+                    if (this.windwosWidth < +this.sidenavBreakpoint + 1) {
                         this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
                         this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
                         this.setShown(true);
@@ -8771,7 +8767,7 @@ class SidenavComponent {
             }
             else {
                 if (this.fixed) {
-                    if (this.windwosWidth < this.sidenavBreakpoint + 1) {
+                    if (this.windwosWidth < 1441) {
                         this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(0%)');
                         this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(0%)');
                         this.setShown(true);
@@ -8799,7 +8795,7 @@ class SidenavComponent {
         if (this.isBrowser) {
             if (this.sidenavBreakpoint) {
                 if (this.fixed) {
-                    if (this.windwosWidth < this.sidenavBreakpoint + 1) {
+                    if (this.windwosWidth < +this.sidenavBreakpoint + 1) {
                         this.renderer.setStyle(this.sideNav.nativeElement, 'transform', 'translateX(-100%)');
                         this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateX(-100%)');
                         this.setShown(false);
@@ -8888,17 +8884,17 @@ SidenavComponent.decorators = [
 ];
 /** @nocollapse */
 SidenavComponent.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
-    { type: ElementRef, },
-    { type: Renderer2, },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+    { type: ElementRef },
+    { type: Renderer2 }
 ];
 SidenavComponent.propDecorators = {
-    "class": [{ type: Input },],
-    "fixed": [{ type: Input },],
-    "sidenavBreakpoint": [{ type: Input },],
-    "sideNav": [{ type: ViewChild, args: ['sidenav',] },],
-    "overlay": [{ type: ViewChild, args: ['overlay',] },],
-    "windwosResize": [{ type: HostListener, args: ['window:resize',] },],
+    class: [{ type: Input }],
+    fixed: [{ type: Input }],
+    sidenavBreakpoint: [{ type: Input }],
+    sideNav: [{ type: ViewChild, args: ['sidenav',] }],
+    overlay: [{ type: ViewChild, args: ['overlay',] }],
+    windwosResize: [{ type: HostListener, args: ['window:resize',] }]
 };
 
 /**
@@ -9899,23 +9895,23 @@ PageScrollDirective.decorators = [
 ];
 /** @nocollapse */
 PageScrollDirective.ctorParameters = () => [
-    { type: PageScrollService, },
-    { type: Router, decorators: [{ type: Optional },] },
-    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] },] },
+    { type: PageScrollService },
+    { type: Router, decorators: [{ type: Optional }] },
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
 ];
 PageScrollDirective.propDecorators = {
-    "routerLink": [{ type: Input },],
-    "href": [{ type: Input },],
-    "pageScrollHorizontal": [{ type: Input },],
-    "pageScrollOffset": [{ type: Input },],
-    "pageScrollDuration": [{ type: Input },],
-    "pageScrollSpeed": [{ type: Input },],
-    "pageScrollEasing": [{ type: Input },],
-    "pageScrollInterruptible": [{ type: Input },],
-    "pageScrollAdjustHash": [{ type: Input },],
-    "pageScroll": [{ type: Input },],
-    "pageScrollFinish": [{ type: Output },],
-    "handleClick": [{ type: HostListener, args: ['click', ['$event'],] },],
+    routerLink: [{ type: Input }],
+    href: [{ type: Input }],
+    pageScrollHorizontal: [{ type: Input }],
+    pageScrollOffset: [{ type: Input }],
+    pageScrollDuration: [{ type: Input }],
+    pageScrollSpeed: [{ type: Input }],
+    pageScrollEasing: [{ type: Input }],
+    pageScrollInterruptible: [{ type: Input }],
+    pageScrollAdjustHash: [{ type: Input }],
+    pageScroll: [{ type: Input }],
+    pageScrollFinish: [{ type: Output }],
+    handleClick: [{ type: HostListener, args: ['click', ['$event'],] }]
 };
 
 /**
@@ -10148,11 +10144,11 @@ MdbStickyDirective.decorators = [
 ];
 /** @nocollapse */
 MdbStickyDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
+    { type: ElementRef },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
 ];
 MdbStickyDirective.propDecorators = {
-    "stickyAfter": [{ type: Input },],
+    stickyAfter: [{ type: Input }]
 };
 
 /**
@@ -10248,10 +10244,10 @@ WavesDirective.decorators = [
 ];
 /** @nocollapse */
 WavesDirective.ctorParameters = () => [
-    { type: ElementRef, },
+    { type: ElementRef }
 ];
 WavesDirective.propDecorators = {
-    "click": [{ type: HostListener, args: ['click', ['$event'],] },],
+    click: [{ type: HostListener, args: ['click', ['$event'],] }]
 };
 
 /**
@@ -10490,22 +10486,22 @@ TabsetComponent.decorators = [
 ];
 /** @nocollapse */
 TabsetComponent.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
-    { type: TabsetConfig, },
-    { type: WavesDirective, },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+    { type: TabsetConfig },
+    { type: WavesDirective }
 ];
 TabsetComponent.propDecorators = {
-    "clazz": [{ type: HostBinding, args: ['class.tab-container',] },],
-    "buttonClass": [{ type: Input },],
-    "contentClass": [{ type: Input },],
-    "tabEl": [{ type: ViewChildren, args: ['tabEl', { read: ElementRef },] },],
-    "showBsTab": [{ type: Output },],
-    "shownBsTab": [{ type: Output },],
-    "hideBsTab": [{ type: Output },],
-    "hiddenBsTab": [{ type: Output },],
-    "vertical": [{ type: Input },],
-    "justified": [{ type: Input },],
-    "type": [{ type: Input },],
+    clazz: [{ type: HostBinding, args: ['class.tab-container',] }],
+    buttonClass: [{ type: Input }],
+    contentClass: [{ type: Input }],
+    tabEl: [{ type: ViewChildren, args: ['tabEl', { read: ElementRef },] }],
+    showBsTab: [{ type: Output }],
+    shownBsTab: [{ type: Output }],
+    hideBsTab: [{ type: Output }],
+    hiddenBsTab: [{ type: Output }],
+    vertical: [{ type: Input }],
+    justified: [{ type: Input }],
+    type: [{ type: Input }]
 };
 
 /**
@@ -10625,21 +10621,21 @@ TabDirective.decorators = [
 ];
 /** @nocollapse */
 TabDirective.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
-    { type: TabsetComponent, },
-    { type: ElementRef, },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+    { type: TabsetComponent },
+    { type: ElementRef }
 ];
 TabDirective.propDecorators = {
-    "heading": [{ type: Input },],
-    "disabled": [{ type: Input },],
-    "removable": [{ type: Input },],
-    "customClass": [{ type: Input },],
-    "active": [{ type: HostBinding, args: ['class.active',] }, { type: Input },],
-    "select": [{ type: Output },],
-    "deselect": [{ type: Output },],
-    "removed": [{ type: Output },],
-    "addClass": [{ type: HostBinding, args: ['class.tab-pane',] },],
-    "test": [{ type: HostBinding, args: ['class.fade',] },],
+    heading: [{ type: Input }],
+    disabled: [{ type: Input }],
+    removable: [{ type: Input }],
+    customClass: [{ type: Input }],
+    active: [{ type: HostBinding, args: ['class.active',] }, { type: Input }],
+    select: [{ type: Output }],
+    deselect: [{ type: Output }],
+    removed: [{ type: Output }],
+    addClass: [{ type: HostBinding, args: ['class.tab-pane',] }],
+    test: [{ type: HostBinding, args: ['class.fade',] }]
 };
 
 /**
@@ -10663,8 +10659,8 @@ TabHeadingDirective.decorators = [
 ];
 /** @nocollapse */
 TabHeadingDirective.ctorParameters = () => [
-    { type: TemplateRef, },
-    { type: TabDirective, },
+    { type: TemplateRef },
+    { type: TabDirective }
 ];
 
 /**
@@ -10702,10 +10698,10 @@ NgTranscludeDirective.decorators = [
 ];
 /** @nocollapse */
 NgTranscludeDirective.ctorParameters = () => [
-    { type: ViewContainerRef, },
+    { type: ViewContainerRef }
 ];
 NgTranscludeDirective.propDecorators = {
-    "mdbNgTransclude": [{ type: Input },],
+    mdbNgTransclude: [{ type: Input }]
 };
 
 /**
@@ -10826,10 +10822,10 @@ MaterialChipsComponent.decorators = [
 /** @nocollapse */
 MaterialChipsComponent.ctorParameters = () => [];
 MaterialChipsComponent.propDecorators = {
-    "placeholder": [{ type: Input, args: ['placeholder',] },],
-    "tagsfocusedChange": [{ type: Output },],
-    "labelsChange": [{ type: Output },],
-    "tagsfocused": [{ type: Input },],
+    placeholder: [{ type: Input, args: ['placeholder',] }],
+    tagsfocusedChange: [{ type: Output }],
+    labelsChange: [{ type: Output }],
+    tagsfocused: [{ type: Input }]
 };
 
 /**
@@ -11283,27 +11279,27 @@ ClockPickerComponent.decorators = [
 ];
 /** @nocollapse */
 ClockPickerComponent.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
+    { type: ElementRef },
+    { type: Renderer2 },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
 ];
 ClockPickerComponent.propDecorators = {
-    "hoursPlate": [{ type: ViewChild, args: ['hoursPlate',] },],
-    "minutesPlate": [{ type: ViewChild, args: ['minutesPlate',] },],
-    "plate": [{ type: ViewChild, args: ['plate',] },],
-    "svg": [{ type: ViewChild, args: ['svg',] },],
-    "g": [{ type: ViewChild, args: ['g',] },],
-    "hand": [{ type: ViewChild, args: ['hand',] },],
-    "fg": [{ type: ViewChild, args: ['fg',] },],
-    "bg": [{ type: ViewChild, args: ['bg',] },],
-    "bearing": [{ type: ViewChild, args: ['bearing',] },],
-    "twelvehour": [{ type: Input, args: ['twelvehour',] },],
-    "darktheme": [{ type: Input, args: ['darktheme',] },],
-    "placeholder": [{ type: Input, args: ['placeholder',] },],
-    "label": [{ type: Input, args: ['label',] },],
-    "duration": [{ type: Input, args: ['duration',] },],
-    "showClock": [{ type: Input, args: ['showClock',] },],
-    "buttonLabel": [{ type: Input, args: ['buttonlabel',] },],
+    hoursPlate: [{ type: ViewChild, args: ['hoursPlate',] }],
+    minutesPlate: [{ type: ViewChild, args: ['minutesPlate',] }],
+    plate: [{ type: ViewChild, args: ['plate',] }],
+    svg: [{ type: ViewChild, args: ['svg',] }],
+    g: [{ type: ViewChild, args: ['g',] }],
+    hand: [{ type: ViewChild, args: ['hand',] }],
+    fg: [{ type: ViewChild, args: ['fg',] }],
+    bg: [{ type: ViewChild, args: ['bg',] }],
+    bearing: [{ type: ViewChild, args: ['bearing',] }],
+    twelvehour: [{ type: Input, args: ['twelvehour',] }],
+    darktheme: [{ type: Input, args: ['darktheme',] }],
+    placeholder: [{ type: Input, args: ['placeholder',] }],
+    label: [{ type: Input, args: ['label',] }],
+    duration: [{ type: Input, args: ['duration',] }],
+    showClock: [{ type: Input, args: ['showClock',] }],
+    buttonLabel: [{ type: Input, args: ['buttonlabel',] }]
 };
 
 /**
@@ -11420,12 +11416,11 @@ class ButtonCheckboxDirective {
 ButtonCheckboxDirective.decorators = [
     { type: Directive, args: [{ selector: '[mdbCheckbox]', providers: [CHECKBOX_CONTROL_VALUE_ACCESSOR] },] },
 ];
-/** @nocollapse */
 ButtonCheckboxDirective.propDecorators = {
-    "btnCheckboxTrue": [{ type: Input },],
-    "btnCheckboxFalse": [{ type: Input },],
-    "state": [{ type: HostBinding, args: ['class.active',] },],
-    "onClick": [{ type: HostListener, args: ['click',] },],
+    btnCheckboxTrue: [{ type: Input }],
+    btnCheckboxFalse: [{ type: Input }],
+    state: [{ type: HostBinding, args: ['class.active',] }],
+    onClick: [{ type: HostListener, args: ['click',] }]
 };
 
 /**
@@ -11526,15 +11521,15 @@ ButtonRadioDirective.decorators = [
 ];
 /** @nocollapse */
 ButtonRadioDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
+    { type: ElementRef },
+    { type: Renderer2 }
 ];
 ButtonRadioDirective.propDecorators = {
-    "mdbRadio": [{ type: Input },],
-    "uncheckable": [{ type: Input },],
-    "value": [{ type: Input },],
-    "isActive": [{ type: HostBinding, args: ['class.active',] },],
-    "onClick": [{ type: HostListener, args: ['click', ['$event'],] },],
+    mdbRadio: [{ type: Input }],
+    uncheckable: [{ type: Input }],
+    value: [{ type: Input }],
+    isActive: [{ type: HostBinding, args: ['class.active',] }],
+    onClick: [{ type: HostListener, args: ['click', ['$event'],] }]
 };
 
 /**
@@ -11944,14 +11939,16 @@ class CarouselComponent {
     /**
      * @param {?} config
      * @param {?} el
+     * @param {?} platformId
      */
-    constructor(config, el) {
+    constructor(config, el, platformId) {
         this.SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
         this._slides = new LinkedList();
         this.destroyed = false;
         // protected el: ElementRef = null;
         this.el = null;
         this.animationEnd = true;
+        this.isBrowser = false;
         this.isControls = true;
         this.class = '';
         this.type = '';
@@ -11960,6 +11957,7 @@ class CarouselComponent {
          * Will be emitted when active slide has been changed. Part of two-way-bindable [(activeSlide)] property
          */
         this.activeSlideChange = new EventEmitter(false);
+        this.isBrowser = isPlatformBrowser(platformId);
         Object.assign(this, config);
         this.el = el;
     }
@@ -12143,12 +12141,14 @@ class CarouselComponent {
         if (this.animationEnd) {
             this.animationEnd = false;
             goToSlide.directionNext = true;
-            setTimeout(() => {
-                goToSlide.directionNext = false;
-                this.animationEnd = true;
-                this.activeSlide = goToIndex;
-                this.play();
-            }, 100);
+            if (this.isBrowser) {
+                setTimeout(() => {
+                    goToSlide.directionNext = false;
+                    this.animationEnd = true;
+                    this.activeSlide = goToIndex;
+                    this.play();
+                }, 100);
+            }
         }
     }
     /**
@@ -12163,40 +12163,46 @@ class CarouselComponent {
             if (direction === Direction.NEXT) {
                 this.animationEnd = false;
                 goToSlide.directionNext = true;
-                setTimeout(() => {
-                    goToSlide.directionLeft = true;
-                    currentSlide.directionLeft = true;
-                }, 100);
+                if (this.isBrowser) {
+                    setTimeout(() => {
+                        goToSlide.directionLeft = true;
+                        currentSlide.directionLeft = true;
+                    }, 100);
+                }
             }
             if (direction === Direction.PREV) {
                 this.animationEnd = false;
                 goToSlide.directionPrev = true;
-                setTimeout(() => {
-                    goToSlide.directionRight = true;
-                    currentSlide.directionRight = true;
-                }, 100);
+                if (this.isBrowser) {
+                    setTimeout(() => {
+                        goToSlide.directionRight = true;
+                        currentSlide.directionRight = true;
+                    }, 100);
+                }
             }
-            setTimeout(() => {
-                goToSlide.directionLeft = false;
-                goToSlide.directionNext = false;
-                currentSlide.directionLeft = false;
-                currentSlide.directionNext = false;
-                goToSlide.directionRight = false;
-                goToSlide.directionPrev = false;
-                currentSlide.directionRight = false;
-                currentSlide.directionPrev = false;
-                this.animationEnd = true;
-                this.activeSlide = goToIndex;
-                let /** @type {?} */ directionName;
-                if (direction === Direction.NEXT) {
-                    directionName = 'Next';
-                }
-                else if (direction === Direction.PREV) {
-                    directionName = 'Prev';
-                }
-                this.activeSlideChange.emit({ 'direction': directionName, 'relatedTarget': this.activeSlide });
-                this.play();
-            }, 700);
+            if (this.isBrowser) {
+                setTimeout(() => {
+                    goToSlide.directionLeft = false;
+                    goToSlide.directionNext = false;
+                    currentSlide.directionLeft = false;
+                    currentSlide.directionNext = false;
+                    goToSlide.directionRight = false;
+                    goToSlide.directionPrev = false;
+                    currentSlide.directionRight = false;
+                    currentSlide.directionPrev = false;
+                    this.animationEnd = true;
+                    this.activeSlide = goToIndex;
+                    let /** @type {?} */ directionName;
+                    if (direction === Direction.NEXT) {
+                        directionName = 'Next';
+                    }
+                    else if (direction === Direction.PREV) {
+                        directionName = 'Prev';
+                    }
+                    this.activeSlideChange.emit({ 'direction': directionName, 'relatedTarget': this.activeSlide });
+                    this.play();
+                }, 700);
+            }
         }
     }
     /**
@@ -12311,17 +12317,19 @@ class CarouselComponent {
      */
     restartTimer() {
         this.resetTimer();
-        const /** @type {?} */ interval = +this.interval;
-        if (!isNaN(interval) && interval > 0) {
-            this.currentInterval = setInterval(() => {
-                const /** @type {?} */ nInterval = +this.interval;
-                if (this.isPlaying && !isNaN(this.interval) && nInterval > 0 && this.slides.length) {
-                    this.nextSlide();
-                }
-                else {
-                    this.pause();
-                }
-            }, interval);
+        if (this.isBrowser) {
+            const /** @type {?} */ interval = +this.interval;
+            if (!isNaN(interval) && interval > 0) {
+                this.currentInterval = setInterval(() => {
+                    const /** @type {?} */ nInterval = +this.interval;
+                    if (this.isPlaying && !isNaN(this.interval) && nInterval > 0 && this.slides.length) {
+                        this.nextSlide();
+                    }
+                    else {
+                        this.pause();
+                    }
+                }, interval);
+            }
         }
     }
     /**
@@ -12329,9 +12337,11 @@ class CarouselComponent {
      * @return {?}
      */
     resetTimer() {
-        if (this.currentInterval) {
-            clearInterval(this.currentInterval);
-            this.currentInterval = void 0;
+        if (this.isBrowser) {
+            if (this.currentInterval) {
+                clearInterval(this.currentInterval);
+                this.currentInterval = void 0;
+            }
         }
     }
     /**
@@ -12403,24 +12413,25 @@ CarouselComponent.decorators = [
 ];
 /** @nocollapse */
 CarouselComponent.ctorParameters = () => [
-    { type: CarouselConfig, },
-    { type: ElementRef, },
+    { type: CarouselConfig },
+    { type: ElementRef },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
 ];
 CarouselComponent.propDecorators = {
-    "noWrap": [{ type: Input },],
-    "noPause": [{ type: Input },],
-    "isControls": [{ type: Input, args: ['isControls',] },],
-    "keyboard": [{ type: Input },],
-    "class": [{ type: Input, args: ['class',] },],
-    "type": [{ type: Input, args: ['type',] },],
-    "animation": [{ type: Input, args: ['animation',] },],
-    "activeSlideChange": [{ type: Output },],
-    "activeSlide": [{ type: Input },],
-    "interval": [{ type: Input },],
-    "play": [{ type: HostListener, args: ['mouseleave',] },],
-    "pause": [{ type: HostListener, args: ['mouseenter',] },],
-    "keyboardControl": [{ type: HostListener, args: ['keyup', ['$event'],] },],
-    "focus": [{ type: HostListener, args: ['click', ['$event'],] },],
+    noWrap: [{ type: Input }],
+    noPause: [{ type: Input }],
+    isControls: [{ type: Input, args: ['isControls',] }],
+    keyboard: [{ type: Input }],
+    class: [{ type: Input, args: ['class',] }],
+    type: [{ type: Input, args: ['type',] }],
+    animation: [{ type: Input, args: ['animation',] }],
+    activeSlideChange: [{ type: Output }],
+    activeSlide: [{ type: Input }],
+    interval: [{ type: Input }],
+    play: [{ type: HostListener, args: ['mouseleave',] }],
+    pause: [{ type: HostListener, args: ['mouseenter',] }],
+    keyboardControl: [{ type: HostListener, args: ['keyup', ['$event'],] }],
+    focus: [{ type: HostListener, args: ['click', ['$event'],] }]
 };
 
 /**
@@ -12467,17 +12478,17 @@ SlideComponent.decorators = [
 ];
 /** @nocollapse */
 SlideComponent.ctorParameters = () => [
-    { type: CarouselComponent, },
-    { type: ElementRef, },
+    { type: CarouselComponent },
+    { type: ElementRef }
 ];
 SlideComponent.propDecorators = {
-    "active": [{ type: HostBinding, args: ['class.active',] }, { type: Input },],
-    "animated": [{ type: HostBinding, args: ['class.animated',] },],
-    "directionNext": [{ type: HostBinding, args: ['class.carousel-item-next',] },],
-    "directionLeft": [{ type: HostBinding, args: ['class.carousel-item-left',] },],
-    "directionPrev": [{ type: HostBinding, args: ['class.carousel-item-prev',] },],
-    "directionRight": [{ type: HostBinding, args: ['class.carousel-item-right',] },],
-    "carousel": [{ type: HostBinding, args: ['class.carousel-item',] },],
+    active: [{ type: HostBinding, args: ['class.active',] }, { type: Input }],
+    animated: [{ type: HostBinding, args: ['class.animated',] }],
+    directionNext: [{ type: HostBinding, args: ['class.carousel-item-next',] }],
+    directionLeft: [{ type: HostBinding, args: ['class.carousel-item-left',] }],
+    directionPrev: [{ type: HostBinding, args: ['class.carousel-item-prev',] }],
+    directionRight: [{ type: HostBinding, args: ['class.carousel-item-right',] }],
+    carousel: [{ type: HostBinding, args: ['class.carousel-item',] }]
 };
 
 /**
@@ -12681,19 +12692,19 @@ BaseChartDirective.decorators = [
 ];
 /** @nocollapse */
 BaseChartDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
+    { type: ElementRef },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
 ];
 BaseChartDirective.propDecorators = {
-    "data": [{ type: Input },],
-    "datasets": [{ type: Input },],
-    "labels": [{ type: Input },],
-    "options": [{ type: Input },],
-    "chartType": [{ type: Input },],
-    "colors": [{ type: Input },],
-    "legend": [{ type: Input },],
-    "chartClick": [{ type: Output },],
-    "chartHover": [{ type: Output },],
+    data: [{ type: Input }],
+    datasets: [{ type: Input }],
+    labels: [{ type: Input }],
+    options: [{ type: Input }],
+    chartType: [{ type: Input }],
+    colors: [{ type: Input }],
+    legend: [{ type: Input }],
+    chartClick: [{ type: Output }],
+    chartHover: [{ type: Output }]
 };
 /**
  * @param {?} colour
@@ -12975,18 +12986,18 @@ CollapseDirective.decorators = [
 ];
 /** @nocollapse */
 CollapseDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
+    { type: ElementRef },
+    { type: Renderer2 }
 ];
 CollapseDirective.propDecorators = {
-    "showBsCollapse": [{ type: Output, args: ['showBsCollapse',] },],
-    "shownBsCollapse": [{ type: Output, args: ['shownBsCollapse',] },],
-    "hideBsCollapse": [{ type: Output, args: ['hideBsCollapse',] },],
-    "hiddenBsCollapse": [{ type: Output, args: ['hiddenBsCollapse',] },],
-    "collapsed": [{ type: Output },],
-    "expanded": [{ type: Output },],
-    "collapse": [{ type: Input },],
-    "animationTime": [{ type: Input },],
+    showBsCollapse: [{ type: Output, args: ['showBsCollapse',] }],
+    shownBsCollapse: [{ type: Output, args: ['shownBsCollapse',] }],
+    hideBsCollapse: [{ type: Output, args: ['hideBsCollapse',] }],
+    hiddenBsCollapse: [{ type: Output, args: ['hiddenBsCollapse',] }],
+    collapsed: [{ type: Output }],
+    expanded: [{ type: Output }],
+    collapse: [{ type: Input }],
+    animationTime: [{ type: Input }]
 };
 
 /**
@@ -13075,11 +13086,11 @@ BsDropdownContainerComponent.decorators = [
 ];
 /** @nocollapse */
 BsDropdownContainerComponent.ctorParameters = () => [
-    { type: BsDropdownState, },
+    { type: BsDropdownState }
 ];
 BsDropdownContainerComponent.propDecorators = {
-    "display": [{ type: HostBinding, args: ['style.display',] },],
-    "position": [{ type: HostBinding, args: ['style.position',] },],
+    display: [{ type: HostBinding, args: ['style.display',] }],
+    position: [{ type: HostBinding, args: ['style.position',] }]
 };
 
 /**
@@ -13107,9 +13118,9 @@ BsDropdownMenuDirective.decorators = [
 ];
 /** @nocollapse */
 BsDropdownMenuDirective.ctorParameters = () => [
-    { type: BsDropdownState, },
-    { type: ViewContainerRef, },
-    { type: TemplateRef, },
+    { type: BsDropdownState },
+    { type: ViewContainerRef },
+    { type: TemplateRef }
 ];
 
 /**
@@ -13180,16 +13191,16 @@ BsDropdownToggleDirective.decorators = [
 ];
 /** @nocollapse */
 BsDropdownToggleDirective.ctorParameters = () => [
-    { type: BsDropdownState, },
-    { type: ElementRef, },
+    { type: BsDropdownState },
+    { type: ElementRef }
 ];
 BsDropdownToggleDirective.propDecorators = {
-    "ariaHaspopup": [{ type: HostBinding, args: ['attr.aria-haspopup',] },],
-    "isDisabled": [{ type: HostBinding, args: ['attr.disabled',] },],
-    "isOpen": [{ type: HostBinding, args: ['attr.aria-expanded',] },],
-    "onClick": [{ type: HostListener, args: ['click',] },],
-    "onDocumentClick": [{ type: HostListener, args: ['document:click', ['$event'],] },],
-    "onEsc": [{ type: HostListener, args: ['keyup.esc',] },],
+    ariaHaspopup: [{ type: HostBinding, args: ['attr.aria-haspopup',] }],
+    isDisabled: [{ type: HostBinding, args: ['attr.disabled',] }],
+    isOpen: [{ type: HostBinding, args: ['attr.aria-expanded',] }],
+    onClick: [{ type: HostListener, args: ['click',] }],
+    onDocumentClick: [{ type: HostListener, args: ['document:click', ['$event'],] }],
+    onEsc: [{ type: HostListener, args: ['keyup.esc',] }]
 };
 
 /**
@@ -13829,11 +13840,11 @@ ComponentLoaderFactory.decorators = [
 ];
 /** @nocollapse */
 ComponentLoaderFactory.ctorParameters = () => [
-    { type: ComponentFactoryResolver, },
-    { type: NgZone, },
-    { type: Injector, },
-    { type: PositioningService, },
-    { type: ApplicationRef, },
+    { type: ComponentFactoryResolver },
+    { type: NgZone },
+    { type: Injector },
+    { type: PositioningService },
+    { type: ApplicationRef }
 ];
 
 /**
@@ -14074,24 +14085,24 @@ BsDropdownDirective.decorators = [
 ];
 /** @nocollapse */
 BsDropdownDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
-    { type: ViewContainerRef, },
-    { type: ComponentLoaderFactory, },
-    { type: BsDropdownConfig, },
-    { type: BsDropdownState, },
+    { type: ElementRef },
+    { type: Renderer2 },
+    { type: ViewContainerRef },
+    { type: ComponentLoaderFactory },
+    { type: BsDropdownConfig },
+    { type: BsDropdownState }
 ];
 BsDropdownDirective.propDecorators = {
-    "placement": [{ type: Input },],
-    "triggers": [{ type: Input },],
-    "container": [{ type: Input },],
-    "dropup": [{ type: HostBinding, args: ['class.dropup',] }, { type: Input },],
-    "autoClose": [{ type: Input },],
-    "isDisabled": [{ type: Input },],
-    "isOpen": [{ type: HostBinding, args: ['class.open',] }, { type: HostBinding, args: ['class.show',] }, { type: Input },],
-    "isOpenChange": [{ type: Output },],
-    "onShown": [{ type: Output },],
-    "onHidden": [{ type: Output },],
+    placement: [{ type: Input }],
+    triggers: [{ type: Input }],
+    container: [{ type: Input }],
+    dropup: [{ type: HostBinding, args: ['class.dropup',] }, { type: Input }],
+    autoClose: [{ type: Input }],
+    isDisabled: [{ type: Input }],
+    isOpen: [{ type: HostBinding, args: ['class.open',] }, { type: HostBinding, args: ['class.show',] }, { type: Input }],
+    isOpenChange: [{ type: Output }],
+    onShown: [{ type: Output }],
+    onHidden: [{ type: Output }]
 };
 
 /**
@@ -14136,33 +14147,70 @@ DropdownModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+class MdbIconComponent {
+}
+MdbIconComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-icon',
+                template: "<i class=\"fa fa-{{icon}} fa-{{size}} {{class}} prefix\"></i>"
+            },] },
+];
+MdbIconComponent.propDecorators = {
+    iconEl: [{ type: ViewChild, args: ['iconEl',] }],
+    icon: [{ type: Input }],
+    size: [{ type: Input }],
+    class: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class IconsModule {
+}
+IconsModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [MdbIconComponent],
+                exports: [MdbIconComponent]
+            },] },
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 class MdbInputDirective {
     /**
-     * @param {?} el
-     * @param {?} renderer
+     * @param {?} _elRef
+     * @param {?} _renderer
      * @param {?} platformId
      */
-    constructor(el, renderer, platformId) {
-        this.renderer = renderer;
-        this.minLength = '0';
-        this.maxLength = '524288';
+    constructor(_elRef, _renderer, platformId) {
+        this._elRef = _elRef;
+        this._renderer = _renderer;
+        this.el = null;
+        this.elLabel = null;
+        this.elIcon = null;
         this.mdbValidate = true;
         this.focusCheckbox = true;
         this.focusRadio = true;
         this.isBrowser = false;
         this.isClicked = false;
-        this.el = null;
-        this.elLabel = null;
-        this.elIcon = null;
-        this.el = el;
+        this.el = _elRef;
         this.isBrowser = isPlatformBrowser(platformId);
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        this.changes.disconnect();
     }
     /**
      * @return {?}
      */
     onfocus() {
         try {
-            this.renderer.addClass(this.elLabel, 'active');
+            this._renderer.addClass(this.elLabel, 'active');
             this.isClicked = true;
         }
         catch (/** @type {?} */ error) {
@@ -14171,200 +14219,12 @@ class MdbInputDirective {
     /**
      * @return {?}
      */
-    onBlur() {
+    onblur() {
         try {
             if (this.el.nativeElement.value === '') {
-                this.renderer.removeClass(this.elLabel, 'active');
+                this._renderer.removeClass(this.elLabel, 'active');
             }
             this.isClicked = false;
-        }
-        catch (/** @type {?} */ error) {
-        }
-        try {
-            // Validation:
-            if (this.mdbValidate) {
-                const /** @type {?} */ inputType = this.el.nativeElement.type;
-                if (inputType === 'email') {
-                    if (this.customRegex) {
-                        const /** @type {?} */ re = new RegExp(this.el.nativeElement.getAttribute('customRegex'));
-                        if (this.el.nativeElement.length === 0) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                            /*tslint:disable:max-line-length*/
-                        }
-                        else if (re.test(this.el.nativeElement.value) && this.el.nativeElement.value.length >= this.minLength && this.el.nativeElement.value.length <= this.maxLength) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.addClass(this.el.nativeElement, 'counter-success');
-                        }
-                        else if (!re.test(this.el.nativeElement.value) || this.el.nativeElement.value.length < this.minLength || this.el.nativeElement.value.length > this.maxLength) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                            this.renderer.addClass(this.el.nativeElement, 'counter-danger');
-                        }
-                    }
-                    else if (!this.customRegex) {
-                        /*tslint:disable:max-line-length*/
-                        const /** @type {?} */ re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                        if (this.el.nativeElement.length === 0) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                        else if (re.test(this.el.nativeElement.value) && this.el.nativeElement.value.length >= this.minLength && this.el.nativeElement.value.length <= this.maxLength) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.addClass(this.el.nativeElement, 'counter-success');
-                        }
-                        else if (!re.test(this.el.nativeElement.value) || this.el.nativeElement.value.length < this.minLength || this.el.nativeElement.value.length > this.maxLength) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                            this.renderer.addClass(this.el.nativeElement, 'counter-danger');
-                        }
-                    }
-                }
-                else if (inputType === 'password') {
-                    if (this.customRegex) {
-                        const /** @type {?} */ re = new RegExp(this.el.nativeElement.getAttribute('customRegex'));
-                        if (this.el.nativeElement.length === 0) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                            // tslint:disable-next-line:max-line-length
-                        }
-                        else if (this.el.nativeElement.value.match(re) && this.el.nativeElement.value.length >= this.minLength && this.el.nativeElement.value.length <= this.maxLength) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.addClass(this.el.nativeElement, 'counter-success');
-                            // tslint:disable-next-line:max-line-length
-                        }
-                        else if (!this.el.nativeElement.value.match(re) || this.el.nativeElement.value.length < this.minLength || this.el.nativeElement.value.length > this.maxLength) {
-                            this.renderer.addClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                    }
-                    else if (!this.customRegex) {
-                        if (this.el.nativeElement.length === 0) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                            // tslint:disable-next-line:max-line-length
-                        }
-                        else if (this.el.nativeElement.value.match(/^(?=(.*\d){1})(.*\S)(?=.*[a-zA-Z\S])[0-9a-zA-Z\S]/g) && this.el.nativeElement.value.length >= this.minLength && this.el.nativeElement.value.length <= this.maxLength) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.addClass(this.el.nativeElement, 'counter-success');
-                            // tslint:disable-next-line:max-line-length
-                        }
-                        else if (!this.el.nativeElement.value.match(/^(?=(.*\d){1})(.*\S)(?=.*[a-zA-Z\S])[0-9a-zA-Z\S]/g) || this.el.nativeElement.value.length < this.minLength || this.el.nativeElement.value.length > this.maxLength) {
-                            this.renderer.addClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                    }
-                }
-                else if (inputType === 'text') {
-                    if (this.customRegex) {
-                        const /** @type {?} */ re = new RegExp(this.el.nativeElement.getAttribute('customRegex'));
-                        if (this.el.nativeElement.length === 0) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                            // tslint:disable-next-line:max-line-length
-                        }
-                        else if (this.el.nativeElement.value.match(re) && this.el.nativeElement.value.length >= this.minLength && this.el.nativeElement.value.length <= this.maxLength) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.addClass(this.el.nativeElement, 'counter-success');
-                            // tslint:disable-next-line:max-line-length
-                        }
-                        else if (!this.el.nativeElement.value.match(re) || this.el.nativeElement.value.length < this.minLength || this.el.nativeElement.value.length > this.maxLength) {
-                            this.renderer.addClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                    }
-                    else if (!this.customRegex) {
-                        if (this.el.nativeElement.length === 0) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                            // tslint:disable-next-line:max-line-length
-                        }
-                        else if (this.el.nativeElement.value.match(/^[a-zA-Z0-9]+$/g) && this.el.nativeElement.value.length >= this.minLength && this.el.nativeElement.value.length <= this.maxLength) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.addClass(this.el.nativeElement, 'counter-success');
-                            // tslint:disable-next-line:max-line-length
-                        }
-                        else if (!this.el.nativeElement.value.match(/^[a-zA-Z0-9]+$/g) || this.el.nativeElement.value.length < this.minLength || this.el.nativeElement.value.length > this.maxLength) {
-                            this.renderer.addClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                    }
-                }
-                else if (inputType === 'submit') {
-                    for (let /** @type {?} */ i = 0; i < this.el.nativeElement.parentElement.length; i++) {
-                        if (this.el.nativeElement.parentElement[i].value == null || this.el.nativeElement.parentElement[i].value === '') {
-                            this.renderer.addClass(this.el.nativeElement.parentElement[i], 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement.parentElement[i], 'counter-success');
-                        }
-                        else if (!this.el.nativeElement.parentElement[i].value == null) {
-                            this.renderer.addClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                    }
-                }
-                else if (inputType === 'tel') {
-                    if (this.customRegex) {
-                        const /** @type {?} */ re = new RegExp(this.el.nativeElement.getAttribute('customRegex'));
-                        if (this.el.nativeElement.length === 0) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                        else if (re.test(this.el.nativeElement.value) && this.el.nativeElement.value.length >= 8 && this.el.nativeElement.value.length <= 20) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.addClass(this.el.nativeElement, 'counter-success');
-                        }
-                        else if (!re.test(this.el.nativeElement.value) || this.el.nativeElement.value.length > 20) {
-                            this.renderer.addClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                    }
-                    else if (!this.customRegex) {
-                        const /** @type {?} */ re = /^(1[ \-\+]{0,3}|\+1[ -\+]{0,3}|\+1|\+)?((\(\+?1-[2-9][0-9]{1,2}\))|(\(\+?[2-8][0-9][0-9]\))|(\(\+?[1-9][0-9]\))|(\(\+?[17]\))|(\([2-9][2-9]\))|([ \-\.]{0,3}[0-9]{2,4}))?([ \-\.][0-9])?([ \-\.]{0,3}[0-9]{2,4}){2,3}$/;
-                        if (this.el.nativeElement.length === 0) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                        else if (re.test(this.el.nativeElement.value) && this.el.nativeElement.value.length >= 8 && this.el.nativeElement.value.length <= 20) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.addClass(this.el.nativeElement, 'counter-success');
-                        }
-                        else if (!re.test(this.el.nativeElement.value) || this.el.nativeElement.value.length > 20) {
-                            this.renderer.addClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                    }
-                }
-                else if (inputType === 'number') {
-                    if (this.customRegex) {
-                        const /** @type {?} */ re = new RegExp(this.el.nativeElement.getAttribute('customRegex'));
-                        if (this.el.nativeElement.length === 0) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                        else if (re.test(this.el.nativeElement.value) && this.el.nativeElement.value.length > 0) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.addClass(this.el.nativeElement, 'counter-success');
-                        }
-                        else if (!re.test(this.el.nativeElement.value) || this.el.nativeElement.value.length < 1) {
-                            this.renderer.addClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                    }
-                    else if (!this.customRegex) {
-                        const /** @type {?} */ re = /^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:(\.|,)\d+)?$/;
-                        if (this.el.nativeElement.length === 0) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                        else if (re.test(this.el.nativeElement.value) && this.el.nativeElement.value.length > 0) {
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.addClass(this.el.nativeElement, 'counter-success');
-                        }
-                        else if (!re.test(this.el.nativeElement.value) || this.el.nativeElement.value.length < 1) {
-                            this.renderer.addClass(this.el.nativeElement, 'counter-danger');
-                            this.renderer.removeClass(this.el.nativeElement, 'counter-success');
-                        }
-                    }
-                }
-            }
         }
         catch (/** @type {?} */ error) {
         }
@@ -14380,27 +14240,81 @@ class MdbInputDirective {
         }
     }
     /**
+     * @param {?} event
+     * @return {?}
+     */
+    onkeydown(event) {
+        try {
+            if (event.target.type === 'number') {
+                if (event.shiftKey) {
+                    switch (event.keyCode) {
+                        case 38:
+                            event.target.value = +event.target.value + 10;
+                            break;
+                        case 40:
+                            event.target.value = +event.target.value - 10;
+                            break;
+                    }
+                }
+                if (event.altKey) {
+                    switch (event.keyCode) {
+                        case 38:
+                            event.target.value = +event.target.value + 0.1;
+                            break;
+                        case 40:
+                            event.target.value = +event.target.value - 0.1;
+                            break;
+                    }
+                }
+            }
+        }
+        catch (/** @type {?} */ error) { }
+    }
+    /**
      * @return {?}
      */
     ngOnInit() {
         if (this.mdbValidate) {
             // Inititalise a new <span> wrong/right elements and render it below the host component.
-            // this.wrongTextContainer = this.renderer.createElement(this.el.nativeElement.parentElement, 'span');
-            this.wrongTextContainer = this.renderer.createElement('span');
-            this.renderer.addClass(this.wrongTextContainer, 'inputVal');
-            this.renderer.addClass(this.wrongTextContainer, 'text-danger');
-            this.renderer.appendChild(this.el.nativeElement.parentElement, this.wrongTextContainer);
-            const /** @type {?} */ textWrong = this.el.nativeElement.getAttribute('data-error');
+            // this.wrongTextContainer = this._renderer.createElement(this.el.nativeElement.parentElement, 'span');
+            this.wrongTextContainer = this._renderer.createElement('span');
+            this._renderer.addClass(this.wrongTextContainer, 'inputVal');
+            this._renderer.addClass(this.wrongTextContainer, 'text-danger');
+            this._renderer.appendChild(this._elRef.nativeElement.parentElement, this.wrongTextContainer);
+            const /** @type {?} */ textWrong = this._elRef.nativeElement.getAttribute('data-error');
             this.wrongTextContainer.innerHTML = (textWrong ? textWrong : 'wrong');
-            this.renderer.setStyle(this.wrongTextContainer, 'visibility', 'hidden');
-            // this.rightTextContainer = this.renderer.createElement(this.el.nativeElement.parentElement, 'span');
-            this.rightTextContainer = this.renderer.createElement('span');
-            this.renderer.addClass(this.rightTextContainer, 'inputVal');
-            this.renderer.addClass(this.rightTextContainer, 'text-success');
-            this.renderer.appendChild(this.el.nativeElement.parentElement, this.rightTextContainer);
-            const /** @type {?} */ textSuccess = this.el.nativeElement.getAttribute('data-success');
+            this._renderer.setStyle(this.wrongTextContainer, 'visibility', 'hidden');
+            // this.rightTextContainer = this._renderer.createElement(this.el.nativeElement.parentElement, 'span');
+            this.rightTextContainer = this._renderer.createElement('span');
+            this._renderer.addClass(this.rightTextContainer, 'inputVal');
+            this._renderer.addClass(this.rightTextContainer, 'text-success');
+            this._renderer.appendChild(this._elRef.nativeElement.parentElement, this.rightTextContainer);
+            const /** @type {?} */ textSuccess = this._elRef.nativeElement.getAttribute('data-success');
             this.rightTextContainer.innerHTML = (textSuccess ? textSuccess : 'success');
-            this.renderer.setStyle(this.rightTextContainer, 'visibility', 'hidden');
+            this._renderer.setStyle(this.rightTextContainer, 'visibility', 'hidden');
+            this.changes = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (/** @type {?} */ (mutation.target['classList'].contains('ng-touched')) && /** @type {?} */ (mutation.target['classList'].contains('ng-invalid')) && !/** @type {?} */ (mutation.target['classList'].contains('counter-danger'))) {
+                        this._renderer.addClass(this._elRef.nativeElement, 'counter-danger');
+                        this._renderer.removeClass(this._elRef.nativeElement, 'counter-success');
+                        this._renderer.setStyle(this.rightTextContainer, 'visibility', 'hidden');
+                        this._renderer.setStyle(this.wrongTextContainer, 'visibility', 'visible');
+                        this._renderer.setStyle(this.rightTextContainer, 'top', this._elRef.nativeElement.offsetHeight + 'px');
+                        this._renderer.setStyle(this.wrongTextContainer, 'top', this._elRef.nativeElement.offsetHeight + 'px');
+                    }
+                    else if (/** @type {?} */ (mutation.target['classList'].contains('ng-touched')) && /** @type {?} */ (mutation.target['classList'].contains('ng-valid')) && !/** @type {?} */ (mutation.target['classList'].contains('counter-success'))) {
+                        this._renderer.removeClass(this._elRef.nativeElement, 'counter-danger');
+                        this._renderer.addClass(this._elRef.nativeElement, 'counter-success');
+                        this._renderer.setStyle(this.rightTextContainer, 'visibility', 'visible');
+                        this._renderer.setStyle(this.wrongTextContainer, 'visibility', 'hidden');
+                        this._renderer.setStyle(this.rightTextContainer, 'top', this._elRef.nativeElement.offsetHeight + 'px');
+                        this._renderer.setStyle(this.wrongTextContainer, 'top', this._elRef.nativeElement.offsetHeight + 'px');
+                    }
+                });
+            });
+            this.changes.observe(this._elRef.nativeElement, {
+                attributes: true,
+            });
         }
     }
     /**
@@ -14409,10 +14323,10 @@ class MdbInputDirective {
     ngAfterViewInit() {
         const /** @type {?} */ type = this.el.nativeElement.type;
         if (this.focusCheckbox && type === 'checkbox') {
-            this.renderer.addClass(this.el.nativeElement, 'onFocusSelect');
+            this._renderer.addClass(this.el.nativeElement, 'onFocusSelect');
         }
         if (this.focusRadio && type === 'radio') {
-            this.renderer.addClass(this.el.nativeElement, 'onFocusSelect');
+            this._renderer.addClass(this.el.nativeElement, 'onFocusSelect');
         }
     }
     /**
@@ -14423,7 +14337,7 @@ class MdbInputDirective {
         this.checkValue();
         // tslint:disable-next-line:max-line-length
         if (this.el.nativeElement.tagName === 'MDB-COMPLETER' && this.el.nativeElement.getAttribute('ng-reflect-model') == null && !this.isClicked) {
-            this.renderer.removeClass(this.elLabel, 'active');
+            this._renderer.removeClass(this.elLabel, 'active');
         }
     }
     /**
@@ -14443,11 +14357,11 @@ class MdbInputDirective {
             catch (/** @type {?} */ err) { }
             this.elLabel = inputP.querySelector('label[for="' + inputId + '"]') || inputP.querySelector('label');
             if (this.elLabel && this.el.nativeElement.value !== '') {
-                this.renderer.addClass(this.elLabel, 'active');
+                this._renderer.addClass(this.elLabel, 'active');
             }
             this.elIcon = inputP.querySelector('i') || false;
             if (this.elIcon) {
-                this.renderer.addClass(this.elIcon, 'active');
+                this._renderer.addClass(this.elIcon, 'active');
             }
         }
     }
@@ -14459,20 +14373,21 @@ class MdbInputDirective {
         if (this.elLabel != null) {
             value = this.el.nativeElement.value || '';
             if (value === '') {
-                this.renderer.removeClass(this.elLabel, 'active');
+                this._renderer.removeClass(this.elLabel, 'active');
                 if (this.elIcon) {
-                    this.renderer.removeClass(this.elIcon, 'active');
+                    this._renderer.removeClass(this.elIcon, 'active');
                 }
                 // tslint:disable-next-line:max-line-length
             }
             if (value === '' && this.isClicked ||
                 value === '' && this.el.nativeElement.placeholder ||
                 value === '' && this.el.nativeElement.attributes.placeholder) {
-                this.renderer.addClass(this.elLabel, 'active');
+                this._renderer.addClass(this.elLabel, 'active');
             }
             if (this.el.nativeElement.getAttribute('ng-reflect-model') != null) {
+                // tslint:disable-next-line:max-line-length
                 if (this.el.nativeElement.tagName === 'MDB-COMPLETER' && this.el.nativeElement.getAttribute('ng-reflect-model').length !== 0) {
-                    this.renderer.addClass(this.elLabel, 'active');
+                    this._renderer.addClass(this.elLabel, 'active');
                 }
             }
         }
@@ -14485,22 +14400,21 @@ MdbInputDirective.decorators = [
 ];
 /** @nocollapse */
 MdbInputDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
+    { type: ElementRef },
+    { type: Renderer2 },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
 ];
 MdbInputDirective.propDecorators = {
-    "mdbInputDirective": [{ type: Input, args: ['mdbInputDirective',] },],
-    "placeholder": [{ type: Input, args: ['placeholder',] },],
-    "minLength": [{ type: Input, args: ['minLength',] },],
-    "maxLength": [{ type: Input, args: ['maxLength',] },],
-    "customRegex": [{ type: Input, args: ['customRegex',] },],
-    "mdbValidate": [{ type: Input, args: ['mdbValidate',] },],
-    "focusCheckbox": [{ type: Input, args: ['focusCheckbox',] },],
-    "focusRadio": [{ type: Input, args: ['focusRadio',] },],
-    "onfocus": [{ type: HostListener, args: ['focus',] },],
-    "onBlur": [{ type: HostListener, args: ['blur',] },],
-    "onchange": [{ type: HostListener, args: ['change',] },],
+    mdbInputDirective: [{ type: Input, args: ['mdbInputDirective',] }],
+    placeholder: [{ type: Input, args: ['placeholder',] }],
+    customRegex: [{ type: Input, args: ['customRegex',] }],
+    mdbValidate: [{ type: Input, args: ['mdbValidate',] }],
+    focusCheckbox: [{ type: Input, args: ['focusCheckbox',] }],
+    focusRadio: [{ type: Input, args: ['focusRadio',] }],
+    onfocus: [{ type: HostListener, args: ['focus',] }],
+    onblur: [{ type: HostListener, args: ['blur',] }],
+    onchange: [{ type: HostListener, args: ['change',] }],
+    onkeydown: [{ type: HostListener, args: ['keydown', ['$event'],] }]
 };
 
 /**
@@ -14567,8 +14481,8 @@ EqualValidatorDirective.decorators = [
 ];
 /** @nocollapse */
 EqualValidatorDirective.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Attribute, args: ['validateEqual',] },] },
-    { type: undefined, decorators: [{ type: Attribute, args: ['reverse',] },] },
+    { type: String, decorators: [{ type: Attribute, args: ['validateEqual',] }] },
+    { type: String, decorators: [{ type: Attribute, args: ['reverse',] }] }
 ];
 
 /**
@@ -14586,434 +14500,8 @@ class InputsModule {
 InputsModule.decorators = [
     { type: NgModule, args: [{
                 declarations: [MdbInputDirective, EqualValidatorDirective],
-                exports: [MdbInputDirective, EqualValidatorDirective]
-            },] },
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class DeepDirective {
-    /**
-     * @param {?} el
-     * @param {?} renderer
-     */
-    constructor(el, renderer) {
-        this.el = el;
-        this.renderer = renderer;
-    }
-    /**
-     * @return {?}
-     */
-    ngAfterViewInit() {
-        this.renderer.addClass(this.el.nativeElement, 'onFocusSelect');
-    }
-}
-DeepDirective.decorators = [
-    { type: Directive, args: [{
-                selector: '[mdbDeepDirective]',
-            },] },
-];
-/** @nocollapse */
-DeepDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class DeepModule {
-    /**
-     * @return {?}
-     */
-    static forRoot() {
-        return { ngModule: DeepModule, providers: [] };
-    }
-}
-DeepModule.decorators = [
-    { type: NgModule, args: [{
-                declarations: [DeepDirective],
-                exports: [DeepDirective]
-            },] },
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class InputValidateDirective {
-    /**
-     * @param {?} _elRef
-     * @param {?} _renderer
-     */
-    constructor(_elRef, _renderer) {
-        this._elRef = _elRef;
-        this._renderer = _renderer;
-        this.value = '';
-        this.minLength = '0';
-        this.maxLength = '524288';
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        // Inititalise a new <span> wrong/right elements and render it below the host component.
-        this.wrongTextContainer = this._renderer.createElement(this._elRef.nativeElement.parentElement, 'span');
-        this._renderer.setElementClass(this.wrongTextContainer, 'inputVal', true);
-        this._renderer.setElementClass(this.wrongTextContainer, 'text-danger', true);
-        const /** @type {?} */ textWrong = this._elRef.nativeElement.getAttribute('data-error');
-        this.wrongTextContainer.innerHTML = (textWrong ? textWrong : 'wrong');
-        this._renderer.setElementStyle(this.wrongTextContainer, 'visibility', 'hidden');
-        this.rightTextContainer = this._renderer.createElement(this._elRef.nativeElement.parentElement, 'span');
-        this._renderer.setElementClass(this.rightTextContainer, 'inputVal', true);
-        this._renderer.setElementClass(this.rightTextContainer, 'text-success', true);
-        const /** @type {?} */ textSuccess = this._elRef.nativeElement.getAttribute('data-success');
-        this.rightTextContainer.innerHTML = (textSuccess ? textSuccess : 'success');
-        this._renderer.setElementStyle(this.rightTextContainer, 'visibility', 'hidden');
-    }
-    /**
-     * @return {?}
-     */
-    onBlur() {
-        const /** @type {?} */ inputType = this._elRef.nativeElement.type;
-        if (inputType === 'email') {
-            if (this.customRegex) {
-                const /** @type {?} */ re = new RegExp(this._elRef.nativeElement.getAttribute('customRegex'));
-                if (this._elRef.nativeElement.length === 0) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                    /*tslint:disable:max-line-length*/
-                }
-                else if (re.test(this._elRef.nativeElement.value) && this._elRef.nativeElement.value.length >= this.minLength && this._elRef.nativeElement.value.length <= this.maxLength) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', true);
-                }
-                else if (!re.test(this._elRef.nativeElement.value) || this._elRef.nativeElement.value.length < this.minLength || this._elRef.nativeElement.value.length > this.maxLength) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', true);
-                }
-            }
-            else if (!this.customRegex) {
-                /*tslint:disable:max-line-length*/
-                const /** @type {?} */ re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                if (this._elRef.nativeElement.length === 0) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-                else if (re.test(this._elRef.nativeElement.value) && this._elRef.nativeElement.value.length >= this.minLength && this._elRef.nativeElement.value.length <= this.maxLength) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', true);
-                }
-                else if (!re.test(this._elRef.nativeElement.value) || this._elRef.nativeElement.value.length < this.minLength || this._elRef.nativeElement.value.length > this.maxLength) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', true);
-                }
-            }
-        }
-        else if (inputType === 'password') {
-            if (this.customRegex) {
-                const /** @type {?} */ re = new RegExp(this._elRef.nativeElement.getAttribute('customRegex'));
-                if (this._elRef.nativeElement.length === 0) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                    // tslint:disable-next-line:max-line-length
-                }
-                else if (this._elRef.nativeElement.value.match(re) && this._elRef.nativeElement.value.length >= this.minLength && this._elRef.nativeElement.value.length <= this.maxLength) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', true);
-                    // tslint:disable-next-line:max-line-length
-                }
-                else if (!this._elRef.nativeElement.value.match(re) || this._elRef.nativeElement.value.length < this.minLength || this._elRef.nativeElement.value.length > this.maxLength) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', true);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-            }
-            else if (!this.customRegex) {
-                if (this._elRef.nativeElement.length === 0) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                    // tslint:disable-next-line:max-line-length
-                }
-                else if (this._elRef.nativeElement.value.match(/^(?=(.*\d){1})(.*\S)(?=.*[a-zA-Z\S])[0-9a-zA-Z\S]/g) && this._elRef.nativeElement.value.length >= this.minLength && this._elRef.nativeElement.value.length <= this.maxLength) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', true);
-                    // tslint:disable-next-line:max-line-length
-                }
-                else if (!this._elRef.nativeElement.value.match(/^(?=(.*\d){1})(.*\S)(?=.*[a-zA-Z\S])[0-9a-zA-Z\S]/g) || this._elRef.nativeElement.value.length < this.minLength || this._elRef.nativeElement.value.length > this.maxLength) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', true);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-            }
-        }
-        else if (inputType === 'text') {
-            if (this.customRegex) {
-                const /** @type {?} */ re = new RegExp(this._elRef.nativeElement.getAttribute('customRegex'));
-                if (this._elRef.nativeElement.length === 0) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                    // tslint:disable-next-line:max-line-length
-                }
-                else if (this._elRef.nativeElement.value.match(re) && this._elRef.nativeElement.value.length >= this.minLength && this._elRef.nativeElement.value.length <= this.maxLength) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', true);
-                    // tslint:disable-next-line:max-line-length
-                }
-                else if (!this._elRef.nativeElement.value.match(re) || this._elRef.nativeElement.value.length < this.minLength || this._elRef.nativeElement.value.length > this.maxLength) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', true);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-            }
-            else if (!this.customRegex) {
-                if (this._elRef.nativeElement.length === 0) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                    // tslint:disable-next-line:max-line-length
-                }
-                else if (this._elRef.nativeElement.value.match(/^[a-zA-Z0-9]+$/g) && this._elRef.nativeElement.value.length >= this.minLength && this._elRef.nativeElement.value.length <= this.maxLength) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', true);
-                    // tslint:disable-next-line:max-line-length
-                }
-                else if (!this._elRef.nativeElement.value.match(/^[a-zA-Z0-9]+$/g) || this._elRef.nativeElement.value.length < this.minLength || this._elRef.nativeElement.value.length > this.maxLength) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', true);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-            }
-        }
-        else if (inputType === 'submit') {
-            for (let /** @type {?} */ i = 0; i < this._elRef.nativeElement.parentElement.length; i++) {
-                if (this._elRef.nativeElement.parentElement[i].value == null || this._elRef.nativeElement.parentElement[i].value === '') {
-                    this._renderer.setElementClass(this._elRef.nativeElement.parentElement[i], 'counter-danger', true);
-                    this._renderer.setElementClass(this._elRef.nativeElement.parentElement[i], 'counter-success', false);
-                }
-                else if (!this._elRef.nativeElement.parentElement[i].value == null) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', true);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-            }
-        }
-        else if (inputType === 'tel') {
-            if (this.customRegex) {
-                const /** @type {?} */ re = new RegExp(this._elRef.nativeElement.getAttribute('customRegex'));
-                if (this._elRef.nativeElement.length === 0) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-                else if (re.test(this._elRef.nativeElement.value) && this._elRef.nativeElement.value.length >= 8 && this._elRef.nativeElement.value.length <= 20) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', true);
-                }
-                else if (!re.test(this._elRef.nativeElement.value) || this._elRef.nativeElement.value.length > 20) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', true);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-            }
-            else if (!this.customRegex) {
-                const /** @type {?} */ re = /^(1[ \-\+]{0,3}|\+1[ -\+]{0,3}|\+1|\+)?((\(\+?1-[2-9][0-9]{1,2}\))|(\(\+?[2-8][0-9][0-9]\))|(\(\+?[1-9][0-9]\))|(\(\+?[17]\))|(\([2-9][2-9]\))|([ \-\.]{0,3}[0-9]{2,4}))?([ \-\.][0-9])?([ \-\.]{0,3}[0-9]{2,4}){2,3}$/;
-                if (this._elRef.nativeElement.length === 0) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-                else if (re.test(this._elRef.nativeElement.value) && this._elRef.nativeElement.value.length >= 8 && this._elRef.nativeElement.value.length <= 20) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', true);
-                }
-                else if (!re.test(this._elRef.nativeElement.value) || this._elRef.nativeElement.value.length > 20) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', true);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-            }
-        }
-        else if (inputType === 'number') {
-            if (this.customRegex) {
-                const /** @type {?} */ re = new RegExp(this._elRef.nativeElement.getAttribute('customRegex'));
-                if (this._elRef.nativeElement.length === 0) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-                else if (re.test(this._elRef.nativeElement.value) && this._elRef.nativeElement.value.length > 0) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', true);
-                }
-                else if (!re.test(this._elRef.nativeElement.value) || this._elRef.nativeElement.value.length < 1) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', true);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-            }
-            else if (!this.customRegex) {
-                const /** @type {?} */ re = /^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:(\.|,)\d+)?$/;
-                if (this._elRef.nativeElement.length === 0) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-                else if (re.test(this._elRef.nativeElement.value) && this._elRef.nativeElement.value.length > 0) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', false);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', true);
-                }
-                else if (!re.test(this._elRef.nativeElement.value) || this._elRef.nativeElement.value.length < 1) {
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-danger', true);
-                    this._renderer.setElementClass(this._elRef.nativeElement, 'counter-success', false);
-                }
-            }
-        }
-    }
-}
-InputValidateDirective.decorators = [
-    { type: Directive, args: [{
-                selector: '[mdbInputValidate]',
-            },] },
-];
-/** @nocollapse */
-InputValidateDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer, },
-];
-InputValidateDirective.propDecorators = {
-    "value": [{ type: Input },],
-    "minLength": [{ type: Input, args: ['minLength',] },],
-    "maxLength": [{ type: Input, args: ['maxLength',] },],
-    "customRegex": [{ type: Input, args: ['customRegex',] },],
-    "onBlur": [{ type: HostListener, args: ['blur', ['$event'],] },],
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class ActiveDirective {
-    /**
-     * @param {?} el
-     * @param {?} renderer
-     * @param {?} platformId
-     */
-    constructor(el, renderer, platformId) {
-        this.renderer = renderer;
-        this.isBrowser = false;
-        this.isClicked = false;
-        this.el = null;
-        this.elLabel = null;
-        this.elIcon = null;
-        this.el = el;
-        this.isBrowser = isPlatformBrowser(platformId);
-    }
-    /**
-     * @return {?}
-     */
-    onClick() {
-        this.initComponent();
-        this.isClicked = true;
-    }
-    /**
-     * @return {?}
-     */
-    Click() {
-        this.isClicked = true;
-    }
-    /**
-     * @return {?}
-     */
-    onBlur() {
-        this.checkValue();
-        this.isClicked = false;
-    }
-    /**
-     * @return {?}
-     */
-    ngAfterViewInit() {
-        this.initComponent();
-        setTimeout(() => {
-            this.checkValue();
-        }, 0);
-    }
-    /**
-     * @return {?}
-     */
-    ngAfterViewChecked() {
-        this.initComponent();
-        this.checkValue();
-    }
-    /**
-     * @return {?}
-     */
-    initComponent() {
-        let /** @type {?} */ inputId;
-        let /** @type {?} */ inputP;
-        if (this.isBrowser) {
-            try {
-                inputId = this.el.nativeElement.id;
-            }
-            catch (/** @type {?} */ err) { }
-            try {
-                inputP = this.el.nativeElement.parentNode;
-            }
-            catch (/** @type {?} */ err) { }
-            this.elLabel = inputP.querySelector('label[for="' + inputId + '"]') || inputP.querySelector('label');
-            if (this.elLabel != null) {
-                this.renderer.addClass(this.elLabel, 'active');
-            }
-            this.elIcon = inputP.querySelector('i') || false;
-            if (this.elIcon) {
-                this.renderer.addClass(this.elIcon, 'active');
-            }
-        }
-    }
-    /**
-     * @return {?}
-     */
-    checkValue() {
-        let /** @type {?} */ value = '';
-        if (this.elLabel != null) {
-            value = this.el.nativeElement.value || '';
-            if (value === '') {
-                this.renderer.removeClass(this.elLabel, 'active');
-                if (this.elIcon) {
-                    this.renderer.removeClass(this.elIcon, 'active');
-                }
-                // tslint:disable-next-line:max-line-length
-            }
-            if (value === '' && this.isClicked || value === '' && this.el.nativeElement.placeholder || value === '' && this.el.nativeElement.attributes.placeholder) {
-                this.renderer.addClass(this.elLabel, 'active');
-            }
-        }
-    }
-}
-ActiveDirective.decorators = [
-    { type: Directive, args: [{
-                selector: '[mdbActive]'
-            },] },
-];
-/** @nocollapse */
-ActiveDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
-];
-ActiveDirective.propDecorators = {
-    "mdbActive": [{ type: Input },],
-    "onClick": [{ type: HostListener, args: ['focus', ['$event'],] },],
-    "Click": [{ type: HostListener, args: ['click', ['$event'],] },],
-    "onBlur": [{ type: HostListener, args: ['blur', ['$event'],] },],
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class ActiveModule {
-    /**
-     * @return {?}
-     */
-    static forRoot() {
-        return { ngModule: ActiveModule, providers: [] };
-    }
-}
-ActiveModule.decorators = [
-    { type: NgModule, args: [{
-                declarations: [ActiveDirective, InputValidateDirective],
-                exports: [ActiveDirective, InputValidateDirective]
+                exports: [MdbInputDirective, EqualValidatorDirective],
+                schemas: [NO_ERRORS_SCHEMA],
             },] },
 ];
 
@@ -15178,11 +14666,11 @@ ModalBackdropComponent.decorators = [
 ];
 /** @nocollapse */
 ModalBackdropComponent.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer, },
+    { type: ElementRef },
+    { type: Renderer }
 ];
 ModalBackdropComponent.propDecorators = {
-    "classNameBackDrop": [{ type: HostBinding, args: ['class.modal-backdrop',] },],
+    classNameBackDrop: [{ type: HostBinding, args: ['class.modal-backdrop',] }]
 };
 
 /**
@@ -15364,7 +14852,7 @@ class ModalDirective {
     }
     /**
      *  Show dialog
-     *  \@internal
+     * \@internal
      * @return {?}
      */
     showElement() {
@@ -15531,19 +15019,19 @@ ModalDirective.decorators = [
 ];
 /** @nocollapse */
 ModalDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: ViewContainerRef, },
-    { type: Renderer2, },
-    { type: ComponentLoaderFactory, },
+    { type: ElementRef },
+    { type: ViewContainerRef },
+    { type: Renderer2 },
+    { type: ComponentLoaderFactory }
 ];
 ModalDirective.propDecorators = {
-    "config": [{ type: Input },],
-    "onShow": [{ type: Output },],
-    "onShown": [{ type: Output },],
-    "onHide": [{ type: Output },],
-    "onHidden": [{ type: Output },],
-    "onClick": [{ type: HostListener, args: ['click', ['$event'],] },],
-    "onEsc": [{ type: HostListener, args: ['keydown.esc',] },],
+    config: [{ type: Input }],
+    onShow: [{ type: Output }],
+    onShown: [{ type: Output }],
+    onHide: [{ type: Output }],
+    onHidden: [{ type: Output }],
+    onClick: [{ type: HostListener, args: ['click', ['$event'],] }],
+    onEsc: [{ type: HostListener, args: ['keydown.esc',] }]
 };
 
 /**
@@ -15653,16 +15141,16 @@ ModalContainerComponent.decorators = [
 ];
 /** @nocollapse */
 ModalContainerComponent.ctorParameters = () => [
-    { type: ModalOptions, },
-    { type: ElementRef, },
-    { type: Renderer, },
+    { type: ModalOptions },
+    { type: ElementRef },
+    { type: Renderer }
 ];
 ModalContainerComponent.propDecorators = {
-    "tabindex": [{ type: HostBinding, args: ['tabindex',] },],
-    "role": [{ type: HostBinding, args: ['role',] },],
-    "modla": [{ type: HostBinding, args: ['class.modal',] },],
-    "onClick": [{ type: HostListener, args: ['click', ['$event'],] },],
-    "onEsc": [{ type: HostListener, args: ['window:keydown.esc',] },],
+    tabindex: [{ type: HostBinding, args: ['tabindex',] }],
+    role: [{ type: HostBinding, args: ['role',] }],
+    modla: [{ type: HostBinding, args: ['class.modal',] }],
+    onClick: [{ type: HostListener, args: ['click', ['$event'],] }],
+    onEsc: [{ type: HostListener, args: ['window:keydown.esc',] }]
 };
 
 /**
@@ -15878,10 +15366,10 @@ MDBModalService.decorators = [
 ];
 /** @nocollapse */
 MDBModalService.ctorParameters = () => [
-    { type: ComponentLoaderFactory, },
-    { type: ElementRef, },
-    { type: ViewContainerRef, },
-    { type: Renderer2, },
+    { type: ComponentLoaderFactory },
+    { type: ElementRef },
+    { type: ViewContainerRef },
+    { type: Renderer2 }
 ];
 
 /**
@@ -15971,11 +15459,11 @@ LinksComponent.decorators = [
 ];
 /** @nocollapse */
 LinksComponent.ctorParameters = () => [
-    { type: NavbarService, },
+    { type: NavbarService }
 ];
 LinksComponent.propDecorators = {
-    "links": [{ type: ContentChildren, args: [RouterLinkWithHref, { read: ElementRef, descendants: true },] },],
-    "linkClick": [{ type: Output },],
+    links: [{ type: ContentChildren, args: [RouterLinkWithHref, { read: ElementRef, descendants: true },] }],
+    linkClick: [{ type: Output }]
 };
 
 /**
@@ -16178,18 +15666,18 @@ NavbarComponent.decorators = [
 ];
 /** @nocollapse */
 NavbarComponent.ctorParameters = () => [
-    { type: Renderer2, },
-    { type: NavbarService, },
+    { type: Renderer2 },
+    { type: NavbarService }
 ];
 NavbarComponent.propDecorators = {
-    "SideClass": [{ type: Input },],
-    "containerInside": [{ type: Input },],
-    "el": [{ type: ViewChild, args: ['navbar',] },],
-    "mobile": [{ type: ViewChild, args: ['mobile',] },],
-    "navbar": [{ type: ViewChild, args: ['nav',] },],
-    "container": [{ type: ViewChild, args: ['container',] },],
-    "onResize": [{ type: HostListener, args: ['window:resize', ['$event'],] },],
-    "onScroll": [{ type: HostListener, args: ['document:scroll', ['$event'],] },],
+    SideClass: [{ type: Input }],
+    containerInside: [{ type: Input }],
+    el: [{ type: ViewChild, args: ['navbar',] }],
+    mobile: [{ type: ViewChild, args: ['mobile',] }],
+    navbar: [{ type: ViewChild, args: ['nav',] }],
+    container: [{ type: ViewChild, args: ['container',] }],
+    onResize: [{ type: HostListener, args: ['window:resize', ['$event'],] }],
+    onScroll: [{ type: HostListener, args: ['document:scroll', ['$event'],] }]
 };
 
 /**
@@ -16233,11 +15721,11 @@ NavlinksComponent.decorators = [
 ];
 /** @nocollapse */
 NavlinksComponent.ctorParameters = () => [
-    { type: NavbarService, },
+    { type: NavbarService }
 ];
 NavlinksComponent.propDecorators = {
-    "links": [{ type: ContentChildren, args: [RouterLinkWithHref, { read: ElementRef, descendants: true },] },],
-    "linkClick": [{ type: Output },],
+    links: [{ type: ContentChildren, args: [RouterLinkWithHref, { read: ElementRef, descendants: true },] }],
+    linkClick: [{ type: Output }]
 };
 
 /**
@@ -16321,14 +15809,14 @@ PopoverContainerComponent.decorators = [
 ];
 /** @nocollapse */
 PopoverContainerComponent.ctorParameters = () => [
-    { type: PopoverConfig, },
+    { type: PopoverConfig }
 ];
 PopoverContainerComponent.propDecorators = {
-    "placement": [{ type: Input },],
-    "title": [{ type: Input },],
-    "show": [{ type: HostBinding, args: ['class.show',] },],
-    "role": [{ type: HostBinding, args: ['attr.role',] },],
-    "class": [{ type: HostBinding, args: ['class',] },],
+    placement: [{ type: Input }],
+    title: [{ type: Input }],
+    show: [{ type: HostBinding, args: ['class.show',] }],
+    role: [{ type: HostBinding, args: ['attr.role',] }],
+    class: [{ type: HostBinding, args: ['class',] }]
 };
 
 /**
@@ -16440,21 +15928,21 @@ PopoverDirective.decorators = [
 ];
 /** @nocollapse */
 PopoverDirective.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Renderer2, },
-    { type: ViewContainerRef, },
-    { type: PopoverConfig, },
-    { type: ComponentLoaderFactory, },
+    { type: ElementRef },
+    { type: Renderer2 },
+    { type: ViewContainerRef },
+    { type: PopoverConfig },
+    { type: ComponentLoaderFactory }
 ];
 PopoverDirective.propDecorators = {
-    "mdbPopover": [{ type: Input },],
-    "popoverTitle": [{ type: Input },],
-    "placement": [{ type: Input },],
-    "triggers": [{ type: Input },],
-    "container": [{ type: Input },],
-    "isOpen": [{ type: Input },],
-    "onShown": [{ type: Output },],
-    "onHidden": [{ type: Output },],
+    mdbPopover: [{ type: Input }],
+    popoverTitle: [{ type: Input }],
+    placement: [{ type: Input }],
+    triggers: [{ type: Input }],
+    container: [{ type: Input }],
+    isOpen: [{ type: Input }],
+    onShown: [{ type: Output }],
+    onHidden: [{ type: Output }]
 };
 
 /**
@@ -16544,10 +16032,10 @@ RippleDirective.decorators = [
 ];
 /** @nocollapse */
 RippleDirective.ctorParameters = () => [
-    { type: ElementRef, },
+    { type: ElementRef }
 ];
 RippleDirective.propDecorators = {
-    "click": [{ type: HostListener, args: ['click', ['$event'],] },],
+    click: [{ type: HostListener, args: ['click', ['$event'],] }]
 };
 
 /**
@@ -16661,10 +16149,10 @@ TooltipContainerComponent.decorators = [
 ];
 /** @nocollapse */
 TooltipContainerComponent.ctorParameters = () => [
-    { type: TooltipConfig, },
+    { type: TooltipConfig }
 ];
 TooltipContainerComponent.propDecorators = {
-    "show": [{ type: HostBinding, args: ['class.show',] },],
+    show: [{ type: HostBinding, args: ['class.show',] }]
 };
 
 /**
@@ -16830,24 +16318,24 @@ TooltipDirective.decorators = [
 ];
 /** @nocollapse */
 TooltipDirective.ctorParameters = () => [
-    { type: ViewContainerRef, },
-    { type: Renderer2, },
-    { type: ElementRef, },
-    { type: ComponentLoaderFactory, },
-    { type: TooltipConfig, },
+    { type: ViewContainerRef },
+    { type: Renderer2 },
+    { type: ElementRef },
+    { type: ComponentLoaderFactory },
+    { type: TooltipConfig }
 ];
 TooltipDirective.propDecorators = {
-    "mdbTooltip": [{ type: Input },],
-    "tooltipChange": [{ type: Output },],
-    "placement": [{ type: Input },],
-    "triggers": [{ type: Input },],
-    "container": [{ type: Input },],
-    "isOpen": [{ type: Input },],
-    "isDisabled": [{ type: Input },],
-    "onShown": [{ type: Output },],
-    "onHidden": [{ type: Output },],
-    "delay": [{ type: Input },],
-    "fadeDuration": [{ type: Input },],
+    mdbTooltip: [{ type: Input }],
+    tooltipChange: [{ type: Output }],
+    placement: [{ type: Input }],
+    triggers: [{ type: Input }],
+    container: [{ type: Input }],
+    isOpen: [{ type: Input }],
+    isDisabled: [{ type: Input }],
+    onShown: [{ type: Output }],
+    onHidden: [{ type: Output }],
+    delay: [{ type: Input }],
+    fadeDuration: [{ type: Input }]
 };
 __decorate([
     OnChange(),
@@ -16948,13 +16436,16 @@ class BsComponentRef {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 const MODULES = [
-    DeepModule,
     ButtonsModule,
     RippleModule,
     WavesModule,
     InputsModule,
-    ActiveModule,
     NavbarModule,
     DropdownModule,
     CarouselModule,
@@ -16963,6 +16454,7 @@ const MODULES = [
     ModalModule,
     TooltipModule,
     PopoverModule,
+    IconsModule
 ];
 class MDBRootModule {
 }
@@ -16970,11 +16462,9 @@ MDBRootModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
                     ButtonsModule,
-                    DeepModule,
                     RippleModule.forRoot(),
                     WavesModule.forRoot(),
                     InputsModule.forRoot(),
-                    ActiveModule.forRoot(),
                     NavbarModule,
                     DropdownModule.forRoot(),
                     CarouselModule.forRoot(),
@@ -16983,6 +16473,7 @@ MDBRootModule.decorators = [
                     ModalModule.forRoot(),
                     TooltipModule.forRoot(),
                     PopoverModule.forRoot(),
+                    IconsModule
                 ],
                 exports: MODULES,
                 schemas: [NO_ERRORS_SCHEMA]
@@ -17090,7 +16581,7 @@ const MODULES$1 = [
     AccordionModule,
     StickyContentModule,
     SmoothscrollModule,
-    CharCounterModule
+    CharCounterModule,
 ];
 class MDBRootModulePro {
 }
@@ -17111,7 +16602,7 @@ MDBRootModulePro.decorators = [
                     AccordionModule,
                     StickyContentModule,
                     SmoothscrollModule.forRoot(),
-                    CharCounterModule.forRoot()
+                    CharCounterModule.forRoot(),
                 ],
                 exports: [MODULES$1],
                 providers: [],
@@ -17183,5 +16674,5 @@ MDBBootstrapModulesPro.decorators = [
  * Generated bundle index. Do not edit.
  */
 
-export { SBItemBodyComponent, SBItemHeadComponent, SBItemComponent, sbConfig, SqueezeBoxComponent, SQUEEZEBOX_COMPONENTS, AccordionModule, OverlayContainer, OverlayRef, Overlay, OVERLAY_PROVIDERS, DomPortalHost, ComponentPortal, BasePortalHost, ToastComponent, GlobalConfig, ToastPackage, tsConfig, ToastContainerDirective, ToastContainerModule, ToastRef, ToastInjector, ToastModule, ToastService, TOAST_CONFIG, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, CompleterListItemComponent, CompleterComponent, MdbCompleterDirective, CtrRowItem, MdbDropdownDirective, MdbInputCompleteDirective, CtrListContext, MdbListDirective, MdbRowDirective, CompleterBaseData, CompleterService, localDataFactory, remoteDataFactory, LocalDataFactoryProvider, RemoteDataFactoryProvider, LocalData, RemoteData, MAX_CHARS, MIN_SEARCH_LENGTH, PAUSE, TEXT_SEARCHING, TEXT_NO_RESULTS, CLEAR_TIMEOUT, isNil, AutocompleteModule, CardRevealComponent, CardRotatingComponent, CardsModule, InputAutoFillDirective, FocusDirective, LocaleService, UtilService, DatepickerModule, MYDP_VALUE_ACCESSOR, MDBDatePickerComponent, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, UploadStatus, humanizeBytes, MDBUploaderService, MDBFileDropDirective, MDBFileSelectDirective, FileInputModule, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, OptionList, Option, SelectDropdownComponent, SELECT_VALUE_ACCESSOR, SelectComponent, SelectModule, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, MDBSpinningPreloader, ProgressBarComponent, MdProgressSpinnerCssMatStylerDirective, MdProgressSpinnerComponent, MdSpinnerComponent, BarComponent, ProgressSpinnerComponent, ProgressDirective, ProgressbarComponent, ProgressbarConfigComponent, ProgressbarModule, PreloadersModule, ProgressBars, SidenavComponent, SidenavModule, PageScrollUtilService, EasingLogic, PageScrollConfig, PageScrollDirective, PageScrollInstance, SmoothscrollModule, PageScrollService, computedStyle, MdbStickyDirective, StickyContentModule, TabHeadingDirective, TabDirective, TabsetComponent, TabsetConfig, NgTranscludeDirective, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TimePickerModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, ButtonsModule, CHECKBOX_CONTROL_VALUE_ACCESSOR, ButtonCheckboxDirective, RADIO_CONTROL_VALUE_ACCESSOR, ButtonRadioDirective, Direction, CarouselComponent, CarouselConfig, SlideComponent, CarouselModule, BaseChartDirective, ChartsModule, CollapseDirective, CollapseModule, BsDropdownContainerComponent, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownConfig, BsDropdownDirective, BsDropdownState, DropdownModule, InputsModule, MdbInputDirective, DeepModule, DeepDirective, InputValidateDirective, EqualValidatorDirective, ActiveDirective, ActiveModule, ModalDirective, ModalOptions, MDBModalRef, modalConfigDefaults, ClassName, Selector, TransitionDurations, DISMISS_REASONS, MDBModalService, ModalBackdropOptions, ModalBackdropComponent, ModalContainerComponent, msConfig, ModalModule, LinksComponent, LogoComponent, NavbarComponent, NavbarService, NavlinksComponent, NavbarModule, PopoverContainerComponent, PopoverConfig, PopoverDirective, PopoverModule, RippleDirective, RippleModule, WavesDirective, WavesModule, TooltipContainerComponent, TooltipDirective, TooltipConfig, TooltipModule, BsComponentRef, ComponentLoader, ComponentLoaderFactory, ContentRef, win as window, document$1 as document, location, gc, performance, Event, MouseEvent, KeyboardEvent, EventTarget, History, Location, EventListener, Positioning, positionElements, PositioningService, OnChange, LinkedList, isBs3, Trigger, parseTriggers, listenToTriggers, Utils, MDBBootstrapModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, ButtonsModule as ɵcq1, ButtonCheckboxDirective as ɵcr1, ButtonRadioDirective as ɵcs1, CarouselComponent as ɵct1, CarouselConfig as ɵcu1, CarouselModule as ɵcw1, SlideComponent as ɵcv1, BaseChartDirective as ɵcx1, ChartsModule as ɵcy1, CollapseDirective as ɵcz1, CollapseModule as ɵda1, BsDropdownContainerComponent as ɵdb1, BsDropdownMenuDirective as ɵdc1, BsDropdownToggleDirective as ɵdd1, BsDropdownConfig as ɵde1, BsDropdownDirective as ɵdf1, DropdownModule as ɵdh1, BsDropdownState as ɵdg1, ActiveDirective as ɵdn1, ActiveModule as ɵdo1, DeepDirective as ɵdl1, DeepModule as ɵdk1, InputValidateDirective as ɵdm1, InputsModule as ɵdi1, MdbInputDirective as ɵdj1, MDBRootModule as ɵek1, ModalDirective as ɵdp1, ModalModule as ɵdv1, ModalOptions as ɵdq1, MDBModalService as ɵdr1, ModalBackdropComponent as ɵdt1, ModalBackdropOptions as ɵds1, ModalContainerComponent as ɵdu1, NavbarComponent as ɵdw1, NavbarModule as ɵdx1, PopoverContainerComponent as ɵdy1, PopoverConfig as ɵdz1, PopoverDirective as ɵea1, PopoverModule as ɵeb1, RippleDirective as ɵec1, RippleModule as ɵed1, TooltipContainerComponent as ɵeg1, TooltipDirective as ɵeh1, TooltipModule as ɵej1, TooltipConfig as ɵei1, WavesDirective as ɵee1, WavesModule as ɵef1, SBItemComponent as ɵc1, SBItemBodyComponent as ɵa1, SBItemHeadComponent as ɵb1, SqueezeBoxComponent as ɵd1, AccordionModule as ɵe1, CompleterListItemComponent as ɵf1, CompleterComponent as ɵg1, MdbCompleterDirective as ɵh1, MdbDropdownDirective as ɵi1, MdbInputCompleteDirective as ɵj1, MdbListDirective as ɵk1, MdbRowDirective as ɵl1, AutocompleteModule as ɵp1, CompleterService as ɵm1, LocalDataFactoryProvider as ɵn1, RemoteDataFactoryProvider as ɵo1, CardRevealComponent as ɵq1, CardRotatingComponent as ɵr1, CardsModule as ɵs1, MDBDatePickerComponent as ɵz1, MYDP_VALUE_ACCESSOR as ɵy1, DatepickerModule as ɵx1, InputAutoFillDirective as ɵt1, FocusDirective as ɵu1, LocaleService as ɵv1, UtilService as ɵw1, SimpleChartComponent as ɵba1, ChartSimpleModule as ɵbc1, EasyPieChartComponent as ɵbb1, MDBFileDropDirective as ɵbd1, MDBFileSelectDirective as ɵbe1, FileInputModule as ɵbf1, CharCounterDirective as ɵbg1, CharCounterModule as ɵbh1, ImageModalComponent as ɵbi1, LightBoxModule as ɵbj1, SelectDropdownComponent as ɵbl1, SELECT_VALUE_ACCESSOR as ɵbm1, SelectComponent as ɵbn1, SelectModule as ɵbo1, MDBRootModulePro as ɵel1, BarComponent as ɵbp1, ProgressBars as ɵbv1, MdProgressBarModule as ɵem1, MdProgressSpinnerModule as ɵen1, ProgressSpinnerComponent as ɵbq1, ProgressDirective as ɵbr1, ProgressbarComponent as ɵbs1, ProgressbarConfigComponent as ɵbt1, ProgressbarModule as ɵbu1, SidenavComponent as ɵbw1, SidenavModule as ɵbx1, PageScrollDirective as ɵby1, PageScrollInstance as ɵbz1, SmoothscrollModule as ɵca1, PageScrollService as ɵcb1, MdbStickyDirective as ɵcc1, StickyContentModule as ɵcd1, TabHeadingDirective as ɵce1, TabDirective as ɵcf1, TabsetComponent as ɵcg1, TabsetConfig as ɵch1, TabsModule as ɵcj1, NgTranscludeDirective as ɵci1, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR as ɵck1, MaterialChipsComponent as ɵcl1, MaterialChipsModule as ɵcm1, ClockPickerComponent as ɵcp1, TIME_PIRCKER_VALUE_ACCESSOT as ɵco1, TimePickerModule as ɵcn1 };
+export { SBItemBodyComponent, SBItemHeadComponent, SBItemComponent, sbConfig, SqueezeBoxComponent, SQUEEZEBOX_COMPONENTS, AccordionModule, OverlayContainer, OverlayRef, Overlay, OVERLAY_PROVIDERS, DomPortalHost, ComponentPortal, BasePortalHost, ToastComponent, GlobalConfig, ToastPackage, tsConfig, ToastContainerDirective, ToastContainerModule, ToastRef, ToastInjector, ToastModule, ToastService, TOAST_CONFIG, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, CompleterListItemComponent, CompleterComponent, MdbCompleterDirective, CtrRowItem, MdbDropdownDirective, MdbInputCompleteDirective, CtrListContext, MdbListDirective, MdbRowDirective, CompleterBaseData, CompleterService, localDataFactory, remoteDataFactory, LocalDataFactoryProvider, RemoteDataFactoryProvider, LocalData, RemoteData, MAX_CHARS, MIN_SEARCH_LENGTH, PAUSE, TEXT_SEARCHING, TEXT_NO_RESULTS, CLEAR_TIMEOUT, isNil, AutocompleteModule, CardRevealComponent, CardRotatingComponent, CardsModule, InputAutoFillDirective, FocusDirective, LocaleService, UtilService, DatepickerModule, MYDP_VALUE_ACCESSOR, MDBDatePickerComponent, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, UploadStatus, humanizeBytes, MDBUploaderService, MDBFileDropDirective, MDBFileSelectDirective, FileInputModule, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, OptionList, Option, SelectDropdownComponent, SELECT_VALUE_ACCESSOR, SelectComponent, SelectModule, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, MDBSpinningPreloader, ProgressBarComponent, MdProgressSpinnerCssMatStylerDirective, MdProgressSpinnerComponent, MdSpinnerComponent, BarComponent, ProgressSpinnerComponent, ProgressDirective, ProgressbarComponent, ProgressbarConfigComponent, ProgressbarModule, PreloadersModule, ProgressBars, SidenavComponent, SidenavModule, PageScrollUtilService, EasingLogic, PageScrollConfig, PageScrollDirective, PageScrollInstance, SmoothscrollModule, PageScrollService, computedStyle, MdbStickyDirective, StickyContentModule, TabHeadingDirective, TabDirective, TabsetComponent, TabsetConfig, NgTranscludeDirective, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TimePickerModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, ButtonsModule, CHECKBOX_CONTROL_VALUE_ACCESSOR, ButtonCheckboxDirective, RADIO_CONTROL_VALUE_ACCESSOR, ButtonRadioDirective, Direction, CarouselComponent, CarouselConfig, SlideComponent, CarouselModule, BaseChartDirective, ChartsModule, CollapseDirective, CollapseModule, BsDropdownContainerComponent, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownConfig, BsDropdownDirective, BsDropdownState, DropdownModule, IconsModule, MdbIconComponent, InputsModule, MdbInputDirective, EqualValidatorDirective, ModalDirective, ModalOptions, MDBModalRef, modalConfigDefaults, ClassName, Selector, TransitionDurations, DISMISS_REASONS, MDBModalService, ModalBackdropOptions, ModalBackdropComponent, ModalContainerComponent, msConfig, ModalModule, LinksComponent, LogoComponent, NavbarComponent, NavbarService, NavlinksComponent, NavbarModule, PopoverContainerComponent, PopoverConfig, PopoverDirective, PopoverModule, RippleDirective, RippleModule, WavesDirective, WavesModule, TooltipContainerComponent, TooltipDirective, TooltipConfig, TooltipModule, BsComponentRef, ComponentLoader, ComponentLoaderFactory, ContentRef, win as window, document$1 as document, location, gc, performance, Event, MouseEvent, KeyboardEvent, EventTarget, History, Location, EventListener, Positioning, positionElements, PositioningService, OnChange, LinkedList, isBs3, Trigger, parseTriggers, listenToTriggers, Utils, MDBBootstrapModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, ButtonsModule as ɵcq1, ButtonCheckboxDirective as ɵcr1, ButtonRadioDirective as ɵcs1, CarouselComponent as ɵct1, CarouselConfig as ɵcu1, CarouselModule as ɵcw1, SlideComponent as ɵcv1, BaseChartDirective as ɵcx1, ChartsModule as ɵcy1, CollapseDirective as ɵcz1, CollapseModule as ɵda1, BsDropdownContainerComponent as ɵdb1, BsDropdownMenuDirective as ɵdc1, BsDropdownToggleDirective as ɵdd1, BsDropdownConfig as ɵde1, BsDropdownDirective as ɵdf1, DropdownModule as ɵdh1, BsDropdownState as ɵdg1, MdbIconComponent as ɵdj1, IconsModule as ɵdi1, InputsModule as ɵdk1, MdbInputDirective as ɵdl1, MDBRootModule as ɵeh1, ModalDirective as ɵdm1, ModalModule as ɵds1, ModalOptions as ɵdn1, MDBModalService as ɵdo1, ModalBackdropComponent as ɵdq1, ModalBackdropOptions as ɵdp1, ModalContainerComponent as ɵdr1, NavbarComponent as ɵdt1, NavbarModule as ɵdu1, PopoverContainerComponent as ɵdv1, PopoverConfig as ɵdw1, PopoverDirective as ɵdx1, PopoverModule as ɵdy1, RippleDirective as ɵdz1, RippleModule as ɵea1, TooltipContainerComponent as ɵed1, TooltipDirective as ɵee1, TooltipModule as ɵeg1, TooltipConfig as ɵef1, WavesDirective as ɵeb1, WavesModule as ɵec1, SBItemComponent as ɵc1, SBItemBodyComponent as ɵa1, SBItemHeadComponent as ɵb1, SqueezeBoxComponent as ɵd1, AccordionModule as ɵe1, CompleterListItemComponent as ɵf1, CompleterComponent as ɵg1, MdbCompleterDirective as ɵh1, MdbDropdownDirective as ɵi1, MdbInputCompleteDirective as ɵj1, MdbListDirective as ɵk1, MdbRowDirective as ɵl1, AutocompleteModule as ɵp1, CompleterService as ɵm1, LocalDataFactoryProvider as ɵn1, RemoteDataFactoryProvider as ɵo1, CardRevealComponent as ɵq1, CardRotatingComponent as ɵr1, CardsModule as ɵs1, MDBDatePickerComponent as ɵz1, MYDP_VALUE_ACCESSOR as ɵy1, DatepickerModule as ɵx1, InputAutoFillDirective as ɵt1, FocusDirective as ɵu1, LocaleService as ɵv1, UtilService as ɵw1, SimpleChartComponent as ɵba1, ChartSimpleModule as ɵbc1, EasyPieChartComponent as ɵbb1, MDBFileDropDirective as ɵbd1, MDBFileSelectDirective as ɵbe1, FileInputModule as ɵbf1, CharCounterDirective as ɵbg1, CharCounterModule as ɵbh1, ImageModalComponent as ɵbi1, LightBoxModule as ɵbj1, SelectDropdownComponent as ɵbl1, SELECT_VALUE_ACCESSOR as ɵbm1, SelectComponent as ɵbn1, SelectModule as ɵbo1, MDBRootModulePro as ɵei1, BarComponent as ɵbp1, ProgressBars as ɵbv1, MdProgressBarModule as ɵej1, MdProgressSpinnerModule as ɵek1, ProgressSpinnerComponent as ɵbq1, ProgressDirective as ɵbr1, ProgressbarComponent as ɵbs1, ProgressbarConfigComponent as ɵbt1, ProgressbarModule as ɵbu1, SidenavComponent as ɵbw1, SidenavModule as ɵbx1, PageScrollDirective as ɵby1, PageScrollInstance as ɵbz1, SmoothscrollModule as ɵca1, PageScrollService as ɵcb1, MdbStickyDirective as ɵcc1, StickyContentModule as ɵcd1, TabHeadingDirective as ɵce1, TabDirective as ɵcf1, TabsetComponent as ɵcg1, TabsetConfig as ɵch1, TabsModule as ɵcj1, NgTranscludeDirective as ɵci1, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR as ɵck1, MaterialChipsComponent as ɵcl1, MaterialChipsModule as ɵcm1, ClockPickerComponent as ɵcp1, TIME_PIRCKER_VALUE_ACCESSOT as ɵco1, TimePickerModule as ɵcn1 };
 //# sourceMappingURL=ng-uikit-pro-standard.js.map
