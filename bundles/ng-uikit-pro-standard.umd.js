@@ -11272,9 +11272,25 @@ var ClockPickerComponent = /** @class */ (function () {
      */
     ClockPickerComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
+        // console.log(this.elem.nativeElement);
         this.renderer.listen(this.elem.nativeElement.querySelector('.clockpicker-plate'), 'mousedown', function (event) {
             _this.mousedown(event, false);
         });
+    };
+    /**
+     * @return {?}
+     */
+    ClockPickerComponent.prototype.ngAfterContentChecked = function () {
+        var _this = this;
+        if (this.elem.nativeElement.firstElementChild.firstElementChild.nextSibling.classList.contains('picker--opened')) {
+            console.log(this.elem.nativeElement);
+            ((document.querySelectorAll('.mydp'))).forEach(function (element) {
+                _this.renderer.setStyle(element, 'z-index', '50');
+            });
+            ((document.querySelectorAll('.clockpicker .picker'))).forEach(function (element) {
+                _this.renderer.setStyle(element, 'z-index', '50');
+            });
+        }
     };
     /**
      * @return {?}

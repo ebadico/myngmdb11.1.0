@@ -10911,9 +10911,24 @@ class ClockPickerComponent {
      * @return {?}
      */
     ngAfterViewInit() {
+        // console.log(this.elem.nativeElement);
         this.renderer.listen(this.elem.nativeElement.querySelector('.clockpicker-plate'), 'mousedown', (event) => {
             this.mousedown(event, false);
         });
+    }
+    /**
+     * @return {?}
+     */
+    ngAfterContentChecked() {
+        if (this.elem.nativeElement.firstElementChild.firstElementChild.nextSibling.classList.contains('picker--opened')) {
+            console.log(this.elem.nativeElement);
+            (/** @type {?} */ (document.querySelectorAll('.mydp'))).forEach((element) => {
+                this.renderer.setStyle(element, 'z-index', '50');
+            });
+            (/** @type {?} */ (document.querySelectorAll('.clockpicker .picker'))).forEach((element) => {
+                this.renderer.setStyle(element, 'z-index', '50');
+            });
+        }
     }
     /**
      * @return {?}
