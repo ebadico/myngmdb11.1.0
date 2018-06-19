@@ -14739,27 +14739,27 @@ var MdbInputDirective = /** @class */ (function () {
      */
     MdbInputDirective.prototype.ngOnInit = function () {
         var _this = this;
-        if (this.mdbValidate) {
-            // Inititalise a new <span> wrong/right elements and render it below the host component.
-            // this.wrongTextContainer = this._renderer.createElement(this.el.nativeElement.parentElement, 'span');
-            this.wrongTextContainer = this._renderer.createElement('span');
-            this._renderer.addClass(this.wrongTextContainer, 'inputVal');
-            this._renderer.addClass(this.wrongTextContainer, 'text-danger');
-            this._renderer.appendChild(this._elRef.nativeElement.parentElement, this.wrongTextContainer);
-            var /** @type {?} */ textWrong = this._elRef.nativeElement.getAttribute('data-error');
-            this.wrongTextContainer.innerHTML = (textWrong ? textWrong : 'wrong');
-            this._renderer.setStyle(this.wrongTextContainer, 'visibility', 'hidden');
-            // this.rightTextContainer = this._renderer.createElement(this.el.nativeElement.parentElement, 'span');
-            this.rightTextContainer = this._renderer.createElement('span');
-            this._renderer.addClass(this.rightTextContainer, 'inputVal');
-            this._renderer.addClass(this.rightTextContainer, 'text-success');
-            this._renderer.appendChild(this._elRef.nativeElement.parentElement, this.rightTextContainer);
-            var /** @type {?} */ textSuccess = this._elRef.nativeElement.getAttribute('data-success');
-            this.rightTextContainer.innerHTML = (textSuccess ? textSuccess : 'success');
-            this._renderer.setStyle(this.rightTextContainer, 'visibility', 'hidden');
-            this.changes = new MutationObserver(function (mutations) {
-                mutations.forEach(function (mutation) {
-                    if ((mutation.target['classList'].contains('ng-touched')) && /** @type {?} */ (mutation.target['classList'].contains('ng-invalid')) && !(mutation.target['classList'].contains('counter-danger'))) {
+        // Inititalise a new <span> wrong/right elements and render it below the host component.
+        // this.wrongTextContainer = this._renderer.createElement(this.el.nativeElement.parentElement, 'span');
+        this.wrongTextContainer = this._renderer.createElement('span');
+        this._renderer.addClass(this.wrongTextContainer, 'inputVal');
+        this._renderer.addClass(this.wrongTextContainer, 'text-danger');
+        this._renderer.appendChild(this._elRef.nativeElement.parentElement, this.wrongTextContainer);
+        var /** @type {?} */ textWrong = this._elRef.nativeElement.getAttribute('data-error');
+        this.wrongTextContainer.innerHTML = (textWrong ? textWrong : 'wrong');
+        this._renderer.setStyle(this.wrongTextContainer, 'visibility', 'hidden');
+        // this.rightTextContainer = this._renderer.createElement(this.el.nativeElement.parentElement, 'span');
+        this.rightTextContainer = this._renderer.createElement('span');
+        this._renderer.addClass(this.rightTextContainer, 'inputVal');
+        this._renderer.addClass(this.rightTextContainer, 'text-success');
+        this._renderer.appendChild(this._elRef.nativeElement.parentElement, this.rightTextContainer);
+        var /** @type {?} */ textSuccess = this._elRef.nativeElement.getAttribute('data-success');
+        this.rightTextContainer.innerHTML = (textSuccess ? textSuccess : 'success');
+        this._renderer.setStyle(this.rightTextContainer, 'visibility', 'hidden');
+        this.changes = new MutationObserver(function (mutations) {
+            mutations.forEach(function (mutation) {
+                if ((mutation.target['classList'].contains('ng-touched')) && /** @type {?} */ (mutation.target['classList'].contains('ng-invalid')) && !(mutation.target['classList'].contains('counter-danger'))) {
+                    if (_this.mdbValidate) {
                         _this._renderer.addClass(_this._elRef.nativeElement, 'counter-danger');
                         _this._renderer.removeClass(_this._elRef.nativeElement, 'counter-success');
                         _this._renderer.setStyle(_this.rightTextContainer, 'visibility', 'hidden');
@@ -14767,7 +14767,9 @@ var MdbInputDirective = /** @class */ (function () {
                         _this._renderer.setStyle(_this.rightTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
                         _this._renderer.setStyle(_this.wrongTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
                     }
-                    else if ((mutation.target['classList'].contains('ng-touched')) && /** @type {?} */ (mutation.target['classList'].contains('ng-valid')) && !(mutation.target['classList'].contains('counter-success'))) {
+                }
+                else if ((mutation.target['classList'].contains('ng-touched')) && /** @type {?} */ (mutation.target['classList'].contains('ng-valid')) && !(mutation.target['classList'].contains('counter-success'))) {
+                    if (_this.mdbValidate) {
                         _this._renderer.removeClass(_this._elRef.nativeElement, 'counter-danger');
                         _this._renderer.addClass(_this._elRef.nativeElement, 'counter-success');
                         _this._renderer.setStyle(_this.rightTextContainer, 'visibility', 'visible');
@@ -14775,12 +14777,12 @@ var MdbInputDirective = /** @class */ (function () {
                         _this._renderer.setStyle(_this.rightTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
                         _this._renderer.setStyle(_this.wrongTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
                     }
-                });
+                }
             });
-            this.changes.observe(this._elRef.nativeElement, {
-                attributes: true,
-            });
-        }
+        });
+        this.changes.observe(this._elRef.nativeElement, {
+            attributes: true,
+        });
     };
     /**
      * @return {?}
