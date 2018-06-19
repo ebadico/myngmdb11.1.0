@@ -10911,9 +10911,24 @@ class ClockPickerComponent {
      * @return {?}
      */
     ngAfterViewInit() {
+        // console.log(this.elem.nativeElement);
         this.renderer.listen(this.elem.nativeElement.querySelector('.clockpicker-plate'), 'mousedown', (event) => {
             this.mousedown(event, false);
         });
+    }
+    /**
+     * @return {?}
+     */
+    ngAfterContentChecked() {
+        if (this.elem.nativeElement.firstElementChild.firstElementChild.nextSibling.classList.contains('picker--opened')) {
+            console.log(this.elem.nativeElement);
+            (/** @type {?} */ (document.querySelectorAll('.mydp'))).forEach((element) => {
+                this.renderer.setStyle(element, 'z-index', '50');
+            });
+            (/** @type {?} */ (document.querySelectorAll('.clockpicker .picker'))).forEach((element) => {
+                this.renderer.setStyle(element, 'z-index', '50');
+            });
+        }
     }
     /**
      * @return {?}
@@ -14274,27 +14289,27 @@ class MdbInputDirective {
      * @return {?}
      */
     ngOnInit() {
-        if (this.mdbValidate) {
-            // Inititalise a new <span> wrong/right elements and render it below the host component.
-            // this.wrongTextContainer = this._renderer.createElement(this.el.nativeElement.parentElement, 'span');
-            this.wrongTextContainer = this._renderer.createElement('span');
-            this._renderer.addClass(this.wrongTextContainer, 'inputVal');
-            this._renderer.addClass(this.wrongTextContainer, 'text-danger');
-            this._renderer.appendChild(this._elRef.nativeElement.parentElement, this.wrongTextContainer);
-            const /** @type {?} */ textWrong = this._elRef.nativeElement.getAttribute('data-error');
-            this.wrongTextContainer.innerHTML = (textWrong ? textWrong : 'wrong');
-            this._renderer.setStyle(this.wrongTextContainer, 'visibility', 'hidden');
-            // this.rightTextContainer = this._renderer.createElement(this.el.nativeElement.parentElement, 'span');
-            this.rightTextContainer = this._renderer.createElement('span');
-            this._renderer.addClass(this.rightTextContainer, 'inputVal');
-            this._renderer.addClass(this.rightTextContainer, 'text-success');
-            this._renderer.appendChild(this._elRef.nativeElement.parentElement, this.rightTextContainer);
-            const /** @type {?} */ textSuccess = this._elRef.nativeElement.getAttribute('data-success');
-            this.rightTextContainer.innerHTML = (textSuccess ? textSuccess : 'success');
-            this._renderer.setStyle(this.rightTextContainer, 'visibility', 'hidden');
-            this.changes = new MutationObserver((mutations) => {
-                mutations.forEach((mutation) => {
-                    if (/** @type {?} */ (mutation.target['classList'].contains('ng-touched')) && /** @type {?} */ (mutation.target['classList'].contains('ng-invalid')) && !/** @type {?} */ (mutation.target['classList'].contains('counter-danger'))) {
+        // Inititalise a new <span> wrong/right elements and render it below the host component.
+        // this.wrongTextContainer = this._renderer.createElement(this.el.nativeElement.parentElement, 'span');
+        this.wrongTextContainer = this._renderer.createElement('span');
+        this._renderer.addClass(this.wrongTextContainer, 'inputVal');
+        this._renderer.addClass(this.wrongTextContainer, 'text-danger');
+        this._renderer.appendChild(this._elRef.nativeElement.parentElement, this.wrongTextContainer);
+        const /** @type {?} */ textWrong = this._elRef.nativeElement.getAttribute('data-error');
+        this.wrongTextContainer.innerHTML = (textWrong ? textWrong : 'wrong');
+        this._renderer.setStyle(this.wrongTextContainer, 'visibility', 'hidden');
+        // this.rightTextContainer = this._renderer.createElement(this.el.nativeElement.parentElement, 'span');
+        this.rightTextContainer = this._renderer.createElement('span');
+        this._renderer.addClass(this.rightTextContainer, 'inputVal');
+        this._renderer.addClass(this.rightTextContainer, 'text-success');
+        this._renderer.appendChild(this._elRef.nativeElement.parentElement, this.rightTextContainer);
+        const /** @type {?} */ textSuccess = this._elRef.nativeElement.getAttribute('data-success');
+        this.rightTextContainer.innerHTML = (textSuccess ? textSuccess : 'success');
+        this._renderer.setStyle(this.rightTextContainer, 'visibility', 'hidden');
+        this.changes = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (/** @type {?} */ (mutation.target['classList'].contains('ng-touched')) && /** @type {?} */ (mutation.target['classList'].contains('ng-invalid')) && !/** @type {?} */ (mutation.target['classList'].contains('counter-danger'))) {
+                    if (this.mdbValidate) {
                         this._renderer.addClass(this._elRef.nativeElement, 'counter-danger');
                         this._renderer.removeClass(this._elRef.nativeElement, 'counter-success');
                         this._renderer.setStyle(this.rightTextContainer, 'visibility', 'hidden');
@@ -14302,7 +14317,9 @@ class MdbInputDirective {
                         this._renderer.setStyle(this.rightTextContainer, 'top', this._elRef.nativeElement.offsetHeight + 'px');
                         this._renderer.setStyle(this.wrongTextContainer, 'top', this._elRef.nativeElement.offsetHeight + 'px');
                     }
-                    else if (/** @type {?} */ (mutation.target['classList'].contains('ng-touched')) && /** @type {?} */ (mutation.target['classList'].contains('ng-valid')) && !/** @type {?} */ (mutation.target['classList'].contains('counter-success'))) {
+                }
+                else if (/** @type {?} */ (mutation.target['classList'].contains('ng-touched')) && /** @type {?} */ (mutation.target['classList'].contains('ng-valid')) && !/** @type {?} */ (mutation.target['classList'].contains('counter-success'))) {
+                    if (this.mdbValidate) {
                         this._renderer.removeClass(this._elRef.nativeElement, 'counter-danger');
                         this._renderer.addClass(this._elRef.nativeElement, 'counter-success');
                         this._renderer.setStyle(this.rightTextContainer, 'visibility', 'visible');
@@ -14310,12 +14327,12 @@ class MdbInputDirective {
                         this._renderer.setStyle(this.rightTextContainer, 'top', this._elRef.nativeElement.offsetHeight + 'px');
                         this._renderer.setStyle(this.wrongTextContainer, 'top', this._elRef.nativeElement.offsetHeight + 'px');
                     }
-                });
+                }
             });
-            this.changes.observe(this._elRef.nativeElement, {
-                attributes: true,
-            });
-        }
+        });
+        this.changes.observe(this._elRef.nativeElement, {
+            attributes: true,
+        });
     }
     /**
      * @return {?}

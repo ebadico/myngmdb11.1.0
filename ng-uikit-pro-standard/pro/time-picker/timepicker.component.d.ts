@@ -1,7 +1,7 @@
-import { ElementRef, Renderer2, OnInit, AfterViewInit } from '@angular/core';
+import { ElementRef, Renderer2, OnInit, AfterViewInit, AfterContentChecked } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 export declare const TIME_PIRCKER_VALUE_ACCESSOT: any;
-export declare class ClockPickerComponent implements OnInit, AfterViewInit, ControlValueAccessor {
+export declare class ClockPickerComponent implements OnInit, AfterViewInit, ControlValueAccessor, AfterContentChecked {
     elem: ElementRef;
     renderer: Renderer2;
     hoursPlate: ElementRef;
@@ -40,6 +40,7 @@ export declare class ClockPickerComponent implements OnInit, AfterViewInit, Cont
     constructor(elem: ElementRef, renderer: Renderer2, platformId: string);
     ngOnInit(): void;
     ngAfterViewInit(): void;
+    ngAfterContentChecked(): void;
     checkDraw(): void;
     mousedown(e: any, space: any): void;
     hideKeyboard(): void;
