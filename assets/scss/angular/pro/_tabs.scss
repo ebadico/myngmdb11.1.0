@@ -23,14 +23,14 @@ mdb-tabset {
         transition: all 0.4s !important;
       }
       .nav-link {
-        color: #666;
+        color: #666 !important;
         &:hover {
           @extend .rgba-grey-light;
           // background-color: $rgba-grey-light;
         }
       }
     }
-    .active {
+    .active a {
       color: #fff !important;
       @extend .z-depth-1;
     }

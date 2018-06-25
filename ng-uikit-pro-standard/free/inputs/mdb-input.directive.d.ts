@@ -7,6 +7,7 @@ export declare class MdbInputDirective implements AfterViewChecked, OnInit, Afte
     el: ElementRef | any;
     elLabel: ElementRef | any;
     elIcon: Element | any;
+    element: any;
     private changes;
     mdbInputDirective: MdbInputDirective;
     placeholder: string;
@@ -22,9 +23,14 @@ export declare class MdbInputDirective implements AfterViewChecked, OnInit, Afte
     onblur(): void;
     onchange(): void;
     onkeydown(event: any): void;
+    oncut(): void;
+    onpaste(): void;
+    ondrop(): void;
     ngOnInit(): void;
     ngAfterViewInit(): void;
     ngAfterViewChecked(): void;
+    resize(): void;
+    delayedResize(): void;
     initComponent(): void;
     private checkValue();
 }

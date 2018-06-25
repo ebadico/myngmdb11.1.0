@@ -3852,12 +3852,10 @@ var MDBDatePickerComponent = /** @class */ (function () {
                 !_this.elem.nativeElement.contains(event.target)) {
                 _this.removeInlineStyle();
                 _this.showSelector = false;
-                _this.removeZIndex();
                 _this.calendarToggle.emit(CalToggle.CloseByOutClick);
             }
             if (event.target.classList.contains('picker__holder')) {
                 _this.removeInlineStyle();
-                _this.removeZIndex();
                 _this.showSelector = false;
             }
             if (true && event.target && _this.elem.nativeElement.contains(event.target)) {
@@ -3879,8 +3877,25 @@ var MDBDatePickerComponent = /** @class */ (function () {
     /**
      * @return {?}
      */
+    MDBDatePickerComponent.prototype.ngAfterContentChecked = function () {
+        var _this = this;
+        if (this.isBrowser) {
+            // Fix for visible date / time picker input when picker plate is visible.
+            try {
+                var /** @type {?} */ openedPicker = document.querySelector('.picker--opened');
+                var /** @type {?} */ allPickers = document.querySelectorAll('.picker');
+                allPickers.forEach(function (element) {
+                    _this.renderer.setStyle(element, 'z-index', '0');
+                });
+                this.renderer.setStyle(openedPicker, 'z-index', '1');
+            }
+            catch (error) { }
+        }
+    };
+    /**
+     * @return {?}
+     */
     MDBDatePickerComponent.prototype.removeInlineStyle = function () {
-        this.removeZIndex();
         try {
             if (this.elem.nativeElement.parentElement.parentElement.classList.contains('modal-content')) {
                 this.renderer.setStyle(this.elem.nativeElement.parentElement.parentElement, 'transition', 'height 0.3s');
@@ -4176,35 +4191,8 @@ var MDBDatePickerComponent = /** @class */ (function () {
         this.clearDate();
         if (this.showSelector) {
             this.calendarToggle.emit(CalToggle.CloseByCalBtn);
-            this.setZIndex();
         }
         // this.showSelector = false;
-    };
-    /**
-     * @return {?}
-     */
-    MDBDatePickerComponent.prototype.setZIndex = function () {
-        for (var /** @type {?} */ i = 0; i <= this.elements.length; i++) {
-            if (i === this.elements.length) {
-                break;
-            }
-            this.renderer.setStyle(this.elements[i], 'z-index', '1');
-            if (this.elements[i] === this.elem.nativeElement.childNodes[0] || this.elements[i] === this.elem.nativeElement.childNodes[1]) {
-                this.elementNumber = i;
-                this.renderer.setStyle(this.elements[i], 'z-index', '50');
-            }
-        }
-    };
-    /**
-     * @return {?}
-     */
-    MDBDatePickerComponent.prototype.removeZIndex = function () {
-        for (var /** @type {?} */ i = 0; i <= this.elements.length; i++) {
-            if (i === this.elements.length) {
-                break;
-            }
-            this.renderer.setStyle(this.elements[i], 'z-index', '50');
-        }
     };
     /**
      * @return {?}
@@ -4227,7 +4215,6 @@ var MDBDatePickerComponent = /** @class */ (function () {
         if (this.showSelector) {
             this.setVisibleMonth();
             this.calendarToggle.emit(CalToggle.Open);
-            this.setZIndex();
         }
         else {
             this.calendarToggle.emit(CalToggle.CloseByCalBtn);
@@ -4384,7 +4371,6 @@ var MDBDatePickerComponent = /** @class */ (function () {
         this.onChangeCb('');
         this.onTouchedCb();
         this.updateDateValue(date, true);
-        this.setZIndex();
     };
     /**
      * @param {?} date
@@ -6992,6 +6978,12 @@ var SelectDropdownComponent = /** @class */ (function () {
         // if (window.innerHeight - this._elementRef.nativeElement.getBoundingClientRect().bottom < this.dropdownContent.nativeElement.clientHeight) {
         //   this._renderer.setStyle(this.dropdownContent.nativeElement, 'top', - this.dropdownContent.nativeElement.clientHeight + 'px');
         // }
+        if (this.multiple) {
+            this._elementRef.nativeElement.querySelectorAll('.disabled.optgroup').forEach(function (element) {
+                _this._renderer.setStyle(element.firstElementChild.lastElementChild, 'display', 'none');
+                console.log(element.firstElementChild.lastElementChild);
+            });
+        }
         try {
             setTimeout(function () {
                 if (_this._elementRef.nativeElement.parentElement.attributes.customClass !== undefined) {
@@ -7125,7 +7117,7 @@ var SelectDropdownComponent = /** @class */ (function () {
 SelectDropdownComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'mdb-select-dropdown',
-                template: "<div class=\"dropdown-content\" #dropdownContent [ngStyle]=\"{'top.px': top, 'left.px': left, 'width.px': width}\"  [@dropdownAnimation]=\"{value: state, params: {startHeight: startHeight, endHeight: endHeight}}\"> <div class=\"filter\" *ngIf=\"!multiple && filterEnabled\"> <input #filterInput autocomplete=\"on\" [placeholder]=\"placeholder\" (click)=\"onSingleFilterClick($event)\" (input)=\"onSingleFilterInput($event)\" (keydown)=\"onSingleFilterKeydown($event)\"> </div> <div class=\"options\" #optionsList> <ul class=\"select-dropdown\" [ngClass]=\"{'multiple-select-dropdown': multiple}\" (wheel)=\"onOptionsWheel($event)\"> <li *ngFor=\"let option of optionList.filtered\" [ngClass]=\"{'active': option.highlighted, 'selected': option.selected, 'disabled': option.disabled, 'optgroup': option.group}\" [ngStyle]=\"getOptionStyle(option)\" (click)=\"onOptionClick(option)\" (mouseover)=\"onOptionMouseover(option)\"> <img class=\"rounded-circle\" [src]=\"option.icon\" *ngIf=\"option.icon !== ''\"> <span class=\"select-option\" *ngIf=\"!multiple\">{{option.label}}</span> <span class=\"filtrable\" *ngIf=\"multiple\"> <input type=\"checkbox\" [checked]=\"option.selected\" class=\"{{customClass}}\"> <label></label> {{option.label}} </span> </li> <li *ngIf=\"!this.hasOptionsItems\" class=\"message disabled\"> <span>{{notFoundMsg}}</span> </li> </ul> </div> </div>",
+                template: "<div class=\"dropdown-content\" #dropdownContent [ngStyle]=\"{'top.px': top, 'left.px': left, 'width.px': width}\"  [@dropdownAnimation]=\"{value: state, params: {startHeight: startHeight, endHeight: endHeight}}\"> <div class=\"filter\" *ngIf=\"!multiple && filterEnabled\"> <input #filterInput autocomplete=\"on\" [placeholder]=\"placeholder\" (click)=\"onSingleFilterClick($event)\" (input)=\"onSingleFilterInput($event)\" (keydown)=\"onSingleFilterKeydown($event)\"> </div> <div class=\"options\" #optionsList> <ul class=\"select-dropdown\" [ngClass]=\"{'multiple-select-dropdown': multiple}\" (wheel)=\"onOptionsWheel($event)\"> <li *ngFor=\"let option of optionList.filtered\" [ngClass]=\"{'active': option.highlighted, 'selected': option.selected, 'disabled': option.disabled, 'optgroup': option.group}\" [ngStyle]=\"getOptionStyle(option)\" (click)=\"onOptionClick(option)\" (mouseover)=\"onOptionMouseover(option)\"> <img class=\"rounded-circle\" [src]=\"option.icon\" *ngIf=\"option.icon !== ''\"> <span class=\"select-option\" *ngIf=\"!multiple\">{{option.label}}</span> <span class=\"filtrable\" *ngIf=\"multiple\"> <input type=\"checkbox\" [checked]=\"option.selected\" class=\"form-check-input {{customClass}}\"> <label></label> {{option.label}} </span> </li> <li *ngIf=\"!this.hasOptionsItems\" class=\"message disabled\"> <span>{{notFoundMsg}}</span> </li> </ul> </div> </div>",
                 encapsulation: core.ViewEncapsulation.None,
                 animations: [animations.trigger('dropdownAnimation', [
                         animations.state('invisible', animations.style({ height: '{{startHeight}}', }), { params: { startHeight: 0 } }),
@@ -9124,7 +9116,7 @@ var SidenavComponent = /** @class */ (function () {
 SidenavComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'mdb-sidenav',
-                template: "<ul #sidenav id=\"slide-out\" class=\"{{ class }} side-nav\" > <ng-content></ng-content> <!-- <div class=\"sidenav-bg mask-strong\"></div>     --> </ul> <div (click)=\"hide()\" #overlay id=\"sidenav-overlay\" style=\"display: none;\"></div>"
+                template: "<ul #sidenav id=\"slide-out\" class=\"{{ class }} side-nav\" > <ng-content></ng-content> <!-- <div class=\"sidenav-bg mask-strong\"></div>     --> </ul> <div (click)=\"hide()\" (touchstart)=\"hide()\" #overlay id=\"sidenav-overlay\" style=\"display: none;\"></div>"
             },] },
 ];
 /** @nocollapse */
@@ -11229,6 +11221,7 @@ var ClockPickerComponent = /** @class */ (function () {
         this.isMobile = null;
         this.touchDevice = ('ontouchstart' in document.documentElement);
         this.showHours = false;
+        this.elements = document.getElementsByClassName('clockpicker');
         this.dialRadius = 135;
         this.outerRadius = 110;
         this.innerRadius = 80;
@@ -11259,6 +11252,20 @@ var ClockPickerComponent = /** @class */ (function () {
         });
     }
     /**
+     * @param {?} event
+     * @return {?}
+     */
+    ClockPickerComponent.prototype.ontouchmove = function (event) {
+        var _this = this;
+        // Rotating Time Picker on mobile
+        if (event.target.parentElement.classList.contains('clockpicker-dial')) {
+            ((this.elem.nativeElement.querySelectorAll('.clockpicker-tick'))).forEach(function (element) {
+                _this.renderer.setStyle(element, 'background-color', 'rgba(0, 150, 136, 0');
+            });
+            this.mousedown(event);
+        }
+    };
+    /**
      * @return {?}
      */
     ClockPickerComponent.prototype.ngOnInit = function () {
@@ -11272,7 +11279,6 @@ var ClockPickerComponent = /** @class */ (function () {
      */
     ClockPickerComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
-        // console.log(this.elem.nativeElement);
         this.renderer.listen(this.elem.nativeElement.querySelector('.clockpicker-plate'), 'mousedown', function (event) {
             _this.mousedown(event, false);
         });
@@ -11282,14 +11288,17 @@ var ClockPickerComponent = /** @class */ (function () {
      */
     ClockPickerComponent.prototype.ngAfterContentChecked = function () {
         var _this = this;
-        if (this.elem.nativeElement.firstElementChild.firstElementChild.nextSibling.classList.contains('picker--opened')) {
-            console.log(this.elem.nativeElement);
-            ((document.querySelectorAll('.mydp'))).forEach(function (element) {
-                _this.renderer.setStyle(element, 'z-index', '50');
-            });
-            ((document.querySelectorAll('.clockpicker .picker'))).forEach(function (element) {
-                _this.renderer.setStyle(element, 'z-index', '50');
-            });
+        if (this.isBrowser) {
+            // Fix for visible date / time picker input when picker plate is visible.
+            try {
+                var /** @type {?} */ openedPicker = document.querySelector('.picker--opened');
+                var /** @type {?} */ allPickers = document.querySelectorAll('.picker');
+                allPickers.forEach(function (element) {
+                    _this.renderer.setStyle(element, 'z-index', '0');
+                });
+                this.renderer.setStyle(openedPicker, 'z-index', '1');
+            }
+            catch (error) { }
         }
     };
     /**
@@ -11309,12 +11318,12 @@ var ClockPickerComponent = /** @class */ (function () {
     };
     /**
      * @param {?} e
-     * @param {?} space
+     * @param {?=} space
      * @return {?}
      */
     ClockPickerComponent.prototype.mousedown = function (e, space) {
         var _this = this;
-        var /** @type {?} */ offset = this.plate.nativeElement.getBoundingClientRect(), /** @type {?} */ isTouch = /^touch/.test(e.type), /** @type {?} */ x0 = offset.left + this.dialRadius, /** @type {?} */ y0 = offset.top + this.dialRadius, /** @type {?} */ dx = (isTouch ? e.originalEvent.touches[0] : e).clientX - x0, /** @type {?} */ dy = (isTouch ? e.originalEvent.touches[0] : e).clientY - y0, /** @type {?} */ z = Math.sqrt(dx * dx + dy * dy);
+        var /** @type {?} */ offset = this.plate.nativeElement.getBoundingClientRect(), /** @type {?} */ isTouch = /^touch/.test(e.type), /** @type {?} */ x0 = offset.left + this.dialRadius, /** @type {?} */ y0 = offset.top + this.dialRadius, /** @type {?} */ dx = (isTouch ? e.touches[0] : e).clientX - x0, /** @type {?} */ dy = (isTouch ? e.touches[0] : e).clientY - y0, /** @type {?} */ z = Math.sqrt(dx * dx + dy * dy);
         var /** @type {?} */ moved = false;
         if (space && (z < this.outerRadius - this.tickRadius || z > this.outerRadius + this.tickRadius)) {
             return;
@@ -11663,7 +11672,8 @@ ClockPickerComponent.propDecorators = {
     label: [{ type: core.Input, args: ['label',] }],
     duration: [{ type: core.Input, args: ['duration',] }],
     showClock: [{ type: core.Input, args: ['showClock',] }],
-    buttonLabel: [{ type: core.Input, args: ['buttonlabel',] }]
+    buttonLabel: [{ type: core.Input }],
+    ontouchmove: [{ type: core.HostListener, args: ['touchmove', ['$event'],] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -12455,6 +12465,19 @@ var CarouselComponent = /** @class */ (function () {
         }
     };
     /**
+     * @return {?}
+     */
+    CarouselComponent.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        // Setting first visible slide
+        if (this.activeSlideIndex) {
+            setTimeout(function () {
+                _this._select(_this.activeSlideIndex);
+                _this.activeSlideChange.emit({ 'relatedTarget': _this.activeSlide });
+            }, 0);
+        }
+    };
+    /**
      * Removes specified slide. If this slide is active - will roll to another slide
      * @param {?} slide
      * @return {?}
@@ -12520,6 +12543,9 @@ var CarouselComponent = /** @class */ (function () {
         else {
             this.activeSlide = this.findNextSlideIndex(Direction.NEXT, force);
         }
+        if (!this.animation) {
+            this.activeSlideChange.emit({ 'direction': 'Next', 'relatedTarget': this.activeSlide });
+        }
     };
     /**
      * Rolling to previous slide
@@ -12540,6 +12566,9 @@ var CarouselComponent = /** @class */ (function () {
         else {
             this.activeSlide = this.findNextSlideIndex(Direction.PREV, force);
         }
+        if (!this.animation) {
+            this.activeSlideChange.emit({ 'direction': 'Prev', 'relatedTarget': this.activeSlide });
+        }
     };
     /**
      * @param {?} goToIndex
@@ -12557,6 +12586,7 @@ var CarouselComponent = /** @class */ (function () {
                     goToSlide.directionNext = false;
                     _this.animationEnd = true;
                     _this.activeSlide = goToIndex;
+                    _this.activeSlideChange.emit({ 'direction': 'Next', 'relatedTarget': _this.activeSlide });
                     _this.play();
                 }, 100);
             }
@@ -12839,6 +12869,7 @@ CarouselComponent.propDecorators = {
     class: [{ type: core.Input, args: ['class',] }],
     type: [{ type: core.Input, args: ['type',] }],
     animation: [{ type: core.Input, args: ['animation',] }],
+    activeSlideIndex: [{ type: core.Input }],
     activeSlideChange: [{ type: core.Output }],
     activeSlide: [{ type: core.Input }],
     interval: [{ type: core.Input }],
@@ -14649,6 +14680,7 @@ var MdbInputDirective = /** @class */ (function () {
         this.el = null;
         this.elLabel = null;
         this.elIcon = null;
+        this.element = null;
         this.mdbValidate = true;
         this.focusCheckbox = true;
         this.focusRadio = true;
@@ -14727,6 +14759,43 @@ var MdbInputDirective = /** @class */ (function () {
             }
         }
         catch (error) { }
+        this.delayedResize();
+    };
+    /**
+     * @return {?}
+     */
+    MdbInputDirective.prototype.oncut = function () {
+        var _this = this;
+        try {
+            setTimeout(function () {
+                _this.delayedResize();
+            }, 0);
+        }
+        catch (error) { }
+    };
+    /**
+     * @return {?}
+     */
+    MdbInputDirective.prototype.onpaste = function () {
+        var _this = this;
+        try {
+            setTimeout(function () {
+                _this.delayedResize();
+            }, 0);
+        }
+        catch (error) { }
+    };
+    /**
+     * @return {?}
+     */
+    MdbInputDirective.prototype.ondrop = function () {
+        var _this = this;
+        try {
+            setTimeout(function () {
+                _this.delayedResize();
+            }, 0);
+        }
+        catch (error) { }
     };
     /**
      * @return {?}
@@ -14782,6 +14851,12 @@ var MdbInputDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbInputDirective.prototype.ngAfterViewInit = function () {
+        if (this.isBrowser) {
+            try {
+                this.element = document.querySelector('.md-textarea-auto');
+            }
+            catch (error) { }
+        }
         var /** @type {?} */ type = this.el.nativeElement.type;
         if (this.focusCheckbox && type === 'checkbox') {
             this._renderer.addClass(this.el.nativeElement, 'onFocusSelect');
@@ -14800,6 +14875,22 @@ var MdbInputDirective = /** @class */ (function () {
         if (this.el.nativeElement.tagName === 'MDB-COMPLETER' && this.el.nativeElement.getAttribute('ng-reflect-model') == null && !this.isClicked) {
             this._renderer.removeClass(this.elLabel, 'active');
         }
+    };
+    /**
+     * @return {?}
+     */
+    MdbInputDirective.prototype.resize = function () {
+        try {
+            this._renderer.setStyle(this.element, 'height', 'auto');
+            this._renderer.setStyle(this.element, 'height', this.element.scrollHeight + 'px');
+        }
+        catch (error) { }
+    };
+    /**
+     * @return {?}
+     */
+    MdbInputDirective.prototype.delayedResize = function () {
+        setTimeout(this.resize(), 0);
     };
     /**
      * @return {?}
@@ -14876,7 +14967,10 @@ MdbInputDirective.propDecorators = {
     onfocus: [{ type: core.HostListener, args: ['focus',] }],
     onblur: [{ type: core.HostListener, args: ['blur',] }],
     onchange: [{ type: core.HostListener, args: ['change',] }],
-    onkeydown: [{ type: core.HostListener, args: ['keydown', ['$event'],] }]
+    onkeydown: [{ type: core.HostListener, args: ['keydown', ['$event'],] }],
+    oncut: [{ type: core.HostListener, args: ['cut', ['$event'],] }],
+    onpaste: [{ type: core.HostListener, args: ['paste', ['$event'],] }],
+    ondrop: [{ type: core.HostListener, args: ['drop', ['$event'],] }]
 };
 /**
  * @fileoverview added by tsickle

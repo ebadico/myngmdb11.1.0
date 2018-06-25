@@ -23,6 +23,8 @@ export declare class ClockPickerComponent implements OnInit, AfterViewInit, Cont
     isMobile: any;
     touchDevice: boolean;
     showHours: boolean;
+    elements: HTMLCollectionOf<Element>;
+    elementNumber: any;
     dialRadius: number;
     outerRadius: number;
     innerRadius: number;
@@ -38,11 +40,12 @@ export declare class ClockPickerComponent implements OnInit, AfterViewInit, Cont
     mousemoveEvent: any;
     mouseupEvent: any;
     constructor(elem: ElementRef, renderer: Renderer2, platformId: string);
+    ontouchmove(event: any): void;
     ngOnInit(): void;
     ngAfterViewInit(): void;
     ngAfterContentChecked(): void;
     checkDraw(): void;
-    mousedown(e: any, space: any): void;
+    mousedown(e: any, space?: any): void;
     hideKeyboard(): void;
     openBtnClicked(): void;
     closeBtnClicked(): void;
