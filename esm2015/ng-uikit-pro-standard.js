@@ -3104,20 +3104,41 @@ AutocompleteModule.decorators = [
  */
 class CardRevealComponent {
     /**
+     * @param {?} _r
+     */
+    constructor(_r) {
+        this._r = _r;
+    }
+    /**
      * @return {?}
      */
     toggle() {
         this.show = !this.show;
         this.socials = (this.socials === 'active') ? 'inactive' : 'active';
+        setTimeout(() => {
+            try {
+                let /** @type {?} */ height = this.cardFront.nativeElement.offsetHeight;
+                this._r.setStyle(this.cardReveal.nativeElement.firstElementChild, 'height', height + 'px');
+            }
+            catch (/** @type {?} */ error) { }
+        }, 0);
     }
 }
 CardRevealComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-card-reveal',
-                template: "<div class=\"card-overflow col-12\"> <div class=\"card-front\"> <ng-content select=\"card-front\" ></ng-content> </div> <div class=\"card-revealed\" *ngIf=\"show\" [@socialsState]=\"socials\" > <ng-content select=\"card-revealed\" ></ng-content> </div> </div> ",
+                template: "<div class=\"card-overflow col-12\" > <div #cardFront class=\"card-front\"> <ng-content select=\".card-front\" ></ng-content> </div> <div #cardReveal class=\"card-reveal\" *ngIf=\"show\"  [@socialsState]=\"socials\" > <ng-content select=\".card-reveal\"></ng-content> </div> </div> ",
                 animations: [socialsState]
             },] },
 ];
+/** @nocollapse */
+CardRevealComponent.ctorParameters = () => [
+    { type: Renderer2 }
+];
+CardRevealComponent.propDecorators = {
+    cardReveal: [{ type: ViewChild, args: ['cardReveal',] }],
+    cardFront: [{ type: ViewChild, args: ['cardFront',] }]
+};
 
 /**
  * @fileoverview added by tsickle
@@ -4784,8 +4805,10 @@ class EasyPieChartComponent {
     /**
      * @param {?} el
      * @param {?} platformId
+     * @param {?} _r
      */
-    constructor(el, platformId) {
+    constructor(el, platformId, _r) {
+        this._r = _r;
         this.isBrowser = false;
         this.isBrowser = isPlatformBrowser(platformId);
         this.element = el;
@@ -4810,9 +4833,15 @@ class EasyPieChartComponent {
      */
     ngOnInit() {
         if (this.isBrowser) {
+            let /** @type {?} */ size = this.options.size;
             this.element.nativeElement.innerHTML = '';
             this.pieChart = new EasyPieChart(this.element.nativeElement, this.options);
             this.pieChart.update(this.percent);
+            // Positioning text in center of chart
+            let /** @type {?} */ percent = document.querySelector('.percent');
+            this._r.setStyle(percent, 'line-height', size + 'px');
+            this._r.setStyle(percent, 'width', size + 'px');
+            this._r.setStyle(percent, 'height', size + 'px');
         }
     }
     /**
@@ -4834,7 +4863,8 @@ EasyPieChartComponent.decorators = [
 /** @nocollapse */
 EasyPieChartComponent.ctorParameters = () => [
     { type: ElementRef },
-    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+    { type: Renderer2 }
 ];
 EasyPieChartComponent.propDecorators = {
     percent: [{ type: Input, args: ['percent',] }],
@@ -11483,7 +11513,7 @@ class ButtonRadioDirective {
      */
     onClick(event) {
         try {
-            this.el.nativeElement.parentElement.childNodes.forEach(element => {
+            this.el.nativeElement.parentElement.childNodes.forEach((element) => {
                 this.radioElementsArray.push(element);
             });
             this.radioElementsArray.forEach(element => {
@@ -14389,6 +14419,19 @@ class MdbInputDirective {
                         this._renderer.setStyle(this.wrongTextContainer, 'visibility', 'hidden');
                         this._renderer.setStyle(this.rightTextContainer, 'top', this._elRef.nativeElement.offsetHeight + 'px');
                         this._renderer.setStyle(this.wrongTextContainer, 'top', this._elRef.nativeElement.offsetHeight + 'px');
+                    }
+                }
+                if (/** @type {?} */ (mutation.target['classList'].contains('ng-pristine')) && /** @type {?} */ (mutation.target['classList'].contains('ng-invalid'))) {
+                    mutation.target.offsetParent.childNodes.forEach((element) => {
+                        if (element.classList.contains('text-danger') || element.classList.contains('text-success')) {
+                            this._renderer.setStyle(element, 'visibility', 'hidden');
+                        }
+                    });
+                    if (/** @type {?} */ (mutation.target['classList'].contains('counter-danger'))) {
+                        this._renderer.removeClass(this._elRef.nativeElement, 'counter-danger');
+                    }
+                    else if (/** @type {?} */ (mutation.target['classList'].contains('counter-success'))) {
+                        this._renderer.removeClass(this._elRef.nativeElement, 'counter-success');
                     }
                 }
             });

@@ -3193,24 +3193,44 @@ AutocompleteModule.decorators = [
  * @suppress {checkTypes} checked by tsc
  */
 var CardRevealComponent = /** @class */ (function () {
-    function CardRevealComponent() {
+    /**
+     * @param {?} _r
+     */
+    function CardRevealComponent(_r) {
+        this._r = _r;
     }
     /**
      * @return {?}
      */
     CardRevealComponent.prototype.toggle = function () {
+        var _this = this;
         this.show = !this.show;
         this.socials = (this.socials === 'active') ? 'inactive' : 'active';
+        setTimeout(function () {
+            try {
+                var /** @type {?} */ height = _this.cardFront.nativeElement.offsetHeight;
+                _this._r.setStyle(_this.cardReveal.nativeElement.firstElementChild, 'height', height + 'px');
+            }
+            catch (error) { }
+        }, 0);
     };
     return CardRevealComponent;
 }());
 CardRevealComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-card-reveal',
-                template: "<div class=\"card-overflow col-12\"> <div class=\"card-front\"> <ng-content select=\"card-front\" ></ng-content> </div> <div class=\"card-revealed\" *ngIf=\"show\" [@socialsState]=\"socials\" > <ng-content select=\"card-revealed\" ></ng-content> </div> </div> ",
+                template: "<div class=\"card-overflow col-12\" > <div #cardFront class=\"card-front\"> <ng-content select=\".card-front\" ></ng-content> </div> <div #cardReveal class=\"card-reveal\" *ngIf=\"show\"  [@socialsState]=\"socials\" > <ng-content select=\".card-reveal\"></ng-content> </div> </div> ",
                 animations: [socialsState]
             },] },
 ];
+/** @nocollapse */
+CardRevealComponent.ctorParameters = function () { return [
+    { type: Renderer2 }
+]; };
+CardRevealComponent.propDecorators = {
+    cardReveal: [{ type: ViewChild, args: ['cardReveal',] }],
+    cardFront: [{ type: ViewChild, args: ['cardFront',] }]
+};
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -4895,8 +4915,10 @@ var EasyPieChartComponent = /** @class */ (function () {
     /**
      * @param {?} el
      * @param {?} platformId
+     * @param {?} _r
      */
-    function EasyPieChartComponent(el, platformId) {
+    function EasyPieChartComponent(el, platformId, _r) {
+        this._r = _r;
         this.isBrowser = false;
         this.isBrowser = isPlatformBrowser(platformId);
         this.element = el;
@@ -4921,9 +4943,15 @@ var EasyPieChartComponent = /** @class */ (function () {
      */
     EasyPieChartComponent.prototype.ngOnInit = function () {
         if (this.isBrowser) {
+            var /** @type {?} */ size = this.options.size;
             this.element.nativeElement.innerHTML = '';
             this.pieChart = new EasyPieChart(this.element.nativeElement, this.options);
             this.pieChart.update(this.percent);
+            // Positioning text in center of chart
+            var /** @type {?} */ percent = document.querySelector('.percent');
+            this._r.setStyle(percent, 'line-height', size + 'px');
+            this._r.setStyle(percent, 'width', size + 'px');
+            this._r.setStyle(percent, 'height', size + 'px');
         }
     };
     /**
@@ -4946,7 +4974,8 @@ EasyPieChartComponent.decorators = [
 /** @nocollapse */
 EasyPieChartComponent.ctorParameters = function () { return [
     { type: ElementRef },
-    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+    { type: Renderer2 }
 ]; };
 EasyPieChartComponent.propDecorators = {
     percent: [{ type: Input, args: ['percent',] }],
@@ -14845,6 +14874,19 @@ var MdbInputDirective = /** @class */ (function () {
                         _this._renderer.setStyle(_this.wrongTextContainer, 'visibility', 'hidden');
                         _this._renderer.setStyle(_this.rightTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
                         _this._renderer.setStyle(_this.wrongTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
+                    }
+                }
+                if ((mutation.target['classList'].contains('ng-pristine')) && /** @type {?} */ (mutation.target['classList'].contains('ng-invalid'))) {
+                    mutation.target.offsetParent.childNodes.forEach(function (element) {
+                        if (element.classList.contains('text-danger') || element.classList.contains('text-success')) {
+                            _this._renderer.setStyle(element, 'visibility', 'hidden');
+                        }
+                    });
+                    if ((mutation.target['classList'].contains('counter-danger'))) {
+                        _this._renderer.removeClass(_this._elRef.nativeElement, 'counter-danger');
+                    }
+                    else if ((mutation.target['classList'].contains('counter-success'))) {
+                        _this._renderer.removeClass(_this._elRef.nativeElement, 'counter-success');
                     }
                 }
             });
