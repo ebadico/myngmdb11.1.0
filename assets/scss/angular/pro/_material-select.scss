@@ -217,7 +217,7 @@ mdb-select {
               flex-direction: row;
               align-items: center;
               label {
-                padding-left: 10px;
+                // padding-left: 10px;
               }
             }
           } 
@@ -426,7 +426,7 @@ mdb-select+label {
 .multiple-select-dropdown li [type="checkbox"]+label {
   height: 10px;
   top: 0 !important;
-  margin-top: 1px !important;
+  margin-top: -2px !important;
 }
 
 

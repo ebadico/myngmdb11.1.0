@@ -7016,7 +7016,6 @@ var SelectDropdownComponent = /** @class */ (function () {
         if (this.multiple) {
             this._elementRef.nativeElement.querySelectorAll('.disabled.optgroup').forEach(function (element) {
                 _this._renderer.setStyle(element.firstElementChild.lastElementChild, 'display', 'none');
-                console.log(element.firstElementChild.lastElementChild);
             });
         }
         try {
@@ -8615,11 +8614,14 @@ BarComponent.propDecorators = {
 var ProgressSpinnerComponent = /** @class */ (function () {
     /**
      * @param {?} el
+     * @param {?} platformId
      */
-    function ProgressSpinnerComponent(el) {
+    function ProgressSpinnerComponent(el, platformId) {
         this.addClass = 'spinner-blue-only';
+        this.isBrowser = false;
         this.spinnerType = '';
         this.spinnerColor = 'rainbow';
+        this.isBrowser = isPlatformBrowser(platformId);
         this.el = el;
     }
     /**
@@ -8656,29 +8658,31 @@ var ProgressSpinnerComponent = /** @class */ (function () {
         var _this = this;
         var /** @type {?} */ counter = 0;
         var /** @type {?} */ hostElem = this.el.nativeElement;
-        setInterval(function () {
-            switch (counter) {
-                case 0:
-                    _this.addClass = 'spinner-red-only mat-progress-spinner ';
-                    break;
-                case 1:
-                    _this.addClass = 'spinner-yellow-only mat-progress-spinner';
-                    break;
-                case 2:
-                    _this.addClass = 'spinner-blue-only mat-progress-spinner';
-                    break;
-                case 3:
-                    _this.addClass = 'spinner-green-only mat-progress-spinner';
-                    break;
-            }
-            hostElem.children[0].children[0].className = ' ' + _this.addClass;
-            if (counter < 3) {
-                counter++;
-            }
-            else {
-                counter = 0;
-            }
-        }, 1333);
+        if (this.isBrowser) {
+            setInterval(function () {
+                switch (counter) {
+                    case 0:
+                        _this.addClass = 'spinner-red-only mat-progress-spinner ';
+                        break;
+                    case 1:
+                        _this.addClass = 'spinner-yellow-only mat-progress-spinner';
+                        break;
+                    case 2:
+                        _this.addClass = 'spinner-blue-only mat-progress-spinner';
+                        break;
+                    case 3:
+                        _this.addClass = 'spinner-green-only mat-progress-spinner';
+                        break;
+                }
+                hostElem.children[0].children[0].className = ' ' + _this.addClass;
+                if (counter < 3) {
+                    counter++;
+                }
+                else {
+                    counter = 0;
+                }
+            }, 1333);
+        }
     };
     return ProgressSpinnerComponent;
 }());
@@ -8690,7 +8694,8 @@ ProgressSpinnerComponent.decorators = [
 ];
 /** @nocollapse */
 ProgressSpinnerComponent.ctorParameters = function () { return [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
 ]; };
 ProgressSpinnerComponent.propDecorators = {
     spinnerType: [{ type: Input }],
@@ -14728,7 +14733,9 @@ var MdbInputDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbInputDirective.prototype.ngOnDestroy = function () {
-        this.changes.disconnect();
+        if (this.isBrowser) {
+            this.changes.disconnect();
+        }
     };
     /**
      * @return {?}
@@ -14854,46 +14861,48 @@ var MdbInputDirective = /** @class */ (function () {
         var /** @type {?} */ textSuccess = this._elRef.nativeElement.getAttribute('data-success');
         this.rightTextContainer.innerHTML = (textSuccess ? textSuccess : 'success');
         this._renderer.setStyle(this.rightTextContainer, 'visibility', 'hidden');
-        this.changes = new MutationObserver(function (mutations) {
-            mutations.forEach(function (mutation) {
-                if ((mutation.target['classList'].contains('ng-touched')) && /** @type {?} */ (mutation.target['classList'].contains('ng-invalid')) && !(mutation.target['classList'].contains('counter-danger'))) {
-                    if (_this.mdbValidate) {
-                        _this._renderer.addClass(_this._elRef.nativeElement, 'counter-danger');
-                        _this._renderer.removeClass(_this._elRef.nativeElement, 'counter-success');
-                        _this._renderer.setStyle(_this.rightTextContainer, 'visibility', 'hidden');
-                        _this._renderer.setStyle(_this.wrongTextContainer, 'visibility', 'visible');
-                        _this._renderer.setStyle(_this.rightTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
-                        _this._renderer.setStyle(_this.wrongTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
-                    }
-                }
-                else if ((mutation.target['classList'].contains('ng-touched')) && /** @type {?} */ (mutation.target['classList'].contains('ng-valid')) && !(mutation.target['classList'].contains('counter-success'))) {
-                    if (_this.mdbValidate) {
-                        _this._renderer.removeClass(_this._elRef.nativeElement, 'counter-danger');
-                        _this._renderer.addClass(_this._elRef.nativeElement, 'counter-success');
-                        _this._renderer.setStyle(_this.rightTextContainer, 'visibility', 'visible');
-                        _this._renderer.setStyle(_this.wrongTextContainer, 'visibility', 'hidden');
-                        _this._renderer.setStyle(_this.rightTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
-                        _this._renderer.setStyle(_this.wrongTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
-                    }
-                }
-                if ((mutation.target['classList'].contains('ng-pristine')) && /** @type {?} */ (mutation.target['classList'].contains('ng-invalid'))) {
-                    mutation.target.offsetParent.childNodes.forEach(function (element) {
-                        if (element.classList.contains('text-danger') || element.classList.contains('text-success')) {
-                            _this._renderer.setStyle(element, 'visibility', 'hidden');
+        if (this.isBrowser) {
+            this.changes = new MutationObserver(function (mutations) {
+                mutations.forEach(function (mutation) {
+                    if ((mutation.target['classList'].contains('ng-touched')) && /** @type {?} */ (mutation.target['classList'].contains('ng-invalid')) && !(mutation.target['classList'].contains('counter-danger'))) {
+                        if (_this.mdbValidate) {
+                            _this._renderer.addClass(_this._elRef.nativeElement, 'counter-danger');
+                            _this._renderer.removeClass(_this._elRef.nativeElement, 'counter-success');
+                            _this._renderer.setStyle(_this.rightTextContainer, 'visibility', 'hidden');
+                            _this._renderer.setStyle(_this.wrongTextContainer, 'visibility', 'visible');
+                            _this._renderer.setStyle(_this.rightTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
+                            _this._renderer.setStyle(_this.wrongTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
                         }
-                    });
-                    if ((mutation.target['classList'].contains('counter-danger'))) {
-                        _this._renderer.removeClass(_this._elRef.nativeElement, 'counter-danger');
                     }
-                    else if ((mutation.target['classList'].contains('counter-success'))) {
-                        _this._renderer.removeClass(_this._elRef.nativeElement, 'counter-success');
+                    else if ((mutation.target['classList'].contains('ng-touched')) && /** @type {?} */ (mutation.target['classList'].contains('ng-valid')) && !(mutation.target['classList'].contains('counter-success'))) {
+                        if (_this.mdbValidate) {
+                            _this._renderer.removeClass(_this._elRef.nativeElement, 'counter-danger');
+                            _this._renderer.addClass(_this._elRef.nativeElement, 'counter-success');
+                            _this._renderer.setStyle(_this.rightTextContainer, 'visibility', 'visible');
+                            _this._renderer.setStyle(_this.wrongTextContainer, 'visibility', 'hidden');
+                            _this._renderer.setStyle(_this.rightTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
+                            _this._renderer.setStyle(_this.wrongTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
+                        }
                     }
-                }
+                    if ((mutation.target['classList'].contains('ng-pristine')) && /** @type {?} */ (mutation.target['classList'].contains('ng-invalid'))) {
+                        mutation.target.offsetParent.childNodes.forEach(function (element) {
+                            if (element.classList.contains('text-danger') || element.classList.contains('text-success')) {
+                                _this._renderer.setStyle(element, 'visibility', 'hidden');
+                            }
+                        });
+                        if ((mutation.target['classList'].contains('counter-danger'))) {
+                            _this._renderer.removeClass(_this._elRef.nativeElement, 'counter-danger');
+                        }
+                        else if ((mutation.target['classList'].contains('counter-success'))) {
+                            _this._renderer.removeClass(_this._elRef.nativeElement, 'counter-success');
+                        }
+                    }
+                });
             });
-        });
-        this.changes.observe(this._elRef.nativeElement, {
-            attributes: true,
-        });
+            this.changes.observe(this._elRef.nativeElement, {
+                attributes: true,
+            });
+        }
     };
     /**
      * @return {?}
