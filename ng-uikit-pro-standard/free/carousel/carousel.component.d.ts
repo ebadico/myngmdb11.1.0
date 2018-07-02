@@ -1,4 +1,4 @@
-import { OnDestroy, EventEmitter, ElementRef } from '@angular/core';
+import { OnDestroy, EventEmitter, ElementRef, AfterViewInit } from '@angular/core';
 import { LinkedList } from '../utils/linked-list.class';
 import { SlideComponent } from './slide.component';
 import { CarouselConfig } from './carousel.config';
@@ -10,7 +10,7 @@ export declare enum Direction {
 /**
 * Base element to create carousel
 */
-export declare class CarouselComponent implements OnDestroy {
+export declare class CarouselComponent implements OnDestroy, AfterViewInit {
     SWIPE_ACTION: {
         LEFT: string;
         RIGHT: string;
@@ -32,6 +32,7 @@ export declare class CarouselComponent implements OnDestroy {
     class: String;
     type: String;
     animation: String;
+    activeSlideIndex: number;
     protected _currentActiveSlide: number | any;
     /** Will be emitted when active slide has been changed. Part of two-way-bindable [(activeSlide)] property */
     activeSlideChange: EventEmitter<any>;
@@ -53,6 +54,7 @@ export declare class CarouselComponent implements OnDestroy {
      * @param slide
      */
     addSlide(slide: SlideComponent): void;
+    ngAfterViewInit(): void;
     /**
      * Removes specified slide. If this slide is active - will roll to another slide
      * @param slide
