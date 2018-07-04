@@ -1,9 +1,10 @@
-import { EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { EventEmitter, OnDestroy, OnInit, ElementRef } from '@angular/core';
 import { TabDirective } from './tab.directive';
 import { TabsetConfig } from './tabset.config';
 import { WavesDirective } from './../../free/waves/waves-effect.directive';
 export declare class TabsetComponent implements OnDestroy, OnInit {
     ripple: WavesDirective;
+    private el;
     tabs: TabDirective[];
     classMap: any;
     protected isDestroyed: boolean;
@@ -22,13 +23,14 @@ export declare class TabsetComponent implements OnDestroy, OnInit {
     shownBsTab: EventEmitter<any>;
     hideBsTab: EventEmitter<any>;
     hiddenBsTab: EventEmitter<any>;
+    getActiveTab: EventEmitter<any>;
     vertical: boolean;
     setActiveTab(index: number): void;
     /** if true tabs fill the container and have a consistent width */
     justified: boolean;
     /** navigation context class: 'tabs' or 'pills' */
     type: string;
-    constructor(platformId: string, config: TabsetConfig, ripple: WavesDirective);
+    constructor(platformId: string, config: TabsetConfig, ripple: WavesDirective, el: ElementRef);
     click(event: any, index: any): void;
     ngOnDestroy(): void;
     getActive(): any;

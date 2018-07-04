@@ -4406,7 +4406,14 @@ var MDBDatePickerComponent = /** @class */ (function () {
         // Date selected, notifies parent using callbacks and value accessor
         this.tmp = date;
         var /** @type {?} */ dateModel = this.getDateModel(date);
-        this.dateChanged.emit(dateModel);
+        // this.dateChanged.emit({ previousDate: this.selectionDayTxt, actualDate: dateModel });
+        this.dateChanged.emit({
+            date: date,
+            jsdate: null,
+            previousDateFormatted: this.selectionDayTxt,
+            actualDateFormatted: dateModel,
+            epoc: 0
+        });
         this.onChangeCb(dateModel);
         this.onTouchedCb();
         this.updateDateValue(date, false);
@@ -4795,7 +4802,7 @@ MDBDatePickerComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-date-picker',
                 exportAs: 'mdbdatepicker',
-                template: "<!-- Line 27: Deleted (focus)=\"onFocusInput($event)\" for better use in Firefox. If other strange problems will occur, please paste it in line 27. --> <div class=\"mydp picker\" [ngClass]=\"{'picker--opened': showSelector}\" [ngStyle]=\"{'width': opts.width}\"> <div class=\"md-form\"> <label *ngIf=\"label.length > 0\"  [ngClass]=\"{ 'active': checkActive(), 'disabled': opts.componentDisabled }\">{{ label }}</label> <input  type=\"text\"  class=\"form-control mydp-date\"  [attr.aria-label]=\"opts.ariaLabelInputField\"  (click)=\"openBtnClicked()\"  [attr.maxlength]=\"opts.dateFormat.length\"  [ngClass]=\"{ 'selectiondisabled': opts.componentDisabled, 'disabled': opts.componentDisabled }\" placeholder=\"{{ placeholder }}\"  [ngModel]=\"selectionDayTxt\"  (ngModelChange)=\"onUserDateInput($event)\"  [value]=\"selectionDayTxt\"  [ngStyle]=\"{ 'height': opts.height,  'font-size': opts.selectionTxtFontSize }\" (blur)=\"onBlurInput($event)\"  [disabled]=\"opts.componentDisabled\"  autocomplete=\"off\"> </div> <div class=\"selector picker__holder selectorarrow selectorarrowleft selectorarrowright\" #divFocus [ngClass]=\"{'alignselectorright': opts.alignSelectorRight}\" tabindex=\"0\"> <div class=\"picker__frame picker__box\" #pickerFrame> <div class=\"picker__header\"> <div class=\"picker__date-display\"> <div class=\"picker__weekday-display\"> {{ weekText(getWeekday(tmp)) }} </div> <div class=\"picker__month-display\"> <div>{{ monthText(tmp.month) }}</div> </div> <div class=\"picker__day-display\"> <div>{{ tmp.day }}</div> </div> <div class=\"picker__year-display\"> <div>{{ tmp.year }}</div> </div> </div> <select class=\"picker__select--year\" [(ngModel)]=\"visibleMonth.year\" (ngModelChange)=\"onUserYearInput($event)\" role=\"menu\" aria-label=\"Year selector\"> <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option> </select> <select class=\"picker__select--month\" [(ngModel)]=\"visibleMonth.monthTxt\" (ngModelChange)=\"onUserMonthInput($event)\" role=\"menu\" aria-label=\"Month selector\"> <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option> </select> <button class=\"picker__nav--prev\" data-nav=\"-1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Previous month\" (click)=\"prevMonth()\" [disabled]=\"prevMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled}\"></button> <button class=\"picker__nav--next\" data-nav=\"1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Next month\" (click)=\"nextMonth()\" [disabled]=\"nextMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled}\"></button> </div> <table class=\"picker__table\"> <thead><tr><th class=\"picker__weekday weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#</th><th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th></tr></thead> <tbody> <tr *ngFor=\"let w of dates\"> <td class=\"picker__day daycellweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td> <td class=\"picker__day\" *ngFor=\"let d of w.week\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId&&!d.disabled, 'disabled': d.disabled, 'tablesingleday': d.cmo===currMonthId&&!d.disabled}\"> <div *ngIf=\"d.markedDate.marked\" class=\"markdate\" [ngStyle]=\"{'background-color': d.markedDate.color}\"></div> <div class=\"picker__day\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId,'picker__day--outfocus': (d.cmo===nextMonthId || d.cmo===prevMonthId), 'picker__day--today':d.currDay&&opts.markCurrentDay, 'picker__day--selected picker__day--highlighted':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId}\" (click)=\"!d.disabled&&cellClicked(d);$event.stopPropagation()\" (keydown)=\"cellKeyDown($event, d)\" tabindex=\"0\"> {{d.dateObj.day}} </div> </td> </tr> </tbody> </table> <div class=\"picker__footer\"> <button type=\"button\"  *ngIf=\"opts.showTodayBtn\"  class=\"picker__button--today\" (click)=\"todayClicked()\" role=\"button\" [attr.aria-label]=\"opts.todayBtnTxt\"> {{opts.todayBtnTxt}} </button> <button type=\"button\" *ngIf=\"opts.showClearDateBtn\" class=\"picker__button--clear\" (click)=\"removeBtnClicked()\" role=\"button\" [attr.aria-label]=\"opts.clearBtnTxt\"> {{opts.clearBtnTxt}} </button> <button type=\"button\" [ngClass]=\"{'ml-auto': !opts.showTodayBtn}\" class=\"picker__button--close\" (click)=\"showSelector = false; removeInlineStyle();\" role=\"button\" [attr.aria-label]=\"opts.closeBtnTxt\"> {{opts.closeBtnTxt}} </button> </div> </div> </div> </div> ",
+                template: "<!-- Line 27: Deleted (focus)=\"onFocusInput($event)\" for better use in Firefox. If other strange problems will occur, please paste it in line 27. --> <div class=\"mydp picker\" [ngClass]=\"{'picker--opened': showSelector}\" [ngStyle]=\"{'width': opts.width}\"> <div class=\"md-form\"> <label *ngIf=\"label.length > 0\" [ngClass]=\"{ 'active': checkActive(), 'disabled': opts.componentDisabled }\">{{ label }}</label> <input type=\"text\" class=\"form-control mydp-date\" [attr.aria-label]=\"opts.ariaLabelInputField\" (click)=\"openBtnClicked()\" [attr.maxlength]=\"opts.dateFormat.length\" [ngClass]=\"{ 'selectiondisabled': opts.componentDisabled, 'disabled': opts.componentDisabled }\" placeholder=\"{{ placeholder }}\" [ngModel]=\"selectionDayTxt\" (ngModelChange)=\"onUserDateInput($event)\" [value]=\"selectionDayTxt\" [ngStyle]=\"{ 'height': opts.height,  'font-size': opts.selectionTxtFontSize }\" (blur)=\"onBlurInput($event)\" [disabled]=\"opts.componentDisabled\" autocomplete=\"off\"> </div> <div class=\"selector picker__holder selectorarrow selectorarrowleft selectorarrowright\" #divFocus [ngClass]=\"{'alignselectorright': opts.alignSelectorRight}\" tabindex=\"0\"> <div class=\"picker__frame picker__box\" #pickerFrame> <div class=\"picker__header\"> <div class=\"picker__date-display\"> <div class=\"picker__weekday-display\"> {{ weekText(getWeekday(tmp)) }} </div> <div class=\"picker__month-display\"> <div>{{ monthText(tmp.month) }}</div> </div> <div class=\"picker__day-display\"> <div>{{ tmp.day }}</div> </div> <div class=\"picker__year-display\"> <div>{{ tmp.year }}</div> </div> </div> <select class=\"picker__select--year\" [(ngModel)]=\"visibleMonth.year\" (ngModelChange)=\"onUserYearInput($event)\" role=\"menu\" aria-label=\"Year selector\"> <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option> </select> <select class=\"picker__select--month\" [(ngModel)]=\"visibleMonth.monthTxt\" (ngModelChange)=\"onUserMonthInput($event)\" role=\"menu\" aria-label=\"Month selector\"> <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option> </select> <button class=\"picker__nav--prev\" data-nav=\"-1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Previous month\" (click)=\"prevMonth()\" [disabled]=\"prevMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled}\"></button> <button class=\"picker__nav--next\" data-nav=\"1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Next month\" (click)=\"nextMonth()\" [disabled]=\"nextMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled}\"></button> </div> <table class=\"picker__table\"> <thead> <tr> <th class=\"picker__weekday weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#</th> <th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th> </tr> </thead> <tbody> <tr *ngFor=\"let w of dates\"> <td class=\"picker__day daycellweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td> <td class=\"picker__day\" *ngFor=\"let d of w.week\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId&&!d.disabled, 'disabled': d.disabled, 'tablesingleday': d.cmo===currMonthId&&!d.disabled}\"> <div *ngIf=\"d.markedDate.marked\" class=\"markdate\" [ngStyle]=\"{'background-color': d.markedDate.color}\"></div> <div class=\"picker__day\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId,'picker__day--outfocus': (d.cmo===nextMonthId || d.cmo===prevMonthId), 'picker__day--today':d.currDay&&opts.markCurrentDay, 'picker__day--selected picker__day--highlighted':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId}\" (click)=\"!d.disabled&&cellClicked(d);$event.stopPropagation()\" (keydown)=\"cellKeyDown($event, d)\" tabindex=\"0\"> {{d.dateObj.day}} </div> </td> </tr> </tbody> </table> <div class=\"picker__footer\"> <button type=\"button\" *ngIf=\"opts.showTodayBtn\" class=\"picker__button--today\" (click)=\"todayClicked()\" role=\"button\" [attr.aria-label]=\"opts.todayBtnTxt\"> {{opts.todayBtnTxt}} </button> <button type=\"button\" *ngIf=\"opts.showClearDateBtn\" class=\"picker__button--clear\" (click)=\"removeBtnClicked()\" role=\"button\" [attr.aria-label]=\"opts.clearBtnTxt\"> {{opts.clearBtnTxt}} </button> <button type=\"button\" [ngClass]=\"{'ml-auto': !opts.showTodayBtn}\" class=\"picker__button--close\" (click)=\"showSelector = false; removeInlineStyle();\" role=\"button\" [attr.aria-label]=\"opts.closeBtnTxt\"> {{opts.closeBtnTxt}} </button> </div> </div> </div> </div>",
                 providers: [LocaleService, UtilService, MYDP_VALUE_ACCESSOR],
                 encapsulation: ViewEncapsulation.None
             },] },
@@ -10620,9 +10627,11 @@ var TabsetComponent = /** @class */ (function () {
      * @param {?} platformId
      * @param {?} config
      * @param {?} ripple
+     * @param {?} el
      */
-    function TabsetComponent(platformId, config, ripple) {
+    function TabsetComponent(platformId, config, ripple, el) {
         this.ripple = ripple;
+        this.el = el;
         this.tabs = [];
         this.classMap = {};
         this.isBrowser = null;
@@ -10631,6 +10640,7 @@ var TabsetComponent = /** @class */ (function () {
         this.shownBsTab = new EventEmitter();
         this.hideBsTab = new EventEmitter();
         this.hiddenBsTab = new EventEmitter();
+        this.getActiveTab = new EventEmitter();
         this.isBrowser = isPlatformBrowser(platformId);
         Object.assign(this, config);
     }
@@ -10658,6 +10668,10 @@ var TabsetComponent = /** @class */ (function () {
      */
     TabsetComponent.prototype.setActiveTab = function (index) {
         this.tabs[index - 1].active = true;
+        this.getActiveTab.emit({
+            el: this.tabs[index - 1],
+            activeTabIndex: index - 1
+        });
     };
     Object.defineProperty(TabsetComponent.prototype, "justified", {
         /**
@@ -10724,7 +10738,7 @@ var TabsetComponent = /** @class */ (function () {
         });
         this.shownBsTab.emit({
             target: clicked,
-            relatedTarget: prev
+            relatedTarget: prev,
         });
     };
     /**
@@ -10847,8 +10861,23 @@ var TabsetComponent = /** @class */ (function () {
      * @return {?}
      */
     TabsetComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.listGet();
         this.tabsGet();
+        setTimeout(function () {
+            var /** @type {?} */ activeElement = _this.tabEl.find(function (element) { return element.nativeElement.classList.contains('active'); });
+            try {
+                _this.tabEl.forEach(function (element, index, array) {
+                    if (array[index] === activeElement) {
+                        _this.getActiveTab.emit({
+                            el: _this.tabs[index],
+                            activeTabIndex: index
+                        });
+                    }
+                });
+            }
+            catch (error) { }
+        }, 0);
     };
     return TabsetComponent;
 }());
@@ -10863,7 +10892,8 @@ TabsetComponent.decorators = [
 TabsetComponent.ctorParameters = function () { return [
     { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
     { type: TabsetConfig },
-    { type: WavesDirective }
+    { type: WavesDirective },
+    { type: ElementRef }
 ]; };
 TabsetComponent.propDecorators = {
     clazz: [{ type: HostBinding, args: ['class.tab-container',] }],
@@ -10874,6 +10904,7 @@ TabsetComponent.propDecorators = {
     shownBsTab: [{ type: Output }],
     hideBsTab: [{ type: Output }],
     hiddenBsTab: [{ type: Output }],
+    getActiveTab: [{ type: Output }],
     vertical: [{ type: Input }],
     justified: [{ type: Input }],
     type: [{ type: Input }]
@@ -13336,8 +13367,11 @@ var CollapseDirective = /** @class */ (function () {
     /**
      * @param {?} _el
      * @param {?} _renderer
+     * @param {?} document
+     * @param {?} platformId
      */
-    function CollapseDirective(_el, _renderer) {
+    function CollapseDirective(_el, _renderer, document, platformId) {
+        this.document = document;
         this.showBsCollapse = new EventEmitter();
         this.shownBsCollapse = new EventEmitter();
         this.hideBsCollapse = new EventEmitter();
@@ -13356,6 +13390,8 @@ var CollapseDirective = /** @class */ (function () {
         this.isCollapsing = false;
         this.collapsing = false;
         this.animationTime = 500;
+        this.isBrowser = false;
+        this.isBrowser = isPlatformBrowser(platformId);
         this._el = _el;
         this._renderer = _renderer;
     }
@@ -13403,11 +13439,24 @@ var CollapseDirective = /** @class */ (function () {
             }
         }
         try {
-            if (event.type === 'click') {
-                this.maxHeight = event.target.parentElement.nextElementSibling.scrollHeight;
-            }
-            else if (event.type === 'mouseenter' || event.type === 'mouseleave') {
-                this.maxHeight = event.target.nextElementSibling.scrollHeight;
+            if (this.isBrowser) {
+                var /** @type {?} */ fixedButtonContainer = this.document.querySelector('.fixed-action-btn');
+                var /** @type {?} */ fixedCollapseContainer = this.document.querySelector('.fixed_collapse');
+                if (event.type === 'click') {
+                    // If fixedButtonContainer got top style instead of bottom, remove bottom styles from this._el.nativeElement - needed in cases,
+                    // when menu should be slided from the button instead of from the bottom edge of the screen.
+                    if (fixedButtonContainer.style.top !== '' && window.innerHeight - event.clientY > this.maxHeight) {
+                        this._renderer.setStyle(this._el.nativeElement, 'bottom', 'unset');
+                    }
+                    this.maxHeight = fixedCollapseContainer.scrollHeight;
+                }
+                else if (event.type === 'mouseenter' || event.type === 'mouseleave') {
+                    // Same as in 103 line.
+                    if (fixedButtonContainer.style.top !== '' && window.innerHeight - event.clientY > this.maxHeight) {
+                        this._renderer.setStyle(this._el.nativeElement, 'bottom', 'unset');
+                    }
+                    this.maxHeight = fixedCollapseContainer.scrollHeight;
+                }
             }
         }
         catch (error) { }
@@ -13477,7 +13526,9 @@ CollapseDirective.decorators = [
 /** @nocollapse */
 CollapseDirective.ctorParameters = function () { return [
     { type: ElementRef },
-    { type: Renderer2 }
+    { type: Renderer2 },
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
 ]; };
 CollapseDirective.propDecorators = {
     showBsCollapse: [{ type: Output, args: ['showBsCollapse',] }],
@@ -14884,19 +14935,19 @@ var MdbInputDirective = /** @class */ (function () {
                             _this._renderer.setStyle(_this.wrongTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
                         }
                     }
-                    if ((mutation.target['classList'].contains('ng-pristine')) && /** @type {?} */ (mutation.target['classList'].contains('ng-invalid'))) {
-                        mutation.target.offsetParent.childNodes.forEach(function (element) {
-                            if (element.classList.contains('text-danger') || element.classList.contains('text-success')) {
-                                _this._renderer.setStyle(element, 'visibility', 'hidden');
-                            }
-                        });
-                        if ((mutation.target['classList'].contains('counter-danger'))) {
-                            _this._renderer.removeClass(_this._elRef.nativeElement, 'counter-danger');
-                        }
-                        else if ((mutation.target['classList'].contains('counter-success'))) {
-                            _this._renderer.removeClass(_this._elRef.nativeElement, 'counter-success');
-                        }
-                    }
+                    // if (<DOMTokenList>mutation.target['classList'].contains('ng-pristine') &&
+                    //     <DOMTokenList>mutation.target['classList'].contains('ng-invalid')) {
+                    //     mutation.target.offsetParent.childNodes.forEach((element: any) => {
+                    //         if (element.classList.contains('text-danger') || element.classList.contains('text-success')) {
+                    //             this._renderer.setStyle(element, 'visibility', 'hidden');
+                    //         }
+                    //     });
+                    //     if (<DOMTokenList>mutation.target['classList'].contains('counter-danger')) {
+                    //         this._renderer.removeClass(this._elRef.nativeElement, 'counter-danger')
+                    //     } else if (<DOMTokenList>mutation.target['classList'].contains('counter-success')) {
+                    //         this._renderer.removeClass(this._elRef.nativeElement, 'counter-success')
+                    //     }
+                    // }
                 });
             });
             this.changes.observe(this._elRef.nativeElement, {
