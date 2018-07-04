@@ -1,3 +1,7 @@
+6.1.6
+*** Fixes: ***
+    * Fixed problem with freezing browser while validating input
+    
 6.1.5
 *** New Features: ***
     * Added .md-textarea-auto class which allows textarea to auto resize when would not fit into it. This feature requires mdbInputDirective on textarea,
