@@ -53,7 +53,7 @@
     right: 0;
     left: auto;
     transform: translateX(100%);
-  } 
+  }
   // Light version
   &.side-nav-light {
     background-color: $sidenav-light-bgc;
@@ -103,7 +103,7 @@
         background-color: transparent;
       }
     }
-  } 
+  }
   // Fixed side-nav shown
   &.fixed {
     left: 0;
@@ -113,7 +113,7 @@
       right: 0;
       left: auto;
     }
-  } 
+  }
   // Fixed sideNav hide on smaller
   @media #{$hide-sidenav} {
     &.fixed {
@@ -122,7 +122,7 @@
         transform: translateX(105%);
       }
     }
-  } 
+  }
   // Collapsible menu
   .collapsible {
     margin: 0;
@@ -187,7 +187,7 @@
       top: $sidenav-rotate-icon-top;
       margin-right: $sidenav-rotate-icon-mr;
     }
-  } 
+  }
   // Mask and image
   .sidenav-bg {
     top: 0;
@@ -210,10 +210,10 @@
       margin-bottom: -99999px;
       padding-bottom: 99999px;
     }
-  } 
+  }
   // SideNav logo
   .logo-wrapper {
-    border-bottom: 1px solid $sidenav-logo-wrapper-border-bottom-color;
+    border-bottom: 1px solid $sidenav-light-border-bottom-color;
     height: $sidenav-logo-wrapper-height;
     a {
       height: $sidenav-logo-wrapper-height;
@@ -271,7 +271,7 @@
         margin: 0;
       }
     }
-  } 
+  }
   // About
   .about {
     padding: $sidenav-about-padding;
@@ -280,7 +280,7 @@
       margin-bottom: 0;
       text-align: center;
     }
-  } 
+  }
   // Social
   .social {
     padding-top: 0;
@@ -307,7 +307,7 @@
         transition: $sidenav-social-fa-transition;
       }
     }
-  } 
+  }
   // Search form
   .search-form {
     padding: 0;

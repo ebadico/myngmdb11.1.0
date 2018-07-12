@@ -1,10 +1,9 @@
-import { EventEmitter, OnDestroy, OnInit, ElementRef } from '@angular/core';
+import { EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { TabDirective } from './tab.directive';
 import { TabsetConfig } from './tabset.config';
 import { WavesDirective } from './../../free/waves/waves-effect.directive';
 export declare class TabsetComponent implements OnDestroy, OnInit {
     ripple: WavesDirective;
-    private el;
     tabs: TabDirective[];
     classMap: any;
     protected isDestroyed: boolean;
@@ -30,7 +29,7 @@ export declare class TabsetComponent implements OnDestroy, OnInit {
     justified: boolean;
     /** navigation context class: 'tabs' or 'pills' */
     type: string;
-    constructor(platformId: string, config: TabsetConfig, ripple: WavesDirective, el: ElementRef);
+    constructor(platformId: string, config: TabsetConfig, ripple: WavesDirective);
     click(event: any, index: any): void;
     ngOnDestroy(): void;
     getActive(): any;
@@ -41,5 +40,7 @@ export declare class TabsetComponent implements OnDestroy, OnInit {
     protected setClassMap(): void;
     listGet(): void;
     tabsGet(): void;
+    getActiveElement(): any;
+    showActiveIndex(): void;
     ngOnInit(): void;
 }

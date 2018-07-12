@@ -21,11 +21,12 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     filterPlaceholder: string;
     label: string;
     filterEnabled: boolean;
-    opened: EventEmitter<null>;
-    closed: EventEmitter<null>;
+    opened: EventEmitter<any>;
+    closed: EventEmitter<any>;
     selected: EventEmitter<IOption>;
     deselected: EventEmitter<IOption | IOption[]>;
     noOptionsFound: EventEmitter<string>;
+    changed: EventEmitter<{}>;
     selectionSpan: any;
     dropdown: SelectDropdownComponent;
     filterInput: any;
@@ -44,6 +45,7 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     width: number;
     top: number;
     left: number;
+    itemsBefore: Array<any>;
     onChange: (_: any) => void;
     onTouched: () => void;
     /** Event handlers. **/

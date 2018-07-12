@@ -12,7 +12,7 @@ export declare class PopoverDirective implements OnInit, OnDestroy {
     /**
      * Title of a popover.
      */
-    popoverTitle: string;
+    mdbPopoverHeader: string;
     /**
      * Placement of a popover. Accepts: "top", "bottom", "left", "right"
      */
