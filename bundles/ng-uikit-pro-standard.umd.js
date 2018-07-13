@@ -1,10 +1,8 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('tslib'), require('@angular/core'), require('@angular/common'), require('@angular/animations'), require('rxjs'), require('@angular/platform-browser'), require('@angular/forms'), require('rxjs/operators'), require('@angular/http'), require('easy-pie-chart/dist/easypiechart.js'), require('hammerjs'), require('@angular/router'), require('chart.js')) :
-	typeof define === 'function' && define.amd ? define(['exports', 'tslib', '@angular/core', '@angular/common', '@angular/animations', 'rxjs', '@angular/platform-browser', '@angular/forms', 'rxjs/operators', '@angular/http', 'easy-pie-chart/dist/easypiechart.js', 'hammerjs', '@angular/router', 'chart.js'], factory) :
-	(factory((global['ng-uikit-pro-standard'] = {}),global.tslib,global.ng.core,global.ng.common,global.ng.animations,global.RX,global.ng.platformBrowser,global.ng.forms,global.Rx.Observable,global.ng.http,global.EasyPieChart,global.hammerjs,global.ng.router,global.Chart));
-}(this, (function (exports,tslib_1,core,common,animations,rxjs,platformBrowser,forms,operators,http,EasyPieChart,hammerjs,router,Chart) { 'use strict';
-
-Chart = Chart && Chart.hasOwnProperty('default') ? Chart['default'] : Chart;
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('tslib'), require('@angular/core'), require('@angular/common'), require('@angular/animations'), require('rxjs'), require('@angular/platform-browser'), require('@angular/forms'), require('rxjs/operators'), require('@angular/http'), require('hammerjs'), require('@angular/router'), require('chart.js')) :
+	typeof define === 'function' && define.amd ? define(['exports', 'tslib', '@angular/core', '@angular/common', '@angular/animations', 'rxjs', '@angular/platform-browser', '@angular/forms', 'rxjs/operators', '@angular/http', 'hammerjs', '@angular/router', 'chart.js'], factory) :
+	(factory((global['ng-uikit-pro-standard'] = {}),global.tslib,global.ng.core,global.ng.common,global.ng.animations,global.RX,global.ng.platformBrowser,global.ng.forms,global.Rx.Observable,global.ng.http,global.hammerjs,global.ng.router,global.Chart));
+}(this, (function (exports,tslib_1,core,common,animations,rxjs,platformBrowser,forms,operators,http,hammerjs,router,Chart) { 'use strict';
 
 /**
  * @fileoverview added by tsickle
@@ -16655,7 +16653,7 @@ var PopoverDirective = /** @class */ (function () {
             .show({
             content: this.mdbPopover,
             placement: this.placement,
-            title: this.mdbPopoverHeader
+            title: this.mdbPopoverHeader || this.popoverTitle
         });
         this.isOpen = true;
     };
@@ -16719,6 +16717,7 @@ PopoverDirective.ctorParameters = function () { return [
 PopoverDirective.propDecorators = {
     mdbPopover: [{ type: core.Input }],
     mdbPopoverHeader: [{ type: core.Input }],
+    popoverTitle: [{ type: core.Input }],
     placement: [{ type: core.Input }],
     triggers: [{ type: core.Input }],
     container: [{ type: core.Input }],

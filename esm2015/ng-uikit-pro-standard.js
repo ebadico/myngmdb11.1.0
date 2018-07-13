@@ -6,10 +6,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { FormControl, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
 import { catchError, map } from 'rxjs/operators';
 import { Headers, Http, HttpModule, RequestOptions } from '@angular/http';
-import * as EasyPieChart from 'easy-pie-chart/dist/easypiechart.js';
 import 'hammerjs';
 import { NavigationCancel, NavigationEnd, NavigationError, Router, RouterLinkWithHref } from '@angular/router';
-import Chart from 'chart.js';
+import * as Chart from 'chart.js';
 import { __decorate, __metadata } from 'tslib';
 
 /**
@@ -16155,7 +16154,7 @@ class PopoverDirective {
             .show({
             content: this.mdbPopover,
             placement: this.placement,
-            title: this.mdbPopoverHeader
+            title: this.mdbPopoverHeader || this.popoverTitle
         });
         this.isOpen = true;
     }
@@ -16217,6 +16216,7 @@ PopoverDirective.ctorParameters = () => [
 PopoverDirective.propDecorators = {
     mdbPopover: [{ type: Input }],
     mdbPopoverHeader: [{ type: Input }],
+    popoverTitle: [{ type: Input }],
     placement: [{ type: Input }],
     triggers: [{ type: Input }],
     container: [{ type: Input }],
