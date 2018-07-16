@@ -7,7 +7,7 @@
   margin-right: $tabs-margin-x;
   margin-bottom: $tabs-margin-y;
   background-color: $nav-tabs-pills-bgc;
-  z-index: 2;
+  z-index: 1;
   position: relative;
   border-radius: $nav-tabs-border-radius;
   .nav-item + .nav-item {
@@ -46,7 +46,7 @@
 .tab-content {
   padding: $tab-content-padding;
   padding-top: $tab-content-pt;
-  z-index: 1;
+  // z-index: 1;
   &.vertical {
     padding-top: 0;
   }
@@ -101,16 +101,12 @@
   .nav {
     white-space: nowrap;
     overflow-x: auto;
-    z-index: 2;
     position: relative;
     border-radius: $classic-tabs-border-radius $classic-tabs-border-radius 0 0;
     @media (min-width: 62rem) {
       overflow-x: hidden;
     }
     li {
-      @media (min-width: 62em) {
-        flex: inherit;
-      }
       a {
         display: block;
         padding: $classic-tabs-padding-y $classic-tabs-padding-x;
@@ -120,7 +116,7 @@
         text-align: center;
         border-radius: 0;
         &.active {
-          border-bottom: $classic-tabs-li-a-active-border-bottom;
+          border-bottom: $classic-tabs-li-a-active-border-bottom solid;
           color: $white-base;
         }
       }

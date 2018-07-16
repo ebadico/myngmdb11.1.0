@@ -1,14 +1,15 @@
 import * as tslib_1 from "tslib";
-import { ApplicationRef, Attribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentFactoryResolver, ContentChild, ContentChildren, Directive, ElementRef, EventEmitter, Host, HostBinding, HostListener, Inject, Injectable, InjectionToken, Injector, Input, NO_ERRORS_SCHEMA, NgModule, NgZone, Optional, Output, PLATFORM_ID, ReflectiveInjector, Renderer, Renderer2, SecurityContext, SkipSelf, TemplateRef, ViewChild, ViewChildren, ViewContainerRef, ViewEncapsulation, forwardRef, isDevMode } from '@angular/core';
-import { CommonModule, isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { ApplicationRef, Attribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentFactoryResolver, ContentChild, ContentChildren, Directive, ElementRef, EventEmitter, Host, HostBinding, HostListener, Inject, Injectable, InjectionToken, Injector, Input, NO_ERRORS_SCHEMA, NgModule, NgZone, Optional, Output, PLATFORM_ID, ReflectiveInjector, Renderer2, SecurityContext, SkipSelf, TemplateRef, ViewChild, ViewChildren, ViewContainerRef, ViewEncapsulation, forwardRef, isDevMode } from '@angular/core';
+import { CommonModule, DOCUMENT, isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Observable, Subject, timer } from 'rxjs';
-import { DOCUMENT, DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { FormControl, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
 import { catchError, map } from 'rxjs/operators';
 import { Headers, Http, HttpModule, RequestOptions } from '@angular/http';
 import 'hammerjs';
 import { NavigationCancel, NavigationEnd, NavigationError, Router, RouterLinkWithHref } from '@angular/router';
+import * as Chart from 'chart.js';
 import { __decorate, __metadata } from 'tslib';
 /**
  * @fileoverview added by tsickle
@@ -41,7 +42,7 @@ var SBItemBodyComponent = /** @class */ (function () {
 SBItemBodyComponent.decorators = [
     { type: Component, args: [{
                 exportAs: 'sbItemBody',
-                selector: 'mdb-item-body',
+                selector: 'mdb-item-body, mdb-accordion-item-body',
                 template: "<div #body class=\"sb-item-body\" [style.height]=\"height\"> <div class=\"card-body\"> <ng-content></ng-content> </div> </div>"
             },] },
 ];
@@ -95,7 +96,7 @@ var SBItemComponent = /** @class */ (function () {
 SBItemComponent.decorators = [
     { type: Component, args: [{
                 exportAs: 'sbItem',
-                selector: 'mdb-item',
+                selector: 'mdb-item, mdb-accordion-item',
                 template: "<div class=\"card\" [ngClass]=\"{'is-collapsed': collapsed, 'active': !collapsed}\"> <ng-content></ng-content> </div>"
             },] },
 ];
@@ -130,7 +131,7 @@ var SBItemHeadComponent = /** @class */ (function () {
 SBItemHeadComponent.decorators = [
     { type: Component, args: [{
                 exportAs: 'sbItemHead',
-                selector: 'mdb-item-head',
+                selector: 'mdb-item-head, mdb-accordion-item-head',
                 template: "<div class=\"card-header\"> <a role=\"button\" (click)=\"toggleClick($event)\"> <h5 class=\"mb-0\"> <ng-content></ng-content> <i class=\"fa fa-angle-down rotate-icon\"></i> </h5> </a> </div>"
             },] },
 ];
@@ -166,7 +167,7 @@ var SqueezeBoxComponent = /** @class */ (function () {
 SqueezeBoxComponent.decorators = [
     { type: Component, args: [{
                 exportAs: 'squeezebox',
-                selector: 'mdb-squeezebox',
+                selector: 'mdb-squeezebox, mdb-accordion',
                 template: "<div class=\"accordion\"> <ng-content></ng-content> </div>"
             },] },
 ];
@@ -2049,10 +2050,9 @@ var CompleterComponent = /** @class */ (function () {
         }
     };
     /**
-     * @param {?} event
      * @return {?}
      */
-    CompleterComponent.prototype.onFocusIn = function (event) {
+    CompleterComponent.prototype.onFocusIn = function () {
         try {
             this.renderer.addClass(this.el.nativeElement.firstChild.children[2], 'active');
         }
@@ -2064,7 +2064,7 @@ var CompleterComponent = /** @class */ (function () {
      */
     CompleterComponent.prototype.onFocusOut = function (event) {
         try {
-            if (event.target.value == '') {
+            if (event.target.value === '') {
                 this.renderer.removeClass(this.el.nativeElement.firstChild.children[2], 'active');
             }
         }
@@ -2211,19 +2211,19 @@ var CompleterComponent = /** @class */ (function () {
      * @return {?}
      */
     CompleterComponent.prototype.onBlur = function () {
-        this.blur.emit();
         this.onTouched();
         if (this.searchStr === undefined || this.searchStr === '') {
             this.focused = false;
         }
+        this.blur.emit(this);
     };
     /**
      * @return {?}
      */
     CompleterComponent.prototype.onFocus = function () {
-        this.focusEvent.emit();
         this.onTouched();
         this.focused = true;
+        this.focusEvent.emit({ focused: true, element: this.el });
     };
     /**
      * @param {?} event
@@ -2279,8 +2279,8 @@ var CompleterComponent = /** @class */ (function () {
 }());
 CompleterComponent.decorators = [
     { type: Component, args: [{
-                selector: 'mdb-completer',
-                template: "<div class=\"completer-holder md-form\" mdbCompleter> <input #mdbInput [attr.id]=\"inputId.length > 0 ? inputId : null\" type=\"search\" class=\"completer-input form-control mdb-autocomplete\" mdbInput [ngClass]=\"inputClass\" [(ngModel)]=\"searchStr\" (ngModelChange)=\"onChange($event)\" [attr.name]=\"inputName\" [placeholder]=\"placeholder\" [attr.maxlength]=\"maxChars\" [tabindex]=\"fieldTabindex\" [disabled]=\"disableInput\" [clearSelected]=\"clearSelected\" [clearUnselected]=\"clearUnselected\" [overrideSuggested]=\"overrideSuggested\" [openOnFocus]=\"openOnFocus\" [fillHighlighted]=\"fillHighlighted\" (blur)=\"onBlur()\" (focus)=\"onFocus()\" (keyup)=\"onKeyup($event)\" (keydown)=\"onKeydown($event)\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" /> <button class=\"mdb-autocomplete-clear\"> <svg fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"https://www.w3.org/2000/svg\"> <path d=\"M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z\" /> <path d=\"M0 0h24v24H0z\" fill=\"none\" /> </svg> </button> <label [ngClass]=\"{'active': focused}\">{{ label }}</label> <div class=\"completer-dropdown-holder\" *mdbList=\"dataService; minSearchLength: minSearchLength; pause: pause; autoMatch: autoMatch; initialValue: initialValue; autoHighlight: autoHighlight; let items = results; let searchActive = searching; let isInitialized = searchInitialized; let isOpen = isOpen;\"> <div class=\"completer-dropdown\" mdbDropdown *ngIf=\"isInitialized && isOpen && ((items.length > 0 || displayNoResults) || (searchActive && displaySearching))\"> <div *ngIf=\"searchActive && displaySearching\" class=\"completer-searching\">{{_textSearching}}</div> <div *ngIf=\"!searchActive && (!items || items.length === 0)\" class=\"completer-no-results\">{{_textNoResults}}</div> <div class=\"completer-row-wrapper\" *ngFor=\"let item of items; let rowIndex=index\"> <div class=\"completer-row\" [mdbRow]=\"rowIndex\" [dataItem]=\"item\"> <div *ngIf=\"item.image || item.image === ''\" class=\"completer-image-holder\"> <img *ngIf=\"item.image != ''\" src=\"{{item.image}}\" class=\"completer-image\" /> <div *ngIf=\"item.image === ''\" class=\"completer-image-default\"></div> </div> <div class=\"completer-item-text\" [ngClass]=\"{'completer-item-text-image': item.image || item.image === '' }\"> <mdb-completer-list-item class=\"completer-title\" [text]=\"item.title\" [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'title'\"></mdb-completer-list-item> <mdb-completer-list-item *ngIf=\"item.description && item.description != ''\" class=\"completer-description\" [text]=\"item.description\" [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'description'\"> </mdb-completer-list-item> </div> </div> </div> </div> </div> </div> ",
+                selector: 'mdb-autocomplete, mdb-completer',
+                template: "<div class=\"completer-holder md-form\" mdbCompleter> <input #mdbInput [attr.id]=\"inputId.length > 0 ? inputId : null\" type=\"search\" class=\"completer-input form-control mdb-autocomplete\" mdbInput [ngClass]=\"inputClass\" [(ngModel)]=\"searchStr\" (ngModelChange)=\"onChange($event)\" [attr.name]=\"inputName\" [placeholder]=\"placeholder\" [attr.maxlength]=\"maxChars\" [tabindex]=\"fieldTabindex\" [disabled]=\"disableInput\" [clearSelected]=\"clearSelected\" [clearUnselected]=\"clearUnselected\" [overrideSuggested]=\"overrideSuggested\" [openOnFocus]=\"openOnFocus\" [fillHighlighted]=\"fillHighlighted\" (blur)=\"onBlur()\" (focus)=\"onFocus()\" (keyup)=\"onKeyup($event)\" (keydown)=\"onKeydown($event)\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" /> <button class=\"mdb-autocomplete-clear\"> <svg fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"https://www.w3.org/2000/svg\"> <path d=\"M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z\" /> <path d=\"M0 0h24v24H0z\" fill=\"none\" /> </svg> </button> <label [ngClass]=\"{'active': focused}\">{{ label }}</label> <div class=\"completer-dropdown-holder\" *mdbList=\"dataService; minSearchLength: minSearchLength; pause: pause; autoMatch: autoMatch; initialValue: initialValue; autoHighlight: autoHighlight; let items = results; let searchActive = searching; let isInitialized = searchInitialized; let isOpen = isOpen;\"> <div class=\"completer-dropdown\" mdbAutocompleteDropdown *ngIf=\"isInitialized && isOpen && ((items.length > 0 || displayNoResults) || (searchActive && displaySearching))\"> <div *ngIf=\"searchActive && displaySearching\" class=\"completer-searching\">{{_textSearching}}</div> <div *ngIf=\"!searchActive && (!items || items.length === 0)\" class=\"completer-no-results\">{{_textNoResults}}</div> <div class=\"completer-row-wrapper\" *ngFor=\"let item of items; let rowIndex=index\"> <div class=\"completer-row\" [mdbRow]=\"rowIndex\" [dataItem]=\"item\"> <div *ngIf=\"item.image || item.image === ''\" class=\"completer-image-holder\"> <img *ngIf=\"item.image != ''\" src=\"{{item.image}}\" class=\"completer-image\" /> <div *ngIf=\"item.image === ''\" class=\"completer-image-default\"></div> </div> <div class=\"completer-item-text\" [ngClass]=\"{'completer-item-text-image': item.image || item.image === '' }\"> <mdb-completer-list-item class=\"completer-title\" [text]=\"item.title\" [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'title'\"></mdb-completer-list-item> <mdb-completer-list-item *ngIf=\"item.description && item.description != ''\" class=\"completer-description\" [text]=\"item.description\" [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'description'\"> </mdb-completer-list-item> </div> </div> </div> </div> </div> </div> ",
                 providers: [COMPLETER_CONTROL_VALUE_ACCESSOR]
             },] },
 ];
@@ -2323,7 +2323,7 @@ CompleterComponent.propDecorators = {
     mdbInput: [{ type: ViewChild, args: ['mdbInput',] }],
     onkeyup: [{ type: HostListener, args: ['keyup', ['$event'],] }],
     onclick: [{ type: HostListener, args: ['click', ['$event'],] }],
-    onFocusIn: [{ type: HostListener, args: ['focusin', ['$event'],] }],
+    onFocusIn: [{ type: HostListener, args: ['focusin',] }],
     onFocusOut: [{ type: HostListener, args: ['focusout', ['$event'],] }],
     datasource: [{ type: Input }],
     textNoResults: [{ type: Input }],
@@ -2527,7 +2527,7 @@ var MdbDropdownDirective = /** @class */ (function () {
 }());
 MdbDropdownDirective.decorators = [
     { type: Directive, args: [{
-                selector: '[mdbDropdown]',
+                selector: '[mdbAutocompleteDropdown]',
             },] },
 ];
 /** @nocollapse */
@@ -3249,7 +3249,7 @@ var CardRotatingComponent = /** @class */ (function () {
 }());
 CardRotatingComponent.decorators = [
     { type: Component, args: [{
-                selector: 'mdb-card-rotating',
+                selector: 'mdb-card-rotating, mdb-flipping-card',
                 template: "<div class=\"flip-container card-wrapper\" [ngClass]=\"{'rotate': rotate}\"> <div class=\"flipper card-rotating effect__click tp-box\"> <ng-content></ng-content> </div> </div> "
             },] },
 ];
@@ -3447,16 +3447,42 @@ FocusDirective.propDecorators = {
 var LocaleService = /** @class */ (function () {
     function LocaleService() {
         this.locales = {
-            "en": {
-                dayLabelsFull: { su: "Sunday", mo: "Monday", tu: "Tuesday", we: "Wednesday", th: "Thursday", fr: "Friday", sa: "Saturday" },
-                dayLabels: { su: "Sun", mo: "Mon", tu: "Tue", we: "Wed", th: "Thu", fr: "Fri", sa: "Sat" },
-                monthLabelsFull: { 1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June", 7: "July", 8: "August", 9: "September", 10: "October", 11: "November", 12: "December" },
-                monthLabels: { 1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "May", 6: "Jun", 7: "Jul", 8: "Aug", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dec" },
-                dateFormat: "yyyy-mm-dd",
-                todayBtnTxt: "Today",
-                clearBtnTxt: "Clear",
-                closeBtnTxt: "Close",
-                firstDayOfWeek: "mo",
+            'en': {
+                dayLabelsFull: { su: 'Sunday', mo: 'Monday', tu: 'Tuesday', we: 'Wednesday', th: 'Thursday', fr: 'Friday', sa: 'Saturday' },
+                dayLabels: { su: 'Sun', mo: 'Mon', tu: 'Tue', we: 'Wed', th: 'Thu', fr: 'Fri', sa: 'Sat' },
+                monthLabelsFull: {
+                    1: 'January',
+                    2: 'February',
+                    3: 'March',
+                    4: 'April',
+                    5: 'May',
+                    6: 'June',
+                    7: 'July',
+                    8: 'August',
+                    9: 'September',
+                    10: 'October',
+                    11: 'November',
+                    12: 'December'
+                },
+                monthLabels: {
+                    1: 'Jan',
+                    2: 'Feb',
+                    3: 'Mar',
+                    4: 'Apr',
+                    5: 'May',
+                    6: 'Jun',
+                    7: 'Jul',
+                    8: 'Aug',
+                    9: 'Sep',
+                    10: 'Oct',
+                    11: 'Nov',
+                    12: 'Dec'
+                },
+                dateFormat: 'yyyy-mm-dd',
+                todayBtnTxt: 'Today',
+                clearBtnTxt: 'Clear',
+                closeBtnTxt: 'Close',
+                firstDayOfWeek: 'mo',
                 sunHighlight: false,
             }
         };
@@ -4895,13 +4921,14 @@ var SimpleChartComponent = /** @class */ (function () {
 SimpleChartComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-simple-chart',
-                template: "<span class=\"min-chart\"> <span class=\"percent\">{{ percent }}</span> <mdb-easy-pie-chart [percent]=\"percent\" [options]=\"options\"></mdb-easy-pie-chart> </span>",
+                template: "<span class=\"min-chart\"> <span  *ngIf=\"customText\"   class=\"chart-custom-text\" [ngStyle]=\"{ 'line-height': size + 'px', 'width': size + 'px', 'height': size + 'px'}\">{{ customText }}</span> <span  *ngIf=\"!customText\"  class=\"percent\">{{ percent }}</span> <mdb-easy-pie-chart [percent]=\"percent\" [options]=\"options\"></mdb-easy-pie-chart> </span>",
                 styles: []
             },] },
 ];
 /** @nocollapse */
 SimpleChartComponent.ctorParameters = function () { return []; };
 SimpleChartComponent.propDecorators = {
+    customText: [{ type: Input, args: ['customText',] }],
     percent: [{ type: Input, args: ['percent',] }],
     barColor: [{ type: Input, args: ['barColor',] }],
     trackColor: [{ type: Input, args: ['trackColor',] }],
@@ -4956,9 +4983,11 @@ var EasyPieChartComponent = /** @class */ (function () {
             this.pieChart.update(this.percent);
             // Positioning text in center of chart
             var /** @type {?} */ percent = document.querySelector('.percent');
-            this._r.setStyle(percent, 'line-height', size + 'px');
-            this._r.setStyle(percent, 'width', size + 'px');
-            this._r.setStyle(percent, 'height', size + 'px');
+            if (percent) {
+                this._r.setStyle(percent, 'line-height', size + 'px');
+                this._r.setStyle(percent, 'width', size + 'px');
+                this._r.setStyle(percent, 'height', size + 'px');
+            }
         }
     };
     /**
@@ -5005,7 +5034,7 @@ ChartSimpleModule.decorators = [
                 exports: [
                     SimpleChartComponent, EasyPieChartComponent
                 ],
-                imports: []
+                imports: [CommonModule]
             },] },
 ];
 /**
@@ -5674,14 +5703,16 @@ var ImageModalComponent = /** @class */ (function () {
      * @return {?}
      */
     ImageModalComponent.prototype.keyboardControl = function (event) {
-        if (event.keyCode === 39) {
-            this.nextImage();
-        }
-        if (event.keyCode === 37) {
-            this.prevImage();
-        }
-        if (event.keyCode === 27) {
-            this.closeGallery();
+        if (this.opened) {
+            if (event.keyCode === 39) {
+                this.nextImage();
+            }
+            if (event.keyCode === 37) {
+                this.prevImage();
+            }
+            if (event.keyCode === 27) {
+                this.closeGallery();
+            }
         }
     };
     /**
@@ -7026,16 +7057,18 @@ var SelectDropdownComponent = /** @class */ (function () {
             });
         }
         try {
-            setTimeout(function () {
-                if (_this._elementRef.nativeElement.parentElement.attributes.customClass !== undefined) {
-                    _this.customClass = _this._elementRef.nativeElement.parentElement.attributes.customClass.value;
-                }
-            }, 0);
+            if (!(this._elementRef.nativeElement.parentElement == undefined)) {
+                setTimeout(function () {
+                    if (_this._elementRef.nativeElement.parentElement.attributes.customClass !== undefined) {
+                        _this.customClass = _this._elementRef.nativeElement.parentElement.attributes.customClass.value;
+                    }
+                }, 0);
+            }
         }
         catch (error) {
         }
         this.moveHighlightedIntoView();
-        if (!this.multiple && this.filterEnabled) {
+        if (this.filterEnabled) {
             this.filterInput.nativeElement.focus();
         }
     };
@@ -7095,14 +7128,14 @@ var SelectDropdownComponent = /** @class */ (function () {
      */
     SelectDropdownComponent.prototype.getOptionStyle = function (option) {
         if (option.highlighted) {
-            var /** @type {?} */ style$$1 = {};
+            var /** @type {?} */ optionStyle = {};
             if (typeof this.highlightColor !== 'undefined') {
-                style$$1['background-color'] = this.highlightColor;
+                optionStyle['background-color'] = this.highlightColor;
             }
             if (typeof this.highlightTextColor !== 'undefined') {
-                style$$1['color'] = this.highlightTextColor;
+                optionStyle['color'] = this.highlightTextColor;
             }
-            return style$$1;
+            return optionStyle;
         }
         else {
             return {};
@@ -7158,7 +7191,7 @@ var SelectDropdownComponent = /** @class */ (function () {
 SelectDropdownComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-select-dropdown',
-                template: "<div class=\"dropdown-content\" #dropdownContent [ngStyle]=\"{'top.px': top, 'left.px': left, 'width.px': width}\"  [@dropdownAnimation]=\"{value: state, params: {startHeight: startHeight, endHeight: endHeight}}\"> <div class=\"filter\" *ngIf=\"!multiple && filterEnabled\"> <input #filterInput autocomplete=\"on\" [placeholder]=\"placeholder\" (click)=\"onSingleFilterClick($event)\" (input)=\"onSingleFilterInput($event)\" (keydown)=\"onSingleFilterKeydown($event)\"> </div> <div class=\"options\" #optionsList> <ul class=\"select-dropdown\" [ngClass]=\"{'multiple-select-dropdown': multiple}\" (wheel)=\"onOptionsWheel($event)\"> <li *ngFor=\"let option of optionList.filtered\" [ngClass]=\"{'active': option.highlighted, 'selected': option.selected, 'disabled': option.disabled, 'optgroup': option.group}\" [ngStyle]=\"getOptionStyle(option)\" (click)=\"onOptionClick(option)\" (mouseover)=\"onOptionMouseover(option)\"> <img class=\"rounded-circle\" [src]=\"option.icon\" *ngIf=\"option.icon !== ''\"> <span class=\"select-option\" *ngIf=\"!multiple\">{{option.label}}</span> <span class=\"filtrable\" *ngIf=\"multiple\"> <input type=\"checkbox\" [checked]=\"option.selected\" class=\"form-check-input {{customClass}}\"> <label></label> {{option.label}} </span> </li> <li *ngIf=\"!this.hasOptionsItems\" class=\"message disabled\"> <span>{{notFoundMsg}}</span> </li> </ul> </div> </div>",
+                template: "<div class=\"dropdown-content\" #dropdownContent [ngStyle]=\"{'top.px': top, 'left.px': left, 'width.px': width}\"  [@dropdownAnimation]=\"{value: state, params: {startHeight: startHeight, endHeight: endHeight}}\"> <div class=\"filter\" *ngIf=\"filterEnabled\"> <input #filterInput autocomplete=\"on\" [placeholder]=\"placeholder\" (click)=\"onSingleFilterClick($event)\" (input)=\"onSingleFilterInput($event)\" (keydown)=\"onSingleFilterKeydown($event)\"> </div> <div class=\"options\" #optionsList> <ul class=\"select-dropdown\" [ngClass]=\"{'multiple-select-dropdown': multiple}\" (wheel)=\"onOptionsWheel($event)\"> <li *ngFor=\"let option of optionList.filtered\" [ngClass]=\"{'active': option.highlighted, 'selected': option.selected, 'disabled': option.disabled, 'optgroup': option.group}\" [ngStyle]=\"getOptionStyle(option)\" (click)=\"onOptionClick(option)\" (mouseover)=\"onOptionMouseover(option)\"> <img class=\"rounded-circle\" [src]=\"option.icon\" *ngIf=\"option.icon !== ''\"> <span class=\"select-option\" *ngIf=\"!multiple\">{{option.label}}</span> <span class=\"filtrable\" *ngIf=\"multiple\"> <input type=\"checkbox\" [checked]=\"option.selected\" class=\"form-check-input {{customClass}}\"> <label></label> {{option.label}} </span> </li> <li *ngIf=\"!this.hasOptionsItems\" class=\"message disabled\"> <span>{{notFoundMsg}}</span> </li> </ul> </div> </div>",
                 encapsulation: ViewEncapsulation.None,
                 animations: [trigger('dropdownAnimation', [
                         state('invisible', style({ height: '{{startHeight}}', }), { params: { startHeight: 0 } }),
@@ -7228,6 +7261,7 @@ var SelectComponent = /** @class */ (function () {
         this.selected = new EventEmitter();
         this.deselected = new EventEmitter();
         this.noOptionsFound = new EventEmitter();
+        this.changed = new EventEmitter();
         // Angular lifecycle hooks.
         this.KEYS = {
             BACKSPACE: 8,
@@ -7250,6 +7284,7 @@ var SelectComponent = /** @class */ (function () {
         this.placeholderView = '';
         this.clearClicked = false;
         this.selectContainerClicked = false;
+        this.itemsBefore = [];
         this.onChange = function (_) { };
         this.onTouched = function () { };
     }
@@ -7284,6 +7319,7 @@ var SelectComponent = /** @class */ (function () {
     SelectComponent.prototype.ngOnChanges = function (changes) {
         if (changes.hasOwnProperty('options')) {
             this.updateOptionsList(changes['options'].isFirstChange());
+            this.changed.emit({ previousValue: changes.options.previousValue, currentValue: changes.options.currentValue });
         }
         if (changes.hasOwnProperty('noFilter')) {
             var /** @type {?} */ numOptions = this.optionList.options.length;
@@ -7535,7 +7571,10 @@ var SelectComponent = /** @class */ (function () {
         this.hasSelected = this._value.length > 0;
         this.placeholderView = this.hasSelected ? '' : this.placeholder;
         this.updateFilterWidth();
-        this.onChange(this.value);
+        if (this.value) {
+            this.onChange(this.value);
+        }
+        /* this.onChange(this.value); */
     };
     /**
      * Initialization. *
@@ -7575,10 +7614,10 @@ var SelectComponent = /** @class */ (function () {
             this.updateWidth();
             this.updatePosition();
             this.isOpen = true;
-            if (this.multiple && this.filterEnabled) {
-                this.filterInput.nativeElement.focus();
-            }
-            this.opened.emit(null);
+            // if (this.multiple && this.filterEnabled) {
+            //   this.filterInput.nativeElement.focus();
+            // }
+            this.opened.emit(this);
         }
     };
     /**
@@ -7603,7 +7642,7 @@ var SelectComponent = /** @class */ (function () {
                 if (focus) {
                     _this.focus();
                 }
-                _this.closed.emit(null);
+                _this.closed.emit(_this);
             }
         }, 200);
     };
@@ -7682,12 +7721,15 @@ var SelectComponent = /** @class */ (function () {
      * @return {?}
      */
     SelectComponent.prototype.clearFilterInput = function () {
-        if (this.multiple && this.filterEnabled) {
-            this.filterInput.nativeElement.value = '';
+        try {
+            if (this.multiple && this.filterEnabled) {
+                this.filterInput.nativeElement.value = '';
+            }
+            else {
+                this.dropdown.clearFilterInput();
+            }
         }
-        else {
-            this.dropdown.clearFilterInput();
-        }
+        catch (error) { }
     };
     /**
      * @param {?} value
@@ -7775,12 +7817,15 @@ var SelectComponent = /** @class */ (function () {
      */
     SelectComponent.prototype.focus = function () {
         this.hasFocus = true;
-        if (this.multiple && this.filterEnabled) {
-            this.filterInput.nativeElement.focus();
+        try {
+            if (this.filterEnabled) {
+                this.filterInput.nativeElement.focus();
+            }
+            else {
+                this.selectionSpan.nativeElement.focus();
+            }
         }
-        else {
-            this.selectionSpan.nativeElement.focus();
-        }
+        catch (error) { }
     };
     /**
      * @return {?}
@@ -7847,6 +7892,7 @@ SelectComponent.propDecorators = {
     selected: [{ type: Output }],
     deselected: [{ type: Output }],
     noOptionsFound: [{ type: Output }],
+    changed: [{ type: Output }],
     selectionSpan: [{ type: ViewChild, args: ['selection',] }],
     dropdown: [{ type: ViewChild, args: ['dropdown',] }],
     filterInput: [{ type: ViewChild, args: ['filterInput',] }],
@@ -8743,7 +8789,7 @@ var ProgressbarComponent = /** @class */ (function () {
 }());
 ProgressbarComponent.decorators = [
     { type: Component, args: [{
-                selector: 'mdb-progressbar',
+                selector: 'mdb-progressbar, mdb-progress',
                 template: "<div mdbProgress [animate]=\"animate\" [max]=\"max\"> <mdb-bar [type]=\"type\" [value]=\"value\"> <ng-content></ng-content> </mdb-bar> </div> "
             },] },
 ];
@@ -9162,7 +9208,7 @@ var SidenavComponent = /** @class */ (function () {
 }());
 SidenavComponent.decorators = [
     { type: Component, args: [{
-                selector: 'mdb-sidenav',
+                selector: 'mdb-sidenav, mdb-side-nav',
                 template: "<ul #sidenav id=\"slide-out\" class=\"{{ class }} side-nav\" > <ng-content></ng-content> <!-- <div class=\"sidenav-bg mask-strong\"></div>     --> </ul> <div (click)=\"hide()\" (touchstart)=\"hide()\" #overlay id=\"sidenav-overlay\" style=\"display: none;\"></div>"
             },] },
 ];
@@ -10627,11 +10673,9 @@ var TabsetComponent = /** @class */ (function () {
      * @param {?} platformId
      * @param {?} config
      * @param {?} ripple
-     * @param {?} el
      */
-    function TabsetComponent(platformId, config, ripple, el) {
+    function TabsetComponent(platformId, config, ripple) {
         this.ripple = ripple;
-        this.el = el;
         this.tabs = [];
         this.classMap = {};
         this.isBrowser = null;
@@ -10860,31 +10904,48 @@ var TabsetComponent = /** @class */ (function () {
     /**
      * @return {?}
      */
-    TabsetComponent.prototype.ngOnInit = function () {
+    TabsetComponent.prototype.getActiveElement = function () {
+        var /** @type {?} */ tabs = this.tabs.map(function (object, index) {
+            return {
+                index: index,
+                object: object
+            };
+        });
+        for (var _i = 0, tabs_2 = tabs; _i < tabs_2.length; _i++) {
+            var tab = tabs_2[_i];
+            if (tab.object.active) {
+                return {
+                    el: tab.object,
+                    activeTabIndex: tab.index
+                };
+            }
+        }
+    };
+    /**
+     * @return {?}
+     */
+    TabsetComponent.prototype.showActiveIndex = function () {
         var _this = this;
+        setTimeout(function () {
+            var /** @type {?} */ activeElement = _this.getActiveElement();
+            _this.getActiveTab.emit(activeElement);
+        }, 0);
+    };
+    /**
+     * @return {?}
+     */
+    TabsetComponent.prototype.ngOnInit = function () {
+        console.log('tabs', this.tabs);
         this.listGet();
         this.tabsGet();
-        setTimeout(function () {
-            var /** @type {?} */ activeElement = _this.tabEl.find(function (element) { return element.nativeElement.classList.contains('active'); });
-            try {
-                _this.tabEl.forEach(function (element, index, array) {
-                    if (array[index] === activeElement) {
-                        _this.getActiveTab.emit({
-                            el: _this.tabs[index],
-                            activeTabIndex: index
-                        });
-                    }
-                });
-            }
-            catch (error) { }
-        }, 0);
+        this.showActiveIndex();
     };
     return TabsetComponent;
 }());
 TabsetComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-tabset',
-                template: "<div class=\"container-fluid\">  <div class=\"row\"> <div class=\"{{ listGetClass }}\"> <ul class=\"nav {{ buttonClass }}\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\"> <li *ngFor=\"let tabz of tabs;let i = index\" [ngClass]=\"['nav-item', tabz.customClass || '']\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\" (click)=\"click($event, i)\"> <a #tabEl href=\"javascript:void(0);\" class=\"nav-link waves-light\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\"> <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span> <span *ngIf=\"tabz.removable\"> <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"glyphicon glyphicon-remove-circle\"> </span> </span> </a> </li> </ul> </div> <div class=\"{{ tabsGetClass }}\"> <div class=\"tab-content {{ contentClass }}\"> <ng-content></ng-content> </div> </div> </div> </div>",
+                template: "<div class=\"container-fluid\">  <div class=\"row\"> <div class=\"{{ listGetClass }}\"> <ul class=\"nav {{ buttonClass }}\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\"> <li *ngFor=\"let tabz of tabs;let i = index\" [ngClass]=\"['nav-item', tabz.customClass || '']\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\" (click)=\"click($event, i)\"> <a #tabEl href=\"javascript:void(0);\" class=\"nav-link waves-light\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\"> <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span> <span *ngIf=\"tabz.removable\"> <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"fa fa-remove ml-2\"> </span> </span> </a> </li> </ul> </div> <div class=\"{{ tabsGetClass }}\"> <div class=\"tab-content {{ contentClass }}\"> <ng-content></ng-content> </div> </div> </div> </div>",
                 providers: [WavesDirective]
             },] },
 ];
@@ -10892,8 +10953,7 @@ TabsetComponent.decorators = [
 TabsetComponent.ctorParameters = function () { return [
     { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
     { type: TabsetConfig },
-    { type: WavesDirective },
-    { type: ElementRef }
+    { type: WavesDirective }
 ]; };
 TabsetComponent.propDecorators = {
     clazz: [{ type: HostBinding, args: ['class.tab-container',] }],
@@ -10961,14 +11021,14 @@ var TabDirective = /** @class */ (function () {
                     setTimeout(function () {
                         _this._active = active;
                         _this.deselect.emit(_this);
-                    }, 150);
+                    }, 0);
                 }
                 return;
             }
             setTimeout(function () {
                 _this._active = active;
                 _this.classAdd(_this.el.nativeElement, 'show');
-            }, 150);
+            }, 0);
             this.select.emit(this);
             this.tabset.tabs.forEach(function (mdbTab) {
                 if (mdbTab !== _this) {
@@ -12647,7 +12707,7 @@ var CarouselComponent = /** @class */ (function () {
      */
     CarouselComponent.prototype.fadeAnimation = function (goToIndex) {
         var _this = this;
-        //const currentSlide = this._slides.get(this._currentActiveSlide);
+        // const currentSlide = this._slides.get(this._currentActiveSlide);
         var /** @type {?} */ goToSlide = this._slides.get(goToIndex);
         if (this.animationEnd) {
             this.animationEnd = false;
@@ -12986,7 +13046,7 @@ var SlideComponent = /** @class */ (function () {
 }());
 SlideComponent.decorators = [
     { type: Component, args: [{
-                selector: 'mdb-slide',
+                selector: 'mdb-slide, mdb-carousel-item',
                 template: "\n  <ng-content></ng-content>\n  "
             },] },
 ];
@@ -13069,7 +13129,7 @@ var BaseChartDirective = /** @class */ (function () {
     BaseChartDirective.prototype.ngOnChanges = function (changes) {
         if (this.initFlag) {
             // Check if the changes are in the data or datasets
-            if (changes.hasOwnProperty('data') || changes.hasOwnProperty('datasets')) {
+            if ((changes.hasOwnProperty('data') || changes.hasOwnProperty('datasets')) && !changes.hasOwnProperty('labels')) {
                 if (changes['data']) {
                     this.updateChartData(changes['data'].currentValue);
                 }
@@ -13468,7 +13528,7 @@ var CollapseDirective = /** @class */ (function () {
     CollapseDirective.prototype.hide = function () {
         var _this = this;
         this.collapsing = true;
-        this.hideBsCollapse.emit();
+        this.hideBsCollapse.emit(this);
         this.isCollapse = false;
         this.isCollapsing = true;
         this.isExpanded = false;
@@ -13481,7 +13541,7 @@ var CollapseDirective = /** @class */ (function () {
         setTimeout(function () {
             container.classList.remove('collapsing');
             container.classList.add('collapse');
-            _this.hiddenBsCollapse.emit();
+            _this.hiddenBsCollapse.emit(_this);
             _this.collapsing = false;
         }, this.animationTime);
         this.collapsed.emit(this);
@@ -13494,7 +13554,7 @@ var CollapseDirective = /** @class */ (function () {
         var _this = this;
         if (!this.isExpanded) {
             this.collapsing = true;
-            this.showBsCollapse.emit();
+            this.showBsCollapse.emit(this);
             this.isCollapse = false;
             this.isCollapsing = true;
             this.isExpanded = true;
@@ -13509,7 +13569,7 @@ var CollapseDirective = /** @class */ (function () {
                 container_1.classList.remove('collapsing');
                 container_1.classList.add('collapse');
                 container_1.classList.add('show');
-                _this.shownBsCollapse.emit();
+                _this.shownBsCollapse.emit(_this);
                 _this.collapsing = false;
             }, this.animationTime - (this.animationTime * 0.5));
             this.expanded.emit(this);
@@ -14456,7 +14516,6 @@ var BsDropdownDirective = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    ;
     Object.defineProperty(BsDropdownDirective.prototype, "isDisabled", {
         /**
          * @return {?}
@@ -14561,7 +14620,7 @@ var BsDropdownDirective = /** @class */ (function () {
             return;
         }
         // material and dropup dropdown animation
-        //const parent = this._elementRef.nativeElement.classList;
+        // const parent = this._elementRef.nativeElement.classList;
         var /** @type {?} */ container = this._elementRef.nativeElement.lastElementChild;
         setTimeout(function () { container.classList.add('fadeInDropdown'); }, 200);
         if (this._showInline) {
@@ -14700,7 +14759,6 @@ var DropdownModule = /** @class */ (function () {
             ]
         };
     };
-    ;
     return DropdownModule;
 }());
 DropdownModule.decorators = [
@@ -14980,9 +15038,9 @@ var MdbInputDirective = /** @class */ (function () {
         this.initComponent();
         this.checkValue();
         // tslint:disable-next-line:max-line-length
-        if (this.el.nativeElement.tagName === 'MDB-COMPLETER' && this.el.nativeElement.getAttribute('ng-reflect-model') == null && !this.isClicked) {
-            this._renderer.removeClass(this.elLabel, 'active');
-        }
+        /* if (this.el.nativeElement.tagName === 'MDB-COMPLETER' && this.el.nativeElement.getAttribute('ng-reflect-model') == null && !this.isClicked) {
+                    this._renderer.removeClass(this.elLabel, 'active');
+                } */
     };
     /**
      * @return {?}
@@ -15046,9 +15104,9 @@ var MdbInputDirective = /** @class */ (function () {
             }
             if (this.el.nativeElement.getAttribute('ng-reflect-model') != null) {
                 // tslint:disable-next-line:max-line-length
-                if (this.el.nativeElement.tagName === 'MDB-COMPLETER' && this.el.nativeElement.getAttribute('ng-reflect-model').length !== 0) {
-                    this._renderer.addClass(this.elLabel, 'active');
-                }
+                /* if (this.el.nativeElement.tagName === 'MDB-COMPLETER' && this.el.nativeElement.getAttribute('ng-reflect-model').length !== 0) {
+                                    this._renderer.addClass(this.elLabel, 'active');
+                                } */
             }
         }
     };
@@ -15323,9 +15381,17 @@ var ModalBackdropComponent = /** @class */ (function () {
          */
         set: function (value) {
             this._isShown = value;
-            this.renderer.setElementClass(this.element.nativeElement, "" + ClassName.IN, value);
-            if (!isBs3()) {
-                this.renderer.setElementClass(this.element.nativeElement, "" + ClassName.SHOW, value);
+            if (value) {
+                this.renderer.addClass(this.element.nativeElement, "" + ClassName.IN);
+                if (!isBs3()) {
+                    this.renderer.addClass(this.element.nativeElement, "" + ClassName.SHOW);
+                }
+            }
+            else {
+                this.renderer.removeClass(this.element.nativeElement, "" + ClassName.IN);
+                if (!isBs3()) {
+                    this.renderer.removeClass(this.element.nativeElement, "" + ClassName.SHOW);
+                }
             }
         },
         enumerable: true,
@@ -15336,7 +15402,11 @@ var ModalBackdropComponent = /** @class */ (function () {
      */
     ModalBackdropComponent.prototype.ngOnInit = function () {
         if (this.isAnimated) {
-            this.renderer.setElementClass(this.element.nativeElement, "" + ClassName.FADE, this.isAnimated);
+            this.renderer.addClass(this.element.nativeElement, "" + ClassName.FADE);
+            Utils.reflow(this.element.nativeElement);
+        }
+        else {
+            this.renderer.addClass(this.element.nativeElement, "" + ClassName.FADE);
             Utils.reflow(this.element.nativeElement);
         }
         this.isShown = true;
@@ -15352,7 +15422,7 @@ ModalBackdropComponent.decorators = [
 /** @nocollapse */
 ModalBackdropComponent.ctorParameters = function () { return [
     { type: ElementRef },
-    { type: Renderer }
+    { type: Renderer2 }
 ]; };
 ModalBackdropComponent.propDecorators = {
     classNameBackDrop: [{ type: HostBinding, args: ['class.modal-backdrop',] }]
@@ -15656,12 +15726,15 @@ var ModalDirective = /** @class */ (function () {
      * @return {?}
      */
     ModalDirective.prototype.focusOtherModal = function () {
-        var /** @type {?} */ otherOpenedModals = this._element.nativeElement.parentElement.querySelectorAll('.in[mdbModal]');
-        if (!otherOpenedModals.length) {
-            return;
+        try {
+            var /** @type {?} */ otherOpenedModals = this._element.nativeElement.parentElement.querySelectorAll('.in[mdbModal]');
+            if (!otherOpenedModals.length) {
+                return;
+            }
+            //  this._renderer.invokeElementMethod(otherOpenedModals[otherOpenedModals.length - 1], 'focus');
+            otherOpenedModals[otherOpenedModals.length - 1].nativeElement.focus();
         }
-        //  this._renderer.invokeElementMethod(otherOpenedModals[otherOpenedModals.length - 1], 'focus');
-        otherOpenedModals[otherOpenedModals.length - 1].nativeElement.focus();
+        catch (error) { }
     };
     /**
      * \@internal
@@ -15713,7 +15786,7 @@ var ModalDirective = /** @class */ (function () {
 ModalDirective.decorators = [
     { type: Directive, args: [{
                 selector: '[mdbModal]',
-                exportAs: 'mdb-modal'
+                exportAs: 'mdb-modal, mdbModal'
             },] },
 ];
 /** @nocollapse */
@@ -15786,19 +15859,19 @@ var ModalContainerComponent = /** @class */ (function () {
     ModalContainerComponent.prototype.ngOnInit = function () {
         var _this = this;
         if (this.isAnimated) {
-            this._renderer.setElementClass(this._element.nativeElement, ClassName.FADE, true);
+            this._renderer.addClass(this._element.nativeElement, ClassName.FADE);
         }
-        this._renderer.setElementStyle(this._element.nativeElement, 'display', 'block');
+        this._renderer.setStyle(this._element.nativeElement, 'display', 'block');
         setTimeout(function () {
             _this.isShown = true;
-            _this._renderer.setElementClass(_this._element.nativeElement, isBs3() ? ClassName.IN : ClassName.SHOW, true);
+            _this._renderer.addClass(_this._element.nativeElement, isBs3() ? ClassName.IN : ClassName.SHOW);
         }, this.isAnimated ? TransitionDurations.BACKDROP : 0);
         if (document && document.body) {
             if (this.mdbModalService.getModalsCount() === 1) {
                 this.mdbModalService.checkScrollbar();
                 this.mdbModalService.setScrollbar();
             }
-            this._renderer.setElementClass(document.body, ClassName.OPEN, true);
+            this._renderer.addClass(document.body, ClassName.OPEN);
         }
     };
     /**
@@ -15818,11 +15891,11 @@ var ModalContainerComponent = /** @class */ (function () {
             return;
         }
         this.isModalHiding = true;
-        this._renderer.setElementClass(this._element.nativeElement, isBs3() ? ClassName.IN : ClassName.SHOW, false);
+        this._renderer.removeClass(this._element.nativeElement, isBs3() ? ClassName.IN : ClassName.SHOW);
         setTimeout(function () {
             _this.isShown = false;
             if (document && document.body && _this.mdbModalService.getModalsCount() === 1) {
-                _this._renderer.setElementClass(document.body, ClassName.OPEN, false);
+                _this._renderer.removeClass(document.body, ClassName.OPEN);
             }
             _this.mdbModalService.hide(_this.level);
             _this.isModalHiding = false;
@@ -15840,7 +15913,7 @@ ModalContainerComponent.decorators = [
 ModalContainerComponent.ctorParameters = function () { return [
     { type: ModalOptions },
     { type: ElementRef },
-    { type: Renderer }
+    { type: Renderer2 }
 ]; };
 ModalContainerComponent.propDecorators = {
     tabindex: [{ type: HostBinding, args: ['tabindex',] }],
@@ -16176,7 +16249,7 @@ var LogoComponent = /** @class */ (function () {
 }());
 LogoComponent.decorators = [
     { type: Component, args: [{
-                selector: 'logo',
+                selector: 'logo, mdb-navbar-brand',
                 template: "\n  <ng-content></ng-content>\n  "
             },] },
 ];
@@ -16370,7 +16443,7 @@ var NavbarComponent = /** @class */ (function () {
 NavbarComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-navbar',
-                template: "<nav class=\"{{SideClass}}\" #nav> <div [ngClass]=\"{'container': containerInside}\" [ngStyle]=\"{'display': displayStyle}\" #container> <ng-content select=\"logo\"></ng-content> <ng-content *ngIf=\"this.doubleNav == true\" select=\"navlinks\"></ng-content> <div *ngIf=\"this.doubleNav == false\"> <button class=\"navbar-toggler\" type=\"button\" (click)=\"toggle($event)\" mdbWavesEffect *ngIf=\"this.el.nativeElement.children.length !== 0\"> <span class=\"navbar-toggler-icon\"> </span> </button> </div> <div #navbar [style.height]=\"height\" class=\"navbar-collapse collapse\" [ngClass]=\"{'collapse': collapse, 'show': showClass, 'collapsing': collapsing}\"> <ng-content select=\"links\"></ng-content> </div> </div> </nav> ",
+                template: "<nav class=\"{{SideClass}}\" #nav> <div [ngClass]=\"{'container': containerInside}\" [ngStyle]=\"{'display': displayStyle}\" #container> <ng-content select=\"mdb-navbar-brand\"></ng-content> <ng-content select=\"logo\"></ng-content> <ng-content *ngIf=\"this.doubleNav == true\" select=\"navlinks\"></ng-content> <div *ngIf=\"this.doubleNav == false\"> <button class=\"navbar-toggler\" type=\"button\" (click)=\"toggle($event)\" mdbWavesEffect *ngIf=\"this.el.nativeElement.children.length !== 0\"> <span class=\"navbar-toggler-icon\"> </span> </button> </div> <div #navbar [style.height]=\"height\" class=\"navbar-collapse collapse\" [ngClass]=\"{'collapse': collapse, 'show': showClass, 'collapsing': collapsing}\"> <ng-content select=\"links\"></ng-content> </div> </div> </nav> ",
             },] },
 ];
 /** @nocollapse */
@@ -16587,7 +16660,7 @@ var PopoverDirective = /** @class */ (function () {
             .show({
             content: this.mdbPopover,
             placement: this.placement,
-            title: this.popoverTitle
+            title: this.mdbPopoverHeader || this.popoverTitle
         });
         this.isOpen = true;
     };
@@ -16650,6 +16723,7 @@ PopoverDirective.ctorParameters = function () { return [
 ]; };
 PopoverDirective.propDecorators = {
     mdbPopover: [{ type: Input }],
+    mdbPopoverHeader: [{ type: Input }],
     popoverTitle: [{ type: Input }],
     placement: [{ type: Input }],
     triggers: [{ type: Input }],
@@ -17084,7 +17158,6 @@ var TooltipModule = /** @class */ (function () {
             providers: [TooltipConfig, ComponentLoaderFactory, PositioningService]
         };
     };
-    ;
     return TooltipModule;
 }());
 TooltipModule.decorators = [

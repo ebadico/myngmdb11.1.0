@@ -32,8 +32,8 @@ export declare class CompleterComponent implements OnInit, ControlValueAccessor,
     focused: boolean;
     selected: EventEmitter<CompleterItem>;
     highlighted: EventEmitter<CompleterItem>;
-    blur: EventEmitter<void>;
-    focusEvent: EventEmitter<void>;
+    blur: EventEmitter<{}>;
+    focusEvent: EventEmitter<{}>;
     opened: EventEmitter<boolean>;
     keyup: EventEmitter<any>;
     keydown: EventEmitter<any>;
@@ -52,7 +52,7 @@ export declare class CompleterComponent implements OnInit, ControlValueAccessor,
     constructor(completerService: CompleterService, renderer: Renderer2, el: ElementRef);
     onkeyup(event: any): void;
     onclick(event: any): void;
-    onFocusIn(event: any): void;
+    onFocusIn(): void;
     onFocusOut(event: any): void;
     value: any;
     ngAfterViewInit(): void;

@@ -203,7 +203,7 @@
 //     }
 //   }
 //   @each $name, $color in $ctbc {
-    // &.#{$name} {
+//&.#{$name} {
 //       li {
 //         a {
 //           &.active {
@@ -214,3 +214,26 @@
 //     }
 //   }
 // }
+
+// Checkbox
+$base-radio-checkbox-label-pl: 2.19rem !default;
+$base-radio-checkbox-label-height: 1.57rem !default;
+$base-radio-checkbox-label-line-height: $base-radio-checkbox-label-height !default;
+$base-radio-checkbox-label-font-size: 1rem !default;
+
+// hide default radio / checkbox
+%hide-radio-checkbox {
+  position: absolute;
+  left: -9999px;
+  visibility: hidden;
+}
+
+%base-radio-checkbox-label {
+  position: relative;
+  padding-left: $base-radio-checkbox-label-pl;
+  cursor: pointer;
+  display: inline-block;
+  height: $base-radio-checkbox-label-height;
+  line-height: $base-radio-checkbox-label-line-height;
+  font-size: $base-radio-checkbox-label-font-size;
+}
