@@ -15972,13 +15972,15 @@ class NavbarComponent {
      * @return {?}
      */
     addTogglerIconClasses() {
-        if (Array.isArray(this.iconBackground)) {
-            this.iconBackground.forEach((iconClass) => {
-                this.renderer.addClass(this.toggler.nativeElement, iconClass);
-            });
-        }
-        else {
-            this.renderer.addClass(this.toggler.nativeElement, this.iconBackground);
+        if (this.iconBackground) {
+            if (Array.isArray(this.iconBackground)) {
+                this.iconBackground.forEach((iconClass) => {
+                    this.renderer.addClass(this.toggler.nativeElement, iconClass);
+                });
+            }
+            else {
+                this.renderer.addClass(this.toggler.nativeElement, this.iconBackground);
+            }
         }
     }
     /**

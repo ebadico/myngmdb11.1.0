@@ -16461,13 +16461,15 @@ var NavbarComponent = /** @class */ (function () {
      */
     NavbarComponent.prototype.addTogglerIconClasses = function () {
         var _this = this;
-        if (Array.isArray(this.iconBackground)) {
-            this.iconBackground.forEach(function (iconClass) {
-                _this.renderer.addClass(_this.toggler.nativeElement, iconClass);
-            });
-        }
-        else {
-            this.renderer.addClass(this.toggler.nativeElement, this.iconBackground);
+        if (this.iconBackground) {
+            if (Array.isArray(this.iconBackground)) {
+                this.iconBackground.forEach(function (iconClass) {
+                    _this.renderer.addClass(_this.toggler.nativeElement, iconClass);
+                });
+            }
+            else {
+                this.renderer.addClass(this.toggler.nativeElement, this.iconBackground);
+            }
         }
     };
     /**
