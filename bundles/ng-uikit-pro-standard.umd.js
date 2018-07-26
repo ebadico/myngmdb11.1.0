@@ -14954,14 +14954,6 @@ var MdbInputDirective = /** @class */ (function () {
     /**
      * @return {?}
      */
-    MdbInputDirective.prototype.ngOnDestroy = function () {
-        if (this.isBrowser) {
-            this.changes.disconnect();
-        }
-    };
-    /**
-     * @return {?}
-     */
     MdbInputDirective.prototype.onfocus = function () {
         try {
             this._renderer.addClass(this.elLabel, 'active');

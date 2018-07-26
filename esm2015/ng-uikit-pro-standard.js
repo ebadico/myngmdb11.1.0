@@ -14507,14 +14507,6 @@ class MdbInputDirective {
     /**
      * @return {?}
      */
-    ngOnDestroy() {
-        if (this.isBrowser) {
-            this.changes.disconnect();
-        }
-    }
-    /**
-     * @return {?}
-     */
     onfocus() {
         try {
             this._renderer.addClass(this.elLabel, 'active');
