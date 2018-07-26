@@ -697,6 +697,13 @@ var ToastComponent = /** @class */ (function () {
     /**
      * @return {?}
      */
+    ToastComponent.prototype.onActionClick = function () {
+        this.toastPackage.triggerAction();
+        this.remove();
+    };
+    /**
+     * @return {?}
+     */
     ToastComponent.prototype.tapToast = function () {
         if (this.state === 'removed') {
             return;
@@ -741,7 +748,7 @@ var ToastComponent = /** @class */ (function () {
 ToastComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'mdb-toast-component',
-                template: "<button *ngIf=\"options.closeButton\" (click)=\"remove()\" class=\"toast-close-button\"> &times; </button> <div *ngIf=\"title\" class=\"{{options.titleClass}}\" [attr.aria-label]=\"title\"> {{title}} </div> <div *ngIf=\"message && options.enableHtml\" class=\"{{options.messageClass}}\" [innerHTML]=\"message\"> </div> <div *ngIf=\"message && !options.enableHtml\" class=\"{{options.messageClass}}\" [attr.aria-label]=\"message\"> {{message}} </div> <div *ngIf=\"options.progressBar\"> <div class=\"toast-progress\" [style.width.%]=\"width\"></div> </div>",
+                template: "<button *ngIf=\"options.closeButton\" (click)=\"remove()\" class=\"toast-close-button\"> &times; </button> <div *ngIf=\"title\" class=\"{{options.titleClass}}\" [attr.aria-label]=\"title\"> {{title}} </div> <div *ngIf=\"message && options.enableHtml\" class=\"{{options.messageClass}}\" [innerHTML]=\"message\"> </div> <div *ngIf=\"message && !options.enableHtml\" class=\"{{options.messageClass}}\" [attr.aria-label]=\"message\"> {{message}} </div> <button *ngIf=\"options.actionButton\" class=\"btn btn-block toast-action mt-2\" (click)=\"onActionClick()\">{{ options.actionButton }}</button> <div *ngIf=\"options.progressBar\"> <div class=\"toast-progress\" [style.width.%]=\"width\"></div> </div>",
                 animations: [
                     animations.trigger('flyInOut', [
                         animations.state('inactive', animations.style({
@@ -980,6 +987,7 @@ var ToastService = /** @class */ (function () {
         this.toastConfig.tapToDismiss = use(this.toastConfig.tapToDismiss, true);
         this.toastConfig.toastComponent = use(this.toastConfig.toastComponent, ToastComponent);
         this.toastConfig.onActivateTick = use(this.toastConfig.onActivateTick, false);
+        this.toastConfig.actionButton = use(this.toastConfig.actionButton, '');
     }
     /**
      * show successful toast
@@ -1131,6 +1139,7 @@ var ToastService = /** @class */ (function () {
         current.tapToDismiss = use(override.tapToDismiss, current.tapToDismiss);
         current.toastComponent = use(override.toastComponent, current.toastComponent);
         current.onActivateTick = use(override.onActivateTick, current.onActivateTick);
+        current.actionButton = use(override.actionButton, current.actionButton);
         return current;
     };
     /**
@@ -1184,7 +1193,7 @@ var ToastService = /** @class */ (function () {
             message: message,
             toastRef: toastRef,
             onShown: toastRef.afterActivate(),
-            onHidden: toastRef.afterActivate(),
+            onHidden: toastRef.afterClosed(),
             onTap: toastPackage.onTap(),
             onAction: toastPackage.onAction(),
         };
@@ -2041,6 +2050,10 @@ var CompleterComponent = /** @class */ (function () {
             this.searchStr = '';
             this.renderer.setStyle(event.target, 'visibility', 'hidden');
         }
+        if (event.target === this.autocompleteLabel) {
+            this.renderer.addClass(this.autocompleteLabel, 'active');
+            this._focus = true;
+        }
     };
     /**
      * @return {?}
@@ -2086,12 +2099,16 @@ var CompleterComponent = /** @class */ (function () {
      * @return {?}
      */
     CompleterComponent.prototype.ngAfterViewInit = function () {
+        this.autocompleteLabel = this.el.nativeElement.children[0].children[2];
         try {
             this.renderer.removeClass(this.el.nativeElement.firstChild.children[2], 'active');
         }
         catch (error) { }
         if (this.autofocus) {
             this._focus = true;
+        }
+        if (this.initialValue || this.searchStr) {
+            this.renderer.addClass(this.el.nativeElement.firstChild.children[2], 'active');
         }
     };
     /**
@@ -2214,8 +2231,11 @@ var CompleterComponent = /** @class */ (function () {
      * @return {?}
      */
     CompleterComponent.prototype.onFocus = function () {
+        var _this = this;
         this.onTouched();
-        this.focused = true;
+        setTimeout(function () {
+            _this.focused = true;
+        }, 0);
         this.focusEvent.emit({ focused: true, element: this.el });
     };
     /**
@@ -2529,7 +2549,7 @@ MdbDropdownDirective.ctorParameters = function () { return [
     { type: core.ElementRef }
 ]; };
 MdbDropdownDirective.propDecorators = {
-    onMouseDown: [{ type: core.HostListener, args: ['mousedown', ['$event'],] }]
+    onMouseDown: [{ type: core.HostListener, args: ['mousedown',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -2762,8 +2782,8 @@ MdbInputCompleteDirective.propDecorators = {
     ngModelChange: [{ type: core.Output }],
     keyupHandler: [{ type: core.HostListener, args: ['keyup', ['$event'],] }],
     keydownHandler: [{ type: core.HostListener, args: ['keydown', ['$event'],] }],
-    onBlur: [{ type: core.HostListener, args: ['blur', ['$event'],] }],
-    onfocus: [{ type: core.HostListener, args: ['focus', ['$event'],] }]
+    onBlur: [{ type: core.HostListener, args: ['blur',] }],
+    onfocus: [{ type: core.HostListener, args: ['focus',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -3114,8 +3134,8 @@ MdbRowDirective.ctorParameters = function () { return [
 MdbRowDirective.propDecorators = {
     mdbRow: [{ type: core.Input }],
     dataItem: [{ type: core.Input }],
-    onClick: [{ type: core.HostListener, args: ['click', ['$event'],] }],
-    onMouseEnter: [{ type: core.HostListener, args: ['mouseenter', ['$event'],] }]
+    onClick: [{ type: core.HostListener, args: ['click',] }],
+    onMouseEnter: [{ type: core.HostListener, args: ['mouseenter',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -5510,9 +5530,9 @@ CharCounterDirective.ctorParameters = function () { return [
 ]; };
 CharCounterDirective.propDecorators = {
     length: [{ type: core.Input }],
-    onKeyUp: [{ type: core.HostListener, args: ['input', ['$event'],] }],
-    hide: [{ type: core.HostListener, args: ['blur', ['$event'],] }],
-    show: [{ type: core.HostListener, args: ['focus', ['$event'],] }]
+    onKeyUp: [{ type: core.HostListener, args: ['input',] }],
+    hide: [{ type: core.HostListener, args: ['blur',] }],
+    show: [{ type: core.HostListener, args: ['focus',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -7220,7 +7240,7 @@ SelectDropdownComponent.propDecorators = {
     filterInput: [{ type: core.ViewChild, args: ['filterInput',] }],
     optionsList: [{ type: core.ViewChild, args: ['optionsList',] }],
     dropdownContent: [{ type: core.ViewChild, args: ['dropdownContent',] }],
-    onkeyup: [{ type: core.HostListener, args: ['keyup', ['$event'],] }]
+    onkeyup: [{ type: core.HostListener, args: ['keyup',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -7381,7 +7401,7 @@ var SelectComponent = /** @class */ (function () {
      * @return {?}
      */
     SelectComponent.prototype.onSelectContainerFocus = function () {
-        this.onTouched();
+        this.openDropdown();
     };
     /**
      * @param {?} event
@@ -7856,7 +7876,7 @@ var SelectComponent = /** @class */ (function () {
 SelectComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'mdb-select',
-                template: "<label *ngIf=\"label !== ''\"> {{label}} </label> <div #selection [attr.tabindex]=\"disabled ? null : 0\" [ngClass]=\"{'open': isOpen, 'focus': hasFocus, 'below': isBelow, 'disabled': disabled}\" (click)=\"onSelectContainerClick()\" (focus)=\"onSelectContainerFocus()\" (keydown)=\"onSelectContainerKeydown($event)\" (window:click)=\"onWindowClick()\" (window:resize)=\"onWindowResize()\"> <div class=\"single\" *ngIf=\"!multiple\"> <div class=\"value\" *ngIf=\"optionList.hasSelected()\"> {{optionList.selection[0].label}} </div> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div class=\"clear\" *ngIf=\"allowClear && hasSelected\" (click)=\"onClearSelectionClick($event)\"> &#x2715; </div> </div> <div class=\"multiple\" *ngIf=\"multiple\"> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div class=\"option\"  *ngFor=\"let option of optionList.selection\"> <span class=\"deselect-option\">, </span>{{option.label}} </div> </div> </div> <mdb-select-dropdown *ngIf=\"isOpen\" #dropdown [multiple]=\"multiple\" [optionList]=\"optionList\" [notFoundMsg]=\"notFoundMsg\" [highlightColor]=\"highlightColor\" [highlightTextColor]=\"highlightTextColor\" [filterEnabled]=\"filterEnabled\" [placeholder]=\"filterPlaceholder\" [top]=\"top\" [left]=\"left\" (close)=\"onDropdownClose($event)\" (optionClicked)=\"onDropdownOptionClicked($event)\" (singleFilterClick)=\"onSingleFilterClick()\" (singleFilterInput)=\"onSingleFilterInput($event)\" (singleFilterKeydown)=\"onSingleFilterKeydown($event)\"> </mdb-select-dropdown>",
+                template: "<label *ngIf=\"label !== ''\"> {{label}} </label> <div #selection [attr.tabindex]=\"disabled ? null : 0\" [ngClass]=\"{'open': isOpen, 'focus': hasFocus, 'below': isBelow, 'disabled': disabled}\" (mousedown)=\"onSelectContainerClick()\" (focus)=\"onSelectContainerFocus()\" (keydown)=\"onSelectContainerKeydown($event)\" (window:click)=\"onWindowClick()\" (window:resize)=\"onWindowResize()\"> <div class=\"single\" *ngIf=\"!multiple\"> <div class=\"value\" *ngIf=\"optionList.hasSelected()\"> {{optionList.selection[0].label}} </div> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div class=\"clear\" *ngIf=\"allowClear && hasSelected\" (click)=\"onClearSelectionClick($event)\"> &#x2715; </div> </div> <div class=\"multiple\" *ngIf=\"multiple\"> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div class=\"option\"  *ngFor=\"let option of optionList.selection\"> <span class=\"deselect-option\">, </span>{{option.label}} </div> </div> </div> <mdb-select-dropdown *ngIf=\"isOpen\" #dropdown [multiple]=\"multiple\" [optionList]=\"optionList\" [notFoundMsg]=\"notFoundMsg\" [highlightColor]=\"highlightColor\" [highlightTextColor]=\"highlightTextColor\" [filterEnabled]=\"filterEnabled\" [placeholder]=\"filterPlaceholder\" [top]=\"top\" [left]=\"left\" (close)=\"onDropdownClose($event)\" (optionClicked)=\"onDropdownOptionClicked($event)\" (singleFilterClick)=\"onSingleFilterClick()\" (singleFilterInput)=\"onSingleFilterInput($event)\" (singleFilterKeydown)=\"onSingleFilterKeydown($event)\"> </mdb-select-dropdown>",
                 providers: [SELECT_VALUE_ACCESSOR],
                 encapsulation: core.ViewEncapsulation.None
             },] },
@@ -10315,7 +10335,7 @@ PageScrollDirective.propDecorators = {
     pageScrollAdjustHash: [{ type: core.Input }],
     pageScroll: [{ type: core.Input }],
     pageScrollFinish: [{ type: core.Output }],
-    handleClick: [{ type: core.HostListener, args: ['click', ['$event'],] }]
+    handleClick: [{ type: core.HostListener, args: ['click',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -11819,6 +11839,104 @@ TimePickerModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+var MdbBtnDirective = /** @class */ (function () {
+    /**
+     * @param {?} el
+     * @param {?} renderer
+     */
+    function MdbBtnDirective(el, renderer) {
+        this.el = el;
+        this.renderer = renderer;
+        this.color = '';
+        this.rounded = false;
+        this.gradient = '';
+        this.outline = false;
+        this.flat = false;
+        this.size = '';
+        this.block = false;
+        this.floating = false;
+    }
+    /**
+     * @return {?}
+     */
+    MdbBtnDirective.prototype.ngOnInit = function () {
+        var /** @type {?} */ colorClass = 'btn-' + this.color;
+        var /** @type {?} */ gradientClass = this.gradient + '-gradient';
+        var /** @type {?} */ outlineClass = 'btn-outline-' + this.color;
+        var /** @type {?} */ flatClass = 'btn-flat';
+        var /** @type {?} */ roundedClass = 'btn-rounded';
+        var /** @type {?} */ sizeClass = 'btn-' + this.size;
+        var /** @type {?} */ blockClass = 'btn-block';
+        var /** @type {?} */ floatingClass = 'btn-floating';
+        this.renderer.addClass(this.el.nativeElement, 'btn');
+        if (this.color !== '') {
+            this.renderer.addClass(this.el.nativeElement, colorClass);
+        }
+        if (this.rounded) {
+            this.renderer.addClass(this.el.nativeElement, roundedClass);
+        }
+        if (this.gradient) {
+            if (this.color !== '') {
+                this.renderer.removeClass(this.el.nativeElement, colorClass);
+            }
+            this.renderer.addClass(this.el.nativeElement, gradientClass);
+        }
+        if (this.outline) {
+            this.renderer.removeClass(this.el.nativeElement, colorClass);
+            this.renderer.addClass(this.el.nativeElement, outlineClass);
+        }
+        if (this.flat) {
+            if (this.color) {
+                this.renderer.removeClass(this.el.nativeElement, colorClass);
+            }
+            if (this.gradient) {
+                this.renderer.removeClass(this.el.nativeElement, gradientClass);
+            }
+            if (this.outline) {
+                this.renderer.removeClass(this.el.nativeElement, outlineClass);
+            }
+            if (this.rounded) {
+                this.renderer.removeClass(this.el.nativeElement, roundedClass);
+            }
+            this.renderer.addClass(this.el.nativeElement, flatClass);
+        }
+        if (this.size) {
+            this.renderer.addClass(this.el.nativeElement, sizeClass);
+        }
+        if (this.block) {
+            this.renderer.addClass(this.el.nativeElement, blockClass);
+        }
+        if (this.floating) {
+            this.renderer.removeClass(this.el.nativeElement, 'btn');
+            this.renderer.addClass(this.el.nativeElement, floatingClass);
+        }
+    };
+    return MdbBtnDirective;
+}());
+MdbBtnDirective.decorators = [
+    { type: core.Directive, args: [{
+                selector: '[mdbBtn]'
+            },] },
+];
+/** @nocollapse */
+MdbBtnDirective.ctorParameters = function () { return [
+    { type: core.ElementRef },
+    { type: core.Renderer2 }
+]; };
+MdbBtnDirective.propDecorators = {
+    color: [{ type: core.Input }],
+    rounded: [{ type: core.Input }],
+    gradient: [{ type: core.Input }],
+    outline: [{ type: core.Input }],
+    flat: [{ type: core.Input }],
+    size: [{ type: core.Input }],
+    block: [{ type: core.Input }],
+    floating: [{ type: core.Input }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 // TODO: config: activeClass - Class to apply to the checked buttons
 var CHECKBOX_CONTROL_VALUE_ACCESSOR = {
     provide: forms.NG_VALUE_ACCESSOR,
@@ -12061,8 +12179,8 @@ var ButtonsModule = /** @class */ (function () {
 }());
 ButtonsModule.decorators = [
     { type: core.NgModule, args: [{
-                declarations: [ButtonCheckboxDirective, ButtonRadioDirective],
-                exports: [ButtonCheckboxDirective, ButtonRadioDirective]
+                declarations: [ButtonCheckboxDirective, ButtonRadioDirective, MdbBtnDirective],
+                exports: [ButtonCheckboxDirective, ButtonRadioDirective, MdbBtnDirective]
             },] },
 ];
 /**
@@ -13000,7 +13118,7 @@ CarouselComponent.propDecorators = {
     play: [{ type: core.HostListener, args: ['mouseleave',] }],
     pause: [{ type: core.HostListener, args: ['mouseenter',] }],
     keyboardControl: [{ type: core.HostListener, args: ['keyup', ['$event'],] }],
-    focus: [{ type: core.HostListener, args: ['click', ['$event'],] }]
+    focus: [{ type: core.HostListener, args: ['click',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -14824,6 +14942,8 @@ var MdbInputDirective = /** @class */ (function () {
         this.elIcon = null;
         this.element = null;
         this.mdbValidate = true;
+        this.validateSuccess = true;
+        this.validateError = true;
         this.focusCheckbox = true;
         this.focusRadio = true;
         this.isBrowser = false;
@@ -14854,6 +14974,7 @@ var MdbInputDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbInputDirective.prototype.onblur = function () {
+        this.validationFunction();
         try {
             if (this.el.nativeElement.value === '') {
                 this._renderer.removeClass(this.elLabel, 'active');
@@ -14872,6 +14993,12 @@ var MdbInputDirective = /** @class */ (function () {
         }
         catch (error) {
         }
+    };
+    /**
+     * @return {?}
+     */
+    MdbInputDirective.prototype.oniput = function () {
+        this.validationFunction();
     };
     /**
      * @param {?} event
@@ -14945,66 +15072,112 @@ var MdbInputDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbInputDirective.prototype.ngOnInit = function () {
-        var _this = this;
         // Inititalise a new <span> wrong/right elements and render it below the host component.
-        // this.wrongTextContainer = this._renderer.createElement(this.el.nativeElement.parentElement, 'span');
-        this.wrongTextContainer = this._renderer.createElement('span');
-        this._renderer.addClass(this.wrongTextContainer, 'inputVal');
-        this._renderer.addClass(this.wrongTextContainer, 'text-danger');
-        this._renderer.appendChild(this._elRef.nativeElement.parentElement, this.wrongTextContainer);
-        var /** @type {?} */ textWrong = this._elRef.nativeElement.getAttribute('data-error');
-        this.wrongTextContainer.innerHTML = (textWrong ? textWrong : 'wrong');
-        this._renderer.setStyle(this.wrongTextContainer, 'visibility', 'hidden');
-        // this.rightTextContainer = this._renderer.createElement(this.el.nativeElement.parentElement, 'span');
-        this.rightTextContainer = this._renderer.createElement('span');
-        this._renderer.addClass(this.rightTextContainer, 'inputVal');
-        this._renderer.addClass(this.rightTextContainer, 'text-success');
-        this._renderer.appendChild(this._elRef.nativeElement.parentElement, this.rightTextContainer);
-        var /** @type {?} */ textSuccess = this._elRef.nativeElement.getAttribute('data-success');
-        this.rightTextContainer.innerHTML = (textSuccess ? textSuccess : 'success');
-        this._renderer.setStyle(this.rightTextContainer, 'visibility', 'hidden');
-        if (this.isBrowser) {
-            this.changes = new MutationObserver(function (mutations) {
-                mutations.forEach(function (mutation) {
-                    if ((mutation.target['classList'].contains('ng-touched')) && /** @type {?} */ (mutation.target['classList'].contains('ng-invalid')) && !(mutation.target['classList'].contains('counter-danger'))) {
-                        if (_this.mdbValidate) {
-                            _this._renderer.addClass(_this._elRef.nativeElement, 'counter-danger');
-                            _this._renderer.removeClass(_this._elRef.nativeElement, 'counter-success');
-                            _this._renderer.setStyle(_this.rightTextContainer, 'visibility', 'hidden');
-                            _this._renderer.setStyle(_this.wrongTextContainer, 'visibility', 'visible');
-                            _this._renderer.setStyle(_this.rightTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
-                            _this._renderer.setStyle(_this.wrongTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
-                        }
-                    }
-                    else if ((mutation.target['classList'].contains('ng-touched')) && /** @type {?} */ (mutation.target['classList'].contains('ng-valid')) && !(mutation.target['classList'].contains('counter-success'))) {
-                        if (_this.mdbValidate) {
-                            _this._renderer.removeClass(_this._elRef.nativeElement, 'counter-danger');
-                            _this._renderer.addClass(_this._elRef.nativeElement, 'counter-success');
-                            _this._renderer.setStyle(_this.rightTextContainer, 'visibility', 'visible');
-                            _this._renderer.setStyle(_this.wrongTextContainer, 'visibility', 'hidden');
-                            _this._renderer.setStyle(_this.rightTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
-                            _this._renderer.setStyle(_this.wrongTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
-                        }
-                    }
-                    // if (<DOMTokenList>mutation.target['classList'].contains('ng-pristine') &&
-                    //     <DOMTokenList>mutation.target['classList'].contains('ng-invalid')) {
-                    //     mutation.target.offsetParent.childNodes.forEach((element: any) => {
-                    //         if (element.classList.contains('text-danger') || element.classList.contains('text-success')) {
-                    //             this._renderer.setStyle(element, 'visibility', 'hidden');
-                    //         }
-                    //     });
-                    //     if (<DOMTokenList>mutation.target['classList'].contains('counter-danger')) {
-                    //         this._renderer.removeClass(this._elRef.nativeElement, 'counter-danger')
-                    //     } else if (<DOMTokenList>mutation.target['classList'].contains('counter-success')) {
-                    //         this._renderer.removeClass(this._elRef.nativeElement, 'counter-success')
-                    //     }
-                    // }
-                });
-            });
-            this.changes.observe(this._elRef.nativeElement, {
-                attributes: true,
-            });
+        if (this.mdbValidate) {
+            this.wrongTextContainer = this._renderer.createElement('span');
+            this._renderer.addClass(this.wrongTextContainer, 'inputVal');
+            this._renderer.addClass(this.wrongTextContainer, 'text-danger');
+            this._renderer.appendChild(this._elRef.nativeElement.parentElement, this.wrongTextContainer);
+            var /** @type {?} */ textWrong = this._elRef.nativeElement.getAttribute('data-error');
+            this.wrongTextContainer.innerHTML = (textWrong ? textWrong : 'wrong');
+            if (!textWrong) {
+                this.wrongTextContainer.innerHTML = (this.errorMessage ? this.errorMessage : 'wrong');
+            }
+            this._renderer.setStyle(this.wrongTextContainer, 'visibility', 'hidden');
+            this.rightTextContainer = this._renderer.createElement('span');
+            this._renderer.addClass(this.rightTextContainer, 'inputVal');
+            this._renderer.addClass(this.rightTextContainer, 'text-success');
+            this._renderer.appendChild(this._elRef.nativeElement.parentElement, this.rightTextContainer);
+            var /** @type {?} */ textSuccess = this._elRef.nativeElement.getAttribute('data-success');
+            this.rightTextContainer.innerHTML = (textSuccess ? textSuccess : 'success');
+            if (!textSuccess) {
+                this.rightTextContainer.innerHTML = (this.successMessage ? this.successMessage : 'success');
+            }
+            this._renderer.setStyle(this.rightTextContainer, 'visibility', 'hidden');
         }
+    };
+    /**
+     * @return {?}
+     */
+    MdbInputDirective.prototype.ngDoCheck = function () {
+        if (this.mdbValidate &&
+            this._elRef.nativeElement.classList.contains('ng-valid') &&
+            this._elRef.nativeElement.classList.contains('ng-dirty') &&
+            !this._elRef.nativeElement.classList.contains('counter-success')) {
+            this._renderer.addClass(this._elRef.nativeElement, 'counter-success');
+            this._renderer.setStyle(this.wrongTextContainer, 'visibility', 'hidden');
+            this._renderer.setStyle(this.rightTextContainer, 'visibility', 'visible');
+            this._renderer.setStyle(this.rightTextContainer, 'top', this._elRef.nativeElement.offsetHeight + 'px');
+            this._renderer.setStyle(this.wrongTextContainer, 'top', this._elRef.nativeElement.offsetHeight + 'px');
+        }
+        if (this.mdbValidate &&
+            this._elRef.nativeElement.classList.contains('ng-invalid') &&
+            this._elRef.nativeElement.classList.contains('ng-dirty') &&
+            !this._elRef.nativeElement.classList.contains('counter-danger')) {
+            this._renderer.addClass(this._elRef.nativeElement, 'counter-danger');
+            this._renderer.setStyle(this.rightTextContainer, 'visibility', 'hidden');
+            this._renderer.setStyle(this.wrongTextContainer, 'visibility', 'visible');
+            this._renderer.setStyle(this.rightTextContainer, 'top', this._elRef.nativeElement.offsetHeight + 'px');
+            this._renderer.setStyle(this.wrongTextContainer, 'top', this._elRef.nativeElement.offsetHeight + 'px');
+        }
+        if (this._elRef.nativeElement.classList.contains('ng-invalid') &&
+            this._elRef.nativeElement.classList.contains('ng-pristine') &&
+            this._elRef.nativeElement.classList.contains('ng-untouched') || this._elRef.nativeElement.disabled) {
+            if (this._elRef.nativeElement.classList.contains('counter-success')) {
+                this._renderer.removeClass(this._elRef.nativeElement, 'counter-success');
+                this._renderer.setStyle(this.rightTextContainer, 'visibility', 'hidden');
+            }
+            else if (this._elRef.nativeElement.classList.contains('counter-danger')) {
+                this._renderer.removeClass(this._elRef.nativeElement, 'counter-danger');
+                this._renderer.setStyle(this.wrongTextContainer, 'visibility', 'hidden');
+            }
+        }
+        if (!this.validateSuccess) {
+            this._renderer.removeClass(this._elRef.nativeElement, 'counter-success');
+            this._renderer.setStyle(this.rightTextContainer, 'display', 'none');
+            if (this._elRef.nativeElement.classList.contains('ng-valid')) {
+                this._renderer.removeClass(this._elRef.nativeElement, 'counter-danger');
+            }
+        }
+        if (!this.validateError) {
+            this._renderer.removeClass(this._elRef.nativeElement, 'counter-danger');
+            this._renderer.setStyle(this.wrongTextContainer, 'display', 'none');
+            if (this._elRef.nativeElement.classList.contains('ng-invalid')) {
+                this._renderer.removeClass(this._elRef.nativeElement, 'counter-success');
+            }
+        }
+    };
+    /**
+     * @return {?}
+     */
+    MdbInputDirective.prototype.validationFunction = function () {
+        var _this = this;
+        setTimeout(function () {
+            if (_this._elRef.nativeElement.classList.contains('ng-invalid')) {
+                _this._renderer.removeClass(_this._elRef.nativeElement, 'counter-success');
+                _this._renderer.removeClass(_this._elRef.nativeElement, 'counter-danger');
+            }
+            if (_this._elRef.nativeElement.classList.contains('ng-touched') &&
+                _this._elRef.nativeElement.classList.contains('ng-invalid')) {
+                if (_this.mdbValidate) {
+                    _this._renderer.addClass(_this._elRef.nativeElement, 'counter-danger');
+                    _this._renderer.setStyle(_this.rightTextContainer, 'visibility', 'hidden');
+                    _this._renderer.setStyle(_this.wrongTextContainer, 'visibility', 'visible');
+                    _this._renderer.setStyle(_this.rightTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
+                    _this._renderer.setStyle(_this.wrongTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
+                }
+            }
+            else if (_this._elRef.nativeElement.classList.contains('ng-touched') &&
+                _this._elRef.nativeElement.classList.contains('ng-valid')) {
+                if (_this.mdbValidate) {
+                    _this._renderer.addClass(_this._elRef.nativeElement, 'counter-success');
+                    _this._renderer.setStyle(_this.rightTextContainer, 'visibility', 'visible');
+                    _this._renderer.setStyle(_this.wrongTextContainer, 'visibility', 'hidden');
+                    _this._renderer.setStyle(_this.rightTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
+                    _this._renderer.setStyle(_this.wrongTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
+                }
+            }
+        }, 0);
     };
     /**
      * @return {?}
@@ -15032,8 +15205,8 @@ var MdbInputDirective = /** @class */ (function () {
         this.checkValue();
         // tslint:disable-next-line:max-line-length
         /* if (this.el.nativeElement.tagName === 'MDB-COMPLETER' && this.el.nativeElement.getAttribute('ng-reflect-model') == null && !this.isClicked) {
-                    this._renderer.removeClass(this.elLabel, 'active');
-                } */
+                this._renderer.removeClass(this.elLabel, 'active');
+            } */
     };
     /**
      * @return {?}
@@ -15098,8 +15271,8 @@ var MdbInputDirective = /** @class */ (function () {
             if (this.el.nativeElement.getAttribute('ng-reflect-model') != null) {
                 // tslint:disable-next-line:max-line-length
                 /* if (this.el.nativeElement.tagName === 'MDB-COMPLETER' && this.el.nativeElement.getAttribute('ng-reflect-model').length !== 0) {
-                                    this._renderer.addClass(this.elLabel, 'active');
-                                } */
+                            this._renderer.addClass(this.elLabel, 'active');
+                        } */
             }
         }
     };
@@ -15121,15 +15294,20 @@ MdbInputDirective.propDecorators = {
     placeholder: [{ type: core.Input, args: ['placeholder',] }],
     customRegex: [{ type: core.Input, args: ['customRegex',] }],
     mdbValidate: [{ type: core.Input, args: ['mdbValidate',] }],
+    validateSuccess: [{ type: core.Input, args: ['validateSuccess',] }],
+    validateError: [{ type: core.Input, args: ['validateError',] }],
     focusCheckbox: [{ type: core.Input, args: ['focusCheckbox',] }],
     focusRadio: [{ type: core.Input, args: ['focusRadio',] }],
+    errorMessage: [{ type: core.Input }],
+    successMessage: [{ type: core.Input }],
     onfocus: [{ type: core.HostListener, args: ['focus',] }],
     onblur: [{ type: core.HostListener, args: ['blur',] }],
     onchange: [{ type: core.HostListener, args: ['change',] }],
+    oniput: [{ type: core.HostListener, args: ['input',] }],
     onkeydown: [{ type: core.HostListener, args: ['keydown', ['$event'],] }],
-    oncut: [{ type: core.HostListener, args: ['cut', ['$event'],] }],
-    onpaste: [{ type: core.HostListener, args: ['paste', ['$event'],] }],
-    ondrop: [{ type: core.HostListener, args: ['drop', ['$event'],] }]
+    oncut: [{ type: core.HostListener, args: ['cut',] }],
+    onpaste: [{ type: core.HostListener, args: ['paste',] }],
+    ondrop: [{ type: core.HostListener, args: ['drop',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -16281,6 +16459,20 @@ var NavbarComponent = /** @class */ (function () {
     /**
      * @return {?}
      */
+    NavbarComponent.prototype.addTogglerIconClasses = function () {
+        var _this = this;
+        if (Array.isArray(this.iconBackground)) {
+            this.iconBackground.forEach(function (iconClass) {
+                _this.renderer.addClass(_this.toggler.nativeElement, iconClass);
+            });
+        }
+        else {
+            this.renderer.addClass(this.toggler.nativeElement, this.iconBackground);
+        }
+    };
+    /**
+     * @return {?}
+     */
     NavbarComponent.prototype.ngOnInit = function () {
         var /** @type {?} */ isDoubleNav = this.SideClass.split(' ');
         if (isDoubleNav.indexOf('double-nav') !== -1) {
@@ -16312,6 +16504,7 @@ var NavbarComponent = /** @class */ (function () {
                 _this.el.nativeElement.remove();
             }
         });
+        this.addTogglerIconClasses();
     };
     /**
      * @param {?} event
@@ -16367,11 +16560,12 @@ var NavbarComponent = /** @class */ (function () {
          * @return {?}
          */
         get: function () {
-            // if(!this.containerInside) {
-            //  return 'flex';
-            // } else {
-            return '';
-            // }
+            if (!this.containerInside) {
+                return 'flex';
+            }
+            else {
+                return '';
+            }
         },
         enumerable: true,
         configurable: true
@@ -16436,7 +16630,7 @@ var NavbarComponent = /** @class */ (function () {
 NavbarComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'mdb-navbar',
-                template: "<nav class=\"{{SideClass}}\" #nav> <div [ngClass]=\"{'container': containerInside}\" [ngStyle]=\"{'display': displayStyle}\" #container> <ng-content select=\"mdb-navbar-brand\"></ng-content> <ng-content select=\"logo\"></ng-content> <ng-content *ngIf=\"this.doubleNav == true\" select=\"navlinks\"></ng-content> <div *ngIf=\"this.doubleNav == false\"> <button class=\"navbar-toggler\" type=\"button\" (click)=\"toggle($event)\" mdbWavesEffect *ngIf=\"this.el.nativeElement.children.length !== 0\"> <span class=\"navbar-toggler-icon\"> </span> </button> </div> <div #navbar [style.height]=\"height\" class=\"navbar-collapse collapse\" [ngClass]=\"{'collapse': collapse, 'show': showClass, 'collapsing': collapsing}\"> <ng-content select=\"links\"></ng-content> </div> </div> </nav> ",
+                template: "<nav class=\"{{SideClass}}\" #nav> <div [ngClass]=\"{'container': containerInside}\" [ngStyle]=\"{'display': displayStyle}\" #container> <ng-content select=\"mdb-navbar-brand\"></ng-content> <ng-content select=\"logo\"></ng-content> <ng-content *ngIf=\"this.doubleNav == true\" select=\"navlinks\"></ng-content> <div *ngIf=\"this.doubleNav == false\"> <button #toggler class=\"navbar-toggler\" type=\"button\" (click)=\"toggle($event)\" mdbWavesEffect *ngIf=\"this.el.nativeElement.children.length !== 0\"> <span class=\"navbar-toggler-icon\"> </span> </button> </div> <div #navbar [style.height]=\"height\" class=\"navbar-collapse collapse\" [ngClass]=\"{'collapse': collapse, 'show': showClass, 'collapsing': collapsing}\"> <ng-content select=\"links\"></ng-content> </div> </div> </nav>",
             },] },
 ];
 /** @nocollapse */
@@ -16445,14 +16639,16 @@ NavbarComponent.ctorParameters = function () { return [
     { type: NavbarService }
 ]; };
 NavbarComponent.propDecorators = {
+    iconBackground: [{ type: core.Input }],
     SideClass: [{ type: core.Input }],
     containerInside: [{ type: core.Input }],
     el: [{ type: core.ViewChild, args: ['navbar',] }],
     mobile: [{ type: core.ViewChild, args: ['mobile',] }],
     navbar: [{ type: core.ViewChild, args: ['nav',] }],
     container: [{ type: core.ViewChild, args: ['container',] }],
+    toggler: [{ type: core.ViewChild, args: ['toggler',] }],
     onResize: [{ type: core.HostListener, args: ['window:resize', ['$event'],] }],
-    onScroll: [{ type: core.HostListener, args: ['document:scroll', ['$event'],] }]
+    onScroll: [{ type: core.HostListener, args: ['document:scroll',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -17576,6 +17772,7 @@ exports.CHECKBOX_CONTROL_VALUE_ACCESSOR = CHECKBOX_CONTROL_VALUE_ACCESSOR;
 exports.ButtonCheckboxDirective = ButtonCheckboxDirective;
 exports.RADIO_CONTROL_VALUE_ACCESSOR = RADIO_CONTROL_VALUE_ACCESSOR;
 exports.ButtonRadioDirective = ButtonRadioDirective;
+exports.MdbBtnDirective = MdbBtnDirective;
 exports.Direction = Direction;
 exports.CarouselComponent = CarouselComponent;
 exports.CarouselConfig = CarouselConfig;
@@ -17659,50 +17856,51 @@ exports.MDBBootstrapModule = MDBBootstrapModule;
 exports.MDBBootstrapModulePro = MDBBootstrapModulePro;
 exports.MDBRootModules = MDBRootModules;
 exports.MDBBootstrapModulesPro = MDBBootstrapModulesPro;
+exports.ɵct1 = MdbBtnDirective;
 exports.ɵcq1 = ButtonsModule;
 exports.ɵcr1 = ButtonCheckboxDirective;
 exports.ɵcs1 = ButtonRadioDirective;
-exports.ɵct1 = CarouselComponent;
-exports.ɵcu1 = CarouselConfig;
-exports.ɵcw1 = CarouselModule;
-exports.ɵcv1 = SlideComponent;
-exports.ɵcx1 = BaseChartDirective;
-exports.ɵcy1 = ChartsModule;
-exports.ɵcz1 = CollapseDirective;
-exports.ɵda1 = CollapseModule;
-exports.ɵdb1 = BsDropdownContainerComponent;
-exports.ɵdc1 = BsDropdownMenuDirective;
-exports.ɵdd1 = BsDropdownToggleDirective;
-exports.ɵde1 = BsDropdownConfig;
-exports.ɵdf1 = BsDropdownDirective;
-exports.ɵdh1 = DropdownModule;
-exports.ɵdg1 = BsDropdownState;
-exports.ɵdj1 = MdbIconComponent;
-exports.ɵdi1 = IconsModule;
-exports.ɵdk1 = InputsModule;
-exports.ɵdl1 = MdbInputDirective;
-exports.ɵeh1 = MDBRootModule;
-exports.ɵdm1 = ModalDirective;
-exports.ɵds1 = ModalModule;
-exports.ɵdn1 = ModalOptions;
-exports.ɵdo1 = MDBModalService;
-exports.ɵdq1 = ModalBackdropComponent;
-exports.ɵdp1 = ModalBackdropOptions;
-exports.ɵdr1 = ModalContainerComponent;
-exports.ɵdt1 = NavbarComponent;
-exports.ɵdu1 = NavbarModule;
-exports.ɵdv1 = PopoverContainerComponent;
-exports.ɵdw1 = PopoverConfig;
-exports.ɵdx1 = PopoverDirective;
-exports.ɵdy1 = PopoverModule;
-exports.ɵdz1 = RippleDirective;
-exports.ɵea1 = RippleModule;
-exports.ɵed1 = TooltipContainerComponent;
-exports.ɵee1 = TooltipDirective;
-exports.ɵeg1 = TooltipModule;
-exports.ɵef1 = TooltipConfig;
-exports.ɵeb1 = WavesDirective;
-exports.ɵec1 = WavesModule;
+exports.ɵcu1 = CarouselComponent;
+exports.ɵcv1 = CarouselConfig;
+exports.ɵcx1 = CarouselModule;
+exports.ɵcw1 = SlideComponent;
+exports.ɵcy1 = BaseChartDirective;
+exports.ɵcz1 = ChartsModule;
+exports.ɵda1 = CollapseDirective;
+exports.ɵdb1 = CollapseModule;
+exports.ɵdc1 = BsDropdownContainerComponent;
+exports.ɵdd1 = BsDropdownMenuDirective;
+exports.ɵde1 = BsDropdownToggleDirective;
+exports.ɵdf1 = BsDropdownConfig;
+exports.ɵdg1 = BsDropdownDirective;
+exports.ɵdi1 = DropdownModule;
+exports.ɵdh1 = BsDropdownState;
+exports.ɵdk1 = MdbIconComponent;
+exports.ɵdj1 = IconsModule;
+exports.ɵdl1 = InputsModule;
+exports.ɵdm1 = MdbInputDirective;
+exports.ɵei1 = MDBRootModule;
+exports.ɵdn1 = ModalDirective;
+exports.ɵdt1 = ModalModule;
+exports.ɵdo1 = ModalOptions;
+exports.ɵdp1 = MDBModalService;
+exports.ɵdr1 = ModalBackdropComponent;
+exports.ɵdq1 = ModalBackdropOptions;
+exports.ɵds1 = ModalContainerComponent;
+exports.ɵdu1 = NavbarComponent;
+exports.ɵdv1 = NavbarModule;
+exports.ɵdw1 = PopoverContainerComponent;
+exports.ɵdx1 = PopoverConfig;
+exports.ɵdy1 = PopoverDirective;
+exports.ɵdz1 = PopoverModule;
+exports.ɵea1 = RippleDirective;
+exports.ɵeb1 = RippleModule;
+exports.ɵee1 = TooltipContainerComponent;
+exports.ɵef1 = TooltipDirective;
+exports.ɵeh1 = TooltipModule;
+exports.ɵeg1 = TooltipConfig;
+exports.ɵec1 = WavesDirective;
+exports.ɵed1 = WavesModule;
 exports.ɵc1 = SBItemComponent;
 exports.ɵa1 = SBItemBodyComponent;
 exports.ɵb1 = SBItemHeadComponent;
@@ -17743,11 +17941,11 @@ exports.ɵbl1 = SelectDropdownComponent;
 exports.ɵbm1 = SELECT_VALUE_ACCESSOR;
 exports.ɵbn1 = SelectComponent;
 exports.ɵbo1 = SelectModule;
-exports.ɵei1 = MDBRootModulePro;
+exports.ɵej1 = MDBRootModulePro;
 exports.ɵbp1 = BarComponent;
 exports.ɵbv1 = ProgressBars;
-exports.ɵej1 = MdProgressBarModule;
-exports.ɵek1 = MdProgressSpinnerModule;
+exports.ɵek1 = MdProgressBarModule;
+exports.ɵel1 = MdProgressSpinnerModule;
 exports.ɵbq1 = ProgressSpinnerComponent;
 exports.ɵbr1 = ProgressDirective;
 exports.ɵbs1 = ProgressbarComponent;

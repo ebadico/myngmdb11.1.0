@@ -1,6 +1,6 @@
 /*!
  * Material Design for Bootstrap 4
- * Version: MDB PRO 4.5.6
+ * Version: MDB PRO 4.5.7
  *
  *
  * Copyright: Material Design for Bootstrap
@@ -62,6 +62,9 @@
 @import "free/tables";
 @import "free/depreciated";
 
+// Free addons
+// @import "addons/datatables";
+
 // PRO
 @import "pro/variables";
 @import "pro/buttons";
@@ -114,7 +117,5 @@
 @import "pro/sections/pricing";
 @import "pro/sections/contacts";
 
-// Angular
-@import "angular/mdb-angular";
 // Your custom styles
 @import "custom-styles";

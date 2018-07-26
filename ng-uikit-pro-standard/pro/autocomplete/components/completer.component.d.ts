@@ -30,6 +30,7 @@ export declare class CompleterComponent implements OnInit, ControlValueAccessor,
     autoHighlight: boolean;
     label: string;
     focused: boolean;
+    autocompleteLabel: ElementRef;
     selected: EventEmitter<CompleterItem>;
     highlighted: EventEmitter<CompleterItem>;
     blur: EventEmitter<{}>;
