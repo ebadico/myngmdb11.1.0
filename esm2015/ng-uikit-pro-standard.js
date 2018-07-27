@@ -16848,6 +16848,324 @@ class BsComponentRef {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+class MdbCardFooterComponent {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    constructor(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        // this._r.addClass(this._el.nativeElement, 'card-footer');
+        if (this.class) {
+            this.class.split(' ').forEach((element) => {
+                this._r.addClass(this._el.nativeElement, element);
+            });
+        }
+    }
+}
+MdbCardFooterComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-card-footer',
+                template: "<div class=\"card-footer\"> <ng-content></ng-content> </div>",
+            },] },
+];
+/** @nocollapse */
+MdbCardFooterComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Renderer2 }
+];
+MdbCardFooterComponent.propDecorators = {
+    class: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class MdbCardTitleComponent {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    constructor(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this._r.addClass(this._el.nativeElement, 'card-title');
+    }
+}
+MdbCardTitleComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-card-title',
+                template: "<ng-content></ng-content>",
+            },] },
+];
+/** @nocollapse */
+MdbCardTitleComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Renderer2 }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class MdbCardTextComponent {
+}
+MdbCardTextComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-card-text',
+                template: "<p class=\"card-text {{class}} \"> <ng-content></ng-content> </p>",
+            },] },
+];
+MdbCardTextComponent.propDecorators = {
+    class: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class MdbCardBodyComponent {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    constructor(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+    }
+    /**
+     * @param {?} cascade
+     * @return {?}
+     */
+    set cascade(cascade) {
+        if (cascade) {
+            this._r.addClass(this._el.nativeElement, 'card-body-cascade');
+        }
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this._r.addClass(this._el.nativeElement, 'card-body');
+        if (this.class) {
+            this.class.split(' ').forEach((element) => {
+                this._r.addClass(this._el.nativeElement, element);
+            });
+        }
+    }
+}
+MdbCardBodyComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-card-body',
+                template: " <ng-content></ng-content> ",
+                encapsulation: ViewEncapsulation.None
+            },] },
+];
+/** @nocollapse */
+MdbCardBodyComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Renderer2 }
+];
+MdbCardBodyComponent.propDecorators = {
+    class: [{ type: Input }],
+    cascade: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class MdbCardComponent {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    constructor(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+    }
+    /**
+     * @param {?} narrower
+     * @return {?}
+     */
+    set narrower(narrower) {
+        if (narrower) {
+            this._r.addClass(this._el.nativeElement, 'narrower');
+        }
+    }
+    /**
+     * @param {?} reverse
+     * @return {?}
+     */
+    set reverse(reverse) {
+        if (reverse) {
+            this._r.addClass(this._el.nativeElement, 'reverse');
+        }
+    }
+    /**
+     * @param {?} dark
+     * @return {?}
+     */
+    set dark(dark) {
+        if (dark) {
+            this._r.addClass(this._el.nativeElement, 'card-dark');
+        }
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this._r.addClass(this._el.nativeElement, 'card');
+        if (this.cascade) {
+            this._r.addClass(this._el.nativeElement, 'card-cascade');
+        }
+        if (this.wider) {
+            this._r.addClass(this._el.nativeElement, 'wider');
+        }
+        if (this.narrower) {
+            this._r.addClass(this._el.nativeElement, 'narrower');
+        }
+        if (this.class) {
+            this.class.split(' ').forEach((element) => {
+                this._r.addClass(this._el.nativeElement, element);
+            });
+        }
+    }
+}
+MdbCardComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-card',
+                template: "<div class=\"card\" [ngClass]=\"{'card-cascade': cascade, 'wider': wider}\" #card> <ng-content></ng-content> </div>",
+            },] },
+];
+/** @nocollapse */
+MdbCardComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Renderer2 }
+];
+MdbCardComponent.propDecorators = {
+    class: [{ type: Input }],
+    cascade: [{ type: Input }],
+    wider: [{ type: Input }],
+    narrower: [{ type: Input }],
+    reverse: [{ type: Input }],
+    dark: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class MdbCardImageComponent {
+}
+MdbCardImageComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-card-img',
+                template: "<img class=\"img-fluid\" [src]=\"src\" [alt]=\"alt\">",
+            },] },
+];
+MdbCardImageComponent.propDecorators = {
+    src: [{ type: Input }],
+    alt: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class MdbCardHeaderComponent {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    constructor(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this._r.addClass(this._el.nativeElement, 'card-header');
+        if (this.class) {
+            this.class.split(' ').forEach((element) => {
+                this._r.addClass(this._el.nativeElement, element);
+            });
+        }
+    }
+}
+MdbCardHeaderComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-card-header',
+                template: "<ng-content></ng-content>",
+            },] },
+];
+/** @nocollapse */
+MdbCardHeaderComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Renderer2 }
+];
+MdbCardHeaderComponent.propDecorators = {
+    class: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class CardsFreeModule {
+    /**
+     * @return {?}
+     */
+    static forRoot() {
+        return { ngModule: CardsFreeModule, providers: [] };
+    }
+}
+CardsFreeModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule],
+                declarations: [
+                    MdbCardComponent,
+                    MdbCardBodyComponent,
+                    MdbCardImageComponent,
+                    MdbCardTextComponent,
+                    MdbCardTitleComponent,
+                    MdbCardFooterComponent,
+                    MdbCardHeaderComponent
+                ],
+                exports: [
+                    MdbCardComponent,
+                    MdbCardBodyComponent,
+                    MdbCardImageComponent,
+                    MdbCardTextComponent,
+                    MdbCardTitleComponent,
+                    MdbCardFooterComponent,
+                    MdbCardHeaderComponent
+                ]
+            },] },
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -16910,6 +17228,7 @@ class BsComponentRef {
  */
 const MODULES = [
     ButtonsModule,
+    CardsFreeModule,
     RippleModule,
     WavesModule,
     InputsModule,
@@ -16940,7 +17259,8 @@ MDBRootModule.decorators = [
                     ModalModule.forRoot(),
                     TooltipModule.forRoot(),
                     PopoverModule.forRoot(),
-                    IconsModule
+                    IconsModule,
+                    CardsFreeModule.forRoot()
                 ],
                 exports: MODULES,
                 schemas: [NO_ERRORS_SCHEMA]
@@ -17141,5 +17461,5 @@ MDBBootstrapModulesPro.decorators = [
  * Generated bundle index. Do not edit.
  */
 
-export { SBItemBodyComponent, SBItemHeadComponent, SBItemComponent, sbConfig, SqueezeBoxComponent, SQUEEZEBOX_COMPONENTS, AccordionModule, OverlayContainer, OverlayRef, Overlay, OVERLAY_PROVIDERS, DomPortalHost, ComponentPortal, BasePortalHost, ToastComponent, GlobalConfig, ToastPackage, tsConfig, ToastContainerDirective, ToastContainerModule, ToastRef, ToastInjector, ToastModule, ToastService, TOAST_CONFIG, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, CompleterListItemComponent, CompleterComponent, MdbCompleterDirective, CtrRowItem, MdbDropdownDirective, MdbInputCompleteDirective, CtrListContext, MdbListDirective, MdbRowDirective, CompleterBaseData, CompleterService, localDataFactory, remoteDataFactory, LocalDataFactoryProvider, RemoteDataFactoryProvider, LocalData, RemoteData, MAX_CHARS, MIN_SEARCH_LENGTH, PAUSE, TEXT_SEARCHING, TEXT_NO_RESULTS, CLEAR_TIMEOUT, isNil, AutocompleteModule, CardRevealComponent, CardRotatingComponent, CardsModule, InputAutoFillDirective, FocusDirective, LocaleService, UtilService, DatepickerModule, MYDP_VALUE_ACCESSOR, MDBDatePickerComponent, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, UploadStatus, humanizeBytes, MDBUploaderService, MDBFileDropDirective, MDBFileSelectDirective, FileInputModule, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, OptionList, Option, SelectDropdownComponent, SELECT_VALUE_ACCESSOR, SelectComponent, SelectModule, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, MDBSpinningPreloader, ProgressBarComponent, MdProgressSpinnerCssMatStylerDirective, MdProgressSpinnerComponent, MdSpinnerComponent, BarComponent, ProgressSpinnerComponent, ProgressDirective, ProgressbarComponent, ProgressbarConfigComponent, ProgressbarModule, PreloadersModule, ProgressBars, SidenavComponent, SidenavModule, PageScrollUtilService, EasingLogic, PageScrollConfig, PageScrollDirective, PageScrollInstance, SmoothscrollModule, PageScrollService, computedStyle, MdbStickyDirective, StickyContentModule, TabHeadingDirective, TabDirective, TabsetComponent, TabsetConfig, NgTranscludeDirective, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TimePickerModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, ButtonsModule, CHECKBOX_CONTROL_VALUE_ACCESSOR, ButtonCheckboxDirective, RADIO_CONTROL_VALUE_ACCESSOR, ButtonRadioDirective, MdbBtnDirective, Direction, CarouselComponent, CarouselConfig, SlideComponent, CarouselModule, BaseChartDirective, ChartsModule, CollapseDirective, CollapseModule, BsDropdownContainerComponent, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownConfig, BsDropdownDirective, BsDropdownState, DropdownModule, IconsModule, MdbIconComponent, InputsModule, MdbInputDirective, EqualValidatorDirective, ModalDirective, ModalOptions, MDBModalRef, modalConfigDefaults, ClassName, Selector, TransitionDurations, DISMISS_REASONS, MDBModalService, ModalBackdropOptions, ModalBackdropComponent, ModalContainerComponent, msConfig, ModalModule, LinksComponent, LogoComponent, NavbarComponent, NavbarService, NavlinksComponent, NavbarModule, PopoverContainerComponent, PopoverConfig, PopoverDirective, PopoverModule, RippleDirective, RippleModule, WavesDirective, WavesModule, TooltipContainerComponent, TooltipDirective, TooltipConfig, TooltipModule, BsComponentRef, ComponentLoader, ComponentLoaderFactory, ContentRef, win as window, document$1 as document, location, gc, performance, Event, MouseEvent, KeyboardEvent, EventTarget, History, Location, EventListener, Positioning, positionElements, PositioningService, OnChange, LinkedList, isBs3, Trigger, parseTriggers, listenToTriggers, Utils, MDBBootstrapModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, MdbBtnDirective as ɵct1, ButtonsModule as ɵcq1, ButtonCheckboxDirective as ɵcr1, ButtonRadioDirective as ɵcs1, CarouselComponent as ɵcu1, CarouselConfig as ɵcv1, CarouselModule as ɵcx1, SlideComponent as ɵcw1, BaseChartDirective as ɵcy1, ChartsModule as ɵcz1, CollapseDirective as ɵda1, CollapseModule as ɵdb1, BsDropdownContainerComponent as ɵdc1, BsDropdownMenuDirective as ɵdd1, BsDropdownToggleDirective as ɵde1, BsDropdownConfig as ɵdf1, BsDropdownDirective as ɵdg1, DropdownModule as ɵdi1, BsDropdownState as ɵdh1, MdbIconComponent as ɵdk1, IconsModule as ɵdj1, InputsModule as ɵdl1, MdbInputDirective as ɵdm1, MDBRootModule as ɵei1, ModalDirective as ɵdn1, ModalModule as ɵdt1, ModalOptions as ɵdo1, MDBModalService as ɵdp1, ModalBackdropComponent as ɵdr1, ModalBackdropOptions as ɵdq1, ModalContainerComponent as ɵds1, NavbarComponent as ɵdu1, NavbarModule as ɵdv1, PopoverContainerComponent as ɵdw1, PopoverConfig as ɵdx1, PopoverDirective as ɵdy1, PopoverModule as ɵdz1, RippleDirective as ɵea1, RippleModule as ɵeb1, TooltipContainerComponent as ɵee1, TooltipDirective as ɵef1, TooltipModule as ɵeh1, TooltipConfig as ɵeg1, WavesDirective as ɵec1, WavesModule as ɵed1, SBItemComponent as ɵc1, SBItemBodyComponent as ɵa1, SBItemHeadComponent as ɵb1, SqueezeBoxComponent as ɵd1, AccordionModule as ɵe1, CompleterListItemComponent as ɵf1, CompleterComponent as ɵg1, MdbCompleterDirective as ɵh1, MdbDropdownDirective as ɵi1, MdbInputCompleteDirective as ɵj1, MdbListDirective as ɵk1, MdbRowDirective as ɵl1, AutocompleteModule as ɵp1, CompleterService as ɵm1, LocalDataFactoryProvider as ɵn1, RemoteDataFactoryProvider as ɵo1, CardRevealComponent as ɵq1, CardRotatingComponent as ɵr1, CardsModule as ɵs1, MDBDatePickerComponent as ɵz1, MYDP_VALUE_ACCESSOR as ɵy1, DatepickerModule as ɵx1, InputAutoFillDirective as ɵt1, FocusDirective as ɵu1, LocaleService as ɵv1, UtilService as ɵw1, SimpleChartComponent as ɵba1, ChartSimpleModule as ɵbc1, EasyPieChartComponent as ɵbb1, MDBFileDropDirective as ɵbd1, MDBFileSelectDirective as ɵbe1, FileInputModule as ɵbf1, CharCounterDirective as ɵbg1, CharCounterModule as ɵbh1, ImageModalComponent as ɵbi1, LightBoxModule as ɵbj1, SelectDropdownComponent as ɵbl1, SELECT_VALUE_ACCESSOR as ɵbm1, SelectComponent as ɵbn1, SelectModule as ɵbo1, MDBRootModulePro as ɵej1, BarComponent as ɵbp1, ProgressBars as ɵbv1, MdProgressBarModule as ɵek1, MdProgressSpinnerModule as ɵel1, ProgressSpinnerComponent as ɵbq1, ProgressDirective as ɵbr1, ProgressbarComponent as ɵbs1, ProgressbarConfigComponent as ɵbt1, ProgressbarModule as ɵbu1, SidenavComponent as ɵbw1, SidenavModule as ɵbx1, PageScrollDirective as ɵby1, PageScrollInstance as ɵbz1, SmoothscrollModule as ɵca1, PageScrollService as ɵcb1, MdbStickyDirective as ɵcc1, StickyContentModule as ɵcd1, TabHeadingDirective as ɵce1, TabDirective as ɵcf1, TabsetComponent as ɵcg1, TabsetConfig as ɵch1, TabsModule as ɵcj1, NgTranscludeDirective as ɵci1, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR as ɵck1, MaterialChipsComponent as ɵcl1, MaterialChipsModule as ɵcm1, ClockPickerComponent as ɵcp1, TIME_PIRCKER_VALUE_ACCESSOT as ɵco1, TimePickerModule as ɵcn1 };
+export { SBItemBodyComponent, SBItemHeadComponent, SBItemComponent, sbConfig, SqueezeBoxComponent, SQUEEZEBOX_COMPONENTS, AccordionModule, OverlayContainer, OverlayRef, Overlay, OVERLAY_PROVIDERS, DomPortalHost, ComponentPortal, BasePortalHost, ToastComponent, GlobalConfig, ToastPackage, tsConfig, ToastContainerDirective, ToastContainerModule, ToastRef, ToastInjector, ToastModule, ToastService, TOAST_CONFIG, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, CompleterListItemComponent, CompleterComponent, MdbCompleterDirective, CtrRowItem, MdbDropdownDirective, MdbInputCompleteDirective, CtrListContext, MdbListDirective, MdbRowDirective, CompleterBaseData, CompleterService, localDataFactory, remoteDataFactory, LocalDataFactoryProvider, RemoteDataFactoryProvider, LocalData, RemoteData, MAX_CHARS, MIN_SEARCH_LENGTH, PAUSE, TEXT_SEARCHING, TEXT_NO_RESULTS, CLEAR_TIMEOUT, isNil, AutocompleteModule, CardRevealComponent, CardRotatingComponent, CardsModule, InputAutoFillDirective, FocusDirective, LocaleService, UtilService, DatepickerModule, MYDP_VALUE_ACCESSOR, MDBDatePickerComponent, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, UploadStatus, humanizeBytes, MDBUploaderService, MDBFileDropDirective, MDBFileSelectDirective, FileInputModule, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, OptionList, Option, SelectDropdownComponent, SELECT_VALUE_ACCESSOR, SelectComponent, SelectModule, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, MDBSpinningPreloader, ProgressBarComponent, MdProgressSpinnerCssMatStylerDirective, MdProgressSpinnerComponent, MdSpinnerComponent, BarComponent, ProgressSpinnerComponent, ProgressDirective, ProgressbarComponent, ProgressbarConfigComponent, ProgressbarModule, PreloadersModule, ProgressBars, SidenavComponent, SidenavModule, PageScrollUtilService, EasingLogic, PageScrollConfig, PageScrollDirective, PageScrollInstance, SmoothscrollModule, PageScrollService, computedStyle, MdbStickyDirective, StickyContentModule, TabHeadingDirective, TabDirective, TabsetComponent, TabsetConfig, NgTranscludeDirective, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TimePickerModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, ButtonsModule, CHECKBOX_CONTROL_VALUE_ACCESSOR, ButtonCheckboxDirective, RADIO_CONTROL_VALUE_ACCESSOR, ButtonRadioDirective, MdbBtnDirective, Direction, CarouselComponent, CarouselConfig, SlideComponent, CarouselModule, BaseChartDirective, ChartsModule, CollapseDirective, CollapseModule, BsDropdownContainerComponent, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownConfig, BsDropdownDirective, BsDropdownState, DropdownModule, IconsModule, MdbIconComponent, InputsModule, MdbInputDirective, EqualValidatorDirective, ModalDirective, ModalOptions, MDBModalRef, modalConfigDefaults, ClassName, Selector, TransitionDurations, DISMISS_REASONS, MDBModalService, ModalBackdropOptions, ModalBackdropComponent, ModalContainerComponent, msConfig, ModalModule, LinksComponent, LogoComponent, NavbarComponent, NavbarService, NavlinksComponent, NavbarModule, PopoverContainerComponent, PopoverConfig, PopoverDirective, PopoverModule, RippleDirective, RippleModule, WavesDirective, WavesModule, TooltipContainerComponent, TooltipDirective, TooltipConfig, TooltipModule, BsComponentRef, ComponentLoader, ComponentLoaderFactory, ContentRef, win as window, document$1 as document, location, gc, performance, Event, MouseEvent, KeyboardEvent, EventTarget, History, Location, EventListener, Positioning, positionElements, PositioningService, OnChange, LinkedList, isBs3, Trigger, parseTriggers, listenToTriggers, Utils, MDBBootstrapModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, MdbBtnDirective as ɵct1, ButtonsModule as ɵcq1, ButtonCheckboxDirective as ɵcr1, ButtonRadioDirective as ɵcs1, CardsFreeModule as ɵej1, MdbCardBodyComponent as ɵel1, MdbCardFooterComponent as ɵep1, MdbCardHeaderComponent as ɵeq1, MdbCardImageComponent as ɵem1, MdbCardTextComponent as ɵen1, MdbCardTitleComponent as ɵeo1, MdbCardComponent as ɵek1, CarouselComponent as ɵcu1, CarouselConfig as ɵcv1, CarouselModule as ɵcx1, SlideComponent as ɵcw1, BaseChartDirective as ɵcy1, ChartsModule as ɵcz1, CollapseDirective as ɵda1, CollapseModule as ɵdb1, BsDropdownContainerComponent as ɵdc1, BsDropdownMenuDirective as ɵdd1, BsDropdownToggleDirective as ɵde1, BsDropdownConfig as ɵdf1, BsDropdownDirective as ɵdg1, DropdownModule as ɵdi1, BsDropdownState as ɵdh1, MdbIconComponent as ɵdk1, IconsModule as ɵdj1, InputsModule as ɵdl1, MdbInputDirective as ɵdm1, MDBRootModule as ɵei1, ModalDirective as ɵdn1, ModalModule as ɵdt1, ModalOptions as ɵdo1, MDBModalService as ɵdp1, ModalBackdropComponent as ɵdr1, ModalBackdropOptions as ɵdq1, ModalContainerComponent as ɵds1, NavbarComponent as ɵdu1, NavbarModule as ɵdv1, PopoverContainerComponent as ɵdw1, PopoverConfig as ɵdx1, PopoverDirective as ɵdy1, PopoverModule as ɵdz1, RippleDirective as ɵea1, RippleModule as ɵeb1, TooltipContainerComponent as ɵee1, TooltipDirective as ɵef1, TooltipModule as ɵeh1, TooltipConfig as ɵeg1, WavesDirective as ɵec1, WavesModule as ɵed1, SBItemComponent as ɵc1, SBItemBodyComponent as ɵa1, SBItemHeadComponent as ɵb1, SqueezeBoxComponent as ɵd1, AccordionModule as ɵe1, CompleterListItemComponent as ɵf1, CompleterComponent as ɵg1, MdbCompleterDirective as ɵh1, MdbDropdownDirective as ɵi1, MdbInputCompleteDirective as ɵj1, MdbListDirective as ɵk1, MdbRowDirective as ɵl1, AutocompleteModule as ɵp1, CompleterService as ɵm1, LocalDataFactoryProvider as ɵn1, RemoteDataFactoryProvider as ɵo1, CardRevealComponent as ɵq1, CardRotatingComponent as ɵr1, CardsModule as ɵs1, MDBDatePickerComponent as ɵz1, MYDP_VALUE_ACCESSOR as ɵy1, DatepickerModule as ɵx1, InputAutoFillDirective as ɵt1, FocusDirective as ɵu1, LocaleService as ɵv1, UtilService as ɵw1, SimpleChartComponent as ɵba1, ChartSimpleModule as ɵbc1, EasyPieChartComponent as ɵbb1, MDBFileDropDirective as ɵbd1, MDBFileSelectDirective as ɵbe1, FileInputModule as ɵbf1, CharCounterDirective as ɵbg1, CharCounterModule as ɵbh1, ImageModalComponent as ɵbi1, LightBoxModule as ɵbj1, SelectDropdownComponent as ɵbl1, SELECT_VALUE_ACCESSOR as ɵbm1, SelectComponent as ɵbn1, SelectModule as ɵbo1, MDBRootModulePro as ɵer1, BarComponent as ɵbp1, ProgressBars as ɵbv1, MdProgressBarModule as ɵes1, MdProgressSpinnerModule as ɵet1, ProgressSpinnerComponent as ɵbq1, ProgressDirective as ɵbr1, ProgressbarComponent as ɵbs1, ProgressbarConfigComponent as ɵbt1, ProgressbarModule as ɵbu1, SidenavComponent as ɵbw1, SidenavModule as ɵbx1, PageScrollDirective as ɵby1, PageScrollInstance as ɵbz1, SmoothscrollModule as ɵca1, PageScrollService as ɵcb1, MdbStickyDirective as ɵcc1, StickyContentModule as ɵcd1, TabHeadingDirective as ɵce1, TabDirective as ɵcf1, TabsetComponent as ɵcg1, TabsetConfig as ɵch1, TabsModule as ɵcj1, NgTranscludeDirective as ɵci1, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR as ɵck1, MaterialChipsComponent as ɵcl1, MaterialChipsModule as ɵcm1, ClockPickerComponent as ɵcp1, TIME_PIRCKER_VALUE_ACCESSOT as ɵco1, TimePickerModule as ɵcn1 };
 //# sourceMappingURL=ng-uikit-pro-standard.js.map

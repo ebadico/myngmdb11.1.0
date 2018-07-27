@@ -17367,6 +17367,349 @@ var BsComponentRef = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+var MdbCardFooterComponent = /** @class */ (function () {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    function MdbCardFooterComponent(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+    }
+    /**
+     * @return {?}
+     */
+    MdbCardFooterComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        // this._r.addClass(this._el.nativeElement, 'card-footer');
+        if (this.class) {
+            this.class.split(' ').forEach(function (element) {
+                _this._r.addClass(_this._el.nativeElement, element);
+            });
+        }
+    };
+    return MdbCardFooterComponent;
+}());
+MdbCardFooterComponent.decorators = [
+    { type: core.Component, args: [{
+                selector: 'mdb-card-footer',
+                template: "<div class=\"card-footer\"> <ng-content></ng-content> </div>",
+            },] },
+];
+/** @nocollapse */
+MdbCardFooterComponent.ctorParameters = function () { return [
+    { type: core.ElementRef },
+    { type: core.Renderer2 }
+]; };
+MdbCardFooterComponent.propDecorators = {
+    class: [{ type: core.Input }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var MdbCardTitleComponent = /** @class */ (function () {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    function MdbCardTitleComponent(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+    }
+    /**
+     * @return {?}
+     */
+    MdbCardTitleComponent.prototype.ngOnInit = function () {
+        this._r.addClass(this._el.nativeElement, 'card-title');
+    };
+    return MdbCardTitleComponent;
+}());
+MdbCardTitleComponent.decorators = [
+    { type: core.Component, args: [{
+                selector: 'mdb-card-title',
+                template: "<ng-content></ng-content>",
+            },] },
+];
+/** @nocollapse */
+MdbCardTitleComponent.ctorParameters = function () { return [
+    { type: core.ElementRef },
+    { type: core.Renderer2 }
+]; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var MdbCardTextComponent = /** @class */ (function () {
+    function MdbCardTextComponent() {
+    }
+    return MdbCardTextComponent;
+}());
+MdbCardTextComponent.decorators = [
+    { type: core.Component, args: [{
+                selector: 'mdb-card-text',
+                template: "<p class=\"card-text {{class}} \"> <ng-content></ng-content> </p>",
+            },] },
+];
+MdbCardTextComponent.propDecorators = {
+    class: [{ type: core.Input }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var MdbCardBodyComponent = /** @class */ (function () {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    function MdbCardBodyComponent(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+    }
+    Object.defineProperty(MdbCardBodyComponent.prototype, "cascade", {
+        /**
+         * @param {?} cascade
+         * @return {?}
+         */
+        set: function (cascade) {
+            if (cascade) {
+                this._r.addClass(this._el.nativeElement, 'card-body-cascade');
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    MdbCardBodyComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._r.addClass(this._el.nativeElement, 'card-body');
+        if (this.class) {
+            this.class.split(' ').forEach(function (element) {
+                _this._r.addClass(_this._el.nativeElement, element);
+            });
+        }
+    };
+    return MdbCardBodyComponent;
+}());
+MdbCardBodyComponent.decorators = [
+    { type: core.Component, args: [{
+                selector: 'mdb-card-body',
+                template: " <ng-content></ng-content> ",
+                encapsulation: core.ViewEncapsulation.None
+            },] },
+];
+/** @nocollapse */
+MdbCardBodyComponent.ctorParameters = function () { return [
+    { type: core.ElementRef },
+    { type: core.Renderer2 }
+]; };
+MdbCardBodyComponent.propDecorators = {
+    class: [{ type: core.Input }],
+    cascade: [{ type: core.Input }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var MdbCardComponent = /** @class */ (function () {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    function MdbCardComponent(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+    }
+    Object.defineProperty(MdbCardComponent.prototype, "narrower", {
+        /**
+         * @param {?} narrower
+         * @return {?}
+         */
+        set: function (narrower) {
+            if (narrower) {
+                this._r.addClass(this._el.nativeElement, 'narrower');
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MdbCardComponent.prototype, "reverse", {
+        /**
+         * @param {?} reverse
+         * @return {?}
+         */
+        set: function (reverse) {
+            if (reverse) {
+                this._r.addClass(this._el.nativeElement, 'reverse');
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MdbCardComponent.prototype, "dark", {
+        /**
+         * @param {?} dark
+         * @return {?}
+         */
+        set: function (dark) {
+            if (dark) {
+                this._r.addClass(this._el.nativeElement, 'card-dark');
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    MdbCardComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._r.addClass(this._el.nativeElement, 'card');
+        if (this.cascade) {
+            this._r.addClass(this._el.nativeElement, 'card-cascade');
+        }
+        if (this.wider) {
+            this._r.addClass(this._el.nativeElement, 'wider');
+        }
+        if (this.narrower) {
+            this._r.addClass(this._el.nativeElement, 'narrower');
+        }
+        if (this.class) {
+            this.class.split(' ').forEach(function (element) {
+                _this._r.addClass(_this._el.nativeElement, element);
+            });
+        }
+    };
+    return MdbCardComponent;
+}());
+MdbCardComponent.decorators = [
+    { type: core.Component, args: [{
+                selector: 'mdb-card',
+                template: "<div class=\"card\" [ngClass]=\"{'card-cascade': cascade, 'wider': wider}\" #card> <ng-content></ng-content> </div>",
+            },] },
+];
+/** @nocollapse */
+MdbCardComponent.ctorParameters = function () { return [
+    { type: core.ElementRef },
+    { type: core.Renderer2 }
+]; };
+MdbCardComponent.propDecorators = {
+    class: [{ type: core.Input }],
+    cascade: [{ type: core.Input }],
+    wider: [{ type: core.Input }],
+    narrower: [{ type: core.Input }],
+    reverse: [{ type: core.Input }],
+    dark: [{ type: core.Input }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var MdbCardImageComponent = /** @class */ (function () {
+    function MdbCardImageComponent() {
+    }
+    return MdbCardImageComponent;
+}());
+MdbCardImageComponent.decorators = [
+    { type: core.Component, args: [{
+                selector: 'mdb-card-img',
+                template: "<img class=\"img-fluid\" [src]=\"src\" [alt]=\"alt\">",
+            },] },
+];
+MdbCardImageComponent.propDecorators = {
+    src: [{ type: core.Input }],
+    alt: [{ type: core.Input }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var MdbCardHeaderComponent = /** @class */ (function () {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    function MdbCardHeaderComponent(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+    }
+    /**
+     * @return {?}
+     */
+    MdbCardHeaderComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._r.addClass(this._el.nativeElement, 'card-header');
+        if (this.class) {
+            this.class.split(' ').forEach(function (element) {
+                _this._r.addClass(_this._el.nativeElement, element);
+            });
+        }
+    };
+    return MdbCardHeaderComponent;
+}());
+MdbCardHeaderComponent.decorators = [
+    { type: core.Component, args: [{
+                selector: 'mdb-card-header',
+                template: "<ng-content></ng-content>",
+            },] },
+];
+/** @nocollapse */
+MdbCardHeaderComponent.ctorParameters = function () { return [
+    { type: core.ElementRef },
+    { type: core.Renderer2 }
+]; };
+MdbCardHeaderComponent.propDecorators = {
+    class: [{ type: core.Input }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var CardsFreeModule = /** @class */ (function () {
+    function CardsFreeModule() {
+    }
+    /**
+     * @return {?}
+     */
+    CardsFreeModule.forRoot = function () {
+        return { ngModule: CardsFreeModule, providers: [] };
+    };
+    return CardsFreeModule;
+}());
+CardsFreeModule.decorators = [
+    { type: core.NgModule, args: [{
+                imports: [common.CommonModule],
+                declarations: [
+                    MdbCardComponent,
+                    MdbCardBodyComponent,
+                    MdbCardImageComponent,
+                    MdbCardTextComponent,
+                    MdbCardTitleComponent,
+                    MdbCardFooterComponent,
+                    MdbCardHeaderComponent
+                ],
+                exports: [
+                    MdbCardComponent,
+                    MdbCardBodyComponent,
+                    MdbCardImageComponent,
+                    MdbCardTextComponent,
+                    MdbCardTitleComponent,
+                    MdbCardFooterComponent,
+                    MdbCardHeaderComponent
+                ]
+            },] },
+];
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -17417,6 +17760,7 @@ var BsComponentRef = /** @class */ (function () {
  */
 var MODULES = [
     ButtonsModule,
+    CardsFreeModule,
     RippleModule,
     WavesModule,
     InputsModule,
@@ -17450,7 +17794,8 @@ MDBRootModule.decorators = [
                     ModalModule.forRoot(),
                     TooltipModule.forRoot(),
                     PopoverModule.forRoot(),
-                    IconsModule
+                    IconsModule,
+                    CardsFreeModule.forRoot()
                 ],
                 exports: MODULES,
                 schemas: [core.NO_ERRORS_SCHEMA]
@@ -17854,6 +18199,14 @@ exports.ɵct1 = MdbBtnDirective;
 exports.ɵcq1 = ButtonsModule;
 exports.ɵcr1 = ButtonCheckboxDirective;
 exports.ɵcs1 = ButtonRadioDirective;
+exports.ɵej1 = CardsFreeModule;
+exports.ɵel1 = MdbCardBodyComponent;
+exports.ɵep1 = MdbCardFooterComponent;
+exports.ɵeq1 = MdbCardHeaderComponent;
+exports.ɵem1 = MdbCardImageComponent;
+exports.ɵen1 = MdbCardTextComponent;
+exports.ɵeo1 = MdbCardTitleComponent;
+exports.ɵek1 = MdbCardComponent;
 exports.ɵcu1 = CarouselComponent;
 exports.ɵcv1 = CarouselConfig;
 exports.ɵcx1 = CarouselModule;
@@ -17935,11 +18288,11 @@ exports.ɵbl1 = SelectDropdownComponent;
 exports.ɵbm1 = SELECT_VALUE_ACCESSOR;
 exports.ɵbn1 = SelectComponent;
 exports.ɵbo1 = SelectModule;
-exports.ɵej1 = MDBRootModulePro;
+exports.ɵer1 = MDBRootModulePro;
 exports.ɵbp1 = BarComponent;
 exports.ɵbv1 = ProgressBars;
-exports.ɵek1 = MdProgressBarModule;
-exports.ɵel1 = MdProgressSpinnerModule;
+exports.ɵes1 = MdProgressBarModule;
+exports.ɵet1 = MdProgressSpinnerModule;
 exports.ɵbq1 = ProgressSpinnerComponent;
 exports.ɵbr1 = ProgressDirective;
 exports.ɵbs1 = ProgressbarComponent;
