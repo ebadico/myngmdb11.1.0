@@ -1,5 +1,5 @@
-import { ElementRef, Renderer2, AfterViewInit, AfterViewChecked, OnInit, OnDestroy } from '@angular/core';
-export declare class MdbInputDirective implements AfterViewChecked, OnInit, AfterViewInit, OnDestroy {
+import { ElementRef, Renderer2, AfterViewInit, AfterViewChecked, OnInit, DoCheck } from '@angular/core';
+export declare class MdbInputDirective implements AfterViewChecked, OnInit, AfterViewInit, DoCheck {
     private _elRef;
     private _renderer;
     wrongTextContainer: any;
@@ -8,25 +8,30 @@ export declare class MdbInputDirective implements AfterViewChecked, OnInit, Afte
     elLabel: ElementRef | any;
     elIcon: Element | any;
     element: any;
-    private changes;
     mdbInputDirective: MdbInputDirective;
     placeholder: string;
     customRegex: any;
     mdbValidate: boolean;
+    validateSuccess: boolean;
+    validateError: boolean;
     focusCheckbox: boolean;
     focusRadio: boolean;
+    errorMessage: string;
+    successMessage: string;
     isBrowser: any;
     isClicked: boolean;
     constructor(_elRef: ElementRef, _renderer: Renderer2, platformId: string);
-    ngOnDestroy(): void;
     onfocus(): void;
     onblur(): void;
     onchange(): void;
+    oniput(): void;
     onkeydown(event: any): void;
     oncut(): void;
     onpaste(): void;
     ondrop(): void;
     ngOnInit(): void;
+    ngDoCheck(): void;
+    validationFunction(): void;
     ngAfterViewInit(): void;
     ngAfterViewChecked(): void;
     resize(): void;

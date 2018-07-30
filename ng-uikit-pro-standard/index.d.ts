@@ -115,6 +115,7 @@ export * from './pro/time-picker/timepicker.component';
 export * from './free/buttons/buttons.module';
 export * from './free/buttons/checkbox.directive';
 export * from './free/buttons/radio.directive';
+export * from './free/buttons/buttons.directive';
 export * from './free/carousel/carousel.component';
 export * from './free/carousel/carousel.config';
 export * from './free/carousel/slide.component';

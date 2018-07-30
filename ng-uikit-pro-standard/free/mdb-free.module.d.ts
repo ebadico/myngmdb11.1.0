@@ -1,5 +1,6 @@
 import { ModuleWithProviders } from '@angular/core';
-export { ButtonsModule, ButtonRadioDirective, ButtonCheckboxDirective } from './buttons/index';
+export { ButtonsModule, ButtonRadioDirective, ButtonCheckboxDirective, MdbBtnDirective } from './buttons/index';
+export { CardsFreeModule, MdbCardComponent, MdbCardBodyComponent, MdbCardImageComponent, MdbCardTextComponent, MdbCardTitleComponent, MdbCardFooterComponent, MdbCardHeaderComponent } from './cards/index';
 export { RippleModule, RippleDirective } from './ripple/index';
 export { WavesModule, WavesDirective } from './waves/index';
 export { InputsModule, MdbInputDirective } from './inputs/index';

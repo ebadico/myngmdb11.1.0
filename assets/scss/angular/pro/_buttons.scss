@@ -42,6 +42,28 @@
     }
 }
 
+// Floating button
+.btn-floating {
+    mdb-icon {
+      display: inline-block;
+      width: inherit;
+      text-align: center;
+      color: $white-base;
+    }
+    &:hover {
+      box-shadow: $z-depth-2;
+    }
+    &:before {
+      border-radius: 0;
+    }
+    &.btn-sm {
+      @include make-btn-floating($btn-floating-width-sm, $btn-floating-height-sm, $btn-floating-icon-size-sm, $btn-floating-line-height-sm);
+    }
+    &.btn-lg {
+      @include make-btn-floating($btn-floating-width-lg, $btn-floating-height-lg, $btn-floating-icon-size-lg, $btn-floating-line-height-lg);
+    }
+  }
+
 .btn {
     &.btn-floating {
         position: fixed;
