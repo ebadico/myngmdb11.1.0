@@ -26,7 +26,7 @@
    * Removed duplicated elements from Autocomplete docs,
    * Updated Autocomplete docs with example of 'textNoResults' usage,
    * Updated pagination advanced examples (added variables that allow to change the number of elements displayed on a given page).
-   
+
 6.2.0
 *** MDB Angular Admin Templates: *** 
     * Resolved problem with not working hamburger menu in Admin Dashboard Free,

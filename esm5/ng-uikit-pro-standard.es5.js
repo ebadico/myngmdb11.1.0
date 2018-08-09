@@ -116,6 +116,7 @@ var SBItemHeadComponent = /** @class */ (function () {
      */
     function SBItemHeadComponent(sbItem) {
         this.sbItem = sbItem;
+        this.isDisabled = false;
     }
     /**
      * @param {?} event
@@ -123,8 +124,10 @@ var SBItemHeadComponent = /** @class */ (function () {
      */
     SBItemHeadComponent.prototype.toggleClick = function (event) {
         event.preventDefault();
-        this.sbItem.collapsed = !this.sbItem.collapsed;
-        this.sbItem.toggle(this.sbItem.collapsed);
+        if (!this.isDisabled) {
+            this.sbItem.collapsed = !this.sbItem.collapsed;
+            this.sbItem.toggle(this.sbItem.collapsed);
+        }
     };
     return SBItemHeadComponent;
 }());
@@ -139,6 +142,9 @@ SBItemHeadComponent.decorators = [
 SBItemHeadComponent.ctorParameters = function () { return [
     { type: SBItemComponent }
 ]; };
+SBItemHeadComponent.propDecorators = {
+    isDisabled: [{ type: Input }]
+};
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -3528,6 +3534,9 @@ LocaleService.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+var M = 'm';
+var MMM = 'mmm';
+var D = 'd';
 var UtilService = /** @class */ (function () {
     function UtilService() {
     }
@@ -3548,20 +3557,12 @@ var UtilService = /** @class */ (function () {
     UtilService.prototype.isDateValid = function (dateStr, dateFormat, minYear, maxYear, disableUntil, disableSince, disableWeekends, disableDays, disableDateRanges, monthLabels, enableDays) {
         var /** @type {?} */ returnDate = { day: 0, month: 0, year: 0 };
         var /** @type {?} */ daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-        var /** @type {?} */ isMonthStr = this.getDatePartIndex(dateFormat, 'mmm') !== -1;
-        if (dateStr.length !== dateFormat.length) {
-            return returnDate;
-        }
-        var /** @type {?} */ separator = this.getDateFormatSeparator(dateFormat);
-        var /** @type {?} */ parts = dateStr.split(separator);
-        if (parts.length !== 3) {
-            return returnDate;
-        }
-        var /** @type {?} */ day = this.parseDatePartNumber(dateFormat, dateStr, 'dd');
-        var /** @type {?} */ month = isMonthStr ?
-            this.parseDatePartMonthName(dateFormat, dateStr, 'mmm', monthLabels) :
-            this.parseDatePartNumber(dateFormat, dateStr, 'mm');
-        var /** @type {?} */ year = this.parseDatePartNumber(dateFormat, dateStr, 'yyyy');
+        var /** @type {?} */ isMonthStr = dateFormat.indexOf(MMM) !== -1;
+        var /** @type {?} */ delimeters = this.getDateFormatDelimeters(dateFormat);
+        var /** @type {?} */ dateValue = this.getDateValue(dateStr, dateFormat, delimeters);
+        var /** @type {?} */ year = +dateValue[0].value;
+        var /** @type {?} */ month = this.getNumberByValue(dateValue[1]);
+        var /** @type {?} */ day = this.getNumberByValue(dateValue[2]);
         if (day !== -1 && month !== -1 && year !== -1) {
             if (year < minYear || year > maxYear || month < 1 || month > 12) {
                 return returnDate;
@@ -3582,11 +3583,78 @@ var UtilService = /** @class */ (function () {
         return returnDate;
     };
     /**
+     * @param {?} dateStr
+     * @param {?} dateFormat
+     * @param {?} delimeters
+     * @return {?}
+     */
+    UtilService.prototype.getDateValue = function (dateStr, dateFormat, delimeters) {
+        var /** @type {?} */ del = delimeters[0];
+        if (delimeters[0] !== delimeters[1]) {
+            del = delimeters[0] + delimeters[1];
+        }
+        var /** @type {?} */ re = new RegExp('[' + del + ']');
+        var /** @type {?} */ ds = dateStr.split(re);
+        var /** @type {?} */ df = dateFormat.split(re);
+        var /** @type {?} */ da = [];
+        for (var /** @type {?} */ i = 0; i < df.length; i++) {
+            if (df[i].indexOf('yy') !== -1) {
+                da[0] = { value: ds[i], format: df[i] };
+            }
+            if (df[i].indexOf(M) !== -1) {
+                da[1] = { value: ds[i], format: df[i] };
+            }
+            if (df[i].indexOf(D) !== -1) {
+                da[2] = { value: ds[i], format: df[i] };
+            }
+        }
+        return da;
+    };
+    /**
+     * @param {?} df
+     * @param {?} monthLabels
+     * @return {?}
+     */
+    UtilService.prototype.getMonthNumberByMonthName = function (df, monthLabels) {
+        if (df.value) {
+            for (var /** @type {?} */ key = 1; key <= 12; key++) {
+                if (df.value.toLowerCase() === monthLabels[key].toLowerCase()) {
+                    return key;
+                }
+            }
+        }
+        return -1;
+    };
+    /**
+     * @param {?} df
+     * @return {?}
+     */
+    UtilService.prototype.getNumberByValue = function (df) {
+        if (!/^\d+$/.test(df.value)) {
+            return -1;
+        }
+        var /** @type {?} */ nbr = Number(df.value);
+        if (df.format.length === 1 && df.value.length !== 1 && nbr < 10 || df.format.length === 1 && df.value.length !== 2 && nbr >= 10) {
+            nbr = -1;
+        }
+        else if (df.format.length === 2 && df.value.length > 2) {
+            nbr = -1;
+        }
+        return nbr;
+    };
+    /**
      * @param {?} dateFormat
      * @return {?}
      */
     UtilService.prototype.getDateFormatSeparator = function (dateFormat) {
         return dateFormat.replace(/[dmy]/g, '')[0];
+    };
+    /**
+     * @param {?} dateFormat
+     * @return {?}
+     */
+    UtilService.prototype.getDateFormatDelimeters = function (dateFormat) {
+        return dateFormat.match(/[^(dmy)]{1,}/g);
     };
     /**
      * @param {?} monthLabel
@@ -3865,6 +3933,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
         this.nextMonthId = MonthId.next;
         this.tmp = { year: this.getToday().year, month: this.getToday().month, day: this.getToday().day };
         this.opts = {
+            startDate: /** @type {?} */ (''),
             closeAfterSelect: /** @type {?} */ (false),
             dayLabelsFull: /** @type {?} */ ({}),
             dayLabels: /** @type {?} */ ({}),
@@ -4183,6 +4252,9 @@ var MDBDatePickerComponent = /** @class */ (function () {
         }
         if (changes.hasOwnProperty('options')) {
             this.options = changes['options'].currentValue;
+            if (changes["options"].currentValue.startDate) {
+                this.onUserDateInput(changes["options"].currentValue.startDate);
+            }
         }
         this.weekDays.length = 0;
         this.parseOptions();
@@ -4516,8 +4588,8 @@ var MDBDatePickerComponent = /** @class */ (function () {
         var /** @type {?} */ mm = this.preZero(val.month); // 01 - 12
         var /** @type {?} */ mmm = this.getMonthShort(val.month); // Jan - Dec
         var /** @type {?} */ mmmm = this.getMonthFull(val.month); // January – December
-        var /** @type {?} */ yy = val.year.toString().slice(2, 4); // 00 - 99
-        var /** @type {?} */ yyyy = val.year; // 2000 - 2999
+        var /** @type {?} */ yy = val.year.toString().length === 2 ? val.year : val.year.toString().slice(2, 4); // 00 - 99
+        var /** @type {?} */ yyyy = val.year;
         var /** @type {?} */ toReplace = this.opts.dateFormat.split(/(d{1,4}|m{1,4}|y{4}|yy|!.)/g);
         var /** @type {?} */ formatted = '';
         toReplace.forEach(function (el) {
@@ -5756,7 +5828,7 @@ var ImageModalComponent = /** @class */ (function () {
 ImageModalComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-image-modal',
-                template: "<div class=\"ng-gallery mdb-lightbox {{ type }}\" *ngIf=\"showRepeat\">  <figure class=\"col-md-4\" *ngFor =\"let i of modalImages; let index = index\"> <img src=\"{{ !i.thumb ? i.img : i.thumb }}\" class=\"ng-thumb\" (click)=\"openGallery(index)\" alt=\"Image {{ index + 1 }}\" /> </figure> </div> <div  tabindex=\"0\" class=\"ng-overlay\" [class.hide_lightbox]=\"opened == false\"> <div class=\"top-bar\" style='z-index: 100000'> <span class=\"info-text\">{{ currentImageIndex + 1 }}/{{ modalImages.length }}</span>     <a class=\"close-popup\" (click)=\"closeGallery()\" (click)=\"toggleRestart()\"></a> <a *ngIf=\"!is_iPhone_or_iPod\" class=\"fullscreen-toogle\" [class.toggled]='fullscreen' (click)=\"fullScreen()\"></a> <a class=\"zoom-toogle\" [class.zoom]='zoom' (click)=\"toggleZoomed()\" *ngIf=\"!isMobile\"></a> </div> <div class=\"ng-gallery-content\"> <!--<img *ngIf=\"!loading\" src=\"{{imgSrc}}\" (mousedown)=\"checkEvent($event)\" (mouseup)=\"setZoom($event)\" [class.zoom]='zoom' [class.smooth]='smooth' class=\"effect\" (swipeleft)=\"swipe($event, $event.type)\" (swiperight)=\"swipe($event, $event.type)\"/>--> <img *ngIf=\"!loading\" src=\"{{imgSrc}}\" [class.smooth]='smooth' class=\"effect\" (swipeleft)=\"swipe($event, $event.type)\" (swiperight)=\"swipe($event, $event.type)\" (click)=\"toggleZoomed()\" style=\"transform: scale(0.9, 0.9)\"/> <div class=\"uil-ring-css\" *ngIf=\"loading\"> <div></div> </div>   <a class=\"nav-left\" *ngIf=\"modalImages.length >1 && !isMobile\" (click)=\"prevImage()\" > <span></span> </a> <a class=\"nav-right\" *ngIf=\"modalImages.length >1 && !isMobile\" (click)=\"nextImage()\"> <span></span> </a> </div> </div> <div *ngIf=\"openModalWindow\"> <mdb-image-modal [modalImages]=\"images\" [imagePointer]=\"imagePointer\" (cancelEvent)=\"cancelImageModel()\"></mdb-image-modal> </div>",
+                template: "<div class=\"ng-gallery mdb-lightbox {{ type }}\" *ngIf=\"showRepeat\">  <figure class=\"col-md-4\" *ngFor =\"let i of modalImages; let index = index\"> <img src=\"{{ !i.thumb ? i.img : i.thumb }}\" class=\"ng-thumb\" (click)=\"openGallery(index)\" alt=\"Image {{ index + 1 }}\" /> </figure> </div> <div  tabindex=\"0\" class=\"ng-overlay\" [class.hide_lightbox]=\"opened == false\"> <div class=\"top-bar\" style='z-index: 100000'> <span class=\"info-text\">{{ currentImageIndex + 1 }}/{{ modalImages.length }}</span>     <a class=\"close-popup\" (click)=\"closeGallery()\" (click)=\"toggleRestart()\"></a> <a *ngIf=\"!is_iPhone_or_iPod\" class=\"fullscreen-toogle\" [class.toggled]='fullscreen' (click)=\"fullScreen()\"></a> <a class=\"zoom-toogle\" [class.zoom]='zoom' (click)=\"toggleZoomed()\" *ngIf=\"!isMobile\"></a> </div> <div class=\"ng-gallery-content\"> <!--<img *ngIf=\"!loading\" src=\"{{imgSrc}}\" (mousedown)=\"checkEvent($event)\" (mouseup)=\"setZoom($event)\" [class.zoom]='zoom' [class.smooth]='smooth' class=\"effect\" (swipeleft)=\"swipe($event, $event.type)\" (swiperight)=\"swipe($event, $event.type)\"/>--> <img *ngIf=\"!loading\" src=\"{{imgSrc}}\" [class.smooth]='smooth' class=\"effect\" (swipeleft)=\"swipe($event)\" (swiperight)=\"swipe($event)\" (click)=\"toggleZoomed()\" style=\"transform: scale(0.9, 0.9)\"/> <div class=\"uil-ring-css\" *ngIf=\"loading\"> <div></div> </div>   <a class=\"nav-left\" *ngIf=\"modalImages.length >1 && !isMobile\" (click)=\"prevImage()\" > <span></span> </a> <a class=\"nav-right\" *ngIf=\"modalImages.length >1 && !isMobile\" (click)=\"nextImage()\"> <span></span> </a> </div> </div> <div *ngIf=\"openModalWindow\"> <!-- <mdb-image-modal [modalImages]=\"images\" [imagePointer]=\"imagePointer\" (cancelEvent)=\"cancelImageModel()\"></mdb-image-modal> --> <mdb-image-modal [imagePointer]=\"imagePointer\"></mdb-image-modal> </div>",
             },] },
 ];
 /** @nocollapse */
@@ -6857,7 +6929,7 @@ var OptionList = /** @class */ (function () {
             this.options.forEach(function (option) {
                 var /** @type {?} */ l = Diacritics.strip(option.label).toUpperCase();
                 var /** @type {?} */ t = Diacritics.strip(term).toUpperCase();
-                option.shown = l.indexOf(t) > -1;
+                option.shown = l.indexOf(t) === 0;
             });
         }
         this.highlight();
@@ -7211,7 +7283,7 @@ var SelectDropdownComponent = /** @class */ (function () {
 SelectDropdownComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-select-dropdown',
-                template: "<div class=\"dropdown-content\" #dropdownContent [ngStyle]=\"{'top.px': top, 'left.px': left, 'width.px': width}\"  [@dropdownAnimation]=\"{value: state, params: {startHeight: startHeight, endHeight: endHeight}}\"> <div class=\"filter\" *ngIf=\"filterEnabled\"> <input #filterInput autocomplete=\"on\" [placeholder]=\"placeholder\" (click)=\"onSingleFilterClick($event)\" (input)=\"onSingleFilterInput($event)\" (keydown)=\"onSingleFilterKeydown($event)\"> </div> <div class=\"options\" #optionsList> <ul class=\"select-dropdown\" [ngClass]=\"{'multiple-select-dropdown': multiple}\" (wheel)=\"onOptionsWheel($event)\"> <li *ngFor=\"let option of optionList.filtered\" [ngClass]=\"{'active': option.highlighted, 'selected': option.selected, 'disabled': option.disabled, 'optgroup': option.group}\" [ngStyle]=\"getOptionStyle(option)\" (click)=\"onOptionClick(option)\" (mouseover)=\"onOptionMouseover(option)\"> <img class=\"rounded-circle\" [src]=\"option.icon\" *ngIf=\"option.icon !== ''\"> <span class=\"select-option\" *ngIf=\"!multiple\">{{option.label}}</span> <span class=\"filtrable\" *ngIf=\"multiple\"> <input type=\"checkbox\" [checked]=\"option.selected\" class=\"form-check-input {{customClass}}\"> <label></label> {{option.label}} </span> </li> <li *ngIf=\"!this.hasOptionsItems\" class=\"message disabled\"> <span>{{notFoundMsg}}</span> </li> </ul> </div> </div>",
+                template: "<div class=\"dropdown-content\" #dropdownContent [ngStyle]=\"{'top.px': top, 'left.px': left, 'width.px': width}\"  [@dropdownAnimation]=\"{value: state, params: {startHeight: startHeight, endHeight: endHeight}}\"> <div class=\"filter\" *ngIf=\"filterEnabled\"> <input #filterInput autocomplete=\"on\" [placeholder]=\"placeholder\" (click)=\"onSingleFilterClick()\" (input)=\"onSingleFilterInput($event)\" (keydown)=\"onSingleFilterKeydown($event)\"> </div> <div class=\"options\" #optionsList> <ul class=\"select-dropdown\" [ngClass]=\"{'multiple-select-dropdown': multiple}\" (wheel)=\"onOptionsWheel($event)\"> <li *ngFor=\"let option of optionList.filtered\" [ngClass]=\"{'active': option.highlighted, 'selected': option.selected, 'disabled': option.disabled, 'optgroup': option.group}\" [ngStyle]=\"getOptionStyle(option)\" (click)=\"onOptionClick(option)\" (mouseover)=\"onOptionMouseover(option)\"> <img class=\"rounded-circle\" [src]=\"option.icon\" *ngIf=\"option.icon !== ''\"> <span class=\"select-option\" *ngIf=\"!multiple\">{{option.label}}</span> <span class=\"filtrable\" *ngIf=\"multiple\"> <input type=\"checkbox\" [checked]=\"option.selected\" class=\"form-check-input {{customClass}}\"> <label></label> {{option.label}} </span> </li> <li *ngIf=\"!this.hasOptionsItems\" class=\"message disabled\"> <span>{{notFoundMsg}}</span> </li> </ul> </div> </div>",
                 encapsulation: ViewEncapsulation.None,
                 animations: [trigger('dropdownAnimation', [
                         state('invisible', style({ height: '{{startHeight}}', }), { params: { startHeight: 0 } }),
@@ -7328,6 +7400,7 @@ var SelectComponent = /** @class */ (function () {
      * @return {?}
      */
     SelectComponent.prototype.ngAfterViewInit = function () {
+        this.updateState();
         this.setArrowUpIcon();
         this.setArrowDownIcon();
         this.renderer.setStyle(this.selectionSpan.nativeElement.children[0].lastChild, 'visibility', 'hidden');
@@ -7338,14 +7411,19 @@ var SelectComponent = /** @class */ (function () {
      */
     SelectComponent.prototype.ngOnChanges = function (changes) {
         if (changes.hasOwnProperty('options')) {
-            this.updateOptionsList(changes['options'].isFirstChange());
-            this.changed.emit({ previousValue: changes.options.previousValue, currentValue: changes.options.currentValue });
+            this.updateOptionsList(changes["options"].currentValue);
+            this.updateState();
+            this.changed.emit({ previousValue: changes["options"].previousValue, currentValue: changes["options"].currentValue });
         }
         if (changes.hasOwnProperty('noFilter')) {
             var /** @type {?} */ numOptions = this.optionList.options.length;
             var /** @type {?} */ minNumOptions = changes['noFilter'].currentValue;
             this.filterEnabled = numOptions >= minNumOptions;
         }
+        if (changes.hasOwnProperty('placeholder')) {
+            this.updateState();
+        }
+        console.log('test');
     };
     /**
      * @return {?}
@@ -7530,10 +7608,9 @@ var SelectComponent = /** @class */ (function () {
             else if (!Array.isArray(v)) {
                 throw new TypeError('Value must be a string or an array.');
             }
-            if (!OptionList.equalValues(v, this._value)) {
-                this.optionList.value = v;
-                this.valueChanged();
-            }
+            this.optionList.value = v;
+            this._value = v;
+            this.updateState();
         },
         enumerable: true,
         configurable: true
@@ -7588,30 +7665,27 @@ var SelectComponent = /** @class */ (function () {
      */
     SelectComponent.prototype.valueChanged = function () {
         this._value = this.optionList.value;
-        this.hasSelected = this._value.length > 0;
+        this.updateState();
+        this.onChange(this.value);
+    };
+    /**
+     * @return {?}
+     */
+    SelectComponent.prototype.updateState = function () {
+        var _this = this;
         this.placeholderView = this.hasSelected ? '' : this.placeholder;
-        this.updateFilterWidth();
-        if (this.value) {
-            this.onChange(this.value);
-        }
-        /* this.onChange(this.value); */
+        setTimeout(function () {
+            _this.updateFilterWidth();
+        });
     };
     /**
      * Initialization. *
-     * @param {?} firstTime
+     * @param {?} options
      * @return {?}
      */
-    SelectComponent.prototype.updateOptionsList = function (firstTime) {
-        // let v: Array<string> | any;
-        var /** @type {?} */ v;
-        if (!firstTime) {
-            v = this.optionList.value;
-        }
-        this.optionList = new OptionList(this.options);
-        if (!firstTime) {
-            this.optionList.value = v;
-            this.valueChanged();
-        }
+    SelectComponent.prototype.updateOptionsList = function (options) {
+        this.optionList = new OptionList(options);
+        this.optionList.value = this._value;
     };
     /**
      * Dropdown. *
@@ -7883,7 +7957,7 @@ var SelectComponent = /** @class */ (function () {
 SelectComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-select',
-                template: "<label *ngIf=\"label !== ''\"> {{label}} </label> <div #selection [attr.tabindex]=\"disabled ? null : 0\" [ngClass]=\"{'open': isOpen, 'focus': hasFocus, 'below': isBelow, 'disabled': disabled}\" (mousedown)=\"onSelectContainerClick()\" (focus)=\"onSelectContainerFocus()\" (keydown)=\"onSelectContainerKeydown($event)\" (window:click)=\"onWindowClick()\" (window:resize)=\"onWindowResize()\"> <div class=\"single\" *ngIf=\"!multiple\"> <div class=\"value\" *ngIf=\"optionList.hasSelected()\"> {{optionList.selection[0].label}} </div> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div class=\"clear\" *ngIf=\"allowClear && hasSelected\" (click)=\"onClearSelectionClick($event)\"> &#x2715; </div> </div> <div class=\"multiple\" *ngIf=\"multiple\"> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div class=\"option\"  *ngFor=\"let option of optionList.selection\"> <span class=\"deselect-option\">, </span>{{option.label}} </div> </div> </div> <mdb-select-dropdown *ngIf=\"isOpen\" #dropdown [multiple]=\"multiple\" [optionList]=\"optionList\" [notFoundMsg]=\"notFoundMsg\" [highlightColor]=\"highlightColor\" [highlightTextColor]=\"highlightTextColor\" [filterEnabled]=\"filterEnabled\" [placeholder]=\"filterPlaceholder\" [top]=\"top\" [left]=\"left\" (close)=\"onDropdownClose($event)\" (optionClicked)=\"onDropdownOptionClicked($event)\" (singleFilterClick)=\"onSingleFilterClick()\" (singleFilterInput)=\"onSingleFilterInput($event)\" (singleFilterKeydown)=\"onSingleFilterKeydown($event)\"> </mdb-select-dropdown>",
+                template: "<label *ngIf=\"label !== ''\"> {{label}} </label> <div #selection [attr.tabindex]=\"disabled ? null : 0\" [ngClass]=\"{'open': isOpen, 'focus': hasFocus, 'below': isBelow, 'disabled': disabled}\" (mousedown)=\"onSelectContainerClick()\" (focus)=\"onSelectContainerFocus()\" (keydown)=\"onSelectContainerKeydown($event)\" (window:click)=\"onWindowClick()\" (window:resize)=\"onWindowResize()\"> <div class=\"single\" *ngIf=\"!multiple\"> <div class=\"value\" *ngIf=\"optionList.hasSelected()\"> {{optionList.selection[0].label}} </div> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div class=\"clear\" *ngIf=\"allowClear && hasSelected\" (click)=\"onClearSelectionClick()\"> &#x2715; </div> </div> <div class=\"multiple\" *ngIf=\"multiple\"> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div class=\"option\"  *ngFor=\"let option of optionList.selection\"> <span class=\"deselect-option\">, </span>{{option.label}} </div> </div> </div> <mdb-select-dropdown *ngIf=\"isOpen\" #dropdown [multiple]=\"multiple\" [optionList]=\"optionList\" [notFoundMsg]=\"notFoundMsg\" [highlightColor]=\"highlightColor\" [highlightTextColor]=\"highlightTextColor\" [filterEnabled]=\"filterEnabled\" [placeholder]=\"filterPlaceholder\" [top]=\"top\" [left]=\"left\" (close)=\"onDropdownClose($event)\" (optionClicked)=\"onDropdownOptionClicked($event)\" (singleFilterClick)=\"onSingleFilterClick()\" (singleFilterInput)=\"onSingleFilterInput($event)\" (singleFilterKeydown)=\"onSingleFilterKeydown($event)\"> </mdb-select-dropdown>",
                 providers: [SELECT_VALUE_ACCESSOR],
                 encapsulation: ViewEncapsulation.None
             },] },
@@ -11276,9 +11350,11 @@ var MaterialChipsComponent = /** @class */ (function () {
     };
     /**
      * @param {?} value
+     * @param {?} event
      * @return {?}
      */
-    MaterialChipsComponent.prototype.addValue = function (value) {
+    MaterialChipsComponent.prototype.addValue = function (value, event) {
+        event.preventDefault();
         if (!value || value.trim() === '') {
             return;
         }
@@ -11316,7 +11392,7 @@ var MaterialChipsComponent = /** @class */ (function () {
 MaterialChipsComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-material-chips',
-                template: "<div *ngIf=\"values && values.length\" class=\"md-chip-list\"  [ngClass]=\"focused\"> <span *ngFor=\"let value of values\" class=\"md-chip\" selected >          {{value}} <i class=\"close fa fa-times\" aria-hidden=\"true\" (click)=\"removeValue(value)\" ></i> </span> <span> <input  [(ngModel)]=\"labelToAdd\"  (keyup.enter)=\"addValue(box.value, $event);$event.preventDefault()\" (focus)=\"onFocus()\"  (focusout)=\"focusOutFunction()\"   #box /> </span> </div> <div *ngIf=\"!values || !values.length\"> <input class=\"md-chips-input\" placeholder=\"{{ placeholder }}\" #tbox  (keyup.enter)=\"addValue(tbox.value, $event);$event.preventDefault()\"/> </div>",
+                template: "<div *ngIf=\"values && values.length\" class=\"md-chip-list\"  [ngClass]=\"focused\"> <span *ngFor=\"let value of values\" class=\"md-chip\" selected >          {{value}} <i class=\"close fa fa-times\" aria-hidden=\"true\" (click)=\"removeValue(value)\" ></i> </span> <span> <input  [(ngModel)]=\"labelToAdd\"  (keyup.enter)=\"addValue(box.value, $event)\" (focus)=\"onFocus()\"  (focusout)=\"focusOutFunction()\"   #box /> </span> </div> <div *ngIf=\"!values || !values.length\"> <input class=\"md-chips-input\" placeholder=\"{{ placeholder }}\" #tbox  (keyup.enter)=\"addValue(tbox.value, $event)\"/> </div>",
                 providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
             },] },
 ];
@@ -13137,13 +13213,17 @@ var SlideComponent = /** @class */ (function () {
      * @param {?} el
      */
     function SlideComponent(carousel, el) {
+        this.carousel = carousel;
         this.animated = false;
         this.directionNext = false;
         this.directionLeft = false;
         this.directionPrev = false;
         this.directionRight = false;
+        /**
+         * Wraps element by appropriate CSS classes
+         */
         this.el = null;
-        this.carousel = carousel;
+        // this.carousel = carousel;
         this.el = el;
     }
     /**
@@ -13180,7 +13260,7 @@ SlideComponent.propDecorators = {
     directionLeft: [{ type: HostBinding, args: ['class.carousel-item-left',] }],
     directionPrev: [{ type: HostBinding, args: ['class.carousel-item-prev',] }],
     directionRight: [{ type: HostBinding, args: ['class.carousel-item-right',] }],
-    carousel: [{ type: HostBinding, args: ['class.carousel-item',] }]
+    el: [{ type: HostBinding, args: ['class.carousel-item',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -13205,6 +13285,349 @@ CarouselModule.decorators = [
                 providers: [CarouselConfig]
             },] },
 ];
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var MdbCardFooterComponent = /** @class */ (function () {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    function MdbCardFooterComponent(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+    }
+    /**
+     * @return {?}
+     */
+    MdbCardFooterComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        // this._r.addClass(this._el.nativeElement, 'card-footer');
+        if (this.class) {
+            this.class.split(' ').forEach(function (element) {
+                _this._r.addClass(_this._el.nativeElement, element);
+            });
+        }
+    };
+    return MdbCardFooterComponent;
+}());
+MdbCardFooterComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-card-footer',
+                template: "<div class=\"card-footer\"> <ng-content></ng-content> </div>",
+            },] },
+];
+/** @nocollapse */
+MdbCardFooterComponent.ctorParameters = function () { return [
+    { type: ElementRef },
+    { type: Renderer2 }
+]; };
+MdbCardFooterComponent.propDecorators = {
+    class: [{ type: Input }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var MdbCardTitleComponent = /** @class */ (function () {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    function MdbCardTitleComponent(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+    }
+    /**
+     * @return {?}
+     */
+    MdbCardTitleComponent.prototype.ngOnInit = function () {
+        this._r.addClass(this._el.nativeElement, 'card-title');
+    };
+    return MdbCardTitleComponent;
+}());
+MdbCardTitleComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-card-title',
+                template: "<ng-content></ng-content>",
+            },] },
+];
+/** @nocollapse */
+MdbCardTitleComponent.ctorParameters = function () { return [
+    { type: ElementRef },
+    { type: Renderer2 }
+]; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var MdbCardTextComponent = /** @class */ (function () {
+    function MdbCardTextComponent() {
+    }
+    return MdbCardTextComponent;
+}());
+MdbCardTextComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-card-text',
+                template: "<p class=\"card-text {{class}} \"> <ng-content></ng-content> </p>",
+            },] },
+];
+MdbCardTextComponent.propDecorators = {
+    class: [{ type: Input }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var MdbCardBodyComponent = /** @class */ (function () {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    function MdbCardBodyComponent(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+    }
+    Object.defineProperty(MdbCardBodyComponent.prototype, "cascade", {
+        /**
+         * @param {?} cascade
+         * @return {?}
+         */
+        set: function (cascade) {
+            if (cascade) {
+                this._r.addClass(this._el.nativeElement, 'card-body-cascade');
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    MdbCardBodyComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._r.addClass(this._el.nativeElement, 'card-body');
+        if (this.class) {
+            this.class.split(' ').forEach(function (element) {
+                _this._r.addClass(_this._el.nativeElement, element);
+            });
+        }
+    };
+    return MdbCardBodyComponent;
+}());
+MdbCardBodyComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-card-body',
+                template: " <ng-content></ng-content> ",
+                encapsulation: ViewEncapsulation.None
+            },] },
+];
+/** @nocollapse */
+MdbCardBodyComponent.ctorParameters = function () { return [
+    { type: ElementRef },
+    { type: Renderer2 }
+]; };
+MdbCardBodyComponent.propDecorators = {
+    class: [{ type: Input }],
+    cascade: [{ type: Input }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var MdbCardComponent = /** @class */ (function () {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    function MdbCardComponent(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+    }
+    Object.defineProperty(MdbCardComponent.prototype, "narrower", {
+        /**
+         * @param {?} narrower
+         * @return {?}
+         */
+        set: function (narrower) {
+            if (narrower) {
+                this._r.addClass(this._el.nativeElement, 'narrower');
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MdbCardComponent.prototype, "reverse", {
+        /**
+         * @param {?} reverse
+         * @return {?}
+         */
+        set: function (reverse) {
+            if (reverse) {
+                this._r.addClass(this._el.nativeElement, 'reverse');
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MdbCardComponent.prototype, "dark", {
+        /**
+         * @param {?} dark
+         * @return {?}
+         */
+        set: function (dark) {
+            if (dark) {
+                this._r.addClass(this._el.nativeElement, 'card-dark');
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    MdbCardComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._r.addClass(this._el.nativeElement, 'card');
+        if (this.cascade) {
+            this._r.addClass(this._el.nativeElement, 'card-cascade');
+        }
+        if (this.wider) {
+            this._r.addClass(this._el.nativeElement, 'wider');
+        }
+        if (this.narrower) {
+            this._r.addClass(this._el.nativeElement, 'narrower');
+        }
+        if (this.class) {
+            this.class.split(' ').forEach(function (element) {
+                _this._r.addClass(_this._el.nativeElement, element);
+            });
+        }
+    };
+    return MdbCardComponent;
+}());
+MdbCardComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-card',
+                template: "<div class=\"card\" [ngClass]=\"{'card-cascade': cascade, 'wider': wider}\" #card> <ng-content></ng-content> </div>",
+            },] },
+];
+/** @nocollapse */
+MdbCardComponent.ctorParameters = function () { return [
+    { type: ElementRef },
+    { type: Renderer2 }
+]; };
+MdbCardComponent.propDecorators = {
+    class: [{ type: Input }],
+    cascade: [{ type: Input }],
+    wider: [{ type: Input }],
+    narrower: [{ type: Input }],
+    reverse: [{ type: Input }],
+    dark: [{ type: Input }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var MdbCardImageComponent = /** @class */ (function () {
+    function MdbCardImageComponent() {
+    }
+    return MdbCardImageComponent;
+}());
+MdbCardImageComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-card-img',
+                template: "<img class=\"img-fluid\" [src]=\"src\" [alt]=\"alt\">",
+            },] },
+];
+MdbCardImageComponent.propDecorators = {
+    src: [{ type: Input }],
+    alt: [{ type: Input }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var MdbCardHeaderComponent = /** @class */ (function () {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    function MdbCardHeaderComponent(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+    }
+    /**
+     * @return {?}
+     */
+    MdbCardHeaderComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._r.addClass(this._el.nativeElement, 'card-header');
+        if (this.class) {
+            this.class.split(' ').forEach(function (element) {
+                _this._r.addClass(_this._el.nativeElement, element);
+            });
+        }
+    };
+    return MdbCardHeaderComponent;
+}());
+MdbCardHeaderComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-card-header',
+                template: "<ng-content></ng-content>",
+            },] },
+];
+/** @nocollapse */
+MdbCardHeaderComponent.ctorParameters = function () { return [
+    { type: ElementRef },
+    { type: Renderer2 }
+]; };
+MdbCardHeaderComponent.propDecorators = {
+    class: [{ type: Input }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var CardsFreeModule = /** @class */ (function () {
+    function CardsFreeModule() {
+    }
+    /**
+     * @return {?}
+     */
+    CardsFreeModule.forRoot = function () {
+        return { ngModule: CardsFreeModule, providers: [] };
+    };
+    return CardsFreeModule;
+}());
+CardsFreeModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule],
+                declarations: [
+                    MdbCardComponent,
+                    MdbCardBodyComponent,
+                    MdbCardImageComponent,
+                    MdbCardTextComponent,
+                    MdbCardTitleComponent,
+                    MdbCardFooterComponent,
+                    MdbCardHeaderComponent
+                ],
+                exports: [
+                    MdbCardComponent,
+                    MdbCardBodyComponent,
+                    MdbCardImageComponent,
+                    MdbCardTextComponent,
+                    MdbCardTitleComponent,
+                    MdbCardFooterComponent,
+                    MdbCardHeaderComponent
+                ]
+            },] },
+];
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -15212,8 +15635,8 @@ var MdbInputDirective = /** @class */ (function () {
      */
     MdbInputDirective.prototype.resize = function () {
         try {
-            this._renderer.setStyle(this.element, 'height', 'auto');
-            this._renderer.setStyle(this.element, 'height', this.element.scrollHeight + 'px');
+            this._renderer.setStyle(this.el.nativeElement, 'height', 'auto');
+            this._renderer.setStyle(this.el.nativeElement, 'height', this.el.nativeElement.scrollHeight + 'px');
         }
         catch (error) { }
     };
@@ -17374,349 +17797,6 @@ var BsComponentRef = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-var MdbCardFooterComponent = /** @class */ (function () {
-    /**
-     * @param {?} _el
-     * @param {?} _r
-     */
-    function MdbCardFooterComponent(_el, _r) {
-        this._el = _el;
-        this._r = _r;
-    }
-    /**
-     * @return {?}
-     */
-    MdbCardFooterComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        // this._r.addClass(this._el.nativeElement, 'card-footer');
-        if (this.class) {
-            this.class.split(' ').forEach(function (element) {
-                _this._r.addClass(_this._el.nativeElement, element);
-            });
-        }
-    };
-    return MdbCardFooterComponent;
-}());
-MdbCardFooterComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'mdb-card-footer',
-                template: "<div class=\"card-footer\"> <ng-content></ng-content> </div>",
-            },] },
-];
-/** @nocollapse */
-MdbCardFooterComponent.ctorParameters = function () { return [
-    { type: ElementRef },
-    { type: Renderer2 }
-]; };
-MdbCardFooterComponent.propDecorators = {
-    class: [{ type: Input }]
-};
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-var MdbCardTitleComponent = /** @class */ (function () {
-    /**
-     * @param {?} _el
-     * @param {?} _r
-     */
-    function MdbCardTitleComponent(_el, _r) {
-        this._el = _el;
-        this._r = _r;
-    }
-    /**
-     * @return {?}
-     */
-    MdbCardTitleComponent.prototype.ngOnInit = function () {
-        this._r.addClass(this._el.nativeElement, 'card-title');
-    };
-    return MdbCardTitleComponent;
-}());
-MdbCardTitleComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'mdb-card-title',
-                template: "<ng-content></ng-content>",
-            },] },
-];
-/** @nocollapse */
-MdbCardTitleComponent.ctorParameters = function () { return [
-    { type: ElementRef },
-    { type: Renderer2 }
-]; };
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-var MdbCardTextComponent = /** @class */ (function () {
-    function MdbCardTextComponent() {
-    }
-    return MdbCardTextComponent;
-}());
-MdbCardTextComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'mdb-card-text',
-                template: "<p class=\"card-text {{class}} \"> <ng-content></ng-content> </p>",
-            },] },
-];
-MdbCardTextComponent.propDecorators = {
-    class: [{ type: Input }]
-};
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-var MdbCardBodyComponent = /** @class */ (function () {
-    /**
-     * @param {?} _el
-     * @param {?} _r
-     */
-    function MdbCardBodyComponent(_el, _r) {
-        this._el = _el;
-        this._r = _r;
-    }
-    Object.defineProperty(MdbCardBodyComponent.prototype, "cascade", {
-        /**
-         * @param {?} cascade
-         * @return {?}
-         */
-        set: function (cascade) {
-            if (cascade) {
-                this._r.addClass(this._el.nativeElement, 'card-body-cascade');
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * @return {?}
-     */
-    MdbCardBodyComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this._r.addClass(this._el.nativeElement, 'card-body');
-        if (this.class) {
-            this.class.split(' ').forEach(function (element) {
-                _this._r.addClass(_this._el.nativeElement, element);
-            });
-        }
-    };
-    return MdbCardBodyComponent;
-}());
-MdbCardBodyComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'mdb-card-body',
-                template: " <ng-content></ng-content> ",
-                encapsulation: ViewEncapsulation.None
-            },] },
-];
-/** @nocollapse */
-MdbCardBodyComponent.ctorParameters = function () { return [
-    { type: ElementRef },
-    { type: Renderer2 }
-]; };
-MdbCardBodyComponent.propDecorators = {
-    class: [{ type: Input }],
-    cascade: [{ type: Input }]
-};
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-var MdbCardComponent = /** @class */ (function () {
-    /**
-     * @param {?} _el
-     * @param {?} _r
-     */
-    function MdbCardComponent(_el, _r) {
-        this._el = _el;
-        this._r = _r;
-    }
-    Object.defineProperty(MdbCardComponent.prototype, "narrower", {
-        /**
-         * @param {?} narrower
-         * @return {?}
-         */
-        set: function (narrower) {
-            if (narrower) {
-                this._r.addClass(this._el.nativeElement, 'narrower');
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MdbCardComponent.prototype, "reverse", {
-        /**
-         * @param {?} reverse
-         * @return {?}
-         */
-        set: function (reverse) {
-            if (reverse) {
-                this._r.addClass(this._el.nativeElement, 'reverse');
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MdbCardComponent.prototype, "dark", {
-        /**
-         * @param {?} dark
-         * @return {?}
-         */
-        set: function (dark) {
-            if (dark) {
-                this._r.addClass(this._el.nativeElement, 'card-dark');
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * @return {?}
-     */
-    MdbCardComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this._r.addClass(this._el.nativeElement, 'card');
-        if (this.cascade) {
-            this._r.addClass(this._el.nativeElement, 'card-cascade');
-        }
-        if (this.wider) {
-            this._r.addClass(this._el.nativeElement, 'wider');
-        }
-        if (this.narrower) {
-            this._r.addClass(this._el.nativeElement, 'narrower');
-        }
-        if (this.class) {
-            this.class.split(' ').forEach(function (element) {
-                _this._r.addClass(_this._el.nativeElement, element);
-            });
-        }
-    };
-    return MdbCardComponent;
-}());
-MdbCardComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'mdb-card',
-                template: "<div class=\"card\" [ngClass]=\"{'card-cascade': cascade, 'wider': wider}\" #card> <ng-content></ng-content> </div>",
-            },] },
-];
-/** @nocollapse */
-MdbCardComponent.ctorParameters = function () { return [
-    { type: ElementRef },
-    { type: Renderer2 }
-]; };
-MdbCardComponent.propDecorators = {
-    class: [{ type: Input }],
-    cascade: [{ type: Input }],
-    wider: [{ type: Input }],
-    narrower: [{ type: Input }],
-    reverse: [{ type: Input }],
-    dark: [{ type: Input }]
-};
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-var MdbCardImageComponent = /** @class */ (function () {
-    function MdbCardImageComponent() {
-    }
-    return MdbCardImageComponent;
-}());
-MdbCardImageComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'mdb-card-img',
-                template: "<img class=\"img-fluid\" [src]=\"src\" [alt]=\"alt\">",
-            },] },
-];
-MdbCardImageComponent.propDecorators = {
-    src: [{ type: Input }],
-    alt: [{ type: Input }]
-};
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-var MdbCardHeaderComponent = /** @class */ (function () {
-    /**
-     * @param {?} _el
-     * @param {?} _r
-     */
-    function MdbCardHeaderComponent(_el, _r) {
-        this._el = _el;
-        this._r = _r;
-    }
-    /**
-     * @return {?}
-     */
-    MdbCardHeaderComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this._r.addClass(this._el.nativeElement, 'card-header');
-        if (this.class) {
-            this.class.split(' ').forEach(function (element) {
-                _this._r.addClass(_this._el.nativeElement, element);
-            });
-        }
-    };
-    return MdbCardHeaderComponent;
-}());
-MdbCardHeaderComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'mdb-card-header',
-                template: "<ng-content></ng-content>",
-            },] },
-];
-/** @nocollapse */
-MdbCardHeaderComponent.ctorParameters = function () { return [
-    { type: ElementRef },
-    { type: Renderer2 }
-]; };
-MdbCardHeaderComponent.propDecorators = {
-    class: [{ type: Input }]
-};
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-var CardsFreeModule = /** @class */ (function () {
-    function CardsFreeModule() {
-    }
-    /**
-     * @return {?}
-     */
-    CardsFreeModule.forRoot = function () {
-        return { ngModule: CardsFreeModule, providers: [] };
-    };
-    return CardsFreeModule;
-}());
-CardsFreeModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [CommonModule],
-                declarations: [
-                    MdbCardComponent,
-                    MdbCardBodyComponent,
-                    MdbCardImageComponent,
-                    MdbCardTextComponent,
-                    MdbCardTitleComponent,
-                    MdbCardFooterComponent,
-                    MdbCardHeaderComponent
-                ],
-                exports: [
-                    MdbCardComponent,
-                    MdbCardBodyComponent,
-                    MdbCardImageComponent,
-                    MdbCardTextComponent,
-                    MdbCardTitleComponent,
-                    MdbCardFooterComponent,
-                    MdbCardHeaderComponent
-                ]
-            },] },
-];
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -17998,5 +18078,5 @@ MDBBootstrapModulesPro.decorators = [
 /**
  * Generated bundle index. Do not edit.
  */
-export { SBItemBodyComponent, SBItemHeadComponent, SBItemComponent, sbConfig, SqueezeBoxComponent, SQUEEZEBOX_COMPONENTS, AccordionModule, OverlayContainer, OverlayRef, Overlay, OVERLAY_PROVIDERS, DomPortalHost, ComponentPortal, BasePortalHost, ToastComponent, GlobalConfig, ToastPackage, tsConfig, ToastContainerDirective, ToastContainerModule, ToastRef, ToastInjector, ToastModule, ToastService, TOAST_CONFIG, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, CompleterListItemComponent, CompleterComponent, MdbCompleterDirective, CtrRowItem, MdbDropdownDirective, MdbInputCompleteDirective, CtrListContext, MdbListDirective, MdbRowDirective, CompleterBaseData, CompleterService, localDataFactory, remoteDataFactory, LocalDataFactoryProvider, RemoteDataFactoryProvider, LocalData, RemoteData, MAX_CHARS, MIN_SEARCH_LENGTH, PAUSE, TEXT_SEARCHING, TEXT_NO_RESULTS, CLEAR_TIMEOUT, isNil, AutocompleteModule, CardRevealComponent, CardRotatingComponent, CardsModule, InputAutoFillDirective, FocusDirective, LocaleService, UtilService, DatepickerModule, MYDP_VALUE_ACCESSOR, MDBDatePickerComponent, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, UploadStatus, humanizeBytes, MDBUploaderService, MDBFileDropDirective, MDBFileSelectDirective, FileInputModule, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, OptionList, Option, SelectDropdownComponent, SELECT_VALUE_ACCESSOR, SelectComponent, SelectModule, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, MDBSpinningPreloader, ProgressBarComponent, MdProgressSpinnerCssMatStylerDirective, MdProgressSpinnerComponent, MdSpinnerComponent, BarComponent, ProgressSpinnerComponent, ProgressDirective, ProgressbarComponent, ProgressbarConfigComponent, ProgressbarModule, PreloadersModule, ProgressBars, SidenavComponent, SidenavModule, PageScrollUtilService, EasingLogic, PageScrollConfig, PageScrollDirective, PageScrollInstance, SmoothscrollModule, PageScrollService, computedStyle, MdbStickyDirective, StickyContentModule, TabHeadingDirective, TabDirective, TabsetComponent, TabsetConfig, NgTranscludeDirective, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TimePickerModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, ButtonsModule, CHECKBOX_CONTROL_VALUE_ACCESSOR, ButtonCheckboxDirective, RADIO_CONTROL_VALUE_ACCESSOR, ButtonRadioDirective, MdbBtnDirective, Direction, CarouselComponent, CarouselConfig, SlideComponent, CarouselModule, BaseChartDirective, ChartsModule, CollapseDirective, CollapseModule, BsDropdownContainerComponent, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownConfig, BsDropdownDirective, BsDropdownState, DropdownModule, IconsModule, MdbIconComponent, InputsModule, MdbInputDirective, EqualValidatorDirective, ModalDirective, ModalOptions, MDBModalRef, modalConfigDefaults, ClassName, Selector, TransitionDurations, DISMISS_REASONS, MDBModalService, ModalBackdropOptions, ModalBackdropComponent, ModalContainerComponent, msConfig, ModalModule, LinksComponent, LogoComponent, NavbarComponent, NavbarService, NavlinksComponent, NavbarModule, PopoverContainerComponent, PopoverConfig, PopoverDirective, PopoverModule, RippleDirective, RippleModule, WavesDirective, WavesModule, TooltipContainerComponent, TooltipDirective, TooltipConfig, TooltipModule, BsComponentRef, ComponentLoader, ComponentLoaderFactory, ContentRef, win as window, document$1 as document, location, gc, performance, Event, MouseEvent, KeyboardEvent, EventTarget, History, Location, EventListener, Positioning, positionElements, PositioningService, OnChange, LinkedList, isBs3, Trigger, parseTriggers, listenToTriggers, Utils, MDBBootstrapModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, MdbBtnDirective as ɵct1, ButtonsModule as ɵcq1, ButtonCheckboxDirective as ɵcr1, ButtonRadioDirective as ɵcs1, CardsFreeModule as ɵej1, MdbCardBodyComponent as ɵel1, MdbCardFooterComponent as ɵep1, MdbCardHeaderComponent as ɵeq1, MdbCardImageComponent as ɵem1, MdbCardTextComponent as ɵen1, MdbCardTitleComponent as ɵeo1, MdbCardComponent as ɵek1, CarouselComponent as ɵcu1, CarouselConfig as ɵcv1, CarouselModule as ɵcx1, SlideComponent as ɵcw1, BaseChartDirective as ɵcy1, ChartsModule as ɵcz1, CollapseDirective as ɵda1, CollapseModule as ɵdb1, BsDropdownContainerComponent as ɵdc1, BsDropdownMenuDirective as ɵdd1, BsDropdownToggleDirective as ɵde1, BsDropdownConfig as ɵdf1, BsDropdownDirective as ɵdg1, DropdownModule as ɵdi1, BsDropdownState as ɵdh1, MdbIconComponent as ɵdk1, IconsModule as ɵdj1, InputsModule as ɵdl1, MdbInputDirective as ɵdm1, MDBRootModule as ɵei1, ModalDirective as ɵdn1, ModalModule as ɵdt1, ModalOptions as ɵdo1, MDBModalService as ɵdp1, ModalBackdropComponent as ɵdr1, ModalBackdropOptions as ɵdq1, ModalContainerComponent as ɵds1, NavbarComponent as ɵdu1, NavbarModule as ɵdv1, PopoverContainerComponent as ɵdw1, PopoverConfig as ɵdx1, PopoverDirective as ɵdy1, PopoverModule as ɵdz1, RippleDirective as ɵea1, RippleModule as ɵeb1, TooltipContainerComponent as ɵee1, TooltipDirective as ɵef1, TooltipModule as ɵeh1, TooltipConfig as ɵeg1, WavesDirective as ɵec1, WavesModule as ɵed1, SBItemComponent as ɵc1, SBItemBodyComponent as ɵa1, SBItemHeadComponent as ɵb1, SqueezeBoxComponent as ɵd1, AccordionModule as ɵe1, CompleterListItemComponent as ɵf1, CompleterComponent as ɵg1, MdbCompleterDirective as ɵh1, MdbDropdownDirective as ɵi1, MdbInputCompleteDirective as ɵj1, MdbListDirective as ɵk1, MdbRowDirective as ɵl1, AutocompleteModule as ɵp1, CompleterService as ɵm1, LocalDataFactoryProvider as ɵn1, RemoteDataFactoryProvider as ɵo1, CardRevealComponent as ɵq1, CardRotatingComponent as ɵr1, CardsModule as ɵs1, MDBDatePickerComponent as ɵz1, MYDP_VALUE_ACCESSOR as ɵy1, DatepickerModule as ɵx1, InputAutoFillDirective as ɵt1, FocusDirective as ɵu1, LocaleService as ɵv1, UtilService as ɵw1, SimpleChartComponent as ɵba1, ChartSimpleModule as ɵbc1, EasyPieChartComponent as ɵbb1, MDBFileDropDirective as ɵbd1, MDBFileSelectDirective as ɵbe1, FileInputModule as ɵbf1, CharCounterDirective as ɵbg1, CharCounterModule as ɵbh1, ImageModalComponent as ɵbi1, LightBoxModule as ɵbj1, SelectDropdownComponent as ɵbl1, SELECT_VALUE_ACCESSOR as ɵbm1, SelectComponent as ɵbn1, SelectModule as ɵbo1, MDBRootModulePro as ɵer1, BarComponent as ɵbp1, ProgressBars as ɵbv1, MdProgressBarModule as ɵes1, MdProgressSpinnerModule as ɵet1, ProgressSpinnerComponent as ɵbq1, ProgressDirective as ɵbr1, ProgressbarComponent as ɵbs1, ProgressbarConfigComponent as ɵbt1, ProgressbarModule as ɵbu1, SidenavComponent as ɵbw1, SidenavModule as ɵbx1, PageScrollDirective as ɵby1, PageScrollInstance as ɵbz1, SmoothscrollModule as ɵca1, PageScrollService as ɵcb1, MdbStickyDirective as ɵcc1, StickyContentModule as ɵcd1, TabHeadingDirective as ɵce1, TabDirective as ɵcf1, TabsetComponent as ɵcg1, TabsetConfig as ɵch1, TabsModule as ɵcj1, NgTranscludeDirective as ɵci1, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR as ɵck1, MaterialChipsComponent as ɵcl1, MaterialChipsModule as ɵcm1, ClockPickerComponent as ɵcp1, TIME_PIRCKER_VALUE_ACCESSOT as ɵco1, TimePickerModule as ɵcn1 };
+export { SBItemBodyComponent, SBItemHeadComponent, SBItemComponent, sbConfig, SqueezeBoxComponent, SQUEEZEBOX_COMPONENTS, AccordionModule, OverlayContainer, OverlayRef, Overlay, OVERLAY_PROVIDERS, DomPortalHost, ComponentPortal, BasePortalHost, ToastComponent, GlobalConfig, ToastPackage, tsConfig, ToastContainerDirective, ToastContainerModule, ToastRef, ToastInjector, ToastModule, ToastService, TOAST_CONFIG, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, CompleterListItemComponent, CompleterComponent, MdbCompleterDirective, CtrRowItem, MdbDropdownDirective, MdbInputCompleteDirective, CtrListContext, MdbListDirective, MdbRowDirective, CompleterBaseData, CompleterService, localDataFactory, remoteDataFactory, LocalDataFactoryProvider, RemoteDataFactoryProvider, LocalData, RemoteData, MAX_CHARS, MIN_SEARCH_LENGTH, PAUSE, TEXT_SEARCHING, TEXT_NO_RESULTS, CLEAR_TIMEOUT, isNil, AutocompleteModule, CardRevealComponent, CardRotatingComponent, CardsModule, InputAutoFillDirective, FocusDirective, LocaleService, UtilService, DatepickerModule, MYDP_VALUE_ACCESSOR, MDBDatePickerComponent, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, UploadStatus, humanizeBytes, MDBUploaderService, MDBFileDropDirective, MDBFileSelectDirective, FileInputModule, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, OptionList, Option, SelectDropdownComponent, SELECT_VALUE_ACCESSOR, SelectComponent, SelectModule, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, MDBSpinningPreloader, ProgressBarComponent, MdProgressSpinnerCssMatStylerDirective, MdProgressSpinnerComponent, MdSpinnerComponent, BarComponent, ProgressSpinnerComponent, ProgressDirective, ProgressbarComponent, ProgressbarConfigComponent, ProgressbarModule, PreloadersModule, ProgressBars, SidenavComponent, SidenavModule, PageScrollUtilService, EasingLogic, PageScrollConfig, PageScrollDirective, PageScrollInstance, SmoothscrollModule, PageScrollService, computedStyle, MdbStickyDirective, StickyContentModule, TabHeadingDirective, TabDirective, TabsetComponent, TabsetConfig, NgTranscludeDirective, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TimePickerModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, ButtonsModule, CHECKBOX_CONTROL_VALUE_ACCESSOR, ButtonCheckboxDirective, RADIO_CONTROL_VALUE_ACCESSOR, ButtonRadioDirective, MdbBtnDirective, Direction, CarouselComponent, CarouselConfig, SlideComponent, CarouselModule, CardsFreeModule, MdbCardComponent, MdbCardBodyComponent, MdbCardImageComponent, MdbCardTextComponent, MdbCardTitleComponent, MdbCardFooterComponent, MdbCardHeaderComponent, BaseChartDirective, ChartsModule, CollapseDirective, CollapseModule, BsDropdownContainerComponent, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownConfig, BsDropdownDirective, BsDropdownState, DropdownModule, IconsModule, MdbIconComponent, InputsModule, MdbInputDirective, EqualValidatorDirective, ModalDirective, ModalOptions, MDBModalRef, modalConfigDefaults, ClassName, Selector, TransitionDurations, DISMISS_REASONS, MDBModalService, ModalBackdropOptions, ModalBackdropComponent, ModalContainerComponent, msConfig, ModalModule, LinksComponent, LogoComponent, NavbarComponent, NavbarService, NavlinksComponent, NavbarModule, PopoverContainerComponent, PopoverConfig, PopoverDirective, PopoverModule, RippleDirective, RippleModule, WavesDirective, WavesModule, TooltipContainerComponent, TooltipDirective, TooltipConfig, TooltipModule, BsComponentRef, ComponentLoader, ComponentLoaderFactory, ContentRef, win as window, document$1 as document, location, gc, performance, Event, MouseEvent, KeyboardEvent, EventTarget, History, Location, EventListener, Positioning, positionElements, PositioningService, OnChange, LinkedList, isBs3, Trigger, parseTriggers, listenToTriggers, Utils, MDBBootstrapModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, MdbBtnDirective as ɵct1, ButtonsModule as ɵcq1, ButtonCheckboxDirective as ɵcr1, ButtonRadioDirective as ɵcs1, CardsFreeModule as ɵcy1, CarouselComponent as ɵcu1, CarouselConfig as ɵcv1, CarouselModule as ɵcx1, SlideComponent as ɵcw1, BaseChartDirective as ɵcz1, ChartsModule as ɵda1, CollapseDirective as ɵdb1, CollapseModule as ɵdc1, BsDropdownContainerComponent as ɵdd1, BsDropdownMenuDirective as ɵde1, BsDropdownToggleDirective as ɵdf1, BsDropdownConfig as ɵdg1, BsDropdownDirective as ɵdh1, DropdownModule as ɵdj1, BsDropdownState as ɵdi1, MdbIconComponent as ɵdl1, IconsModule as ɵdk1, InputsModule as ɵdm1, MdbInputDirective as ɵdn1, MDBRootModule as ɵej1, ModalDirective as ɵdo1, ModalModule as ɵdu1, ModalOptions as ɵdp1, MDBModalService as ɵdq1, ModalBackdropComponent as ɵds1, ModalBackdropOptions as ɵdr1, ModalContainerComponent as ɵdt1, NavbarComponent as ɵdv1, NavbarModule as ɵdw1, PopoverContainerComponent as ɵdx1, PopoverConfig as ɵdy1, PopoverDirective as ɵdz1, PopoverModule as ɵea1, RippleDirective as ɵeb1, RippleModule as ɵec1, TooltipContainerComponent as ɵef1, TooltipDirective as ɵeg1, TooltipModule as ɵei1, TooltipConfig as ɵeh1, WavesDirective as ɵed1, WavesModule as ɵee1, SBItemComponent as ɵc1, SBItemBodyComponent as ɵa1, SBItemHeadComponent as ɵb1, SqueezeBoxComponent as ɵd1, AccordionModule as ɵe1, CompleterListItemComponent as ɵf1, CompleterComponent as ɵg1, MdbCompleterDirective as ɵh1, MdbDropdownDirective as ɵi1, MdbInputCompleteDirective as ɵj1, MdbListDirective as ɵk1, MdbRowDirective as ɵl1, AutocompleteModule as ɵp1, CompleterService as ɵm1, LocalDataFactoryProvider as ɵn1, RemoteDataFactoryProvider as ɵo1, CardRevealComponent as ɵq1, CardRotatingComponent as ɵr1, CardsModule as ɵs1, MDBDatePickerComponent as ɵz1, MYDP_VALUE_ACCESSOR as ɵy1, DatepickerModule as ɵx1, InputAutoFillDirective as ɵt1, FocusDirective as ɵu1, LocaleService as ɵv1, UtilService as ɵw1, SimpleChartComponent as ɵba1, ChartSimpleModule as ɵbc1, EasyPieChartComponent as ɵbb1, MDBFileDropDirective as ɵbd1, MDBFileSelectDirective as ɵbe1, FileInputModule as ɵbf1, CharCounterDirective as ɵbg1, CharCounterModule as ɵbh1, ImageModalComponent as ɵbi1, LightBoxModule as ɵbj1, SelectDropdownComponent as ɵbl1, SELECT_VALUE_ACCESSOR as ɵbm1, SelectComponent as ɵbn1, SelectModule as ɵbo1, MDBRootModulePro as ɵek1, BarComponent as ɵbp1, ProgressBars as ɵbv1, MdProgressBarModule as ɵel1, MdProgressSpinnerModule as ɵem1, ProgressSpinnerComponent as ɵbq1, ProgressDirective as ɵbr1, ProgressbarComponent as ɵbs1, ProgressbarConfigComponent as ɵbt1, ProgressbarModule as ɵbu1, SidenavComponent as ɵbw1, SidenavModule as ɵbx1, PageScrollDirective as ɵby1, PageScrollInstance as ɵbz1, SmoothscrollModule as ɵca1, PageScrollService as ɵcb1, MdbStickyDirective as ɵcc1, StickyContentModule as ɵcd1, TabHeadingDirective as ɵce1, TabDirective as ɵcf1, TabsetComponent as ɵcg1, TabsetConfig as ɵch1, TabsModule as ɵcj1, NgTranscludeDirective as ɵci1, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR as ɵck1, MaterialChipsComponent as ɵcl1, MaterialChipsModule as ɵcm1, ClockPickerComponent as ɵcp1, TIME_PIRCKER_VALUE_ACCESSOT as ɵco1, TimePickerModule as ɵcn1 };
 //# sourceMappingURL=ng-uikit-pro-standard.es5.js.map
