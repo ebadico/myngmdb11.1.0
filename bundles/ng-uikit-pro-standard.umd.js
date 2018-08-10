@@ -14225,6 +14225,7 @@ CheckboxComponent.propDecorators = {
     checkboxPosition: [{ type: core.Input }],
     default: [{ type: core.Input }],
     inline: [{ type: core.Input }],
+    tabIndex: [{ type: core.Input }],
     change: [{ type: core.Output }]
 };
 /**
