@@ -17314,7 +17314,6 @@ class TooltipContainerComponent {
         if (this.popupClass) {
             this.classMap[this.popupClass] = true;
         }
-        console.log(this.tooltipInner.nativeElement);
         setTimeout(() => {
             const /** @type {?} */ arrowClassList = this.tooltipArrow.nativeElement.classList;
             const /** @type {?} */ tooltipHeight = this.tooltipInner.nativeElement.clientHeight;

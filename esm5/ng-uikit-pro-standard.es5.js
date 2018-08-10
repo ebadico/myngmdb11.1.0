@@ -17873,7 +17873,6 @@ var TooltipContainerComponent = /** @class */ (function () {
         if (this.popupClass) {
             this.classMap[this.popupClass] = true;
         }
-        console.log(this.tooltipInner.nativeElement);
         setTimeout(function () {
             var /** @type {?} */ arrowClassList = _this.tooltipArrow.nativeElement.classList;
             var /** @type {?} */ tooltipHeight = _this.tooltipInner.nativeElement.clientHeight;
