@@ -475,7 +475,7 @@ $material-select-dropdown-content-li-span-padding:                      $autocom
 
 $material-select-colorful-dropdown-content-padding:                     $autocomplete-clear-top !default;
 $material-select-colorful-dropdown-content-li-active-color:             $white !default;
-$material-select-colorful-dropdown-content-li-hover-transition:         all $card-front-back-transition linear !default;
+$material-select-colorful-dropdown-content-li-hover-transition:         all .15 linear !default;
 $material-select-colorful-dropdown-content-li-hover-border-radius:      $border-radius-base !default;
 
 // SideNav Variables
@@ -561,7 +561,7 @@ $mdb-lightbox-figure-img-transition:     opacity .4s !default;
 $mdb-lightbox-figure-img-hover-opacity:  .8 !default;
 $mdb-lightbox-no-margin-padding:         $autocomplete-clear-top !default;
 $pswp__button-background:                url(#{$image-path}/lightbox/default-skin.png) !default;
-$pswp__button-background-image:          url(#{$image-path}/lightbox/default-skin.svg) !default;
+$pswp__button-background-image:          url(#{$image-path1}/lightbox/default-skin.svg) !default;
 $pswp__preloader__icn-background:        url(#{$image-path}/lightbox/preloader.gif) !default;
 
 // Date Picker

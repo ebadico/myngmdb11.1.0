@@ -12,6 +12,7 @@
             padding: 1rem 1.5rem;
             background: transparent;
             border-bottom: 0;
+            cursor: pointer;
             a {
                 .rotate-icon {
                     transform: rotate(180deg);
@@ -51,6 +52,12 @@
 }
 .fa-angle-down.rotate-icon {
     transition: all 150ms ease-in 0s;
+}
+
+.item-disabled,
+.item-disabled a > h5 {
+    color: #bdbdbd !important;
+    cursor: default !important;
 }
 
 

@@ -133,6 +133,8 @@ export * from './free/charts/chart.directive';
 export * from './free/charts/color.service';
 export * from './free/charts/colors.service';
 export * from './free/charts/chart.module';
+export * from './free/checkbox/checkbox.component';
+export * from './free/checkbox/checkbox.module';
 export * from './free/collapse/collapse.directive';
 export * from './free/collapse/collapse.module';
 export * from './free/dropdown/dropdown-container.component';

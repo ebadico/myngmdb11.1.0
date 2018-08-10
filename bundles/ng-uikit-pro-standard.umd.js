@@ -128,7 +128,7 @@ SBItemHeadComponent.decorators = [
     { type: core.Component, args: [{
                 exportAs: 'sbItemHead',
                 selector: 'mdb-item-head, mdb-accordion-item-head',
-                template: "<div class=\"card-header\"> <a role=\"button\" (click)=\"toggleClick($event)\"> <h5 class=\"mb-0\"> <ng-content></ng-content> <i class=\"fa fa-angle-down rotate-icon\"></i> </h5> </a> </div>"
+                template: "<div class=\"card-header\" [ngClass]=\"{ 'item-disabled': isDisabled }\" (click)=\"toggleClick($event)\"> <a role=\"button\"> <h5 class=\"mb-0\"> <ng-content></ng-content> <i class=\"fa fa-angle-down rotate-icon\"></i> </h5> </a> </div>"
             },] },
 ];
 /** @nocollapse */
@@ -5126,17 +5126,23 @@ ChartSimpleModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+/**
+ * @record
+ */
+/**
+ * @record
+ */
 /** @enum {number} */
 var UploadStatus = {
     Queue: 0,
     Uploading: 1,
     Done: 2,
-    Canceled: 3,
+    Cancelled: 3,
 };
 UploadStatus[UploadStatus.Queue] = "Queue";
 UploadStatus[UploadStatus.Uploading] = "Uploading";
 UploadStatus[UploadStatus.Done] = "Done";
-UploadStatus[UploadStatus.Canceled] = "Canceled";
+UploadStatus[UploadStatus.Cancelled] = "Cancelled";
 /**
  * @record
  */
@@ -5163,41 +5169,50 @@ function humanizeBytes(bytes) {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 }
 var MDBUploaderService = /** @class */ (function () {
-    function MDBUploaderService() {
-        this.setToNullValue = null;
-        this.files = [];
+    /**
+     * @param {?=} concurrency
+     * @param {?=} contentTypes
+     * @param {?=} maxUploads
+     */
+    function MDBUploaderService(concurrency, contentTypes, maxUploads) {
+        if (concurrency === void 0) { concurrency = Number.POSITIVE_INFINITY; }
+        if (contentTypes === void 0) { contentTypes = ['*']; }
+        if (maxUploads === void 0) { maxUploads = Number.POSITIVE_INFINITY; }
+        var _this = this;
+        this.queue = [];
         this.serviceEvents = new core.EventEmitter();
-        this.uploads = [];
+        this.uploadScheduler = new rxjs.Subject();
+        this.subs = [];
+        this.contentTypes = contentTypes;
+        this.maxUploads = maxUploads;
+        this.uploadScheduler
+            .pipe(operators.mergeMap(function (upload) { return _this.startUpload(upload); }, concurrency))
+            .subscribe(function (uploadOutput) { return _this.serviceEvents.emit(uploadOutput); });
     }
     /**
-     * @param {?} files
+     * @param {?} incomingFiles
      * @return {?}
      */
-    MDBUploaderService.prototype.handleFiles = function (files) {
+    MDBUploaderService.prototype.handleFiles = function (incomingFiles) {
         var _this = this;
-        this.fileList = files;
-        this.files = [].map.call(files, function (file, i) {
-            // const uploadFile: UploadFile = {
-            var /** @type {?} */ uploadFile = {
-                fileIndex: i,
-                id: _this.generateId(),
-                name: file.name,
-                size: file.size,
-                type: file.type,
-                progress: {
-                    status: UploadStatus.Queue,
-                    data: {
-                        percentage: 0,
-                        speed: null,
-                        speedHuman: null
-                    }
-                },
-                lastModifiedDate: file.lastModifiedDate
-            };
+        var /** @type {?} */ allowedIncomingFiles = [].reduce.call(incomingFiles, function (acc, checkFile, i) {
+            var /** @type {?} */ futureQueueLength = acc.length + _this.queue.length + 1;
+            if (_this.isContentTypeAllowed(checkFile.type) && futureQueueLength <= _this.maxUploads) {
+                acc = acc.concat(checkFile);
+            }
+            else {
+                var /** @type {?} */ rejectedFile = _this.makeUploadFile(checkFile, i);
+                _this.serviceEvents.emit({ type: 'rejected', file: rejectedFile });
+            }
+            return acc;
+        }, []);
+        (_a = this.queue).push.apply(_a, [].map.call(allowedIncomingFiles, function (file, i) {
+            var /** @type {?} */ uploadFile = _this.makeUploadFile(file, i);
             _this.serviceEvents.emit({ type: 'addedToQueue', file: uploadFile });
             return uploadFile;
-        });
+        }));
         this.serviceEvents.emit({ type: 'allAddedToQueue' });
+        var _a;
     };
     /**
      * @param {?} input
@@ -5205,63 +5220,82 @@ var MDBUploaderService = /** @class */ (function () {
      */
     MDBUploaderService.prototype.initInputEvents = function (input) {
         var _this = this;
-        // input.subscribe((event: UploadInput) => {
-        // input.subscribe((event: UploadInput) => {
-        input.subscribe(function (event) {
+        return input.subscribe(function (event) {
             switch (event.type) {
-                // case 'uploadFile':
-                //   this.serviceEvents.emit({ type: 'start', file: event.file });
-                //   const sub = this.uploadFile(event.file, event).subscribe((data: any) => {
-                //     this.serviceEvents.emit(data);
-                //   });
-                //   this.uploads.push({ file: event.file, sub: sub });
-                // break;
-                // Fix from user: https://mdbootstrap.com/support/input-file-no-trabaja-correctamente-mdbfileselect/
                 case 'uploadFile':
-                    _this.serviceEvents.emit({ type: 'start', file: event.file });
-                    var /** @type {?} */ sub = _this.uploadFile(event.file, event);
-                    _this.uploads.push({ file: event.file, sub: sub });
-                    sub.subscribe(function (data) {
-                        _this.serviceEvents.emit(data);
-                    });
+                    var /** @type {?} */ uploadFileIndex = _this.queue.findIndex(function (file) { return file === event.file; });
+                    if (uploadFileIndex !== -1 && event.file) {
+                        _this.uploadScheduler.next({ file: _this.queue[uploadFileIndex], event: event });
+                    }
                     break;
                 case 'uploadAll':
-                    // Lines 118, 121 and 129 commented due to ts comipilator check “noUnusedLocals”: true, “noUnusedParameters”: true,
-                    // const concurrency = event.concurrency > 0 ? event.concurrency : Number.POSITIVE_INFINITY;
-                    // const subscriber = Subscriber.create((data: UploadOutput) => {
-                    //   this.serviceEvents.emit(data);
-                    // });
-                    _this.uploads = _this.uploads.concat(_this.files.map(function (file) {
-                        return { file: file, sub: _this.setToNullValue };
-                    }));
-                    // const subscription = Observable.from(this.files.map(file => this.uploadFile(file, event)))
-                    //   .mergeAll(concurrency)
-                    //   .combineLatest(data => data)
-                    //   .subscribe(subscriber);
+                    var /** @type {?} */ files = _this.queue.filter(function (file) { return file.progress.status === UploadStatus.Queue; });
+                    files.forEach(function (file) { return _this.uploadScheduler.next({ file: file, event: event }); });
                     break;
                 case 'cancel':
                     var /** @type {?} */ id_1 = event.id || null;
                     if (!id_1) {
                         return;
                     }
-                    // const index = this.uploads.findIndex(upload => upload.file.id === id);
-                    var /** @type {?} */ index = _this.uploads.findIndex(function (upload) { return upload.file.id === id_1; });
-                    if (index !== -1) {
-                        if (_this.uploads[index].sub) {
-                            _this.uploads[index].sub.unsubscribe();
+                    var /** @type {?} */ index = _this.subs.findIndex(function (sub) { return sub.id === id_1; });
+                    if (index !== -1 && _this.subs[index].sub) {
+                        _this.subs[index].sub.unsubscribe();
+                        var /** @type {?} */ fileIndex = _this.queue.findIndex(function (file) { return file.id === id_1; });
+                        if (fileIndex !== -1) {
+                            _this.queue[fileIndex].progress.status = UploadStatus.Cancelled;
+                            _this.serviceEvents.emit({ type: 'cancelled', file: _this.queue[fileIndex] });
                         }
-                        _this.serviceEvents.emit({ type: 'cancelled', file: _this.uploads[index].file });
-                        _this.uploads[index].file.progress.status = UploadStatus.Canceled;
                     }
                     break;
                 case 'cancelAll':
-                    // this.uploads.forEach(upload => {
-                    _this.uploads.forEach(function (upload) {
-                        upload.file.progress.status = UploadStatus.Canceled;
-                        _this.serviceEvents.emit({ type: 'cancelled', file: upload.file });
+                    _this.subs.forEach(function (sub) {
+                        if (sub.sub) {
+                            sub.sub.unsubscribe();
+                        }
+                        var /** @type {?} */ file = _this.queue.find(function (uploadFile) { return uploadFile.id === sub.id; });
+                        if (file) {
+                            file.progress.status = UploadStatus.Cancelled;
+                            _this.serviceEvents.emit({ type: 'cancelled', file: file });
+                        }
                     });
                     break;
+                case 'remove':
+                    if (!event.id) {
+                        return;
+                    }
+                    var /** @type {?} */ i = _this.queue.findIndex(function (file) { return file.id === event.id; });
+                    if (i !== -1) {
+                        var /** @type {?} */ file = _this.queue[i];
+                        _this.queue.splice(i, 1);
+                        _this.serviceEvents.emit({ type: 'removed', file: file });
+                    }
+                    break;
+                case 'removeAll':
+                    if (_this.queue.length) {
+                        _this.queue = [];
+                        _this.serviceEvents.emit({ type: 'removedAll' });
+                    }
+                    break;
             }
+        });
+    };
+    /**
+     * @param {?} upload
+     * @return {?}
+     */
+    MDBUploaderService.prototype.startUpload = function (upload) {
+        var _this = this;
+        return new rxjs.Observable(function (observer) {
+            var /** @type {?} */ sub = _this.uploadFile(upload.file, upload.event)
+                .subscribe(function (output) {
+                observer.next(output);
+            }, function (err) {
+                observer.error(err);
+                observer.complete();
+            }, function () {
+                observer.complete();
+            });
+            _this.subs.push({ id: upload.file.id, sub: sub });
         });
     };
     /**
@@ -5272,27 +5306,32 @@ var MDBUploaderService = /** @class */ (function () {
     MDBUploaderService.prototype.uploadFile = function (file, event) {
         var _this = this;
         return new rxjs.Observable(function (observer) {
-            var /** @type {?} */ url = event.url;
+            var /** @type {?} */ url = event.url || '';
             var /** @type {?} */ method = event.method || 'POST';
             var /** @type {?} */ data = event.data || {};
             var /** @type {?} */ headers = event.headers || {};
-            var /** @type {?} */ reader = new FileReader();
             var /** @type {?} */ xhr = new XMLHttpRequest();
             var /** @type {?} */ time = new Date().getTime();
-            var /** @type {?} */ load = 0;
+            var /** @type {?} */ progressStartTime = (file.progress.data && file.progress.data.startTime) || time;
+            var /** @type {?} */ speed = 0;
+            var /** @type {?} */ eta = null;
             xhr.upload.addEventListener('progress', function (e) {
                 if (e.lengthComputable) {
                     var /** @type {?} */ percentage = Math.round((e.loaded * 100) / e.total);
                     var /** @type {?} */ diff = new Date().getTime() - time;
-                    time += diff;
-                    load = e.loaded - load;
-                    var /** @type {?} */ speed = parseInt(/** @type {?} */ ((load / diff * 1000)), 10);
+                    speed = Math.round(e.loaded / diff * 1000);
+                    progressStartTime = (file.progress.data && file.progress.data.startTime) || new Date().getTime();
+                    eta = Math.ceil((e.total - e.loaded) / speed);
                     file.progress = {
                         status: UploadStatus.Uploading,
                         data: {
                             percentage: percentage,
                             speed: speed,
-                            speedHuman: humanizeBytes(speed) + "/s"
+                            speedHuman: humanizeBytes(speed) + "/s",
+                            startTime: progressStartTime,
+                            endTime: null,
+                            eta: eta,
+                            etaHuman: _this.secondsToHuman(eta)
                         }
                     };
                     observer.next({ type: 'uploading', file: file });
@@ -5304,52 +5343,143 @@ var MDBUploaderService = /** @class */ (function () {
             });
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
+                    var /** @type {?} */ speedAverage = Math.round(file.size / (new Date().getTime() - progressStartTime) * 1000);
                     file.progress = {
                         status: UploadStatus.Done,
                         data: {
                             percentage: 100,
-                            speed: null,
-                            speedHuman: null
+                            speed: speedAverage,
+                            speedHuman: humanizeBytes(speedAverage) + "/s",
+                            startTime: progressStartTime,
+                            endTime: new Date().getTime(),
+                            eta: eta,
+                            etaHuman: _this.secondsToHuman(eta || 0)
                         }
                     };
+                    file.responseStatus = xhr.status;
                     try {
                         file.response = JSON.parse(xhr.response);
                     }
                     catch (e) {
                         file.response = xhr.response;
                     }
+                    file.responseHeaders = _this.parseResponseHeaders(xhr.getAllResponseHeaders());
                     observer.next({ type: 'done', file: file });
                     observer.complete();
                 }
             };
             xhr.open(method, url, true);
-            var /** @type {?} */ form = new FormData();
+            xhr.withCredentials = event.withCredentials ? true : false;
             try {
-                var /** @type {?} */ uploadFile_1 = _this.fileList.item(file.fileIndex);
-                var /** @type {?} */ uploadIndex = _this.uploads.findIndex(function (upload) { return upload.file.size === uploadFile_1.size; });
-                if (_this.uploads[uploadIndex].file.progress.status === UploadStatus.Canceled) {
+                var /** @type {?} */ uploadFile_1 = (file.nativeFile);
+                var /** @type {?} */ uploadIndex = _this.queue.findIndex(function (outFile) { return outFile.nativeFile === uploadFile_1; });
+                if (_this.queue[uploadIndex].progress.status === UploadStatus.Cancelled) {
                     observer.complete();
                 }
-                form.append('file', uploadFile_1, uploadFile_1.name);
-                Object.keys(data).forEach(function (key) { return form.append(key, data[key]); });
+                Object.keys(data).forEach(function (key) { return file.form.append(key, data[key]); });
                 Object.keys(headers).forEach(function (key) { return xhr.setRequestHeader(key, headers[key]); });
+                file.form.append(event.fieldName || 'file', uploadFile_1, uploadFile_1.name);
                 _this.serviceEvents.emit({ type: 'start', file: file });
-                xhr.send(form);
+                xhr.send(file.form);
             }
             catch (e) {
                 observer.complete();
             }
             return function () {
                 xhr.abort();
-                reader.abort();
             };
         });
+    };
+    /**
+     * @param {?} sec
+     * @return {?}
+     */
+    MDBUploaderService.prototype.secondsToHuman = function (sec) {
+        return new Date(sec * 1000).toISOString().substr(11, 8);
     };
     /**
      * @return {?}
      */
     MDBUploaderService.prototype.generateId = function () {
         return Math.random().toString(36).substring(7);
+    };
+    /**
+     * @param {?} contentTypes
+     * @return {?}
+     */
+    MDBUploaderService.prototype.setContentTypes = function (contentTypes) {
+        if (typeof contentTypes !== 'undefined' && contentTypes instanceof Array) {
+            if (contentTypes.find(function (type) { return type === '*'; }) !== undefined) {
+                this.contentTypes = ['*'];
+            }
+            else {
+                this.contentTypes = contentTypes;
+            }
+            return;
+        }
+        this.contentTypes = ['*'];
+    };
+    /**
+     * @return {?}
+     */
+    MDBUploaderService.prototype.allContentTypesAllowed = function () {
+        return this.contentTypes.find(function (type) { return type === '*'; }) !== undefined;
+    };
+    /**
+     * @param {?} mimetype
+     * @return {?}
+     */
+    MDBUploaderService.prototype.isContentTypeAllowed = function (mimetype) {
+        if (this.allContentTypesAllowed()) {
+            return true;
+        }
+        return this.contentTypes.find(function (type) { return type === mimetype; }) !== undefined;
+    };
+    /**
+     * @param {?} file
+     * @param {?} index
+     * @return {?}
+     */
+    MDBUploaderService.prototype.makeUploadFile = function (file, index) {
+        return {
+            fileIndex: index,
+            id: this.generateId(),
+            name: file.name,
+            size: file.size,
+            type: file.type,
+            form: new FormData(),
+            progress: {
+                status: UploadStatus.Queue,
+                data: {
+                    percentage: 0,
+                    speed: 0,
+                    speedHuman: humanizeBytes(0) + "/s",
+                    startTime: null,
+                    endTime: null,
+                    eta: null,
+                    etaHuman: null
+                }
+            },
+            lastModifiedDate: file.lastModified,
+            sub: undefined,
+            nativeFile: file
+        };
+    };
+    /**
+     * @param {?} httpHeaders
+     * @return {?}
+     */
+    MDBUploaderService.prototype.parseResponseHeaders = function (httpHeaders) {
+        if (!httpHeaders) {
+            return;
+        }
+        return httpHeaders.split('\n')
+            .map(function (x) { return x.split(/: */, 2); })
+            .filter(function (x) { return x[0]; })
+            .reduce(function (ac, x) {
+            ac[x[0]] = x[1];
+            return ac;
+        }, {});
     };
     return MDBUploaderService;
 }());
@@ -5808,12 +5938,12 @@ var ImageModalComponent = /** @class */ (function () {
         if (action === void 0) { action = this.SWIPE_ACTION.RIGHT; }
         // let thisImg = this._element.querySelector('.ng-gallery-content').querySelector('img[src="' + this.imgSrc + '"]');
         if (action === this.SWIPE_ACTION.RIGHT) {
-            this.nextImage();
+            this.prevImage();
             // console.log(event.distance, this.modalImages);
         }
         // previous
         if (action === this.SWIPE_ACTION.LEFT) {
-            this.prevImage();
+            this.nextImage();
         }
     };
     return ImageModalComponent;
@@ -5821,7 +5951,7 @@ var ImageModalComponent = /** @class */ (function () {
 ImageModalComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'mdb-image-modal',
-                template: "<div class=\"ng-gallery mdb-lightbox {{ type }}\" *ngIf=\"showRepeat\">  <figure class=\"col-md-4\" *ngFor =\"let i of modalImages; let index = index\"> <img src=\"{{ !i.thumb ? i.img : i.thumb }}\" class=\"ng-thumb\" (click)=\"openGallery(index)\" alt=\"Image {{ index + 1 }}\" /> </figure> </div> <div  tabindex=\"0\" class=\"ng-overlay\" [class.hide_lightbox]=\"opened == false\"> <div class=\"top-bar\" style='z-index: 100000'> <span class=\"info-text\">{{ currentImageIndex + 1 }}/{{ modalImages.length }}</span>     <a class=\"close-popup\" (click)=\"closeGallery()\" (click)=\"toggleRestart()\"></a> <a *ngIf=\"!is_iPhone_or_iPod\" class=\"fullscreen-toogle\" [class.toggled]='fullscreen' (click)=\"fullScreen()\"></a> <a class=\"zoom-toogle\" [class.zoom]='zoom' (click)=\"toggleZoomed()\" *ngIf=\"!isMobile\"></a> </div> <div class=\"ng-gallery-content\"> <!--<img *ngIf=\"!loading\" src=\"{{imgSrc}}\" (mousedown)=\"checkEvent($event)\" (mouseup)=\"setZoom($event)\" [class.zoom]='zoom' [class.smooth]='smooth' class=\"effect\" (swipeleft)=\"swipe($event, $event.type)\" (swiperight)=\"swipe($event, $event.type)\"/>--> <img *ngIf=\"!loading\" src=\"{{imgSrc}}\" [class.smooth]='smooth' class=\"effect\" (swipeleft)=\"swipe($event)\" (swiperight)=\"swipe($event)\" (click)=\"toggleZoomed()\" style=\"transform: scale(0.9, 0.9)\"/> <div class=\"uil-ring-css\" *ngIf=\"loading\"> <div></div> </div>   <a class=\"nav-left\" *ngIf=\"modalImages.length >1 && !isMobile\" (click)=\"prevImage()\" > <span></span> </a> <a class=\"nav-right\" *ngIf=\"modalImages.length >1 && !isMobile\" (click)=\"nextImage()\"> <span></span> </a> </div> </div> <div *ngIf=\"openModalWindow\"> <!-- <mdb-image-modal [modalImages]=\"images\" [imagePointer]=\"imagePointer\" (cancelEvent)=\"cancelImageModel()\"></mdb-image-modal> --> <mdb-image-modal [imagePointer]=\"imagePointer\"></mdb-image-modal> </div>",
+                template: "<div class=\"ng-gallery mdb-lightbox {{ type }}\" *ngIf=\"showRepeat\">  <figure class=\"col-md-4\" *ngFor =\"let i of modalImages; let index = index\"> <img src=\"{{ !i.thumb ? i.img : i.thumb }}\" class=\"ng-thumb\" (click)=\"openGallery(index)\" alt=\"Image {{ index + 1 }}\" /> </figure> </div> <div  tabindex=\"0\" class=\"ng-overlay\" [class.hide_lightbox]=\"opened == false\"> <div class=\"top-bar\" style='z-index: 100000'> <span class=\"info-text\">{{ currentImageIndex + 1 }}/{{ modalImages.length }}</span>     <a class=\"close-popup\" (click)=\"closeGallery()\" (click)=\"toggleRestart()\"></a> <a *ngIf=\"!is_iPhone_or_iPod\" class=\"fullscreen-toogle\" [class.toggled]='fullscreen' (click)=\"fullScreen()\"></a> <a class=\"zoom-toogle\" [class.zoom]='zoom' (click)=\"toggleZoomed()\" *ngIf=\"!isMobile\"></a> </div> <div class=\"ng-gallery-content\"> <!--<img *ngIf=\"!loading\" src=\"{{imgSrc}}\" (mousedown)=\"checkEvent($event)\" (mouseup)=\"setZoom($event)\" [class.zoom]='zoom' [class.smooth]='smooth' class=\"effect\" (swipeleft)=\"swipe($event, $event.type)\" (swiperight)=\"swipe($event, $event.type)\"/>--> <img *ngIf=\"!loading\" src=\"{{imgSrc}}\" [class.smooth]='smooth' class=\"effect\" (swipeleft)=\"swipe($event.type)\" (swiperight)=\"swipe($event.type)\" (click)=\"toggleZoomed()\" style=\"transform: scale(0.9, 0.9)\"/> <div class=\"uil-ring-css\" *ngIf=\"loading\"> <div></div> </div>   <a class=\"nav-left\" *ngIf=\"modalImages.length >1 && !isMobile\" (click)=\"prevImage()\" > <span></span> </a> <a class=\"nav-right\" *ngIf=\"modalImages.length >1 && !isMobile\" (click)=\"nextImage()\"> <span></span> </a> </div> </div> <div *ngIf=\"openModalWindow\"> <!-- <mdb-image-modal [modalImages]=\"images\" [imagePointer]=\"imagePointer\" (cancelEvent)=\"cancelImageModel()\"></mdb-image-modal> --> <mdb-image-modal [imagePointer]=\"imagePointer\"></mdb-image-modal> </div>",
             },] },
 ];
 /** @nocollapse */
@@ -7416,7 +7546,6 @@ var SelectComponent = /** @class */ (function () {
         if (changes.hasOwnProperty('placeholder')) {
             this.updateState();
         }
-        console.log('test');
     };
     /**
      * @return {?}
@@ -13957,6 +14086,174 @@ ChartsModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+var CHECKBOX_VALUE_ACCESSOR = {
+    provide: forms.NG_VALUE_ACCESSOR,
+    useExisting: core.forwardRef(function () { return CheckboxComponent; }),
+    multi: true
+};
+var defaultIdNumber = 0;
+var MdbCheckboxChange = /** @class */ (function () {
+    function MdbCheckboxChange() {
+    }
+    return MdbCheckboxChange;
+}());
+var CheckboxComponent = /** @class */ (function () {
+    function CheckboxComponent() {
+        this.defaultId = "mdb-checkbox-" + ++defaultIdNumber;
+        this.id = this.defaultId;
+        this.checked = false;
+        this.filledIn = false;
+        this.indeterminate = false;
+        this.rounded = false;
+        this.checkboxPosition = 'left';
+        this.default = false;
+        this.inline = false;
+        this.change = new core.EventEmitter();
+        // Control Value Accessor Methods
+        this.onChange = function (value) { };
+        this.onTouched = function () { };
+    }
+    /**
+     * @return {?}
+     */
+    CheckboxComponent.prototype.ngOnInit = function () {
+        if (this.indeterminate && !this.filledIn && !this.rounded) {
+            this.inputEl.indeterminate = true;
+        }
+    };
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    CheckboxComponent.prototype.ngOnChanges = function (changes) {
+        if (changes.hasOwnProperty('checked')) {
+            this.checked = changes["checked"].currentValue;
+        }
+    };
+    Object.defineProperty(CheckboxComponent.prototype, "changeEvent", {
+        /**
+         * @return {?}
+         */
+        get: function () {
+            var /** @type {?} */ newChangeEvent = new MdbCheckboxChange();
+            newChangeEvent.element = this;
+            newChangeEvent.checked = this.checked;
+            return newChangeEvent;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    CheckboxComponent.prototype.toggle = function () {
+        if (this.disabled) {
+            return;
+        }
+        this.checked = !this.checked;
+        this.indeterminate = false;
+        this.onChange(this.checked);
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    CheckboxComponent.prototype.onCheckboxClick = function (event) {
+        event.stopPropagation();
+        this.toggle();
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    CheckboxComponent.prototype.onCheckboxChange = function (event) {
+        event.stopPropagation();
+        this.change.emit(this.changeEvent);
+    };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    CheckboxComponent.prototype.writeValue = function (value) {
+        this.value = value;
+        this.checked = !!value;
+    };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    CheckboxComponent.prototype.registerOnChange = function (fn) {
+        this.onChange = fn;
+    };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    CheckboxComponent.prototype.registerOnTouched = function (fn) {
+        this.onTouched = fn;
+    };
+    /**
+     * @param {?} isDisabled
+     * @return {?}
+     */
+    CheckboxComponent.prototype.setDisabledState = function (isDisabled) {
+        this.disabled = isDisabled;
+    };
+    return CheckboxComponent;
+}());
+CheckboxComponent.decorators = [
+    { type: core.Component, args: [{
+                selector: 'mdb-checkbox',
+                template: "<div [ngClass]=\"{  'custom-control custom-checkbox': default, 'form-check': !default, 'custom-control-inline': inline, 'form-check-inline': inline && !default }\"> <input  #input type=\"checkbox\" class=\"custom-control-input\" [ngClass]=\"{  'filled-in': filledIn || rounded, 'custom-control-input': default, 'form-check-input': !default }\" [id]=\"id\" [checked]=\"checked\" [disabled]=\"disabled\" [required]=\"required\" [indeterminate]=\"indeterminate\" [attr.name]=\"name\" [attr.value]=\"value\" [tabIndex]=\"tabIndex\" (click)=\"onCheckboxClick($event)\" (change)=\"onCheckboxChange($event)\" > <label [ngClass]=\"{  'custom-control-label': default, 'form-check-label': !default, 'label-before': checkboxPosition === 'right',  'checkbox-rounded': rounded, 'disabled': disabled }\" [attr.for]=\"id\"> <ng-content></ng-content> </label> </div>",
+                providers: [CHECKBOX_VALUE_ACCESSOR]
+            },] },
+];
+/** @nocollapse */
+CheckboxComponent.ctorParameters = function () { return []; };
+CheckboxComponent.propDecorators = {
+    inputEl: [{ type: core.ViewChild, args: ['input',] }],
+    class: [{ type: core.Input }],
+    id: [{ type: core.Input }],
+    required: [{ type: core.Input }],
+    name: [{ type: core.Input }],
+    value: [{ type: core.Input }],
+    checked: [{ type: core.Input }],
+    filledIn: [{ type: core.Input }],
+    indeterminate: [{ type: core.Input }],
+    disabled: [{ type: core.Input }],
+    rounded: [{ type: core.Input }],
+    checkboxPosition: [{ type: core.Input }],
+    default: [{ type: core.Input }],
+    inline: [{ type: core.Input }],
+    change: [{ type: core.Output }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var CheckboxModule = /** @class */ (function () {
+    function CheckboxModule() {
+    }
+    return CheckboxModule;
+}());
+CheckboxModule.decorators = [
+    { type: core.NgModule, args: [{
+                declarations: [
+                    CheckboxComponent
+                ],
+                exports: [
+                    CheckboxComponent
+                ],
+                imports: [
+                    common.CommonModule,
+                    forms.FormsModule
+                ]
+            },] },
+];
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var CollapseDirective = /** @class */ (function () {
     /**
      * @param {?} _el
@@ -15484,6 +15781,24 @@ var MdbInputDirective = /** @class */ (function () {
         catch (error) { }
     };
     /**
+     * @param {?} value
+     * @return {?}
+     */
+    MdbInputDirective.prototype.updateErrorMsg = function (value) {
+        if (this.wrongTextContainer) {
+            this.wrongTextContainer.innerHTML = value;
+        }
+    };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    MdbInputDirective.prototype.updateSuccessMsg = function (value) {
+        if (this.rightTextContainer) {
+            this.rightTextContainer.innerHTML = value;
+        }
+    };
+    /**
      * @return {?}
      */
     MdbInputDirective.prototype.ngOnInit = function () {
@@ -15509,6 +15824,20 @@ var MdbInputDirective = /** @class */ (function () {
                 this.rightTextContainer.innerHTML = (this.successMessage ? this.successMessage : 'success');
             }
             this._renderer.setStyle(this.rightTextContainer, 'visibility', 'hidden');
+        }
+    };
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    MdbInputDirective.prototype.ngOnChanges = function (changes) {
+        if (changes.hasOwnProperty('errorMessage')) {
+            var /** @type {?} */ newErrorMsg = changes["errorMessage"].currentValue;
+            this.updateErrorMsg(newErrorMsg);
+        }
+        if (changes.hasOwnProperty('successMessage')) {
+            var /** @type {?} */ newSuccessMsg = changes["successMessage"].currentValue;
+            this.updateSuccessMsg(newSuccessMsg);
         }
     };
     /**
@@ -17505,8 +17834,10 @@ TooltipConfig.decorators = [
 var TooltipContainerComponent = /** @class */ (function () {
     /**
      * @param {?} config
+     * @param {?=} r
      */
-    function TooltipContainerComponent(config) {
+    function TooltipContainerComponent(config, r) {
+        this.r = r;
         this.show = !this.isBs3;
         Object.assign(this, config);
     }
@@ -17524,6 +17855,7 @@ var TooltipContainerComponent = /** @class */ (function () {
      * @return {?}
      */
     TooltipContainerComponent.prototype.ngAfterViewInit = function () {
+        var _this = this;
         this.classMap = { in: false, fade: false };
         this.classMap[this.placement] = true;
         this.classMap['tooltip-' + this.placement] = true;
@@ -17534,6 +17866,20 @@ var TooltipContainerComponent = /** @class */ (function () {
         if (this.popupClass) {
             this.classMap[this.popupClass] = true;
         }
+        console.log(this.tooltipInner.nativeElement);
+        setTimeout(function () {
+            var /** @type {?} */ arrowClassList = _this.tooltipArrow.nativeElement.classList;
+            var /** @type {?} */ tooltipHeight = _this.tooltipInner.nativeElement.clientHeight;
+            if (arrowClassList.contains('top')) {
+                _this.r.setStyle(_this.tooltipArrow.nativeElement, 'top', tooltipHeight + 6 + 'px');
+            }
+            else if (arrowClassList.contains('left')) {
+                _this.r.setStyle(_this.tooltipArrow.nativeElement, 'top', (tooltipHeight / 2) + 'px');
+            }
+            else if (arrowClassList.contains('right')) {
+                _this.r.setStyle(_this.tooltipArrow.nativeElement, 'top', (tooltipHeight / 2) + 'px');
+            }
+        }, 0);
     };
     return TooltipContainerComponent;
 }());
@@ -17545,14 +17891,17 @@ TooltipContainerComponent.decorators = [
                 host: {
                     '[class]': '"tooltip-fadeIn tooltip in tooltip-" + placement'
                 },
-                template: "\n  <div class=\"tooltip-arrow\"></div>\n  <div class=\"tooltip-inner\"><ng-content></ng-content></div>\n  "
+                template: "\n  <div #tooltipArrow class=\"tooltip-arrow\" [ngClass]=\"{'left': placement == 'left', 'right': placement == 'right', 'top': placement == 'top'}\"></div>\n  <div #tooltipInner class=\"tooltip-inner\"><ng-content></ng-content></div>\n  "
             },] },
 ];
 /** @nocollapse */
 TooltipContainerComponent.ctorParameters = function () { return [
-    { type: TooltipConfig }
+    { type: TooltipConfig },
+    { type: core.Renderer2 }
 ]; };
 TooltipContainerComponent.propDecorators = {
+    tooltipInner: [{ type: core.ViewChild, args: ['tooltipInner',] }],
+    tooltipArrow: [{ type: core.ViewChild, args: ['tooltipArrow',] }],
     show: [{ type: core.HostBinding, args: ['class.show',] }]
 };
 /**
@@ -17838,6 +18187,10 @@ var BsComponentRef = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var MODULES = [
     ButtonsModule,
     CardsFreeModule,
@@ -17852,7 +18205,8 @@ var MODULES = [
     ModalModule,
     TooltipModule,
     PopoverModule,
-    IconsModule
+    IconsModule,
+    CheckboxModule
 ];
 var MDBRootModule = /** @class */ (function () {
     function MDBRootModule() {
@@ -17875,7 +18229,8 @@ MDBRootModule.decorators = [
                     TooltipModule.forRoot(),
                     PopoverModule.forRoot(),
                     IconsModule,
-                    CardsFreeModule.forRoot()
+                    CardsFreeModule.forRoot(),
+                    CheckboxModule
                 ],
                 exports: MODULES,
                 schemas: [core.NO_ERRORS_SCHEMA]
@@ -17971,7 +18326,7 @@ var MODULES$1 = [
     AccordionModule,
     StickyContentModule,
     SmoothscrollModule,
-    CharCounterModule,
+    CharCounterModule
 ];
 var MDBRootModulePro = /** @class */ (function () {
     function MDBRootModulePro() {
@@ -17995,7 +18350,7 @@ MDBRootModulePro.decorators = [
                     AccordionModule,
                     StickyContentModule,
                     SmoothscrollModule.forRoot(),
-                    CharCounterModule.forRoot(),
+                    CharCounterModule.forRoot()
                 ],
                 exports: [MODULES$1],
                 providers: [],
@@ -18207,6 +18562,10 @@ exports.MdbCardFooterComponent = MdbCardFooterComponent;
 exports.MdbCardHeaderComponent = MdbCardHeaderComponent;
 exports.BaseChartDirective = BaseChartDirective;
 exports.ChartsModule = ChartsModule;
+exports.CHECKBOX_VALUE_ACCESSOR = CHECKBOX_VALUE_ACCESSOR;
+exports.MdbCheckboxChange = MdbCheckboxChange;
+exports.CheckboxComponent = CheckboxComponent;
+exports.CheckboxModule = CheckboxModule;
 exports.CollapseDirective = CollapseDirective;
 exports.CollapseModule = CollapseModule;
 exports.BsDropdownContainerComponent = BsDropdownContainerComponent;
@@ -18294,41 +18653,44 @@ exports.ɵcx1 = CarouselModule;
 exports.ɵcw1 = SlideComponent;
 exports.ɵcz1 = BaseChartDirective;
 exports.ɵda1 = ChartsModule;
-exports.ɵdb1 = CollapseDirective;
-exports.ɵdc1 = CollapseModule;
-exports.ɵdd1 = BsDropdownContainerComponent;
-exports.ɵde1 = BsDropdownMenuDirective;
-exports.ɵdf1 = BsDropdownToggleDirective;
-exports.ɵdg1 = BsDropdownConfig;
-exports.ɵdh1 = BsDropdownDirective;
-exports.ɵdj1 = DropdownModule;
-exports.ɵdi1 = BsDropdownState;
-exports.ɵdl1 = MdbIconComponent;
-exports.ɵdk1 = IconsModule;
-exports.ɵdm1 = InputsModule;
-exports.ɵdn1 = MdbInputDirective;
-exports.ɵej1 = MDBRootModule;
-exports.ɵdo1 = ModalDirective;
-exports.ɵdu1 = ModalModule;
-exports.ɵdp1 = ModalOptions;
-exports.ɵdq1 = MDBModalService;
-exports.ɵds1 = ModalBackdropComponent;
-exports.ɵdr1 = ModalBackdropOptions;
-exports.ɵdt1 = ModalContainerComponent;
-exports.ɵdv1 = NavbarComponent;
-exports.ɵdw1 = NavbarModule;
-exports.ɵdx1 = PopoverContainerComponent;
-exports.ɵdy1 = PopoverConfig;
-exports.ɵdz1 = PopoverDirective;
-exports.ɵea1 = PopoverModule;
-exports.ɵeb1 = RippleDirective;
-exports.ɵec1 = RippleModule;
-exports.ɵef1 = TooltipContainerComponent;
-exports.ɵeg1 = TooltipDirective;
-exports.ɵei1 = TooltipModule;
-exports.ɵeh1 = TooltipConfig;
-exports.ɵed1 = WavesDirective;
-exports.ɵee1 = WavesModule;
+exports.ɵdb1 = CHECKBOX_VALUE_ACCESSOR;
+exports.ɵdc1 = CheckboxComponent;
+exports.ɵdd1 = CheckboxModule;
+exports.ɵde1 = CollapseDirective;
+exports.ɵdf1 = CollapseModule;
+exports.ɵdg1 = BsDropdownContainerComponent;
+exports.ɵdh1 = BsDropdownMenuDirective;
+exports.ɵdi1 = BsDropdownToggleDirective;
+exports.ɵdj1 = BsDropdownConfig;
+exports.ɵdk1 = BsDropdownDirective;
+exports.ɵdm1 = DropdownModule;
+exports.ɵdl1 = BsDropdownState;
+exports.ɵdo1 = MdbIconComponent;
+exports.ɵdn1 = IconsModule;
+exports.ɵdp1 = InputsModule;
+exports.ɵdq1 = MdbInputDirective;
+exports.ɵem1 = MDBRootModule;
+exports.ɵdr1 = ModalDirective;
+exports.ɵdx1 = ModalModule;
+exports.ɵds1 = ModalOptions;
+exports.ɵdt1 = MDBModalService;
+exports.ɵdv1 = ModalBackdropComponent;
+exports.ɵdu1 = ModalBackdropOptions;
+exports.ɵdw1 = ModalContainerComponent;
+exports.ɵdy1 = NavbarComponent;
+exports.ɵdz1 = NavbarModule;
+exports.ɵea1 = PopoverContainerComponent;
+exports.ɵeb1 = PopoverConfig;
+exports.ɵec1 = PopoverDirective;
+exports.ɵed1 = PopoverModule;
+exports.ɵee1 = RippleDirective;
+exports.ɵef1 = RippleModule;
+exports.ɵei1 = TooltipContainerComponent;
+exports.ɵej1 = TooltipDirective;
+exports.ɵel1 = TooltipModule;
+exports.ɵek1 = TooltipConfig;
+exports.ɵeg1 = WavesDirective;
+exports.ɵeh1 = WavesModule;
 exports.ɵc1 = SBItemComponent;
 exports.ɵa1 = SBItemBodyComponent;
 exports.ɵb1 = SBItemHeadComponent;
@@ -18369,11 +18731,11 @@ exports.ɵbl1 = SelectDropdownComponent;
 exports.ɵbm1 = SELECT_VALUE_ACCESSOR;
 exports.ɵbn1 = SelectComponent;
 exports.ɵbo1 = SelectModule;
-exports.ɵek1 = MDBRootModulePro;
+exports.ɵen1 = MDBRootModulePro;
 exports.ɵbp1 = BarComponent;
 exports.ɵbv1 = ProgressBars;
-exports.ɵel1 = MdProgressBarModule;
-exports.ɵem1 = MdProgressSpinnerModule;
+exports.ɵeo1 = MdProgressBarModule;
+exports.ɵep1 = MdProgressSpinnerModule;
 exports.ɵbq1 = ProgressSpinnerComponent;
 exports.ɵbr1 = ProgressDirective;
 exports.ɵbs1 = ProgressbarComponent;
