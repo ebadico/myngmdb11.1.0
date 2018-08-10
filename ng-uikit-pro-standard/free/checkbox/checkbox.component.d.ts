@@ -20,7 +20,7 @@ export declare class CheckboxComponent implements OnInit, OnChanges {
     checkboxPosition: string;
     default: boolean;
     inline: boolean;
-    tabIndex: string;
+    tabIndex: number;
     change: EventEmitter<MdbCheckboxChange>;
     constructor();
     ngOnInit(): void;
