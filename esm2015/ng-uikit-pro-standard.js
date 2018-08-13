@@ -3441,7 +3441,8 @@ LocaleService.decorators = [
  * @suppress {checkTypes} checked by tsc
  */
 const M = 'm';
-const MMM = 'mmm';
+/* const MM = 'mm'; */
+/* const MMM = 'mmm'; */
 const D = 'd';
 class UtilService {
     /**
@@ -3461,7 +3462,7 @@ class UtilService {
     isDateValid(dateStr, dateFormat, minYear, maxYear, disableUntil, disableSince, disableWeekends, disableDays, disableDateRanges, monthLabels, enableDays) {
         const /** @type {?} */ returnDate = { day: 0, month: 0, year: 0 };
         const /** @type {?} */ daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-        const /** @type {?} */ isMonthStr = dateFormat.indexOf(MMM) !== -1;
+        /* const isMonthStr: boolean = dateFormat.indexOf(MMM) !== -1; */
         const /** @type {?} */ delimeters = this.getDateFormatDelimeters(dateFormat);
         const /** @type {?} */ dateValue = this.getDateValue(dateStr, dateFormat, delimeters);
         const /** @type {?} */ year = +dateValue[0].value;
@@ -13672,7 +13673,7 @@ class CheckboxComponent {
         this.inline = false;
         this.change = new EventEmitter();
         // Control Value Accessor Methods
-        this.onChange = (value) => { };
+        this.onChange = (_) => { };
         this.onTouched = () => { };
     }
     /**
@@ -17288,7 +17289,7 @@ TooltipConfig.decorators = [
 class TooltipContainerComponent {
     /**
      * @param {?} config
-     * @param {?=} r
+     * @param {?} r
      */
     constructor(config, r) {
         this.r = r;

@@ -10,6 +10,6 @@ export declare class TooltipContainerComponent implements AfterViewInit {
     tooltipArrow: ElementRef;
     show: boolean;
     readonly isBs3: boolean;
-    constructor(config: TooltipConfig, r?: Renderer2);
+    constructor(config: TooltipConfig, r: Renderer2);
     ngAfterViewInit(): void;
 }

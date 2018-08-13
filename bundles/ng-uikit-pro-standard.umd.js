@@ -3528,7 +3528,8 @@ LocaleService.decorators = [
  * @suppress {checkTypes} checked by tsc
  */
 var M = 'm';
-var MMM = 'mmm';
+/* const MM = 'mm'; */
+/* const MMM = 'mmm'; */
 var D = 'd';
 var UtilService = /** @class */ (function () {
     function UtilService() {
@@ -3550,7 +3551,7 @@ var UtilService = /** @class */ (function () {
     UtilService.prototype.isDateValid = function (dateStr, dateFormat, minYear, maxYear, disableUntil, disableSince, disableWeekends, disableDays, disableDateRanges, monthLabels, enableDays) {
         var /** @type {?} */ returnDate = { day: 0, month: 0, year: 0 };
         var /** @type {?} */ daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-        var /** @type {?} */ isMonthStr = dateFormat.indexOf(MMM) !== -1;
+        /* const isMonthStr: boolean = dateFormat.indexOf(MMM) !== -1; */
         var /** @type {?} */ delimeters = this.getDateFormatDelimeters(dateFormat);
         var /** @type {?} */ dateValue = this.getDateValue(dateStr, dateFormat, delimeters);
         var /** @type {?} */ year = +dateValue[0].value;
@@ -14110,7 +14111,7 @@ var CheckboxComponent = /** @class */ (function () {
         this.inline = false;
         this.change = new core.EventEmitter();
         // Control Value Accessor Methods
-        this.onChange = function (value) { };
+        this.onChange = function (_) { };
         this.onTouched = function () { };
     }
     /**
@@ -17835,7 +17836,7 @@ TooltipConfig.decorators = [
 var TooltipContainerComponent = /** @class */ (function () {
     /**
      * @param {?} config
-     * @param {?=} r
+     * @param {?} r
      */
     function TooltipContainerComponent(config, r) {
         this.r = r;

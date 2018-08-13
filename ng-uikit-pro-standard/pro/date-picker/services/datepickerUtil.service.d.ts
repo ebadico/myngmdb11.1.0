@@ -11,7 +11,7 @@ export declare class UtilService {
     getMonthNumberByMonthName(df: IMyDateFormat, monthLabels: IMyMonthLabels): number;
     getNumberByValue(df: IMyDateFormat): number;
     getDateFormatSeparator(dateFormat: string): string;
-    getDateFormatDelimeters(dateFormat: string): Array<string>;
+    getDateFormatDelimeters(dateFormat: string): Array<string> | any;
     isMonthLabelValid(monthLabel: string, monthLabels: IMyMonthLabels): number;
     isYearLabelValid(yearLabel: number, minYear: number, maxYear: number): number;
     parseDatePartNumber(dateFormat: string, dateString: string, datePart: string): number;

@@ -29,7 +29,7 @@ export declare class CheckboxComponent implements OnInit, OnChanges {
     toggle(): void;
     onCheckboxClick(event: any): void;
     onCheckboxChange(event: any): void;
-    onChange: (value: any) => void;
+    onChange: (_: any) => void;
     onTouched: () => void;
     writeValue(value: any): void;
     registerOnChange(fn: (_: any) => void): void;
