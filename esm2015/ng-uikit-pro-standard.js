@@ -4,7 +4,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Observable, Subject, timer } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormControl, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 import { Headers, Http, HttpModule, RequestOptions } from '@angular/http';
 import 'hammerjs';
 import { NavigationCancel, NavigationEnd, NavigationError, Router, RouterLinkWithHref } from '@angular/router';
@@ -116,6 +116,7 @@ class SBItemHeadComponent {
      */
     constructor(sbItem) {
         this.sbItem = sbItem;
+        this.isDisabled = false;
     }
     /**
      * @param {?} event
@@ -123,21 +124,26 @@ class SBItemHeadComponent {
      */
     toggleClick(event) {
         event.preventDefault();
-        this.sbItem.collapsed = !this.sbItem.collapsed;
-        this.sbItem.toggle(this.sbItem.collapsed);
+        if (!this.isDisabled) {
+            this.sbItem.collapsed = !this.sbItem.collapsed;
+            this.sbItem.toggle(this.sbItem.collapsed);
+        }
     }
 }
 SBItemHeadComponent.decorators = [
     { type: Component, args: [{
                 exportAs: 'sbItemHead',
                 selector: 'mdb-item-head, mdb-accordion-item-head',
-                template: "<div class=\"card-header\"> <a role=\"button\" (click)=\"toggleClick($event)\"> <h5 class=\"mb-0\"> <ng-content></ng-content> <i class=\"fa fa-angle-down rotate-icon\"></i> </h5> </a> </div>"
+                template: "<div class=\"card-header\" [ngClass]=\"{ 'item-disabled': isDisabled }\" (click)=\"toggleClick($event)\"> <a role=\"button\"> <h5 class=\"mb-0\"> <ng-content></ng-content> <i class=\"fa fa-angle-down rotate-icon\"></i> </h5> </a> </div>"
             },] },
 ];
 /** @nocollapse */
 SBItemHeadComponent.ctorParameters = () => [
     { type: SBItemComponent }
 ];
+SBItemHeadComponent.propDecorators = {
+    isDisabled: [{ type: Input }]
+};
 
 /**
  * @fileoverview added by tsickle
@@ -3434,6 +3440,10 @@ LocaleService.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+const M = 'm';
+/* const MM = 'mm'; */
+/* const MMM = 'mmm'; */
+const D = 'd';
 class UtilService {
     /**
      * @param {?} dateStr
@@ -3452,20 +3462,12 @@ class UtilService {
     isDateValid(dateStr, dateFormat, minYear, maxYear, disableUntil, disableSince, disableWeekends, disableDays, disableDateRanges, monthLabels, enableDays) {
         const /** @type {?} */ returnDate = { day: 0, month: 0, year: 0 };
         const /** @type {?} */ daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-        const /** @type {?} */ isMonthStr = this.getDatePartIndex(dateFormat, 'mmm') !== -1;
-        if (dateStr.length !== dateFormat.length) {
-            return returnDate;
-        }
-        const /** @type {?} */ separator = this.getDateFormatSeparator(dateFormat);
-        const /** @type {?} */ parts = dateStr.split(separator);
-        if (parts.length !== 3) {
-            return returnDate;
-        }
-        const /** @type {?} */ day = this.parseDatePartNumber(dateFormat, dateStr, 'dd');
-        const /** @type {?} */ month = isMonthStr ?
-            this.parseDatePartMonthName(dateFormat, dateStr, 'mmm', monthLabels) :
-            this.parseDatePartNumber(dateFormat, dateStr, 'mm');
-        const /** @type {?} */ year = this.parseDatePartNumber(dateFormat, dateStr, 'yyyy');
+        /* const isMonthStr: boolean = dateFormat.indexOf(MMM) !== -1; */
+        const /** @type {?} */ delimeters = this.getDateFormatDelimeters(dateFormat);
+        const /** @type {?} */ dateValue = this.getDateValue(dateStr, dateFormat, delimeters);
+        const /** @type {?} */ year = +dateValue[0].value;
+        const /** @type {?} */ month = this.getNumberByValue(dateValue[1]);
+        const /** @type {?} */ day = this.getNumberByValue(dateValue[2]);
         if (day !== -1 && month !== -1 && year !== -1) {
             if (year < minYear || year > maxYear || month < 1 || month > 12) {
                 return returnDate;
@@ -3486,11 +3488,78 @@ class UtilService {
         return returnDate;
     }
     /**
+     * @param {?} dateStr
+     * @param {?} dateFormat
+     * @param {?} delimeters
+     * @return {?}
+     */
+    getDateValue(dateStr, dateFormat, delimeters) {
+        let /** @type {?} */ del = delimeters[0];
+        if (delimeters[0] !== delimeters[1]) {
+            del = delimeters[0] + delimeters[1];
+        }
+        const /** @type {?} */ re = new RegExp('[' + del + ']');
+        const /** @type {?} */ ds = dateStr.split(re);
+        const /** @type {?} */ df = dateFormat.split(re);
+        const /** @type {?} */ da = [];
+        for (let /** @type {?} */ i = 0; i < df.length; i++) {
+            if (df[i].indexOf('yy') !== -1) {
+                da[0] = { value: ds[i], format: df[i] };
+            }
+            if (df[i].indexOf(M) !== -1) {
+                da[1] = { value: ds[i], format: df[i] };
+            }
+            if (df[i].indexOf(D) !== -1) {
+                da[2] = { value: ds[i], format: df[i] };
+            }
+        }
+        return da;
+    }
+    /**
+     * @param {?} df
+     * @param {?} monthLabels
+     * @return {?}
+     */
+    getMonthNumberByMonthName(df, monthLabels) {
+        if (df.value) {
+            for (let /** @type {?} */ key = 1; key <= 12; key++) {
+                if (df.value.toLowerCase() === monthLabels[key].toLowerCase()) {
+                    return key;
+                }
+            }
+        }
+        return -1;
+    }
+    /**
+     * @param {?} df
+     * @return {?}
+     */
+    getNumberByValue(df) {
+        if (!/^\d+$/.test(df.value)) {
+            return -1;
+        }
+        let /** @type {?} */ nbr = Number(df.value);
+        if (df.format.length === 1 && df.value.length !== 1 && nbr < 10 || df.format.length === 1 && df.value.length !== 2 && nbr >= 10) {
+            nbr = -1;
+        }
+        else if (df.format.length === 2 && df.value.length > 2) {
+            nbr = -1;
+        }
+        return nbr;
+    }
+    /**
      * @param {?} dateFormat
      * @return {?}
      */
     getDateFormatSeparator(dateFormat) {
         return dateFormat.replace(/[dmy]/g, '')[0];
+    }
+    /**
+     * @param {?} dateFormat
+     * @return {?}
+     */
+    getDateFormatDelimeters(dateFormat) {
+        return dateFormat.match(/[^(dmy)]{1,}/g);
     }
     /**
      * @param {?} monthLabel
@@ -3763,6 +3832,7 @@ class MDBDatePickerComponent {
         this.nextMonthId = MonthId.next;
         this.tmp = { year: this.getToday().year, month: this.getToday().month, day: this.getToday().day };
         this.opts = {
+            startDate: /** @type {?} */ (''),
             closeAfterSelect: /** @type {?} */ (false),
             dayLabelsFull: /** @type {?} */ ({}),
             dayLabels: /** @type {?} */ ({}),
@@ -4075,6 +4145,9 @@ class MDBDatePickerComponent {
         }
         if (changes.hasOwnProperty('options')) {
             this.options = changes['options'].currentValue;
+            if (changes["options"].currentValue.startDate) {
+                this.onUserDateInput(changes["options"].currentValue.startDate);
+            }
         }
         this.weekDays.length = 0;
         this.parseOptions();
@@ -4407,8 +4480,8 @@ class MDBDatePickerComponent {
         const /** @type {?} */ mm = this.preZero(val.month); // 01 - 12
         const /** @type {?} */ mmm = this.getMonthShort(val.month); // Jan - Dec
         const /** @type {?} */ mmmm = this.getMonthFull(val.month); // January – December
-        const /** @type {?} */ yy = val.year.toString().slice(2, 4); // 00 - 99
-        const /** @type {?} */ yyyy = val.year; // 2000 - 2999
+        const /** @type {?} */ yy = val.year.toString().length === 2 ? val.year : val.year.toString().slice(2, 4); // 00 - 99
+        const /** @type {?} */ yyyy = val.year;
         const /** @type {?} */ toReplace = this.opts.dateFormat.split(/(d{1,4}|m{1,4}|y{4}|yy|!.)/g);
         let /** @type {?} */ formatted = '';
         toReplace.forEach((el) => {
@@ -4948,17 +5021,25 @@ ChartSimpleModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+/**
+ * @record
+ */
+
+/**
+ * @record
+ */
+
 /** @enum {number} */
 const UploadStatus = {
     Queue: 0,
     Uploading: 1,
     Done: 2,
-    Canceled: 3,
+    Cancelled: 3,
 };
 UploadStatus[UploadStatus.Queue] = "Queue";
 UploadStatus[UploadStatus.Uploading] = "Uploading";
 UploadStatus[UploadStatus.Done] = "Done";
-UploadStatus[UploadStatus.Canceled] = "Canceled";
+UploadStatus[UploadStatus.Cancelled] = "Cancelled";
 /**
  * @record
  */
@@ -4989,39 +5070,43 @@ function humanizeBytes(bytes) {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 }
 class MDBUploaderService {
-    constructor() {
-        this.setToNullValue = null;
-        this.files = [];
+    /**
+     * @param {?=} concurrency
+     * @param {?=} contentTypes
+     * @param {?=} maxUploads
+     */
+    constructor(concurrency = Number.POSITIVE_INFINITY, contentTypes = ['*'], maxUploads = Number.POSITIVE_INFINITY) {
+        this.queue = [];
         this.serviceEvents = new EventEmitter();
-        this.uploads = [];
+        this.uploadScheduler = new Subject();
+        this.subs = [];
+        this.contentTypes = contentTypes;
+        this.maxUploads = maxUploads;
+        this.uploadScheduler
+            .pipe(mergeMap(upload => this.startUpload(upload), concurrency))
+            .subscribe(uploadOutput => this.serviceEvents.emit(uploadOutput));
     }
     /**
-     * @param {?} files
+     * @param {?} incomingFiles
      * @return {?}
      */
-    handleFiles(files) {
-        this.fileList = files;
-        this.files = [].map.call(files, (file, i) => {
-            // const uploadFile: UploadFile = {
-            const /** @type {?} */ uploadFile = {
-                fileIndex: i,
-                id: this.generateId(),
-                name: file.name,
-                size: file.size,
-                type: file.type,
-                progress: {
-                    status: UploadStatus.Queue,
-                    data: {
-                        percentage: 0,
-                        speed: null,
-                        speedHuman: null
-                    }
-                },
-                lastModifiedDate: file.lastModifiedDate
-            };
+    handleFiles(incomingFiles) {
+        const /** @type {?} */ allowedIncomingFiles = [].reduce.call(incomingFiles, (acc, checkFile, i) => {
+            const /** @type {?} */ futureQueueLength = acc.length + this.queue.length + 1;
+            if (this.isContentTypeAllowed(checkFile.type) && futureQueueLength <= this.maxUploads) {
+                acc = acc.concat(checkFile);
+            }
+            else {
+                const /** @type {?} */ rejectedFile = this.makeUploadFile(checkFile, i);
+                this.serviceEvents.emit({ type: 'rejected', file: rejectedFile });
+            }
+            return acc;
+        }, []);
+        this.queue.push(...[].map.call(allowedIncomingFiles, (file, i) => {
+            const /** @type {?} */ uploadFile = this.makeUploadFile(file, i);
             this.serviceEvents.emit({ type: 'addedToQueue', file: uploadFile });
             return uploadFile;
-        });
+        }));
         this.serviceEvents.emit({ type: 'allAddedToQueue' });
     }
     /**
@@ -5029,63 +5114,81 @@ class MDBUploaderService {
      * @return {?}
      */
     initInputEvents(input) {
-        // input.subscribe((event: UploadInput) => {
-        // input.subscribe((event: UploadInput) => {
-        input.subscribe((event) => {
+        return input.subscribe((event) => {
             switch (event.type) {
-                // case 'uploadFile':
-                //   this.serviceEvents.emit({ type: 'start', file: event.file });
-                //   const sub = this.uploadFile(event.file, event).subscribe((data: any) => {
-                //     this.serviceEvents.emit(data);
-                //   });
-                //   this.uploads.push({ file: event.file, sub: sub });
-                // break;
-                // Fix from user: https://mdbootstrap.com/support/input-file-no-trabaja-correctamente-mdbfileselect/
                 case 'uploadFile':
-                    this.serviceEvents.emit({ type: 'start', file: event.file });
-                    const /** @type {?} */ sub = this.uploadFile(event.file, event);
-                    this.uploads.push({ file: event.file, sub: sub });
-                    sub.subscribe((data) => {
-                        this.serviceEvents.emit(data);
-                    });
+                    const /** @type {?} */ uploadFileIndex = this.queue.findIndex(file => file === event.file);
+                    if (uploadFileIndex !== -1 && event.file) {
+                        this.uploadScheduler.next({ file: this.queue[uploadFileIndex], event: event });
+                    }
                     break;
                 case 'uploadAll':
-                    // Lines 118, 121 and 129 commented due to ts comipilator check “noUnusedLocals”: true, “noUnusedParameters”: true,
-                    // const concurrency = event.concurrency > 0 ? event.concurrency : Number.POSITIVE_INFINITY;
-                    // const subscriber = Subscriber.create((data: UploadOutput) => {
-                    //   this.serviceEvents.emit(data);
-                    // });
-                    this.uploads = this.uploads.concat(this.files.map((file) => {
-                        return { file: file, sub: this.setToNullValue };
-                    }));
-                    // const subscription = Observable.from(this.files.map(file => this.uploadFile(file, event)))
-                    //   .mergeAll(concurrency)
-                    //   .combineLatest(data => data)
-                    //   .subscribe(subscriber);
+                    const /** @type {?} */ files = this.queue.filter(file => file.progress.status === UploadStatus.Queue);
+                    files.forEach(file => this.uploadScheduler.next({ file: file, event: event }));
                     break;
                 case 'cancel':
                     const /** @type {?} */ id = event.id || null;
                     if (!id) {
                         return;
                     }
-                    // const index = this.uploads.findIndex(upload => upload.file.id === id);
-                    const /** @type {?} */ index = this.uploads.findIndex((upload) => upload.file.id === id);
-                    if (index !== -1) {
-                        if (this.uploads[index].sub) {
-                            this.uploads[index].sub.unsubscribe();
+                    const /** @type {?} */ index = this.subs.findIndex(sub => sub.id === id);
+                    if (index !== -1 && this.subs[index].sub) {
+                        this.subs[index].sub.unsubscribe();
+                        const /** @type {?} */ fileIndex = this.queue.findIndex(file => file.id === id);
+                        if (fileIndex !== -1) {
+                            this.queue[fileIndex].progress.status = UploadStatus.Cancelled;
+                            this.serviceEvents.emit({ type: 'cancelled', file: this.queue[fileIndex] });
                         }
-                        this.serviceEvents.emit({ type: 'cancelled', file: this.uploads[index].file });
-                        this.uploads[index].file.progress.status = UploadStatus.Canceled;
                     }
                     break;
                 case 'cancelAll':
-                    // this.uploads.forEach(upload => {
-                    this.uploads.forEach((upload) => {
-                        upload.file.progress.status = UploadStatus.Canceled;
-                        this.serviceEvents.emit({ type: 'cancelled', file: upload.file });
+                    this.subs.forEach(sub => {
+                        if (sub.sub) {
+                            sub.sub.unsubscribe();
+                        }
+                        const /** @type {?} */ file = this.queue.find(uploadFile => uploadFile.id === sub.id);
+                        if (file) {
+                            file.progress.status = UploadStatus.Cancelled;
+                            this.serviceEvents.emit({ type: 'cancelled', file: file });
+                        }
                     });
                     break;
+                case 'remove':
+                    if (!event.id) {
+                        return;
+                    }
+                    const /** @type {?} */ i = this.queue.findIndex(file => file.id === event.id);
+                    if (i !== -1) {
+                        const /** @type {?} */ file = this.queue[i];
+                        this.queue.splice(i, 1);
+                        this.serviceEvents.emit({ type: 'removed', file: file });
+                    }
+                    break;
+                case 'removeAll':
+                    if (this.queue.length) {
+                        this.queue = [];
+                        this.serviceEvents.emit({ type: 'removedAll' });
+                    }
+                    break;
             }
+        });
+    }
+    /**
+     * @param {?} upload
+     * @return {?}
+     */
+    startUpload(upload) {
+        return new Observable(observer => {
+            const /** @type {?} */ sub = this.uploadFile(upload.file, upload.event)
+                .subscribe(output => {
+                observer.next(output);
+            }, err => {
+                observer.error(err);
+                observer.complete();
+            }, () => {
+                observer.complete();
+            });
+            this.subs.push({ id: upload.file.id, sub: sub });
         });
     }
     /**
@@ -5095,27 +5198,32 @@ class MDBUploaderService {
      */
     uploadFile(file, event) {
         return new Observable(observer => {
-            const /** @type {?} */ url = event.url;
+            const /** @type {?} */ url = event.url || '';
             const /** @type {?} */ method = event.method || 'POST';
             const /** @type {?} */ data = event.data || {};
             const /** @type {?} */ headers = event.headers || {};
-            const /** @type {?} */ reader = new FileReader();
             const /** @type {?} */ xhr = new XMLHttpRequest();
-            let /** @type {?} */ time = new Date().getTime();
-            let /** @type {?} */ load = 0;
+            const /** @type {?} */ time = new Date().getTime();
+            let /** @type {?} */ progressStartTime = (file.progress.data && file.progress.data.startTime) || time;
+            let /** @type {?} */ speed = 0;
+            let /** @type {?} */ eta = null;
             xhr.upload.addEventListener('progress', (e) => {
                 if (e.lengthComputable) {
                     const /** @type {?} */ percentage = Math.round((e.loaded * 100) / e.total);
                     const /** @type {?} */ diff = new Date().getTime() - time;
-                    time += diff;
-                    load = e.loaded - load;
-                    const /** @type {?} */ speed = parseInt(/** @type {?} */ ((load / diff * 1000)), 10);
+                    speed = Math.round(e.loaded / diff * 1000);
+                    progressStartTime = (file.progress.data && file.progress.data.startTime) || new Date().getTime();
+                    eta = Math.ceil((e.total - e.loaded) / speed);
                     file.progress = {
                         status: UploadStatus.Uploading,
                         data: {
                             percentage: percentage,
                             speed: speed,
-                            speedHuman: `${humanizeBytes(speed)}/s`
+                            speedHuman: `${humanizeBytes(speed)}/s`,
+                            startTime: progressStartTime,
+                            endTime: null,
+                            eta: eta,
+                            etaHuman: this.secondsToHuman(eta)
                         }
                     };
                     observer.next({ type: 'uploading', file: file });
@@ -5127,52 +5235,143 @@ class MDBUploaderService {
             });
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
+                    const /** @type {?} */ speedAverage = Math.round(file.size / (new Date().getTime() - progressStartTime) * 1000);
                     file.progress = {
                         status: UploadStatus.Done,
                         data: {
                             percentage: 100,
-                            speed: null,
-                            speedHuman: null
+                            speed: speedAverage,
+                            speedHuman: `${humanizeBytes(speedAverage)}/s`,
+                            startTime: progressStartTime,
+                            endTime: new Date().getTime(),
+                            eta: eta,
+                            etaHuman: this.secondsToHuman(eta || 0)
                         }
                     };
+                    file.responseStatus = xhr.status;
                     try {
                         file.response = JSON.parse(xhr.response);
                     }
                     catch (/** @type {?} */ e) {
                         file.response = xhr.response;
                     }
+                    file.responseHeaders = this.parseResponseHeaders(xhr.getAllResponseHeaders());
                     observer.next({ type: 'done', file: file });
                     observer.complete();
                 }
             };
             xhr.open(method, url, true);
-            const /** @type {?} */ form = new FormData();
+            xhr.withCredentials = event.withCredentials ? true : false;
             try {
-                const /** @type {?} */ uploadFile = this.fileList.item(file.fileIndex);
-                const /** @type {?} */ uploadIndex = this.uploads.findIndex((upload) => upload.file.size === uploadFile.size);
-                if (this.uploads[uploadIndex].file.progress.status === UploadStatus.Canceled) {
+                const /** @type {?} */ uploadFile = /** @type {?} */ (file.nativeFile);
+                const /** @type {?} */ uploadIndex = this.queue.findIndex(outFile => outFile.nativeFile === uploadFile);
+                if (this.queue[uploadIndex].progress.status === UploadStatus.Cancelled) {
                     observer.complete();
                 }
-                form.append('file', uploadFile, uploadFile.name);
-                Object.keys(data).forEach(key => form.append(key, data[key]));
+                Object.keys(data).forEach(key => file.form.append(key, data[key]));
                 Object.keys(headers).forEach(key => xhr.setRequestHeader(key, headers[key]));
+                file.form.append(event.fieldName || 'file', uploadFile, uploadFile.name);
                 this.serviceEvents.emit({ type: 'start', file: file });
-                xhr.send(form);
+                xhr.send(file.form);
             }
             catch (/** @type {?} */ e) {
                 observer.complete();
             }
             return () => {
                 xhr.abort();
-                reader.abort();
             };
         });
+    }
+    /**
+     * @param {?} sec
+     * @return {?}
+     */
+    secondsToHuman(sec) {
+        return new Date(sec * 1000).toISOString().substr(11, 8);
     }
     /**
      * @return {?}
      */
     generateId() {
         return Math.random().toString(36).substring(7);
+    }
+    /**
+     * @param {?} contentTypes
+     * @return {?}
+     */
+    setContentTypes(contentTypes) {
+        if (typeof contentTypes !== 'undefined' && contentTypes instanceof Array) {
+            if (contentTypes.find((type) => type === '*') !== undefined) {
+                this.contentTypes = ['*'];
+            }
+            else {
+                this.contentTypes = contentTypes;
+            }
+            return;
+        }
+        this.contentTypes = ['*'];
+    }
+    /**
+     * @return {?}
+     */
+    allContentTypesAllowed() {
+        return this.contentTypes.find((type) => type === '*') !== undefined;
+    }
+    /**
+     * @param {?} mimetype
+     * @return {?}
+     */
+    isContentTypeAllowed(mimetype) {
+        if (this.allContentTypesAllowed()) {
+            return true;
+        }
+        return this.contentTypes.find((type) => type === mimetype) !== undefined;
+    }
+    /**
+     * @param {?} file
+     * @param {?} index
+     * @return {?}
+     */
+    makeUploadFile(file, index) {
+        return {
+            fileIndex: index,
+            id: this.generateId(),
+            name: file.name,
+            size: file.size,
+            type: file.type,
+            form: new FormData(),
+            progress: {
+                status: UploadStatus.Queue,
+                data: {
+                    percentage: 0,
+                    speed: 0,
+                    speedHuman: `${humanizeBytes(0)}/s`,
+                    startTime: null,
+                    endTime: null,
+                    eta: null,
+                    etaHuman: null
+                }
+            },
+            lastModifiedDate: file.lastModified,
+            sub: undefined,
+            nativeFile: file
+        };
+    }
+    /**
+     * @param {?} httpHeaders
+     * @return {?}
+     */
+    parseResponseHeaders(httpHeaders) {
+        if (!httpHeaders) {
+            return;
+        }
+        return httpHeaders.split('\n')
+            .map(x => x.split(/: */, 2))
+            .filter(x => x[0])
+            .reduce((ac, x) => {
+            ac[x[0]] = x[1];
+            return ac;
+        }, {});
     }
 }
 
@@ -5619,19 +5818,19 @@ class ImageModalComponent {
     swipe(action = this.SWIPE_ACTION.RIGHT) {
         // let thisImg = this._element.querySelector('.ng-gallery-content').querySelector('img[src="' + this.imgSrc + '"]');
         if (action === this.SWIPE_ACTION.RIGHT) {
-            this.nextImage();
+            this.prevImage();
             // console.log(event.distance, this.modalImages);
         }
         // previous
         if (action === this.SWIPE_ACTION.LEFT) {
-            this.prevImage();
+            this.nextImage();
         }
     }
 }
 ImageModalComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-image-modal',
-                template: "<div class=\"ng-gallery mdb-lightbox {{ type }}\" *ngIf=\"showRepeat\">  <figure class=\"col-md-4\" *ngFor =\"let i of modalImages; let index = index\"> <img src=\"{{ !i.thumb ? i.img : i.thumb }}\" class=\"ng-thumb\" (click)=\"openGallery(index)\" alt=\"Image {{ index + 1 }}\" /> </figure> </div> <div  tabindex=\"0\" class=\"ng-overlay\" [class.hide_lightbox]=\"opened == false\"> <div class=\"top-bar\" style='z-index: 100000'> <span class=\"info-text\">{{ currentImageIndex + 1 }}/{{ modalImages.length }}</span>     <a class=\"close-popup\" (click)=\"closeGallery()\" (click)=\"toggleRestart()\"></a> <a *ngIf=\"!is_iPhone_or_iPod\" class=\"fullscreen-toogle\" [class.toggled]='fullscreen' (click)=\"fullScreen()\"></a> <a class=\"zoom-toogle\" [class.zoom]='zoom' (click)=\"toggleZoomed()\" *ngIf=\"!isMobile\"></a> </div> <div class=\"ng-gallery-content\"> <!--<img *ngIf=\"!loading\" src=\"{{imgSrc}}\" (mousedown)=\"checkEvent($event)\" (mouseup)=\"setZoom($event)\" [class.zoom]='zoom' [class.smooth]='smooth' class=\"effect\" (swipeleft)=\"swipe($event, $event.type)\" (swiperight)=\"swipe($event, $event.type)\"/>--> <img *ngIf=\"!loading\" src=\"{{imgSrc}}\" [class.smooth]='smooth' class=\"effect\" (swipeleft)=\"swipe($event, $event.type)\" (swiperight)=\"swipe($event, $event.type)\" (click)=\"toggleZoomed()\" style=\"transform: scale(0.9, 0.9)\"/> <div class=\"uil-ring-css\" *ngIf=\"loading\"> <div></div> </div>   <a class=\"nav-left\" *ngIf=\"modalImages.length >1 && !isMobile\" (click)=\"prevImage()\" > <span></span> </a> <a class=\"nav-right\" *ngIf=\"modalImages.length >1 && !isMobile\" (click)=\"nextImage()\"> <span></span> </a> </div> </div> <div *ngIf=\"openModalWindow\"> <mdb-image-modal [modalImages]=\"images\" [imagePointer]=\"imagePointer\" (cancelEvent)=\"cancelImageModel()\"></mdb-image-modal> </div>",
+                template: "<div class=\"ng-gallery mdb-lightbox {{ type }}\" *ngIf=\"showRepeat\">  <figure class=\"col-md-4\" *ngFor =\"let i of modalImages; let index = index\"> <img src=\"{{ !i.thumb ? i.img : i.thumb }}\" class=\"ng-thumb\" (click)=\"openGallery(index)\" alt=\"Image {{ index + 1 }}\" /> </figure> </div> <div  tabindex=\"0\" class=\"ng-overlay\" [class.hide_lightbox]=\"opened == false\"> <div class=\"top-bar\" style='z-index: 100000'> <span class=\"info-text\">{{ currentImageIndex + 1 }}/{{ modalImages.length }}</span>     <a class=\"close-popup\" (click)=\"closeGallery()\" (click)=\"toggleRestart()\"></a> <a *ngIf=\"!is_iPhone_or_iPod\" class=\"fullscreen-toogle\" [class.toggled]='fullscreen' (click)=\"fullScreen()\"></a> <a class=\"zoom-toogle\" [class.zoom]='zoom' (click)=\"toggleZoomed()\" *ngIf=\"!isMobile\"></a> </div> <div class=\"ng-gallery-content\"> <!--<img *ngIf=\"!loading\" src=\"{{imgSrc}}\" (mousedown)=\"checkEvent($event)\" (mouseup)=\"setZoom($event)\" [class.zoom]='zoom' [class.smooth]='smooth' class=\"effect\" (swipeleft)=\"swipe($event, $event.type)\" (swiperight)=\"swipe($event, $event.type)\"/>--> <img *ngIf=\"!loading\" src=\"{{imgSrc}}\" [class.smooth]='smooth' class=\"effect\" (swipeleft)=\"swipe($event.type)\" (swiperight)=\"swipe($event.type)\" (click)=\"toggleZoomed()\" style=\"transform: scale(0.9, 0.9)\"/> <div class=\"uil-ring-css\" *ngIf=\"loading\"> <div></div> </div>   <a class=\"nav-left\" *ngIf=\"modalImages.length >1 && !isMobile\" (click)=\"prevImage()\" > <span></span> </a> <a class=\"nav-right\" *ngIf=\"modalImages.length >1 && !isMobile\" (click)=\"nextImage()\"> <span></span> </a> </div> </div> <div *ngIf=\"openModalWindow\"> <!-- <mdb-image-modal [modalImages]=\"images\" [imagePointer]=\"imagePointer\" (cancelEvent)=\"cancelImageModel()\"></mdb-image-modal> --> <mdb-image-modal [imagePointer]=\"imagePointer\"></mdb-image-modal> </div>",
             },] },
 ];
 /** @nocollapse */
@@ -6700,7 +6899,7 @@ class OptionList {
             this.options.forEach((option) => {
                 const /** @type {?} */ l = Diacritics.strip(option.label).toUpperCase();
                 const /** @type {?} */ t = Diacritics.strip(term).toUpperCase();
-                option.shown = l.indexOf(t) > -1;
+                option.shown = l.indexOf(t) === 0;
             });
         }
         this.highlight();
@@ -7042,7 +7241,7 @@ class SelectDropdownComponent {
 SelectDropdownComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-select-dropdown',
-                template: "<div class=\"dropdown-content\" #dropdownContent [ngStyle]=\"{'top.px': top, 'left.px': left, 'width.px': width}\"  [@dropdownAnimation]=\"{value: state, params: {startHeight: startHeight, endHeight: endHeight}}\"> <div class=\"filter\" *ngIf=\"filterEnabled\"> <input #filterInput autocomplete=\"on\" [placeholder]=\"placeholder\" (click)=\"onSingleFilterClick($event)\" (input)=\"onSingleFilterInput($event)\" (keydown)=\"onSingleFilterKeydown($event)\"> </div> <div class=\"options\" #optionsList> <ul class=\"select-dropdown\" [ngClass]=\"{'multiple-select-dropdown': multiple}\" (wheel)=\"onOptionsWheel($event)\"> <li *ngFor=\"let option of optionList.filtered\" [ngClass]=\"{'active': option.highlighted, 'selected': option.selected, 'disabled': option.disabled, 'optgroup': option.group}\" [ngStyle]=\"getOptionStyle(option)\" (click)=\"onOptionClick(option)\" (mouseover)=\"onOptionMouseover(option)\"> <img class=\"rounded-circle\" [src]=\"option.icon\" *ngIf=\"option.icon !== ''\"> <span class=\"select-option\" *ngIf=\"!multiple\">{{option.label}}</span> <span class=\"filtrable\" *ngIf=\"multiple\"> <input type=\"checkbox\" [checked]=\"option.selected\" class=\"form-check-input {{customClass}}\"> <label></label> {{option.label}} </span> </li> <li *ngIf=\"!this.hasOptionsItems\" class=\"message disabled\"> <span>{{notFoundMsg}}</span> </li> </ul> </div> </div>",
+                template: "<div class=\"dropdown-content\" #dropdownContent [ngStyle]=\"{'top.px': top, 'left.px': left, 'width.px': width}\"  [@dropdownAnimation]=\"{value: state, params: {startHeight: startHeight, endHeight: endHeight}}\"> <div class=\"filter\" *ngIf=\"filterEnabled\"> <input #filterInput autocomplete=\"on\" [placeholder]=\"placeholder\" (click)=\"onSingleFilterClick()\" (input)=\"onSingleFilterInput($event)\" (keydown)=\"onSingleFilterKeydown($event)\"> </div> <div class=\"options\" #optionsList> <ul class=\"select-dropdown\" [ngClass]=\"{'multiple-select-dropdown': multiple}\" (wheel)=\"onOptionsWheel($event)\"> <li *ngFor=\"let option of optionList.filtered\" [ngClass]=\"{'active': option.highlighted, 'selected': option.selected, 'disabled': option.disabled, 'optgroup': option.group}\" [ngStyle]=\"getOptionStyle(option)\" (click)=\"onOptionClick(option)\" (mouseover)=\"onOptionMouseover(option)\"> <img class=\"rounded-circle\" [src]=\"option.icon\" *ngIf=\"option.icon !== ''\"> <span class=\"select-option\" *ngIf=\"!multiple\">{{option.label}}</span> <span class=\"filtrable\" *ngIf=\"multiple\"> <input type=\"checkbox\" [checked]=\"option.selected\" class=\"form-check-input {{customClass}}\"> <label></label> {{option.label}} </span> </li> <li *ngIf=\"!this.hasOptionsItems\" class=\"message disabled\"> <span>{{notFoundMsg}}</span> </li> </ul> </div> </div>",
                 encapsulation: ViewEncapsulation.None,
                 animations: [trigger('dropdownAnimation', [
                         state('invisible', style({ height: '{{startHeight}}', }), { params: { startHeight: 0 } }),
@@ -7160,6 +7359,7 @@ class SelectComponent {
      * @return {?}
      */
     ngAfterViewInit() {
+        this.updateState();
         this.setArrowUpIcon();
         this.setArrowDownIcon();
         this.renderer.setStyle(this.selectionSpan.nativeElement.children[0].lastChild, 'visibility', 'hidden');
@@ -7170,13 +7370,17 @@ class SelectComponent {
      */
     ngOnChanges(changes) {
         if (changes.hasOwnProperty('options')) {
-            this.updateOptionsList(changes['options'].isFirstChange());
-            this.changed.emit({ previousValue: changes.options.previousValue, currentValue: changes.options.currentValue });
+            this.updateOptionsList(changes["options"].currentValue);
+            this.updateState();
+            this.changed.emit({ previousValue: changes["options"].previousValue, currentValue: changes["options"].currentValue });
         }
         if (changes.hasOwnProperty('noFilter')) {
             const /** @type {?} */ numOptions = this.optionList.options.length;
             const /** @type {?} */ minNumOptions = changes['noFilter'].currentValue;
             this.filterEnabled = numOptions >= minNumOptions;
+        }
+        if (changes.hasOwnProperty('placeholder')) {
+            this.updateState();
         }
     }
     /**
@@ -7360,10 +7564,9 @@ class SelectComponent {
         else if (!Array.isArray(v)) {
             throw new TypeError('Value must be a string or an array.');
         }
-        if (!OptionList.equalValues(v, this._value)) {
-            this.optionList.value = v;
-            this.valueChanged();
-        }
+        this.optionList.value = v;
+        this._value = v;
+        this.updateState();
     }
     /**
      * @return {?}
@@ -7414,30 +7617,26 @@ class SelectComponent {
      */
     valueChanged() {
         this._value = this.optionList.value;
-        this.hasSelected = this._value.length > 0;
+        this.updateState();
+        this.onChange(this.value);
+    }
+    /**
+     * @return {?}
+     */
+    updateState() {
         this.placeholderView = this.hasSelected ? '' : this.placeholder;
-        this.updateFilterWidth();
-        if (this.value) {
-            this.onChange(this.value);
-        }
-        /* this.onChange(this.value); */
+        setTimeout(() => {
+            this.updateFilterWidth();
+        });
     }
     /**
      * Initialization. *
-     * @param {?} firstTime
+     * @param {?} options
      * @return {?}
      */
-    updateOptionsList(firstTime) {
-        // let v: Array<string> | any;
-        let /** @type {?} */ v;
-        if (!firstTime) {
-            v = this.optionList.value;
-        }
-        this.optionList = new OptionList(this.options);
-        if (!firstTime) {
-            this.optionList.value = v;
-            this.valueChanged();
-        }
+    updateOptionsList(options) {
+        this.optionList = new OptionList(options);
+        this.optionList.value = this._value;
     }
     /**
      * Dropdown. *
@@ -7705,7 +7904,7 @@ class SelectComponent {
 SelectComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-select',
-                template: "<label *ngIf=\"label !== ''\"> {{label}} </label> <div #selection [attr.tabindex]=\"disabled ? null : 0\" [ngClass]=\"{'open': isOpen, 'focus': hasFocus, 'below': isBelow, 'disabled': disabled}\" (mousedown)=\"onSelectContainerClick()\" (focus)=\"onSelectContainerFocus()\" (keydown)=\"onSelectContainerKeydown($event)\" (window:click)=\"onWindowClick()\" (window:resize)=\"onWindowResize()\"> <div class=\"single\" *ngIf=\"!multiple\"> <div class=\"value\" *ngIf=\"optionList.hasSelected()\"> {{optionList.selection[0].label}} </div> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div class=\"clear\" *ngIf=\"allowClear && hasSelected\" (click)=\"onClearSelectionClick($event)\"> &#x2715; </div> </div> <div class=\"multiple\" *ngIf=\"multiple\"> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div class=\"option\"  *ngFor=\"let option of optionList.selection\"> <span class=\"deselect-option\">, </span>{{option.label}} </div> </div> </div> <mdb-select-dropdown *ngIf=\"isOpen\" #dropdown [multiple]=\"multiple\" [optionList]=\"optionList\" [notFoundMsg]=\"notFoundMsg\" [highlightColor]=\"highlightColor\" [highlightTextColor]=\"highlightTextColor\" [filterEnabled]=\"filterEnabled\" [placeholder]=\"filterPlaceholder\" [top]=\"top\" [left]=\"left\" (close)=\"onDropdownClose($event)\" (optionClicked)=\"onDropdownOptionClicked($event)\" (singleFilterClick)=\"onSingleFilterClick()\" (singleFilterInput)=\"onSingleFilterInput($event)\" (singleFilterKeydown)=\"onSingleFilterKeydown($event)\"> </mdb-select-dropdown>",
+                template: "<label *ngIf=\"label !== ''\"> {{label}} </label> <div #selection [attr.tabindex]=\"disabled ? null : 0\" [ngClass]=\"{'open': isOpen, 'focus': hasFocus, 'below': isBelow, 'disabled': disabled}\" (mousedown)=\"onSelectContainerClick()\" (focus)=\"onSelectContainerFocus()\" (keydown)=\"onSelectContainerKeydown($event)\" (window:click)=\"onWindowClick()\" (window:resize)=\"onWindowResize()\"> <div class=\"single\" *ngIf=\"!multiple\"> <div class=\"value\" *ngIf=\"optionList.hasSelected()\"> {{optionList.selection[0].label}} </div> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div class=\"clear\" *ngIf=\"allowClear && hasSelected\" (click)=\"onClearSelectionClick()\"> &#x2715; </div> </div> <div class=\"multiple\" *ngIf=\"multiple\"> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div class=\"option\"  *ngFor=\"let option of optionList.selection\"> <span class=\"deselect-option\">, </span>{{option.label}} </div> </div> </div> <mdb-select-dropdown *ngIf=\"isOpen\" #dropdown [multiple]=\"multiple\" [optionList]=\"optionList\" [notFoundMsg]=\"notFoundMsg\" [highlightColor]=\"highlightColor\" [highlightTextColor]=\"highlightTextColor\" [filterEnabled]=\"filterEnabled\" [placeholder]=\"filterPlaceholder\" [top]=\"top\" [left]=\"left\" (close)=\"onDropdownClose($event)\" (optionClicked)=\"onDropdownOptionClicked($event)\" (singleFilterClick)=\"onSingleFilterClick()\" (singleFilterInput)=\"onSingleFilterInput($event)\" (singleFilterKeydown)=\"onSingleFilterKeydown($event)\"> </mdb-select-dropdown>",
                 providers: [SELECT_VALUE_ACCESSOR],
                 encapsulation: ViewEncapsulation.None
             },] },
@@ -10910,9 +11109,11 @@ class MaterialChipsComponent {
     }
     /**
      * @param {?} value
+     * @param {?} event
      * @return {?}
      */
-    addValue(value) {
+    addValue(value, event) {
+        event.preventDefault();
         if (!value || value.trim() === '') {
             return;
         }
@@ -10949,7 +11150,7 @@ class MaterialChipsComponent {
 MaterialChipsComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-material-chips',
-                template: "<div *ngIf=\"values && values.length\" class=\"md-chip-list\"  [ngClass]=\"focused\"> <span *ngFor=\"let value of values\" class=\"md-chip\" selected >          {{value}} <i class=\"close fa fa-times\" aria-hidden=\"true\" (click)=\"removeValue(value)\" ></i> </span> <span> <input  [(ngModel)]=\"labelToAdd\"  (keyup.enter)=\"addValue(box.value, $event);$event.preventDefault()\" (focus)=\"onFocus()\"  (focusout)=\"focusOutFunction()\"   #box /> </span> </div> <div *ngIf=\"!values || !values.length\"> <input class=\"md-chips-input\" placeholder=\"{{ placeholder }}\" #tbox  (keyup.enter)=\"addValue(tbox.value, $event);$event.preventDefault()\"/> </div>",
+                template: "<div *ngIf=\"values && values.length\" class=\"md-chip-list\"  [ngClass]=\"focused\"> <span *ngFor=\"let value of values\" class=\"md-chip\" selected >          {{value}} <i class=\"close fa fa-times\" aria-hidden=\"true\" (click)=\"removeValue(value)\" ></i> </span> <span> <input  [(ngModel)]=\"labelToAdd\"  (keyup.enter)=\"addValue(box.value, $event)\" (focus)=\"onFocus()\"  (focusout)=\"focusOutFunction()\"   #box /> </span> </div> <div *ngIf=\"!values || !values.length\"> <input class=\"md-chips-input\" placeholder=\"{{ placeholder }}\" #tbox  (keyup.enter)=\"addValue(tbox.value, $event)\"/> </div>",
                 providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
             },] },
 ];
@@ -12728,13 +12929,17 @@ class SlideComponent {
      * @param {?} el
      */
     constructor(carousel, el) {
+        this.carousel = carousel;
         this.animated = false;
         this.directionNext = false;
         this.directionLeft = false;
         this.directionPrev = false;
         this.directionRight = false;
+        /**
+         * Wraps element by appropriate CSS classes
+         */
         this.el = null;
-        this.carousel = carousel;
+        // this.carousel = carousel;
         this.el = el;
     }
     /**
@@ -12772,7 +12977,7 @@ SlideComponent.propDecorators = {
     directionLeft: [{ type: HostBinding, args: ['class.carousel-item-left',] }],
     directionPrev: [{ type: HostBinding, args: ['class.carousel-item-prev',] }],
     directionRight: [{ type: HostBinding, args: ['class.carousel-item-right',] }],
-    carousel: [{ type: HostBinding, args: ['class.carousel-item',] }]
+    el: [{ type: HostBinding, args: ['class.carousel-item',] }]
 };
 
 /**
@@ -12795,6 +13000,324 @@ CarouselModule.decorators = [
                 providers: [CarouselConfig]
             },] },
 ];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class MdbCardFooterComponent {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    constructor(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        // this._r.addClass(this._el.nativeElement, 'card-footer');
+        if (this.class) {
+            this.class.split(' ').forEach((element) => {
+                this._r.addClass(this._el.nativeElement, element);
+            });
+        }
+    }
+}
+MdbCardFooterComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-card-footer',
+                template: "<div class=\"card-footer\"> <ng-content></ng-content> </div>",
+            },] },
+];
+/** @nocollapse */
+MdbCardFooterComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Renderer2 }
+];
+MdbCardFooterComponent.propDecorators = {
+    class: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class MdbCardTitleComponent {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    constructor(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this._r.addClass(this._el.nativeElement, 'card-title');
+    }
+}
+MdbCardTitleComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-card-title',
+                template: "<ng-content></ng-content>",
+            },] },
+];
+/** @nocollapse */
+MdbCardTitleComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Renderer2 }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class MdbCardTextComponent {
+}
+MdbCardTextComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-card-text',
+                template: "<p class=\"card-text {{class}} \"> <ng-content></ng-content> </p>",
+            },] },
+];
+MdbCardTextComponent.propDecorators = {
+    class: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class MdbCardBodyComponent {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    constructor(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+    }
+    /**
+     * @param {?} cascade
+     * @return {?}
+     */
+    set cascade(cascade) {
+        if (cascade) {
+            this._r.addClass(this._el.nativeElement, 'card-body-cascade');
+        }
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this._r.addClass(this._el.nativeElement, 'card-body');
+        if (this.class) {
+            this.class.split(' ').forEach((element) => {
+                this._r.addClass(this._el.nativeElement, element);
+            });
+        }
+    }
+}
+MdbCardBodyComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-card-body',
+                template: " <ng-content></ng-content> ",
+                encapsulation: ViewEncapsulation.None
+            },] },
+];
+/** @nocollapse */
+MdbCardBodyComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Renderer2 }
+];
+MdbCardBodyComponent.propDecorators = {
+    class: [{ type: Input }],
+    cascade: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class MdbCardComponent {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    constructor(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+    }
+    /**
+     * @param {?} narrower
+     * @return {?}
+     */
+    set narrower(narrower) {
+        if (narrower) {
+            this._r.addClass(this._el.nativeElement, 'narrower');
+        }
+    }
+    /**
+     * @param {?} reverse
+     * @return {?}
+     */
+    set reverse(reverse) {
+        if (reverse) {
+            this._r.addClass(this._el.nativeElement, 'reverse');
+        }
+    }
+    /**
+     * @param {?} dark
+     * @return {?}
+     */
+    set dark(dark) {
+        if (dark) {
+            this._r.addClass(this._el.nativeElement, 'card-dark');
+        }
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this._r.addClass(this._el.nativeElement, 'card');
+        if (this.cascade) {
+            this._r.addClass(this._el.nativeElement, 'card-cascade');
+        }
+        if (this.wider) {
+            this._r.addClass(this._el.nativeElement, 'wider');
+        }
+        if (this.narrower) {
+            this._r.addClass(this._el.nativeElement, 'narrower');
+        }
+        if (this.class) {
+            this.class.split(' ').forEach((element) => {
+                this._r.addClass(this._el.nativeElement, element);
+            });
+        }
+    }
+}
+MdbCardComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-card',
+                template: "<div class=\"card\" [ngClass]=\"{'card-cascade': cascade, 'wider': wider}\" #card> <ng-content></ng-content> </div>",
+            },] },
+];
+/** @nocollapse */
+MdbCardComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Renderer2 }
+];
+MdbCardComponent.propDecorators = {
+    class: [{ type: Input }],
+    cascade: [{ type: Input }],
+    wider: [{ type: Input }],
+    narrower: [{ type: Input }],
+    reverse: [{ type: Input }],
+    dark: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class MdbCardImageComponent {
+}
+MdbCardImageComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-card-img',
+                template: "<img class=\"img-fluid\" [src]=\"src\" [alt]=\"alt\">",
+            },] },
+];
+MdbCardImageComponent.propDecorators = {
+    src: [{ type: Input }],
+    alt: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class MdbCardHeaderComponent {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    constructor(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this._r.addClass(this._el.nativeElement, 'card-header');
+        if (this.class) {
+            this.class.split(' ').forEach((element) => {
+                this._r.addClass(this._el.nativeElement, element);
+            });
+        }
+    }
+}
+MdbCardHeaderComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-card-header',
+                template: "<ng-content></ng-content>",
+            },] },
+];
+/** @nocollapse */
+MdbCardHeaderComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Renderer2 }
+];
+MdbCardHeaderComponent.propDecorators = {
+    class: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class CardsFreeModule {
+    /**
+     * @return {?}
+     */
+    static forRoot() {
+        return { ngModule: CardsFreeModule, providers: [] };
+    }
+}
+CardsFreeModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule],
+                declarations: [
+                    MdbCardComponent,
+                    MdbCardBodyComponent,
+                    MdbCardImageComponent,
+                    MdbCardTextComponent,
+                    MdbCardTitleComponent,
+                    MdbCardFooterComponent,
+                    MdbCardHeaderComponent
+                ],
+                exports: [
+                    MdbCardComponent,
+                    MdbCardBodyComponent,
+                    MdbCardImageComponent,
+                    MdbCardTextComponent,
+                    MdbCardTitleComponent,
+                    MdbCardFooterComponent,
+                    MdbCardHeaderComponent
+                ]
+            },] },
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -13122,6 +13645,166 @@ ChartsModule.decorators = [
                     BaseChartDirective
                 ],
                 imports: []
+            },] },
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+const CHECKBOX_VALUE_ACCESSOR = {
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => CheckboxComponent),
+    multi: true
+};
+let defaultIdNumber = 0;
+class MdbCheckboxChange {
+}
+class CheckboxComponent {
+    constructor() {
+        this.defaultId = `mdb-checkbox-${++defaultIdNumber}`;
+        this.id = this.defaultId;
+        this.checked = false;
+        this.filledIn = false;
+        this.indeterminate = false;
+        this.rounded = false;
+        this.checkboxPosition = 'left';
+        this.default = false;
+        this.inline = false;
+        this.change = new EventEmitter();
+        // Control Value Accessor Methods
+        this.onChange = (_) => { };
+        this.onTouched = () => { };
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        if (this.indeterminate && !this.filledIn && !this.rounded) {
+            this.inputEl.indeterminate = true;
+        }
+    }
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    ngOnChanges(changes) {
+        if (changes.hasOwnProperty('checked')) {
+            this.checked = changes["checked"].currentValue;
+        }
+    }
+    /**
+     * @return {?}
+     */
+    get changeEvent() {
+        const /** @type {?} */ newChangeEvent = new MdbCheckboxChange();
+        newChangeEvent.element = this;
+        newChangeEvent.checked = this.checked;
+        return newChangeEvent;
+    }
+    /**
+     * @return {?}
+     */
+    toggle() {
+        if (this.disabled) {
+            return;
+        }
+        this.checked = !this.checked;
+        this.indeterminate = false;
+        this.onChange(this.checked);
+    }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    onCheckboxClick(event) {
+        event.stopPropagation();
+        this.toggle();
+    }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    onCheckboxChange(event) {
+        event.stopPropagation();
+        this.change.emit(this.changeEvent);
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    writeValue(value) {
+        this.value = value;
+        this.checked = !!value;
+    }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    registerOnChange(fn) {
+        this.onChange = fn;
+    }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    registerOnTouched(fn) {
+        this.onTouched = fn;
+    }
+    /**
+     * @param {?} isDisabled
+     * @return {?}
+     */
+    setDisabledState(isDisabled) {
+        this.disabled = isDisabled;
+    }
+}
+CheckboxComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-checkbox',
+                template: "<div [ngClass]=\"{  'custom-control custom-checkbox': default, 'form-check': !default, 'custom-control-inline': inline, 'form-check-inline': inline && !default }\"> <input  #input type=\"checkbox\" class=\"custom-control-input\" [ngClass]=\"{  'filled-in': filledIn || rounded, 'custom-control-input': default, 'form-check-input': !default }\" [id]=\"id\" [checked]=\"checked\" [disabled]=\"disabled\" [required]=\"required\" [indeterminate]=\"indeterminate\" [attr.name]=\"name\" [attr.value]=\"value\" [tabIndex]=\"tabIndex\" (click)=\"onCheckboxClick($event)\" (change)=\"onCheckboxChange($event)\" > <label [ngClass]=\"{  'custom-control-label': default, 'form-check-label': !default, 'label-before': checkboxPosition === 'right',  'checkbox-rounded': rounded, 'disabled': disabled }\" [attr.for]=\"id\"> <ng-content></ng-content> </label> </div>",
+                providers: [CHECKBOX_VALUE_ACCESSOR]
+            },] },
+];
+/** @nocollapse */
+CheckboxComponent.ctorParameters = () => [];
+CheckboxComponent.propDecorators = {
+    inputEl: [{ type: ViewChild, args: ['input',] }],
+    class: [{ type: Input }],
+    id: [{ type: Input }],
+    required: [{ type: Input }],
+    name: [{ type: Input }],
+    value: [{ type: Input }],
+    checked: [{ type: Input }],
+    filledIn: [{ type: Input }],
+    indeterminate: [{ type: Input }],
+    disabled: [{ type: Input }],
+    rounded: [{ type: Input }],
+    checkboxPosition: [{ type: Input }],
+    default: [{ type: Input }],
+    inline: [{ type: Input }],
+    tabIndex: [{ type: Input }],
+    change: [{ type: Output }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class CheckboxModule {
+}
+CheckboxModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [
+                    CheckboxComponent
+                ],
+                exports: [
+                    CheckboxComponent
+                ],
+                imports: [
+                    CommonModule,
+                    FormsModule
+                ]
             },] },
 ];
 
@@ -14611,6 +15294,24 @@ class MdbInputDirective {
         catch (/** @type {?} */ error) { }
     }
     /**
+     * @param {?} value
+     * @return {?}
+     */
+    updateErrorMsg(value) {
+        if (this.wrongTextContainer) {
+            this.wrongTextContainer.innerHTML = value;
+        }
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    updateSuccessMsg(value) {
+        if (this.rightTextContainer) {
+            this.rightTextContainer.innerHTML = value;
+        }
+    }
+    /**
      * @return {?}
      */
     ngOnInit() {
@@ -14636,6 +15337,20 @@ class MdbInputDirective {
                 this.rightTextContainer.innerHTML = (this.successMessage ? this.successMessage : 'success');
             }
             this._renderer.setStyle(this.rightTextContainer, 'visibility', 'hidden');
+        }
+    }
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    ngOnChanges(changes) {
+        if (changes.hasOwnProperty('errorMessage')) {
+            const /** @type {?} */ newErrorMsg = changes["errorMessage"].currentValue;
+            this.updateErrorMsg(newErrorMsg);
+        }
+        if (changes.hasOwnProperty('successMessage')) {
+            const /** @type {?} */ newSuccessMsg = changes["successMessage"].currentValue;
+            this.updateSuccessMsg(newSuccessMsg);
         }
     }
     /**
@@ -14754,8 +15469,8 @@ class MdbInputDirective {
      */
     resize() {
         try {
-            this._renderer.setStyle(this.element, 'height', 'auto');
-            this._renderer.setStyle(this.element, 'height', this.element.scrollHeight + 'px');
+            this._renderer.setStyle(this.el.nativeElement, 'height', 'auto');
+            this._renderer.setStyle(this.el.nativeElement, 'height', this.el.nativeElement.scrollHeight + 'px');
         }
         catch (/** @type {?} */ error) { }
     }
@@ -16574,8 +17289,10 @@ TooltipConfig.decorators = [
 class TooltipContainerComponent {
     /**
      * @param {?} config
+     * @param {?} r
      */
-    constructor(config) {
+    constructor(config, r) {
+        this.r = r;
         this.show = !this.isBs3;
         Object.assign(this, config);
     }
@@ -16599,6 +17316,19 @@ class TooltipContainerComponent {
         if (this.popupClass) {
             this.classMap[this.popupClass] = true;
         }
+        setTimeout(() => {
+            const /** @type {?} */ arrowClassList = this.tooltipArrow.nativeElement.classList;
+            const /** @type {?} */ tooltipHeight = this.tooltipInner.nativeElement.clientHeight;
+            if (arrowClassList.contains('top')) {
+                this.r.setStyle(this.tooltipArrow.nativeElement, 'top', tooltipHeight + 6 + 'px');
+            }
+            else if (arrowClassList.contains('left')) {
+                this.r.setStyle(this.tooltipArrow.nativeElement, 'top', (tooltipHeight / 2) + 'px');
+            }
+            else if (arrowClassList.contains('right')) {
+                this.r.setStyle(this.tooltipArrow.nativeElement, 'top', (tooltipHeight / 2) + 'px');
+            }
+        }, 0);
     }
 }
 TooltipContainerComponent.decorators = [
@@ -16610,16 +17340,19 @@ TooltipContainerComponent.decorators = [
                     '[class]': '"tooltip-fadeIn tooltip in tooltip-" + placement'
                 },
                 template: `
-  <div class="tooltip-arrow"></div>
-  <div class="tooltip-inner"><ng-content></ng-content></div>
+  <div #tooltipArrow class="tooltip-arrow" [ngClass]="{'left': placement == 'left', 'right': placement == 'right', 'top': placement == 'top'}"></div>
+  <div #tooltipInner class="tooltip-inner"><ng-content></ng-content></div>
   `
             },] },
 ];
 /** @nocollapse */
 TooltipContainerComponent.ctorParameters = () => [
-    { type: TooltipConfig }
+    { type: TooltipConfig },
+    { type: Renderer2 }
 ];
 TooltipContainerComponent.propDecorators = {
+    tooltipInner: [{ type: ViewChild, args: ['tooltipInner',] }],
+    tooltipArrow: [{ type: ViewChild, args: ['tooltipArrow',] }],
     show: [{ type: HostBinding, args: ['class.show',] }]
 };
 
@@ -16848,319 +17581,6 @@ class BsComponentRef {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-class MdbCardFooterComponent {
-    /**
-     * @param {?} _el
-     * @param {?} _r
-     */
-    constructor(_el, _r) {
-        this._el = _el;
-        this._r = _r;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        // this._r.addClass(this._el.nativeElement, 'card-footer');
-        if (this.class) {
-            this.class.split(' ').forEach((element) => {
-                this._r.addClass(this._el.nativeElement, element);
-            });
-        }
-    }
-}
-MdbCardFooterComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'mdb-card-footer',
-                template: "<div class=\"card-footer\"> <ng-content></ng-content> </div>",
-            },] },
-];
-/** @nocollapse */
-MdbCardFooterComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: Renderer2 }
-];
-MdbCardFooterComponent.propDecorators = {
-    class: [{ type: Input }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class MdbCardTitleComponent {
-    /**
-     * @param {?} _el
-     * @param {?} _r
-     */
-    constructor(_el, _r) {
-        this._el = _el;
-        this._r = _r;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this._r.addClass(this._el.nativeElement, 'card-title');
-    }
-}
-MdbCardTitleComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'mdb-card-title',
-                template: "<ng-content></ng-content>",
-            },] },
-];
-/** @nocollapse */
-MdbCardTitleComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: Renderer2 }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class MdbCardTextComponent {
-}
-MdbCardTextComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'mdb-card-text',
-                template: "<p class=\"card-text {{class}} \"> <ng-content></ng-content> </p>",
-            },] },
-];
-MdbCardTextComponent.propDecorators = {
-    class: [{ type: Input }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class MdbCardBodyComponent {
-    /**
-     * @param {?} _el
-     * @param {?} _r
-     */
-    constructor(_el, _r) {
-        this._el = _el;
-        this._r = _r;
-    }
-    /**
-     * @param {?} cascade
-     * @return {?}
-     */
-    set cascade(cascade) {
-        if (cascade) {
-            this._r.addClass(this._el.nativeElement, 'card-body-cascade');
-        }
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this._r.addClass(this._el.nativeElement, 'card-body');
-        if (this.class) {
-            this.class.split(' ').forEach((element) => {
-                this._r.addClass(this._el.nativeElement, element);
-            });
-        }
-    }
-}
-MdbCardBodyComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'mdb-card-body',
-                template: " <ng-content></ng-content> ",
-                encapsulation: ViewEncapsulation.None
-            },] },
-];
-/** @nocollapse */
-MdbCardBodyComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: Renderer2 }
-];
-MdbCardBodyComponent.propDecorators = {
-    class: [{ type: Input }],
-    cascade: [{ type: Input }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class MdbCardComponent {
-    /**
-     * @param {?} _el
-     * @param {?} _r
-     */
-    constructor(_el, _r) {
-        this._el = _el;
-        this._r = _r;
-    }
-    /**
-     * @param {?} narrower
-     * @return {?}
-     */
-    set narrower(narrower) {
-        if (narrower) {
-            this._r.addClass(this._el.nativeElement, 'narrower');
-        }
-    }
-    /**
-     * @param {?} reverse
-     * @return {?}
-     */
-    set reverse(reverse) {
-        if (reverse) {
-            this._r.addClass(this._el.nativeElement, 'reverse');
-        }
-    }
-    /**
-     * @param {?} dark
-     * @return {?}
-     */
-    set dark(dark) {
-        if (dark) {
-            this._r.addClass(this._el.nativeElement, 'card-dark');
-        }
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this._r.addClass(this._el.nativeElement, 'card');
-        if (this.cascade) {
-            this._r.addClass(this._el.nativeElement, 'card-cascade');
-        }
-        if (this.wider) {
-            this._r.addClass(this._el.nativeElement, 'wider');
-        }
-        if (this.narrower) {
-            this._r.addClass(this._el.nativeElement, 'narrower');
-        }
-        if (this.class) {
-            this.class.split(' ').forEach((element) => {
-                this._r.addClass(this._el.nativeElement, element);
-            });
-        }
-    }
-}
-MdbCardComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'mdb-card',
-                template: "<div class=\"card\" [ngClass]=\"{'card-cascade': cascade, 'wider': wider}\" #card> <ng-content></ng-content> </div>",
-            },] },
-];
-/** @nocollapse */
-MdbCardComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: Renderer2 }
-];
-MdbCardComponent.propDecorators = {
-    class: [{ type: Input }],
-    cascade: [{ type: Input }],
-    wider: [{ type: Input }],
-    narrower: [{ type: Input }],
-    reverse: [{ type: Input }],
-    dark: [{ type: Input }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class MdbCardImageComponent {
-}
-MdbCardImageComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'mdb-card-img',
-                template: "<img class=\"img-fluid\" [src]=\"src\" [alt]=\"alt\">",
-            },] },
-];
-MdbCardImageComponent.propDecorators = {
-    src: [{ type: Input }],
-    alt: [{ type: Input }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class MdbCardHeaderComponent {
-    /**
-     * @param {?} _el
-     * @param {?} _r
-     */
-    constructor(_el, _r) {
-        this._el = _el;
-        this._r = _r;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this._r.addClass(this._el.nativeElement, 'card-header');
-        if (this.class) {
-            this.class.split(' ').forEach((element) => {
-                this._r.addClass(this._el.nativeElement, element);
-            });
-        }
-    }
-}
-MdbCardHeaderComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'mdb-card-header',
-                template: "<ng-content></ng-content>",
-            },] },
-];
-/** @nocollapse */
-MdbCardHeaderComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: Renderer2 }
-];
-MdbCardHeaderComponent.propDecorators = {
-    class: [{ type: Input }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class CardsFreeModule {
-    /**
-     * @return {?}
-     */
-    static forRoot() {
-        return { ngModule: CardsFreeModule, providers: [] };
-    }
-}
-CardsFreeModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [CommonModule],
-                declarations: [
-                    MdbCardComponent,
-                    MdbCardBodyComponent,
-                    MdbCardImageComponent,
-                    MdbCardTextComponent,
-                    MdbCardTitleComponent,
-                    MdbCardFooterComponent,
-                    MdbCardHeaderComponent
-                ],
-                exports: [
-                    MdbCardComponent,
-                    MdbCardBodyComponent,
-                    MdbCardImageComponent,
-                    MdbCardTextComponent,
-                    MdbCardTitleComponent,
-                    MdbCardFooterComponent,
-                    MdbCardHeaderComponent
-                ]
-            },] },
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
 
 /**
  * @fileoverview added by tsickle
@@ -17240,7 +17660,8 @@ const MODULES = [
     ModalModule,
     TooltipModule,
     PopoverModule,
-    IconsModule
+    IconsModule,
+    CheckboxModule
 ];
 class MDBRootModule {
 }
@@ -17260,7 +17681,8 @@ MDBRootModule.decorators = [
                     TooltipModule.forRoot(),
                     PopoverModule.forRoot(),
                     IconsModule,
-                    CardsFreeModule.forRoot()
+                    CardsFreeModule.forRoot(),
+                    CheckboxModule
                 ],
                 exports: MODULES,
                 schemas: [NO_ERRORS_SCHEMA]
@@ -17368,7 +17790,7 @@ const MODULES$1 = [
     AccordionModule,
     StickyContentModule,
     SmoothscrollModule,
-    CharCounterModule,
+    CharCounterModule
 ];
 class MDBRootModulePro {
 }
@@ -17389,7 +17811,7 @@ MDBRootModulePro.decorators = [
                     AccordionModule,
                     StickyContentModule,
                     SmoothscrollModule.forRoot(),
-                    CharCounterModule.forRoot(),
+                    CharCounterModule.forRoot()
                 ],
                 exports: [MODULES$1],
                 providers: [],
@@ -17461,5 +17883,5 @@ MDBBootstrapModulesPro.decorators = [
  * Generated bundle index. Do not edit.
  */
 
-export { SBItemBodyComponent, SBItemHeadComponent, SBItemComponent, sbConfig, SqueezeBoxComponent, SQUEEZEBOX_COMPONENTS, AccordionModule, OverlayContainer, OverlayRef, Overlay, OVERLAY_PROVIDERS, DomPortalHost, ComponentPortal, BasePortalHost, ToastComponent, GlobalConfig, ToastPackage, tsConfig, ToastContainerDirective, ToastContainerModule, ToastRef, ToastInjector, ToastModule, ToastService, TOAST_CONFIG, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, CompleterListItemComponent, CompleterComponent, MdbCompleterDirective, CtrRowItem, MdbDropdownDirective, MdbInputCompleteDirective, CtrListContext, MdbListDirective, MdbRowDirective, CompleterBaseData, CompleterService, localDataFactory, remoteDataFactory, LocalDataFactoryProvider, RemoteDataFactoryProvider, LocalData, RemoteData, MAX_CHARS, MIN_SEARCH_LENGTH, PAUSE, TEXT_SEARCHING, TEXT_NO_RESULTS, CLEAR_TIMEOUT, isNil, AutocompleteModule, CardRevealComponent, CardRotatingComponent, CardsModule, InputAutoFillDirective, FocusDirective, LocaleService, UtilService, DatepickerModule, MYDP_VALUE_ACCESSOR, MDBDatePickerComponent, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, UploadStatus, humanizeBytes, MDBUploaderService, MDBFileDropDirective, MDBFileSelectDirective, FileInputModule, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, OptionList, Option, SelectDropdownComponent, SELECT_VALUE_ACCESSOR, SelectComponent, SelectModule, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, MDBSpinningPreloader, ProgressBarComponent, MdProgressSpinnerCssMatStylerDirective, MdProgressSpinnerComponent, MdSpinnerComponent, BarComponent, ProgressSpinnerComponent, ProgressDirective, ProgressbarComponent, ProgressbarConfigComponent, ProgressbarModule, PreloadersModule, ProgressBars, SidenavComponent, SidenavModule, PageScrollUtilService, EasingLogic, PageScrollConfig, PageScrollDirective, PageScrollInstance, SmoothscrollModule, PageScrollService, computedStyle, MdbStickyDirective, StickyContentModule, TabHeadingDirective, TabDirective, TabsetComponent, TabsetConfig, NgTranscludeDirective, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TimePickerModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, ButtonsModule, CHECKBOX_CONTROL_VALUE_ACCESSOR, ButtonCheckboxDirective, RADIO_CONTROL_VALUE_ACCESSOR, ButtonRadioDirective, MdbBtnDirective, Direction, CarouselComponent, CarouselConfig, SlideComponent, CarouselModule, BaseChartDirective, ChartsModule, CollapseDirective, CollapseModule, BsDropdownContainerComponent, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownConfig, BsDropdownDirective, BsDropdownState, DropdownModule, IconsModule, MdbIconComponent, InputsModule, MdbInputDirective, EqualValidatorDirective, ModalDirective, ModalOptions, MDBModalRef, modalConfigDefaults, ClassName, Selector, TransitionDurations, DISMISS_REASONS, MDBModalService, ModalBackdropOptions, ModalBackdropComponent, ModalContainerComponent, msConfig, ModalModule, LinksComponent, LogoComponent, NavbarComponent, NavbarService, NavlinksComponent, NavbarModule, PopoverContainerComponent, PopoverConfig, PopoverDirective, PopoverModule, RippleDirective, RippleModule, WavesDirective, WavesModule, TooltipContainerComponent, TooltipDirective, TooltipConfig, TooltipModule, BsComponentRef, ComponentLoader, ComponentLoaderFactory, ContentRef, win as window, document$1 as document, location, gc, performance, Event, MouseEvent, KeyboardEvent, EventTarget, History, Location, EventListener, Positioning, positionElements, PositioningService, OnChange, LinkedList, isBs3, Trigger, parseTriggers, listenToTriggers, Utils, MDBBootstrapModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, MdbBtnDirective as ɵct1, ButtonsModule as ɵcq1, ButtonCheckboxDirective as ɵcr1, ButtonRadioDirective as ɵcs1, CardsFreeModule as ɵej1, MdbCardBodyComponent as ɵel1, MdbCardFooterComponent as ɵep1, MdbCardHeaderComponent as ɵeq1, MdbCardImageComponent as ɵem1, MdbCardTextComponent as ɵen1, MdbCardTitleComponent as ɵeo1, MdbCardComponent as ɵek1, CarouselComponent as ɵcu1, CarouselConfig as ɵcv1, CarouselModule as ɵcx1, SlideComponent as ɵcw1, BaseChartDirective as ɵcy1, ChartsModule as ɵcz1, CollapseDirective as ɵda1, CollapseModule as ɵdb1, BsDropdownContainerComponent as ɵdc1, BsDropdownMenuDirective as ɵdd1, BsDropdownToggleDirective as ɵde1, BsDropdownConfig as ɵdf1, BsDropdownDirective as ɵdg1, DropdownModule as ɵdi1, BsDropdownState as ɵdh1, MdbIconComponent as ɵdk1, IconsModule as ɵdj1, InputsModule as ɵdl1, MdbInputDirective as ɵdm1, MDBRootModule as ɵei1, ModalDirective as ɵdn1, ModalModule as ɵdt1, ModalOptions as ɵdo1, MDBModalService as ɵdp1, ModalBackdropComponent as ɵdr1, ModalBackdropOptions as ɵdq1, ModalContainerComponent as ɵds1, NavbarComponent as ɵdu1, NavbarModule as ɵdv1, PopoverContainerComponent as ɵdw1, PopoverConfig as ɵdx1, PopoverDirective as ɵdy1, PopoverModule as ɵdz1, RippleDirective as ɵea1, RippleModule as ɵeb1, TooltipContainerComponent as ɵee1, TooltipDirective as ɵef1, TooltipModule as ɵeh1, TooltipConfig as ɵeg1, WavesDirective as ɵec1, WavesModule as ɵed1, SBItemComponent as ɵc1, SBItemBodyComponent as ɵa1, SBItemHeadComponent as ɵb1, SqueezeBoxComponent as ɵd1, AccordionModule as ɵe1, CompleterListItemComponent as ɵf1, CompleterComponent as ɵg1, MdbCompleterDirective as ɵh1, MdbDropdownDirective as ɵi1, MdbInputCompleteDirective as ɵj1, MdbListDirective as ɵk1, MdbRowDirective as ɵl1, AutocompleteModule as ɵp1, CompleterService as ɵm1, LocalDataFactoryProvider as ɵn1, RemoteDataFactoryProvider as ɵo1, CardRevealComponent as ɵq1, CardRotatingComponent as ɵr1, CardsModule as ɵs1, MDBDatePickerComponent as ɵz1, MYDP_VALUE_ACCESSOR as ɵy1, DatepickerModule as ɵx1, InputAutoFillDirective as ɵt1, FocusDirective as ɵu1, LocaleService as ɵv1, UtilService as ɵw1, SimpleChartComponent as ɵba1, ChartSimpleModule as ɵbc1, EasyPieChartComponent as ɵbb1, MDBFileDropDirective as ɵbd1, MDBFileSelectDirective as ɵbe1, FileInputModule as ɵbf1, CharCounterDirective as ɵbg1, CharCounterModule as ɵbh1, ImageModalComponent as ɵbi1, LightBoxModule as ɵbj1, SelectDropdownComponent as ɵbl1, SELECT_VALUE_ACCESSOR as ɵbm1, SelectComponent as ɵbn1, SelectModule as ɵbo1, MDBRootModulePro as ɵer1, BarComponent as ɵbp1, ProgressBars as ɵbv1, MdProgressBarModule as ɵes1, MdProgressSpinnerModule as ɵet1, ProgressSpinnerComponent as ɵbq1, ProgressDirective as ɵbr1, ProgressbarComponent as ɵbs1, ProgressbarConfigComponent as ɵbt1, ProgressbarModule as ɵbu1, SidenavComponent as ɵbw1, SidenavModule as ɵbx1, PageScrollDirective as ɵby1, PageScrollInstance as ɵbz1, SmoothscrollModule as ɵca1, PageScrollService as ɵcb1, MdbStickyDirective as ɵcc1, StickyContentModule as ɵcd1, TabHeadingDirective as ɵce1, TabDirective as ɵcf1, TabsetComponent as ɵcg1, TabsetConfig as ɵch1, TabsModule as ɵcj1, NgTranscludeDirective as ɵci1, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR as ɵck1, MaterialChipsComponent as ɵcl1, MaterialChipsModule as ɵcm1, ClockPickerComponent as ɵcp1, TIME_PIRCKER_VALUE_ACCESSOT as ɵco1, TimePickerModule as ɵcn1 };
+export { SBItemBodyComponent, SBItemHeadComponent, SBItemComponent, sbConfig, SqueezeBoxComponent, SQUEEZEBOX_COMPONENTS, AccordionModule, OverlayContainer, OverlayRef, Overlay, OVERLAY_PROVIDERS, DomPortalHost, ComponentPortal, BasePortalHost, ToastComponent, GlobalConfig, ToastPackage, tsConfig, ToastContainerDirective, ToastContainerModule, ToastRef, ToastInjector, ToastModule, ToastService, TOAST_CONFIG, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, CompleterListItemComponent, CompleterComponent, MdbCompleterDirective, CtrRowItem, MdbDropdownDirective, MdbInputCompleteDirective, CtrListContext, MdbListDirective, MdbRowDirective, CompleterBaseData, CompleterService, localDataFactory, remoteDataFactory, LocalDataFactoryProvider, RemoteDataFactoryProvider, LocalData, RemoteData, MAX_CHARS, MIN_SEARCH_LENGTH, PAUSE, TEXT_SEARCHING, TEXT_NO_RESULTS, CLEAR_TIMEOUT, isNil, AutocompleteModule, CardRevealComponent, CardRotatingComponent, CardsModule, InputAutoFillDirective, FocusDirective, LocaleService, UtilService, DatepickerModule, MYDP_VALUE_ACCESSOR, MDBDatePickerComponent, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, UploadStatus, humanizeBytes, MDBUploaderService, MDBFileDropDirective, MDBFileSelectDirective, FileInputModule, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, OptionList, Option, SelectDropdownComponent, SELECT_VALUE_ACCESSOR, SelectComponent, SelectModule, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, MDBSpinningPreloader, ProgressBarComponent, MdProgressSpinnerCssMatStylerDirective, MdProgressSpinnerComponent, MdSpinnerComponent, BarComponent, ProgressSpinnerComponent, ProgressDirective, ProgressbarComponent, ProgressbarConfigComponent, ProgressbarModule, PreloadersModule, ProgressBars, SidenavComponent, SidenavModule, PageScrollUtilService, EasingLogic, PageScrollConfig, PageScrollDirective, PageScrollInstance, SmoothscrollModule, PageScrollService, computedStyle, MdbStickyDirective, StickyContentModule, TabHeadingDirective, TabDirective, TabsetComponent, TabsetConfig, NgTranscludeDirective, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TimePickerModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, ButtonsModule, CHECKBOX_CONTROL_VALUE_ACCESSOR, ButtonCheckboxDirective, RADIO_CONTROL_VALUE_ACCESSOR, ButtonRadioDirective, MdbBtnDirective, Direction, CarouselComponent, CarouselConfig, SlideComponent, CarouselModule, CardsFreeModule, MdbCardComponent, MdbCardBodyComponent, MdbCardImageComponent, MdbCardTextComponent, MdbCardTitleComponent, MdbCardFooterComponent, MdbCardHeaderComponent, BaseChartDirective, ChartsModule, CHECKBOX_VALUE_ACCESSOR, MdbCheckboxChange, CheckboxComponent, CheckboxModule, CollapseDirective, CollapseModule, BsDropdownContainerComponent, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownConfig, BsDropdownDirective, BsDropdownState, DropdownModule, IconsModule, MdbIconComponent, InputsModule, MdbInputDirective, EqualValidatorDirective, ModalDirective, ModalOptions, MDBModalRef, modalConfigDefaults, ClassName, Selector, TransitionDurations, DISMISS_REASONS, MDBModalService, ModalBackdropOptions, ModalBackdropComponent, ModalContainerComponent, msConfig, ModalModule, LinksComponent, LogoComponent, NavbarComponent, NavbarService, NavlinksComponent, NavbarModule, PopoverContainerComponent, PopoverConfig, PopoverDirective, PopoverModule, RippleDirective, RippleModule, WavesDirective, WavesModule, TooltipContainerComponent, TooltipDirective, TooltipConfig, TooltipModule, BsComponentRef, ComponentLoader, ComponentLoaderFactory, ContentRef, win as window, document$1 as document, location, gc, performance, Event, MouseEvent, KeyboardEvent, EventTarget, History, Location, EventListener, Positioning, positionElements, PositioningService, OnChange, LinkedList, isBs3, Trigger, parseTriggers, listenToTriggers, Utils, MDBBootstrapModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, MdbBtnDirective as ɵct1, ButtonsModule as ɵcq1, ButtonCheckboxDirective as ɵcr1, ButtonRadioDirective as ɵcs1, CardsFreeModule as ɵcy1, CarouselComponent as ɵcu1, CarouselConfig as ɵcv1, CarouselModule as ɵcx1, SlideComponent as ɵcw1, BaseChartDirective as ɵcz1, ChartsModule as ɵda1, CHECKBOX_VALUE_ACCESSOR as ɵdb1, CheckboxComponent as ɵdc1, CheckboxModule as ɵdd1, CollapseDirective as ɵde1, CollapseModule as ɵdf1, BsDropdownContainerComponent as ɵdg1, BsDropdownMenuDirective as ɵdh1, BsDropdownToggleDirective as ɵdi1, BsDropdownConfig as ɵdj1, BsDropdownDirective as ɵdk1, DropdownModule as ɵdm1, BsDropdownState as ɵdl1, MdbIconComponent as ɵdo1, IconsModule as ɵdn1, InputsModule as ɵdp1, MdbInputDirective as ɵdq1, MDBRootModule as ɵem1, ModalDirective as ɵdr1, ModalModule as ɵdx1, ModalOptions as ɵds1, MDBModalService as ɵdt1, ModalBackdropComponent as ɵdv1, ModalBackdropOptions as ɵdu1, ModalContainerComponent as ɵdw1, NavbarComponent as ɵdy1, NavbarModule as ɵdz1, PopoverContainerComponent as ɵea1, PopoverConfig as ɵeb1, PopoverDirective as ɵec1, PopoverModule as ɵed1, RippleDirective as ɵee1, RippleModule as ɵef1, TooltipContainerComponent as ɵei1, TooltipDirective as ɵej1, TooltipModule as ɵel1, TooltipConfig as ɵek1, WavesDirective as ɵeg1, WavesModule as ɵeh1, SBItemComponent as ɵc1, SBItemBodyComponent as ɵa1, SBItemHeadComponent as ɵb1, SqueezeBoxComponent as ɵd1, AccordionModule as ɵe1, CompleterListItemComponent as ɵf1, CompleterComponent as ɵg1, MdbCompleterDirective as ɵh1, MdbDropdownDirective as ɵi1, MdbInputCompleteDirective as ɵj1, MdbListDirective as ɵk1, MdbRowDirective as ɵl1, AutocompleteModule as ɵp1, CompleterService as ɵm1, LocalDataFactoryProvider as ɵn1, RemoteDataFactoryProvider as ɵo1, CardRevealComponent as ɵq1, CardRotatingComponent as ɵr1, CardsModule as ɵs1, MDBDatePickerComponent as ɵz1, MYDP_VALUE_ACCESSOR as ɵy1, DatepickerModule as ɵx1, InputAutoFillDirective as ɵt1, FocusDirective as ɵu1, LocaleService as ɵv1, UtilService as ɵw1, SimpleChartComponent as ɵba1, ChartSimpleModule as ɵbc1, EasyPieChartComponent as ɵbb1, MDBFileDropDirective as ɵbd1, MDBFileSelectDirective as ɵbe1, FileInputModule as ɵbf1, CharCounterDirective as ɵbg1, CharCounterModule as ɵbh1, ImageModalComponent as ɵbi1, LightBoxModule as ɵbj1, SelectDropdownComponent as ɵbl1, SELECT_VALUE_ACCESSOR as ɵbm1, SelectComponent as ɵbn1, SelectModule as ɵbo1, MDBRootModulePro as ɵen1, BarComponent as ɵbp1, ProgressBars as ɵbv1, MdProgressBarModule as ɵeo1, MdProgressSpinnerModule as ɵep1, ProgressSpinnerComponent as ɵbq1, ProgressDirective as ɵbr1, ProgressbarComponent as ɵbs1, ProgressbarConfigComponent as ɵbt1, ProgressbarModule as ɵbu1, SidenavComponent as ɵbw1, SidenavModule as ɵbx1, PageScrollDirective as ɵby1, PageScrollInstance as ɵbz1, SmoothscrollModule as ɵca1, PageScrollService as ɵcb1, MdbStickyDirective as ɵcc1, StickyContentModule as ɵcd1, TabHeadingDirective as ɵce1, TabDirective as ɵcf1, TabsetComponent as ɵcg1, TabsetConfig as ɵch1, TabsModule as ɵcj1, NgTranscludeDirective as ɵci1, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR as ɵck1, MaterialChipsComponent as ɵcl1, MaterialChipsModule as ɵcm1, ClockPickerComponent as ɵcp1, TIME_PIRCKER_VALUE_ACCESSOT as ɵco1, TimePickerModule as ɵcn1 };
 //# sourceMappingURL=ng-uikit-pro-standard.js.map

@@ -1,4 +1,4 @@
-import { OnChanges, OnInit, EventEmitter, ExistingProvider, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
+import { OnChanges, OnInit, EventEmitter, ExistingProvider, ElementRef, Renderer2, AfterViewInit, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { SelectDropdownComponent } from './select-dropdown.component';
 import { IOption } from './option-interface';
@@ -53,7 +53,7 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     constructor(el: ElementRef, renderer: Renderer2);
     ngOnInit(): void;
     ngAfterViewInit(): void;
-    ngOnChanges(changes: any): void;
+    ngOnChanges(changes: SimpleChanges): void;
     setArrowUpIcon(): void;
     setArrowDownIcon(): void;
     isChild(elemnt: any): boolean;
@@ -83,8 +83,9 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     registerOnTouched(fn: () => void): void;
     setDisabledState(isDisabled: boolean): void;
     valueChanged(): void;
+    updateState(): void;
     /** Initialization. **/
-    updateOptionsList(firstTime: boolean): void;
+    updateOptionsList(options: Array<IOption>): void;
     /** Dropdown. **/
     toggleDropdown(): void;
     openDropdown(): void;

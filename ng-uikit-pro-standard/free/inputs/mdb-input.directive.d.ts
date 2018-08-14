@@ -1,5 +1,5 @@
-import { ElementRef, Renderer2, AfterViewInit, AfterViewChecked, OnInit, DoCheck } from '@angular/core';
-export declare class MdbInputDirective implements AfterViewChecked, OnInit, AfterViewInit, DoCheck {
+import { ElementRef, Renderer2, AfterViewInit, AfterViewChecked, OnInit, DoCheck, OnChanges, SimpleChanges } from '@angular/core';
+export declare class MdbInputDirective implements AfterViewChecked, OnInit, AfterViewInit, DoCheck, OnChanges {
     private _elRef;
     private _renderer;
     wrongTextContainer: any;
@@ -29,7 +29,10 @@ export declare class MdbInputDirective implements AfterViewChecked, OnInit, Afte
     oncut(): void;
     onpaste(): void;
     ondrop(): void;
+    updateErrorMsg(value: string): void;
+    updateSuccessMsg(value: string): void;
     ngOnInit(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     ngDoCheck(): void;
     validationFunction(): void;
     ngAfterViewInit(): void;
