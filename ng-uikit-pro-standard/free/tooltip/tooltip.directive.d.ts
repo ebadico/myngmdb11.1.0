@@ -1,7 +1,7 @@
-import { TemplateRef, ViewContainerRef, EventEmitter, Renderer2, ElementRef, OnInit, OnDestroy } from '@angular/core';
+import { TemplateRef, ViewContainerRef, EventEmitter, Renderer2, ElementRef, OnInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import { TooltipConfig } from './tooltip.service';
 import { ComponentLoaderFactory } from '../utils/component-loader/component-loader.factory';
-export declare class TooltipDirective implements OnInit, OnDestroy {
+export declare class TooltipDirective implements OnInit, OnDestroy, OnChanges {
     /**
      * Content to be displayed as tooltip.
      */
@@ -44,6 +44,7 @@ export declare class TooltipDirective implements OnInit, OnDestroy {
     private _tooltip;
     constructor(_viewContainerRef: ViewContainerRef, _renderer: Renderer2, _elementRef: ElementRef, cis: ComponentLoaderFactory, config: TooltipConfig);
     ngOnInit(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     /**
      * Toggles an element’s tooltip. This is considered a “manual” triggering of
      * the tooltip.

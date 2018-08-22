@@ -30,6 +30,7 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     selectionSpan: any;
     dropdown: SelectDropdownComponent;
     filterInput: any;
+    clearButton: any;
     KEYS: any;
     _value: Array<any>;
     optionList: OptionList;
@@ -59,8 +60,9 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     isChild(elemnt: any): boolean;
     onWindowClick(): void;
     onWindowResize(): void;
-    onSelectContainerClick(): void;
+    onSelectContainerClick(event: any): void;
     onSelectContainerFocus(): void;
+    onSelectContainerBlur(): void;
     onSelectContainerKeydown(event: any): void;
     onDropdownOptionClicked(option: Option): void;
     onDropdownClose(focus: any): void;
@@ -69,7 +71,7 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     onSingleFilterKeydown(event: any): void;
     onMultipleFilterInput(event: any): void;
     onMultipleFilterKeydown(event: any): void;
-    onClearSelectionClick(): void;
+    onClearSelectionClick(event: any): void;
     onDeselectOptionClick(option: Option): void;
     /** API. **/
     open(): void;

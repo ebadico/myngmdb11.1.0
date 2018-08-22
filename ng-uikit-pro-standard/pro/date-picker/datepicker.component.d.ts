@@ -25,6 +25,8 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     inputFocusBlur: EventEmitter<IMyInputFocusBlur>;
     divFocus: any;
     pickerFrame: ElementRef;
+    isDateSelected: boolean;
+    labelActive: boolean;
     showSelector: boolean;
     visibleMonth: IMyMonth;
     selectedMonth: IMyMonth;

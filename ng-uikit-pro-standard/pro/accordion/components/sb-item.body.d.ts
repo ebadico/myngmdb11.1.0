@@ -1,8 +1,9 @@
-import { ElementRef, Renderer2 } from '@angular/core';
+import { ElementRef } from '@angular/core';
 export declare class SBItemBodyComponent {
-    private renderer;
+    customClass: string;
     height: string;
+    expandAnimationState: string;
     bodyEl: ElementRef;
-    constructor(renderer: Renderer2);
+    constructor();
     toggle(collapsed: boolean): void;
 }

@@ -1,20 +1,17 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('tslib'), require('@angular/core'), require('@angular/common'), require('@angular/animations'), require('rxjs'), require('@angular/platform-browser'), require('@angular/forms'), require('rxjs/operators'), require('@angular/http'), require('hammerjs'), require('@angular/router'), require('chart.js')) :
-	typeof define === 'function' && define.amd ? define(['exports', 'tslib', '@angular/core', '@angular/common', '@angular/animations', 'rxjs', '@angular/platform-browser', '@angular/forms', 'rxjs/operators', '@angular/http', 'hammerjs', '@angular/router', 'chart.js'], factory) :
-	(factory((global['ng-uikit-pro-standard'] = {}),global.tslib,global.ng.core,global.ng.common,global.ng.animations,global.RX,global.ng.platformBrowser,global.ng.forms,global.Rx.Observable,global.ng.http,global.hammerjs,global.ng.router,global.Chart));
-}(this, (function (exports,tslib_1,core,common,animations,rxjs,platformBrowser,forms,operators,http,hammerjs,router,Chart) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('tslib'), require('@angular/core'), require('@angular/animations'), require('@angular/common'), require('rxjs'), require('@angular/platform-browser'), require('@angular/forms'), require('rxjs/operators'), require('@angular/http'), require('hammerjs'), require('@angular/router'), require('chart.js')) :
+	typeof define === 'function' && define.amd ? define(['exports', 'tslib', '@angular/core', '@angular/animations', '@angular/common', 'rxjs', '@angular/platform-browser', '@angular/forms', 'rxjs/operators', '@angular/http', 'hammerjs', '@angular/router', 'chart.js'], factory) :
+	(factory((global['ng-uikit-pro-standard'] = {}),global.tslib,global.ng.core,global.ng.animations,global.ng.common,global.RX,global.ng.platformBrowser,global.ng.forms,global.Rx.Observable,global.ng.http,global.hammerjs,global.ng.router,global.Chart));
+}(this, (function (exports,tslib_1,core,animations,common,rxjs,platformBrowser,forms,operators,http,hammerjs,router,Chart) { 'use strict';
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
 var SBItemBodyComponent = /** @class */ (function () {
-    /**
-     * @param {?} renderer
-     */
-    function SBItemBodyComponent(renderer) {
-        this.renderer = renderer;
+    function SBItemBodyComponent() {
         this.height = '0';
+        this.expandAnimationState = 'collapsed';
     }
     /**
      * @param {?} collapsed
@@ -22,13 +19,9 @@ var SBItemBodyComponent = /** @class */ (function () {
      */
     SBItemBodyComponent.prototype.toggle = function (collapsed) {
         var _this = this;
-        var /** @type {?} */ height = '0';
-        if (!collapsed) {
-            this.renderer.setStyle(this.bodyEl.nativeElement, 'height', 'auto');
-            height = this.bodyEl.nativeElement.offsetHeight + 'px';
-            this.renderer.setStyle(this.bodyEl.nativeElement, 'height', '0');
-        }
-        setTimeout(function () { return _this.renderer.setStyle(_this.bodyEl.nativeElement, 'height', height); }, 50);
+        setTimeout(function () {
+            collapsed ? _this.expandAnimationState = 'collapsed' : _this.expandAnimationState = 'expanded';
+        }, 0);
     };
     return SBItemBodyComponent;
 }());
@@ -36,14 +29,20 @@ SBItemBodyComponent.decorators = [
     { type: core.Component, args: [{
                 exportAs: 'sbItemBody',
                 selector: 'mdb-item-body, mdb-accordion-item-body',
-                template: "<div #body class=\"sb-item-body\" [style.height]=\"height\"> <div class=\"card-body\"> <ng-content></ng-content> </div> </div>"
+                template: "<div #body class=\"sb-item-body\" [style.height]=\"height\" [@expandBody]=\"expandAnimationState\"> <div class=\"card-body {{ customClass }}\"> <ng-content></ng-content> </div> </div>",
+                animations: [
+                    animations.trigger('expandBody', [
+                        animations.state('collapsed', animations.style({ height: '0px', visibility: 'hidden' })),
+                        animations.state('expanded', animations.style({ height: '*', visibility: 'visible' })),
+                        animations.transition('expanded <=> collapsed', animations.animate('500ms ease')),
+                    ])
+                ]
             },] },
 ];
 /** @nocollapse */
-SBItemBodyComponent.ctorParameters = function () { return [
-    { type: core.Renderer2 }
-]; };
+SBItemBodyComponent.ctorParameters = function () { return []; };
 SBItemBodyComponent.propDecorators = {
+    customClass: [{ type: core.Input }],
     bodyEl: [{ type: core.ViewChild, args: ['body',] }]
 };
 /**
@@ -66,6 +65,10 @@ var SBItemComponent = /** @class */ (function () {
      * @return {?}
      */
     SBItemComponent.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        setTimeout(function () {
+            _this.collapsed ? _this.body.expandAnimationState = 'collapsed' : _this.body.expandAnimationState = 'expanded';
+        }, 0);
         this.body.toggle(this.collapsed);
     };
     /**
@@ -90,13 +93,14 @@ SBItemComponent.decorators = [
     { type: core.Component, args: [{
                 exportAs: 'sbItem',
                 selector: 'mdb-item, mdb-accordion-item',
-                template: "<div class=\"card\" [ngClass]=\"{'is-collapsed': collapsed, 'active': !collapsed}\"> <ng-content></ng-content> </div>"
+                template: "<div class=\"card test z-depth1 {{ customClass }}\" [ngClass]=\"{'is-collapsed': collapsed, 'active': !collapsed}\"> <ng-content></ng-content> </div>"
             },] },
 ];
 /** @nocollapse */
 SBItemComponent.ctorParameters = function () { return []; };
 SBItemComponent.propDecorators = {
     collapsed: [{ type: core.Input }],
+    customClass: [{ type: core.Input }],
     body: [{ type: core.ContentChild, args: [SBItemBodyComponent,] }]
 };
 /**
@@ -110,6 +114,7 @@ var SBItemHeadComponent = /** @class */ (function () {
     function SBItemHeadComponent(sbItem) {
         this.sbItem = sbItem;
         this.isDisabled = false;
+        this.indicator = true;
     }
     /**
      * @param {?} event
@@ -128,7 +133,7 @@ SBItemHeadComponent.decorators = [
     { type: core.Component, args: [{
                 exportAs: 'sbItemHead',
                 selector: 'mdb-item-head, mdb-accordion-item-head',
-                template: "<div class=\"card-header\" [ngClass]=\"{ 'item-disabled': isDisabled }\" (click)=\"toggleClick($event)\"> <a role=\"button\"> <h5 class=\"mb-0\"> <ng-content></ng-content> <i class=\"fa fa-angle-down rotate-icon\"></i> </h5> </a> </div>"
+                template: "<div class=\"card-header {{ customClass }}\" [ngClass]=\"{ 'item-disabled': isDisabled }\" (click)=\"toggleClick($event)\"> <a role=\"button\"> <h5 class=\"mb-0\"> <ng-content></ng-content> <i *ngIf=\"indicator\" class=\"fa fa-angle-down rotate-icon\"></i> </h5> </a> </div>"
             },] },
 ];
 /** @nocollapse */
@@ -136,7 +141,9 @@ SBItemHeadComponent.ctorParameters = function () { return [
     { type: SBItemComponent }
 ]; };
 SBItemHeadComponent.propDecorators = {
-    isDisabled: [{ type: core.Input }]
+    isDisabled: [{ type: core.Input }],
+    customClass: [{ type: core.Input }],
+    indicator: [{ type: core.Input }]
 };
 /**
  * @fileoverview added by tsickle
@@ -2121,10 +2128,13 @@ var CompleterComponent = /** @class */ (function () {
      * @return {?}
      */
     CompleterComponent.prototype.ngAfterViewChecked = function () {
-        if (this._focus) {
-            this.mdbInput.nativeElement.focus();
-            this._focus = false;
-        }
+        var _this = this;
+        setTimeout(function () {
+            if (_this._focus) {
+                _this.mdbInput.nativeElement.focus();
+                _this._focus = false;
+            }
+        }, 0);
     };
     /**
      * @return {?}
@@ -3903,6 +3913,8 @@ var MDBDatePickerComponent = /** @class */ (function () {
         this.calendarViewChanged = new core.EventEmitter();
         this.calendarToggle = new core.EventEmitter();
         this.inputFocusBlur = new core.EventEmitter();
+        this.isDateSelected = false;
+        this.labelActive = false;
         this.showSelector = false;
         this.visibleMonth = { monthTxt: '', monthNbr: 0, year: 1 };
         this.selectedMonth = { monthTxt: '', monthNbr: 0, year: 0 };
@@ -4041,6 +4053,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
         setTimeout(function () {
             document.documentElement.style.removeProperty('overflow');
         }, 155);
+        this.labelActive = false;
     };
     /**
      * @return {?}
@@ -4271,6 +4284,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
                 setTimeout(function () {
                     _this.onChangeCb(_this.getDateModel(_this.selectedDate));
                 });
+                this.isDateSelected = true;
             }
             else {
                 // Do not clear on init
@@ -4330,6 +4344,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
         if (this.showSelector) {
             this.calendarToggle.emit(CalToggle.CloseByCalBtn);
         }
+        this.isDateSelected = false;
         // this.showSelector = false;
     };
     /**
@@ -4360,6 +4375,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
         if (this.isMobile) {
             this.hideKeyboard();
         }
+        this.labelActive = true;
     };
     /**
      * @return {?}
@@ -4509,6 +4525,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
         this.onChangeCb('');
         this.onTouchedCb();
         this.updateDateValue(date, true);
+        this.labelActive = false;
     };
     /**
      * @param {?} date
@@ -4536,6 +4553,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
             this.showSelector = false;
             this.removeInlineStyle();
         }
+        this.labelActive = true;
         // hide calendar when date was clicked
         // this.showSelector = false;
     };
@@ -4547,6 +4565,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
     MDBDatePickerComponent.prototype.updateDateValue = function (date, clear) {
         // Updates date values
         this.selectedDate = date;
+        this.isDateSelected = true;
         this.selectionDayTxt = clear ? '' : this.formatDate(date);
         this.inputFieldChanged.emit({ value: this.selectionDayTxt, dateFormat: this.opts.dateFormat, valid: !clear });
         this.invalidDate = false;
@@ -4899,14 +4918,13 @@ var MDBDatePickerComponent = /** @class */ (function () {
         if (this.placeholder.length > 0) {
             return true;
         }
-        else {
-            if (this.showSelector) {
-                return true;
-            }
-            else {
-                return false;
-            }
+        if (this.labelActive) {
+            return true;
         }
+        if (this.isDateSelected) {
+            return true;
+        }
+        return false;
     };
     return MDBDatePickerComponent;
 }());
@@ -4914,7 +4932,7 @@ MDBDatePickerComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'mdb-date-picker',
                 exportAs: 'mdbdatepicker',
-                template: "<!-- Line 27: Deleted (focus)=\"onFocusInput($event)\" for better use in Firefox. If other strange problems will occur, please paste it in line 27. --> <div class=\"mydp picker\" [ngClass]=\"{'picker--opened': showSelector}\" [ngStyle]=\"{'width': opts.width}\"> <div class=\"md-form\"> <label *ngIf=\"label.length > 0\" [ngClass]=\"{ 'active': checkActive(), 'disabled': opts.componentDisabled }\">{{ label }}</label> <input type=\"text\" class=\"form-control mydp-date\" [attr.aria-label]=\"opts.ariaLabelInputField\" (click)=\"openBtnClicked()\" [attr.maxlength]=\"opts.dateFormat.length\" [ngClass]=\"{ 'selectiondisabled': opts.componentDisabled, 'disabled': opts.componentDisabled }\" placeholder=\"{{ placeholder }}\" [ngModel]=\"selectionDayTxt\" (ngModelChange)=\"onUserDateInput($event)\" [value]=\"selectionDayTxt\" [ngStyle]=\"{ 'height': opts.height,  'font-size': opts.selectionTxtFontSize }\" (blur)=\"onBlurInput($event)\" [disabled]=\"opts.componentDisabled\" autocomplete=\"off\"> </div> <div class=\"selector picker__holder selectorarrow selectorarrowleft selectorarrowright\" #divFocus [ngClass]=\"{'alignselectorright': opts.alignSelectorRight}\" tabindex=\"0\"> <div class=\"picker__frame picker__box\" #pickerFrame> <div class=\"picker__header\"> <div class=\"picker__date-display\"> <div class=\"picker__weekday-display\"> {{ weekText(getWeekday(tmp)) }} </div> <div class=\"picker__month-display\"> <div>{{ monthText(tmp.month) }}</div> </div> <div class=\"picker__day-display\"> <div>{{ tmp.day }}</div> </div> <div class=\"picker__year-display\"> <div>{{ tmp.year }}</div> </div> </div> <select class=\"picker__select--year\" [(ngModel)]=\"visibleMonth.year\" (ngModelChange)=\"onUserYearInput($event)\" role=\"menu\" aria-label=\"Year selector\"> <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option> </select> <select class=\"picker__select--month\" [(ngModel)]=\"visibleMonth.monthTxt\" (ngModelChange)=\"onUserMonthInput($event)\" role=\"menu\" aria-label=\"Month selector\"> <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option> </select> <button class=\"picker__nav--prev\" data-nav=\"-1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Previous month\" (click)=\"prevMonth()\" [disabled]=\"prevMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled}\"></button> <button class=\"picker__nav--next\" data-nav=\"1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Next month\" (click)=\"nextMonth()\" [disabled]=\"nextMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled}\"></button> </div> <table class=\"picker__table\"> <thead> <tr> <th class=\"picker__weekday weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#</th> <th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th> </tr> </thead> <tbody> <tr *ngFor=\"let w of dates\"> <td class=\"picker__day daycellweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td> <td class=\"picker__day\" *ngFor=\"let d of w.week\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId&&!d.disabled, 'disabled': d.disabled, 'tablesingleday': d.cmo===currMonthId&&!d.disabled}\"> <div *ngIf=\"d.markedDate.marked\" class=\"markdate\" [ngStyle]=\"{'background-color': d.markedDate.color}\"></div> <div class=\"picker__day\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId,'picker__day--outfocus': (d.cmo===nextMonthId || d.cmo===prevMonthId), 'picker__day--today':d.currDay&&opts.markCurrentDay, 'picker__day--selected picker__day--highlighted':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId}\" (click)=\"!d.disabled&&cellClicked(d);$event.stopPropagation()\" (keydown)=\"cellKeyDown($event, d)\" tabindex=\"0\"> {{d.dateObj.day}} </div> </td> </tr> </tbody> </table> <div class=\"picker__footer\"> <button type=\"button\" *ngIf=\"opts.showTodayBtn\" class=\"picker__button--today\" (click)=\"todayClicked()\" role=\"button\" [attr.aria-label]=\"opts.todayBtnTxt\"> {{opts.todayBtnTxt}} </button> <button type=\"button\" *ngIf=\"opts.showClearDateBtn\" class=\"picker__button--clear\" (click)=\"removeBtnClicked()\" role=\"button\" [attr.aria-label]=\"opts.clearBtnTxt\"> {{opts.clearBtnTxt}} </button> <button type=\"button\" [ngClass]=\"{'ml-auto': !opts.showTodayBtn}\" class=\"picker__button--close\" (click)=\"showSelector = false; removeInlineStyle();\" role=\"button\" [attr.aria-label]=\"opts.closeBtnTxt\"> {{opts.closeBtnTxt}} </button> </div> </div> </div> </div>",
+                template: "<!-- Line 27: Deleted (focus)=\"onFocusInput($event)\" for better use in Firefox. If other strange problems will occur, please paste it in line 27. --> <div class=\"mydp picker\" [ngClass]=\"{'picker--opened': showSelector}\" [ngStyle]=\"{'width': opts.width}\"> <div class=\"md-form\"> <label (click)=\"openBtnClicked()\" *ngIf=\"label.length > 0\" [ngClass]=\"{ 'active': checkActive(), 'disabled': opts.componentDisabled }\">{{ label }}</label> <input type=\"text\" class=\"form-control mydp-date\" [attr.aria-label]=\"opts.ariaLabelInputField\" (click)=\"openBtnClicked()\" [attr.maxlength]=\"opts.dateFormat.length\" [ngClass]=\"{ 'selectiondisabled': opts.componentDisabled, 'disabled': opts.componentDisabled }\" placeholder=\"{{ placeholder }}\" [ngModel]=\"selectionDayTxt\" (ngModelChange)=\"onUserDateInput($event)\" [value]=\"selectionDayTxt\" [ngStyle]=\"{ 'height': opts.height,  'font-size': opts.selectionTxtFontSize }\" (blur)=\"onBlurInput($event)\" [disabled]=\"opts.componentDisabled\" autocomplete=\"off\"> </div> <div class=\"selector picker__holder selectorarrow selectorarrowleft selectorarrowright\" #divFocus [ngClass]=\"{'alignselectorright': opts.alignSelectorRight}\" tabindex=\"0\"> <div class=\"picker__frame picker__box\" #pickerFrame> <div class=\"picker__header\"> <div class=\"picker__date-display\"> <div class=\"picker__weekday-display\"> {{ weekText(getWeekday(tmp)) }} </div> <div class=\"picker__month-display\"> <div>{{ monthText(tmp.month) }}</div> </div> <div class=\"picker__day-display\"> <div>{{ tmp.day }}</div> </div> <div class=\"picker__year-display\"> <div>{{ tmp.year }}</div> </div> </div> <select class=\"picker__select--year\" [(ngModel)]=\"visibleMonth.year\" (ngModelChange)=\"onUserYearInput($event)\" role=\"menu\" aria-label=\"Year selector\"> <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option> </select> <select class=\"picker__select--month\" [(ngModel)]=\"visibleMonth.monthTxt\" (ngModelChange)=\"onUserMonthInput($event)\" role=\"menu\" aria-label=\"Month selector\"> <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option> </select> <button class=\"picker__nav--prev\" data-nav=\"-1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Previous month\" (click)=\"prevMonth()\" [disabled]=\"prevMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled}\"></button> <button class=\"picker__nav--next\" data-nav=\"1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Next month\" (click)=\"nextMonth()\" [disabled]=\"nextMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled}\"></button> </div> <table class=\"picker__table\"> <thead> <tr> <th class=\"picker__weekday weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#</th> <th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th> </tr> </thead> <tbody> <tr *ngFor=\"let w of dates\"> <td class=\"picker__day daycellweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td> <td class=\"picker__day\" *ngFor=\"let d of w.week\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId&&!d.disabled, 'disabled': d.disabled, 'tablesingleday': d.cmo===currMonthId&&!d.disabled}\"> <div *ngIf=\"d.markedDate.marked\" class=\"markdate\" [ngStyle]=\"{'background-color': d.markedDate.color}\"></div> <div class=\"picker__day\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId,'picker__day--outfocus': (d.cmo===nextMonthId || d.cmo===prevMonthId), 'picker__day--today':d.currDay&&opts.markCurrentDay, 'picker__day--selected picker__day--highlighted':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId}\" (click)=\"!d.disabled&&cellClicked(d);$event.stopPropagation()\" (keydown)=\"cellKeyDown($event, d)\" tabindex=\"0\"> {{d.dateObj.day}} </div> </td> </tr> </tbody> </table> <div class=\"picker__footer\"> <button type=\"button\" *ngIf=\"opts.showTodayBtn\" class=\"picker__button--today\" (click)=\"todayClicked()\" role=\"button\" [attr.aria-label]=\"opts.todayBtnTxt\"> {{opts.todayBtnTxt}} </button> <button type=\"button\" *ngIf=\"opts.showClearDateBtn\" class=\"picker__button--clear\" (click)=\"removeBtnClicked()\" role=\"button\" [attr.aria-label]=\"opts.clearBtnTxt\"> {{opts.clearBtnTxt}} </button> <button type=\"button\" [ngClass]=\"{'ml-auto': !opts.showTodayBtn}\" class=\"picker__button--close\" (click)=\"showSelector = false; removeInlineStyle();\" role=\"button\" [attr.aria-label]=\"opts.closeBtnTxt\"> {{opts.closeBtnTxt}} </button> </div> </div> </div> </div>",
                 providers: [LocaleService, UtilService, MYDP_VALUE_ACCESSOR],
                 encapsulation: core.ViewEncapsulation.None
             },] },
@@ -7597,11 +7615,15 @@ var SelectComponent = /** @class */ (function () {
         this.updateWidth();
     };
     /**
+     * @param {?} event
      * @return {?}
      */
-    SelectComponent.prototype.onSelectContainerClick = function () {
-        this.selectContainerClicked = true;
-        if (!this.clearClicked) {
+    SelectComponent.prototype.onSelectContainerClick = function (event) {
+        if (this.clearButton && event.target === this.clearButton.nativeElement) {
+            return;
+        }
+        else {
+            this.selectContainerClicked = true;
             this.toggleDropdown();
         }
     };
@@ -7610,6 +7632,14 @@ var SelectComponent = /** @class */ (function () {
      */
     SelectComponent.prototype.onSelectContainerFocus = function () {
         this.openDropdown();
+    };
+    /**
+     * @return {?}
+     */
+    SelectComponent.prototype.onSelectContainerBlur = function () {
+        if (!this.isOpen && !this.disabled) {
+            this.onTouched();
+        }
     };
     /**
      * @param {?} event
@@ -7682,12 +7712,14 @@ var SelectComponent = /** @class */ (function () {
         this.handleMultipleFilterKeydown(event);
     };
     /**
+     * @param {?} event
      * @return {?}
      */
-    SelectComponent.prototype.onClearSelectionClick = function () {
+    SelectComponent.prototype.onClearSelectionClick = function (event) {
+        event.preventDefault();
         this.clearClicked = true;
         this.clearSelection();
-        this.closeDropdown(true);
+        this.placeholderView = this.placeholder;
     };
     /**
      * @param {?} option
@@ -7709,6 +7741,7 @@ var SelectComponent = /** @class */ (function () {
      */
     SelectComponent.prototype.close = function () {
         this.closeDropdown();
+        this.onTouched();
     };
     Object.defineProperty(SelectComponent.prototype, "value", {
         /**
@@ -7862,6 +7895,7 @@ var SelectComponent = /** @class */ (function () {
                 _this.closed.emit(_this);
             }
         }, 200);
+        this.onTouched();
     };
     /**
      * Select. *
@@ -7873,6 +7907,7 @@ var SelectComponent = /** @class */ (function () {
             this.optionList.select(option, this.multiple);
             this.valueChanged();
             this.selected.emit(option.wrappedOption);
+            this.hasSelected = true;
         }
     };
     /**
@@ -7883,6 +7918,7 @@ var SelectComponent = /** @class */ (function () {
         if (option.selected) {
             this.optionList.deselect(option);
             this.valueChanged();
+            this.placeholderView = this.placeholder;
             this.deselected.emit(option.wrappedOption);
         }
     };
@@ -7890,10 +7926,14 @@ var SelectComponent = /** @class */ (function () {
      * @return {?}
      */
     SelectComponent.prototype.clearSelection = function () {
+        var _this = this;
         var /** @type {?} */ selection = this.optionList.selection;
         if (selection.length > 0) {
             this.optionList.clearSelection();
             this.valueChanged();
+            setTimeout(function () {
+                _this.hasSelected = false;
+            }, 0);
             if (selection.length === 1) {
                 this.deselected.emit(selection[0].wrappedOption);
             }
@@ -8080,7 +8120,7 @@ var SelectComponent = /** @class */ (function () {
 SelectComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'mdb-select',
-                template: "<label *ngIf=\"label !== ''\"> {{label}} </label> <div #selection [attr.tabindex]=\"disabled ? null : 0\" [ngClass]=\"{'open': isOpen, 'focus': hasFocus, 'below': isBelow, 'disabled': disabled}\" (mousedown)=\"onSelectContainerClick()\" (focus)=\"onSelectContainerFocus()\" (keydown)=\"onSelectContainerKeydown($event)\" (window:click)=\"onWindowClick()\" (window:resize)=\"onWindowResize()\"> <div class=\"single\" *ngIf=\"!multiple\"> <div class=\"value\" *ngIf=\"optionList.hasSelected()\"> {{optionList.selection[0].label}} </div> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div class=\"clear\" *ngIf=\"allowClear && hasSelected\" (click)=\"onClearSelectionClick()\"> &#x2715; </div> </div> <div class=\"multiple\" *ngIf=\"multiple\"> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div class=\"option\"  *ngFor=\"let option of optionList.selection\"> <span class=\"deselect-option\">, </span>{{option.label}} </div> </div> </div> <mdb-select-dropdown *ngIf=\"isOpen\" #dropdown [multiple]=\"multiple\" [optionList]=\"optionList\" [notFoundMsg]=\"notFoundMsg\" [highlightColor]=\"highlightColor\" [highlightTextColor]=\"highlightTextColor\" [filterEnabled]=\"filterEnabled\" [placeholder]=\"filterPlaceholder\" [top]=\"top\" [left]=\"left\" (close)=\"onDropdownClose($event)\" (optionClicked)=\"onDropdownOptionClicked($event)\" (singleFilterClick)=\"onSingleFilterClick()\" (singleFilterInput)=\"onSingleFilterInput($event)\" (singleFilterKeydown)=\"onSingleFilterKeydown($event)\"> </mdb-select-dropdown>",
+                template: "<label *ngIf=\"label !== ''\"> {{label}} </label> <div #selection [attr.tabindex]=\"disabled ? null : 0\" [ngClass]=\"{'open': isOpen, 'focus': hasFocus, 'below': isBelow, 'disabled': disabled}\" (mousedown)=\"onSelectContainerClick($event)\" (focus)=\"onSelectContainerFocus()\" (blur)=\"onSelectContainerBlur()\" (keydown)=\"onSelectContainerKeydown($event)\" (window:click)=\"onWindowClick()\" (window:resize)=\"onWindowResize()\"> <div class=\"single\" *ngIf=\"!multiple\"> <div class=\"value\" *ngIf=\"optionList.hasSelected()\"> {{optionList.selection[0].label}} </div> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div #clear class=\"clear\" *ngIf=\"allowClear && hasSelected\" (mousedown)=\"onClearSelectionClick($event)\"> &#x2715; </div> </div> <div class=\"multiple\" *ngIf=\"multiple\"> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div class=\"option\"  *ngFor=\"let option of optionList.selection\"> <span class=\"deselect-option\">, </span>{{option.label}} </div> </div> </div> <mdb-select-dropdown *ngIf=\"isOpen\" #dropdown [multiple]=\"multiple\" [optionList]=\"optionList\" [notFoundMsg]=\"notFoundMsg\" [highlightColor]=\"highlightColor\" [highlightTextColor]=\"highlightTextColor\" [filterEnabled]=\"filterEnabled\" [placeholder]=\"filterPlaceholder\" [top]=\"top\" [left]=\"left\" (close)=\"onDropdownClose($event)\" (optionClicked)=\"onDropdownOptionClicked($event)\" (singleFilterClick)=\"onSingleFilterClick()\" (singleFilterInput)=\"onSingleFilterInput($event)\" (singleFilterKeydown)=\"onSingleFilterKeydown($event)\"> </mdb-select-dropdown>",
                 providers: [SELECT_VALUE_ACCESSOR],
                 encapsulation: core.ViewEncapsulation.None
             },] },
@@ -8113,6 +8153,7 @@ SelectComponent.propDecorators = {
     selectionSpan: [{ type: core.ViewChild, args: ['selection',] }],
     dropdown: [{ type: core.ViewChild, args: ['dropdown',] }],
     filterInput: [{ type: core.ViewChild, args: ['filterInput',] }],
+    clearButton: [{ type: core.ViewChild, args: ['clear',] }],
     closeSelect: [{ type: core.HostListener, args: ['document:click', ['$event'],] }]
 };
 /**
@@ -11152,7 +11193,6 @@ var TabsetComponent = /** @class */ (function () {
      * @return {?}
      */
     TabsetComponent.prototype.ngOnInit = function () {
-        console.log('tabs', this.tabs);
         this.listGet();
         this.tabsGet();
         this.showActiveIndex();
@@ -14395,8 +14435,9 @@ var CollapseDirective = /** @class */ (function () {
             var /** @type {?} */ container_1 = this._el.nativeElement;
             container_1.classList.remove('collapse');
             container_1.classList.add('collapsing');
+            var /** @type {?} */ maxElHeight_1 = this._el.nativeElement.scrollHeight;
             setTimeout(function () {
-                _this._renderer.setStyle(container_1, 'height', _this.maxHeight + 'px');
+                _this._renderer.setStyle(container_1, 'height', maxElHeight_1 + 'px');
             }, 10);
             setTimeout(function () {
                 container_1.classList.remove('collapsing');
@@ -17997,6 +18038,15 @@ var TooltipDirective = /** @class */ (function () {
                 _this._tooltip.hide();
             }
         });
+    };
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    TooltipDirective.prototype.ngOnChanges = function (changes) {
+        if (!changes['mdbTooltip'].isFirstChange()) {
+            this.tooltipChange.emit(this.mdbTooltip);
+        }
     };
     /**
      * Toggles an element’s tooltip. This is considered a “manual” triggering of

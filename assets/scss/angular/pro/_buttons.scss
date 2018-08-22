@@ -30,6 +30,13 @@
     }
 }
 
+.fixed-action-btn {
+    position: fixed;
+    z-index: 998;
+    right: auto;
+    bottom: auto;
+}
+
 //Fixed buttons
 .fixed-action-btn {
     .fixed_collapse {
