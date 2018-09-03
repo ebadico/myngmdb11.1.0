@@ -66,10 +66,12 @@ var SBItemComponent = /** @class */ (function () {
      */
     SBItemComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
-        setTimeout(function () {
-            _this.collapsed ? _this.body.expandAnimationState = 'collapsed' : _this.body.expandAnimationState = 'expanded';
-        }, 0);
-        this.body.toggle(this.collapsed);
+        if (this.body !== undefined) {
+            setTimeout(function () {
+                _this.collapsed ? _this.body.expandAnimationState = 'collapsed' : _this.body.expandAnimationState = 'expanded';
+            }, 0);
+            this.body.toggle(this.collapsed);
+        }
     };
     /**
      * @param {?} collapsed
@@ -84,8 +86,10 @@ var SBItemComponent = /** @class */ (function () {
      * @return {?}
      */
     SBItemComponent.prototype.applyToggle = function (collapsed) {
-        this.collapsed = collapsed;
-        this.body.toggle(collapsed);
+        if (this.body !== undefined) {
+            this.collapsed = collapsed;
+            this.body.toggle(collapsed);
+        }
     };
     return SBItemComponent;
 }());
@@ -4221,8 +4225,8 @@ var MDBDatePickerComponent = /** @class */ (function () {
         else if (value && value['date']) {
             this.updateDateValue(this.parseSelectedDate(value['date']), false);
         }
-        else if (value === '') {
-            this.updateDateValue({ year: 0, month: 0, day: 0 }, true);
+        else if (value === '' || value === null) {
+            this.clearDate();
         }
     };
     /**
@@ -4525,6 +4529,8 @@ var MDBDatePickerComponent = /** @class */ (function () {
         this.onChangeCb('');
         this.onTouchedCb();
         this.updateDateValue(date, true);
+        this.tmp = { year: this.getToday().year, month: this.getToday().month, day: this.getToday().day };
+        this.setVisibleMonth();
         this.labelActive = false;
     };
     /**
@@ -4565,6 +4571,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
     MDBDatePickerComponent.prototype.updateDateValue = function (date, clear) {
         // Updates date values
         this.selectedDate = date;
+        this.tmp = date;
         this.isDateSelected = true;
         this.selectionDayTxt = clear ? '' : this.formatDate(date);
         this.inputFieldChanged.emit({ value: this.selectionDayTxt, dateFormat: this.opts.dateFormat, valid: !clear });
@@ -9462,6 +9469,17 @@ var SidenavComponent = /** @class */ (function () {
             _this.shown = value;
         }, 510);
     };
+    /**
+     * @return {?}
+     */
+    SidenavComponent.prototype.ngOnDestroy = function () {
+        if (document.body.classList.contains('hidden-sn')) {
+            this.renderer.removeClass(document.body, 'hidden-sn');
+        }
+        else if (document.body.classList.contains('fixed-sn')) {
+            this.renderer.removeClass(document.body, 'fixed-sn');
+        }
+    };
     return SidenavComponent;
 }());
 SidenavComponent.decorators = [
@@ -11202,7 +11220,7 @@ var TabsetComponent = /** @class */ (function () {
 TabsetComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'mdb-tabset',
-                template: "<div class=\"container-fluid\">  <div class=\"row\"> <div class=\"{{ listGetClass }}\"> <ul class=\"nav {{ buttonClass }}\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\"> <li *ngFor=\"let tabz of tabs;let i = index\" [ngClass]=\"['nav-item', tabz.customClass || '']\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\" (click)=\"click($event, i)\"> <a #tabEl href=\"javascript:void(0);\" class=\"nav-link waves-light\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\"> <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span> <span *ngIf=\"tabz.removable\"> <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"fa fa-remove ml-2\"> </span> </span> </a> </li> </ul> </div> <div class=\"{{ tabsGetClass }}\"> <div class=\"tab-content {{ contentClass }}\"> <ng-content></ng-content> </div> </div> </div> </div>",
+                template: "<div class=\"container-fluid\">  <div class=\"row\"> <div class=\"{{ listGetClass }}\"> <ul class=\"nav {{ buttonClass }}\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\"> <li *ngFor=\"let tabz of tabs;let i = index\" [ngClass]=\"['nav-item', tabz.customClass || '']\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\" (click)=\"click($event, i)\"> <a #tabEl href=\"javascript:void(0);\" class=\"nav-link waves-light\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\"> <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span> <span *ngIf=\"tabz.removable\"> <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"fa fa-remove ml-2\"> </span> </span> </a> </li> </ul> </div> <div class=\"{{ tabsGetClass }}\"> <div class=\"tab-content {{ contentClass }}\"> <ng-content></ng-content> </div> </div> </div> </div> ",
                 providers: [WavesDirective]
             },] },
 ];
@@ -12079,6 +12097,131 @@ TimePickerModule.decorators = [
                 imports: [common.CommonModule, forms.FormsModule],
                 declarations: [ClockPickerComponent],
                 exports: [ClockPickerComponent]
+            },] },
+];
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var MdbMovableDirective = /** @class */ (function () {
+    /**
+     * @param {?} el
+     */
+    function MdbMovableDirective(el) {
+        this.el = el;
+        this.elementPosition = { x: 0, y: 0 };
+        this.movable = true;
+    }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    MdbMovableDirective.prototype.onStartMove = function (event) {
+        this.isElementMoving = true;
+        this.startMoving(event);
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    MdbMovableDirective.prototype.onMove = function (event) {
+        event.preventDefault();
+        if (!this.isElementMoving) {
+            return;
+        }
+        this.movingOver(event);
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    MdbMovableDirective.prototype.onEndMove = function (event) {
+        if (!this.isElementMoving) {
+            return;
+        }
+        this.isElementMoving = false;
+        this.endMoving(event);
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    MdbMovableDirective.prototype.startMoving = function (event) {
+        if (event.type === 'mousedown') {
+            this.startingPosition = {
+                x: event.clientX - this.elementPosition.x,
+                y: event.clientY - this.elementPosition.y
+            };
+        }
+        else {
+            this.startingPosition = {
+                x: event.changedTouches[0].clientX - this.elementPosition.x,
+                y: event.changedTouches[0].clientY - this.elementPosition.y
+            };
+        }
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    MdbMovableDirective.prototype.movingOver = function (event) {
+        if (event.type === 'mousemove') {
+            this.elementPosition.x = event.clientX - this.startingPosition.x;
+            this.elementPosition.y = event.clientY - this.startingPosition.y;
+        }
+        else {
+            this.elementPosition.x =
+                event.changedTouches[0].clientX - this.startingPosition.x;
+            this.elementPosition.y =
+                event.changedTouches[0].clientY - this.startingPosition.y;
+        }
+        this.updatePosition();
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    MdbMovableDirective.prototype.endMoving = function (event) { };
+    /**
+     * @return {?}
+     */
+    MdbMovableDirective.prototype.updatePosition = function () {
+        var _this = this;
+        requestAnimationFrame(function () {
+            _this.el.nativeElement.style.transform = "\n        translate(" + _this.elementPosition.x + "px,\n                  " + _this.elementPosition.y + "px)\n      ";
+        });
+    };
+    return MdbMovableDirective;
+}());
+MdbMovableDirective.decorators = [
+    { type: core.Directive, args: [{
+                selector: '[mdbMovable]'
+            },] },
+];
+/** @nocollapse */
+MdbMovableDirective.ctorParameters = function () { return [
+    { type: core.ElementRef }
+]; };
+MdbMovableDirective.propDecorators = {
+    movable: [{ type: core.HostBinding, args: ['class.mdb-movable',] }],
+    onStartMove: [{ type: core.HostListener, args: ['mousedown', ['$event'],] }, { type: core.HostListener, args: ['touchstart', ['$event'],] }],
+    onMove: [{ type: core.HostListener, args: ['document:mousemove', ['$event'],] }, { type: core.HostListener, args: ['touchmove', ['$event'],] }],
+    onEndMove: [{ type: core.HostListener, args: ['document:mouseup', ['$event'],] }, { type: core.HostListener, args: ['touchend', ['$event'],] }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var MovableModule = /** @class */ (function () {
+    function MovableModule() {
+    }
+    return MovableModule;
+}());
+MovableModule.decorators = [
+    { type: core.NgModule, args: [{
+                declarations: [MdbMovableDirective],
+                exports: [MdbMovableDirective],
+                schemas: [core.NO_ERRORS_SCHEMA],
             },] },
 ];
 /**
@@ -14296,183 +14439,94 @@ CheckboxModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-var CollapseDirective = /** @class */ (function () {
-    /**
-     * @param {?} _el
-     * @param {?} _renderer
-     * @param {?} document
-     * @param {?} platformId
-     */
-    function CollapseDirective(_el, _renderer, document, platformId) {
-        this.document = document;
+var CollapseComponent = /** @class */ (function () {
+    function CollapseComponent() {
+        this.isCollapsed = false;
         this.showBsCollapse = new core.EventEmitter();
         this.shownBsCollapse = new core.EventEmitter();
         this.hideBsCollapse = new core.EventEmitter();
         this.hiddenBsCollapse = new core.EventEmitter();
-        /**
-         * This event fires as soon as content collapses
-         */
         this.collapsed = new core.EventEmitter();
-        /**
-         * This event fires as soon as content becomes visible
-         */
         this.expanded = new core.EventEmitter();
-        this.isExpanded = true;
-        this.isCollapsed = false;
-        this.isCollapse = true;
-        this.isCollapsing = false;
-        this.collapsing = false;
-        this.animationTime = 500;
-        this.isBrowser = false;
-        this.isBrowser = common.isPlatformBrowser(platformId);
-        this._el = _el;
-        this._renderer = _renderer;
+        this.overflow = 'hidden';
     }
     /**
+     * @param {?} event
      * @return {?}
      */
-    CollapseDirective.prototype.ngOnInit = function () {
-        this._el.nativeElement.classList.add('show');
-        this._el.nativeElement.style.transition = this.animationTime + 'ms ease';
-        if (!this.collapse) {
-            this._el.nativeElement.classList.remove('show');
-            this.hide();
-        }
-        else {
-            this.show();
-        }
-        this.isExpanded = this.collapse;
-    };
-    /**
-     * @return {?}
-     */
-    CollapseDirective.prototype.ngAfterViewInit = function () {
-        this.maxHeight = this._el.nativeElement.scrollHeight;
-    };
-    /**
-     * @return {?}
-     */
-    CollapseDirective.prototype.resize = function () {
-        var /** @type {?} */ container = this._el.nativeElement;
-        this.maxHeight = this._el.nativeElement.scrollHeight;
-        this._renderer.setStyle(container, 'height', this.maxHeight + 'px');
-    };
-    /**
-     * allows to manually toggle content visibility
-     * @param {?=} event
-     * @return {?}
-     */
-    CollapseDirective.prototype.toggle = function (event) {
-        if (!this.collapsing) {
-            if (this.isExpanded) {
-                this.hide();
-            }
-            else {
-                this.show();
-            }
-        }
-        try {
-            if (this.isBrowser) {
-                var /** @type {?} */ fixedButtonContainer = this.document.querySelector('.fixed-action-btn');
-                var /** @type {?} */ fixedCollapseContainer = this.document.querySelector('.fixed_collapse');
-                if (event.type === 'click') {
-                    // If fixedButtonContainer got top style instead of bottom, remove bottom styles from this._el.nativeElement - needed in cases,
-                    // when menu should be slided from the button instead of from the bottom edge of the screen.
-                    if (fixedButtonContainer.style.top !== '' && window.innerHeight - event.clientY > this.maxHeight) {
-                        this._renderer.setStyle(this._el.nativeElement, 'bottom', 'unset');
-                    }
-                    this.maxHeight = fixedCollapseContainer.scrollHeight;
-                }
-                else if (event.type === 'mouseenter' || event.type === 'mouseleave') {
-                    // Same as in 103 line.
-                    if (fixedButtonContainer.style.top !== '' && window.innerHeight - event.clientY > this.maxHeight) {
-                        this._renderer.setStyle(this._el.nativeElement, 'bottom', 'unset');
-                    }
-                    this.maxHeight = fixedCollapseContainer.scrollHeight;
-                }
-            }
-        }
-        catch (error) { }
-    };
-    /**
-     * allows to manually hide content
-     * @return {?}
-     */
-    CollapseDirective.prototype.hide = function () {
-        var _this = this;
-        this.collapsing = true;
-        this.hideBsCollapse.emit(this);
-        this.isCollapse = false;
-        this.isCollapsing = true;
-        this.isExpanded = false;
-        this.isCollapsed = true;
-        var /** @type {?} */ container = this._el.nativeElement;
-        container.classList.remove('collapse');
-        container.classList.remove('show');
-        container.classList.add('collapsing');
-        this._renderer.setStyle(container, 'height', '0px');
-        setTimeout(function () {
-            container.classList.remove('collapsing');
-            container.classList.add('collapse');
-            _this.hiddenBsCollapse.emit(_this);
-            _this.collapsing = false;
-        }, this.animationTime);
-        this.collapsed.emit(this);
-    };
-    /**
-     * allows to manually show collapsed content
-     * @return {?}
-     */
-    CollapseDirective.prototype.show = function () {
-        var _this = this;
-        if (!this.isExpanded) {
-            this.collapsing = true;
-            this.showBsCollapse.emit(this);
-            this.isCollapse = false;
-            this.isCollapsing = true;
-            this.isExpanded = true;
-            this.isCollapsed = false;
-            var /** @type {?} */ container_1 = this._el.nativeElement;
-            container_1.classList.remove('collapse');
-            container_1.classList.add('collapsing');
-            var /** @type {?} */ maxElHeight_1 = this._el.nativeElement.scrollHeight;
-            setTimeout(function () {
-                _this._renderer.setStyle(container_1, 'height', maxElHeight_1 + 'px');
-            }, 10);
-            setTimeout(function () {
-                container_1.classList.remove('collapsing');
-                container_1.classList.add('collapse');
-                container_1.classList.add('show');
-                _this.shownBsCollapse.emit(_this);
-                _this.collapsing = false;
-            }, this.animationTime - (this.animationTime * 0.5));
+    CollapseComponent.prototype.onExpandBodyDone = function (event) {
+        if (event.toState === 'expanded') {
+            this.shownBsCollapse.emit(this);
             this.expanded.emit(this);
         }
+        else {
+            this.hiddenBsCollapse.emit(this);
+            this.collapsed.emit(this);
+        }
     };
-    return CollapseDirective;
+    /**
+     * @return {?}
+     */
+    CollapseComponent.prototype.toggle = function () {
+        this.isCollapsed ? this.open() : this.hide();
+    };
+    /**
+     * @return {?}
+     */
+    CollapseComponent.prototype.open = function () {
+        this.expandAnimationState = 'expanded';
+        this.isCollapsed = false;
+        this.showBsCollapse.emit(this);
+    };
+    /**
+     * @return {?}
+     */
+    CollapseComponent.prototype.hide = function () {
+        this.expandAnimationState = 'collapsed';
+        this.isCollapsed = true;
+        this.hideBsCollapse.emit(this);
+    };
+    /**
+     * @return {?}
+     */
+    CollapseComponent.prototype.initializeCollapseState = function () {
+        this.isCollapsed ? this.hide() : this.open();
+    };
+    /**
+     * @return {?}
+     */
+    CollapseComponent.prototype.ngOnInit = function () {
+        this.initializeCollapseState();
+    };
+    return CollapseComponent;
 }());
-CollapseDirective.decorators = [
-    { type: core.Directive, args: [{
+CollapseComponent.decorators = [
+    { type: core.Component, args: [{
                 selector: '[mdbCollapse]',
                 exportAs: 'bs-collapse',
+                template: '<ng-content></ng-content>',
+                animations: [
+                    animations.trigger('expandBody', [
+                        animations.state('collapsed', animations.style({ height: '0px', visibility: 'hidden' })),
+                        animations.state('expanded', animations.style({ height: '*', visibility: 'visible' })),
+                        animations.transition('expanded <=> collapsed', animations.animate('500ms ease')),
+                    ])
+                ],
             },] },
 ];
 /** @nocollapse */
-CollapseDirective.ctorParameters = function () { return [
-    { type: core.ElementRef },
-    { type: core.Renderer2 },
-    { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] },
-    { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
-]; };
-CollapseDirective.propDecorators = {
-    showBsCollapse: [{ type: core.Output, args: ['showBsCollapse',] }],
-    shownBsCollapse: [{ type: core.Output, args: ['shownBsCollapse',] }],
-    hideBsCollapse: [{ type: core.Output, args: ['hideBsCollapse',] }],
-    hiddenBsCollapse: [{ type: core.Output, args: ['hiddenBsCollapse',] }],
+CollapseComponent.ctorParameters = function () { return []; };
+CollapseComponent.propDecorators = {
+    isCollapsed: [{ type: core.Input }],
+    showBsCollapse: [{ type: core.Output }],
+    shownBsCollapse: [{ type: core.Output }],
+    hideBsCollapse: [{ type: core.Output }],
+    hiddenBsCollapse: [{ type: core.Output }],
     collapsed: [{ type: core.Output }],
     expanded: [{ type: core.Output }],
-    collapse: [{ type: core.Input }],
-    animationTime: [{ type: core.Input }]
+    expandAnimationState: [{ type: core.HostBinding, args: ['@expandBody',] }],
+    overflow: [{ type: core.HostBinding, args: ['style.overflow',] }],
+    onExpandBodyDone: [{ type: core.HostListener, args: ['@expandBody.done', ['$event'],] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -14491,8 +14545,8 @@ var CollapseModule = /** @class */ (function () {
 }());
 CollapseModule.decorators = [
     { type: core.NgModule, args: [{
-                declarations: [CollapseDirective],
-                exports: [CollapseDirective]
+                declarations: [CollapseComponent],
+                exports: [CollapseComponent]
             },] },
 ];
 /**
@@ -15999,11 +16053,10 @@ var MdbInputDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbInputDirective.prototype.resize = function () {
-        try {
+        if (this.el.nativeElement.classList.contains('md-textarea-auto')) {
             this._renderer.setStyle(this.el.nativeElement, 'height', 'auto');
             this._renderer.setStyle(this.el.nativeElement, 'height', this.el.nativeElement.scrollHeight + 'px');
         }
-        catch (error) { }
     };
     /**
      * @return {?}
@@ -18361,6 +18414,10 @@ MDBBootstrapModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var MODULES$1 = [
     AutocompleteModule,
     CardsModule,
@@ -18377,7 +18434,8 @@ var MODULES$1 = [
     AccordionModule,
     StickyContentModule,
     SmoothscrollModule,
-    CharCounterModule
+    CharCounterModule,
+    MovableModule
 ];
 var MDBRootModulePro = /** @class */ (function () {
     function MDBRootModulePro() {
@@ -18401,7 +18459,8 @@ MDBRootModulePro.decorators = [
                     AccordionModule,
                     StickyContentModule,
                     SmoothscrollModule.forRoot(),
-                    CharCounterModule.forRoot()
+                    CharCounterModule.forRoot(),
+                    MovableModule
                 ],
                 exports: [MODULES$1],
                 providers: [],
@@ -18592,6 +18651,8 @@ exports.MaterialChipsModule = MaterialChipsModule;
 exports.TimePickerModule = TimePickerModule;
 exports.TIME_PIRCKER_VALUE_ACCESSOT = TIME_PIRCKER_VALUE_ACCESSOT;
 exports.ClockPickerComponent = ClockPickerComponent;
+exports.MovableModule = MovableModule;
+exports.MdbMovableDirective = MdbMovableDirective;
 exports.ButtonsModule = ButtonsModule;
 exports.CHECKBOX_CONTROL_VALUE_ACCESSOR = CHECKBOX_CONTROL_VALUE_ACCESSOR;
 exports.ButtonCheckboxDirective = ButtonCheckboxDirective;
@@ -18617,7 +18678,7 @@ exports.CHECKBOX_VALUE_ACCESSOR = CHECKBOX_VALUE_ACCESSOR;
 exports.MdbCheckboxChange = MdbCheckboxChange;
 exports.CheckboxComponent = CheckboxComponent;
 exports.CheckboxModule = CheckboxModule;
-exports.CollapseDirective = CollapseDirective;
+exports.CollapseComponent = CollapseComponent;
 exports.CollapseModule = CollapseModule;
 exports.BsDropdownContainerComponent = BsDropdownContainerComponent;
 exports.BsDropdownMenuDirective = BsDropdownMenuDirective;
@@ -18693,55 +18754,55 @@ exports.MDBBootstrapModule = MDBBootstrapModule;
 exports.MDBBootstrapModulePro = MDBBootstrapModulePro;
 exports.MDBRootModules = MDBRootModules;
 exports.MDBBootstrapModulesPro = MDBBootstrapModulesPro;
-exports.ɵct1 = MdbBtnDirective;
-exports.ɵcq1 = ButtonsModule;
-exports.ɵcr1 = ButtonCheckboxDirective;
-exports.ɵcs1 = ButtonRadioDirective;
-exports.ɵcy1 = CardsFreeModule;
-exports.ɵcu1 = CarouselComponent;
-exports.ɵcv1 = CarouselConfig;
-exports.ɵcx1 = CarouselModule;
-exports.ɵcw1 = SlideComponent;
-exports.ɵcz1 = BaseChartDirective;
-exports.ɵda1 = ChartsModule;
-exports.ɵdb1 = CHECKBOX_VALUE_ACCESSOR;
-exports.ɵdc1 = CheckboxComponent;
-exports.ɵdd1 = CheckboxModule;
-exports.ɵde1 = CollapseDirective;
-exports.ɵdf1 = CollapseModule;
-exports.ɵdg1 = BsDropdownContainerComponent;
-exports.ɵdh1 = BsDropdownMenuDirective;
-exports.ɵdi1 = BsDropdownToggleDirective;
-exports.ɵdj1 = BsDropdownConfig;
-exports.ɵdk1 = BsDropdownDirective;
-exports.ɵdm1 = DropdownModule;
-exports.ɵdl1 = BsDropdownState;
-exports.ɵdo1 = MdbIconComponent;
-exports.ɵdn1 = IconsModule;
-exports.ɵdp1 = InputsModule;
-exports.ɵdq1 = MdbInputDirective;
-exports.ɵem1 = MDBRootModule;
-exports.ɵdr1 = ModalDirective;
-exports.ɵdx1 = ModalModule;
-exports.ɵds1 = ModalOptions;
-exports.ɵdt1 = MDBModalService;
-exports.ɵdv1 = ModalBackdropComponent;
-exports.ɵdu1 = ModalBackdropOptions;
-exports.ɵdw1 = ModalContainerComponent;
-exports.ɵdy1 = NavbarComponent;
-exports.ɵdz1 = NavbarModule;
-exports.ɵea1 = PopoverContainerComponent;
-exports.ɵeb1 = PopoverConfig;
-exports.ɵec1 = PopoverDirective;
-exports.ɵed1 = PopoverModule;
-exports.ɵee1 = RippleDirective;
-exports.ɵef1 = RippleModule;
-exports.ɵei1 = TooltipContainerComponent;
-exports.ɵej1 = TooltipDirective;
-exports.ɵel1 = TooltipModule;
-exports.ɵek1 = TooltipConfig;
-exports.ɵeg1 = WavesDirective;
-exports.ɵeh1 = WavesModule;
+exports.ɵcv1 = MdbBtnDirective;
+exports.ɵcs1 = ButtonsModule;
+exports.ɵct1 = ButtonCheckboxDirective;
+exports.ɵcu1 = ButtonRadioDirective;
+exports.ɵda1 = CardsFreeModule;
+exports.ɵcw1 = CarouselComponent;
+exports.ɵcx1 = CarouselConfig;
+exports.ɵcz1 = CarouselModule;
+exports.ɵcy1 = SlideComponent;
+exports.ɵdb1 = BaseChartDirective;
+exports.ɵdc1 = ChartsModule;
+exports.ɵdd1 = CHECKBOX_VALUE_ACCESSOR;
+exports.ɵde1 = CheckboxComponent;
+exports.ɵdf1 = CheckboxModule;
+exports.ɵdg1 = CollapseComponent;
+exports.ɵdh1 = CollapseModule;
+exports.ɵdi1 = BsDropdownContainerComponent;
+exports.ɵdj1 = BsDropdownMenuDirective;
+exports.ɵdk1 = BsDropdownToggleDirective;
+exports.ɵdl1 = BsDropdownConfig;
+exports.ɵdm1 = BsDropdownDirective;
+exports.ɵdo1 = DropdownModule;
+exports.ɵdn1 = BsDropdownState;
+exports.ɵdq1 = MdbIconComponent;
+exports.ɵdp1 = IconsModule;
+exports.ɵdr1 = InputsModule;
+exports.ɵds1 = MdbInputDirective;
+exports.ɵeo1 = MDBRootModule;
+exports.ɵdt1 = ModalDirective;
+exports.ɵdz1 = ModalModule;
+exports.ɵdu1 = ModalOptions;
+exports.ɵdv1 = MDBModalService;
+exports.ɵdx1 = ModalBackdropComponent;
+exports.ɵdw1 = ModalBackdropOptions;
+exports.ɵdy1 = ModalContainerComponent;
+exports.ɵea1 = NavbarComponent;
+exports.ɵeb1 = NavbarModule;
+exports.ɵec1 = PopoverContainerComponent;
+exports.ɵed1 = PopoverConfig;
+exports.ɵee1 = PopoverDirective;
+exports.ɵef1 = PopoverModule;
+exports.ɵeg1 = RippleDirective;
+exports.ɵeh1 = RippleModule;
+exports.ɵek1 = TooltipContainerComponent;
+exports.ɵel1 = TooltipDirective;
+exports.ɵen1 = TooltipModule;
+exports.ɵem1 = TooltipConfig;
+exports.ɵei1 = WavesDirective;
+exports.ɵej1 = WavesModule;
 exports.ɵc1 = SBItemComponent;
 exports.ɵa1 = SBItemBodyComponent;
 exports.ɵb1 = SBItemHeadComponent;
@@ -18782,11 +18843,13 @@ exports.ɵbl1 = SelectDropdownComponent;
 exports.ɵbm1 = SELECT_VALUE_ACCESSOR;
 exports.ɵbn1 = SelectComponent;
 exports.ɵbo1 = SelectModule;
-exports.ɵen1 = MDBRootModulePro;
+exports.ɵep1 = MDBRootModulePro;
+exports.ɵcr1 = MdbMovableDirective;
+exports.ɵcq1 = MovableModule;
 exports.ɵbp1 = BarComponent;
 exports.ɵbv1 = ProgressBars;
-exports.ɵeo1 = MdProgressBarModule;
-exports.ɵep1 = MdProgressSpinnerModule;
+exports.ɵeq1 = MdProgressBarModule;
+exports.ɵer1 = MdProgressSpinnerModule;
 exports.ɵbq1 = ProgressSpinnerComponent;
 exports.ɵbr1 = ProgressDirective;
 exports.ɵbs1 = ProgressbarComponent;

@@ -1,5 +1,5 @@
-import { ElementRef, Renderer2, AfterViewInit } from '@angular/core';
-export declare class SidenavComponent implements AfterViewInit {
+import { ElementRef, Renderer2, AfterViewInit, OnDestroy } from '@angular/core';
+export declare class SidenavComponent implements AfterViewInit, OnDestroy {
     el: ElementRef;
     renderer: Renderer2;
     windwosWidth: number;
@@ -19,4 +19,5 @@ export declare class SidenavComponent implements AfterViewInit {
     showOverlay(): void;
     hideOverlay(): void;
     setShown(value: boolean): void;
+    ngOnDestroy(): void;
 }
