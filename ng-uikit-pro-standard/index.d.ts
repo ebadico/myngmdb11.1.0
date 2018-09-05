@@ -112,8 +112,6 @@ export * from './pro/tags/chips.component';
 export * from './pro/tags/chips.module';
 export * from './pro/time-picker/timepicker.module';
 export * from './pro/time-picker/timepicker.component';
-export * from './pro/movable/movable.module';
-export * from './pro/movable/mdb-movable.directive';
 export * from './free/buttons/buttons.module';
 export * from './free/buttons/checkbox.directive';
 export * from './free/buttons/radio.directive';

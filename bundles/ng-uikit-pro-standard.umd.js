@@ -12103,131 +12103,6 @@ TimePickerModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-var MdbMovableDirective = /** @class */ (function () {
-    /**
-     * @param {?} el
-     */
-    function MdbMovableDirective(el) {
-        this.el = el;
-        this.elementPosition = { x: 0, y: 0 };
-        this.movable = true;
-    }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    MdbMovableDirective.prototype.onStartMove = function (event) {
-        this.isElementMoving = true;
-        this.startMoving(event);
-    };
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    MdbMovableDirective.prototype.onMove = function (event) {
-        event.preventDefault();
-        if (!this.isElementMoving) {
-            return;
-        }
-        this.movingOver(event);
-    };
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    MdbMovableDirective.prototype.onEndMove = function (event) {
-        if (!this.isElementMoving) {
-            return;
-        }
-        this.isElementMoving = false;
-        this.endMoving(event);
-    };
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    MdbMovableDirective.prototype.startMoving = function (event) {
-        if (event.type === 'mousedown') {
-            this.startingPosition = {
-                x: event.clientX - this.elementPosition.x,
-                y: event.clientY - this.elementPosition.y
-            };
-        }
-        else {
-            this.startingPosition = {
-                x: event.changedTouches[0].clientX - this.elementPosition.x,
-                y: event.changedTouches[0].clientY - this.elementPosition.y
-            };
-        }
-    };
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    MdbMovableDirective.prototype.movingOver = function (event) {
-        if (event.type === 'mousemove') {
-            this.elementPosition.x = event.clientX - this.startingPosition.x;
-            this.elementPosition.y = event.clientY - this.startingPosition.y;
-        }
-        else {
-            this.elementPosition.x =
-                event.changedTouches[0].clientX - this.startingPosition.x;
-            this.elementPosition.y =
-                event.changedTouches[0].clientY - this.startingPosition.y;
-        }
-        this.updatePosition();
-    };
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    MdbMovableDirective.prototype.endMoving = function (event) { };
-    /**
-     * @return {?}
-     */
-    MdbMovableDirective.prototype.updatePosition = function () {
-        var _this = this;
-        requestAnimationFrame(function () {
-            _this.el.nativeElement.style.transform = "\n        translate(" + _this.elementPosition.x + "px,\n                  " + _this.elementPosition.y + "px)\n      ";
-        });
-    };
-    return MdbMovableDirective;
-}());
-MdbMovableDirective.decorators = [
-    { type: core.Directive, args: [{
-                selector: '[mdbMovable]'
-            },] },
-];
-/** @nocollapse */
-MdbMovableDirective.ctorParameters = function () { return [
-    { type: core.ElementRef }
-]; };
-MdbMovableDirective.propDecorators = {
-    movable: [{ type: core.HostBinding, args: ['class.mdb-movable',] }],
-    onStartMove: [{ type: core.HostListener, args: ['mousedown', ['$event'],] }, { type: core.HostListener, args: ['touchstart', ['$event'],] }],
-    onMove: [{ type: core.HostListener, args: ['document:mousemove', ['$event'],] }, { type: core.HostListener, args: ['touchmove', ['$event'],] }],
-    onEndMove: [{ type: core.HostListener, args: ['document:mouseup', ['$event'],] }, { type: core.HostListener, args: ['touchend', ['$event'],] }]
-};
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-var MovableModule = /** @class */ (function () {
-    function MovableModule() {
-    }
-    return MovableModule;
-}());
-MovableModule.decorators = [
-    { type: core.NgModule, args: [{
-                declarations: [MdbMovableDirective],
-                exports: [MdbMovableDirective],
-                schemas: [core.NO_ERRORS_SCHEMA],
-            },] },
-];
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
 var MdbBtnDirective = /** @class */ (function () {
     /**
      * @param {?} el
@@ -18414,10 +18289,6 @@ MDBBootstrapModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
 var MODULES$1 = [
     AutocompleteModule,
     CardsModule,
@@ -18435,7 +18306,6 @@ var MODULES$1 = [
     StickyContentModule,
     SmoothscrollModule,
     CharCounterModule,
-    MovableModule
 ];
 var MDBRootModulePro = /** @class */ (function () {
     function MDBRootModulePro() {
@@ -18460,7 +18330,6 @@ MDBRootModulePro.decorators = [
                     StickyContentModule,
                     SmoothscrollModule.forRoot(),
                     CharCounterModule.forRoot(),
-                    MovableModule
                 ],
                 exports: [MODULES$1],
                 providers: [],
@@ -18651,8 +18520,6 @@ exports.MaterialChipsModule = MaterialChipsModule;
 exports.TimePickerModule = TimePickerModule;
 exports.TIME_PIRCKER_VALUE_ACCESSOT = TIME_PIRCKER_VALUE_ACCESSOT;
 exports.ClockPickerComponent = ClockPickerComponent;
-exports.MovableModule = MovableModule;
-exports.MdbMovableDirective = MdbMovableDirective;
 exports.ButtonsModule = ButtonsModule;
 exports.CHECKBOX_CONTROL_VALUE_ACCESSOR = CHECKBOX_CONTROL_VALUE_ACCESSOR;
 exports.ButtonCheckboxDirective = ButtonCheckboxDirective;
@@ -18754,55 +18621,55 @@ exports.MDBBootstrapModule = MDBBootstrapModule;
 exports.MDBBootstrapModulePro = MDBBootstrapModulePro;
 exports.MDBRootModules = MDBRootModules;
 exports.MDBBootstrapModulesPro = MDBBootstrapModulesPro;
-exports.ɵcv1 = MdbBtnDirective;
-exports.ɵcs1 = ButtonsModule;
-exports.ɵct1 = ButtonCheckboxDirective;
-exports.ɵcu1 = ButtonRadioDirective;
-exports.ɵda1 = CardsFreeModule;
-exports.ɵcw1 = CarouselComponent;
-exports.ɵcx1 = CarouselConfig;
-exports.ɵcz1 = CarouselModule;
-exports.ɵcy1 = SlideComponent;
-exports.ɵdb1 = BaseChartDirective;
-exports.ɵdc1 = ChartsModule;
-exports.ɵdd1 = CHECKBOX_VALUE_ACCESSOR;
-exports.ɵde1 = CheckboxComponent;
-exports.ɵdf1 = CheckboxModule;
-exports.ɵdg1 = CollapseComponent;
-exports.ɵdh1 = CollapseModule;
-exports.ɵdi1 = BsDropdownContainerComponent;
-exports.ɵdj1 = BsDropdownMenuDirective;
-exports.ɵdk1 = BsDropdownToggleDirective;
-exports.ɵdl1 = BsDropdownConfig;
-exports.ɵdm1 = BsDropdownDirective;
-exports.ɵdo1 = DropdownModule;
-exports.ɵdn1 = BsDropdownState;
-exports.ɵdq1 = MdbIconComponent;
-exports.ɵdp1 = IconsModule;
-exports.ɵdr1 = InputsModule;
-exports.ɵds1 = MdbInputDirective;
-exports.ɵeo1 = MDBRootModule;
-exports.ɵdt1 = ModalDirective;
-exports.ɵdz1 = ModalModule;
-exports.ɵdu1 = ModalOptions;
-exports.ɵdv1 = MDBModalService;
-exports.ɵdx1 = ModalBackdropComponent;
-exports.ɵdw1 = ModalBackdropOptions;
-exports.ɵdy1 = ModalContainerComponent;
-exports.ɵea1 = NavbarComponent;
-exports.ɵeb1 = NavbarModule;
-exports.ɵec1 = PopoverContainerComponent;
-exports.ɵed1 = PopoverConfig;
-exports.ɵee1 = PopoverDirective;
-exports.ɵef1 = PopoverModule;
-exports.ɵeg1 = RippleDirective;
-exports.ɵeh1 = RippleModule;
-exports.ɵek1 = TooltipContainerComponent;
-exports.ɵel1 = TooltipDirective;
-exports.ɵen1 = TooltipModule;
-exports.ɵem1 = TooltipConfig;
-exports.ɵei1 = WavesDirective;
-exports.ɵej1 = WavesModule;
+exports.ɵct1 = MdbBtnDirective;
+exports.ɵcq1 = ButtonsModule;
+exports.ɵcr1 = ButtonCheckboxDirective;
+exports.ɵcs1 = ButtonRadioDirective;
+exports.ɵcy1 = CardsFreeModule;
+exports.ɵcu1 = CarouselComponent;
+exports.ɵcv1 = CarouselConfig;
+exports.ɵcx1 = CarouselModule;
+exports.ɵcw1 = SlideComponent;
+exports.ɵcz1 = BaseChartDirective;
+exports.ɵda1 = ChartsModule;
+exports.ɵdb1 = CHECKBOX_VALUE_ACCESSOR;
+exports.ɵdc1 = CheckboxComponent;
+exports.ɵdd1 = CheckboxModule;
+exports.ɵde1 = CollapseComponent;
+exports.ɵdf1 = CollapseModule;
+exports.ɵdg1 = BsDropdownContainerComponent;
+exports.ɵdh1 = BsDropdownMenuDirective;
+exports.ɵdi1 = BsDropdownToggleDirective;
+exports.ɵdj1 = BsDropdownConfig;
+exports.ɵdk1 = BsDropdownDirective;
+exports.ɵdm1 = DropdownModule;
+exports.ɵdl1 = BsDropdownState;
+exports.ɵdo1 = MdbIconComponent;
+exports.ɵdn1 = IconsModule;
+exports.ɵdp1 = InputsModule;
+exports.ɵdq1 = MdbInputDirective;
+exports.ɵem1 = MDBRootModule;
+exports.ɵdr1 = ModalDirective;
+exports.ɵdx1 = ModalModule;
+exports.ɵds1 = ModalOptions;
+exports.ɵdt1 = MDBModalService;
+exports.ɵdv1 = ModalBackdropComponent;
+exports.ɵdu1 = ModalBackdropOptions;
+exports.ɵdw1 = ModalContainerComponent;
+exports.ɵdy1 = NavbarComponent;
+exports.ɵdz1 = NavbarModule;
+exports.ɵea1 = PopoverContainerComponent;
+exports.ɵeb1 = PopoverConfig;
+exports.ɵec1 = PopoverDirective;
+exports.ɵed1 = PopoverModule;
+exports.ɵee1 = RippleDirective;
+exports.ɵef1 = RippleModule;
+exports.ɵei1 = TooltipContainerComponent;
+exports.ɵej1 = TooltipDirective;
+exports.ɵel1 = TooltipModule;
+exports.ɵek1 = TooltipConfig;
+exports.ɵeg1 = WavesDirective;
+exports.ɵeh1 = WavesModule;
 exports.ɵc1 = SBItemComponent;
 exports.ɵa1 = SBItemBodyComponent;
 exports.ɵb1 = SBItemHeadComponent;
@@ -18843,13 +18710,11 @@ exports.ɵbl1 = SelectDropdownComponent;
 exports.ɵbm1 = SELECT_VALUE_ACCESSOR;
 exports.ɵbn1 = SelectComponent;
 exports.ɵbo1 = SelectModule;
-exports.ɵep1 = MDBRootModulePro;
-exports.ɵcr1 = MdbMovableDirective;
-exports.ɵcq1 = MovableModule;
+exports.ɵen1 = MDBRootModulePro;
 exports.ɵbp1 = BarComponent;
 exports.ɵbv1 = ProgressBars;
-exports.ɵeq1 = MdProgressBarModule;
-exports.ɵer1 = MdProgressSpinnerModule;
+exports.ɵeo1 = MdProgressBarModule;
+exports.ɵep1 = MdProgressSpinnerModule;
 exports.ɵbq1 = ProgressSpinnerComponent;
 exports.ɵbr1 = ProgressDirective;
 exports.ɵbs1 = ProgressbarComponent;

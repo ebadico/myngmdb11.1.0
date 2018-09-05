@@ -12110,131 +12110,6 @@ TimePickerModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-var MdbMovableDirective = /** @class */ (function () {
-    /**
-     * @param {?} el
-     */
-    function MdbMovableDirective(el) {
-        this.el = el;
-        this.elementPosition = { x: 0, y: 0 };
-        this.movable = true;
-    }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    MdbMovableDirective.prototype.onStartMove = function (event) {
-        this.isElementMoving = true;
-        this.startMoving(event);
-    };
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    MdbMovableDirective.prototype.onMove = function (event) {
-        event.preventDefault();
-        if (!this.isElementMoving) {
-            return;
-        }
-        this.movingOver(event);
-    };
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    MdbMovableDirective.prototype.onEndMove = function (event) {
-        if (!this.isElementMoving) {
-            return;
-        }
-        this.isElementMoving = false;
-        this.endMoving(event);
-    };
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    MdbMovableDirective.prototype.startMoving = function (event) {
-        if (event.type === 'mousedown') {
-            this.startingPosition = {
-                x: event.clientX - this.elementPosition.x,
-                y: event.clientY - this.elementPosition.y
-            };
-        }
-        else {
-            this.startingPosition = {
-                x: event.changedTouches[0].clientX - this.elementPosition.x,
-                y: event.changedTouches[0].clientY - this.elementPosition.y
-            };
-        }
-    };
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    MdbMovableDirective.prototype.movingOver = function (event) {
-        if (event.type === 'mousemove') {
-            this.elementPosition.x = event.clientX - this.startingPosition.x;
-            this.elementPosition.y = event.clientY - this.startingPosition.y;
-        }
-        else {
-            this.elementPosition.x =
-                event.changedTouches[0].clientX - this.startingPosition.x;
-            this.elementPosition.y =
-                event.changedTouches[0].clientY - this.startingPosition.y;
-        }
-        this.updatePosition();
-    };
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    MdbMovableDirective.prototype.endMoving = function (event) { };
-    /**
-     * @return {?}
-     */
-    MdbMovableDirective.prototype.updatePosition = function () {
-        var _this = this;
-        requestAnimationFrame(function () {
-            _this.el.nativeElement.style.transform = "\n        translate(" + _this.elementPosition.x + "px,\n                  " + _this.elementPosition.y + "px)\n      ";
-        });
-    };
-    return MdbMovableDirective;
-}());
-MdbMovableDirective.decorators = [
-    { type: Directive, args: [{
-                selector: '[mdbMovable]'
-            },] },
-];
-/** @nocollapse */
-MdbMovableDirective.ctorParameters = function () { return [
-    { type: ElementRef }
-]; };
-MdbMovableDirective.propDecorators = {
-    movable: [{ type: HostBinding, args: ['class.mdb-movable',] }],
-    onStartMove: [{ type: HostListener, args: ['mousedown', ['$event'],] }, { type: HostListener, args: ['touchstart', ['$event'],] }],
-    onMove: [{ type: HostListener, args: ['document:mousemove', ['$event'],] }, { type: HostListener, args: ['touchmove', ['$event'],] }],
-    onEndMove: [{ type: HostListener, args: ['document:mouseup', ['$event'],] }, { type: HostListener, args: ['touchend', ['$event'],] }]
-};
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-var MovableModule = /** @class */ (function () {
-    function MovableModule() {
-    }
-    return MovableModule;
-}());
-MovableModule.decorators = [
-    { type: NgModule, args: [{
-                declarations: [MdbMovableDirective],
-                exports: [MdbMovableDirective],
-                schemas: [NO_ERRORS_SCHEMA],
-            },] },
-];
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
 var MdbBtnDirective = /** @class */ (function () {
     /**
      * @param {?} el
@@ -18421,10 +18296,6 @@ MDBBootstrapModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
 var MODULES$1 = [
     AutocompleteModule,
     CardsModule,
@@ -18442,7 +18313,6 @@ var MODULES$1 = [
     StickyContentModule,
     SmoothscrollModule,
     CharCounterModule,
-    MovableModule
 ];
 var MDBRootModulePro = /** @class */ (function () {
     function MDBRootModulePro() {
@@ -18467,7 +18337,6 @@ MDBRootModulePro.decorators = [
                     StickyContentModule,
                     SmoothscrollModule.forRoot(),
                     CharCounterModule.forRoot(),
-                    MovableModule
                 ],
                 exports: [MODULES$1],
                 providers: [],
@@ -18543,5 +18412,5 @@ MDBBootstrapModulesPro.decorators = [
 /**
  * Generated bundle index. Do not edit.
  */
-export { SBItemBodyComponent, SBItemHeadComponent, SBItemComponent, sbConfig, SqueezeBoxComponent, SQUEEZEBOX_COMPONENTS, AccordionModule, OverlayContainer, OverlayRef, Overlay, OVERLAY_PROVIDERS, DomPortalHost, ComponentPortal, BasePortalHost, ToastComponent, GlobalConfig, ToastPackage, tsConfig, ToastContainerDirective, ToastContainerModule, ToastRef, ToastInjector, ToastModule, ToastService, TOAST_CONFIG, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, CompleterListItemComponent, CompleterComponent, MdbCompleterDirective, CtrRowItem, MdbDropdownDirective, MdbInputCompleteDirective, CtrListContext, MdbListDirective, MdbRowDirective, CompleterBaseData, CompleterService, localDataFactory, remoteDataFactory, LocalDataFactoryProvider, RemoteDataFactoryProvider, LocalData, RemoteData, MAX_CHARS, MIN_SEARCH_LENGTH, PAUSE, TEXT_SEARCHING, TEXT_NO_RESULTS, CLEAR_TIMEOUT, isNil, AutocompleteModule, CardRevealComponent, CardRotatingComponent, CardsModule, InputAutoFillDirective, FocusDirective, LocaleService, UtilService, DatepickerModule, MYDP_VALUE_ACCESSOR, MDBDatePickerComponent, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, UploadStatus, humanizeBytes, MDBUploaderService, MDBFileDropDirective, MDBFileSelectDirective, FileInputModule, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, OptionList, Option, SelectDropdownComponent, SELECT_VALUE_ACCESSOR, SelectComponent, SelectModule, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, MDBSpinningPreloader, ProgressBarComponent, MdProgressSpinnerCssMatStylerDirective, MdProgressSpinnerComponent, MdSpinnerComponent, BarComponent, ProgressSpinnerComponent, ProgressDirective, ProgressbarComponent, ProgressbarConfigComponent, ProgressbarModule, PreloadersModule, ProgressBars, SidenavComponent, SidenavModule, PageScrollUtilService, EasingLogic, PageScrollConfig, PageScrollDirective, PageScrollInstance, SmoothscrollModule, PageScrollService, computedStyle, MdbStickyDirective, StickyContentModule, TabHeadingDirective, TabDirective, TabsetComponent, TabsetConfig, NgTranscludeDirective, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TimePickerModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, MovableModule, MdbMovableDirective, ButtonsModule, CHECKBOX_CONTROL_VALUE_ACCESSOR, ButtonCheckboxDirective, RADIO_CONTROL_VALUE_ACCESSOR, ButtonRadioDirective, MdbBtnDirective, Direction, CarouselComponent, CarouselConfig, SlideComponent, CarouselModule, CardsFreeModule, MdbCardComponent, MdbCardBodyComponent, MdbCardImageComponent, MdbCardTextComponent, MdbCardTitleComponent, MdbCardFooterComponent, MdbCardHeaderComponent, BaseChartDirective, ChartsModule, CHECKBOX_VALUE_ACCESSOR, MdbCheckboxChange, CheckboxComponent, CheckboxModule, CollapseComponent, CollapseModule, BsDropdownContainerComponent, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownConfig, BsDropdownDirective, BsDropdownState, DropdownModule, IconsModule, MdbIconComponent, InputsModule, MdbInputDirective, EqualValidatorDirective, ModalDirective, ModalOptions, MDBModalRef, modalConfigDefaults, ClassName, Selector, TransitionDurations, DISMISS_REASONS, MDBModalService, ModalBackdropOptions, ModalBackdropComponent, ModalContainerComponent, msConfig, ModalModule, LinksComponent, LogoComponent, NavbarComponent, NavbarService, NavlinksComponent, NavbarModule, PopoverContainerComponent, PopoverConfig, PopoverDirective, PopoverModule, RippleDirective, RippleModule, WavesDirective, WavesModule, TooltipContainerComponent, TooltipDirective, TooltipConfig, TooltipModule, BsComponentRef, ComponentLoader, ComponentLoaderFactory, ContentRef, win as window, document$1 as document, location, gc, performance, Event, MouseEvent, KeyboardEvent, EventTarget, History, Location, EventListener, Positioning, positionElements, PositioningService, OnChange, LinkedList, isBs3, Trigger, parseTriggers, listenToTriggers, Utils, MDBBootstrapModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, MdbBtnDirective as ɵcv1, ButtonsModule as ɵcs1, ButtonCheckboxDirective as ɵct1, ButtonRadioDirective as ɵcu1, CardsFreeModule as ɵda1, CarouselComponent as ɵcw1, CarouselConfig as ɵcx1, CarouselModule as ɵcz1, SlideComponent as ɵcy1, BaseChartDirective as ɵdb1, ChartsModule as ɵdc1, CHECKBOX_VALUE_ACCESSOR as ɵdd1, CheckboxComponent as ɵde1, CheckboxModule as ɵdf1, CollapseComponent as ɵdg1, CollapseModule as ɵdh1, BsDropdownContainerComponent as ɵdi1, BsDropdownMenuDirective as ɵdj1, BsDropdownToggleDirective as ɵdk1, BsDropdownConfig as ɵdl1, BsDropdownDirective as ɵdm1, DropdownModule as ɵdo1, BsDropdownState as ɵdn1, MdbIconComponent as ɵdq1, IconsModule as ɵdp1, InputsModule as ɵdr1, MdbInputDirective as ɵds1, MDBRootModule as ɵeo1, ModalDirective as ɵdt1, ModalModule as ɵdz1, ModalOptions as ɵdu1, MDBModalService as ɵdv1, ModalBackdropComponent as ɵdx1, ModalBackdropOptions as ɵdw1, ModalContainerComponent as ɵdy1, NavbarComponent as ɵea1, NavbarModule as ɵeb1, PopoverContainerComponent as ɵec1, PopoverConfig as ɵed1, PopoverDirective as ɵee1, PopoverModule as ɵef1, RippleDirective as ɵeg1, RippleModule as ɵeh1, TooltipContainerComponent as ɵek1, TooltipDirective as ɵel1, TooltipModule as ɵen1, TooltipConfig as ɵem1, WavesDirective as ɵei1, WavesModule as ɵej1, SBItemComponent as ɵc1, SBItemBodyComponent as ɵa1, SBItemHeadComponent as ɵb1, SqueezeBoxComponent as ɵd1, AccordionModule as ɵe1, CompleterListItemComponent as ɵf1, CompleterComponent as ɵg1, MdbCompleterDirective as ɵh1, MdbDropdownDirective as ɵi1, MdbInputCompleteDirective as ɵj1, MdbListDirective as ɵk1, MdbRowDirective as ɵl1, AutocompleteModule as ɵp1, CompleterService as ɵm1, LocalDataFactoryProvider as ɵn1, RemoteDataFactoryProvider as ɵo1, CardRevealComponent as ɵq1, CardRotatingComponent as ɵr1, CardsModule as ɵs1, MDBDatePickerComponent as ɵz1, MYDP_VALUE_ACCESSOR as ɵy1, DatepickerModule as ɵx1, InputAutoFillDirective as ɵt1, FocusDirective as ɵu1, LocaleService as ɵv1, UtilService as ɵw1, SimpleChartComponent as ɵba1, ChartSimpleModule as ɵbc1, EasyPieChartComponent as ɵbb1, MDBFileDropDirective as ɵbd1, MDBFileSelectDirective as ɵbe1, FileInputModule as ɵbf1, CharCounterDirective as ɵbg1, CharCounterModule as ɵbh1, ImageModalComponent as ɵbi1, LightBoxModule as ɵbj1, SelectDropdownComponent as ɵbl1, SELECT_VALUE_ACCESSOR as ɵbm1, SelectComponent as ɵbn1, SelectModule as ɵbo1, MDBRootModulePro as ɵep1, MdbMovableDirective as ɵcr1, MovableModule as ɵcq1, BarComponent as ɵbp1, ProgressBars as ɵbv1, MdProgressBarModule as ɵeq1, MdProgressSpinnerModule as ɵer1, ProgressSpinnerComponent as ɵbq1, ProgressDirective as ɵbr1, ProgressbarComponent as ɵbs1, ProgressbarConfigComponent as ɵbt1, ProgressbarModule as ɵbu1, SidenavComponent as ɵbw1, SidenavModule as ɵbx1, PageScrollDirective as ɵby1, PageScrollInstance as ɵbz1, SmoothscrollModule as ɵca1, PageScrollService as ɵcb1, MdbStickyDirective as ɵcc1, StickyContentModule as ɵcd1, TabHeadingDirective as ɵce1, TabDirective as ɵcf1, TabsetComponent as ɵcg1, TabsetConfig as ɵch1, TabsModule as ɵcj1, NgTranscludeDirective as ɵci1, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR as ɵck1, MaterialChipsComponent as ɵcl1, MaterialChipsModule as ɵcm1, ClockPickerComponent as ɵcp1, TIME_PIRCKER_VALUE_ACCESSOT as ɵco1, TimePickerModule as ɵcn1 };
+export { SBItemBodyComponent, SBItemHeadComponent, SBItemComponent, sbConfig, SqueezeBoxComponent, SQUEEZEBOX_COMPONENTS, AccordionModule, OverlayContainer, OverlayRef, Overlay, OVERLAY_PROVIDERS, DomPortalHost, ComponentPortal, BasePortalHost, ToastComponent, GlobalConfig, ToastPackage, tsConfig, ToastContainerDirective, ToastContainerModule, ToastRef, ToastInjector, ToastModule, ToastService, TOAST_CONFIG, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, CompleterListItemComponent, CompleterComponent, MdbCompleterDirective, CtrRowItem, MdbDropdownDirective, MdbInputCompleteDirective, CtrListContext, MdbListDirective, MdbRowDirective, CompleterBaseData, CompleterService, localDataFactory, remoteDataFactory, LocalDataFactoryProvider, RemoteDataFactoryProvider, LocalData, RemoteData, MAX_CHARS, MIN_SEARCH_LENGTH, PAUSE, TEXT_SEARCHING, TEXT_NO_RESULTS, CLEAR_TIMEOUT, isNil, AutocompleteModule, CardRevealComponent, CardRotatingComponent, CardsModule, InputAutoFillDirective, FocusDirective, LocaleService, UtilService, DatepickerModule, MYDP_VALUE_ACCESSOR, MDBDatePickerComponent, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, UploadStatus, humanizeBytes, MDBUploaderService, MDBFileDropDirective, MDBFileSelectDirective, FileInputModule, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, OptionList, Option, SelectDropdownComponent, SELECT_VALUE_ACCESSOR, SelectComponent, SelectModule, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, MDBSpinningPreloader, ProgressBarComponent, MdProgressSpinnerCssMatStylerDirective, MdProgressSpinnerComponent, MdSpinnerComponent, BarComponent, ProgressSpinnerComponent, ProgressDirective, ProgressbarComponent, ProgressbarConfigComponent, ProgressbarModule, PreloadersModule, ProgressBars, SidenavComponent, SidenavModule, PageScrollUtilService, EasingLogic, PageScrollConfig, PageScrollDirective, PageScrollInstance, SmoothscrollModule, PageScrollService, computedStyle, MdbStickyDirective, StickyContentModule, TabHeadingDirective, TabDirective, TabsetComponent, TabsetConfig, NgTranscludeDirective, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TimePickerModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, ButtonsModule, CHECKBOX_CONTROL_VALUE_ACCESSOR, ButtonCheckboxDirective, RADIO_CONTROL_VALUE_ACCESSOR, ButtonRadioDirective, MdbBtnDirective, Direction, CarouselComponent, CarouselConfig, SlideComponent, CarouselModule, CardsFreeModule, MdbCardComponent, MdbCardBodyComponent, MdbCardImageComponent, MdbCardTextComponent, MdbCardTitleComponent, MdbCardFooterComponent, MdbCardHeaderComponent, BaseChartDirective, ChartsModule, CHECKBOX_VALUE_ACCESSOR, MdbCheckboxChange, CheckboxComponent, CheckboxModule, CollapseComponent, CollapseModule, BsDropdownContainerComponent, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownConfig, BsDropdownDirective, BsDropdownState, DropdownModule, IconsModule, MdbIconComponent, InputsModule, MdbInputDirective, EqualValidatorDirective, ModalDirective, ModalOptions, MDBModalRef, modalConfigDefaults, ClassName, Selector, TransitionDurations, DISMISS_REASONS, MDBModalService, ModalBackdropOptions, ModalBackdropComponent, ModalContainerComponent, msConfig, ModalModule, LinksComponent, LogoComponent, NavbarComponent, NavbarService, NavlinksComponent, NavbarModule, PopoverContainerComponent, PopoverConfig, PopoverDirective, PopoverModule, RippleDirective, RippleModule, WavesDirective, WavesModule, TooltipContainerComponent, TooltipDirective, TooltipConfig, TooltipModule, BsComponentRef, ComponentLoader, ComponentLoaderFactory, ContentRef, win as window, document$1 as document, location, gc, performance, Event, MouseEvent, KeyboardEvent, EventTarget, History, Location, EventListener, Positioning, positionElements, PositioningService, OnChange, LinkedList, isBs3, Trigger, parseTriggers, listenToTriggers, Utils, MDBBootstrapModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, MdbBtnDirective as ɵct1, ButtonsModule as ɵcq1, ButtonCheckboxDirective as ɵcr1, ButtonRadioDirective as ɵcs1, CardsFreeModule as ɵcy1, CarouselComponent as ɵcu1, CarouselConfig as ɵcv1, CarouselModule as ɵcx1, SlideComponent as ɵcw1, BaseChartDirective as ɵcz1, ChartsModule as ɵda1, CHECKBOX_VALUE_ACCESSOR as ɵdb1, CheckboxComponent as ɵdc1, CheckboxModule as ɵdd1, CollapseComponent as ɵde1, CollapseModule as ɵdf1, BsDropdownContainerComponent as ɵdg1, BsDropdownMenuDirective as ɵdh1, BsDropdownToggleDirective as ɵdi1, BsDropdownConfig as ɵdj1, BsDropdownDirective as ɵdk1, DropdownModule as ɵdm1, BsDropdownState as ɵdl1, MdbIconComponent as ɵdo1, IconsModule as ɵdn1, InputsModule as ɵdp1, MdbInputDirective as ɵdq1, MDBRootModule as ɵem1, ModalDirective as ɵdr1, ModalModule as ɵdx1, ModalOptions as ɵds1, MDBModalService as ɵdt1, ModalBackdropComponent as ɵdv1, ModalBackdropOptions as ɵdu1, ModalContainerComponent as ɵdw1, NavbarComponent as ɵdy1, NavbarModule as ɵdz1, PopoverContainerComponent as ɵea1, PopoverConfig as ɵeb1, PopoverDirective as ɵec1, PopoverModule as ɵed1, RippleDirective as ɵee1, RippleModule as ɵef1, TooltipContainerComponent as ɵei1, TooltipDirective as ɵej1, TooltipModule as ɵel1, TooltipConfig as ɵek1, WavesDirective as ɵeg1, WavesModule as ɵeh1, SBItemComponent as ɵc1, SBItemBodyComponent as ɵa1, SBItemHeadComponent as ɵb1, SqueezeBoxComponent as ɵd1, AccordionModule as ɵe1, CompleterListItemComponent as ɵf1, CompleterComponent as ɵg1, MdbCompleterDirective as ɵh1, MdbDropdownDirective as ɵi1, MdbInputCompleteDirective as ɵj1, MdbListDirective as ɵk1, MdbRowDirective as ɵl1, AutocompleteModule as ɵp1, CompleterService as ɵm1, LocalDataFactoryProvider as ɵn1, RemoteDataFactoryProvider as ɵo1, CardRevealComponent as ɵq1, CardRotatingComponent as ɵr1, CardsModule as ɵs1, MDBDatePickerComponent as ɵz1, MYDP_VALUE_ACCESSOR as ɵy1, DatepickerModule as ɵx1, InputAutoFillDirective as ɵt1, FocusDirective as ɵu1, LocaleService as ɵv1, UtilService as ɵw1, SimpleChartComponent as ɵba1, ChartSimpleModule as ɵbc1, EasyPieChartComponent as ɵbb1, MDBFileDropDirective as ɵbd1, MDBFileSelectDirective as ɵbe1, FileInputModule as ɵbf1, CharCounterDirective as ɵbg1, CharCounterModule as ɵbh1, ImageModalComponent as ɵbi1, LightBoxModule as ɵbj1, SelectDropdownComponent as ɵbl1, SELECT_VALUE_ACCESSOR as ɵbm1, SelectComponent as ɵbn1, SelectModule as ɵbo1, MDBRootModulePro as ɵen1, BarComponent as ɵbp1, ProgressBars as ɵbv1, MdProgressBarModule as ɵeo1, MdProgressSpinnerModule as ɵep1, ProgressSpinnerComponent as ɵbq1, ProgressDirective as ɵbr1, ProgressbarComponent as ɵbs1, ProgressbarConfigComponent as ɵbt1, ProgressbarModule as ɵbu1, SidenavComponent as ɵbw1, SidenavModule as ɵbx1, PageScrollDirective as ɵby1, PageScrollInstance as ɵbz1, SmoothscrollModule as ɵca1, PageScrollService as ɵcb1, MdbStickyDirective as ɵcc1, StickyContentModule as ɵcd1, TabHeadingDirective as ɵce1, TabDirective as ɵcf1, TabsetComponent as ɵcg1, TabsetConfig as ɵch1, TabsModule as ɵcj1, NgTranscludeDirective as ɵci1, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR as ɵck1, MaterialChipsComponent as ɵcl1, MaterialChipsModule as ɵcm1, ClockPickerComponent as ɵcp1, TIME_PIRCKER_VALUE_ACCESSOT as ɵco1, TimePickerModule as ɵcn1 };
 //# sourceMappingURL=ng-uikit-pro-standard.es5.js.map

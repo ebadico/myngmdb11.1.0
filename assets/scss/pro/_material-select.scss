@@ -24,10 +24,21 @@
       margin: 0 0 $material-select-wrapper-input-dropdown-margin 0;
       padding: 0;
       display: block;
+      padding-right: 25px;
+      text-overflow: ellipsis;
       &:disabled {
         color: $material-select-wrapper-input-dropdown-disabled-color;
         border-bottom-color: $material-select-wrapper-input-dropdown-disabled-border-bottom-color;
         cursor: default;
+      }
+      .selected, li:focus {
+        background-color: rgba(0,0,0,.15);
+      }
+      li.active {
+        background:transparent;
+      }
+      .fa {
+        color:inherit;
       }
     }
   }
@@ -35,11 +46,12 @@
     @extend %user-select-none;
   }
   .search-wrap {
-    padding: $material-select-wrapper-search-wrap-py 0;
+    padding: $material-select-wrapper-search-wrap-py 0 0;
     display: block;
     margin: 0 $material-select-wrapper-search-wrap-mx;
     .md-form {
       margin-top: 0;
+      margin-bottom: 1rem;
       input {
         padding-bottom: $material-select-wrapper-search-wrap-input-pb;
         margin-bottom: 0;

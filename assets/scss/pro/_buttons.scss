@@ -1,9 +1,10 @@
 // Buttons
 .btn {
   &.btn-flat {
+    font-weight: 500;
     box-shadow: none;
     background-color: transparent;
-    color: inherit !important;
+    color: inherit;
     &:not([disabled]):not(.disabled):active {
       box-shadow: none;
     }
@@ -23,7 +24,6 @@
   margin: $btn-floating-margin;
   border-radius: $btn-floating-border-radius;
   padding: 0;
-  border: none;
   cursor: pointer;
   i {
     display: inline-block;

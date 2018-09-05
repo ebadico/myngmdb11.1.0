@@ -22,6 +22,27 @@ $gradients-premium: map-merge((
   ),
 ), $gradients-premium);
 
+// Gradients Premium RGBA Version
+$gradients-premium-rgba: () !default;
+$gradients-premium-rgba: map-merge((
+  "purple": (
+    "start": rgba(255,110,196,.9),
+    "end": rgba(120,115,245,.9)
+  ),
+  "peach": (
+    "start": rgba(255,216,111,.9),
+    "end": rgba(252,98,98,.9)
+  ),
+  "aqua": (
+    "start": rgba(32,150,255,.9),
+    "end": rgba(5,255,163,.9)
+  ),
+  "blue": (
+    "start": rgba(69,202,252,.9),
+    "end": rgba(48,63,159,.9)
+  ),
+), $gradients-premium-rgba);
+
 // Accordion
 $accordion-card-header-padding-y:      1rem !default;
 $accordion-card-header-padding-x:      1.5rem !default;
@@ -475,7 +496,7 @@ $material-select-dropdown-content-li-span-padding:                      $autocom
 
 $material-select-colorful-dropdown-content-padding:                     $autocomplete-clear-top !default;
 $material-select-colorful-dropdown-content-li-active-color:             $white !default;
-$material-select-colorful-dropdown-content-li-hover-transition:         all .15s linear !default;
+$material-select-colorful-dropdown-content-li-hover-transition:         .15s !default;
 $material-select-colorful-dropdown-content-li-hover-border-radius:      $border-radius-base !default;
 
 // SideNav Variables
@@ -561,7 +582,7 @@ $mdb-lightbox-figure-img-transition:     opacity .4s !default;
 $mdb-lightbox-figure-img-hover-opacity:  .8 !default;
 $mdb-lightbox-no-margin-padding:         $autocomplete-clear-top !default;
 $pswp__button-background:                url(#{$image-path}/lightbox/default-skin.png) !default;
-$pswp__button-background-image:          url(#{$image-path1}/lightbox/default-skin.svg) !default;
+$pswp__button-background-image:          url(#{$image-path}/lightbox/default-skin.svg) !default;
 $pswp__preloader__icn-background:        url(#{$image-path}/lightbox/preloader.gif) !default;
 
 // Date Picker

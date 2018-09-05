@@ -316,7 +316,7 @@
       font-weight: 300;
       padding-left: $sidenav-search-form-input-padding-left;
       @include placeholder {
-        @extend .white-text;
+        color: #fff;
       }
     }
     .form-control {

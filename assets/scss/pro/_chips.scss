@@ -17,6 +17,14 @@
     transition: $pagination-page-link-transition;
     background-color: $grey-lighten-2;
   }
+  &:focus {
+    transition: $pagination-page-link-transition;
+    background-color: $grey-lighten-1;
+  }
+  &:active {
+    transition: $pagination-page-link-transition;
+    @extend .z-depth-1;
+  }
   img {
     float: left;
     margin: 0 $chip-img-margin-right 0 $chip-img-margin-left;
