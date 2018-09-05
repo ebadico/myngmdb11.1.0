@@ -185,7 +185,7 @@ SqueezeBoxComponent.decorators = [
     { type: Component, args: [{
                 exportAs: 'squeezebox',
                 selector: 'mdb-squeezebox, mdb-accordion',
-                template: "<div class=\"accordion\"> <ng-content></ng-content> </div>"
+                template: "<div class=\"accordion md-accordion\"> <ng-content></ng-content> </div>"
             },] },
 ];
 /** @nocollapse */
