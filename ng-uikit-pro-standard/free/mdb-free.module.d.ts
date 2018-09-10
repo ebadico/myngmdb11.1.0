@@ -9,7 +9,7 @@ export { NavbarModule } from './navbars/index';
 export { BsDropdownConfig, BsDropdownContainerComponent, BsDropdownDirective, BsDropdownMenuDirective, DropdownModule, BsDropdownState, BsDropdownToggleDirective } from './dropdown/index';
 export { CarouselComponent, CarouselConfig, CarouselModule } from './carousel/index';
 export { ChartsModule, BaseChartDirective } from './charts/index';
-export { CollapseDirective, CollapseModule } from './collapse/index';
+export { CollapseComponent, CollapseModule } from './collapse/index';
 export { ModalBackdropComponent, ModalBackdropOptions, ModalDirective, ModalModule, ModalOptions, MDBModalService, ModalContainerComponent, MDBModalRef } from './modals/index';
 export { TooltipConfig, TooltipContainerComponent, TooltipDirective, TooltipModule } from './tooltip/index';
 export { PopoverConfig, PopoverContainerComponent, PopoverModule, PopoverDirective } from './popover/index';

@@ -1,6 +1,13 @@
 // General
-.nav-tabs {
+.md-tabs {
   overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
+
   .nav-item {
     flex-basis: 0;
     flex-grow: 1;
@@ -10,6 +17,22 @@
       width:100%;
     }
   }
+}
+
+.tab-control {
+  background-color: transparent;
+  border: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  cursor: pointer;
+}
+
+.tab-control-icon {
+  color: white;
+}
+
+.tab-control-icon.disabled {
+  color: #e0e0e0;
 }
 
 

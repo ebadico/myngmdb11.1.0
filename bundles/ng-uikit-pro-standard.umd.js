@@ -1,20 +1,17 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('tslib'), require('@angular/core'), require('@angular/common'), require('@angular/animations'), require('rxjs'), require('@angular/platform-browser'), require('@angular/forms'), require('rxjs/operators'), require('@angular/http'), require('hammerjs'), require('@angular/router'), require('chart.js')) :
-	typeof define === 'function' && define.amd ? define(['exports', 'tslib', '@angular/core', '@angular/common', '@angular/animations', 'rxjs', '@angular/platform-browser', '@angular/forms', 'rxjs/operators', '@angular/http', 'hammerjs', '@angular/router', 'chart.js'], factory) :
-	(factory((global['ng-uikit-pro-standard'] = {}),global.tslib,global.ng.core,global.ng.common,global.ng.animations,global.RX,global.ng.platformBrowser,global.ng.forms,global.Rx.Observable,global.ng.http,global.hammerjs,global.ng.router,global.Chart));
-}(this, (function (exports,tslib_1,core,common,animations,rxjs,platformBrowser,forms,operators,http,hammerjs,router,Chart) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('tslib'), require('@angular/core'), require('@angular/animations'), require('@angular/common'), require('rxjs'), require('@angular/platform-browser'), require('@angular/forms'), require('rxjs/operators'), require('@angular/http'), require('hammerjs'), require('@angular/router'), require('chart.js')) :
+	typeof define === 'function' && define.amd ? define(['exports', 'tslib', '@angular/core', '@angular/animations', '@angular/common', 'rxjs', '@angular/platform-browser', '@angular/forms', 'rxjs/operators', '@angular/http', 'hammerjs', '@angular/router', 'chart.js'], factory) :
+	(factory((global['ng-uikit-pro-standard'] = {}),global.tslib,global.ng.core,global.ng.animations,global.ng.common,global.RX,global.ng.platformBrowser,global.ng.forms,global.Rx.Observable,global.ng.http,global.hammerjs,global.ng.router,global.Chart));
+}(this, (function (exports,tslib_1,core,animations,common,rxjs,platformBrowser,forms,operators,http,hammerjs,router,Chart) { 'use strict';
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
 var SBItemBodyComponent = /** @class */ (function () {
-    /**
-     * @param {?} renderer
-     */
-    function SBItemBodyComponent(renderer) {
-        this.renderer = renderer;
+    function SBItemBodyComponent() {
         this.height = '0';
+        this.expandAnimationState = 'collapsed';
     }
     /**
      * @param {?} collapsed
@@ -22,13 +19,9 @@ var SBItemBodyComponent = /** @class */ (function () {
      */
     SBItemBodyComponent.prototype.toggle = function (collapsed) {
         var _this = this;
-        var /** @type {?} */ height = '0';
-        if (!collapsed) {
-            this.renderer.setStyle(this.bodyEl.nativeElement, 'height', 'auto');
-            height = this.bodyEl.nativeElement.offsetHeight + 'px';
-            this.renderer.setStyle(this.bodyEl.nativeElement, 'height', '0');
-        }
-        setTimeout(function () { return _this.renderer.setStyle(_this.bodyEl.nativeElement, 'height', height); }, 50);
+        setTimeout(function () {
+            collapsed ? _this.expandAnimationState = 'collapsed' : _this.expandAnimationState = 'expanded';
+        }, 0);
     };
     return SBItemBodyComponent;
 }());
@@ -36,14 +29,20 @@ SBItemBodyComponent.decorators = [
     { type: core.Component, args: [{
                 exportAs: 'sbItemBody',
                 selector: 'mdb-item-body, mdb-accordion-item-body',
-                template: "<div #body class=\"sb-item-body\" [style.height]=\"height\"> <div class=\"card-body\"> <ng-content></ng-content> </div> </div>"
+                template: "<div #body class=\"sb-item-body\" [style.height]=\"height\" [@expandBody]=\"expandAnimationState\"> <div class=\"card-body {{ customClass }}\"> <ng-content></ng-content> </div> </div>",
+                animations: [
+                    animations.trigger('expandBody', [
+                        animations.state('collapsed', animations.style({ height: '0px', visibility: 'hidden' })),
+                        animations.state('expanded', animations.style({ height: '*', visibility: 'visible' })),
+                        animations.transition('expanded <=> collapsed', animations.animate('500ms ease')),
+                    ])
+                ]
             },] },
 ];
 /** @nocollapse */
-SBItemBodyComponent.ctorParameters = function () { return [
-    { type: core.Renderer2 }
-]; };
+SBItemBodyComponent.ctorParameters = function () { return []; };
 SBItemBodyComponent.propDecorators = {
+    customClass: [{ type: core.Input }],
     bodyEl: [{ type: core.ViewChild, args: ['body',] }]
 };
 /**
@@ -66,7 +65,13 @@ var SBItemComponent = /** @class */ (function () {
      * @return {?}
      */
     SBItemComponent.prototype.ngAfterViewInit = function () {
-        this.body.toggle(this.collapsed);
+        var _this = this;
+        if (this.body !== undefined) {
+            setTimeout(function () {
+                _this.collapsed ? _this.body.expandAnimationState = 'collapsed' : _this.body.expandAnimationState = 'expanded';
+            }, 0);
+            this.body.toggle(this.collapsed);
+        }
     };
     /**
      * @param {?} collapsed
@@ -81,8 +86,10 @@ var SBItemComponent = /** @class */ (function () {
      * @return {?}
      */
     SBItemComponent.prototype.applyToggle = function (collapsed) {
-        this.collapsed = collapsed;
-        this.body.toggle(collapsed);
+        if (this.body !== undefined) {
+            this.collapsed = collapsed;
+            this.body.toggle(collapsed);
+        }
     };
     return SBItemComponent;
 }());
@@ -90,13 +97,14 @@ SBItemComponent.decorators = [
     { type: core.Component, args: [{
                 exportAs: 'sbItem',
                 selector: 'mdb-item, mdb-accordion-item',
-                template: "<div class=\"card\" [ngClass]=\"{'is-collapsed': collapsed, 'active': !collapsed}\"> <ng-content></ng-content> </div>"
+                template: "<div class=\"card test z-depth1 {{ customClass }}\" [ngClass]=\"{'is-collapsed': collapsed, 'active': !collapsed}\"> <ng-content></ng-content> </div>"
             },] },
 ];
 /** @nocollapse */
 SBItemComponent.ctorParameters = function () { return []; };
 SBItemComponent.propDecorators = {
     collapsed: [{ type: core.Input }],
+    customClass: [{ type: core.Input }],
     body: [{ type: core.ContentChild, args: [SBItemBodyComponent,] }]
 };
 /**
@@ -110,6 +118,7 @@ var SBItemHeadComponent = /** @class */ (function () {
     function SBItemHeadComponent(sbItem) {
         this.sbItem = sbItem;
         this.isDisabled = false;
+        this.indicator = true;
     }
     /**
      * @param {?} event
@@ -128,7 +137,7 @@ SBItemHeadComponent.decorators = [
     { type: core.Component, args: [{
                 exportAs: 'sbItemHead',
                 selector: 'mdb-item-head, mdb-accordion-item-head',
-                template: "<div class=\"card-header\" [ngClass]=\"{ 'item-disabled': isDisabled }\" (click)=\"toggleClick($event)\"> <a role=\"button\"> <h5 class=\"mb-0\"> <ng-content></ng-content> <i class=\"fa fa-angle-down rotate-icon\"></i> </h5> </a> </div>"
+                template: "<div class=\"card-header {{ customClass }}\" [ngClass]=\"{ 'item-disabled': isDisabled }\" (click)=\"toggleClick($event)\"> <a role=\"button\"> <h5 class=\"mb-0\"> <ng-content></ng-content> <i *ngIf=\"indicator\" class=\"fa fa-angle-down rotate-icon\"></i> </h5> </a> </div>"
             },] },
 ];
 /** @nocollapse */
@@ -136,7 +145,9 @@ SBItemHeadComponent.ctorParameters = function () { return [
     { type: SBItemComponent }
 ]; };
 SBItemHeadComponent.propDecorators = {
-    isDisabled: [{ type: core.Input }]
+    isDisabled: [{ type: core.Input }],
+    customClass: [{ type: core.Input }],
+    indicator: [{ type: core.Input }]
 };
 /**
  * @fileoverview added by tsickle
@@ -167,7 +178,7 @@ SqueezeBoxComponent.decorators = [
     { type: core.Component, args: [{
                 exportAs: 'squeezebox',
                 selector: 'mdb-squeezebox, mdb-accordion',
-                template: "<div class=\"accordion\"> <ng-content></ng-content> </div>"
+                template: "<div class=\"accordion md-accordion\"> <ng-content></ng-content> </div>"
             },] },
 ];
 /** @nocollapse */
@@ -2121,10 +2132,13 @@ var CompleterComponent = /** @class */ (function () {
      * @return {?}
      */
     CompleterComponent.prototype.ngAfterViewChecked = function () {
-        if (this._focus) {
-            this.mdbInput.nativeElement.focus();
-            this._focus = false;
-        }
+        var _this = this;
+        setTimeout(function () {
+            if (_this._focus) {
+                _this.mdbInput.nativeElement.focus();
+                _this._focus = false;
+            }
+        }, 0);
     };
     /**
      * @return {?}
@@ -2299,7 +2313,7 @@ var CompleterComponent = /** @class */ (function () {
 CompleterComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'mdb-autocomplete, mdb-completer',
-                template: "<div class=\"completer-holder md-form\" mdbCompleter> <input #mdbInput [attr.id]=\"inputId.length > 0 ? inputId : null\" type=\"search\" class=\"completer-input form-control mdb-autocomplete\" mdbInput [ngClass]=\"inputClass\" [(ngModel)]=\"searchStr\" (ngModelChange)=\"onChange($event)\" [attr.name]=\"inputName\" [placeholder]=\"placeholder\" [attr.maxlength]=\"maxChars\" [tabindex]=\"fieldTabindex\" [disabled]=\"disableInput\" [clearSelected]=\"clearSelected\" [clearUnselected]=\"clearUnselected\" [overrideSuggested]=\"overrideSuggested\" [openOnFocus]=\"openOnFocus\" [fillHighlighted]=\"fillHighlighted\" (blur)=\"onBlur()\" (focus)=\"onFocus()\" (keyup)=\"onKeyup($event)\" (keydown)=\"onKeydown($event)\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" /> <button class=\"mdb-autocomplete-clear\"> <svg fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"https://www.w3.org/2000/svg\"> <path d=\"M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z\" /> <path d=\"M0 0h24v24H0z\" fill=\"none\" /> </svg> </button> <label [ngClass]=\"{'active': focused}\">{{ label }}</label> <div class=\"completer-dropdown-holder\" *mdbList=\"dataService; minSearchLength: minSearchLength; pause: pause; autoMatch: autoMatch; initialValue: initialValue; autoHighlight: autoHighlight; let items = results; let searchActive = searching; let isInitialized = searchInitialized; let isOpen = isOpen;\"> <div class=\"completer-dropdown\" mdbAutocompleteDropdown *ngIf=\"isInitialized && isOpen && ((items.length > 0 || displayNoResults) || (searchActive && displaySearching))\"> <div *ngIf=\"searchActive && displaySearching\" class=\"completer-searching\">{{_textSearching}}</div> <div *ngIf=\"!searchActive && (!items || items.length === 0)\" class=\"completer-no-results\">{{_textNoResults}}</div> <div class=\"completer-row-wrapper\" *ngFor=\"let item of items; let rowIndex=index\"> <div class=\"completer-row\" [mdbRow]=\"rowIndex\" [dataItem]=\"item\"> <div *ngIf=\"item.image || item.image === ''\" class=\"completer-image-holder\"> <img *ngIf=\"item.image != ''\" src=\"{{item.image}}\" class=\"completer-image\" /> <div *ngIf=\"item.image === ''\" class=\"completer-image-default\"></div> </div> <div class=\"completer-item-text\" [ngClass]=\"{'completer-item-text-image': item.image || item.image === '' }\"> <mdb-completer-list-item class=\"completer-title\" [text]=\"item.title\" [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'title'\"></mdb-completer-list-item> <mdb-completer-list-item *ngIf=\"item.description && item.description != ''\" class=\"completer-description\" [text]=\"item.description\" [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'description'\"> </mdb-completer-list-item> </div> </div> </div> </div> </div> </div> ",
+                template: "<div class=\"completer-holder md-form\" mdbCompleter> <input #mdbInput [attr.id]=\"inputId.length > 0 ? inputId : null\" type=\"search\" class=\"completer-input form-control mdb-autocomplete\" mdbInput [ngClass]=\"inputClass\" [(ngModel)]=\"searchStr\" (ngModelChange)=\"onChange($event)\" [attr.name]=\"inputName\" [placeholder]=\"placeholder\" [attr.maxlength]=\"maxChars\" [tabindex]=\"fieldTabindex\" [disabled]=\"disableInput\" [clearSelected]=\"clearSelected\" [clearUnselected]=\"clearUnselected\" [overrideSuggested]=\"overrideSuggested\" [openOnFocus]=\"openOnFocus\" [fillHighlighted]=\"fillHighlighted\" (blur)=\"onBlur()\" (focus)=\"onFocus()\" (keyup)=\"onKeyup($event)\" (keydown)=\"onKeydown($event)\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" /> <button class=\"mdb-autocomplete-clear\"> <svg fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"https://www.w3.org/2000/svg\"> <path d=\"M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z\" /> <path d=\"M0 0h24v24H0z\" fill=\"none\" /> </svg> </button> <label [ngClass]=\"{'active': focused || value}\">{{ label }}</label> <div class=\"completer-dropdown-holder\" *mdbList=\"dataService; minSearchLength: minSearchLength; pause: pause; autoMatch: autoMatch; initialValue: initialValue; autoHighlight: autoHighlight; let items = results; let searchActive = searching; let isInitialized = searchInitialized; let isOpen = isOpen;\"> <div class=\"completer-dropdown\" mdbAutocompleteDropdown *ngIf=\"isInitialized && isOpen && ((items.length > 0 || displayNoResults) || (searchActive && displaySearching))\"> <div *ngIf=\"searchActive && displaySearching\" class=\"completer-searching\">{{_textSearching}}</div> <div *ngIf=\"!searchActive && (!items || items.length === 0)\" class=\"completer-no-results\">{{_textNoResults}}</div> <div class=\"completer-row-wrapper\" *ngFor=\"let item of items; let rowIndex=index\"> <div class=\"completer-row\" [mdbRow]=\"rowIndex\" [dataItem]=\"item\"> <div *ngIf=\"item.image || item.image === ''\" class=\"completer-image-holder\"> <img *ngIf=\"item.image != ''\" src=\"{{item.image}}\" class=\"completer-image\" /> <div *ngIf=\"item.image === ''\" class=\"completer-image-default\"></div> </div> <div class=\"completer-item-text\" [ngClass]=\"{'completer-item-text-image': item.image || item.image === '' }\"> <mdb-completer-list-item class=\"completer-title\" [text]=\"item.title\" [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'title'\"></mdb-completer-list-item> <mdb-completer-list-item *ngIf=\"item.description && item.description != ''\" class=\"completer-description\" [text]=\"item.description\" [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'description'\"> </mdb-completer-list-item> </div> </div> </div> </div> </div> </div> ",
                 providers: [COMPLETER_CONTROL_VALUE_ACCESSOR]
             },] },
 ];
@@ -3903,6 +3917,8 @@ var MDBDatePickerComponent = /** @class */ (function () {
         this.calendarViewChanged = new core.EventEmitter();
         this.calendarToggle = new core.EventEmitter();
         this.inputFocusBlur = new core.EventEmitter();
+        this.isDateSelected = false;
+        this.labelActive = false;
         this.showSelector = false;
         this.visibleMonth = { monthTxt: '', monthNbr: 0, year: 1 };
         this.selectedMonth = { monthTxt: '', monthNbr: 0, year: 0 };
@@ -4041,6 +4057,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
         setTimeout(function () {
             document.documentElement.style.removeProperty('overflow');
         }, 155);
+        this.labelActive = false;
     };
     /**
      * @return {?}
@@ -4208,8 +4225,8 @@ var MDBDatePickerComponent = /** @class */ (function () {
         else if (value && value['date']) {
             this.updateDateValue(this.parseSelectedDate(value['date']), false);
         }
-        else if (value === '') {
-            this.updateDateValue({ year: 0, month: 0, day: 0 }, true);
+        else if (value === '' || value === null) {
+            this.clearDate();
         }
     };
     /**
@@ -4271,6 +4288,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
                 setTimeout(function () {
                     _this.onChangeCb(_this.getDateModel(_this.selectedDate));
                 });
+                this.isDateSelected = true;
             }
             else {
                 // Do not clear on init
@@ -4330,6 +4348,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
         if (this.showSelector) {
             this.calendarToggle.emit(CalToggle.CloseByCalBtn);
         }
+        this.isDateSelected = false;
         // this.showSelector = false;
     };
     /**
@@ -4360,6 +4379,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
         if (this.isMobile) {
             this.hideKeyboard();
         }
+        this.labelActive = true;
     };
     /**
      * @return {?}
@@ -4509,6 +4529,9 @@ var MDBDatePickerComponent = /** @class */ (function () {
         this.onChangeCb('');
         this.onTouchedCb();
         this.updateDateValue(date, true);
+        this.tmp = { year: this.getToday().year, month: this.getToday().month, day: this.getToday().day };
+        this.setVisibleMonth();
+        this.labelActive = false;
     };
     /**
      * @param {?} date
@@ -4536,6 +4559,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
             this.showSelector = false;
             this.removeInlineStyle();
         }
+        this.labelActive = true;
         // hide calendar when date was clicked
         // this.showSelector = false;
     };
@@ -4547,6 +4571,8 @@ var MDBDatePickerComponent = /** @class */ (function () {
     MDBDatePickerComponent.prototype.updateDateValue = function (date, clear) {
         // Updates date values
         this.selectedDate = date;
+        this.tmp = date;
+        this.isDateSelected = true;
         this.selectionDayTxt = clear ? '' : this.formatDate(date);
         this.inputFieldChanged.emit({ value: this.selectionDayTxt, dateFormat: this.opts.dateFormat, valid: !clear });
         this.invalidDate = false;
@@ -4899,14 +4925,13 @@ var MDBDatePickerComponent = /** @class */ (function () {
         if (this.placeholder.length > 0) {
             return true;
         }
-        else {
-            if (this.showSelector) {
-                return true;
-            }
-            else {
-                return false;
-            }
+        if (this.labelActive) {
+            return true;
         }
+        if (this.isDateSelected) {
+            return true;
+        }
+        return false;
     };
     return MDBDatePickerComponent;
 }());
@@ -4914,7 +4939,7 @@ MDBDatePickerComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'mdb-date-picker',
                 exportAs: 'mdbdatepicker',
-                template: "<!-- Line 27: Deleted (focus)=\"onFocusInput($event)\" for better use in Firefox. If other strange problems will occur, please paste it in line 27. --> <div class=\"mydp picker\" [ngClass]=\"{'picker--opened': showSelector}\" [ngStyle]=\"{'width': opts.width}\"> <div class=\"md-form\"> <label *ngIf=\"label.length > 0\" [ngClass]=\"{ 'active': checkActive(), 'disabled': opts.componentDisabled }\">{{ label }}</label> <input type=\"text\" class=\"form-control mydp-date\" [attr.aria-label]=\"opts.ariaLabelInputField\" (click)=\"openBtnClicked()\" [attr.maxlength]=\"opts.dateFormat.length\" [ngClass]=\"{ 'selectiondisabled': opts.componentDisabled, 'disabled': opts.componentDisabled }\" placeholder=\"{{ placeholder }}\" [ngModel]=\"selectionDayTxt\" (ngModelChange)=\"onUserDateInput($event)\" [value]=\"selectionDayTxt\" [ngStyle]=\"{ 'height': opts.height,  'font-size': opts.selectionTxtFontSize }\" (blur)=\"onBlurInput($event)\" [disabled]=\"opts.componentDisabled\" autocomplete=\"off\"> </div> <div class=\"selector picker__holder selectorarrow selectorarrowleft selectorarrowright\" #divFocus [ngClass]=\"{'alignselectorright': opts.alignSelectorRight}\" tabindex=\"0\"> <div class=\"picker__frame picker__box\" #pickerFrame> <div class=\"picker__header\"> <div class=\"picker__date-display\"> <div class=\"picker__weekday-display\"> {{ weekText(getWeekday(tmp)) }} </div> <div class=\"picker__month-display\"> <div>{{ monthText(tmp.month) }}</div> </div> <div class=\"picker__day-display\"> <div>{{ tmp.day }}</div> </div> <div class=\"picker__year-display\"> <div>{{ tmp.year }}</div> </div> </div> <select class=\"picker__select--year\" [(ngModel)]=\"visibleMonth.year\" (ngModelChange)=\"onUserYearInput($event)\" role=\"menu\" aria-label=\"Year selector\"> <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option> </select> <select class=\"picker__select--month\" [(ngModel)]=\"visibleMonth.monthTxt\" (ngModelChange)=\"onUserMonthInput($event)\" role=\"menu\" aria-label=\"Month selector\"> <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option> </select> <button class=\"picker__nav--prev\" data-nav=\"-1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Previous month\" (click)=\"prevMonth()\" [disabled]=\"prevMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled}\"></button> <button class=\"picker__nav--next\" data-nav=\"1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Next month\" (click)=\"nextMonth()\" [disabled]=\"nextMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled}\"></button> </div> <table class=\"picker__table\"> <thead> <tr> <th class=\"picker__weekday weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#</th> <th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th> </tr> </thead> <tbody> <tr *ngFor=\"let w of dates\"> <td class=\"picker__day daycellweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td> <td class=\"picker__day\" *ngFor=\"let d of w.week\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId&&!d.disabled, 'disabled': d.disabled, 'tablesingleday': d.cmo===currMonthId&&!d.disabled}\"> <div *ngIf=\"d.markedDate.marked\" class=\"markdate\" [ngStyle]=\"{'background-color': d.markedDate.color}\"></div> <div class=\"picker__day\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId,'picker__day--outfocus': (d.cmo===nextMonthId || d.cmo===prevMonthId), 'picker__day--today':d.currDay&&opts.markCurrentDay, 'picker__day--selected picker__day--highlighted':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId}\" (click)=\"!d.disabled&&cellClicked(d);$event.stopPropagation()\" (keydown)=\"cellKeyDown($event, d)\" tabindex=\"0\"> {{d.dateObj.day}} </div> </td> </tr> </tbody> </table> <div class=\"picker__footer\"> <button type=\"button\" *ngIf=\"opts.showTodayBtn\" class=\"picker__button--today\" (click)=\"todayClicked()\" role=\"button\" [attr.aria-label]=\"opts.todayBtnTxt\"> {{opts.todayBtnTxt}} </button> <button type=\"button\" *ngIf=\"opts.showClearDateBtn\" class=\"picker__button--clear\" (click)=\"removeBtnClicked()\" role=\"button\" [attr.aria-label]=\"opts.clearBtnTxt\"> {{opts.clearBtnTxt}} </button> <button type=\"button\" [ngClass]=\"{'ml-auto': !opts.showTodayBtn}\" class=\"picker__button--close\" (click)=\"showSelector = false; removeInlineStyle();\" role=\"button\" [attr.aria-label]=\"opts.closeBtnTxt\"> {{opts.closeBtnTxt}} </button> </div> </div> </div> </div>",
+                template: "<!-- Line 27: Deleted (focus)=\"onFocusInput($event)\" for better use in Firefox. If other strange problems will occur, please paste it in line 27. --> <div class=\"mydp picker\" [ngClass]=\"{'picker--opened': showSelector}\" [ngStyle]=\"{'width': opts.width}\"> <div class=\"md-form\"> <label (click)=\"openBtnClicked()\" *ngIf=\"label.length > 0\" [ngClass]=\"{ 'active': checkActive(), 'disabled': opts.componentDisabled }\">{{ label }}</label> <input type=\"text\" class=\"form-control mydp-date\" [attr.aria-label]=\"opts.ariaLabelInputField\" (click)=\"openBtnClicked()\" [attr.maxlength]=\"opts.dateFormat.length\" [ngClass]=\"{ 'selectiondisabled': opts.componentDisabled, 'disabled': opts.componentDisabled }\" placeholder=\"{{ placeholder }}\" [ngModel]=\"selectionDayTxt\" (ngModelChange)=\"onUserDateInput($event)\" [value]=\"selectionDayTxt\" [ngStyle]=\"{ 'height': opts.height,  'font-size': opts.selectionTxtFontSize }\" (blur)=\"onBlurInput($event)\" [disabled]=\"opts.componentDisabled\" autocomplete=\"off\"> </div> <div class=\"selector picker__holder selectorarrow selectorarrowleft selectorarrowright\" #divFocus [ngClass]=\"{'alignselectorright': opts.alignSelectorRight}\" tabindex=\"0\"> <div class=\"picker__frame picker__box\" #pickerFrame> <div class=\"picker__header\"> <div class=\"picker__date-display\"> <div class=\"picker__weekday-display\"> {{ weekText(getWeekday(tmp)) }} </div> <div class=\"picker__month-display\"> <div>{{ monthText(tmp.month) }}</div> </div> <div class=\"picker__day-display\"> <div>{{ tmp.day }}</div> </div> <div class=\"picker__year-display\"> <div>{{ tmp.year }}</div> </div> </div> <select class=\"picker__select--year\" [(ngModel)]=\"visibleMonth.year\" (ngModelChange)=\"onUserYearInput($event)\" role=\"menu\" aria-label=\"Year selector\"> <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option> </select> <select class=\"picker__select--month\" [(ngModel)]=\"visibleMonth.monthTxt\" (ngModelChange)=\"onUserMonthInput($event)\" role=\"menu\" aria-label=\"Month selector\"> <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option> </select> <button class=\"picker__nav--prev\" data-nav=\"-1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Previous month\" (click)=\"prevMonth()\" [disabled]=\"prevMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled}\"></button> <button class=\"picker__nav--next\" data-nav=\"1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Next month\" (click)=\"nextMonth()\" [disabled]=\"nextMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled}\"></button> </div> <table class=\"picker__table\"> <thead> <tr> <th class=\"picker__weekday weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#</th> <th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th> </tr> </thead> <tbody> <tr *ngFor=\"let w of dates\"> <td class=\"picker__day daycellweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td> <td class=\"picker__day\" *ngFor=\"let d of w.week\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId&&!d.disabled, 'disabled': d.disabled, 'tablesingleday': d.cmo===currMonthId&&!d.disabled}\"> <div *ngIf=\"d.markedDate.marked\" class=\"markdate\" [ngStyle]=\"{'background-color': d.markedDate.color}\"></div> <div class=\"picker__day\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId,'picker__day--outfocus': (d.cmo===nextMonthId || d.cmo===prevMonthId), 'picker__day--today':d.currDay&&opts.markCurrentDay, 'picker__day--selected picker__day--highlighted':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId}\" (click)=\"!d.disabled&&cellClicked(d);$event.stopPropagation()\" (keydown)=\"cellKeyDown($event, d)\" tabindex=\"0\"> {{d.dateObj.day}} </div> </td> </tr> </tbody> </table> <div class=\"picker__footer\"> <button type=\"button\" *ngIf=\"opts.showTodayBtn\" class=\"picker__button--today\" (click)=\"todayClicked()\" role=\"button\" [attr.aria-label]=\"opts.todayBtnTxt\"> {{opts.todayBtnTxt}} </button> <button type=\"button\" *ngIf=\"opts.showClearDateBtn\" class=\"picker__button--clear\" (click)=\"removeBtnClicked()\" role=\"button\" [attr.aria-label]=\"opts.clearBtnTxt\"> {{opts.clearBtnTxt}} </button> <button type=\"button\" [ngClass]=\"{'ml-auto': !opts.showTodayBtn}\" class=\"picker__button--close\" (click)=\"showSelector = false; removeInlineStyle();\" role=\"button\" [attr.aria-label]=\"opts.closeBtnTxt\"> {{opts.closeBtnTxt}} </button> </div> </div> </div> </div>",
                 providers: [LocaleService, UtilService, MYDP_VALUE_ACCESSOR],
                 encapsulation: core.ViewEncapsulation.None
             },] },
@@ -7597,11 +7622,15 @@ var SelectComponent = /** @class */ (function () {
         this.updateWidth();
     };
     /**
+     * @param {?} event
      * @return {?}
      */
-    SelectComponent.prototype.onSelectContainerClick = function () {
-        this.selectContainerClicked = true;
-        if (!this.clearClicked) {
+    SelectComponent.prototype.onSelectContainerClick = function (event) {
+        if (this.clearButton && event.target === this.clearButton.nativeElement) {
+            return;
+        }
+        else {
+            this.selectContainerClicked = true;
             this.toggleDropdown();
         }
     };
@@ -7610,6 +7639,14 @@ var SelectComponent = /** @class */ (function () {
      */
     SelectComponent.prototype.onSelectContainerFocus = function () {
         this.openDropdown();
+    };
+    /**
+     * @return {?}
+     */
+    SelectComponent.prototype.onSelectContainerBlur = function () {
+        if (!this.isOpen && !this.disabled) {
+            this.onTouched();
+        }
     };
     /**
      * @param {?} event
@@ -7682,12 +7719,14 @@ var SelectComponent = /** @class */ (function () {
         this.handleMultipleFilterKeydown(event);
     };
     /**
+     * @param {?} event
      * @return {?}
      */
-    SelectComponent.prototype.onClearSelectionClick = function () {
+    SelectComponent.prototype.onClearSelectionClick = function (event) {
+        event.preventDefault();
         this.clearClicked = true;
         this.clearSelection();
-        this.closeDropdown(true);
+        this.placeholderView = this.placeholder;
     };
     /**
      * @param {?} option
@@ -7709,6 +7748,7 @@ var SelectComponent = /** @class */ (function () {
      */
     SelectComponent.prototype.close = function () {
         this.closeDropdown();
+        this.onTouched();
     };
     Object.defineProperty(SelectComponent.prototype, "value", {
         /**
@@ -7862,6 +7902,7 @@ var SelectComponent = /** @class */ (function () {
                 _this.closed.emit(_this);
             }
         }, 200);
+        this.onTouched();
     };
     /**
      * Select. *
@@ -7873,6 +7914,7 @@ var SelectComponent = /** @class */ (function () {
             this.optionList.select(option, this.multiple);
             this.valueChanged();
             this.selected.emit(option.wrappedOption);
+            this.hasSelected = true;
         }
     };
     /**
@@ -7883,6 +7925,7 @@ var SelectComponent = /** @class */ (function () {
         if (option.selected) {
             this.optionList.deselect(option);
             this.valueChanged();
+            this.placeholderView = this.placeholder;
             this.deselected.emit(option.wrappedOption);
         }
     };
@@ -7890,10 +7933,14 @@ var SelectComponent = /** @class */ (function () {
      * @return {?}
      */
     SelectComponent.prototype.clearSelection = function () {
+        var _this = this;
         var /** @type {?} */ selection = this.optionList.selection;
         if (selection.length > 0) {
             this.optionList.clearSelection();
             this.valueChanged();
+            setTimeout(function () {
+                _this.hasSelected = false;
+            }, 0);
             if (selection.length === 1) {
                 this.deselected.emit(selection[0].wrappedOption);
             }
@@ -8080,7 +8127,7 @@ var SelectComponent = /** @class */ (function () {
 SelectComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'mdb-select',
-                template: "<label *ngIf=\"label !== ''\"> {{label}} </label> <div #selection [attr.tabindex]=\"disabled ? null : 0\" [ngClass]=\"{'open': isOpen, 'focus': hasFocus, 'below': isBelow, 'disabled': disabled}\" (mousedown)=\"onSelectContainerClick()\" (focus)=\"onSelectContainerFocus()\" (keydown)=\"onSelectContainerKeydown($event)\" (window:click)=\"onWindowClick()\" (window:resize)=\"onWindowResize()\"> <div class=\"single\" *ngIf=\"!multiple\"> <div class=\"value\" *ngIf=\"optionList.hasSelected()\"> {{optionList.selection[0].label}} </div> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div class=\"clear\" *ngIf=\"allowClear && hasSelected\" (click)=\"onClearSelectionClick()\"> &#x2715; </div> </div> <div class=\"multiple\" *ngIf=\"multiple\"> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div class=\"option\"  *ngFor=\"let option of optionList.selection\"> <span class=\"deselect-option\">, </span>{{option.label}} </div> </div> </div> <mdb-select-dropdown *ngIf=\"isOpen\" #dropdown [multiple]=\"multiple\" [optionList]=\"optionList\" [notFoundMsg]=\"notFoundMsg\" [highlightColor]=\"highlightColor\" [highlightTextColor]=\"highlightTextColor\" [filterEnabled]=\"filterEnabled\" [placeholder]=\"filterPlaceholder\" [top]=\"top\" [left]=\"left\" (close)=\"onDropdownClose($event)\" (optionClicked)=\"onDropdownOptionClicked($event)\" (singleFilterClick)=\"onSingleFilterClick()\" (singleFilterInput)=\"onSingleFilterInput($event)\" (singleFilterKeydown)=\"onSingleFilterKeydown($event)\"> </mdb-select-dropdown>",
+                template: "<label *ngIf=\"label !== ''\"> {{label}} </label> <div #selection [attr.tabindex]=\"disabled ? null : 0\" [ngClass]=\"{'open': isOpen, 'focus': hasFocus, 'below': isBelow, 'disabled': disabled}\" (mousedown)=\"onSelectContainerClick($event)\" (focus)=\"onSelectContainerFocus()\" (blur)=\"onSelectContainerBlur()\" (keydown)=\"onSelectContainerKeydown($event)\" (window:click)=\"onWindowClick()\" (window:resize)=\"onWindowResize()\"> <div class=\"single\" *ngIf=\"!multiple\"> <div class=\"value\" *ngIf=\"optionList.hasSelected()\"> {{optionList.selection[0].label}} </div> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div #clear class=\"clear\" *ngIf=\"allowClear && hasSelected\" (mousedown)=\"onClearSelectionClick($event)\"> &#x2715; </div> </div> <div class=\"multiple\" *ngIf=\"multiple\"> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div class=\"option\"  *ngFor=\"let option of optionList.selection\"> <span class=\"deselect-option\">, </span>{{option.label}} </div> </div> </div> <mdb-select-dropdown *ngIf=\"isOpen\" #dropdown [multiple]=\"multiple\" [optionList]=\"optionList\" [notFoundMsg]=\"notFoundMsg\" [highlightColor]=\"highlightColor\" [highlightTextColor]=\"highlightTextColor\" [filterEnabled]=\"filterEnabled\" [placeholder]=\"filterPlaceholder\" [top]=\"top\" [left]=\"left\" (close)=\"onDropdownClose($event)\" (optionClicked)=\"onDropdownOptionClicked($event)\" (singleFilterClick)=\"onSingleFilterClick()\" (singleFilterInput)=\"onSingleFilterInput($event)\" (singleFilterKeydown)=\"onSingleFilterKeydown($event)\"> </mdb-select-dropdown>",
                 providers: [SELECT_VALUE_ACCESSOR],
                 encapsulation: core.ViewEncapsulation.None
             },] },
@@ -8113,6 +8160,7 @@ SelectComponent.propDecorators = {
     selectionSpan: [{ type: core.ViewChild, args: ['selection',] }],
     dropdown: [{ type: core.ViewChild, args: ['dropdown',] }],
     filterInput: [{ type: core.ViewChild, args: ['filterInput',] }],
+    clearButton: [{ type: core.ViewChild, args: ['clear',] }],
     closeSelect: [{ type: core.HostListener, args: ['document:click', ['$event'],] }]
 };
 /**
@@ -9420,6 +9468,17 @@ var SidenavComponent = /** @class */ (function () {
         setTimeout(function () {
             _this.shown = value;
         }, 510);
+    };
+    /**
+     * @return {?}
+     */
+    SidenavComponent.prototype.ngOnDestroy = function () {
+        if (document.body.classList.contains('hidden-sn')) {
+            this.renderer.removeClass(document.body, 'hidden-sn');
+        }
+        else if (document.body.classList.contains('fixed-sn')) {
+            this.renderer.removeClass(document.body, 'fixed-sn');
+        }
     };
     return SidenavComponent;
 }());
@@ -11152,7 +11211,6 @@ var TabsetComponent = /** @class */ (function () {
      * @return {?}
      */
     TabsetComponent.prototype.ngOnInit = function () {
-        console.log('tabs', this.tabs);
         this.listGet();
         this.tabsGet();
         this.showActiveIndex();
@@ -11162,7 +11220,7 @@ var TabsetComponent = /** @class */ (function () {
 TabsetComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'mdb-tabset',
-                template: "<div class=\"container-fluid\">  <div class=\"row\"> <div class=\"{{ listGetClass }}\"> <ul class=\"nav {{ buttonClass }}\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\"> <li *ngFor=\"let tabz of tabs;let i = index\" [ngClass]=\"['nav-item', tabz.customClass || '']\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\" (click)=\"click($event, i)\"> <a #tabEl href=\"javascript:void(0);\" class=\"nav-link waves-light\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\"> <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span> <span *ngIf=\"tabz.removable\"> <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"fa fa-remove ml-2\"> </span> </span> </a> </li> </ul> </div> <div class=\"{{ tabsGetClass }}\"> <div class=\"tab-content {{ contentClass }}\"> <ng-content></ng-content> </div> </div> </div> </div>",
+                template: "<div class=\"container-fluid\">  <div class=\"row\"> <div class=\"{{ listGetClass }}\"> <ul class=\"nav {{ buttonClass }}\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\"> <li *ngFor=\"let tabz of tabs;let i = index\" [ngClass]=\"['nav-item', tabz.customClass || '']\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\" (click)=\"click($event, i)\"> <a #tabEl href=\"javascript:void(0);\" class=\"nav-link waves-light\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\"> <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span> <span *ngIf=\"tabz.removable\"> <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"fa fa-remove ml-2\"> </span> </span> </a> </li> </ul> </div> <div class=\"{{ tabsGetClass }}\"> <div class=\"tab-content {{ contentClass }}\"> <ng-content></ng-content> </div> </div> </div> </div> ",
                 providers: [WavesDirective]
             },] },
 ];
@@ -14256,182 +14314,94 @@ CheckboxModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-var CollapseDirective = /** @class */ (function () {
-    /**
-     * @param {?} _el
-     * @param {?} _renderer
-     * @param {?} document
-     * @param {?} platformId
-     */
-    function CollapseDirective(_el, _renderer, document, platformId) {
-        this.document = document;
+var CollapseComponent = /** @class */ (function () {
+    function CollapseComponent() {
+        this.isCollapsed = false;
         this.showBsCollapse = new core.EventEmitter();
         this.shownBsCollapse = new core.EventEmitter();
         this.hideBsCollapse = new core.EventEmitter();
         this.hiddenBsCollapse = new core.EventEmitter();
-        /**
-         * This event fires as soon as content collapses
-         */
         this.collapsed = new core.EventEmitter();
-        /**
-         * This event fires as soon as content becomes visible
-         */
         this.expanded = new core.EventEmitter();
-        this.isExpanded = true;
-        this.isCollapsed = false;
-        this.isCollapse = true;
-        this.isCollapsing = false;
-        this.collapsing = false;
-        this.animationTime = 500;
-        this.isBrowser = false;
-        this.isBrowser = common.isPlatformBrowser(platformId);
-        this._el = _el;
-        this._renderer = _renderer;
+        this.overflow = 'hidden';
     }
     /**
+     * @param {?} event
      * @return {?}
      */
-    CollapseDirective.prototype.ngOnInit = function () {
-        this._el.nativeElement.classList.add('show');
-        this._el.nativeElement.style.transition = this.animationTime + 'ms ease';
-        if (!this.collapse) {
-            this._el.nativeElement.classList.remove('show');
-            this.hide();
-        }
-        else {
-            this.show();
-        }
-        this.isExpanded = this.collapse;
-    };
-    /**
-     * @return {?}
-     */
-    CollapseDirective.prototype.ngAfterViewInit = function () {
-        this.maxHeight = this._el.nativeElement.scrollHeight;
-    };
-    /**
-     * @return {?}
-     */
-    CollapseDirective.prototype.resize = function () {
-        var /** @type {?} */ container = this._el.nativeElement;
-        this.maxHeight = this._el.nativeElement.scrollHeight;
-        this._renderer.setStyle(container, 'height', this.maxHeight + 'px');
-    };
-    /**
-     * allows to manually toggle content visibility
-     * @param {?=} event
-     * @return {?}
-     */
-    CollapseDirective.prototype.toggle = function (event) {
-        if (!this.collapsing) {
-            if (this.isExpanded) {
-                this.hide();
-            }
-            else {
-                this.show();
-            }
-        }
-        try {
-            if (this.isBrowser) {
-                var /** @type {?} */ fixedButtonContainer = this.document.querySelector('.fixed-action-btn');
-                var /** @type {?} */ fixedCollapseContainer = this.document.querySelector('.fixed_collapse');
-                if (event.type === 'click') {
-                    // If fixedButtonContainer got top style instead of bottom, remove bottom styles from this._el.nativeElement - needed in cases,
-                    // when menu should be slided from the button instead of from the bottom edge of the screen.
-                    if (fixedButtonContainer.style.top !== '' && window.innerHeight - event.clientY > this.maxHeight) {
-                        this._renderer.setStyle(this._el.nativeElement, 'bottom', 'unset');
-                    }
-                    this.maxHeight = fixedCollapseContainer.scrollHeight;
-                }
-                else if (event.type === 'mouseenter' || event.type === 'mouseleave') {
-                    // Same as in 103 line.
-                    if (fixedButtonContainer.style.top !== '' && window.innerHeight - event.clientY > this.maxHeight) {
-                        this._renderer.setStyle(this._el.nativeElement, 'bottom', 'unset');
-                    }
-                    this.maxHeight = fixedCollapseContainer.scrollHeight;
-                }
-            }
-        }
-        catch (error) { }
-    };
-    /**
-     * allows to manually hide content
-     * @return {?}
-     */
-    CollapseDirective.prototype.hide = function () {
-        var _this = this;
-        this.collapsing = true;
-        this.hideBsCollapse.emit(this);
-        this.isCollapse = false;
-        this.isCollapsing = true;
-        this.isExpanded = false;
-        this.isCollapsed = true;
-        var /** @type {?} */ container = this._el.nativeElement;
-        container.classList.remove('collapse');
-        container.classList.remove('show');
-        container.classList.add('collapsing');
-        this._renderer.setStyle(container, 'height', '0px');
-        setTimeout(function () {
-            container.classList.remove('collapsing');
-            container.classList.add('collapse');
-            _this.hiddenBsCollapse.emit(_this);
-            _this.collapsing = false;
-        }, this.animationTime);
-        this.collapsed.emit(this);
-    };
-    /**
-     * allows to manually show collapsed content
-     * @return {?}
-     */
-    CollapseDirective.prototype.show = function () {
-        var _this = this;
-        if (!this.isExpanded) {
-            this.collapsing = true;
-            this.showBsCollapse.emit(this);
-            this.isCollapse = false;
-            this.isCollapsing = true;
-            this.isExpanded = true;
-            this.isCollapsed = false;
-            var /** @type {?} */ container_1 = this._el.nativeElement;
-            container_1.classList.remove('collapse');
-            container_1.classList.add('collapsing');
-            setTimeout(function () {
-                _this._renderer.setStyle(container_1, 'height', _this.maxHeight + 'px');
-            }, 10);
-            setTimeout(function () {
-                container_1.classList.remove('collapsing');
-                container_1.classList.add('collapse');
-                container_1.classList.add('show');
-                _this.shownBsCollapse.emit(_this);
-                _this.collapsing = false;
-            }, this.animationTime - (this.animationTime * 0.5));
+    CollapseComponent.prototype.onExpandBodyDone = function (event) {
+        if (event.toState === 'expanded') {
+            this.shownBsCollapse.emit(this);
             this.expanded.emit(this);
         }
+        else {
+            this.hiddenBsCollapse.emit(this);
+            this.collapsed.emit(this);
+        }
     };
-    return CollapseDirective;
+    /**
+     * @return {?}
+     */
+    CollapseComponent.prototype.toggle = function () {
+        this.isCollapsed ? this.open() : this.hide();
+    };
+    /**
+     * @return {?}
+     */
+    CollapseComponent.prototype.open = function () {
+        this.expandAnimationState = 'expanded';
+        this.isCollapsed = false;
+        this.showBsCollapse.emit(this);
+    };
+    /**
+     * @return {?}
+     */
+    CollapseComponent.prototype.hide = function () {
+        this.expandAnimationState = 'collapsed';
+        this.isCollapsed = true;
+        this.hideBsCollapse.emit(this);
+    };
+    /**
+     * @return {?}
+     */
+    CollapseComponent.prototype.initializeCollapseState = function () {
+        this.isCollapsed ? this.hide() : this.open();
+    };
+    /**
+     * @return {?}
+     */
+    CollapseComponent.prototype.ngOnInit = function () {
+        this.initializeCollapseState();
+    };
+    return CollapseComponent;
 }());
-CollapseDirective.decorators = [
-    { type: core.Directive, args: [{
+CollapseComponent.decorators = [
+    { type: core.Component, args: [{
                 selector: '[mdbCollapse]',
                 exportAs: 'bs-collapse',
+                template: '<ng-content></ng-content>',
+                animations: [
+                    animations.trigger('expandBody', [
+                        animations.state('collapsed', animations.style({ height: '0px', visibility: 'hidden' })),
+                        animations.state('expanded', animations.style({ height: '*', visibility: 'visible' })),
+                        animations.transition('expanded <=> collapsed', animations.animate('500ms ease')),
+                    ])
+                ],
             },] },
 ];
 /** @nocollapse */
-CollapseDirective.ctorParameters = function () { return [
-    { type: core.ElementRef },
-    { type: core.Renderer2 },
-    { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] },
-    { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
-]; };
-CollapseDirective.propDecorators = {
-    showBsCollapse: [{ type: core.Output, args: ['showBsCollapse',] }],
-    shownBsCollapse: [{ type: core.Output, args: ['shownBsCollapse',] }],
-    hideBsCollapse: [{ type: core.Output, args: ['hideBsCollapse',] }],
-    hiddenBsCollapse: [{ type: core.Output, args: ['hiddenBsCollapse',] }],
+CollapseComponent.ctorParameters = function () { return []; };
+CollapseComponent.propDecorators = {
+    isCollapsed: [{ type: core.Input }],
+    showBsCollapse: [{ type: core.Output }],
+    shownBsCollapse: [{ type: core.Output }],
+    hideBsCollapse: [{ type: core.Output }],
+    hiddenBsCollapse: [{ type: core.Output }],
     collapsed: [{ type: core.Output }],
     expanded: [{ type: core.Output }],
-    collapse: [{ type: core.Input }],
-    animationTime: [{ type: core.Input }]
+    expandAnimationState: [{ type: core.HostBinding, args: ['@expandBody',] }],
+    overflow: [{ type: core.HostBinding, args: ['style.overflow',] }],
+    onExpandBodyDone: [{ type: core.HostListener, args: ['@expandBody.done', ['$event'],] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -14450,8 +14420,8 @@ var CollapseModule = /** @class */ (function () {
 }());
 CollapseModule.decorators = [
     { type: core.NgModule, args: [{
-                declarations: [CollapseDirective],
-                exports: [CollapseDirective]
+                declarations: [CollapseComponent],
+                exports: [CollapseComponent]
             },] },
 ];
 /**
@@ -15958,11 +15928,10 @@ var MdbInputDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbInputDirective.prototype.resize = function () {
-        try {
+        if (this.el.nativeElement.classList.contains('md-textarea-auto')) {
             this._renderer.setStyle(this.el.nativeElement, 'height', 'auto');
             this._renderer.setStyle(this.el.nativeElement, 'height', this.el.nativeElement.scrollHeight + 'px');
         }
-        catch (error) { }
     };
     /**
      * @return {?}
@@ -17999,6 +17968,15 @@ var TooltipDirective = /** @class */ (function () {
         });
     };
     /**
+     * @param {?} changes
+     * @return {?}
+     */
+    TooltipDirective.prototype.ngOnChanges = function (changes) {
+        if (!changes['mdbTooltip'].isFirstChange()) {
+            this.tooltipChange.emit(this.mdbTooltip);
+        }
+    };
+    /**
      * Toggles an element’s tooltip. This is considered a “manual” triggering of
      * the tooltip.
      * @return {?}
@@ -18327,7 +18305,7 @@ var MODULES$1 = [
     AccordionModule,
     StickyContentModule,
     SmoothscrollModule,
-    CharCounterModule
+    CharCounterModule,
 ];
 var MDBRootModulePro = /** @class */ (function () {
     function MDBRootModulePro() {
@@ -18351,7 +18329,7 @@ MDBRootModulePro.decorators = [
                     AccordionModule,
                     StickyContentModule,
                     SmoothscrollModule.forRoot(),
-                    CharCounterModule.forRoot()
+                    CharCounterModule.forRoot(),
                 ],
                 exports: [MODULES$1],
                 providers: [],
@@ -18567,7 +18545,7 @@ exports.CHECKBOX_VALUE_ACCESSOR = CHECKBOX_VALUE_ACCESSOR;
 exports.MdbCheckboxChange = MdbCheckboxChange;
 exports.CheckboxComponent = CheckboxComponent;
 exports.CheckboxModule = CheckboxModule;
-exports.CollapseDirective = CollapseDirective;
+exports.CollapseComponent = CollapseComponent;
 exports.CollapseModule = CollapseModule;
 exports.BsDropdownContainerComponent = BsDropdownContainerComponent;
 exports.BsDropdownMenuDirective = BsDropdownMenuDirective;
@@ -18657,7 +18635,7 @@ exports.ɵda1 = ChartsModule;
 exports.ɵdb1 = CHECKBOX_VALUE_ACCESSOR;
 exports.ɵdc1 = CheckboxComponent;
 exports.ɵdd1 = CheckboxModule;
-exports.ɵde1 = CollapseDirective;
+exports.ɵde1 = CollapseComponent;
 exports.ɵdf1 = CollapseModule;
 exports.ɵdg1 = BsDropdownContainerComponent;
 exports.ɵdh1 = BsDropdownMenuDirective;

@@ -15,7 +15,7 @@ export { BaseChartDirective as ɵcz1 } from './ng-uikit-pro-standard/free/charts
 export { ChartsModule as ɵda1 } from './ng-uikit-pro-standard/free/charts/chart.module';
 export { CHECKBOX_VALUE_ACCESSOR as ɵdb1, CheckboxComponent as ɵdc1 } from './ng-uikit-pro-standard/free/checkbox/checkbox.component';
 export { CheckboxModule as ɵdd1 } from './ng-uikit-pro-standard/free/checkbox/checkbox.module';
-export { CollapseDirective as ɵde1 } from './ng-uikit-pro-standard/free/collapse/collapse.directive';
+export { CollapseComponent as ɵde1 } from './ng-uikit-pro-standard/free/collapse/collapse.component';
 export { CollapseModule as ɵdf1 } from './ng-uikit-pro-standard/free/collapse/collapse.module';
 export { BsDropdownContainerComponent as ɵdg1 } from './ng-uikit-pro-standard/free/dropdown/dropdown-container.component';
 export { BsDropdownMenuDirective as ɵdh1 } from './ng-uikit-pro-standard/free/dropdown/dropdown-menu.directive';

@@ -75,3 +75,36 @@
 @each $name, $val in $gradients-premium {
   @include make-gradient($name, $val);
 }
+@each $name, $val in $gradients-premium-rgba {
+  @include make-gradient-rgba($name, $val);
+}
+
+.collapse-content {
+  table,
+  p {
+    &.collapse {
+      &:not(.show) {
+        height: 2.65rem;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
+    }
+    &.collapsing {
+      min-height: 2.65rem;
+    }
+  }
+  a {
+    &.collapsed {
+      &:after {
+        content: 'Read More';
+      }
+    }
+    &:not(.collapsed) {
+      &:after {
+        content: 'Read Less';
+      }
+    }
+  }
+}

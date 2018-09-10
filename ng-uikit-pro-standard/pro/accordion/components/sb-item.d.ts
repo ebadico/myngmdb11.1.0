@@ -3,6 +3,7 @@ import { SBItemBodyComponent } from './sb-item.body';
 export declare class SBItemComponent implements AfterViewInit {
     private squeezebox;
     collapsed: boolean;
+    customClass: string;
     body: SBItemBodyComponent;
     constructor();
     ngAfterViewInit(): void;
