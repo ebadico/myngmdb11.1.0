@@ -104,7 +104,7 @@ SBItemComponent.decorators = [
     { type: Component, args: [{
                 exportAs: 'sbItem',
                 selector: 'mdb-item, mdb-accordion-item',
-                template: "<div class=\"card test z-depth1 {{ customClass }}\" [ngClass]=\"{'is-collapsed': collapsed, 'active': !collapsed}\"> <ng-content></ng-content> </div>"
+                template: "<div class=\"card {{ customClass }}\" [ngClass]=\"{'is-collapsed': collapsed, 'active': !collapsed}\"> <ng-content></ng-content> </div>"
             },] },
 ];
 /** @nocollapse */
