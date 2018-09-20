@@ -12102,6 +12102,452 @@ TimePickerModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+var ScrollSpyLinkDirective = /** @class */ (function () {
+    /**
+     * @param {?} cdRef
+     * @param {?} document
+     */
+    function ScrollSpyLinkDirective(cdRef, document) {
+        this.cdRef = cdRef;
+        this.document = document;
+        this.active = false;
+    }
+    Object.defineProperty(ScrollSpyLinkDirective.prototype, "id", {
+        /**
+         * @return {?}
+         */
+        get: function () {
+            return this._id;
+        },
+        /**
+         * @param {?} newId
+         * @return {?}
+         */
+        set: function (newId) {
+            if (newId) {
+                this._id = newId;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    ScrollSpyLinkDirective.prototype.onClick = function () {
+        if (this.section) {
+            this.section.scrollIntoView();
+        }
+    };
+    /**
+     * @return {?}
+     */
+    ScrollSpyLinkDirective.prototype.detectChanges = function () {
+        this.cdRef.detectChanges();
+    };
+    /**
+     * @return {?}
+     */
+    ScrollSpyLinkDirective.prototype.assignSectionToId = function () {
+        this.section = this.document.documentElement.querySelector("#" + this.id);
+    };
+    /**
+     * @return {?}
+     */
+    ScrollSpyLinkDirective.prototype.ngOnInit = function () {
+        this.assignSectionToId();
+    };
+    return ScrollSpyLinkDirective;
+}());
+ScrollSpyLinkDirective.decorators = [
+    { type: core.Directive, args: [{
+                selector: '[mdbScrollSpyLink]'
+            },] },
+];
+/** @nocollapse */
+ScrollSpyLinkDirective.ctorParameters = function () { return [
+    { type: core.ChangeDetectorRef },
+    { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] }
+]; };
+ScrollSpyLinkDirective.propDecorators = {
+    id: [{ type: core.Input, args: ['mdbScrollSpyLink',] }],
+    active: [{ type: core.HostBinding, args: ['class.active',] }],
+    onClick: [{ type: core.HostListener, args: ['click', [],] }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @record
+ */
+var ScrollSpyService = /** @class */ (function () {
+    function ScrollSpyService() {
+        this.scrollSpys = [];
+    }
+    /**
+     * @param {?} scrollSpy
+     * @return {?}
+     */
+    ScrollSpyService.prototype.addScrollSpy = function (scrollSpy) {
+        this.scrollSpys.push(scrollSpy);
+    };
+    /**
+     * @param {?} scrollSpyId
+     * @param {?} activeLinkId
+     * @return {?}
+     */
+    ScrollSpyService.prototype.updateActiveState = function (scrollSpyId, activeLinkId) {
+        var /** @type {?} */ scrollSpy = this.scrollSpys.find(function (spy) {
+            return spy.id === scrollSpyId;
+        });
+        if (!scrollSpy) {
+            return;
+        }
+        var /** @type {?} */ activeLink = scrollSpy.links.find(function (link) {
+            return link.id === activeLinkId;
+        });
+        this.removeActiveLinks(scrollSpy);
+        this.setActiveLink(activeLink);
+    };
+    /**
+     * @param {?} scrollSpyId
+     * @param {?} activeLinkId
+     * @return {?}
+     */
+    ScrollSpyService.prototype.removeActiveState = function (scrollSpyId, activeLinkId) {
+        var /** @type {?} */ scrollSpy = this.scrollSpys.find(function (spy) {
+            return spy.id === scrollSpyId;
+        });
+        if (!scrollSpy) {
+            return;
+        }
+        var /** @type {?} */ activeLink = scrollSpy.links.find(function (link) {
+            return link.id === activeLinkId;
+        });
+        if (!activeLink) {
+            return;
+        }
+        activeLink.active = false;
+        activeLink.detectChanges();
+    };
+    /**
+     * @param {?} activeLink
+     * @return {?}
+     */
+    ScrollSpyService.prototype.setActiveLink = function (activeLink) {
+        activeLink.active = true;
+        activeLink.detectChanges();
+    };
+    /**
+     * @param {?} scrollSpy
+     * @return {?}
+     */
+    ScrollSpyService.prototype.removeActiveLinks = function (scrollSpy) {
+        scrollSpy.links.forEach(function (link) {
+            link.active = false;
+            link.detectChanges();
+        });
+    };
+    return ScrollSpyService;
+}());
+ScrollSpyService.decorators = [
+    { type: core.Injectable },
+];
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var ScrollSpyDirective = /** @class */ (function () {
+    /**
+     * @param {?} scrollSpyService
+     */
+    function ScrollSpyDirective(scrollSpyService) {
+        this.scrollSpyService = scrollSpyService;
+    }
+    Object.defineProperty(ScrollSpyDirective.prototype, "id", {
+        /**
+         * @return {?}
+         */
+        get: function () {
+            return this._id;
+        },
+        /**
+         * @param {?} newId
+         * @return {?}
+         */
+        set: function (newId) {
+            if (newId) {
+                this._id = newId;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    ScrollSpyDirective.prototype.ngAfterViewInit = function () {
+        this.scrollSpyService.addScrollSpy({ id: this.id, links: this.links });
+    };
+    return ScrollSpyDirective;
+}());
+ScrollSpyDirective.decorators = [
+    { type: core.Directive, args: [{
+                selector: '[mdbScrollSpy]'
+            },] },
+];
+/** @nocollapse */
+ScrollSpyDirective.ctorParameters = function () { return [
+    { type: ScrollSpyService }
+]; };
+ScrollSpyDirective.propDecorators = {
+    links: [{ type: core.ContentChildren, args: [ScrollSpyLinkDirective,] }],
+    id: [{ type: core.Input, args: ['mdbScrollSpy',] }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var ScrollSpyWindowDirective = /** @class */ (function () {
+    /**
+     * @param {?} document
+     * @param {?} el
+     * @param {?} renderer
+     * @param {?} ngZone
+     * @param {?} scrollSpyService
+     */
+    function ScrollSpyWindowDirective(document, el, renderer, ngZone, scrollSpyService) {
+        this.document = document;
+        this.el = el;
+        this.renderer = renderer;
+        this.ngZone = ngZone;
+        this.scrollSpyService = scrollSpyService;
+        this.offset = 0;
+    }
+    Object.defineProperty(ScrollSpyWindowDirective.prototype, "scrollSpyId", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this._scrollSpyId; },
+        /**
+         * @param {?} newId
+         * @return {?}
+         */
+        set: function (newId) {
+            if (newId) {
+                this._scrollSpyId = newId;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    ScrollSpyWindowDirective.prototype.isElementInViewport = function () {
+        var /** @type {?} */ scrollTop = this.document.documentElement.scrollTop || this.document.body.scrollTop;
+        var /** @type {?} */ elHeight = this.el.nativeElement.offsetHeight;
+        var /** @type {?} */ elTop = this.el.nativeElement.offsetTop - this.offset;
+        var /** @type {?} */ elBottom = elTop + elHeight;
+        return (scrollTop >= elTop && scrollTop <= elBottom);
+    };
+    /**
+     * @param {?} scrollSpyId
+     * @param {?} id
+     * @return {?}
+     */
+    ScrollSpyWindowDirective.prototype.updateActiveState = function (scrollSpyId, id) {
+        if (this.isElementInViewport()) {
+            this.scrollSpyService.updateActiveState(scrollSpyId, id);
+        }
+        else {
+            this.scrollSpyService.removeActiveState(scrollSpyId, id);
+        }
+    };
+    /**
+     * @return {?}
+     */
+    ScrollSpyWindowDirective.prototype.onScroll = function () {
+        this.updateActiveState(this.scrollSpyId, this.id);
+    };
+    /**
+     * @return {?}
+     */
+    ScrollSpyWindowDirective.prototype.listenToScroll = function () {
+        var _this = this;
+        this.renderer.listen(window, 'scroll', function () {
+            _this.onScroll();
+        });
+    };
+    /**
+     * @return {?}
+     */
+    ScrollSpyWindowDirective.prototype.ngOnInit = function () {
+        this.id = this.el.nativeElement.id;
+        this.ngZone.runOutsideAngular(this.listenToScroll.bind(this));
+    };
+    /**
+     * @return {?}
+     */
+    ScrollSpyWindowDirective.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        setTimeout(function () {
+            _this.updateActiveState(_this.scrollSpyId, _this.id);
+        }, 0);
+    };
+    return ScrollSpyWindowDirective;
+}());
+ScrollSpyWindowDirective.decorators = [
+    { type: core.Directive, args: [{
+                selector: '[mdbScrollSpyWindow]'
+            },] },
+];
+/** @nocollapse */
+ScrollSpyWindowDirective.ctorParameters = function () { return [
+    { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] },
+    { type: core.ElementRef },
+    { type: core.Renderer2 },
+    { type: core.NgZone },
+    { type: ScrollSpyService }
+]; };
+ScrollSpyWindowDirective.propDecorators = {
+    scrollSpyId: [{ type: core.Input, args: ['mdbScrollSpyWindow',] }],
+    offset: [{ type: core.Input }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var ScrollSpyElementDirective = /** @class */ (function () {
+    /**
+     * @param {?} el
+     * @param {?} renderer
+     * @param {?} ngZone
+     * @param {?} scrollSpyService
+     */
+    function ScrollSpyElementDirective(el, renderer, ngZone, scrollSpyService) {
+        this.el = el;
+        this.renderer = renderer;
+        this.ngZone = ngZone;
+        this.scrollSpyService = scrollSpyService;
+        this.offset = 0;
+    }
+    Object.defineProperty(ScrollSpyElementDirective.prototype, "scrollSpyId", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this._scrollSpyId; },
+        /**
+         * @param {?} newId
+         * @return {?}
+         */
+        set: function (newId) {
+            if (newId) {
+                this._scrollSpyId = newId;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    ScrollSpyElementDirective.prototype.isElementInViewport = function () {
+        var /** @type {?} */ scrollTop = this.el.nativeElement.parentElement.scrollTop;
+        var /** @type {?} */ elTop = this.el.nativeElement.offsetTop - this.offset;
+        return (scrollTop >= elTop);
+    };
+    /**
+     * @param {?} scrollSpyId
+     * @param {?} id
+     * @return {?}
+     */
+    ScrollSpyElementDirective.prototype.updateActiveState = function (scrollSpyId, id) {
+        if (this.isElementInViewport()) {
+            this.scrollSpyService.updateActiveState(scrollSpyId, id);
+        }
+    };
+    /**
+     * @return {?}
+     */
+    ScrollSpyElementDirective.prototype.onScroll = function () {
+        this.updateActiveState(this.scrollSpyId, this.id);
+    };
+    /**
+     * @return {?}
+     */
+    ScrollSpyElementDirective.prototype.listenToScroll = function () {
+        var _this = this;
+        this.renderer.listen(this.el.nativeElement.parentElement, 'scroll', function () {
+            _this.onScroll();
+        });
+    };
+    /**
+     * @return {?}
+     */
+    ScrollSpyElementDirective.prototype.ngOnInit = function () {
+        this.id = this.el.nativeElement.id;
+        this.renderer.setStyle(this.el.nativeElement.parentElement, 'position', 'relative');
+        this.ngZone.runOutsideAngular(this.listenToScroll.bind(this));
+    };
+    /**
+     * @return {?}
+     */
+    ScrollSpyElementDirective.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        setTimeout(function () {
+            _this.updateActiveState(_this.scrollSpyId, _this.id);
+        }, 0);
+    };
+    return ScrollSpyElementDirective;
+}());
+ScrollSpyElementDirective.decorators = [
+    { type: core.Directive, args: [{
+                selector: '[mdbScrollSpyElement]'
+            },] },
+];
+/** @nocollapse */
+ScrollSpyElementDirective.ctorParameters = function () { return [
+    { type: core.ElementRef },
+    { type: core.Renderer2 },
+    { type: core.NgZone },
+    { type: ScrollSpyService }
+]; };
+ScrollSpyElementDirective.propDecorators = {
+    scrollSpyId: [{ type: core.Input, args: ['mdbScrollSpyElement',] }],
+    offset: [{ type: core.Input }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var ScrollSpyModule = /** @class */ (function () {
+    function ScrollSpyModule() {
+    }
+    return ScrollSpyModule;
+}());
+ScrollSpyModule.decorators = [
+    { type: core.NgModule, args: [{
+                declarations: [
+                    ScrollSpyDirective,
+                    ScrollSpyLinkDirective,
+                    ScrollSpyWindowDirective,
+                    ScrollSpyElementDirective
+                ],
+                exports: [
+                    ScrollSpyDirective,
+                    ScrollSpyLinkDirective,
+                    ScrollSpyWindowDirective,
+                    ScrollSpyElementDirective
+                ],
+                providers: [ScrollSpyService]
+            },] },
+];
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var MdbBtnDirective = /** @class */ (function () {
     /**
      * @param {?} el
@@ -14315,7 +14761,7 @@ CheckboxModule.decorators = [
  */
 var CollapseComponent = /** @class */ (function () {
     function CollapseComponent() {
-        this.isCollapsed = false;
+        this.isCollapsed = true;
         this.showBsCollapse = new core.EventEmitter();
         this.shownBsCollapse = new core.EventEmitter();
         this.hideBsCollapse = new core.EventEmitter();
@@ -18288,6 +18734,10 @@ MDBBootstrapModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var MODULES$1 = [
     AutocompleteModule,
     CardsModule,
@@ -18305,6 +18755,7 @@ var MODULES$1 = [
     StickyContentModule,
     SmoothscrollModule,
     CharCounterModule,
+    ScrollSpyModule
 ];
 var MDBRootModulePro = /** @class */ (function () {
     function MDBRootModulePro() {
@@ -18329,6 +18780,7 @@ MDBRootModulePro.decorators = [
                     StickyContentModule,
                     SmoothscrollModule.forRoot(),
                     CharCounterModule.forRoot(),
+                    ScrollSpyModule
                 ],
                 exports: [MODULES$1],
                 providers: [],
@@ -18519,6 +18971,12 @@ exports.MaterialChipsModule = MaterialChipsModule;
 exports.TimePickerModule = TimePickerModule;
 exports.TIME_PIRCKER_VALUE_ACCESSOT = TIME_PIRCKER_VALUE_ACCESSOT;
 exports.ClockPickerComponent = ClockPickerComponent;
+exports.ScrollSpyModule = ScrollSpyModule;
+exports.ScrollSpyDirective = ScrollSpyDirective;
+exports.ScrollSpyWindowDirective = ScrollSpyWindowDirective;
+exports.ScrollSpyElementDirective = ScrollSpyElementDirective;
+exports.ScrollSpyLinkDirective = ScrollSpyLinkDirective;
+exports.ScrollSpyService = ScrollSpyService;
 exports.ButtonsModule = ButtonsModule;
 exports.CHECKBOX_CONTROL_VALUE_ACCESSOR = CHECKBOX_CONTROL_VALUE_ACCESSOR;
 exports.ButtonCheckboxDirective = ButtonCheckboxDirective;
@@ -18620,55 +19078,55 @@ exports.MDBBootstrapModule = MDBBootstrapModule;
 exports.MDBBootstrapModulePro = MDBBootstrapModulePro;
 exports.MDBRootModules = MDBRootModules;
 exports.MDBBootstrapModulesPro = MDBBootstrapModulesPro;
-exports.ɵct1 = MdbBtnDirective;
-exports.ɵcq1 = ButtonsModule;
-exports.ɵcr1 = ButtonCheckboxDirective;
-exports.ɵcs1 = ButtonRadioDirective;
-exports.ɵcy1 = CardsFreeModule;
-exports.ɵcu1 = CarouselComponent;
-exports.ɵcv1 = CarouselConfig;
-exports.ɵcx1 = CarouselModule;
-exports.ɵcw1 = SlideComponent;
-exports.ɵcz1 = BaseChartDirective;
-exports.ɵda1 = ChartsModule;
-exports.ɵdb1 = CHECKBOX_VALUE_ACCESSOR;
-exports.ɵdc1 = CheckboxComponent;
-exports.ɵdd1 = CheckboxModule;
-exports.ɵde1 = CollapseComponent;
-exports.ɵdf1 = CollapseModule;
-exports.ɵdg1 = BsDropdownContainerComponent;
-exports.ɵdh1 = BsDropdownMenuDirective;
-exports.ɵdi1 = BsDropdownToggleDirective;
-exports.ɵdj1 = BsDropdownConfig;
-exports.ɵdk1 = BsDropdownDirective;
-exports.ɵdm1 = DropdownModule;
-exports.ɵdl1 = BsDropdownState;
-exports.ɵdo1 = MdbIconComponent;
-exports.ɵdn1 = IconsModule;
-exports.ɵdp1 = InputsModule;
-exports.ɵdq1 = MdbInputDirective;
-exports.ɵem1 = MDBRootModule;
-exports.ɵdr1 = ModalDirective;
-exports.ɵdx1 = ModalModule;
-exports.ɵds1 = ModalOptions;
-exports.ɵdt1 = MDBModalService;
-exports.ɵdv1 = ModalBackdropComponent;
-exports.ɵdu1 = ModalBackdropOptions;
-exports.ɵdw1 = ModalContainerComponent;
-exports.ɵdy1 = NavbarComponent;
-exports.ɵdz1 = NavbarModule;
-exports.ɵea1 = PopoverContainerComponent;
-exports.ɵeb1 = PopoverConfig;
-exports.ɵec1 = PopoverDirective;
-exports.ɵed1 = PopoverModule;
-exports.ɵee1 = RippleDirective;
-exports.ɵef1 = RippleModule;
-exports.ɵei1 = TooltipContainerComponent;
-exports.ɵej1 = TooltipDirective;
-exports.ɵel1 = TooltipModule;
-exports.ɵek1 = TooltipConfig;
-exports.ɵeg1 = WavesDirective;
-exports.ɵeh1 = WavesModule;
+exports.ɵcz1 = MdbBtnDirective;
+exports.ɵcw1 = ButtonsModule;
+exports.ɵcx1 = ButtonCheckboxDirective;
+exports.ɵcy1 = ButtonRadioDirective;
+exports.ɵde1 = CardsFreeModule;
+exports.ɵda1 = CarouselComponent;
+exports.ɵdb1 = CarouselConfig;
+exports.ɵdd1 = CarouselModule;
+exports.ɵdc1 = SlideComponent;
+exports.ɵdf1 = BaseChartDirective;
+exports.ɵdg1 = ChartsModule;
+exports.ɵdh1 = CHECKBOX_VALUE_ACCESSOR;
+exports.ɵdi1 = CheckboxComponent;
+exports.ɵdj1 = CheckboxModule;
+exports.ɵdk1 = CollapseComponent;
+exports.ɵdl1 = CollapseModule;
+exports.ɵdm1 = BsDropdownContainerComponent;
+exports.ɵdn1 = BsDropdownMenuDirective;
+exports.ɵdo1 = BsDropdownToggleDirective;
+exports.ɵdp1 = BsDropdownConfig;
+exports.ɵdq1 = BsDropdownDirective;
+exports.ɵds1 = DropdownModule;
+exports.ɵdr1 = BsDropdownState;
+exports.ɵdu1 = MdbIconComponent;
+exports.ɵdt1 = IconsModule;
+exports.ɵdv1 = InputsModule;
+exports.ɵdw1 = MdbInputDirective;
+exports.ɵes1 = MDBRootModule;
+exports.ɵdx1 = ModalDirective;
+exports.ɵed1 = ModalModule;
+exports.ɵdy1 = ModalOptions;
+exports.ɵdz1 = MDBModalService;
+exports.ɵeb1 = ModalBackdropComponent;
+exports.ɵea1 = ModalBackdropOptions;
+exports.ɵec1 = ModalContainerComponent;
+exports.ɵee1 = NavbarComponent;
+exports.ɵef1 = NavbarModule;
+exports.ɵeg1 = PopoverContainerComponent;
+exports.ɵeh1 = PopoverConfig;
+exports.ɵei1 = PopoverDirective;
+exports.ɵej1 = PopoverModule;
+exports.ɵek1 = RippleDirective;
+exports.ɵel1 = RippleModule;
+exports.ɵeo1 = TooltipContainerComponent;
+exports.ɵep1 = TooltipDirective;
+exports.ɵer1 = TooltipModule;
+exports.ɵeq1 = TooltipConfig;
+exports.ɵem1 = WavesDirective;
+exports.ɵen1 = WavesModule;
 exports.ɵc1 = SBItemComponent;
 exports.ɵa1 = SBItemBodyComponent;
 exports.ɵb1 = SBItemHeadComponent;
@@ -18709,16 +19167,22 @@ exports.ɵbl1 = SelectDropdownComponent;
 exports.ɵbm1 = SELECT_VALUE_ACCESSOR;
 exports.ɵbn1 = SelectComponent;
 exports.ɵbo1 = SelectModule;
-exports.ɵen1 = MDBRootModulePro;
+exports.ɵet1 = MDBRootModulePro;
 exports.ɵbp1 = BarComponent;
 exports.ɵbv1 = ProgressBars;
-exports.ɵeo1 = MdProgressBarModule;
-exports.ɵep1 = MdProgressSpinnerModule;
+exports.ɵeu1 = MdProgressBarModule;
+exports.ɵev1 = MdProgressSpinnerModule;
 exports.ɵbq1 = ProgressSpinnerComponent;
 exports.ɵbr1 = ProgressDirective;
 exports.ɵbs1 = ProgressbarComponent;
 exports.ɵbt1 = ProgressbarConfigComponent;
 exports.ɵbu1 = ProgressbarModule;
+exports.ɵct1 = ScrollSpyElementDirective;
+exports.ɵcu1 = ScrollSpyLinkDirective;
+exports.ɵcs1 = ScrollSpyWindowDirective;
+exports.ɵcr1 = ScrollSpyDirective;
+exports.ɵcq1 = ScrollSpyModule;
+exports.ɵcv1 = ScrollSpyService;
 exports.ɵbw1 = SidenavComponent;
 exports.ɵbx1 = SidenavModule;
 exports.ɵby1 = PageScrollDirective;
