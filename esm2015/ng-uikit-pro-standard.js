@@ -14321,12 +14321,12 @@ class CollapseComponent {
      * @return {?}
      */
     toggle() {
-        this.isCollapsed ? this.open() : this.hide();
+        this.isCollapsed ? this.show() : this.hide();
     }
     /**
      * @return {?}
      */
-    open() {
+    show() {
         this.expandAnimationState = 'expanded';
         this.isCollapsed = false;
         this.showBsCollapse.emit(this);
@@ -14343,7 +14343,7 @@ class CollapseComponent {
      * @return {?}
      */
     initializeCollapseState() {
-        this.isCollapsed ? this.hide() : this.open();
+        this.isCollapsed ? this.hide() : this.show();
     }
     /**
      * @return {?}

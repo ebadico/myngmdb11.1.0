@@ -14788,12 +14788,12 @@ var CollapseComponent = /** @class */ (function () {
      * @return {?}
      */
     CollapseComponent.prototype.toggle = function () {
-        this.isCollapsed ? this.open() : this.hide();
+        this.isCollapsed ? this.show() : this.hide();
     };
     /**
      * @return {?}
      */
-    CollapseComponent.prototype.open = function () {
+    CollapseComponent.prototype.show = function () {
         this.expandAnimationState = 'expanded';
         this.isCollapsed = false;
         this.showBsCollapse.emit(this);
@@ -14810,7 +14810,7 @@ var CollapseComponent = /** @class */ (function () {
      * @return {?}
      */
     CollapseComponent.prototype.initializeCollapseState = function () {
-        this.isCollapsed ? this.hide() : this.open();
+        this.isCollapsed ? this.hide() : this.show();
     };
     /**
      * @return {?}
