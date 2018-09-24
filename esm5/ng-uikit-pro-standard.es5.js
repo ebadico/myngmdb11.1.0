@@ -104,7 +104,7 @@ SBItemComponent.decorators = [
     { type: Component, args: [{
                 exportAs: 'sbItem',
                 selector: 'mdb-item, mdb-accordion-item',
-                template: "<div class=\"card test z-depth1 {{ customClass }}\" [ngClass]=\"{'is-collapsed': collapsed, 'active': !collapsed}\"> <ng-content></ng-content> </div>"
+                template: "<div class=\"card {{ customClass }}\" [ngClass]=\"{'is-collapsed': collapsed, 'active': !collapsed}\"> <ng-content></ng-content> </div>"
             },] },
 ];
 /** @nocollapse */
@@ -2139,13 +2139,10 @@ var CompleterComponent = /** @class */ (function () {
      * @return {?}
      */
     CompleterComponent.prototype.ngAfterViewChecked = function () {
-        var _this = this;
-        setTimeout(function () {
-            if (_this._focus) {
-                _this.mdbInput.nativeElement.focus();
-                _this._focus = false;
-            }
-        }, 0);
+        if (this._focus) {
+            this.mdbInput.nativeElement.focus();
+            this._focus = false;
+        }
     };
     /**
      * @return {?}
@@ -2259,7 +2256,6 @@ var CompleterComponent = /** @class */ (function () {
      */
     CompleterComponent.prototype.onFocus = function () {
         var _this = this;
-        this.onTouched();
         setTimeout(function () {
             _this.focused = true;
         }, 0);
@@ -2320,7 +2316,7 @@ var CompleterComponent = /** @class */ (function () {
 CompleterComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-autocomplete, mdb-completer',
-                template: "<div class=\"completer-holder md-form\" mdbCompleter> <input #mdbInput [attr.id]=\"inputId.length > 0 ? inputId : null\" type=\"search\" class=\"completer-input form-control mdb-autocomplete\" mdbInput [ngClass]=\"inputClass\" [(ngModel)]=\"searchStr\" (ngModelChange)=\"onChange($event)\" [attr.name]=\"inputName\" [placeholder]=\"placeholder\" [attr.maxlength]=\"maxChars\" [tabindex]=\"fieldTabindex\" [disabled]=\"disableInput\" [clearSelected]=\"clearSelected\" [clearUnselected]=\"clearUnselected\" [overrideSuggested]=\"overrideSuggested\" [openOnFocus]=\"openOnFocus\" [fillHighlighted]=\"fillHighlighted\" (blur)=\"onBlur()\" (focus)=\"onFocus()\" (keyup)=\"onKeyup($event)\" (keydown)=\"onKeydown($event)\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" /> <button class=\"mdb-autocomplete-clear\"> <svg fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"https://www.w3.org/2000/svg\"> <path d=\"M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z\" /> <path d=\"M0 0h24v24H0z\" fill=\"none\" /> </svg> </button> <label [ngClass]=\"{'active': focused || value}\">{{ label }}</label> <div class=\"completer-dropdown-holder\" *mdbList=\"dataService; minSearchLength: minSearchLength; pause: pause; autoMatch: autoMatch; initialValue: initialValue; autoHighlight: autoHighlight; let items = results; let searchActive = searching; let isInitialized = searchInitialized; let isOpen = isOpen;\"> <div class=\"completer-dropdown\" mdbAutocompleteDropdown *ngIf=\"isInitialized && isOpen && ((items.length > 0 || displayNoResults) || (searchActive && displaySearching))\"> <div *ngIf=\"searchActive && displaySearching\" class=\"completer-searching\">{{_textSearching}}</div> <div *ngIf=\"!searchActive && (!items || items.length === 0)\" class=\"completer-no-results\">{{_textNoResults}}</div> <div class=\"completer-row-wrapper\" *ngFor=\"let item of items; let rowIndex=index\"> <div class=\"completer-row\" [mdbRow]=\"rowIndex\" [dataItem]=\"item\"> <div *ngIf=\"item.image || item.image === ''\" class=\"completer-image-holder\"> <img *ngIf=\"item.image != ''\" src=\"{{item.image}}\" class=\"completer-image\" /> <div *ngIf=\"item.image === ''\" class=\"completer-image-default\"></div> </div> <div class=\"completer-item-text\" [ngClass]=\"{'completer-item-text-image': item.image || item.image === '' }\"> <mdb-completer-list-item class=\"completer-title\" [text]=\"item.title\" [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'title'\"></mdb-completer-list-item> <mdb-completer-list-item *ngIf=\"item.description && item.description != ''\" class=\"completer-description\" [text]=\"item.description\" [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'description'\"> </mdb-completer-list-item> </div> </div> </div> </div> </div> </div> ",
+                template: "<div class=\"completer-holder md-form\" mdbCompleter> <input #mdbInput [attr.id]=\"inputId.length > 0 ? inputId : null\" type=\"search\" class=\"completer-input form-control mdb-autocomplete\" mdbInput [ngClass]=\"inputClass\" [(ngModel)]=\"searchStr\" (ngModelChange)=\"onChange($event)\" [attr.name]=\"inputName\" [placeholder]=\"placeholder\" [attr.maxlength]=\"maxChars\" [tabindex]=\"fieldTabindex\" [disabled]=\"disableInput\" [clearSelected]=\"clearSelected\" [clearUnselected]=\"clearUnselected\" [overrideSuggested]=\"overrideSuggested\" [openOnFocus]=\"openOnFocus\" [fillHighlighted]=\"fillHighlighted\" (blur)=\"onBlur()\" (focus)=\"onFocus()\" (keyup)=\"onKeyup($event)\" (keydown)=\"onKeydown($event)\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" /> <button class=\"mdb-autocomplete-clear\"> &#x2715; </button> <label [ngClass]=\"{'active': focused || value}\">{{ label }}</label> <div class=\"completer-dropdown-holder\" *mdbList=\"dataService; minSearchLength: minSearchLength; pause: pause; autoMatch: autoMatch; initialValue: initialValue; autoHighlight: autoHighlight; let items = results; let searchActive = searching; let isInitialized = searchInitialized; let isOpen = isOpen;\"> <div class=\"completer-dropdown\" mdbAutocompleteDropdown *ngIf=\"isInitialized && isOpen && ((items.length > 0 || displayNoResults) || (searchActive && displaySearching))\"> <div *ngIf=\"searchActive && displaySearching\" class=\"completer-searching\">{{_textSearching}}</div> <div *ngIf=\"!searchActive && (!items || items.length === 0)\" class=\"completer-no-results\">{{_textNoResults}}</div> <div class=\"completer-row-wrapper\" *ngFor=\"let item of items; let rowIndex=index\"> <div class=\"completer-row\" [mdbRow]=\"rowIndex\" [dataItem]=\"item\"> <div *ngIf=\"item.image || item.image === ''\" class=\"completer-image-holder\"> <img *ngIf=\"item.image != ''\" src=\"{{item.image}}\" class=\"completer-image\" /> <div *ngIf=\"item.image === ''\" class=\"completer-image-default\"></div> </div> <div class=\"completer-item-text\" [ngClass]=\"{'completer-item-text-image': item.image || item.image === '' }\"> <mdb-completer-list-item class=\"completer-title\" [text]=\"item.title\" [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'title'\"></mdb-completer-list-item> <mdb-completer-list-item *ngIf=\"item.description && item.description != ''\" class=\"completer-description\" [text]=\"item.description\" [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'description'\"> </mdb-completer-list-item> </div> </div> </div> </div> </div> </div> ",
                 providers: [COMPLETER_CONTROL_VALUE_ACCESSOR]
             },] },
 ];
@@ -7086,6 +7082,9 @@ var OptionList = /** @class */ (function () {
                 var /** @type {?} */ l = Diacritics.strip(option.label).toUpperCase();
                 var /** @type {?} */ t = Diacritics.strip(term).toUpperCase();
                 option.shown = l.indexOf(t) === 0;
+                if (option.shown) {
+                    anyShown = true;
+                }
             });
         }
         this.highlight();
@@ -12110,6 +12109,452 @@ TimePickerModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+var ScrollSpyLinkDirective = /** @class */ (function () {
+    /**
+     * @param {?} cdRef
+     * @param {?} document
+     */
+    function ScrollSpyLinkDirective(cdRef, document) {
+        this.cdRef = cdRef;
+        this.document = document;
+        this.active = false;
+    }
+    Object.defineProperty(ScrollSpyLinkDirective.prototype, "id", {
+        /**
+         * @return {?}
+         */
+        get: function () {
+            return this._id;
+        },
+        /**
+         * @param {?} newId
+         * @return {?}
+         */
+        set: function (newId) {
+            if (newId) {
+                this._id = newId;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    ScrollSpyLinkDirective.prototype.onClick = function () {
+        if (this.section) {
+            this.section.scrollIntoView();
+        }
+    };
+    /**
+     * @return {?}
+     */
+    ScrollSpyLinkDirective.prototype.detectChanges = function () {
+        this.cdRef.detectChanges();
+    };
+    /**
+     * @return {?}
+     */
+    ScrollSpyLinkDirective.prototype.assignSectionToId = function () {
+        this.section = this.document.documentElement.querySelector("#" + this.id);
+    };
+    /**
+     * @return {?}
+     */
+    ScrollSpyLinkDirective.prototype.ngOnInit = function () {
+        this.assignSectionToId();
+    };
+    return ScrollSpyLinkDirective;
+}());
+ScrollSpyLinkDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[mdbScrollSpyLink]'
+            },] },
+];
+/** @nocollapse */
+ScrollSpyLinkDirective.ctorParameters = function () { return [
+    { type: ChangeDetectorRef },
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
+]; };
+ScrollSpyLinkDirective.propDecorators = {
+    id: [{ type: Input, args: ['mdbScrollSpyLink',] }],
+    active: [{ type: HostBinding, args: ['class.active',] }],
+    onClick: [{ type: HostListener, args: ['click', [],] }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @record
+ */
+var ScrollSpyService = /** @class */ (function () {
+    function ScrollSpyService() {
+        this.scrollSpys = [];
+    }
+    /**
+     * @param {?} scrollSpy
+     * @return {?}
+     */
+    ScrollSpyService.prototype.addScrollSpy = function (scrollSpy) {
+        this.scrollSpys.push(scrollSpy);
+    };
+    /**
+     * @param {?} scrollSpyId
+     * @param {?} activeLinkId
+     * @return {?}
+     */
+    ScrollSpyService.prototype.updateActiveState = function (scrollSpyId, activeLinkId) {
+        var /** @type {?} */ scrollSpy = this.scrollSpys.find(function (spy) {
+            return spy.id === scrollSpyId;
+        });
+        if (!scrollSpy) {
+            return;
+        }
+        var /** @type {?} */ activeLink = scrollSpy.links.find(function (link) {
+            return link.id === activeLinkId;
+        });
+        this.removeActiveLinks(scrollSpy);
+        this.setActiveLink(activeLink);
+    };
+    /**
+     * @param {?} scrollSpyId
+     * @param {?} activeLinkId
+     * @return {?}
+     */
+    ScrollSpyService.prototype.removeActiveState = function (scrollSpyId, activeLinkId) {
+        var /** @type {?} */ scrollSpy = this.scrollSpys.find(function (spy) {
+            return spy.id === scrollSpyId;
+        });
+        if (!scrollSpy) {
+            return;
+        }
+        var /** @type {?} */ activeLink = scrollSpy.links.find(function (link) {
+            return link.id === activeLinkId;
+        });
+        if (!activeLink) {
+            return;
+        }
+        activeLink.active = false;
+        activeLink.detectChanges();
+    };
+    /**
+     * @param {?} activeLink
+     * @return {?}
+     */
+    ScrollSpyService.prototype.setActiveLink = function (activeLink) {
+        activeLink.active = true;
+        activeLink.detectChanges();
+    };
+    /**
+     * @param {?} scrollSpy
+     * @return {?}
+     */
+    ScrollSpyService.prototype.removeActiveLinks = function (scrollSpy) {
+        scrollSpy.links.forEach(function (link) {
+            link.active = false;
+            link.detectChanges();
+        });
+    };
+    return ScrollSpyService;
+}());
+ScrollSpyService.decorators = [
+    { type: Injectable },
+];
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var ScrollSpyDirective = /** @class */ (function () {
+    /**
+     * @param {?} scrollSpyService
+     */
+    function ScrollSpyDirective(scrollSpyService) {
+        this.scrollSpyService = scrollSpyService;
+    }
+    Object.defineProperty(ScrollSpyDirective.prototype, "id", {
+        /**
+         * @return {?}
+         */
+        get: function () {
+            return this._id;
+        },
+        /**
+         * @param {?} newId
+         * @return {?}
+         */
+        set: function (newId) {
+            if (newId) {
+                this._id = newId;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    ScrollSpyDirective.prototype.ngAfterViewInit = function () {
+        this.scrollSpyService.addScrollSpy({ id: this.id, links: this.links });
+    };
+    return ScrollSpyDirective;
+}());
+ScrollSpyDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[mdbScrollSpy]'
+            },] },
+];
+/** @nocollapse */
+ScrollSpyDirective.ctorParameters = function () { return [
+    { type: ScrollSpyService }
+]; };
+ScrollSpyDirective.propDecorators = {
+    links: [{ type: ContentChildren, args: [ScrollSpyLinkDirective,] }],
+    id: [{ type: Input, args: ['mdbScrollSpy',] }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var ScrollSpyWindowDirective = /** @class */ (function () {
+    /**
+     * @param {?} document
+     * @param {?} el
+     * @param {?} renderer
+     * @param {?} ngZone
+     * @param {?} scrollSpyService
+     */
+    function ScrollSpyWindowDirective(document, el, renderer, ngZone, scrollSpyService) {
+        this.document = document;
+        this.el = el;
+        this.renderer = renderer;
+        this.ngZone = ngZone;
+        this.scrollSpyService = scrollSpyService;
+        this.offset = 0;
+    }
+    Object.defineProperty(ScrollSpyWindowDirective.prototype, "scrollSpyId", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this._scrollSpyId; },
+        /**
+         * @param {?} newId
+         * @return {?}
+         */
+        set: function (newId) {
+            if (newId) {
+                this._scrollSpyId = newId;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    ScrollSpyWindowDirective.prototype.isElementInViewport = function () {
+        var /** @type {?} */ scrollTop = this.document.documentElement.scrollTop || this.document.body.scrollTop;
+        var /** @type {?} */ elHeight = this.el.nativeElement.offsetHeight;
+        var /** @type {?} */ elTop = this.el.nativeElement.offsetTop - this.offset;
+        var /** @type {?} */ elBottom = elTop + elHeight;
+        return (scrollTop >= elTop && scrollTop <= elBottom);
+    };
+    /**
+     * @param {?} scrollSpyId
+     * @param {?} id
+     * @return {?}
+     */
+    ScrollSpyWindowDirective.prototype.updateActiveState = function (scrollSpyId, id) {
+        if (this.isElementInViewport()) {
+            this.scrollSpyService.updateActiveState(scrollSpyId, id);
+        }
+        else {
+            this.scrollSpyService.removeActiveState(scrollSpyId, id);
+        }
+    };
+    /**
+     * @return {?}
+     */
+    ScrollSpyWindowDirective.prototype.onScroll = function () {
+        this.updateActiveState(this.scrollSpyId, this.id);
+    };
+    /**
+     * @return {?}
+     */
+    ScrollSpyWindowDirective.prototype.listenToScroll = function () {
+        var _this = this;
+        this.renderer.listen(window, 'scroll', function () {
+            _this.onScroll();
+        });
+    };
+    /**
+     * @return {?}
+     */
+    ScrollSpyWindowDirective.prototype.ngOnInit = function () {
+        this.id = this.el.nativeElement.id;
+        this.ngZone.runOutsideAngular(this.listenToScroll.bind(this));
+    };
+    /**
+     * @return {?}
+     */
+    ScrollSpyWindowDirective.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        setTimeout(function () {
+            _this.updateActiveState(_this.scrollSpyId, _this.id);
+        }, 0);
+    };
+    return ScrollSpyWindowDirective;
+}());
+ScrollSpyWindowDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[mdbScrollSpyWindow]'
+            },] },
+];
+/** @nocollapse */
+ScrollSpyWindowDirective.ctorParameters = function () { return [
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] },
+    { type: ElementRef },
+    { type: Renderer2 },
+    { type: NgZone },
+    { type: ScrollSpyService }
+]; };
+ScrollSpyWindowDirective.propDecorators = {
+    scrollSpyId: [{ type: Input, args: ['mdbScrollSpyWindow',] }],
+    offset: [{ type: Input }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var ScrollSpyElementDirective = /** @class */ (function () {
+    /**
+     * @param {?} el
+     * @param {?} renderer
+     * @param {?} ngZone
+     * @param {?} scrollSpyService
+     */
+    function ScrollSpyElementDirective(el, renderer, ngZone, scrollSpyService) {
+        this.el = el;
+        this.renderer = renderer;
+        this.ngZone = ngZone;
+        this.scrollSpyService = scrollSpyService;
+        this.offset = 0;
+    }
+    Object.defineProperty(ScrollSpyElementDirective.prototype, "scrollSpyId", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this._scrollSpyId; },
+        /**
+         * @param {?} newId
+         * @return {?}
+         */
+        set: function (newId) {
+            if (newId) {
+                this._scrollSpyId = newId;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    ScrollSpyElementDirective.prototype.isElementInViewport = function () {
+        var /** @type {?} */ scrollTop = this.el.nativeElement.parentElement.scrollTop;
+        var /** @type {?} */ elTop = this.el.nativeElement.offsetTop - this.offset;
+        return (scrollTop >= elTop);
+    };
+    /**
+     * @param {?} scrollSpyId
+     * @param {?} id
+     * @return {?}
+     */
+    ScrollSpyElementDirective.prototype.updateActiveState = function (scrollSpyId, id) {
+        if (this.isElementInViewport()) {
+            this.scrollSpyService.updateActiveState(scrollSpyId, id);
+        }
+    };
+    /**
+     * @return {?}
+     */
+    ScrollSpyElementDirective.prototype.onScroll = function () {
+        this.updateActiveState(this.scrollSpyId, this.id);
+    };
+    /**
+     * @return {?}
+     */
+    ScrollSpyElementDirective.prototype.listenToScroll = function () {
+        var _this = this;
+        this.renderer.listen(this.el.nativeElement.parentElement, 'scroll', function () {
+            _this.onScroll();
+        });
+    };
+    /**
+     * @return {?}
+     */
+    ScrollSpyElementDirective.prototype.ngOnInit = function () {
+        this.id = this.el.nativeElement.id;
+        this.renderer.setStyle(this.el.nativeElement.parentElement, 'position', 'relative');
+        this.ngZone.runOutsideAngular(this.listenToScroll.bind(this));
+    };
+    /**
+     * @return {?}
+     */
+    ScrollSpyElementDirective.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        setTimeout(function () {
+            _this.updateActiveState(_this.scrollSpyId, _this.id);
+        }, 0);
+    };
+    return ScrollSpyElementDirective;
+}());
+ScrollSpyElementDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[mdbScrollSpyElement]'
+            },] },
+];
+/** @nocollapse */
+ScrollSpyElementDirective.ctorParameters = function () { return [
+    { type: ElementRef },
+    { type: Renderer2 },
+    { type: NgZone },
+    { type: ScrollSpyService }
+]; };
+ScrollSpyElementDirective.propDecorators = {
+    scrollSpyId: [{ type: Input, args: ['mdbScrollSpyElement',] }],
+    offset: [{ type: Input }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var ScrollSpyModule = /** @class */ (function () {
+    function ScrollSpyModule() {
+    }
+    return ScrollSpyModule;
+}());
+ScrollSpyModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [
+                    ScrollSpyDirective,
+                    ScrollSpyLinkDirective,
+                    ScrollSpyWindowDirective,
+                    ScrollSpyElementDirective
+                ],
+                exports: [
+                    ScrollSpyDirective,
+                    ScrollSpyLinkDirective,
+                    ScrollSpyWindowDirective,
+                    ScrollSpyElementDirective
+                ],
+                providers: [ScrollSpyService]
+            },] },
+];
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var MdbBtnDirective = /** @class */ (function () {
     /**
      * @param {?} el
@@ -14323,7 +14768,7 @@ CheckboxModule.decorators = [
  */
 var CollapseComponent = /** @class */ (function () {
     function CollapseComponent() {
-        this.isCollapsed = false;
+        this.isCollapsed = true;
         this.showBsCollapse = new EventEmitter();
         this.shownBsCollapse = new EventEmitter();
         this.hideBsCollapse = new EventEmitter();
@@ -14350,12 +14795,12 @@ var CollapseComponent = /** @class */ (function () {
      * @return {?}
      */
     CollapseComponent.prototype.toggle = function () {
-        this.isCollapsed ? this.open() : this.hide();
+        this.isCollapsed ? this.show() : this.hide();
     };
     /**
      * @return {?}
      */
-    CollapseComponent.prototype.open = function () {
+    CollapseComponent.prototype.show = function () {
         this.expandAnimationState = 'expanded';
         this.isCollapsed = false;
         this.showBsCollapse.emit(this);
@@ -14372,7 +14817,7 @@ var CollapseComponent = /** @class */ (function () {
      * @return {?}
      */
     CollapseComponent.prototype.initializeCollapseState = function () {
-        this.isCollapsed ? this.hide() : this.open();
+        this.isCollapsed ? this.hide() : this.show();
     };
     /**
      * @return {?}
@@ -18296,6 +18741,10 @@ MDBBootstrapModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var MODULES$1 = [
     AutocompleteModule,
     CardsModule,
@@ -18313,6 +18762,7 @@ var MODULES$1 = [
     StickyContentModule,
     SmoothscrollModule,
     CharCounterModule,
+    ScrollSpyModule
 ];
 var MDBRootModulePro = /** @class */ (function () {
     function MDBRootModulePro() {
@@ -18337,6 +18787,7 @@ MDBRootModulePro.decorators = [
                     StickyContentModule,
                     SmoothscrollModule.forRoot(),
                     CharCounterModule.forRoot(),
+                    ScrollSpyModule
                 ],
                 exports: [MODULES$1],
                 providers: [],
@@ -18412,5 +18863,5 @@ MDBBootstrapModulesPro.decorators = [
 /**
  * Generated bundle index. Do not edit.
  */
-export { SBItemBodyComponent, SBItemHeadComponent, SBItemComponent, sbConfig, SqueezeBoxComponent, SQUEEZEBOX_COMPONENTS, AccordionModule, OverlayContainer, OverlayRef, Overlay, OVERLAY_PROVIDERS, DomPortalHost, ComponentPortal, BasePortalHost, ToastComponent, GlobalConfig, ToastPackage, tsConfig, ToastContainerDirective, ToastContainerModule, ToastRef, ToastInjector, ToastModule, ToastService, TOAST_CONFIG, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, CompleterListItemComponent, CompleterComponent, MdbCompleterDirective, CtrRowItem, MdbDropdownDirective, MdbInputCompleteDirective, CtrListContext, MdbListDirective, MdbRowDirective, CompleterBaseData, CompleterService, localDataFactory, remoteDataFactory, LocalDataFactoryProvider, RemoteDataFactoryProvider, LocalData, RemoteData, MAX_CHARS, MIN_SEARCH_LENGTH, PAUSE, TEXT_SEARCHING, TEXT_NO_RESULTS, CLEAR_TIMEOUT, isNil, AutocompleteModule, CardRevealComponent, CardRotatingComponent, CardsModule, InputAutoFillDirective, FocusDirective, LocaleService, UtilService, DatepickerModule, MYDP_VALUE_ACCESSOR, MDBDatePickerComponent, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, UploadStatus, humanizeBytes, MDBUploaderService, MDBFileDropDirective, MDBFileSelectDirective, FileInputModule, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, OptionList, Option, SelectDropdownComponent, SELECT_VALUE_ACCESSOR, SelectComponent, SelectModule, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, MDBSpinningPreloader, ProgressBarComponent, MdProgressSpinnerCssMatStylerDirective, MdProgressSpinnerComponent, MdSpinnerComponent, BarComponent, ProgressSpinnerComponent, ProgressDirective, ProgressbarComponent, ProgressbarConfigComponent, ProgressbarModule, PreloadersModule, ProgressBars, SidenavComponent, SidenavModule, PageScrollUtilService, EasingLogic, PageScrollConfig, PageScrollDirective, PageScrollInstance, SmoothscrollModule, PageScrollService, computedStyle, MdbStickyDirective, StickyContentModule, TabHeadingDirective, TabDirective, TabsetComponent, TabsetConfig, NgTranscludeDirective, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TimePickerModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, ButtonsModule, CHECKBOX_CONTROL_VALUE_ACCESSOR, ButtonCheckboxDirective, RADIO_CONTROL_VALUE_ACCESSOR, ButtonRadioDirective, MdbBtnDirective, Direction, CarouselComponent, CarouselConfig, SlideComponent, CarouselModule, CardsFreeModule, MdbCardComponent, MdbCardBodyComponent, MdbCardImageComponent, MdbCardTextComponent, MdbCardTitleComponent, MdbCardFooterComponent, MdbCardHeaderComponent, BaseChartDirective, ChartsModule, CHECKBOX_VALUE_ACCESSOR, MdbCheckboxChange, CheckboxComponent, CheckboxModule, CollapseComponent, CollapseModule, BsDropdownContainerComponent, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownConfig, BsDropdownDirective, BsDropdownState, DropdownModule, IconsModule, MdbIconComponent, InputsModule, MdbInputDirective, EqualValidatorDirective, ModalDirective, ModalOptions, MDBModalRef, modalConfigDefaults, ClassName, Selector, TransitionDurations, DISMISS_REASONS, MDBModalService, ModalBackdropOptions, ModalBackdropComponent, ModalContainerComponent, msConfig, ModalModule, LinksComponent, LogoComponent, NavbarComponent, NavbarService, NavlinksComponent, NavbarModule, PopoverContainerComponent, PopoverConfig, PopoverDirective, PopoverModule, RippleDirective, RippleModule, WavesDirective, WavesModule, TooltipContainerComponent, TooltipDirective, TooltipConfig, TooltipModule, BsComponentRef, ComponentLoader, ComponentLoaderFactory, ContentRef, win as window, document$1 as document, location, gc, performance, Event, MouseEvent, KeyboardEvent, EventTarget, History, Location, EventListener, Positioning, positionElements, PositioningService, OnChange, LinkedList, isBs3, Trigger, parseTriggers, listenToTriggers, Utils, MDBBootstrapModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, MdbBtnDirective as ɵct1, ButtonsModule as ɵcq1, ButtonCheckboxDirective as ɵcr1, ButtonRadioDirective as ɵcs1, CardsFreeModule as ɵcy1, CarouselComponent as ɵcu1, CarouselConfig as ɵcv1, CarouselModule as ɵcx1, SlideComponent as ɵcw1, BaseChartDirective as ɵcz1, ChartsModule as ɵda1, CHECKBOX_VALUE_ACCESSOR as ɵdb1, CheckboxComponent as ɵdc1, CheckboxModule as ɵdd1, CollapseComponent as ɵde1, CollapseModule as ɵdf1, BsDropdownContainerComponent as ɵdg1, BsDropdownMenuDirective as ɵdh1, BsDropdownToggleDirective as ɵdi1, BsDropdownConfig as ɵdj1, BsDropdownDirective as ɵdk1, DropdownModule as ɵdm1, BsDropdownState as ɵdl1, MdbIconComponent as ɵdo1, IconsModule as ɵdn1, InputsModule as ɵdp1, MdbInputDirective as ɵdq1, MDBRootModule as ɵem1, ModalDirective as ɵdr1, ModalModule as ɵdx1, ModalOptions as ɵds1, MDBModalService as ɵdt1, ModalBackdropComponent as ɵdv1, ModalBackdropOptions as ɵdu1, ModalContainerComponent as ɵdw1, NavbarComponent as ɵdy1, NavbarModule as ɵdz1, PopoverContainerComponent as ɵea1, PopoverConfig as ɵeb1, PopoverDirective as ɵec1, PopoverModule as ɵed1, RippleDirective as ɵee1, RippleModule as ɵef1, TooltipContainerComponent as ɵei1, TooltipDirective as ɵej1, TooltipModule as ɵel1, TooltipConfig as ɵek1, WavesDirective as ɵeg1, WavesModule as ɵeh1, SBItemComponent as ɵc1, SBItemBodyComponent as ɵa1, SBItemHeadComponent as ɵb1, SqueezeBoxComponent as ɵd1, AccordionModule as ɵe1, CompleterListItemComponent as ɵf1, CompleterComponent as ɵg1, MdbCompleterDirective as ɵh1, MdbDropdownDirective as ɵi1, MdbInputCompleteDirective as ɵj1, MdbListDirective as ɵk1, MdbRowDirective as ɵl1, AutocompleteModule as ɵp1, CompleterService as ɵm1, LocalDataFactoryProvider as ɵn1, RemoteDataFactoryProvider as ɵo1, CardRevealComponent as ɵq1, CardRotatingComponent as ɵr1, CardsModule as ɵs1, MDBDatePickerComponent as ɵz1, MYDP_VALUE_ACCESSOR as ɵy1, DatepickerModule as ɵx1, InputAutoFillDirective as ɵt1, FocusDirective as ɵu1, LocaleService as ɵv1, UtilService as ɵw1, SimpleChartComponent as ɵba1, ChartSimpleModule as ɵbc1, EasyPieChartComponent as ɵbb1, MDBFileDropDirective as ɵbd1, MDBFileSelectDirective as ɵbe1, FileInputModule as ɵbf1, CharCounterDirective as ɵbg1, CharCounterModule as ɵbh1, ImageModalComponent as ɵbi1, LightBoxModule as ɵbj1, SelectDropdownComponent as ɵbl1, SELECT_VALUE_ACCESSOR as ɵbm1, SelectComponent as ɵbn1, SelectModule as ɵbo1, MDBRootModulePro as ɵen1, BarComponent as ɵbp1, ProgressBars as ɵbv1, MdProgressBarModule as ɵeo1, MdProgressSpinnerModule as ɵep1, ProgressSpinnerComponent as ɵbq1, ProgressDirective as ɵbr1, ProgressbarComponent as ɵbs1, ProgressbarConfigComponent as ɵbt1, ProgressbarModule as ɵbu1, SidenavComponent as ɵbw1, SidenavModule as ɵbx1, PageScrollDirective as ɵby1, PageScrollInstance as ɵbz1, SmoothscrollModule as ɵca1, PageScrollService as ɵcb1, MdbStickyDirective as ɵcc1, StickyContentModule as ɵcd1, TabHeadingDirective as ɵce1, TabDirective as ɵcf1, TabsetComponent as ɵcg1, TabsetConfig as ɵch1, TabsModule as ɵcj1, NgTranscludeDirective as ɵci1, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR as ɵck1, MaterialChipsComponent as ɵcl1, MaterialChipsModule as ɵcm1, ClockPickerComponent as ɵcp1, TIME_PIRCKER_VALUE_ACCESSOT as ɵco1, TimePickerModule as ɵcn1 };
+export { SBItemBodyComponent, SBItemHeadComponent, SBItemComponent, sbConfig, SqueezeBoxComponent, SQUEEZEBOX_COMPONENTS, AccordionModule, OverlayContainer, OverlayRef, Overlay, OVERLAY_PROVIDERS, DomPortalHost, ComponentPortal, BasePortalHost, ToastComponent, GlobalConfig, ToastPackage, tsConfig, ToastContainerDirective, ToastContainerModule, ToastRef, ToastInjector, ToastModule, ToastService, TOAST_CONFIG, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, CompleterListItemComponent, CompleterComponent, MdbCompleterDirective, CtrRowItem, MdbDropdownDirective, MdbInputCompleteDirective, CtrListContext, MdbListDirective, MdbRowDirective, CompleterBaseData, CompleterService, localDataFactory, remoteDataFactory, LocalDataFactoryProvider, RemoteDataFactoryProvider, LocalData, RemoteData, MAX_CHARS, MIN_SEARCH_LENGTH, PAUSE, TEXT_SEARCHING, TEXT_NO_RESULTS, CLEAR_TIMEOUT, isNil, AutocompleteModule, CardRevealComponent, CardRotatingComponent, CardsModule, InputAutoFillDirective, FocusDirective, LocaleService, UtilService, DatepickerModule, MYDP_VALUE_ACCESSOR, MDBDatePickerComponent, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, UploadStatus, humanizeBytes, MDBUploaderService, MDBFileDropDirective, MDBFileSelectDirective, FileInputModule, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, OptionList, Option, SelectDropdownComponent, SELECT_VALUE_ACCESSOR, SelectComponent, SelectModule, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, MDBSpinningPreloader, ProgressBarComponent, MdProgressSpinnerCssMatStylerDirective, MdProgressSpinnerComponent, MdSpinnerComponent, BarComponent, ProgressSpinnerComponent, ProgressDirective, ProgressbarComponent, ProgressbarConfigComponent, ProgressbarModule, PreloadersModule, ProgressBars, SidenavComponent, SidenavModule, PageScrollUtilService, EasingLogic, PageScrollConfig, PageScrollDirective, PageScrollInstance, SmoothscrollModule, PageScrollService, computedStyle, MdbStickyDirective, StickyContentModule, TabHeadingDirective, TabDirective, TabsetComponent, TabsetConfig, NgTranscludeDirective, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TimePickerModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, ScrollSpyModule, ScrollSpyDirective, ScrollSpyWindowDirective, ScrollSpyElementDirective, ScrollSpyLinkDirective, ScrollSpyService, ButtonsModule, CHECKBOX_CONTROL_VALUE_ACCESSOR, ButtonCheckboxDirective, RADIO_CONTROL_VALUE_ACCESSOR, ButtonRadioDirective, MdbBtnDirective, Direction, CarouselComponent, CarouselConfig, SlideComponent, CarouselModule, CardsFreeModule, MdbCardComponent, MdbCardBodyComponent, MdbCardImageComponent, MdbCardTextComponent, MdbCardTitleComponent, MdbCardFooterComponent, MdbCardHeaderComponent, BaseChartDirective, ChartsModule, CHECKBOX_VALUE_ACCESSOR, MdbCheckboxChange, CheckboxComponent, CheckboxModule, CollapseComponent, CollapseModule, BsDropdownContainerComponent, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownConfig, BsDropdownDirective, BsDropdownState, DropdownModule, IconsModule, MdbIconComponent, InputsModule, MdbInputDirective, EqualValidatorDirective, ModalDirective, ModalOptions, MDBModalRef, modalConfigDefaults, ClassName, Selector, TransitionDurations, DISMISS_REASONS, MDBModalService, ModalBackdropOptions, ModalBackdropComponent, ModalContainerComponent, msConfig, ModalModule, LinksComponent, LogoComponent, NavbarComponent, NavbarService, NavlinksComponent, NavbarModule, PopoverContainerComponent, PopoverConfig, PopoverDirective, PopoverModule, RippleDirective, RippleModule, WavesDirective, WavesModule, TooltipContainerComponent, TooltipDirective, TooltipConfig, TooltipModule, BsComponentRef, ComponentLoader, ComponentLoaderFactory, ContentRef, win as window, document$1 as document, location, gc, performance, Event, MouseEvent, KeyboardEvent, EventTarget, History, Location, EventListener, Positioning, positionElements, PositioningService, OnChange, LinkedList, isBs3, Trigger, parseTriggers, listenToTriggers, Utils, MDBBootstrapModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, MdbBtnDirective as ɵcz1, ButtonsModule as ɵcw1, ButtonCheckboxDirective as ɵcx1, ButtonRadioDirective as ɵcy1, CardsFreeModule as ɵde1, CarouselComponent as ɵda1, CarouselConfig as ɵdb1, CarouselModule as ɵdd1, SlideComponent as ɵdc1, BaseChartDirective as ɵdf1, ChartsModule as ɵdg1, CHECKBOX_VALUE_ACCESSOR as ɵdh1, CheckboxComponent as ɵdi1, CheckboxModule as ɵdj1, CollapseComponent as ɵdk1, CollapseModule as ɵdl1, BsDropdownContainerComponent as ɵdm1, BsDropdownMenuDirective as ɵdn1, BsDropdownToggleDirective as ɵdo1, BsDropdownConfig as ɵdp1, BsDropdownDirective as ɵdq1, DropdownModule as ɵds1, BsDropdownState as ɵdr1, MdbIconComponent as ɵdu1, IconsModule as ɵdt1, InputsModule as ɵdv1, MdbInputDirective as ɵdw1, MDBRootModule as ɵes1, ModalDirective as ɵdx1, ModalModule as ɵed1, ModalOptions as ɵdy1, MDBModalService as ɵdz1, ModalBackdropComponent as ɵeb1, ModalBackdropOptions as ɵea1, ModalContainerComponent as ɵec1, NavbarComponent as ɵee1, NavbarModule as ɵef1, PopoverContainerComponent as ɵeg1, PopoverConfig as ɵeh1, PopoverDirective as ɵei1, PopoverModule as ɵej1, RippleDirective as ɵek1, RippleModule as ɵel1, TooltipContainerComponent as ɵeo1, TooltipDirective as ɵep1, TooltipModule as ɵer1, TooltipConfig as ɵeq1, WavesDirective as ɵem1, WavesModule as ɵen1, SBItemComponent as ɵc1, SBItemBodyComponent as ɵa1, SBItemHeadComponent as ɵb1, SqueezeBoxComponent as ɵd1, AccordionModule as ɵe1, CompleterListItemComponent as ɵf1, CompleterComponent as ɵg1, MdbCompleterDirective as ɵh1, MdbDropdownDirective as ɵi1, MdbInputCompleteDirective as ɵj1, MdbListDirective as ɵk1, MdbRowDirective as ɵl1, AutocompleteModule as ɵp1, CompleterService as ɵm1, LocalDataFactoryProvider as ɵn1, RemoteDataFactoryProvider as ɵo1, CardRevealComponent as ɵq1, CardRotatingComponent as ɵr1, CardsModule as ɵs1, MDBDatePickerComponent as ɵz1, MYDP_VALUE_ACCESSOR as ɵy1, DatepickerModule as ɵx1, InputAutoFillDirective as ɵt1, FocusDirective as ɵu1, LocaleService as ɵv1, UtilService as ɵw1, SimpleChartComponent as ɵba1, ChartSimpleModule as ɵbc1, EasyPieChartComponent as ɵbb1, MDBFileDropDirective as ɵbd1, MDBFileSelectDirective as ɵbe1, FileInputModule as ɵbf1, CharCounterDirective as ɵbg1, CharCounterModule as ɵbh1, ImageModalComponent as ɵbi1, LightBoxModule as ɵbj1, SelectDropdownComponent as ɵbl1, SELECT_VALUE_ACCESSOR as ɵbm1, SelectComponent as ɵbn1, SelectModule as ɵbo1, MDBRootModulePro as ɵet1, BarComponent as ɵbp1, ProgressBars as ɵbv1, MdProgressBarModule as ɵeu1, MdProgressSpinnerModule as ɵev1, ProgressSpinnerComponent as ɵbq1, ProgressDirective as ɵbr1, ProgressbarComponent as ɵbs1, ProgressbarConfigComponent as ɵbt1, ProgressbarModule as ɵbu1, ScrollSpyElementDirective as ɵct1, ScrollSpyLinkDirective as ɵcu1, ScrollSpyWindowDirective as ɵcs1, ScrollSpyDirective as ɵcr1, ScrollSpyModule as ɵcq1, ScrollSpyService as ɵcv1, SidenavComponent as ɵbw1, SidenavModule as ɵbx1, PageScrollDirective as ɵby1, PageScrollInstance as ɵbz1, SmoothscrollModule as ɵca1, PageScrollService as ɵcb1, MdbStickyDirective as ɵcc1, StickyContentModule as ɵcd1, TabHeadingDirective as ɵce1, TabDirective as ɵcf1, TabsetComponent as ɵcg1, TabsetConfig as ɵch1, TabsModule as ɵcj1, NgTranscludeDirective as ɵci1, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR as ɵck1, MaterialChipsComponent as ɵcl1, MaterialChipsModule as ɵcm1, ClockPickerComponent as ɵcp1, TIME_PIRCKER_VALUE_ACCESSOT as ɵco1, TimePickerModule as ɵcn1 };
 //# sourceMappingURL=ng-uikit-pro-standard.es5.js.map

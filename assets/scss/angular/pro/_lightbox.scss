@@ -103,7 +103,7 @@ mdb-image-modal {
       }
       > {
         img {
-          width: 100%;
+          max-width: 100% !important;
           &.smooth {
             transition: 0.2s;
           }
