@@ -9265,7 +9265,9 @@ var SidenavComponent = /** @class */ (function () {
                     sidenavBgHeight += sidenavChildren[i].offsetHeight;
                 }
             }
-            this.renderer.setStyle(sidenavBg, 'padding-bottom', sidenavBgHeight + 'px');
+            if (sidenavBg) {
+                this.renderer.setStyle(sidenavBg, 'padding-bottom', sidenavBgHeight + 'px');
+            }
             // pobraneie szerokosci okna po init
             this.windwosWidth = window.innerWidth;
             if (this.sidenavBreakpoint) {
