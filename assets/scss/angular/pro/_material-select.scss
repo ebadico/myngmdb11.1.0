@@ -202,7 +202,6 @@ mdb-select {
         }
       }
       .options {
-        max-height: 185px;
         overflow-y: auto;
         ul {
           list-style: none;
@@ -220,7 +219,7 @@ mdb-select {
                 // padding-left: 10px;
               }
             }
-          } 
+          }
           .selected {
             background-color: #eee;
           }
