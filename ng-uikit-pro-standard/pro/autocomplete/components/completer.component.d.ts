@@ -68,8 +68,6 @@ export declare class CompleterComponent implements OnInit, ControlValueAccessor,
     ngOnInit(): void;
     onBlur(): void;
     onFocus(): void;
-    onKeyup(event: any): void;
-    onKeydown(event: any): void;
     onChange(value: string): void;
     open(): void;
     close(): void;

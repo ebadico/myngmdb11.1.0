@@ -16,6 +16,9 @@ export declare class SelectDropdownComponent implements AfterViewInit, OnChanges
     width: number;
     placeholder: string;
     customClass: string;
+    visibleOptions: number;
+    dropdownHeight: number;
+    dropdownMaxHeight: number;
     close: EventEmitter<boolean>;
     optionClicked: EventEmitter<Option>;
     singleFilterClick: EventEmitter<null>;
@@ -34,6 +37,8 @@ export declare class SelectDropdownComponent implements AfterViewInit, OnChanges
     /** Event handlers. **/
     onkeyup(): void;
     ngOnInit(): void;
+    setDropdownHeight(): void;
+    setVisibleOptionsNumber(): void;
     ngOnChanges(changes: any): void;
     ngAfterViewInit(): void;
     onSingleFilterClick(): void;

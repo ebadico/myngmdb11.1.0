@@ -5,9 +5,14 @@
 .side-nav {
     transition: 0.5s;
     background-color: #2c2f34;
-    overflow: auto;
+    overflow-y: auto;
     .sidenav-bg {
         position: fixed;
+        
+        &::after {
+            margin-bottom: unset;
+            padding-bottom: unset;
+        }
     }
 
     &.side-nav-light {

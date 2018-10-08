@@ -8,6 +8,7 @@ export declare const SELECT_VALUE_ACCESSOR: ExistingProvider;
 export declare class SelectComponent implements ControlValueAccessor, OnChanges, OnInit, AfterViewInit {
     el: ElementRef;
     renderer: Renderer2;
+    private document;
     options: Array<IOption>;
     customClass: string;
     allowClear: boolean;
@@ -21,6 +22,8 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     filterPlaceholder: string;
     label: string;
     filterEnabled: boolean;
+    visibleOptions: number;
+    tabindex: number;
     opened: EventEmitter<any>;
     closed: EventEmitter<any>;
     selected: EventEmitter<IOption>;
@@ -34,7 +37,10 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     KEYS: any;
     _value: Array<any>;
     optionList: OptionList;
+    optionsLength: number;
+    visibleOptionsDefault: number;
     hasSelected: boolean;
+    isBrowser: boolean;
     hasFocus: boolean;
     isOpen: boolean;
     isBelow: boolean;
@@ -43,6 +49,9 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     placeholderView: string;
     clearClicked: boolean;
     selectContainerClicked: boolean;
+    optionHeight: number;
+    dropdownHeight: number;
+    dropdownMaxHeight: number;
     width: number;
     top: number;
     left: number;
@@ -51,8 +60,9 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     onTouched: () => void;
     /** Event handlers. **/
     closeSelect($event: any): void;
-    constructor(el: ElementRef, renderer: Renderer2);
+    constructor(el: ElementRef, renderer: Renderer2, document: any, platformId: string);
     ngOnInit(): void;
+    updateDropdownHeight(): void;
     ngAfterViewInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
     setArrowUpIcon(): void;

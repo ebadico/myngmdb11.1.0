@@ -1,4 +1,5 @@
 import { ModuleWithProviders } from '@angular/core';
+export { AutoFormatModule, MdbDateFormatDirective, MdbCreditCardDirective, MdbCvvDirective } from './auto-format/index';
 export { ScrollSpyModule, ScrollSpyDirective, ScrollSpyWindowDirective, ScrollSpyElementDirective, ScrollSpyLinkDirective, ScrollSpyService } from './scroll-spy/index';
 export { AutocompleteModule, CompleterComponent, CompleterListItemComponent, CompleterService, LocalDataFactoryProvider, RemoteDataFactoryProvider, MdbCompleterDirective, MdbDropdownDirective, MdbInputCompleteDirective, MdbListDirective, MdbRowDirective } from './autocomplete/index';
 export { CardsModule, CardRotatingComponent, CardRevealComponent } from './cards/index';
