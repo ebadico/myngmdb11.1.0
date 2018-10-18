@@ -1,8 +1,8 @@
-import { EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { EventEmitter, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
 import { TabDirective } from './tab.directive';
 import { TabsetConfig } from './tabset.config';
 import { WavesDirective } from './../../free/waves/waves-effect.directive';
-export declare class TabsetComponent implements OnDestroy, OnInit {
+export declare class TabsetComponent implements OnDestroy, OnInit, AfterViewInit {
     ripple: WavesDirective;
     tabs: TabDirective[];
     classMap: any;
@@ -42,5 +42,8 @@ export declare class TabsetComponent implements OnDestroy, OnInit {
     tabsGet(): void;
     getActiveElement(): any;
     showActiveIndex(): void;
+    private getFirstActiveTabIndex();
+    private initActiveTab();
     ngOnInit(): void;
+    ngAfterViewInit(): void;
 }

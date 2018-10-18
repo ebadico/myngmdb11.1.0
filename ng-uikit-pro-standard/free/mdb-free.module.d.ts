@@ -1,4 +1,5 @@
 import { ModuleWithProviders } from '@angular/core';
+export { MdbBreadcrumbComponent, MdbBreadcrumbItemComponent, BreadcrumbModule } from './breadcrumbs/index';
 export { MDBBadgeComponent, BadgeModule } from './badge/index';
 export { MdbTablePaginationComponent, MdbTableRowDirective, MdbTableScrollDirective, MdbTableSortDirective, MdbTableDirective, MdbTableService } from './tables/index';
 export { CHECKBOX_VALUE_ACCESSOR, CheckboxComponent, CheckboxModule } from './checkbox/index';

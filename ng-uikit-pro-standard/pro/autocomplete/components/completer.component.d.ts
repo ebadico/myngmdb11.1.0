@@ -21,6 +21,7 @@ export declare class CompleterComponent implements OnInit, ControlValueAccessor,
     placeholder: string;
     matchClass: string;
     fieldTabindex: number;
+    clearButtonTabIndex: number;
     autoMatch: boolean;
     disableInput: boolean;
     inputClass: string;
@@ -29,8 +30,9 @@ export declare class CompleterComponent implements OnInit, ControlValueAccessor,
     initialValue: any;
     autoHighlight: boolean;
     label: string;
-    focused: boolean;
-    autocompleteLabel: ElementRef;
+    datasource: CompleterData | string | Array<any>;
+    textNoResults: string;
+    textSearching: string;
     selected: EventEmitter<CompleterItem>;
     highlighted: EventEmitter<CompleterItem>;
     blur: EventEmitter<{}>;
@@ -40,6 +42,9 @@ export declare class CompleterComponent implements OnInit, ControlValueAccessor,
     keydown: EventEmitter<any>;
     completer: MdbCompleterDirective;
     mdbInput: ElementRef;
+    labelEl: ElementRef;
+    focused: boolean;
+    state: string;
     searchStr: string;
     control: FormControl;
     displaySearching: any;
@@ -54,7 +59,9 @@ export declare class CompleterComponent implements OnInit, ControlValueAccessor,
     onkeyup(event: any): void;
     onclick(event: any): void;
     onFocusIn(): void;
-    onFocusOut(event: any): void;
+    onFocusOut(): void;
+    activateClearButton(event: any): void;
+    triggerClearButtonAnimation(buttonState: string): void;
     value: any;
     ngAfterViewInit(): void;
     ngAfterViewChecked(): void;
@@ -62,9 +69,6 @@ export declare class CompleterComponent implements OnInit, ControlValueAccessor,
     writeValue(value: any): void;
     registerOnChange(fn: any): void;
     registerOnTouched(fn: any): void;
-    datasource: CompleterData | string | Array<any>;
-    textNoResults: string;
-    textSearching: string;
     ngOnInit(): void;
     onBlur(): void;
     onFocus(): void;
