@@ -11968,8 +11968,20 @@ var TabsetComponent = /** @class */ (function () {
     /**
      * @return {?}
      */
+    TabsetComponent.prototype.removeActiveTabs = function () {
+        this.tabs.forEach(function (tab) {
+            tab.active = false;
+        });
+    };
+    /**
+     * @return {?}
+     */
     TabsetComponent.prototype.initActiveTab = function () {
         var /** @type {?} */ index = this.getFirstActiveTabIndex();
+        if (index === -1) {
+            this.removeActiveTabs();
+            return;
+        }
         this.setActiveTab(index + 1);
     };
     /**

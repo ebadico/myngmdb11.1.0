@@ -11603,8 +11603,20 @@ class TabsetComponent {
     /**
      * @return {?}
      */
+    removeActiveTabs() {
+        this.tabs.forEach((tab) => {
+            tab.active = false;
+        });
+    }
+    /**
+     * @return {?}
+     */
     initActiveTab() {
         const /** @type {?} */ index = this.getFirstActiveTabIndex();
+        if (index === -1) {
+            this.removeActiveTabs();
+            return;
+        }
         this.setActiveTab(index + 1);
     }
     /**

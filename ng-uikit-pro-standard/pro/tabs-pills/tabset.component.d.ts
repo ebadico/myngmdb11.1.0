@@ -43,6 +43,7 @@ export declare class TabsetComponent implements OnDestroy, OnInit, AfterViewInit
     getActiveElement(): any;
     showActiveIndex(): void;
     private getFirstActiveTabIndex();
+    private removeActiveTabs();
     private initActiveTab();
     ngOnInit(): void;
     ngAfterViewInit(): void;
