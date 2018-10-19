@@ -9963,17 +9963,19 @@ var SidenavComponent = /** @class */ (function () {
             var /** @type {?} */ sidenavChildren = sidenav.children[0].children;
             var /** @type {?} */ sidenavMask = this.el.nativeElement.querySelector('.sidenav-bg');
             var /** @type {?} */ sidenavChildrenHeight = 0;
-            for (var /** @type {?} */ i = 0; i < sidenavChildren.length; i++) {
-                if (sidenavChildren[i].classList.contains('sidenav-bg')) {
-                    continue;
-                }
-                else {
-                    for (var /** @type {?} */ j = 0; j < sidenavChildren[i].children.length; j++) {
-                        sidenavChildrenHeight += sidenavChildren[i].children[j].scrollHeight;
+            if (sidenavMask) {
+                for (var /** @type {?} */ i = 0; i < sidenavChildren.length; i++) {
+                    if (sidenavChildren[i].classList.contains('sidenav-bg')) {
+                        continue;
+                    }
+                    else {
+                        for (var /** @type {?} */ j = 0; j < sidenavChildren[i].children.length; j++) {
+                            sidenavChildrenHeight += sidenavChildren[i].children[j].scrollHeight;
+                        }
                     }
                 }
+                this.renderer.setStyle(sidenavMask, 'min-height', sidenavChildrenHeight + 16 + 'px');
             }
-            this.renderer.setStyle(sidenavMask, 'min-height', sidenavChildrenHeight + 16 + 'px');
             // pobraneie szerokosci okna po init
             this.windwosWidth = win.innerWidth;
             if (this.sidenavBreakpoint) {
