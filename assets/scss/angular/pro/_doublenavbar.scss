@@ -103,6 +103,15 @@ header {
       will-change: transform;
     }
   }
+  .mega-menu {
+    margin-left: 0px !important;
+    left: 240px !important;
+    width: calc(100% - 240px) !important;
+    @media (max-width: $sidenav-breakpoint) {
+      left: 0px !important;
+      width: 100% !important;
+    }
+  }
 }
 
 //Fix for double nav only for IE10+

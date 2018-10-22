@@ -1,9 +1,36 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('tslib'), require('@angular/core'), require('@angular/animations'), require('@angular/common'), require('rxjs'), require('@angular/platform-browser'), require('@angular/forms'), require('rxjs/operators'), require('@angular/http'), require('hammerjs'), require('@angular/router'), require('chart.js')) :
-	typeof define === 'function' && define.amd ? define(['exports', 'tslib', '@angular/core', '@angular/animations', '@angular/common', 'rxjs', '@angular/platform-browser', '@angular/forms', 'rxjs/operators', '@angular/http', 'hammerjs', '@angular/router', 'chart.js'], factory) :
-	(factory((global['ng-uikit-pro-standard'] = {}),global.tslib,global.ng.core,global.ng.animations,global.ng.common,global.RX,global.ng.platformBrowser,global.ng.forms,global.Rx.Observable,global.ng.http,global.hammerjs,global.ng.router,global.Chart));
-}(this, (function (exports,tslib_1,core,animations,common,rxjs,platformBrowser,forms,operators,http,hammerjs,router,Chart) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('tslib'), require('@angular/core'), require('@angular/animations'), require('@angular/router'), require('@angular/common'), require('rxjs'), require('@angular/platform-browser'), require('@angular/forms'), require('rxjs/operators'), require('@angular/http'), require('hammerjs'), require('chart.js')) :
+	typeof define === 'function' && define.amd ? define(['exports', 'tslib', '@angular/core', '@angular/animations', '@angular/router', '@angular/common', 'rxjs', '@angular/platform-browser', '@angular/forms', 'rxjs/operators', '@angular/http', 'hammerjs', 'chart.js'], factory) :
+	(factory((global['ng-uikit-pro-standard'] = {}),global.tslib,global.ng.core,global.ng.animations,global.ng.router,global.ng.common,global.RX,global.ng.platformBrowser,global.ng.forms,global.Rx.Observable,global.ng.http,global.hammerjs,global.Chart));
+}(this, (function (exports,tslib_1,core,animations,router,common,rxjs,platformBrowser,forms,operators,http,hammerjs,Chart) { 'use strict';
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/*tslint:disable */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * JS version of browser APIs. This library can only run in the browser.
+ */
+var win = typeof window !== 'undefined' && window || /** @type {?} */ ({});
+var document$1 = win.document;
+var location = win.location;
+var gc = win['gc'] ? function () { return win['gc'](); } : function () { return null; };
+var performance = win['performance'] ? win['performance'] : null;
+var Event = win['Event'];
+var MouseEvent = win['MouseEvent'];
+var KeyboardEvent = win['KeyboardEvent'];
+var EventTarget = win['EventTarget'];
+var History = win['History'];
+var Location = win['Location'];
+var EventListener = win['EventListener'];
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -22,6 +49,27 @@ var SBItemBodyComponent = /** @class */ (function () {
         setTimeout(function () {
             collapsed ? _this.expandAnimationState = 'collapsed' : _this.expandAnimationState = 'expanded';
         }, 0);
+    };
+    /**
+     * @param {?} activeUrl
+     * @return {?}
+     */
+    SBItemBodyComponent.prototype.openSidenavOnActiveLink = function (activeUrl) {
+        var _this = this;
+        var /** @type {?} */ activeLink = this.routerLinks.find(function (link) {
+            return link.href === activeUrl;
+        });
+        if (activeLink) {
+            setTimeout(function () {
+                _this.expandAnimationState = 'expanded';
+            }, 40);
+        }
+    };
+    /**
+     * @return {?}
+     */
+    SBItemBodyComponent.prototype.ngAfterContentInit = function () {
+        this.openSidenavOnActiveLink(win.location.pathname);
     };
     return SBItemBodyComponent;
 }());
@@ -43,6 +91,7 @@ SBItemBodyComponent.decorators = [
 SBItemBodyComponent.ctorParameters = function () { return []; };
 SBItemBodyComponent.propDecorators = {
     customClass: [{ type: core.Input }],
+    routerLinks: [{ type: core.ContentChildren, args: [router.RouterLinkWithHref,] }],
     bodyEl: [{ type: core.ViewChild, args: ['body',] }]
 };
 /**
@@ -72,6 +121,17 @@ var SBItemComponent = /** @class */ (function () {
             }, 0);
             this.body.toggle(this.collapsed);
         }
+    };
+    /**
+     * @return {?}
+     */
+    SBItemComponent.prototype.ngAfterContentInit = function () {
+        var _this = this;
+        setTimeout(function () {
+            if (_this.body.expandAnimationState === 'expanded') {
+                _this.collapsed = false;
+            }
+        }, 40);
     };
     /**
      * @param {?} collapsed
@@ -2024,7 +2084,6 @@ var CompleterComponent = /** @class */ (function () {
         this.autofocus = false;
         this.openOnFocus = false;
         this.autoHighlight = false;
-        this.focused = false;
         this.selected = new core.EventEmitter();
         this.highlighted = new core.EventEmitter();
         this.blur = new core.EventEmitter();
@@ -2032,11 +2091,12 @@ var CompleterComponent = /** @class */ (function () {
         this.opened = new core.EventEmitter();
         this.keyup = new core.EventEmitter();
         this.keydown = new core.EventEmitter();
+        this.focused = false;
+        // Used in sliding-down animation
+        this.state = 'unfocused';
         this.searchStr = '';
         this.control = new forms.FormControl('');
-        //  displaySearching = true;
         this.displaySearching = true;
-        //  displayNoResults = true;
         this.displayNoResults = true;
         this._onTouchedCallback = noop;
         this._onChangeCallback = noop;
@@ -2045,125 +2105,6 @@ var CompleterComponent = /** @class */ (function () {
         this._textNoResults = TEXT_NO_RESULTS;
         this._textSearching = TEXT_SEARCHING;
     }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    CompleterComponent.prototype.onkeyup = function (event) {
-        if (event.target.value !== '') {
-            this.renderer.setStyle(event.target.nextElementSibling, 'visibility', 'visible');
-        }
-        else {
-            this.renderer.setStyle(event.target.nextElementSibling, 'visibility', 'hidden');
-        }
-    };
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    CompleterComponent.prototype.onclick = function (event) {
-        if (event.target.classList.contains('mdb-autocomplete-clear')) {
-            event.target.previousElementSibling.value = '';
-            this.searchStr = '';
-            this.renderer.setStyle(event.target, 'visibility', 'hidden');
-        }
-        if (event.target === this.autocompleteLabel) {
-            this.renderer.addClass(this.autocompleteLabel, 'active');
-            this._focus = true;
-        }
-    };
-    /**
-     * @return {?}
-     */
-    CompleterComponent.prototype.onFocusIn = function () {
-        try {
-            this.renderer.addClass(this.el.nativeElement.firstChild.children[2], 'active');
-        }
-        catch (error) { }
-    };
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    CompleterComponent.prototype.onFocusOut = function (event) {
-        try {
-            if (event.target.value === '') {
-                this.renderer.removeClass(this.el.nativeElement.firstChild.children[2], 'active');
-            }
-        }
-        catch (error) { }
-    };
-    Object.defineProperty(CompleterComponent.prototype, "value", {
-        /**
-         * @return {?}
-         */
-        get: function () { return this.searchStr; },
-        /**
-         * @param {?} v
-         * @return {?}
-         */
-        set: function (v) {
-            if (v !== this.searchStr) {
-                this.searchStr = v;
-            }
-            // Propagate the change in any case
-            this._onChangeCallback(v);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * @return {?}
-     */
-    CompleterComponent.prototype.ngAfterViewInit = function () {
-        this.autocompleteLabel = this.el.nativeElement.children[0].children[2];
-        try {
-            this.renderer.removeClass(this.el.nativeElement.firstChild.children[2], 'active');
-        }
-        catch (error) { }
-        if (this.autofocus) {
-            this._focus = true;
-        }
-        if (this.initialValue || this.searchStr) {
-            this.renderer.addClass(this.el.nativeElement.firstChild.children[2], 'active');
-        }
-    };
-    /**
-     * @return {?}
-     */
-    CompleterComponent.prototype.ngAfterViewChecked = function () {
-        if (this._focus) {
-            this.mdbInput.nativeElement.focus();
-            this._focus = false;
-        }
-    };
-    /**
-     * @return {?}
-     */
-    CompleterComponent.prototype.onTouched = function () {
-        this._onTouchedCallback();
-    };
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    CompleterComponent.prototype.writeValue = function (value) {
-        this.searchStr = value;
-    };
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    CompleterComponent.prototype.registerOnChange = function (fn) {
-        this._onChangeCallback = fn;
-    };
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    CompleterComponent.prototype.registerOnTouched = function (fn) {
-        this._onTouchedCallback = fn;
-    };
     Object.defineProperty(CompleterComponent.prototype, "datasource", {
         /**
          * @param {?} source
@@ -2214,6 +2155,126 @@ var CompleterComponent = /** @class */ (function () {
         configurable: true
     });
     /**
+     * @param {?} event
+     * @return {?}
+     */
+    CompleterComponent.prototype.onkeyup = function (event) {
+        if (event.target.value !== '') {
+            this.renderer.setStyle(event.target.nextElementSibling, 'visibility', 'visible');
+        }
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    CompleterComponent.prototype.onclick = function (event) {
+        if (event.target === this.labelEl.nativeElement) {
+            this.renderer.addClass(this.labelEl.nativeElement, 'active');
+            this._focus = true;
+        }
+    };
+    /**
+     * @return {?}
+     */
+    CompleterComponent.prototype.onFocusIn = function () {
+        if (this.labelEl) {
+            this.renderer.addClass(this.labelEl.nativeElement, 'active');
+        }
+    };
+    /**
+     * @return {?}
+     */
+    CompleterComponent.prototype.onFocusOut = function () {
+        if (this.mdbInput.nativeElement.value === '' && this.labelEl) {
+            this.renderer.removeClass(this.labelEl.nativeElement, 'active');
+        }
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    CompleterComponent.prototype.activateClearButton = function (event) {
+        this.mdbInput.nativeElement.value = '';
+        this.searchStr = '';
+        this.renderer.setStyle(event.target, 'visibility', 'hidden');
+    };
+    /**
+     * @param {?} buttonState
+     * @return {?}
+     */
+    CompleterComponent.prototype.triggerClearButtonAnimation = function (buttonState) {
+        this.state = buttonState;
+    };
+    Object.defineProperty(CompleterComponent.prototype, "value", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this.searchStr; },
+        /**
+         * @param {?} v
+         * @return {?}
+         */
+        set: function (v) {
+            if (v !== this.searchStr) {
+                this.searchStr = v;
+            }
+            // Propagate the change in any case
+            this._onChangeCallback(v);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    CompleterComponent.prototype.ngAfterViewInit = function () {
+        if (this.labelEl) {
+            this.renderer.removeClass(this.labelEl.nativeElement, 'active');
+        }
+        if (this.autofocus) {
+            this._focus = true;
+        }
+        if (this.initialValue || this.searchStr) {
+            this.renderer.addClass(this.labelEl.nativeElement, 'active');
+        }
+    };
+    /**
+     * @return {?}
+     */
+    CompleterComponent.prototype.ngAfterViewChecked = function () {
+        if (this._focus) {
+            this.mdbInput.nativeElement.focus();
+            this._focus = false;
+        }
+    };
+    /**
+     * @return {?}
+     */
+    CompleterComponent.prototype.onTouched = function () {
+        this._onTouchedCallback();
+    };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    CompleterComponent.prototype.writeValue = function (value) {
+        this.searchStr = value;
+    };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    CompleterComponent.prototype.registerOnChange = function (fn) {
+        this._onChangeCallback = fn;
+    };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    CompleterComponent.prototype.registerOnTouched = function (fn) {
+        this._onTouchedCallback = fn;
+    };
+    /**
      * @return {?}
      */
     CompleterComponent.prototype.ngOnInit = function () {
@@ -2229,10 +2290,9 @@ var CompleterComponent = /** @class */ (function () {
             _this.opened.emit(isOpen);
         });
         if (this.initialValue) {
-            // <- start workaround
-            this.searchStr = this.initialValue; //
-            this.onFocus(); // fix label
-        } // <- end workaround
+            this.searchStr = this.initialValue;
+            this.onFocus();
+        }
     };
     /**
      * @return {?}
@@ -2295,8 +2355,14 @@ var CompleterComponent = /** @class */ (function () {
 CompleterComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'mdb-autocomplete, mdb-completer',
-                template: "<div class=\"completer-holder md-form\" mdbCompleter> <input #mdbInput [attr.id]=\"inputId.length > 0 ? inputId : null\" type=\"search\" class=\"completer-input form-control mdb-autocomplete\" mdbInput [ngClass]=\"inputClass\" [(ngModel)]=\"searchStr\" (ngModelChange)=\"onChange($event)\" [attr.name]=\"inputName\" [placeholder]=\"placeholder\" [attr.maxlength]=\"maxChars\" [tabindex]=\"fieldTabindex\" [disabled]=\"disableInput\" [clearSelected]=\"clearSelected\" [clearUnselected]=\"clearUnselected\" [overrideSuggested]=\"overrideSuggested\" [openOnFocus]=\"openOnFocus\" [fillHighlighted]=\"fillHighlighted\" (blur)=\"onBlur()\" (focus)=\"onFocus()\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" /> <button type=\"button\" class=\"mdb-autocomplete-clear\"> &#x2715; </button> <label [ngClass]=\"{'active': focused || value}\">{{ label }}</label> <div class=\"completer-dropdown-holder\" *mdbList=\"dataService; minSearchLength: minSearchLength; pause: pause; autoMatch: autoMatch; initialValue: initialValue; autoHighlight: autoHighlight; let items = results; let searchActive = searching; let isInitialized = searchInitialized; let isOpen = isOpen;\"> <div class=\"completer-dropdown\" mdbAutocompleteDropdown *ngIf=\"isInitialized && isOpen && ((items.length > 0 || displayNoResults) || (searchActive && displaySearching))\"> <div *ngIf=\"searchActive && displaySearching\" class=\"completer-searching\">{{_textSearching}}</div> <div *ngIf=\"!searchActive && (!items || items.length === 0)\" class=\"completer-no-results\">{{_textNoResults}}</div> <div class=\"completer-row-wrapper\" *ngFor=\"let item of items; let rowIndex=index\"> <div class=\"completer-row\" [mdbRow]=\"rowIndex\" [dataItem]=\"item\"> <div *ngIf=\"item.image || item.image === ''\" class=\"completer-image-holder\"> <img *ngIf=\"item.image != ''\" src=\"{{item.image}}\" class=\"completer-image\" /> <div *ngIf=\"item.image === ''\" class=\"completer-image-default\"></div> </div> <div class=\"completer-item-text\" [ngClass]=\"{'completer-item-text-image': item.image || item.image === '' }\"> <mdb-completer-list-item class=\"completer-title\" [text]=\"item.title\" [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'title'\"></mdb-completer-list-item> <mdb-completer-list-item *ngIf=\"item.description && item.description != ''\" class=\"completer-description\" [text]=\"item.description\" [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'description'\"> </mdb-completer-list-item> </div> </div> </div> </div> </div> </div> ",
-                providers: [COMPLETER_CONTROL_VALUE_ACCESSOR]
+                template: "<div class=\"completer-holder md-form\" mdbCompleter> <input #mdbInput [attr.id]=\"inputId.length > 0 ? inputId : null\" type=\"search\" class=\"completer-input form-control mdb-autocomplete\" mdbInput [ngClass]=\"inputClass\" [(ngModel)]=\"searchStr\" (ngModelChange)=\"onChange($event)\" [attr.name]=\"inputName\" [placeholder]=\"placeholder\" [attr.maxlength]=\"maxChars\" [tabindex]=\"fieldTabindex\" [disabled]=\"disableInput\" [clearSelected]=\"clearSelected\" [clearUnselected]=\"clearUnselected\" [overrideSuggested]=\"overrideSuggested\" [openOnFocus]=\"openOnFocus\" [fillHighlighted]=\"fillHighlighted\" (blur)=\"onBlur()\" (focus)=\"onFocus()\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" /> <button type=\"button\" [tabindex]=\"clearButtonTabIndex\" class=\"mdb-autocomplete-clear\" (click)=\"activateClearButton($event)\" (focus)=\"triggerClearButtonAnimation('focused')\" (blur)=\"triggerClearButtonAnimation('unfocused')\" (mouseenter)=\"triggerClearButtonAnimation('focused')\" (mouseleave)=\"triggerClearButtonAnimation('unfocused')\" [@focusAnimation]=\"{value: state}\"> &#x2715; </button> <label #labelEl [ngClass]=\"{'active': focused || value}\">{{ label }}</label> <div class=\"completer-dropdown-holder\" *mdbList=\"dataService; minSearchLength: minSearchLength; pause: pause; autoMatch: autoMatch; initialValue: initialValue; autoHighlight: autoHighlight; let items = results; let searchActive = searching; let isInitialized = searchInitialized; let isOpen = isOpen;\"> <div class=\"completer-dropdown\" mdbAutocompleteDropdown *ngIf=\"isInitialized && isOpen && ((items.length > 0 || displayNoResults) || (searchActive && displaySearching))\"> <div *ngIf=\"searchActive && displaySearching\" class=\"completer-searching\">{{_textSearching}}</div> <div *ngIf=\"!searchActive && (!items || items.length === 0)\" class=\"completer-no-results\">{{_textNoResults}}</div> <div class=\"completer-row-wrapper\" *ngFor=\"let item of items; let rowIndex=index\"> <div class=\"completer-row\" [mdbRow]=\"rowIndex\" [dataItem]=\"item\"> <div class=\"completer-item-text\" [ngClass]=\"{'completer-item-text-image': item.image || item.image === '' }\"> <mdb-completer-list-item class=\"completer-title\" [text]=\"item.title\" [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'title'\"></mdb-completer-list-item> <mdb-completer-list-item *ngIf=\"item.description && item.description != ''\" class=\"completer-description\" [text]=\"item.description\" [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'description'\"> </mdb-completer-list-item> </div> <div *ngIf=\"item.image || item.image === ''\" class=\"completer-image-holder\"> <img *ngIf=\"item.image != ''\" src=\"{{item.image}}\" class=\"completer-image\" /> <div *ngIf=\"item.image === ''\" class=\"completer-image-default\"></div> </div> </div> </div> </div> </div> </div> ",
+                providers: [COMPLETER_CONTROL_VALUE_ACCESSOR],
+                animations: [animations.trigger('focusAnimation', [
+                        animations.state('unfocused', animations.style({ transform: 'scale(1.0, 1.0)', })),
+                        animations.state('focused', animations.style({ transform: 'scale(1.5, 1.5)' })),
+                        animations.transition('unfocused => focused', animations.animate('200ms ease-in')),
+                        animations.transition('focused => unfocused', animations.animate('200ms ease-in'))
+                    ])]
             },] },
 ];
 /** @nocollapse */
@@ -2319,6 +2385,7 @@ CompleterComponent.propDecorators = {
     placeholder: [{ type: core.Input }],
     matchClass: [{ type: core.Input }],
     fieldTabindex: [{ type: core.Input }],
+    clearButtonTabIndex: [{ type: core.Input }],
     autoMatch: [{ type: core.Input }],
     disableInput: [{ type: core.Input }],
     inputClass: [{ type: core.Input }],
@@ -2327,6 +2394,9 @@ CompleterComponent.propDecorators = {
     initialValue: [{ type: core.Input }],
     autoHighlight: [{ type: core.Input }],
     label: [{ type: core.Input }],
+    datasource: [{ type: core.Input }],
+    textNoResults: [{ type: core.Input }],
+    textSearching: [{ type: core.Input }],
     selected: [{ type: core.Output }],
     highlighted: [{ type: core.Output }],
     blur: [{ type: core.Output }],
@@ -2336,13 +2406,11 @@ CompleterComponent.propDecorators = {
     keydown: [{ type: core.Output }],
     completer: [{ type: core.ViewChild, args: [MdbCompleterDirective,] }],
     mdbInput: [{ type: core.ViewChild, args: ['mdbInput',] }],
+    labelEl: [{ type: core.ViewChild, args: ['labelEl',] }],
     onkeyup: [{ type: core.HostListener, args: ['keyup', ['$event'],] }],
     onclick: [{ type: core.HostListener, args: ['click', ['$event'],] }],
     onFocusIn: [{ type: core.HostListener, args: ['focusin',] }],
-    onFocusOut: [{ type: core.HostListener, args: ['focusout', ['$event'],] }],
-    datasource: [{ type: core.Input }],
-    textNoResults: [{ type: core.Input }],
-    textSearching: [{ type: core.Input }]
+    onFocusOut: [{ type: core.HostListener, args: ['focusout',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -3288,6 +3356,437 @@ CardsModule.decorators = [
                 imports: [common.CommonModule],
                 declarations: [CardRevealComponent, CardRotatingComponent],
                 exports: [CardRevealComponent, CardRotatingComponent]
+            },] },
+];
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var MdbDateFormatDirective = /** @class */ (function () {
+    function MdbDateFormatDirective() {
+        this.separator = '/';
+        this.format = ['dd', 'mm', 'yyyy'];
+    }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    MdbDateFormatDirective.prototype.onInput = function (event) {
+        var /** @type {?} */ currentValue = event.target.value;
+        var /** @type {?} */ newValue = this.getFormattedDate(currentValue);
+        event.target.value = newValue;
+    };
+    /**
+     * @return {?}
+     */
+    MdbDateFormatDirective.prototype.ngOnInit = function () {
+        this.setSeparatorsNumber();
+        this.setResultLength();
+    };
+    /**
+     * @return {?}
+     */
+    MdbDateFormatDirective.prototype.setSeparatorsNumber = function () {
+        this.separatorsNumber = this.format.length - 1;
+    };
+    /**
+     * @return {?}
+     */
+    MdbDateFormatDirective.prototype.setResultLength = function () {
+        var /** @type {?} */ resLength = 0;
+        this.format.forEach(function (value) {
+            resLength += value.length;
+        });
+        this.resultLength = resLength + this.separatorsNumber;
+    };
+    /**
+     * @param {?} date
+     * @return {?}
+     */
+    MdbDateFormatDirective.prototype.getFormattedDate = function (date) {
+        var _this = this;
+        var /** @type {?} */ dateParts = this.getDateParts(date);
+        var /** @type {?} */ result = dateParts.map(function (part, index) {
+            return part = _this.formatDateParts(part, index);
+        });
+        return result.join(this.separator).slice(0, this.resultLength);
+    };
+    /**
+     * @param {?} date
+     * @return {?}
+     */
+    MdbDateFormatDirective.prototype.getDateParts = function (date) {
+        date = this.getDigits(date).slice(0, this.resultLength - this.separatorsNumber);
+        var /** @type {?} */ parts = [];
+        var /** @type {?} */ partsIndex = {
+            first: this.format[0].length,
+            mid: this.format[0].length + this.format[1].length,
+            last: this.resultLength
+        };
+        parts[0] = date.slice(0, partsIndex.first);
+        if (date.length > partsIndex.first) {
+            parts[1] = date.slice(partsIndex.first, partsIndex.mid);
+        }
+        if (date.length > partsIndex.mid) {
+            parts[2] = date.slice(partsIndex.mid, partsIndex.last);
+        }
+        return parts;
+    };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    MdbDateFormatDirective.prototype.getDigits = function (value) {
+        return value.replace(/\D/g, '');
+    };
+    /**
+     * @param {?} datePart
+     * @param {?} index
+     * @return {?}
+     */
+    MdbDateFormatDirective.prototype.formatDateParts = function (datePart, index) {
+        switch (this.format[index]) {
+            case 'dd':
+                datePart = this.getFormattedDay(datePart);
+                break;
+            case 'mm':
+                datePart = this.getFormattedMonth(datePart);
+                break;
+        }
+        return datePart;
+    };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    MdbDateFormatDirective.prototype.getFormattedDay = function (value) {
+        var /** @type {?} */ dayFirstNum = parseInt(value.charAt(0), 10);
+        if (value) {
+            if (dayFirstNum > 3 && dayFirstNum !== 0) {
+                return '0' + value.charAt(0);
+            }
+            else {
+                return value;
+            }
+        }
+    };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    MdbDateFormatDirective.prototype.getFormattedMonth = function (value) {
+        var /** @type {?} */ monthFirstNum = parseInt(value.charAt(0), 10);
+        var /** @type {?} */ monthNum = parseInt(value, 10);
+        if (value) {
+            if (monthFirstNum > 1 && monthFirstNum !== 0) {
+                return '0' + value.charAt(0);
+            }
+            else if (monthNum > 12) {
+                return '12';
+            }
+            else {
+                return value;
+            }
+        }
+    };
+    return MdbDateFormatDirective;
+}());
+MdbDateFormatDirective.decorators = [
+    { type: core.Directive, args: [{
+                selector: '[mdbDateFormat]',
+            },] },
+];
+MdbDateFormatDirective.propDecorators = {
+    separator: [{ type: core.Input }],
+    format: [{ type: core.Input }],
+    onInput: [{ type: core.HostListener, args: ['input', ['$event'],] }, { type: core.HostListener, args: ['paste', ['$event'],] }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @record
+ */
+var MdbCreditCardDirective = /** @class */ (function () {
+    function MdbCreditCardDirective() {
+        this.standardPattern = /(\d{1,4})/g;
+        this.defaultCard = {
+            name: '',
+            fullName: '',
+            re: /\d{0,16}/,
+            pattern: this.standardPattern,
+            maxLength: 19,
+            cvvLength: 3
+        };
+        this.cards = [
+            {
+                name: 'visa',
+                fullName: 'Visa',
+                re: /^4\d{0,15}/,
+                pattern: this.standardPattern,
+                maxLength: 16,
+                cvvLength: 3
+            },
+            {
+                name: 'mastercard',
+                fullName: 'Mastercard',
+                re: /^(5[1-5]\d{0,2}|22[2-9]\d{0,1}|2[3-7]\d{0,2})\d{0,12}/,
+                pattern: this.standardPattern,
+                maxLength: 16,
+                cvvLength: 3
+            },
+            {
+                name: 'amex',
+                fullName: 'American Express',
+                re: /^3[47]\d{0,13}/,
+                pattern: /(\d{1,4})(\d{1,6})?(\d{1,5})?/,
+                maxLength: 15,
+                cvvLength: 4
+            },
+            {
+                name: 'jcb',
+                fullName: 'JCB',
+                re: /^(?:35\d{0,2})\d{0,12}/,
+                pattern: this.standardPattern,
+                maxLength: 19,
+                cvvLength: 3
+            },
+            {
+                name: 'discover',
+                fullName: 'Discover',
+                re: /^(?:6011|65\d{0,2}|64[4-9]\d?)\d{0,12}/,
+                pattern: this.standardPattern,
+                maxLength: 19,
+                cvvLength: 3
+            },
+            {
+                name: 'diners-club',
+                fullName: 'Diners Club',
+                re: /^3(?:0([0-5]|9)|[689]\d?)\d{0,11}/,
+                pattern: /(\d{1,4})(\d{1,5})?(\d{1,4})?/,
+                maxLength: 19,
+                cvvLength: 3
+            }
+        ];
+        this._separator = ' ';
+    }
+    Object.defineProperty(MdbCreditCardDirective.prototype, "additionalCards", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this._additionalCards; },
+        /**
+         * @param {?} cards
+         * @return {?}
+         */
+        set: function (cards) {
+            this._additionalCards = cards;
+            this.addCards(cards);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MdbCreditCardDirective.prototype, "separator", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this._separator; },
+        /**
+         * @param {?} separator
+         * @return {?}
+         */
+        set: function (separator) {
+            this._separator = separator;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    MdbCreditCardDirective.prototype.onInput = function (event) {
+        this.formatInput(event);
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    MdbCreditCardDirective.prototype.formatInput = function (event) {
+        var /** @type {?} */ input = event.target.value;
+        var /** @type {?} */ formattedInput = this.getFormattedInput(input);
+        event.target.value = formattedInput;
+    };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    MdbCreditCardDirective.prototype.getFormattedInput = function (value) {
+        value = this.removeNonDigits(value);
+        var /** @type {?} */ card = this.findCardByNumber(value);
+        this.updateCurrentCardNames(card.name, card.fullName);
+        var /** @type {?} */ cardNumMaxLength;
+        if (this.hasStandardPattern(card)) {
+            var /** @type {?} */ matches = value.match(card.pattern);
+            if (matches === null) {
+                return value;
+            }
+            cardNumMaxLength = card.maxLength + matches.length - 1;
+            this.maxLength = cardNumMaxLength.toString();
+            return matches.join(this.separator);
+        }
+        else {
+            var /** @type {?} */ results = card.pattern.exec(value);
+            if (results === null) {
+                return value;
+            }
+            results.shift();
+            cardNumMaxLength = card.maxLength + results.length - 1;
+            this.maxLength = cardNumMaxLength.toString();
+            return results.filter(this.isMatch).join(this.separator);
+        }
+    };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    MdbCreditCardDirective.prototype.removeNonDigits = function (value) {
+        return value.replace(/\D/g, '');
+    };
+    /**
+     * @param {?} card
+     * @return {?}
+     */
+    MdbCreditCardDirective.prototype.hasStandardPattern = function (card) {
+        return card.pattern.toString() === this.standardPattern.toString();
+    };
+    /**
+     * @param {?} match
+     * @return {?}
+     */
+    MdbCreditCardDirective.prototype.isMatch = function (match) {
+        return match !== undefined;
+    };
+    /**
+     * @param {?} name
+     * @param {?} fullName
+     * @return {?}
+     */
+    MdbCreditCardDirective.prototype.updateCurrentCardNames = function (name, fullName) {
+        this.cardName = name;
+        this.cardFullName = fullName;
+    };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    MdbCreditCardDirective.prototype.findCardByNumber = function (value) {
+        var /** @type {?} */ cardType = this.cards.find(function (card) {
+            return card.re.test(value);
+        });
+        if (!cardType) {
+            return this.defaultCard;
+        }
+        return cardType;
+    };
+    /**
+     * @param {?} newCards
+     * @return {?}
+     */
+    MdbCreditCardDirective.prototype.addCards = function (newCards) {
+        var _this = this;
+        newCards.forEach(function (card) {
+            _this.cards.push(card);
+        });
+    };
+    return MdbCreditCardDirective;
+}());
+MdbCreditCardDirective.decorators = [
+    { type: core.Directive, args: [{
+                selector: '[mdbCreditCard]',
+                exportAs: 'mdbCreditCard'
+            },] },
+];
+/** @nocollapse */
+MdbCreditCardDirective.ctorParameters = function () { return []; };
+MdbCreditCardDirective.propDecorators = {
+    additionalCards: [{ type: core.Input }],
+    separator: [{ type: core.Input }],
+    maxLength: [{ type: core.HostBinding, args: ['attr.maxLength',] }],
+    onInput: [{ type: core.HostListener, args: ['input', ['$event'],] }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var MdbCvvDirective = /** @class */ (function () {
+    function MdbCvvDirective() {
+        this.maxLength = '4';
+    }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    MdbCvvDirective.prototype.onInput = function (event) {
+        this.formatInput(event);
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    MdbCvvDirective.prototype.formatInput = function (event) {
+        var /** @type {?} */ input = event.target.value;
+        var /** @type {?} */ newValue = this.getFormattedValue(input);
+        event.target.value = newValue;
+    };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    MdbCvvDirective.prototype.getFormattedValue = function (value) {
+        value = this.removeNonDigits(value);
+        return value;
+    };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    MdbCvvDirective.prototype.removeNonDigits = function (value) {
+        return value.replace(/\D/g, '');
+    };
+    return MdbCvvDirective;
+}());
+MdbCvvDirective.decorators = [
+    { type: core.Directive, args: [{
+                selector: '[mdbCvv]',
+            },] },
+];
+MdbCvvDirective.propDecorators = {
+    maxLength: [{ type: core.HostBinding, args: ['attr.maxLength',] }],
+    onInput: [{ type: core.HostListener, args: ['input', ['$event'],] }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var AutoFormatModule = /** @class */ (function () {
+    function AutoFormatModule() {
+    }
+    return AutoFormatModule;
+}());
+AutoFormatModule.decorators = [
+    { type: core.NgModule, args: [{
+                declarations: [
+                    MdbDateFormatDirective,
+                    MdbCreditCardDirective,
+                    MdbCvvDirective
+                ],
+                exports: [
+                    MdbDateFormatDirective,
+                    MdbCreditCardDirective,
+                    MdbCvvDirective
+                ]
             },] },
 ];
 /**
@@ -7309,9 +7808,11 @@ var SelectDropdownComponent = /** @class */ (function () {
         catch (error) {
         }
         this.moveHighlightedIntoView();
-        if (this.filterEnabled) {
-            this.filterInput.nativeElement.focus();
-        }
+        setTimeout(function () {
+            if (_this.filterEnabled) {
+                _this.filterInput.nativeElement.focus();
+            }
+        }, 0);
     };
     /**
      * @return {?}
@@ -9236,6 +9737,203 @@ ProgressBars.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+var RANGE_VALUE_ACCESOR = {
+    provide: forms.NG_VALUE_ACCESSOR,
+    useExisting: core.forwardRef(function () { return MdbRangeInputComponent; }),
+    multi: true
+};
+var MdbRangeInputComponent = /** @class */ (function () {
+    /**
+     * @param {?} renderer
+     * @param {?} cdRef
+     */
+    function MdbRangeInputComponent(renderer, cdRef) {
+        this.renderer = renderer;
+        this.cdRef = cdRef;
+        this.min = 0;
+        this.max = 100;
+        this.rangeValueChange = new core.EventEmitter();
+        this.range = 0;
+        this.cloudRange = 0;
+        this.visibility = false;
+        // Control Value Accessor Methods
+        this.onChange = function (_) { };
+        this.onTouched = function () { };
+    }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    MdbRangeInputComponent.prototype.onchange = function (event) {
+        this.onChange(event.target.value);
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    MdbRangeInputComponent.prototype.oninput = function (event) {
+        var /** @type {?} */ value = +event.target.value;
+        this.rangeValueChange.emit({ value: value });
+        if (this.checkIfSafari()) {
+            this.focusRangeInput();
+        }
+    };
+    /**
+     * @return {?}
+     */
+    MdbRangeInputComponent.prototype.onclick = function () {
+        this.focusRangeInput();
+    };
+    /**
+     * @return {?}
+     */
+    MdbRangeInputComponent.prototype.onmouseleave = function () {
+        if (this.checkIfSafari()) {
+            this.blurRangeInput();
+        }
+    };
+    /**
+     * @return {?}
+     */
+    MdbRangeInputComponent.prototype.focusRangeInput = function () {
+        this.input.nativeElement.focus();
+        this.visibility = true;
+    };
+    /**
+     * @return {?}
+     */
+    MdbRangeInputComponent.prototype.blurRangeInput = function () {
+        this.input.nativeElement.blur();
+        this.visibility = false;
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    MdbRangeInputComponent.prototype.coverage = function (event) {
+        if (typeof this.range === 'string' && this.range.length !== 0) {
+            return this.range;
+        }
+        if (!this.default) {
+            var /** @type {?} */ newValue = event.target.value;
+            var /** @type {?} */ newRelativeGain = newValue - this.min;
+            var /** @type {?} */ inputWidth = this.input.nativeElement.offsetWidth;
+            var /** @type {?} */ thumbOffset = 0;
+            var /** @type {?} */ offsetAmmount = 15;
+            var /** @type {?} */ distanceFromMiddle = newRelativeGain - (this.steps / 2);
+            this.stepLength = inputWidth / this.steps;
+            thumbOffset = (distanceFromMiddle / this.steps) * offsetAmmount;
+            this.cloudRange = (this.stepLength * newRelativeGain) - thumbOffset;
+            this.renderer.setStyle(this.rangeCloud.nativeElement, 'left', this.cloudRange + 'px');
+        }
+    };
+    /**
+     * @return {?}
+     */
+    MdbRangeInputComponent.prototype.checkIfSafari = function () {
+        var /** @type {?} */ isSafari = navigator.userAgent.indexOf('Safari') > -1;
+        var /** @type {?} */ isChrome = navigator.userAgent.indexOf('Chrome') > -1;
+        var /** @type {?} */ isFirefox = navigator.userAgent.indexOf('Firefox') > -1;
+        var /** @type {?} */ isOpera = navigator.userAgent.indexOf('Opera') > -1;
+        if (isSafari && !isChrome && !isFirefox && !isOpera) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    /**
+     * @return {?}
+     */
+    MdbRangeInputComponent.prototype.ngAfterViewInit = function () {
+        this.steps = this.max - this.min;
+        if (this.value) {
+            this.range = this.value;
+            this.cdRef.detectChanges();
+        }
+    };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    MdbRangeInputComponent.prototype.writeValue = function (value) {
+        this.value = value;
+    };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    MdbRangeInputComponent.prototype.registerOnChange = function (fn) {
+        this.onChange = fn;
+    };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    MdbRangeInputComponent.prototype.registerOnTouched = function (fn) {
+        this.onTouched = fn;
+    };
+    /**
+     * @param {?} isDisabled
+     * @return {?}
+     */
+    MdbRangeInputComponent.prototype.setDisabledState = function (isDisabled) {
+        this.disabled = isDisabled;
+    };
+    return MdbRangeInputComponent;
+}());
+MdbRangeInputComponent.decorators = [
+    { type: core.Component, args: [{
+                selector: 'mdb-range-input',
+                template: "<div *ngIf=\"!default\" class=\"range-field\" #rangeField> <div class=\"track\"> <div #rangeCloud class=\"range-cloud\" title=\"range\" [ngClass]=\"{'visible': this.visibility, 'hidden': !this.visibility}\"> <span class=\"text-transform\">{{range}}</span> </div> </div> <input #input [name]=\"name\" type=\"range\" [disabled]=\"disabled\" [id]=\"id\" [min]=\"min\" [max]=\"max\" [step]=\"step\" [value]=\"value\" [(ngModel)]=\"range\" (focus)=\"this.visibility = true\" (blur)=\"this.visibility = false\" (input)=\"coverage($event)\"> </div> <div *ngIf=\"default\"> <label for=\"customRange1\">Example range</label> <input #input class=\"custom-range\" [name]=\"name\" type=\"range\" [id]=\"id\" [min]=\"min\" [max]=\"max\" [step]=\"step\" [attr.value]=\"value\" [value]=\"value\" [(ngModel)]=\"range\" (focus)=\"this.visibility = true\" (blur)=\"this.visibility = false\" (input)=\"coverage($event)\"> <span class=\"{{defaultRangeCounterClass}}\">{{ range }}</span> </div>",
+                providers: [RANGE_VALUE_ACCESOR],
+            },] },
+];
+/** @nocollapse */
+MdbRangeInputComponent.ctorParameters = function () { return [
+    { type: core.Renderer2 },
+    { type: core.ChangeDetectorRef }
+]; };
+MdbRangeInputComponent.propDecorators = {
+    input: [{ type: core.ViewChild, args: ['input',] }],
+    rangeCloud: [{ type: core.ViewChild, args: ['rangeCloud',] }],
+    rangeField: [{ type: core.ViewChild, args: ['rangeField',] }],
+    id: [{ type: core.Input }],
+    required: [{ type: core.Input }],
+    name: [{ type: core.Input }],
+    value: [{ type: core.Input }],
+    disabled: [{ type: core.Input }],
+    min: [{ type: core.Input }],
+    max: [{ type: core.Input }],
+    step: [{ type: core.Input }],
+    default: [{ type: core.Input }],
+    defaultRangeCounterClass: [{ type: core.Input }],
+    rangeValueChange: [{ type: core.Output }],
+    onchange: [{ type: core.HostListener, args: ['change', ['$event'],] }],
+    oninput: [{ type: core.HostListener, args: ['input', ['$event'],] }],
+    onclick: [{ type: core.HostListener, args: ['click',] }],
+    onmouseleave: [{ type: core.HostListener, args: ['mouseleave',] }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var RangeModule = /** @class */ (function () {
+    function RangeModule() {
+    }
+    return RangeModule;
+}());
+RangeModule.decorators = [
+    { type: core.NgModule, args: [{
+                imports: [common.CommonModule, forms.FormsModule],
+                declarations: [MdbRangeInputComponent],
+                exports: [MdbRangeInputComponent]
+            },] },
+];
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var SidenavComponent = /** @class */ (function () {
     /**
      * @param {?} platformId
@@ -9254,22 +9952,25 @@ var SidenavComponent = /** @class */ (function () {
      */
     SidenavComponent.prototype.ngAfterViewInit = function () {
         if (this.isBrowser) {
-            var /** @type {?} */ sidenavChildren = this.sideNav.nativeElement.children;
-            var /** @type {?} */ sidenavBg = this.sideNav.nativeElement.querySelector('.sidenav-bg');
-            var /** @type {?} */ sidenavBgHeight = null;
-            for (var /** @type {?} */ i = 0; i < sidenavChildren.length; i++) {
-                if (sidenavChildren[i].classList.contains('sidenav-bg')) {
-                    continue;
+            var /** @type {?} */ sidenav = this.el.nativeElement;
+            var /** @type {?} */ sidenavChildren = sidenav.children[0].children;
+            var /** @type {?} */ sidenavMask = this.el.nativeElement.querySelector('.sidenav-bg');
+            var /** @type {?} */ sidenavChildrenHeight = 0;
+            if (sidenavMask) {
+                for (var /** @type {?} */ i = 0; i < sidenavChildren.length; i++) {
+                    if (sidenavChildren[i].classList.contains('sidenav-bg')) {
+                        continue;
+                    }
+                    else {
+                        for (var /** @type {?} */ j = 0; j < sidenavChildren[i].children.length; j++) {
+                            sidenavChildrenHeight += sidenavChildren[i].children[j].scrollHeight;
+                        }
+                    }
                 }
-                else {
-                    sidenavBgHeight += sidenavChildren[i].offsetHeight;
-                }
-            }
-            if (sidenavBg) {
-                this.renderer.setStyle(sidenavBg, 'padding-bottom', sidenavBgHeight + 'px');
+                this.renderer.setStyle(sidenavMask, 'min-height', sidenavChildrenHeight + 16 + 'px');
             }
             // pobraneie szerokosci okna po init
-            this.windwosWidth = window.innerWidth;
+            this.windwosWidth = win.innerWidth;
             if (this.sidenavBreakpoint) {
                 if (this.fixed) {
                     this.renderer.addClass(document.body, 'fixed-sn');
@@ -9319,7 +10020,7 @@ var SidenavComponent = /** @class */ (function () {
      */
     SidenavComponent.prototype.windwosResize = function () {
         if (this.isBrowser) {
-            this.windwosWidth = window.innerWidth;
+            this.windwosWidth = win.innerWidth;
             if (this.sidenavBreakpoint) {
                 if (this.fixed) {
                     if (this.windwosWidth < +this.sidenavBreakpoint + 1) {
@@ -11260,17 +11961,51 @@ var TabsetComponent = /** @class */ (function () {
     /**
      * @return {?}
      */
+    TabsetComponent.prototype.getFirstActiveTabIndex = function () {
+        var /** @type {?} */ activeTabs = this.tabs.filter(function (tab) {
+            return !tab.disabled;
+        });
+        return this.tabs.indexOf(activeTabs[0]);
+    };
+    /**
+     * @return {?}
+     */
+    TabsetComponent.prototype.removeActiveTabs = function () {
+        this.tabs.forEach(function (tab) {
+            tab.active = false;
+        });
+    };
+    /**
+     * @return {?}
+     */
+    TabsetComponent.prototype.initActiveTab = function () {
+        var /** @type {?} */ index = this.getFirstActiveTabIndex();
+        if (index === -1) {
+            this.removeActiveTabs();
+            return;
+        }
+        this.setActiveTab(index + 1);
+    };
+    /**
+     * @return {?}
+     */
     TabsetComponent.prototype.ngOnInit = function () {
         this.listGet();
         this.tabsGet();
         this.showActiveIndex();
+    };
+    /**
+     * @return {?}
+     */
+    TabsetComponent.prototype.ngAfterViewInit = function () {
+        this.initActiveTab();
     };
     return TabsetComponent;
 }());
 TabsetComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'mdb-tabset',
-                template: "<div class=\"container-fluid\">  <div class=\"row\"> <div class=\"{{ listGetClass }}\"> <ul class=\"nav {{ buttonClass }}\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\"> <li *ngFor=\"let tabz of tabs;let i = index\" [ngClass]=\"['nav-item', tabz.customClass || '']\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\" (click)=\"click($event, i)\"> <a #tabEl href=\"javascript:void(0);\" class=\"nav-link waves-light\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\"> <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span> <span *ngIf=\"tabz.removable\"> <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"fa fa-remove ml-2\"> </span> </span> </a> </li> </ul> </div> <div class=\"{{ tabsGetClass }}\"> <div class=\"tab-content {{ contentClass }}\"> <ng-content></ng-content> </div> </div> </div> </div> ",
+                template: "<div class=\"container-fluid\"> <div class=\"row\"> <div class=\"{{ listGetClass }}\"> <ul class=\"nav {{ buttonClass }}\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\"> <li *ngFor=\"let tabz of tabs;let i = index\" [ngClass]=\"['nav-item', tabz.customClass || '']\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\" (click)=\"click($event, i)\"> <a #tabEl href=\"javascript:void(0);\" class=\"nav-link waves-light\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\"> <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span> <span *ngIf=\"tabz.removable\"> <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"fa fa-remove ml-2\"> </span> </span> </a> </li> </ul> </div> <div class=\"{{ tabsGetClass }}\"> <div class=\"tab-content {{ contentClass }}\"> <ng-content></ng-content> </div> </div> </div> </div> ",
                 providers: [WavesDirective]
             },] },
 ];
@@ -11305,6 +12040,10 @@ var TabDirective = /** @class */ (function () {
      * @param {?} el
      */
     function TabDirective(platformId, tabset, el) {
+        /**
+         * if true tab can not be activated
+         */
+        this.disabled = false;
         /**
          * fired when tab became active, $event:Tab equals to selected instance of Tab component
          */
@@ -11409,6 +12148,12 @@ var TabDirective = /** @class */ (function () {
             var /** @type {?} */ reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
             el.className = el.className.replace(reg, ' ');
         }
+    };
+    /**
+     * @return {?}
+     */
+    TabDirective.prototype.ngOnDestroy = function () {
+        this.tabset.removeTab(this);
     };
     return TabDirective;
 }());
@@ -12247,6 +12992,16 @@ var ScrollSpyService = /** @class */ (function () {
     };
     /**
      * @param {?} scrollSpyId
+     * @return {?}
+     */
+    ScrollSpyService.prototype.removeScrollSpy = function (scrollSpyId) {
+        var /** @type {?} */ scrollSpyIndex = this.scrollSpys.findIndex(function (spy) {
+            return spy.id === scrollSpyId;
+        });
+        this.scrollSpys.splice(scrollSpyIndex, 1);
+    };
+    /**
+     * @param {?} scrollSpyId
      * @param {?} activeLinkId
      * @return {?}
      */
@@ -12342,6 +13097,12 @@ var ScrollSpyDirective = /** @class */ (function () {
      */
     ScrollSpyDirective.prototype.ngAfterViewInit = function () {
         this.scrollSpyService.addScrollSpy({ id: this.id, links: this.links });
+    };
+    /**
+     * @return {?}
+     */
+    ScrollSpyDirective.prototype.ngOnDestroy = function () {
+        this.scrollSpyService.removeScrollSpy(this.id);
     };
     return ScrollSpyDirective;
 }());
@@ -12595,437 +13356,6 @@ ScrollSpyModule.decorators = [
                     ScrollSpyElementDirective
                 ],
                 providers: [ScrollSpyService]
-            },] },
-];
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-var MdbDateFormatDirective = /** @class */ (function () {
-    function MdbDateFormatDirective() {
-        this.separator = '/';
-        this.format = ['dd', 'mm', 'yyyy'];
-    }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    MdbDateFormatDirective.prototype.onInput = function (event) {
-        var /** @type {?} */ currentValue = event.target.value;
-        var /** @type {?} */ newValue = this.getFormattedDate(currentValue);
-        event.target.value = newValue;
-    };
-    /**
-     * @return {?}
-     */
-    MdbDateFormatDirective.prototype.ngOnInit = function () {
-        this.setSeparatorsNumber();
-        this.setResultLength();
-    };
-    /**
-     * @return {?}
-     */
-    MdbDateFormatDirective.prototype.setSeparatorsNumber = function () {
-        this.separatorsNumber = this.format.length - 1;
-    };
-    /**
-     * @return {?}
-     */
-    MdbDateFormatDirective.prototype.setResultLength = function () {
-        var /** @type {?} */ resLength = 0;
-        this.format.forEach(function (value) {
-            resLength += value.length;
-        });
-        this.resultLength = resLength + this.separatorsNumber;
-    };
-    /**
-     * @param {?} date
-     * @return {?}
-     */
-    MdbDateFormatDirective.prototype.getFormattedDate = function (date) {
-        var _this = this;
-        var /** @type {?} */ dateParts = this.getDateParts(date);
-        var /** @type {?} */ result = dateParts.map(function (part, index) {
-            return part = _this.formatDateParts(part, index);
-        });
-        return result.join(this.separator).slice(0, this.resultLength);
-    };
-    /**
-     * @param {?} date
-     * @return {?}
-     */
-    MdbDateFormatDirective.prototype.getDateParts = function (date) {
-        date = this.getDigits(date).slice(0, this.resultLength - this.separatorsNumber);
-        var /** @type {?} */ parts = [];
-        var /** @type {?} */ partsIndex = {
-            first: this.format[0].length,
-            mid: this.format[0].length + this.format[1].length,
-            last: this.resultLength
-        };
-        parts[0] = date.slice(0, partsIndex.first);
-        if (date.length > partsIndex.first) {
-            parts[1] = date.slice(partsIndex.first, partsIndex.mid);
-        }
-        if (date.length > partsIndex.mid) {
-            parts[2] = date.slice(partsIndex.mid, partsIndex.last);
-        }
-        return parts;
-    };
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    MdbDateFormatDirective.prototype.getDigits = function (value) {
-        return value.replace(/\D/g, '');
-    };
-    /**
-     * @param {?} datePart
-     * @param {?} index
-     * @return {?}
-     */
-    MdbDateFormatDirective.prototype.formatDateParts = function (datePart, index) {
-        switch (this.format[index]) {
-            case 'dd':
-                datePart = this.getFormattedDay(datePart);
-                break;
-            case 'mm':
-                datePart = this.getFormattedMonth(datePart);
-                break;
-        }
-        return datePart;
-    };
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    MdbDateFormatDirective.prototype.getFormattedDay = function (value) {
-        var /** @type {?} */ dayFirstNum = parseInt(value.charAt(0), 10);
-        if (value) {
-            if (dayFirstNum > 3 && dayFirstNum !== 0) {
-                return '0' + value.charAt(0);
-            }
-            else {
-                return value;
-            }
-        }
-    };
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    MdbDateFormatDirective.prototype.getFormattedMonth = function (value) {
-        var /** @type {?} */ monthFirstNum = parseInt(value.charAt(0), 10);
-        var /** @type {?} */ monthNum = parseInt(value, 10);
-        if (value) {
-            if (monthFirstNum > 1 && monthFirstNum !== 0) {
-                return '0' + value.charAt(0);
-            }
-            else if (monthNum > 12) {
-                return '12';
-            }
-            else {
-                return value;
-            }
-        }
-    };
-    return MdbDateFormatDirective;
-}());
-MdbDateFormatDirective.decorators = [
-    { type: core.Directive, args: [{
-                selector: '[mdbDateFormat]',
-            },] },
-];
-MdbDateFormatDirective.propDecorators = {
-    separator: [{ type: core.Input }],
-    format: [{ type: core.Input }],
-    onInput: [{ type: core.HostListener, args: ['input', ['$event'],] }, { type: core.HostListener, args: ['paste', ['$event'],] }]
-};
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @record
- */
-var MdbCreditCardDirective = /** @class */ (function () {
-    function MdbCreditCardDirective() {
-        this.standardPattern = /(\d{1,4})/g;
-        this.defaultCard = {
-            name: '',
-            fullName: '',
-            re: /\d{0,16}/,
-            pattern: this.standardPattern,
-            maxLength: 19,
-            cvvLength: 3
-        };
-        this.cards = [
-            {
-                name: 'visa',
-                fullName: 'Visa',
-                re: /^4\d{0,15}/,
-                pattern: this.standardPattern,
-                maxLength: 16,
-                cvvLength: 3
-            },
-            {
-                name: 'mastercard',
-                fullName: 'Mastercard',
-                re: /^(5[1-5]\d{0,2}|22[2-9]\d{0,1}|2[3-7]\d{0,2})\d{0,12}/,
-                pattern: this.standardPattern,
-                maxLength: 16,
-                cvvLength: 3
-            },
-            {
-                name: 'amex',
-                fullName: 'American Express',
-                re: /^3[47]\d{0,13}/,
-                pattern: /(\d{1,4})(\d{1,6})?(\d{1,5})?/,
-                maxLength: 15,
-                cvvLength: 4
-            },
-            {
-                name: 'jcb',
-                fullName: 'JCB',
-                re: /^(?:35\d{0,2})\d{0,12}/,
-                pattern: this.standardPattern,
-                maxLength: 19,
-                cvvLength: 3
-            },
-            {
-                name: 'discover',
-                fullName: 'Discover',
-                re: /^(?:6011|65\d{0,2}|64[4-9]\d?)\d{0,12}/,
-                pattern: this.standardPattern,
-                maxLength: 19,
-                cvvLength: 3
-            },
-            {
-                name: 'diners-club',
-                fullName: 'Diners Club',
-                re: /^3(?:0([0-5]|9)|[689]\d?)\d{0,11}/,
-                pattern: /(\d{1,4})(\d{1,5})?(\d{1,4})?/,
-                maxLength: 19,
-                cvvLength: 3
-            }
-        ];
-        this._separator = ' ';
-    }
-    Object.defineProperty(MdbCreditCardDirective.prototype, "additionalCards", {
-        /**
-         * @return {?}
-         */
-        get: function () { return this._additionalCards; },
-        /**
-         * @param {?} cards
-         * @return {?}
-         */
-        set: function (cards) {
-            this._additionalCards = cards;
-            this.addCards(cards);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MdbCreditCardDirective.prototype, "separator", {
-        /**
-         * @return {?}
-         */
-        get: function () { return this._separator; },
-        /**
-         * @param {?} separator
-         * @return {?}
-         */
-        set: function (separator) {
-            this._separator = separator;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    MdbCreditCardDirective.prototype.onInput = function (event) {
-        this.formatInput(event);
-    };
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    MdbCreditCardDirective.prototype.formatInput = function (event) {
-        var /** @type {?} */ input = event.target.value;
-        var /** @type {?} */ formattedInput = this.getFormattedInput(input);
-        event.target.value = formattedInput;
-    };
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    MdbCreditCardDirective.prototype.getFormattedInput = function (value) {
-        value = this.removeNonDigits(value);
-        var /** @type {?} */ card = this.findCardByNumber(value);
-        this.updateCurrentCardNames(card.name, card.fullName);
-        var /** @type {?} */ cardNumMaxLength;
-        if (this.hasStandardPattern(card)) {
-            var /** @type {?} */ matches = value.match(card.pattern);
-            if (matches === null) {
-                return value;
-            }
-            cardNumMaxLength = card.maxLength + matches.length - 1;
-            this.maxLength = cardNumMaxLength.toString();
-            return matches.join(this.separator);
-        }
-        else {
-            var /** @type {?} */ results = card.pattern.exec(value);
-            if (results === null) {
-                return value;
-            }
-            results.shift();
-            cardNumMaxLength = card.maxLength + results.length - 1;
-            this.maxLength = cardNumMaxLength.toString();
-            return results.filter(this.isMatch).join(this.separator);
-        }
-    };
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    MdbCreditCardDirective.prototype.removeNonDigits = function (value) {
-        return value.replace(/\D/g, '');
-    };
-    /**
-     * @param {?} card
-     * @return {?}
-     */
-    MdbCreditCardDirective.prototype.hasStandardPattern = function (card) {
-        return card.pattern.toString() === this.standardPattern.toString();
-    };
-    /**
-     * @param {?} match
-     * @return {?}
-     */
-    MdbCreditCardDirective.prototype.isMatch = function (match) {
-        return match !== undefined;
-    };
-    /**
-     * @param {?} name
-     * @param {?} fullName
-     * @return {?}
-     */
-    MdbCreditCardDirective.prototype.updateCurrentCardNames = function (name, fullName) {
-        this.cardName = name;
-        this.cardFullName = fullName;
-    };
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    MdbCreditCardDirective.prototype.findCardByNumber = function (value) {
-        var /** @type {?} */ cardType = this.cards.find(function (card) {
-            return card.re.test(value);
-        });
-        if (!cardType) {
-            return this.defaultCard;
-        }
-        return cardType;
-    };
-    /**
-     * @param {?} newCards
-     * @return {?}
-     */
-    MdbCreditCardDirective.prototype.addCards = function (newCards) {
-        var _this = this;
-        newCards.forEach(function (card) {
-            _this.cards.push(card);
-        });
-    };
-    return MdbCreditCardDirective;
-}());
-MdbCreditCardDirective.decorators = [
-    { type: core.Directive, args: [{
-                selector: '[mdbCreditCard]',
-                exportAs: 'mdbCreditCard'
-            },] },
-];
-/** @nocollapse */
-MdbCreditCardDirective.ctorParameters = function () { return []; };
-MdbCreditCardDirective.propDecorators = {
-    additionalCards: [{ type: core.Input }],
-    separator: [{ type: core.Input }],
-    maxLength: [{ type: core.HostBinding, args: ['attr.maxLength',] }],
-    onInput: [{ type: core.HostListener, args: ['input', ['$event'],] }]
-};
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-var MdbCvvDirective = /** @class */ (function () {
-    function MdbCvvDirective() {
-        this.maxLength = '4';
-    }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    MdbCvvDirective.prototype.onInput = function (event) {
-        this.formatInput(event);
-    };
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    MdbCvvDirective.prototype.formatInput = function (event) {
-        var /** @type {?} */ input = event.target.value;
-        var /** @type {?} */ newValue = this.getFormattedValue(input);
-        event.target.value = newValue;
-    };
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    MdbCvvDirective.prototype.getFormattedValue = function (value) {
-        value = this.removeNonDigits(value);
-        return value;
-    };
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    MdbCvvDirective.prototype.removeNonDigits = function (value) {
-        return value.replace(/\D/g, '');
-    };
-    return MdbCvvDirective;
-}());
-MdbCvvDirective.decorators = [
-    { type: core.Directive, args: [{
-                selector: '[mdbCvv]',
-            },] },
-];
-MdbCvvDirective.propDecorators = {
-    maxLength: [{ type: core.HostBinding, args: ['attr.maxLength',] }],
-    onInput: [{ type: core.HostListener, args: ['input', ['$event'],] }]
-};
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-var AutoFormatModule = /** @class */ (function () {
-    function AutoFormatModule() {
-    }
-    return AutoFormatModule;
-}());
-AutoFormatModule.decorators = [
-    { type: core.NgModule, args: [{
-                declarations: [
-                    MdbDateFormatDirective,
-                    MdbCreditCardDirective,
-                    MdbCvvDirective
-                ],
-                exports: [
-                    MdbDateFormatDirective,
-                    MdbCreditCardDirective,
-                    MdbCvvDirective
-                ]
             },] },
 ];
 /**
@@ -13445,29 +13775,72 @@ BadgeModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/*tslint:disable */
+var MdbBreadcrumbComponent = /** @class */ (function () {
+    function MdbBreadcrumbComponent() {
+    }
+    return MdbBreadcrumbComponent;
+}());
+MdbBreadcrumbComponent.decorators = [
+    { type: core.Component, args: [{
+                selector: 'mdb-breadcrumb',
+                template: "<ol class=\"breadcrumb list-inline list-unstyled {{customClass}} text-{{textTransform}}\"> <ng-content></ng-content> </ol> "
+            },] },
+];
+MdbBreadcrumbComponent.propDecorators = {
+    customClass: [{ type: core.Input }],
+    textTransform: [{ type: core.Input }]
+};
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
  */
+var MdbBreadcrumbItemComponent = /** @class */ (function () {
+    /**
+     * @param {?} _el
+     * @param {?} _renderer
+     */
+    function MdbBreadcrumbItemComponent(_el, _renderer) {
+        this._el = _el;
+        this._renderer = _renderer;
+    }
+    /**
+     * @return {?}
+     */
+    MdbBreadcrumbItemComponent.prototype.ngOnInit = function () {
+        this._renderer.addClass(this._el.nativeElement, 'breadcrumb-item');
+    };
+    return MdbBreadcrumbItemComponent;
+}());
+MdbBreadcrumbItemComponent.decorators = [
+    { type: core.Component, args: [{
+                selector: 'mdb-breadcrumb-item',
+                template: "<li class=\"list-inline-item breadcrumb-item font-weight-{{fontWeight}}\"> <ng-content></ng-content> </li> "
+            },] },
+];
+/** @nocollapse */
+MdbBreadcrumbItemComponent.ctorParameters = function () { return [
+    { type: core.ElementRef },
+    { type: core.Renderer2 }
+]; };
+MdbBreadcrumbItemComponent.propDecorators = {
+    fontWeight: [{ type: core.Input }]
+};
 /**
- * JS version of browser APIs. This library can only run in the browser.
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
  */
-var win = typeof window !== 'undefined' && window || /** @type {?} */ ({});
-var document$1 = win.document;
-var location = win.location;
-var gc = win['gc'] ? function () { return win['gc'](); } : function () { return null; };
-var performance = win['performance'] ? win['performance'] : null;
-var Event = win['Event'];
-var MouseEvent = win['MouseEvent'];
-var KeyboardEvent = win['KeyboardEvent'];
-var EventTarget = win['EventTarget'];
-var History = win['History'];
-var Location = win['Location'];
-var EventListener = win['EventListener'];
+var BreadcrumbModule = /** @class */ (function () {
+    function BreadcrumbModule() {
+    }
+    return BreadcrumbModule;
+}());
+BreadcrumbModule.decorators = [
+    { type: core.NgModule, args: [{
+                imports: [common.CommonModule],
+                declarations: [MdbBreadcrumbComponent, MdbBreadcrumbItemComponent],
+                exports: [MdbBreadcrumbComponent, MdbBreadcrumbItemComponent]
+            },] },
+];
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -15771,8 +16144,10 @@ var ComponentLoader = /** @class */ (function () {
         this._posService = _posService;
         this.onBeforeShow = new core.EventEmitter();
         this.onShown = new core.EventEmitter();
+        this.shown = new core.EventEmitter();
         this.onBeforeHide = new core.EventEmitter();
         this.onHidden = new core.EventEmitter();
+        this.hidden = new core.EventEmitter();
         this._providers = [];
     }
     Object.defineProperty(ComponentLoader.prototype, "isShown", {
@@ -16287,7 +16662,9 @@ var BsDropdownDirective = /** @class */ (function () {
             .createLoader(this._elementRef, this._viewContainerRef, this._renderer)
             .provide({ provide: BsDropdownState, useValue: this._state });
         this.onShown = this._dropdown.onShown;
+        this.shown = this._dropdown.shown;
         this.onHidden = this._dropdown.onHidden;
+        this.hidden = this._dropdown.hidden;
         this.isOpenChange = this._state.isOpenChange;
         // set initial dropdown state from config
         this._state.autoClose = this._config.autoClose;
@@ -16423,6 +16800,7 @@ var BsDropdownDirective = /** @class */ (function () {
         if (this._showInline) {
             this._isInlineOpen = true;
             this.onShown.emit(true);
+            this.shown.emit(true);
             this._state.isOpenChange.emit(true);
             return;
         }
@@ -16464,6 +16842,7 @@ var BsDropdownDirective = /** @class */ (function () {
                 if (_this._showInline) {
                     _this._isInlineOpen = false;
                     _this.onHidden.emit(true);
+                    _this.hidden.emit(true);
                 }
                 else {
                     _this._dropdown.hide();
@@ -16475,6 +16854,7 @@ var BsDropdownDirective = /** @class */ (function () {
             if (this._showInline) {
                 this._isInlineOpen = false;
                 this.onHidden.emit(true);
+                this.hidden.emit(true);
             }
             else {
                 this._dropdown.hide();
@@ -16533,7 +16913,9 @@ BsDropdownDirective.propDecorators = {
     isOpen: [{ type: core.HostBinding, args: ['class.open',] }, { type: core.HostBinding, args: ['class.show',] }, { type: core.Input }],
     isOpenChange: [{ type: core.Output }],
     onShown: [{ type: core.Output }],
-    onHidden: [{ type: core.Output }]
+    shown: [{ type: core.Output }],
+    onHidden: [{ type: core.Output }],
+    hidden: [{ type: core.Output }]
 };
 /**
  * @fileoverview added by tsickle
@@ -17328,18 +17710,22 @@ var ModalDirective = /** @class */ (function () {
          * This event fires immediately when the `show` instance method is called.
          */
         this.onShow = new core.EventEmitter();
+        this.open = new core.EventEmitter();
         /**
          * This event is fired when the modal has been made visible to the user (will wait for CSS transitions to complete)
          */
         this.onShown = new core.EventEmitter();
+        this.opened = new core.EventEmitter();
         /**
          * This event is fired immediately when the hide instance method has been called.
          */
         this.onHide = new core.EventEmitter();
+        this.close = new core.EventEmitter();
         /**
          * This event is fired when the modal has finished being hidden from the user (will wait for CSS transitions to complete).
          */
         this.onHidden = new core.EventEmitter();
+        this.closed = new core.EventEmitter();
         this.isAnimated = true;
         this._isShown = false;
         this.isBodyOverflowing = false;
@@ -17438,6 +17824,7 @@ var ModalDirective = /** @class */ (function () {
         var _this = this;
         this.dismissReason = null;
         this.onShow.emit(this);
+        this.open.emit(this);
         if (this._isShown) {
             return;
         }
@@ -17469,6 +17856,7 @@ var ModalDirective = /** @class */ (function () {
             event.preventDefault();
         }
         this.onHide.emit(this);
+        this.close.emit(this);
         // todo: add an option to prevent hiding
         if (!this._isShown) {
             return;
@@ -17525,6 +17913,7 @@ var ModalDirective = /** @class */ (function () {
                 _this._element.nativeElement.focus();
             }
             _this.onShown.emit(_this);
+            _this.opened.emit(_this);
         };
         if (this.isAnimated) {
             setTimeout(transitionComplete, TRANSITION_DURATION);
@@ -17551,6 +17940,7 @@ var ModalDirective = /** @class */ (function () {
             _this.resetAdjustments();
             _this.focusOtherModal();
             _this.onHidden.emit(_this);
+            _this.closed.emit(_this);
         });
     };
     /**
@@ -17679,9 +18069,13 @@ ModalDirective.ctorParameters = function () { return [
 ModalDirective.propDecorators = {
     config: [{ type: core.Input }],
     onShow: [{ type: core.Output }],
+    open: [{ type: core.Output }],
     onShown: [{ type: core.Output }],
+    opened: [{ type: core.Output }],
     onHide: [{ type: core.Output }],
+    close: [{ type: core.Output }],
     onHidden: [{ type: core.Output }],
+    closed: [{ type: core.Output }],
     onClick: [{ type: core.HostListener, args: ['click', ['$event'],] }],
     onEsc: [{ type: core.HostListener, args: ['keydown.esc',] }]
 };
@@ -18521,7 +18915,9 @@ var PopoverDirective = /** @class */ (function () {
             .provide({ provide: PopoverConfig, useValue: _config });
         Object.assign(this, _config);
         this.onShown = this._popover.onShown;
+        this.shown = this._popover.onShown;
         this.onHidden = this._popover.onHidden;
+        this.hidden = this._popover.onHidden;
     }
     Object.defineProperty(PopoverDirective.prototype, "isOpen", {
         /**
@@ -18630,7 +19026,9 @@ PopoverDirective.propDecorators = {
     container: [{ type: core.Input }],
     isOpen: [{ type: core.Input }],
     onShown: [{ type: core.Output }],
-    onHidden: [{ type: core.Output }]
+    shown: [{ type: core.Output }],
+    onHidden: [{ type: core.Output }],
+    hidden: [{ type: core.Output }]
 };
 /**
  * @fileoverview added by tsickle
@@ -19522,7 +19920,9 @@ var TooltipDirective = /** @class */ (function () {
             .provide({ provide: TooltipConfig, useValue: config });
         Object.assign(this, config);
         this.onShown = this._tooltip.onShown;
+        this.shown = this._tooltip.onShown;
         this.onHidden = this._tooltip.onHidden;
+        this.hidden = this._tooltip.onHidden;
     }
     Object.defineProperty(TooltipDirective.prototype, "isOpen", {
         /**
@@ -19661,7 +20061,9 @@ TooltipDirective.propDecorators = {
     isOpen: [{ type: core.Input }],
     isDisabled: [{ type: core.Input }],
     onShown: [{ type: core.Output }],
+    shown: [{ type: core.Output }],
     onHidden: [{ type: core.Output }],
+    hidden: [{ type: core.Output }],
     delay: [{ type: core.Input }],
     fadeDuration: [{ type: core.Input }]
 };
@@ -19771,6 +20173,10 @@ var BsComponentRef = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var MODULES = [
     ButtonsModule,
     CardsFreeModule,
@@ -19788,7 +20194,8 @@ var MODULES = [
     IconsModule,
     CheckboxModule,
     TableModule,
-    BadgeModule
+    BadgeModule,
+    BreadcrumbModule
 ];
 var MDBRootModule = /** @class */ (function () {
     function MDBRootModule() {
@@ -19814,7 +20221,8 @@ MDBRootModule.decorators = [
                     CardsFreeModule.forRoot(),
                     CheckboxModule,
                     TableModule,
-                    BadgeModule
+                    BadgeModule,
+                    BreadcrumbModule
                 ],
                 exports: MODULES,
                 schemas: [core.NO_ERRORS_SCHEMA]
@@ -19902,6 +20310,10 @@ MDBBootstrapModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var MODULES$1 = [
     AutocompleteModule,
     CardsModule,
@@ -19920,7 +20332,8 @@ var MODULES$1 = [
     SmoothscrollModule,
     CharCounterModule,
     ScrollSpyModule,
-    AutoFormatModule
+    AutoFormatModule,
+    RangeModule
 ];
 var MDBRootModulePro = /** @class */ (function () {
     function MDBRootModulePro() {
@@ -19946,7 +20359,8 @@ MDBRootModulePro.decorators = [
                     SmoothscrollModule.forRoot(),
                     CharCounterModule.forRoot(),
                     ScrollSpyModule,
-                    AutoFormatModule
+                    AutoFormatModule,
+                    RangeModule
                 ],
                 exports: [MODULES$1],
                 providers: [],
@@ -20067,6 +20481,10 @@ exports.AutocompleteModule = AutocompleteModule;
 exports.CardRevealComponent = CardRevealComponent;
 exports.CardRotatingComponent = CardRotatingComponent;
 exports.CardsModule = CardsModule;
+exports.AutoFormatModule = AutoFormatModule;
+exports.MdbDateFormatDirective = MdbDateFormatDirective;
+exports.MdbCreditCardDirective = MdbCreditCardDirective;
+exports.MdbCvvDirective = MdbCvvDirective;
 exports.InputAutoFillDirective = InputAutoFillDirective;
 exports.FocusDirective = FocusDirective;
 exports.LocaleService = LocaleService;
@@ -20113,6 +20531,9 @@ exports.ProgressbarConfigComponent = ProgressbarConfigComponent;
 exports.ProgressbarModule = ProgressbarModule;
 exports.PreloadersModule = PreloadersModule;
 exports.ProgressBars = ProgressBars;
+exports.RangeModule = RangeModule;
+exports.RANGE_VALUE_ACCESOR = RANGE_VALUE_ACCESOR;
+exports.MdbRangeInputComponent = MdbRangeInputComponent;
 exports.SidenavComponent = SidenavComponent;
 exports.SidenavModule = SidenavModule;
 exports.PageScrollUtilService = PageScrollUtilService;
@@ -20143,10 +20564,6 @@ exports.ScrollSpyWindowDirective = ScrollSpyWindowDirective;
 exports.ScrollSpyElementDirective = ScrollSpyElementDirective;
 exports.ScrollSpyLinkDirective = ScrollSpyLinkDirective;
 exports.ScrollSpyService = ScrollSpyService;
-exports.AutoFormatModule = AutoFormatModule;
-exports.MdbDateFormatDirective = MdbDateFormatDirective;
-exports.MdbCreditCardDirective = MdbCreditCardDirective;
-exports.MdbCvvDirective = MdbCvvDirective;
 exports.ButtonsModule = ButtonsModule;
 exports.CHECKBOX_CONTROL_VALUE_ACCESSOR = CHECKBOX_CONTROL_VALUE_ACCESSOR;
 exports.ButtonCheckboxDirective = ButtonCheckboxDirective;
@@ -20155,6 +20572,9 @@ exports.ButtonRadioDirective = ButtonRadioDirective;
 exports.MdbBtnDirective = MdbBtnDirective;
 exports.BadgeModule = BadgeModule;
 exports.MDBBadgeComponent = MDBBadgeComponent;
+exports.MdbBreadcrumbComponent = MdbBreadcrumbComponent;
+exports.MdbBreadcrumbItemComponent = MdbBreadcrumbItemComponent;
+exports.BreadcrumbModule = BreadcrumbModule;
 exports.Direction = Direction;
 exports.CarouselComponent = CarouselComponent;
 exports.CarouselConfig = CarouselConfig;
@@ -20257,73 +20677,76 @@ exports.MDBBootstrapModule = MDBBootstrapModule;
 exports.MDBBootstrapModulePro = MDBBootstrapModulePro;
 exports.MDBRootModules = MDBRootModules;
 exports.MDBBootstrapModulesPro = MDBBootstrapModulesPro;
-exports.ɵde1 = BadgeModule;
-exports.ɵdf1 = MDBBadgeComponent;
-exports.ɵdd1 = MdbBtnDirective;
-exports.ɵda1 = ButtonsModule;
-exports.ɵdb1 = ButtonCheckboxDirective;
-exports.ɵdc1 = ButtonRadioDirective;
-exports.ɵdk1 = CardsFreeModule;
-exports.ɵdg1 = CarouselComponent;
-exports.ɵdh1 = CarouselConfig;
-exports.ɵdj1 = CarouselModule;
-exports.ɵdi1 = SlideComponent;
-exports.ɵdl1 = BaseChartDirective;
-exports.ɵdm1 = ChartsModule;
-exports.ɵdn1 = CHECKBOX_VALUE_ACCESSOR;
-exports.ɵdo1 = CheckboxComponent;
-exports.ɵdp1 = CheckboxModule;
-exports.ɵdq1 = CollapseComponent;
-exports.ɵdr1 = CollapseModule;
-exports.ɵds1 = BsDropdownContainerComponent;
-exports.ɵdt1 = BsDropdownMenuDirective;
-exports.ɵdu1 = BsDropdownToggleDirective;
-exports.ɵdv1 = BsDropdownConfig;
-exports.ɵdw1 = BsDropdownDirective;
-exports.ɵdy1 = DropdownModule;
-exports.ɵdx1 = BsDropdownState;
-exports.ɵea1 = MdbIconComponent;
-exports.ɵdz1 = IconsModule;
-exports.ɵeb1 = InputsModule;
-exports.ɵec1 = MdbInputDirective;
-exports.ɵff1 = MDBRootModule;
-exports.ɵed1 = ModalDirective;
-exports.ɵej1 = ModalModule;
-exports.ɵee1 = ModalOptions;
-exports.ɵef1 = MDBModalService;
-exports.ɵeh1 = ModalBackdropComponent;
-exports.ɵeg1 = ModalBackdropOptions;
-exports.ɵei1 = ModalContainerComponent;
-exports.ɵek1 = NavbarComponent;
-exports.ɵel1 = NavbarModule;
-exports.ɵem1 = PopoverContainerComponent;
-exports.ɵen1 = PopoverConfig;
-exports.ɵeo1 = PopoverDirective;
-exports.ɵep1 = PopoverModule;
-exports.ɵeq1 = RippleDirective;
-exports.ɵer1 = RippleModule;
-exports.ɵeu1 = MdbTablePaginationComponent;
-exports.ɵev1 = MdbTableRowDirective;
-exports.ɵew1 = MdbTableScrollDirective;
-exports.ɵex1 = MdbTableSortDirective;
-exports.ɵey1 = MdbTableDirective;
-exports.ɵez1 = MdbTableService;
-exports.ɵfa1 = TableModule;
-exports.ɵfb1 = TooltipContainerComponent;
-exports.ɵfc1 = TooltipDirective;
-exports.ɵfe1 = TooltipModule;
-exports.ɵfd1 = TooltipConfig;
-exports.ɵes1 = WavesDirective;
-exports.ɵet1 = WavesModule;
+exports.ɵdg1 = BadgeModule;
+exports.ɵdh1 = MDBBadgeComponent;
+exports.ɵdk1 = BreadcrumbModule;
+exports.ɵdj1 = MdbBreadcrumbItemComponent;
+exports.ɵdi1 = MdbBreadcrumbComponent;
+exports.ɵdf1 = MdbBtnDirective;
+exports.ɵdc1 = ButtonsModule;
+exports.ɵdd1 = ButtonCheckboxDirective;
+exports.ɵde1 = ButtonRadioDirective;
+exports.ɵdp1 = CardsFreeModule;
+exports.ɵdl1 = CarouselComponent;
+exports.ɵdm1 = CarouselConfig;
+exports.ɵdo1 = CarouselModule;
+exports.ɵdn1 = SlideComponent;
+exports.ɵdq1 = BaseChartDirective;
+exports.ɵdr1 = ChartsModule;
+exports.ɵds1 = CHECKBOX_VALUE_ACCESSOR;
+exports.ɵdt1 = CheckboxComponent;
+exports.ɵdu1 = CheckboxModule;
+exports.ɵdv1 = CollapseComponent;
+exports.ɵdw1 = CollapseModule;
+exports.ɵdx1 = BsDropdownContainerComponent;
+exports.ɵdy1 = BsDropdownMenuDirective;
+exports.ɵdz1 = BsDropdownToggleDirective;
+exports.ɵea1 = BsDropdownConfig;
+exports.ɵeb1 = BsDropdownDirective;
+exports.ɵed1 = DropdownModule;
+exports.ɵec1 = BsDropdownState;
+exports.ɵef1 = MdbIconComponent;
+exports.ɵee1 = IconsModule;
+exports.ɵeg1 = InputsModule;
+exports.ɵeh1 = MdbInputDirective;
+exports.ɵfk1 = MDBRootModule;
+exports.ɵei1 = ModalDirective;
+exports.ɵeo1 = ModalModule;
+exports.ɵej1 = ModalOptions;
+exports.ɵek1 = MDBModalService;
+exports.ɵem1 = ModalBackdropComponent;
+exports.ɵel1 = ModalBackdropOptions;
+exports.ɵen1 = ModalContainerComponent;
+exports.ɵep1 = NavbarComponent;
+exports.ɵeq1 = NavbarModule;
+exports.ɵer1 = PopoverContainerComponent;
+exports.ɵes1 = PopoverConfig;
+exports.ɵet1 = PopoverDirective;
+exports.ɵeu1 = PopoverModule;
+exports.ɵev1 = RippleDirective;
+exports.ɵew1 = RippleModule;
+exports.ɵez1 = MdbTablePaginationComponent;
+exports.ɵfa1 = MdbTableRowDirective;
+exports.ɵfb1 = MdbTableScrollDirective;
+exports.ɵfc1 = MdbTableSortDirective;
+exports.ɵfd1 = MdbTableDirective;
+exports.ɵfe1 = MdbTableService;
+exports.ɵff1 = TableModule;
+exports.ɵfg1 = TooltipContainerComponent;
+exports.ɵfh1 = TooltipDirective;
+exports.ɵfj1 = TooltipModule;
+exports.ɵfi1 = TooltipConfig;
+exports.ɵex1 = WavesDirective;
+exports.ɵey1 = WavesModule;
 exports.ɵc1 = SBItemComponent;
 exports.ɵa1 = SBItemBodyComponent;
 exports.ɵb1 = SBItemHeadComponent;
 exports.ɵd1 = SqueezeBoxComponent;
 exports.ɵe1 = AccordionModule;
-exports.ɵcw1 = AutoFormatModule;
-exports.ɵcy1 = MdbCreditCardDirective;
-exports.ɵcz1 = MdbCvvDirective;
-exports.ɵcx1 = MdbDateFormatDirective;
+exports.ɵt1 = AutoFormatModule;
+exports.ɵv1 = MdbCreditCardDirective;
+exports.ɵw1 = MdbCvvDirective;
+exports.ɵu1 = MdbDateFormatDirective;
 exports.ɵf1 = CompleterListItemComponent;
 exports.ɵg1 = CompleterComponent;
 exports.ɵh1 = MdbCompleterDirective;
@@ -20338,63 +20761,65 @@ exports.ɵo1 = RemoteDataFactoryProvider;
 exports.ɵq1 = CardRevealComponent;
 exports.ɵr1 = CardRotatingComponent;
 exports.ɵs1 = CardsModule;
-exports.ɵz1 = MDBDatePickerComponent;
-exports.ɵy1 = MYDP_VALUE_ACCESSOR;
-exports.ɵx1 = DatepickerModule;
-exports.ɵt1 = InputAutoFillDirective;
-exports.ɵu1 = FocusDirective;
-exports.ɵv1 = LocaleService;
-exports.ɵw1 = UtilService;
-exports.ɵba1 = SimpleChartComponent;
-exports.ɵbc1 = ChartSimpleModule;
-exports.ɵbb1 = EasyPieChartComponent;
-exports.ɵbd1 = MDBFileDropDirective;
-exports.ɵbe1 = MDBFileSelectDirective;
-exports.ɵbf1 = FileInputModule;
-exports.ɵbg1 = CharCounterDirective;
-exports.ɵbh1 = CharCounterModule;
-exports.ɵbi1 = ImageModalComponent;
-exports.ɵbj1 = LightBoxModule;
-exports.ɵbl1 = SelectDropdownComponent;
-exports.ɵbm1 = SELECT_VALUE_ACCESSOR;
-exports.ɵbn1 = SelectComponent;
-exports.ɵbo1 = SelectModule;
-exports.ɵfg1 = MDBRootModulePro;
-exports.ɵbp1 = BarComponent;
-exports.ɵbv1 = ProgressBars;
-exports.ɵfh1 = MdProgressBarModule;
-exports.ɵfi1 = MdProgressSpinnerModule;
-exports.ɵbq1 = ProgressSpinnerComponent;
-exports.ɵbr1 = ProgressDirective;
-exports.ɵbs1 = ProgressbarComponent;
-exports.ɵbt1 = ProgressbarConfigComponent;
-exports.ɵbu1 = ProgressbarModule;
-exports.ɵct1 = ScrollSpyElementDirective;
-exports.ɵcu1 = ScrollSpyLinkDirective;
-exports.ɵcs1 = ScrollSpyWindowDirective;
-exports.ɵcr1 = ScrollSpyDirective;
-exports.ɵcq1 = ScrollSpyModule;
-exports.ɵcv1 = ScrollSpyService;
-exports.ɵbw1 = SidenavComponent;
-exports.ɵbx1 = SidenavModule;
-exports.ɵby1 = PageScrollDirective;
-exports.ɵbz1 = PageScrollInstance;
-exports.ɵca1 = SmoothscrollModule;
-exports.ɵcb1 = PageScrollService;
-exports.ɵcc1 = MdbStickyDirective;
-exports.ɵcd1 = StickyContentModule;
-exports.ɵce1 = TabHeadingDirective;
-exports.ɵcf1 = TabDirective;
-exports.ɵcg1 = TabsetComponent;
-exports.ɵch1 = TabsetConfig;
-exports.ɵcj1 = TabsModule;
-exports.ɵci1 = NgTranscludeDirective;
-exports.ɵck1 = CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR;
-exports.ɵcl1 = MaterialChipsComponent;
-exports.ɵcm1 = MaterialChipsModule;
-exports.ɵcp1 = ClockPickerComponent;
-exports.ɵco1 = TIME_PIRCKER_VALUE_ACCESSOT;
-exports.ɵcn1 = TimePickerModule;
+exports.ɵbd1 = MDBDatePickerComponent;
+exports.ɵbc1 = MYDP_VALUE_ACCESSOR;
+exports.ɵbb1 = DatepickerModule;
+exports.ɵx1 = InputAutoFillDirective;
+exports.ɵy1 = FocusDirective;
+exports.ɵz1 = LocaleService;
+exports.ɵba1 = UtilService;
+exports.ɵbe1 = SimpleChartComponent;
+exports.ɵbg1 = ChartSimpleModule;
+exports.ɵbf1 = EasyPieChartComponent;
+exports.ɵbh1 = MDBFileDropDirective;
+exports.ɵbi1 = MDBFileSelectDirective;
+exports.ɵbj1 = FileInputModule;
+exports.ɵbk1 = CharCounterDirective;
+exports.ɵbl1 = CharCounterModule;
+exports.ɵbm1 = ImageModalComponent;
+exports.ɵbn1 = LightBoxModule;
+exports.ɵbp1 = SelectDropdownComponent;
+exports.ɵbq1 = SELECT_VALUE_ACCESSOR;
+exports.ɵbr1 = SelectComponent;
+exports.ɵbs1 = SelectModule;
+exports.ɵfl1 = MDBRootModulePro;
+exports.ɵbt1 = BarComponent;
+exports.ɵbz1 = ProgressBars;
+exports.ɵfm1 = MdProgressBarModule;
+exports.ɵfn1 = MdProgressSpinnerModule;
+exports.ɵbu1 = ProgressSpinnerComponent;
+exports.ɵbv1 = ProgressDirective;
+exports.ɵbw1 = ProgressbarComponent;
+exports.ɵbx1 = ProgressbarConfigComponent;
+exports.ɵby1 = ProgressbarModule;
+exports.ɵcb1 = MdbRangeInputComponent;
+exports.ɵca1 = RangeModule;
+exports.ɵcz1 = ScrollSpyElementDirective;
+exports.ɵda1 = ScrollSpyLinkDirective;
+exports.ɵcy1 = ScrollSpyWindowDirective;
+exports.ɵcx1 = ScrollSpyDirective;
+exports.ɵcw1 = ScrollSpyModule;
+exports.ɵdb1 = ScrollSpyService;
+exports.ɵcc1 = SidenavComponent;
+exports.ɵcd1 = SidenavModule;
+exports.ɵce1 = PageScrollDirective;
+exports.ɵcf1 = PageScrollInstance;
+exports.ɵcg1 = SmoothscrollModule;
+exports.ɵch1 = PageScrollService;
+exports.ɵci1 = MdbStickyDirective;
+exports.ɵcj1 = StickyContentModule;
+exports.ɵck1 = TabHeadingDirective;
+exports.ɵcl1 = TabDirective;
+exports.ɵcm1 = TabsetComponent;
+exports.ɵcn1 = TabsetConfig;
+exports.ɵcp1 = TabsModule;
+exports.ɵco1 = NgTranscludeDirective;
+exports.ɵcq1 = CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR;
+exports.ɵcr1 = MaterialChipsComponent;
+exports.ɵcs1 = MaterialChipsModule;
+exports.ɵcv1 = ClockPickerComponent;
+exports.ɵcu1 = TIME_PIRCKER_VALUE_ACCESSOT;
+exports.ɵct1 = TimePickerModule;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

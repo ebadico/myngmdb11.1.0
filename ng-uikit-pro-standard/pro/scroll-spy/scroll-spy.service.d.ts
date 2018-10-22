@@ -7,6 +7,7 @@ export interface ScrollSpy {
 export declare class ScrollSpyService {
     private scrollSpys;
     addScrollSpy(scrollSpy: ScrollSpy): void;
+    removeScrollSpy(scrollSpyId: string): void;
     updateActiveState(scrollSpyId: string, activeLinkId: string): void;
     removeActiveState(scrollSpyId: string, activeLinkId: string): void;
     setActiveLink(activeLink: ScrollSpyLinkDirective | any): void;

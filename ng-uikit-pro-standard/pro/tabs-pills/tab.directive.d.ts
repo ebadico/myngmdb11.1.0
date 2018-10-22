@@ -1,6 +1,6 @@
-import { EventEmitter, TemplateRef, ElementRef, OnInit } from '@angular/core';
+import { EventEmitter, TemplateRef, ElementRef, OnInit, OnDestroy } from '@angular/core';
 import { TabsetComponent } from './tabset.component';
-export declare class TabDirective implements OnInit {
+export declare class TabDirective implements OnInit, OnDestroy {
     /** tab header text */
     heading: string;
     /** if true tab can not be activated */
@@ -30,4 +30,5 @@ export declare class TabDirective implements OnInit {
     protected hasClass(el: any, className: any): any;
     protected classAdd(el: any, className: any): void;
     protected removeClass(el: any, className: any): void;
+    ngOnDestroy(): void;
 }
