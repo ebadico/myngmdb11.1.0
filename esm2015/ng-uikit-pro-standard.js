@@ -8199,10 +8199,14 @@ class SelectComponent {
      */
     updateLabelState() {
         if (!this.placeholder && !this.hasSelected) {
-            this.labelActive = false;
+            setTimeout(() => {
+                this.labelActive = false;
+            }, 0);
         }
         else {
-            this.labelActive = true;
+            setTimeout(() => {
+                this.labelActive = true;
+            }, 0);
         }
     }
     /**
@@ -16625,7 +16629,9 @@ class MdbInputDirective {
      */
     oncut() {
         try {
-            this.delayedResize();
+            setTimeout(() => {
+                this.delayedResize();
+            }, 0);
         }
         catch (/** @type {?} */ error) { }
     }
@@ -16634,7 +16640,9 @@ class MdbInputDirective {
      */
     onpaste() {
         try {
-            this.delayedResize();
+            setTimeout(() => {
+                this.delayedResize();
+            }, 0);
         }
         catch (/** @type {?} */ error) { }
     }
@@ -16643,7 +16651,9 @@ class MdbInputDirective {
      */
     ondrop() {
         try {
-            this.delayedResize();
+            setTimeout(() => {
+                this.delayedResize();
+            }, 0);
         }
         catch (/** @type {?} */ error) { }
     }
@@ -16831,7 +16841,7 @@ class MdbInputDirective {
      * @return {?}
      */
     delayedResize() {
-        setTimeout(() => this.resize(), 0);
+        setTimeout(this.resize(), 0);
     }
     /**
      * @return {?}

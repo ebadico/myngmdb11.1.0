@@ -8391,11 +8391,16 @@ var SelectComponent = /** @class */ (function () {
      * @return {?}
      */
     SelectComponent.prototype.updateLabelState = function () {
+        var _this = this;
         if (!this.placeholder && !this.hasSelected) {
-            this.labelActive = false;
+            setTimeout(function () {
+                _this.labelActive = false;
+            }, 0);
         }
         else {
-            this.labelActive = true;
+            setTimeout(function () {
+                _this.labelActive = true;
+            }, 0);
         }
     };
     /**
@@ -17169,8 +17174,11 @@ var MdbInputDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbInputDirective.prototype.oncut = function () {
+        var _this = this;
         try {
-            this.delayedResize();
+            setTimeout(function () {
+                _this.delayedResize();
+            }, 0);
         }
         catch (error) { }
     };
@@ -17178,8 +17186,11 @@ var MdbInputDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbInputDirective.prototype.onpaste = function () {
+        var _this = this;
         try {
-            this.delayedResize();
+            setTimeout(function () {
+                _this.delayedResize();
+            }, 0);
         }
         catch (error) { }
     };
@@ -17187,8 +17198,11 @@ var MdbInputDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbInputDirective.prototype.ondrop = function () {
+        var _this = this;
         try {
-            this.delayedResize();
+            setTimeout(function () {
+                _this.delayedResize();
+            }, 0);
         }
         catch (error) { }
     };
@@ -17377,8 +17391,7 @@ var MdbInputDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbInputDirective.prototype.delayedResize = function () {
-        var _this = this;
-        setTimeout(function () { return _this.resize(); }, 0);
+        setTimeout(this.resize(), 0);
     };
     /**
      * @return {?}
