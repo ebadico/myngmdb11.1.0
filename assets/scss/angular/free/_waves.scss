@@ -1,11 +1,21 @@
 mdb-tabset {
-    a {
-        &.waves-effect,
-        &.waves-light {
-            display: block;
-        }
+  a {
+
+    &.waves-effect,
+    &.waves-light {
+      display: block;
     }
+  }
 }
+
 .waves-effect {
-    z-index: 0;
+  z-index: 0;
+}
+
+a {
+
+  &.waves-effect,
+  &.waves-light {
+    display: block;
+  }
 }

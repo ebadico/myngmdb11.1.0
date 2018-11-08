@@ -26,7 +26,7 @@ export declare class NavbarComponent implements AfterViewInit, OnInit {
     addTogglerIconClasses(): void;
     ngOnInit(): void;
     ngAfterViewInit(): void;
-    toggle(event: any): void;
+    toggle(): void;
     show(): void;
     hide(): void;
     readonly displayStyle: string;

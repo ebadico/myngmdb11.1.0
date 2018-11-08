@@ -2192,7 +2192,7 @@ var CompleterComponent = /** @class */ (function () {
      * @return {?}
      */
     CompleterComponent.prototype.onFocusOut = function () {
-        if (this.mdbInput.nativeElement.value === '' && this.labelEl) {
+        if (this.mdbInput.nativeElement.value === '' && this.labelEl && !this.placeholder) {
             this.renderer.removeClass(this.labelEl.nativeElement, 'active');
         }
     };
@@ -2241,7 +2241,7 @@ var CompleterComponent = /** @class */ (function () {
         if (this.autofocus) {
             this._focus = true;
         }
-        if (this.initialValue || this.searchStr) {
+        if (this.initialValue || this.searchStr || this.placeholder) {
             this.renderer.addClass(this.labelEl.nativeElement, 'active');
         }
     };
@@ -2362,7 +2362,7 @@ var CompleterComponent = /** @class */ (function () {
 CompleterComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-autocomplete, mdb-completer',
-                template: "<div class=\"completer-holder md-form\" mdbCompleter> <input #mdbInput [attr.id]=\"inputId.length > 0 ? inputId : null\" type=\"search\" class=\"completer-input form-control mdb-autocomplete\" mdbInput [ngClass]=\"inputClass\" [(ngModel)]=\"searchStr\" (ngModelChange)=\"onChange($event)\" [attr.name]=\"inputName\" [placeholder]=\"placeholder\" [attr.maxlength]=\"maxChars\" [tabindex]=\"fieldTabindex\" [disabled]=\"disableInput\" [clearSelected]=\"clearSelected\" [clearUnselected]=\"clearUnselected\" [overrideSuggested]=\"overrideSuggested\" [openOnFocus]=\"openOnFocus\" [fillHighlighted]=\"fillHighlighted\" (blur)=\"onBlur()\" (focus)=\"onFocus()\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" /> <button type=\"button\" [tabindex]=\"clearButtonTabIndex\" class=\"mdb-autocomplete-clear\" (click)=\"activateClearButton($event)\" (focus)=\"triggerClearButtonAnimation('focused')\" (blur)=\"triggerClearButtonAnimation('unfocused')\" (mouseenter)=\"triggerClearButtonAnimation('focused')\" (mouseleave)=\"triggerClearButtonAnimation('unfocused')\" [@focusAnimation]=\"{value: state}\"> &#x2715; </button> <label #labelEl [ngClass]=\"{'active': focused || value}\">{{ label }}</label> <div class=\"completer-dropdown-holder\" *mdbList=\"dataService; minSearchLength: minSearchLength; pause: pause; autoMatch: autoMatch; initialValue: initialValue; autoHighlight: autoHighlight; let items = results; let searchActive = searching; let isInitialized = searchInitialized; let isOpen = isOpen;\"> <div class=\"completer-dropdown\" mdbAutocompleteDropdown *ngIf=\"isInitialized && isOpen && ((items.length > 0 || displayNoResults) || (searchActive && displaySearching))\"> <div *ngIf=\"searchActive && displaySearching\" class=\"completer-searching\">{{_textSearching}}</div> <div *ngIf=\"!searchActive && (!items || items.length === 0)\" class=\"completer-no-results\">{{_textNoResults}}</div> <div class=\"completer-row-wrapper\" *ngFor=\"let item of items; let rowIndex=index\"> <div class=\"completer-row\" [mdbRow]=\"rowIndex\" [dataItem]=\"item\"> <div class=\"completer-item-text\" [ngClass]=\"{'completer-item-text-image': item.image || item.image === '' }\"> <mdb-completer-list-item class=\"completer-title\" [text]=\"item.title\" [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'title'\"></mdb-completer-list-item> <mdb-completer-list-item *ngIf=\"item.description && item.description != ''\" class=\"completer-description\" [text]=\"item.description\" [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'description'\"> </mdb-completer-list-item> </div> <div *ngIf=\"item.image || item.image === ''\" class=\"completer-image-holder\"> <img *ngIf=\"item.image != ''\" src=\"{{item.image}}\" class=\"completer-image\" /> <div *ngIf=\"item.image === ''\" class=\"completer-image-default\"></div> </div> </div> </div> </div> </div> </div> ",
+                template: "<div class=\"completer-holder md-form\" mdbCompleter> <input #mdbInput [attr.id]=\"inputId.length > 0 ? inputId : null\" type=\"search\" class=\"completer-input form-control mdb-autocomplete\" mdbInput [ngClass]=\"inputClass\" [(ngModel)]=\"searchStr\" (ngModelChange)=\"onChange($event)\" [attr.name]=\"inputName\" [placeholder]=\"placeholder\" [attr.maxlength]=\"maxChars\" [tabindex]=\"fieldTabindex\" [disabled]=\"disableInput\" [clearSelected]=\"clearSelected\" [clearUnselected]=\"clearUnselected\" [overrideSuggested]=\"overrideSuggested\" [openOnFocus]=\"openOnFocus\" [fillHighlighted]=\"fillHighlighted\" (blur)=\"onBlur()\" (focus)=\"onFocus()\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" /> <button type=\"button\" [tabindex]=\"clearButtonTabIndex\" class=\"mdb-autocomplete-clear\" (click)=\"activateClearButton($event)\" (focus)=\"triggerClearButtonAnimation('focused')\" (blur)=\"triggerClearButtonAnimation('unfocused')\" (mouseenter)=\"triggerClearButtonAnimation('focused')\" (mouseleave)=\"triggerClearButtonAnimation('unfocused')\" [@focusAnimation]=\"{value: state}\"> &#x2715; </button> <label #labelEl [ngClass]=\"{'active': focused || value || placeholder}\">{{ label }}</label> <div class=\"completer-dropdown-holder\" *mdbList=\"dataService; minSearchLength: minSearchLength; pause: pause; autoMatch: autoMatch; initialValue: initialValue; autoHighlight: autoHighlight; let items = results; let searchActive = searching; let isInitialized = searchInitialized; let isOpen = isOpen;\"> <div class=\"completer-dropdown\" mdbAutocompleteDropdown *ngIf=\"isInitialized && isOpen && ((items.length > 0 || displayNoResults) || (searchActive && displaySearching))\"> <div *ngIf=\"searchActive && displaySearching\" class=\"completer-searching\">{{_textSearching}}</div> <div *ngIf=\"!searchActive && (!items || items.length === 0)\" class=\"completer-no-results\">{{_textNoResults}}</div> <div class=\"completer-row-wrapper\" *ngFor=\"let item of items; let rowIndex=index\"> <div class=\"completer-row\" [mdbRow]=\"rowIndex\" [dataItem]=\"item\"> <div class=\"completer-item-text\" [ngClass]=\"{'completer-item-text-image': item.image || item.image === '' }\"> <mdb-completer-list-item class=\"completer-title\" [text]=\"item.title\" [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'title'\"></mdb-completer-list-item> <mdb-completer-list-item *ngIf=\"item.description && item.description != ''\" class=\"completer-description\" [text]=\"item.description\" [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'description'\"> </mdb-completer-list-item> </div> <div *ngIf=\"item.image || item.image === ''\" class=\"completer-image-holder\"> <img *ngIf=\"item.image != ''\" src=\"{{item.image}}\" class=\"completer-image\" /> <div *ngIf=\"item.image === ''\" class=\"completer-image-default\"></div> </div> </div> </div> </div> </div> </div> ",
                 providers: [COMPLETER_CONTROL_VALUE_ACCESSOR],
                 animations: [trigger('focusAnimation', [
                         state('unfocused', style({ transform: 'scale(1.0, 1.0)', })),
@@ -3300,6 +3300,7 @@ var CardRevealComponent = /** @class */ (function () {
             try {
                 var /** @type {?} */ height = _this.cardFront.nativeElement.offsetHeight;
                 _this._r.setStyle(_this.cardReveal.nativeElement.firstElementChild, 'height', height + 'px');
+                _this._r.setStyle(_this.cardOverflow.nativeElement, 'height', height + 'px');
             }
             catch (error) { }
         }, 0);
@@ -3309,7 +3310,7 @@ var CardRevealComponent = /** @class */ (function () {
 CardRevealComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-card-reveal',
-                template: "<div class=\"card-overflow col-12\" > <div #cardFront class=\"card-front\"> <ng-content select=\".card-front\" ></ng-content> </div> <div #cardReveal class=\"card-reveal\" *ngIf=\"show\"  [@socialsState]=\"socials\" > <ng-content select=\".card-reveal\"></ng-content> </div> </div> ",
+                template: "<div #cardOverflow class=\"card-overflow col-12\" > <div #cardFront class=\"card-front\"> <ng-content select=\".card-front\" ></ng-content> </div> <div #cardReveal class=\"card-reveal\" *ngIf=\"show\"  [@socialsState]=\"socials\"> <ng-content select=\".card-reveal\"></ng-content> </div> </div> ",
                 animations: [socialsState]
             },] },
 ];
@@ -3319,7 +3320,8 @@ CardRevealComponent.ctorParameters = function () { return [
 ]; };
 CardRevealComponent.propDecorators = {
     cardReveal: [{ type: ViewChild, args: ['cardReveal',] }],
-    cardFront: [{ type: ViewChild, args: ['cardFront',] }]
+    cardFront: [{ type: ViewChild, args: ['cardFront',] }],
+    cardOverflow: [{ type: ViewChild, args: ['cardOverflow',] }]
 };
 /**
  * @fileoverview added by tsickle
@@ -4516,19 +4518,21 @@ var MDBDatePickerComponent = /** @class */ (function () {
     /**
      * @return {?}
      */
-    MDBDatePickerComponent.prototype.ngAfterContentChecked = function () {
+    MDBDatePickerComponent.prototype.ChangeZIndex = function () {
         var _this = this;
         if (this.isBrowser) {
-            // Fix for visible date / time picker input when picker plate is visible.
-            try {
-                var /** @type {?} */ openedPicker = document.querySelector('.picker--opened');
-                var /** @type {?} */ allPickers = document.querySelectorAll('.picker');
-                allPickers.forEach(function (element) {
-                    _this.renderer.setStyle(element, 'z-index', '0');
-                });
-                this.renderer.setStyle(openedPicker, 'z-index', '1');
-            }
-            catch (error) { }
+            setTimeout(function () {
+                // Fix for visible date / time picker input when picker plate is visible.
+                try {
+                    var /** @type {?} */ openedPicker = document.querySelector('.picker--opened');
+                    var /** @type {?} */ allPickers = document.querySelectorAll('.picker');
+                    allPickers.forEach(function (element) {
+                        _this.renderer.setStyle(element, 'z-index', '0');
+                    });
+                    _this.renderer.setStyle(openedPicker, 'z-index', '1');
+                }
+                catch (error) { }
+            }, 0);
         }
     };
     /**
@@ -4794,12 +4798,8 @@ var MDBDatePickerComponent = /** @class */ (function () {
      */
     MDBDatePickerComponent.prototype.hideKeyboard = function () {
         var _this = this;
-        // this set timeout needed for case when hideKeyborad
-        // is called inside of 'onfocus' event handler
         try {
             setTimeout(function () {
-                // creating temp field
-                // const field = document.createElement('input');
                 var /** @type {?} */ field = _this.renderer.createElement('input');
                 _this.renderer.appendChild(_this.elem.nativeElement, field);
                 var /** @type {?} */ inputReference = _this.elem.nativeElement.lastElementChild;
@@ -4807,11 +4807,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
                 _this.renderer.setAttribute(inputReference, 'type', 'text');
                 _this.renderer.setStyle(inputReference, 'opacity', '0');
                 _this.renderer.setStyle(inputReference, '-webkit-user-modify', 'read-write-plaintext-only');
-                // // hiding temp field from peoples eyes
-                // // -webkit-user-modify is nessesary for Android 4.x
-                // adding onfocus event handler for out temp field
                 field.onfocus = function () {
-                    // this timeout of 200ms is nessasary for Android 2.3.x
                     setTimeout(function () {
                         _this.renderer.setStyle(field, 'display', 'none');
                         setTimeout(function () {
@@ -4820,7 +4816,6 @@ var MDBDatePickerComponent = /** @class */ (function () {
                         }, 0);
                     }, 0);
                 };
-                // focusing it
                 field.focus();
             }, 0);
         }
@@ -4831,13 +4826,11 @@ var MDBDatePickerComponent = /** @class */ (function () {
      * @return {?}
      */
     MDBDatePickerComponent.prototype.removeBtnClicked = function () {
-        // Remove date button clicked
         this.clearDate();
         if (this.showSelector) {
             this.calendarToggle.emit(CalToggle.CloseByCalBtn);
         }
         this.isDateSelected = false;
-        // this.showSelector = false;
     };
     /**
      * @return {?}
@@ -4868,6 +4861,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
             this.hideKeyboard();
         }
         this.labelActive = true;
+        this.ChangeZIndex();
     };
     /**
      * @return {?}
@@ -5435,9 +5429,7 @@ MDBDatePickerComponent.decorators = [
 /** @nocollapse */
 MDBDatePickerComponent.ctorParameters = function () { return [
     { type: ElementRef },
-    { type: 
-        // ChangeDetectorRef,
-        Renderer2 },
+    { type: Renderer2 },
     { type: LocaleService },
     { type: UtilService },
     { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
@@ -8038,6 +8030,7 @@ var SelectComponent = /** @class */ (function () {
         this.filterInputWidth = 1;
         this.isDisabled = false;
         this.placeholderView = '';
+        this.labelActive = false;
         this.clearClicked = false;
         this.selectContainerClicked = false;
         this.optionHeight = 44;
@@ -8075,6 +8068,7 @@ var SelectComponent = /** @class */ (function () {
      */
     SelectComponent.prototype.ngAfterViewInit = function () {
         this.updateState();
+        this.updateLabelState();
         this.setArrowUpIcon();
         this.setArrowDownIcon();
         this.renderer.setStyle(this.selectionSpan.nativeElement.children[0].lastChild, 'visibility', 'hidden');
@@ -8159,18 +8153,29 @@ var SelectComponent = /** @class */ (function () {
         else {
             this.selectContainerClicked = true;
             this.toggleDropdown();
+            if (this.labelActive && !this.hasSelected && !this.placeholder) {
+                this.labelActive = false;
+            }
+            else {
+                this.labelActive = true;
+            }
         }
     };
     /**
      * @return {?}
      */
     SelectComponent.prototype.onSelectContainerFocus = function () {
+        this.labelActive = true;
         this.openDropdown();
     };
     /**
      * @return {?}
      */
     SelectComponent.prototype.onSelectContainerBlur = function () {
+        var _this = this;
+        setTimeout(function () {
+            _this.updateLabelState();
+        }, 150);
         if (!this.isOpen && !this.disabled) {
             this.onTouched();
         }
@@ -8254,6 +8259,7 @@ var SelectComponent = /** @class */ (function () {
         this.clearClicked = true;
         this.clearSelection();
         this.placeholderView = this.placeholder;
+        this.labelActive = false;
     };
     /**
      * @param {?} option
@@ -8328,6 +8334,10 @@ var SelectComponent = /** @class */ (function () {
      */
     SelectComponent.prototype.writeValue = function (value) {
         this.value = value;
+        if (!value) {
+            this.hasSelected = false;
+            this.updateLabelState();
+        }
     };
     /**
      * @param {?} fn
@@ -8363,7 +8373,7 @@ var SelectComponent = /** @class */ (function () {
      */
     SelectComponent.prototype.updateState = function () {
         var _this = this;
-        this.placeholderView = this.hasSelected ? '' : this.placeholder;
+        this.placeholderView = this.placeholder;
         setTimeout(function () {
             _this.updateFilterWidth();
         });
@@ -8376,6 +8386,17 @@ var SelectComponent = /** @class */ (function () {
     SelectComponent.prototype.updateOptionsList = function (options) {
         this.optionList = new OptionList(options);
         this.optionList.value = this._value;
+    };
+    /**
+     * @return {?}
+     */
+    SelectComponent.prototype.updateLabelState = function () {
+        if (!this.placeholder && !this.hasSelected) {
+            this.labelActive = false;
+        }
+        else {
+            this.labelActive = true;
+        }
     };
     /**
      * Dropdown. *
@@ -8442,6 +8463,7 @@ var SelectComponent = /** @class */ (function () {
             this.valueChanged();
             this.selected.emit(option.wrappedOption);
             this.hasSelected = true;
+            this.updateLabelState();
         }
     };
     /**
@@ -8453,6 +8475,10 @@ var SelectComponent = /** @class */ (function () {
             this.optionList.deselect(option);
             this.valueChanged();
             this.placeholderView = this.placeholder;
+            if (this.optionList.selection.length === 0) {
+                this.hasSelected = false;
+                this.updateLabelState();
+            }
             this.deselected.emit(option.wrappedOption);
         }
     };
@@ -8667,7 +8693,7 @@ var SelectComponent = /** @class */ (function () {
 SelectComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-select',
-                template: "<label *ngIf=\"label !== ''\"> {{label}} </label> <div #selection [attr.tabindex]=\"disabled ? null : 0\" [ngClass]=\"{'open': isOpen, 'focus': hasFocus, 'below': isBelow, 'disabled': disabled}\" [tabindex]=\"tabindex\" (mousedown)=\"onSelectContainerClick($event)\" (focus)=\"onSelectContainerFocus()\" (blur)=\"onSelectContainerBlur()\" (keydown)=\"onSelectContainerKeydown($event)\" (window:click)=\"onWindowClick()\" (window:resize)=\"onWindowResize()\"> <div class=\"single\" *ngIf=\"!multiple\"> <div class=\"value\" *ngIf=\"optionList.hasSelected()\"> {{optionList.selection[0].label}} </div> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div #clear class=\"clear\" *ngIf=\"allowClear && hasSelected\" (mousedown)=\"onClearSelectionClick($event)\"> &#x2715; </div> </div> <div class=\"multiple\" *ngIf=\"multiple\"> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div class=\"option\" *ngFor=\"let option of optionList.selection\"> <span class=\"deselect-option\">, </span>{{option.label}} </div> </div> </div> <mdb-select-dropdown *ngIf=\"isOpen\" #dropdown [multiple]=\"multiple\" [dropdownHeight]=\"dropdownHeight\" [dropdownMaxHeight]=\"dropdownMaxHeight\" [optionList]=\"optionList\" [notFoundMsg]=\"notFoundMsg\" [highlightColor]=\"highlightColor\" [highlightTextColor]=\"highlightTextColor\" [filterEnabled]=\"filterEnabled\" [placeholder]=\"filterPlaceholder\" [top]=\"top\" [left]=\"left\" (close)=\"onDropdownClose($event)\" (optionClicked)=\"onDropdownOptionClicked($event)\" (singleFilterClick)=\"onSingleFilterClick()\" (singleFilterInput)=\"onSingleFilterInput($event)\" (singleFilterKeydown)=\"onSingleFilterKeydown($event)\"> </mdb-select-dropdown>",
+                template: "<label *ngIf=\"label !== ''\" [ngClass]=\"{'active': labelActive }\"> {{label}} </label> <div #selection [attr.tabindex]=\"disabled ? null : 0\" [ngClass]=\"{'open': isOpen, 'focus': hasFocus, 'below': isBelow, 'disabled': disabled}\" [tabindex]=\"tabindex\" (mousedown)=\"onSelectContainerClick($event)\" (focus)=\"onSelectContainerFocus()\" (blur)=\"onSelectContainerBlur()\" (keydown)=\"onSelectContainerKeydown($event)\" (window:click)=\"onWindowClick()\" (window:resize)=\"onWindowResize()\"> <div class=\"single form-control\" *ngIf=\"!multiple\"> <div class=\"value\" *ngIf=\"optionList.hasSelected()\"> {{optionList.selection[0].label}} </div> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div #clear class=\"clear\" *ngIf=\"allowClear && hasSelected\" (mousedown)=\"onClearSelectionClick($event)\"> &#x2715; </div> </div> <div class=\"multiple form-control\" *ngIf=\"multiple\"> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div class=\"option\"> <span *ngFor=\"let option of optionList.selection\"> {{option.label}}<span class=\"deselect-option\">,</span> </span> </div> </div> </div> <mdb-select-dropdown *ngIf=\"isOpen\" #dropdown [multiple]=\"multiple\" [dropdownHeight]=\"dropdownHeight\" [dropdownMaxHeight]=\"dropdownMaxHeight\" [optionList]=\"optionList\" [notFoundMsg]=\"notFoundMsg\" [highlightColor]=\"highlightColor\" [highlightTextColor]=\"highlightTextColor\" [filterEnabled]=\"filterEnabled\" [placeholder]=\"filterPlaceholder\" [top]=\"top\" [left]=\"left\" (close)=\"onDropdownClose($event)\" (optionClicked)=\"onDropdownOptionClicked($event)\" (singleFilterClick)=\"onSingleFilterClick()\" (singleFilterInput)=\"onSingleFilterInput($event)\" (singleFilterKeydown)=\"onSingleFilterKeydown($event)\"> </mdb-select-dropdown>",
                 providers: [SELECT_VALUE_ACCESSOR],
                 encapsulation: ViewEncapsulation.None
             },] },
@@ -12637,6 +12663,13 @@ var ClockPickerComponent = /** @class */ (function () {
         this.showClock = false;
     };
     /**
+     * @return {?}
+     */
+    ClockPickerComponent.prototype.clearTimeInput = function () {
+        this.selectedHours = { 'h': '12', 'm': '00', 'ampm': 'AM' };
+        this.endHours = '';
+    };
+    /**
      * @param {?} hour
      * @return {?}
      */
@@ -14858,7 +14891,7 @@ var MdbCardFooterComponent = /** @class */ (function () {
      */
     MdbCardFooterComponent.prototype.ngOnInit = function () {
         var _this = this;
-        // this._r.addClass(this._el.nativeElement, 'card-footer');
+        this._r.addClass(this._el.nativeElement, 'card-footer');
         if (this.class) {
             this.class.split(' ').forEach(function (element) {
                 _this._r.addClass(_this._el.nativeElement, element);
@@ -14870,7 +14903,7 @@ var MdbCardFooterComponent = /** @class */ (function () {
 MdbCardFooterComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-card-footer',
-                template: "<div class=\"card-footer\"> <ng-content></ng-content> </div>",
+                template: "<ng-content></ng-content> ",
             },] },
 ];
 /** @nocollapse */
@@ -15039,6 +15072,32 @@ var MdbCardComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(MdbCardComponent.prototype, "bgColor", {
+        /**
+         * @param {?} color
+         * @return {?}
+         */
+        set: function (color) {
+            if (color) {
+                this._r.addClass(this.card.nativeElement, color);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MdbCardComponent.prototype, "borderColor", {
+        /**
+         * @param {?} color
+         * @return {?}
+         */
+        set: function (color) {
+            if (color) {
+                this._r.addClass(this.card.nativeElement, color);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * @return {?}
      */
@@ -15059,6 +15118,10 @@ var MdbCardComponent = /** @class */ (function () {
                 _this._r.addClass(_this._el.nativeElement, element);
             });
         }
+        if (this._el.nativeElement.parentElement.classList.contains('card-deck')) {
+            this._r.addClass(this.card.nativeElement, 'w-100');
+            this._r.addClass(this.card.nativeElement, 'mx-0');
+        }
     };
     return MdbCardComponent;
 }());
@@ -15077,9 +15140,12 @@ MdbCardComponent.propDecorators = {
     class: [{ type: Input }],
     cascade: [{ type: Input }],
     wider: [{ type: Input }],
+    card: [{ type: ViewChild, args: ['card',] }],
     narrower: [{ type: Input }],
     reverse: [{ type: Input }],
-    dark: [{ type: Input }]
+    dark: [{ type: Input }],
+    bgColor: [{ type: Input }],
+    borderColor: [{ type: Input }]
 };
 /**
  * @fileoverview added by tsickle
@@ -15756,8 +15822,8 @@ CollapseComponent.decorators = [
                 template: '<ng-content></ng-content>',
                 animations: [
                     trigger('expandBody', [
-                        state('collapsed', style({ height: '0px', visibility: 'hidden' })),
-                        state('expanded', style({ height: '*', visibility: 'visible' })),
+                        state('collapsed', style({ height: '0px', visibility: 'hidden', overflow: 'hidden' })),
+                        state('expanded', style({ height: '*', visibility: 'visible', overflow: 'visible' })),
                         transition('expanded <=> collapsed', animate('500ms ease')),
                     ])
                 ],
@@ -17103,11 +17169,8 @@ var MdbInputDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbInputDirective.prototype.oncut = function () {
-        var _this = this;
         try {
-            setTimeout(function () {
-                _this.delayedResize();
-            }, 0);
+            this.delayedResize();
         }
         catch (error) { }
     };
@@ -17115,11 +17178,8 @@ var MdbInputDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbInputDirective.prototype.onpaste = function () {
-        var _this = this;
         try {
-            setTimeout(function () {
-                _this.delayedResize();
-            }, 0);
+            this.delayedResize();
         }
         catch (error) { }
     };
@@ -17127,11 +17187,8 @@ var MdbInputDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbInputDirective.prototype.ondrop = function () {
-        var _this = this;
         try {
-            setTimeout(function () {
-                _this.delayedResize();
-            }, 0);
+            this.delayedResize();
         }
         catch (error) { }
     };
@@ -17320,7 +17377,8 @@ var MdbInputDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbInputDirective.prototype.delayedResize = function () {
-        setTimeout(this.resize(), 0);
+        var _this = this;
+        setTimeout(function () { return _this.resize(); }, 0);
     };
     /**
      * @return {?}
@@ -18619,11 +18677,9 @@ var NavbarComponent = /** @class */ (function () {
         this.addTogglerIconClasses();
     };
     /**
-     * @param {?} event
      * @return {?}
      */
-    NavbarComponent.prototype.toggle = function (event) {
-        event.preventDefault();
+    NavbarComponent.prototype.toggle = function () {
         if (!this.collapsing) {
             if (this.shown) {
                 this.hide();
@@ -18742,7 +18798,7 @@ var NavbarComponent = /** @class */ (function () {
 NavbarComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-navbar',
-                template: "<nav class=\"{{SideClass}}\" #nav> <div [ngClass]=\"{'container': containerInside}\" [ngStyle]=\"{'display': displayStyle}\" #container> <ng-content select=\"mdb-navbar-brand\"></ng-content> <ng-content select=\"logo\"></ng-content> <ng-content *ngIf=\"this.doubleNav == true\" select=\"navlinks\"></ng-content> <div *ngIf=\"this.doubleNav == false\"> <button #toggler class=\"navbar-toggler\" type=\"button\" (click)=\"toggle($event)\" mdbWavesEffect *ngIf=\"this.el.nativeElement.children.length !== 0\"> <span class=\"navbar-toggler-icon\"> </span> </button> </div> <div #navbar [style.height]=\"height\" class=\"navbar-collapse collapse\" [ngClass]=\"{'collapse': collapse, 'show': showClass, 'collapsing': collapsing}\"> <ng-content select=\"links\"></ng-content> </div> </div> </nav>",
+                template: "<nav class=\"{{SideClass}}\" #nav> <div [ngClass]=\"{'container': containerInside}\" [ngStyle]=\"{'display': displayStyle}\" #container> <ng-content select=\"mdb-navbar-brand\"></ng-content> <ng-content select=\"logo\"></ng-content> <ng-content *ngIf=\"this.doubleNav == true\" select=\"navlinks\"></ng-content> <div *ngIf=\"this.doubleNav == false\"> <button #toggler class=\"navbar-toggler\" type=\"button\" (click)=\"toggle(); $event.preventDefault()\" mdbWavesEffect *ngIf=\"this.el.nativeElement.children.length !== 0\"> <span class=\"navbar-toggler-icon\"> </span> </button> </div> <div #navbar [style.height]=\"height\" class=\"navbar-collapse collapse\" [ngClass]=\"{'collapse': collapse, 'show': showClass, 'collapsing': collapsing}\"> <ng-content select=\"links\"></ng-content> </div> </div> </nav>",
             },] },
 ];
 /** @nocollapse */

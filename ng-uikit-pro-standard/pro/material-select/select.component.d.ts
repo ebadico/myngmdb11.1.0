@@ -47,6 +47,7 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     filterInputWidth: number;
     isDisabled: boolean;
     placeholderView: string;
+    labelActive: boolean;
     clearClicked: boolean;
     selectContainerClicked: boolean;
     optionHeight: number;
@@ -98,6 +99,7 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     updateState(): void;
     /** Initialization. **/
     updateOptionsList(options: Array<IOption>): void;
+    updateLabelState(): void;
     /** Dropdown. **/
     toggleDropdown(): void;
     openDropdown(): void;

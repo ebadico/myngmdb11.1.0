@@ -3,6 +3,7 @@ export declare class CardRevealComponent {
     private _r;
     cardReveal: ElementRef;
     cardFront: ElementRef;
+    cardOverflow: ElementRef;
     socials: any;
     show: boolean;
     constructor(_r: Renderer2);

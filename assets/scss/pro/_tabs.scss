@@ -115,6 +115,9 @@
         color: $classic-tabs-color;
         text-align: center;
         border-radius: 0;
+        &:not(.active) {
+          margin-bottom: $classic-tabs-li-a-active-border-bottom;
+        }
         &.active {
           border-bottom: $classic-tabs-li-a-active-border-bottom solid;
           color: $white-base;
