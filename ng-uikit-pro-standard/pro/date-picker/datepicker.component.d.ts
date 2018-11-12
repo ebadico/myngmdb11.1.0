@@ -1,11 +1,11 @@
 import { IMyLocales } from './interfaces/locale.interface';
-import { EventEmitter, OnChanges, SimpleChanges, ElementRef, Renderer2, AfterViewInit, AfterContentChecked } from '@angular/core';
+import { EventEmitter, OnChanges, SimpleChanges, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { IMyDate, IMyMonth, IMyWeek, IMyInputFieldChanged, IMyCalendarViewChanged, IMyInputFocusBlur } from './interfaces/index';
 import { LocaleService } from './services/datepickerLocale.service';
 import { UtilService } from './services/datepickerUtil.service';
 export declare const MYDP_VALUE_ACCESSOR: any;
-export declare class MDBDatePickerComponent implements OnChanges, ControlValueAccessor, AfterViewInit, AfterContentChecked {
+export declare class MDBDatePickerComponent implements OnChanges, ControlValueAccessor, AfterViewInit {
     elem: ElementRef;
     private renderer;
     private localeService;
@@ -61,7 +61,7 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     isBrowser: any;
     constructor(elem: ElementRef, renderer: Renderer2, localeService: LocaleService, utilService: UtilService, platformId: string);
     ngAfterViewInit(): void;
-    ngAfterContentChecked(): void;
+    ChangeZIndex(): void;
     onChangeCb: (_: any) => void;
     onTouchedCb: () => void;
     removeInlineStyle(): void;

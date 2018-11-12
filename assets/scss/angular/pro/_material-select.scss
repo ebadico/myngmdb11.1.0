@@ -98,7 +98,7 @@ mdb-select {
       }
       &.multiple {
         display: flex;
-        flex-flow: row wrap;
+        padding-right: 25px;
         position: relative;
         cursor: pointer;
         background-color: transparent;
@@ -124,10 +124,15 @@ mdb-select {
           font-size: 14px;
         }
         >div.option {
+          overflow: hidden;
+          min-width: 0;
+          text-overflow: ellipsis;
+          white-space: nowrap;
           cursor: default;
-          display: inline-block;
-          flex-shrink: 0;
           line-height: 2rem;
+          span:last-child .deselect-option {
+            display: none;
+          }
           span.deselect-option {
             color: #aaa;
             cursor: pointer;
@@ -144,9 +149,6 @@ mdb-select {
               color: #555;
             }
           }
-          &:first-child span {
-            display: none;
-          }
         } // display: flex;
         input {
           background-color: transparent;
@@ -162,10 +164,18 @@ mdb-select {
     }
   }
   label {
-    color: rgba(0, 0, 0, 0.38);
-    display: block;
-    font-size: .8rem;
-    padding: 4px 0;
+    color: #757575;
+    font-size: 1rem;
+    position: absolute;
+    top: .65rem;
+    left: 0;
+    transition: .2s ease-out;
+    cursor: text;
+
+    &.active {
+      font-size: .8rem;
+      transform: translateY(-120%);
+    }
   }
   mdb-select-dropdown {
     box-sizing: border-box;
@@ -215,9 +225,6 @@ mdb-select {
               display: flex;
               flex-direction: row;
               align-items: center;
-              label {
-                // padding-left: 10px;
-              }
             }
           }
           .selected {
@@ -415,10 +422,13 @@ mdb-select {
   }
 }
 
-mdb-select+label {
+mdb-select + label {
   position: absolute;
-  top: -14px;
+  transform: translateY(-120%);
+  top: .65rem;
   font-size: .8rem;
+  left: 6px;
+  color: #757575;
   left: 15px;
 }
 
@@ -430,6 +440,35 @@ mdb-select+label {
 
 .clear {
   right: 30px !important;
+}
+
+.md-form mdb-select + label {
+  position: absolute;
+  transform: translateY(-120%);
+  font-size: .8rem;
+  color: #757575;
+  left: 0px;
+}
+
+.md-form mdb-select .form-control {
+  height: calc(2.25rem + 2px);
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.md-form mdb-select label {
+  color: #757575;
+  font-size: 1rem;
+  position: absolute;
+  top: .65rem;
+  left: 0;
+  transition: .2s ease-out;
+  cursor: text;
+
+  &.active {
+    font-size: .8rem;
+    transform: translateY(-120%);
+  }
 }
 
 

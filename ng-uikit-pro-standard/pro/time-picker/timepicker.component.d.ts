@@ -50,6 +50,7 @@ export declare class ClockPickerComponent implements OnInit, AfterViewInit, Cont
     hideKeyboard(): void;
     openBtnClicked(): void;
     closeBtnClicked(): void;
+    clearTimeInput(): void;
     setHour(hour: String): void;
     setMinute(min: String): void;
     setAmPm(ampm: String): void;

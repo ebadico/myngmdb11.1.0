@@ -59,7 +59,7 @@ mdb-tabset {
     }
     .active:hover {
       @extend .z-depth-1-half;
-    }  
+    }
   }
   .margin li {
     margin: 0.5em !important;
@@ -80,4 +80,9 @@ mdb-tabset {
         margin: 0 5px 5px 5px;
         padding-top: 0;
     }
+}
+
+.nav-stacked {
+  display: flex;
+  flex-direction: column;
 }

@@ -2136,7 +2136,7 @@ class CompleterComponent {
      * @return {?}
      */
     onFocusOut() {
-        if (this.mdbInput.nativeElement.value === '' && this.labelEl) {
+        if (this.mdbInput.nativeElement.value === '' && this.labelEl && !this.placeholder) {
             this.renderer.removeClass(this.labelEl.nativeElement, 'active');
         }
     }
@@ -2181,7 +2181,7 @@ class CompleterComponent {
         if (this.autofocus) {
             this._focus = true;
         }
-        if (this.initialValue || this.searchStr) {
+        if (this.initialValue || this.searchStr || this.placeholder) {
             this.renderer.addClass(this.labelEl.nativeElement, 'active');
         }
     }
@@ -2299,7 +2299,7 @@ class CompleterComponent {
 CompleterComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-autocomplete, mdb-completer',
-                template: "<div class=\"completer-holder md-form\" mdbCompleter> <input #mdbInput [attr.id]=\"inputId.length > 0 ? inputId : null\" type=\"search\" class=\"completer-input form-control mdb-autocomplete\" mdbInput [ngClass]=\"inputClass\" [(ngModel)]=\"searchStr\" (ngModelChange)=\"onChange($event)\" [attr.name]=\"inputName\" [placeholder]=\"placeholder\" [attr.maxlength]=\"maxChars\" [tabindex]=\"fieldTabindex\" [disabled]=\"disableInput\" [clearSelected]=\"clearSelected\" [clearUnselected]=\"clearUnselected\" [overrideSuggested]=\"overrideSuggested\" [openOnFocus]=\"openOnFocus\" [fillHighlighted]=\"fillHighlighted\" (blur)=\"onBlur()\" (focus)=\"onFocus()\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" /> <button type=\"button\" [tabindex]=\"clearButtonTabIndex\" class=\"mdb-autocomplete-clear\" (click)=\"activateClearButton($event)\" (focus)=\"triggerClearButtonAnimation('focused')\" (blur)=\"triggerClearButtonAnimation('unfocused')\" (mouseenter)=\"triggerClearButtonAnimation('focused')\" (mouseleave)=\"triggerClearButtonAnimation('unfocused')\" [@focusAnimation]=\"{value: state}\"> &#x2715; </button> <label #labelEl [ngClass]=\"{'active': focused || value}\">{{ label }}</label> <div class=\"completer-dropdown-holder\" *mdbList=\"dataService; minSearchLength: minSearchLength; pause: pause; autoMatch: autoMatch; initialValue: initialValue; autoHighlight: autoHighlight; let items = results; let searchActive = searching; let isInitialized = searchInitialized; let isOpen = isOpen;\"> <div class=\"completer-dropdown\" mdbAutocompleteDropdown *ngIf=\"isInitialized && isOpen && ((items.length > 0 || displayNoResults) || (searchActive && displaySearching))\"> <div *ngIf=\"searchActive && displaySearching\" class=\"completer-searching\">{{_textSearching}}</div> <div *ngIf=\"!searchActive && (!items || items.length === 0)\" class=\"completer-no-results\">{{_textNoResults}}</div> <div class=\"completer-row-wrapper\" *ngFor=\"let item of items; let rowIndex=index\"> <div class=\"completer-row\" [mdbRow]=\"rowIndex\" [dataItem]=\"item\"> <div class=\"completer-item-text\" [ngClass]=\"{'completer-item-text-image': item.image || item.image === '' }\"> <mdb-completer-list-item class=\"completer-title\" [text]=\"item.title\" [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'title'\"></mdb-completer-list-item> <mdb-completer-list-item *ngIf=\"item.description && item.description != ''\" class=\"completer-description\" [text]=\"item.description\" [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'description'\"> </mdb-completer-list-item> </div> <div *ngIf=\"item.image || item.image === ''\" class=\"completer-image-holder\"> <img *ngIf=\"item.image != ''\" src=\"{{item.image}}\" class=\"completer-image\" /> <div *ngIf=\"item.image === ''\" class=\"completer-image-default\"></div> </div> </div> </div> </div> </div> </div> ",
+                template: "<div class=\"completer-holder md-form\" mdbCompleter> <input #mdbInput [attr.id]=\"inputId.length > 0 ? inputId : null\" type=\"search\" class=\"completer-input form-control mdb-autocomplete\" mdbInput [ngClass]=\"inputClass\" [(ngModel)]=\"searchStr\" (ngModelChange)=\"onChange($event)\" [attr.name]=\"inputName\" [placeholder]=\"placeholder\" [attr.maxlength]=\"maxChars\" [tabindex]=\"fieldTabindex\" [disabled]=\"disableInput\" [clearSelected]=\"clearSelected\" [clearUnselected]=\"clearUnselected\" [overrideSuggested]=\"overrideSuggested\" [openOnFocus]=\"openOnFocus\" [fillHighlighted]=\"fillHighlighted\" (blur)=\"onBlur()\" (focus)=\"onFocus()\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" /> <button type=\"button\" [tabindex]=\"clearButtonTabIndex\" class=\"mdb-autocomplete-clear\" (click)=\"activateClearButton($event)\" (focus)=\"triggerClearButtonAnimation('focused')\" (blur)=\"triggerClearButtonAnimation('unfocused')\" (mouseenter)=\"triggerClearButtonAnimation('focused')\" (mouseleave)=\"triggerClearButtonAnimation('unfocused')\" [@focusAnimation]=\"{value: state}\"> &#x2715; </button> <label #labelEl [ngClass]=\"{'active': focused || value || placeholder}\">{{ label }}</label> <div class=\"completer-dropdown-holder\" *mdbList=\"dataService; minSearchLength: minSearchLength; pause: pause; autoMatch: autoMatch; initialValue: initialValue; autoHighlight: autoHighlight; let items = results; let searchActive = searching; let isInitialized = searchInitialized; let isOpen = isOpen;\"> <div class=\"completer-dropdown\" mdbAutocompleteDropdown *ngIf=\"isInitialized && isOpen && ((items.length > 0 || displayNoResults) || (searchActive && displaySearching))\"> <div *ngIf=\"searchActive && displaySearching\" class=\"completer-searching\">{{_textSearching}}</div> <div *ngIf=\"!searchActive && (!items || items.length === 0)\" class=\"completer-no-results\">{{_textNoResults}}</div> <div class=\"completer-row-wrapper\" *ngFor=\"let item of items; let rowIndex=index\"> <div class=\"completer-row\" [mdbRow]=\"rowIndex\" [dataItem]=\"item\"> <div class=\"completer-item-text\" [ngClass]=\"{'completer-item-text-image': item.image || item.image === '' }\"> <mdb-completer-list-item class=\"completer-title\" [text]=\"item.title\" [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'title'\"></mdb-completer-list-item> <mdb-completer-list-item *ngIf=\"item.description && item.description != ''\" class=\"completer-description\" [text]=\"item.description\" [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'description'\"> </mdb-completer-list-item> </div> <div *ngIf=\"item.image || item.image === ''\" class=\"completer-image-holder\"> <img *ngIf=\"item.image != ''\" src=\"{{item.image}}\" class=\"completer-image\" /> <div *ngIf=\"item.image === ''\" class=\"completer-image-default\"></div> </div> </div> </div> </div> </div> </div> ",
                 providers: [COMPLETER_CONTROL_VALUE_ACCESSOR],
                 animations: [trigger('focusAnimation', [
                         state('unfocused', style({ transform: 'scale(1.0, 1.0)', })),
@@ -3206,6 +3206,7 @@ class CardRevealComponent {
             try {
                 const /** @type {?} */ height = this.cardFront.nativeElement.offsetHeight;
                 this._r.setStyle(this.cardReveal.nativeElement.firstElementChild, 'height', height + 'px');
+                this._r.setStyle(this.cardOverflow.nativeElement, 'height', height + 'px');
             }
             catch (/** @type {?} */ error) { }
         }, 0);
@@ -3214,7 +3215,7 @@ class CardRevealComponent {
 CardRevealComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-card-reveal',
-                template: "<div class=\"card-overflow col-12\" > <div #cardFront class=\"card-front\"> <ng-content select=\".card-front\" ></ng-content> </div> <div #cardReveal class=\"card-reveal\" *ngIf=\"show\"  [@socialsState]=\"socials\" > <ng-content select=\".card-reveal\"></ng-content> </div> </div> ",
+                template: "<div #cardOverflow class=\"card-overflow col-12\" > <div #cardFront class=\"card-front\"> <ng-content select=\".card-front\" ></ng-content> </div> <div #cardReveal class=\"card-reveal\" *ngIf=\"show\"  [@socialsState]=\"socials\"> <ng-content select=\".card-reveal\"></ng-content> </div> </div> ",
                 animations: [socialsState]
             },] },
 ];
@@ -3224,7 +3225,8 @@ CardRevealComponent.ctorParameters = () => [
 ];
 CardRevealComponent.propDecorators = {
     cardReveal: [{ type: ViewChild, args: ['cardReveal',] }],
-    cardFront: [{ type: ViewChild, args: ['cardFront',] }]
+    cardFront: [{ type: ViewChild, args: ['cardFront',] }],
+    cardOverflow: [{ type: ViewChild, args: ['cardOverflow',] }]
 };
 
 /**
@@ -4400,18 +4402,20 @@ class MDBDatePickerComponent {
     /**
      * @return {?}
      */
-    ngAfterContentChecked() {
+    ChangeZIndex() {
         if (this.isBrowser) {
-            // Fix for visible date / time picker input when picker plate is visible.
-            try {
-                const /** @type {?} */ openedPicker = document.querySelector('.picker--opened');
-                const /** @type {?} */ allPickers = document.querySelectorAll('.picker');
-                allPickers.forEach((element) => {
-                    this.renderer.setStyle(element, 'z-index', '0');
-                });
-                this.renderer.setStyle(openedPicker, 'z-index', '1');
-            }
-            catch (/** @type {?} */ error) { }
+            setTimeout(() => {
+                // Fix for visible date / time picker input when picker plate is visible.
+                try {
+                    const /** @type {?} */ openedPicker = document.querySelector('.picker--opened');
+                    const /** @type {?} */ allPickers = document.querySelectorAll('.picker');
+                    allPickers.forEach((element) => {
+                        this.renderer.setStyle(element, 'z-index', '0');
+                    });
+                    this.renderer.setStyle(openedPicker, 'z-index', '1');
+                }
+                catch (/** @type {?} */ error) { }
+            }, 0);
         }
     }
     /**
@@ -4672,12 +4676,8 @@ class MDBDatePickerComponent {
      * @return {?}
      */
     hideKeyboard() {
-        // this set timeout needed for case when hideKeyborad
-        // is called inside of 'onfocus' event handler
         try {
             setTimeout(() => {
-                // creating temp field
-                // const field = document.createElement('input');
                 const /** @type {?} */ field = this.renderer.createElement('input');
                 this.renderer.appendChild(this.elem.nativeElement, field);
                 const /** @type {?} */ inputReference = this.elem.nativeElement.lastElementChild;
@@ -4685,11 +4685,7 @@ class MDBDatePickerComponent {
                 this.renderer.setAttribute(inputReference, 'type', 'text');
                 this.renderer.setStyle(inputReference, 'opacity', '0');
                 this.renderer.setStyle(inputReference, '-webkit-user-modify', 'read-write-plaintext-only');
-                // // hiding temp field from peoples eyes
-                // // -webkit-user-modify is nessesary for Android 4.x
-                // adding onfocus event handler for out temp field
                 field.onfocus = () => {
-                    // this timeout of 200ms is nessasary for Android 2.3.x
                     setTimeout(() => {
                         this.renderer.setStyle(field, 'display', 'none');
                         setTimeout(() => {
@@ -4698,7 +4694,6 @@ class MDBDatePickerComponent {
                         }, 0);
                     }, 0);
                 };
-                // focusing it
                 field.focus();
             }, 0);
         }
@@ -4709,13 +4704,11 @@ class MDBDatePickerComponent {
      * @return {?}
      */
     removeBtnClicked() {
-        // Remove date button clicked
         this.clearDate();
         if (this.showSelector) {
             this.calendarToggle.emit(CalToggle.CloseByCalBtn);
         }
         this.isDateSelected = false;
-        // this.showSelector = false;
     }
     /**
      * @return {?}
@@ -4746,6 +4739,7 @@ class MDBDatePickerComponent {
             this.hideKeyboard();
         }
         this.labelActive = true;
+        this.ChangeZIndex();
     }
     /**
      * @return {?}
@@ -5312,9 +5306,7 @@ MDBDatePickerComponent.decorators = [
 /** @nocollapse */
 MDBDatePickerComponent.ctorParameters = () => [
     { type: ElementRef },
-    { type: 
-        // ChangeDetectorRef,
-        Renderer2 },
+    { type: Renderer2 },
     { type: LocaleService },
     { type: UtilService },
     { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
@@ -7853,6 +7845,7 @@ class SelectComponent {
         this.filterInputWidth = 1;
         this.isDisabled = false;
         this.placeholderView = '';
+        this.labelActive = false;
         this.clearClicked = false;
         this.selectContainerClicked = false;
         this.optionHeight = 44;
@@ -7890,6 +7883,7 @@ class SelectComponent {
      */
     ngAfterViewInit() {
         this.updateState();
+        this.updateLabelState();
         this.setArrowUpIcon();
         this.setArrowDownIcon();
         this.renderer.setStyle(this.selectionSpan.nativeElement.children[0].lastChild, 'visibility', 'hidden');
@@ -7974,18 +7968,28 @@ class SelectComponent {
         else {
             this.selectContainerClicked = true;
             this.toggleDropdown();
+            if (this.labelActive && !this.hasSelected && !this.placeholder) {
+                this.labelActive = false;
+            }
+            else {
+                this.labelActive = true;
+            }
         }
     }
     /**
      * @return {?}
      */
     onSelectContainerFocus() {
+        this.labelActive = true;
         this.openDropdown();
     }
     /**
      * @return {?}
      */
     onSelectContainerBlur() {
+        setTimeout(() => {
+            this.updateLabelState();
+        }, 150);
         if (!this.isOpen && !this.disabled) {
             this.onTouched();
         }
@@ -8068,6 +8072,7 @@ class SelectComponent {
         this.clearClicked = true;
         this.clearSelection();
         this.placeholderView = this.placeholder;
+        this.labelActive = false;
     }
     /**
      * @param {?} option
@@ -8137,6 +8142,10 @@ class SelectComponent {
      */
     writeValue(value) {
         this.value = value;
+        if (!value) {
+            this.hasSelected = false;
+            this.updateLabelState();
+        }
     }
     /**
      * @param {?} fn
@@ -8171,7 +8180,7 @@ class SelectComponent {
      * @return {?}
      */
     updateState() {
-        this.placeholderView = this.hasSelected ? '' : this.placeholder;
+        this.placeholderView = this.placeholder;
         setTimeout(() => {
             this.updateFilterWidth();
         });
@@ -8184,6 +8193,21 @@ class SelectComponent {
     updateOptionsList(options) {
         this.optionList = new OptionList(options);
         this.optionList.value = this._value;
+    }
+    /**
+     * @return {?}
+     */
+    updateLabelState() {
+        if (!this.placeholder && !this.hasSelected) {
+            setTimeout(() => {
+                this.labelActive = false;
+            }, 0);
+        }
+        else {
+            setTimeout(() => {
+                this.labelActive = true;
+            }, 0);
+        }
     }
     /**
      * Dropdown. *
@@ -8248,6 +8272,7 @@ class SelectComponent {
             this.valueChanged();
             this.selected.emit(option.wrappedOption);
             this.hasSelected = true;
+            this.updateLabelState();
         }
     }
     /**
@@ -8259,6 +8284,10 @@ class SelectComponent {
             this.optionList.deselect(option);
             this.valueChanged();
             this.placeholderView = this.placeholder;
+            if (this.optionList.selection.length === 0) {
+                this.hasSelected = false;
+                this.updateLabelState();
+            }
             this.deselected.emit(option.wrappedOption);
         }
     }
@@ -8470,7 +8499,7 @@ class SelectComponent {
 SelectComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-select',
-                template: "<label *ngIf=\"label !== ''\"> {{label}} </label> <div #selection [attr.tabindex]=\"disabled ? null : 0\" [ngClass]=\"{'open': isOpen, 'focus': hasFocus, 'below': isBelow, 'disabled': disabled}\" [tabindex]=\"tabindex\" (mousedown)=\"onSelectContainerClick($event)\" (focus)=\"onSelectContainerFocus()\" (blur)=\"onSelectContainerBlur()\" (keydown)=\"onSelectContainerKeydown($event)\" (window:click)=\"onWindowClick()\" (window:resize)=\"onWindowResize()\"> <div class=\"single\" *ngIf=\"!multiple\"> <div class=\"value\" *ngIf=\"optionList.hasSelected()\"> {{optionList.selection[0].label}} </div> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div #clear class=\"clear\" *ngIf=\"allowClear && hasSelected\" (mousedown)=\"onClearSelectionClick($event)\"> &#x2715; </div> </div> <div class=\"multiple\" *ngIf=\"multiple\"> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div class=\"option\" *ngFor=\"let option of optionList.selection\"> <span class=\"deselect-option\">, </span>{{option.label}} </div> </div> </div> <mdb-select-dropdown *ngIf=\"isOpen\" #dropdown [multiple]=\"multiple\" [dropdownHeight]=\"dropdownHeight\" [dropdownMaxHeight]=\"dropdownMaxHeight\" [optionList]=\"optionList\" [notFoundMsg]=\"notFoundMsg\" [highlightColor]=\"highlightColor\" [highlightTextColor]=\"highlightTextColor\" [filterEnabled]=\"filterEnabled\" [placeholder]=\"filterPlaceholder\" [top]=\"top\" [left]=\"left\" (close)=\"onDropdownClose($event)\" (optionClicked)=\"onDropdownOptionClicked($event)\" (singleFilterClick)=\"onSingleFilterClick()\" (singleFilterInput)=\"onSingleFilterInput($event)\" (singleFilterKeydown)=\"onSingleFilterKeydown($event)\"> </mdb-select-dropdown>",
+                template: "<label *ngIf=\"label !== ''\" [ngClass]=\"{'active': labelActive }\"> {{label}} </label> <div #selection [attr.tabindex]=\"disabled ? null : 0\" [ngClass]=\"{'open': isOpen, 'focus': hasFocus, 'below': isBelow, 'disabled': disabled}\" [tabindex]=\"tabindex\" (mousedown)=\"onSelectContainerClick($event)\" (focus)=\"onSelectContainerFocus()\" (blur)=\"onSelectContainerBlur()\" (keydown)=\"onSelectContainerKeydown($event)\" (window:click)=\"onWindowClick()\" (window:resize)=\"onWindowResize()\"> <div class=\"single form-control\" *ngIf=\"!multiple\"> <div class=\"value\" *ngIf=\"optionList.hasSelected()\"> {{optionList.selection[0].label}} </div> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div #clear class=\"clear\" *ngIf=\"allowClear && hasSelected\" (mousedown)=\"onClearSelectionClick($event)\"> &#x2715; </div> </div> <div class=\"multiple form-control\" *ngIf=\"multiple\"> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div class=\"option\"> <span *ngFor=\"let option of optionList.selection\"> {{option.label}}<span class=\"deselect-option\">,</span> </span> </div> </div> </div> <mdb-select-dropdown *ngIf=\"isOpen\" #dropdown [multiple]=\"multiple\" [dropdownHeight]=\"dropdownHeight\" [dropdownMaxHeight]=\"dropdownMaxHeight\" [optionList]=\"optionList\" [notFoundMsg]=\"notFoundMsg\" [highlightColor]=\"highlightColor\" [highlightTextColor]=\"highlightTextColor\" [filterEnabled]=\"filterEnabled\" [placeholder]=\"filterPlaceholder\" [top]=\"top\" [left]=\"left\" (close)=\"onDropdownClose($event)\" (optionClicked)=\"onDropdownOptionClicked($event)\" (singleFilterClick)=\"onSingleFilterClick()\" (singleFilterInput)=\"onSingleFilterInput($event)\" (singleFilterKeydown)=\"onSingleFilterKeydown($event)\"> </mdb-select-dropdown>",
                 providers: [SELECT_VALUE_ACCESSOR],
                 encapsulation: ViewEncapsulation.None
             },] },
@@ -12254,6 +12283,13 @@ class ClockPickerComponent {
         this.showClock = false;
     }
     /**
+     * @return {?}
+     */
+    clearTimeInput() {
+        this.selectedHours = { 'h': '12', 'm': '00', 'ampm': 'AM' };
+        this.endHours = '';
+    }
+    /**
      * @param {?} hour
      * @return {?}
      */
@@ -14398,7 +14434,7 @@ class MdbCardFooterComponent {
      * @return {?}
      */
     ngOnInit() {
-        // this._r.addClass(this._el.nativeElement, 'card-footer');
+        this._r.addClass(this._el.nativeElement, 'card-footer');
         if (this.class) {
             this.class.split(' ').forEach((element) => {
                 this._r.addClass(this._el.nativeElement, element);
@@ -14409,7 +14445,7 @@ class MdbCardFooterComponent {
 MdbCardFooterComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-card-footer',
-                template: "<div class=\"card-footer\"> <ng-content></ng-content> </div>",
+                template: "<ng-content></ng-content> ",
             },] },
 ];
 /** @nocollapse */
@@ -14561,6 +14597,24 @@ class MdbCardComponent {
         }
     }
     /**
+     * @param {?} color
+     * @return {?}
+     */
+    set bgColor(color) {
+        if (color) {
+            this._r.addClass(this.card.nativeElement, color);
+        }
+    }
+    /**
+     * @param {?} color
+     * @return {?}
+     */
+    set borderColor(color) {
+        if (color) {
+            this._r.addClass(this.card.nativeElement, color);
+        }
+    }
+    /**
      * @return {?}
      */
     ngOnInit() {
@@ -14579,6 +14633,10 @@ class MdbCardComponent {
                 this._r.addClass(this._el.nativeElement, element);
             });
         }
+        if (this._el.nativeElement.parentElement.classList.contains('card-deck')) {
+            this._r.addClass(this.card.nativeElement, 'w-100');
+            this._r.addClass(this.card.nativeElement, 'mx-0');
+        }
     }
 }
 MdbCardComponent.decorators = [
@@ -14596,9 +14654,12 @@ MdbCardComponent.propDecorators = {
     class: [{ type: Input }],
     cascade: [{ type: Input }],
     wider: [{ type: Input }],
+    card: [{ type: ViewChild, args: ['card',] }],
     narrower: [{ type: Input }],
     reverse: [{ type: Input }],
-    dark: [{ type: Input }]
+    dark: [{ type: Input }],
+    bgColor: [{ type: Input }],
+    borderColor: [{ type: Input }]
 };
 
 /**
@@ -15259,8 +15320,8 @@ CollapseComponent.decorators = [
                 template: '<ng-content></ng-content>',
                 animations: [
                     trigger('expandBody', [
-                        state('collapsed', style({ height: '0px', visibility: 'hidden' })),
-                        state('expanded', style({ height: '*', visibility: 'visible' })),
+                        state('collapsed', style({ height: '0px', visibility: 'hidden', overflow: 'hidden' })),
+                        state('expanded', style({ height: '*', visibility: 'visible', overflow: 'visible' })),
                         transition('expanded <=> collapsed', animate('500ms ease')),
                     ])
                 ],
@@ -18040,11 +18101,9 @@ class NavbarComponent {
         this.addTogglerIconClasses();
     }
     /**
-     * @param {?} event
      * @return {?}
      */
-    toggle(event) {
-        event.preventDefault();
+    toggle() {
         if (!this.collapsing) {
             if (this.shown) {
                 this.hide();
@@ -18155,7 +18214,7 @@ class NavbarComponent {
 NavbarComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-navbar',
-                template: "<nav class=\"{{SideClass}}\" #nav> <div [ngClass]=\"{'container': containerInside}\" [ngStyle]=\"{'display': displayStyle}\" #container> <ng-content select=\"mdb-navbar-brand\"></ng-content> <ng-content select=\"logo\"></ng-content> <ng-content *ngIf=\"this.doubleNav == true\" select=\"navlinks\"></ng-content> <div *ngIf=\"this.doubleNav == false\"> <button #toggler class=\"navbar-toggler\" type=\"button\" (click)=\"toggle($event)\" mdbWavesEffect *ngIf=\"this.el.nativeElement.children.length !== 0\"> <span class=\"navbar-toggler-icon\"> </span> </button> </div> <div #navbar [style.height]=\"height\" class=\"navbar-collapse collapse\" [ngClass]=\"{'collapse': collapse, 'show': showClass, 'collapsing': collapsing}\"> <ng-content select=\"links\"></ng-content> </div> </div> </nav>",
+                template: "<nav class=\"{{SideClass}}\" #nav> <div [ngClass]=\"{'container': containerInside}\" [ngStyle]=\"{'display': displayStyle}\" #container> <ng-content select=\"mdb-navbar-brand\"></ng-content> <ng-content select=\"logo\"></ng-content> <ng-content *ngIf=\"this.doubleNav == true\" select=\"navlinks\"></ng-content> <div *ngIf=\"this.doubleNav == false\"> <button #toggler class=\"navbar-toggler\" type=\"button\" (click)=\"toggle(); $event.preventDefault()\" mdbWavesEffect *ngIf=\"this.el.nativeElement.children.length !== 0\"> <span class=\"navbar-toggler-icon\"> </span> </button> </div> <div #navbar [style.height]=\"height\" class=\"navbar-collapse collapse\" [ngClass]=\"{'collapse': collapse, 'show': showClass, 'collapsing': collapsing}\"> <ng-content select=\"links\"></ng-content> </div> </div> </nav>",
             },] },
 ];
 /** @nocollapse */
