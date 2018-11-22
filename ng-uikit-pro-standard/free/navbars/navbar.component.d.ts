@@ -29,7 +29,7 @@ export declare class NavbarComponent implements AfterViewInit, OnInit {
     toggle(): void;
     show(): void;
     hide(): void;
-    readonly displayStyle: string;
+    readonly displayStyle: "" | "flex";
     onResize(event: any): void;
     onScroll(): void;
 }

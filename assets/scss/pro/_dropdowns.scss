@@ -6,9 +6,12 @@
 .dropright {
   .dropdown-menu {
     padding: $dropdown-menu-padding;
-    @each $name, $color in $dropdown-colors {
+
+    @each $name,
+    $color in $dropdown-colors {
       &.dropdown-#{$name} {
         .dropdown-item {
+
           &:hover,
           &:active {
             background-color: $color !important;
@@ -16,12 +19,15 @@
         }
       }
     }
+
     .dropdown-item {
       padding: $dropdown-menu-padding;
       margin-left: 0;
       font-size: $dropdown-item-font-size;
+
       &.disabled {
         color: $dropdown-item-disabled-color;
+
         &:hover,
         &:active,
         &:focus {
@@ -30,6 +36,7 @@
           background-color: transparent !important;
         }
       }
+
       &:hover,
       &:active {
         box-shadow: $z-depth-1-half;
@@ -42,7 +49,7 @@
   }
 }
 
-.navbar-nav  {
+.navbar-nav {
   .dropdown-menu-right {
     right: 0;
     left: auto;

@@ -14,6 +14,7 @@ export declare class TabsetComponent implements OnDestroy, OnInit, AfterViewInit
     tabsGetClass: String;
     isBrowser: any;
     clazz: boolean;
+    disableWaves: boolean;
     buttonClass: String;
     contentClass: String;
     /** if true tabs will be placed vertically */
@@ -42,9 +43,9 @@ export declare class TabsetComponent implements OnDestroy, OnInit, AfterViewInit
     tabsGet(): void;
     getActiveElement(): any;
     showActiveIndex(): void;
-    private getFirstActiveTabIndex();
-    private removeActiveTabs();
-    private initActiveTab();
+    private getFirstActiveTabIndex;
+    private removeActiveTabs;
+    private initActiveTab;
     ngOnInit(): void;
     ngAfterViewInit(): void;
 }

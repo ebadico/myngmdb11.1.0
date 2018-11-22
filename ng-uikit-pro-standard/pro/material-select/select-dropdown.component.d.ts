@@ -48,10 +48,10 @@ export declare class SelectDropdownComponent implements AfterViewInit, OnChanges
     onOptionMouseover(option: Option): void;
     onOptionClick(option: Option): void;
     /** Initialization. **/
-    private optionsReset();
+    private optionsReset;
     /** View. **/
     getOptionStyle(option: Option): any;
     clearFilterInput(): void;
     moveHighlightedIntoView(): void;
-    private handleOptionsWheel(e);
+    private handleOptionsWheel;
 }
