@@ -10,6 +10,7 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     private renderer;
     private localeService;
     private utilService;
+    tabIndex: any;
     options: any;
     locale: string;
     defaultMonth: string;
@@ -25,6 +26,7 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     inputFocusBlur: EventEmitter<IMyInputFocusBlur>;
     divFocus: any;
     pickerFrame: ElementRef;
+    dateInput: ElementRef;
     isDateSelected: boolean;
     labelActive: boolean;
     showSelector: boolean;
@@ -64,6 +66,7 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     ChangeZIndex(): void;
     onChangeCb: (_: any) => void;
     onTouchedCb: () => void;
+    setDisabledState(isDisabled: boolean): void;
     removeInlineStyle(): void;
     setLocaleOptions(): void;
     addLocale(locale: IMyLocales): void;

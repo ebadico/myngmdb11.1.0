@@ -12,7 +12,7 @@ export declare enum UploadStatus {
     Queue = 0,
     Uploading = 1,
     Done = 2,
-    Cancelled = 3,
+    Cancelled = 3
 }
 export interface UploadProgress {
     status: UploadStatus;
@@ -92,5 +92,5 @@ export declare class MDBUploaderService {
     allContentTypesAllowed(): boolean;
     isContentTypeAllowed(mimetype: string): boolean;
     makeUploadFile(file: File, index: number): UploadFile;
-    private parseResponseHeaders(httpHeaders);
+    private parseResponseHeaders;
 }

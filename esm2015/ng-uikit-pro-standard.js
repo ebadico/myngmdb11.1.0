@@ -13,7 +13,7 @@ import { __decorate, __metadata } from 'tslib';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /*tslint:disable */
 /**
@@ -25,23 +25,35 @@ import { __decorate, __metadata } from 'tslib';
  */
 /**
  * JS version of browser APIs. This library can only run in the browser.
+ * @type {?}
  */
-var win = typeof window !== 'undefined' && window || /** @type {?} */ ({});
+var win = typeof window !== 'undefined' && window || (/** @type {?} */ ({}));
+/** @type {?} */
 var document$1 = win.document;
+/** @type {?} */
 var location = win.location;
+/** @type {?} */
 var gc = win['gc'] ? () => win['gc']() : () => null;
+/** @type {?} */
 var performance = win['performance'] ? win['performance'] : null;
+/** @type {?} */
 const Event = win['Event'];
+/** @type {?} */
 const MouseEvent = win['MouseEvent'];
+/** @type {?} */
 const KeyboardEvent = win['KeyboardEvent'];
+/** @type {?} */
 const EventTarget = win['EventTarget'];
+/** @type {?} */
 const History = win['History'];
+/** @type {?} */
 const Location = win['Location'];
+/** @type {?} */
 const EventListener = win['EventListener'];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class SBItemBodyComponent {
     constructor() {
@@ -62,7 +74,8 @@ class SBItemBodyComponent {
      * @return {?}
      */
     openSidenavOnActiveLink(activeUrl) {
-        const /** @type {?} */ activeLink = this.routerLinks.find((link) => {
+        /** @type {?} */
+        const activeLink = this.routerLinks.find((link) => {
             return link.href === activeUrl;
         });
         if (activeLink) {
@@ -102,15 +115,16 @@ SBItemBodyComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 const sbConfig = {
     serviceInstance: new Object()
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class SBItemComponent {
     constructor() {
@@ -133,7 +147,7 @@ class SBItemComponent {
      */
     ngAfterContentInit() {
         setTimeout(() => {
-            if (this.body.expandAnimationState === 'expanded') {
+            if (this.body && this.body.expandAnimationState === 'expanded') {
                 this.collapsed = false;
             }
         }, 40);
@@ -174,7 +188,7 @@ SBItemComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class SBItemHeadComponent {
     /**
@@ -216,7 +230,7 @@ SBItemHeadComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class SqueezeBoxComponent {
     constructor() {
@@ -254,8 +268,9 @@ SqueezeBoxComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 const SQUEEZEBOX_COMPONENTS = [SqueezeBoxComponent, SBItemComponent, SBItemHeadComponent, SBItemBodyComponent];
 class AccordionModule {
 }
@@ -269,7 +284,7 @@ AccordionModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * The OverlayContainer is the container in which all overlays will load.
@@ -294,7 +309,8 @@ class OverlayContainer {
      * @return {?}
      */
     _createContainer() {
-        const /** @type {?} */ container = document.createElement('div');
+        /** @type {?} */
+        const container = document.createElement('div');
         container.classList.add('overlay-container');
         document.body.appendChild(container);
         this._containerElement = container;
@@ -303,7 +319,7 @@ class OverlayContainer {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * Reference to an overlay that has been created with the Overlay service.
@@ -335,7 +351,7 @@ class OverlayRef {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @record
@@ -370,7 +386,8 @@ class ComponentPortal {
      * @return {?}
      */
     detach() {
-        const /** @type {?} */ host = this._attachedHost;
+        /** @type {?} */
+        const host = this._attachedHost;
         this._attachedHost = null;
         return host.detach();
     }
@@ -387,6 +404,7 @@ class ComponentPortal {
      * @param {?} host
      * @return {?}
      */
+    // setAttachedHost(host: BasePortalHost) {
     setAttachedHost(host) {
         this._attachedHost = host;
     }
@@ -434,7 +452,7 @@ class BasePortalHost {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * A PortalHost for attaching portals to an arbitrary DOM element outside of the Angular
@@ -462,8 +480,10 @@ class DomPortalHost extends BasePortalHost {
      * @return {?}
      */
     attachComponentPortal(portal, newestOnTop) {
-        const /** @type {?} */ componentFactory = this._componentFactoryResolver.resolveComponentFactory(portal.component);
-        let /** @type {?} */ componentRef;
+        /** @type {?} */
+        const componentFactory = this._componentFactoryResolver.resolveComponentFactory(portal.component);
+        /** @type {?} */
+        let componentRef;
         // If the portal specifies a ViewContainerRef, we will use that as the attachment point
         // for the component (in terms of Angular's component tree, not rendering).
         // When the ViewContainerRef is missing, we use the factory to create the component directly
@@ -495,13 +515,13 @@ class DomPortalHost extends BasePortalHost {
      * @return {?}
      */
     _getComponentRootNode(componentRef) {
-        return /** @type {?} */ ((/** @type {?} */ (componentRef.hostView)).rootNodes[0]);
+        return (/** @type {?} */ (((/** @type {?} */ (componentRef.hostView))).rootNodes[0]));
     }
 }
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * Service to create Overlays. Overlays are dynamically added pieces of floating UI, meant to be
@@ -551,7 +571,8 @@ class Overlay {
      * @return {?} Newly-created pane element
      */
     _createPaneElement(positionClass, overlayContainer) {
-        const /** @type {?} */ pane = document.createElement('div');
+        /** @type {?} */
+        const pane = document.createElement('div');
         pane.id = 'toast-container';
         pane.classList.add(positionClass);
         if (!overlayContainer) {
@@ -590,6 +611,7 @@ Overlay.ctorParameters = () => [
 ];
 /**
  * Providers for Overlay and its related injectables.
+ * @type {?}
  */
 const OVERLAY_PROVIDERS = [
     Overlay,
@@ -598,7 +620,7 @@ const OVERLAY_PROVIDERS = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * Configuration for an individual toast.
@@ -609,6 +631,7 @@ const OVERLAY_PROVIDERS = [
  * @record
  */
 
+// WARNING: interface has both a type and a value, skipping emit
 /**
  * Remove warning message from angular-cli
  */
@@ -666,13 +689,14 @@ class ToastPackage {
         return this._onAction.asObservable();
     }
 }
+/** @type {?} */
 const tsConfig = {
     serviceInstance: new Object()
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class ToastComponent {
     /**
@@ -742,8 +766,10 @@ class ToastComponent {
         if (this.width === 0) {
             return;
         }
-        const /** @type {?} */ now = new Date().getTime();
-        const /** @type {?} */ remaining = this.hideTime - now;
+        /** @type {?} */
+        const now = new Date().getTime();
+        /** @type {?} */
+        const remaining = this.hideTime - now;
         this.width = (remaining / this.options.timeOut) * 100;
         if (this.width <= 0) {
             this.width = 0;
@@ -843,7 +869,7 @@ ToastComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class ToastContainerDirective {
     /**
@@ -889,7 +915,7 @@ ToastContainerModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * Reference to a toast opened via the Toast service.
@@ -985,13 +1011,14 @@ class ToastInjector {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 const TOAST_CONFIG = new InjectionToken('ToastConfig');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @record
@@ -1004,9 +1031,7 @@ class ToastService {
      * @param {?} _injector
      * @param {?} sanitizer
      */
-    constructor(
-    // @Inject(TOAST_CONFIG) public toastConfig: GlobalConfig,
-    toastConfig, overlay, _injector, sanitizer) {
+    constructor(toastConfig, overlay, _injector, sanitizer) {
         this.toastConfig = toastConfig;
         this.overlay = overlay;
         this._injector = _injector;
@@ -1061,6 +1086,7 @@ class ToastService {
      * @param {?=} type
      * @return {?}
      */
+    // show(message: string, title?: string, override?: IndividualConfig, type = '') {
     show(message, title, override, type = '') {
         return this._buildNotification(type, message, title, this.applyConfig(override));
     }
@@ -1071,9 +1097,11 @@ class ToastService {
      * @param {?=} override
      * @return {?}
      */
+    // success(message: string, title?: string, override?: IndividualConfig) {
     success(message, title, override) {
         //   const type = this.toastConfig.iconClasses.success;
-        const /** @type {?} */ type = this.toastConfig.iconClasses.success;
+        /** @type {?} */
+        const type = this.toastConfig.iconClasses.success;
         return this._buildNotification(type, message, title, this.applyConfig(override));
     }
     /**
@@ -1083,9 +1111,11 @@ class ToastService {
      * @param {?=} override
      * @return {?}
      */
+    // error(message: string, title?: string, override?: IndividualConfig) {
     error(message, title, override) {
         //   const type = this.toastConfig.iconClasses.error;
-        const /** @type {?} */ type = this.toastConfig.iconClasses.error;
+        /** @type {?} */
+        const type = this.toastConfig.iconClasses.error;
         return this._buildNotification(type, message, title, this.applyConfig(override));
     }
     /**
@@ -1095,9 +1125,11 @@ class ToastService {
      * @param {?=} override
      * @return {?}
      */
+    // info(message: string, title?: string, override?: IndividualConfig) {
     info(message, title, override) {
         //   const type = this.toastConfig.iconClasses.info;
-        const /** @type {?} */ type = this.toastConfig.iconClasses.info;
+        /** @type {?} */
+        const type = this.toastConfig.iconClasses.info;
         return this._buildNotification(type, message, title, this.applyConfig(override));
     }
     /**
@@ -1107,9 +1139,11 @@ class ToastService {
      * @param {?=} override
      * @return {?}
      */
+    // warning(message: string, title?: string, override?: IndividualConfig) {
     warning(message, title, override) {
         //   const type = this.toastConfig.iconClasses.warning;
-        const /** @type {?} */ type = this.toastConfig.iconClasses.warning;
+        /** @type {?} */
+        const type = this.toastConfig.iconClasses.warning;
         return this._buildNotification(type, message, title, this.applyConfig(override));
     }
     /**
@@ -1119,7 +1153,8 @@ class ToastService {
      */
     clear(toastId) {
         // Call every toastRef manualClose function
-        let /** @type {?} */ toast;
+        /** @type {?} */
+        let toast;
         for (toast of this.toasts) {
             if (toastId !== undefined) {
                 if (toast.toastId === toastId) {
@@ -1139,7 +1174,8 @@ class ToastService {
      */
     remove(toastId) {
         // const found = this._findToast(toastId);
-        const /** @type {?} */ found = this._findToast(toastId);
+        /** @type {?} */
+        const found = this._findToast(toastId);
         if (!found) {
             return false;
         }
@@ -1151,7 +1187,8 @@ class ToastService {
         }
         if (this.currentlyActive <= +this.toastConfig.maxOpened && this.toasts[this.currentlyActive]) {
             // const p = this.toasts[this.currentlyActive].toastRef;
-            const /** @type {?} */ p = this.toasts[this.currentlyActive].toastRef;
+            /** @type {?} */
+            const p = this.toasts[this.currentlyActive].toastRef;
             if (!p.isInactive()) {
                 this.currentlyActive = this.currentlyActive + 1;
                 p.activate();
@@ -1165,7 +1202,7 @@ class ToastService {
      * @return {?}
      */
     isDuplicate(message) {
-        for (let /** @type {?} */ i = 0; i < this.toasts.length; i++) {
+        for (let i = 0; i < this.toasts.length; i++) {
             if (this.toasts[i].message === message) {
                 return true;
             }
@@ -1187,7 +1224,8 @@ class ToastService {
         function use(source, defaultValue) {
             return override && source !== undefined ? source : defaultValue;
         }
-        const /** @type {?} */ current = Object.assign({}, this.toastConfig);
+        /** @type {?} */
+        const current = Object.assign({}, this.toastConfig);
         current.closeButton = use(override.closeButton, current.closeButton);
         current.extendedTimeOut = use(override.extendedTimeOut, current.extendedTimeOut);
         current.progressBar = use(override.progressBar, current.progressBar);
@@ -1209,7 +1247,7 @@ class ToastService {
      * @return {?}
      */
     _findToast(toastId) {
-        for (let /** @type {?} */ i = 0; i < this.toasts.length; i++) {
+        for (let i = 0; i < this.toasts.length; i++) {
             if (this.toasts[i].toastId === toastId) {
                 return { index: i, activeToast: this.toasts[i] };
             }
@@ -1231,24 +1269,30 @@ class ToastService {
             return null;
         }
         this.previousToastMessage = message;
-        let /** @type {?} */ keepInactive = false;
+        /** @type {?} */
+        let keepInactive = false;
         if (this.toastConfig.maxOpened && this.currentlyActive >= this.toastConfig.maxOpened) {
             keepInactive = true;
             if (this.toastConfig.autoDismiss) {
                 this.clear(this.toasts[this.toasts.length - 1].toastId);
             }
         }
-        const /** @type {?} */ overlayRef = this.overlay.create(config.positionClass, this.overlayContainer);
+        /** @type {?} */
+        const overlayRef = this.overlay.create(config.positionClass, this.overlayContainer);
         this.index = this.index + 1;
         // let sanitizedMessage = message;
-        let /** @type {?} */ sanitizedMessage = message;
+        /** @type {?} */
+        let sanitizedMessage = message;
         if (message && config.enableHtml) {
             sanitizedMessage = this.sanitizer.sanitize(SecurityContext.HTML, message);
         }
-        const /** @type {?} */ toastRef = new ToastRef(overlayRef);
-        const /** @type {?} */ toastPackage = new ToastPackage(this.index, config, sanitizedMessage, title, toastType, toastRef);
+        /** @type {?} */
+        const toastRef = new ToastRef(overlayRef);
+        /** @type {?} */
+        const toastPackage = new ToastPackage(this.index, config, sanitizedMessage, title, toastType, toastRef);
         // const ins: ActiveToast = {
-        const /** @type {?} */ ins = {
+        /** @type {?} */
+        const ins = {
             toastId: this.index,
             message,
             toastRef,
@@ -1257,8 +1301,10 @@ class ToastService {
             onTap: toastPackage.onTap(),
             onAction: toastPackage.onAction(),
         };
-        const /** @type {?} */ toastInjector = new ToastInjector(toastPackage, this._injector);
-        const /** @type {?} */ component = new ComponentPortal(config.toastComponent, toastInjector);
+        /** @type {?} */
+        const toastInjector = new ToastInjector(toastPackage, this._injector);
+        /** @type {?} */
+        const component = new ComponentPortal(config.toastComponent, toastInjector);
         ins.portal = overlayRef.attach(component, this.toastConfig.newestOnTop);
         if (!keepInactive) {
             setTimeout(() => {
@@ -1283,7 +1329,7 @@ ToastService.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class ToastModule {
     /**
@@ -1325,37 +1371,48 @@ ToastModule.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 // SideNav
+/** @type {?} */
 const slideIn = trigger('slideIn', [
     state('inactive', style({ opacity: 0, transform: 'translateX(-300%)' })),
     state('active', style({ opacity: 1, transform: 'translateX(0)' })),
     transition('inactive => active', animate('500ms ease')),
     transition('active => inactive', animate('500ms ease')),
 ]);
+/** @type {?} */
 const fadeIn = trigger('fadeIn', [
     state('inactive', style({ opacity: 0 })),
     state('active', style({ opacity: 1 })),
     transition('inactive => active', animate('500ms ease')),
     transition('active => inactive', animate('500ms ease')),
 ]);
+/** @type {?} */
 const slideOut = trigger('slideOut', [
     state('inactive', style({ opacity: 0, transform: 'translateX(-300%)' })),
     state('active', style({ opacity: 1, transform: 'translateX(0)' })),
     transition('inactive => active', animate('500ms ease')),
     transition('active => inactive', animate('500ms ease')),
 ]);
+/** @type {?} */
 const flipState = trigger('flipState', [
     state('active', style({ transform: 'rotateY(179.9deg)' })),
     state('inactive', style({ transform: 'rotateY(0)' })),
 ]);
 // Rotating animation animation
+/** @type {?} */
 const turnState = trigger('turnState', [
     state('active', style({ transform: 'rotateY(179.9deg)' })),
     state('inactive', style({ transform: 'rotateY(0)' })),
 ]);
 // Social reveal animation
+/** @type {?} */
 const iconsState = trigger('iconsState', [
     state('isactive', style({ visibility: 'visible', transform: 'translate(-6%)' })),
     state('isnotactive', style({ visibility: 'hidden', transform: 'translate(27%)' })),
@@ -1363,6 +1420,7 @@ const iconsState = trigger('iconsState', [
     transition('isnotactive => isactive', animate('200ms ease-out')),
 ]);
 // Reveal animation animation
+/** @type {?} */
 const socialsState = trigger('socialsState', [
     state('active', style({ visibility: 'visible', transform: 'translateY(-100%)' })),
     state('inactive', style({ visibility: 'hidden', transform: 'translateY(0)' })),
@@ -1380,6 +1438,7 @@ const socialsState = trigger('socialsState', [
 //   state('inactive', style({ transform: 'scale(0.9, 0.9)' })),
 // ]);
 // alerts
+/** @type {?} */
 const flyInOut = trigger('flyInOut', [
     state('inactive', style({ display: 'none', opacity: 0.7 })),
     state('active', style({ opacity: 0.7 })),
@@ -1390,7 +1449,15 @@ const flyInOut = trigger('flyInOut', [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @record
@@ -1408,17 +1475,22 @@ class CompleterListItemComponent {
             this.parts.push({ isMatch: false, text: this.text });
             return;
         }
-        const /** @type {?} */ matchStr = this.text.toLowerCase();
-        let /** @type {?} */ matchPos = matchStr.indexOf(this.searchStr.toLowerCase());
-        let /** @type {?} */ startIndex = 0;
+        /** @type {?} */
+        const matchStr = this.text.toLowerCase();
+        /** @type {?} */
+        let matchPos = matchStr.indexOf(this.searchStr.toLowerCase());
+        /** @type {?} */
+        let startIndex = 0;
         while (matchPos >= 0) {
-            const /** @type {?} */ matchText = this.text.slice(matchPos, matchPos + this.searchStr.length);
+            /** @type {?} */
+            const matchText = this.text.slice(matchPos, matchPos + this.searchStr.length);
             if (matchPos === 0) {
                 this.parts.push({ isMatch: true, text: matchText });
                 startIndex += this.searchStr.length;
             }
             else if (matchPos > 0) {
-                const /** @type {?} */ matchPart = this.text.slice(startIndex, matchPos);
+                /** @type {?} */
+                const matchPart = this.text.slice(startIndex, matchPos);
                 this.parts.push({ isMatch: false, text: matchPart });
                 this.parts.push({ isMatch: true, text: matchText });
                 startIndex += this.searchStr.length + matchPart.length;
@@ -1445,7 +1517,7 @@ CompleterListItemComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @record
@@ -1631,13 +1703,20 @@ MdbCompleterDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
-const MAX_CHARS = 524288; // the default max length per the html maxlength attribute
+/** @type {?} */
+const MAX_CHARS = 524288;
+// the default max length per the html maxlength attribute
+/** @type {?} */
 const MIN_SEARCH_LENGTH = 3;
+/** @type {?} */
 const PAUSE = 100;
+/** @type {?} */
 const TEXT_SEARCHING = 'Searching...';
+/** @type {?} */
 const TEXT_NO_RESULTS = 'No results found';
+/** @type {?} */
 const CLEAR_TIMEOUT = 50;
 /**
  * @param {?} value
@@ -1649,7 +1728,7 @@ function isNil(value) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @abstract
@@ -1663,36 +1742,44 @@ class CompleterBaseData extends Subject {
      */
     cancel() { }
     /**
+     * @template THIS
+     * @this {THIS}
      * @param {?} searchFields
-     * @return {?}
+     * @return {THIS}
      */
     searchFields(searchFields) {
-        this._searchFields = searchFields;
-        return this;
+        (/** @type {?} */ (this))._searchFields = searchFields;
+        return (/** @type {?} */ (this));
     }
     /**
+     * @template THIS
+     * @this {THIS}
      * @param {?} titleField
-     * @return {?}
+     * @return {THIS}
      */
     titleField(titleField) {
-        this._titleField = titleField;
-        return this;
+        (/** @type {?} */ (this))._titleField = titleField;
+        return (/** @type {?} */ (this));
     }
     /**
+     * @template THIS
+     * @this {THIS}
      * @param {?} descriptionField
-     * @return {?}
+     * @return {THIS}
      */
     descriptionField(descriptionField) {
-        this._descriptionField = descriptionField;
-        return this;
+        (/** @type {?} */ (this))._descriptionField = descriptionField;
+        return (/** @type {?} */ (this));
     }
     /**
+     * @template THIS
+     * @this {THIS}
      * @param {?} imageField
-     * @return {?}
+     * @return {THIS}
      */
     imageField(imageField) {
-        this._imageField = imageField;
-        return this;
+        (/** @type {?} */ (this))._imageField = imageField;
+        return (/** @type {?} */ (this));
     }
     /**
      * @param {?} data
@@ -1700,10 +1787,13 @@ class CompleterBaseData extends Subject {
      */
     convertToItem(data) {
         // let image: string = null;
-        let /** @type {?} */ image = null;
-        let /** @type {?} */ formattedText;
+        /** @type {?} */
+        let image = null;
+        /** @type {?} */
+        let formattedText;
         // let formattedDesc: string;
-        let /** @type {?} */ formattedDesc;
+        /** @type {?} */
+        let formattedDesc;
         if (this._titleField) {
             formattedText = this.extractTitle(data);
         }
@@ -1719,12 +1809,12 @@ class CompleterBaseData extends Subject {
         if (isNil(formattedText)) {
             return null;
         }
-        return /** @type {?} */ ({
+        return (/** @type {?} */ ({
             title: formattedText,
             description: formattedDesc,
             image: image,
             originalObject: data
-        });
+        }));
     }
     /**
      * @param {?} data
@@ -1732,11 +1822,14 @@ class CompleterBaseData extends Subject {
      * @return {?}
      */
     extractMatches(data, term) {
-        let /** @type {?} */ matches = [];
-        const /** @type {?} */ searchFields = this._searchFields ? this._searchFields.split(',') : null;
+        /** @type {?} */
+        let matches = [];
+        /** @type {?} */
+        const searchFields = this._searchFields ? this._searchFields.split(',') : null;
         if (this._searchFields !== null && this._searchFields !== undefined && term !== '') {
             matches = data.filter(item => {
-                const /** @type {?} */ values = searchFields ?
+                /** @type {?} */
+                const values = searchFields ?
                     searchFields.map(searchField => this.extractValue(item, searchField)).filter(value => !!value) : [item];
                 return values.some(value => value.toString().toLowerCase().indexOf(term.toString().toLowerCase()) >= 0);
             });
@@ -1764,12 +1857,14 @@ class CompleterBaseData extends Subject {
      * @return {?}
      */
     extractValue(obj, key) {
-        let /** @type {?} */ keys;
-        let /** @type {?} */ result;
+        /** @type {?} */
+        let keys;
+        /** @type {?} */
+        let result;
         if (key) {
             keys = key.split('.');
             result = obj;
-            for (let /** @type {?} */ i = 0; i < keys.length; i++) {
+            for (let i = 0; i < keys.length; i++) {
                 if (result) {
                     result = result[keys[i]];
                 }
@@ -1785,11 +1880,14 @@ class CompleterBaseData extends Subject {
      * @return {?}
      */
     processResults(matches) {
-        let /** @type {?} */ i;
-        const /** @type {?} */ results = [];
+        /** @type {?} */
+        let i;
+        /** @type {?} */
+        const results = [];
         if (matches && matches.length > 0) {
             for (i = 0; i < matches.length; i++) {
-                const /** @type {?} */ item = this.convertToItem(matches[i]);
+                /** @type {?} */
+                const item = this.convertToItem(matches[i]);
                 if (item) {
                     results.push(item);
                 }
@@ -1801,29 +1899,31 @@ class CompleterBaseData extends Subject {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class LocalData extends CompleterBaseData {
     constructor() {
         super();
     }
     /**
+     * @template THIS
+     * @this {THIS}
      * @param {?} data
-     * @return {?}
+     * @return {THIS}
      */
     data(data) {
         if (data instanceof Observable) {
-            (/** @type {?} */ (data)).subscribe((res) => {
-                this._data = res;
-                if (this.savedTerm) {
-                    this.search(this.savedTerm);
+            ((/** @type {?} */ (data))).subscribe((res) => {
+                (/** @type {?} */ (this))._data = res;
+                if ((/** @type {?} */ (this)).savedTerm) {
+                    (/** @type {?} */ (this)).search((/** @type {?} */ (this)).savedTerm);
                 }
             });
         }
         else {
-            this._data = /** @type {?} */ (data);
+            (/** @type {?} */ (this))._data = (/** @type {?} */ (data));
         }
-        return this;
+        return (/** @type {?} */ (this));
     }
     /**
      * @param {?} term
@@ -1835,10 +1935,12 @@ class LocalData extends CompleterBaseData {
         }
         else {
             this.savedTerm = null;
-            const /** @type {?} */ matches = this.extractMatches(this._data, term);
+            /** @type {?} */
+            const matches = this.extractMatches(this._data, term);
             this.next(this.processResults(matches));
         }
     }
+    // public convertToItem(data: any): CompleterItem {
     /**
      * @param {?} data
      * @return {?}
@@ -1855,7 +1957,7 @@ LocalData.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class RemoteData extends CompleterBaseData {
     /**
@@ -1865,16 +1967,20 @@ class RemoteData extends CompleterBaseData {
         super();
         this.http = http$$1;
         this.setToNullValue = null;
+        // private _urlFormater: (term: string) => string | any = null;
         this._urlFormater = this.setToNullValue;
+        // private _dataField: string = null;
         this._dataField = null;
     }
     /**
+     * @template THIS
+     * @this {THIS}
      * @param {?} remoteUrl
-     * @return {?}
+     * @return {THIS}
      */
     remoteUrl(remoteUrl) {
-        this._remoteUrl = remoteUrl;
-        return this;
+        (/** @type {?} */ (this))._remoteUrl = remoteUrl;
+        return (/** @type {?} */ (this));
     }
     /**
      * @param {?} urlFormater
@@ -1912,7 +2018,8 @@ class RemoteData extends CompleterBaseData {
     search(term) {
         this.cancel();
         // let params = {};
-        let /** @type {?} */ url = '';
+        /** @type {?} */
+        let url = '';
         if (this._urlFormater) {
             url = this._urlFormater(term);
         }
@@ -1920,20 +2027,22 @@ class RemoteData extends CompleterBaseData {
             url = this._remoteUrl + encodeURIComponent(term);
         }
         /*
-             * If requestOptions are provided, they will override anything set in headers.
-             *
-             * If no requestOptions are provided, a new RequestOptions object will be instantiated,
-             * and either the provided headers or a new Headers() object will be sent.
-             */
+         * If requestOptions are provided, they will override anything set in headers.
+         *
+         * If no requestOptions are provided, a new RequestOptions object will be instantiated,
+         * and either the provided headers or a new Headers() object will be sent.
+         */
         if (!this._requestOptions) {
             this._requestOptions = new RequestOptions();
             this._requestOptions.headers = this._headers || new Headers();
         }
         this.remoteSearch = this.http.get(url, this._requestOptions).pipe(map((res) => res.json()), map((data) => {
-            const /** @type {?} */ matches = this.extractValue(data, this._dataField);
+            /** @type {?} */
+            const matches = this.extractValue(data, this._dataField);
             return this.extractMatches(matches, term);
         }), map((matches) => {
-            const /** @type {?} */ results = this.processResults(matches);
+            /** @type {?} */
+            const results = this.processResults(matches);
             this.next(results);
             return results;
         }), catchError((err) => {
@@ -1951,6 +2060,7 @@ class RemoteData extends CompleterBaseData {
             this.remoteSearch.unsubscribe();
         }
     }
+    // public convertToItem(data: any): CompleterItem {
     /**
      * @param {?} data
      * @return {?}
@@ -1962,7 +2072,7 @@ class RemoteData extends CompleterBaseData {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class CompleterService {
     /**
@@ -1970,11 +2080,10 @@ class CompleterService {
      * @param {?} remoteDataFactory
      */
     constructor(localDataFactory, // Using any instead of () => LocalData because on AoT errors
-    // Using any instead of () => LocalData because on AoT errors
     remoteDataFactory // Using any instead of () => LocalData because on AoT errors
     ) {
         this.localDataFactory = localDataFactory;
-        this.remoteDataFactory = remoteDataFactory; // Using any instead of () => LocalData because on AoT errors
+        this.remoteDataFactory = remoteDataFactory;
     }
     /**
      * @param {?} data
@@ -1983,7 +2092,8 @@ class CompleterService {
      * @return {?}
      */
     local(data, searchFields = '', titleField = '') {
-        const /** @type {?} */ localData = this.localDataFactory();
+        /** @type {?} */
+        const localData = this.localDataFactory();
         return localData
             .data(data)
             .searchFields(searchFields)
@@ -1996,7 +2106,8 @@ class CompleterService {
      * @return {?}
      */
     remote(url, searchFields = '', titleField = '') {
-        const /** @type {?} */ remoteData = this.remoteDataFactory();
+        /** @type {?} */
+        const remoteData = this.remoteDataFactory();
         return remoteData
             .remoteUrl(url)
             .searchFields(searchFields)
@@ -2014,9 +2125,11 @@ CompleterService.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 const noop = () => { };
+/** @type {?} */
 const COMPLETER_CONTROL_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => CompleterComponent),
@@ -2359,7 +2472,7 @@ CompleterComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @record
@@ -2391,7 +2504,8 @@ class MdbDropdownDirective {
      * @return {?}
      */
     ngOnInit() {
-        const /** @type {?} */ css = getComputedStyle(this.el.nativeElement);
+        /** @type {?} */
+        const css = getComputedStyle(this.el.nativeElement);
         this.isScrollOn = css.maxHeight && css.overflowY === 'auto';
     }
     /**
@@ -2405,7 +2519,8 @@ class MdbDropdownDirective {
      * @return {?}
      */
     ngAfterViewInit() {
-        const /** @type {?} */ autoHighlightIndex = this.completer.autoHighlightIndex;
+        /** @type {?} */
+        const autoHighlightIndex = this.completer.autoHighlightIndex;
         if (autoHighlightIndex) {
             setTimeout(() => {
                 this.highlightRow(autoHighlightIndex);
@@ -2434,7 +2549,8 @@ class MdbDropdownDirective {
      * @return {?}
      */
     highlightRow(index) {
-        const /** @type {?} */ highlighted = this.rows.find(row => row.index === index);
+        /** @type {?} */
+        const highlighted = this.rows.find(row => row.index === index);
         if (index < 0) {
             if (this.currHighlighted) {
                 this.currHighlighted.row.setHighlighted(false);
@@ -2453,19 +2569,21 @@ class MdbDropdownDirective {
         this.currHighlighted.row.setHighlighted(true);
         this.completer.onHighlighted(this.currHighlighted.row.getDataItem());
         if (this.isScrollOn && this.currHighlighted) {
-            const /** @type {?} */ rowTop = this.dropdownRowTop();
+            /** @type {?} */
+            const rowTop = this.dropdownRowTop();
             if (rowTop < 0) {
                 this.dropdownScrollTopTo(rowTop - 1);
             }
             else {
-                const /** @type {?} */ row = this.currHighlighted.row.getNativeElement();
+                /** @type {?} */
+                const row = this.currHighlighted.row.getNativeElement();
                 if (this.dropdownHeight() < row.getBoundingClientRect().bottom) {
                     this.dropdownScrollTopTo(this.dropdownRowOffsetHeight(row));
                     if (this.el.nativeElement.getBoundingClientRect().bottom - this.dropdownRowOffsetHeight(row)
                         < row.getBoundingClientRect().top) {
                         this.dropdownScrollTopTo(row.getBoundingClientRect().top - (this.el.nativeElement.getBoundingClientRect().top
                             // + parseInt(getComputedStyle(this.el.nativeElement).paddingTop, 10)));
-                            + parseInt(/** @type {?} */ (getComputedStyle(this.el.nativeElement).paddingTop), 10)));
+                            + parseInt((/** @type {?} */ (getComputedStyle(this.el.nativeElement).paddingTop)), 10)));
                     }
                 }
             }
@@ -2499,7 +2617,8 @@ class MdbDropdownDirective {
      * @return {?}
      */
     nextRow() {
-        let /** @type {?} */ nextRowIndex = 0;
+        /** @type {?} */
+        let nextRowIndex = 0;
         if (this.currHighlighted) {
             nextRowIndex = this.currHighlighted.index + 1;
         }
@@ -2509,7 +2628,8 @@ class MdbDropdownDirective {
      * @return {?}
      */
     prevRow() {
-        let /** @type {?} */ nextRowIndex = -1;
+        /** @type {?} */
+        let nextRowIndex = -1;
         if (this.currHighlighted) {
             nextRowIndex = this.currHighlighted.index - 1;
         }
@@ -2529,7 +2649,7 @@ class MdbDropdownDirective {
         return this.currHighlighted.row.getNativeElement().getBoundingClientRect().top -
             (this.el.nativeElement.getBoundingClientRect().top +
                 // parseInt(getComputedStyle(this.el.nativeElement).paddingTop, 10));
-                parseInt(/** @type {?} */ (getComputedStyle(this.el.nativeElement).paddingTop), 10));
+                parseInt((/** @type {?} */ (getComputedStyle(this.el.nativeElement).paddingTop)), 10));
     }
     /**
      * @return {?}
@@ -2537,17 +2657,18 @@ class MdbDropdownDirective {
     dropdownHeight() {
         return this.el.nativeElement.getBoundingClientRect().top +
             // parseInt(getComputedStyle(this.el.nativeElement).maxHeight, 10);
-            parseInt(/** @type {?} */ (getComputedStyle(this.el.nativeElement).maxHeight), 10);
+            parseInt((/** @type {?} */ (getComputedStyle(this.el.nativeElement).maxHeight)), 10);
     }
     /**
      * @param {?} row
      * @return {?}
      */
     dropdownRowOffsetHeight(row) {
-        const /** @type {?} */ css = getComputedStyle(row);
+        /** @type {?} */
+        const css = getComputedStyle(row);
         return row.offsetHeight +
             // parseInt(css.marginTop, 10) + parseInt(css.marginBottom, 10);
-            parseInt(/** @type {?} */ (css.marginTop), 10) + parseInt(/** @type {?} */ (css.marginBottom), 10);
+            parseInt((/** @type {?} */ (css.marginTop)), 10) + parseInt((/** @type {?} */ (css.marginBottom)), 10);
     }
 }
 MdbDropdownDirective.decorators = [
@@ -2566,17 +2687,25 @@ MdbDropdownDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 // keyboard events
+/** @type {?} */
 const KEY_DW = 40;
+/** @type {?} */
 const KEY_RT = 39;
+/** @type {?} */
 const KEY_UP = 38;
+/** @type {?} */
 const KEY_LF = 37;
+/** @type {?} */
 const KEY_ES = 27;
+/** @type {?} */
 const KEY_EN = 13;
+/** @type {?} */
 const KEY_TAB = 9;
 class MdbInputCompleteDirective {
+    // constructor( @Host() private completer: MdbCompleterDirective, private ngModel: NgModel, private el: ElementRef) {
     /**
      * @param {?} completer
      * @param {?} tempngModel
@@ -2594,6 +2723,7 @@ class MdbInputCompleteDirective {
         this.ngModelChange = new EventEmitter();
         this._searchStr = '';
         this._displayStr = '';
+        // private blurTimer: Subscription = null;
         this.blurTimer = null;
         this.ngModel = this.tempngModel;
         this.completer.selected.subscribe((item) => {
@@ -2794,7 +2924,7 @@ MdbInputCompleteDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 // import { catchError } from 'rxjs/operators';
 class CtrListContext {
@@ -2818,9 +2948,7 @@ class MdbListDirective {
      * @param {?} viewContainer
      * @param {?} cd
      */
-    constructor(
-    // @Host() private completer: MdbCompleterDirective,
-    tmpCompleter, templateRef, viewContainer, cd) {
+    constructor(tmpCompleter, templateRef, viewContainer, cd) {
         this.tmpCompleter = tmpCompleter;
         this.templateRef = templateRef;
         this.viewContainer = viewContainer;
@@ -2829,9 +2957,14 @@ class MdbListDirective {
         this.mdbListPause = PAUSE;
         this.mdbListAutoMatch = false;
         this.mdbListAutoHighlight = false;
+        // private results: CompleterItem[] = [];
         this.setToNullValue = null;
+        // private term: string = null;
         this.term = null;
+        // private searching = false;
+        // private searchTimer: Subscription = null;
         this.searchTimer = null;
+        // private clearTimer: Subscription = null;
         this.clearTimer = null;
         this.ctx = new CtrListContext([], false, false, false);
         this._initialValue = null;
@@ -2852,6 +2985,9 @@ class MdbListDirective {
         this._dataService = newService;
         if (this._dataService) {
             this._dataService
+                // .catch(err => this.handleError(err))
+                // .catch((err: any) => this.handleError(err))
+                // .subscribe(results => {
                 .subscribe((results) => {
                 try {
                     this.ctx.searchInitialized = true;
@@ -2872,7 +3008,7 @@ class MdbListDirective {
                     }
                     this.refreshTemplate();
                 }
-                catch (/** @type {?} */ err) {
+                catch (err) {
                 }
             });
         }
@@ -2884,7 +3020,8 @@ class MdbListDirective {
     set initialValue(value) {
         if (this._dataService && typeof this._dataService.convertToItem === 'function') {
             setTimeout(() => {
-                const /** @type {?} */ initialItem = this._dataService.convertToItem(value);
+                /** @type {?} */
+                const initialItem = this._dataService.convertToItem(value);
                 if (initialItem) {
                     this.completer.onSelected(initialItem, false);
                 }
@@ -2917,7 +3054,7 @@ class MdbListDirective {
                 try {
                     this.searchTimerComplete(term);
                 }
-                catch (/** @type {?} */ err) {
+                catch (err) {
                 }
             });
         }
@@ -2978,6 +3115,19 @@ class MdbListDirective {
         this.term = term;
         this._dataService.search(term);
     }
+    // private handleError(error: any) {
+    //   this.ctx.searching = false;
+    //   let errMsg = 'search error';
+    //   if (error) {
+    //     errMsg = (error.message) ? error.message :
+    //       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+    //   }
+    //   if (console && console.error) {
+    //     console.error(errMsg); // log to console
+    //   }
+    //   this.refreshTemplate();
+    //   return observableThrowError(errMsg);
+    // }
     /**
      * @return {?}
      */
@@ -2997,7 +3147,8 @@ class MdbListDirective {
             return null;
         }
         // First try to find the exact term
-        let /** @type {?} */ bestMatch = this.ctx.results.findIndex(item => item.title.toLowerCase() === this.term.toLocaleLowerCase());
+        /** @type {?} */
+        let bestMatch = this.ctx.results.findIndex(item => item.title.toLowerCase() === this.term.toLocaleLowerCase());
         // If not try to find the first item that starts with the term
         if (bestMatch < 0) {
             bestMatch = this.ctx.results.findIndex(item => item.title.toLowerCase().startsWith(this.term.toLocaleLowerCase()));
@@ -3032,7 +3183,7 @@ MdbListDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MdbRowDirective {
     /**
@@ -3124,7 +3275,15 @@ MdbRowDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @return {?}
@@ -3143,12 +3302,14 @@ function remoteDataFactory(http$$1) {
         return new RemoteData(http$$1);
     };
 }
+/** @type {?} */
 let LocalDataFactoryProvider = { provide: LocalData, useFactory: localDataFactory };
+/** @type {?} */
 let RemoteDataFactoryProvider = { provide: RemoteData, useFactory: remoteDataFactory, deps: [Http] };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class AutocompleteModule {
 }
@@ -3187,7 +3348,12 @@ AutocompleteModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class CardRevealComponent {
     /**
@@ -3204,11 +3370,12 @@ class CardRevealComponent {
         this.socials = (this.socials === 'active') ? 'inactive' : 'active';
         setTimeout(() => {
             try {
-                const /** @type {?} */ height = this.cardFront.nativeElement.offsetHeight;
+                /** @type {?} */
+                const height = this.cardFront.nativeElement.offsetHeight;
                 this._r.setStyle(this.cardReveal.nativeElement.firstElementChild, 'height', height + 'px');
                 this._r.setStyle(this.cardOverflow.nativeElement, 'height', height + 'px');
             }
-            catch (/** @type {?} */ error) { }
+            catch (error) { }
         }, 0);
     }
 }
@@ -3231,7 +3398,7 @@ CardRevealComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class CardRotatingComponent {
     constructor() {
@@ -3253,7 +3420,7 @@ CardRotatingComponent.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class CardsModule {
     /**
@@ -3273,7 +3440,7 @@ CardsModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MdbDateFormatDirective {
     constructor() {
@@ -3285,8 +3452,10 @@ class MdbDateFormatDirective {
      * @return {?}
      */
     onInput(event) {
-        const /** @type {?} */ currentValue = event.target.value;
-        const /** @type {?} */ newValue = this.getFormattedDate(currentValue);
+        /** @type {?} */
+        const currentValue = event.target.value;
+        /** @type {?} */
+        const newValue = this.getFormattedDate(currentValue);
         event.target.value = newValue;
     }
     /**
@@ -3306,7 +3475,8 @@ class MdbDateFormatDirective {
      * @return {?}
      */
     setResultLength() {
-        let /** @type {?} */ resLength = 0;
+        /** @type {?} */
+        let resLength = 0;
         this.format.forEach((value) => {
             resLength += value.length;
         });
@@ -3317,8 +3487,10 @@ class MdbDateFormatDirective {
      * @return {?}
      */
     getFormattedDate(date) {
-        const /** @type {?} */ dateParts = this.getDateParts(date);
-        const /** @type {?} */ result = dateParts.map((part, index) => {
+        /** @type {?} */
+        const dateParts = this.getDateParts(date);
+        /** @type {?} */
+        const result = dateParts.map((part, index) => {
             return part = this.formatDateParts(part, index);
         });
         return result.join(this.separator).slice(0, this.resultLength);
@@ -3329,8 +3501,10 @@ class MdbDateFormatDirective {
      */
     getDateParts(date) {
         date = this.getDigits(date).slice(0, this.resultLength - this.separatorsNumber);
-        const /** @type {?} */ parts = [];
-        const /** @type {?} */ partsIndex = {
+        /** @type {?} */
+        const parts = [];
+        /** @type {?} */
+        const partsIndex = {
             first: this.format[0].length,
             mid: this.format[0].length + this.format[1].length,
             last: this.resultLength
@@ -3372,7 +3546,8 @@ class MdbDateFormatDirective {
      * @return {?}
      */
     getFormattedDay(value) {
-        const /** @type {?} */ dayFirstNum = parseInt(value.charAt(0), 10);
+        /** @type {?} */
+        const dayFirstNum = parseInt(value.charAt(0), 10);
         if (value) {
             if (dayFirstNum > 3 && dayFirstNum !== 0) {
                 return '0' + value.charAt(0);
@@ -3387,8 +3562,10 @@ class MdbDateFormatDirective {
      * @return {?}
      */
     getFormattedMonth(value) {
-        const /** @type {?} */ monthFirstNum = parseInt(value.charAt(0), 10);
-        const /** @type {?} */ monthNum = parseInt(value, 10);
+        /** @type {?} */
+        const monthFirstNum = parseInt(value.charAt(0), 10);
+        /** @type {?} */
+        const monthNum = parseInt(value, 10);
         if (value) {
             if (monthFirstNum > 1 && monthFirstNum !== 0) {
                 return '0' + value.charAt(0);
@@ -3415,7 +3592,7 @@ MdbDateFormatDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @record
@@ -3519,8 +3696,10 @@ class MdbCreditCardDirective {
      * @return {?}
      */
     formatInput(event) {
-        const /** @type {?} */ input = event.target.value;
-        const /** @type {?} */ formattedInput = this.getFormattedInput(input);
+        /** @type {?} */
+        const input = event.target.value;
+        /** @type {?} */
+        const formattedInput = this.getFormattedInput(input);
         event.target.value = formattedInput;
     }
     /**
@@ -3529,11 +3708,14 @@ class MdbCreditCardDirective {
      */
     getFormattedInput(value) {
         value = this.removeNonDigits(value);
-        const /** @type {?} */ card = this.findCardByNumber(value);
+        /** @type {?} */
+        const card = this.findCardByNumber(value);
         this.updateCurrentCardNames(card.name, card.fullName);
-        let /** @type {?} */ cardNumMaxLength;
+        /** @type {?} */
+        let cardNumMaxLength;
         if (this.hasStandardPattern(card)) {
-            const /** @type {?} */ matches = value.match(card.pattern);
+            /** @type {?} */
+            const matches = value.match(card.pattern);
             if (matches === null) {
                 return value;
             }
@@ -3542,7 +3724,8 @@ class MdbCreditCardDirective {
             return matches.join(this.separator);
         }
         else {
-            const /** @type {?} */ results = card.pattern.exec(value);
+            /** @type {?} */
+            const results = card.pattern.exec(value);
             if (results === null) {
                 return value;
             }
@@ -3587,7 +3770,8 @@ class MdbCreditCardDirective {
      * @return {?}
      */
     findCardByNumber(value) {
-        const /** @type {?} */ cardType = this.cards.find((card) => {
+        /** @type {?} */
+        const cardType = this.cards.find((card) => {
             return card.re.test(value);
         });
         if (!cardType) {
@@ -3622,7 +3806,7 @@ MdbCreditCardDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MdbCvvDirective {
     constructor() {
@@ -3640,8 +3824,10 @@ class MdbCvvDirective {
      * @return {?}
      */
     formatInput(event) {
-        const /** @type {?} */ input = event.target.value;
-        const /** @type {?} */ newValue = this.getFormattedValue(input);
+        /** @type {?} */
+        const input = event.target.value;
+        /** @type {?} */
+        const newValue = this.getFormattedValue(input);
         event.target.value = newValue;
     }
     /**
@@ -3672,7 +3858,7 @@ MdbCvvDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class AutoFormatModule {
 }
@@ -3693,12 +3879,14 @@ AutoFormatModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /** @enum {number} */
-const KeyCode = { backspace: 8, delete: 46, };
-KeyCode[KeyCode.backspace] = "backspace";
-KeyCode[KeyCode.delete] = "delete";
+const KeyCode = {
+    backspace: 8, delete: 46,
+};
+KeyCode[KeyCode.backspace] = 'backspace';
+KeyCode[KeyCode.delete] = 'delete';
 class InputAutoFillDirective {
     /**
      * @param {?} el
@@ -3716,10 +3904,14 @@ class InputAutoFillDirective {
         if (!this.opts.enabled || evt.keyCode === KeyCode.backspace || evt.keyCode === KeyCode.delete) {
             return;
         }
-        const /** @type {?} */ val = this.getInputValue();
-        const /** @type {?} */ ews = this.endsWith(val, this.opts.separator);
-        const /** @type {?} */ parts = val.split(this.opts.separator);
-        const /** @type {?} */ idx = parts.length - 1;
+        /** @type {?} */
+        const val = this.getInputValue();
+        /** @type {?} */
+        const ews = this.endsWith(val, this.opts.separator);
+        /** @type {?} */
+        const parts = val.split(this.opts.separator);
+        /** @type {?} */
+        const idx = parts.length - 1;
         if (val.indexOf(this.opts.separator + this.opts.separator) !== -1 || idx > 2) {
             return;
         }
@@ -3818,7 +4010,7 @@ InputAutoFillDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class FocusDirective {
     /**
@@ -3827,6 +4019,7 @@ class FocusDirective {
     constructor(el) {
         this.el = el;
     }
+    // Focus to element: if value 0 = don't set focus, 1 = set only focus, 2 = set focus and set cursor position
     /**
      * @return {?}
      */
@@ -3858,7 +4051,143 @@ FocusDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class LocaleService {
     constructor() {
@@ -3922,12 +4251,16 @@ LocaleService.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 const M = 'm';
 /* const MM = 'mm'; */
 /* const MMM = 'mmm'; */
+/** @type {?} */
 const D = 'd';
+/* const DD = 'dd'; */
+/* const YYYY = 'yyyy'; */
 class UtilService {
     /**
      * @param {?} dateStr
@@ -3944,19 +4277,26 @@ class UtilService {
      * @return {?}
      */
     isDateValid(dateStr, dateFormat, minYear, maxYear, disableUntil, disableSince, disableWeekends, disableDays, disableDateRanges, monthLabels, enableDays) {
-        const /** @type {?} */ returnDate = { day: 0, month: 0, year: 0 };
-        const /** @type {?} */ daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        /** @type {?} */
+        const returnDate = { day: 0, month: 0, year: 0 };
+        /** @type {?} */
+        const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
         /* const isMonthStr: boolean = dateFormat.indexOf(MMM) !== -1; */
-        const /** @type {?} */ delimeters = this.getDateFormatDelimeters(dateFormat);
-        const /** @type {?} */ dateValue = this.getDateValue(dateStr, dateFormat, delimeters);
-        const /** @type {?} */ year = +dateValue[0].value;
-        const /** @type {?} */ month = this.getNumberByValue(dateValue[1]);
-        const /** @type {?} */ day = this.getNumberByValue(dateValue[2]);
+        const delimeters = this.getDateFormatDelimeters(dateFormat);
+        /** @type {?} */
+        const dateValue = this.getDateValue(dateStr, dateFormat, delimeters);
+        /** @type {?} */
+        const year = this.getNumberByValue(dateValue[0]);
+        /** @type {?} */
+        const month = this.getNumberByValue(dateValue[1]);
+        /** @type {?} */
+        const day = this.getNumberByValue(dateValue[2]);
         if (day !== -1 && month !== -1 && year !== -1) {
             if (year < minYear || year > maxYear || month < 1 || month > 12) {
                 return returnDate;
             }
-            const /** @type {?} */ date = { year: year, month: month, day: day };
+            /** @type {?} */
+            const date = { year: year, month: month, day: day };
             if (this.isDisabledDay(date, disableUntil, disableSince, disableWeekends, disableDays, disableDateRanges, enableDays)) {
                 return returnDate;
             }
@@ -3978,15 +4318,20 @@ class UtilService {
      * @return {?}
      */
     getDateValue(dateStr, dateFormat, delimeters) {
-        let /** @type {?} */ del = delimeters[0];
+        /** @type {?} */
+        let del = delimeters[0];
         if (delimeters[0] !== delimeters[1]) {
             del = delimeters[0] + delimeters[1];
         }
-        const /** @type {?} */ re = new RegExp('[' + del + ']');
-        const /** @type {?} */ ds = dateStr.split(re);
-        const /** @type {?} */ df = dateFormat.split(re);
-        const /** @type {?} */ da = [];
-        for (let /** @type {?} */ i = 0; i < df.length; i++) {
+        /** @type {?} */
+        const re = new RegExp('[' + del + ']');
+        /** @type {?} */
+        const ds = dateStr.split(re);
+        /** @type {?} */
+        const df = dateFormat.split(re);
+        /** @type {?} */
+        const da = [];
+        for (let i = 0; i < df.length; i++) {
             if (df[i].indexOf('yy') !== -1) {
                 da[0] = { value: ds[i], format: df[i] };
             }
@@ -4006,7 +4351,7 @@ class UtilService {
      */
     getMonthNumberByMonthName(df, monthLabels) {
         if (df.value) {
-            for (let /** @type {?} */ key = 1; key <= 12; key++) {
+            for (let key = 1; key <= 12; key++) {
                 if (df.value.toLowerCase() === monthLabels[key].toLowerCase()) {
                     return key;
                 }
@@ -4022,7 +4367,8 @@ class UtilService {
         if (!/^\d+$/.test(df.value)) {
             return -1;
         }
-        let /** @type {?} */ nbr = Number(df.value);
+        /** @type {?} */
+        let nbr = Number(df.value);
         if (df.format.length === 1 && df.value.length !== 1 && nbr < 10 || df.format.length === 1 && df.value.length !== 2 && nbr >= 10) {
             nbr = -1;
         }
@@ -4051,7 +4397,7 @@ class UtilService {
      * @return {?}
      */
     isMonthLabelValid(monthLabel, monthLabels) {
-        for (let /** @type {?} */ key = 1; key <= 12; key++) {
+        for (let key = 1; key <= 12; key++) {
             if (monthLabel.toLowerCase() === monthLabels[key].toLowerCase()) {
                 return key;
             }
@@ -4077,9 +4423,11 @@ class UtilService {
      * @return {?}
      */
     parseDatePartNumber(dateFormat, dateString, datePart) {
-        const /** @type {?} */ pos = this.getDatePartIndex(dateFormat, datePart);
+        /** @type {?} */
+        const pos = this.getDatePartIndex(dateFormat, datePart);
         if (pos !== -1) {
-            const /** @type {?} */ value = dateString.substring(pos, pos + datePart.length);
+            /** @type {?} */
+            const value = dateString.substring(pos, pos + datePart.length);
             if (!/^\d+$/.test(value)) {
                 return -1;
             }
@@ -4095,7 +4443,8 @@ class UtilService {
      * @return {?}
      */
     parseDatePartMonthName(dateFormat, dateString, datePart, monthLabels) {
-        const /** @type {?} */ pos = this.getDatePartIndex(dateFormat, datePart);
+        /** @type {?} */
+        const pos = this.getDatePartIndex(dateFormat, datePart);
         if (pos !== -1) {
             return this.isMonthLabelValid(dateString.substring(pos, pos + datePart.length), monthLabels);
         }
@@ -4109,14 +4458,17 @@ class UtilService {
     getDatePartIndex(dateFormat, datePart) {
         return dateFormat.indexOf(datePart);
     }
+    // parseDefaultMonth(monthString: string): IMyMonth {
     /**
      * @param {?} monthString
      * @return {?}
      */
     parseDefaultMonth(monthString) {
-        const /** @type {?} */ month = { monthTxt: '', monthNbr: 0, year: 0 };
+        /** @type {?} */
+        const month = { monthTxt: '', monthNbr: 0, year: 0 };
         if (monthString !== '') {
-            const /** @type {?} */ split = monthString.split(monthString.match(/[^0-9]/)[0]);
+            /** @type {?} */
+            const split = monthString.split(monthString.match(/[^0-9]/)[0]);
             month.monthNbr = split[0].length === 2 ? parseInt(split[0], 0) : parseInt(split[1], 0);
             month.year = split[0].length === 2 ? parseInt(split[1], 0) : parseInt(split[0], 0);
         }
@@ -4133,12 +4485,13 @@ class UtilService {
      * @return {?}
      */
     isDisabledDay(date, disableUntil, disableSince, disableWeekends, disableDays, disableDateRanges, enableDays) {
-        for (const /** @type {?} */ e of enableDays) {
+        for (const e of enableDays) {
             if (e.year === date.year && e.month === date.month && e.day === date.day) {
                 return false;
             }
         }
-        const /** @type {?} */ dateMs = this.getTimeInMilliseconds(date);
+        /** @type {?} */
+        const dateMs = this.getTimeInMilliseconds(date);
         if (this.isInitializedDate(disableUntil) && dateMs <= this.getTimeInMilliseconds(disableUntil)) {
             return true;
         }
@@ -4146,17 +4499,18 @@ class UtilService {
             return true;
         }
         if (disableWeekends) {
-            const /** @type {?} */ dn = this.getDayNumber(date);
+            /** @type {?} */
+            const dn = this.getDayNumber(date);
             if (dn === 0 || dn === 6) {
                 return true;
             }
         }
-        for (const /** @type {?} */ d of disableDays) {
+        for (const d of disableDays) {
             if (d.year === date.year && d.month === date.month && d.day === date.day) {
                 return true;
             }
         }
-        for (const /** @type {?} */ d of disableDateRanges) {
+        for (const d of disableDateRanges) {
             if (this.isInitializedDate(d.begin) &&
                 this.isInitializedDate(d.end) &&
                 dateMs >= this.getTimeInMilliseconds(d.begin) &&
@@ -4173,15 +4527,16 @@ class UtilService {
      * @return {?}
      */
     isMarkedDate(date, markedDates, markWeekends) {
-        for (const /** @type {?} */ md of markedDates) {
-            for (const /** @type {?} */ d of md.dates) {
+        for (const md of markedDates) {
+            for (const d of md.dates) {
                 if (d.year === date.year && d.month === date.month && d.day === date.day) {
                     return { marked: true, color: md.color };
                 }
             }
         }
         if (markWeekends && markWeekends.marked) {
-            const /** @type {?} */ dayNbr = this.getDayNumber(date);
+            /** @type {?} */
+            const dayNbr = this.getDayNumber(date);
             if (dayNbr === 0 || dayNbr === 6) {
                 return { marked: true, color: markWeekends.color };
             }
@@ -4193,7 +4548,8 @@ class UtilService {
      * @return {?}
      */
     getWeekNumber(date) {
-        const /** @type {?} */ d = new Date(date.year, date.month - 1, date.day, 0, 0, 0, 0);
+        /** @type {?} */
+        const d = new Date(date.year, date.month - 1, date.day, 0, 0, 0, 0);
         d.setDate(d.getDate() + (d.getDay() === 0 ? -3 : 4 - d.getDay()));
         return Math.round(((d.getTime() - new Date(d.getFullYear(), 0, 4).getTime()) / 86400000) / 7) + 1;
     }
@@ -4232,7 +4588,8 @@ class UtilService {
      * @return {?}
      */
     getDayNumber(date) {
-        const /** @type {?} */ d = new Date(date.year, date.month - 1, date.day, 0, 0, 0, 0);
+        /** @type {?} */
+        const d = new Date(date.year, date.month - 1, date.day, 0, 0, 0, 0);
         return d.getDay();
     }
 }
@@ -4242,36 +4599,47 @@ UtilService.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 const MYDP_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => MDBDatePickerComponent),
     multi: true
 };
 /** @enum {number} */
-const CalToggle = { Open: 1, CloseByDateSel: 2, CloseByCalBtn: 3, CloseByOutClick: 4, };
-CalToggle[CalToggle.Open] = "Open";
-CalToggle[CalToggle.CloseByDateSel] = "CloseByDateSel";
-CalToggle[CalToggle.CloseByCalBtn] = "CloseByCalBtn";
-CalToggle[CalToggle.CloseByOutClick] = "CloseByOutClick";
+const CalToggle = {
+    Open: 1, CloseByDateSel: 2, CloseByCalBtn: 3, CloseByOutClick: 4,
+};
+CalToggle[CalToggle.Open] = 'Open';
+CalToggle[CalToggle.CloseByDateSel] = 'CloseByDateSel';
+CalToggle[CalToggle.CloseByCalBtn] = 'CloseByCalBtn';
+CalToggle[CalToggle.CloseByOutClick] = 'CloseByOutClick';
 /** @enum {number} */
-const Year = { min: 1000, max: 9999, };
-Year[Year.min] = "min";
-Year[Year.max] = "max";
+const Year = {
+    min: 1000, max: 9999,
+};
+Year[Year.min] = 'min';
+Year[Year.max] = 'max';
 /** @enum {number} */
-const InputFocusBlur = { focus: 1, blur: 2, };
-InputFocusBlur[InputFocusBlur.focus] = "focus";
-InputFocusBlur[InputFocusBlur.blur] = "blur";
+const InputFocusBlur = {
+    focus: 1, blur: 2,
+};
+InputFocusBlur[InputFocusBlur.focus] = 'focus';
+InputFocusBlur[InputFocusBlur.blur] = 'blur';
 /** @enum {number} */
-const KeyCode$1 = { enter: 13, space: 32, };
-KeyCode$1[KeyCode$1.enter] = "enter";
-KeyCode$1[KeyCode$1.space] = "space";
+const KeyCode$1 = {
+    enter: 13, space: 32,
+};
+KeyCode$1[KeyCode$1.enter] = 'enter';
+KeyCode$1[KeyCode$1.space] = 'space';
 /** @enum {number} */
-const MonthId = { prev: 1, curr: 2, next: 3, };
-MonthId[MonthId.prev] = "prev";
-MonthId[MonthId.curr] = "curr";
-MonthId[MonthId.next] = "next";
+const MonthId = {
+    prev: 1, curr: 2, next: 3,
+};
+MonthId[MonthId.prev] = 'prev';
+MonthId[MonthId.curr] = 'curr';
+MonthId[MonthId.next] = 'next';
 class MDBDatePickerComponent {
     /**
      * @param {?} elem
@@ -4317,45 +4685,46 @@ class MDBDatePickerComponent {
         this.currMonthId = MonthId.curr;
         this.nextMonthId = MonthId.next;
         this.tmp = { year: this.getToday().year, month: this.getToday().month, day: this.getToday().day };
+        // Default options
         this.opts = {
-            startDate: /** @type {?} */ (''),
-            closeAfterSelect: /** @type {?} */ (false),
-            dayLabelsFull: /** @type {?} */ ({}),
-            dayLabels: /** @type {?} */ ({}),
-            monthLabelsFull: /** @type {?} */ ({}),
-            monthLabels: /** @type {?} */ ({}),
-            dateFormat: /** @type {?} */ (''),
-            showTodayBtn: /** @type {?} */ (true),
-            todayBtnTxt: /** @type {?} */ (''),
-            firstDayOfWeek: /** @type {?} */ (''),
-            sunHighlight: /** @type {?} */ (true),
-            markCurrentDay: /** @type {?} */ (true),
-            disableUntil: /** @type {?} */ ({ year: 0, month: 0, day: 0 }),
-            disableSince: /** @type {?} */ ({ year: 0, month: 0, day: 0 }),
-            disableDays: /** @type {?} */ ([]),
-            enableDays: /** @type {?} */ ([]),
-            markDates: /** @type {?} */ ([]),
-            markWeekends: /** @type {?} */ ({}),
-            disableDateRanges: /** @type {?} */ ([]),
-            disableWeekends: /** @type {?} */ (false),
-            showWeekNumbers: /** @type {?} */ (false),
-            height: /** @type {?} */ ('32px'),
-            width: /** @type {?} */ ('100%'),
-            selectionTxtFontSize: /** @type {?} */ ('1rem'),
-            showClearDateBtn: /** @type {?} */ (true),
-            alignSelectorRight: /** @type {?} */ (false),
-            disableHeaderButtons: /** @type {?} */ (true),
-            minYear: /** @type {?} */ (Year.min),
-            maxYear: /** @type {?} */ (Year.max),
-            componentDisabled: /** @type {?} */ (false),
-            showSelectorArrow: /** @type {?} */ (true),
-            ariaLabelInputField: /** @type {?} */ ('Date input field'),
-            ariaLabelClearDate: /** @type {?} */ ('Clear Date'),
-            ariaLabelOpenCalendar: /** @type {?} */ ('Open Calendar'),
-            ariaLabelPrevMonth: /** @type {?} */ ('Previous Month'),
-            ariaLabelNextMonth: /** @type {?} */ ('Next Month'),
-            ariaLabelPrevYear: /** @type {?} */ ('Previous Year'),
-            ariaLabelNextYear: /** @type {?} */ ('Next Year')
+            startDate: (/** @type {?} */ ('')),
+            closeAfterSelect: (/** @type {?} */ (false)),
+            dayLabelsFull: (/** @type {?} */ ({})),
+            dayLabels: (/** @type {?} */ ({})),
+            monthLabelsFull: (/** @type {?} */ ({})),
+            monthLabels: (/** @type {?} */ ({})),
+            dateFormat: (/** @type {?} */ ('')),
+            showTodayBtn: (/** @type {?} */ (true)),
+            todayBtnTxt: (/** @type {?} */ ('')),
+            firstDayOfWeek: (/** @type {?} */ ('')),
+            sunHighlight: (/** @type {?} */ (true)),
+            markCurrentDay: (/** @type {?} */ (true)),
+            disableUntil: (/** @type {?} */ ({ year: 0, month: 0, day: 0 })),
+            disableSince: (/** @type {?} */ ({ year: 0, month: 0, day: 0 })),
+            disableDays: (/** @type {?} */ ([])),
+            enableDays: (/** @type {?} */ ([])),
+            markDates: (/** @type {?} */ ([])),
+            markWeekends: (/** @type {?} */ ({})),
+            disableDateRanges: (/** @type {?} */ ([])),
+            disableWeekends: (/** @type {?} */ (false)),
+            showWeekNumbers: (/** @type {?} */ (false)),
+            height: (/** @type {?} */ ('32px')),
+            width: (/** @type {?} */ ('100%')),
+            selectionTxtFontSize: (/** @type {?} */ ('1rem')),
+            showClearDateBtn: (/** @type {?} */ (true)),
+            alignSelectorRight: (/** @type {?} */ (false)),
+            disableHeaderButtons: (/** @type {?} */ (true)),
+            minYear: (/** @type {?} */ (Year.min)),
+            maxYear: (/** @type {?} */ (Year.max)),
+            componentDisabled: (/** @type {?} */ (false)),
+            showSelectorArrow: (/** @type {?} */ (true)),
+            ariaLabelInputField: (/** @type {?} */ ('Date input field')),
+            ariaLabelClearDate: (/** @type {?} */ ('Clear Date')),
+            ariaLabelOpenCalendar: (/** @type {?} */ ('Open Calendar')),
+            ariaLabelPrevMonth: (/** @type {?} */ ('Previous Month')),
+            ariaLabelNextMonth: (/** @type {?} */ ('Next Month')),
+            ariaLabelPrevYear: (/** @type {?} */ ('Previous Year')),
+            ariaLabelNextYear: (/** @type {?} */ ('Next Year'))
         };
         this.months = [];
         this.years = [];
@@ -4407,16 +4776,25 @@ class MDBDatePickerComponent {
             setTimeout(() => {
                 // Fix for visible date / time picker input when picker plate is visible.
                 try {
-                    const /** @type {?} */ openedPicker = document.querySelector('.picker--opened');
-                    const /** @type {?} */ allPickers = document.querySelectorAll('.picker');
+                    /** @type {?} */
+                    const openedPicker = document.querySelector('.picker--opened');
+                    /** @type {?} */
+                    const allPickers = document.querySelectorAll('.picker');
                     allPickers.forEach((element) => {
                         this.renderer.setStyle(element, 'z-index', '0');
                     });
-                    this.renderer.setStyle(openedPicker, 'z-index', '1');
+                    this.renderer.setStyle(openedPicker, 'z-index', '100');
                 }
-                catch (/** @type {?} */ error) { }
+                catch (error) { }
             }, 0);
         }
+    }
+    /**
+     * @param {?} isDisabled
+     * @return {?}
+     */
+    setDisabledState(isDisabled) {
+        this.renderer.setProperty(this.dateInput.nativeElement, 'disabled', isDisabled);
     }
     /**
      * @return {?}
@@ -4428,9 +4806,9 @@ class MDBDatePickerComponent {
                 this.elem.nativeElement.parentElement.parentElement.style.height = this.modalHeightBefore + 'px';
             }
         }
-        catch (/** @type {?} */ error) { }
+        catch (error) { }
         setTimeout(() => {
-            document.documentElement.style.removeProperty('overflow');
+            ((/** @type {?} */ (document.documentElement))).style.removeProperty('overflow');
         }, 155);
         this.labelActive = false;
     }
@@ -4438,7 +4816,8 @@ class MDBDatePickerComponent {
      * @return {?}
      */
     setLocaleOptions() {
-        const /** @type {?} */ opts = this.localeService.getLocaleOptions(this.locale);
+        /** @type {?} */
+        const opts = this.localeService.getLocaleOptions(this.locale);
         Object.keys(opts).forEach((k) => {
             this.opts[k] = opts[k];
         });
@@ -4457,8 +4836,10 @@ class MDBDatePickerComponent {
      * @return {?}
      */
     setOptions() {
-        const /** @type {?} */ thisYear = new Date();
-        const /** @type {?} */ currentYear = thisYear.getFullYear();
+        /** @type {?} */
+        const thisYear = new Date();
+        /** @type {?} */
+        const currentYear = thisYear.getFullYear();
         if (this.options !== undefined) {
             Object.keys(this.options).forEach((k) => {
                 this.opts[k] = this.options[k];
@@ -4493,8 +4874,9 @@ class MDBDatePickerComponent {
             this.clearDate();
         }
         else {
-            const /** @type {?} */ date = this.utilService.isDateValid(value, this.opts.dateFormat, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDays, this.opts.disableDateRanges, this.opts.monthLabels, this.opts.enableDays);
-            if (date.day !== 0 && date.month !== 0 && date.year !== 0) {
+            /** @type {?} */
+            const date = this.utilService.isDateValid(value, this.opts.dateFormat, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDays, this.opts.disableDateRanges, this.opts.monthLabels, this.opts.enableDays);
+            if (this.utilService.isInitializedDate(date)) {
                 this.selectDate(date);
             }
             else {
@@ -4514,7 +4896,7 @@ class MDBDatePickerComponent {
     onFocusInput(event) {
         this.openBtnClicked();
         this.inputFocusBlur.emit({ reason: InputFocusBlur.focus, value: event.target.value });
-        document.documentElement.style.overflow = 'hidden';
+        ((/** @type {?} */ (document.documentElement))).style.overflow = 'hidden';
         this.divFocus.nativeElement.focus();
     }
     /**
@@ -4532,7 +4914,8 @@ class MDBDatePickerComponent {
      */
     onUserMonthInput(value) {
         this.invalidMonth = false;
-        const /** @type {?} */ m = this.utilService.isMonthLabelValid(value, this.opts.monthLabels);
+        /** @type {?} */
+        const m = this.utilService.isMonthLabelValid(value, this.opts.monthLabels);
         if (m !== -1) {
             this.editMonth = false;
             if (m !== this.visibleMonth.monthNbr) {
@@ -4550,7 +4933,8 @@ class MDBDatePickerComponent {
      */
     onUserYearInput(value) {
         this.invalidYear = false;
-        const /** @type {?} */ y = this.utilService.isYearLabelValid(Number(value), this.opts.minYear, this.opts.maxYear);
+        /** @type {?} */
+        const y = this.utilService.isYearLabelValid(Number(value), this.opts.minYear, this.opts.maxYear);
         if (y !== -1) {
             this.editYear = false;
             if (y !== this.visibleMonth.year) {
@@ -4579,8 +4963,9 @@ class MDBDatePickerComponent {
         this.isTodayDisabled();
         this.dayIdx = this.weekDayOpts.indexOf(this.opts.firstDayOfWeek);
         if (this.dayIdx !== -1) {
-            let /** @type {?} */ idx = this.dayIdx;
-            for (let /** @type {?} */ i = 0; i < this.weekDayOpts.length; i++) {
+            /** @type {?} */
+            let idx = this.dayIdx;
+            for (let i = 0; i < this.weekDayOpts.length; i++) {
                 this.weekDays.push(this.opts.dayLabels[this.weekDayOpts[idx]]);
                 idx = this.weekDayOpts[idx] === 'sa' ? 0 : idx + 1;
             }
@@ -4634,14 +5019,15 @@ class MDBDatePickerComponent {
         }
         if (changes.hasOwnProperty('options')) {
             this.options = changes['options'].currentValue;
-            if (changes["options"].currentValue.startDate) {
-                this.onUserDateInput(changes["options"].currentValue.startDate);
+            if (changes.options.currentValue.startDate) {
+                this.onUserDateInput(changes.options.currentValue.startDate);
             }
         }
         this.weekDays.length = 0;
         this.parseOptions();
         if (changes.hasOwnProperty('defaultMonth')) {
-            const /** @type {?} */ dm = changes['defaultMonth'].currentValue;
+            /** @type {?} */
+            const dm = changes['defaultMonth'].currentValue;
             if (dm !== null && dm !== undefined && dm !== '') {
                 this.selectedMonth = this.parseSelectedMonth(dm);
             }
@@ -4650,7 +5036,8 @@ class MDBDatePickerComponent {
             }
         }
         if (changes.hasOwnProperty('selDate')) {
-            const /** @type {?} */ sd = changes['selDate'];
+            /** @type {?} */
+            const sd = changes['selDate'];
             if (sd.currentValue !== null &&
                 sd.currentValue !== undefined &&
                 sd.currentValue !== '' &&
@@ -4678,9 +5065,11 @@ class MDBDatePickerComponent {
     hideKeyboard() {
         try {
             setTimeout(() => {
-                const /** @type {?} */ field = this.renderer.createElement('input');
+                /** @type {?} */
+                const field = this.renderer.createElement('input');
                 this.renderer.appendChild(this.elem.nativeElement, field);
-                const /** @type {?} */ inputReference = this.elem.nativeElement.lastElementChild;
+                /** @type {?} */
+                const inputReference = this.elem.nativeElement.lastElementChild;
                 this.renderer.setAttribute(inputReference, 'type', 'text');
                 this.renderer.setAttribute(inputReference, 'type', 'text');
                 this.renderer.setStyle(inputReference, 'opacity', '0');
@@ -4697,7 +5086,7 @@ class MDBDatePickerComponent {
                 field.focus();
             }, 0);
         }
-        catch (/** @type {?} */ error) {
+        catch (error) {
         }
     }
     /**
@@ -4725,7 +5114,7 @@ class MDBDatePickerComponent {
                 this.elem.nativeElement.parentElement.parentElement.style.height = this.modalHeightBefore + this.pickerFrame.nativeElement.offsetHeight + 'px';
             }
         }
-        catch (/** @type {?} */ error) { }
+        catch (error) { }
         // Open selector button clicked
         this.showSelector = !this.showSelector;
         if (this.showSelector) {
@@ -4746,10 +5135,14 @@ class MDBDatePickerComponent {
      */
     setVisibleMonth() {
         // Sets visible month of calendar
-        let /** @type {?} */ y = 0, /** @type {?} */ m = 0;
+        /** @type {?} */
+        let y = 0;
+        /** @type {?} */
+        let m = 0;
         if (!this.utilService.isInitializedDate(this.selectedDate)) {
             if (this.selectedMonth.year === 0 && this.selectedMonth.monthNbr === 0) {
-                const /** @type {?} */ today = this.getToday();
+                /** @type {?} */
+                const today = this.getToday();
                 y = today.year;
                 m = today.month;
             }
@@ -4771,7 +5164,7 @@ class MDBDatePickerComponent {
      */
     monthList() {
         this.months = [];
-        for (let /** @type {?} */ i = 1; i <= 12; i++) {
+        for (let i = 1; i <= 12; i++) {
             this.months.push({ index: i, short: this.opts.monthLabels[i], label: this.opts.monthLabelsFull[i] });
         }
     }
@@ -4780,9 +5173,11 @@ class MDBDatePickerComponent {
      */
     yearsList() {
         this.years = [];
-        const /** @type {?} */ firstYear = this.opts.minYear;
-        const /** @type {?} */ lastYear = this.opts.maxYear;
-        for (let /** @type {?} */ i = firstYear; i <= lastYear; i++) {
+        /** @type {?} */
+        const firstYear = this.opts.minYear;
+        /** @type {?} */
+        const lastYear = this.opts.maxYear;
+        for (let i = firstYear; i <= lastYear; i++) {
             this.years.push(i);
         }
     }
@@ -4791,10 +5186,13 @@ class MDBDatePickerComponent {
      */
     prevMonth() {
         // Previous month from calendar
-        const /** @type {?} */ d = this.getDate(this.visibleMonth.year, this.visibleMonth.monthNbr, 1);
+        /** @type {?} */
+        const d = this.getDate(this.visibleMonth.year, this.visibleMonth.monthNbr, 1);
         d.setMonth(d.getMonth() - 1);
-        const /** @type {?} */ y = d.getFullYear();
-        const /** @type {?} */ m = d.getMonth() + 1;
+        /** @type {?} */
+        const y = d.getFullYear();
+        /** @type {?} */
+        const m = d.getMonth() + 1;
         this.visibleMonth = { monthTxt: this.monthText(m), monthNbr: m, year: y };
         this.generateCalendar(m, y, true);
     }
@@ -4803,10 +5201,13 @@ class MDBDatePickerComponent {
      */
     nextMonth() {
         // Next month from calendar
-        const /** @type {?} */ d = this.getDate(this.visibleMonth.year, this.visibleMonth.monthNbr, 1);
+        /** @type {?} */
+        const d = this.getDate(this.visibleMonth.year, this.visibleMonth.monthNbr, 1);
         d.setMonth(d.getMonth() + 1);
-        const /** @type {?} */ y = d.getFullYear();
-        const /** @type {?} */ m = d.getMonth() + 1;
+        /** @type {?} */
+        const y = d.getFullYear();
+        /** @type {?} */
+        const m = d.getMonth() + 1;
         this.visibleMonth = { monthTxt: this.monthText(m), monthNbr: m, year: y };
         this.generateCalendar(m, y, true);
     }
@@ -4831,7 +5232,8 @@ class MDBDatePickerComponent {
      */
     todayClicked() {
         // Today button clicked
-        const /** @type {?} */ today = this.getToday();
+        /** @type {?} */
+        const today = this.getToday();
         if (!this.utilService.isDisabledDay(today, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDays, this.opts.disableDateRanges, this.opts.enableDays)) {
             this.selectDate(today);
         }
@@ -4884,7 +5286,8 @@ class MDBDatePickerComponent {
      */
     clearDate() {
         // Clears the date and notifies parent using callbacks and value accessor
-        const /** @type {?} */ date = { year: 0, month: 0, day: 0 };
+        /** @type {?} */
+        const date = { year: 0, month: 0, day: 0 };
         this.dateChanged.emit({ date: date, jsdate: null, formatted: '', epoc: 0 });
         this.onChangeCb('');
         this.onTouchedCb();
@@ -4900,7 +5303,8 @@ class MDBDatePickerComponent {
     selectDate(date) {
         // Date selected, notifies parent using callbacks and value accessor
         this.tmp = date;
-        const /** @type {?} */ dateModel = this.getDateModel(date);
+        /** @type {?} */
+        const dateModel = this.getDateModel(date);
         // this.dateChanged.emit({ previousDate: this.selectionDayTxt, actualDate: dateModel });
         this.dateChanged.emit({
             date: date,
@@ -4960,18 +5364,39 @@ class MDBDatePickerComponent {
     formatDate(val) {
         // Returns formatted date string, if mmm is part of dateFormat returns month as a string
         // days
-        const /** @type {?} */ d = val.day; // 1 - 31
-        const /** @type {?} */ dd = this.preZero(val.day); // 01 - 31
-        const /** @type {?} */ ddd = this.opts.dayLabels[this.getWeekday(val)]; // Sun-Sat
-        const /** @type {?} */ dddd = this.opts.dayLabelsFull[this.getWeekday(val)]; // Sunday – Saturday
-        const /** @type {?} */ m = val.month; // 1 - 12
-        const /** @type {?} */ mm = this.preZero(val.month); // 01 - 12
-        const /** @type {?} */ mmm = this.getMonthShort(val.month); // Jan - Dec
-        const /** @type {?} */ mmmm = this.getMonthFull(val.month); // January – December
-        const /** @type {?} */ yy = val.year.toString().length === 2 ? val.year : val.year.toString().slice(2, 4); // 00 - 99
-        const /** @type {?} */ yyyy = val.year;
-        const /** @type {?} */ toReplace = this.opts.dateFormat.split(/(d{1,4}|m{1,4}|y{4}|yy|!.)/g);
-        let /** @type {?} */ formatted = '';
+        /** @type {?} */
+        const d = val.day;
+        // 1 - 31
+        /** @type {?} */
+        const dd = this.preZero(val.day);
+        // 01 - 31
+        /** @type {?} */
+        const ddd = this.opts.dayLabels[this.getWeekday(val)];
+        // Sun-Sat
+        /** @type {?} */
+        const dddd = this.opts.dayLabelsFull[this.getWeekday(val)];
+        // Sunday – Saturday
+        /** @type {?} */
+        const m = val.month;
+        // 1 - 12
+        /** @type {?} */
+        const mm = this.preZero(val.month);
+        // 01 - 12
+        /** @type {?} */
+        const mmm = this.getMonthShort(val.month);
+        // Jan - Dec
+        /** @type {?} */
+        const mmmm = this.getMonthFull(val.month);
+        // January – December
+        /** @type {?} */
+        const yy = val.year.toString().length === 2 ? val.year : val.year.toString().slice(2, 4);
+        // 00 - 99
+        /** @type {?} */
+        const yyyy = val.year;
+        /** @type {?} */
+        const toReplace = this.opts.dateFormat.split(/(d{1,4}|m{1,4}|y{4}|yy|!.)/g);
+        /** @type {?} */
+        let formatted = '';
         toReplace.forEach((el) => {
             switch (el) {
                 case 'dddd':
@@ -5046,11 +5471,13 @@ class MDBDatePickerComponent {
      */
     monthStartIdx(y, m) {
         // Month start index
-        const /** @type {?} */ d = new Date();
+        /** @type {?} */
+        const d = new Date();
         d.setDate(1);
         d.setMonth(m - 1);
         d.setFullYear(y);
-        const /** @type {?} */ idx = d.getDay() + this.sundayIdx();
+        /** @type {?} */
+        const idx = d.getDay() + this.sundayIdx();
         return idx >= 7 ? idx - 7 : idx;
     }
     /**
@@ -5069,7 +5496,8 @@ class MDBDatePickerComponent {
      */
     daysInPrevMonth(m, y) {
         // Return number of days of the previous month
-        const /** @type {?} */ d = this.getDate(y, m, 1);
+        /** @type {?} */
+        const d = this.getDate(y, m, 1);
         d.setMonth(d.getMonth() - 1);
         return this.daysInMonth(d.getMonth() + 1, d.getFullYear());
     }
@@ -5089,7 +5517,8 @@ class MDBDatePickerComponent {
      * @return {?}
      */
     getToday() {
-        const /** @type {?} */ date = new Date();
+        /** @type {?} */
+        const date = new Date();
         return { year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() };
     }
     /**
@@ -5132,20 +5561,29 @@ class MDBDatePickerComponent {
      */
     generateCalendar(m, y, notifyChange) {
         this.dates.length = 0;
-        const /** @type {?} */ today = this.getToday();
-        const /** @type {?} */ monthStart = this.monthStartIdx(y, m);
-        const /** @type {?} */ dInThisM = this.daysInMonth(m, y);
-        const /** @type {?} */ dInPrevM = this.daysInPrevMonth(m, y);
-        let /** @type {?} */ dayNbr = 1;
-        let /** @type {?} */ cmo = this.prevMonthId;
-        for (let /** @type {?} */ i = 1; i < 7; i++) {
-            const /** @type {?} */ week = [];
+        /** @type {?} */
+        const today = this.getToday();
+        /** @type {?} */
+        const monthStart = this.monthStartIdx(y, m);
+        /** @type {?} */
+        const dInThisM = this.daysInMonth(m, y);
+        /** @type {?} */
+        const dInPrevM = this.daysInPrevMonth(m, y);
+        /** @type {?} */
+        let dayNbr = 1;
+        /** @type {?} */
+        let cmo = this.prevMonthId;
+        for (let i = 1; i < 7; i++) {
+            /** @type {?} */
+            const week = [];
             if (i === 1) {
                 // First week
-                const /** @type {?} */ pm = dInPrevM - monthStart + 1;
+                /** @type {?} */
+                const pm = dInPrevM - monthStart + 1;
                 // Previous month
-                for (let /** @type {?} */ j = pm; j <= dInPrevM; j++) {
-                    const /** @type {?} */ date = { year: y, month: m - 1, day: j };
+                for (let j = pm; j <= dInPrevM; j++) {
+                    /** @type {?} */
+                    const date = { year: y, month: m - 1, day: j };
                     week.push({
                         dateObj: date, cmo: cmo, currDay: this.isCurrDay(j, m, y, cmo, today),
                         dayNbr: this.utilService.getDayNumber(date),
@@ -5155,9 +5593,11 @@ class MDBDatePickerComponent {
                 }
                 cmo = this.currMonthId;
                 // Current month
-                const /** @type {?} */ daysLeft = 7 - week.length;
-                for (let /** @type {?} */ j = 0; j < daysLeft; j++) {
-                    const /** @type {?} */ date = { year: y, month: m, day: dayNbr };
+                /** @type {?} */
+                const daysLeft = 7 - week.length;
+                for (let j = 0; j < daysLeft; j++) {
+                    /** @type {?} */
+                    const date = { year: y, month: m, day: dayNbr };
                     week.push({
                         dateObj: date, cmo: cmo, currDay: this.isCurrDay(dayNbr, m, y, cmo, today),
                         dayNbr: this.utilService.getDayNumber(date),
@@ -5169,13 +5609,14 @@ class MDBDatePickerComponent {
             }
             else {
                 // Rest of the weeks
-                for (let /** @type {?} */ j = 1; j < 8; j++) {
+                for (let j = 1; j < 8; j++) {
                     if (dayNbr > dInThisM) {
                         // Next month
                         dayNbr = 1;
                         cmo = this.nextMonthId;
                     }
-                    const /** @type {?} */ date = { year: y, month: cmo === this.currMonthId ? m : m + 1, day: dayNbr };
+                    /** @type {?} */
+                    const date = { year: y, month: cmo === this.currMonthId ? m : m + 1, day: dayNbr };
                     week.push({
                         dateObj: date, cmo: cmo, currDay: this.isCurrDay(dayNbr, m, y, cmo, today),
                         dayNbr: this.utilService.getDayNumber(date),
@@ -5185,7 +5626,8 @@ class MDBDatePickerComponent {
                     dayNbr++;
                 }
             }
-            const /** @type {?} */ weekNbr = this.opts.showWeekNumbers &&
+            /** @type {?} */
+            const weekNbr = this.opts.showWeekNumbers &&
                 this.opts.firstDayOfWeek === 'mo' ?
                 this.utilService.getWeekNumber(week[0].dateObj) : 0;
             this.dates.push({ week: week, weekNbr: weekNbr });
@@ -5223,9 +5665,11 @@ class MDBDatePickerComponent {
      */
     parseSelectedDate(selDate) {
         // Parse selDate value - it can be string or IMyDate object
-        let /** @type {?} */ date = { day: 0, month: 0, year: 0 };
+        /** @type {?} */
+        let date = { day: 0, month: 0, year: 0 };
         if (typeof selDate === 'string') {
-            const /** @type {?} */ sd = /** @type {?} */ (selDate);
+            /** @type {?} */
+            const sd = (/** @type {?} */ (selDate));
             date.day = this.utilService.parseDatePartNumber(this.opts.dateFormat, sd, 'dd');
             date.month = this.opts.dateFormat.indexOf('mmm') !== -1
                 ? this.utilService.parseDatePartMonthName(this.opts.dateFormat, sd, 'mmm', this.opts.monthLabels)
@@ -5251,10 +5695,14 @@ class MDBDatePickerComponent {
      * @return {?}
      */
     setHeaderBtnDisabledState(m, y) {
-        let /** @type {?} */ dpm = false;
-        let /** @type {?} */ dpy = false;
-        let /** @type {?} */ dnm = false;
-        let /** @type {?} */ dny = false;
+        /** @type {?} */
+        let dpm = false;
+        /** @type {?} */
+        let dpy = false;
+        /** @type {?} */
+        let dnm = false;
+        /** @type {?} */
+        let dny = false;
         if (this.opts.disableHeaderButtons) {
             dpm = this.utilService.isMonthDisabledByDisableUntil({
                 year: m === 1 ? y - 1 : y,
@@ -5298,7 +5746,7 @@ MDBDatePickerComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-date-picker',
                 exportAs: 'mdbdatepicker',
-                template: "<!-- Line 27: Deleted (focus)=\"onFocusInput($event)\" for better use in Firefox. If other strange problems will occur, please paste it in line 27. --> <div class=\"mydp picker\" [ngClass]=\"{'picker--opened': showSelector}\" [ngStyle]=\"{'width': opts.width}\"> <div class=\"md-form\"> <label (click)=\"openBtnClicked()\" *ngIf=\"label.length > 0\" [ngClass]=\"{ 'active': checkActive(), 'disabled': opts.componentDisabled }\">{{ label }}</label> <input type=\"text\" class=\"form-control mydp-date\" [attr.aria-label]=\"opts.ariaLabelInputField\" (click)=\"openBtnClicked()\" [attr.maxlength]=\"opts.dateFormat.length\" [ngClass]=\"{ 'selectiondisabled': opts.componentDisabled, 'disabled': opts.componentDisabled }\" placeholder=\"{{ placeholder }}\" [ngModel]=\"selectionDayTxt\" (ngModelChange)=\"onUserDateInput($event)\" [value]=\"selectionDayTxt\" [ngStyle]=\"{ 'height': opts.height,  'font-size': opts.selectionTxtFontSize }\" (blur)=\"onBlurInput($event)\" [disabled]=\"opts.componentDisabled\" autocomplete=\"off\"> </div> <div class=\"selector picker__holder selectorarrow selectorarrowleft selectorarrowright\" #divFocus [ngClass]=\"{'alignselectorright': opts.alignSelectorRight}\" tabindex=\"0\"> <div class=\"picker__frame picker__box\" #pickerFrame> <div class=\"picker__header\"> <div class=\"picker__date-display\"> <div class=\"picker__weekday-display\"> {{ weekText(getWeekday(tmp)) }} </div> <div class=\"picker__month-display\"> <div>{{ monthText(tmp.month) }}</div> </div> <div class=\"picker__day-display\"> <div>{{ tmp.day }}</div> </div> <div class=\"picker__year-display\"> <div>{{ tmp.year }}</div> </div> </div> <select class=\"picker__select--year\" [(ngModel)]=\"visibleMonth.year\" (ngModelChange)=\"onUserYearInput($event)\" role=\"menu\" aria-label=\"Year selector\"> <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option> </select> <select class=\"picker__select--month\" [(ngModel)]=\"visibleMonth.monthTxt\" (ngModelChange)=\"onUserMonthInput($event)\" role=\"menu\" aria-label=\"Month selector\"> <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option> </select> <button class=\"picker__nav--prev\" data-nav=\"-1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Previous month\" (click)=\"prevMonth()\" [disabled]=\"prevMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled}\"></button> <button class=\"picker__nav--next\" data-nav=\"1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Next month\" (click)=\"nextMonth()\" [disabled]=\"nextMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled}\"></button> </div> <table class=\"picker__table\"> <thead> <tr> <th class=\"picker__weekday weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#</th> <th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th> </tr> </thead> <tbody> <tr *ngFor=\"let w of dates\"> <td class=\"picker__day daycellweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td> <td class=\"picker__day\" *ngFor=\"let d of w.week\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId&&!d.disabled, 'disabled': d.disabled, 'tablesingleday': d.cmo===currMonthId&&!d.disabled}\"> <div *ngIf=\"d.markedDate.marked\" class=\"markdate\" [ngStyle]=\"{'background-color': d.markedDate.color}\"></div> <div class=\"picker__day\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId,'picker__day--outfocus': (d.cmo===nextMonthId || d.cmo===prevMonthId), 'picker__day--today':d.currDay&&opts.markCurrentDay, 'picker__day--selected picker__day--highlighted':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId}\" (click)=\"!d.disabled&&cellClicked(d);$event.stopPropagation()\" (keydown)=\"cellKeyDown($event, d)\" tabindex=\"0\"> {{d.dateObj.day}} </div> </td> </tr> </tbody> </table> <div class=\"picker__footer\"> <button type=\"button\" *ngIf=\"opts.showTodayBtn\" class=\"picker__button--today\" (click)=\"todayClicked()\" role=\"button\" [attr.aria-label]=\"opts.todayBtnTxt\"> {{opts.todayBtnTxt}} </button> <button type=\"button\" *ngIf=\"opts.showClearDateBtn\" class=\"picker__button--clear\" (click)=\"removeBtnClicked()\" role=\"button\" [attr.aria-label]=\"opts.clearBtnTxt\"> {{opts.clearBtnTxt}} </button> <button type=\"button\" [ngClass]=\"{'ml-auto': !opts.showTodayBtn}\" class=\"picker__button--close\" (click)=\"showSelector = false; removeInlineStyle();\" role=\"button\" [attr.aria-label]=\"opts.closeBtnTxt\"> {{opts.closeBtnTxt}} </button> </div> </div> </div> </div>",
+                template: "<!-- Line 27: Deleted (focus)=\"onFocusInput($event)\" for better use in Firefox. If other strange problems will occur, please paste it in line 27. --> <div class=\"mydp picker\" [ngClass]=\"{'picker--opened': showSelector}\" [ngStyle]=\"{'width': opts.width}\"> <div class=\"md-form\"> <label (click)=\"openBtnClicked()\" *ngIf=\"label.length > 0\" [ngClass]=\"{ 'active': checkActive(), 'disabled': opts.componentDisabled }\">{{ label }}</label> <input #dateInput type=\"text\" class=\"form-control mydp-date\" [attr.aria-label]=\"opts.ariaLabelInputField\" (click)=\"openBtnClicked()\" [attr.maxlength]=\"opts.dateFormat.length\" [ngClass]=\"{ 'selectiondisabled': opts.componentDisabled, 'disabled': opts.componentDisabled }\" placeholder=\"{{ placeholder }}\" [ngModel]=\"selectionDayTxt\" (ngModelChange)=\"onUserDateInput($event)\" [value]=\"selectionDayTxt\" [ngStyle]=\"{ 'height': opts.height, 'font-size': opts.selectionTxtFontSize }\" (blur)=\"onBlurInput($event)\" [disabled]=\"opts.componentDisabled\" autocomplete=\"off\" [tabindex]=\"tabIndex\"> </div> <div class=\"selector picker__holder selectorarrow selectorarrowleft selectorarrowright\" #divFocus [ngClass]=\"{'alignselectorright': opts.alignSelectorRight}\" tabindex=\"0\"> <div class=\"picker__frame picker__box\" #pickerFrame> <div class=\"picker__header\"> <div class=\"picker__date-display\"> <div class=\"picker__weekday-display\"> {{ weekText(getWeekday(tmp)) }} </div> <div class=\"picker__month-display\"> <div>{{ monthText(tmp.month) }}</div> </div> <div class=\"picker__day-display\"> <div>{{ tmp.day }}</div> </div> <div class=\"picker__year-display\"> <div>{{ tmp.year }}</div> </div> </div> <select class=\"picker__select--year\" [(ngModel)]=\"visibleMonth.year\" (ngModelChange)=\"onUserYearInput($event)\" role=\"menu\" aria-label=\"Year selector\"> <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option> </select> <select class=\"picker__select--month\" [(ngModel)]=\"visibleMonth.monthTxt\" (ngModelChange)=\"onUserMonthInput($event)\" role=\"menu\" aria-label=\"Month selector\"> <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option> </select> <button class=\"picker__nav--prev\" data-nav=\"-1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Previous month\" (click)=\"prevMonth()\" [disabled]=\"prevMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled}\"></button> <button class=\"picker__nav--next\" data-nav=\"1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Next month\" (click)=\"nextMonth()\" [disabled]=\"nextMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled}\"></button> </div> <table class=\"picker__table\"> <thead> <tr> <th class=\"picker__weekday weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#</th> <th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th> </tr> </thead> <tbody> <tr *ngFor=\"let w of dates\"> <td class=\"picker__day daycellweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td> <td class=\"picker__day\" *ngFor=\"let d of w.week\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId&&!d.disabled, 'disabled': d.disabled, 'tablesingleday': d.cmo===currMonthId&&!d.disabled}\"> <div *ngIf=\"d.markedDate.marked\" class=\"markdate\" [ngStyle]=\"{'background-color': d.markedDate.color}\"></div> <div class=\"picker__day\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId,'picker__day--outfocus': (d.cmo===nextMonthId || d.cmo===prevMonthId), 'picker__day--today':d.currDay&&opts.markCurrentDay, 'picker__day--selected picker__day--highlighted':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId}\" (click)=\"!d.disabled&&cellClicked(d);$event.stopPropagation()\" (keydown)=\"cellKeyDown($event, d)\" tabindex=\"0\"> {{d.dateObj.day}} </div> </td> </tr> </tbody> </table> <div class=\"picker__footer\"> <button type=\"button\" *ngIf=\"opts.showTodayBtn\" class=\"picker__button--today\" (click)=\"todayClicked()\" role=\"button\" [attr.aria-label]=\"opts.todayBtnTxt\"> {{opts.todayBtnTxt}} </button> <button type=\"button\" *ngIf=\"opts.showClearDateBtn\" class=\"picker__button--clear\" (click)=\"removeBtnClicked()\" role=\"button\" [attr.aria-label]=\"opts.clearBtnTxt\"> {{opts.clearBtnTxt}} </button> <button type=\"button\" [ngClass]=\"{'ml-auto': !opts.showTodayBtn}\" class=\"picker__button--close\" (click)=\"showSelector = false; removeInlineStyle();\" role=\"button\" [attr.aria-label]=\"opts.closeBtnTxt\"> {{opts.closeBtnTxt}} </button> </div> </div> </div> </div>",
                 providers: [LocaleService, UtilService, MYDP_VALUE_ACCESSOR],
                 encapsulation: ViewEncapsulation.None
             },] },
@@ -5312,6 +5760,7 @@ MDBDatePickerComponent.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
 ];
 MDBDatePickerComponent.propDecorators = {
+    tabIndex: [{ type: Input }],
     options: [{ type: Input }],
     locale: [{ type: Input }],
     defaultMonth: [{ type: Input }],
@@ -5326,12 +5775,13 @@ MDBDatePickerComponent.propDecorators = {
     calendarToggle: [{ type: Output }],
     inputFocusBlur: [{ type: Output }],
     divFocus: [{ type: ViewChild, args: ['divFocus',] }],
-    pickerFrame: [{ type: ViewChild, args: ['pickerFrame',] }]
+    pickerFrame: [{ type: ViewChild, args: ['pickerFrame',] }],
+    dateInput: [{ type: ViewChild, args: ['dateInput',] }]
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class DatepickerModule {
 }
@@ -5345,7 +5795,7 @@ DatepickerModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class SimpleChartComponent {
     constructor() {
@@ -5410,7 +5860,7 @@ SimpleChartComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class EasyPieChartComponent {
     /**
@@ -5423,7 +5873,8 @@ class EasyPieChartComponent {
         this.isBrowser = false;
         this.isBrowser = isPlatformBrowser(platformId);
         this.element = el;
-        const /** @type {?} */ options = {
+        /** @type {?} */
+        const options = {
             barColor: '#ef1e25',
             trackColor: '#f9f9f9',
             scaleColor: '#dfe0e0',
@@ -5444,12 +5895,14 @@ class EasyPieChartComponent {
      */
     ngOnInit() {
         if (this.isBrowser) {
-            const /** @type {?} */ size = this.options.size;
+            /** @type {?} */
+            const size = this.options.size;
             this.element.nativeElement.innerHTML = '';
             this.pieChart = new EasyPieChart(this.element.nativeElement, this.options);
             this.pieChart.update(this.percent);
             // Positioning text in center of chart
-            const /** @type {?} */ percent = document.querySelector('.percent');
+            /** @type {?} */
+            const percent = document.querySelector('.percent');
             if (percent) {
                 this._r.setStyle(percent, 'line-height', size + 'px');
                 this._r.setStyle(percent, 'width', size + 'px');
@@ -5486,7 +5939,7 @@ EasyPieChartComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class ChartSimpleModule {
 }
@@ -5504,7 +5957,7 @@ ChartSimpleModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @record
@@ -5521,10 +5974,10 @@ const UploadStatus = {
     Done: 2,
     Cancelled: 3,
 };
-UploadStatus[UploadStatus.Queue] = "Queue";
-UploadStatus[UploadStatus.Uploading] = "Uploading";
-UploadStatus[UploadStatus.Done] = "Done";
-UploadStatus[UploadStatus.Cancelled] = "Cancelled";
+UploadStatus[UploadStatus.Queue] = 'Queue';
+UploadStatus[UploadStatus.Uploading] = 'Uploading';
+UploadStatus[UploadStatus.Done] = 'Done';
+UploadStatus[UploadStatus.Cancelled] = 'Cancelled';
 /**
  * @record
  */
@@ -5549,9 +6002,12 @@ function humanizeBytes(bytes) {
     if (bytes === 0) {
         return '0 Byte';
     }
-    const /** @type {?} */ k = 1024;
-    const /** @type {?} */ sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB'];
-    const /** @type {?} */ i = Math.floor(Math.log(bytes) / Math.log(k));
+    /** @type {?} */
+    const k = 1024;
+    /** @type {?} */
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB'];
+    /** @type {?} */
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 }
 class MDBUploaderService {
@@ -5576,19 +6032,23 @@ class MDBUploaderService {
      * @return {?}
      */
     handleFiles(incomingFiles) {
-        const /** @type {?} */ allowedIncomingFiles = [].reduce.call(incomingFiles, (acc, checkFile, i) => {
-            const /** @type {?} */ futureQueueLength = acc.length + this.queue.length + 1;
+        /** @type {?} */
+        const allowedIncomingFiles = [].reduce.call(incomingFiles, (acc, checkFile, i) => {
+            /** @type {?} */
+            const futureQueueLength = acc.length + this.queue.length + 1;
             if (this.isContentTypeAllowed(checkFile.type) && futureQueueLength <= this.maxUploads) {
                 acc = acc.concat(checkFile);
             }
             else {
-                const /** @type {?} */ rejectedFile = this.makeUploadFile(checkFile, i);
+                /** @type {?} */
+                const rejectedFile = this.makeUploadFile(checkFile, i);
                 this.serviceEvents.emit({ type: 'rejected', file: rejectedFile });
             }
             return acc;
         }, []);
         this.queue.push(...[].map.call(allowedIncomingFiles, (file, i) => {
-            const /** @type {?} */ uploadFile = this.makeUploadFile(file, i);
+            /** @type {?} */
+            const uploadFile = this.makeUploadFile(file, i);
             this.serviceEvents.emit({ type: 'addedToQueue', file: uploadFile });
             return uploadFile;
         }));
@@ -5602,24 +6062,29 @@ class MDBUploaderService {
         return input.subscribe((event) => {
             switch (event.type) {
                 case 'uploadFile':
-                    const /** @type {?} */ uploadFileIndex = this.queue.findIndex(file => file === event.file);
+                    /** @type {?} */
+                    const uploadFileIndex = this.queue.findIndex(file => file === event.file);
                     if (uploadFileIndex !== -1 && event.file) {
                         this.uploadScheduler.next({ file: this.queue[uploadFileIndex], event: event });
                     }
                     break;
                 case 'uploadAll':
-                    const /** @type {?} */ files = this.queue.filter(file => file.progress.status === UploadStatus.Queue);
+                    /** @type {?} */
+                    const files = this.queue.filter(file => file.progress.status === UploadStatus.Queue);
                     files.forEach(file => this.uploadScheduler.next({ file: file, event: event }));
                     break;
                 case 'cancel':
-                    const /** @type {?} */ id = event.id || null;
+                    /** @type {?} */
+                    const id = event.id || null;
                     if (!id) {
                         return;
                     }
-                    const /** @type {?} */ index = this.subs.findIndex(sub => sub.id === id);
+                    /** @type {?} */
+                    const index = this.subs.findIndex(sub => sub.id === id);
                     if (index !== -1 && this.subs[index].sub) {
                         this.subs[index].sub.unsubscribe();
-                        const /** @type {?} */ fileIndex = this.queue.findIndex(file => file.id === id);
+                        /** @type {?} */
+                        const fileIndex = this.queue.findIndex(file => file.id === id);
                         if (fileIndex !== -1) {
                             this.queue[fileIndex].progress.status = UploadStatus.Cancelled;
                             this.serviceEvents.emit({ type: 'cancelled', file: this.queue[fileIndex] });
@@ -5631,7 +6096,8 @@ class MDBUploaderService {
                         if (sub.sub) {
                             sub.sub.unsubscribe();
                         }
-                        const /** @type {?} */ file = this.queue.find(uploadFile => uploadFile.id === sub.id);
+                        /** @type {?} */
+                        const file = this.queue.find(uploadFile => uploadFile.id === sub.id);
                         if (file) {
                             file.progress.status = UploadStatus.Cancelled;
                             this.serviceEvents.emit({ type: 'cancelled', file: file });
@@ -5642,9 +6108,11 @@ class MDBUploaderService {
                     if (!event.id) {
                         return;
                     }
-                    const /** @type {?} */ i = this.queue.findIndex(file => file.id === event.id);
+                    /** @type {?} */
+                    const i = this.queue.findIndex(file => file.id === event.id);
                     if (i !== -1) {
-                        const /** @type {?} */ file = this.queue[i];
+                        /** @type {?} */
+                        const file = this.queue[i];
                         this.queue.splice(i, 1);
                         this.serviceEvents.emit({ type: 'removed', file: file });
                     }
@@ -5664,7 +6132,8 @@ class MDBUploaderService {
      */
     startUpload(upload) {
         return new Observable(observer => {
-            const /** @type {?} */ sub = this.uploadFile(upload.file, upload.event)
+            /** @type {?} */
+            const sub = this.uploadFile(upload.file, upload.event)
                 .subscribe(output => {
                 observer.next(output);
             }, err => {
@@ -5683,19 +6152,30 @@ class MDBUploaderService {
      */
     uploadFile(file, event) {
         return new Observable(observer => {
-            const /** @type {?} */ url = event.url || '';
-            const /** @type {?} */ method = event.method || 'POST';
-            const /** @type {?} */ data = event.data || {};
-            const /** @type {?} */ headers = event.headers || {};
-            const /** @type {?} */ xhr = new XMLHttpRequest();
-            const /** @type {?} */ time = new Date().getTime();
-            let /** @type {?} */ progressStartTime = (file.progress.data && file.progress.data.startTime) || time;
-            let /** @type {?} */ speed = 0;
-            let /** @type {?} */ eta = null;
+            /** @type {?} */
+            const url = event.url || '';
+            /** @type {?} */
+            const method = event.method || 'POST';
+            /** @type {?} */
+            const data = event.data || {};
+            /** @type {?} */
+            const headers = event.headers || {};
+            /** @type {?} */
+            const xhr = new XMLHttpRequest();
+            /** @type {?} */
+            const time = new Date().getTime();
+            /** @type {?} */
+            let progressStartTime = (file.progress.data && file.progress.data.startTime) || time;
+            /** @type {?} */
+            let speed = 0;
+            /** @type {?} */
+            let eta = null;
             xhr.upload.addEventListener('progress', (e) => {
                 if (e.lengthComputable) {
-                    const /** @type {?} */ percentage = Math.round((e.loaded * 100) / e.total);
-                    const /** @type {?} */ diff = new Date().getTime() - time;
+                    /** @type {?} */
+                    const percentage = Math.round((e.loaded * 100) / e.total);
+                    /** @type {?} */
+                    const diff = new Date().getTime() - time;
                     speed = Math.round(e.loaded / diff * 1000);
                     progressStartTime = (file.progress.data && file.progress.data.startTime) || new Date().getTime();
                     eta = Math.ceil((e.total - e.loaded) / speed);
@@ -5720,7 +6200,8 @@ class MDBUploaderService {
             });
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
-                    const /** @type {?} */ speedAverage = Math.round(file.size / (new Date().getTime() - progressStartTime) * 1000);
+                    /** @type {?} */
+                    const speedAverage = Math.round(file.size / (new Date().getTime() - progressStartTime) * 1000);
                     file.progress = {
                         status: UploadStatus.Done,
                         data: {
@@ -5737,7 +6218,7 @@ class MDBUploaderService {
                     try {
                         file.response = JSON.parse(xhr.response);
                     }
-                    catch (/** @type {?} */ e) {
+                    catch (e) {
                         file.response = xhr.response;
                     }
                     file.responseHeaders = this.parseResponseHeaders(xhr.getAllResponseHeaders());
@@ -5748,8 +6229,10 @@ class MDBUploaderService {
             xhr.open(method, url, true);
             xhr.withCredentials = event.withCredentials ? true : false;
             try {
-                const /** @type {?} */ uploadFile = /** @type {?} */ (file.nativeFile);
-                const /** @type {?} */ uploadIndex = this.queue.findIndex(outFile => outFile.nativeFile === uploadFile);
+                /** @type {?} */
+                const uploadFile = (/** @type {?} */ (file.nativeFile));
+                /** @type {?} */
+                const uploadIndex = this.queue.findIndex(outFile => outFile.nativeFile === uploadFile);
                 if (this.queue[uploadIndex].progress.status === UploadStatus.Cancelled) {
                     observer.complete();
                 }
@@ -5759,7 +6242,7 @@ class MDBUploaderService {
                 this.serviceEvents.emit({ type: 'start', file: file });
                 xhr.send(file.form);
             }
-            catch (/** @type {?} */ e) {
+            catch (e) {
                 observer.complete();
             }
             return () => {
@@ -5851,8 +6334,8 @@ class MDBUploaderService {
             return;
         }
         return httpHeaders.split('\n')
-            .map(x => x.split(/: */, 2))
-            .filter(x => x[0])
+            .map((x) => x.split(/: */, 2))
+            .filter((x) => x[0])
             .reduce((ac, x) => {
             ac[x[0]] = x[1];
             return ac;
@@ -5862,7 +6345,7 @@ class MDBUploaderService {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MDBFileDropDirective {
     /**
@@ -5906,7 +6389,9 @@ class MDBFileDropDirective {
         if (this.isServer) {
             return;
         }
-        this.uploadInput.unsubscribe();
+        if (this.uploadInput) {
+            this.uploadInput.unsubscribe();
+        }
     }
     /**
      * @param {?} e
@@ -5915,7 +6400,8 @@ class MDBFileDropDirective {
     onDrop(e) {
         e.stopPropagation();
         e.preventDefault();
-        const /** @type {?} */ event = { type: 'drop' };
+        /** @type {?} */
+        const event = { type: 'drop' };
         this.uploadOutput.emit(event);
         this.upload.handleFiles(e.dataTransfer.files);
     }
@@ -5927,7 +6413,8 @@ class MDBFileDropDirective {
         if (!e) {
             return;
         }
-        const /** @type {?} */ event = { type: 'dragOver' };
+        /** @type {?} */
+        const event = { type: 'dragOver' };
         this.uploadOutput.emit(event);
     }
     /**
@@ -5938,7 +6425,8 @@ class MDBFileDropDirective {
         if (!e) {
             return;
         }
-        const /** @type {?} */ event = { type: 'dragOut' };
+        /** @type {?} */
+        const event = { type: 'dragOut' };
         this.uploadOutput.emit(event);
     }
 }
@@ -5962,7 +6450,7 @@ MDBFileDropDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MDBFileSelectDirective {
     /**
@@ -6003,7 +6491,9 @@ class MDBFileSelectDirective {
             return;
         }
         this.el.removeEventListener('change', this.fileListener, false);
-        this.uploadInput.unsubscribe();
+        if (this.uploadInput) {
+            this.uploadInput.unsubscribe();
+        }
     }
 }
 MDBFileSelectDirective.decorators = [
@@ -6023,7 +6513,7 @@ MDBFileSelectDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class FileInputModule {
 }
@@ -6042,7 +6532,7 @@ FileInputModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class CharCounterDirective {
     /**
@@ -6110,7 +6600,7 @@ CharCounterDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class CharCounterModule {
     /**
@@ -6129,7 +6619,7 @@ CharCounterModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class ImageModalComponent {
     /**
@@ -6156,7 +6646,7 @@ class ImageModalComponent {
             document.createEvent('TouchEvent');
             this.isMobile = true;
         }
-        catch (/** @type {?} */ err) {
+        catch (err) {
             this.isMobile = false;
             return;
         }
@@ -6167,7 +6657,8 @@ class ImageModalComponent {
     toggleZoomed() {
         // this.zoomed = (this.zoomed === 'inactive') ? 'active' : 'inactive';
         // this.zoom = !this.zoom;
-        const /** @type {?} */ imgRef = this.element.nativeElement.lastElementChild.lastElementChild.firstElementChild;
+        /** @type {?} */
+        const imgRef = this.element.nativeElement.lastElementChild.lastElementChild.firstElementChild;
         if (!this.clicked) {
             this.renderer.setStyle(imgRef, 'transform', 'scale(1.0, 1.0');
             this.renderer.setStyle(imgRef, 'animate', '300ms ease-out');
@@ -6248,7 +6739,7 @@ class ImageModalComponent {
         }
         this.currentImageIndex = index;
         this.opened = true;
-        for (let /** @type {?} */ i = 0; i < this.modalImages.length; i++) {
+        for (let i = 0; i < this.modalImages.length; i++) {
             if (i === this.currentImageIndex) {
                 this.imgSrc = this.modalImages[i].img;
                 this.loading = false;
@@ -6270,8 +6761,10 @@ class ImageModalComponent {
     get is_iPhone_or_iPod() {
         if (this.isBrowser) {
             if (navigator && navigator.userAgent && navigator.userAgent != null) {
-                const /** @type {?} */ strUserAgent = navigator.userAgent.toLowerCase();
-                const /** @type {?} */ arrMatches = strUserAgent.match(/ipad/);
+                /** @type {?} */
+                const strUserAgent = navigator.userAgent.toLowerCase();
+                /** @type {?} */
+                const arrMatches = strUserAgent.match(/ipad/);
                 if (arrMatches != null) {
                     return true;
                 }
@@ -6337,7 +6830,7 @@ ImageModalComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class LightBoxModule {
 }
@@ -6351,7 +6844,7 @@ LightBoxModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class Diacritics {
     /**
@@ -6359,7 +6852,8 @@ class Diacritics {
      * @return {?}
      */
     static strip(text) {
-        const /** @type {?} */ match = (a) => {
+        /** @type {?} */
+        const match = (a) => {
             return this.DIACRITICS[a] || a;
         };
         return text.replace(/[^\u0000-\u007E]/g, match);
@@ -7209,7 +7703,15 @@ Diacritics.DIACRITICS = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class Option {
     /**
@@ -7250,20 +7752,26 @@ class Option {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class OptionList {
     /**
      * @param {?} options
      */
     constructor(options) {
+        /* Consider using these for performance improvement. */
+        // private _selection: Array<Option>;
+        // private _filtered: Array<Option>;
+        // private _value: Array<string>;
+        // private _highlightedOption: Option = null;
         this._highlightedOption = null;
         this.setToNullValue = null;
         if (typeof options === 'undefined' || options === null) {
             options = [];
         }
         this._options = options.map((option) => {
-            const /** @type {?} */ o = new Option(option);
+            /** @type {?} */
+            const o = new Option(option);
             if (option.disabled) {
                 o.disabled = true;
             }
@@ -7276,6 +7784,7 @@ class OptionList {
         this._hasShown = this._options.length > 0;
         this.highlight();
     }
+    // v0 and v1 are assumed not to be undefined or null.
     /**
      * @param {?} v0
      * @param {?} v1
@@ -7285,8 +7794,10 @@ class OptionList {
         if (v0.length !== v1.length) {
             return false;
         }
-        const /** @type {?} */ a = v0.slice().sort();
-        const /** @type {?} */ b = v1.slice().sort();
+        /** @type {?} */
+        const a = v0.slice().sort();
+        /** @type {?} */
+        const b = v1.slice().sort();
         return a.every((v, i) => {
             return v === b[i];
         });
@@ -7375,15 +7886,18 @@ class OptionList {
      * @return {?}
      */
     filter(term) {
-        let /** @type {?} */ anyShown = false;
+        /** @type {?} */
+        let anyShown = false;
         if (term.trim() === '') {
             this.resetFilter();
             anyShown = this.options.length > 0;
         }
         else {
             this.options.forEach((option) => {
-                const /** @type {?} */ l = Diacritics.strip(option.label).toUpperCase();
-                const /** @type {?} */ t = Diacritics.strip(term).toUpperCase();
+                /** @type {?} */
+                const l = Diacritics.strip(option.label).toUpperCase();
+                /** @type {?} */
+                const t = Diacritics.strip(term).toUpperCase();
                 option.shown = l.indexOf(t) === 0;
                 if (option.shown) {
                     anyShown = true;
@@ -7413,7 +7927,8 @@ class OptionList {
      * @return {?}
      */
     highlight() {
-        const /** @type {?} */ option = this.hasShownSelected() ?
+        /** @type {?} */
+        const option = this.hasShownSelected() ?
             this.getFirstShownSelected() : this.getFirstShown();
         this.highlightOption(option);
     }
@@ -7432,8 +7947,10 @@ class OptionList {
      * @return {?}
      */
     highlightNextOption() {
-        const /** @type {?} */ shownOptions = this.filtered;
-        const /** @type {?} */ index = this.getHighlightedIndexFromList(shownOptions);
+        /** @type {?} */
+        const shownOptions = this.filtered;
+        /** @type {?} */
+        const index = this.getHighlightedIndexFromList(shownOptions);
         if (index > -1 && index < shownOptions.length - 1) {
             this.highlightOption(shownOptions[index + 1]);
         }
@@ -7442,8 +7959,10 @@ class OptionList {
      * @return {?}
      */
     highlightPreviousOption() {
-        const /** @type {?} */ shownOptions = this.filtered;
-        const /** @type {?} */ index = this.getHighlightedIndexFromList(shownOptions);
+        /** @type {?} */
+        const shownOptions = this.filtered;
+        /** @type {?} */
+        const index = this.getHighlightedIndexFromList(shownOptions);
         if (index > 0) {
             this.highlightOption(shownOptions[index - 1]);
         }
@@ -7462,7 +7981,7 @@ class OptionList {
      * @return {?}
      */
     getHighlightedIndexFromList(options) {
-        for (let /** @type {?} */ i = 0; i < options.length; i++) {
+        for (let i = 0; i < options.length; i++) {
             if (options[i].highlighted) {
                 return i;
             }
@@ -7502,7 +8021,7 @@ class OptionList {
      * @return {?}
      */
     getFirstShown() {
-        for (const /** @type {?} */ option of this.options) {
+        for (const option of this.options) {
             if (option.shown) {
                 return option;
             }
@@ -7514,7 +8033,7 @@ class OptionList {
      * @return {?}
      */
     getFirstShownSelected() {
-        for (const /** @type {?} */ option of this.options) {
+        for (const option of this.options) {
             if (option.shown && option.selected) {
                 return option;
             }
@@ -7526,7 +8045,7 @@ class OptionList {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class SelectDropdownComponent {
     /**
@@ -7557,6 +8076,7 @@ class SelectDropdownComponent {
      * Event handlers. *
      * @return {?}
      */
+    // Angular life cycle hooks.
     onkeyup() {
         this.hasOptionsItems = this._elementRef.nativeElement.childNodes[0].children[1].children[0].children.length >= 1 ? true : false;
     }
@@ -7588,7 +8108,8 @@ class SelectDropdownComponent {
         if (changes.hasOwnProperty('optionList')) {
             this.optionsReset();
         }
-        const /** @type {?} */ container = this._elementRef.nativeElement.classList;
+        /** @type {?} */
+        const container = this._elementRef.nativeElement.classList;
         setTimeout(() => { container.add('fadeInSelect'); }, 200);
     }
     /**
@@ -7619,7 +8140,7 @@ class SelectDropdownComponent {
                 }, 0);
             }
         }
-        catch (/** @type {?} */ error) {
+        catch (error) {
         }
         this.moveHighlightedIntoView();
         setTimeout(() => {
@@ -7628,6 +8149,7 @@ class SelectDropdownComponent {
             }
         }, 0);
     }
+    // Filter input (single select).
     /**
      * @return {?}
      */
@@ -7648,6 +8170,7 @@ class SelectDropdownComponent {
     onSingleFilterKeydown(event) {
         this.singleFilterKeydown.emit(event);
     }
+    // Options list.
     /**
      * @param {?} event
      * @return {?}
@@ -7684,7 +8207,8 @@ class SelectDropdownComponent {
      */
     getOptionStyle(option) {
         if (option.highlighted) {
-            const /** @type {?} */ optionStyle = {};
+            /** @type {?} */
+            const optionStyle = {};
             if (typeof this.highlightColor !== 'undefined') {
                 optionStyle['background-color'] = this.highlightColor;
             }
@@ -7709,16 +8233,25 @@ class SelectDropdownComponent {
      * @return {?}
      */
     moveHighlightedIntoView() {
-        const /** @type {?} */ list = this.optionsList.nativeElement;
-        const /** @type {?} */ listHeight = list.offsetHeight;
-        const /** @type {?} */ itemIndex = this.optionList.getHighlightedIndex();
+        /** @type {?} */
+        const list = this.optionsList.nativeElement;
+        /** @type {?} */
+        const listHeight = list.offsetHeight;
+        /** @type {?} */
+        const itemIndex = this.optionList.getHighlightedIndex();
         if (itemIndex > -1) {
-            const /** @type {?} */ item = list.children[0].children[itemIndex];
-            const /** @type {?} */ itemHeight = item.offsetHeight;
-            const /** @type {?} */ itemTop = itemIndex * itemHeight;
-            const /** @type {?} */ itemBottom = itemTop + itemHeight;
-            const /** @type {?} */ viewTop = list.scrollTop;
-            const /** @type {?} */ viewBottom = viewTop + listHeight;
+            /** @type {?} */
+            const item = list.children[0].children[itemIndex];
+            /** @type {?} */
+            const itemHeight = item.offsetHeight;
+            /** @type {?} */
+            const itemTop = itemIndex * itemHeight;
+            /** @type {?} */
+            const itemBottom = itemTop + itemHeight;
+            /** @type {?} */
+            const viewTop = list.scrollTop;
+            /** @type {?} */
+            const viewBottom = viewTop + listHeight;
             if (itemBottom > viewBottom) {
                 list.scrollTop = itemBottom - listHeight;
             }
@@ -7732,9 +8265,12 @@ class SelectDropdownComponent {
      * @return {?}
      */
     handleOptionsWheel(e) {
-        const /** @type {?} */ div = this.optionsList.nativeElement;
-        const /** @type {?} */ atTop = div.scrollTop === 0;
-        const /** @type {?} */ atBottom = div.offsetHeight + div.scrollTop === div.scrollHeight;
+        /** @type {?} */
+        const div = this.optionsList.nativeElement;
+        /** @type {?} */
+        const atTop = div.scrollTop === 0;
+        /** @type {?} */
+        const atBottom = div.offsetHeight + div.scrollTop === div.scrollHeight;
         if (atTop && e.deltaY < 0) {
             e.preventDefault();
         }
@@ -7790,14 +8326,16 @@ SelectDropdownComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 const SELECT_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => SelectComponent),
     multi: true
 };
 class SelectComponent {
+    // Angular lifecycle hooks.
     /**
      * @param {?} el
      * @param {?} renderer
@@ -7894,15 +8432,17 @@ class SelectComponent {
      */
     ngOnChanges(changes) {
         if (changes.hasOwnProperty('options')) {
-            this.updateOptionsList(changes["options"].currentValue);
+            this.updateOptionsList(changes.options.currentValue);
             this.updateState();
             this.updateDropdownHeight();
             this.updatePosition();
-            this.changed.emit({ previousValue: changes["options"].previousValue, currentValue: changes["options"].currentValue });
+            this.changed.emit({ previousValue: changes.options.previousValue, currentValue: changes.options.currentValue });
         }
         if (changes.hasOwnProperty('noFilter')) {
-            const /** @type {?} */ numOptions = this.optionList.options.length;
-            const /** @type {?} */ minNumOptions = changes['noFilter'].currentValue;
+            /** @type {?} */
+            const numOptions = this.optionList.options.length;
+            /** @type {?} */
+            const minNumOptions = changes['noFilter'].currentValue;
             this.filterEnabled = numOptions >= minNumOptions;
         }
         if (changes.hasOwnProperty('placeholder')) {
@@ -7913,7 +8453,8 @@ class SelectComponent {
      * @return {?}
      */
     setArrowUpIcon() {
-        const /** @type {?} */ div = this.renderer.createElement('div');
+        /** @type {?} */
+        const div = this.renderer.createElement('div');
         this.renderer.appendChild(this.selectionSpan.nativeElement.children[0], div);
         this.selectionSpan.nativeElement.children[0].lastChild.innerHTML = '&#x25BC;';
         this.renderer.addClass(this.selectionSpan.nativeElement.children[0].lastChild, 'toggle');
@@ -7922,7 +8463,8 @@ class SelectComponent {
      * @return {?}
      */
     setArrowDownIcon() {
-        const /** @type {?} */ div = this.renderer.createElement('div');
+        /** @type {?} */
+        const div = this.renderer.createElement('div');
         this.renderer.appendChild(this.selectionSpan.nativeElement.children[0], div);
         this.selectionSpan.nativeElement.children[0].lastChild.innerHTML = '&#x25B2;';
         this.renderer.addClass(this.selectionSpan.nativeElement.children[0].lastChild, 'toggle');
@@ -7932,7 +8474,8 @@ class SelectComponent {
      * @return {?}
      */
     isChild(elemnt) {
-        let /** @type {?} */ node = elemnt.parentNode;
+        /** @type {?} */
+        let node = elemnt.parentNode;
         while (node != null) {
             if (node === this.el.nativeElement) {
                 return true;
@@ -7941,6 +8484,7 @@ class SelectComponent {
         }
         return false;
     }
+    // Window.
     /**
      * @return {?}
      */
@@ -7957,6 +8501,7 @@ class SelectComponent {
     onWindowResize() {
         this.updateWidth();
     }
+    // Select container.
     /**
      * @param {?} event
      * @return {?}
@@ -8001,6 +8546,7 @@ class SelectComponent {
     onSelectContainerKeydown(event) {
         this.handleSelectContainerKeydown(event);
     }
+    // Dropdown container.
     /**
      * @param {?} option
      * @return {?}
@@ -8016,6 +8562,7 @@ class SelectComponent {
     onDropdownClose(focus) {
         this.closeDropdown(focus);
     }
+    // Single filter input.
     /**
      * @return {?}
      */
@@ -8027,7 +8574,8 @@ class SelectComponent {
      * @return {?}
      */
     onSingleFilterInput(term) {
-        const /** @type {?} */ hasShown = this.optionList.filter(term);
+        /** @type {?} */
+        const hasShown = this.optionList.filter(term);
         if (!hasShown) {
             this.noOptionsFound.emit(term);
         }
@@ -8039,6 +8587,7 @@ class SelectComponent {
     onSingleFilterKeydown(event) {
         this.handleSingleFilterKeydown(event);
     }
+    // Multiple filter input.
     /**
      * @param {?} event
      * @return {?}
@@ -8049,8 +8598,10 @@ class SelectComponent {
         }
         this.updateFilterWidth();
         setTimeout(() => {
-            const /** @type {?} */ term = event.target.value;
-            const /** @type {?} */ hasShown = this.optionList.filter(term);
+            /** @type {?} */
+            const term = event.target.value;
+            /** @type {?} */
+            const hasShown = this.optionList.filter(term);
             if (!hasShown) {
                 this.noOptionsFound.emit(term);
             }
@@ -8063,6 +8614,7 @@ class SelectComponent {
     onMultipleFilterKeydown(event) {
         this.handleMultipleFilterKeydown(event);
     }
+    // Single clear select.
     /**
      * @param {?} event
      * @return {?}
@@ -8074,6 +8626,7 @@ class SelectComponent {
         this.placeholderView = this.placeholder;
         this.labelActive = false;
     }
+    // Multiple deselect option.
     /**
      * @param {?} option
      * @return {?}
@@ -8086,6 +8639,7 @@ class SelectComponent {
      * API. *
      * @return {?}
      */
+    // TODO fix issues with global click/key handler that closes the dropdown.
     open() {
         this.openDropdown();
     }
@@ -8241,7 +8795,8 @@ class SelectComponent {
      * @return {?}
      */
     closeDropdown(focus = false) {
-        const /** @type {?} */ container = this.el.nativeElement.lastElementChild.classList;
+        /** @type {?} */
+        const container = this.el.nativeElement.lastElementChild.classList;
         this.renderer.removeStyle(this.el.nativeElement, 'z-index');
         container.remove('fadeInSelect');
         if (this.isOpen) {
@@ -8295,7 +8850,8 @@ class SelectComponent {
      * @return {?}
      */
     clearSelection() {
-        const /** @type {?} */ selection = this.optionList.selection;
+        /** @type {?} */
+        const selection = this.optionList.selection;
         if (selection.length > 0) {
             this.optionList.clearSelection();
             this.valueChanged();
@@ -8324,7 +8880,8 @@ class SelectComponent {
      * @return {?}
      */
     selectHighlightedOption() {
-        const /** @type {?} */ option = this.optionList.highlightedOption;
+        /** @type {?} */
+        const option = this.optionList.highlightedOption;
         if (option !== null) {
             this.selectOption(option);
             this.closeDropdown(true);
@@ -8334,9 +8891,11 @@ class SelectComponent {
      * @return {?}
      */
     deselectLast() {
-        const /** @type {?} */ sel = this.optionList.selection;
+        /** @type {?} */
+        const sel = this.optionList.selection;
         if (sel.length > 0) {
-            const /** @type {?} */ option = sel[sel.length - 1];
+            /** @type {?} */
+            const option = sel[sel.length - 1];
             this.deselectOption(option);
             this.setMultipleFilterInput(option.label + ' ');
         }
@@ -8354,7 +8913,7 @@ class SelectComponent {
                 this.dropdown.clearFilterInput();
             }
         }
-        catch (/** @type {?} */ error) { }
+        catch (error) { }
     }
     /**
      * @param {?} value
@@ -8370,7 +8929,8 @@ class SelectComponent {
      * @return {?}
      */
     handleSelectContainerKeydown(event) {
-        const /** @type {?} */ key = event.which;
+        /** @type {?} */
+        const key = event.which;
         if (this.isOpen) {
             if (key === this.KEYS.ESC ||
                 (key === this.KEYS.UP && event.altKey)) {
@@ -8401,11 +8961,11 @@ class SelectComponent {
             if (key === this.KEYS.ENTER || key === this.KEYS.SPACE ||
                 (key === this.KEYS.DOWN && event.altKey)) {
                 /* FIREFOX HACK:
-                         *
-                         * The setTimeout is added to prevent the enter keydown event
-                         * to be triggered for the filter input field, which causes
-                         * the dropdown to be closed again.
-                         */
+                 *
+                 * The setTimeout is added to prevent the enter keydown event
+                 * to be triggered for the filter input field, which causes
+                 * the dropdown to be closed again.
+                 */
                 setTimeout(() => { this.openDropdown(); });
             }
         }
@@ -8415,7 +8975,8 @@ class SelectComponent {
      * @return {?}
      */
     handleMultipleFilterKeydown(event) {
-        const /** @type {?} */ key = event.which;
+        /** @type {?} */
+        const key = event.which;
         if (key === this.KEYS.BACKSPACE) {
             if (this.hasSelected && this.filterEnabled &&
                 this.filterInput.nativeElement.value === '') {
@@ -8428,7 +8989,8 @@ class SelectComponent {
      * @return {?}
      */
     handleSingleFilterKeydown(event) {
-        const /** @type {?} */ key = event.which;
+        /** @type {?} */
+        const key = event.which;
         if (key === this.KEYS.ESC || key === this.KEYS.TAB
             || key === this.KEYS.UP || key === this.KEYS.DOWN
             || key === this.KEYS.ENTER) {
@@ -8449,7 +9011,7 @@ class SelectComponent {
                 this.selectionSpan.nativeElement.focus();
             }
         }
-        catch (/** @type {?} */ error) { }
+        catch (error) { }
     }
     /**
      * @return {?}
@@ -8468,16 +9030,24 @@ class SelectComponent {
      * @return {?}
      */
     updatePosition() {
-        let /** @type {?} */ elPosition = 0;
+        /** @type {?} */
+        const docEl = document.documentElement;
+        /** @type {?} */
+        let elPosition = 0;
         if (this.isBrowser) {
             elPosition = this.el.nativeElement.getBoundingClientRect().bottom + this.document.documentElement.scrollTop;
         }
-        const /** @type {?} */ selectSpan = this.selectionSpan.nativeElement;
+        /** @type {?} */
+        const selectSpan = this.selectionSpan.nativeElement;
         this.left = selectSpan.offsetLeft;
-        const /** @type {?} */ labelHeight = 20;
-        const /** @type {?} */ bottom = document.documentElement.scrollTop + document.documentElement.clientHeight;
-        const /** @type {?} */ dropdownHeight = this.dropdownMaxHeight > this.dropdownHeight ? this.dropdownHeight : this.dropdownMaxHeight;
-        const /** @type {?} */ selectHeight = dropdownHeight + selectSpan.offsetHeight + labelHeight;
+        /** @type {?} */
+        const labelHeight = 20;
+        /** @type {?} */
+        const bottom = docEl.scrollTop + docEl.clientHeight;
+        /** @type {?} */
+        const dropdownHeight = this.dropdownMaxHeight > this.dropdownHeight ? this.dropdownHeight : this.dropdownMaxHeight;
+        /** @type {?} */
+        const selectHeight = dropdownHeight + selectSpan.offsetHeight + labelHeight;
         if (elPosition + dropdownHeight >= bottom) {
             this.top = selectSpan.offsetHeight - selectHeight;
         }
@@ -8490,7 +9060,8 @@ class SelectComponent {
      */
     updateFilterWidth() {
         if (typeof this.filterInput !== 'undefined') {
-            const /** @type {?} */ value = this.filterInput.nativeElement.value;
+            /** @type {?} */
+            const value = this.filterInput.nativeElement.value;
             this.filterInputWidth = value.length === 0 ?
                 1 + this.placeholderView.length * 10 : 1 + value.length * 10;
         }
@@ -8542,7 +9113,7 @@ SelectComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class SelectModule {
 }
@@ -8564,18 +9135,29 @@ SelectModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 const CONTAINER_CLASS_NAME = 'spinning-preloader-container';
+/** @type {?} */
 const COMPLETE_CLASS_NAME = 'complete';
+/** @type {?} */
 const CONTAINER_QUERY = `.${CONTAINER_CLASS_NAME}`;
+/** @type {?} */
 const CONTAINER_NAME = CONTAINER_CLASS_NAME.split('-').join(' ');
+/** @type {?} */
 const TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE = `The ${CONTAINER_NAME} was not found`;
+/** @type {?} */
 const EMULATE_ELEMENT_NAME = 'div';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MDBSpinningPreloader {
     /**
@@ -8627,8 +9209,10 @@ MDBSpinningPreloader.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+// TODO(josephperrott): Benchpress tests.
+// TODO(josephperrott): Add ARIA attributes for progressbar "for".
 /**
  * <md-progress-bar> component.
  */
@@ -8674,7 +9258,8 @@ class ProgressBarComponent {
      * @return {?}
      */
     _primaryTransform() {
-        const /** @type {?} */ scale = this.value / 100;
+        /** @type {?} */
+        const scale = this.value / 100;
         return { transform: `scaleX(${scale})` };
     }
     /**
@@ -8684,7 +9269,8 @@ class ProgressBarComponent {
      */
     _bufferTransform() {
         if (this.mode === 'buffer') {
-            const /** @type {?} */ scale = this.bufferValue / 100;
+            /** @type {?} */
+            const scale = this.bufferValue / 100;
             return { transform: `scaleX(${scale})` };
         }
     }
@@ -8716,29 +9302,36 @@ function clamp(v, min = 0, max = 100) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+// TODO(josephperrott): Benchpress tests.
 /**
  * A single degree in radians.
+ * @type {?}
  */
 const DEGREE_IN_RADIANS = Math.PI / 180;
 /**
  * Duration of the indeterminate animation.
+ * @type {?}
  */
 const DURATION_INDETERMINATE = 667;
 /**
  * Duration of the indeterminate animation.
+ * @type {?}
  */
 const DURATION_DETERMINATE = 225;
 /**
  * Start animation value of the indeterminate animation
+ * @type {?}
  */
 const startIndeterminate = 3;
 /**
  * End animation value of the indeterminate animation
+ * @type {?}
  */
 const endIndeterminate = 80;
 /* Maximum angle for the arc. The angle can't be exactly 360, because the arc becomes hidden. */
+/** @type {?} */
 const MAX_ANGLE = 359.99 / 100;
 /**
  * Directive whose purpose is to add the mat- CSS styling to this selector.
@@ -8843,7 +9436,8 @@ class MdProgressSpinnerComponent {
      */
     set value(v) {
         if (v != null && this.mode === 'determinate') {
-            const /** @type {?} */ newValue = clamp$1(v);
+            /** @type {?} */
+            const newValue = clamp$1(v);
             this._animateCircle(this.value || 0, newValue);
             this._value = newValue;
         }
@@ -8886,16 +9480,21 @@ class MdProgressSpinnerComponent {
      * @return {?}
      */
     _animateCircle(animateFrom, animateTo, ease = linearEase, duration = DURATION_DETERMINATE, rotation = 0) {
-        const /** @type {?} */ id = ++this._lastAnimationId;
-        const /** @type {?} */ startTime = Date.now();
-        const /** @type {?} */ changeInValue = animateTo - animateFrom;
+        /** @type {?} */
+        const id = ++this._lastAnimationId;
+        /** @type {?} */
+        const startTime = Date.now();
+        /** @type {?} */
+        const changeInValue = animateTo - animateFrom;
         // No need to animate it if the values are the same
         if (animateTo === animateFrom) {
             this._renderArc(animateTo, rotation);
         }
         else {
-            const /** @type {?} */ animation = () => {
-                const /** @type {?} */ elapsedTime = Math.max(0, Math.min(Date.now() - startTime, duration));
+            /** @type {?} */
+            const animation = () => {
+                /** @type {?} */
+                const elapsedTime = Math.max(0, Math.min(Date.now() - startTime, duration));
                 this._renderArc(ease(elapsedTime, animateFrom, changeInValue, duration), rotation);
                 // Prevent overlapping animations by checking if a new animation has been called for and
                 // if the animation has lasted longer than the animation duration.
@@ -8913,15 +9512,21 @@ class MdProgressSpinnerComponent {
      * @return {?}
      */
     _startIndeterminateAnimation() {
-        let /** @type {?} */ rotationStartPoint = 0;
-        let /** @type {?} */ start = startIndeterminate;
-        let /** @type {?} */ end = endIndeterminate;
-        const /** @type {?} */ duration = DURATION_INDETERMINATE;
-        const /** @type {?} */ animate$$1 = () => {
+        /** @type {?} */
+        let rotationStartPoint = 0;
+        /** @type {?} */
+        let start = startIndeterminate;
+        /** @type {?} */
+        let end = endIndeterminate;
+        /** @type {?} */
+        const duration = DURATION_INDETERMINATE;
+        /** @type {?} */
+        const animate$$1 = () => {
             this._animateCircle(start, end, materialEase, duration, rotationStartPoint);
             // Prevent rotation from reaching Number.MAX_SAFE_INTEGER.
             rotationStartPoint = (rotationStartPoint + end) % 100;
-            const /** @type {?} */ temp = start;
+            /** @type {?} */
+            const temp = start;
             start = -end;
             end = -temp;
         };
@@ -8950,7 +9555,8 @@ class MdProgressSpinnerComponent {
      */
     _renderArc(currentValue, rotation = 0) {
         // Caches the path reference so it doesn't have to be looked up every time.
-        const /** @type {?} */ path = this._path = this._path || this._elementRef.nativeElement.querySelector('path');
+        /** @type {?} */
+        const path = this._path = this._path || this._elementRef.nativeElement.querySelector('path');
         // Ensure that the path was found. This may not be the case if the
         // animation function fires too early.
         if (path) {
@@ -9045,6 +9651,9 @@ MdSpinnerComponent.propDecorators = {
     true: [{ type: HostBinding, args: ['class.mat-spinner',] }]
 };
 /**
+* Module functions.
+*/
+/**
  * Clamps a value to be between 0 and 100.
  * @param {?} v
  * @return {?}
@@ -9060,7 +9669,8 @@ function clamp$1(v) {
  * @return {?}
  */
 function polarToCartesian(radius, pathRadius, angleInDegrees) {
-    const /** @type {?} */ angleInRadians = (angleInDegrees - 90) * DEGREE_IN_RADIANS;
+    /** @type {?} */
+    const angleInRadians = (angleInDegrees - 90) * DEGREE_IN_RADIANS;
     return (radius + (pathRadius * Math.cos(angleInRadians))) +
         ',' + (radius + (pathRadius * Math.sin(angleInRadians)));
 }
@@ -9084,10 +9694,14 @@ function linearEase(currentTime, startValue, changeInValue, duration) {
  * @return {?}
  */
 function materialEase(currentTime, startValue, changeInValue, duration) {
-    const /** @type {?} */ time = currentTime / duration;
-    const /** @type {?} */ timeCubed = Math.pow(time, 3);
-    const /** @type {?} */ timeQuad = Math.pow(time, 4);
-    const /** @type {?} */ timeQuint = Math.pow(time, 5);
+    /** @type {?} */
+    const time = currentTime / duration;
+    /** @type {?} */
+    const timeCubed = Math.pow(time, 3);
+    /** @type {?} */
+    const timeQuad = Math.pow(time, 4);
+    /** @type {?} */
+    const timeQuint = Math.pow(time, 5);
     return startValue + changeInValue * ((6 * timeQuint) + (-15 * timeQuad) + (10 * timeCubed));
 }
 /**
@@ -9101,15 +9715,24 @@ function materialEase(currentTime, startValue, changeInValue, duration) {
  *    percentage value provided.
  */
 function getSvgArc(currentValue, rotation) {
-    const /** @type {?} */ startPoint = rotation || 0;
-    const /** @type {?} */ radius = 50;
-    const /** @type {?} */ pathRadius = 40;
-    const /** @type {?} */ startAngle = startPoint * MAX_ANGLE;
-    const /** @type {?} */ endAngle = currentValue * MAX_ANGLE;
-    const /** @type {?} */ start = polarToCartesian(radius, pathRadius, startAngle);
-    const /** @type {?} */ end = polarToCartesian(radius, pathRadius, endAngle + startAngle);
-    const /** @type {?} */ arcSweep = endAngle < 0 ? 0 : 1;
-    let /** @type {?} */ largeArcFlag;
+    /** @type {?} */
+    const startPoint = rotation || 0;
+    /** @type {?} */
+    const radius = 50;
+    /** @type {?} */
+    const pathRadius = 40;
+    /** @type {?} */
+    const startAngle = startPoint * MAX_ANGLE;
+    /** @type {?} */
+    const endAngle = currentValue * MAX_ANGLE;
+    /** @type {?} */
+    const start = polarToCartesian(radius, pathRadius, startAngle);
+    /** @type {?} */
+    const end = polarToCartesian(radius, pathRadius, endAngle + startAngle);
+    /** @type {?} */
+    const arcSweep = endAngle < 0 ? 0 : 1;
+    /** @type {?} */
+    let largeArcFlag;
     if (endAngle < 0) {
         largeArcFlag = endAngle >= -180 ? 0 : 1;
     }
@@ -9121,8 +9744,10 @@ function getSvgArc(currentValue, rotation) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+// todo: progress element conflict with bootstrap.css
+// todo: need hack: replace host element with div
 class ProgressDirective {
     constructor() {
         this.addClass = true;
@@ -9175,8 +9800,10 @@ ProgressDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+// todo: number pipe
+// todo: use query from progress?
 class BarComponent {
     /**
      * @param {?} progress
@@ -9220,7 +9847,8 @@ class BarComponent {
      */
     recalculatePercentage() {
         this.percent = +(100 * this.value / this.progress.max).toFixed(2);
-        const /** @type {?} */ totalPercentage = this.progress.bars.reduce(function (total, bar) {
+        /** @type {?} */
+        const totalPercentage = this.progress.bars.reduce(function (total, bar) {
             return total + bar.percent;
         }, 0);
         if (totalPercentage > 100) {
@@ -9245,7 +9873,7 @@ BarComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class ProgressSpinnerComponent {
     /**
@@ -9264,8 +9892,10 @@ class ProgressSpinnerComponent {
      * @return {?}
      */
     ngAfterViewInit() {
-        const /** @type {?} */ hostElem = this.el.nativeElement;
-        const /** @type {?} */ colorClass = this.spinnerColor;
+        /** @type {?} */
+        const hostElem = this.el.nativeElement;
+        /** @type {?} */
+        const colorClass = this.spinnerColor;
         this.addClass = 'spinner-rainbow';
         switch (colorClass) {
             case 'green':
@@ -9291,8 +9921,10 @@ class ProgressSpinnerComponent {
      * @return {?}
      */
     spinerRun() {
-        let /** @type {?} */ counter = 0;
-        const /** @type {?} */ hostElem = this.el.nativeElement;
+        /** @type {?} */
+        let counter = 0;
+        /** @type {?} */
+        const hostElem = this.el.nativeElement;
         if (this.isBrowser) {
             setInterval(() => {
                 switch (counter) {
@@ -9338,7 +9970,7 @@ ProgressSpinnerComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class ProgressbarConfigComponent {
     constructor() {
@@ -9358,7 +9990,7 @@ ProgressbarConfigComponent.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class ProgressbarComponent {
     /**
@@ -9387,7 +10019,7 @@ ProgressbarComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class ProgressbarModule {
     /**
@@ -9407,7 +10039,7 @@ ProgressbarModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MdProgressSpinnerModule {
     /**
@@ -9440,7 +10072,7 @@ MdProgressSpinnerModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MdProgressBarModule {
     /**
@@ -9464,8 +10096,9 @@ MdProgressBarModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 const MATERIAL_MODULES = [
     MdProgressBarModule,
     MdProgressSpinnerModule,
@@ -9504,8 +10137,9 @@ ProgressBars.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 const RANGE_VALUE_ACCESOR = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => MdbRangeInputComponent),
@@ -9541,7 +10175,8 @@ class MdbRangeInputComponent {
      * @return {?}
      */
     oninput(event) {
-        const /** @type {?} */ value = +event.target.value;
+        /** @type {?} */
+        const value = +event.target.value;
         this.rangeValueChange.emit({ value: value });
         if (this.checkIfSafari()) {
             this.focusRangeInput();
@@ -9584,12 +10219,18 @@ class MdbRangeInputComponent {
             return this.range;
         }
         if (!this.default) {
-            const /** @type {?} */ newValue = event.target.value;
-            const /** @type {?} */ newRelativeGain = newValue - this.min;
-            const /** @type {?} */ inputWidth = this.input.nativeElement.offsetWidth;
-            let /** @type {?} */ thumbOffset = 0;
-            const /** @type {?} */ offsetAmmount = 15;
-            const /** @type {?} */ distanceFromMiddle = newRelativeGain - (this.steps / 2);
+            /** @type {?} */
+            const newValue = event.target.value;
+            /** @type {?} */
+            const newRelativeGain = newValue - this.min;
+            /** @type {?} */
+            const inputWidth = this.input.nativeElement.offsetWidth;
+            /** @type {?} */
+            let thumbOffset = 0;
+            /** @type {?} */
+            const offsetAmmount = 15;
+            /** @type {?} */
+            const distanceFromMiddle = newRelativeGain - (this.steps / 2);
             this.stepLength = inputWidth / this.steps;
             thumbOffset = (distanceFromMiddle / this.steps) * offsetAmmount;
             this.cloudRange = (this.stepLength * newRelativeGain) - thumbOffset;
@@ -9600,10 +10241,14 @@ class MdbRangeInputComponent {
      * @return {?}
      */
     checkIfSafari() {
-        const /** @type {?} */ isSafari = navigator.userAgent.indexOf('Safari') > -1;
-        const /** @type {?} */ isChrome = navigator.userAgent.indexOf('Chrome') > -1;
-        const /** @type {?} */ isFirefox = navigator.userAgent.indexOf('Firefox') > -1;
-        const /** @type {?} */ isOpera = navigator.userAgent.indexOf('Opera') > -1;
+        /** @type {?} */
+        const isSafari = navigator.userAgent.indexOf('Safari') > -1;
+        /** @type {?} */
+        const isChrome = navigator.userAgent.indexOf('Chrome') > -1;
+        /** @type {?} */
+        const isFirefox = navigator.userAgent.indexOf('Firefox') > -1;
+        /** @type {?} */
+        const isOpera = navigator.userAgent.indexOf('Opera') > -1;
         if (isSafari && !isChrome && !isFirefox && !isOpera) {
             return true;
         }
@@ -9685,7 +10330,7 @@ MdbRangeInputComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class RangeModule {
 }
@@ -9699,7 +10344,7 @@ RangeModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class SidenavComponent {
     /**
@@ -9719,17 +10364,21 @@ class SidenavComponent {
      */
     ngAfterViewInit() {
         if (this.isBrowser) {
-            const /** @type {?} */ sidenav = this.el.nativeElement;
-            const /** @type {?} */ sidenavChildren = sidenav.children[0].children;
-            const /** @type {?} */ sidenavMask = this.el.nativeElement.querySelector('.sidenav-bg');
-            let /** @type {?} */ sidenavChildrenHeight = 0;
+            /** @type {?} */
+            const sidenav = this.el.nativeElement;
+            /** @type {?} */
+            const sidenavChildren = sidenav.children[0].children;
+            /** @type {?} */
+            const sidenavMask = this.el.nativeElement.querySelector('.sidenav-bg');
+            /** @type {?} */
+            let sidenavChildrenHeight = 0;
             if (sidenavMask) {
-                for (let /** @type {?} */ i = 0; i < sidenavChildren.length; i++) {
+                for (let i = 0; i < sidenavChildren.length; i++) {
                     if (sidenavChildren[i].classList.contains('sidenav-bg')) {
                         continue;
                     }
                     else {
-                        for (let /** @type {?} */ j = 0; j < sidenavChildren[i].children.length; j++) {
+                        for (let j = 0; j < sidenavChildren[i].children.length; j++) {
                             sidenavChildrenHeight += sidenavChildren[i].children[j].scrollHeight;
                         }
                     }
@@ -10019,7 +10668,7 @@ SidenavComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class SidenavModule {
 }
@@ -10039,7 +10688,7 @@ SidenavModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * Created by sebastianfuss on 02.09.16.
@@ -10060,37 +10709,50 @@ class PageScrollUtilService {
      * @return {?}
      */
     static extractElementPosition(document, scrollTargetElement) {
-        const /** @type {?} */ body = document.body;
-        const /** @type {?} */ docEl = document.documentElement;
+        /** @type {?} */
+        const body = document.body;
+        /** @type {?} */
+        const docEl = document.documentElement;
         // const windowPageYOffset: number = document.defaultView && document.defaultView.pageYOffset || undefined;
-        const /** @type {?} */ windowPageYOffset = document.defaultView && /** @type {?} */ (document.defaultView.pageYOffset) || undefined;
+        /** @type {?} */
+        const windowPageYOffset = document.defaultView && (/** @type {?} */ (document.defaultView.pageYOffset)) || undefined;
         // const windowPageXOffset: number = document.defaultView && document.defaultView.pageXOffset || undefined;
-        const /** @type {?} */ windowPageXOffset = document.defaultView && /** @type {?} */ (document.defaultView.pageXOffset) || undefined;
-        const /** @type {?} */ scrollTop = windowPageYOffset || docEl.scrollTop || body.scrollTop;
-        const /** @type {?} */ scrollLeft = windowPageXOffset || docEl.scrollLeft || body.scrollLeft;
-        const /** @type {?} */ clientTop = docEl.clientTop || body.clientTop || 0;
-        const /** @type {?} */ clientLeft = docEl.clientLeft || body.clientLeft || 0;
+        /** @type {?} */
+        const windowPageXOffset = document.defaultView && (/** @type {?} */ (document.defaultView.pageXOffset)) || undefined;
+        /** @type {?} */
+        const scrollTop = windowPageYOffset || docEl.scrollTop || body.scrollTop;
+        /** @type {?} */
+        const scrollLeft = windowPageXOffset || docEl.scrollLeft || body.scrollLeft;
+        /** @type {?} */
+        const clientTop = docEl.clientTop || body.clientTop || 0;
+        /** @type {?} */
+        const clientLeft = docEl.clientLeft || body.clientLeft || 0;
         if (PageScrollUtilService.isUndefinedOrNull(scrollTargetElement)) {
             // No element found, so return the current position to not cause any change in scroll position
             return { top: scrollTop, left: scrollLeft };
         }
-        const /** @type {?} */ box = scrollTargetElement.getBoundingClientRect();
-        const /** @type {?} */ top = box.top + scrollTop - clientTop;
-        const /** @type {?} */ left = box.left + scrollLeft - clientLeft;
+        /** @type {?} */
+        const box = scrollTargetElement.getBoundingClientRect();
+        /** @type {?} */
+        const top = box.top + scrollTop - clientTop;
+        /** @type {?} */
+        const left = box.left + scrollLeft - clientLeft;
         return { top: Math.round(top), left: Math.round(left) };
     }
 }
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @abstract
  */
 class EasingLogic {
 }
+// @dynamic
 class PageScrollConfig {
+    // Getter and setter to avoid auto completion to suggest calling the method
     /**
      * @return {?}
      */
@@ -10175,7 +10837,7 @@ PageScrollConfig._easingLogic = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class PageScrollService {
     constructor() {
@@ -10186,10 +10848,11 @@ class PageScrollService {
                     // Non-interruptible anyway, so do not stop anything
                     return;
                 }
-                let /** @type {?} */ shouldStop = true;
+                /** @type {?} */
+                let shouldStop = true;
                 if (event.type === 'keyup') {
                     // Only stop if specific keys have been pressed, for all others don't stop anything
-                    if (PageScrollConfig._interruptKeys.indexOf((/** @type {?} */ (event)).keyCode) === -1) {
+                    if (PageScrollConfig._interruptKeys.indexOf(((/** @type {?} */ (event))).keyCode) === -1) {
                         // The pressed key is not in the list of interrupting keys
                         shouldStop = false;
                     }
@@ -10219,7 +10882,8 @@ class PageScrollService {
      * @return {?}
      */
     stopInternal(interrupted, pageScrollInstance) {
-        const /** @type {?} */ index = this.runningInstances.indexOf(pageScrollInstance);
+        /** @type {?} */
+        const index = this.runningInstances.indexOf(pageScrollInstance);
         if (index >= 0) {
             this.runningInstances.splice(index, 1);
         }
@@ -10254,7 +10918,8 @@ class PageScrollService {
             }
             return;
         }
-        let /** @type {?} */ startScrollPositionFound = false;
+        /** @type {?} */
+        let startScrollPositionFound = false;
         // Reset start scroll position to 0. If any of the scrollingViews has a different one, it will be extracted next
         pageScrollInstance.startScrollPosition = 0;
         // Get the start scroll position from the scrollingViews (e.g. if the user already scrolled down the content)
@@ -10264,7 +10929,8 @@ class PageScrollService {
             }
             // Get the scrollTop or scrollLeft value of the first scrollingView that returns a value for its "scrollTop"
             // or "scrollLeft" property that is not undefined and unequal to 0
-            const /** @type {?} */ scrollPosition = pageScrollInstance.getScrollPropertyValue(scrollingView);
+            /** @type {?} */
+            const scrollPosition = pageScrollInstance.getScrollPropertyValue(scrollingView);
             if (!startScrollPositionFound && scrollPosition) {
                 // We found a scrollingView that does not have scrollTop or scrollLeft 0
                 // Return the scroll position value, as this will be our startScrollPosition
@@ -10272,9 +10938,11 @@ class PageScrollService {
                 startScrollPositionFound = true;
             }
         });
-        const /** @type {?} */ pageScrollOffset = pageScrollInstance.getCurrentOffset();
+        /** @type {?} */
+        const pageScrollOffset = pageScrollInstance.getCurrentOffset();
         // Calculate the target position that the scroll animation should go to
-        const /** @type {?} */ scrollTargetPosition = pageScrollInstance.extractScrollTargetPosition();
+        /** @type {?} */
+        const scrollTargetPosition = pageScrollInstance.extractScrollTargetPosition();
         pageScrollInstance.targetScrollPosition = Math.round((pageScrollInstance.verticalScrolling ? scrollTargetPosition.top : scrollTargetPosition.left) - pageScrollOffset);
         // Calculate the distance we need to go in total
         pageScrollInstance.distanceToScroll = pageScrollInstance.targetScrollPosition - pageScrollInstance.startScrollPosition;
@@ -10289,7 +10957,8 @@ class PageScrollService {
         // We're at the final destination already
         // OR we need to scroll down but are already at the end
         // OR we need to scroll up but are at the top already
-        const /** @type {?} */ allReadyAtDestination = Math.abs(pageScrollInstance.distanceToScroll) < PageScrollConfig._minScrollDistance;
+        /** @type {?} */
+        const allReadyAtDestination = Math.abs(pageScrollInstance.distanceToScroll) < PageScrollConfig._minScrollDistance;
         // Check how long we need to scroll if a speed option is given
         // Default executionDuration is the specified duration
         pageScrollInstance.executionDuration = pageScrollInstance.duration;
@@ -10300,7 +10969,8 @@ class PageScrollService {
         }
         // We should go there directly, as our "animation" would have one big step
         // only anyway and this way we save the interval stuff
-        const /** @type {?} */ tooShortInterval = pageScrollInstance.executionDuration <= PageScrollConfig._interval;
+        /** @type {?} */
+        const tooShortInterval = pageScrollInstance.executionDuration <= PageScrollConfig._interval;
         if (allReadyAtDestination || tooShortInterval) {
             if (isDevMode()) {
                 
@@ -10320,10 +10990,13 @@ class PageScrollService {
         pageScrollInstance.endTime = pageScrollInstance.startTime + pageScrollInstance.executionDuration;
         pageScrollInstance.timer = setInterval((_pageScrollInstance) => {
             // Take the current time
-            const /** @type {?} */ currentTime = new Date().getTime();
+            /** @type {?} */
+            const currentTime = new Date().getTime();
             // Determine the new scroll position
-            let /** @type {?} */ newScrollPosition;
-            let /** @type {?} */ stopNow = false;
+            /** @type {?} */
+            let newScrollPosition;
+            /** @type {?} */
+            let stopNow = false;
             if (_pageScrollInstance.endTime <= currentTime) {
                 // We're over the time already, so go the targetScrollPosition (aka destination)
                 newScrollPosition = _pageScrollInstance.targetScrollPosition;
@@ -10354,11 +11027,14 @@ class PageScrollService {
      * @param {?=} namespace
      * @return {?}
      */
+    //   public stopAll(namespace?: string): boolean {
     stopAll(namespace) {
         if (this.runningInstances.length > 0) {
-            let /** @type {?} */ stoppedSome = false;
-            for (let /** @type {?} */ i = 0; i < this.runningInstances.length; ++i) {
-                const /** @type {?} */ pageScrollInstance = this.runningInstances[i];
+            /** @type {?} */
+            let stoppedSome = false;
+            for (let i = 0; i < this.runningInstances.length; ++i) {
+                /** @type {?} */
+                const pageScrollInstance = this.runningInstances[i];
                 if (PageScrollUtilService.isUndefinedOrNull(namespace) || namespace.length === 0 ||
                     pageScrollInstance.namespace === namespace) {
                     stoppedSome = true;
@@ -10388,7 +11064,7 @@ PageScrollService.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
 * Created by sebastianfuss on 29.08.16.
@@ -10414,23 +11090,38 @@ class PageScrollInstance {
         /**
          * These properties will be set during instance construction and default to their defaults from PageScrollConfig
          */
+        /* A namespace to "group" scroll animations together and stopping some does not stop others */
         this._namespace = PageScrollConfig._defaultNamespace;
+        /* Whether we scroll vertically (true) or horizontally (false) */
         this._verticalScrolling = PageScrollConfig.defaultIsVerticalScrolling;
+        /* Offset in px that the animation should stop above that target element */
         this._offset = PageScrollConfig.defaultScrollOffset;
+        /* Duration in milliseconds the scroll animation should last */
         this._duration = PageScrollConfig.defaultDuration;
+        /* Easing function to manipulate the scrollTop/scrollLeft value over time */
         this._easingLogic = PageScrollConfig.defaultEasingLogic;
+        /* Boolean whether the scroll animation should stop on user interruption or not */
         this._interruptible = PageScrollConfig.defaultInterruptible;
+        /* Whether the advanded offset calculation for inline scrolling should be used */
         this._advancedInlineOffsetCalculation = PageScrollConfig.defaultAdvancedInlineOffsetCalculation;
+        /* Event emitter to notify the world about the scrolling */
         this._pageScrollFinish = new EventEmitter();
         /**
          * These properties will be set/manipulated if the scroll animation starts
          */
+        /* The initial value of the scrollTop or scrollLeft position when the animation starts */
         this._startScrollPosition = 0;
+        /* Whether an interrupt listener is attached to the body or not */
         this._interruptListenersAttached = false;
+        /* References to the timer instance that is used to perform the scroll animation to be
+           able to clear it on animation end*/
         this._timer = null;
         this._namespace = namespace;
         this.document = document;
     }
+    /*
+       * Factory methods for instance creation
+       */
     /**
      * @param {?} document
      * @param {?} scrollTarget
@@ -10444,6 +11135,7 @@ class PageScrollInstance {
             namespace
         });
     }
+    //   public static newInstance(options: PageScrollOptions) {
     /**
      * @param {?} options
      * @return {?}
@@ -10453,7 +11145,8 @@ class PageScrollInstance {
             options.namespace = PageScrollConfig._defaultNamespace;
         }
         // const pageScrollInstance: PageScrollInstance = new PageScrollInstance(options.namespace, document);
-        const /** @type {?} */ pageScrollInstance = new PageScrollInstance(options.namespace, document);
+        /** @type {?} */
+        const pageScrollInstance = new PageScrollInstance(options.namespace, document);
         if (PageScrollUtilService.isUndefinedOrNull(options.scrollingViews) || options.scrollingViews.length === 0) {
             pageScrollInstance._isInlineScrolling = false;
             pageScrollInstance._scrollingViews = [document.documentElement, document.body, document.body.parentNode];
@@ -10606,27 +11299,33 @@ class PageScrollInstance {
      */
     extractScrollTargetPosition() {
         // let scrollTargetElement: HTMLElement;
-        let /** @type {?} */ scrollTargetElement;
+        /** @type {?} */
+        let scrollTargetElement;
         if (typeof this._scrollTarget === 'string') {
-            scrollTargetElement = this.document.getElementById((/** @type {?} */ (this._scrollTarget)).substr(1));
+            scrollTargetElement = this.document.getElementById(((/** @type {?} */ (this._scrollTarget))).substr(1));
         }
         else {
-            scrollTargetElement = /** @type {?} */ (this._scrollTarget);
+            scrollTargetElement = (/** @type {?} */ (this._scrollTarget));
         }
         if (scrollTargetElement === null || scrollTargetElement === undefined) {
             // Scroll target not found
             return { top: NaN, left: NaN };
         }
         if (this._isInlineScrolling) {
-            const /** @type {?} */ position = { top: scrollTargetElement.offsetTop, left: scrollTargetElement.offsetLeft };
+            /** @type {?} */
+            const position = { top: scrollTargetElement.offsetTop, left: scrollTargetElement.offsetLeft };
             if (this._advancedInlineOffsetCalculation && this.scrollingViews.length === 1) {
-                const /** @type {?} */ accumulatedParentsPos = { top: 0, left: 0 };
+                /** @type {?} */
+                const accumulatedParentsPos = { top: 0, left: 0 };
                 // not named window to make sure we're not getting the global window variable by accident
-                const /** @type {?} */ theWindow = scrollTargetElement.ownerDocument.defaultView;
-                let /** @type {?} */ parentFound = false;
+                /** @type {?} */
+                const theWindow = scrollTargetElement.ownerDocument.defaultView;
+                /** @type {?} */
+                let parentFound = false;
                 // Start parent is the immediate parent
                 // let parent = scrollTargetElement.parentElement;
-                let /** @type {?} */ parent = scrollTargetElement.parentElement;
+                /** @type {?} */
+                let parent = scrollTargetElement.parentElement;
                 // Iterate upwards all parents
                 while (!parentFound && !PageScrollUtilService.isUndefinedOrNull(parent)) {
                     if (theWindow.getComputedStyle(parent).getPropertyValue('position') === 'relative') {
@@ -10675,15 +11374,18 @@ class PageScrollInstance {
         }
         // Set the new scrollTop/scrollLeft to all scrollingViews elements
         return this.scrollingViews.reduce((oneAlreadyWorked, scrollingView) => {
-            const /** @type {?} */ startScrollPropertyValue = this.getScrollPropertyValue(scrollingView);
+            /** @type {?} */
+            const startScrollPropertyValue = this.getScrollPropertyValue(scrollingView);
             if (scrollingView && !PageScrollUtilService.isUndefinedOrNull(startScrollPropertyValue)) {
-                const /** @type {?} */ scrollDistance = Math.abs(startScrollPropertyValue - position);
+                /** @type {?} */
+                const scrollDistance = Math.abs(startScrollPropertyValue - position);
                 // The movement we need to perform is less than 2px
                 // This we consider a small movement which some browser may not perform when
                 // changing the scrollTop/scrollLeft property
                 // Thus in this cases we do not stop the scroll animation, although setting the
                 // scrollTop/scrollLeft value "fails"
-                const /** @type {?} */ isSmallMovement = scrollDistance < PageScrollConfig._minScrollDistance;
+                /** @type {?} */
+                const isSmallMovement = scrollDistance < PageScrollConfig._minScrollDistance;
                 if (!this.verticalScrolling) {
                     scrollingView.scrollLeft = position;
                 }
@@ -10897,7 +11599,7 @@ class PageScrollInstance {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class PageScrollDirective {
     /**
@@ -10916,7 +11618,7 @@ class PageScrollDirective {
         this.pageScrollAdjustHash = false;
         this.pageScroll = null;
         this.pageScrollFinish = new EventEmitter();
-        this.document = /** @type {?} */ (document);
+        this.document = (/** @type {?} */ (document));
     }
     /**
      * @return {?}
@@ -10934,6 +11636,7 @@ class PageScrollDirective {
         }
         return undefined;
     }
+    // private generatePageScrollInstance(): PageScrollInstance {
     /**
      * @return {?}
      */
@@ -10963,7 +11666,7 @@ class PageScrollDirective {
             && this.pageScrollInstance.scrollTarget.substr(0, 1) === '#') {
             // "Navigate" to the current route again and this time set the fragment/hash
             this.router.navigate([], {
-                fragment: /** @type {?} */ (this.pageScrollInstance.scrollTarget.substr(1)),
+                fragment: (/** @type {?} */ (this.pageScrollInstance.scrollTarget.substr(1))),
                 preserveQueryParams: true
             });
         }
@@ -10972,7 +11675,8 @@ class PageScrollDirective {
      * @return {?}
      */
     scroll() {
-        const /** @type {?} */ pageScrollInstance = this.generatePageScrollInstance();
+        /** @type {?} */
+        const pageScrollInstance = this.generatePageScrollInstance();
         this.pushRouterState();
         this.pageScrollService.start(pageScrollInstance);
     }
@@ -10981,7 +11685,8 @@ class PageScrollDirective {
      */
     handleClick() {
         if (this.routerLink && this.router !== null && this.router !== undefined) {
-            let /** @type {?} */ urlTree;
+            /** @type {?} */
+            let urlTree;
             if (typeof this.routerLink === 'string') {
                 urlTree = this.router.parseUrl(this.routerLink);
             }
@@ -10992,7 +11697,8 @@ class PageScrollDirective {
                 // We need to navigate their first.
                 // Navigation is handled by the routerLink directive
                 // so we only need to listen for route change
-                const /** @type {?} */ subscription = /** @type {?} */ (this.router.events.subscribe((routerEvent) => {
+                /** @type {?} */
+                const subscription = (/** @type {?} */ (this.router.events.subscribe((routerEvent) => {
                     if (routerEvent instanceof NavigationEnd) {
                         subscription.unsubscribe();
                         this.scroll();
@@ -11000,7 +11706,7 @@ class PageScrollDirective {
                     else if (routerEvent instanceof NavigationError || routerEvent instanceof NavigationCancel) {
                         subscription.unsubscribe();
                     }
-                }));
+                })));
                 return false; // to preventDefault()
             }
         }
@@ -11036,7 +11742,7 @@ PageScrollDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
 * Created by sebastianfuss on 03.09.16.
@@ -11064,7 +11770,7 @@ SmoothscrollModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * returns coumputed style of given element
@@ -11072,11 +11778,15 @@ SmoothscrollModule.decorators = [
  * @param {?} styleProp
  * @return {?}
  */
+// export function computedStyle(element: string | HTMLElement, styleProp: string): string {
 function computedStyle(element, styleProp) {
-    let /** @type {?} */ el;
-    el = (typeof element === 'string') ? (/** @type {?} */ (document.querySelector(/** @type {?} */ (element)))) : element;
-    let /** @type {?} */ value;
-    const /** @type {?} */ defaultView = (el.ownerDocument || document).defaultView;
+    /** @type {?} */
+    let el;
+    el = (typeof element === 'string') ? ((/** @type {?} */ (document.querySelector((/** @type {?} */ (element)))))) : element;
+    /** @type {?} */
+    let value;
+    /** @type {?} */
+    const defaultView = (el.ownerDocument || document).defaultView;
     // W3C standard way:
     if (defaultView && defaultView.getComputedStyle) {
         // sanitize property name to css notation
@@ -11084,8 +11794,7 @@ function computedStyle(element, styleProp) {
         styleProp = styleProp.replace(/([A-Z])/g, '-$1').toLowerCase();
         return defaultView.getComputedStyle(el, null).getPropertyValue(styleProp);
     }
-    else if (el['currentStyle']) {
-        // IE
+    else if (el['currentStyle']) { // IE
         // sanitize property name to camelCase
         styleProp = styleProp.replace(/\-(\w)/g, function (letter) {
             return letter.toUpperCase();
@@ -11094,7 +11803,10 @@ function computedStyle(element, styleProp) {
         // convert other units to pixels on IE
         if (/^\d+(em|pt|%|ex)?$/i.test(value)) {
             return (function (val) {
-                const /** @type {?} */ oldLeft = el.style.left, /** @type {?} */ oldRsLeft = el['runtimeStyle'].left;
+                /** @type {?} */
+                const oldLeft = el.style.left;
+                /** @type {?} */
+                const oldRsLeft = el['runtimeStyle'].left;
                 el['runtimeStyle'].left = el['currentStyle'].left;
                 el.style.left = val || 0;
                 val = el.style['pixelLeft'] + 'px';
@@ -11109,7 +11821,7 @@ function computedStyle(element, styleProp) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MdbStickyDirective {
     /**
@@ -11117,19 +11829,25 @@ class MdbStickyDirective {
      * @param {?} platformId
      */
     constructor(el, platformId) {
+        // css selector to be sticky after
         this.isBrowser = false;
         this.stickyOffsetTop = 0;
         this.scrollHandler = () => {
             // let elRect: ClientRect = this.el.getBoundingClientRect();
-            const /** @type {?} */ parentRect = this.el.parentElement.getBoundingClientRect();
-            const /** @type {?} */ bodyRect = document.body.getBoundingClientRect();
-            let /** @type {?} */ dynProps;
+            /** @type {?} */
+            const parentRect = this.el.parentElement.getBoundingClientRect();
+            /** @type {?} */
+            const bodyRect = document.body.getBoundingClientRect();
+            /** @type {?} */
+            let dynProps;
             if (this.original.float === 'right') {
-                const /** @type {?} */ right = bodyRect.right - parentRect.right + this.original.marginRight;
+                /** @type {?} */
+                const right = bodyRect.right - parentRect.right + this.original.marginRight;
                 dynProps = { right: right + 'px' };
             }
             else if (this.original.float === 'left') {
-                const /** @type {?} */ left = parentRect.left - bodyRect.left + this.original.marginLeft;
+                /** @type {?} */
+                const left = parentRect.left - bodyRect.left + this.original.marginLeft;
                 dynProps = { left: left + 'px' };
             }
             else {
@@ -11139,10 +11857,12 @@ class MdbStickyDirective {
             // console.log('dynProps', dynProps);
             if (this.original.marginTop + this.original.marginBottom +
                 this.original.boundingClientRect.height + this.stickyOffsetTop >= parentRect.bottom) {
+                // console.log('case 1 (absolute)', parentRect.bottom, this.original.marginBottom);
                 /**
                  * stikcy element reached to the bottom of the container
+                 * @type {?}
                  */
-                const /** @type {?} */ floatAdjustment = this.original.float === 'right' ? { right: 0 } :
+                const floatAdjustment = this.original.float === 'right' ? { right: 0 } :
                     this.original.float === 'left' ? { left: 0 } : {};
                 Object.assign(this.el.style, {
                     position: 'absolute',
@@ -11153,8 +11873,8 @@ class MdbStickyDirective {
             }
             else if (parentRect.top * -1 + this.original.marginTop + this.stickyOffsetTop > this.original.offsetTop) {
                 /**
-                            * stikcy element is in the middle of container
-                            */
+                * stikcy element is in the middle of container
+                */
                 // console.log('case 2 (fixed)', parentRect.top * -1, this.original.marginTop, this.original.offsetTop);
                 // if not floating, add an empty filler element, since the original elements becames 'fixed'
                 if (this.original.float !== 'left' && this.original.float !== 'right' && !this.fillerEl) {
@@ -11172,8 +11892,8 @@ class MdbStickyDirective {
             }
             else {
                 /**
-                            * stikcy element is in the original position
-                            */
+                * stikcy element is in the original position
+                */
                 // console.log('case 3 (original)');
                 if (this.fillerEl) {
                     this.parentEl.removeChild(this.fillerEl); // IE11 does not work with el.remove()
@@ -11199,16 +11919,18 @@ class MdbStickyDirective {
     ngAfterViewInit() {
         this.el.style.boxSizing = 'border-box';
         if (this.stickyAfter) {
-            const /** @type {?} */ cetStickyAfterEl = document.querySelector(this.stickyAfter);
+            /** @type {?} */
+            const cetStickyAfterEl = document.querySelector(this.stickyAfter);
             if (cetStickyAfterEl) {
                 this.stickyOffsetTop = cetStickyAfterEl.getBoundingClientRect().bottom;
             }
         }
         // set the parent relatively positioned
-        const /** @type {?} */ allowedPositions = ['absolute', 'fixed', 'relative'];
-        const /** @type {?} */ parentElPosition = computedStyle(this.parentEl, 'position');
-        if (allowedPositions.indexOf(parentElPosition) === -1) {
-            // inherit, initial, unset
+        /** @type {?} */
+        const allowedPositions = ['absolute', 'fixed', 'relative'];
+        /** @type {?} */
+        const parentElPosition = computedStyle(this.parentEl, 'position');
+        if (allowedPositions.indexOf(parentElPosition) === -1) { // inherit, initial, unset
             this.parentEl.style.position = 'relative';
         }
         this.diff = {
@@ -11216,7 +11938,8 @@ class MdbStickyDirective {
             left: this.el.offsetLeft - this.parentEl.offsetLeft
         };
         if (this.isBrowser) {
-            const /** @type {?} */ elRect = this.el.getBoundingClientRect();
+            /** @type {?} */
+            const elRect = this.el.getBoundingClientRect();
             this.el.getBoundingClientRect();
             this.original = {
                 boundingClientRect: elRect,
@@ -11273,7 +11996,7 @@ MdbStickyDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class StickyContentModule {
 }
@@ -11287,7 +12010,7 @@ StickyContentModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class TabsetConfig {
     constructor() {
@@ -11303,7 +12026,7 @@ TabsetConfig.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class WavesDirective {
     /**
@@ -11319,24 +12042,33 @@ class WavesDirective {
     click(event) {
         // event.stopPropagation();
         if (!this.el.nativeElement.classList.contains('disabled')) {
-            const /** @type {?} */ button = this.el.nativeElement;
+            /** @type {?} */
+            const button = this.el.nativeElement;
             if (!button.classList.contains('waves-effect')) {
                 button.className += ' waves-effect';
             }
-            const /** @type {?} */ xPos = event.clientX - button.getBoundingClientRect().left;
-            const /** @type {?} */ yPos = event.clientY - button.getBoundingClientRect().top;
-            const /** @type {?} */ tmp = document.createElement('div');
+            /** @type {?} */
+            const xPos = event.clientX - button.getBoundingClientRect().left;
+            /** @type {?} */
+            const yPos = event.clientY - button.getBoundingClientRect().top;
+            /** @type {?} */
+            const tmp = document.createElement('div');
             tmp.className += 'waves-ripple waves-rippling';
-            const /** @type {?} */ ripple = button.appendChild(tmp);
-            const /** @type {?} */ top = yPos + 'px';
-            const /** @type {?} */ left = xPos + 'px';
+            /** @type {?} */
+            const ripple = button.appendChild(tmp);
+            /** @type {?} */
+            const top = yPos + 'px';
+            /** @type {?} */
+            const left = xPos + 'px';
             tmp.style.top = top;
             tmp.style.left = left;
-            const /** @type {?} */ scale = 'scale(' + ((button.clientWidth / 100) * 3) + ') translate(0,0)';
+            /** @type {?} */
+            const scale = 'scale(' + ((button.clientWidth / 100) * 3) + ') translate(0,0)';
             tmp.style.webkitTransform = scale;
             tmp.style.transform = scale;
             tmp.style.opacity = '1';
-            const /** @type {?} */ duration = 750;
+            /** @type {?} */
+            const duration = 750;
             tmp.style.webkitTransitionDuration = duration + 'ms';
             tmp.style.transitionDuration = duration + 'ms';
             this.removeRipple(button, ripple);
@@ -11372,8 +12104,10 @@ WavesDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+// todo: add active event to tab
+// todo: fix? mixing static and dynamic tabs position tabs in order of creation
 class TabsetComponent {
     /**
      * @param {?} platformId
@@ -11386,6 +12120,7 @@ class TabsetComponent {
         this.classMap = {};
         this.isBrowser = null;
         this.clazz = true;
+        this.disableWaves = false;
         this.showBsTab = new EventEmitter();
         this.shownBsTab = new EventEmitter();
         this.hideBsTab = new EventEmitter();
@@ -11455,8 +12190,10 @@ class TabsetComponent {
      * @return {?}
      */
     click(event, index) {
-        const /** @type {?} */ prev = this.tabEl.toArray()[this.getActive()];
-        const /** @type {?} */ clicked = this.tabEl.toArray()[index];
+        /** @type {?} */
+        const prev = this.tabEl.toArray()[this.getActive()];
+        /** @type {?} */
+        const clicked = this.tabEl.toArray()[index];
         this.hideBsTab.emit({
             target: clicked,
             relatedTarget: prev
@@ -11466,7 +12203,7 @@ class TabsetComponent {
             relatedTarget: prev
         });
         this.setActiveTab(index + 1);
-        if (this.contentClass !== 'vertical') {
+        if (this.contentClass !== 'vertical' && !this.disableWaves) {
             this.ripple.el = clicked;
             this.ripple.click(event);
         }
@@ -11485,17 +12222,19 @@ class TabsetComponent {
     ngOnDestroy() {
         this.isDestroyed = true;
     }
+    // public getActive() {
     /**
      * @return {?}
      */
     getActive() {
-        const /** @type {?} */ tabs = this.tabs.map((object, index) => {
+        /** @type {?} */
+        const tabs = this.tabs.map((object, index) => {
             return {
                 index: index,
                 object: object
             };
         });
-        for (const /** @type {?} */ tab of tabs) {
+        for (const tab of tabs) {
             if (tab.object.active) {
                 return tab.index;
             }
@@ -11514,13 +12253,15 @@ class TabsetComponent {
      * @return {?}
      */
     removeTab(tab) {
-        const /** @type {?} */ index = this.tabs.indexOf(tab);
+        /** @type {?} */
+        const index = this.tabs.indexOf(tab);
         if (index === -1 || this.isDestroyed) {
             return;
         }
         // Select a new tab if the tab to be removed is selected and not destroyed
         if (tab.active && this.hasAvailableTabs(index)) {
-            const /** @type {?} */ newActiveIndex = this.getClosestTabIndex(index);
+            /** @type {?} */
+            const newActiveIndex = this.getClosestTabIndex(index);
             this.tabs[newActiveIndex].active = true;
         }
         tab.removed.emit(tab);
@@ -11531,13 +12272,16 @@ class TabsetComponent {
      * @return {?}
      */
     getClosestTabIndex(index) {
-        const /** @type {?} */ tabsLength = this.tabs.length;
+        /** @type {?} */
+        const tabsLength = this.tabs.length;
         if (!tabsLength) {
             return -1;
         }
-        for (let /** @type {?} */ step = 1; step <= tabsLength; step += 1) {
-            const /** @type {?} */ prevIndex = index - step;
-            const /** @type {?} */ nextIndex = index + step;
+        for (let step = 1; step <= tabsLength; step += 1) {
+            /** @type {?} */
+            const prevIndex = index - step;
+            /** @type {?} */
+            const nextIndex = index + step;
             if (this.tabs[prevIndex] && !this.tabs[prevIndex].disabled) {
                 return prevIndex;
             }
@@ -11552,11 +12296,12 @@ class TabsetComponent {
      * @return {?}
      */
     hasAvailableTabs(index) {
-        const /** @type {?} */ tabsLength = this.tabs.length;
+        /** @type {?} */
+        const tabsLength = this.tabs.length;
         if (!tabsLength) {
             return false;
         }
-        for (let /** @type {?} */ i = 0; i < tabsLength; i += 1) {
+        for (let i = 0; i < tabsLength; i += 1) {
             if (!this.tabs[i].disabled && i !== index) {
                 return true;
             }
@@ -11598,13 +12343,14 @@ class TabsetComponent {
      * @return {?}
      */
     getActiveElement() {
-        const /** @type {?} */ tabs = this.tabs.map((object, index) => {
+        /** @type {?} */
+        const tabs = this.tabs.map((object, index) => {
             return {
                 index: index,
                 object: object
             };
         });
-        for (const /** @type {?} */ tab of tabs) {
+        for (const tab of tabs) {
             if (tab.object.active) {
                 return {
                     el: tab.object,
@@ -11618,7 +12364,8 @@ class TabsetComponent {
      */
     showActiveIndex() {
         setTimeout(() => {
-            const /** @type {?} */ activeElement = this.getActiveElement();
+            /** @type {?} */
+            const activeElement = this.getActiveElement();
             this.getActiveTab.emit(activeElement);
         }, 0);
     }
@@ -11626,7 +12373,8 @@ class TabsetComponent {
      * @return {?}
      */
     getFirstActiveTabIndex() {
-        const /** @type {?} */ activeTabs = this.tabs.filter((tab) => {
+        /** @type {?} */
+        const activeTabs = this.tabs.filter((tab) => {
             return !tab.disabled;
         });
         return this.tabs.indexOf(activeTabs[0]);
@@ -11643,7 +12391,8 @@ class TabsetComponent {
      * @return {?}
      */
     initActiveTab() {
-        const /** @type {?} */ index = this.getFirstActiveTabIndex();
+        /** @type {?} */
+        const index = this.getFirstActiveTabIndex();
         if (index === -1) {
             this.removeActiveTabs();
             return;
@@ -11668,7 +12417,7 @@ class TabsetComponent {
 TabsetComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-tabset',
-                template: "<div class=\"container-fluid\"> <div class=\"row\"> <div class=\"{{ listGetClass }}\"> <ul class=\"nav {{ buttonClass }}\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\"> <li *ngFor=\"let tabz of tabs;let i = index\" [ngClass]=\"['nav-item', tabz.customClass || '']\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\" (click)=\"click($event, i)\"> <a #tabEl href=\"javascript:void(0);\" class=\"nav-link waves-light\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\"> <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span> <span *ngIf=\"tabz.removable\"> <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"fa fa-remove ml-2\"> </span> </span> </a> </li> </ul> </div> <div class=\"{{ tabsGetClass }}\"> <div class=\"tab-content {{ contentClass }}\"> <ng-content></ng-content> </div> </div> </div> </div> ",
+                template: "<div class=\"container-fluid\"> <div class=\"row\"> <div class=\"{{ listGetClass }}\"> <ul class=\"nav {{ buttonClass }}\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\"> <li *ngFor=\"let tabz of tabs;let i = index\" [ngClass]=\"['nav-item', tabz.customClass || '']\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\" (click)=\"click($event, i)\"> <a #tabEl href=\"javascript:void(0);\" class=\"nav-link\" [ngClass]=\"{'waves-light': !disableWaves}\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\"> <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span> <span *ngIf=\"tabz.removable\"> <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"fa fa-remove ml-2\"> </span> </span> </a> </li> </ul> </div> <div class=\"{{ tabsGetClass }}\"> <div class=\"tab-content {{ contentClass }}\"> <ng-content></ng-content> </div> </div> </div> </div> ",
                 providers: [WavesDirective]
             },] },
 ];
@@ -11680,6 +12429,7 @@ TabsetComponent.ctorParameters = () => [
 ];
 TabsetComponent.propDecorators = {
     clazz: [{ type: HostBinding, args: ['class.tab-container',] }],
+    disableWaves: [{ type: Input }],
     buttonClass: [{ type: Input }],
     contentClass: [{ type: Input }],
     tabEl: [{ type: ViewChildren, args: ['tabEl', { read: ElementRef },] }],
@@ -11695,7 +12445,7 @@ TabsetComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class TabDirective {
     /**
@@ -11722,6 +12472,7 @@ class TabDirective {
         this.removed = new EventEmitter();
         this.addClass = true;
         this.test = true;
+        // public el: ElementRef = null;
         this.el = null;
         this.isBrowser = null;
         this.isBrowser = isPlatformBrowser(platformId);
@@ -11804,7 +12555,8 @@ class TabDirective {
             el.classList.remove(className);
         }
         else if (this.hasClass(el, className)) {
-            const /** @type {?} */ reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
+            /** @type {?} */
+            const reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
             el.className = el.className.replace(reg, ' ');
         }
     }
@@ -11839,7 +12591,7 @@ TabDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * Should be used to mark <template> element as a template for tab heading
@@ -11864,7 +12616,7 @@ TabHeadingDirective.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class NgTranscludeDirective {
     /**
@@ -11905,7 +12657,7 @@ NgTranscludeDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class TabsModule {
     /**
@@ -11928,8 +12680,9 @@ TabsModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => MaterialChipsComponent),
@@ -11967,7 +12720,8 @@ class MaterialChipsComponent {
      * @return {?}
      */
     removeValue(value) {
-        const /** @type {?} */ index = this.values.indexOf(value, 0);
+        /** @type {?} */
+        const index = this.values.indexOf(value, 0);
         if (index !== undefined) {
             this.values.splice(index, 1);
             this.labelsChange.emit(this.values);
@@ -12031,7 +12785,7 @@ MaterialChipsComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MaterialChipsModule {
 }
@@ -12045,8 +12799,9 @@ MaterialChipsModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 const TIME_PIRCKER_VALUE_ACCESSOT = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => ClockPickerComponent),
@@ -12069,7 +12824,7 @@ class ClockPickerComponent {
         this.showClock = false;
         this.disabled = false;
         this.isMobile = null;
-        this.touchDevice = ('ontouchstart' in document.documentElement);
+        this.touchDevice = ('ontouchstart' in ((/** @type {?} */ (document.documentElement))));
         this.showHours = false;
         this.elements = document.getElementsByClassName('clockpicker');
         this.dialRadius = 135;
@@ -12108,7 +12863,7 @@ class ClockPickerComponent {
     ontouchmove(event) {
         // Rotating Time Picker on mobile
         if (event.target.parentElement.classList.contains('clockpicker-dial')) {
-            (/** @type {?} */ (this.elem.nativeElement.querySelectorAll('.clockpicker-tick'))).forEach((element) => {
+            ((/** @type {?} */ (this.elem.nativeElement.querySelectorAll('.clockpicker-tick')))).forEach((element) => {
                 this.renderer.setStyle(element, 'background-color', 'rgba(0, 150, 136, 0');
             });
             this.mousedown(event);
@@ -12138,33 +12893,42 @@ class ClockPickerComponent {
         if (this.isBrowser) {
             // Fix for visible date / time picker input when picker plate is visible.
             try {
-                const /** @type {?} */ openedPicker = document.querySelector('.picker--opened');
-                const /** @type {?} */ allPickers = document.querySelectorAll('.picker');
+                /** @type {?} */
+                const openedPicker = document.querySelector('.picker--opened');
+                /** @type {?} */
+                const allPickers = document.querySelectorAll('.picker');
                 allPickers.forEach((element) => {
                     this.renderer.setStyle(element, 'z-index', '0');
                 });
-                this.renderer.setStyle(openedPicker, 'z-index', '1');
+                this.renderer.setStyle(openedPicker, 'z-index', '1000');
             }
-            catch (/** @type {?} */ error) { }
+            catch (error) { }
         }
     }
     /**
      * @return {?}
      */
     checkDraw() {
-        let /** @type {?} */ value;
-        const /** @type {?} */ isHours = this.showHours;
+        /** @type {?} */
+        let value;
+        /** @type {?} */
+        const isHours = this.showHours;
         if (isHours) {
             value = parseInt(this.selectedHours.h, 0);
         }
         else {
             value = parseInt(this.selectedHours.m, 0);
         }
-        const /** @type {?} */ unit = Math.PI / (isHours ? 6 : 30), /** @type {?} */
-        radian = value * unit, /** @type {?} */
-        radius = isHours && value > 0 && value < 13 ? this.innerRadius : this.outerRadius, /** @type {?} */
-        xd = Math.sin(radian) * radius, /** @type {?} */
-        yd = -Math.cos(radian) * radius;
+        /** @type {?} */
+        const unit = Math.PI / (isHours ? 6 : 30);
+        /** @type {?} */
+        const radian = value * unit;
+        /** @type {?} */
+        const radius = isHours && value > 0 && value < 13 ? this.innerRadius : this.outerRadius;
+        /** @type {?} */
+        const xd = Math.sin(radian) * radius;
+        /** @type {?} */
+        const yd = -Math.cos(radian) * radius;
         this.setHand(xd, yd, false);
     }
     /**
@@ -12173,14 +12937,22 @@ class ClockPickerComponent {
      * @return {?}
      */
     mousedown(e, space) {
-        const /** @type {?} */ offset = this.plate.nativeElement.getBoundingClientRect(), /** @type {?} */
-        isTouch = /^touch/.test(e.type), /** @type {?} */
-        x0 = offset.left + this.dialRadius, /** @type {?} */
-        y0 = offset.top + this.dialRadius, /** @type {?} */
-        dx = (isTouch ? e.touches[0] : e).clientX - x0, /** @type {?} */
-        dy = (isTouch ? e.touches[0] : e).clientY - y0, /** @type {?} */
-        z = Math.sqrt(dx * dx + dy * dy);
-        let /** @type {?} */ moved = false;
+        /** @type {?} */
+        const offset = this.plate.nativeElement.getBoundingClientRect();
+        /** @type {?} */
+        const isTouch = /^touch/.test(e.type);
+        /** @type {?} */
+        const x0 = offset.left + this.dialRadius;
+        /** @type {?} */
+        const y0 = offset.top + this.dialRadius;
+        /** @type {?} */
+        const dx = (isTouch ? e.touches[0] : e).clientX - x0;
+        /** @type {?} */
+        const dy = (isTouch ? e.touches[0] : e).clientY - y0;
+        /** @type {?} */
+        const z = Math.sqrt(dx * dx + dy * dy);
+        /** @type {?} */
+        let moved = false;
         if (space && (z < this.outerRadius - this.tickRadius || z > this.outerRadius + this.tickRadius)) {
             return;
         }
@@ -12192,22 +12964,28 @@ class ClockPickerComponent {
         else {
             this.setHand(dx, dy, false);
         }
-        const /** @type {?} */ mousemoveEventMethod = (event) => {
+        /** @type {?} */
+        const mousemoveEventMethod = (event) => {
             event.preventDefault();
             event.stopPropagation();
-            const /** @type {?} */ x = event.clientX - x0, /** @type {?} */
-            y = event.clientY - y0;
+            /** @type {?} */
+            const x = event.clientX - x0;
+            /** @type {?} */
+            const y = event.clientY - y0;
             if (!moved && x === dx && y === dy) {
                 return;
             }
             moved = true;
             this.setHand(x, y, false);
         };
-        const /** @type {?} */ mouseupEventMethod = (event) => {
+        /** @type {?} */
+        const mouseupEventMethod = (event) => {
             document.removeEventListener(this.mousemoveEvent, mousemoveEventMethod);
             e.preventDefault();
-            const /** @type {?} */ x = event.clientX - x0, /** @type {?} */
-            y = event.clientX - y0;
+            /** @type {?} */
+            const x = event.clientX - x0;
+            /** @type {?} */
+            const y = event.clientX - y0;
             if ((space || moved) && x === dx && y === dy) {
                 this.setHand(x, y, false);
             }
@@ -12227,9 +13005,11 @@ class ClockPickerComponent {
             setTimeout(() => {
                 // creating temp field
                 // const field = document.createElement('input');
-                const /** @type {?} */ field = this.renderer.createElement('input');
+                /** @type {?} */
+                const field = this.renderer.createElement('input');
                 this.renderer.appendChild(this.elem.nativeElement, field);
-                const /** @type {?} */ inputReference = this.elem.nativeElement.lastElementChild;
+                /** @type {?} */
+                const inputReference = this.elem.nativeElement.lastElementChild;
                 this.renderer.setAttribute(inputReference, 'type', 'text');
                 this.renderer.setAttribute(inputReference, 'type', 'text');
                 this.renderer.setStyle(inputReference, 'opacity', '0');
@@ -12251,7 +13031,7 @@ class ClockPickerComponent {
                 field.focus();
             }, 0);
         }
-        catch (/** @type {?} */ error) {
+        catch (error) {
         }
     }
     /**
@@ -12269,9 +13049,12 @@ class ClockPickerComponent {
      * @return {?}
      */
     closeBtnClicked() {
-        const /** @type {?} */ h = this.selectedHours.h;
-        const /** @type {?} */ m = this.selectedHours.m;
-        const /** @type {?} */ ampm = this.selectedHours.ampm;
+        /** @type {?} */
+        const h = this.selectedHours.h;
+        /** @type {?} */
+        const m = this.selectedHours.m;
+        /** @type {?} */
+        const ampm = this.selectedHours.ampm;
         if (this.twelvehour) {
             this.endHours = h + ':' + m + ampm;
         }
@@ -12331,10 +13114,13 @@ class ClockPickerComponent {
      */
     generateTick() {
         if (this.twelvehour) {
-            for (let /** @type {?} */ i = 1; i < 13; i++) {
-                const /** @type {?} */ radian = i / 6 * Math.PI;
-                const /** @type {?} */ radius = this.outerRadius;
-                const /** @type {?} */ tick = {
+            for (let i = 1; i < 13; i++) {
+                /** @type {?} */
+                const radian = i / 6 * Math.PI;
+                /** @type {?} */
+                const radius = this.outerRadius;
+                /** @type {?} */
+                const tick = {
                     'hour': i,
                     'left': this.dialRadius + Math.sin(radian) * radius - this.tickRadius,
                     'top': this.dialRadius - Math.cos(radian) * radius - this.tickRadius,
@@ -12343,18 +13129,23 @@ class ClockPickerComponent {
             }
         }
         else {
-            for (let /** @type {?} */ i = 0; i < 24; i++) {
-                const /** @type {?} */ radian = i / 6 * Math.PI;
-                const /** @type {?} */ inner = i > 0 && i < 13;
-                const /** @type {?} */ radius = inner ? this.innerRadius : this.outerRadius;
-                let /** @type {?} */ h;
+            for (let i = 0; i < 24; i++) {
+                /** @type {?} */
+                const radian = i / 6 * Math.PI;
+                /** @type {?} */
+                const inner = i > 0 && i < 13;
+                /** @type {?} */
+                const radius = inner ? this.innerRadius : this.outerRadius;
+                /** @type {?} */
+                let h;
                 if (i === 0) {
                     h = '0' + i.toString();
                 }
                 else {
                     h = i;
                 }
-                const /** @type {?} */ tick = {
+                /** @type {?} */
+                const tick = {
                     'hour': h,
                     'left': this.dialRadius + Math.sin(radian) * radius - this.tickRadius,
                     'top': this.dialRadius - Math.cos(radian) * radius - this.tickRadius,
@@ -12362,13 +13153,16 @@ class ClockPickerComponent {
                 this.hoursTicks.push(tick);
             }
         }
-        for (let /** @type {?} */ i = 0; i < 60; i += 5) {
-            const /** @type {?} */ radian = i / 30 * Math.PI;
-            let /** @type {?} */ min = i.toString();
+        for (let i = 0; i < 60; i += 5) {
+            /** @type {?} */
+            const radian = i / 30 * Math.PI;
+            /** @type {?} */
+            let min = i.toString();
             if (i < 10) {
                 min = '0' + i.toString();
             }
-            const /** @type {?} */ tick = {
+            /** @type {?} */
+            const tick = {
                 'min': min,
                 'left': this.dialRadius + Math.sin(radian) * this.outerRadius - this.tickRadius,
                 'top': this.dialRadius - Math.cos(radian) * this.outerRadius - this.tickRadius,
@@ -12383,13 +13177,20 @@ class ClockPickerComponent {
      * @return {?}
      */
     setHand(x, y, roundBy5) {
-        let /** @type {?} */ radian = Math.atan2(x, -y);
-        const /** @type {?} */ isHours = this.showHours;
-        const /** @type {?} */ unit = Math.PI / (isHours || roundBy5 ? 6 : 30);
-        const /** @type {?} */ z = Math.sqrt(x * x + y * y);
-        const /** @type {?} */ inner = isHours && z < (this.outerRadius + this.innerRadius) / 2;
-        let /** @type {?} */ radius = inner ? this.innerRadius : this.outerRadius;
-        let /** @type {?} */ value;
+        /** @type {?} */
+        let radian = Math.atan2(x, -y);
+        /** @type {?} */
+        const isHours = this.showHours;
+        /** @type {?} */
+        const unit = Math.PI / (isHours || roundBy5 ? 6 : 30);
+        /** @type {?} */
+        const z = Math.sqrt(x * x + y * y);
+        /** @type {?} */
+        const inner = isHours && z < (this.outerRadius + this.innerRadius) / 2;
+        /** @type {?} */
+        let radius = inner ? this.innerRadius : this.outerRadius;
+        /** @type {?} */
+        let value;
         if (this.showHours) {
             value = parseInt(this.selectedHours.h, 0);
         }
@@ -12446,10 +13247,14 @@ class ClockPickerComponent {
                 this.fg.nativeElement.setAttribute('class', 'clockpicker-canvas-fg active');
             }
         }
-        const /** @type {?} */ cx1 = Math.sin(radian) * (radius - this.tickRadius), /** @type {?} */
-        cy1 = -Math.cos(radian) * (radius - this.tickRadius), /** @type {?} */
-        cx2 = Math.sin(radian) * radius, /** @type {?} */
-        cy2 = -Math.cos(radian) * radius;
+        /** @type {?} */
+        const cx1 = Math.sin(radian) * (radius - this.tickRadius);
+        /** @type {?} */
+        const cy1 = -Math.cos(radian) * (radius - this.tickRadius);
+        /** @type {?} */
+        const cx2 = Math.sin(radian) * radius;
+        /** @type {?} */
+        const cy2 = -Math.cos(radian) * radius;
         this.hand.nativeElement.setAttribute('x2', cx1);
         this.hand.nativeElement.setAttribute('y2', cy1);
         this.bg.nativeElement.setAttribute('cx', cx2);
@@ -12478,8 +13283,10 @@ class ClockPickerComponent {
      * @return {?}
      */
     offset(obj) {
-        let /** @type {?} */ left = 0, /** @type {?} */
-        top = 0;
+        /** @type {?} */
+        let left = 0;
+        /** @type {?} */
+        let top = 0;
         if (obj.offsetParent) {
             do {
                 left += obj.offsetLeft;
@@ -12513,7 +13320,7 @@ class ClockPickerComponent {
 ClockPickerComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-time-picker',
-                template: "<div> <div class=\"md-form\"> <label class=\"active\">{{ label }}</label> <input [disabled]=\"disabled\" [placeholder]=\"placeholder\" [value]=\"endHours\" type=\"text\" class=\"form-control timepicker\" (click)=\"openBtnClicked()\" [(ngModel)]=\"endHours\"> </div> <div class=\"clockpicker picker\" [hidden]=\"!showClock\" [ngClass]=\"{'picker--opened': showClock, 'darktheme': darktheme}\"> <div class=\"picker__holder\"> <div class=\"picker__frame\"> <div class=\"picker__wrap\"> <div class=\"picker__box\"> <div class=\"picker__date-display\"> <div class=\"clockpicker-display\"> <div class=\"clockpicker-display-column\"> <span class=\"clockpicker-span-hours text-primary\" [ngClass]=\"{'text-primary': showHours}\" (click)=\"showHoursClock()\"> {{ selectedHours.h }}</span>:<span class=\"clockpicker-span-minutes\" [ngClass]=\"{'text-primary': !showHours}\" (click)=\"showMinutesClock()\">{{selectedHours.m }}</span> </div> <div class=\"clockpicker-display-column clockpicker-display-am-pm\" *ngIf=\"twelvehour\"> <div class=\"clockpicker-span-am-pm\">{{ selectedHours.ampm }}</div> </div> </div> </div> <div class=\"picker__calendar-container\"> <div class=\"clockpicker-plate\" #plate> <div class=\"clockpicker-canvas\"> <svg class=\"clockpicker-svg\" width=\"270\" height=\"270\" #svg> <g transform=\"translate(135,135)\" #g> <line x1=\"0\" y1=\"0\" x2=\"77.94228634059948\" y2=\"-45.00000000000001\" #hand></line> <circle class=\"clockpicker-canvas-fg\" r=\"5\" cx=\"95.26279441628824\" cy=\"-55.000000000000014\" #fg></circle> <circle class=\"clockpicker-canvas-bg\" r=\"20\" cx=\"95.26279441628824\" cy=\"-55.000000000000014\" #bg></circle> <circle class=\"clockpicker-canvas-bearing\" cx=\"0\" cy=\"0\" r=\"2\" #bearing></circle> </g> </svg> </div> <div class=\"clockpicker-dial clockpicker-hours\" #hoursPlate [ngClass]=\"{'clockpicker-dial-out': !showHours}\" [ngStyle]=\"{'visibility': !showHours ? 'hidden' : 'visible'}\"> <div *ngFor=\"let tick of hoursTicks\" class=\"clockpicker-tick\" style=\"font-size: 140%;\" [ngStyle]=\"{'left': tick.left+'px', 'top': tick.top+'px'}\" id=\"{{ tick.hour }}\"> {{ tick.hour }} </div> </div> <div class=\"clockpicker-dial clockpicker-minutes\" #minutesPlate [ngClass]=\"{'clockpicker-dial-out': showHours}\" [ngStyle]=\"{'visibility': showHours ? 'hidden' : 'visible'}\"> <div *ngFor=\"let tick of minutesTicks\" class=\"clockpicker-tick\" style=\"font-size: 120%;\" [ngStyle]=\"{'left': tick.left+'px', 'top': tick.top+'px'}\"> {{ tick.min }} </div> </div> </div> <div class=\"clockpicker-am-pm-block\" *ngIf=\"twelvehour\"> <button type=\"button\" class=\"btn-floating btn-flat clockpicker-button am-button\" [ngClass]=\"{'active': selectedHours.ampm=='AM'}\" (click)=\"setAmPm('AM')\"> AM </button> <button type=\"button\" class=\"btn-floating btn-flat clockpicker-button pm-button\" [ngClass]=\"{'active': selectedHours.ampm=='PM'}\" (click)=\"setAmPm('PM')\"> PM </button> </div> </div> <div class=\"picker__footer\"> <button type=\"button\" *ngIf=\"buttonLabel\" class=\"btn-flat clockpicker-button\" (click)=\"closeBtnClicked()\"> {{buttonLabel}} </button> <button type=\"button\" *ngIf=\"!buttonLabel\" class=\"btn-flat clockpicker-button\" (click)=\"closeBtnClicked()\"> Done </button> </div> </div> </div> </div> </div> </div> </div>",
+                template: "<div> <div class=\"md-form\"> <label class=\"active\">{{ label }}</label> <input [disabled]=\"disabled\" [tabindex]=\"tabIndex\" [placeholder]=\"placeholder\" [value]=\"endHours\" type=\"text\" class=\"form-control timepicker\" (click)=\"openBtnClicked()\" [(ngModel)]=\"endHours\"> </div> <div class=\"clockpicker picker\" [hidden]=\"!showClock\" [ngClass]=\"{'picker--opened': showClock, 'darktheme': darktheme}\"> <div class=\"picker__holder\"> <div class=\"picker__frame\"> <div class=\"picker__wrap\"> <div class=\"picker__box\"> <div class=\"picker__date-display\"> <div class=\"clockpicker-display\"> <div class=\"clockpicker-display-column\"> <span class=\"clockpicker-span-hours text-primary\" [ngClass]=\"{'text-primary': showHours}\" (click)=\"showHoursClock()\"> {{ selectedHours.h }}</span>:<span class=\"clockpicker-span-minutes\" [ngClass]=\"{'text-primary': !showHours}\" (click)=\"showMinutesClock()\">{{selectedHours.m }}</span> </div> <div class=\"clockpicker-display-column clockpicker-display-am-pm\" *ngIf=\"twelvehour\"> <div class=\"clockpicker-span-am-pm\">{{ selectedHours.ampm }}</div> </div> </div> </div> <div class=\"picker__calendar-container\"> <div class=\"clockpicker-plate\" #plate> <div class=\"clockpicker-canvas\"> <svg class=\"clockpicker-svg\" width=\"270\" height=\"270\" #svg> <g transform=\"translate(135,135)\" #g> <line x1=\"0\" y1=\"0\" x2=\"77.94228634059948\" y2=\"-45.00000000000001\" #hand></line> <circle class=\"clockpicker-canvas-fg\" r=\"5\" cx=\"95.26279441628824\" cy=\"-55.000000000000014\" #fg></circle> <circle class=\"clockpicker-canvas-bg\" r=\"20\" cx=\"95.26279441628824\" cy=\"-55.000000000000014\" #bg></circle> <circle class=\"clockpicker-canvas-bearing\" cx=\"0\" cy=\"0\" r=\"2\" #bearing></circle> </g> </svg> </div> <div class=\"clockpicker-dial clockpicker-hours\" #hoursPlate [ngClass]=\"{'clockpicker-dial-out': !showHours}\" [ngStyle]=\"{'visibility': !showHours ? 'hidden' : 'visible'}\"> <div *ngFor=\"let tick of hoursTicks\" class=\"clockpicker-tick\" style=\"font-size: 140%;\" [ngStyle]=\"{'left': tick.left+'px', 'top': tick.top+'px'}\" id=\"{{ tick.hour }}\"> {{ tick.hour }} </div> </div> <div class=\"clockpicker-dial clockpicker-minutes\" #minutesPlate [ngClass]=\"{'clockpicker-dial-out': showHours}\" [ngStyle]=\"{'visibility': showHours ? 'hidden' : 'visible'}\"> <div *ngFor=\"let tick of minutesTicks\" class=\"clockpicker-tick\" style=\"font-size: 120%;\" [ngStyle]=\"{'left': tick.left+'px', 'top': tick.top+'px'}\"> {{ tick.min }} </div> </div> </div> <div class=\"clockpicker-am-pm-block\" *ngIf=\"twelvehour\"> <button type=\"button\" class=\"btn-floating btn-flat clockpicker-button am-button\" [ngClass]=\"{'active': selectedHours.ampm=='AM'}\" (click)=\"setAmPm('AM')\"> AM </button> <button type=\"button\" class=\"btn-floating btn-flat clockpicker-button pm-button\" [ngClass]=\"{'active': selectedHours.ampm=='PM'}\" (click)=\"setAmPm('PM')\"> PM </button> </div> </div> <div class=\"picker__footer\"> <button type=\"button\" *ngIf=\"buttonLabel\" class=\"btn-flat clockpicker-button\" (click)=\"closeBtnClicked()\"> {{buttonLabel}} </button> <button type=\"button\" *ngIf=\"!buttonLabel\" class=\"btn-flat clockpicker-button\" (click)=\"closeBtnClicked()\"> Done </button> </div> </div> </div> </div> </div> </div> </div>",
                 providers: [TIME_PIRCKER_VALUE_ACCESSOT]
             },] },
 ];
@@ -12541,12 +13348,13 @@ ClockPickerComponent.propDecorators = {
     showClock: [{ type: Input, args: ['showClock',] }],
     buttonLabel: [{ type: Input }],
     disabled: [{ type: Input }],
+    tabIndex: [{ type: Input }],
     ontouchmove: [{ type: HostListener, args: ['touchmove', ['$event'],] }]
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class TimePickerModule {
 }
@@ -12560,7 +13368,7 @@ TimePickerModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class ScrollSpyLinkDirective {
     /**
@@ -12632,7 +13440,7 @@ ScrollSpyLinkDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @record
@@ -12654,7 +13462,8 @@ class ScrollSpyService {
      * @return {?}
      */
     removeScrollSpy(scrollSpyId) {
-        const /** @type {?} */ scrollSpyIndex = this.scrollSpys.findIndex((spy) => {
+        /** @type {?} */
+        const scrollSpyIndex = this.scrollSpys.findIndex((spy) => {
             return spy.id === scrollSpyId;
         });
         this.scrollSpys.splice(scrollSpyIndex, 1);
@@ -12665,13 +13474,15 @@ class ScrollSpyService {
      * @return {?}
      */
     updateActiveState(scrollSpyId, activeLinkId) {
-        const /** @type {?} */ scrollSpy = this.scrollSpys.find(spy => {
+        /** @type {?} */
+        const scrollSpy = this.scrollSpys.find(spy => {
             return spy.id === scrollSpyId;
         });
         if (!scrollSpy) {
             return;
         }
-        const /** @type {?} */ activeLink = scrollSpy.links.find(link => {
+        /** @type {?} */
+        const activeLink = scrollSpy.links.find(link => {
             return link.id === activeLinkId;
         });
         this.removeActiveLinks(scrollSpy);
@@ -12683,13 +13494,15 @@ class ScrollSpyService {
      * @return {?}
      */
     removeActiveState(scrollSpyId, activeLinkId) {
-        const /** @type {?} */ scrollSpy = this.scrollSpys.find(spy => {
+        /** @type {?} */
+        const scrollSpy = this.scrollSpys.find(spy => {
             return spy.id === scrollSpyId;
         });
         if (!scrollSpy) {
             return;
         }
-        const /** @type {?} */ activeLink = scrollSpy.links.find(link => {
+        /** @type {?} */
+        const activeLink = scrollSpy.links.find(link => {
             return link.id === activeLinkId;
         });
         if (!activeLink) {
@@ -12723,7 +13536,7 @@ ScrollSpyService.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class ScrollSpyDirective {
     /**
@@ -12776,7 +13589,7 @@ ScrollSpyDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class ScrollSpyWindowDirective {
     /**
@@ -12811,10 +13624,14 @@ class ScrollSpyWindowDirective {
      * @return {?}
      */
     isElementInViewport() {
-        const /** @type {?} */ scrollTop = this.document.documentElement.scrollTop || this.document.body.scrollTop;
-        const /** @type {?} */ elHeight = this.el.nativeElement.offsetHeight;
-        const /** @type {?} */ elTop = this.el.nativeElement.offsetTop - this.offset;
-        const /** @type {?} */ elBottom = elTop + elHeight;
+        /** @type {?} */
+        const scrollTop = this.document.documentElement.scrollTop || this.document.body.scrollTop;
+        /** @type {?} */
+        const elHeight = this.el.nativeElement.offsetHeight;
+        /** @type {?} */
+        const elTop = this.el.nativeElement.offsetTop - this.offset;
+        /** @type {?} */
+        const elBottom = elTop + elHeight;
         return (scrollTop >= elTop && scrollTop <= elBottom);
     }
     /**
@@ -12880,7 +13697,7 @@ ScrollSpyWindowDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class ScrollSpyElementDirective {
     /**
@@ -12913,8 +13730,10 @@ class ScrollSpyElementDirective {
      * @return {?}
      */
     isElementInViewport() {
-        const /** @type {?} */ scrollTop = this.el.nativeElement.parentElement.scrollTop;
-        const /** @type {?} */ elTop = this.el.nativeElement.offsetTop - this.offset;
+        /** @type {?} */
+        const scrollTop = this.el.nativeElement.parentElement.scrollTop;
+        /** @type {?} */
+        const elTop = this.el.nativeElement.offsetTop - this.offset;
         return (scrollTop >= elTop);
     }
     /**
@@ -12977,7 +13796,7 @@ ScrollSpyElementDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class ScrollSpyModule {
 }
@@ -13001,7 +13820,7 @@ ScrollSpyModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MdbBtnDirective {
     /**
@@ -13024,14 +13843,22 @@ class MdbBtnDirective {
      * @return {?}
      */
     ngOnInit() {
-        const /** @type {?} */ colorClass = 'btn-' + this.color;
-        const /** @type {?} */ gradientClass = this.gradient + '-gradient';
-        const /** @type {?} */ outlineClass = 'btn-outline-' + this.color;
-        const /** @type {?} */ flatClass = 'btn-flat';
-        const /** @type {?} */ roundedClass = 'btn-rounded';
-        const /** @type {?} */ sizeClass = 'btn-' + this.size;
-        const /** @type {?} */ blockClass = 'btn-block';
-        const /** @type {?} */ floatingClass = 'btn-floating';
+        /** @type {?} */
+        const colorClass = 'btn-' + this.color;
+        /** @type {?} */
+        const gradientClass = this.gradient + '-gradient';
+        /** @type {?} */
+        const outlineClass = 'btn-outline-' + this.color;
+        /** @type {?} */
+        const flatClass = 'btn-flat';
+        /** @type {?} */
+        const roundedClass = 'btn-rounded';
+        /** @type {?} */
+        const sizeClass = 'btn-' + this.size;
+        /** @type {?} */
+        const blockClass = 'btn-block';
+        /** @type {?} */
+        const floatingClass = 'btn-floating';
         this.renderer.addClass(this.el.nativeElement, 'btn');
         if (this.color !== '') {
             this.renderer.addClass(this.el.nativeElement, colorClass);
@@ -13099,9 +13926,10 @@ MdbBtnDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 // TODO: config: activeClass - Class to apply to the checked buttons
+/** @type {?} */
 const CHECKBOX_CONTROL_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => ButtonCheckboxDirective),
@@ -13124,6 +13952,7 @@ class ButtonCheckboxDirective {
         this.onChange = Function.prototype;
         this.onTouched = Function.prototype;
     }
+    // view -> model
     /**
      * @return {?}
      */
@@ -13164,6 +13993,8 @@ class ButtonCheckboxDirective {
         this.state = state$$1;
         this.value = this.state ? this.trueValue : this.falseValue;
     }
+    // ControlValueAccessor
+    // model -> view
     /**
      * @param {?} value
      * @return {?}
@@ -13206,8 +14037,9 @@ ButtonCheckboxDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 const RADIO_CONTROL_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => ButtonRadioDirective),
@@ -13235,6 +14067,7 @@ class ButtonRadioDirective {
     get isActive() {
         return this.mdbRadio === this.value;
     }
+    // @HostBinding('class.active')
     /**
      * @param {?=} event
      * @return {?}
@@ -13249,7 +14082,7 @@ class ButtonRadioDirective {
             });
             this.renderer.addClass(event.target, 'active');
         }
-        catch (/** @type {?} */ error) {
+        catch (error) {
         }
         if (this.el.nativeElement.attributes.disabled) {
             return;
@@ -13275,6 +14108,8 @@ class ButtonRadioDirective {
     onBlur() {
         this.onTouched();
     }
+    // ControlValueAccessor
+    // model -> view
     /**
      * @param {?} value
      * @return {?}
@@ -13315,7 +14150,7 @@ ButtonRadioDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class ButtonsModule {
     /**
@@ -13334,7 +14169,7 @@ ButtonsModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MDBBadgeComponent {
     /**
@@ -13351,7 +14186,8 @@ class MDBBadgeComponent {
     ngOnInit() {
         this._renderer.addClass(this._el.nativeElement, 'badge');
         if (this.color) {
-            const /** @type {?} */ customClassArr = this.color.split(' ');
+            /** @type {?} */
+            const customClassArr = this.color.split(' ');
             customClassArr.forEach((el) => {
                 this._renderer.addClass(this._el.nativeElement, el);
             });
@@ -13383,7 +14219,7 @@ MDBBadgeComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class BadgeModule {
 }
@@ -13396,7 +14232,7 @@ BadgeModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MdbBreadcrumbComponent {
 }
@@ -13413,7 +14249,7 @@ MdbBreadcrumbComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MdbBreadcrumbItemComponent {
     /**
@@ -13448,7 +14284,7 @@ MdbBreadcrumbItemComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class BreadcrumbModule {
 }
@@ -13462,7 +14298,7 @@ BreadcrumbModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @return {?}
@@ -13473,15 +14309,17 @@ function isBs3() {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @template T
  */
 class LinkedList {
     constructor() {
+        // public length: = 0;
         this.length = 0;
         this.asArray = [];
+        // Array methods overriding END
     }
     /**
      * @param {?} position
@@ -13491,8 +14329,9 @@ class LinkedList {
         if (this.length === 0 || position < 0 || position >= this.length) {
             throw new Error('Position is out of the list');
         }
-        let /** @type {?} */ current = this.head;
-        for (let /** @type {?} */ index = 0; index < position; index++) {
+        /** @type {?} */
+        let current = this.head;
+        for (let index = 0; index < position; index++) {
             current = current.next;
         }
         return current;
@@ -13501,14 +14340,17 @@ class LinkedList {
      * @return {?}
      */
     createInternalArrayRepresentation() {
-        const /** @type {?} */ outArray = [];
-        let /** @type {?} */ current = this.head;
+        /** @type {?} */
+        const outArray = [];
+        /** @type {?} */
+        let current = this.head;
         while (current) {
             outArray.push(current.value);
             current = current.next;
         }
         this.asArray = outArray;
     }
+    // public get(position: number): T {
     /**
      * @param {?} position
      * @return {?}
@@ -13517,8 +14359,9 @@ class LinkedList {
         if (this.length === 0 || position < 0 || position >= this.length) {
             return void 0;
         }
-        let /** @type {?} */ current = this.head;
-        for (let /** @type {?} */ index = 0; index < position; index++) {
+        /** @type {?} */
+        let current = this.head;
+        for (let index = 0; index < position; index++) {
             current = current.next;
         }
         return current.value;
@@ -13532,10 +14375,11 @@ class LinkedList {
         if (position < 0 || position > this.length) {
             throw new Error('Position is out of the list');
         }
-        const /** @type {?} */ node = {
-            value: /** @type {?} */ (value),
-            next: /** @type {?} */ (undefined),
-            previous: /** @type {?} */ (undefined)
+        /** @type {?} */
+        const node = {
+            value: (/** @type {?} */ (value)),
+            next: (/** @type {?} */ (undefined)),
+            previous: (/** @type {?} */ (undefined))
         };
         if (this.length === 0) {
             this.head = node;
@@ -13557,8 +14401,10 @@ class LinkedList {
             }
             else {
                 // node in middle
-                const /** @type {?} */ currentPreviousNode = this.getNode(position - 1);
-                const /** @type {?} */ currentNextNode = currentPreviousNode.next;
+                /** @type {?} */
+                const currentPreviousNode = this.getNode(position - 1);
+                /** @type {?} */
+                const currentNextNode = currentPreviousNode.next;
                 currentPreviousNode.next = node;
                 currentNextNode.previous = node;
                 node.previous = currentPreviousNode;
@@ -13595,7 +14441,8 @@ class LinkedList {
         }
         else {
             // middle node
-            const /** @type {?} */ removedNode = this.getNode(position);
+            /** @type {?} */
+            const removedNode = this.getNode(position);
             removedNode.next.previous = removedNode.previous;
             removedNode.previous.next = removedNode.next;
         }
@@ -13611,7 +14458,8 @@ class LinkedList {
         if (this.length === 0 || position < 0 || position >= this.length) {
             throw new Error('Position is out of the list');
         }
-        const /** @type {?} */ node = this.getNode(position);
+        /** @type {?} */
+        const node = this.getNode(position);
         node.value = value;
         this.createInternalArrayRepresentation();
     }
@@ -13626,9 +14474,11 @@ class LinkedList {
      * @return {?}
      */
     findAll(fn) {
-        let /** @type {?} */ current = this.head;
-        const /** @type {?} */ result = [];
-        for (let /** @type {?} */ index = 0; index < this.length; index++) {
+        /** @type {?} */
+        let current = this.head;
+        /** @type {?} */
+        const result = [];
+        for (let index = 0; index < this.length; index++) {
             if (fn(current.value, index)) {
                 result.push({ index, value: current.value });
             }
@@ -13636,6 +14486,7 @@ class LinkedList {
         }
         return result;
     }
+    // Array methods overriding start
     /**
      * @param {...?} args
      * @return {?}
@@ -13646,6 +14497,7 @@ class LinkedList {
         });
         return this.length;
     }
+    // public pop(): T {
     /**
      * @return {?}
      */
@@ -13653,7 +14505,8 @@ class LinkedList {
         if (this.length === 0) {
             return undefined;
         }
-        const /** @type {?} */ last = this.tail;
+        /** @type {?} */
+        const last = this.tail;
         this.remove(this.length - 1);
         return last.value;
     }
@@ -13668,6 +14521,7 @@ class LinkedList {
         });
         return this.length;
     }
+    // public shift(): T {
     /**
      * @return {?}
      */
@@ -13675,7 +14529,8 @@ class LinkedList {
         if (this.length === 0) {
             return undefined;
         }
-        const /** @type {?} */ lastItem = this.head.value;
+        /** @type {?} */
+        const lastItem = this.head.value;
         this.remove();
         return lastItem;
     }
@@ -13684,8 +14539,9 @@ class LinkedList {
      * @return {?}
      */
     forEach(fn) {
-        let /** @type {?} */ current = this.head;
-        for (let /** @type {?} */ index = 0; index < this.length; index++) {
+        /** @type {?} */
+        let current = this.head;
+        for (let index = 0; index < this.length; index++) {
             fn(current.value, index);
             current = current.next;
         }
@@ -13695,9 +14551,11 @@ class LinkedList {
      * @return {?}
      */
     indexOf(value) {
-        let /** @type {?} */ current = this.head;
-        let /** @type {?} */ position = 0;
-        for (let /** @type {?} */ index = 0; index < this.length; index++) {
+        /** @type {?} */
+        let current = this.head;
+        /** @type {?} */
+        let position = 0;
+        for (let index = 0; index < this.length; index++) {
             if (current.value === value) {
                 position = index;
                 break;
@@ -13711,8 +14569,10 @@ class LinkedList {
      * @return {?}
      */
     some(fn) {
-        let /** @type {?} */ current = this.head;
-        let /** @type {?} */ result = false;
+        /** @type {?} */
+        let current = this.head;
+        /** @type {?} */
+        let result = false;
         while (current && !result) {
             if (fn(current.value)) {
                 result = true;
@@ -13727,8 +14587,10 @@ class LinkedList {
      * @return {?}
      */
     every(fn) {
-        let /** @type {?} */ current = this.head;
-        let /** @type {?} */ result = true;
+        /** @type {?} */
+        let current = this.head;
+        /** @type {?} */
+        let result = true;
         while (current && result) {
             if (!fn(current.value)) {
                 result = false;
@@ -13743,15 +14605,18 @@ class LinkedList {
     toString() {
         return '[Linked List]';
     }
+    // public find(fn: any): T {
     /**
      * @param {?} fn
      * @return {?}
      */
     find(fn) {
-        let /** @type {?} */ current = this.head;
+        /** @type {?} */
+        let current = this.head;
         // let result: T;
-        let /** @type {?} */ result;
-        for (let /** @type {?} */ index = 0; index < this.length; index++) {
+        /** @type {?} */
+        let result;
+        for (let index = 0; index < this.length; index++) {
             if (fn(current.value, index)) {
                 result = current.value;
                 break;
@@ -13765,10 +14630,12 @@ class LinkedList {
      * @return {?}
      */
     findIndex(fn) {
-        let /** @type {?} */ current = this.head;
+        /** @type {?} */
+        let current = this.head;
         // let result: number;
-        let /** @type {?} */ result;
-        for (let /** @type {?} */ index = 0; index < this.length; index++) {
+        /** @type {?} */
+        let result;
+        for (let index = 0; index < this.length; index++) {
             if (fn(current.value, index)) {
                 result = index;
                 break;
@@ -13781,7 +14648,7 @@ class LinkedList {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class CarouselConfig {
     constructor() {
@@ -13806,13 +14673,15 @@ CarouselConfig.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /** @enum {number} */
-const Direction = { UNKNOWN: 0, NEXT: 1, PREV: 2, };
-Direction[Direction.UNKNOWN] = "UNKNOWN";
-Direction[Direction.NEXT] = "NEXT";
-Direction[Direction.PREV] = "PREV";
+const Direction = {
+    UNKNOWN: 0, NEXT: 1, PREV: 2,
+};
+Direction[Direction.UNKNOWN] = 'UNKNOWN';
+Direction[Direction.NEXT] = 'NEXT';
+Direction[Direction.PREV] = 'PREV';
 /**
  * Base element to create carousel
  */
@@ -13947,11 +14816,13 @@ class CarouselComponent {
      * @return {?}
      */
     removeSlide(slide) {
-        const /** @type {?} */ remIndex = this._slides.indexOf(slide);
+        /** @type {?} */
+        const remIndex = this._slides.indexOf(slide);
         if (this._currentActiveSlide === remIndex) {
             // removing of active slide
             //  let nextSlideIndex: number = void 0;
-            let /** @type {?} */ nextSlideIndex = void 0;
+            /** @type {?} */
+            let nextSlideIndex = void 0;
             if (this._slides.length > 1) {
                 // if this slide last - will roll to first slide, if noWrap flag is FALSE or to previous, if noWrap is TRUE
                 // in case, if this slide in middle of collection, index of next slide is same to removed
@@ -13966,7 +14837,8 @@ class CarouselComponent {
         }
         else {
             this._slides.remove(remIndex);
-            const /** @type {?} */ currentSlideIndex = this.getCurrentSlideIndex();
+            /** @type {?} */
+            const currentSlideIndex = this.getCurrentSlideIndex();
             setTimeout(() => {
                 // after removing, need to actualize index of current active slide
                 this._currentActiveSlide = currentSlideIndex;
@@ -13974,6 +14846,7 @@ class CarouselComponent {
             }, 0);
         }
     }
+    // Fixed problem while cannot swipe next / previous image while using HammerJS.
     /**
      * @param {?=} action
      * @return {?}
@@ -13994,7 +14867,8 @@ class CarouselComponent {
     nextSlide(force = false) {
         if (this.animation === 'slide') {
             this.pause();
-            const /** @type {?} */ direction = Direction.NEXT;
+            /** @type {?} */
+            const direction = Direction.NEXT;
             this.slideAnimation(this.findNextSlideIndex(direction, force), direction);
         }
         else if (this.animation === 'fade') {
@@ -14016,7 +14890,8 @@ class CarouselComponent {
     previousSlide(force = false) {
         if (this.animation === 'slide') {
             this.pause();
-            const /** @type {?} */ direction = Direction.PREV;
+            /** @type {?} */
+            const direction = Direction.PREV;
             this.slideAnimation(this.findNextSlideIndex(direction, force), direction);
         }
         else if (this.animation === 'fade') {
@@ -14036,7 +14911,8 @@ class CarouselComponent {
      */
     fadeAnimation(goToIndex) {
         // const currentSlide = this._slides.get(this._currentActiveSlide);
-        const /** @type {?} */ goToSlide = this._slides.get(goToIndex);
+        /** @type {?} */
+        const goToSlide = this._slides.get(goToIndex);
         if (this.animationEnd) {
             this.animationEnd = false;
             goToSlide.directionNext = true;
@@ -14057,8 +14933,10 @@ class CarouselComponent {
      * @return {?}
      */
     slideAnimation(goToIndex, direction) {
-        const /** @type {?} */ currentSlide = this._slides.get(this._currentActiveSlide);
-        const /** @type {?} */ goToSlide = this._slides.get(goToIndex);
+        /** @type {?} */
+        const currentSlide = this._slides.get(this._currentActiveSlide);
+        /** @type {?} */
+        const goToSlide = this._slides.get(goToIndex);
         if (this.animationEnd) {
             if (direction === Direction.NEXT) {
                 this.animationEnd = false;
@@ -14092,7 +14970,8 @@ class CarouselComponent {
                     currentSlide.directionPrev = false;
                     this.animationEnd = true;
                     this.activeSlide = goToIndex;
-                    let /** @type {?} */ directionName;
+                    /** @type {?} */
+                    let directionName;
                     if (direction === Direction.NEXT) {
                         directionName = 'Next';
                     }
@@ -14169,7 +15048,8 @@ class CarouselComponent {
      * @return {?}
      */
     findNextSlideIndex(direction, force) {
-        let /** @type {?} */ nextSlideIndex = 0;
+        /** @type {?} */
+        let nextSlideIndex = 0;
         if (!force && (this.isLast(this.activeSlide) && direction !== Direction.PREV && this.noWrap)) {
             return void 0;
         }
@@ -14199,11 +15079,13 @@ class CarouselComponent {
             this.pause();
             return;
         }
-        const /** @type {?} */ currentSlide = this._slides.get(this._currentActiveSlide);
+        /** @type {?} */
+        const currentSlide = this._slides.get(this._currentActiveSlide);
         if (currentSlide) {
             currentSlide.active = false;
         }
-        const /** @type {?} */ nextSlide = this._slides.get(index);
+        /** @type {?} */
+        const nextSlide = this._slides.get(index);
         if (nextSlide) {
             this._currentActiveSlide = index;
             nextSlide.active = true;
@@ -14218,10 +15100,12 @@ class CarouselComponent {
     restartTimer() {
         this.resetTimer();
         if (this.isBrowser) {
-            const /** @type {?} */ interval = +this.interval;
+            /** @type {?} */
+            const interval = +this.interval;
             if (!isNaN(interval) && interval > 0) {
                 this.currentInterval = setInterval(() => {
-                    const /** @type {?} */ nInterval = +this.interval;
+                    /** @type {?} */
+                    const nInterval = +this.interval;
                     if (this.isPlaying && !isNaN(this.interval) && nInterval > 0 && this.slides.length) {
                         this.nextSlide();
                     }
@@ -14280,7 +15164,8 @@ class CarouselComponent {
             el.classList.remove(className);
         }
         else if (this.hasClass(el, className)) {
-            const /** @type {?} */ reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
+            /** @type {?} */
+            const reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
             el.className = el.className.replace(reg, ' ');
         }
     }
@@ -14337,7 +15222,7 @@ CarouselComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class SlideComponent {
     /**
@@ -14398,7 +15283,7 @@ SlideComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class CarouselModule {
     /**
@@ -14419,7 +15304,7 @@ CarouselModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MdbCardFooterComponent {
     /**
@@ -14459,7 +15344,7 @@ MdbCardFooterComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MdbCardTitleComponent {
     /**
@@ -14491,7 +15376,7 @@ MdbCardTitleComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MdbCardTextComponent {
 }
@@ -14507,7 +15392,7 @@ MdbCardTextComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MdbCardBodyComponent {
     /**
@@ -14558,7 +15443,7 @@ MdbCardBodyComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MdbCardComponent {
     /**
@@ -14664,7 +15549,7 @@ MdbCardComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MdbCardImageComponent {
 }
@@ -14681,7 +15566,7 @@ MdbCardImageComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MdbCardHeaderComponent {
     /**
@@ -14721,7 +15606,7 @@ MdbCardHeaderComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class CardsFreeModule {
     /**
@@ -14757,12 +15642,12 @@ CardsFreeModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class BaseChartDirective {
     /**
@@ -14831,8 +15716,10 @@ class BaseChartDirective {
      * @return {?}
      */
     getChartBuilder(ctx /*, data:Array<any>, options:any*/) {
-        const /** @type {?} */ datasets = this.getDatasets();
-        const /** @type {?} */ options = Object.assign({}, this.options);
+        /** @type {?} */
+        const datasets = this.getDatasets();
+        /** @type {?} */
+        const options = Object.assign({}, this.options);
         if (this.legend === false) {
             options.legend = { display: false };
         }
@@ -14850,7 +15737,8 @@ class BaseChartDirective {
                 this.chartClick.emit({ event, active });
             };
         }
-        const /** @type {?} */ opts = {
+        /** @type {?} */
+        const opts = {
             type: this.chartType,
             data: {
                 labels: this.labels,
@@ -14881,11 +15769,12 @@ class BaseChartDirective {
      * @return {?}
      */
     getDatasets() {
-        let /** @type {?} */ datasets = void 0;
+        /** @type {?} */
+        let datasets = void 0;
         // in case if datasets is not provided, but data is present
         if (!this.datasets || !this.datasets.length && (this.data && this.data.length)) {
             if (Array.isArray(this.data[0])) {
-                datasets = (/** @type {?} */ (this.data)).map((data, index) => {
+                datasets = ((/** @type {?} */ (this.data))).map((data, index) => {
                     return { data, label: this.labels[index] || `Label ${index}` };
                 });
             }
@@ -14897,7 +15786,8 @@ class BaseChartDirective {
             (datasets && datasets.length)) {
             datasets = (this.datasets || datasets)
                 .map((elm, index) => {
-                const /** @type {?} */ newElm = Object.assign({}, elm);
+                /** @type {?} */
+                const newElm = Object.assign({}, elm);
                 if (this.colors && this.colors.length) {
                     Object.assign(newElm, this.colors[index]);
                 }
@@ -15042,8 +15932,9 @@ function generateColor(index) {
  * @return {?}
  */
 function generateColors(count) {
-    const /** @type {?} */ colorsArr = new Array(count);
-    for (let /** @type {?} */ i = 0; i < count; i++) {
+    /** @type {?} */
+    const colorsArr = new Array(count);
+    for (let i = 0; i < count; i++) {
         colorsArr[i] = BaseChartDirective.defaultColors[i] || getRandomColor();
     }
     return colorsArr;
@@ -15073,7 +15964,23 @@ function getColors(chartType, index, count) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class ChartsModule {
 }
@@ -15091,13 +15998,15 @@ ChartsModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 const CHECKBOX_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => CheckboxComponent),
     multi: true
 };
+/** @type {?} */
 let defaultIdNumber = 0;
 class MdbCheckboxChange {
 }
@@ -15131,14 +16040,15 @@ class CheckboxComponent {
      */
     ngOnChanges(changes) {
         if (changes.hasOwnProperty('checked')) {
-            this.checked = changes["checked"].currentValue;
+            this.checked = changes.checked.currentValue;
         }
     }
     /**
      * @return {?}
      */
     get changeEvent() {
-        const /** @type {?} */ newChangeEvent = new MdbCheckboxChange();
+        /** @type {?} */
+        const newChangeEvent = new MdbCheckboxChange();
         newChangeEvent.element = this;
         newChangeEvent.checked = this.checked;
         return newChangeEvent;
@@ -15230,7 +16140,7 @@ CheckboxComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class CheckboxModule {
 }
@@ -15251,7 +16161,7 @@ CheckboxModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class CollapseComponent {
     constructor() {
@@ -15344,7 +16254,7 @@ CollapseComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class CollapseModule {
     /**
@@ -15363,7 +16273,7 @@ CollapseModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class BsDropdownState {
     constructor() {
@@ -15384,7 +16294,7 @@ BsDropdownState.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class BsDropdownContainerComponent {
     /**
@@ -15437,7 +16347,7 @@ BsDropdownContainerComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class BsDropdownMenuDirective {
     /**
@@ -15467,7 +16377,7 @@ BsDropdownMenuDirective.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class BsDropdownToggleDirective {
     /**
@@ -15487,6 +16397,7 @@ class BsDropdownToggleDirective {
         // populate disabled state
         this._subscriptions.push(this._state
             .isDisabledChange
+            // .subscribe((value: boolean) => this.isDisabled = value || null));
             .subscribe((value) => this.isDisabled = value || null));
     }
     /**
@@ -15520,7 +16431,7 @@ class BsDropdownToggleDirective {
      * @return {?}
      */
     ngOnDestroy() {
-        for (const /** @type {?} */ sub of this._subscriptions) {
+        for (const sub of this._subscriptions) {
             sub.unsubscribe();
         }
     }
@@ -15547,7 +16458,7 @@ BsDropdownToggleDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * Default dropdown configuration
@@ -15566,7 +16477,7 @@ BsDropdownConfig.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @copyright Valor Software
@@ -15589,8 +16500,9 @@ class Trigger {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 const DEFAULT_ALIASES = {
     hover: ['mouseover', 'mouseout'],
     focus: ['focusin', 'focusout']
@@ -15601,17 +16513,21 @@ const DEFAULT_ALIASES = {
  * @return {?}
  */
 function parseTriggers(triggers, aliases = DEFAULT_ALIASES) {
-    const /** @type {?} */ trimmedTriggers = (triggers || '').trim();
+    /** @type {?} */
+    const trimmedTriggers = (triggers || '').trim();
     if (trimmedTriggers.length === 0) {
         return [];
     }
-    const /** @type {?} */ parsedTriggers = trimmedTriggers.split(/\s+/)
+    /** @type {?} */
+    const parsedTriggers = trimmedTriggers.split(/\s+/)
         .map((trigger$$1) => trigger$$1.split(':'))
         .map((triggerPair) => {
-        const /** @type {?} */ alias = aliases[triggerPair[0]] || triggerPair;
+        /** @type {?} */
+        const alias = aliases[triggerPair[0]] || triggerPair;
         return new Trigger(alias[0], alias[1]);
     });
-    const /** @type {?} */ manualTriggers = parsedTriggers
+    /** @type {?} */
+    const manualTriggers = parsedTriggers
         .filter((triggerPair) => triggerPair.isManual());
     if (manualTriggers.length > 1) {
         throw new Error('Triggers parse error: only one manual trigger is allowed');
@@ -15631,8 +16547,10 @@ function parseTriggers(triggers, aliases = DEFAULT_ALIASES) {
  * @return {?}
  */
 function listenToTriggers(renderer, target, triggers, showFn, hideFn, toggleFn) {
-    const /** @type {?} */ parsedTriggers = parseTriggers(triggers);
-    const /** @type {?} */ listeners = [];
+    /** @type {?} */
+    const parsedTriggers = parseTriggers(triggers);
+    /** @type {?} */
+    const listeners = [];
     if (parsedTriggers.length === 1 && parsedTriggers[0].isManual()) {
         return Function.prototype;
     }
@@ -15659,7 +16577,7 @@ function listenToTriggers(renderer, target, triggers, showFn, hideFn, toggleFn) 
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @copyright Valor Software
@@ -15680,8 +16598,11 @@ class ContentRef {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+// todo: add delay support
+// todo: merge events onShow, onShown, etc...
+// todo: add global positioning configuration?
 /**
  * @record
  */
@@ -15703,6 +16624,7 @@ class ComponentLoader {
      * @param {?} _applicationRef
      * @param {?} _posService
      */
+    // tslint:disable-next-line
     constructor(_viewContainerRef, _renderer, _elementRef, _injector, _componentFactoryResolver, _ngZone, _applicationRef, _posService) {
         this._viewContainerRef = _viewContainerRef;
         this._renderer = _renderer;
@@ -15735,6 +16657,7 @@ class ComponentLoader {
             .resolveComponentFactory(compType);
         return this;
     }
+    // todo: add behaviour: to target element, `body`, custom element
     /**
      * @param {?=} container
      * @return {?}
@@ -15749,7 +16672,7 @@ class ComponentLoader {
      */
     position(opts) {
         this.attachment = opts.attachment || this.attachment;
-        this._elementRef = /** @type {?} */ (opts.target) || this._elementRef;
+        this._elementRef = (/** @type {?} */ (opts.target)) || this._elementRef;
         return this;
     }
     /**
@@ -15760,6 +16683,7 @@ class ComponentLoader {
         this._providers.push(provider);
         return this;
     }
+    // todo: appendChild to element or document.querySelector(this.container)
     /**
      * @param {?=} opts
      * @return {?}
@@ -15770,7 +16694,8 @@ class ComponentLoader {
         if (!this._componentRef) {
             this.onBeforeShow.emit();
             this._contentRef = this._getContentRef(opts.content);
-            const /** @type {?} */ injector = ReflectiveInjector.resolveAndCreate(this._providers, this._injector);
+            /** @type {?} */
+            const injector = ReflectiveInjector.resolveAndCreate(this._providers, this._injector);
             this._componentRef = this._componentFactory.create(injector, this._contentRef.nodes);
             this._applicationRef.attachView(this._componentRef.hostView);
             // this._componentRef = this._viewContainerRef
@@ -15783,7 +16708,7 @@ class ComponentLoader {
             }
             if (this.container === 'body' && typeof document !== 'undefined') {
                 //  document.querySelector(this.container as string)
-                document.querySelector(/** @type {?} */ (this.container))
+                document.querySelector((/** @type {?} */ (this.container)))
                     .appendChild(this._componentRef.location.nativeElement);
             }
             if (!this.container && this._elementRef && this._elementRef.nativeElement.parentElement) {
@@ -15813,7 +16738,8 @@ class ComponentLoader {
             return this;
         }
         this.onBeforeHide.emit(this._componentRef.instance);
-        const /** @type {?} */ componentEl = this._componentRef.location.nativeElement;
+        /** @type {?} */
+        const componentEl = this._componentRef.location.nativeElement;
         componentEl.parentNode.removeChild(componentEl);
         if (this._contentRef.componentRef) {
             this._contentRef.componentRef.destroy();
@@ -15915,17 +16841,22 @@ class ComponentLoader {
         }
         if (content instanceof TemplateRef) {
             if (this._viewContainerRef) {
-                const /** @type {?} */ viewRef = this._viewContainerRef.createEmbeddedView(content);
+                /** @type {?} */
+                const viewRef = this._viewContainerRef.createEmbeddedView(content);
                 return new ContentRef([viewRef.rootNodes], viewRef);
             }
-            const /** @type {?} */ viewRef = content.createEmbeddedView({});
+            /** @type {?} */
+            const viewRef = content.createEmbeddedView({});
             this._applicationRef.attachView(viewRef);
             return new ContentRef([viewRef.rootNodes], viewRef);
         }
         if (typeof content === 'function') {
-            const /** @type {?} */ contentCmptFactory = this._componentFactoryResolver.resolveComponentFactory(content);
-            const /** @type {?} */ modalContentInjector = ReflectiveInjector.resolveAndCreate([...this._providers, content], this._injector);
-            const /** @type {?} */ componentRef = contentCmptFactory.create(modalContentInjector);
+            /** @type {?} */
+            const contentCmptFactory = this._componentFactoryResolver.resolveComponentFactory(content);
+            /** @type {?} */
+            const modalContentInjector = ReflectiveInjector.resolveAndCreate([...this._providers, content], this._injector);
+            /** @type {?} */
+            const componentRef = contentCmptFactory.create(modalContentInjector);
             this._applicationRef.attachView(componentRef.hostView);
             return new ContentRef([[componentRef.location.nativeElement]], componentRef.hostView, componentRef);
         }
@@ -15935,12 +16866,15 @@ class ComponentLoader {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @copyright Valor Software
  * @copyright Angular ng-bootstrap team
  */
+// previous version:
+// https://github.com/angular-ui/bootstrap/blob/07c31d0731f7cb068a1932b8e01d2312b796b4ec/src/position/position.js
+// tslint:disable
 class Positioning {
     /**
      * @param {?} element
@@ -15948,10 +16882,13 @@ class Positioning {
      * @return {?}
      */
     position(element, round = true) {
-        let /** @type {?} */ elPosition;
-        let /** @type {?} */ parentOffset = { width: 0, height: 0, top: 0, bottom: 0, left: 0, right: 0 };
+        /** @type {?} */
+        let elPosition;
+        /** @type {?} */
+        let parentOffset = { width: 0, height: 0, top: 0, bottom: 0, left: 0, right: 0 };
         if (this.getStyle(element, 'position') === 'fixed') {
-            const /** @type {?} */ bcRect = element.getBoundingClientRect();
+            /** @type {?} */
+            const bcRect = element.getBoundingClientRect();
             elPosition = {
                 width: bcRect.width,
                 height: bcRect.height,
@@ -15962,7 +16899,8 @@ class Positioning {
             };
         }
         else {
-            const /** @type {?} */ offsetParentEl = this.offsetParent(element);
+            /** @type {?} */
+            const offsetParentEl = this.offsetParent(element);
             elPosition = this.offset(element, false);
             if (offsetParentEl !== document.documentElement) {
                 parentOffset = this.offset(offsetParentEl, false);
@@ -15988,12 +16926,15 @@ class Positioning {
      * @return {?}
      */
     offset(element, round = true) {
-        const /** @type {?} */ elBcr = element.getBoundingClientRect();
-        const /** @type {?} */ viewportOffset = {
-            top: window.pageYOffset - document.documentElement.clientTop,
-            left: window.pageXOffset - document.documentElement.clientLeft
+        /** @type {?} */
+        const elBcr = element.getBoundingClientRect();
+        /** @type {?} */
+        const viewportOffset = {
+            top: window.pageYOffset - ((/** @type {?} */ (document.documentElement))).clientTop,
+            left: window.pageXOffset - ((/** @type {?} */ (document.documentElement))).clientLeft
         };
-        let /** @type {?} */ elOffset = {
+        /** @type {?} */
+        let elOffset = {
             height: elBcr.height || element.offsetHeight,
             width: elBcr.width || element.offsetWidth,
             top: elBcr.top + viewportOffset.top,
@@ -16019,21 +16960,28 @@ class Positioning {
      * @return {?}
      */
     positionElements(hostElement, targetElement, placement, appendToBody) {
-        const /** @type {?} */ hostElPosition = appendToBody ? this.offset(hostElement, false) : this.position(hostElement, false);
-        const /** @type {?} */ shiftWidth = {
+        /** @type {?} */
+        const hostElPosition = appendToBody ? this.offset(hostElement, false) : this.position(hostElement, false);
+        /** @type {?} */
+        const shiftWidth = {
             left: hostElPosition.left,
             center: hostElPosition.left + hostElPosition.width / 2 - targetElement.offsetWidth / 2,
             right: hostElPosition.left + hostElPosition.width
         };
-        const /** @type {?} */ shiftHeight = {
+        /** @type {?} */
+        const shiftHeight = {
             top: hostElPosition.top,
             center: hostElPosition.top + hostElPosition.height / 2 - targetElement.offsetHeight / 2,
             bottom: hostElPosition.top + hostElPosition.height
         };
-        const /** @type {?} */ targetElBCR = targetElement.getBoundingClientRect();
-        const /** @type {?} */ placementPrimary = placement.split(' ')[0] || 'top';
-        const /** @type {?} */ placementSecondary = placement.split(' ')[1] || 'center';
-        let /** @type {?} */ targetElPosition = {
+        /** @type {?} */
+        const targetElBCR = targetElement.getBoundingClientRect();
+        /** @type {?} */
+        const placementPrimary = placement.split(' ')[0] || 'top';
+        /** @type {?} */
+        const placementSecondary = placement.split(' ')[1] || 'center';
+        /** @type {?} */
+        let targetElPosition = {
             height: targetElBCR.height || targetElement.offsetHeight,
             width: targetElBCR.width || targetElement.offsetWidth,
             top: 0,
@@ -16078,7 +17026,7 @@ class Positioning {
      * @param {?} prop
      * @return {?}
      */
-    getStyle(element, prop) { return (/** @type {?} */ (window.getComputedStyle(element)))[prop]; }
+    getStyle(element, prop) { return ((/** @type {?} */ (window.getComputedStyle(element))))[prop]; }
     /**
      * @param {?} element
      * @return {?}
@@ -16091,13 +17039,15 @@ class Positioning {
      * @return {?}
      */
     offsetParent(element) {
-        let /** @type {?} */ offsetParentEl = /** @type {?} */ (element.offsetParent) || document.documentElement;
+        /** @type {?} */
+        let offsetParentEl = (/** @type {?} */ (element.offsetParent)) || document.documentElement;
         while (offsetParentEl && offsetParentEl !== document.documentElement && this.isStaticPositioned(offsetParentEl)) {
-            offsetParentEl = /** @type {?} */ (offsetParentEl.offsetParent);
+            offsetParentEl = (/** @type {?} */ (offsetParentEl.offsetParent));
         }
         return offsetParentEl || document.documentElement;
     }
 }
+/** @type {?} */
 const positionService = new Positioning();
 /**
  * @param {?} hostElement
@@ -16107,20 +17057,22 @@ const positionService = new Positioning();
  * @return {?}
  */
 function positionElements(hostElement, targetElement, placement, appendToBody) {
-    const /** @type {?} */ pos = positionService.positionElements(hostElement, targetElement, placement, appendToBody);
+    /** @type {?} */
+    const pos = positionService.positionElements(hostElement, targetElement, placement, appendToBody);
     targetElement.style.top = `${pos.top}px`;
     targetElement.style.left = `${pos.left}px`;
 }
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @record
  */
 
 class PositioningService {
+    //  public position(options: PositioningOptions): void {
     /**
      * @param {?} options
      * @return {?}
@@ -16136,12 +17088,12 @@ class PositioningService {
     _getHtmlElement(element) {
         // it means that we got a selector
         if (typeof element === 'string') {
-            return /** @type {?} */ (document.querySelector(element));
+            return (/** @type {?} */ (document.querySelector(element)));
         }
         if (element instanceof ElementRef) {
             return element.nativeElement;
         }
-        return /** @type {?} */ (element);
+        return (/** @type {?} */ (element));
     }
 }
 PositioningService.decorators = [
@@ -16150,7 +17102,7 @@ PositioningService.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class ComponentLoaderFactory {
     /**
@@ -16193,7 +17145,7 @@ ComponentLoaderFactory.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class BsDropdownDirective {
     /**
@@ -16335,7 +17287,8 @@ class BsDropdownDirective {
         }
         // material and dropup dropdown animation
         // const parent = this._elementRef.nativeElement.classList;
-        const /** @type {?} */ container = this._elementRef.nativeElement.lastElementChild;
+        /** @type {?} */
+        const container = this._elementRef.nativeElement.lastElementChild;
         setTimeout(() => { container.classList.add('fadeInDropdown'); }, 200);
         if (this._showInline) {
             this._isInlineOpen = true;
@@ -16347,10 +17300,12 @@ class BsDropdownDirective {
         this._state.dropdownMenu
             .then((dropdownMenu) => {
             // check direction in which dropdown should be opened
-            const /** @type {?} */ _dropup = this.dropup === true ||
+            /** @type {?} */
+            const _dropup = this.dropup === true ||
                 (typeof this.dropup !== 'undefined' && this.dropup !== false);
             this._state.direction = _dropup ? 'up' : 'down';
-            const /** @type {?} */ _placement = this.placement ||
+            /** @type {?} */
+            const _placement = this.placement ||
                 (_dropup ? 'top left' : 'bottom left');
             // show dropdown
             this._dropdown
@@ -16373,8 +17328,10 @@ class BsDropdownDirective {
         if (!this.isOpen) {
             return;
         }
-        const /** @type {?} */ parent = this._elementRef.nativeElement.classList;
-        const /** @type {?} */ container = this._elementRef.nativeElement.lastElementChild;
+        /** @type {?} */
+        const parent = this._elementRef.nativeElement.classList;
+        /** @type {?} */
+        const container = this._elementRef.nativeElement.lastElementChild;
         if ((parent.value === 'dropdown open show') || (parent.value === 'btn-group dropup open show')) {
             container.classList.remove('fadeInDropdown');
             setTimeout(() => {
@@ -16418,7 +17375,7 @@ class BsDropdownDirective {
      */
     ngOnDestroy() {
         // clean up subscriptions and destroy dropdown
-        for (const /** @type {?} */ sub of this._subscriptions) {
+        for (const sub of this._subscriptions) {
             sub.unsubscribe();
         }
         this._dropdown.dispose();
@@ -16457,7 +17414,7 @@ BsDropdownDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class DropdownModule {
     /**
@@ -16494,7 +17451,7 @@ DropdownModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MdbIconComponent {
 }
@@ -16513,7 +17470,7 @@ MdbIconComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class IconsModule {
 }
@@ -16526,7 +17483,12 @@ IconsModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MdbInputDirective {
     /**
@@ -16559,7 +17521,7 @@ class MdbInputDirective {
             this._renderer.addClass(this.elLabel, 'active');
             this.isClicked = true;
         }
-        catch (/** @type {?} */ error) {
+        catch (error) {
         }
     }
     /**
@@ -16573,7 +17535,7 @@ class MdbInputDirective {
             }
             this.isClicked = false;
         }
-        catch (/** @type {?} */ error) {
+        catch (error) {
         }
     }
     /**
@@ -16583,7 +17545,7 @@ class MdbInputDirective {
         try {
             this.checkValue();
         }
-        catch (/** @type {?} */ error) {
+        catch (error) {
         }
     }
     /**
@@ -16621,7 +17583,7 @@ class MdbInputDirective {
                 }
             }
         }
-        catch (/** @type {?} */ error) { }
+        catch (error) { }
         this.delayedResize();
     }
     /**
@@ -16633,7 +17595,7 @@ class MdbInputDirective {
                 this.delayedResize();
             }, 0);
         }
-        catch (/** @type {?} */ error) { }
+        catch (error) { }
     }
     /**
      * @return {?}
@@ -16644,7 +17606,7 @@ class MdbInputDirective {
                 this.delayedResize();
             }, 0);
         }
-        catch (/** @type {?} */ error) { }
+        catch (error) { }
     }
     /**
      * @return {?}
@@ -16655,7 +17617,7 @@ class MdbInputDirective {
                 this.delayedResize();
             }, 0);
         }
-        catch (/** @type {?} */ error) { }
+        catch (error) { }
     }
     /**
      * @param {?} value
@@ -16685,20 +17647,22 @@ class MdbInputDirective {
             this._renderer.addClass(this.wrongTextContainer, 'inputVal');
             this._renderer.addClass(this.wrongTextContainer, 'text-danger');
             this._renderer.appendChild(this._elRef.nativeElement.parentElement, this.wrongTextContainer);
-            const /** @type {?} */ textWrong = this._elRef.nativeElement.getAttribute('data-error');
+            /** @type {?} */
+            const textWrong = this._elRef.nativeElement.getAttribute('data-error');
             this.wrongTextContainer.innerHTML = (textWrong ? textWrong : 'wrong');
-            if (!textWrong) {
-                this.wrongTextContainer.innerHTML = (this.errorMessage ? this.errorMessage : 'wrong');
+            if (!textWrong && this.errorMessage !== undefined) {
+                this.wrongTextContainer.innerHTML = this.errorMessage;
             }
             this._renderer.setStyle(this.wrongTextContainer, 'visibility', 'hidden');
             this.rightTextContainer = this._renderer.createElement('span');
             this._renderer.addClass(this.rightTextContainer, 'inputVal');
             this._renderer.addClass(this.rightTextContainer, 'text-success');
             this._renderer.appendChild(this._elRef.nativeElement.parentElement, this.rightTextContainer);
-            const /** @type {?} */ textSuccess = this._elRef.nativeElement.getAttribute('data-success');
+            /** @type {?} */
+            const textSuccess = this._elRef.nativeElement.getAttribute('data-success');
             this.rightTextContainer.innerHTML = (textSuccess ? textSuccess : 'success');
-            if (!textSuccess) {
-                this.rightTextContainer.innerHTML = (this.successMessage ? this.successMessage : 'success');
+            if (!textSuccess && this.successMessage !== undefined) {
+                this.rightTextContainer.innerHTML = this.successMessage;
             }
             this._renderer.setStyle(this.rightTextContainer, 'visibility', 'hidden');
         }
@@ -16709,11 +17673,13 @@ class MdbInputDirective {
      */
     ngOnChanges(changes) {
         if (changes.hasOwnProperty('errorMessage')) {
-            const /** @type {?} */ newErrorMsg = changes["errorMessage"].currentValue;
+            /** @type {?} */
+            const newErrorMsg = changes.errorMessage.currentValue;
             this.updateErrorMsg(newErrorMsg);
         }
         if (changes.hasOwnProperty('successMessage')) {
-            const /** @type {?} */ newSuccessMsg = changes["successMessage"].currentValue;
+            /** @type {?} */
+            const newSuccessMsg = changes.successMessage.currentValue;
             this.updateSuccessMsg(newSuccessMsg);
         }
     }
@@ -16807,9 +17773,10 @@ class MdbInputDirective {
             try {
                 this.element = document.querySelector('.md-textarea-auto');
             }
-            catch (/** @type {?} */ error) { }
+            catch (error) { }
         }
-        const /** @type {?} */ type = this.el.nativeElement.type;
+        /** @type {?} */
+        const type = this.el.nativeElement.type;
         if (this.focusCheckbox && type === 'checkbox') {
             this._renderer.addClass(this.el.nativeElement, 'onFocusSelect');
         }
@@ -16825,8 +17792,8 @@ class MdbInputDirective {
         this.checkValue();
         // tslint:disable-next-line:max-line-length
         /* if (this.el.nativeElement.tagName === 'MDB-COMPLETER' && this.el.nativeElement.getAttribute('ng-reflect-model') == null && !this.isClicked) {
-                this._renderer.removeClass(this.elLabel, 'active');
-            } */
+            this._renderer.removeClass(this.elLabel, 'active');
+        } */
     }
     /**
      * @return {?}
@@ -16841,23 +17808,27 @@ class MdbInputDirective {
      * @return {?}
      */
     delayedResize() {
-        setTimeout(this.resize(), 0);
+        setTimeout(() => {
+            this.resize();
+        }, 0);
     }
     /**
      * @return {?}
      */
     initComponent() {
-        let /** @type {?} */ inputId;
-        let /** @type {?} */ inputP;
+        /** @type {?} */
+        let inputId;
+        /** @type {?} */
+        let inputP;
         if (this.isBrowser) {
             try {
                 inputId = this.el.nativeElement.id;
             }
-            catch (/** @type {?} */ err) { }
+            catch (err) { }
             try {
                 inputP = this.el.nativeElement.parentNode;
             }
-            catch (/** @type {?} */ err) { }
+            catch (err) { }
             this.elLabel = inputP.querySelector('label[for="' + inputId + '"]') || inputP.querySelector('label');
             if (this.elLabel && this.el.nativeElement.value !== '') {
                 this._renderer.addClass(this.elLabel, 'active');
@@ -16872,7 +17843,8 @@ class MdbInputDirective {
      * @return {?}
      */
     checkValue() {
-        let /** @type {?} */ value = '';
+        /** @type {?} */
+        let value = '';
         if (this.elLabel != null) {
             value = this.el.nativeElement.value || '';
             if (value === '') {
@@ -16890,8 +17862,8 @@ class MdbInputDirective {
             if (this.el.nativeElement.getAttribute('ng-reflect-model') != null) {
                 // tslint:disable-next-line:max-line-length
                 /* if (this.el.nativeElement.tagName === 'MDB-COMPLETER' && this.el.nativeElement.getAttribute('ng-reflect-model').length !== 0) {
-                            this._renderer.addClass(this.elLabel, 'active');
-                        } */
+                    this._renderer.addClass(this.elLabel, 'active');
+                } */
             }
         }
     }
@@ -16930,7 +17902,7 @@ MdbInputDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class EqualValidatorDirective {
     /**
@@ -16955,12 +17927,15 @@ class EqualValidatorDirective {
      * @return {?}
      */
     validate(c) {
-        const /** @type {?} */ setToNullValue = null;
+        /** @type {?} */
+        const setToNullValue = null;
         // self value (e.g. retype password)
-        const /** @type {?} */ v = c.value;
+        /** @type {?} */
+        const v = c.value;
         // control value (e.g. password)
         // const e: any = c.root.get(this.validateEqual);
-        const /** @type {?} */ e = c.root.get(this.validateEqual);
+        /** @type {?} */
+        const e = c.root.get(this.validateEqual);
         // value not equal
         if (e && v !== e.value) {
             return { validateEqual: false };
@@ -16998,7 +17973,7 @@ EqualValidatorDirective.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class InputsModule {
     /**
@@ -17018,12 +17993,12 @@ InputsModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class Utils {
     /**
@@ -17033,6 +18008,7 @@ class Utils {
     static reflow(element) {
         ((bs) => bs)(element.offsetHeight);
     }
+    // source: https://github.com/jquery/jquery/blob/master/src/css/var/getStyles.js
     /**
      * @param {?} elem
      * @return {?}
@@ -17041,7 +18017,8 @@ class Utils {
         // Support: IE <=11 only, Firefox <=30 (#15098, #14150)
         // IE throws on elements created in popups
         // FF meanwhile throws on frame elements through "defaultView.getComputedStyle"
-        let /** @type {?} */ view = elem.ownerDocument.defaultView;
+        /** @type {?} */
+        let view = elem.ownerDocument.defaultView;
         if (!view || !view.opener) {
             view = win;
         }
@@ -17051,7 +18028,7 @@ class Utils {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class ModalOptions {
 }
@@ -17068,6 +18045,7 @@ class MDBModalRef {
 MDBModalRef.decorators = [
     { type: Injectable },
 ];
+/** @type {?} */
 const modalConfigDefaults = {
     backdrop: true,
     keyboard: true,
@@ -17077,6 +18055,7 @@ const modalConfigDefaults = {
     class: '',
     animated: true
 };
+/** @type {?} */
 const ClassName = {
     SCROLLBAR_MEASURER: 'modal-scrollbar-measure',
     BACKDROP: 'modal-backdrop',
@@ -17086,16 +18065,19 @@ const ClassName = {
     // bs3
     SHOW: 'show' // bs4
 };
+/** @type {?} */
 const Selector = {
     DIALOG: '.modal-dialog',
     DATA_TOGGLE: '[data-toggle="modal"]',
     DATA_DISMISS: '[data-dismiss="modal"]',
     FIXED_CONTENT: '.navbar-fixed-top, .navbar-fixed-bottom, .is-fixed'
 };
+/** @type {?} */
 const TransitionDurations = {
     MODAL: 300,
     BACKDROP: 150
 };
+/** @type {?} */
 const DISMISS_REASONS = {
     BACKRDOP: 'backdrop-click',
     ESC: 'esc'
@@ -17103,7 +18085,7 @@ const DISMISS_REASONS = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class ModalBackdropOptions {
     /**
@@ -17198,9 +18180,11 @@ ModalBackdropComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 const TRANSITION_DURATION = 300;
+/** @type {?} */
 const BACKDROP_TRANSITION_DURATION = 150;
 /**
  * Mark any code with directive to show it's content in modal
@@ -17233,6 +18217,7 @@ class ModalDirective {
          */
         this.onHidden = new EventEmitter();
         this.closed = new EventEmitter();
+        // seems like an Options
         this.isAnimated = true;
         this._isShown = false;
         this.isBodyOverflowing = false;
@@ -17253,6 +18238,7 @@ class ModalDirective {
     set config(conf) {
         this._config = this.getConfig(conf);
     }
+    // public get config(): ModalOptions {
     /**
      * @return {?}
      */
@@ -17276,6 +18262,7 @@ class ModalDirective {
         this.dismissReason = DISMISS_REASONS.BACKRDOP;
         this.hide(event);
     }
+    // todo: consider preventing default and stopping propagation
     /**
      * @return {?}
      */
@@ -17307,6 +18294,7 @@ class ModalDirective {
             }
         }, 0);
     }
+    /* Public methods */
     /**
      * Allows to manually toggle modal visibility
      * @return {?}
@@ -17403,7 +18391,8 @@ class ModalDirective {
         if (!isBs3()) {
             this._renderer.addClass(this._element.nativeElement, ClassName.SHOW);
         }
-        const /** @type {?} */ transitionComplete = () => {
+        /** @type {?} */
+        const transitionComplete = () => {
             if (this._config.focus) {
                 this._element.nativeElement.focus();
             }
@@ -17437,6 +18426,7 @@ class ModalDirective {
             this.closed.emit(this);
         });
     }
+    // todo: original show was calling a callback when done, but we can use promise
     /**
      * \@internal
      * @param {?=} callback
@@ -17461,7 +18451,8 @@ class ModalDirective {
         }
         else if (!this._isShown && this.backdrop) {
             this.backdrop.instance.isShown = false;
-            const /** @type {?} */ callbackRemove = () => {
+            /** @type {?} */
+            const callbackRemove = () => {
                 this.removeBackdrop();
                 if (callback) {
                     callback();
@@ -17490,14 +18481,15 @@ class ModalDirective {
      */
     focusOtherModal() {
         try {
-            const /** @type {?} */ otherOpenedModals = this._element.nativeElement.parentElement.querySelectorAll('.in[mdbModal]');
+            /** @type {?} */
+            const otherOpenedModals = this._element.nativeElement.parentElement.querySelectorAll('.in[mdbModal]');
             if (!otherOpenedModals.length) {
                 return;
             }
             //  this._renderer.invokeElementMethod(otherOpenedModals[otherOpenedModals.length - 1], 'focus');
             otherOpenedModals[otherOpenedModals.length - 1].nativeElement.focus();
         }
-        catch (/** @type {?} */ error) { }
+        catch (error) { }
     }
     /**
      * \@internal
@@ -17507,6 +18499,7 @@ class ModalDirective {
         this._renderer.setStyle(this._element.nativeElement, 'paddingLeft', '');
         this._renderer.setStyle(this._element.nativeElement, 'paddingRight', '');
     }
+    /** Scroll bar tricks */
     /**
      * \@internal
      * @return {?}
@@ -17533,14 +18526,17 @@ class ModalDirective {
     resetScrollbar() {
         document$1.body.style.paddingRight = this.originalBodyPadding;
     }
+    // thx d.walsh
     /**
      * @return {?}
      */
     getScrollbarWidth() {
-        const /** @type {?} */ scrollDiv = this._renderer.createElement('div', void 0);
+        /** @type {?} */
+        const scrollDiv = this._renderer.createElement('div', void 0);
         this._renderer.appendChild(document$1.body, scrollDiv);
         scrollDiv.className = ClassName.SCROLLBAR_MEASURER;
-        const /** @type {?} */ scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+        /** @type {?} */
+        const scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
         document$1.body.removeChild(scrollDiv);
         return scrollbarWidth;
     }
@@ -17574,15 +18570,16 @@ ModalDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 const msConfig = {
     serviceInstance: new Object()
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class ModalContainerComponent {
     /**
@@ -17693,9 +18690,10 @@ ModalContainerComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MDBModalService {
+    // public constructor(private clf: ComponentLoaderFactory) {
     /**
      * @param {?} clf
      * @param {?} el
@@ -17707,6 +18705,7 @@ class MDBModalService {
         this.el = el;
         this.v = v;
         this.r = r;
+        // constructor props
         this.config = modalConfigDefaults;
         this.onShow = new EventEmitter();
         this.onShown = new EventEmitter();
@@ -17716,6 +18715,7 @@ class MDBModalService {
         this.originalBodyPadding = 0;
         this.scrollbarWidth = 0;
         this.modalsCount = 0;
+        // private lastDismissReason = '';
         this.lastDismissReason = '';
         this.loaders = [];
         //   this._backdropLoader = this.clf.createLoader<ModalBackdropComponent>(null, null, null);
@@ -17755,8 +18755,10 @@ class MDBModalService {
      * @return {?}
      */
     _showBackdrop() {
-        const /** @type {?} */ isBackdropEnabled = this.config.backdrop || this.config.backdrop === 'static';
-        const /** @type {?} */ isBackdropInDOM = !this.backdropRef || !this.backdropRef.instance.isShown;
+        /** @type {?} */
+        const isBackdropEnabled = this.config.backdrop || this.config.backdrop === 'static';
+        /** @type {?} */
+        const isBackdropInDOM = !this.backdropRef || !this.backdropRef.instance.isShown;
         if (this.modalsCount === 1) {
             this.removeBackdrop();
             if (isBackdropEnabled && isBackdropInDOM) {
@@ -17776,7 +18778,8 @@ class MDBModalService {
             return;
         }
         this.backdropRef.instance.isShown = false;
-        const /** @type {?} */ duration = this.config.animated ? TransitionDurations.BACKDROP : 0;
+        /** @type {?} */
+        const duration = this.config.animated ? TransitionDurations.BACKDROP : 0;
         setTimeout(() => this.removeBackdrop(), duration);
     }
     /**
@@ -17784,9 +18787,12 @@ class MDBModalService {
      * @return {?}
      */
     _showModal(content) {
-        const /** @type {?} */ modalLoader = this.loaders[this.loaders.length - 1];
-        const /** @type {?} */ mdbModalRef = new MDBModalRef();
-        const /** @type {?} */ modalContainerRef = modalLoader
+        /** @type {?} */
+        const modalLoader = this.loaders[this.loaders.length - 1];
+        /** @type {?} */
+        const mdbModalRef = new MDBModalRef();
+        /** @type {?} */
+        const modalContainerRef = modalLoader
             .provide({ provide: ModalOptions, useValue: this.config })
             .provide({ provide: MDBModalRef, useValue: mdbModalRef })
             .attach(ModalContainerComponent)
@@ -17804,7 +18810,8 @@ class MDBModalService {
      * @return {?}
      */
     _hideModal(level) {
-        const /** @type {?} */ modalLoader = this.loaders[level - 1];
+        /** @type {?} */
+        const modalLoader = this.loaders[level - 1];
         if (modalLoader) {
             modalLoader.hide();
         }
@@ -17829,6 +18836,8 @@ class MDBModalService {
         this._backdropLoader.hide();
         this.backdropRef = null;
     }
+    /** AFTER PR MERGE MODAL.COMPONENT WILL BE USING THIS CODE*/
+    /** Scroll bar tricks */
     /**
      * \@internal
      * @return {?}
@@ -17855,14 +18864,17 @@ class MDBModalService {
     resetScrollbar() {
         document.body.style.paddingRight = this.originalBodyPadding + 'px';
     }
+    // thx d.walsh
     /**
      * @return {?}
      */
     getScrollbarWidth() {
-        const /** @type {?} */ scrollDiv = document.createElement('div');
+        /** @type {?} */
+        const scrollDiv = document.createElement('div');
         scrollDiv.className = ClassName.SCROLLBAR_MEASURER;
         document.body.appendChild(scrollDiv);
-        const /** @type {?} */ scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+        /** @type {?} */
+        const scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
         document.body.removeChild(scrollDiv);
         return scrollbarWidth;
     }
@@ -17871,7 +18883,8 @@ class MDBModalService {
      */
     _createLoaders() {
         // const loader = this.clf.createLoader<ModalContainerComponent>(null, null, null);
-        const /** @type {?} */ loader = this.clf.createLoader(this.el, this.v, this.r);
+        /** @type {?} */
+        const loader = this.clf.createLoader(this.el, this.v, this.r);
         this.copyEvent(loader.onBeforeShow, this.onShow);
         this.copyEvent(loader.onShown, this.onShown);
         this.copyEvent(loader.onBeforeHide, this.onHide);
@@ -17912,7 +18925,7 @@ MDBModalService.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class ModalModule {
     /**
@@ -17933,7 +18946,7 @@ ModalModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class NavbarService {
     constructor() {
@@ -17958,7 +18971,7 @@ NavbarService.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class LinksComponent {
     /**
@@ -17972,7 +18985,8 @@ class LinksComponent {
      * @return {?}
      */
     ngAfterContentInit() {
-        const /** @type {?} */ that = this;
+        /** @type {?} */
+        const that = this;
         setTimeout(function () {
             that.links.forEach(function (element) {
                 element.nativeElement.onclick = function () {
@@ -18006,7 +19020,7 @@ LinksComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class LogoComponent {
 }
@@ -18021,7 +19035,7 @@ LogoComponent.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class NavbarComponent {
     /**
@@ -18033,7 +19047,8 @@ class NavbarComponent {
         this._navbarService = _navbarService;
         this.containerInside = true;
         this.shown = false;
-        this.duration = 350;
+        this.duration = 350; // ms
+        // ms
         this.collapse = false;
         this.showClass = false;
         this.collapsing = false;
@@ -18069,7 +19084,8 @@ class NavbarComponent {
      * @return {?}
      */
     ngOnInit() {
-        const /** @type {?} */ isDoubleNav = this.SideClass.split(' ');
+        /** @type {?} */
+        const isDoubleNav = this.SideClass.split(' ');
         if (isDoubleNav.indexOf('double-nav') !== -1) {
             this.doubleNav = true;
         }
@@ -18082,12 +19098,13 @@ class NavbarComponent {
      */
     ngAfterViewInit() {
         /* bugfix - bez tego sypie ExpressionChangedAfterItHasBeenCheckedError -
-            https://github.com/angular/angular/issues/6005#issuecomment-165951692 */
+        https://github.com/angular/angular/issues/6005#issuecomment-165951692 */
         setTimeout(() => {
             this.height = this.el.nativeElement.scrollHeight;
             this.collapse = true;
             if (!this.containerInside) {
-                const /** @type {?} */ childrens = Array.from(this.container.nativeElement.children);
+                /** @type {?} */
+                const childrens = Array.from(this.container.nativeElement.children);
                 childrens.forEach(child => {
                     // this.navbar.nativeElement.append(child);
                     this.renderer.appendChild(this.navbar.nativeElement, child);
@@ -18161,7 +19178,8 @@ class NavbarComponent {
      * @return {?}
      */
     onResize(event) {
-        let /** @type {?} */ breakpoit = 0;
+        /** @type {?} */
+        let breakpoit = 0;
         if (this.SideClass.includes('navbar-expand-xl')) {
             breakpoit = 1200;
         }
@@ -18237,7 +19255,7 @@ NavbarComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class NavlinksComponent {
     /**
@@ -18251,7 +19269,8 @@ class NavlinksComponent {
      * @return {?}
      */
     ngAfterContentInit() {
-        const /** @type {?} */ that = this;
+        /** @type {?} */
+        const that = this;
         setTimeout(function () {
             that.links.forEach(function (element) {
                 element.nativeElement.onclick = function () {
@@ -18285,7 +19304,7 @@ NavlinksComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class NavbarModule {
 }
@@ -18300,7 +19319,7 @@ NavbarModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * Configuration service for the Popover directive.
@@ -18327,7 +19346,7 @@ PopoverConfig.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class PopoverContainerComponent {
     /**
@@ -18376,7 +19395,7 @@ PopoverContainerComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * A lightweight, extensible directive for fancy popover creation.
@@ -18507,7 +19526,7 @@ PopoverDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class PopoverModule {
     /**
@@ -18531,7 +19550,7 @@ PopoverModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class RippleDirective {
     /**
@@ -18547,24 +19566,33 @@ class RippleDirective {
     click(event) {
         // event.stopPropagation();
         if (!this.el.nativeElement.classList.contains('disabled')) {
-            const /** @type {?} */ button = this.el.nativeElement;
+            /** @type {?} */
+            const button = this.el.nativeElement;
             if (!button.classList.contains('waves-effect')) {
                 button.className += ' waves-effect';
             }
-            const /** @type {?} */ xPos = event.clientX - button.getBoundingClientRect().left;
-            const /** @type {?} */ yPos = event.clientY - button.getBoundingClientRect().top;
-            const /** @type {?} */ tmp = document.createElement('div');
+            /** @type {?} */
+            const xPos = event.clientX - button.getBoundingClientRect().left;
+            /** @type {?} */
+            const yPos = event.clientY - button.getBoundingClientRect().top;
+            /** @type {?} */
+            const tmp = document.createElement('div');
             tmp.className += 'waves-ripple waves-rippling';
-            const /** @type {?} */ ripple = button.appendChild(tmp);
-            const /** @type {?} */ top = yPos + 'px';
-            const /** @type {?} */ left = xPos + 'px';
+            /** @type {?} */
+            const ripple = button.appendChild(tmp);
+            /** @type {?} */
+            const top = yPos + 'px';
+            /** @type {?} */
+            const left = xPos + 'px';
             tmp.style.top = top;
             tmp.style.left = left;
-            const /** @type {?} */ scale = 'scale(' + ((button.clientWidth / 100) * 3) + ') translate(0,0)';
+            /** @type {?} */
+            const scale = 'scale(' + ((button.clientWidth / 100) * 3) + ') translate(0,0)';
             tmp.style.webkitTransform = scale;
             tmp.style.transform = scale;
             tmp.style.opacity = '1';
-            const /** @type {?} */ duration = 750;
+            /** @type {?} */
+            const duration = 750;
             tmp.style.webkitTransitionDuration = duration + 'ms';
             tmp.style.transitionDuration = duration + 'ms';
             this.removeRipple(button, ripple);
@@ -18600,7 +19628,7 @@ RippleDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class RippleModule {
     /**
@@ -18619,7 +19647,7 @@ RippleModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class WavesModule {
     /**
@@ -18638,7 +19666,7 @@ WavesModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MdbTableService {
     constructor() {
@@ -18670,7 +19698,8 @@ class MdbTableService {
      * @return {?}
      */
     rowRemoved() {
-        const /** @type {?} */ rowRemoved = Observable.create((observer) => {
+        /** @type {?} */
+        const rowRemoved = Observable.create((observer) => {
             observer.next(true);
         });
         return rowRemoved;
@@ -18698,7 +19727,8 @@ class MdbTableService {
      * @return {?}
      */
     dataSourceChange() {
-        const /** @type {?} */ dataSourceChanged = Observable.create((observer) => {
+        /** @type {?} */
+        const dataSourceChanged = Observable.create((observer) => {
             observer.next(this.getDataSource());
         });
         return dataSourceChanged;
@@ -18731,7 +19761,8 @@ class MdbTableService {
      * @return {?}
      */
     searchDataObservable(searchKey) {
-        const /** @type {?} */ observable = Observable.create((observer) => {
+        /** @type {?} */
+        const observable = Observable.create((observer) => {
             observer.next(this.searchLocalDataBy(searchKey));
         });
         return observable;
@@ -18748,7 +19779,7 @@ MdbTableService.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MdbTablePaginationComponent {
     /**
@@ -18798,7 +19829,8 @@ class MdbTablePaginationComponent {
      * @return {?}
      */
     ngOnChanges(changes) {
-        const /** @type {?} */ searchDataSource = changes['searchDataSource'];
+        /** @type {?} */
+        const searchDataSource = changes['searchDataSource'];
         if (searchDataSource.currentValue.length !== 0) {
             this.allItemsLength = searchDataSource.currentValue.length;
         }
@@ -18839,7 +19871,8 @@ class MdbTablePaginationComponent {
      * @return {?}
      */
     searchTextObs() {
-        const /** @type {?} */ observable = Observable.create((observer) => {
+        /** @type {?} */
+        const observable = Observable.create((observer) => {
             observer.next(this.searchText);
         });
         return observable;
@@ -18912,7 +19945,8 @@ class MdbTablePaginationComponent {
      * @return {?}
      */
     nextPageObservable() {
-        const /** @type {?} */ obs = Observable.create((observer) => {
+        /** @type {?} */
+        const obs = Observable.create((observer) => {
             observer.next(this.firstItemIndex);
         });
         return obs;
@@ -18921,7 +19955,8 @@ class MdbTablePaginationComponent {
      * @return {?}
      */
     previousPageObservable() {
-        const /** @type {?} */ obs = Observable.create((observer) => {
+        /** @type {?} */
+        const obs = Observable.create((observer) => {
             observer.next(this.lastVisibleItemIndex);
         });
         return obs;
@@ -18971,7 +20006,7 @@ MdbTablePaginationComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MdbTableRowDirective {
     /**
@@ -19011,7 +20046,7 @@ MdbTableRowDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MdbTableScrollDirective {
     /**
@@ -19058,8 +20093,10 @@ class MdbTableScrollDirective {
      * @return {?}
      */
     ngOnInit() {
-        const /** @type {?} */ parent = this.el.nativeElement.parentNode;
-        const /** @type {?} */ tableWrapper = this.renderer.createElement('div');
+        /** @type {?} */
+        const parent = this.el.nativeElement.parentNode;
+        /** @type {?} */
+        const tableWrapper = this.renderer.createElement('div');
         if (this.scrollY && this.scrollX && this.maxHeight && this.maxWidth) {
             this.wrapTableWithHorizontalAndVerticalScrollingWrapper(tableWrapper);
         }
@@ -19093,7 +20130,7 @@ MdbTableScrollDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MdbTableSortDirective {
     constructor() {
@@ -19139,7 +20176,7 @@ MdbTableSortDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MdbTableDirective {
     /**
@@ -19159,7 +20196,8 @@ class MdbTableDirective {
     ngOnInit() {
         this.renderer.addClass(this.el.nativeElement, 'table');
         if (this.stickyHeader) {
-            const /** @type {?} */ tableHead = this.el.nativeElement.querySelector('thead');
+            /** @type {?} */
+            const tableHead = this.el.nativeElement.querySelector('thead');
             this.renderer.addClass(tableHead, 'sticky-top');
             if (this.stickyHeaderBgColor) {
                 this.renderer.setStyle(tableHead, 'background-color', this.stickyHeaderBgColor);
@@ -19200,7 +20238,7 @@ MdbTableDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class TableModule {
 }
@@ -19228,7 +20266,7 @@ TableModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * Default values provider for tooltip
@@ -19251,7 +20289,7 @@ TooltipConfig.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class TooltipContainerComponent {
     /**
@@ -19284,8 +20322,10 @@ class TooltipContainerComponent {
             this.classMap[this.popupClass] = true;
         }
         setTimeout(() => {
-            const /** @type {?} */ arrowClassList = this.tooltipArrow.nativeElement.classList;
-            const /** @type {?} */ tooltipHeight = this.tooltipInner.nativeElement.clientHeight;
+            /** @type {?} */
+            const arrowClassList = this.tooltipArrow.nativeElement.classList;
+            /** @type {?} */
+            const tooltipHeight = this.tooltipInner.nativeElement.clientHeight;
             if (arrowClassList.contains('top')) {
                 this.r.setStyle(this.tooltipArrow.nativeElement, 'top', tooltipHeight + 6 + 'px');
             }
@@ -19325,15 +20365,18 @@ TooltipContainerComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/*tslint:disable:no-invalid-this */
 /**
  * @return {?}
  */
 function OnChange() {
-    const /** @type {?} */ sufix = 'Change';
+    /** @type {?} */
+    const sufix = 'Change';
     return function OnChangeHandler(target, propertyKey) {
-        const /** @type {?} */ _key = ` __${propertyKey}Value`;
+        /** @type {?} */
+        const _key = ` __${propertyKey}Value`;
         Object.defineProperty(target, propertyKey, {
             /**
              * @return {?}
@@ -19344,7 +20387,8 @@ function OnChange() {
              * @return {?}
              */
             set(value) {
-                const /** @type {?} */ prevValue = this[_key];
+                /** @type {?} */
+                const prevValue = this[_key];
                 this[_key] = value;
                 if (prevValue !== value && this[propertyKey + sufix]) {
                     this[propertyKey + sufix].emit(value);
@@ -19353,11 +20397,10 @@ function OnChange() {
         });
     };
 }
-/* tslint:enable */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class TooltipDirective {
     /**
@@ -19443,7 +20486,8 @@ class TooltipDirective {
         if (this.isOpen || this.isDisabled || this._delayTimeoutId || !this.mdbTooltip) {
             return;
         }
-        const /** @type {?} */ showTooltip = () => this._tooltip
+        /** @type {?} */
+        const showTooltip = () => this._tooltip
             .attach(TooltipContainerComponent)
             .to(this.container)
             .position({ attachment: this.placement })
@@ -19525,7 +20569,7 @@ __decorate([
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class TooltipModule {
     /**
@@ -19549,7 +20593,7 @@ TooltipModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @template T
@@ -19559,88 +20603,90 @@ class BsComponentRef {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+// free
+/** @type {?} */
 const MODULES = [
     ButtonsModule,
     CardsFreeModule,
@@ -19703,93 +20749,89 @@ MDBBootstrapModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
+/** @type {?} */
 const MODULES$1 = [
     AutocompleteModule,
     CardsModule,
@@ -19854,8 +20896,9 @@ MDBBootstrapModulePro.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 const MODULES$2 = [
     MDBBootstrapModule,
     MDBBootstrapModulePro
@@ -19887,23 +20930,23 @@ MDBBootstrapModulesPro.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 // NG-UIKIT-PRO-STANDARD
 // Accordion
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { SBItemBodyComponent, SBItemHeadComponent, SBItemComponent, sbConfig, SqueezeBoxComponent, SQUEEZEBOX_COMPONENTS, AccordionModule, OverlayContainer, OverlayRef, Overlay, OVERLAY_PROVIDERS, DomPortalHost, ComponentPortal, BasePortalHost, ToastComponent, GlobalConfig, ToastPackage, tsConfig, ToastContainerDirective, ToastContainerModule, ToastRef, ToastInjector, ToastModule, ToastService, TOAST_CONFIG, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, CompleterListItemComponent, CompleterComponent, MdbCompleterDirective, CtrRowItem, MdbDropdownDirective, MdbInputCompleteDirective, CtrListContext, MdbListDirective, MdbRowDirective, CompleterBaseData, CompleterService, localDataFactory, remoteDataFactory, LocalDataFactoryProvider, RemoteDataFactoryProvider, LocalData, RemoteData, MAX_CHARS, MIN_SEARCH_LENGTH, PAUSE, TEXT_SEARCHING, TEXT_NO_RESULTS, CLEAR_TIMEOUT, isNil, AutocompleteModule, CardRevealComponent, CardRotatingComponent, CardsModule, AutoFormatModule, MdbDateFormatDirective, MdbCreditCardDirective, MdbCvvDirective, InputAutoFillDirective, FocusDirective, LocaleService, UtilService, DatepickerModule, MYDP_VALUE_ACCESSOR, MDBDatePickerComponent, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, UploadStatus, humanizeBytes, MDBUploaderService, MDBFileDropDirective, MDBFileSelectDirective, FileInputModule, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, OptionList, Option, SelectDropdownComponent, SELECT_VALUE_ACCESSOR, SelectComponent, SelectModule, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, MDBSpinningPreloader, ProgressBarComponent, MdProgressSpinnerCssMatStylerDirective, MdProgressSpinnerComponent, MdSpinnerComponent, BarComponent, ProgressSpinnerComponent, ProgressDirective, ProgressbarComponent, ProgressbarConfigComponent, ProgressbarModule, PreloadersModule, ProgressBars, RangeModule, RANGE_VALUE_ACCESOR, MdbRangeInputComponent, SidenavComponent, SidenavModule, PageScrollUtilService, EasingLogic, PageScrollConfig, PageScrollDirective, PageScrollInstance, SmoothscrollModule, PageScrollService, computedStyle, MdbStickyDirective, StickyContentModule, TabHeadingDirective, TabDirective, TabsetComponent, TabsetConfig, NgTranscludeDirective, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TimePickerModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, ScrollSpyModule, ScrollSpyDirective, ScrollSpyWindowDirective, ScrollSpyElementDirective, ScrollSpyLinkDirective, ScrollSpyService, ButtonsModule, CHECKBOX_CONTROL_VALUE_ACCESSOR, ButtonCheckboxDirective, RADIO_CONTROL_VALUE_ACCESSOR, ButtonRadioDirective, MdbBtnDirective, BadgeModule, MDBBadgeComponent, MdbBreadcrumbComponent, MdbBreadcrumbItemComponent, BreadcrumbModule, Direction, CarouselComponent, CarouselConfig, SlideComponent, CarouselModule, CardsFreeModule, MdbCardComponent, MdbCardBodyComponent, MdbCardImageComponent, MdbCardTextComponent, MdbCardTitleComponent, MdbCardFooterComponent, MdbCardHeaderComponent, BaseChartDirective, ChartsModule, CHECKBOX_VALUE_ACCESSOR, MdbCheckboxChange, CheckboxComponent, CheckboxModule, CollapseComponent, CollapseModule, BsDropdownContainerComponent, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownConfig, BsDropdownDirective, BsDropdownState, DropdownModule, IconsModule, MdbIconComponent, InputsModule, MdbInputDirective, EqualValidatorDirective, ModalDirective, ModalOptions, MDBModalRef, modalConfigDefaults, ClassName, Selector, TransitionDurations, DISMISS_REASONS, MDBModalService, ModalBackdropOptions, ModalBackdropComponent, ModalContainerComponent, msConfig, ModalModule, LinksComponent, LogoComponent, NavbarComponent, NavbarService, NavlinksComponent, NavbarModule, PopoverContainerComponent, PopoverConfig, PopoverDirective, PopoverModule, RippleDirective, RippleModule, WavesDirective, WavesModule, MdbTablePaginationComponent, MdbTableRowDirective, MdbTableScrollDirective, MdbTableSortDirective, MdbTableDirective, MdbTableService, TableModule, TooltipContainerComponent, TooltipDirective, TooltipConfig, TooltipModule, BsComponentRef, ComponentLoader, ComponentLoaderFactory, ContentRef, win as window, document$1 as document, location, gc, performance, Event, MouseEvent, KeyboardEvent, EventTarget, History, Location, EventListener, Positioning, positionElements, PositioningService, OnChange, LinkedList, isBs3, Trigger, parseTriggers, listenToTriggers, Utils, MDBBootstrapModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, BadgeModule as ɵdg1, MDBBadgeComponent as ɵdh1, BreadcrumbModule as ɵdk1, MdbBreadcrumbItemComponent as ɵdj1, MdbBreadcrumbComponent as ɵdi1, MdbBtnDirective as ɵdf1, ButtonsModule as ɵdc1, ButtonCheckboxDirective as ɵdd1, ButtonRadioDirective as ɵde1, CardsFreeModule as ɵdp1, CarouselComponent as ɵdl1, CarouselConfig as ɵdm1, CarouselModule as ɵdo1, SlideComponent as ɵdn1, BaseChartDirective as ɵdq1, ChartsModule as ɵdr1, CHECKBOX_VALUE_ACCESSOR as ɵds1, CheckboxComponent as ɵdt1, CheckboxModule as ɵdu1, CollapseComponent as ɵdv1, CollapseModule as ɵdw1, BsDropdownContainerComponent as ɵdx1, BsDropdownMenuDirective as ɵdy1, BsDropdownToggleDirective as ɵdz1, BsDropdownConfig as ɵea1, BsDropdownDirective as ɵeb1, DropdownModule as ɵed1, BsDropdownState as ɵec1, MdbIconComponent as ɵef1, IconsModule as ɵee1, InputsModule as ɵeg1, MdbInputDirective as ɵeh1, MDBRootModule as ɵfk1, ModalDirective as ɵei1, ModalModule as ɵeo1, ModalOptions as ɵej1, MDBModalService as ɵek1, ModalBackdropComponent as ɵem1, ModalBackdropOptions as ɵel1, ModalContainerComponent as ɵen1, NavbarComponent as ɵep1, NavbarModule as ɵeq1, PopoverContainerComponent as ɵer1, PopoverConfig as ɵes1, PopoverDirective as ɵet1, PopoverModule as ɵeu1, RippleDirective as ɵev1, RippleModule as ɵew1, MdbTablePaginationComponent as ɵez1, MdbTableRowDirective as ɵfa1, MdbTableScrollDirective as ɵfb1, MdbTableSortDirective as ɵfc1, MdbTableDirective as ɵfd1, MdbTableService as ɵfe1, TableModule as ɵff1, TooltipContainerComponent as ɵfg1, TooltipDirective as ɵfh1, TooltipModule as ɵfj1, TooltipConfig as ɵfi1, WavesDirective as ɵex1, WavesModule as ɵey1, SBItemComponent as ɵc1, SBItemBodyComponent as ɵa1, SBItemHeadComponent as ɵb1, SqueezeBoxComponent as ɵd1, AccordionModule as ɵe1, AutoFormatModule as ɵt1, MdbCreditCardDirective as ɵv1, MdbCvvDirective as ɵw1, MdbDateFormatDirective as ɵu1, CompleterListItemComponent as ɵf1, CompleterComponent as ɵg1, MdbCompleterDirective as ɵh1, MdbDropdownDirective as ɵi1, MdbInputCompleteDirective as ɵj1, MdbListDirective as ɵk1, MdbRowDirective as ɵl1, AutocompleteModule as ɵp1, CompleterService as ɵm1, LocalDataFactoryProvider as ɵn1, RemoteDataFactoryProvider as ɵo1, CardRevealComponent as ɵq1, CardRotatingComponent as ɵr1, CardsModule as ɵs1, MDBDatePickerComponent as ɵbd1, MYDP_VALUE_ACCESSOR as ɵbc1, DatepickerModule as ɵbb1, InputAutoFillDirective as ɵx1, FocusDirective as ɵy1, LocaleService as ɵz1, UtilService as ɵba1, SimpleChartComponent as ɵbe1, ChartSimpleModule as ɵbg1, EasyPieChartComponent as ɵbf1, MDBFileDropDirective as ɵbh1, MDBFileSelectDirective as ɵbi1, FileInputModule as ɵbj1, CharCounterDirective as ɵbk1, CharCounterModule as ɵbl1, ImageModalComponent as ɵbm1, LightBoxModule as ɵbn1, SelectDropdownComponent as ɵbp1, SELECT_VALUE_ACCESSOR as ɵbq1, SelectComponent as ɵbr1, SelectModule as ɵbs1, MDBRootModulePro as ɵfl1, BarComponent as ɵbt1, ProgressBars as ɵbz1, MdProgressBarModule as ɵfm1, MdProgressSpinnerModule as ɵfn1, ProgressSpinnerComponent as ɵbu1, ProgressDirective as ɵbv1, ProgressbarComponent as ɵbw1, ProgressbarConfigComponent as ɵbx1, ProgressbarModule as ɵby1, MdbRangeInputComponent as ɵcb1, RangeModule as ɵca1, ScrollSpyElementDirective as ɵcz1, ScrollSpyLinkDirective as ɵda1, ScrollSpyWindowDirective as ɵcy1, ScrollSpyDirective as ɵcx1, ScrollSpyModule as ɵcw1, ScrollSpyService as ɵdb1, SidenavComponent as ɵcc1, SidenavModule as ɵcd1, PageScrollDirective as ɵce1, PageScrollInstance as ɵcf1, SmoothscrollModule as ɵcg1, PageScrollService as ɵch1, MdbStickyDirective as ɵci1, StickyContentModule as ɵcj1, TabHeadingDirective as ɵck1, TabDirective as ɵcl1, TabsetComponent as ɵcm1, TabsetConfig as ɵcn1, TabsModule as ɵcp1, NgTranscludeDirective as ɵco1, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR as ɵcq1, MaterialChipsComponent as ɵcr1, MaterialChipsModule as ɵcs1, ClockPickerComponent as ɵcv1, TIME_PIRCKER_VALUE_ACCESSOT as ɵcu1, TimePickerModule as ɵct1 };
+export { SBItemBodyComponent, SBItemHeadComponent, SBItemComponent, sbConfig, SqueezeBoxComponent, SQUEEZEBOX_COMPONENTS, AccordionModule, OverlayContainer, OverlayRef, Overlay, OVERLAY_PROVIDERS, DomPortalHost, ComponentPortal, BasePortalHost, ToastComponent, GlobalConfig, ToastPackage, tsConfig, ToastContainerDirective, ToastContainerModule, ToastRef, ToastInjector, ToastModule, ToastService, TOAST_CONFIG, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, CompleterListItemComponent, CompleterComponent, MdbCompleterDirective, CtrRowItem, MdbDropdownDirective, MdbInputCompleteDirective, CtrListContext, MdbListDirective, MdbRowDirective, CompleterBaseData, CompleterService, localDataFactory, remoteDataFactory, LocalDataFactoryProvider, RemoteDataFactoryProvider, LocalData, RemoteData, isNil, MAX_CHARS, MIN_SEARCH_LENGTH, PAUSE, TEXT_SEARCHING, TEXT_NO_RESULTS, CLEAR_TIMEOUT, AutocompleteModule, CardRevealComponent, CardRotatingComponent, CardsModule, AutoFormatModule, MdbDateFormatDirective, MdbCreditCardDirective, MdbCvvDirective, InputAutoFillDirective, FocusDirective, LocaleService, UtilService, DatepickerModule, MYDP_VALUE_ACCESSOR, MDBDatePickerComponent, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, humanizeBytes, UploadStatus, MDBUploaderService, MDBFileDropDirective, MDBFileSelectDirective, FileInputModule, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, OptionList, Option, SelectDropdownComponent, SELECT_VALUE_ACCESSOR, SelectComponent, SelectModule, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, MDBSpinningPreloader, ProgressBarComponent, MdProgressSpinnerCssMatStylerDirective, MdProgressSpinnerComponent, MdSpinnerComponent, BarComponent, ProgressSpinnerComponent, ProgressDirective, ProgressbarComponent, ProgressbarConfigComponent, ProgressbarModule, PreloadersModule, ProgressBars, RangeModule, RANGE_VALUE_ACCESOR, MdbRangeInputComponent, SidenavComponent, SidenavModule, PageScrollUtilService, EasingLogic, PageScrollConfig, PageScrollDirective, PageScrollInstance, SmoothscrollModule, PageScrollService, computedStyle, MdbStickyDirective, StickyContentModule, TabHeadingDirective, TabDirective, TabsetComponent, TabsetConfig, NgTranscludeDirective, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TimePickerModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, ScrollSpyModule, ScrollSpyDirective, ScrollSpyWindowDirective, ScrollSpyElementDirective, ScrollSpyLinkDirective, ScrollSpyService, ButtonsModule, CHECKBOX_CONTROL_VALUE_ACCESSOR, ButtonCheckboxDirective, RADIO_CONTROL_VALUE_ACCESSOR, ButtonRadioDirective, MdbBtnDirective, BadgeModule, MDBBadgeComponent, MdbBreadcrumbComponent, MdbBreadcrumbItemComponent, BreadcrumbModule, Direction, CarouselComponent, CarouselConfig, SlideComponent, CarouselModule, CardsFreeModule, MdbCardComponent, MdbCardBodyComponent, MdbCardImageComponent, MdbCardTextComponent, MdbCardTitleComponent, MdbCardFooterComponent, MdbCardHeaderComponent, BaseChartDirective, ChartsModule, CHECKBOX_VALUE_ACCESSOR, MdbCheckboxChange, CheckboxComponent, CheckboxModule, CollapseComponent, CollapseModule, BsDropdownContainerComponent, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownConfig, BsDropdownDirective, BsDropdownState, DropdownModule, IconsModule, MdbIconComponent, InputsModule, MdbInputDirective, EqualValidatorDirective, ModalDirective, ModalOptions, MDBModalRef, modalConfigDefaults, ClassName, Selector, TransitionDurations, DISMISS_REASONS, MDBModalService, ModalBackdropOptions, ModalBackdropComponent, ModalContainerComponent, msConfig, ModalModule, LinksComponent, LogoComponent, NavbarComponent, NavbarService, NavlinksComponent, NavbarModule, PopoverContainerComponent, PopoverConfig, PopoverDirective, PopoverModule, RippleDirective, RippleModule, WavesDirective, WavesModule, MdbTablePaginationComponent, MdbTableRowDirective, MdbTableScrollDirective, MdbTableSortDirective, MdbTableDirective, MdbTableService, TableModule, TooltipContainerComponent, TooltipDirective, TooltipConfig, TooltipModule, BsComponentRef, ComponentLoader, ComponentLoaderFactory, ContentRef, win as window, document$1 as document, location, gc, performance, Event, MouseEvent, KeyboardEvent, EventTarget, History, Location, EventListener, positionElements, Positioning, PositioningService, OnChange, LinkedList, isBs3, Trigger, parseTriggers, listenToTriggers, Utils, MDBBootstrapModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, BadgeModule as ɵdg1, MDBBadgeComponent as ɵdh1, BreadcrumbModule as ɵdk1, MdbBreadcrumbItemComponent as ɵdj1, MdbBreadcrumbComponent as ɵdi1, MdbBtnDirective as ɵdf1, ButtonsModule as ɵdc1, ButtonCheckboxDirective as ɵdd1, ButtonRadioDirective as ɵde1, CardsFreeModule as ɵdp1, CarouselComponent as ɵdl1, CarouselConfig as ɵdm1, CarouselModule as ɵdo1, SlideComponent as ɵdn1, BaseChartDirective as ɵdq1, ChartsModule as ɵdr1, CHECKBOX_VALUE_ACCESSOR as ɵds1, CheckboxComponent as ɵdt1, CheckboxModule as ɵdu1, CollapseComponent as ɵdv1, CollapseModule as ɵdw1, BsDropdownContainerComponent as ɵdx1, BsDropdownMenuDirective as ɵdy1, BsDropdownToggleDirective as ɵdz1, BsDropdownConfig as ɵea1, BsDropdownDirective as ɵeb1, DropdownModule as ɵed1, BsDropdownState as ɵec1, MdbIconComponent as ɵef1, IconsModule as ɵee1, InputsModule as ɵeg1, MdbInputDirective as ɵeh1, MDBRootModule as ɵfk1, ModalDirective as ɵei1, ModalModule as ɵeo1, ModalOptions as ɵej1, MDBModalService as ɵek1, ModalBackdropComponent as ɵem1, ModalBackdropOptions as ɵel1, ModalContainerComponent as ɵen1, NavbarComponent as ɵep1, NavbarModule as ɵeq1, PopoverContainerComponent as ɵer1, PopoverConfig as ɵes1, PopoverDirective as ɵet1, PopoverModule as ɵeu1, RippleDirective as ɵev1, RippleModule as ɵew1, MdbTablePaginationComponent as ɵez1, MdbTableRowDirective as ɵfa1, MdbTableScrollDirective as ɵfb1, MdbTableSortDirective as ɵfc1, MdbTableDirective as ɵfd1, MdbTableService as ɵfe1, TableModule as ɵff1, TooltipContainerComponent as ɵfg1, TooltipDirective as ɵfh1, TooltipModule as ɵfj1, TooltipConfig as ɵfi1, WavesDirective as ɵex1, WavesModule as ɵey1, SBItemComponent as ɵc1, SBItemBodyComponent as ɵa1, SBItemHeadComponent as ɵb1, SqueezeBoxComponent as ɵd1, AccordionModule as ɵe1, AutoFormatModule as ɵt1, MdbCreditCardDirective as ɵv1, MdbCvvDirective as ɵw1, MdbDateFormatDirective as ɵu1, CompleterListItemComponent as ɵf1, CompleterComponent as ɵg1, MdbCompleterDirective as ɵh1, MdbDropdownDirective as ɵi1, MdbInputCompleteDirective as ɵj1, MdbListDirective as ɵk1, MdbRowDirective as ɵl1, AutocompleteModule as ɵp1, CompleterService as ɵm1, LocalDataFactoryProvider as ɵn1, RemoteDataFactoryProvider as ɵo1, CardRevealComponent as ɵq1, CardRotatingComponent as ɵr1, CardsModule as ɵs1, MDBDatePickerComponent as ɵbd1, MYDP_VALUE_ACCESSOR as ɵbc1, DatepickerModule as ɵbb1, InputAutoFillDirective as ɵx1, FocusDirective as ɵy1, LocaleService as ɵz1, UtilService as ɵba1, SimpleChartComponent as ɵbe1, ChartSimpleModule as ɵbg1, EasyPieChartComponent as ɵbf1, MDBFileDropDirective as ɵbh1, MDBFileSelectDirective as ɵbi1, FileInputModule as ɵbj1, CharCounterDirective as ɵbk1, CharCounterModule as ɵbl1, ImageModalComponent as ɵbm1, LightBoxModule as ɵbn1, SelectDropdownComponent as ɵbp1, SELECT_VALUE_ACCESSOR as ɵbq1, SelectComponent as ɵbr1, SelectModule as ɵbs1, MDBRootModulePro as ɵfl1, BarComponent as ɵbt1, ProgressBars as ɵbz1, MdProgressBarModule as ɵfm1, MdProgressSpinnerModule as ɵfn1, ProgressSpinnerComponent as ɵbu1, ProgressDirective as ɵbv1, ProgressbarComponent as ɵbw1, ProgressbarConfigComponent as ɵbx1, ProgressbarModule as ɵby1, MdbRangeInputComponent as ɵcb1, RangeModule as ɵca1, ScrollSpyElementDirective as ɵcz1, ScrollSpyLinkDirective as ɵda1, ScrollSpyWindowDirective as ɵcy1, ScrollSpyDirective as ɵcx1, ScrollSpyModule as ɵcw1, ScrollSpyService as ɵdb1, SidenavComponent as ɵcc1, SidenavModule as ɵcd1, PageScrollDirective as ɵce1, PageScrollInstance as ɵcf1, SmoothscrollModule as ɵcg1, PageScrollService as ɵch1, MdbStickyDirective as ɵci1, StickyContentModule as ɵcj1, TabHeadingDirective as ɵck1, TabDirective as ɵcl1, TabsetComponent as ɵcm1, TabsetConfig as ɵcn1, TabsModule as ɵcp1, NgTranscludeDirective as ɵco1, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR as ɵcq1, MaterialChipsComponent as ɵcr1, MaterialChipsModule as ɵcs1, ClockPickerComponent as ɵcv1, TIME_PIRCKER_VALUE_ACCESSOT as ɵcu1, TimePickerModule as ɵct1 };
 //# sourceMappingURL=ng-uikit-pro-standard.js.map

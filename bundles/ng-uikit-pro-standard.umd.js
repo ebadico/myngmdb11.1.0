@@ -6,7 +6,7 @@
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /*tslint:disable */
 /**
@@ -18,22 +18,34 @@
  */
 /**
  * JS version of browser APIs. This library can only run in the browser.
+ * @type {?}
  */
-var win = typeof window !== 'undefined' && window || /** @type {?} */ ({});
+var win = typeof window !== 'undefined' && window || ( /** @type {?} */({}));
+/** @type {?} */
 var document$1 = win.document;
+/** @type {?} */
 var location = win.location;
+/** @type {?} */
 var gc = win['gc'] ? function () { return win['gc'](); } : function () { return null; };
+/** @type {?} */
 var performance = win['performance'] ? win['performance'] : null;
+/** @type {?} */
 var Event = win['Event'];
+/** @type {?} */
 var MouseEvent = win['MouseEvent'];
+/** @type {?} */
 var KeyboardEvent = win['KeyboardEvent'];
+/** @type {?} */
 var EventTarget = win['EventTarget'];
+/** @type {?} */
 var History = win['History'];
+/** @type {?} */
 var Location = win['Location'];
+/** @type {?} */
 var EventListener = win['EventListener'];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var SBItemBodyComponent = /** @class */ (function () {
     function SBItemBodyComponent() {
@@ -56,7 +68,8 @@ var SBItemBodyComponent = /** @class */ (function () {
      */
     SBItemBodyComponent.prototype.openSidenavOnActiveLink = function (activeUrl) {
         var _this = this;
-        var /** @type {?} */ activeLink = this.routerLinks.find(function (link) {
+        /** @type {?} */
+        var activeLink = this.routerLinks.find(function (link) {
             return link.href === activeUrl;
         });
         if (activeLink) {
@@ -96,14 +109,15 @@ SBItemBodyComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 var sbConfig = {
     serviceInstance: new Object()
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var SBItemComponent = /** @class */ (function () {
     function SBItemComponent() {
@@ -128,7 +142,7 @@ var SBItemComponent = /** @class */ (function () {
     SBItemComponent.prototype.ngAfterContentInit = function () {
         var _this = this;
         setTimeout(function () {
-            if (_this.body.expandAnimationState === 'expanded') {
+            if (_this.body && _this.body.expandAnimationState === 'expanded') {
                 _this.collapsed = false;
             }
         }, 40);
@@ -169,7 +183,7 @@ SBItemComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var SBItemHeadComponent = /** @class */ (function () {
     /**
@@ -211,7 +225,7 @@ SBItemHeadComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var SqueezeBoxComponent = /** @class */ (function () {
     function SqueezeBoxComponent() {
@@ -249,8 +263,9 @@ SqueezeBoxComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 var SQUEEZEBOX_COMPONENTS = [SqueezeBoxComponent, SBItemComponent, SBItemHeadComponent, SBItemBodyComponent];
 var AccordionModule = /** @class */ (function () {
     function AccordionModule() {
@@ -266,7 +281,7 @@ AccordionModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * The OverlayContainer is the container in which all overlays will load.
@@ -293,7 +308,8 @@ var OverlayContainer = /** @class */ (function () {
      * @return {?}
      */
     OverlayContainer.prototype._createContainer = function () {
-        var /** @type {?} */ container = document.createElement('div');
+        /** @type {?} */
+        var container = document.createElement('div');
         container.classList.add('overlay-container');
         document.body.appendChild(container);
         this._containerElement = container;
@@ -302,7 +318,7 @@ var OverlayContainer = /** @class */ (function () {
 }());
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * Reference to an overlay that has been created with the Overlay service.
@@ -334,7 +350,7 @@ var OverlayRef = /** @class */ (function () {
 }());
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @record
@@ -368,7 +384,8 @@ var ComponentPortal = /** @class */ (function () {
      * @return {?}
      */
     ComponentPortal.prototype.detach = function () {
-        var /** @type {?} */ host = this._attachedHost;
+        /** @type {?} */
+        var host = this._attachedHost;
         this._attachedHost = null;
         return host.detach();
     };
@@ -389,6 +406,7 @@ var ComponentPortal = /** @class */ (function () {
      * @param {?} host
      * @return {?}
      */
+    // setAttachedHost(host: BasePortalHost) {
     ComponentPortal.prototype.setAttachedHost = function (host) {
         this._attachedHost = host;
     };
@@ -437,7 +455,7 @@ var BasePortalHost = /** @class */ (function () {
 }());
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * A PortalHost for attaching portals to an arbitrary DOM element outside of the Angular
@@ -468,8 +486,10 @@ var DomPortalHost = /** @class */ (function (_super) {
      */
     DomPortalHost.prototype.attachComponentPortal = function (portal, newestOnTop) {
         var _this = this;
-        var /** @type {?} */ componentFactory = this._componentFactoryResolver.resolveComponentFactory(portal.component);
-        var /** @type {?} */ componentRef;
+        /** @type {?} */
+        var componentFactory = this._componentFactoryResolver.resolveComponentFactory(portal.component);
+        /** @type {?} */
+        var componentRef;
         // If the portal specifies a ViewContainerRef, we will use that as the attachment point
         // for the component (in terms of Angular's component tree, not rendering).
         // When the ViewContainerRef is missing, we use the factory to create the component directly
@@ -501,13 +521,13 @@ var DomPortalHost = /** @class */ (function (_super) {
      * @return {?}
      */
     DomPortalHost.prototype._getComponentRootNode = function (componentRef) {
-        return /** @type {?} */ (((componentRef.hostView)).rootNodes[0]);
+        return ( /** @type {?} */((( /** @type {?} */(componentRef.hostView))).rootNodes[0]));
     };
     return DomPortalHost;
 }(BasePortalHost));
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * Service to create Overlays. Overlays are dynamically added pieces of floating UI, meant to be
@@ -557,7 +577,8 @@ var Overlay = /** @class */ (function () {
      * @return {?} Newly-created pane element
      */
     Overlay.prototype._createPaneElement = function (positionClass, overlayContainer) {
-        var /** @type {?} */ pane = document.createElement('div');
+        /** @type {?} */
+        var pane = document.createElement('div');
         pane.id = 'toast-container';
         pane.classList.add(positionClass);
         if (!overlayContainer) {
@@ -597,6 +618,7 @@ Overlay.ctorParameters = function () { return [
 ]; };
 /**
  * Providers for Overlay and its related injectables.
+ * @type {?}
  */
 var OVERLAY_PROVIDERS = [
     Overlay,
@@ -604,7 +626,7 @@ var OVERLAY_PROVIDERS = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * Configuration for an individual toast.
@@ -613,6 +635,7 @@ var OVERLAY_PROVIDERS = [
 /**
  * @record
  */
+// WARNING: interface has both a type and a value, skipping emit
 /**
  * Remove warning message from angular-cli
  */
@@ -674,12 +697,13 @@ var ToastPackage = /** @class */ (function () {
     };
     return ToastPackage;
 }());
+/** @type {?} */
 var tsConfig = {
     serviceInstance: new Object()
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var ToastComponent = /** @class */ (function () {
     /**
@@ -751,8 +775,10 @@ var ToastComponent = /** @class */ (function () {
         if (this.width === 0) {
             return;
         }
-        var /** @type {?} */ now = new Date().getTime();
-        var /** @type {?} */ remaining = this.hideTime - now;
+        /** @type {?} */
+        var now = new Date().getTime();
+        /** @type {?} */
+        var remaining = this.hideTime - now;
         this.width = (remaining / this.options.timeOut) * 100;
         if (this.width <= 0) {
             this.width = 0;
@@ -854,7 +880,7 @@ ToastComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var ToastContainerDirective = /** @class */ (function () {
     /**
@@ -903,7 +929,7 @@ ToastContainerModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * Reference to a toast opened via the Toast service.
@@ -1000,12 +1026,13 @@ var ToastInjector = /** @class */ (function () {
 }());
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 var TOAST_CONFIG = new core.InjectionToken('ToastConfig');
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @record
@@ -1017,9 +1044,7 @@ var ToastService = /** @class */ (function () {
      * @param {?} _injector
      * @param {?} sanitizer
      */
-    function ToastService(
-    // @Inject(TOAST_CONFIG) public toastConfig: GlobalConfig,
-    toastConfig, overlay, _injector, sanitizer) {
+    function ToastService(toastConfig, overlay, _injector, sanitizer) {
         this.toastConfig = toastConfig;
         this.overlay = overlay;
         this._injector = _injector;
@@ -1074,6 +1099,7 @@ var ToastService = /** @class */ (function () {
      * @param {?=} type
      * @return {?}
      */
+    // show(message: string, title?: string, override?: IndividualConfig, type = '') {
     ToastService.prototype.show = function (message, title, override, type) {
         if (type === void 0) { type = ''; }
         return this._buildNotification(type, message, title, this.applyConfig(override));
@@ -1085,9 +1111,11 @@ var ToastService = /** @class */ (function () {
      * @param {?=} override
      * @return {?}
      */
+    // success(message: string, title?: string, override?: IndividualConfig) {
     ToastService.prototype.success = function (message, title, override) {
         //   const type = this.toastConfig.iconClasses.success;
-        var /** @type {?} */ type = this.toastConfig.iconClasses.success;
+        /** @type {?} */
+        var type = this.toastConfig.iconClasses.success;
         return this._buildNotification(type, message, title, this.applyConfig(override));
     };
     /**
@@ -1097,9 +1125,11 @@ var ToastService = /** @class */ (function () {
      * @param {?=} override
      * @return {?}
      */
+    // error(message: string, title?: string, override?: IndividualConfig) {
     ToastService.prototype.error = function (message, title, override) {
         //   const type = this.toastConfig.iconClasses.error;
-        var /** @type {?} */ type = this.toastConfig.iconClasses.error;
+        /** @type {?} */
+        var type = this.toastConfig.iconClasses.error;
         return this._buildNotification(type, message, title, this.applyConfig(override));
     };
     /**
@@ -1109,9 +1139,11 @@ var ToastService = /** @class */ (function () {
      * @param {?=} override
      * @return {?}
      */
+    // info(message: string, title?: string, override?: IndividualConfig) {
     ToastService.prototype.info = function (message, title, override) {
         //   const type = this.toastConfig.iconClasses.info;
-        var /** @type {?} */ type = this.toastConfig.iconClasses.info;
+        /** @type {?} */
+        var type = this.toastConfig.iconClasses.info;
         return this._buildNotification(type, message, title, this.applyConfig(override));
     };
     /**
@@ -1121,9 +1153,11 @@ var ToastService = /** @class */ (function () {
      * @param {?=} override
      * @return {?}
      */
+    // warning(message: string, title?: string, override?: IndividualConfig) {
     ToastService.prototype.warning = function (message, title, override) {
         //   const type = this.toastConfig.iconClasses.warning;
-        var /** @type {?} */ type = this.toastConfig.iconClasses.warning;
+        /** @type {?} */
+        var type = this.toastConfig.iconClasses.warning;
         return this._buildNotification(type, message, title, this.applyConfig(override));
     };
     /**
@@ -1133,7 +1167,8 @@ var ToastService = /** @class */ (function () {
      */
     ToastService.prototype.clear = function (toastId) {
         // Call every toastRef manualClose function
-        var /** @type {?} */ toast;
+        /** @type {?} */
+        var toast;
         for (var _i = 0, _a = this.toasts; _i < _a.length; _i++) {
             toast = _a[_i];
             if (toastId !== undefined) {
@@ -1154,7 +1189,8 @@ var ToastService = /** @class */ (function () {
      */
     ToastService.prototype.remove = function (toastId) {
         // const found = this._findToast(toastId);
-        var /** @type {?} */ found = this._findToast(toastId);
+        /** @type {?} */
+        var found = this._findToast(toastId);
         if (!found) {
             return false;
         }
@@ -1166,7 +1202,8 @@ var ToastService = /** @class */ (function () {
         }
         if (this.currentlyActive <= +this.toastConfig.maxOpened && this.toasts[this.currentlyActive]) {
             // const p = this.toasts[this.currentlyActive].toastRef;
-            var /** @type {?} */ p = this.toasts[this.currentlyActive].toastRef;
+            /** @type {?} */
+            var p = this.toasts[this.currentlyActive].toastRef;
             if (!p.isInactive()) {
                 this.currentlyActive = this.currentlyActive + 1;
                 p.activate();
@@ -1180,7 +1217,7 @@ var ToastService = /** @class */ (function () {
      * @return {?}
      */
     ToastService.prototype.isDuplicate = function (message) {
-        for (var /** @type {?} */ i = 0; i < this.toasts.length; i++) {
+        for (var i = 0; i < this.toasts.length; i++) {
             if (this.toasts[i].message === message) {
                 return true;
             }
@@ -1203,7 +1240,8 @@ var ToastService = /** @class */ (function () {
         function use(source, defaultValue) {
             return override && source !== undefined ? source : defaultValue;
         }
-        var /** @type {?} */ current = Object.assign({}, this.toastConfig);
+        /** @type {?} */
+        var current = Object.assign({}, this.toastConfig);
         current.closeButton = use(override.closeButton, current.closeButton);
         current.extendedTimeOut = use(override.extendedTimeOut, current.extendedTimeOut);
         current.progressBar = use(override.progressBar, current.progressBar);
@@ -1225,7 +1263,7 @@ var ToastService = /** @class */ (function () {
      * @return {?}
      */
     ToastService.prototype._findToast = function (toastId) {
-        for (var /** @type {?} */ i = 0; i < this.toasts.length; i++) {
+        for (var i = 0; i < this.toasts.length; i++) {
             if (this.toasts[i].toastId === toastId) {
                 return { index: i, activeToast: this.toasts[i] };
             }
@@ -1248,24 +1286,30 @@ var ToastService = /** @class */ (function () {
             return null;
         }
         this.previousToastMessage = message;
-        var /** @type {?} */ keepInactive = false;
+        /** @type {?} */
+        var keepInactive = false;
         if (this.toastConfig.maxOpened && this.currentlyActive >= this.toastConfig.maxOpened) {
             keepInactive = true;
             if (this.toastConfig.autoDismiss) {
                 this.clear(this.toasts[this.toasts.length - 1].toastId);
             }
         }
-        var /** @type {?} */ overlayRef = this.overlay.create(config.positionClass, this.overlayContainer);
+        /** @type {?} */
+        var overlayRef = this.overlay.create(config.positionClass, this.overlayContainer);
         this.index = this.index + 1;
         // let sanitizedMessage = message;
-        var /** @type {?} */ sanitizedMessage = message;
+        /** @type {?} */
+        var sanitizedMessage = message;
         if (message && config.enableHtml) {
             sanitizedMessage = this.sanitizer.sanitize(core.SecurityContext.HTML, message);
         }
-        var /** @type {?} */ toastRef = new ToastRef(overlayRef);
-        var /** @type {?} */ toastPackage = new ToastPackage(this.index, config, sanitizedMessage, title, toastType, toastRef);
+        /** @type {?} */
+        var toastRef = new ToastRef(overlayRef);
+        /** @type {?} */
+        var toastPackage = new ToastPackage(this.index, config, sanitizedMessage, title, toastType, toastRef);
         // const ins: ActiveToast = {
-        var /** @type {?} */ ins = {
+        /** @type {?} */
+        var ins = {
             toastId: this.index,
             message: message,
             toastRef: toastRef,
@@ -1274,8 +1318,10 @@ var ToastService = /** @class */ (function () {
             onTap: toastPackage.onTap(),
             onAction: toastPackage.onAction(),
         };
-        var /** @type {?} */ toastInjector = new ToastInjector(toastPackage, this._injector);
-        var /** @type {?} */ component = new ComponentPortal(config.toastComponent, toastInjector);
+        /** @type {?} */
+        var toastInjector = new ToastInjector(toastPackage, this._injector);
+        /** @type {?} */
+        var component = new ComponentPortal(config.toastComponent, toastInjector);
         ins.portal = overlayRef.attach(component, this.toastConfig.newestOnTop);
         if (!keepInactive) {
             setTimeout(function () {
@@ -1300,7 +1346,7 @@ ToastService.ctorParameters = function () { return [
 ]; };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var ToastModule = /** @class */ (function () {
     /**
@@ -1342,37 +1388,47 @@ ToastModule.ctorParameters = function () { return [
 ]; };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 // SideNav
+/** @type {?} */
 var slideIn = animations.trigger('slideIn', [
     animations.state('inactive', animations.style({ opacity: 0, transform: 'translateX(-300%)' })),
     animations.state('active', animations.style({ opacity: 1, transform: 'translateX(0)' })),
     animations.transition('inactive => active', animations.animate('500ms ease')),
     animations.transition('active => inactive', animations.animate('500ms ease')),
 ]);
+/** @type {?} */
 var fadeIn = animations.trigger('fadeIn', [
     animations.state('inactive', animations.style({ opacity: 0 })),
     animations.state('active', animations.style({ opacity: 1 })),
     animations.transition('inactive => active', animations.animate('500ms ease')),
     animations.transition('active => inactive', animations.animate('500ms ease')),
 ]);
+/** @type {?} */
 var slideOut = animations.trigger('slideOut', [
     animations.state('inactive', animations.style({ opacity: 0, transform: 'translateX(-300%)' })),
     animations.state('active', animations.style({ opacity: 1, transform: 'translateX(0)' })),
     animations.transition('inactive => active', animations.animate('500ms ease')),
     animations.transition('active => inactive', animations.animate('500ms ease')),
 ]);
+/** @type {?} */
 var flipState = animations.trigger('flipState', [
     animations.state('active', animations.style({ transform: 'rotateY(179.9deg)' })),
     animations.state('inactive', animations.style({ transform: 'rotateY(0)' })),
 ]);
 // Rotating animation animation
+/** @type {?} */
 var turnState = animations.trigger('turnState', [
     animations.state('active', animations.style({ transform: 'rotateY(179.9deg)' })),
     animations.state('inactive', animations.style({ transform: 'rotateY(0)' })),
 ]);
 // Social reveal animation
+/** @type {?} */
 var iconsState = animations.trigger('iconsState', [
     animations.state('isactive', animations.style({ visibility: 'visible', transform: 'translate(-6%)' })),
     animations.state('isnotactive', animations.style({ visibility: 'hidden', transform: 'translate(27%)' })),
@@ -1380,6 +1436,7 @@ var iconsState = animations.trigger('iconsState', [
     animations.transition('isnotactive => isactive', animations.animate('200ms ease-out')),
 ]);
 // Reveal animation animation
+/** @type {?} */
 var socialsState = animations.trigger('socialsState', [
     animations.state('active', animations.style({ visibility: 'visible', transform: 'translateY(-100%)' })),
     animations.state('inactive', animations.style({ visibility: 'hidden', transform: 'translateY(0)' })),
@@ -1397,6 +1454,7 @@ var socialsState = animations.trigger('socialsState', [
 //   state('inactive', style({ transform: 'scale(0.9, 0.9)' })),
 // ]);
 // alerts
+/** @type {?} */
 var flyInOut = animations.trigger('flyInOut', [
     animations.state('inactive', animations.style({ display: 'none', opacity: 0.7 })),
     animations.state('active', animations.style({ opacity: 0.7 })),
@@ -1406,7 +1464,14 @@ var flyInOut = animations.trigger('flyInOut', [
 ]);
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @record
@@ -1423,17 +1488,22 @@ var CompleterListItemComponent = /** @class */ (function () {
             this.parts.push({ isMatch: false, text: this.text });
             return;
         }
-        var /** @type {?} */ matchStr = this.text.toLowerCase();
-        var /** @type {?} */ matchPos = matchStr.indexOf(this.searchStr.toLowerCase());
-        var /** @type {?} */ startIndex = 0;
+        /** @type {?} */
+        var matchStr = this.text.toLowerCase();
+        /** @type {?} */
+        var matchPos = matchStr.indexOf(this.searchStr.toLowerCase());
+        /** @type {?} */
+        var startIndex = 0;
         while (matchPos >= 0) {
-            var /** @type {?} */ matchText = this.text.slice(matchPos, matchPos + this.searchStr.length);
+            /** @type {?} */
+            var matchText = this.text.slice(matchPos, matchPos + this.searchStr.length);
             if (matchPos === 0) {
                 this.parts.push({ isMatch: true, text: matchText });
                 startIndex += this.searchStr.length;
             }
             else if (matchPos > 0) {
-                var /** @type {?} */ matchPart = this.text.slice(startIndex, matchPos);
+                /** @type {?} */
+                var matchPart = this.text.slice(startIndex, matchPos);
                 this.parts.push({ isMatch: false, text: matchPart });
                 this.parts.push({ isMatch: true, text: matchText });
                 startIndex += this.searchStr.length + matchPart.length;
@@ -1460,7 +1530,7 @@ CompleterListItemComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @record
@@ -1657,13 +1727,20 @@ MdbCompleterDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
-var MAX_CHARS = 524288; // the default max length per the html maxlength attribute
+/** @type {?} */
+var MAX_CHARS = 524288;
+// the default max length per the html maxlength attribute
+/** @type {?} */
 var MIN_SEARCH_LENGTH = 3;
+/** @type {?} */
 var PAUSE = 100;
+/** @type {?} */
 var TEXT_SEARCHING = 'Searching...';
+/** @type {?} */
 var TEXT_NO_RESULTS = 'No results found';
+/** @type {?} */
 var CLEAR_TIMEOUT = 50;
 /**
  * @param {?} value
@@ -1674,7 +1751,7 @@ function isNil(value) {
 }
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @abstract
@@ -1689,36 +1766,44 @@ var CompleterBaseData = /** @class */ (function (_super) {
      */
     CompleterBaseData.prototype.cancel = function () { };
     /**
+     * @template THIS
+     * @this {THIS}
      * @param {?} searchFields
-     * @return {?}
+     * @return {THIS}
      */
     CompleterBaseData.prototype.searchFields = function (searchFields) {
-        this._searchFields = searchFields;
-        return this;
+        ( /** @type {?} */(this))._searchFields = searchFields;
+        return ( /** @type {?} */(this));
     };
     /**
+     * @template THIS
+     * @this {THIS}
      * @param {?} titleField
-     * @return {?}
+     * @return {THIS}
      */
     CompleterBaseData.prototype.titleField = function (titleField) {
-        this._titleField = titleField;
-        return this;
+        ( /** @type {?} */(this))._titleField = titleField;
+        return ( /** @type {?} */(this));
     };
     /**
+     * @template THIS
+     * @this {THIS}
      * @param {?} descriptionField
-     * @return {?}
+     * @return {THIS}
      */
     CompleterBaseData.prototype.descriptionField = function (descriptionField) {
-        this._descriptionField = descriptionField;
-        return this;
+        ( /** @type {?} */(this))._descriptionField = descriptionField;
+        return ( /** @type {?} */(this));
     };
     /**
+     * @template THIS
+     * @this {THIS}
      * @param {?} imageField
-     * @return {?}
+     * @return {THIS}
      */
     CompleterBaseData.prototype.imageField = function (imageField) {
-        this._imageField = imageField;
-        return this;
+        ( /** @type {?} */(this))._imageField = imageField;
+        return ( /** @type {?} */(this));
     };
     /**
      * @param {?} data
@@ -1726,10 +1811,13 @@ var CompleterBaseData = /** @class */ (function (_super) {
      */
     CompleterBaseData.prototype.convertToItem = function (data) {
         // let image: string = null;
-        var /** @type {?} */ image = null;
-        var /** @type {?} */ formattedText;
+        /** @type {?} */
+        var image = null;
+        /** @type {?} */
+        var formattedText;
         // let formattedDesc: string;
-        var /** @type {?} */ formattedDesc;
+        /** @type {?} */
+        var formattedDesc;
         if (this._titleField) {
             formattedText = this.extractTitle(data);
         }
@@ -1745,12 +1833,12 @@ var CompleterBaseData = /** @class */ (function (_super) {
         if (isNil(formattedText)) {
             return null;
         }
-        return /** @type {?} */ ({
+        return ( /** @type {?} */({
             title: formattedText,
             description: formattedDesc,
             image: image,
             originalObject: data
-        });
+        }));
     };
     /**
      * @param {?} data
@@ -1759,11 +1847,14 @@ var CompleterBaseData = /** @class */ (function (_super) {
      */
     CompleterBaseData.prototype.extractMatches = function (data, term) {
         var _this = this;
-        var /** @type {?} */ matches = [];
-        var /** @type {?} */ searchFields = this._searchFields ? this._searchFields.split(',') : null;
+        /** @type {?} */
+        var matches = [];
+        /** @type {?} */
+        var searchFields = this._searchFields ? this._searchFields.split(',') : null;
         if (this._searchFields !== null && this._searchFields !== undefined && term !== '') {
             matches = data.filter(function (item) {
-                var /** @type {?} */ values = searchFields ?
+                /** @type {?} */
+                var values = searchFields ?
                     searchFields.map(function (searchField) { return _this.extractValue(item, searchField); }).filter(function (value) { return !!value; }) : [item];
                 return values.some(function (value) { return value.toString().toLowerCase().indexOf(term.toString().toLowerCase()) >= 0; });
             });
@@ -1792,12 +1883,14 @@ var CompleterBaseData = /** @class */ (function (_super) {
      * @return {?}
      */
     CompleterBaseData.prototype.extractValue = function (obj, key) {
-        var /** @type {?} */ keys;
-        var /** @type {?} */ result;
+        /** @type {?} */
+        var keys;
+        /** @type {?} */
+        var result;
         if (key) {
             keys = key.split('.');
             result = obj;
-            for (var /** @type {?} */ i = 0; i < keys.length; i++) {
+            for (var i = 0; i < keys.length; i++) {
                 if (result) {
                     result = result[keys[i]];
                 }
@@ -1813,11 +1906,14 @@ var CompleterBaseData = /** @class */ (function (_super) {
      * @return {?}
      */
     CompleterBaseData.prototype.processResults = function (matches) {
-        var /** @type {?} */ i;
-        var /** @type {?} */ results = [];
+        /** @type {?} */
+        var i;
+        /** @type {?} */
+        var results = [];
         if (matches && matches.length > 0) {
             for (i = 0; i < matches.length; i++) {
-                var /** @type {?} */ item = this.convertToItem(matches[i]);
+                /** @type {?} */
+                var item = this.convertToItem(matches[i]);
                 if (item) {
                     results.push(item);
                 }
@@ -1829,7 +1925,7 @@ var CompleterBaseData = /** @class */ (function (_super) {
 }(rxjs.Subject));
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var LocalData = /** @class */ (function (_super) {
     tslib_1.__extends(LocalData, _super);
@@ -1837,23 +1933,25 @@ var LocalData = /** @class */ (function (_super) {
         return _super.call(this) || this;
     }
     /**
+     * @template THIS
+     * @this {THIS}
      * @param {?} data
-     * @return {?}
+     * @return {THIS}
      */
     LocalData.prototype.data = function (data) {
         var _this = this;
         if (data instanceof rxjs.Observable) {
-            ((data)).subscribe(function (res) {
-                _this._data = res;
-                if (_this.savedTerm) {
-                    _this.search(_this.savedTerm);
+            (( /** @type {?} */(data))).subscribe(function (res) {
+                ( /** @type {?} */(_this))._data = res;
+                if (( /** @type {?} */(_this)).savedTerm) {
+                    ( /** @type {?} */(_this)).search(( /** @type {?} */(_this)).savedTerm);
                 }
             });
         }
         else {
-            this._data = /** @type {?} */ (data);
+            ( /** @type {?} */(this))._data = ( /** @type {?} */(data));
         }
-        return this;
+        return ( /** @type {?} */(this));
     };
     /**
      * @param {?} term
@@ -1865,10 +1963,12 @@ var LocalData = /** @class */ (function (_super) {
         }
         else {
             this.savedTerm = null;
-            var /** @type {?} */ matches = this.extractMatches(this._data, term);
+            /** @type {?} */
+            var matches = this.extractMatches(this._data, term);
             this.next(this.processResults(matches));
         }
     };
+    // public convertToItem(data: any): CompleterItem {
     /**
      * @param {?} data
      * @return {?}
@@ -1885,7 +1985,7 @@ LocalData.decorators = [
 LocalData.ctorParameters = function () { return []; };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var RemoteData = /** @class */ (function (_super) {
     tslib_1.__extends(RemoteData, _super);
@@ -1896,17 +1996,21 @@ var RemoteData = /** @class */ (function (_super) {
         var _this = _super.call(this) || this;
         _this.http = http$$1;
         _this.setToNullValue = null;
+        // private _urlFormater: (term: string) => string | any = null;
         _this._urlFormater = _this.setToNullValue;
+        // private _dataField: string = null;
         _this._dataField = null;
         return _this;
     }
     /**
+     * @template THIS
+     * @this {THIS}
      * @param {?} remoteUrl
-     * @return {?}
+     * @return {THIS}
      */
     RemoteData.prototype.remoteUrl = function (remoteUrl) {
-        this._remoteUrl = remoteUrl;
-        return this;
+        ( /** @type {?} */(this))._remoteUrl = remoteUrl;
+        return ( /** @type {?} */(this));
     };
     /**
      * @param {?} urlFormater
@@ -1945,7 +2049,8 @@ var RemoteData = /** @class */ (function (_super) {
         var _this = this;
         this.cancel();
         // let params = {};
-        var /** @type {?} */ url = '';
+        /** @type {?} */
+        var url = '';
         if (this._urlFormater) {
             url = this._urlFormater(term);
         }
@@ -1953,20 +2058,22 @@ var RemoteData = /** @class */ (function (_super) {
             url = this._remoteUrl + encodeURIComponent(term);
         }
         /*
-             * If requestOptions are provided, they will override anything set in headers.
-             *
-             * If no requestOptions are provided, a new RequestOptions object will be instantiated,
-             * and either the provided headers or a new Headers() object will be sent.
-             */
+         * If requestOptions are provided, they will override anything set in headers.
+         *
+         * If no requestOptions are provided, a new RequestOptions object will be instantiated,
+         * and either the provided headers or a new Headers() object will be sent.
+         */
         if (!this._requestOptions) {
             this._requestOptions = new http.RequestOptions();
             this._requestOptions.headers = this._headers || new http.Headers();
         }
         this.remoteSearch = this.http.get(url, this._requestOptions).pipe(operators.map(function (res) { return res.json(); }), operators.map(function (data) {
-            var /** @type {?} */ matches = _this.extractValue(data, _this._dataField);
+            /** @type {?} */
+            var matches = _this.extractValue(data, _this._dataField);
             return _this.extractMatches(matches, term);
         }), operators.map(function (matches) {
-            var /** @type {?} */ results = _this.processResults(matches);
+            /** @type {?} */
+            var results = _this.processResults(matches);
             _this.next(results);
             return results;
         }), operators.catchError(function (err) {
@@ -1984,6 +2091,7 @@ var RemoteData = /** @class */ (function (_super) {
             this.remoteSearch.unsubscribe();
         }
     };
+    // public convertToItem(data: any): CompleterItem {
     /**
      * @param {?} data
      * @return {?}
@@ -1995,7 +2103,7 @@ var RemoteData = /** @class */ (function (_super) {
 }(CompleterBaseData));
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var CompleterService = /** @class */ (function () {
     /**
@@ -2003,11 +2111,10 @@ var CompleterService = /** @class */ (function () {
      * @param {?} remoteDataFactory
      */
     function CompleterService(localDataFactory, // Using any instead of () => LocalData because on AoT errors
-    // Using any instead of () => LocalData because on AoT errors
     remoteDataFactory // Using any instead of () => LocalData because on AoT errors
     ) {
         this.localDataFactory = localDataFactory;
-        this.remoteDataFactory = remoteDataFactory; // Using any instead of () => LocalData because on AoT errors
+        this.remoteDataFactory = remoteDataFactory;
     }
     /**
      * @param {?} data
@@ -2018,7 +2125,8 @@ var CompleterService = /** @class */ (function () {
     CompleterService.prototype.local = function (data, searchFields, titleField) {
         if (searchFields === void 0) { searchFields = ''; }
         if (titleField === void 0) { titleField = ''; }
-        var /** @type {?} */ localData = this.localDataFactory();
+        /** @type {?} */
+        var localData = this.localDataFactory();
         return localData
             .data(data)
             .searchFields(searchFields)
@@ -2033,7 +2141,8 @@ var CompleterService = /** @class */ (function () {
     CompleterService.prototype.remote = function (url, searchFields, titleField) {
         if (searchFields === void 0) { searchFields = ''; }
         if (titleField === void 0) { titleField = ''; }
-        var /** @type {?} */ remoteData = this.remoteDataFactory();
+        /** @type {?} */
+        var remoteData = this.remoteDataFactory();
         return remoteData
             .remoteUrl(url)
             .searchFields(searchFields)
@@ -2051,9 +2160,11 @@ CompleterService.ctorParameters = function () { return [
 ]; };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 var noop = function () { };
+/** @type {?} */
 var COMPLETER_CONTROL_VALUE_ACCESSOR = {
     provide: forms.NG_VALUE_ACCESSOR,
     useExisting: core.forwardRef(function () { return CompleterComponent; }),
@@ -2414,7 +2525,7 @@ CompleterComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @record
@@ -2446,7 +2557,8 @@ var MdbDropdownDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbDropdownDirective.prototype.ngOnInit = function () {
-        var /** @type {?} */ css = getComputedStyle(this.el.nativeElement);
+        /** @type {?} */
+        var css = getComputedStyle(this.el.nativeElement);
         this.isScrollOn = css.maxHeight && css.overflowY === 'auto';
     };
     /**
@@ -2461,7 +2573,8 @@ var MdbDropdownDirective = /** @class */ (function () {
      */
     MdbDropdownDirective.prototype.ngAfterViewInit = function () {
         var _this = this;
-        var /** @type {?} */ autoHighlightIndex = this.completer.autoHighlightIndex;
+        /** @type {?} */
+        var autoHighlightIndex = this.completer.autoHighlightIndex;
         if (autoHighlightIndex) {
             setTimeout(function () {
                 _this.highlightRow(autoHighlightIndex);
@@ -2491,7 +2604,8 @@ var MdbDropdownDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbDropdownDirective.prototype.highlightRow = function (index) {
-        var /** @type {?} */ highlighted = this.rows.find(function (row) { return row.index === index; });
+        /** @type {?} */
+        var highlighted = this.rows.find(function (row) { return row.index === index; });
         if (index < 0) {
             if (this.currHighlighted) {
                 this.currHighlighted.row.setHighlighted(false);
@@ -2510,19 +2624,21 @@ var MdbDropdownDirective = /** @class */ (function () {
         this.currHighlighted.row.setHighlighted(true);
         this.completer.onHighlighted(this.currHighlighted.row.getDataItem());
         if (this.isScrollOn && this.currHighlighted) {
-            var /** @type {?} */ rowTop = this.dropdownRowTop();
+            /** @type {?} */
+            var rowTop = this.dropdownRowTop();
             if (rowTop < 0) {
                 this.dropdownScrollTopTo(rowTop - 1);
             }
             else {
-                var /** @type {?} */ row = this.currHighlighted.row.getNativeElement();
+                /** @type {?} */
+                var row = this.currHighlighted.row.getNativeElement();
                 if (this.dropdownHeight() < row.getBoundingClientRect().bottom) {
                     this.dropdownScrollTopTo(this.dropdownRowOffsetHeight(row));
                     if (this.el.nativeElement.getBoundingClientRect().bottom - this.dropdownRowOffsetHeight(row)
                         < row.getBoundingClientRect().top) {
                         this.dropdownScrollTopTo(row.getBoundingClientRect().top - (this.el.nativeElement.getBoundingClientRect().top
                             // + parseInt(getComputedStyle(this.el.nativeElement).paddingTop, 10)));
-                            + parseInt(/** @type {?} */ (getComputedStyle(this.el.nativeElement).paddingTop), 10)));
+                            + parseInt(( /** @type {?} */(getComputedStyle(this.el.nativeElement).paddingTop)), 10)));
                     }
                 }
             }
@@ -2556,7 +2672,8 @@ var MdbDropdownDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbDropdownDirective.prototype.nextRow = function () {
-        var /** @type {?} */ nextRowIndex = 0;
+        /** @type {?} */
+        var nextRowIndex = 0;
         if (this.currHighlighted) {
             nextRowIndex = this.currHighlighted.index + 1;
         }
@@ -2566,7 +2683,8 @@ var MdbDropdownDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbDropdownDirective.prototype.prevRow = function () {
-        var /** @type {?} */ nextRowIndex = -1;
+        /** @type {?} */
+        var nextRowIndex = -1;
         if (this.currHighlighted) {
             nextRowIndex = this.currHighlighted.index - 1;
         }
@@ -2586,7 +2704,7 @@ var MdbDropdownDirective = /** @class */ (function () {
         return this.currHighlighted.row.getNativeElement().getBoundingClientRect().top -
             (this.el.nativeElement.getBoundingClientRect().top +
                 // parseInt(getComputedStyle(this.el.nativeElement).paddingTop, 10));
-                parseInt(/** @type {?} */ (getComputedStyle(this.el.nativeElement).paddingTop), 10));
+                parseInt(( /** @type {?} */(getComputedStyle(this.el.nativeElement).paddingTop)), 10));
     };
     /**
      * @return {?}
@@ -2594,17 +2712,18 @@ var MdbDropdownDirective = /** @class */ (function () {
     MdbDropdownDirective.prototype.dropdownHeight = function () {
         return this.el.nativeElement.getBoundingClientRect().top +
             // parseInt(getComputedStyle(this.el.nativeElement).maxHeight, 10);
-            parseInt(/** @type {?} */ (getComputedStyle(this.el.nativeElement).maxHeight), 10);
+            parseInt(( /** @type {?} */(getComputedStyle(this.el.nativeElement).maxHeight)), 10);
     };
     /**
      * @param {?} row
      * @return {?}
      */
     MdbDropdownDirective.prototype.dropdownRowOffsetHeight = function (row) {
-        var /** @type {?} */ css = getComputedStyle(row);
+        /** @type {?} */
+        var css = getComputedStyle(row);
         return row.offsetHeight +
             // parseInt(css.marginTop, 10) + parseInt(css.marginBottom, 10);
-            parseInt(/** @type {?} */ (css.marginTop), 10) + parseInt(/** @type {?} */ (css.marginBottom), 10);
+            parseInt(( /** @type {?} */(css.marginTop)), 10) + parseInt(( /** @type {?} */(css.marginBottom)), 10);
     };
     return MdbDropdownDirective;
 }());
@@ -2623,17 +2742,25 @@ MdbDropdownDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 // keyboard events
+/** @type {?} */
 var KEY_DW = 40;
+/** @type {?} */
 var KEY_RT = 39;
+/** @type {?} */
 var KEY_UP = 38;
+/** @type {?} */
 var KEY_LF = 37;
+/** @type {?} */
 var KEY_ES = 27;
+/** @type {?} */
 var KEY_EN = 13;
+/** @type {?} */
 var KEY_TAB = 9;
 var MdbInputCompleteDirective = /** @class */ (function () {
+    // constructor( @Host() private completer: MdbCompleterDirective, private ngModel: NgModel, private el: ElementRef) {
     /**
      * @param {?} completer
      * @param {?} tempngModel
@@ -2652,6 +2779,7 @@ var MdbInputCompleteDirective = /** @class */ (function () {
         this.ngModelChange = new core.EventEmitter();
         this._searchStr = '';
         this._displayStr = '';
+        // private blurTimer: Subscription = null;
         this.blurTimer = null;
         this.ngModel = this.tempngModel;
         this.completer.selected.subscribe(function (item) {
@@ -2857,7 +2985,7 @@ MdbInputCompleteDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 // import { catchError } from 'rxjs/operators';
 var CtrListContext = /** @class */ (function () {
@@ -2882,9 +3010,7 @@ var MdbListDirective = /** @class */ (function () {
      * @param {?} viewContainer
      * @param {?} cd
      */
-    function MdbListDirective(
-    // @Host() private completer: MdbCompleterDirective,
-    tmpCompleter, templateRef, viewContainer, cd) {
+    function MdbListDirective(tmpCompleter, templateRef, viewContainer, cd) {
         this.tmpCompleter = tmpCompleter;
         this.templateRef = templateRef;
         this.viewContainer = viewContainer;
@@ -2893,9 +3019,14 @@ var MdbListDirective = /** @class */ (function () {
         this.mdbListPause = PAUSE;
         this.mdbListAutoMatch = false;
         this.mdbListAutoHighlight = false;
+        // private results: CompleterItem[] = [];
         this.setToNullValue = null;
+        // private term: string = null;
         this.term = null;
+        // private searching = false;
+        // private searchTimer: Subscription = null;
         this.searchTimer = null;
+        // private clearTimer: Subscription = null;
         this.clearTimer = null;
         this.ctx = new CtrListContext([], false, false, false);
         this._initialValue = null;
@@ -2918,6 +3049,9 @@ var MdbListDirective = /** @class */ (function () {
             this._dataService = newService;
             if (this._dataService) {
                 this._dataService
+                    // .catch(err => this.handleError(err))
+                    // .catch((err: any) => this.handleError(err))
+                    // .subscribe(results => {
                     .subscribe(function (results) {
                     try {
                         _this.ctx.searchInitialized = true;
@@ -2955,7 +3089,8 @@ var MdbListDirective = /** @class */ (function () {
             var _this = this;
             if (this._dataService && typeof this._dataService.convertToItem === 'function') {
                 setTimeout(function () {
-                    var /** @type {?} */ initialItem = _this._dataService.convertToItem(value);
+                    /** @type {?} */
+                    var initialItem = _this._dataService.convertToItem(value);
                     if (initialItem) {
                         _this.completer.onSelected(initialItem, false);
                     }
@@ -3054,6 +3189,19 @@ var MdbListDirective = /** @class */ (function () {
         this.term = term;
         this._dataService.search(term);
     };
+    // private handleError(error: any) {
+    //   this.ctx.searching = false;
+    //   let errMsg = 'search error';
+    //   if (error) {
+    //     errMsg = (error.message) ? error.message :
+    //       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+    //   }
+    //   if (console && console.error) {
+    //     console.error(errMsg); // log to console
+    //   }
+    //   this.refreshTemplate();
+    //   return observableThrowError(errMsg);
+    // }
     /**
      * @return {?}
      */
@@ -3074,7 +3222,8 @@ var MdbListDirective = /** @class */ (function () {
             return null;
         }
         // First try to find the exact term
-        var /** @type {?} */ bestMatch = this.ctx.results.findIndex(function (item) { return item.title.toLowerCase() === _this.term.toLocaleLowerCase(); });
+        /** @type {?} */
+        var bestMatch = this.ctx.results.findIndex(function (item) { return item.title.toLowerCase() === _this.term.toLocaleLowerCase(); });
         // If not try to find the first item that starts with the term
         if (bestMatch < 0) {
             bestMatch = this.ctx.results.findIndex(function (item) { return item.title.toLowerCase().startsWith(_this.term.toLocaleLowerCase()); });
@@ -3109,7 +3258,7 @@ MdbListDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MdbRowDirective = /** @class */ (function () {
     /**
@@ -3209,7 +3358,14 @@ MdbRowDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @return {?}
@@ -3228,11 +3384,13 @@ function remoteDataFactory(http$$1) {
         return new RemoteData(http$$1);
     };
 }
+/** @type {?} */
 var LocalDataFactoryProvider = { provide: LocalData, useFactory: localDataFactory };
+/** @type {?} */
 var RemoteDataFactoryProvider = { provide: RemoteData, useFactory: remoteDataFactory, deps: [http.Http] };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var AutocompleteModule = /** @class */ (function () {
     function AutocompleteModule() {
@@ -3273,7 +3431,11 @@ AutocompleteModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var CardRevealComponent = /** @class */ (function () {
     /**
@@ -3291,7 +3453,8 @@ var CardRevealComponent = /** @class */ (function () {
         this.socials = (this.socials === 'active') ? 'inactive' : 'active';
         setTimeout(function () {
             try {
-                var /** @type {?} */ height = _this.cardFront.nativeElement.offsetHeight;
+                /** @type {?} */
+                var height = _this.cardFront.nativeElement.offsetHeight;
                 _this._r.setStyle(_this.cardReveal.nativeElement.firstElementChild, 'height', height + 'px');
                 _this._r.setStyle(_this.cardOverflow.nativeElement, 'height', height + 'px');
             }
@@ -3318,7 +3481,7 @@ CardRevealComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var CardRotatingComponent = /** @class */ (function () {
     function CardRotatingComponent() {
@@ -3340,7 +3503,7 @@ CardRotatingComponent.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var CardsModule = /** @class */ (function () {
     function CardsModule() {
@@ -3362,7 +3525,7 @@ CardsModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MdbDateFormatDirective = /** @class */ (function () {
     function MdbDateFormatDirective() {
@@ -3374,8 +3537,10 @@ var MdbDateFormatDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbDateFormatDirective.prototype.onInput = function (event) {
-        var /** @type {?} */ currentValue = event.target.value;
-        var /** @type {?} */ newValue = this.getFormattedDate(currentValue);
+        /** @type {?} */
+        var currentValue = event.target.value;
+        /** @type {?} */
+        var newValue = this.getFormattedDate(currentValue);
         event.target.value = newValue;
     };
     /**
@@ -3395,7 +3560,8 @@ var MdbDateFormatDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbDateFormatDirective.prototype.setResultLength = function () {
-        var /** @type {?} */ resLength = 0;
+        /** @type {?} */
+        var resLength = 0;
         this.format.forEach(function (value) {
             resLength += value.length;
         });
@@ -3407,8 +3573,10 @@ var MdbDateFormatDirective = /** @class */ (function () {
      */
     MdbDateFormatDirective.prototype.getFormattedDate = function (date) {
         var _this = this;
-        var /** @type {?} */ dateParts = this.getDateParts(date);
-        var /** @type {?} */ result = dateParts.map(function (part, index) {
+        /** @type {?} */
+        var dateParts = this.getDateParts(date);
+        /** @type {?} */
+        var result = dateParts.map(function (part, index) {
             return part = _this.formatDateParts(part, index);
         });
         return result.join(this.separator).slice(0, this.resultLength);
@@ -3419,8 +3587,10 @@ var MdbDateFormatDirective = /** @class */ (function () {
      */
     MdbDateFormatDirective.prototype.getDateParts = function (date) {
         date = this.getDigits(date).slice(0, this.resultLength - this.separatorsNumber);
-        var /** @type {?} */ parts = [];
-        var /** @type {?} */ partsIndex = {
+        /** @type {?} */
+        var parts = [];
+        /** @type {?} */
+        var partsIndex = {
             first: this.format[0].length,
             mid: this.format[0].length + this.format[1].length,
             last: this.resultLength
@@ -3462,7 +3632,8 @@ var MdbDateFormatDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbDateFormatDirective.prototype.getFormattedDay = function (value) {
-        var /** @type {?} */ dayFirstNum = parseInt(value.charAt(0), 10);
+        /** @type {?} */
+        var dayFirstNum = parseInt(value.charAt(0), 10);
         if (value) {
             if (dayFirstNum > 3 && dayFirstNum !== 0) {
                 return '0' + value.charAt(0);
@@ -3477,8 +3648,10 @@ var MdbDateFormatDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbDateFormatDirective.prototype.getFormattedMonth = function (value) {
-        var /** @type {?} */ monthFirstNum = parseInt(value.charAt(0), 10);
-        var /** @type {?} */ monthNum = parseInt(value, 10);
+        /** @type {?} */
+        var monthFirstNum = parseInt(value.charAt(0), 10);
+        /** @type {?} */
+        var monthNum = parseInt(value, 10);
         if (value) {
             if (monthFirstNum > 1 && monthFirstNum !== 0) {
                 return '0' + value.charAt(0);
@@ -3505,7 +3678,7 @@ MdbDateFormatDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @record
@@ -3616,8 +3789,10 @@ var MdbCreditCardDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbCreditCardDirective.prototype.formatInput = function (event) {
-        var /** @type {?} */ input = event.target.value;
-        var /** @type {?} */ formattedInput = this.getFormattedInput(input);
+        /** @type {?} */
+        var input = event.target.value;
+        /** @type {?} */
+        var formattedInput = this.getFormattedInput(input);
         event.target.value = formattedInput;
     };
     /**
@@ -3626,11 +3801,14 @@ var MdbCreditCardDirective = /** @class */ (function () {
      */
     MdbCreditCardDirective.prototype.getFormattedInput = function (value) {
         value = this.removeNonDigits(value);
-        var /** @type {?} */ card = this.findCardByNumber(value);
+        /** @type {?} */
+        var card = this.findCardByNumber(value);
         this.updateCurrentCardNames(card.name, card.fullName);
-        var /** @type {?} */ cardNumMaxLength;
+        /** @type {?} */
+        var cardNumMaxLength;
         if (this.hasStandardPattern(card)) {
-            var /** @type {?} */ matches = value.match(card.pattern);
+            /** @type {?} */
+            var matches = value.match(card.pattern);
             if (matches === null) {
                 return value;
             }
@@ -3639,7 +3817,8 @@ var MdbCreditCardDirective = /** @class */ (function () {
             return matches.join(this.separator);
         }
         else {
-            var /** @type {?} */ results = card.pattern.exec(value);
+            /** @type {?} */
+            var results = card.pattern.exec(value);
             if (results === null) {
                 return value;
             }
@@ -3684,7 +3863,8 @@ var MdbCreditCardDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbCreditCardDirective.prototype.findCardByNumber = function (value) {
-        var /** @type {?} */ cardType = this.cards.find(function (card) {
+        /** @type {?} */
+        var cardType = this.cards.find(function (card) {
             return card.re.test(value);
         });
         if (!cardType) {
@@ -3720,7 +3900,7 @@ MdbCreditCardDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MdbCvvDirective = /** @class */ (function () {
     function MdbCvvDirective() {
@@ -3738,8 +3918,10 @@ var MdbCvvDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbCvvDirective.prototype.formatInput = function (event) {
-        var /** @type {?} */ input = event.target.value;
-        var /** @type {?} */ newValue = this.getFormattedValue(input);
+        /** @type {?} */
+        var input = event.target.value;
+        /** @type {?} */
+        var newValue = this.getFormattedValue(input);
         event.target.value = newValue;
     };
     /**
@@ -3770,7 +3952,7 @@ MdbCvvDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var AutoFormatModule = /** @class */ (function () {
     function AutoFormatModule() {
@@ -3793,12 +3975,14 @@ AutoFormatModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /** @enum {number} */
-var KeyCode = { backspace: 8, delete: 46, };
-KeyCode[KeyCode.backspace] = "backspace";
-KeyCode[KeyCode.delete] = "delete";
+var KeyCode = {
+    backspace: 8, delete: 46,
+};
+KeyCode[KeyCode.backspace] = 'backspace';
+KeyCode[KeyCode.delete] = 'delete';
 var InputAutoFillDirective = /** @class */ (function () {
     /**
      * @param {?} el
@@ -3816,10 +4000,14 @@ var InputAutoFillDirective = /** @class */ (function () {
         if (!this.opts.enabled || evt.keyCode === KeyCode.backspace || evt.keyCode === KeyCode.delete) {
             return;
         }
-        var /** @type {?} */ val = this.getInputValue();
-        var /** @type {?} */ ews = this.endsWith(val, this.opts.separator);
-        var /** @type {?} */ parts = val.split(this.opts.separator);
-        var /** @type {?} */ idx = parts.length - 1;
+        /** @type {?} */
+        var val = this.getInputValue();
+        /** @type {?} */
+        var ews = this.endsWith(val, this.opts.separator);
+        /** @type {?} */
+        var parts = val.split(this.opts.separator);
+        /** @type {?} */
+        var idx = parts.length - 1;
         if (val.indexOf(this.opts.separator + this.opts.separator) !== -1 || idx > 2) {
             return;
         }
@@ -3918,7 +4106,7 @@ InputAutoFillDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var FocusDirective = /** @class */ (function () {
     /**
@@ -3927,6 +4115,7 @@ var FocusDirective = /** @class */ (function () {
     function FocusDirective(el) {
         this.el = el;
     }
+    // Focus to element: if value 0 = don't set focus, 1 = set only focus, 2 = set focus and set cursor position
     /**
      * @return {?}
      */
@@ -3958,7 +4147,126 @@ FocusDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var LocaleService = /** @class */ (function () {
     function LocaleService() {
@@ -4022,12 +4330,16 @@ LocaleService.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 var M = 'm';
 /* const MM = 'mm'; */
 /* const MMM = 'mmm'; */
+/** @type {?} */
 var D = 'd';
+/* const DD = 'dd'; */
+/* const YYYY = 'yyyy'; */
 var UtilService = /** @class */ (function () {
     function UtilService() {
     }
@@ -4046,19 +4358,26 @@ var UtilService = /** @class */ (function () {
      * @return {?}
      */
     UtilService.prototype.isDateValid = function (dateStr, dateFormat, minYear, maxYear, disableUntil, disableSince, disableWeekends, disableDays, disableDateRanges, monthLabels, enableDays) {
-        var /** @type {?} */ returnDate = { day: 0, month: 0, year: 0 };
-        var /** @type {?} */ daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        /** @type {?} */
+        var returnDate = { day: 0, month: 0, year: 0 };
+        /** @type {?} */
+        var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
         /* const isMonthStr: boolean = dateFormat.indexOf(MMM) !== -1; */
-        var /** @type {?} */ delimeters = this.getDateFormatDelimeters(dateFormat);
-        var /** @type {?} */ dateValue = this.getDateValue(dateStr, dateFormat, delimeters);
-        var /** @type {?} */ year = +dateValue[0].value;
-        var /** @type {?} */ month = this.getNumberByValue(dateValue[1]);
-        var /** @type {?} */ day = this.getNumberByValue(dateValue[2]);
+        var delimeters = this.getDateFormatDelimeters(dateFormat);
+        /** @type {?} */
+        var dateValue = this.getDateValue(dateStr, dateFormat, delimeters);
+        /** @type {?} */
+        var year = this.getNumberByValue(dateValue[0]);
+        /** @type {?} */
+        var month = this.getNumberByValue(dateValue[1]);
+        /** @type {?} */
+        var day = this.getNumberByValue(dateValue[2]);
         if (day !== -1 && month !== -1 && year !== -1) {
             if (year < minYear || year > maxYear || month < 1 || month > 12) {
                 return returnDate;
             }
-            var /** @type {?} */ date = { year: year, month: month, day: day };
+            /** @type {?} */
+            var date = { year: year, month: month, day: day };
             if (this.isDisabledDay(date, disableUntil, disableSince, disableWeekends, disableDays, disableDateRanges, enableDays)) {
                 return returnDate;
             }
@@ -4080,15 +4399,20 @@ var UtilService = /** @class */ (function () {
      * @return {?}
      */
     UtilService.prototype.getDateValue = function (dateStr, dateFormat, delimeters) {
-        var /** @type {?} */ del = delimeters[0];
+        /** @type {?} */
+        var del = delimeters[0];
         if (delimeters[0] !== delimeters[1]) {
             del = delimeters[0] + delimeters[1];
         }
-        var /** @type {?} */ re = new RegExp('[' + del + ']');
-        var /** @type {?} */ ds = dateStr.split(re);
-        var /** @type {?} */ df = dateFormat.split(re);
-        var /** @type {?} */ da = [];
-        for (var /** @type {?} */ i = 0; i < df.length; i++) {
+        /** @type {?} */
+        var re = new RegExp('[' + del + ']');
+        /** @type {?} */
+        var ds = dateStr.split(re);
+        /** @type {?} */
+        var df = dateFormat.split(re);
+        /** @type {?} */
+        var da = [];
+        for (var i = 0; i < df.length; i++) {
             if (df[i].indexOf('yy') !== -1) {
                 da[0] = { value: ds[i], format: df[i] };
             }
@@ -4108,7 +4432,7 @@ var UtilService = /** @class */ (function () {
      */
     UtilService.prototype.getMonthNumberByMonthName = function (df, monthLabels) {
         if (df.value) {
-            for (var /** @type {?} */ key = 1; key <= 12; key++) {
+            for (var key = 1; key <= 12; key++) {
                 if (df.value.toLowerCase() === monthLabels[key].toLowerCase()) {
                     return key;
                 }
@@ -4124,7 +4448,8 @@ var UtilService = /** @class */ (function () {
         if (!/^\d+$/.test(df.value)) {
             return -1;
         }
-        var /** @type {?} */ nbr = Number(df.value);
+        /** @type {?} */
+        var nbr = Number(df.value);
         if (df.format.length === 1 && df.value.length !== 1 && nbr < 10 || df.format.length === 1 && df.value.length !== 2 && nbr >= 10) {
             nbr = -1;
         }
@@ -4153,7 +4478,7 @@ var UtilService = /** @class */ (function () {
      * @return {?}
      */
     UtilService.prototype.isMonthLabelValid = function (monthLabel, monthLabels) {
-        for (var /** @type {?} */ key = 1; key <= 12; key++) {
+        for (var key = 1; key <= 12; key++) {
             if (monthLabel.toLowerCase() === monthLabels[key].toLowerCase()) {
                 return key;
             }
@@ -4179,9 +4504,11 @@ var UtilService = /** @class */ (function () {
      * @return {?}
      */
     UtilService.prototype.parseDatePartNumber = function (dateFormat, dateString, datePart) {
-        var /** @type {?} */ pos = this.getDatePartIndex(dateFormat, datePart);
+        /** @type {?} */
+        var pos = this.getDatePartIndex(dateFormat, datePart);
         if (pos !== -1) {
-            var /** @type {?} */ value = dateString.substring(pos, pos + datePart.length);
+            /** @type {?} */
+            var value = dateString.substring(pos, pos + datePart.length);
             if (!/^\d+$/.test(value)) {
                 return -1;
             }
@@ -4197,7 +4524,8 @@ var UtilService = /** @class */ (function () {
      * @return {?}
      */
     UtilService.prototype.parseDatePartMonthName = function (dateFormat, dateString, datePart, monthLabels) {
-        var /** @type {?} */ pos = this.getDatePartIndex(dateFormat, datePart);
+        /** @type {?} */
+        var pos = this.getDatePartIndex(dateFormat, datePart);
         if (pos !== -1) {
             return this.isMonthLabelValid(dateString.substring(pos, pos + datePart.length), monthLabels);
         }
@@ -4211,14 +4539,17 @@ var UtilService = /** @class */ (function () {
     UtilService.prototype.getDatePartIndex = function (dateFormat, datePart) {
         return dateFormat.indexOf(datePart);
     };
+    // parseDefaultMonth(monthString: string): IMyMonth {
     /**
      * @param {?} monthString
      * @return {?}
      */
     UtilService.prototype.parseDefaultMonth = function (monthString) {
-        var /** @type {?} */ month = { monthTxt: '', monthNbr: 0, year: 0 };
+        /** @type {?} */
+        var month = { monthTxt: '', monthNbr: 0, year: 0 };
         if (monthString !== '') {
-            var /** @type {?} */ split = monthString.split(monthString.match(/[^0-9]/)[0]);
+            /** @type {?} */
+            var split = monthString.split(monthString.match(/[^0-9]/)[0]);
             month.monthNbr = split[0].length === 2 ? parseInt(split[0], 0) : parseInt(split[1], 0);
             month.year = split[0].length === 2 ? parseInt(split[1], 0) : parseInt(split[0], 0);
         }
@@ -4241,7 +4572,8 @@ var UtilService = /** @class */ (function () {
                 return false;
             }
         }
-        var /** @type {?} */ dateMs = this.getTimeInMilliseconds(date);
+        /** @type {?} */
+        var dateMs = this.getTimeInMilliseconds(date);
         if (this.isInitializedDate(disableUntil) && dateMs <= this.getTimeInMilliseconds(disableUntil)) {
             return true;
         }
@@ -4249,7 +4581,8 @@ var UtilService = /** @class */ (function () {
             return true;
         }
         if (disableWeekends) {
-            var /** @type {?} */ dn = this.getDayNumber(date);
+            /** @type {?} */
+            var dn = this.getDayNumber(date);
             if (dn === 0 || dn === 6) {
                 return true;
             }
@@ -4288,7 +4621,8 @@ var UtilService = /** @class */ (function () {
             }
         }
         if (markWeekends && markWeekends.marked) {
-            var /** @type {?} */ dayNbr = this.getDayNumber(date);
+            /** @type {?} */
+            var dayNbr = this.getDayNumber(date);
             if (dayNbr === 0 || dayNbr === 6) {
                 return { marked: true, color: markWeekends.color };
             }
@@ -4300,7 +4634,8 @@ var UtilService = /** @class */ (function () {
      * @return {?}
      */
     UtilService.prototype.getWeekNumber = function (date) {
-        var /** @type {?} */ d = new Date(date.year, date.month - 1, date.day, 0, 0, 0, 0);
+        /** @type {?} */
+        var d = new Date(date.year, date.month - 1, date.day, 0, 0, 0, 0);
         d.setDate(d.getDate() + (d.getDay() === 0 ? -3 : 4 - d.getDay()));
         return Math.round(((d.getTime() - new Date(d.getFullYear(), 0, 4).getTime()) / 86400000) / 7) + 1;
     };
@@ -4339,7 +4674,8 @@ var UtilService = /** @class */ (function () {
      * @return {?}
      */
     UtilService.prototype.getDayNumber = function (date) {
-        var /** @type {?} */ d = new Date(date.year, date.month - 1, date.day, 0, 0, 0, 0);
+        /** @type {?} */
+        var d = new Date(date.year, date.month - 1, date.day, 0, 0, 0, 0);
         return d.getDay();
     };
     return UtilService;
@@ -4349,36 +4685,47 @@ UtilService.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 var MYDP_VALUE_ACCESSOR = {
     provide: forms.NG_VALUE_ACCESSOR,
     useExisting: core.forwardRef(function () { return MDBDatePickerComponent; }),
     multi: true
 };
 /** @enum {number} */
-var CalToggle = { Open: 1, CloseByDateSel: 2, CloseByCalBtn: 3, CloseByOutClick: 4, };
-CalToggle[CalToggle.Open] = "Open";
-CalToggle[CalToggle.CloseByDateSel] = "CloseByDateSel";
-CalToggle[CalToggle.CloseByCalBtn] = "CloseByCalBtn";
-CalToggle[CalToggle.CloseByOutClick] = "CloseByOutClick";
+var CalToggle = {
+    Open: 1, CloseByDateSel: 2, CloseByCalBtn: 3, CloseByOutClick: 4,
+};
+CalToggle[CalToggle.Open] = 'Open';
+CalToggle[CalToggle.CloseByDateSel] = 'CloseByDateSel';
+CalToggle[CalToggle.CloseByCalBtn] = 'CloseByCalBtn';
+CalToggle[CalToggle.CloseByOutClick] = 'CloseByOutClick';
 /** @enum {number} */
-var Year = { min: 1000, max: 9999, };
-Year[Year.min] = "min";
-Year[Year.max] = "max";
+var Year = {
+    min: 1000, max: 9999,
+};
+Year[Year.min] = 'min';
+Year[Year.max] = 'max';
 /** @enum {number} */
-var InputFocusBlur = { focus: 1, blur: 2, };
-InputFocusBlur[InputFocusBlur.focus] = "focus";
-InputFocusBlur[InputFocusBlur.blur] = "blur";
+var InputFocusBlur = {
+    focus: 1, blur: 2,
+};
+InputFocusBlur[InputFocusBlur.focus] = 'focus';
+InputFocusBlur[InputFocusBlur.blur] = 'blur';
 /** @enum {number} */
-var KeyCode$1 = { enter: 13, space: 32, };
-KeyCode$1[KeyCode$1.enter] = "enter";
-KeyCode$1[KeyCode$1.space] = "space";
+var KeyCode$1 = {
+    enter: 13, space: 32,
+};
+KeyCode$1[KeyCode$1.enter] = 'enter';
+KeyCode$1[KeyCode$1.space] = 'space';
 /** @enum {number} */
-var MonthId = { prev: 1, curr: 2, next: 3, };
-MonthId[MonthId.prev] = "prev";
-MonthId[MonthId.curr] = "curr";
-MonthId[MonthId.next] = "next";
+var MonthId = {
+    prev: 1, curr: 2, next: 3,
+};
+MonthId[MonthId.prev] = 'prev';
+MonthId[MonthId.curr] = 'curr';
+MonthId[MonthId.next] = 'next';
 var MDBDatePickerComponent = /** @class */ (function () {
     /**
      * @param {?} elem
@@ -4425,45 +4772,46 @@ var MDBDatePickerComponent = /** @class */ (function () {
         this.currMonthId = MonthId.curr;
         this.nextMonthId = MonthId.next;
         this.tmp = { year: this.getToday().year, month: this.getToday().month, day: this.getToday().day };
+        // Default options
         this.opts = {
-            startDate: /** @type {?} */ (''),
-            closeAfterSelect: /** @type {?} */ (false),
-            dayLabelsFull: /** @type {?} */ ({}),
-            dayLabels: /** @type {?} */ ({}),
-            monthLabelsFull: /** @type {?} */ ({}),
-            monthLabels: /** @type {?} */ ({}),
-            dateFormat: /** @type {?} */ (''),
-            showTodayBtn: /** @type {?} */ (true),
-            todayBtnTxt: /** @type {?} */ (''),
-            firstDayOfWeek: /** @type {?} */ (''),
-            sunHighlight: /** @type {?} */ (true),
-            markCurrentDay: /** @type {?} */ (true),
-            disableUntil: /** @type {?} */ ({ year: 0, month: 0, day: 0 }),
-            disableSince: /** @type {?} */ ({ year: 0, month: 0, day: 0 }),
-            disableDays: /** @type {?} */ ([]),
-            enableDays: /** @type {?} */ ([]),
-            markDates: /** @type {?} */ ([]),
-            markWeekends: /** @type {?} */ ({}),
-            disableDateRanges: /** @type {?} */ ([]),
-            disableWeekends: /** @type {?} */ (false),
-            showWeekNumbers: /** @type {?} */ (false),
-            height: /** @type {?} */ ('32px'),
-            width: /** @type {?} */ ('100%'),
-            selectionTxtFontSize: /** @type {?} */ ('1rem'),
-            showClearDateBtn: /** @type {?} */ (true),
-            alignSelectorRight: /** @type {?} */ (false),
-            disableHeaderButtons: /** @type {?} */ (true),
-            minYear: /** @type {?} */ (Year.min),
-            maxYear: /** @type {?} */ (Year.max),
-            componentDisabled: /** @type {?} */ (false),
-            showSelectorArrow: /** @type {?} */ (true),
-            ariaLabelInputField: /** @type {?} */ ('Date input field'),
-            ariaLabelClearDate: /** @type {?} */ ('Clear Date'),
-            ariaLabelOpenCalendar: /** @type {?} */ ('Open Calendar'),
-            ariaLabelPrevMonth: /** @type {?} */ ('Previous Month'),
-            ariaLabelNextMonth: /** @type {?} */ ('Next Month'),
-            ariaLabelPrevYear: /** @type {?} */ ('Previous Year'),
-            ariaLabelNextYear: /** @type {?} */ ('Next Year')
+            startDate: ( /** @type {?} */('')),
+            closeAfterSelect: ( /** @type {?} */(false)),
+            dayLabelsFull: ( /** @type {?} */({})),
+            dayLabels: ( /** @type {?} */({})),
+            monthLabelsFull: ( /** @type {?} */({})),
+            monthLabels: ( /** @type {?} */({})),
+            dateFormat: ( /** @type {?} */('')),
+            showTodayBtn: ( /** @type {?} */(true)),
+            todayBtnTxt: ( /** @type {?} */('')),
+            firstDayOfWeek: ( /** @type {?} */('')),
+            sunHighlight: ( /** @type {?} */(true)),
+            markCurrentDay: ( /** @type {?} */(true)),
+            disableUntil: ( /** @type {?} */({ year: 0, month: 0, day: 0 })),
+            disableSince: ( /** @type {?} */({ year: 0, month: 0, day: 0 })),
+            disableDays: ( /** @type {?} */([])),
+            enableDays: ( /** @type {?} */([])),
+            markDates: ( /** @type {?} */([])),
+            markWeekends: ( /** @type {?} */({})),
+            disableDateRanges: ( /** @type {?} */([])),
+            disableWeekends: ( /** @type {?} */(false)),
+            showWeekNumbers: ( /** @type {?} */(false)),
+            height: ( /** @type {?} */('32px')),
+            width: ( /** @type {?} */('100%')),
+            selectionTxtFontSize: ( /** @type {?} */('1rem')),
+            showClearDateBtn: ( /** @type {?} */(true)),
+            alignSelectorRight: ( /** @type {?} */(false)),
+            disableHeaderButtons: ( /** @type {?} */(true)),
+            minYear: ( /** @type {?} */(Year.min)),
+            maxYear: ( /** @type {?} */(Year.max)),
+            componentDisabled: ( /** @type {?} */(false)),
+            showSelectorArrow: ( /** @type {?} */(true)),
+            ariaLabelInputField: ( /** @type {?} */('Date input field')),
+            ariaLabelClearDate: ( /** @type {?} */('Clear Date')),
+            ariaLabelOpenCalendar: ( /** @type {?} */('Open Calendar')),
+            ariaLabelPrevMonth: ( /** @type {?} */('Previous Month')),
+            ariaLabelNextMonth: ( /** @type {?} */('Next Month')),
+            ariaLabelPrevYear: ( /** @type {?} */('Previous Year')),
+            ariaLabelNextYear: ( /** @type {?} */('Next Year'))
         };
         this.months = [];
         this.years = [];
@@ -4517,16 +4865,25 @@ var MDBDatePickerComponent = /** @class */ (function () {
             setTimeout(function () {
                 // Fix for visible date / time picker input when picker plate is visible.
                 try {
-                    var /** @type {?} */ openedPicker = document.querySelector('.picker--opened');
-                    var /** @type {?} */ allPickers = document.querySelectorAll('.picker');
+                    /** @type {?} */
+                    var openedPicker = document.querySelector('.picker--opened');
+                    /** @type {?} */
+                    var allPickers = document.querySelectorAll('.picker');
                     allPickers.forEach(function (element) {
                         _this.renderer.setStyle(element, 'z-index', '0');
                     });
-                    _this.renderer.setStyle(openedPicker, 'z-index', '1');
+                    _this.renderer.setStyle(openedPicker, 'z-index', '100');
                 }
                 catch (error) { }
             }, 0);
         }
+    };
+    /**
+     * @param {?} isDisabled
+     * @return {?}
+     */
+    MDBDatePickerComponent.prototype.setDisabledState = function (isDisabled) {
+        this.renderer.setProperty(this.dateInput.nativeElement, 'disabled', isDisabled);
     };
     /**
      * @return {?}
@@ -4540,7 +4897,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
         }
         catch (error) { }
         setTimeout(function () {
-            document.documentElement.style.removeProperty('overflow');
+            (( /** @type {?} */(document.documentElement))).style.removeProperty('overflow');
         }, 155);
         this.labelActive = false;
     };
@@ -4549,7 +4906,8 @@ var MDBDatePickerComponent = /** @class */ (function () {
      */
     MDBDatePickerComponent.prototype.setLocaleOptions = function () {
         var _this = this;
-        var /** @type {?} */ opts = this.localeService.getLocaleOptions(this.locale);
+        /** @type {?} */
+        var opts = this.localeService.getLocaleOptions(this.locale);
         Object.keys(opts).forEach(function (k) {
             _this.opts[k] = opts[k];
         });
@@ -4570,8 +4928,10 @@ var MDBDatePickerComponent = /** @class */ (function () {
      */
     MDBDatePickerComponent.prototype.setOptions = function () {
         var _this = this;
-        var /** @type {?} */ thisYear = new Date();
-        var /** @type {?} */ currentYear = thisYear.getFullYear();
+        /** @type {?} */
+        var thisYear = new Date();
+        /** @type {?} */
+        var currentYear = thisYear.getFullYear();
         if (this.options !== undefined) {
             Object.keys(this.options).forEach(function (k) {
                 _this.opts[k] = _this.options[k];
@@ -4606,8 +4966,9 @@ var MDBDatePickerComponent = /** @class */ (function () {
             this.clearDate();
         }
         else {
-            var /** @type {?} */ date = this.utilService.isDateValid(value, this.opts.dateFormat, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDays, this.opts.disableDateRanges, this.opts.monthLabels, this.opts.enableDays);
-            if (date.day !== 0 && date.month !== 0 && date.year !== 0) {
+            /** @type {?} */
+            var date = this.utilService.isDateValid(value, this.opts.dateFormat, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDays, this.opts.disableDateRanges, this.opts.monthLabels, this.opts.enableDays);
+            if (this.utilService.isInitializedDate(date)) {
                 this.selectDate(date);
             }
             else {
@@ -4627,7 +4988,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
     MDBDatePickerComponent.prototype.onFocusInput = function (event) {
         this.openBtnClicked();
         this.inputFocusBlur.emit({ reason: InputFocusBlur.focus, value: event.target.value });
-        document.documentElement.style.overflow = 'hidden';
+        (( /** @type {?} */(document.documentElement))).style.overflow = 'hidden';
         this.divFocus.nativeElement.focus();
     };
     /**
@@ -4645,7 +5006,8 @@ var MDBDatePickerComponent = /** @class */ (function () {
      */
     MDBDatePickerComponent.prototype.onUserMonthInput = function (value) {
         this.invalidMonth = false;
-        var /** @type {?} */ m = this.utilService.isMonthLabelValid(value, this.opts.monthLabels);
+        /** @type {?} */
+        var m = this.utilService.isMonthLabelValid(value, this.opts.monthLabels);
         if (m !== -1) {
             this.editMonth = false;
             if (m !== this.visibleMonth.monthNbr) {
@@ -4663,7 +5025,8 @@ var MDBDatePickerComponent = /** @class */ (function () {
      */
     MDBDatePickerComponent.prototype.onUserYearInput = function (value) {
         this.invalidYear = false;
-        var /** @type {?} */ y = this.utilService.isYearLabelValid(Number(value), this.opts.minYear, this.opts.maxYear);
+        /** @type {?} */
+        var y = this.utilService.isYearLabelValid(Number(value), this.opts.minYear, this.opts.maxYear);
         if (y !== -1) {
             this.editYear = false;
             if (y !== this.visibleMonth.year) {
@@ -4692,8 +5055,9 @@ var MDBDatePickerComponent = /** @class */ (function () {
         this.isTodayDisabled();
         this.dayIdx = this.weekDayOpts.indexOf(this.opts.firstDayOfWeek);
         if (this.dayIdx !== -1) {
-            var /** @type {?} */ idx = this.dayIdx;
-            for (var /** @type {?} */ i = 0; i < this.weekDayOpts.length; i++) {
+            /** @type {?} */
+            var idx = this.dayIdx;
+            for (var i = 0; i < this.weekDayOpts.length; i++) {
                 this.weekDays.push(this.opts.dayLabels[this.weekDayOpts[idx]]);
                 idx = this.weekDayOpts[idx] === 'sa' ? 0 : idx + 1;
             }
@@ -4748,14 +5112,15 @@ var MDBDatePickerComponent = /** @class */ (function () {
         }
         if (changes.hasOwnProperty('options')) {
             this.options = changes['options'].currentValue;
-            if (changes["options"].currentValue.startDate) {
-                this.onUserDateInput(changes["options"].currentValue.startDate);
+            if (changes.options.currentValue.startDate) {
+                this.onUserDateInput(changes.options.currentValue.startDate);
             }
         }
         this.weekDays.length = 0;
         this.parseOptions();
         if (changes.hasOwnProperty('defaultMonth')) {
-            var /** @type {?} */ dm = changes['defaultMonth'].currentValue;
+            /** @type {?} */
+            var dm = changes['defaultMonth'].currentValue;
             if (dm !== null && dm !== undefined && dm !== '') {
                 this.selectedMonth = this.parseSelectedMonth(dm);
             }
@@ -4764,7 +5129,8 @@ var MDBDatePickerComponent = /** @class */ (function () {
             }
         }
         if (changes.hasOwnProperty('selDate')) {
-            var /** @type {?} */ sd = changes['selDate'];
+            /** @type {?} */
+            var sd = changes['selDate'];
             if (sd.currentValue !== null &&
                 sd.currentValue !== undefined &&
                 sd.currentValue !== '' &&
@@ -4793,9 +5159,11 @@ var MDBDatePickerComponent = /** @class */ (function () {
         var _this = this;
         try {
             setTimeout(function () {
-                var /** @type {?} */ field = _this.renderer.createElement('input');
+                /** @type {?} */
+                var field = _this.renderer.createElement('input');
                 _this.renderer.appendChild(_this.elem.nativeElement, field);
-                var /** @type {?} */ inputReference = _this.elem.nativeElement.lastElementChild;
+                /** @type {?} */
+                var inputReference = _this.elem.nativeElement.lastElementChild;
                 _this.renderer.setAttribute(inputReference, 'type', 'text');
                 _this.renderer.setAttribute(inputReference, 'type', 'text');
                 _this.renderer.setStyle(inputReference, 'opacity', '0');
@@ -4861,10 +5229,14 @@ var MDBDatePickerComponent = /** @class */ (function () {
      */
     MDBDatePickerComponent.prototype.setVisibleMonth = function () {
         // Sets visible month of calendar
-        var /** @type {?} */ y = 0, /** @type {?} */ m = 0;
+        /** @type {?} */
+        var y = 0;
+        /** @type {?} */
+        var m = 0;
         if (!this.utilService.isInitializedDate(this.selectedDate)) {
             if (this.selectedMonth.year === 0 && this.selectedMonth.monthNbr === 0) {
-                var /** @type {?} */ today = this.getToday();
+                /** @type {?} */
+                var today = this.getToday();
                 y = today.year;
                 m = today.month;
             }
@@ -4886,7 +5258,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
      */
     MDBDatePickerComponent.prototype.monthList = function () {
         this.months = [];
-        for (var /** @type {?} */ i = 1; i <= 12; i++) {
+        for (var i = 1; i <= 12; i++) {
             this.months.push({ index: i, short: this.opts.monthLabels[i], label: this.opts.monthLabelsFull[i] });
         }
     };
@@ -4895,9 +5267,11 @@ var MDBDatePickerComponent = /** @class */ (function () {
      */
     MDBDatePickerComponent.prototype.yearsList = function () {
         this.years = [];
-        var /** @type {?} */ firstYear = this.opts.minYear;
-        var /** @type {?} */ lastYear = this.opts.maxYear;
-        for (var /** @type {?} */ i = firstYear; i <= lastYear; i++) {
+        /** @type {?} */
+        var firstYear = this.opts.minYear;
+        /** @type {?} */
+        var lastYear = this.opts.maxYear;
+        for (var i = firstYear; i <= lastYear; i++) {
             this.years.push(i);
         }
     };
@@ -4906,10 +5280,13 @@ var MDBDatePickerComponent = /** @class */ (function () {
      */
     MDBDatePickerComponent.prototype.prevMonth = function () {
         // Previous month from calendar
-        var /** @type {?} */ d = this.getDate(this.visibleMonth.year, this.visibleMonth.monthNbr, 1);
+        /** @type {?} */
+        var d = this.getDate(this.visibleMonth.year, this.visibleMonth.monthNbr, 1);
         d.setMonth(d.getMonth() - 1);
-        var /** @type {?} */ y = d.getFullYear();
-        var /** @type {?} */ m = d.getMonth() + 1;
+        /** @type {?} */
+        var y = d.getFullYear();
+        /** @type {?} */
+        var m = d.getMonth() + 1;
         this.visibleMonth = { monthTxt: this.monthText(m), monthNbr: m, year: y };
         this.generateCalendar(m, y, true);
     };
@@ -4918,10 +5295,13 @@ var MDBDatePickerComponent = /** @class */ (function () {
      */
     MDBDatePickerComponent.prototype.nextMonth = function () {
         // Next month from calendar
-        var /** @type {?} */ d = this.getDate(this.visibleMonth.year, this.visibleMonth.monthNbr, 1);
+        /** @type {?} */
+        var d = this.getDate(this.visibleMonth.year, this.visibleMonth.monthNbr, 1);
         d.setMonth(d.getMonth() + 1);
-        var /** @type {?} */ y = d.getFullYear();
-        var /** @type {?} */ m = d.getMonth() + 1;
+        /** @type {?} */
+        var y = d.getFullYear();
+        /** @type {?} */
+        var m = d.getMonth() + 1;
         this.visibleMonth = { monthTxt: this.monthText(m), monthNbr: m, year: y };
         this.generateCalendar(m, y, true);
     };
@@ -4946,7 +5326,8 @@ var MDBDatePickerComponent = /** @class */ (function () {
      */
     MDBDatePickerComponent.prototype.todayClicked = function () {
         // Today button clicked
-        var /** @type {?} */ today = this.getToday();
+        /** @type {?} */
+        var today = this.getToday();
         if (!this.utilService.isDisabledDay(today, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDays, this.opts.disableDateRanges, this.opts.enableDays)) {
             this.selectDate(today);
         }
@@ -4999,7 +5380,8 @@ var MDBDatePickerComponent = /** @class */ (function () {
      */
     MDBDatePickerComponent.prototype.clearDate = function () {
         // Clears the date and notifies parent using callbacks and value accessor
-        var /** @type {?} */ date = { year: 0, month: 0, day: 0 };
+        /** @type {?} */
+        var date = { year: 0, month: 0, day: 0 };
         this.dateChanged.emit({ date: date, jsdate: null, formatted: '', epoc: 0 });
         this.onChangeCb('');
         this.onTouchedCb();
@@ -5015,7 +5397,8 @@ var MDBDatePickerComponent = /** @class */ (function () {
     MDBDatePickerComponent.prototype.selectDate = function (date) {
         // Date selected, notifies parent using callbacks and value accessor
         this.tmp = date;
-        var /** @type {?} */ dateModel = this.getDateModel(date);
+        /** @type {?} */
+        var dateModel = this.getDateModel(date);
         // this.dateChanged.emit({ previousDate: this.selectionDayTxt, actualDate: dateModel });
         this.dateChanged.emit({
             date: date,
@@ -5075,18 +5458,39 @@ var MDBDatePickerComponent = /** @class */ (function () {
     MDBDatePickerComponent.prototype.formatDate = function (val) {
         // Returns formatted date string, if mmm is part of dateFormat returns month as a string
         // days
-        var /** @type {?} */ d = val.day; // 1 - 31
-        var /** @type {?} */ dd = this.preZero(val.day); // 01 - 31
-        var /** @type {?} */ ddd = this.opts.dayLabels[this.getWeekday(val)]; // Sun-Sat
-        var /** @type {?} */ dddd = this.opts.dayLabelsFull[this.getWeekday(val)]; // Sunday – Saturday
-        var /** @type {?} */ m = val.month; // 1 - 12
-        var /** @type {?} */ mm = this.preZero(val.month); // 01 - 12
-        var /** @type {?} */ mmm = this.getMonthShort(val.month); // Jan - Dec
-        var /** @type {?} */ mmmm = this.getMonthFull(val.month); // January – December
-        var /** @type {?} */ yy = val.year.toString().length === 2 ? val.year : val.year.toString().slice(2, 4); // 00 - 99
-        var /** @type {?} */ yyyy = val.year;
-        var /** @type {?} */ toReplace = this.opts.dateFormat.split(/(d{1,4}|m{1,4}|y{4}|yy|!.)/g);
-        var /** @type {?} */ formatted = '';
+        /** @type {?} */
+        var d = val.day;
+        // 1 - 31
+        /** @type {?} */
+        var dd = this.preZero(val.day);
+        // 01 - 31
+        /** @type {?} */
+        var ddd = this.opts.dayLabels[this.getWeekday(val)];
+        // Sun-Sat
+        /** @type {?} */
+        var dddd = this.opts.dayLabelsFull[this.getWeekday(val)];
+        // Sunday – Saturday
+        /** @type {?} */
+        var m = val.month;
+        // 1 - 12
+        /** @type {?} */
+        var mm = this.preZero(val.month);
+        // 01 - 12
+        /** @type {?} */
+        var mmm = this.getMonthShort(val.month);
+        // Jan - Dec
+        /** @type {?} */
+        var mmmm = this.getMonthFull(val.month);
+        // January – December
+        /** @type {?} */
+        var yy = val.year.toString().length === 2 ? val.year : val.year.toString().slice(2, 4);
+        // 00 - 99
+        /** @type {?} */
+        var yyyy = val.year;
+        /** @type {?} */
+        var toReplace = this.opts.dateFormat.split(/(d{1,4}|m{1,4}|y{4}|yy|!.)/g);
+        /** @type {?} */
+        var formatted = '';
         toReplace.forEach(function (el) {
             switch (el) {
                 case 'dddd':
@@ -5161,11 +5565,13 @@ var MDBDatePickerComponent = /** @class */ (function () {
      */
     MDBDatePickerComponent.prototype.monthStartIdx = function (y, m) {
         // Month start index
-        var /** @type {?} */ d = new Date();
+        /** @type {?} */
+        var d = new Date();
         d.setDate(1);
         d.setMonth(m - 1);
         d.setFullYear(y);
-        var /** @type {?} */ idx = d.getDay() + this.sundayIdx();
+        /** @type {?} */
+        var idx = d.getDay() + this.sundayIdx();
         return idx >= 7 ? idx - 7 : idx;
     };
     /**
@@ -5184,7 +5590,8 @@ var MDBDatePickerComponent = /** @class */ (function () {
      */
     MDBDatePickerComponent.prototype.daysInPrevMonth = function (m, y) {
         // Return number of days of the previous month
-        var /** @type {?} */ d = this.getDate(y, m, 1);
+        /** @type {?} */
+        var d = this.getDate(y, m, 1);
         d.setMonth(d.getMonth() - 1);
         return this.daysInMonth(d.getMonth() + 1, d.getFullYear());
     };
@@ -5204,7 +5611,8 @@ var MDBDatePickerComponent = /** @class */ (function () {
      * @return {?}
      */
     MDBDatePickerComponent.prototype.getToday = function () {
-        var /** @type {?} */ date = new Date();
+        /** @type {?} */
+        var date = new Date();
         return { year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() };
     };
     /**
@@ -5247,20 +5655,29 @@ var MDBDatePickerComponent = /** @class */ (function () {
      */
     MDBDatePickerComponent.prototype.generateCalendar = function (m, y, notifyChange) {
         this.dates.length = 0;
-        var /** @type {?} */ today = this.getToday();
-        var /** @type {?} */ monthStart = this.monthStartIdx(y, m);
-        var /** @type {?} */ dInThisM = this.daysInMonth(m, y);
-        var /** @type {?} */ dInPrevM = this.daysInPrevMonth(m, y);
-        var /** @type {?} */ dayNbr = 1;
-        var /** @type {?} */ cmo = this.prevMonthId;
-        for (var /** @type {?} */ i = 1; i < 7; i++) {
-            var /** @type {?} */ week = [];
+        /** @type {?} */
+        var today = this.getToday();
+        /** @type {?} */
+        var monthStart = this.monthStartIdx(y, m);
+        /** @type {?} */
+        var dInThisM = this.daysInMonth(m, y);
+        /** @type {?} */
+        var dInPrevM = this.daysInPrevMonth(m, y);
+        /** @type {?} */
+        var dayNbr = 1;
+        /** @type {?} */
+        var cmo = this.prevMonthId;
+        for (var i = 1; i < 7; i++) {
+            /** @type {?} */
+            var week = [];
             if (i === 1) {
                 // First week
-                var /** @type {?} */ pm = dInPrevM - monthStart + 1;
+                /** @type {?} */
+                var pm = dInPrevM - monthStart + 1;
                 // Previous month
-                for (var /** @type {?} */ j = pm; j <= dInPrevM; j++) {
-                    var /** @type {?} */ date = { year: y, month: m - 1, day: j };
+                for (var j = pm; j <= dInPrevM; j++) {
+                    /** @type {?} */
+                    var date = { year: y, month: m - 1, day: j };
                     week.push({
                         dateObj: date, cmo: cmo, currDay: this.isCurrDay(j, m, y, cmo, today),
                         dayNbr: this.utilService.getDayNumber(date),
@@ -5270,9 +5687,11 @@ var MDBDatePickerComponent = /** @class */ (function () {
                 }
                 cmo = this.currMonthId;
                 // Current month
-                var /** @type {?} */ daysLeft = 7 - week.length;
-                for (var /** @type {?} */ j = 0; j < daysLeft; j++) {
-                    var /** @type {?} */ date = { year: y, month: m, day: dayNbr };
+                /** @type {?} */
+                var daysLeft = 7 - week.length;
+                for (var j = 0; j < daysLeft; j++) {
+                    /** @type {?} */
+                    var date = { year: y, month: m, day: dayNbr };
                     week.push({
                         dateObj: date, cmo: cmo, currDay: this.isCurrDay(dayNbr, m, y, cmo, today),
                         dayNbr: this.utilService.getDayNumber(date),
@@ -5284,13 +5703,14 @@ var MDBDatePickerComponent = /** @class */ (function () {
             }
             else {
                 // Rest of the weeks
-                for (var /** @type {?} */ j = 1; j < 8; j++) {
+                for (var j = 1; j < 8; j++) {
                     if (dayNbr > dInThisM) {
                         // Next month
                         dayNbr = 1;
                         cmo = this.nextMonthId;
                     }
-                    var /** @type {?} */ date = { year: y, month: cmo === this.currMonthId ? m : m + 1, day: dayNbr };
+                    /** @type {?} */
+                    var date = { year: y, month: cmo === this.currMonthId ? m : m + 1, day: dayNbr };
                     week.push({
                         dateObj: date, cmo: cmo, currDay: this.isCurrDay(dayNbr, m, y, cmo, today),
                         dayNbr: this.utilService.getDayNumber(date),
@@ -5300,7 +5720,8 @@ var MDBDatePickerComponent = /** @class */ (function () {
                     dayNbr++;
                 }
             }
-            var /** @type {?} */ weekNbr = this.opts.showWeekNumbers &&
+            /** @type {?} */
+            var weekNbr = this.opts.showWeekNumbers &&
                 this.opts.firstDayOfWeek === 'mo' ?
                 this.utilService.getWeekNumber(week[0].dateObj) : 0;
             this.dates.push({ week: week, weekNbr: weekNbr });
@@ -5338,9 +5759,11 @@ var MDBDatePickerComponent = /** @class */ (function () {
      */
     MDBDatePickerComponent.prototype.parseSelectedDate = function (selDate) {
         // Parse selDate value - it can be string or IMyDate object
-        var /** @type {?} */ date = { day: 0, month: 0, year: 0 };
+        /** @type {?} */
+        var date = { day: 0, month: 0, year: 0 };
         if (typeof selDate === 'string') {
-            var /** @type {?} */ sd = (selDate);
+            /** @type {?} */
+            var sd = ( /** @type {?} */(selDate));
             date.day = this.utilService.parseDatePartNumber(this.opts.dateFormat, sd, 'dd');
             date.month = this.opts.dateFormat.indexOf('mmm') !== -1
                 ? this.utilService.parseDatePartMonthName(this.opts.dateFormat, sd, 'mmm', this.opts.monthLabels)
@@ -5366,10 +5789,14 @@ var MDBDatePickerComponent = /** @class */ (function () {
      * @return {?}
      */
     MDBDatePickerComponent.prototype.setHeaderBtnDisabledState = function (m, y) {
-        var /** @type {?} */ dpm = false;
-        var /** @type {?} */ dpy = false;
-        var /** @type {?} */ dnm = false;
-        var /** @type {?} */ dny = false;
+        /** @type {?} */
+        var dpm = false;
+        /** @type {?} */
+        var dpy = false;
+        /** @type {?} */
+        var dnm = false;
+        /** @type {?} */
+        var dny = false;
         if (this.opts.disableHeaderButtons) {
             dpm = this.utilService.isMonthDisabledByDisableUntil({
                 year: m === 1 ? y - 1 : y,
@@ -5414,7 +5841,7 @@ MDBDatePickerComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'mdb-date-picker',
                 exportAs: 'mdbdatepicker',
-                template: "<!-- Line 27: Deleted (focus)=\"onFocusInput($event)\" for better use in Firefox. If other strange problems will occur, please paste it in line 27. --> <div class=\"mydp picker\" [ngClass]=\"{'picker--opened': showSelector}\" [ngStyle]=\"{'width': opts.width}\"> <div class=\"md-form\"> <label (click)=\"openBtnClicked()\" *ngIf=\"label.length > 0\" [ngClass]=\"{ 'active': checkActive(), 'disabled': opts.componentDisabled }\">{{ label }}</label> <input type=\"text\" class=\"form-control mydp-date\" [attr.aria-label]=\"opts.ariaLabelInputField\" (click)=\"openBtnClicked()\" [attr.maxlength]=\"opts.dateFormat.length\" [ngClass]=\"{ 'selectiondisabled': opts.componentDisabled, 'disabled': opts.componentDisabled }\" placeholder=\"{{ placeholder }}\" [ngModel]=\"selectionDayTxt\" (ngModelChange)=\"onUserDateInput($event)\" [value]=\"selectionDayTxt\" [ngStyle]=\"{ 'height': opts.height,  'font-size': opts.selectionTxtFontSize }\" (blur)=\"onBlurInput($event)\" [disabled]=\"opts.componentDisabled\" autocomplete=\"off\"> </div> <div class=\"selector picker__holder selectorarrow selectorarrowleft selectorarrowright\" #divFocus [ngClass]=\"{'alignselectorright': opts.alignSelectorRight}\" tabindex=\"0\"> <div class=\"picker__frame picker__box\" #pickerFrame> <div class=\"picker__header\"> <div class=\"picker__date-display\"> <div class=\"picker__weekday-display\"> {{ weekText(getWeekday(tmp)) }} </div> <div class=\"picker__month-display\"> <div>{{ monthText(tmp.month) }}</div> </div> <div class=\"picker__day-display\"> <div>{{ tmp.day }}</div> </div> <div class=\"picker__year-display\"> <div>{{ tmp.year }}</div> </div> </div> <select class=\"picker__select--year\" [(ngModel)]=\"visibleMonth.year\" (ngModelChange)=\"onUserYearInput($event)\" role=\"menu\" aria-label=\"Year selector\"> <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option> </select> <select class=\"picker__select--month\" [(ngModel)]=\"visibleMonth.monthTxt\" (ngModelChange)=\"onUserMonthInput($event)\" role=\"menu\" aria-label=\"Month selector\"> <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option> </select> <button class=\"picker__nav--prev\" data-nav=\"-1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Previous month\" (click)=\"prevMonth()\" [disabled]=\"prevMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled}\"></button> <button class=\"picker__nav--next\" data-nav=\"1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Next month\" (click)=\"nextMonth()\" [disabled]=\"nextMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled}\"></button> </div> <table class=\"picker__table\"> <thead> <tr> <th class=\"picker__weekday weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#</th> <th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th> </tr> </thead> <tbody> <tr *ngFor=\"let w of dates\"> <td class=\"picker__day daycellweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td> <td class=\"picker__day\" *ngFor=\"let d of w.week\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId&&!d.disabled, 'disabled': d.disabled, 'tablesingleday': d.cmo===currMonthId&&!d.disabled}\"> <div *ngIf=\"d.markedDate.marked\" class=\"markdate\" [ngStyle]=\"{'background-color': d.markedDate.color}\"></div> <div class=\"picker__day\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId,'picker__day--outfocus': (d.cmo===nextMonthId || d.cmo===prevMonthId), 'picker__day--today':d.currDay&&opts.markCurrentDay, 'picker__day--selected picker__day--highlighted':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId}\" (click)=\"!d.disabled&&cellClicked(d);$event.stopPropagation()\" (keydown)=\"cellKeyDown($event, d)\" tabindex=\"0\"> {{d.dateObj.day}} </div> </td> </tr> </tbody> </table> <div class=\"picker__footer\"> <button type=\"button\" *ngIf=\"opts.showTodayBtn\" class=\"picker__button--today\" (click)=\"todayClicked()\" role=\"button\" [attr.aria-label]=\"opts.todayBtnTxt\"> {{opts.todayBtnTxt}} </button> <button type=\"button\" *ngIf=\"opts.showClearDateBtn\" class=\"picker__button--clear\" (click)=\"removeBtnClicked()\" role=\"button\" [attr.aria-label]=\"opts.clearBtnTxt\"> {{opts.clearBtnTxt}} </button> <button type=\"button\" [ngClass]=\"{'ml-auto': !opts.showTodayBtn}\" class=\"picker__button--close\" (click)=\"showSelector = false; removeInlineStyle();\" role=\"button\" [attr.aria-label]=\"opts.closeBtnTxt\"> {{opts.closeBtnTxt}} </button> </div> </div> </div> </div>",
+                template: "<!-- Line 27: Deleted (focus)=\"onFocusInput($event)\" for better use in Firefox. If other strange problems will occur, please paste it in line 27. --> <div class=\"mydp picker\" [ngClass]=\"{'picker--opened': showSelector}\" [ngStyle]=\"{'width': opts.width}\"> <div class=\"md-form\"> <label (click)=\"openBtnClicked()\" *ngIf=\"label.length > 0\" [ngClass]=\"{ 'active': checkActive(), 'disabled': opts.componentDisabled }\">{{ label }}</label> <input #dateInput type=\"text\" class=\"form-control mydp-date\" [attr.aria-label]=\"opts.ariaLabelInputField\" (click)=\"openBtnClicked()\" [attr.maxlength]=\"opts.dateFormat.length\" [ngClass]=\"{ 'selectiondisabled': opts.componentDisabled, 'disabled': opts.componentDisabled }\" placeholder=\"{{ placeholder }}\" [ngModel]=\"selectionDayTxt\" (ngModelChange)=\"onUserDateInput($event)\" [value]=\"selectionDayTxt\" [ngStyle]=\"{ 'height': opts.height, 'font-size': opts.selectionTxtFontSize }\" (blur)=\"onBlurInput($event)\" [disabled]=\"opts.componentDisabled\" autocomplete=\"off\" [tabindex]=\"tabIndex\"> </div> <div class=\"selector picker__holder selectorarrow selectorarrowleft selectorarrowright\" #divFocus [ngClass]=\"{'alignselectorright': opts.alignSelectorRight}\" tabindex=\"0\"> <div class=\"picker__frame picker__box\" #pickerFrame> <div class=\"picker__header\"> <div class=\"picker__date-display\"> <div class=\"picker__weekday-display\"> {{ weekText(getWeekday(tmp)) }} </div> <div class=\"picker__month-display\"> <div>{{ monthText(tmp.month) }}</div> </div> <div class=\"picker__day-display\"> <div>{{ tmp.day }}</div> </div> <div class=\"picker__year-display\"> <div>{{ tmp.year }}</div> </div> </div> <select class=\"picker__select--year\" [(ngModel)]=\"visibleMonth.year\" (ngModelChange)=\"onUserYearInput($event)\" role=\"menu\" aria-label=\"Year selector\"> <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option> </select> <select class=\"picker__select--month\" [(ngModel)]=\"visibleMonth.monthTxt\" (ngModelChange)=\"onUserMonthInput($event)\" role=\"menu\" aria-label=\"Month selector\"> <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option> </select> <button class=\"picker__nav--prev\" data-nav=\"-1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Previous month\" (click)=\"prevMonth()\" [disabled]=\"prevMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled}\"></button> <button class=\"picker__nav--next\" data-nav=\"1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Next month\" (click)=\"nextMonth()\" [disabled]=\"nextMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled}\"></button> </div> <table class=\"picker__table\"> <thead> <tr> <th class=\"picker__weekday weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#</th> <th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th> </tr> </thead> <tbody> <tr *ngFor=\"let w of dates\"> <td class=\"picker__day daycellweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td> <td class=\"picker__day\" *ngFor=\"let d of w.week\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId&&!d.disabled, 'disabled': d.disabled, 'tablesingleday': d.cmo===currMonthId&&!d.disabled}\"> <div *ngIf=\"d.markedDate.marked\" class=\"markdate\" [ngStyle]=\"{'background-color': d.markedDate.color}\"></div> <div class=\"picker__day\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId,'picker__day--outfocus': (d.cmo===nextMonthId || d.cmo===prevMonthId), 'picker__day--today':d.currDay&&opts.markCurrentDay, 'picker__day--selected picker__day--highlighted':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId}\" (click)=\"!d.disabled&&cellClicked(d);$event.stopPropagation()\" (keydown)=\"cellKeyDown($event, d)\" tabindex=\"0\"> {{d.dateObj.day}} </div> </td> </tr> </tbody> </table> <div class=\"picker__footer\"> <button type=\"button\" *ngIf=\"opts.showTodayBtn\" class=\"picker__button--today\" (click)=\"todayClicked()\" role=\"button\" [attr.aria-label]=\"opts.todayBtnTxt\"> {{opts.todayBtnTxt}} </button> <button type=\"button\" *ngIf=\"opts.showClearDateBtn\" class=\"picker__button--clear\" (click)=\"removeBtnClicked()\" role=\"button\" [attr.aria-label]=\"opts.clearBtnTxt\"> {{opts.clearBtnTxt}} </button> <button type=\"button\" [ngClass]=\"{'ml-auto': !opts.showTodayBtn}\" class=\"picker__button--close\" (click)=\"showSelector = false; removeInlineStyle();\" role=\"button\" [attr.aria-label]=\"opts.closeBtnTxt\"> {{opts.closeBtnTxt}} </button> </div> </div> </div> </div>",
                 providers: [LocaleService, UtilService, MYDP_VALUE_ACCESSOR],
                 encapsulation: core.ViewEncapsulation.None
             },] },
@@ -5428,6 +5855,7 @@ MDBDatePickerComponent.ctorParameters = function () { return [
     { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
 ]; };
 MDBDatePickerComponent.propDecorators = {
+    tabIndex: [{ type: core.Input }],
     options: [{ type: core.Input }],
     locale: [{ type: core.Input }],
     defaultMonth: [{ type: core.Input }],
@@ -5442,11 +5870,12 @@ MDBDatePickerComponent.propDecorators = {
     calendarToggle: [{ type: core.Output }],
     inputFocusBlur: [{ type: core.Output }],
     divFocus: [{ type: core.ViewChild, args: ['divFocus',] }],
-    pickerFrame: [{ type: core.ViewChild, args: ['pickerFrame',] }]
+    pickerFrame: [{ type: core.ViewChild, args: ['pickerFrame',] }],
+    dateInput: [{ type: core.ViewChild, args: ['dateInput',] }]
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var DatepickerModule = /** @class */ (function () {
     function DatepickerModule() {
@@ -5462,7 +5891,7 @@ DatepickerModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var SimpleChartComponent = /** @class */ (function () {
     function SimpleChartComponent() {
@@ -5527,7 +5956,7 @@ SimpleChartComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var EasyPieChartComponent = /** @class */ (function () {
     /**
@@ -5540,7 +5969,8 @@ var EasyPieChartComponent = /** @class */ (function () {
         this.isBrowser = false;
         this.isBrowser = common.isPlatformBrowser(platformId);
         this.element = el;
-        var /** @type {?} */ options = {
+        /** @type {?} */
+        var options = {
             barColor: '#ef1e25',
             trackColor: '#f9f9f9',
             scaleColor: '#dfe0e0',
@@ -5561,12 +5991,14 @@ var EasyPieChartComponent = /** @class */ (function () {
      */
     EasyPieChartComponent.prototype.ngOnInit = function () {
         if (this.isBrowser) {
-            var /** @type {?} */ size = this.options.size;
+            /** @type {?} */
+            var size = this.options.size;
             this.element.nativeElement.innerHTML = '';
             this.pieChart = new EasyPieChart(this.element.nativeElement, this.options);
             this.pieChart.update(this.percent);
             // Positioning text in center of chart
-            var /** @type {?} */ percent = document.querySelector('.percent');
+            /** @type {?} */
+            var percent = document.querySelector('.percent');
             if (percent) {
                 this._r.setStyle(percent, 'line-height', size + 'px');
                 this._r.setStyle(percent, 'width', size + 'px');
@@ -5603,7 +6035,7 @@ EasyPieChartComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var ChartSimpleModule = /** @class */ (function () {
     function ChartSimpleModule() {
@@ -5623,7 +6055,7 @@ ChartSimpleModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @record
@@ -5638,10 +6070,10 @@ var UploadStatus = {
     Done: 2,
     Cancelled: 3,
 };
-UploadStatus[UploadStatus.Queue] = "Queue";
-UploadStatus[UploadStatus.Uploading] = "Uploading";
-UploadStatus[UploadStatus.Done] = "Done";
-UploadStatus[UploadStatus.Cancelled] = "Cancelled";
+UploadStatus[UploadStatus.Queue] = 'Queue';
+UploadStatus[UploadStatus.Uploading] = 'Uploading';
+UploadStatus[UploadStatus.Done] = 'Done';
+UploadStatus[UploadStatus.Cancelled] = 'Cancelled';
 /**
  * @record
  */
@@ -5662,9 +6094,12 @@ function humanizeBytes(bytes) {
     if (bytes === 0) {
         return '0 Byte';
     }
-    var /** @type {?} */ k = 1024;
-    var /** @type {?} */ sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB'];
-    var /** @type {?} */ i = Math.floor(Math.log(bytes) / Math.log(k));
+    /** @type {?} */
+    var k = 1024;
+    /** @type {?} */
+    var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB'];
+    /** @type {?} */
+    var i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 }
 var MDBUploaderService = /** @class */ (function () {
@@ -5694,24 +6129,28 @@ var MDBUploaderService = /** @class */ (function () {
      */
     MDBUploaderService.prototype.handleFiles = function (incomingFiles) {
         var _this = this;
-        var /** @type {?} */ allowedIncomingFiles = [].reduce.call(incomingFiles, function (acc, checkFile, i) {
-            var /** @type {?} */ futureQueueLength = acc.length + _this.queue.length + 1;
+        var _a;
+        /** @type {?} */
+        var allowedIncomingFiles = [].reduce.call(incomingFiles, function (acc, checkFile, i) {
+            /** @type {?} */
+            var futureQueueLength = acc.length + _this.queue.length + 1;
             if (_this.isContentTypeAllowed(checkFile.type) && futureQueueLength <= _this.maxUploads) {
                 acc = acc.concat(checkFile);
             }
             else {
-                var /** @type {?} */ rejectedFile = _this.makeUploadFile(checkFile, i);
+                /** @type {?} */
+                var rejectedFile = _this.makeUploadFile(checkFile, i);
                 _this.serviceEvents.emit({ type: 'rejected', file: rejectedFile });
             }
             return acc;
         }, []);
         (_a = this.queue).push.apply(_a, [].map.call(allowedIncomingFiles, function (file, i) {
-            var /** @type {?} */ uploadFile = _this.makeUploadFile(file, i);
+            /** @type {?} */
+            var uploadFile = _this.makeUploadFile(file, i);
             _this.serviceEvents.emit({ type: 'addedToQueue', file: uploadFile });
             return uploadFile;
         }));
         this.serviceEvents.emit({ type: 'allAddedToQueue' });
-        var _a;
     };
     /**
      * @param {?} input
@@ -5722,24 +6161,29 @@ var MDBUploaderService = /** @class */ (function () {
         return input.subscribe(function (event) {
             switch (event.type) {
                 case 'uploadFile':
-                    var /** @type {?} */ uploadFileIndex = _this.queue.findIndex(function (file) { return file === event.file; });
+                    /** @type {?} */
+                    var uploadFileIndex = _this.queue.findIndex(function (file) { return file === event.file; });
                     if (uploadFileIndex !== -1 && event.file) {
                         _this.uploadScheduler.next({ file: _this.queue[uploadFileIndex], event: event });
                     }
                     break;
                 case 'uploadAll':
-                    var /** @type {?} */ files = _this.queue.filter(function (file) { return file.progress.status === UploadStatus.Queue; });
+                    /** @type {?} */
+                    var files = _this.queue.filter(function (file) { return file.progress.status === UploadStatus.Queue; });
                     files.forEach(function (file) { return _this.uploadScheduler.next({ file: file, event: event }); });
                     break;
                 case 'cancel':
-                    var /** @type {?} */ id_1 = event.id || null;
+                    /** @type {?} */
+                    var id_1 = event.id || null;
                     if (!id_1) {
                         return;
                     }
-                    var /** @type {?} */ index = _this.subs.findIndex(function (sub) { return sub.id === id_1; });
+                    /** @type {?} */
+                    var index = _this.subs.findIndex(function (sub) { return sub.id === id_1; });
                     if (index !== -1 && _this.subs[index].sub) {
                         _this.subs[index].sub.unsubscribe();
-                        var /** @type {?} */ fileIndex = _this.queue.findIndex(function (file) { return file.id === id_1; });
+                        /** @type {?} */
+                        var fileIndex = _this.queue.findIndex(function (file) { return file.id === id_1; });
                         if (fileIndex !== -1) {
                             _this.queue[fileIndex].progress.status = UploadStatus.Cancelled;
                             _this.serviceEvents.emit({ type: 'cancelled', file: _this.queue[fileIndex] });
@@ -5751,7 +6195,8 @@ var MDBUploaderService = /** @class */ (function () {
                         if (sub.sub) {
                             sub.sub.unsubscribe();
                         }
-                        var /** @type {?} */ file = _this.queue.find(function (uploadFile) { return uploadFile.id === sub.id; });
+                        /** @type {?} */
+                        var file = _this.queue.find(function (uploadFile) { return uploadFile.id === sub.id; });
                         if (file) {
                             file.progress.status = UploadStatus.Cancelled;
                             _this.serviceEvents.emit({ type: 'cancelled', file: file });
@@ -5762,9 +6207,11 @@ var MDBUploaderService = /** @class */ (function () {
                     if (!event.id) {
                         return;
                     }
-                    var /** @type {?} */ i = _this.queue.findIndex(function (file) { return file.id === event.id; });
+                    /** @type {?} */
+                    var i = _this.queue.findIndex(function (file) { return file.id === event.id; });
                     if (i !== -1) {
-                        var /** @type {?} */ file = _this.queue[i];
+                        /** @type {?} */
+                        var file = _this.queue[i];
                         _this.queue.splice(i, 1);
                         _this.serviceEvents.emit({ type: 'removed', file: file });
                     }
@@ -5785,7 +6232,8 @@ var MDBUploaderService = /** @class */ (function () {
     MDBUploaderService.prototype.startUpload = function (upload) {
         var _this = this;
         return new rxjs.Observable(function (observer) {
-            var /** @type {?} */ sub = _this.uploadFile(upload.file, upload.event)
+            /** @type {?} */
+            var sub = _this.uploadFile(upload.file, upload.event)
                 .subscribe(function (output) {
                 observer.next(output);
             }, function (err) {
@@ -5805,19 +6253,30 @@ var MDBUploaderService = /** @class */ (function () {
     MDBUploaderService.prototype.uploadFile = function (file, event) {
         var _this = this;
         return new rxjs.Observable(function (observer) {
-            var /** @type {?} */ url = event.url || '';
-            var /** @type {?} */ method = event.method || 'POST';
-            var /** @type {?} */ data = event.data || {};
-            var /** @type {?} */ headers = event.headers || {};
-            var /** @type {?} */ xhr = new XMLHttpRequest();
-            var /** @type {?} */ time = new Date().getTime();
-            var /** @type {?} */ progressStartTime = (file.progress.data && file.progress.data.startTime) || time;
-            var /** @type {?} */ speed = 0;
-            var /** @type {?} */ eta = null;
+            /** @type {?} */
+            var url = event.url || '';
+            /** @type {?} */
+            var method = event.method || 'POST';
+            /** @type {?} */
+            var data = event.data || {};
+            /** @type {?} */
+            var headers = event.headers || {};
+            /** @type {?} */
+            var xhr = new XMLHttpRequest();
+            /** @type {?} */
+            var time = new Date().getTime();
+            /** @type {?} */
+            var progressStartTime = (file.progress.data && file.progress.data.startTime) || time;
+            /** @type {?} */
+            var speed = 0;
+            /** @type {?} */
+            var eta = null;
             xhr.upload.addEventListener('progress', function (e) {
                 if (e.lengthComputable) {
-                    var /** @type {?} */ percentage = Math.round((e.loaded * 100) / e.total);
-                    var /** @type {?} */ diff = new Date().getTime() - time;
+                    /** @type {?} */
+                    var percentage = Math.round((e.loaded * 100) / e.total);
+                    /** @type {?} */
+                    var diff = new Date().getTime() - time;
                     speed = Math.round(e.loaded / diff * 1000);
                     progressStartTime = (file.progress.data && file.progress.data.startTime) || new Date().getTime();
                     eta = Math.ceil((e.total - e.loaded) / speed);
@@ -5842,7 +6301,8 @@ var MDBUploaderService = /** @class */ (function () {
             });
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
-                    var /** @type {?} */ speedAverage = Math.round(file.size / (new Date().getTime() - progressStartTime) * 1000);
+                    /** @type {?} */
+                    var speedAverage = Math.round(file.size / (new Date().getTime() - progressStartTime) * 1000);
                     file.progress = {
                         status: UploadStatus.Done,
                         data: {
@@ -5870,8 +6330,10 @@ var MDBUploaderService = /** @class */ (function () {
             xhr.open(method, url, true);
             xhr.withCredentials = event.withCredentials ? true : false;
             try {
-                var /** @type {?} */ uploadFile_1 = (file.nativeFile);
-                var /** @type {?} */ uploadIndex = _this.queue.findIndex(function (outFile) { return outFile.nativeFile === uploadFile_1; });
+                /** @type {?} */
+                var uploadFile_1 = ( /** @type {?} */(file.nativeFile));
+                /** @type {?} */
+                var uploadIndex = _this.queue.findIndex(function (outFile) { return outFile.nativeFile === uploadFile_1; });
                 if (_this.queue[uploadIndex].progress.status === UploadStatus.Cancelled) {
                     observer.complete();
                 }
@@ -5984,7 +6446,7 @@ var MDBUploaderService = /** @class */ (function () {
 }());
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MDBFileDropDirective = /** @class */ (function () {
     /**
@@ -6029,7 +6491,9 @@ var MDBFileDropDirective = /** @class */ (function () {
         if (this.isServer) {
             return;
         }
-        this.uploadInput.unsubscribe();
+        if (this.uploadInput) {
+            this.uploadInput.unsubscribe();
+        }
     };
     /**
      * @param {?} e
@@ -6038,7 +6502,8 @@ var MDBFileDropDirective = /** @class */ (function () {
     MDBFileDropDirective.prototype.onDrop = function (e) {
         e.stopPropagation();
         e.preventDefault();
-        var /** @type {?} */ event = { type: 'drop' };
+        /** @type {?} */
+        var event = { type: 'drop' };
         this.uploadOutput.emit(event);
         this.upload.handleFiles(e.dataTransfer.files);
     };
@@ -6050,7 +6515,8 @@ var MDBFileDropDirective = /** @class */ (function () {
         if (!e) {
             return;
         }
-        var /** @type {?} */ event = { type: 'dragOver' };
+        /** @type {?} */
+        var event = { type: 'dragOver' };
         this.uploadOutput.emit(event);
     };
     /**
@@ -6061,7 +6527,8 @@ var MDBFileDropDirective = /** @class */ (function () {
         if (!e) {
             return;
         }
-        var /** @type {?} */ event = { type: 'dragOut' };
+        /** @type {?} */
+        var event = { type: 'dragOut' };
         this.uploadOutput.emit(event);
     };
     return MDBFileDropDirective;
@@ -6085,7 +6552,7 @@ MDBFileDropDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MDBFileSelectDirective = /** @class */ (function () {
     /**
@@ -6128,7 +6595,9 @@ var MDBFileSelectDirective = /** @class */ (function () {
             return;
         }
         this.el.removeEventListener('change', this.fileListener, false);
-        this.uploadInput.unsubscribe();
+        if (this.uploadInput) {
+            this.uploadInput.unsubscribe();
+        }
     };
     return MDBFileSelectDirective;
 }());
@@ -6148,7 +6617,7 @@ MDBFileSelectDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var FileInputModule = /** @class */ (function () {
     function FileInputModule() {
@@ -6169,7 +6638,7 @@ FileInputModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var CharCounterDirective = /** @class */ (function () {
     /**
@@ -6237,7 +6706,7 @@ CharCounterDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var CharCounterModule = /** @class */ (function () {
     function CharCounterModule() {
@@ -6258,7 +6727,7 @@ CharCounterModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var ImageModalComponent = /** @class */ (function () {
     /**
@@ -6296,7 +6765,8 @@ var ImageModalComponent = /** @class */ (function () {
     ImageModalComponent.prototype.toggleZoomed = function () {
         // this.zoomed = (this.zoomed === 'inactive') ? 'active' : 'inactive';
         // this.zoom = !this.zoom;
-        var /** @type {?} */ imgRef = this.element.nativeElement.lastElementChild.lastElementChild.firstElementChild;
+        /** @type {?} */
+        var imgRef = this.element.nativeElement.lastElementChild.lastElementChild.firstElementChild;
         if (!this.clicked) {
             this.renderer.setStyle(imgRef, 'transform', 'scale(1.0, 1.0');
             this.renderer.setStyle(imgRef, 'animate', '300ms ease-out');
@@ -6377,7 +6847,7 @@ var ImageModalComponent = /** @class */ (function () {
         }
         this.currentImageIndex = index;
         this.opened = true;
-        for (var /** @type {?} */ i = 0; i < this.modalImages.length; i++) {
+        for (var i = 0; i < this.modalImages.length; i++) {
             if (i === this.currentImageIndex) {
                 this.imgSrc = this.modalImages[i].img;
                 this.loading = false;
@@ -6400,8 +6870,10 @@ var ImageModalComponent = /** @class */ (function () {
         get: function () {
             if (this.isBrowser) {
                 if (navigator && navigator.userAgent && navigator.userAgent != null) {
-                    var /** @type {?} */ strUserAgent = navigator.userAgent.toLowerCase();
-                    var /** @type {?} */ arrMatches = strUserAgent.match(/ipad/);
+                    /** @type {?} */
+                    var strUserAgent = navigator.userAgent.toLowerCase();
+                    /** @type {?} */
+                    var arrMatches = strUserAgent.match(/ipad/);
                     if (arrMatches != null) {
                         return true;
                     }
@@ -6471,7 +6943,7 @@ ImageModalComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var LightBoxModule = /** @class */ (function () {
     function LightBoxModule() {
@@ -6487,7 +6959,7 @@ LightBoxModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var Diacritics = /** @class */ (function () {
     function Diacritics() {
@@ -6498,7 +6970,8 @@ var Diacritics = /** @class */ (function () {
      */
     Diacritics.strip = function (text) {
         var _this = this;
-        var /** @type {?} */ match = function (a) {
+        /** @type {?} */
+        var match = function (a) {
             return _this.DIACRITICS[a] || a;
         };
         return text.replace(/[^\u0000-\u007E]/g, match);
@@ -7348,7 +7821,14 @@ Diacritics.DIACRITICS = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var Option = /** @class */ (function () {
     /**
@@ -7401,20 +7881,26 @@ var Option = /** @class */ (function () {
 }());
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var OptionList = /** @class */ (function () {
     /**
      * @param {?} options
      */
     function OptionList(options) {
+        /* Consider using these for performance improvement. */
+        // private _selection: Array<Option>;
+        // private _filtered: Array<Option>;
+        // private _value: Array<string>;
+        // private _highlightedOption: Option = null;
         this._highlightedOption = null;
         this.setToNullValue = null;
         if (typeof options === 'undefined' || options === null) {
             options = [];
         }
         this._options = options.map(function (option) {
-            var /** @type {?} */ o = new Option(option);
+            /** @type {?} */
+            var o = new Option(option);
             if (option.disabled) {
                 o.disabled = true;
             }
@@ -7427,6 +7913,7 @@ var OptionList = /** @class */ (function () {
         this._hasShown = this._options.length > 0;
         this.highlight();
     }
+    // v0 and v1 are assumed not to be undefined or null.
     /**
      * @param {?} v0
      * @param {?} v1
@@ -7436,8 +7923,10 @@ var OptionList = /** @class */ (function () {
         if (v0.length !== v1.length) {
             return false;
         }
-        var /** @type {?} */ a = v0.slice().sort();
-        var /** @type {?} */ b = v1.slice().sort();
+        /** @type {?} */
+        var a = v0.slice().sort();
+        /** @type {?} */
+        var b = v1.slice().sort();
         return a.every(function (v, i) {
             return v === b[i];
         });
@@ -7542,15 +8031,18 @@ var OptionList = /** @class */ (function () {
      * @return {?}
      */
     OptionList.prototype.filter = function (term) {
-        var /** @type {?} */ anyShown = false;
+        /** @type {?} */
+        var anyShown = false;
         if (term.trim() === '') {
             this.resetFilter();
             anyShown = this.options.length > 0;
         }
         else {
             this.options.forEach(function (option) {
-                var /** @type {?} */ l = Diacritics.strip(option.label).toUpperCase();
-                var /** @type {?} */ t = Diacritics.strip(term).toUpperCase();
+                /** @type {?} */
+                var l = Diacritics.strip(option.label).toUpperCase();
+                /** @type {?} */
+                var t = Diacritics.strip(term).toUpperCase();
                 option.shown = l.indexOf(t) === 0;
                 if (option.shown) {
                     anyShown = true;
@@ -7584,7 +8076,8 @@ var OptionList = /** @class */ (function () {
      * @return {?}
      */
     OptionList.prototype.highlight = function () {
-        var /** @type {?} */ option = this.hasShownSelected() ?
+        /** @type {?} */
+        var option = this.hasShownSelected() ?
             this.getFirstShownSelected() : this.getFirstShown();
         this.highlightOption(option);
     };
@@ -7603,8 +8096,10 @@ var OptionList = /** @class */ (function () {
      * @return {?}
      */
     OptionList.prototype.highlightNextOption = function () {
-        var /** @type {?} */ shownOptions = this.filtered;
-        var /** @type {?} */ index = this.getHighlightedIndexFromList(shownOptions);
+        /** @type {?} */
+        var shownOptions = this.filtered;
+        /** @type {?} */
+        var index = this.getHighlightedIndexFromList(shownOptions);
         if (index > -1 && index < shownOptions.length - 1) {
             this.highlightOption(shownOptions[index + 1]);
         }
@@ -7613,8 +8108,10 @@ var OptionList = /** @class */ (function () {
      * @return {?}
      */
     OptionList.prototype.highlightPreviousOption = function () {
-        var /** @type {?} */ shownOptions = this.filtered;
-        var /** @type {?} */ index = this.getHighlightedIndexFromList(shownOptions);
+        /** @type {?} */
+        var shownOptions = this.filtered;
+        /** @type {?} */
+        var index = this.getHighlightedIndexFromList(shownOptions);
         if (index > 0) {
             this.highlightOption(shownOptions[index - 1]);
         }
@@ -7633,7 +8130,7 @@ var OptionList = /** @class */ (function () {
      * @return {?}
      */
     OptionList.prototype.getHighlightedIndexFromList = function (options) {
-        for (var /** @type {?} */ i = 0; i < options.length; i++) {
+        for (var i = 0; i < options.length; i++) {
             if (options[i].highlighted) {
                 return i;
             }
@@ -7703,7 +8200,7 @@ var OptionList = /** @class */ (function () {
 }());
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var SelectDropdownComponent = /** @class */ (function () {
     /**
@@ -7734,6 +8231,7 @@ var SelectDropdownComponent = /** @class */ (function () {
      * Event handlers. *
      * @return {?}
      */
+    // Angular life cycle hooks.
     SelectDropdownComponent.prototype.onkeyup = function () {
         this.hasOptionsItems = this._elementRef.nativeElement.childNodes[0].children[1].children[0].children.length >= 1 ? true : false;
     };
@@ -7765,7 +8263,8 @@ var SelectDropdownComponent = /** @class */ (function () {
         if (changes.hasOwnProperty('optionList')) {
             this.optionsReset();
         }
-        var /** @type {?} */ container = this._elementRef.nativeElement.classList;
+        /** @type {?} */
+        var container = this._elementRef.nativeElement.classList;
         setTimeout(function () { container.add('fadeInSelect'); }, 200);
     };
     /**
@@ -7806,6 +8305,7 @@ var SelectDropdownComponent = /** @class */ (function () {
             }
         }, 0);
     };
+    // Filter input (single select).
     /**
      * @return {?}
      */
@@ -7826,6 +8326,7 @@ var SelectDropdownComponent = /** @class */ (function () {
     SelectDropdownComponent.prototype.onSingleFilterKeydown = function (event) {
         this.singleFilterKeydown.emit(event);
     };
+    // Options list.
     /**
      * @param {?} event
      * @return {?}
@@ -7862,7 +8363,8 @@ var SelectDropdownComponent = /** @class */ (function () {
      */
     SelectDropdownComponent.prototype.getOptionStyle = function (option) {
         if (option.highlighted) {
-            var /** @type {?} */ optionStyle = {};
+            /** @type {?} */
+            var optionStyle = {};
             if (typeof this.highlightColor !== 'undefined') {
                 optionStyle['background-color'] = this.highlightColor;
             }
@@ -7887,16 +8389,25 @@ var SelectDropdownComponent = /** @class */ (function () {
      * @return {?}
      */
     SelectDropdownComponent.prototype.moveHighlightedIntoView = function () {
-        var /** @type {?} */ list = this.optionsList.nativeElement;
-        var /** @type {?} */ listHeight = list.offsetHeight;
-        var /** @type {?} */ itemIndex = this.optionList.getHighlightedIndex();
+        /** @type {?} */
+        var list = this.optionsList.nativeElement;
+        /** @type {?} */
+        var listHeight = list.offsetHeight;
+        /** @type {?} */
+        var itemIndex = this.optionList.getHighlightedIndex();
         if (itemIndex > -1) {
-            var /** @type {?} */ item = list.children[0].children[itemIndex];
-            var /** @type {?} */ itemHeight = item.offsetHeight;
-            var /** @type {?} */ itemTop = itemIndex * itemHeight;
-            var /** @type {?} */ itemBottom = itemTop + itemHeight;
-            var /** @type {?} */ viewTop = list.scrollTop;
-            var /** @type {?} */ viewBottom = viewTop + listHeight;
+            /** @type {?} */
+            var item = list.children[0].children[itemIndex];
+            /** @type {?} */
+            var itemHeight = item.offsetHeight;
+            /** @type {?} */
+            var itemTop = itemIndex * itemHeight;
+            /** @type {?} */
+            var itemBottom = itemTop + itemHeight;
+            /** @type {?} */
+            var viewTop = list.scrollTop;
+            /** @type {?} */
+            var viewBottom = viewTop + listHeight;
             if (itemBottom > viewBottom) {
                 list.scrollTop = itemBottom - listHeight;
             }
@@ -7910,9 +8421,12 @@ var SelectDropdownComponent = /** @class */ (function () {
      * @return {?}
      */
     SelectDropdownComponent.prototype.handleOptionsWheel = function (e) {
-        var /** @type {?} */ div = this.optionsList.nativeElement;
-        var /** @type {?} */ atTop = div.scrollTop === 0;
-        var /** @type {?} */ atBottom = div.offsetHeight + div.scrollTop === div.scrollHeight;
+        /** @type {?} */
+        var div = this.optionsList.nativeElement;
+        /** @type {?} */
+        var atTop = div.scrollTop === 0;
+        /** @type {?} */
+        var atBottom = div.offsetHeight + div.scrollTop === div.scrollHeight;
         if (atTop && e.deltaY < 0) {
             e.preventDefault();
         }
@@ -7968,14 +8482,16 @@ SelectDropdownComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 var SELECT_VALUE_ACCESSOR = {
     provide: forms.NG_VALUE_ACCESSOR,
     useExisting: core.forwardRef(function () { return SelectComponent; }),
     multi: true
 };
 var SelectComponent = /** @class */ (function () {
+    // Angular lifecycle hooks.
     /**
      * @param {?} el
      * @param {?} renderer
@@ -8072,15 +8588,17 @@ var SelectComponent = /** @class */ (function () {
      */
     SelectComponent.prototype.ngOnChanges = function (changes) {
         if (changes.hasOwnProperty('options')) {
-            this.updateOptionsList(changes["options"].currentValue);
+            this.updateOptionsList(changes.options.currentValue);
             this.updateState();
             this.updateDropdownHeight();
             this.updatePosition();
-            this.changed.emit({ previousValue: changes["options"].previousValue, currentValue: changes["options"].currentValue });
+            this.changed.emit({ previousValue: changes.options.previousValue, currentValue: changes.options.currentValue });
         }
         if (changes.hasOwnProperty('noFilter')) {
-            var /** @type {?} */ numOptions = this.optionList.options.length;
-            var /** @type {?} */ minNumOptions = changes['noFilter'].currentValue;
+            /** @type {?} */
+            var numOptions = this.optionList.options.length;
+            /** @type {?} */
+            var minNumOptions = changes['noFilter'].currentValue;
             this.filterEnabled = numOptions >= minNumOptions;
         }
         if (changes.hasOwnProperty('placeholder')) {
@@ -8091,7 +8609,8 @@ var SelectComponent = /** @class */ (function () {
      * @return {?}
      */
     SelectComponent.prototype.setArrowUpIcon = function () {
-        var /** @type {?} */ div = this.renderer.createElement('div');
+        /** @type {?} */
+        var div = this.renderer.createElement('div');
         this.renderer.appendChild(this.selectionSpan.nativeElement.children[0], div);
         this.selectionSpan.nativeElement.children[0].lastChild.innerHTML = '&#x25BC;';
         this.renderer.addClass(this.selectionSpan.nativeElement.children[0].lastChild, 'toggle');
@@ -8100,7 +8619,8 @@ var SelectComponent = /** @class */ (function () {
      * @return {?}
      */
     SelectComponent.prototype.setArrowDownIcon = function () {
-        var /** @type {?} */ div = this.renderer.createElement('div');
+        /** @type {?} */
+        var div = this.renderer.createElement('div');
         this.renderer.appendChild(this.selectionSpan.nativeElement.children[0], div);
         this.selectionSpan.nativeElement.children[0].lastChild.innerHTML = '&#x25B2;';
         this.renderer.addClass(this.selectionSpan.nativeElement.children[0].lastChild, 'toggle');
@@ -8110,7 +8630,8 @@ var SelectComponent = /** @class */ (function () {
      * @return {?}
      */
     SelectComponent.prototype.isChild = function (elemnt) {
-        var /** @type {?} */ node = elemnt.parentNode;
+        /** @type {?} */
+        var node = elemnt.parentNode;
         while (node != null) {
             if (node === this.el.nativeElement) {
                 return true;
@@ -8119,6 +8640,7 @@ var SelectComponent = /** @class */ (function () {
         }
         return false;
     };
+    // Window.
     /**
      * @return {?}
      */
@@ -8135,6 +8657,7 @@ var SelectComponent = /** @class */ (function () {
     SelectComponent.prototype.onWindowResize = function () {
         this.updateWidth();
     };
+    // Select container.
     /**
      * @param {?} event
      * @return {?}
@@ -8180,6 +8703,7 @@ var SelectComponent = /** @class */ (function () {
     SelectComponent.prototype.onSelectContainerKeydown = function (event) {
         this.handleSelectContainerKeydown(event);
     };
+    // Dropdown container.
     /**
      * @param {?} option
      * @return {?}
@@ -8195,6 +8719,7 @@ var SelectComponent = /** @class */ (function () {
     SelectComponent.prototype.onDropdownClose = function (focus) {
         this.closeDropdown(focus);
     };
+    // Single filter input.
     /**
      * @return {?}
      */
@@ -8206,7 +8731,8 @@ var SelectComponent = /** @class */ (function () {
      * @return {?}
      */
     SelectComponent.prototype.onSingleFilterInput = function (term) {
-        var /** @type {?} */ hasShown = this.optionList.filter(term);
+        /** @type {?} */
+        var hasShown = this.optionList.filter(term);
         if (!hasShown) {
             this.noOptionsFound.emit(term);
         }
@@ -8218,6 +8744,7 @@ var SelectComponent = /** @class */ (function () {
     SelectComponent.prototype.onSingleFilterKeydown = function (event) {
         this.handleSingleFilterKeydown(event);
     };
+    // Multiple filter input.
     /**
      * @param {?} event
      * @return {?}
@@ -8229,8 +8756,10 @@ var SelectComponent = /** @class */ (function () {
         }
         this.updateFilterWidth();
         setTimeout(function () {
-            var /** @type {?} */ term = event.target.value;
-            var /** @type {?} */ hasShown = _this.optionList.filter(term);
+            /** @type {?} */
+            var term = event.target.value;
+            /** @type {?} */
+            var hasShown = _this.optionList.filter(term);
             if (!hasShown) {
                 _this.noOptionsFound.emit(term);
             }
@@ -8243,6 +8772,7 @@ var SelectComponent = /** @class */ (function () {
     SelectComponent.prototype.onMultipleFilterKeydown = function (event) {
         this.handleMultipleFilterKeydown(event);
     };
+    // Single clear select.
     /**
      * @param {?} event
      * @return {?}
@@ -8254,6 +8784,7 @@ var SelectComponent = /** @class */ (function () {
         this.placeholderView = this.placeholder;
         this.labelActive = false;
     };
+    // Multiple deselect option.
     /**
      * @param {?} option
      * @return {?}
@@ -8266,6 +8797,7 @@ var SelectComponent = /** @class */ (function () {
      * API. *
      * @return {?}
      */
+    // TODO fix issues with global click/key handler that closes the dropdown.
     SelectComponent.prototype.open = function () {
         this.openDropdown();
     };
@@ -8430,7 +8962,8 @@ var SelectComponent = /** @class */ (function () {
     SelectComponent.prototype.closeDropdown = function (focus) {
         var _this = this;
         if (focus === void 0) { focus = false; }
-        var /** @type {?} */ container = this.el.nativeElement.lastElementChild.classList;
+        /** @type {?} */
+        var container = this.el.nativeElement.lastElementChild.classList;
         this.renderer.removeStyle(this.el.nativeElement, 'z-index');
         container.remove('fadeInSelect');
         if (this.isOpen) {
@@ -8485,7 +9018,8 @@ var SelectComponent = /** @class */ (function () {
      */
     SelectComponent.prototype.clearSelection = function () {
         var _this = this;
-        var /** @type {?} */ selection = this.optionList.selection;
+        /** @type {?} */
+        var selection = this.optionList.selection;
         if (selection.length > 0) {
             this.optionList.clearSelection();
             this.valueChanged();
@@ -8514,7 +9048,8 @@ var SelectComponent = /** @class */ (function () {
      * @return {?}
      */
     SelectComponent.prototype.selectHighlightedOption = function () {
-        var /** @type {?} */ option = this.optionList.highlightedOption;
+        /** @type {?} */
+        var option = this.optionList.highlightedOption;
         if (option !== null) {
             this.selectOption(option);
             this.closeDropdown(true);
@@ -8524,9 +9059,11 @@ var SelectComponent = /** @class */ (function () {
      * @return {?}
      */
     SelectComponent.prototype.deselectLast = function () {
-        var /** @type {?} */ sel = this.optionList.selection;
+        /** @type {?} */
+        var sel = this.optionList.selection;
         if (sel.length > 0) {
-            var /** @type {?} */ option = sel[sel.length - 1];
+            /** @type {?} */
+            var option = sel[sel.length - 1];
             this.deselectOption(option);
             this.setMultipleFilterInput(option.label + ' ');
         }
@@ -8561,7 +9098,8 @@ var SelectComponent = /** @class */ (function () {
      */
     SelectComponent.prototype.handleSelectContainerKeydown = function (event) {
         var _this = this;
-        var /** @type {?} */ key = event.which;
+        /** @type {?} */
+        var key = event.which;
         if (this.isOpen) {
             if (key === this.KEYS.ESC ||
                 (key === this.KEYS.UP && event.altKey)) {
@@ -8592,11 +9130,11 @@ var SelectComponent = /** @class */ (function () {
             if (key === this.KEYS.ENTER || key === this.KEYS.SPACE ||
                 (key === this.KEYS.DOWN && event.altKey)) {
                 /* FIREFOX HACK:
-                         *
-                         * The setTimeout is added to prevent the enter keydown event
-                         * to be triggered for the filter input field, which causes
-                         * the dropdown to be closed again.
-                         */
+                 *
+                 * The setTimeout is added to prevent the enter keydown event
+                 * to be triggered for the filter input field, which causes
+                 * the dropdown to be closed again.
+                 */
                 setTimeout(function () { _this.openDropdown(); });
             }
         }
@@ -8606,7 +9144,8 @@ var SelectComponent = /** @class */ (function () {
      * @return {?}
      */
     SelectComponent.prototype.handleMultipleFilterKeydown = function (event) {
-        var /** @type {?} */ key = event.which;
+        /** @type {?} */
+        var key = event.which;
         if (key === this.KEYS.BACKSPACE) {
             if (this.hasSelected && this.filterEnabled &&
                 this.filterInput.nativeElement.value === '') {
@@ -8619,7 +9158,8 @@ var SelectComponent = /** @class */ (function () {
      * @return {?}
      */
     SelectComponent.prototype.handleSingleFilterKeydown = function (event) {
-        var /** @type {?} */ key = event.which;
+        /** @type {?} */
+        var key = event.which;
         if (key === this.KEYS.ESC || key === this.KEYS.TAB
             || key === this.KEYS.UP || key === this.KEYS.DOWN
             || key === this.KEYS.ENTER) {
@@ -8659,16 +9199,24 @@ var SelectComponent = /** @class */ (function () {
      * @return {?}
      */
     SelectComponent.prototype.updatePosition = function () {
-        var /** @type {?} */ elPosition = 0;
+        /** @type {?} */
+        var docEl = document.documentElement;
+        /** @type {?} */
+        var elPosition = 0;
         if (this.isBrowser) {
             elPosition = this.el.nativeElement.getBoundingClientRect().bottom + this.document.documentElement.scrollTop;
         }
-        var /** @type {?} */ selectSpan = this.selectionSpan.nativeElement;
+        /** @type {?} */
+        var selectSpan = this.selectionSpan.nativeElement;
         this.left = selectSpan.offsetLeft;
-        var /** @type {?} */ labelHeight = 20;
-        var /** @type {?} */ bottom = document.documentElement.scrollTop + document.documentElement.clientHeight;
-        var /** @type {?} */ dropdownHeight = this.dropdownMaxHeight > this.dropdownHeight ? this.dropdownHeight : this.dropdownMaxHeight;
-        var /** @type {?} */ selectHeight = dropdownHeight + selectSpan.offsetHeight + labelHeight;
+        /** @type {?} */
+        var labelHeight = 20;
+        /** @type {?} */
+        var bottom = docEl.scrollTop + docEl.clientHeight;
+        /** @type {?} */
+        var dropdownHeight = this.dropdownMaxHeight > this.dropdownHeight ? this.dropdownHeight : this.dropdownMaxHeight;
+        /** @type {?} */
+        var selectHeight = dropdownHeight + selectSpan.offsetHeight + labelHeight;
         if (elPosition + dropdownHeight >= bottom) {
             this.top = selectSpan.offsetHeight - selectHeight;
         }
@@ -8681,7 +9229,8 @@ var SelectComponent = /** @class */ (function () {
      */
     SelectComponent.prototype.updateFilterWidth = function () {
         if (typeof this.filterInput !== 'undefined') {
-            var /** @type {?} */ value = this.filterInput.nativeElement.value;
+            /** @type {?} */
+            var value = this.filterInput.nativeElement.value;
             this.filterInputWidth = value.length === 0 ?
                 1 + this.placeholderView.length * 10 : 1 + value.length * 10;
         }
@@ -8733,7 +9282,7 @@ SelectComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var SelectModule = /** @class */ (function () {
     function SelectModule() {
@@ -8757,17 +9306,27 @@ SelectModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 var CONTAINER_CLASS_NAME = 'spinning-preloader-container';
+/** @type {?} */
 var COMPLETE_CLASS_NAME = 'complete';
+/** @type {?} */
 var CONTAINER_QUERY = "." + CONTAINER_CLASS_NAME;
+/** @type {?} */
 var CONTAINER_NAME = CONTAINER_CLASS_NAME.split('-').join(' ');
+/** @type {?} */
 var TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE = "The " + CONTAINER_NAME + " was not found";
+/** @type {?} */
 var EMULATE_ELEMENT_NAME = 'div';
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MDBSpinningPreloader = /** @class */ (function () {
     /**
@@ -8823,8 +9382,10 @@ MDBSpinningPreloader.ctorParameters = function () { return [
 ]; };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+// TODO(josephperrott): Benchpress tests.
+// TODO(josephperrott): Add ARIA attributes for progressbar "for".
 /**
  * <md-progress-bar> component.
  */
@@ -8878,7 +9439,8 @@ var ProgressBarComponent = /** @class */ (function () {
      * @return {?}
      */
     ProgressBarComponent.prototype._primaryTransform = function () {
-        var /** @type {?} */ scale = this.value / 100;
+        /** @type {?} */
+        var scale = this.value / 100;
         return { transform: "scaleX(" + scale + ")" };
     };
     /**
@@ -8888,7 +9450,8 @@ var ProgressBarComponent = /** @class */ (function () {
      */
     ProgressBarComponent.prototype._bufferTransform = function () {
         if (this.mode === 'buffer') {
-            var /** @type {?} */ scale = this.bufferValue / 100;
+            /** @type {?} */
+            var scale = this.bufferValue / 100;
             return { transform: "scaleX(" + scale + ")" };
         }
     };
@@ -8922,29 +9485,36 @@ function clamp(v, min, max) {
 }
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+// TODO(josephperrott): Benchpress tests.
 /**
  * A single degree in radians.
+ * @type {?}
  */
 var DEGREE_IN_RADIANS = Math.PI / 180;
 /**
  * Duration of the indeterminate animation.
+ * @type {?}
  */
 var DURATION_INDETERMINATE = 667;
 /**
  * Duration of the indeterminate animation.
+ * @type {?}
  */
 var DURATION_DETERMINATE = 225;
 /**
  * Start animation value of the indeterminate animation
+ * @type {?}
  */
 var startIndeterminate = 3;
 /**
  * End animation value of the indeterminate animation
+ * @type {?}
  */
 var endIndeterminate = 80;
 /* Maximum angle for the arc. The angle can't be exactly 360, because the arc becomes hidden. */
+/** @type {?} */
 var MAX_ANGLE = 359.99 / 100;
 /**
  * Directive whose purpose is to add the mat- CSS styling to this selector.
@@ -9069,7 +9639,8 @@ var MdProgressSpinnerComponent = /** @class */ (function () {
          */
         set: function (v) {
             if (v != null && this.mode === 'determinate') {
-                var /** @type {?} */ newValue = clamp$1(v);
+                /** @type {?} */
+                var newValue = clamp$1(v);
                 this._animateCircle(this.value || 0, newValue);
                 this._value = newValue;
             }
@@ -9123,16 +9694,21 @@ var MdProgressSpinnerComponent = /** @class */ (function () {
         if (ease === void 0) { ease = linearEase; }
         if (duration === void 0) { duration = DURATION_DETERMINATE; }
         if (rotation === void 0) { rotation = 0; }
-        var /** @type {?} */ id = ++this._lastAnimationId;
-        var /** @type {?} */ startTime = Date.now();
-        var /** @type {?} */ changeInValue = animateTo - animateFrom;
+        /** @type {?} */
+        var id = ++this._lastAnimationId;
+        /** @type {?} */
+        var startTime = Date.now();
+        /** @type {?} */
+        var changeInValue = animateTo - animateFrom;
         // No need to animate it if the values are the same
         if (animateTo === animateFrom) {
             this._renderArc(animateTo, rotation);
         }
         else {
-            var /** @type {?} */ animation_1 = function () {
-                var /** @type {?} */ elapsedTime = Math.max(0, Math.min(Date.now() - startTime, duration));
+            /** @type {?} */
+            var animation_1 = function () {
+                /** @type {?} */
+                var elapsedTime = Math.max(0, Math.min(Date.now() - startTime, duration));
                 _this._renderArc(ease(elapsedTime, animateFrom, changeInValue, duration), rotation);
                 // Prevent overlapping animations by checking if a new animation has been called for and
                 // if the animation has lasted longer than the animation duration.
@@ -9151,15 +9727,21 @@ var MdProgressSpinnerComponent = /** @class */ (function () {
      */
     MdProgressSpinnerComponent.prototype._startIndeterminateAnimation = function () {
         var _this = this;
-        var /** @type {?} */ rotationStartPoint = 0;
-        var /** @type {?} */ start = startIndeterminate;
-        var /** @type {?} */ end = endIndeterminate;
-        var /** @type {?} */ duration = DURATION_INDETERMINATE;
-        var /** @type {?} */ animate$$1 = function () {
+        /** @type {?} */
+        var rotationStartPoint = 0;
+        /** @type {?} */
+        var start = startIndeterminate;
+        /** @type {?} */
+        var end = endIndeterminate;
+        /** @type {?} */
+        var duration = DURATION_INDETERMINATE;
+        /** @type {?} */
+        var animate$$1 = function () {
             _this._animateCircle(start, end, materialEase, duration, rotationStartPoint);
             // Prevent rotation from reaching Number.MAX_SAFE_INTEGER.
             rotationStartPoint = (rotationStartPoint + end) % 100;
-            var /** @type {?} */ temp = start;
+            /** @type {?} */
+            var temp = start;
             start = -end;
             end = -temp;
         };
@@ -9189,7 +9771,8 @@ var MdProgressSpinnerComponent = /** @class */ (function () {
     MdProgressSpinnerComponent.prototype._renderArc = function (currentValue, rotation) {
         if (rotation === void 0) { rotation = 0; }
         // Caches the path reference so it doesn't have to be looked up every time.
-        var /** @type {?} */ path = this._path = this._path || this._elementRef.nativeElement.querySelector('path');
+        /** @type {?} */
+        var path = this._path = this._path || this._elementRef.nativeElement.querySelector('path');
         // Ensure that the path was found. This may not be the case if the
         // animation function fires too early.
         if (path) {
@@ -9288,6 +9871,9 @@ MdSpinnerComponent.propDecorators = {
     true: [{ type: core.HostBinding, args: ['class.mat-spinner',] }]
 };
 /**
+* Module functions.
+*/
+/**
  * Clamps a value to be between 0 and 100.
  * @param {?} v
  * @return {?}
@@ -9303,7 +9889,8 @@ function clamp$1(v) {
  * @return {?}
  */
 function polarToCartesian(radius, pathRadius, angleInDegrees) {
-    var /** @type {?} */ angleInRadians = (angleInDegrees - 90) * DEGREE_IN_RADIANS;
+    /** @type {?} */
+    var angleInRadians = (angleInDegrees - 90) * DEGREE_IN_RADIANS;
     return (radius + (pathRadius * Math.cos(angleInRadians))) +
         ',' + (radius + (pathRadius * Math.sin(angleInRadians)));
 }
@@ -9327,10 +9914,14 @@ function linearEase(currentTime, startValue, changeInValue, duration) {
  * @return {?}
  */
 function materialEase(currentTime, startValue, changeInValue, duration) {
-    var /** @type {?} */ time = currentTime / duration;
-    var /** @type {?} */ timeCubed = Math.pow(time, 3);
-    var /** @type {?} */ timeQuad = Math.pow(time, 4);
-    var /** @type {?} */ timeQuint = Math.pow(time, 5);
+    /** @type {?} */
+    var time = currentTime / duration;
+    /** @type {?} */
+    var timeCubed = Math.pow(time, 3);
+    /** @type {?} */
+    var timeQuad = Math.pow(time, 4);
+    /** @type {?} */
+    var timeQuint = Math.pow(time, 5);
     return startValue + changeInValue * ((6 * timeQuint) + (-15 * timeQuad) + (10 * timeCubed));
 }
 /**
@@ -9344,15 +9935,24 @@ function materialEase(currentTime, startValue, changeInValue, duration) {
  *    percentage value provided.
  */
 function getSvgArc(currentValue, rotation) {
-    var /** @type {?} */ startPoint = rotation || 0;
-    var /** @type {?} */ radius = 50;
-    var /** @type {?} */ pathRadius = 40;
-    var /** @type {?} */ startAngle = startPoint * MAX_ANGLE;
-    var /** @type {?} */ endAngle = currentValue * MAX_ANGLE;
-    var /** @type {?} */ start = polarToCartesian(radius, pathRadius, startAngle);
-    var /** @type {?} */ end = polarToCartesian(radius, pathRadius, endAngle + startAngle);
-    var /** @type {?} */ arcSweep = endAngle < 0 ? 0 : 1;
-    var /** @type {?} */ largeArcFlag;
+    /** @type {?} */
+    var startPoint = rotation || 0;
+    /** @type {?} */
+    var radius = 50;
+    /** @type {?} */
+    var pathRadius = 40;
+    /** @type {?} */
+    var startAngle = startPoint * MAX_ANGLE;
+    /** @type {?} */
+    var endAngle = currentValue * MAX_ANGLE;
+    /** @type {?} */
+    var start = polarToCartesian(radius, pathRadius, startAngle);
+    /** @type {?} */
+    var end = polarToCartesian(radius, pathRadius, endAngle + startAngle);
+    /** @type {?} */
+    var arcSweep = endAngle < 0 ? 0 : 1;
+    /** @type {?} */
+    var largeArcFlag;
     if (endAngle < 0) {
         largeArcFlag = endAngle >= -180 ? 0 : 1;
     }
@@ -9363,8 +9963,10 @@ function getSvgArc(currentValue, rotation) {
 }
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+// todo: progress element conflict with bootstrap.css
+// todo: need hack: replace host element with div
 var ProgressDirective = /** @class */ (function () {
     function ProgressDirective() {
         this.addClass = true;
@@ -9421,8 +10023,10 @@ ProgressDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+// todo: number pipe
+// todo: use query from progress?
 var BarComponent = /** @class */ (function () {
     /**
      * @param {?} progress
@@ -9470,7 +10074,8 @@ var BarComponent = /** @class */ (function () {
      */
     BarComponent.prototype.recalculatePercentage = function () {
         this.percent = +(100 * this.value / this.progress.max).toFixed(2);
-        var /** @type {?} */ totalPercentage = this.progress.bars.reduce(function (total, bar) {
+        /** @type {?} */
+        var totalPercentage = this.progress.bars.reduce(function (total, bar) {
             return total + bar.percent;
         }, 0);
         if (totalPercentage > 100) {
@@ -9495,7 +10100,7 @@ BarComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var ProgressSpinnerComponent = /** @class */ (function () {
     /**
@@ -9514,8 +10119,10 @@ var ProgressSpinnerComponent = /** @class */ (function () {
      * @return {?}
      */
     ProgressSpinnerComponent.prototype.ngAfterViewInit = function () {
-        var /** @type {?} */ hostElem = this.el.nativeElement;
-        var /** @type {?} */ colorClass = this.spinnerColor;
+        /** @type {?} */
+        var hostElem = this.el.nativeElement;
+        /** @type {?} */
+        var colorClass = this.spinnerColor;
         this.addClass = 'spinner-rainbow';
         switch (colorClass) {
             case 'green':
@@ -9542,8 +10149,10 @@ var ProgressSpinnerComponent = /** @class */ (function () {
      */
     ProgressSpinnerComponent.prototype.spinerRun = function () {
         var _this = this;
-        var /** @type {?} */ counter = 0;
-        var /** @type {?} */ hostElem = this.el.nativeElement;
+        /** @type {?} */
+        var counter = 0;
+        /** @type {?} */
+        var hostElem = this.el.nativeElement;
         if (this.isBrowser) {
             setInterval(function () {
                 switch (counter) {
@@ -9589,7 +10198,7 @@ ProgressSpinnerComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var ProgressbarConfigComponent = /** @class */ (function () {
     function ProgressbarConfigComponent() {
@@ -9609,7 +10218,7 @@ ProgressbarConfigComponent.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var ProgressbarComponent = /** @class */ (function () {
     /**
@@ -9638,7 +10247,7 @@ ProgressbarComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var ProgressbarModule = /** @class */ (function () {
     function ProgressbarModule() {
@@ -9660,7 +10269,7 @@ ProgressbarModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MdProgressSpinnerModule = /** @class */ (function () {
     function MdProgressSpinnerModule() {
@@ -9695,7 +10304,7 @@ MdProgressSpinnerModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MdProgressBarModule = /** @class */ (function () {
     function MdProgressBarModule() {
@@ -9721,8 +10330,9 @@ MdProgressBarModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 var MATERIAL_MODULES = [
     MdProgressBarModule,
     MdProgressSpinnerModule,
@@ -9766,8 +10376,9 @@ ProgressBars.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 var RANGE_VALUE_ACCESOR = {
     provide: forms.NG_VALUE_ACCESSOR,
     useExisting: core.forwardRef(function () { return MdbRangeInputComponent; }),
@@ -9803,7 +10414,8 @@ var MdbRangeInputComponent = /** @class */ (function () {
      * @return {?}
      */
     MdbRangeInputComponent.prototype.oninput = function (event) {
-        var /** @type {?} */ value = +event.target.value;
+        /** @type {?} */
+        var value = +event.target.value;
         this.rangeValueChange.emit({ value: value });
         if (this.checkIfSafari()) {
             this.focusRangeInput();
@@ -9846,12 +10458,18 @@ var MdbRangeInputComponent = /** @class */ (function () {
             return this.range;
         }
         if (!this.default) {
-            var /** @type {?} */ newValue = event.target.value;
-            var /** @type {?} */ newRelativeGain = newValue - this.min;
-            var /** @type {?} */ inputWidth = this.input.nativeElement.offsetWidth;
-            var /** @type {?} */ thumbOffset = 0;
-            var /** @type {?} */ offsetAmmount = 15;
-            var /** @type {?} */ distanceFromMiddle = newRelativeGain - (this.steps / 2);
+            /** @type {?} */
+            var newValue = event.target.value;
+            /** @type {?} */
+            var newRelativeGain = newValue - this.min;
+            /** @type {?} */
+            var inputWidth = this.input.nativeElement.offsetWidth;
+            /** @type {?} */
+            var thumbOffset = 0;
+            /** @type {?} */
+            var offsetAmmount = 15;
+            /** @type {?} */
+            var distanceFromMiddle = newRelativeGain - (this.steps / 2);
             this.stepLength = inputWidth / this.steps;
             thumbOffset = (distanceFromMiddle / this.steps) * offsetAmmount;
             this.cloudRange = (this.stepLength * newRelativeGain) - thumbOffset;
@@ -9862,10 +10480,14 @@ var MdbRangeInputComponent = /** @class */ (function () {
      * @return {?}
      */
     MdbRangeInputComponent.prototype.checkIfSafari = function () {
-        var /** @type {?} */ isSafari = navigator.userAgent.indexOf('Safari') > -1;
-        var /** @type {?} */ isChrome = navigator.userAgent.indexOf('Chrome') > -1;
-        var /** @type {?} */ isFirefox = navigator.userAgent.indexOf('Firefox') > -1;
-        var /** @type {?} */ isOpera = navigator.userAgent.indexOf('Opera') > -1;
+        /** @type {?} */
+        var isSafari = navigator.userAgent.indexOf('Safari') > -1;
+        /** @type {?} */
+        var isChrome = navigator.userAgent.indexOf('Chrome') > -1;
+        /** @type {?} */
+        var isFirefox = navigator.userAgent.indexOf('Firefox') > -1;
+        /** @type {?} */
+        var isOpera = navigator.userAgent.indexOf('Opera') > -1;
         if (isSafari && !isChrome && !isFirefox && !isOpera) {
             return true;
         }
@@ -9947,7 +10569,7 @@ MdbRangeInputComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var RangeModule = /** @class */ (function () {
     function RangeModule() {
@@ -9963,7 +10585,7 @@ RangeModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var SidenavComponent = /** @class */ (function () {
     /**
@@ -9983,17 +10605,21 @@ var SidenavComponent = /** @class */ (function () {
      */
     SidenavComponent.prototype.ngAfterViewInit = function () {
         if (this.isBrowser) {
-            var /** @type {?} */ sidenav = this.el.nativeElement;
-            var /** @type {?} */ sidenavChildren = sidenav.children[0].children;
-            var /** @type {?} */ sidenavMask = this.el.nativeElement.querySelector('.sidenav-bg');
-            var /** @type {?} */ sidenavChildrenHeight = 0;
+            /** @type {?} */
+            var sidenav = this.el.nativeElement;
+            /** @type {?} */
+            var sidenavChildren = sidenav.children[0].children;
+            /** @type {?} */
+            var sidenavMask = this.el.nativeElement.querySelector('.sidenav-bg');
+            /** @type {?} */
+            var sidenavChildrenHeight = 0;
             if (sidenavMask) {
-                for (var /** @type {?} */ i = 0; i < sidenavChildren.length; i++) {
+                for (var i = 0; i < sidenavChildren.length; i++) {
                     if (sidenavChildren[i].classList.contains('sidenav-bg')) {
                         continue;
                     }
                     else {
-                        for (var /** @type {?} */ j = 0; j < sidenavChildren[i].children.length; j++) {
+                        for (var j = 0; j < sidenavChildren[i].children.length; j++) {
                             sidenavChildrenHeight += sidenavChildren[i].children[j].scrollHeight;
                         }
                     }
@@ -10286,7 +10912,7 @@ SidenavComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var SidenavModule = /** @class */ (function () {
     function SidenavModule() {
@@ -10308,7 +10934,7 @@ SidenavModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * Created by sebastianfuss on 02.09.16.
@@ -10331,30 +10957,41 @@ var PageScrollUtilService = /** @class */ (function () {
      * @return {?}
      */
     PageScrollUtilService.extractElementPosition = function (document, scrollTargetElement) {
-        var /** @type {?} */ body = document.body;
-        var /** @type {?} */ docEl = document.documentElement;
+        /** @type {?} */
+        var body = document.body;
+        /** @type {?} */
+        var docEl = document.documentElement;
         // const windowPageYOffset: number = document.defaultView && document.defaultView.pageYOffset || undefined;
-        var /** @type {?} */ windowPageYOffset = document.defaultView && /** @type {?} */ (document.defaultView.pageYOffset) || undefined;
+        /** @type {?} */
+        var windowPageYOffset = document.defaultView && ( /** @type {?} */(document.defaultView.pageYOffset)) || undefined;
         // const windowPageXOffset: number = document.defaultView && document.defaultView.pageXOffset || undefined;
-        var /** @type {?} */ windowPageXOffset = document.defaultView && /** @type {?} */ (document.defaultView.pageXOffset) || undefined;
-        var /** @type {?} */ scrollTop = windowPageYOffset || docEl.scrollTop || body.scrollTop;
-        var /** @type {?} */ scrollLeft = windowPageXOffset || docEl.scrollLeft || body.scrollLeft;
-        var /** @type {?} */ clientTop = docEl.clientTop || body.clientTop || 0;
-        var /** @type {?} */ clientLeft = docEl.clientLeft || body.clientLeft || 0;
+        /** @type {?} */
+        var windowPageXOffset = document.defaultView && ( /** @type {?} */(document.defaultView.pageXOffset)) || undefined;
+        /** @type {?} */
+        var scrollTop = windowPageYOffset || docEl.scrollTop || body.scrollTop;
+        /** @type {?} */
+        var scrollLeft = windowPageXOffset || docEl.scrollLeft || body.scrollLeft;
+        /** @type {?} */
+        var clientTop = docEl.clientTop || body.clientTop || 0;
+        /** @type {?} */
+        var clientLeft = docEl.clientLeft || body.clientLeft || 0;
         if (PageScrollUtilService.isUndefinedOrNull(scrollTargetElement)) {
             // No element found, so return the current position to not cause any change in scroll position
             return { top: scrollTop, left: scrollLeft };
         }
-        var /** @type {?} */ box = scrollTargetElement.getBoundingClientRect();
-        var /** @type {?} */ top = box.top + scrollTop - clientTop;
-        var /** @type {?} */ left = box.left + scrollLeft - clientLeft;
+        /** @type {?} */
+        var box = scrollTargetElement.getBoundingClientRect();
+        /** @type {?} */
+        var top = box.top + scrollTop - clientTop;
+        /** @type {?} */
+        var left = box.left + scrollLeft - clientLeft;
         return { top: Math.round(top), left: Math.round(left) };
     };
     return PageScrollUtilService;
 }());
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @abstract
@@ -10364,10 +11001,12 @@ var EasingLogic = /** @class */ (function () {
     }
     return EasingLogic;
 }());
+// @dynamic
 var PageScrollConfig = /** @class */ (function () {
     function PageScrollConfig() {
     }
     Object.defineProperty(PageScrollConfig, "defaultEasingLogic", {
+        // Getter and setter to avoid auto completion to suggest calling the method
         /**
          * @return {?}
          */
@@ -10455,7 +11094,7 @@ PageScrollConfig._easingLogic = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var PageScrollService = /** @class */ (function () {
     function PageScrollService() {
@@ -10467,10 +11106,11 @@ var PageScrollService = /** @class */ (function () {
                     // Non-interruptible anyway, so do not stop anything
                     return;
                 }
-                var /** @type {?} */ shouldStop = true;
+                /** @type {?} */
+                var shouldStop = true;
                 if (event.type === 'keyup') {
                     // Only stop if specific keys have been pressed, for all others don't stop anything
-                    if (PageScrollConfig._interruptKeys.indexOf(((event)).keyCode) === -1) {
+                    if (PageScrollConfig._interruptKeys.indexOf((( /** @type {?} */(event))).keyCode) === -1) {
                         // The pressed key is not in the list of interrupting keys
                         shouldStop = false;
                     }
@@ -10500,7 +11140,8 @@ var PageScrollService = /** @class */ (function () {
      * @return {?}
      */
     PageScrollService.prototype.stopInternal = function (interrupted, pageScrollInstance) {
-        var /** @type {?} */ index = this.runningInstances.indexOf(pageScrollInstance);
+        /** @type {?} */
+        var index = this.runningInstances.indexOf(pageScrollInstance);
         if (index >= 0) {
             this.runningInstances.splice(index, 1);
         }
@@ -10536,7 +11177,8 @@ var PageScrollService = /** @class */ (function () {
             }
             return;
         }
-        var /** @type {?} */ startScrollPositionFound = false;
+        /** @type {?} */
+        var startScrollPositionFound = false;
         // Reset start scroll position to 0. If any of the scrollingViews has a different one, it will be extracted next
         pageScrollInstance.startScrollPosition = 0;
         // Get the start scroll position from the scrollingViews (e.g. if the user already scrolled down the content)
@@ -10546,7 +11188,8 @@ var PageScrollService = /** @class */ (function () {
             }
             // Get the scrollTop or scrollLeft value of the first scrollingView that returns a value for its "scrollTop"
             // or "scrollLeft" property that is not undefined and unequal to 0
-            var /** @type {?} */ scrollPosition = pageScrollInstance.getScrollPropertyValue(scrollingView);
+            /** @type {?} */
+            var scrollPosition = pageScrollInstance.getScrollPropertyValue(scrollingView);
             if (!startScrollPositionFound && scrollPosition) {
                 // We found a scrollingView that does not have scrollTop or scrollLeft 0
                 // Return the scroll position value, as this will be our startScrollPosition
@@ -10554,9 +11197,11 @@ var PageScrollService = /** @class */ (function () {
                 startScrollPositionFound = true;
             }
         });
-        var /** @type {?} */ pageScrollOffset = pageScrollInstance.getCurrentOffset();
+        /** @type {?} */
+        var pageScrollOffset = pageScrollInstance.getCurrentOffset();
         // Calculate the target position that the scroll animation should go to
-        var /** @type {?} */ scrollTargetPosition = pageScrollInstance.extractScrollTargetPosition();
+        /** @type {?} */
+        var scrollTargetPosition = pageScrollInstance.extractScrollTargetPosition();
         pageScrollInstance.targetScrollPosition = Math.round((pageScrollInstance.verticalScrolling ? scrollTargetPosition.top : scrollTargetPosition.left) - pageScrollOffset);
         // Calculate the distance we need to go in total
         pageScrollInstance.distanceToScroll = pageScrollInstance.targetScrollPosition - pageScrollInstance.startScrollPosition;
@@ -10571,7 +11216,8 @@ var PageScrollService = /** @class */ (function () {
         // We're at the final destination already
         // OR we need to scroll down but are already at the end
         // OR we need to scroll up but are at the top already
-        var /** @type {?} */ allReadyAtDestination = Math.abs(pageScrollInstance.distanceToScroll) < PageScrollConfig._minScrollDistance;
+        /** @type {?} */
+        var allReadyAtDestination = Math.abs(pageScrollInstance.distanceToScroll) < PageScrollConfig._minScrollDistance;
         // Check how long we need to scroll if a speed option is given
         // Default executionDuration is the specified duration
         pageScrollInstance.executionDuration = pageScrollInstance.duration;
@@ -10582,7 +11228,8 @@ var PageScrollService = /** @class */ (function () {
         }
         // We should go there directly, as our "animation" would have one big step
         // only anyway and this way we save the interval stuff
-        var /** @type {?} */ tooShortInterval = pageScrollInstance.executionDuration <= PageScrollConfig._interval;
+        /** @type {?} */
+        var tooShortInterval = pageScrollInstance.executionDuration <= PageScrollConfig._interval;
         if (allReadyAtDestination || tooShortInterval) {
             if (core.isDevMode()) {
             }
@@ -10601,10 +11248,13 @@ var PageScrollService = /** @class */ (function () {
         pageScrollInstance.endTime = pageScrollInstance.startTime + pageScrollInstance.executionDuration;
         pageScrollInstance.timer = setInterval(function (_pageScrollInstance) {
             // Take the current time
-            var /** @type {?} */ currentTime = new Date().getTime();
+            /** @type {?} */
+            var currentTime = new Date().getTime();
             // Determine the new scroll position
-            var /** @type {?} */ newScrollPosition;
-            var /** @type {?} */ stopNow = false;
+            /** @type {?} */
+            var newScrollPosition;
+            /** @type {?} */
+            var stopNow = false;
             if (_pageScrollInstance.endTime <= currentTime) {
                 // We're over the time already, so go the targetScrollPosition (aka destination)
                 newScrollPosition = _pageScrollInstance.targetScrollPosition;
@@ -10635,11 +11285,14 @@ var PageScrollService = /** @class */ (function () {
      * @param {?=} namespace
      * @return {?}
      */
+    //   public stopAll(namespace?: string): boolean {
     PageScrollService.prototype.stopAll = function (namespace) {
         if (this.runningInstances.length > 0) {
-            var /** @type {?} */ stoppedSome = false;
-            for (var /** @type {?} */ i = 0; i < this.runningInstances.length; ++i) {
-                var /** @type {?} */ pageScrollInstance = this.runningInstances[i];
+            /** @type {?} */
+            var stoppedSome = false;
+            for (var i = 0; i < this.runningInstances.length; ++i) {
+                /** @type {?} */
+                var pageScrollInstance = this.runningInstances[i];
                 if (PageScrollUtilService.isUndefinedOrNull(namespace) || namespace.length === 0 ||
                     pageScrollInstance.namespace === namespace) {
                     stoppedSome = true;
@@ -10669,7 +11322,7 @@ PageScrollService.decorators = [
 PageScrollService.ctorParameters = function () { return []; };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
 * Created by sebastianfuss on 29.08.16.
@@ -10694,23 +11347,38 @@ var PageScrollInstance = /** @class */ (function () {
         /**
          * These properties will be set during instance construction and default to their defaults from PageScrollConfig
          */
+        /* A namespace to "group" scroll animations together and stopping some does not stop others */
         this._namespace = PageScrollConfig._defaultNamespace;
+        /* Whether we scroll vertically (true) or horizontally (false) */
         this._verticalScrolling = PageScrollConfig.defaultIsVerticalScrolling;
+        /* Offset in px that the animation should stop above that target element */
         this._offset = PageScrollConfig.defaultScrollOffset;
+        /* Duration in milliseconds the scroll animation should last */
         this._duration = PageScrollConfig.defaultDuration;
+        /* Easing function to manipulate the scrollTop/scrollLeft value over time */
         this._easingLogic = PageScrollConfig.defaultEasingLogic;
+        /* Boolean whether the scroll animation should stop on user interruption or not */
         this._interruptible = PageScrollConfig.defaultInterruptible;
+        /* Whether the advanded offset calculation for inline scrolling should be used */
         this._advancedInlineOffsetCalculation = PageScrollConfig.defaultAdvancedInlineOffsetCalculation;
+        /* Event emitter to notify the world about the scrolling */
         this._pageScrollFinish = new core.EventEmitter();
         /**
          * These properties will be set/manipulated if the scroll animation starts
          */
+        /* The initial value of the scrollTop or scrollLeft position when the animation starts */
         this._startScrollPosition = 0;
+        /* Whether an interrupt listener is attached to the body or not */
         this._interruptListenersAttached = false;
+        /* References to the timer instance that is used to perform the scroll animation to be
+           able to clear it on animation end*/
         this._timer = null;
         this._namespace = namespace;
         this.document = document;
     }
+    /*
+       * Factory methods for instance creation
+       */
     /**
      * @param {?} document
      * @param {?} scrollTarget
@@ -10724,6 +11392,7 @@ var PageScrollInstance = /** @class */ (function () {
             namespace: namespace
         });
     };
+    //   public static newInstance(options: PageScrollOptions) {
     /**
      * @param {?} options
      * @return {?}
@@ -10733,7 +11402,8 @@ var PageScrollInstance = /** @class */ (function () {
             options.namespace = PageScrollConfig._defaultNamespace;
         }
         // const pageScrollInstance: PageScrollInstance = new PageScrollInstance(options.namespace, document);
-        var /** @type {?} */ pageScrollInstance = new PageScrollInstance(options.namespace, document);
+        /** @type {?} */
+        var pageScrollInstance = new PageScrollInstance(options.namespace, document);
         if (PageScrollUtilService.isUndefinedOrNull(options.scrollingViews) || options.scrollingViews.length === 0) {
             pageScrollInstance._isInlineScrolling = false;
             pageScrollInstance._scrollingViews = [document.documentElement, document.body, document.body.parentNode];
@@ -10886,27 +11556,33 @@ var PageScrollInstance = /** @class */ (function () {
      */
     PageScrollInstance.prototype.extractScrollTargetPosition = function () {
         // let scrollTargetElement: HTMLElement;
-        var /** @type {?} */ scrollTargetElement;
+        /** @type {?} */
+        var scrollTargetElement;
         if (typeof this._scrollTarget === 'string') {
-            scrollTargetElement = this.document.getElementById(((this._scrollTarget)).substr(1));
+            scrollTargetElement = this.document.getElementById((( /** @type {?} */(this._scrollTarget))).substr(1));
         }
         else {
-            scrollTargetElement = /** @type {?} */ (this._scrollTarget);
+            scrollTargetElement = ( /** @type {?} */(this._scrollTarget));
         }
         if (scrollTargetElement === null || scrollTargetElement === undefined) {
             // Scroll target not found
             return { top: NaN, left: NaN };
         }
         if (this._isInlineScrolling) {
-            var /** @type {?} */ position = { top: scrollTargetElement.offsetTop, left: scrollTargetElement.offsetLeft };
+            /** @type {?} */
+            var position = { top: scrollTargetElement.offsetTop, left: scrollTargetElement.offsetLeft };
             if (this._advancedInlineOffsetCalculation && this.scrollingViews.length === 1) {
-                var /** @type {?} */ accumulatedParentsPos = { top: 0, left: 0 };
+                /** @type {?} */
+                var accumulatedParentsPos = { top: 0, left: 0 };
                 // not named window to make sure we're not getting the global window variable by accident
-                var /** @type {?} */ theWindow = scrollTargetElement.ownerDocument.defaultView;
-                var /** @type {?} */ parentFound = false;
+                /** @type {?} */
+                var theWindow = scrollTargetElement.ownerDocument.defaultView;
+                /** @type {?} */
+                var parentFound = false;
                 // Start parent is the immediate parent
                 // let parent = scrollTargetElement.parentElement;
-                var /** @type {?} */ parent = scrollTargetElement.parentElement;
+                /** @type {?} */
+                var parent = scrollTargetElement.parentElement;
                 // Iterate upwards all parents
                 while (!parentFound && !PageScrollUtilService.isUndefinedOrNull(parent)) {
                     if (theWindow.getComputedStyle(parent).getPropertyValue('position') === 'relative') {
@@ -10956,15 +11632,18 @@ var PageScrollInstance = /** @class */ (function () {
         }
         // Set the new scrollTop/scrollLeft to all scrollingViews elements
         return this.scrollingViews.reduce(function (oneAlreadyWorked, scrollingView) {
-            var /** @type {?} */ startScrollPropertyValue = _this.getScrollPropertyValue(scrollingView);
+            /** @type {?} */
+            var startScrollPropertyValue = _this.getScrollPropertyValue(scrollingView);
             if (scrollingView && !PageScrollUtilService.isUndefinedOrNull(startScrollPropertyValue)) {
-                var /** @type {?} */ scrollDistance = Math.abs(startScrollPropertyValue - position);
+                /** @type {?} */
+                var scrollDistance = Math.abs(startScrollPropertyValue - position);
                 // The movement we need to perform is less than 2px
                 // This we consider a small movement which some browser may not perform when
                 // changing the scrollTop/scrollLeft property
                 // Thus in this cases we do not stop the scroll animation, although setting the
                 // scrollTop/scrollLeft value "fails"
-                var /** @type {?} */ isSmallMovement = scrollDistance < PageScrollConfig._minScrollDistance;
+                /** @type {?} */
+                var isSmallMovement = scrollDistance < PageScrollConfig._minScrollDistance;
                 if (!_this.verticalScrolling) {
                     scrollingView.scrollLeft = position;
                 }
@@ -11244,7 +11923,7 @@ var PageScrollInstance = /** @class */ (function () {
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var PageScrollDirective = /** @class */ (function () {
     /**
@@ -11263,7 +11942,7 @@ var PageScrollDirective = /** @class */ (function () {
         this.pageScrollAdjustHash = false;
         this.pageScroll = null;
         this.pageScrollFinish = new core.EventEmitter();
-        this.document = /** @type {?} */ (document);
+        this.document = ( /** @type {?} */(document));
     }
     /**
      * @return {?}
@@ -11281,6 +11960,7 @@ var PageScrollDirective = /** @class */ (function () {
         }
         return undefined;
     };
+    // private generatePageScrollInstance(): PageScrollInstance {
     /**
      * @return {?}
      */
@@ -11310,7 +11990,7 @@ var PageScrollDirective = /** @class */ (function () {
             && this.pageScrollInstance.scrollTarget.substr(0, 1) === '#') {
             // "Navigate" to the current route again and this time set the fragment/hash
             this.router.navigate([], {
-                fragment: /** @type {?} */ (this.pageScrollInstance.scrollTarget.substr(1)),
+                fragment: ( /** @type {?} */(this.pageScrollInstance.scrollTarget.substr(1))),
                 preserveQueryParams: true
             });
         }
@@ -11319,7 +11999,8 @@ var PageScrollDirective = /** @class */ (function () {
      * @return {?}
      */
     PageScrollDirective.prototype.scroll = function () {
-        var /** @type {?} */ pageScrollInstance = this.generatePageScrollInstance();
+        /** @type {?} */
+        var pageScrollInstance = this.generatePageScrollInstance();
         this.pushRouterState();
         this.pageScrollService.start(pageScrollInstance);
     };
@@ -11329,7 +12010,8 @@ var PageScrollDirective = /** @class */ (function () {
     PageScrollDirective.prototype.handleClick = function () {
         var _this = this;
         if (this.routerLink && this.router !== null && this.router !== undefined) {
-            var /** @type {?} */ urlTree = void 0;
+            /** @type {?} */
+            var urlTree = void 0;
             if (typeof this.routerLink === 'string') {
                 urlTree = this.router.parseUrl(this.routerLink);
             }
@@ -11340,7 +12022,8 @@ var PageScrollDirective = /** @class */ (function () {
                 // We need to navigate their first.
                 // Navigation is handled by the routerLink directive
                 // so we only need to listen for route change
-                var /** @type {?} */ subscription_1 = (this.router.events.subscribe(function (routerEvent) {
+                /** @type {?} */
+                var subscription_1 = ( /** @type {?} */(this.router.events.subscribe(function (routerEvent) {
                     if (routerEvent instanceof router.NavigationEnd) {
                         subscription_1.unsubscribe();
                         _this.scroll();
@@ -11348,7 +12031,7 @@ var PageScrollDirective = /** @class */ (function () {
                     else if (routerEvent instanceof router.NavigationError || routerEvent instanceof router.NavigationCancel) {
                         subscription_1.unsubscribe();
                     }
-                }));
+                })));
                 return false; // to preventDefault()
             }
         }
@@ -11384,7 +12067,7 @@ PageScrollDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
 * Created by sebastianfuss on 03.09.16.
@@ -11414,7 +12097,7 @@ SmoothscrollModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * returns coumputed style of given element
@@ -11422,11 +12105,15 @@ SmoothscrollModule.decorators = [
  * @param {?} styleProp
  * @return {?}
  */
+// export function computedStyle(element: string | HTMLElement, styleProp: string): string {
 function computedStyle(element, styleProp) {
-    var /** @type {?} */ el;
-    el = (typeof element === 'string') ? ((document.querySelector(/** @type {?} */ (element)))) : element;
-    var /** @type {?} */ value;
-    var /** @type {?} */ defaultView = (el.ownerDocument || document).defaultView;
+    /** @type {?} */
+    var el;
+    el = (typeof element === 'string') ? (( /** @type {?} */(document.querySelector(( /** @type {?} */(element)))))) : element;
+    /** @type {?} */
+    var value;
+    /** @type {?} */
+    var defaultView = (el.ownerDocument || document).defaultView;
     // W3C standard way:
     if (defaultView && defaultView.getComputedStyle) {
         // sanitize property name to css notation
@@ -11434,8 +12121,7 @@ function computedStyle(element, styleProp) {
         styleProp = styleProp.replace(/([A-Z])/g, '-$1').toLowerCase();
         return defaultView.getComputedStyle(el, null).getPropertyValue(styleProp);
     }
-    else if (el['currentStyle']) {
-        // IE
+    else if (el['currentStyle']) { // IE
         // sanitize property name to camelCase
         styleProp = styleProp.replace(/\-(\w)/g, function (letter) {
             return letter.toUpperCase();
@@ -11444,7 +12130,10 @@ function computedStyle(element, styleProp) {
         // convert other units to pixels on IE
         if (/^\d+(em|pt|%|ex)?$/i.test(value)) {
             return (function (val) {
-                var /** @type {?} */ oldLeft = el.style.left, /** @type {?} */ oldRsLeft = el['runtimeStyle'].left;
+                /** @type {?} */
+                var oldLeft = el.style.left;
+                /** @type {?} */
+                var oldRsLeft = el['runtimeStyle'].left;
                 el['runtimeStyle'].left = el['currentStyle'].left;
                 el.style.left = val || 0;
                 val = el.style['pixelLeft'] + 'px';
@@ -11458,7 +12147,7 @@ function computedStyle(element, styleProp) {
 }
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MdbStickyDirective = /** @class */ (function () {
     /**
@@ -11467,19 +12156,25 @@ var MdbStickyDirective = /** @class */ (function () {
      */
     function MdbStickyDirective(el, platformId) {
         var _this = this;
+        // css selector to be sticky after
         this.isBrowser = false;
         this.stickyOffsetTop = 0;
         this.scrollHandler = function () {
             // let elRect: ClientRect = this.el.getBoundingClientRect();
-            var /** @type {?} */ parentRect = _this.el.parentElement.getBoundingClientRect();
-            var /** @type {?} */ bodyRect = document.body.getBoundingClientRect();
-            var /** @type {?} */ dynProps;
+            /** @type {?} */
+            var parentRect = _this.el.parentElement.getBoundingClientRect();
+            /** @type {?} */
+            var bodyRect = document.body.getBoundingClientRect();
+            /** @type {?} */
+            var dynProps;
             if (_this.original.float === 'right') {
-                var /** @type {?} */ right = bodyRect.right - parentRect.right + _this.original.marginRight;
+                /** @type {?} */
+                var right = bodyRect.right - parentRect.right + _this.original.marginRight;
                 dynProps = { right: right + 'px' };
             }
             else if (_this.original.float === 'left') {
-                var /** @type {?} */ left = parentRect.left - bodyRect.left + _this.original.marginLeft;
+                /** @type {?} */
+                var left = parentRect.left - bodyRect.left + _this.original.marginLeft;
                 dynProps = { left: left + 'px' };
             }
             else {
@@ -11489,10 +12184,12 @@ var MdbStickyDirective = /** @class */ (function () {
             // console.log('dynProps', dynProps);
             if (_this.original.marginTop + _this.original.marginBottom +
                 _this.original.boundingClientRect.height + _this.stickyOffsetTop >= parentRect.bottom) {
+                // console.log('case 1 (absolute)', parentRect.bottom, this.original.marginBottom);
                 /**
                  * stikcy element reached to the bottom of the container
+                 * @type {?}
                  */
-                var /** @type {?} */ floatAdjustment = _this.original.float === 'right' ? { right: 0 } :
+                var floatAdjustment = _this.original.float === 'right' ? { right: 0 } :
                     _this.original.float === 'left' ? { left: 0 } : {};
                 Object.assign(_this.el.style, {
                     position: 'absolute',
@@ -11503,8 +12200,8 @@ var MdbStickyDirective = /** @class */ (function () {
             }
             else if (parentRect.top * -1 + _this.original.marginTop + _this.stickyOffsetTop > _this.original.offsetTop) {
                 /**
-                            * stikcy element is in the middle of container
-                            */
+                * stikcy element is in the middle of container
+                */
                 // console.log('case 2 (fixed)', parentRect.top * -1, this.original.marginTop, this.original.offsetTop);
                 // if not floating, add an empty filler element, since the original elements becames 'fixed'
                 if (_this.original.float !== 'left' && _this.original.float !== 'right' && !_this.fillerEl) {
@@ -11522,8 +12219,8 @@ var MdbStickyDirective = /** @class */ (function () {
             }
             else {
                 /**
-                            * stikcy element is in the original position
-                            */
+                * stikcy element is in the original position
+                */
                 // console.log('case 3 (original)');
                 if (_this.fillerEl) {
                     _this.parentEl.removeChild(_this.fillerEl); // IE11 does not work with el.remove()
@@ -11549,16 +12246,18 @@ var MdbStickyDirective = /** @class */ (function () {
     MdbStickyDirective.prototype.ngAfterViewInit = function () {
         this.el.style.boxSizing = 'border-box';
         if (this.stickyAfter) {
-            var /** @type {?} */ cetStickyAfterEl = document.querySelector(this.stickyAfter);
+            /** @type {?} */
+            var cetStickyAfterEl = document.querySelector(this.stickyAfter);
             if (cetStickyAfterEl) {
                 this.stickyOffsetTop = cetStickyAfterEl.getBoundingClientRect().bottom;
             }
         }
         // set the parent relatively positioned
-        var /** @type {?} */ allowedPositions = ['absolute', 'fixed', 'relative'];
-        var /** @type {?} */ parentElPosition = computedStyle(this.parentEl, 'position');
-        if (allowedPositions.indexOf(parentElPosition) === -1) {
-            // inherit, initial, unset
+        /** @type {?} */
+        var allowedPositions = ['absolute', 'fixed', 'relative'];
+        /** @type {?} */
+        var parentElPosition = computedStyle(this.parentEl, 'position');
+        if (allowedPositions.indexOf(parentElPosition) === -1) { // inherit, initial, unset
             this.parentEl.style.position = 'relative';
         }
         this.diff = {
@@ -11566,7 +12265,8 @@ var MdbStickyDirective = /** @class */ (function () {
             left: this.el.offsetLeft - this.parentEl.offsetLeft
         };
         if (this.isBrowser) {
-            var /** @type {?} */ elRect = this.el.getBoundingClientRect();
+            /** @type {?} */
+            var elRect = this.el.getBoundingClientRect();
             this.el.getBoundingClientRect();
             this.original = {
                 boundingClientRect: elRect,
@@ -11623,7 +12323,7 @@ MdbStickyDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var StickyContentModule = /** @class */ (function () {
     function StickyContentModule() {
@@ -11639,7 +12339,7 @@ StickyContentModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var TabsetConfig = /** @class */ (function () {
     function TabsetConfig() {
@@ -11655,7 +12355,7 @@ TabsetConfig.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var WavesDirective = /** @class */ (function () {
     /**
@@ -11671,24 +12371,33 @@ var WavesDirective = /** @class */ (function () {
     WavesDirective.prototype.click = function (event) {
         // event.stopPropagation();
         if (!this.el.nativeElement.classList.contains('disabled')) {
-            var /** @type {?} */ button = this.el.nativeElement;
+            /** @type {?} */
+            var button = this.el.nativeElement;
             if (!button.classList.contains('waves-effect')) {
                 button.className += ' waves-effect';
             }
-            var /** @type {?} */ xPos = event.clientX - button.getBoundingClientRect().left;
-            var /** @type {?} */ yPos = event.clientY - button.getBoundingClientRect().top;
-            var /** @type {?} */ tmp = document.createElement('div');
+            /** @type {?} */
+            var xPos = event.clientX - button.getBoundingClientRect().left;
+            /** @type {?} */
+            var yPos = event.clientY - button.getBoundingClientRect().top;
+            /** @type {?} */
+            var tmp = document.createElement('div');
             tmp.className += 'waves-ripple waves-rippling';
-            var /** @type {?} */ ripple = button.appendChild(tmp);
-            var /** @type {?} */ top = yPos + 'px';
-            var /** @type {?} */ left = xPos + 'px';
+            /** @type {?} */
+            var ripple = button.appendChild(tmp);
+            /** @type {?} */
+            var top = yPos + 'px';
+            /** @type {?} */
+            var left = xPos + 'px';
             tmp.style.top = top;
             tmp.style.left = left;
-            var /** @type {?} */ scale = 'scale(' + ((button.clientWidth / 100) * 3) + ') translate(0,0)';
+            /** @type {?} */
+            var scale = 'scale(' + ((button.clientWidth / 100) * 3) + ') translate(0,0)';
             tmp.style.webkitTransform = scale;
             tmp.style.transform = scale;
             tmp.style.opacity = '1';
-            var /** @type {?} */ duration = 750;
+            /** @type {?} */
+            var duration = 750;
             tmp.style.webkitTransitionDuration = duration + 'ms';
             tmp.style.transitionDuration = duration + 'ms';
             this.removeRipple(button, ripple);
@@ -11724,8 +12433,10 @@ WavesDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+// todo: add active event to tab
+// todo: fix? mixing static and dynamic tabs position tabs in order of creation
 var TabsetComponent = /** @class */ (function () {
     /**
      * @param {?} platformId
@@ -11738,6 +12449,7 @@ var TabsetComponent = /** @class */ (function () {
         this.classMap = {};
         this.isBrowser = null;
         this.clazz = true;
+        this.disableWaves = false;
         this.showBsTab = new core.EventEmitter();
         this.shownBsTab = new core.EventEmitter();
         this.hideBsTab = new core.EventEmitter();
@@ -11819,8 +12531,10 @@ var TabsetComponent = /** @class */ (function () {
      * @return {?}
      */
     TabsetComponent.prototype.click = function (event, index) {
-        var /** @type {?} */ prev = this.tabEl.toArray()[this.getActive()];
-        var /** @type {?} */ clicked = this.tabEl.toArray()[index];
+        /** @type {?} */
+        var prev = this.tabEl.toArray()[this.getActive()];
+        /** @type {?} */
+        var clicked = this.tabEl.toArray()[index];
         this.hideBsTab.emit({
             target: clicked,
             relatedTarget: prev
@@ -11830,7 +12544,7 @@ var TabsetComponent = /** @class */ (function () {
             relatedTarget: prev
         });
         this.setActiveTab(index + 1);
-        if (this.contentClass !== 'vertical') {
+        if (this.contentClass !== 'vertical' && !this.disableWaves) {
             this.ripple.el = clicked;
             this.ripple.click(event);
         }
@@ -11849,11 +12563,13 @@ var TabsetComponent = /** @class */ (function () {
     TabsetComponent.prototype.ngOnDestroy = function () {
         this.isDestroyed = true;
     };
+    // public getActive() {
     /**
      * @return {?}
      */
     TabsetComponent.prototype.getActive = function () {
-        var /** @type {?} */ tabs = this.tabs.map(function (object, index) {
+        /** @type {?} */
+        var tabs = this.tabs.map(function (object, index) {
             return {
                 index: index,
                 object: object
@@ -11879,13 +12595,15 @@ var TabsetComponent = /** @class */ (function () {
      * @return {?}
      */
     TabsetComponent.prototype.removeTab = function (tab) {
-        var /** @type {?} */ index = this.tabs.indexOf(tab);
+        /** @type {?} */
+        var index = this.tabs.indexOf(tab);
         if (index === -1 || this.isDestroyed) {
             return;
         }
         // Select a new tab if the tab to be removed is selected and not destroyed
         if (tab.active && this.hasAvailableTabs(index)) {
-            var /** @type {?} */ newActiveIndex = this.getClosestTabIndex(index);
+            /** @type {?} */
+            var newActiveIndex = this.getClosestTabIndex(index);
             this.tabs[newActiveIndex].active = true;
         }
         tab.removed.emit(tab);
@@ -11896,13 +12614,16 @@ var TabsetComponent = /** @class */ (function () {
      * @return {?}
      */
     TabsetComponent.prototype.getClosestTabIndex = function (index) {
-        var /** @type {?} */ tabsLength = this.tabs.length;
+        /** @type {?} */
+        var tabsLength = this.tabs.length;
         if (!tabsLength) {
             return -1;
         }
-        for (var /** @type {?} */ step = 1; step <= tabsLength; step += 1) {
-            var /** @type {?} */ prevIndex = index - step;
-            var /** @type {?} */ nextIndex = index + step;
+        for (var step = 1; step <= tabsLength; step += 1) {
+            /** @type {?} */
+            var prevIndex = index - step;
+            /** @type {?} */
+            var nextIndex = index + step;
             if (this.tabs[prevIndex] && !this.tabs[prevIndex].disabled) {
                 return prevIndex;
             }
@@ -11917,11 +12638,12 @@ var TabsetComponent = /** @class */ (function () {
      * @return {?}
      */
     TabsetComponent.prototype.hasAvailableTabs = function (index) {
-        var /** @type {?} */ tabsLength = this.tabs.length;
+        /** @type {?} */
+        var tabsLength = this.tabs.length;
         if (!tabsLength) {
             return false;
         }
-        for (var /** @type {?} */ i = 0; i < tabsLength; i += 1) {
+        for (var i = 0; i < tabsLength; i += 1) {
             if (!this.tabs[i].disabled && i !== index) {
                 return true;
             }
@@ -11963,7 +12685,8 @@ var TabsetComponent = /** @class */ (function () {
      * @return {?}
      */
     TabsetComponent.prototype.getActiveElement = function () {
-        var /** @type {?} */ tabs = this.tabs.map(function (object, index) {
+        /** @type {?} */
+        var tabs = this.tabs.map(function (object, index) {
             return {
                 index: index,
                 object: object
@@ -11985,7 +12708,8 @@ var TabsetComponent = /** @class */ (function () {
     TabsetComponent.prototype.showActiveIndex = function () {
         var _this = this;
         setTimeout(function () {
-            var /** @type {?} */ activeElement = _this.getActiveElement();
+            /** @type {?} */
+            var activeElement = _this.getActiveElement();
             _this.getActiveTab.emit(activeElement);
         }, 0);
     };
@@ -11993,7 +12717,8 @@ var TabsetComponent = /** @class */ (function () {
      * @return {?}
      */
     TabsetComponent.prototype.getFirstActiveTabIndex = function () {
-        var /** @type {?} */ activeTabs = this.tabs.filter(function (tab) {
+        /** @type {?} */
+        var activeTabs = this.tabs.filter(function (tab) {
             return !tab.disabled;
         });
         return this.tabs.indexOf(activeTabs[0]);
@@ -12010,7 +12735,8 @@ var TabsetComponent = /** @class */ (function () {
      * @return {?}
      */
     TabsetComponent.prototype.initActiveTab = function () {
-        var /** @type {?} */ index = this.getFirstActiveTabIndex();
+        /** @type {?} */
+        var index = this.getFirstActiveTabIndex();
         if (index === -1) {
             this.removeActiveTabs();
             return;
@@ -12036,7 +12762,7 @@ var TabsetComponent = /** @class */ (function () {
 TabsetComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'mdb-tabset',
-                template: "<div class=\"container-fluid\"> <div class=\"row\"> <div class=\"{{ listGetClass }}\"> <ul class=\"nav {{ buttonClass }}\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\"> <li *ngFor=\"let tabz of tabs;let i = index\" [ngClass]=\"['nav-item', tabz.customClass || '']\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\" (click)=\"click($event, i)\"> <a #tabEl href=\"javascript:void(0);\" class=\"nav-link waves-light\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\"> <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span> <span *ngIf=\"tabz.removable\"> <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"fa fa-remove ml-2\"> </span> </span> </a> </li> </ul> </div> <div class=\"{{ tabsGetClass }}\"> <div class=\"tab-content {{ contentClass }}\"> <ng-content></ng-content> </div> </div> </div> </div> ",
+                template: "<div class=\"container-fluid\"> <div class=\"row\"> <div class=\"{{ listGetClass }}\"> <ul class=\"nav {{ buttonClass }}\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\"> <li *ngFor=\"let tabz of tabs;let i = index\" [ngClass]=\"['nav-item', tabz.customClass || '']\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\" (click)=\"click($event, i)\"> <a #tabEl href=\"javascript:void(0);\" class=\"nav-link\" [ngClass]=\"{'waves-light': !disableWaves}\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\"> <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span> <span *ngIf=\"tabz.removable\"> <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"fa fa-remove ml-2\"> </span> </span> </a> </li> </ul> </div> <div class=\"{{ tabsGetClass }}\"> <div class=\"tab-content {{ contentClass }}\"> <ng-content></ng-content> </div> </div> </div> </div> ",
                 providers: [WavesDirective]
             },] },
 ];
@@ -12048,6 +12774,7 @@ TabsetComponent.ctorParameters = function () { return [
 ]; };
 TabsetComponent.propDecorators = {
     clazz: [{ type: core.HostBinding, args: ['class.tab-container',] }],
+    disableWaves: [{ type: core.Input }],
     buttonClass: [{ type: core.Input }],
     contentClass: [{ type: core.Input }],
     tabEl: [{ type: core.ViewChildren, args: ['tabEl', { read: core.ElementRef },] }],
@@ -12062,7 +12789,7 @@ TabsetComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var TabDirective = /** @class */ (function () {
     /**
@@ -12089,6 +12816,7 @@ var TabDirective = /** @class */ (function () {
         this.removed = new core.EventEmitter();
         this.addClass = true;
         this.test = true;
+        // public el: ElementRef = null;
         this.el = null;
         this.isBrowser = null;
         this.isBrowser = common.isPlatformBrowser(platformId);
@@ -12176,7 +12904,8 @@ var TabDirective = /** @class */ (function () {
             el.classList.remove(className);
         }
         else if (this.hasClass(el, className)) {
-            var /** @type {?} */ reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
+            /** @type {?} */
+            var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
             el.className = el.className.replace(reg, ' ');
         }
     };
@@ -12211,7 +12940,7 @@ TabDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * Should be used to mark <template> element as a template for tab heading
@@ -12236,7 +12965,7 @@ TabHeadingDirective.ctorParameters = function () { return [
 ]; };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var NgTranscludeDirective = /** @class */ (function () {
     /**
@@ -12281,7 +13010,7 @@ NgTranscludeDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var TabsModule = /** @class */ (function () {
     function TabsModule() {
@@ -12306,8 +13035,9 @@ TabsModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 var CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = {
     provide: forms.NG_VALUE_ACCESSOR,
     useExisting: core.forwardRef(function () { return MaterialChipsComponent; }),
@@ -12349,7 +13079,8 @@ var MaterialChipsComponent = /** @class */ (function () {
      * @return {?}
      */
     MaterialChipsComponent.prototype.removeValue = function (value) {
-        var /** @type {?} */ index = this.values.indexOf(value, 0);
+        /** @type {?} */
+        var index = this.values.indexOf(value, 0);
         if (index !== undefined) {
             this.values.splice(index, 1);
             this.labelsChange.emit(this.values);
@@ -12413,7 +13144,7 @@ MaterialChipsComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MaterialChipsModule = /** @class */ (function () {
     function MaterialChipsModule() {
@@ -12429,8 +13160,9 @@ MaterialChipsModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 var TIME_PIRCKER_VALUE_ACCESSOT = {
     provide: forms.NG_VALUE_ACCESSOR,
     useExisting: core.forwardRef(function () { return ClockPickerComponent; }),
@@ -12454,7 +13186,7 @@ var ClockPickerComponent = /** @class */ (function () {
         this.showClock = false;
         this.disabled = false;
         this.isMobile = null;
-        this.touchDevice = ('ontouchstart' in document.documentElement);
+        this.touchDevice = ('ontouchstart' in (( /** @type {?} */(document.documentElement))));
         this.showHours = false;
         this.elements = document.getElementsByClassName('clockpicker');
         this.dialRadius = 135;
@@ -12494,7 +13226,7 @@ var ClockPickerComponent = /** @class */ (function () {
         var _this = this;
         // Rotating Time Picker on mobile
         if (event.target.parentElement.classList.contains('clockpicker-dial')) {
-            ((this.elem.nativeElement.querySelectorAll('.clockpicker-tick'))).forEach(function (element) {
+            (( /** @type {?} */(this.elem.nativeElement.querySelectorAll('.clockpicker-tick')))).forEach(function (element) {
                 _this.renderer.setStyle(element, 'background-color', 'rgba(0, 150, 136, 0');
             });
             this.mousedown(event);
@@ -12526,12 +13258,14 @@ var ClockPickerComponent = /** @class */ (function () {
         if (this.isBrowser) {
             // Fix for visible date / time picker input when picker plate is visible.
             try {
-                var /** @type {?} */ openedPicker = document.querySelector('.picker--opened');
-                var /** @type {?} */ allPickers = document.querySelectorAll('.picker');
+                /** @type {?} */
+                var openedPicker = document.querySelector('.picker--opened');
+                /** @type {?} */
+                var allPickers = document.querySelectorAll('.picker');
                 allPickers.forEach(function (element) {
                     _this.renderer.setStyle(element, 'z-index', '0');
                 });
-                this.renderer.setStyle(openedPicker, 'z-index', '1');
+                this.renderer.setStyle(openedPicker, 'z-index', '1000');
             }
             catch (error) { }
         }
@@ -12540,15 +13274,26 @@ var ClockPickerComponent = /** @class */ (function () {
      * @return {?}
      */
     ClockPickerComponent.prototype.checkDraw = function () {
-        var /** @type {?} */ value;
-        var /** @type {?} */ isHours = this.showHours;
+        /** @type {?} */
+        var value;
+        /** @type {?} */
+        var isHours = this.showHours;
         if (isHours) {
             value = parseInt(this.selectedHours.h, 0);
         }
         else {
             value = parseInt(this.selectedHours.m, 0);
         }
-        var /** @type {?} */ unit = Math.PI / (isHours ? 6 : 30), /** @type {?} */ radian = value * unit, /** @type {?} */ radius = isHours && value > 0 && value < 13 ? this.innerRadius : this.outerRadius, /** @type {?} */ xd = Math.sin(radian) * radius, /** @type {?} */ yd = -Math.cos(radian) * radius;
+        /** @type {?} */
+        var unit = Math.PI / (isHours ? 6 : 30);
+        /** @type {?} */
+        var radian = value * unit;
+        /** @type {?} */
+        var radius = isHours && value > 0 && value < 13 ? this.innerRadius : this.outerRadius;
+        /** @type {?} */
+        var xd = Math.sin(radian) * radius;
+        /** @type {?} */
+        var yd = -Math.cos(radian) * radius;
         this.setHand(xd, yd, false);
     };
     /**
@@ -12558,8 +13303,22 @@ var ClockPickerComponent = /** @class */ (function () {
      */
     ClockPickerComponent.prototype.mousedown = function (e, space) {
         var _this = this;
-        var /** @type {?} */ offset = this.plate.nativeElement.getBoundingClientRect(), /** @type {?} */ isTouch = /^touch/.test(e.type), /** @type {?} */ x0 = offset.left + this.dialRadius, /** @type {?} */ y0 = offset.top + this.dialRadius, /** @type {?} */ dx = (isTouch ? e.touches[0] : e).clientX - x0, /** @type {?} */ dy = (isTouch ? e.touches[0] : e).clientY - y0, /** @type {?} */ z = Math.sqrt(dx * dx + dy * dy);
-        var /** @type {?} */ moved = false;
+        /** @type {?} */
+        var offset = this.plate.nativeElement.getBoundingClientRect();
+        /** @type {?} */
+        var isTouch = /^touch/.test(e.type);
+        /** @type {?} */
+        var x0 = offset.left + this.dialRadius;
+        /** @type {?} */
+        var y0 = offset.top + this.dialRadius;
+        /** @type {?} */
+        var dx = (isTouch ? e.touches[0] : e).clientX - x0;
+        /** @type {?} */
+        var dy = (isTouch ? e.touches[0] : e).clientY - y0;
+        /** @type {?} */
+        var z = Math.sqrt(dx * dx + dy * dy);
+        /** @type {?} */
+        var moved = false;
         if (space && (z < this.outerRadius - this.tickRadius || z > this.outerRadius + this.tickRadius)) {
             return;
         }
@@ -12571,20 +13330,28 @@ var ClockPickerComponent = /** @class */ (function () {
         else {
             this.setHand(dx, dy, false);
         }
-        var /** @type {?} */ mousemoveEventMethod = function (event) {
+        /** @type {?} */
+        var mousemoveEventMethod = function (event) {
             event.preventDefault();
             event.stopPropagation();
-            var /** @type {?} */ x = event.clientX - x0, /** @type {?} */ y = event.clientY - y0;
+            /** @type {?} */
+            var x = event.clientX - x0;
+            /** @type {?} */
+            var y = event.clientY - y0;
             if (!moved && x === dx && y === dy) {
                 return;
             }
             moved = true;
             _this.setHand(x, y, false);
         };
-        var /** @type {?} */ mouseupEventMethod = function (event) {
+        /** @type {?} */
+        var mouseupEventMethod = function (event) {
             document.removeEventListener(_this.mousemoveEvent, mousemoveEventMethod);
             e.preventDefault();
-            var /** @type {?} */ x = event.clientX - x0, /** @type {?} */ y = event.clientX - y0;
+            /** @type {?} */
+            var x = event.clientX - x0;
+            /** @type {?} */
+            var y = event.clientX - y0;
             if ((space || moved) && x === dx && y === dy) {
                 _this.setHand(x, y, false);
             }
@@ -12605,9 +13372,11 @@ var ClockPickerComponent = /** @class */ (function () {
             setTimeout(function () {
                 // creating temp field
                 // const field = document.createElement('input');
-                var /** @type {?} */ field = _this.renderer.createElement('input');
+                /** @type {?} */
+                var field = _this.renderer.createElement('input');
                 _this.renderer.appendChild(_this.elem.nativeElement, field);
-                var /** @type {?} */ inputReference = _this.elem.nativeElement.lastElementChild;
+                /** @type {?} */
+                var inputReference = _this.elem.nativeElement.lastElementChild;
                 _this.renderer.setAttribute(inputReference, 'type', 'text');
                 _this.renderer.setAttribute(inputReference, 'type', 'text');
                 _this.renderer.setStyle(inputReference, 'opacity', '0');
@@ -12647,9 +13416,12 @@ var ClockPickerComponent = /** @class */ (function () {
      * @return {?}
      */
     ClockPickerComponent.prototype.closeBtnClicked = function () {
-        var /** @type {?} */ h = this.selectedHours.h;
-        var /** @type {?} */ m = this.selectedHours.m;
-        var /** @type {?} */ ampm = this.selectedHours.ampm;
+        /** @type {?} */
+        var h = this.selectedHours.h;
+        /** @type {?} */
+        var m = this.selectedHours.m;
+        /** @type {?} */
+        var ampm = this.selectedHours.ampm;
         if (this.twelvehour) {
             this.endHours = h + ':' + m + ampm;
         }
@@ -12709,10 +13481,13 @@ var ClockPickerComponent = /** @class */ (function () {
      */
     ClockPickerComponent.prototype.generateTick = function () {
         if (this.twelvehour) {
-            for (var /** @type {?} */ i = 1; i < 13; i++) {
-                var /** @type {?} */ radian = i / 6 * Math.PI;
-                var /** @type {?} */ radius = this.outerRadius;
-                var /** @type {?} */ tick = {
+            for (var i = 1; i < 13; i++) {
+                /** @type {?} */
+                var radian = i / 6 * Math.PI;
+                /** @type {?} */
+                var radius = this.outerRadius;
+                /** @type {?} */
+                var tick = {
                     'hour': i,
                     'left': this.dialRadius + Math.sin(radian) * radius - this.tickRadius,
                     'top': this.dialRadius - Math.cos(radian) * radius - this.tickRadius,
@@ -12721,18 +13496,23 @@ var ClockPickerComponent = /** @class */ (function () {
             }
         }
         else {
-            for (var /** @type {?} */ i = 0; i < 24; i++) {
-                var /** @type {?} */ radian = i / 6 * Math.PI;
-                var /** @type {?} */ inner = i > 0 && i < 13;
-                var /** @type {?} */ radius = inner ? this.innerRadius : this.outerRadius;
-                var /** @type {?} */ h = void 0;
+            for (var i = 0; i < 24; i++) {
+                /** @type {?} */
+                var radian = i / 6 * Math.PI;
+                /** @type {?} */
+                var inner = i > 0 && i < 13;
+                /** @type {?} */
+                var radius = inner ? this.innerRadius : this.outerRadius;
+                /** @type {?} */
+                var h = void 0;
                 if (i === 0) {
                     h = '0' + i.toString();
                 }
                 else {
                     h = i;
                 }
-                var /** @type {?} */ tick = {
+                /** @type {?} */
+                var tick = {
                     'hour': h,
                     'left': this.dialRadius + Math.sin(radian) * radius - this.tickRadius,
                     'top': this.dialRadius - Math.cos(radian) * radius - this.tickRadius,
@@ -12740,13 +13520,16 @@ var ClockPickerComponent = /** @class */ (function () {
                 this.hoursTicks.push(tick);
             }
         }
-        for (var /** @type {?} */ i = 0; i < 60; i += 5) {
-            var /** @type {?} */ radian = i / 30 * Math.PI;
-            var /** @type {?} */ min = i.toString();
+        for (var i = 0; i < 60; i += 5) {
+            /** @type {?} */
+            var radian = i / 30 * Math.PI;
+            /** @type {?} */
+            var min = i.toString();
             if (i < 10) {
                 min = '0' + i.toString();
             }
-            var /** @type {?} */ tick = {
+            /** @type {?} */
+            var tick = {
                 'min': min,
                 'left': this.dialRadius + Math.sin(radian) * this.outerRadius - this.tickRadius,
                 'top': this.dialRadius - Math.cos(radian) * this.outerRadius - this.tickRadius,
@@ -12761,13 +13544,20 @@ var ClockPickerComponent = /** @class */ (function () {
      * @return {?}
      */
     ClockPickerComponent.prototype.setHand = function (x, y, roundBy5) {
-        var /** @type {?} */ radian = Math.atan2(x, -y);
-        var /** @type {?} */ isHours = this.showHours;
-        var /** @type {?} */ unit = Math.PI / (isHours || roundBy5 ? 6 : 30);
-        var /** @type {?} */ z = Math.sqrt(x * x + y * y);
-        var /** @type {?} */ inner = isHours && z < (this.outerRadius + this.innerRadius) / 2;
-        var /** @type {?} */ radius = inner ? this.innerRadius : this.outerRadius;
-        var /** @type {?} */ value;
+        /** @type {?} */
+        var radian = Math.atan2(x, -y);
+        /** @type {?} */
+        var isHours = this.showHours;
+        /** @type {?} */
+        var unit = Math.PI / (isHours || roundBy5 ? 6 : 30);
+        /** @type {?} */
+        var z = Math.sqrt(x * x + y * y);
+        /** @type {?} */
+        var inner = isHours && z < (this.outerRadius + this.innerRadius) / 2;
+        /** @type {?} */
+        var radius = inner ? this.innerRadius : this.outerRadius;
+        /** @type {?} */
+        var value;
         if (this.showHours) {
             value = parseInt(this.selectedHours.h, 0);
         }
@@ -12824,7 +13614,14 @@ var ClockPickerComponent = /** @class */ (function () {
                 this.fg.nativeElement.setAttribute('class', 'clockpicker-canvas-fg active');
             }
         }
-        var /** @type {?} */ cx1 = Math.sin(radian) * (radius - this.tickRadius), /** @type {?} */ cy1 = -Math.cos(radian) * (radius - this.tickRadius), /** @type {?} */ cx2 = Math.sin(radian) * radius, /** @type {?} */ cy2 = -Math.cos(radian) * radius;
+        /** @type {?} */
+        var cx1 = Math.sin(radian) * (radius - this.tickRadius);
+        /** @type {?} */
+        var cy1 = -Math.cos(radian) * (radius - this.tickRadius);
+        /** @type {?} */
+        var cx2 = Math.sin(radian) * radius;
+        /** @type {?} */
+        var cy2 = -Math.cos(radian) * radius;
         this.hand.nativeElement.setAttribute('x2', cx1);
         this.hand.nativeElement.setAttribute('y2', cy1);
         this.bg.nativeElement.setAttribute('cx', cx2);
@@ -12853,7 +13650,10 @@ var ClockPickerComponent = /** @class */ (function () {
      * @return {?}
      */
     ClockPickerComponent.prototype.offset = function (obj) {
-        var /** @type {?} */ left = 0, /** @type {?} */ top = 0;
+        /** @type {?} */
+        var left = 0;
+        /** @type {?} */
+        var top = 0;
         if (obj.offsetParent) {
             do {
                 left += obj.offsetLeft;
@@ -12888,7 +13688,7 @@ var ClockPickerComponent = /** @class */ (function () {
 ClockPickerComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'mdb-time-picker',
-                template: "<div> <div class=\"md-form\"> <label class=\"active\">{{ label }}</label> <input [disabled]=\"disabled\" [placeholder]=\"placeholder\" [value]=\"endHours\" type=\"text\" class=\"form-control timepicker\" (click)=\"openBtnClicked()\" [(ngModel)]=\"endHours\"> </div> <div class=\"clockpicker picker\" [hidden]=\"!showClock\" [ngClass]=\"{'picker--opened': showClock, 'darktheme': darktheme}\"> <div class=\"picker__holder\"> <div class=\"picker__frame\"> <div class=\"picker__wrap\"> <div class=\"picker__box\"> <div class=\"picker__date-display\"> <div class=\"clockpicker-display\"> <div class=\"clockpicker-display-column\"> <span class=\"clockpicker-span-hours text-primary\" [ngClass]=\"{'text-primary': showHours}\" (click)=\"showHoursClock()\"> {{ selectedHours.h }}</span>:<span class=\"clockpicker-span-minutes\" [ngClass]=\"{'text-primary': !showHours}\" (click)=\"showMinutesClock()\">{{selectedHours.m }}</span> </div> <div class=\"clockpicker-display-column clockpicker-display-am-pm\" *ngIf=\"twelvehour\"> <div class=\"clockpicker-span-am-pm\">{{ selectedHours.ampm }}</div> </div> </div> </div> <div class=\"picker__calendar-container\"> <div class=\"clockpicker-plate\" #plate> <div class=\"clockpicker-canvas\"> <svg class=\"clockpicker-svg\" width=\"270\" height=\"270\" #svg> <g transform=\"translate(135,135)\" #g> <line x1=\"0\" y1=\"0\" x2=\"77.94228634059948\" y2=\"-45.00000000000001\" #hand></line> <circle class=\"clockpicker-canvas-fg\" r=\"5\" cx=\"95.26279441628824\" cy=\"-55.000000000000014\" #fg></circle> <circle class=\"clockpicker-canvas-bg\" r=\"20\" cx=\"95.26279441628824\" cy=\"-55.000000000000014\" #bg></circle> <circle class=\"clockpicker-canvas-bearing\" cx=\"0\" cy=\"0\" r=\"2\" #bearing></circle> </g> </svg> </div> <div class=\"clockpicker-dial clockpicker-hours\" #hoursPlate [ngClass]=\"{'clockpicker-dial-out': !showHours}\" [ngStyle]=\"{'visibility': !showHours ? 'hidden' : 'visible'}\"> <div *ngFor=\"let tick of hoursTicks\" class=\"clockpicker-tick\" style=\"font-size: 140%;\" [ngStyle]=\"{'left': tick.left+'px', 'top': tick.top+'px'}\" id=\"{{ tick.hour }}\"> {{ tick.hour }} </div> </div> <div class=\"clockpicker-dial clockpicker-minutes\" #minutesPlate [ngClass]=\"{'clockpicker-dial-out': showHours}\" [ngStyle]=\"{'visibility': showHours ? 'hidden' : 'visible'}\"> <div *ngFor=\"let tick of minutesTicks\" class=\"clockpicker-tick\" style=\"font-size: 120%;\" [ngStyle]=\"{'left': tick.left+'px', 'top': tick.top+'px'}\"> {{ tick.min }} </div> </div> </div> <div class=\"clockpicker-am-pm-block\" *ngIf=\"twelvehour\"> <button type=\"button\" class=\"btn-floating btn-flat clockpicker-button am-button\" [ngClass]=\"{'active': selectedHours.ampm=='AM'}\" (click)=\"setAmPm('AM')\"> AM </button> <button type=\"button\" class=\"btn-floating btn-flat clockpicker-button pm-button\" [ngClass]=\"{'active': selectedHours.ampm=='PM'}\" (click)=\"setAmPm('PM')\"> PM </button> </div> </div> <div class=\"picker__footer\"> <button type=\"button\" *ngIf=\"buttonLabel\" class=\"btn-flat clockpicker-button\" (click)=\"closeBtnClicked()\"> {{buttonLabel}} </button> <button type=\"button\" *ngIf=\"!buttonLabel\" class=\"btn-flat clockpicker-button\" (click)=\"closeBtnClicked()\"> Done </button> </div> </div> </div> </div> </div> </div> </div>",
+                template: "<div> <div class=\"md-form\"> <label class=\"active\">{{ label }}</label> <input [disabled]=\"disabled\" [tabindex]=\"tabIndex\" [placeholder]=\"placeholder\" [value]=\"endHours\" type=\"text\" class=\"form-control timepicker\" (click)=\"openBtnClicked()\" [(ngModel)]=\"endHours\"> </div> <div class=\"clockpicker picker\" [hidden]=\"!showClock\" [ngClass]=\"{'picker--opened': showClock, 'darktheme': darktheme}\"> <div class=\"picker__holder\"> <div class=\"picker__frame\"> <div class=\"picker__wrap\"> <div class=\"picker__box\"> <div class=\"picker__date-display\"> <div class=\"clockpicker-display\"> <div class=\"clockpicker-display-column\"> <span class=\"clockpicker-span-hours text-primary\" [ngClass]=\"{'text-primary': showHours}\" (click)=\"showHoursClock()\"> {{ selectedHours.h }}</span>:<span class=\"clockpicker-span-minutes\" [ngClass]=\"{'text-primary': !showHours}\" (click)=\"showMinutesClock()\">{{selectedHours.m }}</span> </div> <div class=\"clockpicker-display-column clockpicker-display-am-pm\" *ngIf=\"twelvehour\"> <div class=\"clockpicker-span-am-pm\">{{ selectedHours.ampm }}</div> </div> </div> </div> <div class=\"picker__calendar-container\"> <div class=\"clockpicker-plate\" #plate> <div class=\"clockpicker-canvas\"> <svg class=\"clockpicker-svg\" width=\"270\" height=\"270\" #svg> <g transform=\"translate(135,135)\" #g> <line x1=\"0\" y1=\"0\" x2=\"77.94228634059948\" y2=\"-45.00000000000001\" #hand></line> <circle class=\"clockpicker-canvas-fg\" r=\"5\" cx=\"95.26279441628824\" cy=\"-55.000000000000014\" #fg></circle> <circle class=\"clockpicker-canvas-bg\" r=\"20\" cx=\"95.26279441628824\" cy=\"-55.000000000000014\" #bg></circle> <circle class=\"clockpicker-canvas-bearing\" cx=\"0\" cy=\"0\" r=\"2\" #bearing></circle> </g> </svg> </div> <div class=\"clockpicker-dial clockpicker-hours\" #hoursPlate [ngClass]=\"{'clockpicker-dial-out': !showHours}\" [ngStyle]=\"{'visibility': !showHours ? 'hidden' : 'visible'}\"> <div *ngFor=\"let tick of hoursTicks\" class=\"clockpicker-tick\" style=\"font-size: 140%;\" [ngStyle]=\"{'left': tick.left+'px', 'top': tick.top+'px'}\" id=\"{{ tick.hour }}\"> {{ tick.hour }} </div> </div> <div class=\"clockpicker-dial clockpicker-minutes\" #minutesPlate [ngClass]=\"{'clockpicker-dial-out': showHours}\" [ngStyle]=\"{'visibility': showHours ? 'hidden' : 'visible'}\"> <div *ngFor=\"let tick of minutesTicks\" class=\"clockpicker-tick\" style=\"font-size: 120%;\" [ngStyle]=\"{'left': tick.left+'px', 'top': tick.top+'px'}\"> {{ tick.min }} </div> </div> </div> <div class=\"clockpicker-am-pm-block\" *ngIf=\"twelvehour\"> <button type=\"button\" class=\"btn-floating btn-flat clockpicker-button am-button\" [ngClass]=\"{'active': selectedHours.ampm=='AM'}\" (click)=\"setAmPm('AM')\"> AM </button> <button type=\"button\" class=\"btn-floating btn-flat clockpicker-button pm-button\" [ngClass]=\"{'active': selectedHours.ampm=='PM'}\" (click)=\"setAmPm('PM')\"> PM </button> </div> </div> <div class=\"picker__footer\"> <button type=\"button\" *ngIf=\"buttonLabel\" class=\"btn-flat clockpicker-button\" (click)=\"closeBtnClicked()\"> {{buttonLabel}} </button> <button type=\"button\" *ngIf=\"!buttonLabel\" class=\"btn-flat clockpicker-button\" (click)=\"closeBtnClicked()\"> Done </button> </div> </div> </div> </div> </div> </div> </div>",
                 providers: [TIME_PIRCKER_VALUE_ACCESSOT]
             },] },
 ];
@@ -12916,11 +13716,12 @@ ClockPickerComponent.propDecorators = {
     showClock: [{ type: core.Input, args: ['showClock',] }],
     buttonLabel: [{ type: core.Input }],
     disabled: [{ type: core.Input }],
+    tabIndex: [{ type: core.Input }],
     ontouchmove: [{ type: core.HostListener, args: ['touchmove', ['$event'],] }]
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var TimePickerModule = /** @class */ (function () {
     function TimePickerModule() {
@@ -12936,7 +13737,7 @@ TimePickerModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var ScrollSpyLinkDirective = /** @class */ (function () {
     /**
@@ -13012,7 +13813,7 @@ ScrollSpyLinkDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @record
@@ -13033,7 +13834,8 @@ var ScrollSpyService = /** @class */ (function () {
      * @return {?}
      */
     ScrollSpyService.prototype.removeScrollSpy = function (scrollSpyId) {
-        var /** @type {?} */ scrollSpyIndex = this.scrollSpys.findIndex(function (spy) {
+        /** @type {?} */
+        var scrollSpyIndex = this.scrollSpys.findIndex(function (spy) {
             return spy.id === scrollSpyId;
         });
         this.scrollSpys.splice(scrollSpyIndex, 1);
@@ -13044,13 +13846,15 @@ var ScrollSpyService = /** @class */ (function () {
      * @return {?}
      */
     ScrollSpyService.prototype.updateActiveState = function (scrollSpyId, activeLinkId) {
-        var /** @type {?} */ scrollSpy = this.scrollSpys.find(function (spy) {
+        /** @type {?} */
+        var scrollSpy = this.scrollSpys.find(function (spy) {
             return spy.id === scrollSpyId;
         });
         if (!scrollSpy) {
             return;
         }
-        var /** @type {?} */ activeLink = scrollSpy.links.find(function (link) {
+        /** @type {?} */
+        var activeLink = scrollSpy.links.find(function (link) {
             return link.id === activeLinkId;
         });
         this.removeActiveLinks(scrollSpy);
@@ -13062,13 +13866,15 @@ var ScrollSpyService = /** @class */ (function () {
      * @return {?}
      */
     ScrollSpyService.prototype.removeActiveState = function (scrollSpyId, activeLinkId) {
-        var /** @type {?} */ scrollSpy = this.scrollSpys.find(function (spy) {
+        /** @type {?} */
+        var scrollSpy = this.scrollSpys.find(function (spy) {
             return spy.id === scrollSpyId;
         });
         if (!scrollSpy) {
             return;
         }
-        var /** @type {?} */ activeLink = scrollSpy.links.find(function (link) {
+        /** @type {?} */
+        var activeLink = scrollSpy.links.find(function (link) {
             return link.id === activeLinkId;
         });
         if (!activeLink) {
@@ -13102,7 +13908,7 @@ ScrollSpyService.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var ScrollSpyDirective = /** @class */ (function () {
     /**
@@ -13159,7 +13965,7 @@ ScrollSpyDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var ScrollSpyWindowDirective = /** @class */ (function () {
     /**
@@ -13198,10 +14004,14 @@ var ScrollSpyWindowDirective = /** @class */ (function () {
      * @return {?}
      */
     ScrollSpyWindowDirective.prototype.isElementInViewport = function () {
-        var /** @type {?} */ scrollTop = this.document.documentElement.scrollTop || this.document.body.scrollTop;
-        var /** @type {?} */ elHeight = this.el.nativeElement.offsetHeight;
-        var /** @type {?} */ elTop = this.el.nativeElement.offsetTop - this.offset;
-        var /** @type {?} */ elBottom = elTop + elHeight;
+        /** @type {?} */
+        var scrollTop = this.document.documentElement.scrollTop || this.document.body.scrollTop;
+        /** @type {?} */
+        var elHeight = this.el.nativeElement.offsetHeight;
+        /** @type {?} */
+        var elTop = this.el.nativeElement.offsetTop - this.offset;
+        /** @type {?} */
+        var elBottom = elTop + elHeight;
         return (scrollTop >= elTop && scrollTop <= elBottom);
     };
     /**
@@ -13269,7 +14079,7 @@ ScrollSpyWindowDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var ScrollSpyElementDirective = /** @class */ (function () {
     /**
@@ -13306,8 +14116,10 @@ var ScrollSpyElementDirective = /** @class */ (function () {
      * @return {?}
      */
     ScrollSpyElementDirective.prototype.isElementInViewport = function () {
-        var /** @type {?} */ scrollTop = this.el.nativeElement.parentElement.scrollTop;
-        var /** @type {?} */ elTop = this.el.nativeElement.offsetTop - this.offset;
+        /** @type {?} */
+        var scrollTop = this.el.nativeElement.parentElement.scrollTop;
+        /** @type {?} */
+        var elTop = this.el.nativeElement.offsetTop - this.offset;
         return (scrollTop >= elTop);
     };
     /**
@@ -13372,7 +14184,7 @@ ScrollSpyElementDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var ScrollSpyModule = /** @class */ (function () {
     function ScrollSpyModule() {
@@ -13398,7 +14210,7 @@ ScrollSpyModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MdbBtnDirective = /** @class */ (function () {
     /**
@@ -13421,14 +14233,22 @@ var MdbBtnDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbBtnDirective.prototype.ngOnInit = function () {
-        var /** @type {?} */ colorClass = 'btn-' + this.color;
-        var /** @type {?} */ gradientClass = this.gradient + '-gradient';
-        var /** @type {?} */ outlineClass = 'btn-outline-' + this.color;
-        var /** @type {?} */ flatClass = 'btn-flat';
-        var /** @type {?} */ roundedClass = 'btn-rounded';
-        var /** @type {?} */ sizeClass = 'btn-' + this.size;
-        var /** @type {?} */ blockClass = 'btn-block';
-        var /** @type {?} */ floatingClass = 'btn-floating';
+        /** @type {?} */
+        var colorClass = 'btn-' + this.color;
+        /** @type {?} */
+        var gradientClass = this.gradient + '-gradient';
+        /** @type {?} */
+        var outlineClass = 'btn-outline-' + this.color;
+        /** @type {?} */
+        var flatClass = 'btn-flat';
+        /** @type {?} */
+        var roundedClass = 'btn-rounded';
+        /** @type {?} */
+        var sizeClass = 'btn-' + this.size;
+        /** @type {?} */
+        var blockClass = 'btn-block';
+        /** @type {?} */
+        var floatingClass = 'btn-floating';
         this.renderer.addClass(this.el.nativeElement, 'btn');
         if (this.color !== '') {
             this.renderer.addClass(this.el.nativeElement, colorClass);
@@ -13496,9 +14316,10 @@ MdbBtnDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 // TODO: config: activeClass - Class to apply to the checked buttons
+/** @type {?} */
 var CHECKBOX_CONTROL_VALUE_ACCESSOR = {
     provide: forms.NG_VALUE_ACCESSOR,
     useExisting: core.forwardRef(function () { return ButtonCheckboxDirective; }),
@@ -13521,6 +14342,7 @@ var ButtonCheckboxDirective = /** @class */ (function () {
         this.onChange = Function.prototype;
         this.onTouched = Function.prototype;
     }
+    // view -> model
     /**
      * @return {?}
      */
@@ -13569,6 +14391,8 @@ var ButtonCheckboxDirective = /** @class */ (function () {
         this.state = state$$1;
         this.value = this.state ? this.trueValue : this.falseValue;
     };
+    // ControlValueAccessor
+    // model -> view
     /**
      * @param {?} value
      * @return {?}
@@ -13611,8 +14435,9 @@ ButtonCheckboxDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 var RADIO_CONTROL_VALUE_ACCESSOR = {
     provide: forms.NG_VALUE_ACCESSOR,
     useExisting: core.forwardRef(function () { return ButtonRadioDirective; }),
@@ -13644,6 +14469,7 @@ var ButtonRadioDirective = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    // @HostBinding('class.active')
     /**
      * @param {?=} event
      * @return {?}
@@ -13685,6 +14511,8 @@ var ButtonRadioDirective = /** @class */ (function () {
     ButtonRadioDirective.prototype.onBlur = function () {
         this.onTouched();
     };
+    // ControlValueAccessor
+    // model -> view
     /**
      * @param {?} value
      * @return {?}
@@ -13725,7 +14553,7 @@ ButtonRadioDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var ButtonsModule = /** @class */ (function () {
     function ButtonsModule() {
@@ -13746,7 +14574,7 @@ ButtonsModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MDBBadgeComponent = /** @class */ (function () {
     /**
@@ -13764,7 +14592,8 @@ var MDBBadgeComponent = /** @class */ (function () {
         var _this = this;
         this._renderer.addClass(this._el.nativeElement, 'badge');
         if (this.color) {
-            var /** @type {?} */ customClassArr = this.color.split(' ');
+            /** @type {?} */
+            var customClassArr = this.color.split(' ');
             customClassArr.forEach(function (el) {
                 _this._renderer.addClass(_this._el.nativeElement, el);
             });
@@ -13796,7 +14625,7 @@ MDBBadgeComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var BadgeModule = /** @class */ (function () {
     function BadgeModule() {
@@ -13811,7 +14640,7 @@ BadgeModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MdbBreadcrumbComponent = /** @class */ (function () {
     function MdbBreadcrumbComponent() {
@@ -13830,7 +14659,7 @@ MdbBreadcrumbComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MdbBreadcrumbItemComponent = /** @class */ (function () {
     /**
@@ -13865,7 +14694,7 @@ MdbBreadcrumbItemComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var BreadcrumbModule = /** @class */ (function () {
     function BreadcrumbModule() {
@@ -13881,7 +14710,7 @@ BreadcrumbModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @return {?}
@@ -13891,15 +14720,17 @@ function isBs3() {
 }
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @template T
  */
 var LinkedList = /** @class */ (function () {
     function LinkedList() {
+        // public length: = 0;
         this.length = 0;
         this.asArray = [];
+        // Array methods overriding END
     }
     /**
      * @param {?} position
@@ -13909,8 +14740,9 @@ var LinkedList = /** @class */ (function () {
         if (this.length === 0 || position < 0 || position >= this.length) {
             throw new Error('Position is out of the list');
         }
-        var /** @type {?} */ current = this.head;
-        for (var /** @type {?} */ index = 0; index < position; index++) {
+        /** @type {?} */
+        var current = this.head;
+        for (var index = 0; index < position; index++) {
             current = current.next;
         }
         return current;
@@ -13919,14 +14751,17 @@ var LinkedList = /** @class */ (function () {
      * @return {?}
      */
     LinkedList.prototype.createInternalArrayRepresentation = function () {
-        var /** @type {?} */ outArray = [];
-        var /** @type {?} */ current = this.head;
+        /** @type {?} */
+        var outArray = [];
+        /** @type {?} */
+        var current = this.head;
         while (current) {
             outArray.push(current.value);
             current = current.next;
         }
         this.asArray = outArray;
     };
+    // public get(position: number): T {
     /**
      * @param {?} position
      * @return {?}
@@ -13935,8 +14770,9 @@ var LinkedList = /** @class */ (function () {
         if (this.length === 0 || position < 0 || position >= this.length) {
             return void 0;
         }
-        var /** @type {?} */ current = this.head;
-        for (var /** @type {?} */ index = 0; index < position; index++) {
+        /** @type {?} */
+        var current = this.head;
+        for (var index = 0; index < position; index++) {
             current = current.next;
         }
         return current.value;
@@ -13951,10 +14787,11 @@ var LinkedList = /** @class */ (function () {
         if (position < 0 || position > this.length) {
             throw new Error('Position is out of the list');
         }
-        var /** @type {?} */ node = {
-            value: /** @type {?} */ (value),
-            next: /** @type {?} */ (undefined),
-            previous: /** @type {?} */ (undefined)
+        /** @type {?} */
+        var node = {
+            value: ( /** @type {?} */(value)),
+            next: ( /** @type {?} */(undefined)),
+            previous: ( /** @type {?} */(undefined))
         };
         if (this.length === 0) {
             this.head = node;
@@ -13976,8 +14813,10 @@ var LinkedList = /** @class */ (function () {
             }
             else {
                 // node in middle
-                var /** @type {?} */ currentPreviousNode = this.getNode(position - 1);
-                var /** @type {?} */ currentNextNode = currentPreviousNode.next;
+                /** @type {?} */
+                var currentPreviousNode = this.getNode(position - 1);
+                /** @type {?} */
+                var currentNextNode = currentPreviousNode.next;
                 currentPreviousNode.next = node;
                 currentNextNode.previous = node;
                 node.previous = currentPreviousNode;
@@ -14015,7 +14854,8 @@ var LinkedList = /** @class */ (function () {
         }
         else {
             // middle node
-            var /** @type {?} */ removedNode = this.getNode(position);
+            /** @type {?} */
+            var removedNode = this.getNode(position);
             removedNode.next.previous = removedNode.previous;
             removedNode.previous.next = removedNode.next;
         }
@@ -14031,7 +14871,8 @@ var LinkedList = /** @class */ (function () {
         if (this.length === 0 || position < 0 || position >= this.length) {
             throw new Error('Position is out of the list');
         }
-        var /** @type {?} */ node = this.getNode(position);
+        /** @type {?} */
+        var node = this.getNode(position);
         node.value = value;
         this.createInternalArrayRepresentation();
     };
@@ -14046,9 +14887,11 @@ var LinkedList = /** @class */ (function () {
      * @return {?}
      */
     LinkedList.prototype.findAll = function (fn) {
-        var /** @type {?} */ current = this.head;
-        var /** @type {?} */ result = [];
-        for (var /** @type {?} */ index = 0; index < this.length; index++) {
+        /** @type {?} */
+        var current = this.head;
+        /** @type {?} */
+        var result = [];
+        for (var index = 0; index < this.length; index++) {
             if (fn(current.value, index)) {
                 result.push({ index: index, value: current.value });
             }
@@ -14056,6 +14899,7 @@ var LinkedList = /** @class */ (function () {
         }
         return result;
     };
+    // Array methods overriding start
     /**
      * @param {...?} args
      * @return {?}
@@ -14071,6 +14915,7 @@ var LinkedList = /** @class */ (function () {
         });
         return this.length;
     };
+    // public pop(): T {
     /**
      * @return {?}
      */
@@ -14078,7 +14923,8 @@ var LinkedList = /** @class */ (function () {
         if (this.length === 0) {
             return undefined;
         }
-        var /** @type {?} */ last = this.tail;
+        /** @type {?} */
+        var last = this.tail;
         this.remove(this.length - 1);
         return last.value;
     };
@@ -14098,6 +14944,7 @@ var LinkedList = /** @class */ (function () {
         });
         return this.length;
     };
+    // public shift(): T {
     /**
      * @return {?}
      */
@@ -14105,7 +14952,8 @@ var LinkedList = /** @class */ (function () {
         if (this.length === 0) {
             return undefined;
         }
-        var /** @type {?} */ lastItem = this.head.value;
+        /** @type {?} */
+        var lastItem = this.head.value;
         this.remove();
         return lastItem;
     };
@@ -14114,8 +14962,9 @@ var LinkedList = /** @class */ (function () {
      * @return {?}
      */
     LinkedList.prototype.forEach = function (fn) {
-        var /** @type {?} */ current = this.head;
-        for (var /** @type {?} */ index = 0; index < this.length; index++) {
+        /** @type {?} */
+        var current = this.head;
+        for (var index = 0; index < this.length; index++) {
             fn(current.value, index);
             current = current.next;
         }
@@ -14125,9 +14974,11 @@ var LinkedList = /** @class */ (function () {
      * @return {?}
      */
     LinkedList.prototype.indexOf = function (value) {
-        var /** @type {?} */ current = this.head;
-        var /** @type {?} */ position = 0;
-        for (var /** @type {?} */ index = 0; index < this.length; index++) {
+        /** @type {?} */
+        var current = this.head;
+        /** @type {?} */
+        var position = 0;
+        for (var index = 0; index < this.length; index++) {
             if (current.value === value) {
                 position = index;
                 break;
@@ -14141,8 +14992,10 @@ var LinkedList = /** @class */ (function () {
      * @return {?}
      */
     LinkedList.prototype.some = function (fn) {
-        var /** @type {?} */ current = this.head;
-        var /** @type {?} */ result = false;
+        /** @type {?} */
+        var current = this.head;
+        /** @type {?} */
+        var result = false;
         while (current && !result) {
             if (fn(current.value)) {
                 result = true;
@@ -14157,8 +15010,10 @@ var LinkedList = /** @class */ (function () {
      * @return {?}
      */
     LinkedList.prototype.every = function (fn) {
-        var /** @type {?} */ current = this.head;
-        var /** @type {?} */ result = true;
+        /** @type {?} */
+        var current = this.head;
+        /** @type {?} */
+        var result = true;
         while (current && result) {
             if (!fn(current.value)) {
                 result = false;
@@ -14173,15 +15028,18 @@ var LinkedList = /** @class */ (function () {
     LinkedList.prototype.toString = function () {
         return '[Linked List]';
     };
+    // public find(fn: any): T {
     /**
      * @param {?} fn
      * @return {?}
      */
     LinkedList.prototype.find = function (fn) {
-        var /** @type {?} */ current = this.head;
+        /** @type {?} */
+        var current = this.head;
         // let result: T;
-        var /** @type {?} */ result;
-        for (var /** @type {?} */ index = 0; index < this.length; index++) {
+        /** @type {?} */
+        var result;
+        for (var index = 0; index < this.length; index++) {
             if (fn(current.value, index)) {
                 result = current.value;
                 break;
@@ -14195,10 +15053,12 @@ var LinkedList = /** @class */ (function () {
      * @return {?}
      */
     LinkedList.prototype.findIndex = function (fn) {
-        var /** @type {?} */ current = this.head;
+        /** @type {?} */
+        var current = this.head;
         // let result: number;
-        var /** @type {?} */ result;
-        for (var /** @type {?} */ index = 0; index < this.length; index++) {
+        /** @type {?} */
+        var result;
+        for (var index = 0; index < this.length; index++) {
             if (fn(current.value, index)) {
                 result = index;
                 break;
@@ -14211,7 +15071,7 @@ var LinkedList = /** @class */ (function () {
 }());
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var CarouselConfig = /** @class */ (function () {
     function CarouselConfig() {
@@ -14236,13 +15096,15 @@ CarouselConfig.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /** @enum {number} */
-var Direction = { UNKNOWN: 0, NEXT: 1, PREV: 2, };
-Direction[Direction.UNKNOWN] = "UNKNOWN";
-Direction[Direction.NEXT] = "NEXT";
-Direction[Direction.PREV] = "PREV";
+var Direction = {
+    UNKNOWN: 0, NEXT: 1, PREV: 2,
+};
+Direction[Direction.UNKNOWN] = 'UNKNOWN';
+Direction[Direction.NEXT] = 'NEXT';
+Direction[Direction.PREV] = 'PREV';
 /**
  * Base element to create carousel
  */
@@ -14395,11 +15257,13 @@ var CarouselComponent = /** @class */ (function () {
      */
     CarouselComponent.prototype.removeSlide = function (slide) {
         var _this = this;
-        var /** @type {?} */ remIndex = this._slides.indexOf(slide);
+        /** @type {?} */
+        var remIndex = this._slides.indexOf(slide);
         if (this._currentActiveSlide === remIndex) {
             // removing of active slide
             //  let nextSlideIndex: number = void 0;
-            var /** @type {?} */ nextSlideIndex_1 = void 0;
+            /** @type {?} */
+            var nextSlideIndex_1 = void 0;
             if (this._slides.length > 1) {
                 // if this slide last - will roll to first slide, if noWrap flag is FALSE or to previous, if noWrap is TRUE
                 // in case, if this slide in middle of collection, index of next slide is same to removed
@@ -14414,7 +15278,8 @@ var CarouselComponent = /** @class */ (function () {
         }
         else {
             this._slides.remove(remIndex);
-            var /** @type {?} */ currentSlideIndex_1 = this.getCurrentSlideIndex();
+            /** @type {?} */
+            var currentSlideIndex_1 = this.getCurrentSlideIndex();
             setTimeout(function () {
                 // after removing, need to actualize index of current active slide
                 _this._currentActiveSlide = currentSlideIndex_1;
@@ -14422,6 +15287,7 @@ var CarouselComponent = /** @class */ (function () {
             }, 0);
         }
     };
+    // Fixed problem while cannot swipe next / previous image while using HammerJS.
     /**
      * @param {?=} action
      * @return {?}
@@ -14444,7 +15310,8 @@ var CarouselComponent = /** @class */ (function () {
         if (force === void 0) { force = false; }
         if (this.animation === 'slide') {
             this.pause();
-            var /** @type {?} */ direction = Direction.NEXT;
+            /** @type {?} */
+            var direction = Direction.NEXT;
             this.slideAnimation(this.findNextSlideIndex(direction, force), direction);
         }
         else if (this.animation === 'fade') {
@@ -14467,7 +15334,8 @@ var CarouselComponent = /** @class */ (function () {
         if (force === void 0) { force = false; }
         if (this.animation === 'slide') {
             this.pause();
-            var /** @type {?} */ direction = Direction.PREV;
+            /** @type {?} */
+            var direction = Direction.PREV;
             this.slideAnimation(this.findNextSlideIndex(direction, force), direction);
         }
         else if (this.animation === 'fade') {
@@ -14488,7 +15356,8 @@ var CarouselComponent = /** @class */ (function () {
     CarouselComponent.prototype.fadeAnimation = function (goToIndex) {
         var _this = this;
         // const currentSlide = this._slides.get(this._currentActiveSlide);
-        var /** @type {?} */ goToSlide = this._slides.get(goToIndex);
+        /** @type {?} */
+        var goToSlide = this._slides.get(goToIndex);
         if (this.animationEnd) {
             this.animationEnd = false;
             goToSlide.directionNext = true;
@@ -14510,8 +15379,10 @@ var CarouselComponent = /** @class */ (function () {
      */
     CarouselComponent.prototype.slideAnimation = function (goToIndex, direction) {
         var _this = this;
-        var /** @type {?} */ currentSlide = this._slides.get(this._currentActiveSlide);
-        var /** @type {?} */ goToSlide = this._slides.get(goToIndex);
+        /** @type {?} */
+        var currentSlide = this._slides.get(this._currentActiveSlide);
+        /** @type {?} */
+        var goToSlide = this._slides.get(goToIndex);
         if (this.animationEnd) {
             if (direction === Direction.NEXT) {
                 this.animationEnd = false;
@@ -14545,7 +15416,8 @@ var CarouselComponent = /** @class */ (function () {
                     currentSlide.directionPrev = false;
                     _this.animationEnd = true;
                     _this.activeSlide = goToIndex;
-                    var /** @type {?} */ directionName;
+                    /** @type {?} */
+                    var directionName;
                     if (direction === Direction.NEXT) {
                         directionName = 'Next';
                     }
@@ -14622,7 +15494,8 @@ var CarouselComponent = /** @class */ (function () {
      * @return {?}
      */
     CarouselComponent.prototype.findNextSlideIndex = function (direction, force) {
-        var /** @type {?} */ nextSlideIndex = 0;
+        /** @type {?} */
+        var nextSlideIndex = 0;
         if (!force && (this.isLast(this.activeSlide) && direction !== Direction.PREV && this.noWrap)) {
             return void 0;
         }
@@ -14652,11 +15525,13 @@ var CarouselComponent = /** @class */ (function () {
             this.pause();
             return;
         }
-        var /** @type {?} */ currentSlide = this._slides.get(this._currentActiveSlide);
+        /** @type {?} */
+        var currentSlide = this._slides.get(this._currentActiveSlide);
         if (currentSlide) {
             currentSlide.active = false;
         }
-        var /** @type {?} */ nextSlide = this._slides.get(index);
+        /** @type {?} */
+        var nextSlide = this._slides.get(index);
         if (nextSlide) {
             this._currentActiveSlide = index;
             nextSlide.active = true;
@@ -14672,10 +15547,12 @@ var CarouselComponent = /** @class */ (function () {
         var _this = this;
         this.resetTimer();
         if (this.isBrowser) {
-            var /** @type {?} */ interval = +this.interval;
+            /** @type {?} */
+            var interval = +this.interval;
             if (!isNaN(interval) && interval > 0) {
                 this.currentInterval = setInterval(function () {
-                    var /** @type {?} */ nInterval = +_this.interval;
+                    /** @type {?} */
+                    var nInterval = +_this.interval;
                     if (_this.isPlaying && !isNaN(_this.interval) && nInterval > 0 && _this.slides.length) {
                         _this.nextSlide();
                     }
@@ -14734,7 +15611,8 @@ var CarouselComponent = /** @class */ (function () {
             el.classList.remove(className);
         }
         else if (this.hasClass(el, className)) {
-            var /** @type {?} */ reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
+            /** @type {?} */
+            var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
             el.className = el.className.replace(reg, ' ');
         }
     };
@@ -14791,7 +15669,7 @@ CarouselComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var SlideComponent = /** @class */ (function () {
     /**
@@ -14850,7 +15728,7 @@ SlideComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var CarouselModule = /** @class */ (function () {
     function CarouselModule() {
@@ -14873,7 +15751,7 @@ CarouselModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MdbCardFooterComponent = /** @class */ (function () {
     /**
@@ -14914,7 +15792,7 @@ MdbCardFooterComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MdbCardTitleComponent = /** @class */ (function () {
     /**
@@ -14946,7 +15824,7 @@ MdbCardTitleComponent.ctorParameters = function () { return [
 ]; };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MdbCardTextComponent = /** @class */ (function () {
     function MdbCardTextComponent() {
@@ -14964,7 +15842,7 @@ MdbCardTextComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MdbCardBodyComponent = /** @class */ (function () {
     /**
@@ -15020,7 +15898,7 @@ MdbCardBodyComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MdbCardComponent = /** @class */ (function () {
     /**
@@ -15147,7 +16025,7 @@ MdbCardComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MdbCardImageComponent = /** @class */ (function () {
     function MdbCardImageComponent() {
@@ -15166,7 +16044,7 @@ MdbCardImageComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MdbCardHeaderComponent = /** @class */ (function () {
     /**
@@ -15207,7 +16085,7 @@ MdbCardHeaderComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var CardsFreeModule = /** @class */ (function () {
     function CardsFreeModule() {
@@ -15245,11 +16123,11 @@ CardsFreeModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var BaseChartDirective = /** @class */ (function () {
     /**
@@ -15319,8 +16197,10 @@ var BaseChartDirective = /** @class */ (function () {
      */
     BaseChartDirective.prototype.getChartBuilder = function (ctx /*, data:Array<any>, options:any*/) {
         var _this = this;
-        var /** @type {?} */ datasets = this.getDatasets();
-        var /** @type {?} */ options = Object.assign({}, this.options);
+        /** @type {?} */
+        var datasets = this.getDatasets();
+        /** @type {?} */
+        var options = Object.assign({}, this.options);
         if (this.legend === false) {
             options.legend = { display: false };
         }
@@ -15338,7 +16218,8 @@ var BaseChartDirective = /** @class */ (function () {
                 _this.chartClick.emit({ event: event, active: active });
             };
         }
-        var /** @type {?} */ opts = {
+        /** @type {?} */
+        var opts = {
             type: this.chartType,
             data: {
                 labels: this.labels,
@@ -15370,11 +16251,12 @@ var BaseChartDirective = /** @class */ (function () {
      */
     BaseChartDirective.prototype.getDatasets = function () {
         var _this = this;
-        var /** @type {?} */ datasets = void 0;
+        /** @type {?} */
+        var datasets = void 0;
         // in case if datasets is not provided, but data is present
         if (!this.datasets || !this.datasets.length && (this.data && this.data.length)) {
             if (Array.isArray(this.data[0])) {
-                datasets = ((this.data)).map(function (data, index) {
+                datasets = (( /** @type {?} */(this.data))).map(function (data, index) {
                     return { data: data, label: _this.labels[index] || "Label " + index };
                 });
             }
@@ -15386,7 +16268,8 @@ var BaseChartDirective = /** @class */ (function () {
             (datasets && datasets.length)) {
             datasets = (this.datasets || datasets)
                 .map(function (elm, index) {
-                var /** @type {?} */ newElm = Object.assign({}, elm);
+                /** @type {?} */
+                var newElm = Object.assign({}, elm);
                 if (_this.colors && _this.colors.length) {
                     Object.assign(newElm, _this.colors[index]);
                 }
@@ -15531,8 +16414,9 @@ function generateColor(index) {
  * @return {?}
  */
 function generateColors(count) {
-    var /** @type {?} */ colorsArr = new Array(count);
-    for (var /** @type {?} */ i = 0; i < count; i++) {
+    /** @type {?} */
+    var colorsArr = new Array(count);
+    for (var i = 0; i < count; i++) {
         colorsArr[i] = BaseChartDirective.defaultColors[i] || getRandomColor();
     }
     return colorsArr;
@@ -15561,7 +16445,21 @@ function getColors(chartType, index, count) {
 }
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var ChartsModule = /** @class */ (function () {
     function ChartsModule() {
@@ -15581,13 +16479,15 @@ ChartsModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 var CHECKBOX_VALUE_ACCESSOR = {
     provide: forms.NG_VALUE_ACCESSOR,
     useExisting: core.forwardRef(function () { return CheckboxComponent; }),
     multi: true
 };
+/** @type {?} */
 var defaultIdNumber = 0;
 var MdbCheckboxChange = /** @class */ (function () {
     function MdbCheckboxChange() {
@@ -15624,7 +16524,7 @@ var CheckboxComponent = /** @class */ (function () {
      */
     CheckboxComponent.prototype.ngOnChanges = function (changes) {
         if (changes.hasOwnProperty('checked')) {
-            this.checked = changes["checked"].currentValue;
+            this.checked = changes.checked.currentValue;
         }
     };
     Object.defineProperty(CheckboxComponent.prototype, "changeEvent", {
@@ -15632,7 +16532,8 @@ var CheckboxComponent = /** @class */ (function () {
          * @return {?}
          */
         get: function () {
-            var /** @type {?} */ newChangeEvent = new MdbCheckboxChange();
+            /** @type {?} */
+            var newChangeEvent = new MdbCheckboxChange();
             newChangeEvent.element = this;
             newChangeEvent.checked = this.checked;
             return newChangeEvent;
@@ -15727,7 +16628,7 @@ CheckboxComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var CheckboxModule = /** @class */ (function () {
     function CheckboxModule() {
@@ -15750,7 +16651,7 @@ CheckboxModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var CollapseComponent = /** @class */ (function () {
     function CollapseComponent() {
@@ -15843,7 +16744,7 @@ CollapseComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var CollapseModule = /** @class */ (function () {
     function CollapseModule() {
@@ -15864,7 +16765,7 @@ CollapseModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var BsDropdownState = /** @class */ (function () {
     function BsDropdownState() {
@@ -15886,7 +16787,7 @@ BsDropdownState.decorators = [
 BsDropdownState.ctorParameters = function () { return []; };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var BsDropdownContainerComponent = /** @class */ (function () {
     /**
@@ -15937,7 +16838,7 @@ BsDropdownContainerComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var BsDropdownMenuDirective = /** @class */ (function () {
     /**
@@ -15967,7 +16868,7 @@ BsDropdownMenuDirective.ctorParameters = function () { return [
 ]; };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var BsDropdownToggleDirective = /** @class */ (function () {
     /**
@@ -15988,6 +16889,7 @@ var BsDropdownToggleDirective = /** @class */ (function () {
         // populate disabled state
         this._subscriptions.push(this._state
             .isDisabledChange
+            // .subscribe((value: boolean) => this.isDisabled = value || null));
             .subscribe(function (value) { return _this.isDisabled = value || null; }));
     }
     /**
@@ -16049,7 +16951,7 @@ BsDropdownToggleDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * Default dropdown configuration
@@ -16068,7 +16970,7 @@ BsDropdownConfig.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @copyright Valor Software
@@ -16091,8 +16993,9 @@ var Trigger = /** @class */ (function () {
 }());
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 var DEFAULT_ALIASES = {
     hover: ['mouseover', 'mouseout'],
     focus: ['focusin', 'focusout']
@@ -16104,17 +17007,21 @@ var DEFAULT_ALIASES = {
  */
 function parseTriggers(triggers, aliases) {
     if (aliases === void 0) { aliases = DEFAULT_ALIASES; }
-    var /** @type {?} */ trimmedTriggers = (triggers || '').trim();
+    /** @type {?} */
+    var trimmedTriggers = (triggers || '').trim();
     if (trimmedTriggers.length === 0) {
         return [];
     }
-    var /** @type {?} */ parsedTriggers = trimmedTriggers.split(/\s+/)
+    /** @type {?} */
+    var parsedTriggers = trimmedTriggers.split(/\s+/)
         .map(function (trigger$$1) { return trigger$$1.split(':'); })
         .map(function (triggerPair) {
-        var /** @type {?} */ alias = aliases[triggerPair[0]] || triggerPair;
+        /** @type {?} */
+        var alias = aliases[triggerPair[0]] || triggerPair;
         return new Trigger(alias[0], alias[1]);
     });
-    var /** @type {?} */ manualTriggers = parsedTriggers
+    /** @type {?} */
+    var manualTriggers = parsedTriggers
         .filter(function (triggerPair) { return triggerPair.isManual(); });
     if (manualTriggers.length > 1) {
         throw new Error('Triggers parse error: only one manual trigger is allowed');
@@ -16134,8 +17041,10 @@ function parseTriggers(triggers, aliases) {
  * @return {?}
  */
 function listenToTriggers(renderer, target, triggers, showFn, hideFn, toggleFn) {
-    var /** @type {?} */ parsedTriggers = parseTriggers(triggers);
-    var /** @type {?} */ listeners = [];
+    /** @type {?} */
+    var parsedTriggers = parseTriggers(triggers);
+    /** @type {?} */
+    var listeners = [];
     if (parsedTriggers.length === 1 && parsedTriggers[0].isManual()) {
         return Function.prototype;
     }
@@ -16161,7 +17070,7 @@ function listenToTriggers(renderer, target, triggers, showFn, hideFn, toggleFn) 
 }
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @copyright Valor Software
@@ -16182,8 +17091,11 @@ var ContentRef = /** @class */ (function () {
 }());
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+// todo: add delay support
+// todo: merge events onShow, onShown, etc...
+// todo: add global positioning configuration?
 /**
  * @record
  */
@@ -16204,6 +17116,7 @@ var ComponentLoader = /** @class */ (function () {
      * @param {?} _applicationRef
      * @param {?} _posService
      */
+    // tslint:disable-next-line
     function ComponentLoader(_viewContainerRef, _renderer, _elementRef, _injector, _componentFactoryResolver, _ngZone, _applicationRef, _posService) {
         this._viewContainerRef = _viewContainerRef;
         this._renderer = _renderer;
@@ -16240,6 +17153,7 @@ var ComponentLoader = /** @class */ (function () {
             .resolveComponentFactory(compType);
         return this;
     };
+    // todo: add behaviour: to target element, `body`, custom element
     /**
      * @param {?=} container
      * @return {?}
@@ -16254,7 +17168,7 @@ var ComponentLoader = /** @class */ (function () {
      */
     ComponentLoader.prototype.position = function (opts) {
         this.attachment = opts.attachment || this.attachment;
-        this._elementRef = /** @type {?} */ (opts.target) || this._elementRef;
+        this._elementRef = ( /** @type {?} */(opts.target)) || this._elementRef;
         return this;
     };
     /**
@@ -16265,6 +17179,7 @@ var ComponentLoader = /** @class */ (function () {
         this._providers.push(provider);
         return this;
     };
+    // todo: appendChild to element or document.querySelector(this.container)
     /**
      * @param {?=} opts
      * @return {?}
@@ -16276,7 +17191,8 @@ var ComponentLoader = /** @class */ (function () {
         if (!this._componentRef) {
             this.onBeforeShow.emit();
             this._contentRef = this._getContentRef(opts.content);
-            var /** @type {?} */ injector = core.ReflectiveInjector.resolveAndCreate(this._providers, this._injector);
+            /** @type {?} */
+            var injector = core.ReflectiveInjector.resolveAndCreate(this._providers, this._injector);
             this._componentRef = this._componentFactory.create(injector, this._contentRef.nodes);
             this._applicationRef.attachView(this._componentRef.hostView);
             // this._componentRef = this._viewContainerRef
@@ -16289,7 +17205,7 @@ var ComponentLoader = /** @class */ (function () {
             }
             if (this.container === 'body' && typeof document !== 'undefined') {
                 //  document.querySelector(this.container as string)
-                document.querySelector(/** @type {?} */ (this.container))
+                document.querySelector(( /** @type {?} */(this.container)))
                     .appendChild(this._componentRef.location.nativeElement);
             }
             if (!this.container && this._elementRef && this._elementRef.nativeElement.parentElement) {
@@ -16319,7 +17235,8 @@ var ComponentLoader = /** @class */ (function () {
             return this;
         }
         this.onBeforeHide.emit(this._componentRef.instance);
-        var /** @type {?} */ componentEl = this._componentRef.location.nativeElement;
+        /** @type {?} */
+        var componentEl = this._componentRef.location.nativeElement;
         componentEl.parentNode.removeChild(componentEl);
         if (this._contentRef.componentRef) {
             this._contentRef.componentRef.destroy();
@@ -16423,17 +17340,22 @@ var ComponentLoader = /** @class */ (function () {
         }
         if (content instanceof core.TemplateRef) {
             if (this._viewContainerRef) {
-                var /** @type {?} */ viewRef_1 = this._viewContainerRef.createEmbeddedView(content);
+                /** @type {?} */
+                var viewRef_1 = this._viewContainerRef.createEmbeddedView(content);
                 return new ContentRef([viewRef_1.rootNodes], viewRef_1);
             }
-            var /** @type {?} */ viewRef = content.createEmbeddedView({});
+            /** @type {?} */
+            var viewRef = content.createEmbeddedView({});
             this._applicationRef.attachView(viewRef);
             return new ContentRef([viewRef.rootNodes], viewRef);
         }
         if (typeof content === 'function') {
-            var /** @type {?} */ contentCmptFactory = this._componentFactoryResolver.resolveComponentFactory(content);
-            var /** @type {?} */ modalContentInjector = core.ReflectiveInjector.resolveAndCreate(this._providers.concat([content]), this._injector);
-            var /** @type {?} */ componentRef = contentCmptFactory.create(modalContentInjector);
+            /** @type {?} */
+            var contentCmptFactory = this._componentFactoryResolver.resolveComponentFactory(content);
+            /** @type {?} */
+            var modalContentInjector = core.ReflectiveInjector.resolveAndCreate(this._providers.concat([content]), this._injector);
+            /** @type {?} */
+            var componentRef = contentCmptFactory.create(modalContentInjector);
             this._applicationRef.attachView(componentRef.hostView);
             return new ContentRef([[componentRef.location.nativeElement]], componentRef.hostView, componentRef);
         }
@@ -16443,12 +17365,15 @@ var ComponentLoader = /** @class */ (function () {
 }());
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @copyright Valor Software
  * @copyright Angular ng-bootstrap team
  */
+// previous version:
+// https://github.com/angular-ui/bootstrap/blob/07c31d0731f7cb068a1932b8e01d2312b796b4ec/src/position/position.js
+// tslint:disable
 var Positioning = /** @class */ (function () {
     function Positioning() {
     }
@@ -16459,10 +17384,13 @@ var Positioning = /** @class */ (function () {
      */
     Positioning.prototype.position = function (element, round) {
         if (round === void 0) { round = true; }
-        var /** @type {?} */ elPosition;
-        var /** @type {?} */ parentOffset = { width: 0, height: 0, top: 0, bottom: 0, left: 0, right: 0 };
+        /** @type {?} */
+        var elPosition;
+        /** @type {?} */
+        var parentOffset = { width: 0, height: 0, top: 0, bottom: 0, left: 0, right: 0 };
         if (this.getStyle(element, 'position') === 'fixed') {
-            var /** @type {?} */ bcRect = element.getBoundingClientRect();
+            /** @type {?} */
+            var bcRect = element.getBoundingClientRect();
             elPosition = {
                 width: bcRect.width,
                 height: bcRect.height,
@@ -16473,7 +17401,8 @@ var Positioning = /** @class */ (function () {
             };
         }
         else {
-            var /** @type {?} */ offsetParentEl = this.offsetParent(element);
+            /** @type {?} */
+            var offsetParentEl = this.offsetParent(element);
             elPosition = this.offset(element, false);
             if (offsetParentEl !== document.documentElement) {
                 parentOffset = this.offset(offsetParentEl, false);
@@ -16500,12 +17429,15 @@ var Positioning = /** @class */ (function () {
      */
     Positioning.prototype.offset = function (element, round) {
         if (round === void 0) { round = true; }
-        var /** @type {?} */ elBcr = element.getBoundingClientRect();
-        var /** @type {?} */ viewportOffset = {
-            top: window.pageYOffset - document.documentElement.clientTop,
-            left: window.pageXOffset - document.documentElement.clientLeft
+        /** @type {?} */
+        var elBcr = element.getBoundingClientRect();
+        /** @type {?} */
+        var viewportOffset = {
+            top: window.pageYOffset - (( /** @type {?} */(document.documentElement))).clientTop,
+            left: window.pageXOffset - (( /** @type {?} */(document.documentElement))).clientLeft
         };
-        var /** @type {?} */ elOffset = {
+        /** @type {?} */
+        var elOffset = {
             height: elBcr.height || element.offsetHeight,
             width: elBcr.width || element.offsetWidth,
             top: elBcr.top + viewportOffset.top,
@@ -16531,21 +17463,28 @@ var Positioning = /** @class */ (function () {
      * @return {?}
      */
     Positioning.prototype.positionElements = function (hostElement, targetElement, placement, appendToBody) {
-        var /** @type {?} */ hostElPosition = appendToBody ? this.offset(hostElement, false) : this.position(hostElement, false);
-        var /** @type {?} */ shiftWidth = {
+        /** @type {?} */
+        var hostElPosition = appendToBody ? this.offset(hostElement, false) : this.position(hostElement, false);
+        /** @type {?} */
+        var shiftWidth = {
             left: hostElPosition.left,
             center: hostElPosition.left + hostElPosition.width / 2 - targetElement.offsetWidth / 2,
             right: hostElPosition.left + hostElPosition.width
         };
-        var /** @type {?} */ shiftHeight = {
+        /** @type {?} */
+        var shiftHeight = {
             top: hostElPosition.top,
             center: hostElPosition.top + hostElPosition.height / 2 - targetElement.offsetHeight / 2,
             bottom: hostElPosition.top + hostElPosition.height
         };
-        var /** @type {?} */ targetElBCR = targetElement.getBoundingClientRect();
-        var /** @type {?} */ placementPrimary = placement.split(' ')[0] || 'top';
-        var /** @type {?} */ placementSecondary = placement.split(' ')[1] || 'center';
-        var /** @type {?} */ targetElPosition = {
+        /** @type {?} */
+        var targetElBCR = targetElement.getBoundingClientRect();
+        /** @type {?} */
+        var placementPrimary = placement.split(' ')[0] || 'top';
+        /** @type {?} */
+        var placementSecondary = placement.split(' ')[1] || 'center';
+        /** @type {?} */
+        var targetElPosition = {
             height: targetElBCR.height || targetElement.offsetHeight,
             width: targetElBCR.width || targetElement.offsetWidth,
             top: 0,
@@ -16590,7 +17529,7 @@ var Positioning = /** @class */ (function () {
      * @param {?} prop
      * @return {?}
      */
-    Positioning.prototype.getStyle = function (element, prop) { return ((window.getComputedStyle(element)))[prop]; };
+    Positioning.prototype.getStyle = function (element, prop) { return (( /** @type {?} */(window.getComputedStyle(element))))[prop]; };
     /**
      * @param {?} element
      * @return {?}
@@ -16603,14 +17542,16 @@ var Positioning = /** @class */ (function () {
      * @return {?}
      */
     Positioning.prototype.offsetParent = function (element) {
-        var /** @type {?} */ offsetParentEl = (element.offsetParent) || document.documentElement;
+        /** @type {?} */
+        var offsetParentEl = ( /** @type {?} */(element.offsetParent)) || document.documentElement;
         while (offsetParentEl && offsetParentEl !== document.documentElement && this.isStaticPositioned(offsetParentEl)) {
-            offsetParentEl = /** @type {?} */ (offsetParentEl.offsetParent);
+            offsetParentEl = ( /** @type {?} */(offsetParentEl.offsetParent));
         }
         return offsetParentEl || document.documentElement;
     };
     return Positioning;
 }());
+/** @type {?} */
 var positionService = new Positioning();
 /**
  * @param {?} hostElement
@@ -16620,13 +17561,14 @@ var positionService = new Positioning();
  * @return {?}
  */
 function positionElements(hostElement, targetElement, placement, appendToBody) {
-    var /** @type {?} */ pos = positionService.positionElements(hostElement, targetElement, placement, appendToBody);
+    /** @type {?} */
+    var pos = positionService.positionElements(hostElement, targetElement, placement, appendToBody);
     targetElement.style.top = pos.top + "px";
     targetElement.style.left = pos.left + "px";
 }
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @record
@@ -16634,6 +17576,7 @@ function positionElements(hostElement, targetElement, placement, appendToBody) {
 var PositioningService = /** @class */ (function () {
     function PositioningService() {
     }
+    //  public position(options: PositioningOptions): void {
     /**
      * @param {?} options
      * @return {?}
@@ -16649,12 +17592,12 @@ var PositioningService = /** @class */ (function () {
     PositioningService.prototype._getHtmlElement = function (element) {
         // it means that we got a selector
         if (typeof element === 'string') {
-            return /** @type {?} */ (document.querySelector(element));
+            return ( /** @type {?} */(document.querySelector(element)));
         }
         if (element instanceof core.ElementRef) {
             return element.nativeElement;
         }
-        return /** @type {?} */ (element);
+        return ( /** @type {?} */(element));
     };
     return PositioningService;
 }());
@@ -16663,7 +17606,7 @@ PositioningService.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var ComponentLoaderFactory = /** @class */ (function () {
     /**
@@ -16706,7 +17649,7 @@ ComponentLoaderFactory.ctorParameters = function () { return [
 ]; };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var BsDropdownDirective = /** @class */ (function () {
     /**
@@ -16866,7 +17809,8 @@ var BsDropdownDirective = /** @class */ (function () {
         }
         // material and dropup dropdown animation
         // const parent = this._elementRef.nativeElement.classList;
-        var /** @type {?} */ container = this._elementRef.nativeElement.lastElementChild;
+        /** @type {?} */
+        var container = this._elementRef.nativeElement.lastElementChild;
         setTimeout(function () { container.classList.add('fadeInDropdown'); }, 200);
         if (this._showInline) {
             this._isInlineOpen = true;
@@ -16878,10 +17822,12 @@ var BsDropdownDirective = /** @class */ (function () {
         this._state.dropdownMenu
             .then(function (dropdownMenu) {
             // check direction in which dropdown should be opened
-            var /** @type {?} */ _dropup = _this.dropup === true ||
+            /** @type {?} */
+            var _dropup = _this.dropup === true ||
                 (typeof _this.dropup !== 'undefined' && _this.dropup !== false);
             _this._state.direction = _dropup ? 'up' : 'down';
-            var /** @type {?} */ _placement = _this.placement ||
+            /** @type {?} */
+            var _placement = _this.placement ||
                 (_dropup ? 'top left' : 'bottom left');
             // show dropdown
             _this._dropdown
@@ -16905,8 +17851,10 @@ var BsDropdownDirective = /** @class */ (function () {
         if (!this.isOpen) {
             return;
         }
-        var /** @type {?} */ parent = this._elementRef.nativeElement.classList;
-        var /** @type {?} */ container = this._elementRef.nativeElement.lastElementChild;
+        /** @type {?} */
+        var parent = this._elementRef.nativeElement.classList;
+        /** @type {?} */
+        var container = this._elementRef.nativeElement.lastElementChild;
         if ((parent.value === 'dropdown open show') || (parent.value === 'btn-group dropup open show')) {
             container.classList.remove('fadeInDropdown');
             setTimeout(function () {
@@ -16990,7 +17938,7 @@ BsDropdownDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var DropdownModule = /** @class */ (function () {
     function DropdownModule() {
@@ -17029,7 +17977,7 @@ DropdownModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MdbIconComponent = /** @class */ (function () {
     function MdbIconComponent() {
@@ -17050,7 +17998,7 @@ MdbIconComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var IconsModule = /** @class */ (function () {
     function IconsModule() {
@@ -17065,7 +18013,11 @@ IconsModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MdbInputDirective = /** @class */ (function () {
     /**
@@ -17227,20 +18179,22 @@ var MdbInputDirective = /** @class */ (function () {
             this._renderer.addClass(this.wrongTextContainer, 'inputVal');
             this._renderer.addClass(this.wrongTextContainer, 'text-danger');
             this._renderer.appendChild(this._elRef.nativeElement.parentElement, this.wrongTextContainer);
-            var /** @type {?} */ textWrong = this._elRef.nativeElement.getAttribute('data-error');
+            /** @type {?} */
+            var textWrong = this._elRef.nativeElement.getAttribute('data-error');
             this.wrongTextContainer.innerHTML = (textWrong ? textWrong : 'wrong');
-            if (!textWrong) {
-                this.wrongTextContainer.innerHTML = (this.errorMessage ? this.errorMessage : 'wrong');
+            if (!textWrong && this.errorMessage !== undefined) {
+                this.wrongTextContainer.innerHTML = this.errorMessage;
             }
             this._renderer.setStyle(this.wrongTextContainer, 'visibility', 'hidden');
             this.rightTextContainer = this._renderer.createElement('span');
             this._renderer.addClass(this.rightTextContainer, 'inputVal');
             this._renderer.addClass(this.rightTextContainer, 'text-success');
             this._renderer.appendChild(this._elRef.nativeElement.parentElement, this.rightTextContainer);
-            var /** @type {?} */ textSuccess = this._elRef.nativeElement.getAttribute('data-success');
+            /** @type {?} */
+            var textSuccess = this._elRef.nativeElement.getAttribute('data-success');
             this.rightTextContainer.innerHTML = (textSuccess ? textSuccess : 'success');
-            if (!textSuccess) {
-                this.rightTextContainer.innerHTML = (this.successMessage ? this.successMessage : 'success');
+            if (!textSuccess && this.successMessage !== undefined) {
+                this.rightTextContainer.innerHTML = this.successMessage;
             }
             this._renderer.setStyle(this.rightTextContainer, 'visibility', 'hidden');
         }
@@ -17251,11 +18205,13 @@ var MdbInputDirective = /** @class */ (function () {
      */
     MdbInputDirective.prototype.ngOnChanges = function (changes) {
         if (changes.hasOwnProperty('errorMessage')) {
-            var /** @type {?} */ newErrorMsg = changes["errorMessage"].currentValue;
+            /** @type {?} */
+            var newErrorMsg = changes.errorMessage.currentValue;
             this.updateErrorMsg(newErrorMsg);
         }
         if (changes.hasOwnProperty('successMessage')) {
-            var /** @type {?} */ newSuccessMsg = changes["successMessage"].currentValue;
+            /** @type {?} */
+            var newSuccessMsg = changes.successMessage.currentValue;
             this.updateSuccessMsg(newSuccessMsg);
         }
     };
@@ -17352,7 +18308,8 @@ var MdbInputDirective = /** @class */ (function () {
             }
             catch (error) { }
         }
-        var /** @type {?} */ type = this.el.nativeElement.type;
+        /** @type {?} */
+        var type = this.el.nativeElement.type;
         if (this.focusCheckbox && type === 'checkbox') {
             this._renderer.addClass(this.el.nativeElement, 'onFocusSelect');
         }
@@ -17368,8 +18325,8 @@ var MdbInputDirective = /** @class */ (function () {
         this.checkValue();
         // tslint:disable-next-line:max-line-length
         /* if (this.el.nativeElement.tagName === 'MDB-COMPLETER' && this.el.nativeElement.getAttribute('ng-reflect-model') == null && !this.isClicked) {
-                this._renderer.removeClass(this.elLabel, 'active');
-            } */
+            this._renderer.removeClass(this.elLabel, 'active');
+        } */
     };
     /**
      * @return {?}
@@ -17384,14 +18341,19 @@ var MdbInputDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbInputDirective.prototype.delayedResize = function () {
-        setTimeout(this.resize(), 0);
+        var _this = this;
+        setTimeout(function () {
+            _this.resize();
+        }, 0);
     };
     /**
      * @return {?}
      */
     MdbInputDirective.prototype.initComponent = function () {
-        var /** @type {?} */ inputId;
-        var /** @type {?} */ inputP;
+        /** @type {?} */
+        var inputId;
+        /** @type {?} */
+        var inputP;
         if (this.isBrowser) {
             try {
                 inputId = this.el.nativeElement.id;
@@ -17415,7 +18377,8 @@ var MdbInputDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbInputDirective.prototype.checkValue = function () {
-        var /** @type {?} */ value = '';
+        /** @type {?} */
+        var value = '';
         if (this.elLabel != null) {
             value = this.el.nativeElement.value || '';
             if (value === '') {
@@ -17433,8 +18396,8 @@ var MdbInputDirective = /** @class */ (function () {
             if (this.el.nativeElement.getAttribute('ng-reflect-model') != null) {
                 // tslint:disable-next-line:max-line-length
                 /* if (this.el.nativeElement.tagName === 'MDB-COMPLETER' && this.el.nativeElement.getAttribute('ng-reflect-model').length !== 0) {
-                            this._renderer.addClass(this.elLabel, 'active');
-                        } */
+                    this._renderer.addClass(this.elLabel, 'active');
+                } */
             }
         }
     };
@@ -17473,7 +18436,7 @@ MdbInputDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var EqualValidatorDirective = /** @class */ (function () {
     /**
@@ -17502,12 +18465,15 @@ var EqualValidatorDirective = /** @class */ (function () {
      * @return {?}
      */
     EqualValidatorDirective.prototype.validate = function (c) {
-        var /** @type {?} */ setToNullValue = null;
+        /** @type {?} */
+        var setToNullValue = null;
         // self value (e.g. retype password)
-        var /** @type {?} */ v = c.value;
+        /** @type {?} */
+        var v = c.value;
         // control value (e.g. password)
         // const e: any = c.root.get(this.validateEqual);
-        var /** @type {?} */ e = c.root.get(this.validateEqual);
+        /** @type {?} */
+        var e = c.root.get(this.validateEqual);
         // value not equal
         if (e && v !== e.value) {
             return { validateEqual: false };
@@ -17545,7 +18511,7 @@ EqualValidatorDirective.ctorParameters = function () { return [
 ]; };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var InputsModule = /** @class */ (function () {
     function InputsModule() {
@@ -17567,11 +18533,11 @@ InputsModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var Utils = /** @class */ (function () {
     function Utils() {
@@ -17583,6 +18549,7 @@ var Utils = /** @class */ (function () {
     Utils.reflow = function (element) {
         (function (bs) { return bs; })(element.offsetHeight);
     };
+    // source: https://github.com/jquery/jquery/blob/master/src/css/var/getStyles.js
     /**
      * @param {?} elem
      * @return {?}
@@ -17591,7 +18558,8 @@ var Utils = /** @class */ (function () {
         // Support: IE <=11 only, Firefox <=30 (#15098, #14150)
         // IE throws on elements created in popups
         // FF meanwhile throws on frame elements through "defaultView.getComputedStyle"
-        var /** @type {?} */ view = elem.ownerDocument.defaultView;
+        /** @type {?} */
+        var view = elem.ownerDocument.defaultView;
         if (!view || !view.opener) {
             view = win;
         }
@@ -17601,7 +18569,7 @@ var Utils = /** @class */ (function () {
 }());
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var ModalOptions = /** @class */ (function () {
     function ModalOptions() {
@@ -17624,6 +18592,7 @@ var MDBModalRef = /** @class */ (function () {
 MDBModalRef.decorators = [
     { type: core.Injectable },
 ];
+/** @type {?} */
 var modalConfigDefaults = {
     backdrop: true,
     keyboard: true,
@@ -17633,6 +18602,7 @@ var modalConfigDefaults = {
     class: '',
     animated: true
 };
+/** @type {?} */
 var ClassName = {
     SCROLLBAR_MEASURER: 'modal-scrollbar-measure',
     BACKDROP: 'modal-backdrop',
@@ -17642,23 +18612,26 @@ var ClassName = {
     // bs3
     SHOW: 'show' // bs4
 };
+/** @type {?} */
 var Selector = {
     DIALOG: '.modal-dialog',
     DATA_TOGGLE: '[data-toggle="modal"]',
     DATA_DISMISS: '[data-dismiss="modal"]',
     FIXED_CONTENT: '.navbar-fixed-top, .navbar-fixed-bottom, .is-fixed'
 };
+/** @type {?} */
 var TransitionDurations = {
     MODAL: 300,
     BACKDROP: 150
 };
+/** @type {?} */
 var DISMISS_REASONS = {
     BACKRDOP: 'backdrop-click',
     ESC: 'esc'
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var ModalBackdropOptions = /** @class */ (function () {
     /**
@@ -17762,9 +18735,11 @@ ModalBackdropComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 var TRANSITION_DURATION = 300;
+/** @type {?} */
 var BACKDROP_TRANSITION_DURATION = 150;
 /**
  * Mark any code with directive to show it's content in modal
@@ -17797,6 +18772,7 @@ var ModalDirective = /** @class */ (function () {
          */
         this.onHidden = new core.EventEmitter();
         this.closed = new core.EventEmitter();
+        // seems like an Options
         this.isAnimated = true;
         this._isShown = false;
         this.isBodyOverflowing = false;
@@ -17810,6 +18786,7 @@ var ModalDirective = /** @class */ (function () {
         this._backdrop = clf.createLoader(_element, _viewContainerRef, _renderer);
     }
     Object.defineProperty(ModalDirective.prototype, "config", {
+        // public get config(): ModalOptions {
         /**
          * @return {?}
          */
@@ -17848,6 +18825,7 @@ var ModalDirective = /** @class */ (function () {
         this.dismissReason = DISMISS_REASONS.BACKRDOP;
         this.hide(event);
     };
+    // todo: consider preventing default and stopping propagation
     /**
      * @return {?}
      */
@@ -17880,6 +18858,7 @@ var ModalDirective = /** @class */ (function () {
             }
         }, 0);
     };
+    /* Public methods */
     /**
      * Allows to manually toggle modal visibility
      * @return {?}
@@ -17979,7 +18958,8 @@ var ModalDirective = /** @class */ (function () {
         if (!isBs3()) {
             this._renderer.addClass(this._element.nativeElement, ClassName.SHOW);
         }
-        var /** @type {?} */ transitionComplete = function () {
+        /** @type {?} */
+        var transitionComplete = function () {
             if (_this._config.focus) {
                 _this._element.nativeElement.focus();
             }
@@ -18014,6 +18994,7 @@ var ModalDirective = /** @class */ (function () {
             _this.closed.emit(_this);
         });
     };
+    // todo: original show was calling a callback when done, but we can use promise
     /**
      * \@internal
      * @param {?=} callback
@@ -18039,7 +19020,8 @@ var ModalDirective = /** @class */ (function () {
         }
         else if (!this._isShown && this.backdrop) {
             this.backdrop.instance.isShown = false;
-            var /** @type {?} */ callbackRemove = function () {
+            /** @type {?} */
+            var callbackRemove = function () {
                 _this.removeBackdrop();
                 if (callback) {
                     callback();
@@ -18068,7 +19050,8 @@ var ModalDirective = /** @class */ (function () {
      */
     ModalDirective.prototype.focusOtherModal = function () {
         try {
-            var /** @type {?} */ otherOpenedModals = this._element.nativeElement.parentElement.querySelectorAll('.in[mdbModal]');
+            /** @type {?} */
+            var otherOpenedModals = this._element.nativeElement.parentElement.querySelectorAll('.in[mdbModal]');
             if (!otherOpenedModals.length) {
                 return;
             }
@@ -18085,6 +19068,7 @@ var ModalDirective = /** @class */ (function () {
         this._renderer.setStyle(this._element.nativeElement, 'paddingLeft', '');
         this._renderer.setStyle(this._element.nativeElement, 'paddingRight', '');
     };
+    /** Scroll bar tricks */
     /**
      * \@internal
      * @return {?}
@@ -18111,14 +19095,17 @@ var ModalDirective = /** @class */ (function () {
     ModalDirective.prototype.resetScrollbar = function () {
         document$1.body.style.paddingRight = this.originalBodyPadding;
     };
+    // thx d.walsh
     /**
      * @return {?}
      */
     ModalDirective.prototype.getScrollbarWidth = function () {
-        var /** @type {?} */ scrollDiv = this._renderer.createElement('div', void 0);
+        /** @type {?} */
+        var scrollDiv = this._renderer.createElement('div', void 0);
         this._renderer.appendChild(document$1.body, scrollDiv);
         scrollDiv.className = ClassName.SCROLLBAR_MEASURER;
-        var /** @type {?} */ scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+        /** @type {?} */
+        var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
         document$1.body.removeChild(scrollDiv);
         return scrollbarWidth;
     };
@@ -18152,14 +19139,15 @@ ModalDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 var msConfig = {
     serviceInstance: new Object()
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var ModalContainerComponent = /** @class */ (function () {
     /**
@@ -18269,9 +19257,10 @@ ModalContainerComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MDBModalService = /** @class */ (function () {
+    // public constructor(private clf: ComponentLoaderFactory) {
     /**
      * @param {?} clf
      * @param {?} el
@@ -18283,6 +19272,7 @@ var MDBModalService = /** @class */ (function () {
         this.el = el;
         this.v = v;
         this.r = r;
+        // constructor props
         this.config = modalConfigDefaults;
         this.onShow = new core.EventEmitter();
         this.onShown = new core.EventEmitter();
@@ -18292,6 +19282,7 @@ var MDBModalService = /** @class */ (function () {
         this.originalBodyPadding = 0;
         this.scrollbarWidth = 0;
         this.modalsCount = 0;
+        // private lastDismissReason = '';
         this.lastDismissReason = '';
         this.loaders = [];
         //   this._backdropLoader = this.clf.createLoader<ModalBackdropComponent>(null, null, null);
@@ -18332,8 +19323,10 @@ var MDBModalService = /** @class */ (function () {
      * @return {?}
      */
     MDBModalService.prototype._showBackdrop = function () {
-        var /** @type {?} */ isBackdropEnabled = this.config.backdrop || this.config.backdrop === 'static';
-        var /** @type {?} */ isBackdropInDOM = !this.backdropRef || !this.backdropRef.instance.isShown;
+        /** @type {?} */
+        var isBackdropEnabled = this.config.backdrop || this.config.backdrop === 'static';
+        /** @type {?} */
+        var isBackdropInDOM = !this.backdropRef || !this.backdropRef.instance.isShown;
         if (this.modalsCount === 1) {
             this.removeBackdrop();
             if (isBackdropEnabled && isBackdropInDOM) {
@@ -18354,7 +19347,8 @@ var MDBModalService = /** @class */ (function () {
             return;
         }
         this.backdropRef.instance.isShown = false;
-        var /** @type {?} */ duration = this.config.animated ? TransitionDurations.BACKDROP : 0;
+        /** @type {?} */
+        var duration = this.config.animated ? TransitionDurations.BACKDROP : 0;
         setTimeout(function () { return _this.removeBackdrop(); }, duration);
     };
     /**
@@ -18362,9 +19356,12 @@ var MDBModalService = /** @class */ (function () {
      * @return {?}
      */
     MDBModalService.prototype._showModal = function (content) {
-        var /** @type {?} */ modalLoader = this.loaders[this.loaders.length - 1];
-        var /** @type {?} */ mdbModalRef = new MDBModalRef();
-        var /** @type {?} */ modalContainerRef = modalLoader
+        /** @type {?} */
+        var modalLoader = this.loaders[this.loaders.length - 1];
+        /** @type {?} */
+        var mdbModalRef = new MDBModalRef();
+        /** @type {?} */
+        var modalContainerRef = modalLoader
             .provide({ provide: ModalOptions, useValue: this.config })
             .provide({ provide: MDBModalRef, useValue: mdbModalRef })
             .attach(ModalContainerComponent)
@@ -18382,7 +19379,8 @@ var MDBModalService = /** @class */ (function () {
      * @return {?}
      */
     MDBModalService.prototype._hideModal = function (level) {
-        var /** @type {?} */ modalLoader = this.loaders[level - 1];
+        /** @type {?} */
+        var modalLoader = this.loaders[level - 1];
         if (modalLoader) {
             modalLoader.hide();
         }
@@ -18407,6 +19405,8 @@ var MDBModalService = /** @class */ (function () {
         this._backdropLoader.hide();
         this.backdropRef = null;
     };
+    /** AFTER PR MERGE MODAL.COMPONENT WILL BE USING THIS CODE*/
+    /** Scroll bar tricks */
     /**
      * \@internal
      * @return {?}
@@ -18433,14 +19433,17 @@ var MDBModalService = /** @class */ (function () {
     MDBModalService.prototype.resetScrollbar = function () {
         document.body.style.paddingRight = this.originalBodyPadding + 'px';
     };
+    // thx d.walsh
     /**
      * @return {?}
      */
     MDBModalService.prototype.getScrollbarWidth = function () {
-        var /** @type {?} */ scrollDiv = document.createElement('div');
+        /** @type {?} */
+        var scrollDiv = document.createElement('div');
         scrollDiv.className = ClassName.SCROLLBAR_MEASURER;
         document.body.appendChild(scrollDiv);
-        var /** @type {?} */ scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+        /** @type {?} */
+        var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
         document.body.removeChild(scrollDiv);
         return scrollbarWidth;
     };
@@ -18449,7 +19452,8 @@ var MDBModalService = /** @class */ (function () {
      */
     MDBModalService.prototype._createLoaders = function () {
         // const loader = this.clf.createLoader<ModalContainerComponent>(null, null, null);
-        var /** @type {?} */ loader = this.clf.createLoader(this.el, this.v, this.r);
+        /** @type {?} */
+        var loader = this.clf.createLoader(this.el, this.v, this.r);
         this.copyEvent(loader.onBeforeShow, this.onShow);
         this.copyEvent(loader.onShown, this.onShown);
         this.copyEvent(loader.onBeforeHide, this.onHide);
@@ -18491,7 +19495,7 @@ MDBModalService.ctorParameters = function () { return [
 ]; };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var ModalModule = /** @class */ (function () {
     function ModalModule() {
@@ -18514,7 +19518,7 @@ ModalModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var NavbarService = /** @class */ (function () {
     function NavbarService() {
@@ -18539,7 +19543,7 @@ NavbarService.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var LinksComponent = /** @class */ (function () {
     /**
@@ -18553,7 +19557,8 @@ var LinksComponent = /** @class */ (function () {
      * @return {?}
      */
     LinksComponent.prototype.ngAfterContentInit = function () {
-        var /** @type {?} */ that = this;
+        /** @type {?} */
+        var that = this;
         setTimeout(function () {
             that.links.forEach(function (element) {
                 element.nativeElement.onclick = function () {
@@ -18585,7 +19590,7 @@ LinksComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var LogoComponent = /** @class */ (function () {
     function LogoComponent() {
@@ -18600,7 +19605,7 @@ LogoComponent.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var NavbarComponent = /** @class */ (function () {
     /**
@@ -18613,7 +19618,8 @@ var NavbarComponent = /** @class */ (function () {
         this._navbarService = _navbarService;
         this.containerInside = true;
         this.shown = false;
-        this.duration = 350;
+        this.duration = 350; // ms
+        // ms
         this.collapse = false;
         this.showClass = false;
         this.collapsing = false;
@@ -18650,7 +19656,8 @@ var NavbarComponent = /** @class */ (function () {
      * @return {?}
      */
     NavbarComponent.prototype.ngOnInit = function () {
-        var /** @type {?} */ isDoubleNav = this.SideClass.split(' ');
+        /** @type {?} */
+        var isDoubleNav = this.SideClass.split(' ');
         if (isDoubleNav.indexOf('double-nav') !== -1) {
             this.doubleNav = true;
         }
@@ -18664,12 +19671,13 @@ var NavbarComponent = /** @class */ (function () {
     NavbarComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
         /* bugfix - bez tego sypie ExpressionChangedAfterItHasBeenCheckedError -
-            https://github.com/angular/angular/issues/6005#issuecomment-165951692 */
+        https://github.com/angular/angular/issues/6005#issuecomment-165951692 */
         setTimeout(function () {
             _this.height = _this.el.nativeElement.scrollHeight;
             _this.collapse = true;
             if (!_this.containerInside) {
-                var /** @type {?} */ childrens = Array.from(_this.container.nativeElement.children);
+                /** @type {?} */
+                var childrens = Array.from(_this.container.nativeElement.children);
                 childrens.forEach(function (child) {
                     // this.navbar.nativeElement.append(child);
                     _this.renderer.appendChild(_this.navbar.nativeElement, child);
@@ -18750,7 +19758,8 @@ var NavbarComponent = /** @class */ (function () {
      */
     NavbarComponent.prototype.onResize = function (event) {
         var _this = this;
-        var /** @type {?} */ breakpoit = 0;
+        /** @type {?} */
+        var breakpoit = 0;
         if (this.SideClass.includes('navbar-expand-xl')) {
             breakpoit = 1200;
         }
@@ -18826,7 +19835,7 @@ NavbarComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var NavlinksComponent = /** @class */ (function () {
     /**
@@ -18840,7 +19849,8 @@ var NavlinksComponent = /** @class */ (function () {
      * @return {?}
      */
     NavlinksComponent.prototype.ngAfterContentInit = function () {
-        var /** @type {?} */ that = this;
+        /** @type {?} */
+        var that = this;
         setTimeout(function () {
             that.links.forEach(function (element) {
                 element.nativeElement.onclick = function () {
@@ -18872,7 +19882,7 @@ NavlinksComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var NavbarModule = /** @class */ (function () {
     function NavbarModule() {
@@ -18889,7 +19899,7 @@ NavbarModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * Configuration service for the Popover directive.
@@ -18916,7 +19926,7 @@ PopoverConfig.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var PopoverContainerComponent = /** @class */ (function () {
     /**
@@ -18965,7 +19975,7 @@ PopoverContainerComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * A lightweight, extensible directive for fancy popover creation.
@@ -19101,7 +20111,7 @@ PopoverDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var PopoverModule = /** @class */ (function () {
     function PopoverModule() {
@@ -19127,7 +20137,7 @@ PopoverModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var RippleDirective = /** @class */ (function () {
     /**
@@ -19143,24 +20153,33 @@ var RippleDirective = /** @class */ (function () {
     RippleDirective.prototype.click = function (event) {
         // event.stopPropagation();
         if (!this.el.nativeElement.classList.contains('disabled')) {
-            var /** @type {?} */ button = this.el.nativeElement;
+            /** @type {?} */
+            var button = this.el.nativeElement;
             if (!button.classList.contains('waves-effect')) {
                 button.className += ' waves-effect';
             }
-            var /** @type {?} */ xPos = event.clientX - button.getBoundingClientRect().left;
-            var /** @type {?} */ yPos = event.clientY - button.getBoundingClientRect().top;
-            var /** @type {?} */ tmp = document.createElement('div');
+            /** @type {?} */
+            var xPos = event.clientX - button.getBoundingClientRect().left;
+            /** @type {?} */
+            var yPos = event.clientY - button.getBoundingClientRect().top;
+            /** @type {?} */
+            var tmp = document.createElement('div');
             tmp.className += 'waves-ripple waves-rippling';
-            var /** @type {?} */ ripple = button.appendChild(tmp);
-            var /** @type {?} */ top = yPos + 'px';
-            var /** @type {?} */ left = xPos + 'px';
+            /** @type {?} */
+            var ripple = button.appendChild(tmp);
+            /** @type {?} */
+            var top = yPos + 'px';
+            /** @type {?} */
+            var left = xPos + 'px';
             tmp.style.top = top;
             tmp.style.left = left;
-            var /** @type {?} */ scale = 'scale(' + ((button.clientWidth / 100) * 3) + ') translate(0,0)';
+            /** @type {?} */
+            var scale = 'scale(' + ((button.clientWidth / 100) * 3) + ') translate(0,0)';
             tmp.style.webkitTransform = scale;
             tmp.style.transform = scale;
             tmp.style.opacity = '1';
-            var /** @type {?} */ duration = 750;
+            /** @type {?} */
+            var duration = 750;
             tmp.style.webkitTransitionDuration = duration + 'ms';
             tmp.style.transitionDuration = duration + 'ms';
             this.removeRipple(button, ripple);
@@ -19196,7 +20215,7 @@ RippleDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var RippleModule = /** @class */ (function () {
     function RippleModule() {
@@ -19217,7 +20236,7 @@ RippleModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var WavesModule = /** @class */ (function () {
     function WavesModule() {
@@ -19238,7 +20257,7 @@ WavesModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MdbTableService = /** @class */ (function () {
     function MdbTableService() {
@@ -19270,7 +20289,8 @@ var MdbTableService = /** @class */ (function () {
      * @return {?}
      */
     MdbTableService.prototype.rowRemoved = function () {
-        var /** @type {?} */ rowRemoved = rxjs.Observable.create(function (observer) {
+        /** @type {?} */
+        var rowRemoved = rxjs.Observable.create(function (observer) {
             observer.next(true);
         });
         return rowRemoved;
@@ -19299,7 +20319,8 @@ var MdbTableService = /** @class */ (function () {
      */
     MdbTableService.prototype.dataSourceChange = function () {
         var _this = this;
-        var /** @type {?} */ dataSourceChanged = rxjs.Observable.create(function (observer) {
+        /** @type {?} */
+        var dataSourceChanged = rxjs.Observable.create(function (observer) {
             observer.next(_this.getDataSource());
         });
         return dataSourceChanged;
@@ -19333,7 +20354,8 @@ var MdbTableService = /** @class */ (function () {
      */
     MdbTableService.prototype.searchDataObservable = function (searchKey) {
         var _this = this;
-        var /** @type {?} */ observable = rxjs.Observable.create(function (observer) {
+        /** @type {?} */
+        var observable = rxjs.Observable.create(function (observer) {
             observer.next(_this.searchLocalDataBy(searchKey));
         });
         return observable;
@@ -19350,7 +20372,7 @@ MdbTableService.ctorParameters = function () { return []; };
 /** @nocollapse */ MdbTableService.ngInjectableDef = core.defineInjectable({ factory: function MdbTableService_Factory() { return new MdbTableService(); }, token: MdbTableService, providedIn: "root" });
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MdbTablePaginationComponent = /** @class */ (function () {
     /**
@@ -19401,7 +20423,8 @@ var MdbTablePaginationComponent = /** @class */ (function () {
      * @return {?}
      */
     MdbTablePaginationComponent.prototype.ngOnChanges = function (changes) {
-        var /** @type {?} */ searchDataSource = changes['searchDataSource'];
+        /** @type {?} */
+        var searchDataSource = changes['searchDataSource'];
         if (searchDataSource.currentValue.length !== 0) {
             this.allItemsLength = searchDataSource.currentValue.length;
         }
@@ -19443,7 +20466,8 @@ var MdbTablePaginationComponent = /** @class */ (function () {
      */
     MdbTablePaginationComponent.prototype.searchTextObs = function () {
         var _this = this;
-        var /** @type {?} */ observable = rxjs.Observable.create(function (observer) {
+        /** @type {?} */
+        var observable = rxjs.Observable.create(function (observer) {
             observer.next(_this.searchText);
         });
         return observable;
@@ -19517,7 +20541,8 @@ var MdbTablePaginationComponent = /** @class */ (function () {
      */
     MdbTablePaginationComponent.prototype.nextPageObservable = function () {
         var _this = this;
-        var /** @type {?} */ obs = rxjs.Observable.create(function (observer) {
+        /** @type {?} */
+        var obs = rxjs.Observable.create(function (observer) {
             observer.next(_this.firstItemIndex);
         });
         return obs;
@@ -19527,7 +20552,8 @@ var MdbTablePaginationComponent = /** @class */ (function () {
      */
     MdbTablePaginationComponent.prototype.previousPageObservable = function () {
         var _this = this;
-        var /** @type {?} */ obs = rxjs.Observable.create(function (observer) {
+        /** @type {?} */
+        var obs = rxjs.Observable.create(function (observer) {
             observer.next(_this.lastVisibleItemIndex);
         });
         return obs;
@@ -19577,7 +20603,7 @@ MdbTablePaginationComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MdbTableRowDirective = /** @class */ (function () {
     /**
@@ -19617,7 +20643,7 @@ MdbTableRowDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MdbTableScrollDirective = /** @class */ (function () {
     /**
@@ -19664,8 +20690,10 @@ var MdbTableScrollDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbTableScrollDirective.prototype.ngOnInit = function () {
-        var /** @type {?} */ parent = this.el.nativeElement.parentNode;
-        var /** @type {?} */ tableWrapper = this.renderer.createElement('div');
+        /** @type {?} */
+        var parent = this.el.nativeElement.parentNode;
+        /** @type {?} */
+        var tableWrapper = this.renderer.createElement('div');
         if (this.scrollY && this.scrollX && this.maxHeight && this.maxWidth) {
             this.wrapTableWithHorizontalAndVerticalScrollingWrapper(tableWrapper);
         }
@@ -19699,7 +20727,7 @@ MdbTableScrollDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MdbTableSortDirective = /** @class */ (function () {
     function MdbTableSortDirective() {
@@ -19746,7 +20774,7 @@ MdbTableSortDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MdbTableDirective = /** @class */ (function () {
     /**
@@ -19766,7 +20794,8 @@ var MdbTableDirective = /** @class */ (function () {
     MdbTableDirective.prototype.ngOnInit = function () {
         this.renderer.addClass(this.el.nativeElement, 'table');
         if (this.stickyHeader) {
-            var /** @type {?} */ tableHead = this.el.nativeElement.querySelector('thead');
+            /** @type {?} */
+            var tableHead = this.el.nativeElement.querySelector('thead');
             this.renderer.addClass(tableHead, 'sticky-top');
             if (this.stickyHeaderBgColor) {
                 this.renderer.setStyle(tableHead, 'background-color', this.stickyHeaderBgColor);
@@ -19807,7 +20836,7 @@ MdbTableDirective.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var TableModule = /** @class */ (function () {
     function TableModule() {
@@ -19837,7 +20866,7 @@ TableModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * Default values provider for tooltip
@@ -19860,7 +20889,7 @@ TooltipConfig.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var TooltipContainerComponent = /** @class */ (function () {
     /**
@@ -19898,8 +20927,10 @@ var TooltipContainerComponent = /** @class */ (function () {
             this.classMap[this.popupClass] = true;
         }
         setTimeout(function () {
-            var /** @type {?} */ arrowClassList = _this.tooltipArrow.nativeElement.classList;
-            var /** @type {?} */ tooltipHeight = _this.tooltipInner.nativeElement.clientHeight;
+            /** @type {?} */
+            var arrowClassList = _this.tooltipArrow.nativeElement.classList;
+            /** @type {?} */
+            var tooltipHeight = _this.tooltipInner.nativeElement.clientHeight;
             if (arrowClassList.contains('top')) {
                 _this.r.setStyle(_this.tooltipArrow.nativeElement, 'top', tooltipHeight + 6 + 'px');
             }
@@ -19936,15 +20967,18 @@ TooltipContainerComponent.propDecorators = {
 };
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/*tslint:disable:no-invalid-this */
 /**
  * @return {?}
  */
 function OnChange() {
-    var /** @type {?} */ sufix = 'Change';
+    /** @type {?} */
+    var sufix = 'Change';
     return function OnChangeHandler(target, propertyKey) {
-        var /** @type {?} */ _key = " __" + propertyKey + "Value";
+        /** @type {?} */
+        var _key = " __" + propertyKey + "Value";
         Object.defineProperty(target, propertyKey, {
             /**
              * @return {?}
@@ -19955,7 +20989,8 @@ function OnChange() {
              * @return {?}
              */
             set: function (value) {
-                var /** @type {?} */ prevValue = this[_key];
+                /** @type {?} */
+                var prevValue = this[_key];
                 this[_key] = value;
                 if (prevValue !== value && this[propertyKey + sufix]) {
                     this[propertyKey + sufix].emit(value);
@@ -19964,10 +20999,9 @@ function OnChange() {
         });
     };
 }
-/* tslint:enable */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var TooltipDirective = /** @class */ (function () {
     /**
@@ -20059,7 +21093,8 @@ var TooltipDirective = /** @class */ (function () {
         if (this.isOpen || this.isDisabled || this._delayTimeoutId || !this.mdbTooltip) {
             return;
         }
-        var /** @type {?} */ showTooltip = function () { return _this._tooltip
+        /** @type {?} */
+        var showTooltip = function () { return _this._tooltip
             .attach(TooltipContainerComponent)
             .to(_this.container)
             .position({ attachment: _this.placement })
@@ -20142,7 +21177,7 @@ tslib_1.__decorate([
 ], TooltipDirective.prototype, "mdbTooltip", void 0);
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var TooltipModule = /** @class */ (function () {
     function TooltipModule() {
@@ -20168,7 +21203,7 @@ TooltipModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @template T
@@ -20180,72 +21215,74 @@ var BsComponentRef = /** @class */ (function () {
 }());
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+// free
+/** @type {?} */
 var MODULES = [
     ButtonsModule,
     CardsFreeModule,
@@ -20313,76 +21350,73 @@ MDBBootstrapModule.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
+/** @type {?} */
 var MODULES$1 = [
     AutocompleteModule,
     CardsModule,
@@ -20452,8 +21486,9 @@ MDBBootstrapModulePro.decorators = [
 ];
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/** @type {?} */
 var MODULES$2 = [
     MDBBootstrapModule,
     MDBBootstrapModulePro
@@ -20539,13 +21574,13 @@ exports.LocalDataFactoryProvider = LocalDataFactoryProvider;
 exports.RemoteDataFactoryProvider = RemoteDataFactoryProvider;
 exports.LocalData = LocalData;
 exports.RemoteData = RemoteData;
+exports.isNil = isNil;
 exports.MAX_CHARS = MAX_CHARS;
 exports.MIN_SEARCH_LENGTH = MIN_SEARCH_LENGTH;
 exports.PAUSE = PAUSE;
 exports.TEXT_SEARCHING = TEXT_SEARCHING;
 exports.TEXT_NO_RESULTS = TEXT_NO_RESULTS;
 exports.CLEAR_TIMEOUT = CLEAR_TIMEOUT;
-exports.isNil = isNil;
 exports.AutocompleteModule = AutocompleteModule;
 exports.CardRevealComponent = CardRevealComponent;
 exports.CardRotatingComponent = CardRotatingComponent;
@@ -20564,8 +21599,8 @@ exports.MDBDatePickerComponent = MDBDatePickerComponent;
 exports.SimpleChartComponent = SimpleChartComponent;
 exports.EasyPieChartComponent = EasyPieChartComponent;
 exports.ChartSimpleModule = ChartSimpleModule;
-exports.UploadStatus = UploadStatus;
 exports.humanizeBytes = humanizeBytes;
+exports.UploadStatus = UploadStatus;
 exports.MDBUploaderService = MDBUploaderService;
 exports.MDBFileDropDirective = MDBFileDropDirective;
 exports.MDBFileSelectDirective = MDBFileSelectDirective;
@@ -20732,8 +21767,8 @@ exports.EventTarget = EventTarget;
 exports.History = History;
 exports.Location = Location;
 exports.EventListener = EventListener;
-exports.Positioning = Positioning;
 exports.positionElements = positionElements;
+exports.Positioning = Positioning;
 exports.PositioningService = PositioningService;
 exports.OnChange = OnChange;
 exports.LinkedList = LinkedList;

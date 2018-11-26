@@ -264,3 +264,13 @@ select {
     }
   }
 }
+
+.md-dropdown {
+  li {
+    &.disabled {
+      &.active {
+        background-color: transparent !important;
+      }
+    }
+  }
+}

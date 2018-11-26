@@ -19,12 +19,12 @@ export declare class MdbCreditCardDirective {
     constructor();
     maxLength: string;
     onInput(event: any): void;
-    private formatInput(event);
-    private getFormattedInput(value);
-    private removeNonDigits(value);
-    private hasStandardPattern(card);
-    private isMatch(match);
-    private updateCurrentCardNames(name, fullName);
-    private findCardByNumber(value);
+    private formatInput;
+    private getFormattedInput;
+    private removeNonDigits;
+    private hasStandardPattern;
+    private isMatch;
+    private updateCurrentCardNames;
+    private findCardByNumber;
     addCards(newCards: CreditCard[]): void;
 }
