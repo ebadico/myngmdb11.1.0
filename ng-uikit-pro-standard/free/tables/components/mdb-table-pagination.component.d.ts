@@ -1,7 +1,7 @@
-import { OnInit, EventEmitter, ChangeDetectorRef, OnChanges, SimpleChanges, AfterViewChecked } from '@angular/core';
+import { OnInit, EventEmitter, ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
 import { MdbTableService } from '../services/mdb-table.service';
-import { Observable } from 'rxjs';
-export declare class MdbTablePaginationComponent implements OnInit, OnChanges, AfterViewChecked {
+import { Observable, Subject } from 'rxjs';
+export declare class MdbTablePaginationComponent implements OnInit, OnChanges {
     private tableService;
     private cdRef;
     searchPagination: boolean;
@@ -17,17 +17,21 @@ export declare class MdbTablePaginationComponent implements OnInit, OnChanges, A
     nextShouldBeDisabled: boolean;
     previousShouldBeDisabled: boolean;
     searchText: string;
+    pagination: Subject<{
+        first: number;
+        last: number;
+    }>;
     nextPageClick: EventEmitter<any>;
     previousPageClick: EventEmitter<any>;
     constructor(tableService: MdbTableService, cdRef: ChangeDetectorRef);
     ngOnInit(): void;
-    ngAfterViewChecked(): void;
     ngOnChanges(changes: SimpleChanges): void;
     setMaxVisibleItemsNumberTo(value: number): void;
     searchTextObs(): Observable<any>;
     disableNextButton(data: any): void;
     calculateFirstItemIndex(): void;
     calculateLastItemIndex(): void;
+    paginationChange(): Observable<any>;
     calculateHowManyPagesShouldBe(): number;
     previousPage(): void;
     nextPage(): void;

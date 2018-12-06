@@ -11,5 +11,5 @@ export declare class ScrollSpyService {
     updateActiveState(scrollSpyId: string, activeLinkId: string): void;
     removeActiveState(scrollSpyId: string, activeLinkId: string): void;
     setActiveLink(activeLink: ScrollSpyLinkDirective | any): void;
-    removeActiveLinks(scrollSpy: ScrollSpy): void;
+    removeActiveLinks(scrollSpyId: string): void;
 }
