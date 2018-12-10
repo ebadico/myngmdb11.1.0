@@ -1,6 +1,6 @@
 {
   "name": "ng-uikit-pro-standard",
-  "version": "7.0.0",
+  "version": "7.1.0",
   "repository": {
     "type": "git",
     "url": "url"
@@ -14,8 +14,8 @@
   "module": "./esm5/ng-uikit-pro-standard.es5.js",
   "typings": "./ng-uikit-pro-standard.d.ts",
   "peerDependencies": {
-    "@angular/core": "^7.0.0",
-    "@angular/common": "^7.0.0",
-    "@angular/http": "^7.0.0"
+    "@angular/core": "^7.1.0",
+    "@angular/common": "^7.1.0",
+    "@angular/http": "^7.1.0"
   }
 }

@@ -23,6 +23,7 @@ export declare class ModalOptions {
     /**
      * Toggle animation
      */
+    containerClass?: string;
     animated?: boolean;
 }
 export declare class MDBModalRef {
