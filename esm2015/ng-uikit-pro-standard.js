@@ -5134,6 +5134,7 @@ class MDBDatePickerComponent {
         }
         this.labelActive = true;
         this.ChangeZIndex();
+        this.cdRef.markForCheck();
     }
     /**
      * @return {?}
@@ -5345,6 +5346,7 @@ class MDBDatePickerComponent {
         this.selectionDayTxt = clear ? '' : this.formatDate(date);
         this.inputFieldChanged.emit({ value: this.selectionDayTxt, dateFormat: this.opts.dateFormat, valid: !clear });
         this.invalidDate = false;
+        this.cdRef.markForCheck();
     }
     /**
      * @param {?} date
@@ -7779,6 +7781,17 @@ class OptionList {
         this._hasShown = this._options.length > 0;
         this.highlight();
     }
+    /**
+     * @return {?}
+     */
+    get highlightFirst() { return this._highlightFirst; }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set highlightFirst(value) {
+        this._highlightFirst = value;
+    }
     // v0 and v1 are assumed not to be undefined or null.
     /**
      * @param {?} v0
@@ -7923,9 +7936,15 @@ class OptionList {
      */
     highlight() {
         /** @type {?} */
-        const option = this.hasShownSelected() ?
-            this.getFirstShownSelected() : this.getFirstShown();
-        this.highlightOption(option);
+        const firstShown = this.getFirstShown();
+        /** @type {?} */
+        const firstSelected = this.getFirstShownSelected();
+        if (this.highlightFirst && firstShown && !firstSelected) {
+            this.highlightOption(firstShown);
+        }
+        else {
+            this.highlightOption(firstSelected);
+        }
     }
     /**
      * @param {?} option
@@ -7946,7 +7965,7 @@ class OptionList {
         const shownOptions = this.filtered;
         /** @type {?} */
         const index = this.getHighlightedIndexFromList(shownOptions);
-        if (index > -1 && index < shownOptions.length - 1) {
+        if (index < shownOptions.length - 1) {
             this.highlightOption(shownOptions[index + 1]);
         }
     }
@@ -8017,7 +8036,7 @@ class OptionList {
      */
     getFirstShown() {
         for (const option of this.options) {
-            if (option.shown) {
+            if (option.shown && !option.group && !option.disabled) {
                 return option;
             }
         }
@@ -8059,6 +8078,7 @@ class SelectDropdownComponent {
         this.singleFilterClick = new EventEmitter();
         this.singleFilterInput = new EventEmitter();
         this.singleFilterKeydown = new EventEmitter();
+        this.selectAll = new EventEmitter();
         this.disabledColor = '#fff';
         this.disabledTextColor = '9e9e9e';
         // Used in sliding-down animation
@@ -8066,6 +8086,7 @@ class SelectDropdownComponent {
         this.startHeight = 0;
         this.endHeight = 45;
         this.hasOptionsItems = true;
+        this.selectAllSelected = false;
     }
     /**
      * Event handlers. *
@@ -8073,12 +8094,14 @@ class SelectDropdownComponent {
      */
     // Angular life cycle hooks.
     onkeyup() {
-        this.hasOptionsItems = this._elementRef.nativeElement.childNodes[0].children[1].children[0].children.length >= 1 ? true : false;
+        this.hasOptionsItems = this.optionList.filtered.length > 0;
+        this.updateSelectAllState();
     }
     /**
      * @return {?}
      */
     ngOnInit() {
+        this.updateSelectAllState();
         this.optionsReset();
         this.setDropdownHeight();
         this.setVisibleOptionsNumber();
@@ -8103,6 +8126,9 @@ class SelectDropdownComponent {
         if (changes.hasOwnProperty('optionList')) {
             this.optionsReset();
         }
+        if (changes.hasOwnProperty('dropdownHeight')) {
+            this.setDropdownHeight();
+        }
         /** @type {?} */
         const container = this._elementRef.nativeElement.classList;
         setTimeout(() => { container.add('fadeInSelect'); }, 200);
@@ -8126,23 +8152,10 @@ class SelectDropdownComponent {
                 this._renderer.setStyle(element.firstElementChild.lastElementChild, 'display', 'none');
             });
         }
-        try {
-            if (!(this._elementRef.nativeElement.parentElement == undefined)) {
-                setTimeout(() => {
-                    if (this._elementRef.nativeElement.parentElement.attributes.customClass !== undefined) {
-                        this.customClass = this._elementRef.nativeElement.parentElement.attributes.customClass.value;
-                    }
-                }, 0);
-            }
-        }
-        catch (error) {
-        }
         this.moveHighlightedIntoView();
-        setTimeout(() => {
-            if (this.filterEnabled) {
-                this.filterInput.nativeElement.focus();
-            }
-        }, 0);
+        if (this.filterEnabled) {
+            this.filterInput.nativeElement.focus();
+        }
     }
     // Filter input (single select).
     /**
@@ -8177,15 +8190,9 @@ class SelectDropdownComponent {
      * @param {?} option
      * @return {?}
      */
-    onOptionMouseover(option) {
-        this.optionList.highlightOption(option);
-    }
-    /**
-     * @param {?} option
-     * @return {?}
-     */
     onOptionClick(option) {
         this.optionClicked.emit(option);
+        this.updateSelectAllState();
     }
     /**
      * Initialization. *
@@ -8201,9 +8208,10 @@ class SelectDropdownComponent {
      * @return {?}
      */
     getOptionStyle(option) {
-        if (option.highlighted) {
+        if (option.highlighted || option.hovered) {
             /** @type {?} */
             const optionStyle = {};
+            optionStyle['height'] = this.optionHeight;
             if (typeof this.highlightColor !== 'undefined') {
                 optionStyle['background-color'] = this.highlightColor;
             }
@@ -8219,6 +8227,24 @@ class SelectDropdownComponent {
     /**
      * @return {?}
      */
+    onSelectAllClick() {
+        this.selectAllSelected = !this.selectAllSelected;
+        this.selectAll.emit(this.selectAllSelected);
+    }
+    /**
+     * @return {?}
+     */
+    updateSelectAllState() {
+        /** @type {?} */
+        const areAllSelected = this.optionList.filtered.every((option) => {
+            return option.selected ? true : false;
+        });
+        areAllSelected ? this.selectAllSelected = true : this.selectAllSelected = false;
+        this.cdRef.detectChanges();
+    }
+    /**
+     * @return {?}
+     */
     clearFilterInput() {
         if (this.filterEnabled) {
             this.filterInput.nativeElement.value = '';
@@ -8229,9 +8255,10 @@ class SelectDropdownComponent {
      */
     moveHighlightedIntoView() {
         /** @type {?} */
-        const list = this.optionsList.nativeElement;
+        let listHeight;
         /** @type {?} */
-        const listHeight = list.offsetHeight;
+        const list = this.optionsList.nativeElement;
+        listHeight = this.multiple && this.enableSelectAll ? list.offsetHeight - this.optionHeight : list.offsetHeight;
         /** @type {?} */
         const itemIndex = this.optionList.getHighlightedIndex();
         if (itemIndex > -1) {
@@ -8277,13 +8304,14 @@ class SelectDropdownComponent {
 SelectDropdownComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-select-dropdown',
-                template: "<div class=\"dropdown-content\" #dropdownContent [ngStyle]=\"{'top.px': top, 'left.px': left, 'width.px': width}\"  [@dropdownAnimation]=\"{value: state, params: {startHeight: startHeight, endHeight: endHeight}}\"> <div class=\"filter\" *ngIf=\"filterEnabled\"> <input #filterInput autocomplete=\"on\" [placeholder]=\"placeholder\" (click)=\"onSingleFilterClick()\" (input)=\"onSingleFilterInput($event)\" (keydown)=\"onSingleFilterKeydown($event)\"> </div> <div class=\"options\" #optionsList> <ul class=\"select-dropdown\" [ngClass]=\"{'multiple-select-dropdown': multiple}\" (wheel)=\"onOptionsWheel($event)\"> <li *ngFor=\"let option of optionList.filtered\" [ngClass]=\"{'active': option.highlighted, 'selected': option.selected, 'disabled': option.disabled, 'optgroup': option.group}\" [ngStyle]=\"getOptionStyle(option)\" (click)=\"onOptionClick(option)\" (mouseover)=\"onOptionMouseover(option)\"> <img class=\"rounded-circle\" [src]=\"option.icon\" *ngIf=\"option.icon !== ''\"> <span class=\"select-option\" *ngIf=\"!multiple\">{{option.label}}</span> <span class=\"filtrable\" *ngIf=\"multiple\"> <input type=\"checkbox\" [checked]=\"option.selected\" class=\"form-check-input {{customClass}}\"> <label></label> {{option.label}} </span> </li> <li *ngIf=\"!this.hasOptionsItems\" class=\"message disabled\"> <span>{{notFoundMsg}}</span> </li> </ul> </div> </div>",
+                template: "<div class=\"dropdown-content\" #dropdownContent [ngStyle]=\"{'top.px': top, 'left.px': left, 'width.px': width}\" [@dropdownAnimation]=\"{value: state, params: {startHeight: startHeight, endHeight: endHeight}}\"> <div class=\"filter md-form px-2\" *ngIf=\"filterEnabled\"> <input type=\"text\" class=\"search form-control w-100 d-block\" #filterInput autocomplete=\"on\" [placeholder]=\"placeholder\" (input)=\"onSingleFilterInput($event)\" (keydown)=\"onSingleFilterKeydown($event)\"> </div> <div class=\"options\" #optionsList> <ul class=\"select-dropdown\" [ngClass]=\"{'multiple-select-dropdown': multiple}\" (wheel)=\"onOptionsWheel($event)\"> <li [ngStyle]=\"{ 'height.px': optionHeight }\" *ngIf=\"multiple && enableSelectAll && this.hasOptionsItems\" (click)=\"onSelectAllClick()\"> <span class=\"filtrable\" *ngIf=\"multiple\"> <input type=\"checkbox\" [checked]=\"selectAllSelected\" class=\"form-check-input {{customClass}}\"> <label></label> Select all </span> </li> <li *ngFor=\"let option of optionList.filtered\" [ngClass]=\"{'active': option.highlighted, 'selected': option.selected, 'disabled': option.disabled, 'optgroup': option.group}\" [ngStyle]=\"getOptionStyle(option)\" (click)=\"onOptionClick(option)\" (mouseover)=\"option.hovered = true\" (mouseleave)=\"option.hovered = false\"> <img class=\"rounded-circle mb-0\" [src]=\"option.icon\" *ngIf=\"option.icon !== ''\"> <span class=\"deselect-option\" *ngIf=\"!multiple\">{{option.label}}</span> <span class=\"deselect-option\" *ngIf=\"multiple\"> <input type=\"checkbox\" [checked]=\"option.selected\" class=\"form-check-input {{customClass}}\" [disabled]=\"option.disabled\"> <label></label> {{option.label}} </span> </li> <li *ngIf=\"!this.hasOptionsItems\" class=\"message disabled\"> <span>{{notFoundMsg}}</span> </li> </ul> </div> </div>",
                 encapsulation: ViewEncapsulation.None,
+                changeDetection: ChangeDetectionStrategy.Default,
                 animations: [trigger('dropdownAnimation', [
-                        state('invisible', style({ opacity: 0, transform: 'scaleY(0.6)' })),
-                        state('visible', style({ opacity: 1, transform: 'scaleY(1)' })),
-                        transition('invisible => visible', animate('200ms ease-in')),
-                        transition('visible => invisible', animate('200ms ease-in'))
+                        state('invisible', style({ opacity: 0, height: '0px' })),
+                        state('visible', style({ opacity: 1, height: '*' })),
+                        transition('invisible => visible', animate('300ms ease')),
+                        transition('visible => invisible', animate('300ms ease'))
                     ])]
             },] },
 ];
@@ -8308,11 +8336,14 @@ SelectDropdownComponent.propDecorators = {
     visibleOptions: [{ type: Input }],
     dropdownHeight: [{ type: Input }],
     dropdownMaxHeight: [{ type: Input }],
+    optionHeight: [{ type: Input }],
+    enableSelectAll: [{ type: Input }],
     close: [{ type: Output }],
     optionClicked: [{ type: Output }],
     singleFilterClick: [{ type: Output }],
     singleFilterInput: [{ type: Output }],
     singleFilterKeydown: [{ type: Output }],
+    selectAll: [{ type: Output }],
     filterInput: [{ type: ViewChild, args: ['filterInput',] }],
     optionsList: [{ type: ViewChild, args: ['optionsList',] }],
     dropdownContent: [{ type: ViewChild, args: ['dropdownContent',] }],
@@ -8336,14 +8367,17 @@ class SelectComponent {
      * @param {?} renderer
      * @param {?} document
      * @param {?} platformId
+     * @param {?} cdRef
      */
-    constructor(el, renderer, document, platformId) {
+    constructor(el, renderer, document, platformId, cdRef) {
         this.el = el;
         this.renderer = renderer;
         this.document = document;
+        this.cdRef = cdRef;
         this.customClass = '';
         this.allowClear = false;
         this.disabled = false;
+        this.highlightFirst = true;
         this.multiple = false;
         this.noFilter = 0;
         this.notFoundMsg = 'No results found';
@@ -8351,6 +8385,7 @@ class SelectComponent {
         this.filterPlaceholder = '';
         this.label = '';
         this.filterEnabled = false;
+        this.enableSelectAll = true;
         this.opened = new EventEmitter();
         this.closed = new EventEmitter();
         this.selected = new EventEmitter();
@@ -8381,7 +8416,8 @@ class SelectComponent {
         this.labelActive = false;
         this.clearClicked = false;
         this.selectContainerClicked = false;
-        this.optionHeight = 44;
+        this.optionHeight = 37;
+        this.filterHeight = 0;
         this.itemsBefore = [];
         this.onChange = (_) => { };
         this.onTouched = () => { };
@@ -8393,8 +8429,12 @@ class SelectComponent {
      * @return {?}
      */
     closeSelect($event) {
-        if (!this.isChild($event.target) && this.isOpen) {
+        if (!this.isChild($event.target) &&
+            this.isOpen &&
+            $event.target !== this.el.nativeElement) {
             this.closeDropdown();
+            this.updateLabelState();
+            this.clearFilterInput();
         }
     }
     /**
@@ -8402,21 +8442,39 @@ class SelectComponent {
      */
     ngOnInit() {
         this.placeholderView = this.placeholder;
+        this.updateFilterHeight();
         this.updateDropdownHeight();
+        this.updateLabelState();
+        if (this.highlightFirst) {
+            this.optionList.highlightFirst = true;
+        }
+    }
+    /**
+     * @return {?}
+     */
+    updateFilterHeight() {
+        this.filterEnabled ? (this.filterHeight = 78) : (this.filterHeight = 0);
     }
     /**
      * @return {?}
      */
     updateDropdownHeight() {
-        this.dropdownMaxHeight = this.visibleOptions ? this.optionHeight * this.visibleOptions : this.optionHeight * this.visibleOptionsDefault;
-        this.dropdownHeight = this.optionHeight * this.optionList.options.length;
+        if (this.multiple && this.enableSelectAll) {
+            // tslint:disable-next-line:max-line-length
+            this.dropdownMaxHeight = this.visibleOptions ? this.optionHeight * (this.visibleOptions + 1) : this.optionHeight * (this.visibleOptionsDefault + 1);
+            this.dropdownHeight = this.optionHeight * (this.optionList.options.length + 1);
+        }
+        else {
+            // tslint:disable-next-line:max-line-length
+            this.dropdownMaxHeight = this.visibleOptions ? this.optionHeight * this.visibleOptions : this.optionHeight * this.visibleOptionsDefault;
+            this.dropdownHeight = this.optionHeight * this.optionList.options.length;
+        }
     }
     /**
      * @return {?}
      */
     ngAfterViewInit() {
         this.updateState();
-        this.updateLabelState();
         this.setArrowUpIcon();
         this.setArrowDownIcon();
         this.renderer.setStyle(this.selectionSpan.nativeElement.children[0].lastChild, 'visibility', 'hidden');
@@ -8431,7 +8489,10 @@ class SelectComponent {
             this.updateState();
             this.updateDropdownHeight();
             this.updatePosition();
-            this.changed.emit({ previousValue: changes.options.previousValue, currentValue: changes.options.currentValue });
+            this.changed.emit({
+                previousValue: changes.options.previousValue,
+                currentValue: changes.options.currentValue
+            });
         }
         if (changes.hasOwnProperty('noFilter')) {
             /** @type {?} */
@@ -8479,17 +8540,6 @@ class SelectComponent {
         }
         return false;
     }
-    // Window.
-    /**
-     * @return {?}
-     */
-    onWindowClick() {
-        if (!this.selectContainerClicked && !this.multiple && this.isOpen) {
-            this.closeDropdown();
-        }
-        this.clearClicked = false;
-        this.selectContainerClicked = false;
-    }
     /**
      * @return {?}
      */
@@ -8502,18 +8552,10 @@ class SelectComponent {
      * @return {?}
      */
     onSelectContainerClick(event) {
-        if (this.clearButton && event.target === this.clearButton.nativeElement) {
-            return;
-        }
-        else {
+        if (this.isChild(event.target)) {
             this.selectContainerClicked = true;
-            this.toggleDropdown();
-            if (this.labelActive && !this.hasSelected && !this.placeholder) {
-                this.labelActive = false;
-            }
-            else {
-                this.labelActive = true;
-            }
+            this.openDropdown();
+            this.updateLabelState();
         }
     }
     /**
@@ -8527,10 +8569,8 @@ class SelectComponent {
      * @return {?}
      */
     onSelectContainerBlur() {
-        setTimeout(() => {
-            this.updateLabelState();
-        }, 150);
-        if (this.isOpen && !this.disabled) {
+        this.updateLabelState();
+        if (!this.isOpen && !this.disabled) {
             this.onTouched();
         }
     }
@@ -8547,8 +8587,7 @@ class SelectComponent {
      * @return {?}
      */
     onDropdownOptionClicked(option) {
-        this.multiple ?
-            this.toggleSelectOption(option) : this.selectOption(option);
+        this.multiple ? this.toggleSelectOption(option) : this.selectOption(option);
     }
     /**
      * @param {?} focus
@@ -8571,8 +8610,15 @@ class SelectComponent {
     onSingleFilterInput(term) {
         /** @type {?} */
         const hasShown = this.optionList.filter(term);
+        if (this.multiple && this.enableSelectAll) {
+            this.dropdownHeight = (this.optionList.filtered.length + 1) * this.optionHeight;
+        }
+        else {
+            this.dropdownHeight = this.optionList.filtered.length * this.optionHeight;
+        }
         if (!hasShown) {
             this.noOptionsFound.emit(term);
+            this.dropdownHeight = this.optionHeight;
         }
     }
     /**
@@ -8592,15 +8638,13 @@ class SelectComponent {
             this.openDropdown();
         }
         this.updateFilterWidth();
-        setTimeout(() => {
-            /** @type {?} */
-            const term = event.target.value;
-            /** @type {?} */
-            const hasShown = this.optionList.filter(term);
-            if (!hasShown) {
-                this.noOptionsFound.emit(term);
-            }
-        });
+        /** @type {?} */
+        const term = event.target.value;
+        /** @type {?} */
+        const hasShown = this.optionList.filter(term);
+        if (!hasShown) {
+            this.noOptionsFound.emit(term);
+        }
     }
     /**
      * @param {?} event
@@ -8619,7 +8663,8 @@ class SelectComponent {
         this.clearClicked = true;
         this.clearSelection();
         this.placeholderView = this.placeholder;
-        this.labelActive = false;
+        this.onTouched();
+        this.updateLabelState();
     }
     // Multiple deselect option.
     /**
@@ -8636,7 +8681,9 @@ class SelectComponent {
      */
     // TODO fix issues with global click/key handler that closes the dropdown.
     open() {
-        this.openDropdown();
+        Promise.resolve().then(() => {
+            this.openDropdown();
+        });
     }
     /**
      * @return {?}
@@ -8658,7 +8705,9 @@ class SelectComponent {
         if (typeof v === 'undefined' || v === null || v === '') {
             v = [];
         }
-        else if (typeof v === 'string' || typeof v === 'number' || typeof v === 'boolean') {
+        else if (typeof v === 'string' ||
+            typeof v === 'number' ||
+            typeof v === 'boolean') {
             v = [v];
         }
         else if (!Array.isArray(v)) {
@@ -8679,7 +8728,7 @@ class SelectComponent {
      * @return {?}
      */
     select(value) {
-        this.optionList.getOptionsByValue(value).forEach((option) => {
+        this.optionList.getOptionsByValue(value).forEach(option => {
             this.selectOption(option);
         });
     }
@@ -8690,10 +8739,11 @@ class SelectComponent {
      */
     writeValue(value) {
         this.value = value;
+        this.hasSelected = true;
         if (!value) {
             this.hasSelected = false;
-            this.updateLabelState();
         }
+        this.updateLabelState();
     }
     /**
      * @param {?} fn
@@ -8715,6 +8765,7 @@ class SelectComponent {
      */
     setDisabledState(isDisabled) {
         this.disabled = isDisabled;
+        this.cdRef.markForCheck();
     }
     /**
      * @return {?}
@@ -8729,9 +8780,7 @@ class SelectComponent {
      */
     updateState() {
         this.placeholderView = this.placeholder;
-        setTimeout(() => {
-            this.updateFilterWidth();
-        });
+        this.updateFilterWidth();
     }
     /**
      * Initialization. *
@@ -8741,20 +8790,17 @@ class SelectComponent {
     updateOptionsList(options) {
         this.optionList = new OptionList(options);
         this.optionList.value = this._value;
+        this.cdRef.markForCheck();
     }
     /**
      * @return {?}
      */
     updateLabelState() {
-        if (!this.placeholder && !this.hasSelected) {
-            setTimeout(() => {
-                this.labelActive = false;
-            }, 0);
+        if (!this.placeholder && !this.hasSelected && !this.isOpen) {
+            this.labelActive = false;
         }
         else {
-            setTimeout(() => {
-                this.labelActive = true;
-            }, 0);
+            this.labelActive = true;
         }
     }
     /**
@@ -8778,11 +8824,9 @@ class SelectComponent {
             this.updateWidth();
             this.updatePosition();
             this.isOpen = true;
-            // if (this.multiple && this.filterEnabled) {
-            //   this.filterInput.nativeElement.focus();
-            // }
             this.opened.emit(this);
         }
+        this.cdRef.markForCheck();
     }
     /**
      * @param {?=} focus
@@ -8798,17 +8842,16 @@ class SelectComponent {
             // tslint:disable-next-line:max-line-length
             this.renderer.setStyle(this.selectionSpan.nativeElement.children[0].children[this.selectionSpan.nativeElement.children[0].children.length - 2], 'visibility', 'visible');
         }
-        setTimeout(() => {
-            if (this.isOpen) {
-                this.clearFilterInput();
-                this.isOpen = false;
-                if (focus) {
-                    this.focus();
-                }
-                this.closed.emit(this);
+        if (this.isOpen) {
+            this.clearFilterInput();
+            this.isOpen = false;
+            if (focus) {
+                this.focus();
             }
-        }, 0);
+            this.closed.emit(this);
+        }
         this.onTouched();
+        this.cdRef.markForCheck();
     }
     /**
      * Select. *
@@ -8816,13 +8859,17 @@ class SelectComponent {
      * @return {?}
      */
     selectOption(option) {
-        if (!option.selected) {
+        if (!option.disabled) {
             this.optionList.select(option, this.multiple);
             this.valueChanged();
             this.selected.emit(option.wrappedOption);
             this.hasSelected = true;
             this.updateLabelState();
         }
+        if (!this.multiple && !option.disabled) {
+            this.closeDropdown();
+        }
+        this.cdRef.markForCheck();
     }
     /**
      * @param {?} option
@@ -8849,14 +8896,12 @@ class SelectComponent {
         if (selection.length > 0) {
             this.optionList.clearSelection();
             this.valueChanged();
-            setTimeout(() => {
-                this.hasSelected = false;
-            }, 0);
+            this.hasSelected = false;
             if (selection.length === 1) {
                 this.deselected.emit(selection[0].wrappedOption);
             }
             else {
-                this.deselected.emit(selection.map((option) => {
+                this.deselected.emit(selection.map(option => {
                     return option.wrappedOption;
                 }));
             }
@@ -8867,8 +8912,7 @@ class SelectComponent {
      * @return {?}
      */
     toggleSelectOption(option) {
-        option.selected ?
-            this.deselectOption(option) : this.selectOption(option);
+        option.selected ? this.deselectOption(option) : this.selectOption(option);
     }
     /**
      * @return {?}
@@ -8876,7 +8920,10 @@ class SelectComponent {
     selectHighlightedOption() {
         /** @type {?} */
         const option = this.optionList.highlightedOption;
-        if (option !== null) {
+        if (this.multiple && option !== null) {
+            this.toggleSelectOption(option);
+        }
+        if (!this.multiple && option !== null) {
             this.selectOption(option);
             this.closeDropdown(true);
         }
@@ -8895,19 +8942,28 @@ class SelectComponent {
         }
     }
     /**
+     * @param {?} isSelected
+     * @return {?}
+     */
+    onSelectAll(isSelected) {
+        if (isSelected) {
+            this.optionList.filtered.forEach((option) => {
+                this.selectOption(option);
+            });
+        }
+        else {
+            this.optionList.filtered.forEach((option) => {
+                this.deselectOption(option);
+            });
+        }
+    }
+    /**
      * Filter. *
      * @return {?}
      */
     clearFilterInput() {
-        try {
-            if (this.multiple && this.filterEnabled) {
-                this.filterInput.nativeElement.value = '';
-            }
-            else {
-                this.dropdown.clearFilterInput();
-            }
-        }
-        catch (error) { }
+        this.dropdown.clearFilterInput();
+        this.updateDropdownHeight();
     }
     /**
      * @param {?} value
@@ -8924,43 +8980,39 @@ class SelectComponent {
      */
     handleSelectContainerKeydown(event) {
         /** @type {?} */
-        const key = event.which;
+        const key = event.keyCode;
         if (this.isOpen) {
-            if (key === this.KEYS.ESC ||
-                (key === this.KEYS.UP && event.altKey)) {
+            if (key === this.KEYS.ESC || (key === this.KEYS.UP && event.altKey)) {
+                event.preventDefault();
                 this.closeDropdown(true);
+                this.updateLabelState();
             }
             else if (key === this.KEYS.TAB) {
                 this.closeDropdown();
             }
             else if (key === this.KEYS.ENTER) {
                 this.selectHighlightedOption();
+                if (this.multiple && this.enableSelectAll) {
+                    this.dropdown.updateSelectAllState();
+                }
             }
             else if (key === this.KEYS.UP) {
+                event.preventDefault();
                 this.optionList.highlightPreviousOption();
                 this.dropdown.moveHighlightedIntoView();
-                if (!this.filterEnabled) {
-                    event.preventDefault();
-                }
             }
             else if (key === this.KEYS.DOWN) {
+                event.preventDefault();
                 this.optionList.highlightNextOption();
                 this.dropdown.moveHighlightedIntoView();
-                if (!this.filterEnabled) {
-                    event.preventDefault();
-                }
             }
         }
         else {
-            if (key === this.KEYS.ENTER || key === this.KEYS.SPACE ||
+            if (key === this.KEYS.ENTER ||
+                key === this.KEYS.SPACE ||
                 (key === this.KEYS.DOWN && event.altKey)) {
-                /* FIREFOX HACK:
-                 *
-                 * The setTimeout is added to prevent the enter keydown event
-                 * to be triggered for the filter input field, which causes
-                 * the dropdown to be closed again.
-                 */
-                setTimeout(() => { this.openDropdown(); });
+                event.preventDefault();
+                this.openDropdown();
             }
         }
     }
@@ -8972,7 +9024,8 @@ class SelectComponent {
         /** @type {?} */
         const key = event.which;
         if (key === this.KEYS.BACKSPACE) {
-            if (this.hasSelected && this.filterEnabled &&
+            if (this.hasSelected &&
+                this.filterEnabled &&
                 this.filterInput.nativeElement.value === '') {
                 this.deselectLast();
             }
@@ -8985,9 +9038,11 @@ class SelectComponent {
     handleSingleFilterKeydown(event) {
         /** @type {?} */
         const key = event.which;
-        if (key === this.KEYS.ESC || key === this.KEYS.TAB
-            || key === this.KEYS.UP || key === this.KEYS.DOWN
-            || key === this.KEYS.ENTER) {
+        if (key === this.KEYS.ESC ||
+            key === this.KEYS.TAB ||
+            key === this.KEYS.UP ||
+            key === this.KEYS.DOWN ||
+            key === this.KEYS.ENTER) {
             this.handleSelectContainerKeydown(event);
         }
     }
@@ -9035,18 +9090,14 @@ class SelectComponent {
         const selectSpan = this.selectionSpan.nativeElement;
         this.left = selectSpan.offsetLeft;
         /** @type {?} */
-        const labelHeight = 20;
-        /** @type {?} */
         const bottom = docEl.scrollTop + docEl.clientHeight;
         /** @type {?} */
         const dropdownHeight = this.dropdownMaxHeight > this.dropdownHeight ? this.dropdownHeight : this.dropdownMaxHeight;
-        /** @type {?} */
-        const selectHeight = dropdownHeight + selectSpan.offsetHeight + labelHeight;
         if (elPosition + dropdownHeight >= bottom) {
-            this.top = selectSpan.offsetHeight - selectHeight;
+            this.top = selectSpan.offsetHeight - dropdownHeight - this.filterHeight;
         }
         else {
-            this.top = selectSpan.offsetHeight;
+            this.top = 0;
         }
     }
     /**
@@ -9056,17 +9107,20 @@ class SelectComponent {
         if (typeof this.filterInput !== 'undefined') {
             /** @type {?} */
             const value = this.filterInput.nativeElement.value;
-            this.filterInputWidth = value.length === 0 ?
-                1 + this.placeholderView.length * 10 : 1 + value.length * 10;
+            this.filterInputWidth =
+                value.length === 0
+                    ? 1 + this.placeholderView.length * 10
+                    : 1 + value.length * 10;
         }
     }
 }
 SelectComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-select',
-                template: "<label *ngIf=\"label !== ''\" [ngClass]=\"{'active': labelActive }\"> {{label}} </label> <div #selection [attr.tabindex]=\"disabled ? null : 0\" [ngClass]=\"{'open': isOpen, 'focus': hasFocus, 'below': isBelow, 'disabled': disabled}\" [tabindex]=\"tabindex\" (mousedown)=\"onSelectContainerClick($event)\" (focus)=\"onSelectContainerFocus()\" (blur)=\"onSelectContainerBlur()\" (keydown)=\"onSelectContainerKeydown($event)\" (window:click)=\"onWindowClick()\" (window:resize)=\"onWindowResize()\"> <div class=\"single form-control\" *ngIf=\"!multiple\"> <div class=\"value\" *ngIf=\"optionList.hasSelected()\"> {{optionList.selection[0].label}} </div> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div #clear class=\"clear\" *ngIf=\"allowClear && hasSelected\" (mousedown)=\"onClearSelectionClick($event)\"> &#x2715; </div> </div> <div class=\"multiple form-control\" *ngIf=\"multiple\"> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div class=\"option\"> <span *ngFor=\"let option of optionList.selection\"> {{option.label}}<span class=\"deselect-option\">,</span> </span> </div> </div> </div> <mdb-select-dropdown *ngIf=\"isOpen\" #dropdown [multiple]=\"multiple\" [dropdownHeight]=\"dropdownHeight\" [dropdownMaxHeight]=\"dropdownMaxHeight\" [optionList]=\"optionList\" [notFoundMsg]=\"notFoundMsg\" [highlightColor]=\"highlightColor\" [highlightTextColor]=\"highlightTextColor\" [filterEnabled]=\"filterEnabled\" [placeholder]=\"filterPlaceholder\" [top]=\"top\" [left]=\"left\" (close)=\"onDropdownClose($event)\" (optionClicked)=\"onDropdownOptionClicked($event)\" (singleFilterClick)=\"onSingleFilterClick()\" (singleFilterInput)=\"onSingleFilterInput($event)\" (singleFilterKeydown)=\"onSingleFilterKeydown($event)\"> </mdb-select-dropdown>",
+                template: "<label *ngIf=\"label !== ''\" [ngClass]=\"{'active': labelActive }\"> {{label}} </label> <div #selection [attr.tabindex]=\"disabled ? null : 0\" [ngClass]=\"{'open': isOpen, 'focus': hasFocus, 'below': isBelow, 'disabled': disabled}\" [tabindex]=\"tabindex\" (mousedown)=\"onSelectContainerClick($event)\" (focus)=\"onSelectContainerFocus()\" (blur)=\"onSelectContainerBlur()\" (keydown)=\"onSelectContainerKeydown($event)\" (window:resize)=\"onWindowResize()\"> <div class=\"single form-control\" *ngIf=\"!multiple\"> <div class=\"value\" *ngIf=\"optionList.hasSelected()\"> {{optionList.selection[0].label}} </div> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div #clear class=\"clear\" *ngIf=\"allowClear && hasSelected\" (mousedown)=\"onClearSelectionClick($event)\"> &#x2715; </div> </div> <div class=\"multiple form-control\" *ngIf=\"multiple\"> <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\"> {{placeholderView}} </div> <div [ngStyle]=\"allowClear && { 'width.%': 90}\" class=\"option\"> <span *ngFor=\"let option of optionList.selection\"> {{option.label}}<span class=\"deselect-option\">,</span> </span> </div> <div #clear class=\"clear\" *ngIf=\"allowClear && hasSelected\" (mousedown)=\"onClearSelectionClick($event)\"> &#x2715; </div> </div> </div> <mdb-select-dropdown *ngIf=\"isOpen\" #dropdown [enableSelectAll]=\"enableSelectAll\" [multiple]=\"multiple\" [dropdownHeight]=\"dropdownHeight\" [dropdownMaxHeight]=\"dropdownMaxHeight\" [optionHeight]=\"optionHeight\" [optionList]=\"optionList\" [notFoundMsg]=\"notFoundMsg\" [customClass]=\"customClass\" [highlightColor]=\"highlightColor\" [highlightTextColor]=\"highlightTextColor\" [filterEnabled]=\"filterEnabled\" [placeholder]=\"filterPlaceholder\" [top]=\"top\" [left]=\"left\" (close)=\"onDropdownClose($event)\" (optionClicked)=\"onDropdownOptionClicked($event)\" (singleFilterClick)=\"onSingleFilterClick()\" (singleFilterInput)=\"onSingleFilterInput($event)\" (singleFilterKeydown)=\"onSingleFilterKeydown($event)\" (selectAll)=\"onSelectAll($event)\"> </mdb-select-dropdown>",
                 providers: [SELECT_VALUE_ACCESSOR],
-                encapsulation: ViewEncapsulation.None
+                encapsulation: ViewEncapsulation.None,
+                changeDetection: ChangeDetectionStrategy.OnPush
             },] },
 ];
 /** @nocollapse */
@@ -9074,7 +9128,8 @@ SelectComponent.ctorParameters = () => [
     { type: ElementRef },
     { type: Renderer2 },
     { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] },
-    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+    { type: ChangeDetectorRef }
 ];
 SelectComponent.propDecorators = {
     options: [{ type: Input }],
@@ -9083,6 +9138,7 @@ SelectComponent.propDecorators = {
     disabled: [{ type: Input }],
     highlightColor: [{ type: Input }],
     highlightTextColor: [{ type: Input }],
+    highlightFirst: [{ type: Input }],
     multiple: [{ type: Input }],
     noFilter: [{ type: Input }],
     notFoundMsg: [{ type: Input }],
@@ -9092,6 +9148,7 @@ SelectComponent.propDecorators = {
     filterEnabled: [{ type: Input }],
     visibleOptions: [{ type: Input }],
     tabindex: [{ type: Input }],
+    enableSelectAll: [{ type: Input }],
     opened: [{ type: Output }],
     closed: [{ type: Output }],
     selected: [{ type: Output }],
@@ -18489,7 +18546,8 @@ const modalConfigDefaults = {
     ignoreBackdropClick: false,
     class: '',
     containerClass: '',
-    animated: true
+    animated: true,
+    scroll: false
 };
 /** @type {?} */
 const ClassName = {
@@ -19079,6 +19137,9 @@ class ModalContainerComponent {
         }
         if (this.config.containerClass) {
             this.updateContainerClass();
+        }
+        if (this.config.scroll) {
+            this._renderer.setStyle(this._element.nativeElement, 'overflow-y', 'auto');
         }
     }
     /**
@@ -20262,7 +20323,6 @@ class MdbTablePaginationComponent {
             if (this.maxVisibleItems > this.allItemsLength) {
                 this.maxVisibleItems = this.allItemsLength;
             }
-            this.cdRef.detectChanges();
         });
     }
     /**
@@ -20354,6 +20414,7 @@ class MdbTablePaginationComponent {
         }
         if (this.lastItemIndex > this.tableService.getDataSource().length) {
             this.lastItemIndex = this.tableService.getDataSource().length;
+            this.lastVisibleItemIndex = this.tableService.getDataSource().length;
         }
         this.pagination.next({ first: this.firstItemIndex, last: this.lastItemIndex });
     }
