@@ -1,4 +1,5 @@
 import { ModuleWithProviders } from '@angular/core';
+export { MdbAutoCompleterComponent, MdbOptionComponent, MdbAutoCompleterDirective, AutoCompleterModule, MdbAutoCompleterOptionDirective } from './auto-completer/index';
 export { RangeModule, MdbRangeInputComponent } from './range/index';
 export { AutoFormatModule, MdbDateFormatDirective, MdbCreditCardDirective, MdbCvvDirective } from './auto-format/index';
 export { ScrollSpyModule, ScrollSpyDirective, ScrollSpyWindowDirective, ScrollSpyElementDirective, ScrollSpyLinkDirective, ScrollSpyService } from './scroll-spy/index';

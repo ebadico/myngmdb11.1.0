@@ -1,7 +1,7 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('tslib'), require('@angular/core'), require('@angular/animations'), require('@angular/router'), require('@angular/common'), require('rxjs'), require('@angular/platform-browser'), require('@angular/forms'), require('rxjs/operators'), require('@angular/http'), require('hammerjs'), require('chart.js')) :
-	typeof define === 'function' && define.amd ? define(['exports', 'tslib', '@angular/core', '@angular/animations', '@angular/router', '@angular/common', 'rxjs', '@angular/platform-browser', '@angular/forms', 'rxjs/operators', '@angular/http', 'hammerjs', 'chart.js'], factory) :
-	(factory((global['ng-uikit-pro-standard'] = {}),global.tslib,global.ng.core,global.ng.animations,global.ng.router,global.ng.common,global.RX,global.ng.platformBrowser,global.ng.forms,global.Rx.Observable,global.ng.http,global.hammerjs,global.Chart));
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('tslib'), require('@angular/core'), require('@angular/animations'), require('@angular/router'), require('@angular/common'), require('rxjs'), require('@angular/platform-browser'), require('@angular/forms'), require('rxjs/operators'), require('@angular/common/http'), require('hammerjs'), require('chart.js')) :
+	typeof define === 'function' && define.amd ? define(['exports', 'tslib', '@angular/core', '@angular/animations', '@angular/router', '@angular/common', 'rxjs', '@angular/platform-browser', '@angular/forms', 'rxjs/operators', '@angular/common/http', 'hammerjs', 'chart.js'], factory) :
+	(factory((global['ng-uikit-pro-standard'] = {}),global.tslib,global.ng.core,global.ng.animations,global.ng.router,global.ng.common,global.RX,global.ng.platformBrowser,global.ng.forms,global.Rx.Observable,global.ng.common,global.hammerjs,global.Chart));
 }(this, (function (exports,tslib_1,core,animations,router,common,rxjs,platformBrowser,forms,operators,http,hammerjs,Chart) { 'use strict';
 
 /**
@@ -2063,11 +2063,11 @@ var RemoteData = /** @class */ (function (_super) {
          * If no requestOptions are provided, a new RequestOptions object will be instantiated,
          * and either the provided headers or a new Headers() object will be sent.
          */
-        if (!this._requestOptions) {
-            this._requestOptions = new http.RequestOptions();
-            this._requestOptions.headers = this._headers || new http.Headers();
-        }
-        this.remoteSearch = this.http.get(url, this._requestOptions).pipe(operators.map(function (res) { return res.json(); }), operators.map(function (data) {
+        // if (!this._requestOptions) {
+        //   this._requestOptions = new RequestOptions();
+        //   (this._requestOptions.headers as any) = this._headers || new HttpHeaders();
+        // }
+        this.remoteSearch = this.http.get(url, this._requestOptions).pipe(operators.map(function (res) { return res; }), operators.map(function (data) {
             /** @type {?} */
             var matches = _this.extractValue(data, _this._dataField);
             return _this.extractMatches(matches, term);
@@ -3387,7 +3387,7 @@ function remoteDataFactory(http$$1) {
 /** @type {?} */
 var LocalDataFactoryProvider = { provide: LocalData, useFactory: localDataFactory };
 /** @type {?} */
-var RemoteDataFactoryProvider = { provide: RemoteData, useFactory: remoteDataFactory, deps: [http.Http] };
+var RemoteDataFactoryProvider = { provide: RemoteData, useFactory: remoteDataFactory, deps: [http.HttpClient] };
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
@@ -3402,7 +3402,7 @@ AutocompleteModule.decorators = [
                 imports: [
                     common.CommonModule,
                     forms.FormsModule,
-                    http.HttpModule
+                    http.HttpClientModule
                 ],
                 declarations: [
                     CompleterListItemComponent,
@@ -3433,6 +3433,543 @@ AutocompleteModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+var MdbOptionComponent = /** @class */ (function () {
+    /**
+     * @param {?} el
+     */
+    function MdbOptionComponent(el) {
+        this.el = el;
+        this.clicked = false;
+        this.clicked = false;
+    }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    MdbOptionComponent.prototype.handleMouseDown = function (event) {
+        /** @type {?} */
+        var text = this.value || event.target.text || event.target.textContent || event.target.value;
+        this.selectedItem = { text: text.trim(), element: this };
+        this.clicked = true;
+    };
+    return MdbOptionComponent;
+}());
+MdbOptionComponent.decorators = [
+    { type: core.Component, args: [{
+                selector: 'mdb-option',
+                template: "<div class=\"completer-row\" (mousedown)=\"handleMouseDown($event)\" mdbAutoCompleterOption> <ng-content></ng-content> </div> "
+            },] },
+];
+/** @nocollapse */
+MdbOptionComponent.ctorParameters = function () { return [
+    { type: core.ElementRef }
+]; };
+MdbOptionComponent.propDecorators = {
+    value: [{ type: core.Input }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+var MdbAutoCompleterComponent = /** @class */ (function () {
+    /**
+     * @param {?} renderer
+     */
+    function MdbAutoCompleterComponent(renderer) {
+        this.renderer = renderer;
+        this.clearButton = true;
+        this.clearButtonTabIndex = 0;
+        this._allItems = [];
+        this._isOpen = false;
+        this._selectedItemIndex = -1;
+        this._selectedItemChanged = new rxjs.Subject();
+    }
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.onItemClick = function () {
+        /** @type {?} */
+        var selectedElement = ( /** @type {?} */({}));
+        this.mdbOptions.forEach(function (el) {
+            if (el.clicked === true) {
+                selectedElement = el;
+            }
+            el.clicked = false;
+        });
+        this.setSelectedItem({ text: selectedElement.value, element: selectedElement });
+        this.highlightRow(0);
+    };
+    /**
+     * @param {?} item
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.setSelectedItem = function (item) {
+        this._selectedItem = item;
+        this._selectedItemChanged.next(this.getSelectedItem());
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.getSelectedItem = function () {
+        return this._selectedItem;
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.selectedItemChanged = function () {
+        return this._selectedItemChanged;
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.isOpen = function () {
+        return this._isOpen;
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.show = function () {
+        this._isOpen = true;
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.hide = function () {
+        this._isOpen = false;
+    };
+    /**
+     * @param {?} index
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.removeHighlight = function (index) {
+        var _this = this;
+        setTimeout(function () {
+            _this.optionList.forEach(function (el, i) {
+                /** @type {?} */
+                var completerRow = el.nativeElement.querySelectorAll('.completer-row');
+                if (i === index) {
+                    _this.renderer.addClass(el.nativeElement.firstElementChild, 'highlight-row');
+                }
+                else if (i !== index) {
+                    completerRow.forEach(function (elem) {
+                        _this.renderer.removeClass(elem, 'highlight-row');
+                    });
+                }
+            });
+        }, 0);
+    };
+    /**
+     * @param {?} index
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.highlightRow = function (index) {
+        var _this = this;
+        this._allItems = this.optionList
+            .filter(function (el) { return el.nativeElement.firstElementChild.classList.contains('completer-row'); })
+            .map(function (elem) { return elem.nativeElement; });
+        if (this._allItems[index]) {
+            this.optionList.forEach(function (el, i) {
+                /** @type {?} */
+                var completerRow = el.nativeElement.querySelectorAll('.completer-row');
+                if (index === i) {
+                    _this.removeHighlight(index);
+                    _this.renderer.addClass(completerRow[completerRow.length - 1], 'highlight-row');
+                }
+            });
+        }
+        this._selectedItemIndex = index;
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.navigateUsingKeyboard = function (event) {
+        switch (event.key) {
+            case 'ArrowDown':
+                this.moveHighlightedIntoView(event.key);
+                if (!this.isOpen()) {
+                    this.show();
+                }
+                if (this._selectedItemIndex === 0) {
+                    this.highlightRow(0);
+                }
+                if (this._selectedItemIndex + 1 <= this._allItems.length - 1) {
+                    this.highlightRow(++this._selectedItemIndex);
+                }
+                else if (this._selectedItemIndex + 1 === this._allItems.length) {
+                    this.highlightRow(0);
+                }
+                break;
+            case 'ArrowUp':
+                this.moveHighlightedIntoView(event.key);
+                if (this._selectedItemIndex === -1 || this._selectedItemIndex === 0) {
+                    this.highlightRow(this._allItems.length);
+                }
+                this.highlightRow(--this._selectedItemIndex);
+                break;
+            case 'Escape':
+                this.hide();
+                break;
+            case 'Enter':
+                /** @type {?} */
+                var selectedOption = this.mdbOptions.map(function (el) { return el; })[this._selectedItemIndex];
+                if (selectedOption) {
+                    this.setSelectedItem({ text: selectedOption.value, element: selectedOption });
+                }
+                this.hide();
+                break;
+        }
+    };
+    /**
+     * @param {?} type
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.moveHighlightedIntoView = function (type) {
+        /** @type {?} */
+        var listHeight = 0;
+        /** @type {?} */
+        var itemIndex = this._selectedItemIndex;
+        this.optionList.forEach(function (el) {
+            listHeight += el.nativeElement.offsetHeight;
+        });
+        if (itemIndex > -1) {
+            /** @type {?} */
+            var item_1 = null;
+            /** @type {?} */
+            var itemHeight_1 = 0;
+            this.optionList.forEach(function (el, i) {
+                if (i === itemIndex + 1) {
+                    item_1 = el.nativeElement;
+                    itemHeight_1 = item_1.offsetHeight;
+                }
+            });
+            /** @type {?} */
+            var itemTop = (itemIndex + 1) * itemHeight_1;
+            /** @type {?} */
+            var viewTop = this.dropdown.nativeElement.scrollTop;
+            /** @type {?} */
+            var viewBottom = viewTop + listHeight;
+            if (type === 'ArrowDown') {
+                this.renderer.setProperty(this.dropdown.nativeElement, 'scrollTop', itemTop - itemHeight_1);
+            }
+            else if (type === 'ArrowUp') {
+                if (itemIndex === 0) {
+                    itemIndex = this.optionList.length - 1;
+                }
+                else {
+                    itemIndex--;
+                }
+                if (itemIndex === this._allItems.length - 2) {
+                    this.renderer.setProperty(this.dropdown.nativeElement, 'scrollTop', viewBottom - itemHeight_1);
+                }
+                else {
+                    this.renderer.setProperty(this.dropdown.nativeElement, 'scrollTop', itemIndex * itemHeight_1);
+                }
+            }
+        }
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.ngOnInit = function () {
+        if (!this.textNoResults) {
+            this.textNoResults = 'No results found';
+        }
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.ngAfterContentInit = function () {
+        this.highlightRow(0);
+    };
+    return MdbAutoCompleterComponent;
+}());
+MdbAutoCompleterComponent.decorators = [
+    { type: core.Component, args: [{
+                selector: 'mdb-auto-completer',
+                template: "<div class=\"completer-dropdown-holder\" *ngIf=\"isOpen()\"> <div class=\"completer-dropdown\" #dropdown> <div class=\"completer-row-wrapper\"> <div *ngIf=\"optionList.length === 0 \" class=\"completer-no-results\">{{textNoResults}}</div> <ng-content #content></ng-content> </div> </div> </div> ",
+                exportAs: 'mdbAutoCompleter',
+            },] },
+];
+/** @nocollapse */
+MdbAutoCompleterComponent.ctorParameters = function () { return [
+    { type: core.Renderer2 }
+]; };
+MdbAutoCompleterComponent.propDecorators = {
+    textNoResults: [{ type: core.Input }],
+    clearButton: [{ type: core.Input }],
+    clearButtonTabIndex: [{ type: core.Input }],
+    optionList: [{ type: core.ContentChildren, args: [MdbOptionComponent, { descendants: true, read: core.ElementRef },] }],
+    mdbOptions: [{ type: core.ContentChildren, args: [MdbOptionComponent, { descendants: true, read: MdbOptionComponent },] }],
+    dropdown: [{ type: core.ViewChild, args: ['dropdown',] }],
+    onItemClick: [{ type: core.HostListener, args: ['mousedown', ['$event'],] }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+var MdbAutoCompleterDirective = /** @class */ (function () {
+    /**
+     * @param {?} renderer
+     * @param {?} el
+     * @param {?} platformId
+     * @param {?} document
+     */
+    function MdbAutoCompleterDirective(renderer, el, platformId, document) {
+        this.renderer = renderer;
+        this.el = el;
+        this.document = document;
+        this.ngModelChange = new core.EventEmitter();
+        this.isBrowser = common.isPlatformBrowser(platformId);
+    }
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype._renderClearButton = function () {
+        /** @type {?} */
+        var el = this.renderer.createElement('button');
+        this._setStyles(el, {
+            position: 'absolute',
+            top: '25%',
+            right: '0',
+            visibility: 'hidden'
+        });
+        this._addClass(el, ['mdb-autocomplete-clear', 'fa', 'fa-times']);
+        this.renderer.setAttribute(el, 'type', 'button');
+        this.renderer.setAttribute(el, 'tabindex', this.mdbAutoCompleter.clearButtonTabIndex.toString());
+        if (this.isBrowser) {
+            this.renderer.appendChild(this.el.nativeElement.offsetParent, el);
+        }
+    };
+    /**
+     * @template THIS
+     * @this {THIS}
+     * @param {?} target
+     * @param {?} styles
+     * @return {THIS}
+     */
+    MdbAutoCompleterDirective.prototype._setStyles = function (target, styles) {
+        var _this = this;
+        Object.keys(styles).forEach(function (prop) {
+            ( /** @type {?} */(_this)).renderer.setStyle(target, prop, styles[prop]);
+        });
+        return ( /** @type {?} */(this));
+    };
+    /**
+     * @param {?} target
+     * @param {?} name
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype._addClass = function (target, name) {
+        var _this = this;
+        name.forEach(function (el) {
+            _this.renderer.addClass(target, el);
+        });
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype._clearInput = function () {
+        this.el.nativeElement.value = '';
+        this.ngModelChange.emit('');
+        /** @type {?} */
+        var clearButton = this.el.nativeElement.parentElement.lastElementChild;
+        this._setStyles(clearButton, { visibility: 'hidden' });
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype._handleInput = function (event) {
+        if (!this._isOpen()) {
+            this._show();
+        }
+        this.mdbAutoCompleter.removeHighlight(0);
+        this.mdbAutoCompleter.highlightRow(0);
+        /** @type {?} */
+        var clearButtonVisibility = event.target.value.length > 0 ? 'visible' : 'hidden';
+        /** @type {?} */
+        var clearButton = this.el.nativeElement.parentElement.lastElementChild;
+        this._setStyles(clearButton, { visibility: clearButtonVisibility });
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype._handleKeyDown = function (event) {
+        this.mdbAutoCompleter.navigateUsingKeyboard(event);
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype._handleFocusIn = function () {
+        this._show();
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype._handleBlurIn = function () {
+        this._hide();
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype._handleMouseDown = function () {
+        this.mdbAutoCompleter.highlightRow(0);
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype._isOpen = function () {
+        return this.mdbAutoCompleter.isOpen();
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype._show = function () {
+        this.mdbAutoCompleter.show();
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype._hide = function () {
+        this.mdbAutoCompleter.hide();
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        this.mdbAutoCompleter.selectedItemChanged().subscribe(function (item) {
+            _this.el.nativeElement.value = item.text;
+            /** @type {?} */
+            var clearButtonVisibility = _this.el.nativeElement.value.length > 0 ? 'visible' : 'hidden';
+            _this._setStyles(_this._clearButton, { visibility: clearButtonVisibility });
+        });
+        if (this.mdbAutoCompleter.clearButton && this.isBrowser) {
+            this._renderClearButton();
+            /** @type {?} */
+            var clearButton_1 = this.el.nativeElement.parentElement.querySelectorAll('.mdb-autocomplete-clear')[0];
+            this._clearButton = this.document.querySelector('.mdb-autocomplete-clear');
+            this.renderer.listen(clearButton_1, 'focus', function () {
+                ['click', 'keydown:space', 'keydown:enter'].forEach(function (event) { return _this.renderer.listen(clearButton_1, event, function () {
+                    _this._clearInput();
+                }); });
+                _this._setStyles(clearButton_1, {
+                    transform: 'scale(1.2, 1.2)',
+                    transition: '200ms'
+                });
+            });
+            this.renderer.listen(clearButton_1, 'mouseenter', function () {
+                _this._setStyles(clearButton_1, {
+                    transform: 'scale(1.2, 1.2)',
+                    transition: '200ms'
+                });
+            });
+            this.renderer.listen(clearButton_1, 'mouseleave', function () {
+                _this._setStyles(clearButton_1, {
+                    transform: 'scale(1.0, 1.0)',
+                    transition: '200ms'
+                });
+            });
+            this.renderer.listen(clearButton_1, 'blur', function () {
+                _this._setStyles(clearButton_1, {
+                    transform: 'scale(1.0, 1.0)',
+                    transition: '200ms'
+                });
+            });
+            if (this.el.nativeElement.disabled) {
+                this.renderer.setAttribute(clearButton_1, 'disabled', 'true');
+            }
+            this._autocompleterInputChanges = new MutationObserver(function (mutations) {
+                mutations.forEach(function (mutation) {
+                    if (mutation.attributeName === 'disabled') {
+                        _this.renderer.setAttribute(_this._clearButton, 'disabled', 'true');
+                    }
+                });
+            });
+            this._autocompleterInputChanges.observe(this.el.nativeElement, {
+                attributes: true,
+                childList: true,
+                characterData: true
+            });
+        }
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype.ngOnDestroy = function () {
+        if (this._autocompleterInputChanges) {
+            this._autocompleterInputChanges.disconnect();
+        }
+    };
+    return MdbAutoCompleterDirective;
+}());
+MdbAutoCompleterDirective.decorators = [
+    { type: core.Directive, args: [{
+                selector: 'input[mdbAutoCompleter], textarea[mdbAutoCompleter]',
+                host: {
+                    '(input)': '_handleInput($event)',
+                    '(keydown)': '_handleKeyDown($event)',
+                    '(focusin)': '_handleFocusIn()',
+                    '(blur)': '_handleBlurIn()',
+                    '(mousedown)': '_handleMouseDown()'
+                },
+                exportAs: 'mdbAutoCompleterTrigger',
+            },] },
+];
+/** @nocollapse */
+MdbAutoCompleterDirective.ctorParameters = function () { return [
+    { type: core.Renderer2 },
+    { type: core.ElementRef },
+    { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] },
+    { type: undefined, decorators: [{ type: core.Inject, args: [platformBrowser.DOCUMENT,] }] }
+]; };
+MdbAutoCompleterDirective.propDecorators = {
+    mdbAutoCompleter: [{ type: core.Input }],
+    ngModelChange: [{ type: core.Output }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+var MdbAutoCompleterOptionDirective = /** @class */ (function () {
+    /**
+     * @param {?} _el
+     */
+    function MdbAutoCompleterOptionDirective(_el) {
+        this._el = _el;
+        this.value = this._el.nativeElement.textContent;
+    }
+    return MdbAutoCompleterOptionDirective;
+}());
+MdbAutoCompleterOptionDirective.decorators = [
+    { type: core.Directive, args: [{ selector: '[mdbAutoCompleterOption]' },] },
+];
+/** @nocollapse */
+MdbAutoCompleterOptionDirective.ctorParameters = function () { return [
+    { type: core.ElementRef }
+]; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+var AutoCompleterModule = /** @class */ (function () {
+    function AutoCompleterModule() {
+    }
+    return AutoCompleterModule;
+}());
+AutoCompleterModule.decorators = [
+    { type: core.NgModule, args: [{
+                imports: [common.CommonModule, http.HttpClientModule, forms.FormsModule],
+                declarations: [MdbAutoCompleterComponent, MdbOptionComponent, MdbAutoCompleterDirective, MdbAutoCompleterOptionDirective],
+                exports: [MdbAutoCompleterComponent, MdbOptionComponent, MdbAutoCompleterDirective, MdbAutoCompleterOptionDirective],
+            },] },
+];
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
@@ -8947,6 +9484,7 @@ var SelectComponent = /** @class */ (function () {
     SelectComponent.prototype.updateState = function () {
         this.placeholderView = this.placeholder;
         this.updateFilterWidth();
+        this.cdRef.markForCheck();
     };
     /**
      * Initialization. *
@@ -21998,6 +22536,10 @@ MDBBootstrapModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
 /** @type {?} */
 var MODULES$1 = [
     AutocompleteModule,
@@ -22018,7 +22560,8 @@ var MODULES$1 = [
     CharCounterModule,
     ScrollSpyModule,
     AutoFormatModule,
-    RangeModule
+    RangeModule,
+    AutoCompleterModule
 ];
 var MDBRootModulePro = /** @class */ (function () {
     function MDBRootModulePro() {
@@ -22045,7 +22588,8 @@ MDBRootModulePro.decorators = [
                     CharCounterModule.forRoot(),
                     ScrollSpyModule,
                     AutoFormatModule,
-                    RangeModule
+                    RangeModule,
+                    AutoCompleterModule
                 ],
                 exports: [MODULES$1],
                 providers: [],
@@ -22164,6 +22708,11 @@ exports.TEXT_SEARCHING = TEXT_SEARCHING;
 exports.TEXT_NO_RESULTS = TEXT_NO_RESULTS;
 exports.CLEAR_TIMEOUT = CLEAR_TIMEOUT;
 exports.AutocompleteModule = AutocompleteModule;
+exports.MdbAutoCompleterComponent = MdbAutoCompleterComponent;
+exports.MdbOptionComponent = MdbOptionComponent;
+exports.MdbAutoCompleterDirective = MdbAutoCompleterDirective;
+exports.MdbAutoCompleterOptionDirective = MdbAutoCompleterOptionDirective;
+exports.AutoCompleterModule = AutoCompleterModule;
 exports.CardRevealComponent = CardRevealComponent;
 exports.CardRotatingComponent = CardRotatingComponent;
 exports.CardsModule = CardsModule;
@@ -22368,81 +22917,86 @@ exports.MDBBootstrapModule = MDBBootstrapModule;
 exports.MDBBootstrapModulePro = MDBBootstrapModulePro;
 exports.MDBRootModules = MDBRootModules;
 exports.MDBBootstrapModulesPro = MDBBootstrapModulesPro;
-exports.ɵdg1 = BadgeModule;
-exports.ɵdh1 = MDBBadgeComponent;
-exports.ɵdk1 = BreadcrumbModule;
-exports.ɵdj1 = MdbBreadcrumbItemComponent;
-exports.ɵdi1 = MdbBreadcrumbComponent;
-exports.ɵdf1 = MdbBtnDirective;
-exports.ɵdc1 = ButtonsModule;
-exports.ɵdd1 = ButtonCheckboxDirective;
-exports.ɵde1 = ButtonRadioDirective;
-exports.ɵdp1 = CardsFreeModule;
-exports.ɵdl1 = CarouselComponent;
-exports.ɵdm1 = CarouselConfig;
-exports.ɵdo1 = CarouselModule;
-exports.ɵdn1 = SlideComponent;
-exports.ɵdq1 = BaseChartDirective;
-exports.ɵdr1 = ChartsModule;
-exports.ɵds1 = CHECKBOX_VALUE_ACCESSOR;
-exports.ɵdt1 = CheckboxComponent;
-exports.ɵdu1 = CheckboxModule;
-exports.ɵdv1 = CollapseComponent;
-exports.ɵdw1 = CollapseModule;
-exports.ɵdx1 = BsDropdownContainerComponent;
-exports.ɵdy1 = BsDropdownMenuDirective;
-exports.ɵdz1 = BsDropdownToggleDirective;
-exports.ɵea1 = BsDropdownConfig;
-exports.ɵeb1 = BsDropdownDirective;
-exports.ɵed1 = DropdownModule;
-exports.ɵec1 = BsDropdownState;
-exports.ɵef1 = MdbIconComponent;
-exports.ɵee1 = IconsModule;
-exports.ɵek1 = MdbErrorDirective;
-exports.ɵej1 = InputUtilitiesModule;
-exports.ɵel1 = MdbSuccessDirective;
-exports.ɵem1 = MdbValidateDirective;
-exports.ɵeh1 = MdbInput;
-exports.ɵeg1 = InputsModule;
-exports.ɵei1 = MdbInputDirective;
-exports.ɵfp1 = MDBRootModule;
-exports.ɵen1 = ModalDirective;
-exports.ɵet1 = ModalModule;
-exports.ɵeo1 = ModalOptions;
-exports.ɵep1 = MDBModalService;
-exports.ɵer1 = ModalBackdropComponent;
-exports.ɵeq1 = ModalBackdropOptions;
-exports.ɵes1 = ModalContainerComponent;
-exports.ɵeu1 = NavbarComponent;
-exports.ɵev1 = NavbarModule;
-exports.ɵew1 = PopoverContainerComponent;
-exports.ɵex1 = PopoverConfig;
-exports.ɵey1 = PopoverDirective;
-exports.ɵez1 = PopoverModule;
-exports.ɵfa1 = RippleDirective;
-exports.ɵfb1 = RippleModule;
-exports.ɵfe1 = MdbTablePaginationComponent;
-exports.ɵff1 = MdbTableRowDirective;
-exports.ɵfg1 = MdbTableScrollDirective;
-exports.ɵfh1 = MdbTableSortDirective;
-exports.ɵfi1 = MdbTableDirective;
-exports.ɵfj1 = MdbTableService;
-exports.ɵfk1 = TableModule;
-exports.ɵfl1 = TooltipContainerComponent;
-exports.ɵfm1 = TooltipDirective;
-exports.ɵfo1 = TooltipModule;
-exports.ɵfn1 = TooltipConfig;
-exports.ɵfc1 = WavesDirective;
-exports.ɵfd1 = WavesModule;
+exports.ɵdl1 = BadgeModule;
+exports.ɵdm1 = MDBBadgeComponent;
+exports.ɵdp1 = BreadcrumbModule;
+exports.ɵdo1 = MdbBreadcrumbItemComponent;
+exports.ɵdn1 = MdbBreadcrumbComponent;
+exports.ɵdk1 = MdbBtnDirective;
+exports.ɵdh1 = ButtonsModule;
+exports.ɵdi1 = ButtonCheckboxDirective;
+exports.ɵdj1 = ButtonRadioDirective;
+exports.ɵdu1 = CardsFreeModule;
+exports.ɵdq1 = CarouselComponent;
+exports.ɵdr1 = CarouselConfig;
+exports.ɵdt1 = CarouselModule;
+exports.ɵds1 = SlideComponent;
+exports.ɵdv1 = BaseChartDirective;
+exports.ɵdw1 = ChartsModule;
+exports.ɵdx1 = CHECKBOX_VALUE_ACCESSOR;
+exports.ɵdy1 = CheckboxComponent;
+exports.ɵdz1 = CheckboxModule;
+exports.ɵea1 = CollapseComponent;
+exports.ɵeb1 = CollapseModule;
+exports.ɵec1 = BsDropdownContainerComponent;
+exports.ɵed1 = BsDropdownMenuDirective;
+exports.ɵee1 = BsDropdownToggleDirective;
+exports.ɵef1 = BsDropdownConfig;
+exports.ɵeg1 = BsDropdownDirective;
+exports.ɵei1 = DropdownModule;
+exports.ɵeh1 = BsDropdownState;
+exports.ɵek1 = MdbIconComponent;
+exports.ɵej1 = IconsModule;
+exports.ɵep1 = MdbErrorDirective;
+exports.ɵeo1 = InputUtilitiesModule;
+exports.ɵeq1 = MdbSuccessDirective;
+exports.ɵer1 = MdbValidateDirective;
+exports.ɵem1 = MdbInput;
+exports.ɵel1 = InputsModule;
+exports.ɵen1 = MdbInputDirective;
+exports.ɵfu1 = MDBRootModule;
+exports.ɵes1 = ModalDirective;
+exports.ɵey1 = ModalModule;
+exports.ɵet1 = ModalOptions;
+exports.ɵeu1 = MDBModalService;
+exports.ɵew1 = ModalBackdropComponent;
+exports.ɵev1 = ModalBackdropOptions;
+exports.ɵex1 = ModalContainerComponent;
+exports.ɵez1 = NavbarComponent;
+exports.ɵfa1 = NavbarModule;
+exports.ɵfb1 = PopoverContainerComponent;
+exports.ɵfc1 = PopoverConfig;
+exports.ɵfd1 = PopoverDirective;
+exports.ɵfe1 = PopoverModule;
+exports.ɵff1 = RippleDirective;
+exports.ɵfg1 = RippleModule;
+exports.ɵfj1 = MdbTablePaginationComponent;
+exports.ɵfk1 = MdbTableRowDirective;
+exports.ɵfl1 = MdbTableScrollDirective;
+exports.ɵfm1 = MdbTableSortDirective;
+exports.ɵfn1 = MdbTableDirective;
+exports.ɵfo1 = MdbTableService;
+exports.ɵfp1 = TableModule;
+exports.ɵfq1 = TooltipContainerComponent;
+exports.ɵfr1 = TooltipDirective;
+exports.ɵft1 = TooltipModule;
+exports.ɵfs1 = TooltipConfig;
+exports.ɵfh1 = WavesDirective;
+exports.ɵfi1 = WavesModule;
 exports.ɵc1 = SBItemComponent;
 exports.ɵa1 = SBItemBodyComponent;
 exports.ɵb1 = SBItemHeadComponent;
 exports.ɵd1 = SqueezeBoxComponent;
 exports.ɵe1 = AccordionModule;
-exports.ɵt1 = AutoFormatModule;
-exports.ɵv1 = MdbCreditCardDirective;
-exports.ɵw1 = MdbCvvDirective;
-exports.ɵu1 = MdbDateFormatDirective;
+exports.ɵu1 = AutoCompleterModule;
+exports.ɵq1 = MdbAutoCompleterComponent;
+exports.ɵr1 = MdbOptionComponent;
+exports.ɵt1 = MdbAutoCompleterOptionDirective;
+exports.ɵs1 = MdbAutoCompleterDirective;
+exports.ɵy1 = AutoFormatModule;
+exports.ɵba1 = MdbCreditCardDirective;
+exports.ɵbb1 = MdbCvvDirective;
+exports.ɵz1 = MdbDateFormatDirective;
 exports.ɵf1 = CompleterListItemComponent;
 exports.ɵg1 = CompleterComponent;
 exports.ɵj1 = MdbInputCompleteDirective;
@@ -22454,68 +23008,68 @@ exports.ɵp1 = AutocompleteModule;
 exports.ɵm1 = CompleterService;
 exports.ɵn1 = LocalDataFactoryProvider;
 exports.ɵo1 = RemoteDataFactoryProvider;
-exports.ɵq1 = CardRevealComponent;
-exports.ɵr1 = CardRotatingComponent;
-exports.ɵs1 = CardsModule;
-exports.ɵbd1 = MDBDatePickerComponent;
-exports.ɵbc1 = MYDP_VALUE_ACCESSOR;
-exports.ɵbb1 = DatepickerModule;
-exports.ɵx1 = InputAutoFillDirective;
-exports.ɵy1 = FocusDirective;
-exports.ɵz1 = LocaleService;
-exports.ɵba1 = UtilService;
-exports.ɵbe1 = SimpleChartComponent;
-exports.ɵbg1 = ChartSimpleModule;
-exports.ɵbf1 = EasyPieChartComponent;
-exports.ɵbh1 = MDBFileDropDirective;
-exports.ɵbi1 = MDBFileSelectDirective;
-exports.ɵbj1 = FileInputModule;
-exports.ɵbk1 = CharCounterDirective;
-exports.ɵbl1 = CharCounterModule;
-exports.ɵbm1 = ImageModalComponent;
-exports.ɵbn1 = LightBoxModule;
-exports.ɵbp1 = SelectDropdownComponent;
-exports.ɵbq1 = SELECT_VALUE_ACCESSOR;
-exports.ɵbr1 = SelectComponent;
-exports.ɵbs1 = SelectModule;
-exports.ɵfq1 = MDBRootModulePro;
-exports.ɵbt1 = BarComponent;
-exports.ɵbz1 = ProgressBars;
-exports.ɵfr1 = MdProgressBarModule;
-exports.ɵfs1 = MdProgressSpinnerModule;
-exports.ɵbu1 = ProgressSpinnerComponent;
-exports.ɵbv1 = ProgressDirective;
-exports.ɵbw1 = ProgressbarComponent;
-exports.ɵbx1 = ProgressbarConfigComponent;
-exports.ɵby1 = ProgressbarModule;
-exports.ɵcb1 = MdbRangeInputComponent;
-exports.ɵca1 = RangeModule;
-exports.ɵcz1 = ScrollSpyElementDirective;
-exports.ɵda1 = ScrollSpyLinkDirective;
-exports.ɵcy1 = ScrollSpyWindowDirective;
-exports.ɵcx1 = ScrollSpyDirective;
-exports.ɵcw1 = ScrollSpyModule;
-exports.ɵdb1 = ScrollSpyService;
-exports.ɵcc1 = SidenavComponent;
-exports.ɵcd1 = SidenavModule;
-exports.ɵce1 = PageScrollDirective;
-exports.ɵcf1 = PageScrollInstance;
-exports.ɵcg1 = SmoothscrollModule;
-exports.ɵch1 = PageScrollService;
-exports.ɵci1 = MdbStickyDirective;
-exports.ɵcj1 = StickyContentModule;
-exports.ɵck1 = TabHeadingDirective;
-exports.ɵcl1 = TabDirective;
-exports.ɵcm1 = TabsetComponent;
-exports.ɵcn1 = TabsetConfig;
-exports.ɵcp1 = TabsModule;
-exports.ɵco1 = NgTranscludeDirective;
-exports.ɵcq1 = CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR;
-exports.ɵcr1 = MaterialChipsComponent;
-exports.ɵcs1 = MaterialChipsModule;
-exports.ɵcv1 = ClockPickerComponent;
-exports.ɵcu1 = TIME_PIRCKER_VALUE_ACCESSOT;
-exports.ɵct1 = TimePickerModule;
+exports.ɵv1 = CardRevealComponent;
+exports.ɵw1 = CardRotatingComponent;
+exports.ɵx1 = CardsModule;
+exports.ɵbi1 = MDBDatePickerComponent;
+exports.ɵbh1 = MYDP_VALUE_ACCESSOR;
+exports.ɵbg1 = DatepickerModule;
+exports.ɵbc1 = InputAutoFillDirective;
+exports.ɵbd1 = FocusDirective;
+exports.ɵbe1 = LocaleService;
+exports.ɵbf1 = UtilService;
+exports.ɵbj1 = SimpleChartComponent;
+exports.ɵbl1 = ChartSimpleModule;
+exports.ɵbk1 = EasyPieChartComponent;
+exports.ɵbm1 = MDBFileDropDirective;
+exports.ɵbn1 = MDBFileSelectDirective;
+exports.ɵbo1 = FileInputModule;
+exports.ɵbp1 = CharCounterDirective;
+exports.ɵbq1 = CharCounterModule;
+exports.ɵbr1 = ImageModalComponent;
+exports.ɵbs1 = LightBoxModule;
+exports.ɵbu1 = SelectDropdownComponent;
+exports.ɵbv1 = SELECT_VALUE_ACCESSOR;
+exports.ɵbw1 = SelectComponent;
+exports.ɵbx1 = SelectModule;
+exports.ɵfv1 = MDBRootModulePro;
+exports.ɵby1 = BarComponent;
+exports.ɵce1 = ProgressBars;
+exports.ɵfw1 = MdProgressBarModule;
+exports.ɵfx1 = MdProgressSpinnerModule;
+exports.ɵbz1 = ProgressSpinnerComponent;
+exports.ɵca1 = ProgressDirective;
+exports.ɵcb1 = ProgressbarComponent;
+exports.ɵcc1 = ProgressbarConfigComponent;
+exports.ɵcd1 = ProgressbarModule;
+exports.ɵcg1 = MdbRangeInputComponent;
+exports.ɵcf1 = RangeModule;
+exports.ɵde1 = ScrollSpyElementDirective;
+exports.ɵdf1 = ScrollSpyLinkDirective;
+exports.ɵdd1 = ScrollSpyWindowDirective;
+exports.ɵdc1 = ScrollSpyDirective;
+exports.ɵdb1 = ScrollSpyModule;
+exports.ɵdg1 = ScrollSpyService;
+exports.ɵch1 = SidenavComponent;
+exports.ɵci1 = SidenavModule;
+exports.ɵcj1 = PageScrollDirective;
+exports.ɵck1 = PageScrollInstance;
+exports.ɵcl1 = SmoothscrollModule;
+exports.ɵcm1 = PageScrollService;
+exports.ɵcn1 = MdbStickyDirective;
+exports.ɵco1 = StickyContentModule;
+exports.ɵcp1 = TabHeadingDirective;
+exports.ɵcq1 = TabDirective;
+exports.ɵcr1 = TabsetComponent;
+exports.ɵcs1 = TabsetConfig;
+exports.ɵcu1 = TabsModule;
+exports.ɵct1 = NgTranscludeDirective;
+exports.ɵcv1 = CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR;
+exports.ɵcw1 = MaterialChipsComponent;
+exports.ɵcx1 = MaterialChipsModule;
+exports.ɵda1 = ClockPickerComponent;
+exports.ɵcz1 = TIME_PIRCKER_VALUE_ACCESSOT;
+exports.ɵcy1 = TimePickerModule;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
