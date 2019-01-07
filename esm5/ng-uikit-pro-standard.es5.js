@@ -4,10 +4,10 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { NavigationCancel, NavigationEnd, NavigationError, Router, RouterLinkWithHref } from '@angular/router';
 import { CommonModule, DOCUMENT, isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Observable, Subject, timer } from 'rxjs';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DOCUMENT as DOCUMENT$1, DomSanitizer } from '@angular/platform-browser';
 import { FormControl, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import { Headers, Http, HttpModule, RequestOptions } from '@angular/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import 'hammerjs';
 import * as Chart from 'chart.js';
 import { __decorate, __metadata } from 'tslib';
@@ -2070,11 +2070,11 @@ var RemoteData = /** @class */ (function (_super) {
          * If no requestOptions are provided, a new RequestOptions object will be instantiated,
          * and either the provided headers or a new Headers() object will be sent.
          */
-        if (!this._requestOptions) {
-            this._requestOptions = new RequestOptions();
-            this._requestOptions.headers = this._headers || new Headers();
-        }
-        this.remoteSearch = this.http.get(url, this._requestOptions).pipe(map(function (res) { return res.json(); }), map(function (data) {
+        // if (!this._requestOptions) {
+        //   this._requestOptions = new RequestOptions();
+        //   (this._requestOptions.headers as any) = this._headers || new HttpHeaders();
+        // }
+        this.remoteSearch = this.http.get(url, this._requestOptions).pipe(map(function (res) { return res; }), map(function (data) {
             /** @type {?} */
             var matches = _this.extractValue(data, _this._dataField);
             return _this.extractMatches(matches, term);
@@ -3394,7 +3394,7 @@ function remoteDataFactory(http$$1) {
 /** @type {?} */
 var LocalDataFactoryProvider = { provide: LocalData, useFactory: localDataFactory };
 /** @type {?} */
-var RemoteDataFactoryProvider = { provide: RemoteData, useFactory: remoteDataFactory, deps: [Http] };
+var RemoteDataFactoryProvider = { provide: RemoteData, useFactory: remoteDataFactory, deps: [HttpClient] };
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
@@ -3409,7 +3409,7 @@ AutocompleteModule.decorators = [
                 imports: [
                     CommonModule,
                     FormsModule,
-                    HttpModule
+                    HttpClientModule
                 ],
                 declarations: [
                     CompleterListItemComponent,
@@ -3440,6 +3440,543 @@ AutocompleteModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+var MdbOptionComponent = /** @class */ (function () {
+    /**
+     * @param {?} el
+     */
+    function MdbOptionComponent(el) {
+        this.el = el;
+        this.clicked = false;
+        this.clicked = false;
+    }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    MdbOptionComponent.prototype.handleMouseDown = function (event) {
+        /** @type {?} */
+        var text = this.value || event.target.text || event.target.textContent || event.target.value;
+        this.selectedItem = { text: text.trim(), element: this };
+        this.clicked = true;
+    };
+    return MdbOptionComponent;
+}());
+MdbOptionComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-option',
+                template: "<div class=\"completer-row\" (mousedown)=\"handleMouseDown($event)\" mdbAutoCompleterOption> <ng-content></ng-content> </div> "
+            },] },
+];
+/** @nocollapse */
+MdbOptionComponent.ctorParameters = function () { return [
+    { type: ElementRef }
+]; };
+MdbOptionComponent.propDecorators = {
+    value: [{ type: Input }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+var MdbAutoCompleterComponent = /** @class */ (function () {
+    /**
+     * @param {?} renderer
+     */
+    function MdbAutoCompleterComponent(renderer) {
+        this.renderer = renderer;
+        this.clearButton = true;
+        this.clearButtonTabIndex = 0;
+        this._allItems = [];
+        this._isOpen = false;
+        this._selectedItemIndex = -1;
+        this._selectedItemChanged = new Subject();
+    }
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.onItemClick = function () {
+        /** @type {?} */
+        var selectedElement = ( /** @type {?} */({}));
+        this.mdbOptions.forEach(function (el) {
+            if (el.clicked === true) {
+                selectedElement = el;
+            }
+            el.clicked = false;
+        });
+        this.setSelectedItem({ text: selectedElement.value, element: selectedElement });
+        this.highlightRow(0);
+    };
+    /**
+     * @param {?} item
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.setSelectedItem = function (item) {
+        this._selectedItem = item;
+        this._selectedItemChanged.next(this.getSelectedItem());
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.getSelectedItem = function () {
+        return this._selectedItem;
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.selectedItemChanged = function () {
+        return this._selectedItemChanged;
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.isOpen = function () {
+        return this._isOpen;
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.show = function () {
+        this._isOpen = true;
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.hide = function () {
+        this._isOpen = false;
+    };
+    /**
+     * @param {?} index
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.removeHighlight = function (index) {
+        var _this = this;
+        setTimeout(function () {
+            _this.optionList.forEach(function (el, i) {
+                /** @type {?} */
+                var completerRow = el.nativeElement.querySelectorAll('.completer-row');
+                if (i === index) {
+                    _this.renderer.addClass(el.nativeElement.firstElementChild, 'highlight-row');
+                }
+                else if (i !== index) {
+                    completerRow.forEach(function (elem) {
+                        _this.renderer.removeClass(elem, 'highlight-row');
+                    });
+                }
+            });
+        }, 0);
+    };
+    /**
+     * @param {?} index
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.highlightRow = function (index) {
+        var _this = this;
+        this._allItems = this.optionList
+            .filter(function (el) { return el.nativeElement.firstElementChild.classList.contains('completer-row'); })
+            .map(function (elem) { return elem.nativeElement; });
+        if (this._allItems[index]) {
+            this.optionList.forEach(function (el, i) {
+                /** @type {?} */
+                var completerRow = el.nativeElement.querySelectorAll('.completer-row');
+                if (index === i) {
+                    _this.removeHighlight(index);
+                    _this.renderer.addClass(completerRow[completerRow.length - 1], 'highlight-row');
+                }
+            });
+        }
+        this._selectedItemIndex = index;
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.navigateUsingKeyboard = function (event) {
+        switch (event.key) {
+            case 'ArrowDown':
+                this.moveHighlightedIntoView(event.key);
+                if (!this.isOpen()) {
+                    this.show();
+                }
+                if (this._selectedItemIndex === 0) {
+                    this.highlightRow(0);
+                }
+                if (this._selectedItemIndex + 1 <= this._allItems.length - 1) {
+                    this.highlightRow(++this._selectedItemIndex);
+                }
+                else if (this._selectedItemIndex + 1 === this._allItems.length) {
+                    this.highlightRow(0);
+                }
+                break;
+            case 'ArrowUp':
+                this.moveHighlightedIntoView(event.key);
+                if (this._selectedItemIndex === -1 || this._selectedItemIndex === 0) {
+                    this.highlightRow(this._allItems.length);
+                }
+                this.highlightRow(--this._selectedItemIndex);
+                break;
+            case 'Escape':
+                this.hide();
+                break;
+            case 'Enter':
+                /** @type {?} */
+                var selectedOption = this.mdbOptions.map(function (el) { return el; })[this._selectedItemIndex];
+                if (selectedOption) {
+                    this.setSelectedItem({ text: selectedOption.value, element: selectedOption });
+                }
+                this.hide();
+                break;
+        }
+    };
+    /**
+     * @param {?} type
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.moveHighlightedIntoView = function (type) {
+        /** @type {?} */
+        var listHeight = 0;
+        /** @type {?} */
+        var itemIndex = this._selectedItemIndex;
+        this.optionList.forEach(function (el) {
+            listHeight += el.nativeElement.offsetHeight;
+        });
+        if (itemIndex > -1) {
+            /** @type {?} */
+            var item_1 = null;
+            /** @type {?} */
+            var itemHeight_1 = 0;
+            this.optionList.forEach(function (el, i) {
+                if (i === itemIndex + 1) {
+                    item_1 = el.nativeElement;
+                    itemHeight_1 = item_1.offsetHeight;
+                }
+            });
+            /** @type {?} */
+            var itemTop = (itemIndex + 1) * itemHeight_1;
+            /** @type {?} */
+            var viewTop = this.dropdown.nativeElement.scrollTop;
+            /** @type {?} */
+            var viewBottom = viewTop + listHeight;
+            if (type === 'ArrowDown') {
+                this.renderer.setProperty(this.dropdown.nativeElement, 'scrollTop', itemTop - itemHeight_1);
+            }
+            else if (type === 'ArrowUp') {
+                if (itemIndex === 0) {
+                    itemIndex = this.optionList.length - 1;
+                }
+                else {
+                    itemIndex--;
+                }
+                if (itemIndex === this._allItems.length - 2) {
+                    this.renderer.setProperty(this.dropdown.nativeElement, 'scrollTop', viewBottom - itemHeight_1);
+                }
+                else {
+                    this.renderer.setProperty(this.dropdown.nativeElement, 'scrollTop', itemIndex * itemHeight_1);
+                }
+            }
+        }
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.ngOnInit = function () {
+        if (!this.textNoResults) {
+            this.textNoResults = 'No results found';
+        }
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.ngAfterContentInit = function () {
+        this.highlightRow(0);
+    };
+    return MdbAutoCompleterComponent;
+}());
+MdbAutoCompleterComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-auto-completer',
+                template: "<div class=\"completer-dropdown-holder\" *ngIf=\"isOpen()\"> <div class=\"completer-dropdown\" #dropdown> <div class=\"completer-row-wrapper\"> <div *ngIf=\"optionList.length === 0 \" class=\"completer-no-results\">{{textNoResults}}</div> <ng-content #content></ng-content> </div> </div> </div> ",
+                exportAs: 'mdbAutoCompleter',
+            },] },
+];
+/** @nocollapse */
+MdbAutoCompleterComponent.ctorParameters = function () { return [
+    { type: Renderer2 }
+]; };
+MdbAutoCompleterComponent.propDecorators = {
+    textNoResults: [{ type: Input }],
+    clearButton: [{ type: Input }],
+    clearButtonTabIndex: [{ type: Input }],
+    optionList: [{ type: ContentChildren, args: [MdbOptionComponent, { descendants: true, read: ElementRef },] }],
+    mdbOptions: [{ type: ContentChildren, args: [MdbOptionComponent, { descendants: true, read: MdbOptionComponent },] }],
+    dropdown: [{ type: ViewChild, args: ['dropdown',] }],
+    onItemClick: [{ type: HostListener, args: ['mousedown', ['$event'],] }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+var MdbAutoCompleterDirective = /** @class */ (function () {
+    /**
+     * @param {?} renderer
+     * @param {?} el
+     * @param {?} platformId
+     * @param {?} document
+     */
+    function MdbAutoCompleterDirective(renderer, el, platformId, document) {
+        this.renderer = renderer;
+        this.el = el;
+        this.document = document;
+        this.ngModelChange = new EventEmitter();
+        this.isBrowser = isPlatformBrowser(platformId);
+    }
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype._renderClearButton = function () {
+        /** @type {?} */
+        var el = this.renderer.createElement('button');
+        this._setStyles(el, {
+            position: 'absolute',
+            top: '25%',
+            right: '0',
+            visibility: 'hidden'
+        });
+        this._addClass(el, ['mdb-autocomplete-clear', 'fa', 'fa-times']);
+        this.renderer.setAttribute(el, 'type', 'button');
+        this.renderer.setAttribute(el, 'tabindex', this.mdbAutoCompleter.clearButtonTabIndex.toString());
+        if (this.isBrowser) {
+            this.renderer.appendChild(this.el.nativeElement.offsetParent, el);
+        }
+    };
+    /**
+     * @template THIS
+     * @this {THIS}
+     * @param {?} target
+     * @param {?} styles
+     * @return {THIS}
+     */
+    MdbAutoCompleterDirective.prototype._setStyles = function (target, styles) {
+        var _this = this;
+        Object.keys(styles).forEach(function (prop) {
+            ( /** @type {?} */(_this)).renderer.setStyle(target, prop, styles[prop]);
+        });
+        return ( /** @type {?} */(this));
+    };
+    /**
+     * @param {?} target
+     * @param {?} name
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype._addClass = function (target, name) {
+        var _this = this;
+        name.forEach(function (el) {
+            _this.renderer.addClass(target, el);
+        });
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype._clearInput = function () {
+        this.el.nativeElement.value = '';
+        this.ngModelChange.emit('');
+        /** @type {?} */
+        var clearButton = this.el.nativeElement.parentElement.lastElementChild;
+        this._setStyles(clearButton, { visibility: 'hidden' });
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype._handleInput = function (event) {
+        if (!this._isOpen()) {
+            this._show();
+        }
+        this.mdbAutoCompleter.removeHighlight(0);
+        this.mdbAutoCompleter.highlightRow(0);
+        /** @type {?} */
+        var clearButtonVisibility = event.target.value.length > 0 ? 'visible' : 'hidden';
+        /** @type {?} */
+        var clearButton = this.el.nativeElement.parentElement.lastElementChild;
+        this._setStyles(clearButton, { visibility: clearButtonVisibility });
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype._handleKeyDown = function (event) {
+        this.mdbAutoCompleter.navigateUsingKeyboard(event);
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype._handleFocusIn = function () {
+        this._show();
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype._handleBlurIn = function () {
+        this._hide();
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype._handleMouseDown = function () {
+        this.mdbAutoCompleter.highlightRow(0);
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype._isOpen = function () {
+        return this.mdbAutoCompleter.isOpen();
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype._show = function () {
+        this.mdbAutoCompleter.show();
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype._hide = function () {
+        this.mdbAutoCompleter.hide();
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        this.mdbAutoCompleter.selectedItemChanged().subscribe(function (item) {
+            _this.el.nativeElement.value = item.text;
+            /** @type {?} */
+            var clearButtonVisibility = _this.el.nativeElement.value.length > 0 ? 'visible' : 'hidden';
+            _this._setStyles(_this._clearButton, { visibility: clearButtonVisibility });
+        });
+        if (this.mdbAutoCompleter.clearButton && this.isBrowser) {
+            this._renderClearButton();
+            /** @type {?} */
+            var clearButton_1 = this.el.nativeElement.parentElement.querySelectorAll('.mdb-autocomplete-clear')[0];
+            this._clearButton = this.document.querySelector('.mdb-autocomplete-clear');
+            this.renderer.listen(clearButton_1, 'focus', function () {
+                ['click', 'keydown:space', 'keydown:enter'].forEach(function (event) { return _this.renderer.listen(clearButton_1, event, function () {
+                    _this._clearInput();
+                }); });
+                _this._setStyles(clearButton_1, {
+                    transform: 'scale(1.2, 1.2)',
+                    transition: '200ms'
+                });
+            });
+            this.renderer.listen(clearButton_1, 'mouseenter', function () {
+                _this._setStyles(clearButton_1, {
+                    transform: 'scale(1.2, 1.2)',
+                    transition: '200ms'
+                });
+            });
+            this.renderer.listen(clearButton_1, 'mouseleave', function () {
+                _this._setStyles(clearButton_1, {
+                    transform: 'scale(1.0, 1.0)',
+                    transition: '200ms'
+                });
+            });
+            this.renderer.listen(clearButton_1, 'blur', function () {
+                _this._setStyles(clearButton_1, {
+                    transform: 'scale(1.0, 1.0)',
+                    transition: '200ms'
+                });
+            });
+            if (this.el.nativeElement.disabled) {
+                this.renderer.setAttribute(clearButton_1, 'disabled', 'true');
+            }
+            this._autocompleterInputChanges = new MutationObserver(function (mutations) {
+                mutations.forEach(function (mutation) {
+                    if (mutation.attributeName === 'disabled') {
+                        _this.renderer.setAttribute(_this._clearButton, 'disabled', 'true');
+                    }
+                });
+            });
+            this._autocompleterInputChanges.observe(this.el.nativeElement, {
+                attributes: true,
+                childList: true,
+                characterData: true
+            });
+        }
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype.ngOnDestroy = function () {
+        if (this._autocompleterInputChanges) {
+            this._autocompleterInputChanges.disconnect();
+        }
+    };
+    return MdbAutoCompleterDirective;
+}());
+MdbAutoCompleterDirective.decorators = [
+    { type: Directive, args: [{
+                selector: 'input[mdbAutoCompleter], textarea[mdbAutoCompleter]',
+                host: {
+                    '(input)': '_handleInput($event)',
+                    '(keydown)': '_handleKeyDown($event)',
+                    '(focusin)': '_handleFocusIn()',
+                    '(blur)': '_handleBlurIn()',
+                    '(mousedown)': '_handleMouseDown()'
+                },
+                exportAs: 'mdbAutoCompleterTrigger',
+            },] },
+];
+/** @nocollapse */
+MdbAutoCompleterDirective.ctorParameters = function () { return [
+    { type: Renderer2 },
+    { type: ElementRef },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT$1,] }] }
+]; };
+MdbAutoCompleterDirective.propDecorators = {
+    mdbAutoCompleter: [{ type: Input }],
+    ngModelChange: [{ type: Output }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+var MdbAutoCompleterOptionDirective = /** @class */ (function () {
+    /**
+     * @param {?} _el
+     */
+    function MdbAutoCompleterOptionDirective(_el) {
+        this._el = _el;
+        this.value = this._el.nativeElement.textContent;
+    }
+    return MdbAutoCompleterOptionDirective;
+}());
+MdbAutoCompleterOptionDirective.decorators = [
+    { type: Directive, args: [{ selector: '[mdbAutoCompleterOption]' },] },
+];
+/** @nocollapse */
+MdbAutoCompleterOptionDirective.ctorParameters = function () { return [
+    { type: ElementRef }
+]; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+var AutoCompleterModule = /** @class */ (function () {
+    function AutoCompleterModule() {
+    }
+    return AutoCompleterModule;
+}());
+AutoCompleterModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule, HttpClientModule, FormsModule],
+                declarations: [MdbAutoCompleterComponent, MdbOptionComponent, MdbAutoCompleterDirective, MdbAutoCompleterOptionDirective],
+                exports: [MdbAutoCompleterComponent, MdbOptionComponent, MdbAutoCompleterDirective, MdbAutoCompleterOptionDirective],
+            },] },
+];
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
@@ -8954,6 +9491,7 @@ var SelectComponent = /** @class */ (function () {
     SelectComponent.prototype.updateState = function () {
         this.placeholderView = this.placeholder;
         this.updateFilterWidth();
+        this.cdRef.markForCheck();
     };
     /**
      * Initialization. *
@@ -22005,6 +22543,10 @@ MDBBootstrapModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
 /** @type {?} */
 var MODULES$1 = [
     AutocompleteModule,
@@ -22025,7 +22567,8 @@ var MODULES$1 = [
     CharCounterModule,
     ScrollSpyModule,
     AutoFormatModule,
-    RangeModule
+    RangeModule,
+    AutoCompleterModule
 ];
 var MDBRootModulePro = /** @class */ (function () {
     function MDBRootModulePro() {
@@ -22052,7 +22595,8 @@ MDBRootModulePro.decorators = [
                     CharCounterModule.forRoot(),
                     ScrollSpyModule,
                     AutoFormatModule,
-                    RangeModule
+                    RangeModule,
+                    AutoCompleterModule
                 ],
                 exports: [MODULES$1],
                 providers: [],
@@ -22129,5 +22673,5 @@ MDBBootstrapModulesPro.decorators = [
 /**
  * Generated bundle index. Do not edit.
  */
-export { SBItemBodyComponent, SBItemHeadComponent, SBItemComponent, sbConfig, SqueezeBoxComponent, SQUEEZEBOX_COMPONENTS, AccordionModule, OverlayContainer, OverlayRef, Overlay, OVERLAY_PROVIDERS, DomPortalHost, ComponentPortal, BasePortalHost, ToastComponent, GlobalConfig, ToastPackage, tsConfig, ToastContainerDirective, ToastContainerModule, ToastRef, ToastInjector, ToastModule, ToastService, TOAST_CONFIG, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, CompleterListItemComponent, CompleterComponent, MdbCompleterDirective, CtrRowItem, MdbDropdownDirective, MdbInputCompleteDirective, CtrListContext, MdbListDirective, MdbRowDirective, CompleterBaseData, CompleterService, localDataFactory, remoteDataFactory, LocalDataFactoryProvider, RemoteDataFactoryProvider, LocalData, RemoteData, isNil, MAX_CHARS, MIN_SEARCH_LENGTH, PAUSE, TEXT_SEARCHING, TEXT_NO_RESULTS, CLEAR_TIMEOUT, AutocompleteModule, CardRevealComponent, CardRotatingComponent, CardsModule, AutoFormatModule, MdbDateFormatDirective, MdbCreditCardDirective, MdbCvvDirective, InputAutoFillDirective, FocusDirective, LocaleService, UtilService, DatepickerModule, MYDP_VALUE_ACCESSOR, MDBDatePickerComponent, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, humanizeBytes, UploadStatus, MDBUploaderService, MDBFileDropDirective, MDBFileSelectDirective, FileInputModule, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, OptionList, Option, SelectDropdownComponent, SELECT_VALUE_ACCESSOR, SelectComponent, SelectModule, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, MDBSpinningPreloader, ProgressBarComponent, MdProgressSpinnerCssMatStylerDirective, MdProgressSpinnerComponent, MdSpinnerComponent, BarComponent, ProgressSpinnerComponent, ProgressDirective, ProgressbarComponent, ProgressbarConfigComponent, ProgressbarModule, PreloadersModule, ProgressBars, RangeModule, RANGE_VALUE_ACCESOR, MdbRangeInputComponent, SidenavComponent, SidenavModule, PageScrollUtilService, EasingLogic, PageScrollConfig, PageScrollDirective, PageScrollInstance, SmoothscrollModule, PageScrollService, computedStyle, MdbStickyDirective, StickyContentModule, TabHeadingDirective, TabDirective, TabsetComponent, TabsetConfig, NgTranscludeDirective, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TimePickerModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, ScrollSpyModule, ScrollSpyDirective, ScrollSpyWindowDirective, ScrollSpyElementDirective, ScrollSpyLinkDirective, ScrollSpyService, ButtonsModule, CHECKBOX_CONTROL_VALUE_ACCESSOR, ButtonCheckboxDirective, RADIO_CONTROL_VALUE_ACCESSOR, ButtonRadioDirective, MdbBtnDirective, BadgeModule, MDBBadgeComponent, MdbBreadcrumbComponent, MdbBreadcrumbItemComponent, BreadcrumbModule, Direction, CarouselComponent, CarouselConfig, SlideComponent, CarouselModule, CardsFreeModule, MdbCardComponent, MdbCardBodyComponent, MdbCardImageComponent, MdbCardTextComponent, MdbCardTitleComponent, MdbCardFooterComponent, MdbCardHeaderComponent, BaseChartDirective, ChartsModule, CHECKBOX_VALUE_ACCESSOR, MdbCheckboxChange, CheckboxComponent, CheckboxModule, CollapseComponent, CollapseModule, BsDropdownContainerComponent, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownConfig, BsDropdownDirective, BsDropdownState, DropdownModule, IconsModule, MdbIconComponent, InputsModule, MdbInput, MdbInputDirective, EqualValidatorDirective, InputUtilitiesModule, MdbErrorDirective, MdbSuccessDirective, MdbValidateDirective, ModalDirective, ModalOptions, MDBModalRef, modalConfigDefaults, ClassName, Selector, TransitionDurations, DISMISS_REASONS, MDBModalService, ModalBackdropOptions, ModalBackdropComponent, ModalContainerComponent, msConfig, ModalModule, LinksComponent, LogoComponent, NavbarComponent, NavbarService, NavlinksComponent, NavbarModule, PopoverContainerComponent, PopoverConfig, PopoverDirective, PopoverModule, RippleDirective, RippleModule, WavesDirective, WavesModule, MdbTablePaginationComponent, MdbTableRowDirective, MdbTableScrollDirective, MdbTableSortDirective, MdbTableDirective, MdbTableService, TableModule, TooltipContainerComponent, TooltipDirective, TooltipConfig, TooltipModule, BsComponentRef, ComponentLoader, ComponentLoaderFactory, ContentRef, win as window, document$1 as document, location, gc, performance, Event, MouseEvent, KeyboardEvent, EventTarget, History, Location, EventListener, positionElements, Positioning, PositioningService, OnChange, LinkedList, isBs3, Trigger, parseTriggers, listenToTriggers, Utils, MDBBootstrapModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, BadgeModule as ɵdg1, MDBBadgeComponent as ɵdh1, BreadcrumbModule as ɵdk1, MdbBreadcrumbItemComponent as ɵdj1, MdbBreadcrumbComponent as ɵdi1, MdbBtnDirective as ɵdf1, ButtonsModule as ɵdc1, ButtonCheckboxDirective as ɵdd1, ButtonRadioDirective as ɵde1, CardsFreeModule as ɵdp1, CarouselComponent as ɵdl1, CarouselConfig as ɵdm1, CarouselModule as ɵdo1, SlideComponent as ɵdn1, BaseChartDirective as ɵdq1, ChartsModule as ɵdr1, CHECKBOX_VALUE_ACCESSOR as ɵds1, CheckboxComponent as ɵdt1, CheckboxModule as ɵdu1, CollapseComponent as ɵdv1, CollapseModule as ɵdw1, BsDropdownContainerComponent as ɵdx1, BsDropdownMenuDirective as ɵdy1, BsDropdownToggleDirective as ɵdz1, BsDropdownConfig as ɵea1, BsDropdownDirective as ɵeb1, DropdownModule as ɵed1, BsDropdownState as ɵec1, MdbIconComponent as ɵef1, IconsModule as ɵee1, MdbErrorDirective as ɵek1, InputUtilitiesModule as ɵej1, MdbSuccessDirective as ɵel1, MdbValidateDirective as ɵem1, MdbInput as ɵeh1, InputsModule as ɵeg1, MdbInputDirective as ɵei1, MDBRootModule as ɵfp1, ModalDirective as ɵen1, ModalModule as ɵet1, ModalOptions as ɵeo1, MDBModalService as ɵep1, ModalBackdropComponent as ɵer1, ModalBackdropOptions as ɵeq1, ModalContainerComponent as ɵes1, NavbarComponent as ɵeu1, NavbarModule as ɵev1, PopoverContainerComponent as ɵew1, PopoverConfig as ɵex1, PopoverDirective as ɵey1, PopoverModule as ɵez1, RippleDirective as ɵfa1, RippleModule as ɵfb1, MdbTablePaginationComponent as ɵfe1, MdbTableRowDirective as ɵff1, MdbTableScrollDirective as ɵfg1, MdbTableSortDirective as ɵfh1, MdbTableDirective as ɵfi1, MdbTableService as ɵfj1, TableModule as ɵfk1, TooltipContainerComponent as ɵfl1, TooltipDirective as ɵfm1, TooltipModule as ɵfo1, TooltipConfig as ɵfn1, WavesDirective as ɵfc1, WavesModule as ɵfd1, SBItemComponent as ɵc1, SBItemBodyComponent as ɵa1, SBItemHeadComponent as ɵb1, SqueezeBoxComponent as ɵd1, AccordionModule as ɵe1, AutoFormatModule as ɵt1, MdbCreditCardDirective as ɵv1, MdbCvvDirective as ɵw1, MdbDateFormatDirective as ɵu1, CompleterListItemComponent as ɵf1, CompleterComponent as ɵg1, MdbInputCompleteDirective as ɵj1, MdbCompleterDirective as ɵh1, MdbDropdownDirective as ɵi1, MdbListDirective as ɵk1, MdbRowDirective as ɵl1, AutocompleteModule as ɵp1, CompleterService as ɵm1, LocalDataFactoryProvider as ɵn1, RemoteDataFactoryProvider as ɵo1, CardRevealComponent as ɵq1, CardRotatingComponent as ɵr1, CardsModule as ɵs1, MDBDatePickerComponent as ɵbd1, MYDP_VALUE_ACCESSOR as ɵbc1, DatepickerModule as ɵbb1, InputAutoFillDirective as ɵx1, FocusDirective as ɵy1, LocaleService as ɵz1, UtilService as ɵba1, SimpleChartComponent as ɵbe1, ChartSimpleModule as ɵbg1, EasyPieChartComponent as ɵbf1, MDBFileDropDirective as ɵbh1, MDBFileSelectDirective as ɵbi1, FileInputModule as ɵbj1, CharCounterDirective as ɵbk1, CharCounterModule as ɵbl1, ImageModalComponent as ɵbm1, LightBoxModule as ɵbn1, SelectDropdownComponent as ɵbp1, SELECT_VALUE_ACCESSOR as ɵbq1, SelectComponent as ɵbr1, SelectModule as ɵbs1, MDBRootModulePro as ɵfq1, BarComponent as ɵbt1, ProgressBars as ɵbz1, MdProgressBarModule as ɵfr1, MdProgressSpinnerModule as ɵfs1, ProgressSpinnerComponent as ɵbu1, ProgressDirective as ɵbv1, ProgressbarComponent as ɵbw1, ProgressbarConfigComponent as ɵbx1, ProgressbarModule as ɵby1, MdbRangeInputComponent as ɵcb1, RangeModule as ɵca1, ScrollSpyElementDirective as ɵcz1, ScrollSpyLinkDirective as ɵda1, ScrollSpyWindowDirective as ɵcy1, ScrollSpyDirective as ɵcx1, ScrollSpyModule as ɵcw1, ScrollSpyService as ɵdb1, SidenavComponent as ɵcc1, SidenavModule as ɵcd1, PageScrollDirective as ɵce1, PageScrollInstance as ɵcf1, SmoothscrollModule as ɵcg1, PageScrollService as ɵch1, MdbStickyDirective as ɵci1, StickyContentModule as ɵcj1, TabHeadingDirective as ɵck1, TabDirective as ɵcl1, TabsetComponent as ɵcm1, TabsetConfig as ɵcn1, TabsModule as ɵcp1, NgTranscludeDirective as ɵco1, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR as ɵcq1, MaterialChipsComponent as ɵcr1, MaterialChipsModule as ɵcs1, ClockPickerComponent as ɵcv1, TIME_PIRCKER_VALUE_ACCESSOT as ɵcu1, TimePickerModule as ɵct1 };
+export { SBItemBodyComponent, SBItemHeadComponent, SBItemComponent, sbConfig, SqueezeBoxComponent, SQUEEZEBOX_COMPONENTS, AccordionModule, OverlayContainer, OverlayRef, Overlay, OVERLAY_PROVIDERS, DomPortalHost, ComponentPortal, BasePortalHost, ToastComponent, GlobalConfig, ToastPackage, tsConfig, ToastContainerDirective, ToastContainerModule, ToastRef, ToastInjector, ToastModule, ToastService, TOAST_CONFIG, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, CompleterListItemComponent, CompleterComponent, MdbCompleterDirective, CtrRowItem, MdbDropdownDirective, MdbInputCompleteDirective, CtrListContext, MdbListDirective, MdbRowDirective, CompleterBaseData, CompleterService, localDataFactory, remoteDataFactory, LocalDataFactoryProvider, RemoteDataFactoryProvider, LocalData, RemoteData, isNil, MAX_CHARS, MIN_SEARCH_LENGTH, PAUSE, TEXT_SEARCHING, TEXT_NO_RESULTS, CLEAR_TIMEOUT, AutocompleteModule, MdbAutoCompleterComponent, MdbOptionComponent, MdbAutoCompleterDirective, MdbAutoCompleterOptionDirective, AutoCompleterModule, CardRevealComponent, CardRotatingComponent, CardsModule, AutoFormatModule, MdbDateFormatDirective, MdbCreditCardDirective, MdbCvvDirective, InputAutoFillDirective, FocusDirective, LocaleService, UtilService, DatepickerModule, MYDP_VALUE_ACCESSOR, MDBDatePickerComponent, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, humanizeBytes, UploadStatus, MDBUploaderService, MDBFileDropDirective, MDBFileSelectDirective, FileInputModule, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, OptionList, Option, SelectDropdownComponent, SELECT_VALUE_ACCESSOR, SelectComponent, SelectModule, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, MDBSpinningPreloader, ProgressBarComponent, MdProgressSpinnerCssMatStylerDirective, MdProgressSpinnerComponent, MdSpinnerComponent, BarComponent, ProgressSpinnerComponent, ProgressDirective, ProgressbarComponent, ProgressbarConfigComponent, ProgressbarModule, PreloadersModule, ProgressBars, RangeModule, RANGE_VALUE_ACCESOR, MdbRangeInputComponent, SidenavComponent, SidenavModule, PageScrollUtilService, EasingLogic, PageScrollConfig, PageScrollDirective, PageScrollInstance, SmoothscrollModule, PageScrollService, computedStyle, MdbStickyDirective, StickyContentModule, TabHeadingDirective, TabDirective, TabsetComponent, TabsetConfig, NgTranscludeDirective, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TimePickerModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, ScrollSpyModule, ScrollSpyDirective, ScrollSpyWindowDirective, ScrollSpyElementDirective, ScrollSpyLinkDirective, ScrollSpyService, ButtonsModule, CHECKBOX_CONTROL_VALUE_ACCESSOR, ButtonCheckboxDirective, RADIO_CONTROL_VALUE_ACCESSOR, ButtonRadioDirective, MdbBtnDirective, BadgeModule, MDBBadgeComponent, MdbBreadcrumbComponent, MdbBreadcrumbItemComponent, BreadcrumbModule, Direction, CarouselComponent, CarouselConfig, SlideComponent, CarouselModule, CardsFreeModule, MdbCardComponent, MdbCardBodyComponent, MdbCardImageComponent, MdbCardTextComponent, MdbCardTitleComponent, MdbCardFooterComponent, MdbCardHeaderComponent, BaseChartDirective, ChartsModule, CHECKBOX_VALUE_ACCESSOR, MdbCheckboxChange, CheckboxComponent, CheckboxModule, CollapseComponent, CollapseModule, BsDropdownContainerComponent, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownConfig, BsDropdownDirective, BsDropdownState, DropdownModule, IconsModule, MdbIconComponent, InputsModule, MdbInput, MdbInputDirective, EqualValidatorDirective, InputUtilitiesModule, MdbErrorDirective, MdbSuccessDirective, MdbValidateDirective, ModalDirective, ModalOptions, MDBModalRef, modalConfigDefaults, ClassName, Selector, TransitionDurations, DISMISS_REASONS, MDBModalService, ModalBackdropOptions, ModalBackdropComponent, ModalContainerComponent, msConfig, ModalModule, LinksComponent, LogoComponent, NavbarComponent, NavbarService, NavlinksComponent, NavbarModule, PopoverContainerComponent, PopoverConfig, PopoverDirective, PopoverModule, RippleDirective, RippleModule, WavesDirective, WavesModule, MdbTablePaginationComponent, MdbTableRowDirective, MdbTableScrollDirective, MdbTableSortDirective, MdbTableDirective, MdbTableService, TableModule, TooltipContainerComponent, TooltipDirective, TooltipConfig, TooltipModule, BsComponentRef, ComponentLoader, ComponentLoaderFactory, ContentRef, win as window, document$1 as document, location, gc, performance, Event, MouseEvent, KeyboardEvent, EventTarget, History, Location, EventListener, positionElements, Positioning, PositioningService, OnChange, LinkedList, isBs3, Trigger, parseTriggers, listenToTriggers, Utils, MDBBootstrapModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, BadgeModule as ɵdl1, MDBBadgeComponent as ɵdm1, BreadcrumbModule as ɵdp1, MdbBreadcrumbItemComponent as ɵdo1, MdbBreadcrumbComponent as ɵdn1, MdbBtnDirective as ɵdk1, ButtonsModule as ɵdh1, ButtonCheckboxDirective as ɵdi1, ButtonRadioDirective as ɵdj1, CardsFreeModule as ɵdu1, CarouselComponent as ɵdq1, CarouselConfig as ɵdr1, CarouselModule as ɵdt1, SlideComponent as ɵds1, BaseChartDirective as ɵdv1, ChartsModule as ɵdw1, CHECKBOX_VALUE_ACCESSOR as ɵdx1, CheckboxComponent as ɵdy1, CheckboxModule as ɵdz1, CollapseComponent as ɵea1, CollapseModule as ɵeb1, BsDropdownContainerComponent as ɵec1, BsDropdownMenuDirective as ɵed1, BsDropdownToggleDirective as ɵee1, BsDropdownConfig as ɵef1, BsDropdownDirective as ɵeg1, DropdownModule as ɵei1, BsDropdownState as ɵeh1, MdbIconComponent as ɵek1, IconsModule as ɵej1, MdbErrorDirective as ɵep1, InputUtilitiesModule as ɵeo1, MdbSuccessDirective as ɵeq1, MdbValidateDirective as ɵer1, MdbInput as ɵem1, InputsModule as ɵel1, MdbInputDirective as ɵen1, MDBRootModule as ɵfu1, ModalDirective as ɵes1, ModalModule as ɵey1, ModalOptions as ɵet1, MDBModalService as ɵeu1, ModalBackdropComponent as ɵew1, ModalBackdropOptions as ɵev1, ModalContainerComponent as ɵex1, NavbarComponent as ɵez1, NavbarModule as ɵfa1, PopoverContainerComponent as ɵfb1, PopoverConfig as ɵfc1, PopoverDirective as ɵfd1, PopoverModule as ɵfe1, RippleDirective as ɵff1, RippleModule as ɵfg1, MdbTablePaginationComponent as ɵfj1, MdbTableRowDirective as ɵfk1, MdbTableScrollDirective as ɵfl1, MdbTableSortDirective as ɵfm1, MdbTableDirective as ɵfn1, MdbTableService as ɵfo1, TableModule as ɵfp1, TooltipContainerComponent as ɵfq1, TooltipDirective as ɵfr1, TooltipModule as ɵft1, TooltipConfig as ɵfs1, WavesDirective as ɵfh1, WavesModule as ɵfi1, SBItemComponent as ɵc1, SBItemBodyComponent as ɵa1, SBItemHeadComponent as ɵb1, SqueezeBoxComponent as ɵd1, AccordionModule as ɵe1, AutoCompleterModule as ɵu1, MdbAutoCompleterComponent as ɵq1, MdbOptionComponent as ɵr1, MdbAutoCompleterOptionDirective as ɵt1, MdbAutoCompleterDirective as ɵs1, AutoFormatModule as ɵy1, MdbCreditCardDirective as ɵba1, MdbCvvDirective as ɵbb1, MdbDateFormatDirective as ɵz1, CompleterListItemComponent as ɵf1, CompleterComponent as ɵg1, MdbInputCompleteDirective as ɵj1, MdbCompleterDirective as ɵh1, MdbDropdownDirective as ɵi1, MdbListDirective as ɵk1, MdbRowDirective as ɵl1, AutocompleteModule as ɵp1, CompleterService as ɵm1, LocalDataFactoryProvider as ɵn1, RemoteDataFactoryProvider as ɵo1, CardRevealComponent as ɵv1, CardRotatingComponent as ɵw1, CardsModule as ɵx1, MDBDatePickerComponent as ɵbi1, MYDP_VALUE_ACCESSOR as ɵbh1, DatepickerModule as ɵbg1, InputAutoFillDirective as ɵbc1, FocusDirective as ɵbd1, LocaleService as ɵbe1, UtilService as ɵbf1, SimpleChartComponent as ɵbj1, ChartSimpleModule as ɵbl1, EasyPieChartComponent as ɵbk1, MDBFileDropDirective as ɵbm1, MDBFileSelectDirective as ɵbn1, FileInputModule as ɵbo1, CharCounterDirective as ɵbp1, CharCounterModule as ɵbq1, ImageModalComponent as ɵbr1, LightBoxModule as ɵbs1, SelectDropdownComponent as ɵbu1, SELECT_VALUE_ACCESSOR as ɵbv1, SelectComponent as ɵbw1, SelectModule as ɵbx1, MDBRootModulePro as ɵfv1, BarComponent as ɵby1, ProgressBars as ɵce1, MdProgressBarModule as ɵfw1, MdProgressSpinnerModule as ɵfx1, ProgressSpinnerComponent as ɵbz1, ProgressDirective as ɵca1, ProgressbarComponent as ɵcb1, ProgressbarConfigComponent as ɵcc1, ProgressbarModule as ɵcd1, MdbRangeInputComponent as ɵcg1, RangeModule as ɵcf1, ScrollSpyElementDirective as ɵde1, ScrollSpyLinkDirective as ɵdf1, ScrollSpyWindowDirective as ɵdd1, ScrollSpyDirective as ɵdc1, ScrollSpyModule as ɵdb1, ScrollSpyService as ɵdg1, SidenavComponent as ɵch1, SidenavModule as ɵci1, PageScrollDirective as ɵcj1, PageScrollInstance as ɵck1, SmoothscrollModule as ɵcl1, PageScrollService as ɵcm1, MdbStickyDirective as ɵcn1, StickyContentModule as ɵco1, TabHeadingDirective as ɵcp1, TabDirective as ɵcq1, TabsetComponent as ɵcr1, TabsetConfig as ɵcs1, TabsModule as ɵcu1, NgTranscludeDirective as ɵct1, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR as ɵcv1, MaterialChipsComponent as ɵcw1, MaterialChipsModule as ɵcx1, ClockPickerComponent as ɵda1, TIME_PIRCKER_VALUE_ACCESSOT as ɵcz1, TimePickerModule as ɵcy1 };
 //# sourceMappingURL=ng-uikit-pro-standard.es5.js.map

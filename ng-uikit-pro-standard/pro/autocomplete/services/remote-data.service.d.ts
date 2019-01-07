@@ -1,4 +1,4 @@
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CompleterBaseData } from './base-data.service';
 import { CompleterItem } from '../components/completer-item.component';
 export declare class RemoteData extends CompleterBaseData {
@@ -8,17 +8,17 @@ export declare class RemoteData extends CompleterBaseData {
     private remoteSearch;
     private _urlFormater;
     private _dataField;
-    private _headers;
+    _headers: any;
     private _requestOptions;
-    constructor(http: Http);
+    constructor(http: HttpClient);
     remoteUrl(remoteUrl: string): this;
     urlFormater(urlFormater: (term: string) => string): void;
     dataField(dataField: string): void;
     /**
      * @deprecated Please use the requestOptions to pass headers with the search request
      */
-    headers(headers: Headers): void;
-    requestOptions(requestOptions: RequestOptions): void;
+    headers(headers: HttpHeaders): void;
+    requestOptions(requestOptions: any): void;
     search(term: string): void;
     cancel(): void;
     convertToItem(data: any): CompleterItem | any;
