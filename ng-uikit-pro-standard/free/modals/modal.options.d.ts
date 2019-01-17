@@ -26,6 +26,7 @@ export declare class ModalOptions {
     containerClass?: string;
     animated?: boolean;
     scroll?: boolean;
+    data?: Object;
 }
 export declare class MDBModalRef {
     /**

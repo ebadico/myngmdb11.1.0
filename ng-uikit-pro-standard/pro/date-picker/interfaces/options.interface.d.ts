@@ -21,8 +21,8 @@ export interface IMyOptions {
     markCurrentDay?: boolean;
     disableUntil?: IMyDate;
     disableSince?: IMyDate;
-    disableDays?: Array<IMyDate>;
-    enableDays?: Array<IMyDate>;
+    disableDays?: Array<IMyDate | number>;
+    enableDays?: Array<IMyDate | number>;
     markDates?: Array<IMyMarkedDates>;
     markWeekends?: IMyMarkedDate;
     disableDateRanges?: Array<IMyDateRange>;

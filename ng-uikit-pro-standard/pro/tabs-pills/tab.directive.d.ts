@@ -1,10 +1,12 @@
-import { EventEmitter, TemplateRef, ElementRef, OnInit, OnDestroy } from '@angular/core';
+import { EventEmitter, TemplateRef, ElementRef, OnInit, OnDestroy, Renderer2 } from '@angular/core';
 import { TabsetComponent } from './tabset.component';
 export declare class TabDirective implements OnInit, OnDestroy {
+    private renderer;
     /** tab header text */
     heading: string;
     /** if true tab can not be activated */
     disabled: boolean;
+    private _disabled;
     /** if true tab can be removable, additional button will appear */
     removable: boolean;
     /** if set, will be added to the tab's class atribute */
@@ -24,12 +26,9 @@ export declare class TabDirective implements OnInit, OnDestroy {
     tabset: TabsetComponent;
     el: ElementRef | any;
     thus: this;
-    protected _active: boolean;
+    private _active;
     isBrowser: any;
-    constructor(platformId: string, tabset: TabsetComponent, el: ElementRef);
+    constructor(platformId: string, tabset: TabsetComponent, el: ElementRef, renderer: Renderer2);
     ngOnInit(): void;
-    protected hasClass(el: any, className: any): any;
-    protected classAdd(el: any, className: any): void;
-    protected removeClass(el: any, className: any): void;
     ngOnDestroy(): void;
 }

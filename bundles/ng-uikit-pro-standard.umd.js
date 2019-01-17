@@ -211,7 +211,7 @@ SBItemHeadComponent.decorators = [
     { type: core.Component, args: [{
                 exportAs: 'sbItemHead',
                 selector: 'mdb-item-head, mdb-accordion-item-head',
-                template: "<div class=\"card-header {{ customClass }}\" [ngClass]=\"{ 'item-disabled': isDisabled }\" (click)=\"toggleClick($event)\"> <a role=\"button\"> <h5 class=\"mb-0\"> <ng-content></ng-content> <i *ngIf=\"indicator\" class=\"fa fa-angle-down rotate-icon\"></i> </h5> </a> </div>"
+                template: "<div class=\"card-header {{ customClass }}\" [ngClass]=\"{ 'item-disabled': isDisabled }\" (click)=\"toggleClick($event)\"> <a role=\"button\"> <h5 class=\"mb-0\"> <ng-content></ng-content> <i *ngIf=\"indicator\" class=\"fas fa-angle-down rotate-icon\"></i> </h5> </a> </div> "
             },] },
 ];
 /** @nocollapse */
@@ -3453,7 +3453,7 @@ var MdbOptionComponent = /** @class */ (function () {
     MdbOptionComponent.prototype.handleMouseDown = function (event) {
         /** @type {?} */
         var text = this.value || event.target.text || event.target.textContent || event.target.value;
-        this.selectedItem = { text: text.trim(), element: this };
+        this.selectedItem = { text: text.toString().trim(), element: this };
         this.clicked = true;
     };
     return MdbOptionComponent;
@@ -3742,7 +3742,9 @@ var MdbAutoCompleterDirective = /** @class */ (function () {
         this.renderer.setAttribute(el, 'type', 'button');
         this.renderer.setAttribute(el, 'tabindex', this.mdbAutoCompleter.clearButtonTabIndex.toString());
         if (this.isBrowser) {
-            this.renderer.appendChild(this.el.nativeElement.offsetParent, el);
+            /** @type {?} */
+            var parent = this.el.nativeElement.offsetParent || this.el.nativeElement.parentElement;
+            this.renderer.appendChild(parent, el);
         }
     };
     /**
@@ -5105,7 +5107,12 @@ var UtilService = /** @class */ (function () {
     UtilService.prototype.isDisabledDay = function (date, disableUntil, disableSince, disableWeekends, disableDays, disableDateRanges, enableDays) {
         for (var _i = 0, enableDays_1 = enableDays; _i < enableDays_1.length; _i++) {
             var e = enableDays_1[_i];
-            if (e.year === date.year && e.month === date.month && e.day === date.day) {
+            if (typeof e === 'number') {
+                if (e === this.getDayNumber(date)) {
+                    return false;
+                }
+            }
+            else if (e.year === date.year && e.month === date.month && e.day === date.day) {
                 return false;
             }
         }
@@ -5126,7 +5133,12 @@ var UtilService = /** @class */ (function () {
         }
         for (var _a = 0, disableDays_1 = disableDays; _a < disableDays_1.length; _a++) {
             var d = disableDays_1[_a];
-            if (d.year === date.year && d.month === date.month && d.day === date.day) {
+            if (typeof d === 'number') {
+                if (this.getDayNumber(date) === d) {
+                    return true;
+                }
+            }
+            else if (d.year === date.year && d.month === date.month && d.day === date.day) {
                 return true;
             }
         }
@@ -6308,11 +6320,23 @@ var MDBDatePickerComponent = /** @class */ (function () {
         if (typeof selDate === 'string') {
             /** @type {?} */
             var sd = ( /** @type {?} */(selDate));
-            date.day = this.utilService.parseDatePartNumber(this.opts.dateFormat, sd, 'dd');
-            date.month = this.opts.dateFormat.indexOf('mmm') !== -1
-                ? this.utilService.parseDatePartMonthName(this.opts.dateFormat, sd, 'mmm', this.opts.monthLabels)
-                : this.utilService.parseDatePartNumber(this.opts.dateFormat, sd, 'mm');
-            date.year = this.utilService.parseDatePartNumber(this.opts.dateFormat, sd, 'yyyy');
+            /** @type {?} */
+            var df = this.opts.dateFormat;
+            /** @type {?} */
+            var delimeters = this.utilService.getDateFormatDelimeters(df);
+            /** @type {?} */
+            var dateValue = this.utilService.getDateValue(sd, df, delimeters);
+            date.year = this.utilService.getNumberByValue(dateValue[0]);
+            if (df.indexOf('mmmm') !== -1) {
+                date.month = this.utilService.getMonthNumberByMonthName(dateValue[1], this.opts.monthLabelsFull);
+            }
+            else if (df.indexOf('mmm') !== -1) {
+                date.month = this.utilService.getMonthNumberByMonthName(dateValue[1], this.opts.monthLabels);
+            }
+            else {
+                date.month = this.utilService.getNumberByValue(dateValue[1]);
+            }
+            date.day = this.utilService.getNumberByValue(dateValue[2]);
         }
         else if (typeof selDate === 'object') {
             date = selDate;
@@ -7455,7 +7479,7 @@ var ImageModalComponent = /** @class */ (function () {
 ImageModalComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'mdb-image-modal',
-                template: "<div class=\"ng-gallery mdb-lightbox {{ type }}\" *ngIf=\"showRepeat\"> <figure class=\"col-md-4\" *ngFor=\"let i of modalImages; let index = index\"> <img src=\"{{ !i.thumb ? i.img : i.thumb }}\" class=\"ng-thumb\" (click)=\"openGallery(index)\" alt=\"Image {{ index + 1 }}\" /> </figure> </div> <div tabindex=\"0\" class=\"ng-overlay\" [class.hide_lightbox]=\"opened == false\"> <div class=\"top-bar\" style='z-index: 100000'> <span class=\"info-text\">{{ currentImageIndex + 1 }}/{{ modalImages.length }}</span> <a class=\"close-popup\" (click)=\"closeGallery()\" (click)=\"toggleRestart()\"></a> <a *ngIf=\"!is_iPhone_or_iPod\" class=\"fullscreen-toogle\" [class.toggled]='fullscreen' (click)=\"fullScreen()\"></a> <a class=\"zoom-toogle\" [class.zoom]='zoom' (click)=\"toggleZoomed()\" *ngIf=\"!isMobile\"></a> </div> <div class=\"ng-gallery-content\"> <img *ngIf=\"!loading\" src=\"{{imgSrc}}\" [class.smooth]='smooth' class=\"effect\" (swipeleft)=\"swipe($event.type)\" (swiperight)=\"swipe($event.type)\" (click)=\"toggleZoomed()\" style=\"transform: scale(0.9, 0.9)\" /> <div class=\"uil-ring-css\" *ngIf=\"loading\"> <div></div> </div> <a class=\"nav-left\" *ngIf=\"modalImages.length >1 && !isMobile\" (click)=\"prevImage()\"> <span></span> </a> <a class=\"nav-right\" *ngIf=\"modalImages.length >1 && !isMobile\" (click)=\"nextImage()\"> <span></span> </a> </div> <div *ngIf=\"caption\" class=\"bottom-bar text-center\"> <figcaption class=\"text-white\">{{caption}}</figcaption> </div> </div> <div *ngIf=\"openModalWindow\"> <mdb-image-modal [imagePointer]=\"imagePointer\"></mdb-image-modal> </div> ",
+                template: "<div class=\"ng-gallery mdb-lightbox {{ type }}\" *ngIf=\"modalImages && showRepeat\"> <figure class=\"col-md-4\" *ngFor=\"let i of modalImages; let index = index\"> <img src=\"{{ !i.thumb ? i.img : i.thumb }}\" class=\"ng-thumb\" (click)=\"openGallery(index)\" alt=\"Image {{ index + 1 }}\" /> </figure> </div> <div tabindex=\"0\" class=\"ng-overlay\" [class.hide_lightbox]=\"opened == false\"> <div class=\"top-bar\" style='z-index: 100000'> <span *ngIf=\"modalImages\" class=\"info-text\">{{ currentImageIndex + 1 }}/{{ modalImages.length }}</span> <a class=\"close-popup\" (click)=\"closeGallery()\" (click)=\"toggleRestart()\"></a> <a *ngIf=\"!is_iPhone_or_iPod\" class=\"fullscreen-toogle\" [class.toggled]='fullscreen' (click)=\"fullScreen()\"></a> <a class=\"zoom-toogle\" [class.zoom]='zoom' (click)=\"toggleZoomed()\" *ngIf=\"!isMobile\"></a> </div> <div class=\"ng-gallery-content\"> <img *ngIf=\"!loading\" src=\"{{imgSrc}}\" [class.smooth]='smooth' class=\"effect\" (swipeleft)=\"swipe($event.type)\" (swiperight)=\"swipe($event.type)\" (click)=\"toggleZoomed()\" style=\"transform: scale(0.9, 0.9)\" /> <div class=\"uil-ring-css\" *ngIf=\"loading\"> <div></div> </div> <a class=\"nav-left\" *ngIf=\"modalImages && modalImages.length >1 && !isMobile\" (click)=\"prevImage()\"> <span></span> </a> <a class=\"nav-right\" *ngIf=\"modalImages && modalImages.length >1 && !isMobile\" (click)=\"nextImage()\"> <span></span> </a> </div> <div *ngIf=\"caption\" class=\"bottom-bar text-center\"> <figcaption class=\"text-white\">{{caption}}</figcaption> </div> </div> <div *ngIf=\"openModalWindow\"> <mdb-image-modal [imagePointer]=\"imagePointer\"></mdb-image-modal> </div> ",
                 styles: ['.bottom-bar {z-index: 100000; position: absolute; bottom: 2rem; left: 0; right: 0; width: 100%;} ']
             },] },
 ];
@@ -12579,7 +12603,7 @@ var PageScrollDirective = /** @class */ (function () {
             // "Navigate" to the current route again and this time set the fragment/hash
             this.router.navigate([], {
                 fragment: ( /** @type {?} */(this.pageScrollInstance.scrollTarget.substr(1))),
-                preserveQueryParams: true
+                queryParamsHandling: 'preserve'
             });
         }
     };
@@ -13030,9 +13054,11 @@ var TabsetComponent = /** @class */ (function () {
      * @param {?} platformId
      * @param {?} config
      * @param {?} ripple
+     * @param {?} cdRef
      */
-    function TabsetComponent(platformId, config, ripple) {
+    function TabsetComponent(platformId, config, ripple, cdRef) {
         this.ripple = ripple;
+        this.cdRef = cdRef;
         this.tabs = [];
         this.classMap = {};
         this.isBrowser = null;
@@ -13074,6 +13100,7 @@ var TabsetComponent = /** @class */ (function () {
             el: this.tabs[index - 1],
             activeTabIndex: index - 1
         });
+        this.cdRef.detectChanges();
     };
     Object.defineProperty(TabsetComponent.prototype, "justified", {
         /**
@@ -13301,12 +13328,9 @@ var TabsetComponent = /** @class */ (function () {
      * @return {?}
      */
     TabsetComponent.prototype.showActiveIndex = function () {
-        var _this = this;
-        setTimeout(function () {
-            /** @type {?} */
-            var activeElement = _this.getActiveElement();
-            _this.getActiveTab.emit(activeElement);
-        }, 0);
+        /** @type {?} */
+        var activeElement = this.getActiveElement();
+        this.getActiveTab.emit(activeElement);
     };
     /**
      * @return {?}
@@ -13357,7 +13381,7 @@ var TabsetComponent = /** @class */ (function () {
 TabsetComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'mdb-tabset',
-                template: "<div class=\"container-fluid\"> <div class=\"row\"> <div class=\"{{ listGetClass }}\"> <ul class=\"nav {{ buttonClass }}\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\"> <li *ngFor=\"let tabz of tabs;let i = index\" [ngClass]=\"['nav-item', tabz.customClass || '']\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\" (click)=\"click($event, i)\"> <a #tabEl href=\"javascript:void(0);\" class=\"nav-link\" [ngClass]=\"{'waves-light': !disableWaves}\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\"> <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span> <span *ngIf=\"tabz.removable\"> <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"fa fa-remove ml-2\"> </span> </span> </a> </li> </ul> </div> <div class=\"{{ tabsGetClass }}\"> <div class=\"tab-content {{ contentClass }}\"> <ng-content></ng-content> </div> </div> </div> </div> ",
+                template: "<div class=\"container-fluid\"> <div class=\"row\"> <div class=\"{{ listGetClass }}\"> <ul class=\"nav {{ buttonClass }}\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\"> <li *ngFor=\"let tabz of tabs;let i = index\" [ngClass]=\"['nav-item', tabz.customClass || '']\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\" (click)=\"click($event, i)\"> <a #tabEl href=\"javascript:void(0);\" class=\"nav-link\" [ngClass]=\"{'waves-light': !disableWaves}\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\"> <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span> <span *ngIf=\"tabz.removable\"> <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"fas fa-times ml-2\"> </span> </span> </a> </li> </ul> </div> <div class=\"{{ tabsGetClass }}\"> <div class=\"tab-content {{ contentClass }}\"> <ng-content></ng-content> </div> </div> </div> </div> ",
                 providers: [WavesDirective]
             },] },
 ];
@@ -13365,7 +13389,8 @@ TabsetComponent.decorators = [
 TabsetComponent.ctorParameters = function () { return [
     { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] },
     { type: TabsetConfig },
-    { type: WavesDirective }
+    { type: WavesDirective },
+    { type: core.ChangeDetectorRef }
 ]; };
 TabsetComponent.propDecorators = {
     clazz: [{ type: core.HostBinding, args: ['class.tab-container',] }],
@@ -13391,12 +13416,11 @@ var TabDirective = /** @class */ (function () {
      * @param {?} platformId
      * @param {?} tabset
      * @param {?} el
+     * @param {?} renderer
      */
-    function TabDirective(platformId, tabset, el) {
-        /**
-         * if true tab can not be activated
-         */
-        this.disabled = false;
+    function TabDirective(platformId, tabset, el, renderer) {
+        this.renderer = renderer;
+        this._disabled = false;
         /**
          * fired when tab became active, $event:Tab equals to selected instance of Tab component
          */
@@ -13413,11 +13437,33 @@ var TabDirective = /** @class */ (function () {
         this.test = true;
         // public el: ElementRef = null;
         this.el = null;
+        this._active = false;
         this.isBrowser = null;
         this.isBrowser = common.isPlatformBrowser(platformId);
         this.el = el;
         this.tabset = tabset;
     }
+    Object.defineProperty(TabDirective.prototype, "disabled", {
+        /**
+         * if true tab can not be activated
+         * @return {?}
+         */
+        get: function () {
+            return this._disabled;
+        },
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        set: function (value) {
+            this._disabled = value;
+            if (this._disabled && this._active) {
+                this.tabset.initActiveTab();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(TabDirective.prototype, "active", {
         /**
          * tab active state toggle
@@ -13433,19 +13479,17 @@ var TabDirective = /** @class */ (function () {
         set: function (active) {
             var _this = this;
             if (this.disabled && active || !active) {
-                if (!active) {
-                    this.removeClass(this.el.nativeElement, 'show');
-                    setTimeout(function () {
-                        _this._active = active;
-                        _this.deselect.emit(_this);
-                    }, 0);
+                if (this._active && !active) {
+                    this.renderer.removeClass(this.el.nativeElement, 'show');
+                    this.renderer.removeClass(this.el.nativeElement, 'active');
+                    this._active = active;
+                    this.deselect.emit(this);
                 }
                 return;
             }
-            setTimeout(function () {
-                _this._active = active;
-                _this.classAdd(_this.el.nativeElement, 'show');
-            }, 0);
+            this.renderer.addClass(this.el.nativeElement, 'show');
+            this.renderer.addClass(this.el.nativeElement, 'active');
+            this._active = active;
             this.select.emit(this);
             this.tabset.tabs.forEach(function (mdbTab) {
                 if (mdbTab !== _this) {
@@ -13464,47 +13508,6 @@ var TabDirective = /** @class */ (function () {
         this.tabset.addTab(this);
     };
     /**
-     * @param {?} el
-     * @param {?} className
-     * @return {?}
-     */
-    TabDirective.prototype.hasClass = function (el, className) {
-        if (el.classList) {
-            return el.classList.contains(className);
-        }
-        else {
-            return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
-        }
-    };
-    /**
-     * @param {?} el
-     * @param {?} className
-     * @return {?}
-     */
-    TabDirective.prototype.classAdd = function (el, className) {
-        if (el.classList) {
-            el.classList.add(className);
-        }
-        else if (!this.hasClass(el, className)) {
-            el.className += ' ' + className;
-        }
-    };
-    /**
-     * @param {?} el
-     * @param {?} className
-     * @return {?}
-     */
-    TabDirective.prototype.removeClass = function (el, className) {
-        if (el.classList) {
-            el.classList.remove(className);
-        }
-        else if (this.hasClass(el, className)) {
-            /** @type {?} */
-            var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
-            el.className = el.className.replace(reg, ' ');
-        }
-    };
-    /**
      * @return {?}
      */
     TabDirective.prototype.ngOnDestroy = function () {
@@ -13519,7 +13522,8 @@ TabDirective.decorators = [
 TabDirective.ctorParameters = function () { return [
     { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] },
     { type: TabsetComponent },
-    { type: core.ElementRef }
+    { type: core.ElementRef },
+    { type: core.Renderer2 }
 ]; };
 TabDirective.propDecorators = {
     heading: [{ type: core.Input }],
@@ -13527,7 +13531,7 @@ TabDirective.propDecorators = {
     removable: [{ type: core.Input }],
     customClass: [{ type: core.Input }],
     tabOrder: [{ type: core.Input }],
-    active: [{ type: core.HostBinding, args: ['class.active',] }, { type: core.Input }],
+    active: [{ type: core.Input }],
     select: [{ type: core.Output }],
     deselect: [{ type: core.Output }],
     removed: [{ type: core.Output }],
@@ -13726,7 +13730,7 @@ var MaterialChipsComponent = /** @class */ (function () {
 MaterialChipsComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'mdb-material-chips',
-                template: "<div *ngIf=\"values && values.length\" class=\"md-chip-list\"  [ngClass]=\"focused\"> <span *ngFor=\"let value of values\" class=\"md-chip\" selected >          {{value}} <i class=\"close fa fa-times\" aria-hidden=\"true\" (click)=\"removeValue(value)\" ></i> </span> <span> <input  [(ngModel)]=\"labelToAdd\"  (keyup.enter)=\"addValue(box.value, $event)\" (focus)=\"onFocus()\"  (focusout)=\"focusOutFunction()\"   #box /> </span> </div> <div *ngIf=\"!values || !values.length\"> <input class=\"md-chips-input\" placeholder=\"{{ placeholder }}\" #tbox  (keyup.enter)=\"addValue(tbox.value, $event)\"/> </div>",
+                template: "<div *ngIf=\"values && values.length\" class=\"md-chip-list\"  [ngClass]=\"focused\"> <span *ngFor=\"let value of values\" class=\"md-chip\" selected >          {{value}} <i class=\"close fas fa-times\" aria-hidden=\"true\" (click)=\"removeValue(value)\" ></i> </span> <span> <input  [(ngModel)]=\"labelToAdd\"  (keyup.enter)=\"addValue(box.value, $event)\" (focus)=\"onFocus()\"  (focusout)=\"focusOutFunction()\"   #box /> </span> </div> <div *ngIf=\"!values || !values.length\"> <input class=\"md-chips-input\" placeholder=\"{{ placeholder }}\" #tbox  (keyup.enter)=\"addValue(tbox.value, $event)\"/> </div> ",
                 providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
             },] },
 ];
@@ -14361,6 +14365,23 @@ var ScrollSpyLinkDirective = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(ScrollSpyLinkDirective.prototype, "section", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this._section; },
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        set: function (value) {
+            if (value) {
+                this._section = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(ScrollSpyLinkDirective.prototype, "id", {
         /**
          * @return {?}
@@ -14434,6 +14455,8 @@ ScrollSpyLinkDirective.propDecorators = {
 var ScrollSpyService = /** @class */ (function () {
     function ScrollSpyService() {
         this.scrollSpys = [];
+        this.activeSubject = new rxjs.Subject();
+        this.active$ = this.activeSubject.asObservable();
     }
     /**
      * @param {?} scrollSpy
@@ -14503,6 +14526,7 @@ var ScrollSpyService = /** @class */ (function () {
         if (activeLink) {
             activeLink.active = true;
             activeLink.detectChanges();
+            this.activeSubject.next(activeLink);
         }
     };
     /**
@@ -14537,6 +14561,7 @@ var ScrollSpyDirective = /** @class */ (function () {
      */
     function ScrollSpyDirective(scrollSpyService) {
         this.scrollSpyService = scrollSpyService;
+        this.activeLinkChange = new core.EventEmitter();
     }
     Object.defineProperty(ScrollSpyDirective.prototype, "id", {
         /**
@@ -14560,6 +14585,17 @@ var ScrollSpyDirective = /** @class */ (function () {
     /**
      * @return {?}
      */
+    ScrollSpyDirective.prototype.ngOnInit = function () {
+        var _this = this;
+        this.activeSub = this.scrollSpyService.active$
+            .pipe(operators.distinctUntilChanged())
+            .subscribe(function (activeLink) {
+            _this.activeLinkChange.emit(activeLink);
+        });
+    };
+    /**
+     * @return {?}
+     */
     ScrollSpyDirective.prototype.ngAfterContentInit = function () {
         this.scrollSpyService.addScrollSpy({ id: this.id, links: this.links });
     };
@@ -14568,6 +14604,7 @@ var ScrollSpyDirective = /** @class */ (function () {
      */
     ScrollSpyDirective.prototype.ngOnDestroy = function () {
         this.scrollSpyService.removeScrollSpy(this.id);
+        this.activeSub.unsubscribe();
     };
     return ScrollSpyDirective;
 }());
@@ -14582,7 +14619,8 @@ ScrollSpyDirective.ctorParameters = function () { return [
 ]; };
 ScrollSpyDirective.propDecorators = {
     links: [{ type: core.ContentChildren, args: [ScrollSpyLinkDirective, { descendants: true },] }],
-    id: [{ type: core.Input, args: ['mdbScrollSpy',] }]
+    id: [{ type: core.Input, args: ['mdbScrollSpy',] }],
+    activeLinkChange: [{ type: core.Output }]
 };
 /**
  * @fileoverview added by tsickle
@@ -14633,7 +14671,7 @@ var ScrollSpyWindowDirective = /** @class */ (function () {
         var elTop = this.el.nativeElement.offsetTop - this.offset;
         /** @type {?} */
         var elBottom = elTop + elHeight;
-        return (scrollTop >= elTop && scrollTop < elBottom);
+        return (scrollTop >= elTop && scrollTop <= elBottom);
     };
     /**
      * @param {?} scrollSpyId
@@ -14741,7 +14779,9 @@ var ScrollSpyElementDirective = /** @class */ (function () {
         var scrollTop = this.el.nativeElement.parentElement.scrollTop;
         /** @type {?} */
         var elTop = this.el.nativeElement.offsetTop - this.offset;
-        return (scrollTop >= elTop);
+        /** @type {?} */
+        var elHeight = this.el.nativeElement.offsetHeight;
+        return (scrollTop >= elTop && scrollTop < elTop + elHeight);
     };
     /**
      * @param {?} scrollSpyId
@@ -14828,6 +14868,439 @@ ScrollSpyModule.decorators = [
                     ScrollSpyElementDirective
                 ],
                 providers: [ScrollSpyService]
+            },] },
+];
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+var MdbStepComponent = /** @class */ (function () {
+    /**
+     * @param {?} el
+     */
+    function MdbStepComponent(el) {
+        this.el = el;
+        this._isActive = false;
+    }
+    Object.defineProperty(MdbStepComponent.prototype, "isDone", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this._isDone; },
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        set: function (value) {
+            this._isDone = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MdbStepComponent.prototype, "isWrong", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this._isWrong; },
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        set: function (value) {
+            this._isWrong = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MdbStepComponent.prototype, "isActive", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this._isActive; },
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        set: function (value) {
+            this._isActive = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    MdbStepComponent.prototype._removeClasses = function () {
+        this.isActive = false;
+        this.isDone = false;
+        this.isWrong = false;
+    };
+    /**
+     * @return {?}
+     */
+    MdbStepComponent.prototype.reset = function () {
+        if (this.stepForm) {
+            this.stepForm.reset();
+        }
+        this._removeClasses();
+    };
+    /**
+     * @return {?}
+     */
+    MdbStepComponent.prototype.ngOnInit = function () {
+    };
+    return MdbStepComponent;
+}());
+MdbStepComponent.decorators = [
+    { type: core.Component, args: [{
+                selector: 'mdb-step',
+                exportAs: 'mdbStep',
+                template: '<ng-template><ng-content></ng-content></ng-template>',
+            },] },
+];
+/** @nocollapse */
+MdbStepComponent.ctorParameters = function () { return [
+    { type: core.ElementRef }
+]; };
+MdbStepComponent.propDecorators = {
+    content: [{ type: core.ViewChild, args: [core.TemplateRef,] }],
+    name: [{ type: core.Input }],
+    label: [{ type: core.Input }],
+    stepForm: [{ type: core.Input }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+var MdbStepperComponent = /** @class */ (function () {
+    /**
+     * @param {?} ripple
+     * @param {?} _renderer
+     * @param {?} platformId
+     */
+    function MdbStepperComponent(ripple, _renderer, platformId) {
+        this.ripple = ripple;
+        this._renderer = _renderer;
+        this.linear = false;
+        this.disableWaves = false;
+        this.vertical = false;
+        this.horizontal = true;
+        this._stepperBreakpoint = 992;
+        this.isBrowser = common.isPlatformBrowser(platformId);
+    }
+    Object.defineProperty(MdbStepperComponent.prototype, "activeStepIndex", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this._activeStepIndex; },
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        set: function (value) {
+            this._activeStepIndex = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    MdbStepperComponent.prototype.onWindowResize = function () {
+        if (this.isBrowser) {
+            if (win.innerWidth < this._stepperBreakpoint) {
+                this.horizontal = false;
+                this._updateHorizontalStepperHeight(this.activeStepIndex);
+            }
+            else {
+                this.horizontal = true;
+                this._updateHorizontalStepperHeight(this.activeStepIndex);
+            }
+        }
+    };
+    /**
+     * @param {?} index
+     * @param {?} event
+     * @return {?}
+     */
+    MdbStepperComponent.prototype.onClick = function (index, event) {
+        if (!this.disableWaves) {
+            /** @type {?} */
+            var clickedEl = this.stepTitles.toArray()[index];
+            this.ripple.el = clickedEl;
+            this.ripple.click(event);
+        }
+    };
+    /**
+     * @return {?}
+     */
+    MdbStepperComponent.prototype.ngOnInit = function () {
+    };
+    /**
+     * @param {?} step
+     * @return {?}
+     */
+    MdbStepperComponent.prototype._isStepValid = function (step) {
+        if (!step.stepForm) {
+            return true;
+        }
+        if (step.stepForm && step.stepForm.valid) {
+            return true;
+        }
+        return false;
+    };
+    /**
+     * @param {?} index
+     * @return {?}
+     */
+    MdbStepperComponent.prototype.getAnimationState = function (index) {
+        /** @type {?} */
+        var nextElPosition = index - this.activeStepIndex;
+        if (nextElPosition < 0) {
+            return 'previous';
+        }
+        else if (nextElPosition > 0) {
+            return 'next';
+        }
+        return 'current';
+    };
+    /**
+     * @param {?} index
+     * @return {?}
+     */
+    MdbStepperComponent.prototype._getStepByIndex = function (index) {
+        return this.steps.toArray()[index];
+    };
+    /**
+     * @return {?}
+     */
+    MdbStepperComponent.prototype.next = function () {
+        if (this.activeStepIndex < (this.steps.length - 1)) {
+            this.setNewActiveStep(this.activeStepIndex + 1);
+        }
+    };
+    /**
+     * @return {?}
+     */
+    MdbStepperComponent.prototype.previous = function () {
+        if (this.activeStepIndex > 0) {
+            this.setNewActiveStep(this.activeStepIndex - 1);
+        }
+    };
+    /**
+     * @return {?}
+     */
+    MdbStepperComponent.prototype.submit = function () {
+        if (this.linear) {
+            this._markCurrentAsDone();
+        }
+    };
+    /**
+     * @param {?} index
+     * @return {?}
+     */
+    MdbStepperComponent.prototype.setNewActiveStep = function (index) {
+        /** @type {?} */
+        var newStep = this._getStepByIndex(index);
+        if (this.linear && !this._isNewStepLinear(index)) {
+            return;
+        }
+        this._removeStepValidationClasses(newStep);
+        if (this.linear && index > this.activeStepIndex) {
+            if (this._isStepValid(this._activeStep)) {
+                this._markCurrentAsDone();
+                this._removeCurrentActiveStep();
+                this._setActiveStep(index);
+            }
+            else {
+                this._markCurrentAsWrong();
+                this._markStepControlsAsDirty(this._activeStep);
+            }
+        }
+        else {
+            if (index < this.activeStepIndex) {
+                this._removeStepValidationClasses(this._activeStep);
+            }
+            this._removeCurrentActiveStep();
+            this._setActiveStep(index);
+        }
+    };
+    /**
+     * @return {?}
+     */
+    MdbStepperComponent.prototype._markCurrentAsDone = function () {
+        this._activeStep.isDone = true;
+        this._activeStep.isWrong = false;
+    };
+    /**
+     * @return {?}
+     */
+    MdbStepperComponent.prototype._markCurrentAsWrong = function () {
+        this._activeStep.isWrong = true;
+        this._activeStep.isDone = false;
+    };
+    /**
+     * @param {?} step
+     * @return {?}
+     */
+    MdbStepperComponent.prototype._markStepControlsAsDirty = function (step) {
+        /** @type {?} */
+        var controls = step.stepForm.controls;
+        if (step.stepForm.controls) {
+            /** @type {?} */
+            var keys = Object.keys(controls);
+            for (var i = 0; i < keys.length; i++) {
+                /** @type {?} */
+                var control = controls[keys[i]];
+                if (control instanceof forms.FormControl) {
+                    control.markAsTouched();
+                }
+            }
+        }
+    };
+    /**
+     * @param {?} step
+     * @return {?}
+     */
+    MdbStepperComponent.prototype._removeStepValidationClasses = function (step) {
+        step.isDone = false;
+        step.isWrong = false;
+    };
+    /**
+     * @param {?} newStepIndex
+     * @return {?}
+     */
+    MdbStepperComponent.prototype._isNewStepLinear = function (newStepIndex) {
+        return this.activeStepIndex - newStepIndex === 1 || this.activeStepIndex - newStepIndex === -1;
+    };
+    /**
+     * @param {?} index
+     * @return {?}
+     */
+    MdbStepperComponent.prototype._setActiveStep = function (index) {
+        this.steps.toArray()[index].isActive = true;
+        this._updateHorizontalStepperHeight(index);
+        this.activeStepIndex = index;
+        this._activeStep = this._getStepByIndex(this.activeStepIndex);
+    };
+    /**
+     * @return {?}
+     */
+    MdbStepperComponent.prototype._removeCurrentActiveStep = function () {
+        /** @type {?} */
+        var currentActiveStep = this.steps.find(function (activeStep) { return activeStep.isActive; });
+        if (currentActiveStep) {
+            currentActiveStep.isActive = false;
+        }
+    };
+    /**
+     * @return {?}
+     */
+    MdbStepperComponent.prototype.resetAll = function () {
+        var _this = this;
+        this.steps.forEach(function (step) {
+            step.reset();
+            _this._setActiveStep(0);
+        });
+    };
+    /**
+     * @param {?} index
+     * @return {?}
+     */
+    MdbStepperComponent.prototype._updateHorizontalStepperHeight = function (index) {
+        var _this = this;
+        if (this.horizontal && !this.vertical) {
+            setTimeout(function () {
+                /** @type {?} */
+                var height = _this.stepContents.toArray()[index].nativeElement.scrollHeight + 50;
+                _this._renderer.setStyle(_this.container.nativeElement, 'height', height + 'px');
+            }, 0);
+        }
+        else {
+            this._renderer.removeStyle(this.container.nativeElement, 'height');
+        }
+    };
+    /**
+     * @return {?}
+     */
+    MdbStepperComponent.prototype._initStepperVariation = function () {
+        var _this = this;
+        if (this.isBrowser) {
+            if (this.vertical || win.innerWidth < this._stepperBreakpoint) {
+                setTimeout(function () {
+                    _this.horizontal = false;
+                    _this._renderer.removeStyle(_this.container.nativeElement, 'height');
+                }, 0);
+            }
+        }
+    };
+    /**
+     * @return {?}
+     */
+    MdbStepperComponent.prototype.ngAfterViewInit = function () {
+        this._initStepperVariation();
+    };
+    /**
+     * @return {?}
+     */
+    MdbStepperComponent.prototype.ngAfterContentInit = function () {
+        this._setActiveStep(0);
+    };
+    return MdbStepperComponent;
+}());
+MdbStepperComponent.decorators = [
+    { type: core.Component, args: [{
+                selector: 'mdb-stepper',
+                exportAs: 'mdbStepper',
+                template: "<div class=\"card-body\"> <ul #container class=\"stepper\" [ngClass]=\"{'horizontal': !vertical && horizontal}\"> <li [ngClass]=\"{'active': step.isActive, 'done': step.isDone, 'wrong': step.isWrong }\" class=\"step\" *ngFor=\"let step of steps; let i = index\"> <div #stepTitle class=\"step-title waves-effect waves-dark\" (click)=\"setNewActiveStep(i); onClick(i, $event)\"> {{ step.name }} <span class=\"step-label\">{{ step.label }}</span> </div> <div #stepContent class=\"step-new-content\" [ngClass]=\"{'d-block': step.isActive }\" [@stepContentTransition]=\"!vertical && getAnimationState(i)\"> <ng-container [ngTemplateOutlet]=\"step.content\"></ng-container> </div> </li> </ul> </div> ",
+                encapsulation: core.ViewEncapsulation.None,
+                animations: [animations.trigger('stepContentTransition', [
+                        animations.state('previous', animations.style({ transform: 'translateX(-100%)', visibility: 'hidden' })),
+                        animations.state('next', animations.style({ transform: 'translateX(100%)', visibility: 'hidden' })),
+                        animations.state('current', animations.style({ transform: 'none', visibility: 'visible' })),
+                        animations.transition('* => *', animations.animate('600ms ease'))
+                    ])],
+                providers: [WavesDirective]
+            },] },
+];
+/** @nocollapse */
+MdbStepperComponent.ctorParameters = function () { return [
+    { type: WavesDirective },
+    { type: core.Renderer2 },
+    { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
+]; };
+MdbStepperComponent.propDecorators = {
+    steps: [{ type: core.ContentChildren, args: [MdbStepComponent,] }],
+    stepTitles: [{ type: core.ViewChildren, args: ['stepTitle',] }],
+    stepContents: [{ type: core.ViewChildren, args: ['stepContent',] }],
+    container: [{ type: core.ViewChild, args: ['container',] }],
+    linear: [{ type: core.Input }],
+    disableWaves: [{ type: core.Input }],
+    vertical: [{ type: core.Input }],
+    onWindowResize: [{ type: core.HostListener, args: ['window:resize',] }]
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+var StepperModule = /** @class */ (function () {
+    function StepperModule() {
+    }
+    return StepperModule;
+}());
+StepperModule.decorators = [
+    { type: core.NgModule, args: [{
+                declarations: [
+                    MdbStepperComponent,
+                    MdbStepComponent
+                ],
+                exports: [
+                    MdbStepperComponent,
+                    MdbStepComponent
+                ],
+                imports: [
+                    common.CommonModule,
+                ]
             },] },
 ];
 /**
@@ -16263,7 +16736,7 @@ var CarouselComponent = /** @class */ (function () {
 CarouselComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'mdb-carousel',
-                template: "<div tabindex=\"0\" (swipeleft)=\"swipe($event.type)\" (swiperight)=\"swipe($event.type)\" (mouseenter)=\"pause()\" (mouseleave)=\"play()\" (mouseup)=\"play()\" class=\"carousel {{ class }} {{ type }}\"> <div class=\"controls-top\" *ngIf=\"slides.length > 1 && !checkNavigation() && isControls\"> <a class=\"btn-floating\" [class.disabled]=\"activeSlide===0&&noWrap\" (click)=\"previousSlide()\"><i class=\"fa fa-chevron-left\"></i></a> <a class=\"btn-floating\" (click)=\"nextSlide()\" [class.disabled]=\"isLast(activeSlide) && noWrap\"><i class=\"fa fa-chevron-right\"></i></a> </div> <ol class=\"carousel-indicators\" *ngIf=\"slides.length > 1 && checkDots() && isControls\"> <li *ngFor=\"let slidez of slides; let i = index;\" [class.active]=\"slidez.active === true\" (click)=\"selectSlide(i)\"></li> </ol> <ol class=\"carousel-indicators\" *ngIf=\"slides.length > 1 && !checkDots() && isControls\"> <li *ngFor=\"let slidez of slides; let i = index;\" [class.active]=\"slidez.active === true\" (click)=\"selectSlide(i)\"> <img  class=\"d-block w-100 img-fluid\" src=\"{{ getImg(slidez) }}\"> </li> </ol> <div class=\"carousel-inner\"><ng-content></ng-content></div> <a class=\"carousel-control-prev\" [class.disabled]=\"activeSlide === 0 && noWrap\" (click)=\"previousSlide()\" *ngIf=\"slides.length > 1 && checkNavigation() && isControls\"> <span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span> <span  class=\"sr-only\">Previous</span> </a> <a class=\"carousel-control-next\" (click)=\"nextSlide()\" [class.disabled]=\"isLast(activeSlide) && noWrap\" *ngIf=\"slides.length > 1 && checkNavigation() && isControls\"> <span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span> <span class=\"sr-only\">Next</span> </a> </div>",
+                template: "<div tabindex=\"0\" (swipeleft)=\"swipe($event.type)\" (swiperight)=\"swipe($event.type)\" (mouseenter)=\"pause()\" (mouseleave)=\"play()\" (mouseup)=\"play()\" class=\"carousel {{ class }} {{ type }}\"> <div class=\"controls-top\" *ngIf=\"slides.length > 1 && !checkNavigation() && isControls\"> <a class=\"btn-floating\" [class.disabled]=\"activeSlide===0&&noWrap\" (click)=\"previousSlide()\"><i class=\"fas fa-chevron-left\"></i></a> <a class=\"btn-floating\" (click)=\"nextSlide()\" [class.disabled]=\"isLast(activeSlide) && noWrap\"><i class=\"fas fa-chevron-right\"></i></a> </div> <ol class=\"carousel-indicators\" *ngIf=\"slides.length > 1 && checkDots() && isControls\"> <li *ngFor=\"let slidez of slides; let i = index;\" [class.active]=\"slidez.active === true\" (click)=\"selectSlide(i)\"></li> </ol> <ol class=\"carousel-indicators\" *ngIf=\"slides.length > 1 && !checkDots() && isControls\"> <li *ngFor=\"let slidez of slides; let i = index;\" [class.active]=\"slidez.active === true\" (click)=\"selectSlide(i)\"> <img  class=\"d-block w-100 img-fluid\" src=\"{{ getImg(slidez) }}\"> </li> </ol> <div class=\"carousel-inner\"><ng-content></ng-content></div> <a class=\"carousel-control-prev\" [class.disabled]=\"activeSlide === 0 && noWrap\" (click)=\"previousSlide()\" *ngIf=\"slides.length > 1 && checkNavigation() && isControls\"> <span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span> <span  class=\"sr-only\">Previous</span> </a> <a class=\"carousel-control-next\" (click)=\"nextSlide()\" [class.disabled]=\"isLast(activeSlide) && noWrap\" *ngIf=\"slides.length > 1 && checkNavigation() && isControls\"> <span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span> <span class=\"sr-only\">Next</span> </a> </div> ",
             },] },
 ];
 /** @nocollapse */
@@ -17812,13 +18285,11 @@ var ComponentLoader = /** @class */ (function () {
         this._innerComponent = null;
         if (!this._componentRef) {
             this.onBeforeShow.emit();
-            this._contentRef = this._getContentRef(opts.content);
+            this._contentRef = this._getContentRef(opts.content, opts.data);
             /** @type {?} */
-            var injector = core.ReflectiveInjector.resolveAndCreate(this._providers, this._injector);
+            var injector = core.Injector.create({ providers: this._providers, parent: this._injector });
             this._componentRef = this._componentFactory.create(injector, this._contentRef.nodes);
             this._applicationRef.attachView(this._componentRef.hostView);
-            // this._componentRef = this._viewContainerRef
-            //   .createComponent(this._componentFactory, 0, injector, this._contentRef.nodes);
             this.instance = this._componentRef.instance;
             Object.assign(this._componentRef.instance, opts);
             if (this.container instanceof core.ElementRef) {
@@ -17826,7 +18297,6 @@ var ComponentLoader = /** @class */ (function () {
                     .appendChild(this._componentRef.location.nativeElement);
             }
             if (this.container === 'body' && typeof document !== 'undefined') {
-                //  document.querySelector(this.container as string)
                 document.querySelector(( /** @type {?} */(this.container)))
                     .appendChild(this._componentRef.location.nativeElement);
             }
@@ -17867,11 +18337,6 @@ var ComponentLoader = /** @class */ (function () {
         if (this._viewContainerRef && this._contentRef.viewRef) {
             this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._contentRef.viewRef));
         }
-        // this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._componentRef.hostView));
-        //
-        // if (this._contentRef.viewRef && this._viewContainerRef.indexOf(this._contentRef.viewRef) !== -1) {
-        //   this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._contentRef.viewRef));
-        // }
         this._contentRef = null;
         this._componentRef = null;
         this.onHidden.emit();
@@ -17954,9 +18419,10 @@ var ComponentLoader = /** @class */ (function () {
     };
     /**
      * @param {?} content
+     * @param {?=} data
      * @return {?}
      */
-    ComponentLoader.prototype._getContentRef = function (content) {
+    ComponentLoader.prototype._getContentRef = function (content, data) {
         if (!content) {
             return new ContentRef([]);
         }
@@ -17975,9 +18441,10 @@ var ComponentLoader = /** @class */ (function () {
             /** @type {?} */
             var contentCmptFactory = this._componentFactoryResolver.resolveComponentFactory(content);
             /** @type {?} */
-            var modalContentInjector = core.ReflectiveInjector.resolveAndCreate(this._providers.slice(), this._injector);
+            var modalContentInjector = core.Injector.create({ providers: this._providers, parent: this._injector });
             /** @type {?} */
             var componentRef = contentCmptFactory.create(modalContentInjector);
+            Object.assign(componentRef.instance, data);
             this._applicationRef.attachView(componentRef.hostView);
             return new ContentRef([[componentRef.location.nativeElement]], componentRef.hostView, componentRef);
         }
@@ -18602,22 +19069,150 @@ DropdownModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 var MdbIconComponent = /** @class */ (function () {
-    function MdbIconComponent() {
+    /**
+     * @param {?} _el
+     * @param {?} _renderer
+     */
+    function MdbIconComponent(_el, _renderer) {
+        this._el = _el;
+        this._renderer = _renderer;
+        this.fab = false;
+        this.far = false;
+        this.fal = false;
+        this.fas = true;
+        this.sizeClass = '';
     }
+    /**
+     * @return {?}
+     */
+    MdbIconComponent.prototype.ngOnInit = function () {
+        if (this.size) {
+            this.sizeClass = "fa-" + this.size;
+        }
+        if (this._el.nativeElement.parentElement.classList.contains('md-form')) {
+            this._renderer.addClass(this._el.nativeElement, 'prefix');
+        }
+        /** @type {?} */
+        var classList = this._el.nativeElement.classList;
+        this.fab = classList.contains('fab');
+        this.far = classList.contains('far');
+        this.fas = classList.contains('fas');
+        this.fal = classList.contains('fal');
+    };
     return MdbIconComponent;
 }());
 MdbIconComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'mdb-icon',
-                template: "<i class=\"fa fa-{{icon}} fa-{{size}} {{class}} prefix\"></i>"
+                template: "<i [ngClass]=\"{'fas': fas, 'far': far, 'fab': fab, 'fal': fal}\" class=\"fa-{{icon}} {{class}} {{sizeClass}}\"></i> "
             },] },
 ];
+/** @nocollapse */
+MdbIconComponent.ctorParameters = function () { return [
+    { type: core.ElementRef },
+    { type: core.Renderer2 }
+]; };
 MdbIconComponent.propDecorators = {
-    iconEl: [{ type: core.ViewChild, args: ['iconEl',] }],
     icon: [{ type: core.Input }],
     size: [{ type: core.Input }],
     class: [{ type: core.Input }]
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+var FabDirective = /** @class */ (function () {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    function FabDirective(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+        this._r.addClass(this._el.nativeElement, 'fab');
+    }
+    return FabDirective;
+}());
+FabDirective.decorators = [
+    { type: core.Directive, args: [{ selector: '[fab], [brands]' },] },
+];
+/** @nocollapse */
+FabDirective.ctorParameters = function () { return [
+    { type: core.ElementRef },
+    { type: core.Renderer2 }
+]; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+var FarDirective = /** @class */ (function () {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    function FarDirective(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+        this._r.addClass(this._el.nativeElement, 'far');
+    }
+    return FarDirective;
+}());
+FarDirective.decorators = [
+    { type: core.Directive, args: [{ selector: '[far], [regular]' },] },
+];
+/** @nocollapse */
+FarDirective.ctorParameters = function () { return [
+    { type: core.ElementRef },
+    { type: core.Renderer2 }
+]; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+var FasDirective = /** @class */ (function () {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    function FasDirective(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+        this._r.addClass(this._el.nativeElement, 'fas');
+    }
+    return FasDirective;
+}());
+FasDirective.decorators = [
+    { type: core.Directive, args: [{ selector: '[fas], [solid]' },] },
+];
+/** @nocollapse */
+FasDirective.ctorParameters = function () { return [
+    { type: core.ElementRef },
+    { type: core.Renderer2 }
+]; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+var FalDirective = /** @class */ (function () {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    function FalDirective(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+        this._r.addClass(this._el.nativeElement, 'fal');
+    }
+    return FalDirective;
+}());
+FalDirective.decorators = [
+    { type: core.Directive, args: [{ selector: '[fal], [light]' },] },
+];
+/** @nocollapse */
+FalDirective.ctorParameters = function () { return [
+    { type: core.ElementRef },
+    { type: core.Renderer2 }
+]; };
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
@@ -18629,8 +19224,21 @@ var IconsModule = /** @class */ (function () {
 }());
 IconsModule.decorators = [
     { type: core.NgModule, args: [{
-                declarations: [MdbIconComponent],
-                exports: [MdbIconComponent]
+                declarations: [
+                    MdbIconComponent,
+                    FabDirective,
+                    FarDirective,
+                    FasDirective,
+                    FalDirective
+                ],
+                imports: [common.CommonModule],
+                exports: [
+                    MdbIconComponent,
+                    FabDirective,
+                    FarDirective,
+                    FasDirective,
+                    FalDirective
+                ]
             },] },
 ];
 /**
@@ -18809,7 +19417,8 @@ var MdbInputDirective = /** @class */ (function () {
                 }
             }
         }
-        catch (error) { }
+        catch (error) {
+        }
         this.delayedResize();
     };
     /**
@@ -18822,7 +19431,8 @@ var MdbInputDirective = /** @class */ (function () {
                 _this.delayedResize();
             }, 0);
         }
-        catch (error) { }
+        catch (error) {
+        }
     };
     /**
      * @return {?}
@@ -18834,7 +19444,8 @@ var MdbInputDirective = /** @class */ (function () {
                 _this.delayedResize();
             }, 0);
         }
-        catch (error) { }
+        catch (error) {
+        }
     };
     /**
      * @return {?}
@@ -18846,7 +19457,8 @@ var MdbInputDirective = /** @class */ (function () {
                 _this.delayedResize();
             }, 0);
         }
-        catch (error) { }
+        catch (error) {
+        }
     };
     /**
      * @param {?} value
@@ -18870,6 +19482,15 @@ var MdbInputDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbInputDirective.prototype.ngOnInit = function () {
+        var _this = this;
+        try {
+            setTimeout(function () {
+                _this.delayedResize();
+            }, 0);
+        }
+        catch (error) {
+            console.log(error);
+        }
         // Inititalise a new <span> wrong/right elements and render it below the host component.
         if (this.mdbValidate) {
             this.wrongTextContainer = this._renderer.createElement('span');
@@ -19003,7 +19624,8 @@ var MdbInputDirective = /** @class */ (function () {
             try {
                 this.element = document.querySelector('.md-textarea-auto');
             }
-            catch (error) { }
+            catch (error) {
+            }
         }
         /** @type {?} */
         var type = this.el.nativeElement.type;
@@ -19055,11 +19677,13 @@ var MdbInputDirective = /** @class */ (function () {
             try {
                 inputId = this.el.nativeElement.id;
             }
-            catch (err) { }
+            catch (err) {
+            }
             try {
                 inputP = this.el.nativeElement.parentNode;
             }
-            catch (err) { }
+            catch (err) {
+            }
             this.elLabel = inputP.querySelector('label[for="' + inputId + '"]') || inputP.querySelector('label');
             if (this.elLabel && this.el.nativeElement.value !== '') {
                 this._renderer.addClass(this.elLabel, 'active');
@@ -19652,7 +20276,8 @@ var modalConfigDefaults = {
     class: '',
     containerClass: '',
     animated: true,
-    scroll: false
+    scroll: false,
+    data: {}
 };
 /** @type {?} */
 var ClassName = {
@@ -20440,7 +21065,7 @@ var MDBModalService = /** @class */ (function () {
             .provide({ provide: MDBModalRef, useValue: mdbModalRef })
             .attach(ModalContainerComponent)
             .to('body')
-            .show({ content: content, isAnimated: this.config.animated });
+            .show({ content: content, isAnimated: this.config.animated, data: this.config.data });
         modalContainerRef.instance.level = this.getModalsCount();
         mdbModalRef.hide = function () {
             modalContainerRef.instance.hide();
@@ -20692,7 +21317,7 @@ var NavbarComponent = /** @class */ (function () {
         this.shown = false;
         this.duration = 350; // ms
         // ms
-        this.collapse = false;
+        this.collapse = true;
         this.showClass = false;
         this.collapsing = false;
         // tslint:disable-next-line:max-line-length
@@ -20742,24 +21367,17 @@ var NavbarComponent = /** @class */ (function () {
      */
     NavbarComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
-        /* bugfix - bez tego sypie ExpressionChangedAfterItHasBeenCheckedError -
-        https://github.com/angular/angular/issues/6005#issuecomment-165951692 */
-        setTimeout(function () {
-            _this.height = _this.el.nativeElement.scrollHeight;
-            _this.collapse = true;
-            if (!_this.containerInside) {
-                /** @type {?} */
-                var childrens = Array.from(_this.container.nativeElement.children);
-                childrens.forEach(function (child) {
-                    // this.navbar.nativeElement.append(child);
-                    _this.renderer.appendChild(_this.navbar.nativeElement, child);
-                    _this.container.nativeElement.remove();
-                });
-            }
-            if (_this.el.nativeElement.children.length === 0) {
-                _this.el.nativeElement.remove();
-            }
-        });
+        if (!this.containerInside) {
+            /** @type {?} */
+            var childrens = Array.from(this.container.nativeElement.children);
+            childrens.forEach(function (child) {
+                _this.renderer.appendChild(_this.navbar.nativeElement, child);
+                _this.container.nativeElement.remove();
+            });
+        }
+        if (this.el.nativeElement.children.length === 0) {
+            this.el.nativeElement.remove();
+        }
         this.addTogglerIconClasses();
     };
     /**
@@ -20784,8 +21402,9 @@ var NavbarComponent = /** @class */ (function () {
         this.collapse = false;
         this.collapsing = true;
         setTimeout(function () {
+            _this.height = _this.el.nativeElement.scrollHeight;
             _this.renderer.setStyle(_this.el.nativeElement, 'height', _this.height + 'px');
-        }, 10);
+        }, 0);
         setTimeout(function () {
             _this.collapsing = false;
             _this.collapse = true;
@@ -20803,7 +21422,7 @@ var NavbarComponent = /** @class */ (function () {
         this.collapsing = true;
         setTimeout(function () {
             _this.renderer.setStyle(_this.el.nativeElement, 'height', '0px');
-        }, 10);
+        }, 0);
         setTimeout(function () {
             _this.collapsing = false;
             _this.collapse = true;
@@ -21812,7 +22431,7 @@ var MdbTableSortDirective = /** @class */ (function () {
      * @return {?}
      */
     MdbTableSortDirective.prototype.onclick = function () {
-        this.sortDataBy(this.sortBy.toLowerCase());
+        this.sortDataBy(this.sortBy.toString().toLowerCase());
     };
     /**
      * @param {?} key
@@ -22540,6 +23159,10 @@ MDBBootstrapModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
 /** @type {?} */
 var MODULES$1 = [
     AutocompleteModule,
@@ -22561,7 +23184,8 @@ var MODULES$1 = [
     ScrollSpyModule,
     AutoFormatModule,
     RangeModule,
-    AutoCompleterModule
+    AutoCompleterModule,
+    StepperModule
 ];
 var MDBRootModulePro = /** @class */ (function () {
     function MDBRootModulePro() {
@@ -22589,7 +23213,8 @@ MDBRootModulePro.decorators = [
                     ScrollSpyModule,
                     AutoFormatModule,
                     RangeModule,
-                    AutoCompleterModule
+                    AutoCompleterModule,
+                    StepperModule
                 ],
                 exports: [MODULES$1],
                 providers: [],
@@ -22799,6 +23424,9 @@ exports.ScrollSpyWindowDirective = ScrollSpyWindowDirective;
 exports.ScrollSpyElementDirective = ScrollSpyElementDirective;
 exports.ScrollSpyLinkDirective = ScrollSpyLinkDirective;
 exports.ScrollSpyService = ScrollSpyService;
+exports.StepperModule = StepperModule;
+exports.MdbStepperComponent = MdbStepperComponent;
+exports.MdbStepComponent = MdbStepComponent;
 exports.ButtonsModule = ButtonsModule;
 exports.CHECKBOX_CONTROL_VALUE_ACCESSOR = CHECKBOX_CONTROL_VALUE_ACCESSOR;
 exports.ButtonCheckboxDirective = ButtonCheckboxDirective;
@@ -22840,6 +23468,10 @@ exports.BsDropdownState = BsDropdownState;
 exports.DropdownModule = DropdownModule;
 exports.IconsModule = IconsModule;
 exports.MdbIconComponent = MdbIconComponent;
+exports.FalDirective = FalDirective;
+exports.FarDirective = FarDirective;
+exports.FabDirective = FabDirective;
+exports.FasDirective = FasDirective;
 exports.InputsModule = InputsModule;
 exports.MdbInput = MdbInput;
 exports.MdbInputDirective = MdbInputDirective;
@@ -22917,72 +23549,76 @@ exports.MDBBootstrapModule = MDBBootstrapModule;
 exports.MDBBootstrapModulePro = MDBBootstrapModulePro;
 exports.MDBRootModules = MDBRootModules;
 exports.MDBBootstrapModulesPro = MDBBootstrapModulesPro;
-exports.ɵdl1 = BadgeModule;
-exports.ɵdm1 = MDBBadgeComponent;
-exports.ɵdp1 = BreadcrumbModule;
-exports.ɵdo1 = MdbBreadcrumbItemComponent;
-exports.ɵdn1 = MdbBreadcrumbComponent;
-exports.ɵdk1 = MdbBtnDirective;
-exports.ɵdh1 = ButtonsModule;
-exports.ɵdi1 = ButtonCheckboxDirective;
-exports.ɵdj1 = ButtonRadioDirective;
-exports.ɵdu1 = CardsFreeModule;
-exports.ɵdq1 = CarouselComponent;
-exports.ɵdr1 = CarouselConfig;
-exports.ɵdt1 = CarouselModule;
-exports.ɵds1 = SlideComponent;
-exports.ɵdv1 = BaseChartDirective;
-exports.ɵdw1 = ChartsModule;
-exports.ɵdx1 = CHECKBOX_VALUE_ACCESSOR;
-exports.ɵdy1 = CheckboxComponent;
-exports.ɵdz1 = CheckboxModule;
-exports.ɵea1 = CollapseComponent;
-exports.ɵeb1 = CollapseModule;
-exports.ɵec1 = BsDropdownContainerComponent;
-exports.ɵed1 = BsDropdownMenuDirective;
-exports.ɵee1 = BsDropdownToggleDirective;
-exports.ɵef1 = BsDropdownConfig;
-exports.ɵeg1 = BsDropdownDirective;
-exports.ɵei1 = DropdownModule;
-exports.ɵeh1 = BsDropdownState;
-exports.ɵek1 = MdbIconComponent;
-exports.ɵej1 = IconsModule;
-exports.ɵep1 = MdbErrorDirective;
-exports.ɵeo1 = InputUtilitiesModule;
-exports.ɵeq1 = MdbSuccessDirective;
-exports.ɵer1 = MdbValidateDirective;
-exports.ɵem1 = MdbInput;
-exports.ɵel1 = InputsModule;
-exports.ɵen1 = MdbInputDirective;
-exports.ɵfu1 = MDBRootModule;
-exports.ɵes1 = ModalDirective;
-exports.ɵey1 = ModalModule;
-exports.ɵet1 = ModalOptions;
-exports.ɵeu1 = MDBModalService;
-exports.ɵew1 = ModalBackdropComponent;
-exports.ɵev1 = ModalBackdropOptions;
-exports.ɵex1 = ModalContainerComponent;
-exports.ɵez1 = NavbarComponent;
-exports.ɵfa1 = NavbarModule;
-exports.ɵfb1 = PopoverContainerComponent;
-exports.ɵfc1 = PopoverConfig;
-exports.ɵfd1 = PopoverDirective;
-exports.ɵfe1 = PopoverModule;
-exports.ɵff1 = RippleDirective;
-exports.ɵfg1 = RippleModule;
-exports.ɵfj1 = MdbTablePaginationComponent;
-exports.ɵfk1 = MdbTableRowDirective;
-exports.ɵfl1 = MdbTableScrollDirective;
-exports.ɵfm1 = MdbTableSortDirective;
-exports.ɵfn1 = MdbTableDirective;
-exports.ɵfo1 = MdbTableService;
-exports.ɵfp1 = TableModule;
-exports.ɵfq1 = TooltipContainerComponent;
-exports.ɵfr1 = TooltipDirective;
-exports.ɵft1 = TooltipModule;
-exports.ɵfs1 = TooltipConfig;
-exports.ɵfh1 = WavesDirective;
-exports.ɵfi1 = WavesModule;
+exports.ɵdo1 = BadgeModule;
+exports.ɵdp1 = MDBBadgeComponent;
+exports.ɵds1 = BreadcrumbModule;
+exports.ɵdr1 = MdbBreadcrumbItemComponent;
+exports.ɵdq1 = MdbBreadcrumbComponent;
+exports.ɵdn1 = MdbBtnDirective;
+exports.ɵdk1 = ButtonsModule;
+exports.ɵdl1 = ButtonCheckboxDirective;
+exports.ɵdm1 = ButtonRadioDirective;
+exports.ɵdx1 = CardsFreeModule;
+exports.ɵdt1 = CarouselComponent;
+exports.ɵdu1 = CarouselConfig;
+exports.ɵdw1 = CarouselModule;
+exports.ɵdv1 = SlideComponent;
+exports.ɵdy1 = BaseChartDirective;
+exports.ɵdz1 = ChartsModule;
+exports.ɵea1 = CHECKBOX_VALUE_ACCESSOR;
+exports.ɵeb1 = CheckboxComponent;
+exports.ɵec1 = CheckboxModule;
+exports.ɵed1 = CollapseComponent;
+exports.ɵee1 = CollapseModule;
+exports.ɵef1 = BsDropdownContainerComponent;
+exports.ɵeg1 = BsDropdownMenuDirective;
+exports.ɵeh1 = BsDropdownToggleDirective;
+exports.ɵei1 = BsDropdownConfig;
+exports.ɵej1 = BsDropdownDirective;
+exports.ɵel1 = DropdownModule;
+exports.ɵek1 = BsDropdownState;
+exports.ɵeq1 = FabDirective;
+exports.ɵeo1 = FalDirective;
+exports.ɵep1 = FarDirective;
+exports.ɵer1 = FasDirective;
+exports.ɵen1 = MdbIconComponent;
+exports.ɵem1 = IconsModule;
+exports.ɵew1 = MdbErrorDirective;
+exports.ɵev1 = InputUtilitiesModule;
+exports.ɵex1 = MdbSuccessDirective;
+exports.ɵey1 = MdbValidateDirective;
+exports.ɵet1 = MdbInput;
+exports.ɵes1 = InputsModule;
+exports.ɵeu1 = MdbInputDirective;
+exports.ɵgb1 = MDBRootModule;
+exports.ɵez1 = ModalDirective;
+exports.ɵff1 = ModalModule;
+exports.ɵfa1 = ModalOptions;
+exports.ɵfb1 = MDBModalService;
+exports.ɵfd1 = ModalBackdropComponent;
+exports.ɵfc1 = ModalBackdropOptions;
+exports.ɵfe1 = ModalContainerComponent;
+exports.ɵfg1 = NavbarComponent;
+exports.ɵfh1 = NavbarModule;
+exports.ɵfi1 = PopoverContainerComponent;
+exports.ɵfj1 = PopoverConfig;
+exports.ɵfk1 = PopoverDirective;
+exports.ɵfl1 = PopoverModule;
+exports.ɵfm1 = RippleDirective;
+exports.ɵfn1 = RippleModule;
+exports.ɵfq1 = MdbTablePaginationComponent;
+exports.ɵfr1 = MdbTableRowDirective;
+exports.ɵfs1 = MdbTableScrollDirective;
+exports.ɵft1 = MdbTableSortDirective;
+exports.ɵfu1 = MdbTableDirective;
+exports.ɵfv1 = MdbTableService;
+exports.ɵfw1 = TableModule;
+exports.ɵfx1 = TooltipContainerComponent;
+exports.ɵfy1 = TooltipDirective;
+exports.ɵga1 = TooltipModule;
+exports.ɵfz1 = TooltipConfig;
+exports.ɵfo1 = WavesDirective;
+exports.ɵfp1 = WavesModule;
 exports.ɵc1 = SBItemComponent;
 exports.ɵa1 = SBItemBodyComponent;
 exports.ɵb1 = SBItemHeadComponent;
@@ -23032,11 +23668,11 @@ exports.ɵbu1 = SelectDropdownComponent;
 exports.ɵbv1 = SELECT_VALUE_ACCESSOR;
 exports.ɵbw1 = SelectComponent;
 exports.ɵbx1 = SelectModule;
-exports.ɵfv1 = MDBRootModulePro;
+exports.ɵgc1 = MDBRootModulePro;
 exports.ɵby1 = BarComponent;
 exports.ɵce1 = ProgressBars;
-exports.ɵfw1 = MdProgressBarModule;
-exports.ɵfx1 = MdProgressSpinnerModule;
+exports.ɵgd1 = MdProgressBarModule;
+exports.ɵge1 = MdProgressSpinnerModule;
 exports.ɵbz1 = ProgressSpinnerComponent;
 exports.ɵca1 = ProgressDirective;
 exports.ɵcb1 = ProgressbarComponent;
@@ -23056,6 +23692,9 @@ exports.ɵcj1 = PageScrollDirective;
 exports.ɵck1 = PageScrollInstance;
 exports.ɵcl1 = SmoothscrollModule;
 exports.ɵcm1 = PageScrollService;
+exports.ɵdj1 = MdbStepComponent;
+exports.ɵdi1 = MdbStepperComponent;
+exports.ɵdh1 = StepperModule;
 exports.ɵcn1 = MdbStickyDirective;
 exports.ɵco1 = StickyContentModule;
 exports.ɵcp1 = TabHeadingDirective;

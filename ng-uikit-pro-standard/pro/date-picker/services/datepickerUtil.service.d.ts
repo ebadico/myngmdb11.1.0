@@ -6,7 +6,7 @@ import { IMyMarkedDates } from '../interfaces/markedDates.interface';
 import { IMyMarkedDate } from '../interfaces/markedDate.interface';
 import { IMyDateFormat } from '../interfaces/my-date-format.interface';
 export declare class UtilService {
-    isDateValid(dateStr: string, dateFormat: string, minYear: number, maxYear: number, disableUntil: IMyDate, disableSince: IMyDate, disableWeekends: boolean, disableDays: Array<IMyDate>, disableDateRanges: Array<IMyDateRange>, monthLabels: IMyMonthLabels, enableDays: Array<IMyDate>): IMyDate;
+    isDateValid(dateStr: string, dateFormat: string, minYear: number, maxYear: number, disableUntil: IMyDate, disableSince: IMyDate, disableWeekends: boolean, disableDays: Array<IMyDate | number>, disableDateRanges: Array<IMyDateRange>, monthLabels: IMyMonthLabels, enableDays: Array<IMyDate | number>): IMyDate;
     getDateValue(dateStr: string, dateFormat: string, delimeters: Array<string>): Array<IMyDateFormat>;
     getMonthNumberByMonthName(df: IMyDateFormat, monthLabels: IMyMonthLabels): number;
     getNumberByValue(df: IMyDateFormat): number;
@@ -18,7 +18,7 @@ export declare class UtilService {
     parseDatePartMonthName(dateFormat: string, dateString: string, datePart: string, monthLabels: IMyMonthLabels): number;
     getDatePartIndex(dateFormat: string, datePart: string): number;
     parseDefaultMonth(monthString: string | any): IMyMonth;
-    isDisabledDay(date: IMyDate, disableUntil: IMyDate, disableSince: IMyDate, disableWeekends: boolean, disableDays: Array<IMyDate>, disableDateRanges: Array<IMyDateRange>, enableDays: Array<IMyDate>): boolean;
+    isDisabledDay(date: IMyDate, disableUntil: IMyDate, disableSince: IMyDate, disableWeekends: boolean, disableDays: Array<IMyDate | number>, disableDateRanges: Array<IMyDateRange>, enableDays: Array<IMyDate | number>): boolean;
     isMarkedDate(date: IMyDate, markedDates: Array<IMyMarkedDates>, markWeekends: IMyMarkedDate): IMyMarkedDate;
     getWeekNumber(date: IMyDate): number;
     isMonthDisabledByDisableUntil(date: IMyDate, disableUntil: IMyDate): boolean;

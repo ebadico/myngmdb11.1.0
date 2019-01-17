@@ -1,11 +1,11 @@
-import { ApplicationRef, Attribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentFactoryResolver, ContentChild, ContentChildren, Directive, ElementRef, EventEmitter, Host, HostBinding, HostListener, Inject, Injectable, InjectionToken, Injector, Input, NO_ERRORS_SCHEMA, NgModule, NgZone, Optional, Output, PLATFORM_ID, ReflectiveInjector, Renderer2, RendererFactory2, SecurityContext, SkipSelf, TemplateRef, ViewChild, ViewChildren, ViewContainerRef, ViewEncapsulation, defineInjectable, forwardRef, isDevMode } from '@angular/core';
+import { ApplicationRef, Attribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentFactoryResolver, ContentChild, ContentChildren, Directive, ElementRef, EventEmitter, Host, HostBinding, HostListener, Inject, Injectable, InjectionToken, Injector, Input, NO_ERRORS_SCHEMA, NgModule, NgZone, Optional, Output, PLATFORM_ID, Renderer2, RendererFactory2, SecurityContext, SkipSelf, TemplateRef, ViewChild, ViewChildren, ViewContainerRef, ViewEncapsulation, defineInjectable, forwardRef, isDevMode } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { NavigationCancel, NavigationEnd, NavigationError, Router, RouterLinkWithHref } from '@angular/router';
 import { CommonModule, DOCUMENT, isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Observable, Subject, timer } from 'rxjs';
 import { DOCUMENT as DOCUMENT$1, DomSanitizer } from '@angular/platform-browser';
 import { FormControl, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { catchError, distinctUntilChanged, map, mergeMap } from 'rxjs/operators';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import 'hammerjs';
 import * as Chart from 'chart.js';
@@ -215,7 +215,7 @@ SBItemHeadComponent.decorators = [
     { type: Component, args: [{
                 exportAs: 'sbItemHead',
                 selector: 'mdb-item-head, mdb-accordion-item-head',
-                template: "<div class=\"card-header {{ customClass }}\" [ngClass]=\"{ 'item-disabled': isDisabled }\" (click)=\"toggleClick($event)\"> <a role=\"button\"> <h5 class=\"mb-0\"> <ng-content></ng-content> <i *ngIf=\"indicator\" class=\"fa fa-angle-down rotate-icon\"></i> </h5> </a> </div>"
+                template: "<div class=\"card-header {{ customClass }}\" [ngClass]=\"{ 'item-disabled': isDisabled }\" (click)=\"toggleClick($event)\"> <a role=\"button\"> <h5 class=\"mb-0\"> <ng-content></ng-content> <i *ngIf=\"indicator\" class=\"fas fa-angle-down rotate-icon\"></i> </h5> </a> </div> "
             },] },
 ];
 /** @nocollapse */
@@ -3371,7 +3371,7 @@ class MdbOptionComponent {
     handleMouseDown(event) {
         /** @type {?} */
         const text = this.value || event.target.text || event.target.textContent || event.target.value;
-        this.selectedItem = { text: text.trim(), element: this };
+        this.selectedItem = { text: text.toString().trim(), element: this };
         this.clicked = true;
     }
 }
@@ -3658,7 +3658,9 @@ class MdbAutoCompleterDirective {
         this.renderer.setAttribute(el, 'type', 'button');
         this.renderer.setAttribute(el, 'tabindex', this.mdbAutoCompleter.clearButtonTabIndex.toString());
         if (this.isBrowser) {
-            this.renderer.appendChild(this.el.nativeElement.offsetParent, el);
+            /** @type {?} */
+            const parent = this.el.nativeElement.offsetParent || this.el.nativeElement.parentElement;
+            this.renderer.appendChild(parent, el);
         }
     }
     /**
@@ -5016,7 +5018,12 @@ class UtilService {
      */
     isDisabledDay(date, disableUntil, disableSince, disableWeekends, disableDays, disableDateRanges, enableDays) {
         for (const e of enableDays) {
-            if (e.year === date.year && e.month === date.month && e.day === date.day) {
+            if (typeof e === 'number') {
+                if (e === this.getDayNumber(date)) {
+                    return false;
+                }
+            }
+            else if (e.year === date.year && e.month === date.month && e.day === date.day) {
                 return false;
             }
         }
@@ -5036,7 +5043,12 @@ class UtilService {
             }
         }
         for (const d of disableDays) {
-            if (d.year === date.year && d.month === date.month && d.day === date.day) {
+            if (typeof d === 'number') {
+                if (this.getDayNumber(date) === d) {
+                    return true;
+                }
+            }
+            else if (d.year === date.year && d.month === date.month && d.day === date.day) {
                 return true;
             }
         }
@@ -6207,11 +6219,23 @@ class MDBDatePickerComponent {
         if (typeof selDate === 'string') {
             /** @type {?} */
             const sd = (/** @type {?} */ (selDate));
-            date.day = this.utilService.parseDatePartNumber(this.opts.dateFormat, sd, 'dd');
-            date.month = this.opts.dateFormat.indexOf('mmm') !== -1
-                ? this.utilService.parseDatePartMonthName(this.opts.dateFormat, sd, 'mmm', this.opts.monthLabels)
-                : this.utilService.parseDatePartNumber(this.opts.dateFormat, sd, 'mm');
-            date.year = this.utilService.parseDatePartNumber(this.opts.dateFormat, sd, 'yyyy');
+            /** @type {?} */
+            const df = this.opts.dateFormat;
+            /** @type {?} */
+            const delimeters = this.utilService.getDateFormatDelimeters(df);
+            /** @type {?} */
+            const dateValue = this.utilService.getDateValue(sd, df, delimeters);
+            date.year = this.utilService.getNumberByValue(dateValue[0]);
+            if (df.indexOf('mmmm') !== -1) {
+                date.month = this.utilService.getMonthNumberByMonthName(dateValue[1], this.opts.monthLabelsFull);
+            }
+            else if (df.indexOf('mmm') !== -1) {
+                date.month = this.utilService.getMonthNumberByMonthName(dateValue[1], this.opts.monthLabels);
+            }
+            else {
+                date.month = this.utilService.getNumberByValue(dateValue[1]);
+            }
+            date.day = this.utilService.getNumberByValue(dateValue[2]);
         }
         else if (typeof selDate === 'object') {
             date = selDate;
@@ -7334,7 +7358,7 @@ class ImageModalComponent {
 ImageModalComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-image-modal',
-                template: "<div class=\"ng-gallery mdb-lightbox {{ type }}\" *ngIf=\"showRepeat\"> <figure class=\"col-md-4\" *ngFor=\"let i of modalImages; let index = index\"> <img src=\"{{ !i.thumb ? i.img : i.thumb }}\" class=\"ng-thumb\" (click)=\"openGallery(index)\" alt=\"Image {{ index + 1 }}\" /> </figure> </div> <div tabindex=\"0\" class=\"ng-overlay\" [class.hide_lightbox]=\"opened == false\"> <div class=\"top-bar\" style='z-index: 100000'> <span class=\"info-text\">{{ currentImageIndex + 1 }}/{{ modalImages.length }}</span> <a class=\"close-popup\" (click)=\"closeGallery()\" (click)=\"toggleRestart()\"></a> <a *ngIf=\"!is_iPhone_or_iPod\" class=\"fullscreen-toogle\" [class.toggled]='fullscreen' (click)=\"fullScreen()\"></a> <a class=\"zoom-toogle\" [class.zoom]='zoom' (click)=\"toggleZoomed()\" *ngIf=\"!isMobile\"></a> </div> <div class=\"ng-gallery-content\"> <img *ngIf=\"!loading\" src=\"{{imgSrc}}\" [class.smooth]='smooth' class=\"effect\" (swipeleft)=\"swipe($event.type)\" (swiperight)=\"swipe($event.type)\" (click)=\"toggleZoomed()\" style=\"transform: scale(0.9, 0.9)\" /> <div class=\"uil-ring-css\" *ngIf=\"loading\"> <div></div> </div> <a class=\"nav-left\" *ngIf=\"modalImages.length >1 && !isMobile\" (click)=\"prevImage()\"> <span></span> </a> <a class=\"nav-right\" *ngIf=\"modalImages.length >1 && !isMobile\" (click)=\"nextImage()\"> <span></span> </a> </div> <div *ngIf=\"caption\" class=\"bottom-bar text-center\"> <figcaption class=\"text-white\">{{caption}}</figcaption> </div> </div> <div *ngIf=\"openModalWindow\"> <mdb-image-modal [imagePointer]=\"imagePointer\"></mdb-image-modal> </div> ",
+                template: "<div class=\"ng-gallery mdb-lightbox {{ type }}\" *ngIf=\"modalImages && showRepeat\"> <figure class=\"col-md-4\" *ngFor=\"let i of modalImages; let index = index\"> <img src=\"{{ !i.thumb ? i.img : i.thumb }}\" class=\"ng-thumb\" (click)=\"openGallery(index)\" alt=\"Image {{ index + 1 }}\" /> </figure> </div> <div tabindex=\"0\" class=\"ng-overlay\" [class.hide_lightbox]=\"opened == false\"> <div class=\"top-bar\" style='z-index: 100000'> <span *ngIf=\"modalImages\" class=\"info-text\">{{ currentImageIndex + 1 }}/{{ modalImages.length }}</span> <a class=\"close-popup\" (click)=\"closeGallery()\" (click)=\"toggleRestart()\"></a> <a *ngIf=\"!is_iPhone_or_iPod\" class=\"fullscreen-toogle\" [class.toggled]='fullscreen' (click)=\"fullScreen()\"></a> <a class=\"zoom-toogle\" [class.zoom]='zoom' (click)=\"toggleZoomed()\" *ngIf=\"!isMobile\"></a> </div> <div class=\"ng-gallery-content\"> <img *ngIf=\"!loading\" src=\"{{imgSrc}}\" [class.smooth]='smooth' class=\"effect\" (swipeleft)=\"swipe($event.type)\" (swiperight)=\"swipe($event.type)\" (click)=\"toggleZoomed()\" style=\"transform: scale(0.9, 0.9)\" /> <div class=\"uil-ring-css\" *ngIf=\"loading\"> <div></div> </div> <a class=\"nav-left\" *ngIf=\"modalImages && modalImages.length >1 && !isMobile\" (click)=\"prevImage()\"> <span></span> </a> <a class=\"nav-right\" *ngIf=\"modalImages && modalImages.length >1 && !isMobile\" (click)=\"nextImage()\"> <span></span> </a> </div> <div *ngIf=\"caption\" class=\"bottom-bar text-center\"> <figcaption class=\"text-white\">{{caption}}</figcaption> </div> </div> <div *ngIf=\"openModalWindow\"> <mdb-image-modal [imagePointer]=\"imagePointer\"></mdb-image-modal> </div> ",
                 styles: ['.bottom-bar {z-index: 100000; position: absolute; bottom: 2rem; left: 0; right: 0; width: 100%;} ']
             },] },
 ];
@@ -12249,7 +12273,7 @@ class PageScrollDirective {
             // "Navigate" to the current route again and this time set the fragment/hash
             this.router.navigate([], {
                 fragment: (/** @type {?} */ (this.pageScrollInstance.scrollTarget.substr(1))),
-                preserveQueryParams: true
+                queryParamsHandling: 'preserve'
             });
         }
     }
@@ -12695,9 +12719,11 @@ class TabsetComponent {
      * @param {?} platformId
      * @param {?} config
      * @param {?} ripple
+     * @param {?} cdRef
      */
-    constructor(platformId, config, ripple) {
+    constructor(platformId, config, ripple, cdRef) {
         this.ripple = ripple;
+        this.cdRef = cdRef;
         this.tabs = [];
         this.classMap = {};
         this.isBrowser = null;
@@ -12735,6 +12761,7 @@ class TabsetComponent {
             el: this.tabs[index - 1],
             activeTabIndex: index - 1
         });
+        this.cdRef.detectChanges();
     }
     /**
      * if true tabs fill the container and have a consistent width
@@ -12952,11 +12979,9 @@ class TabsetComponent {
      * @return {?}
      */
     showActiveIndex() {
-        setTimeout(() => {
-            /** @type {?} */
-            const activeElement = this.getActiveElement();
-            this.getActiveTab.emit(activeElement);
-        }, 0);
+        /** @type {?} */
+        const activeElement = this.getActiveElement();
+        this.getActiveTab.emit(activeElement);
     }
     /**
      * @return {?}
@@ -13006,7 +13031,7 @@ class TabsetComponent {
 TabsetComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-tabset',
-                template: "<div class=\"container-fluid\"> <div class=\"row\"> <div class=\"{{ listGetClass }}\"> <ul class=\"nav {{ buttonClass }}\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\"> <li *ngFor=\"let tabz of tabs;let i = index\" [ngClass]=\"['nav-item', tabz.customClass || '']\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\" (click)=\"click($event, i)\"> <a #tabEl href=\"javascript:void(0);\" class=\"nav-link\" [ngClass]=\"{'waves-light': !disableWaves}\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\"> <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span> <span *ngIf=\"tabz.removable\"> <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"fa fa-remove ml-2\"> </span> </span> </a> </li> </ul> </div> <div class=\"{{ tabsGetClass }}\"> <div class=\"tab-content {{ contentClass }}\"> <ng-content></ng-content> </div> </div> </div> </div> ",
+                template: "<div class=\"container-fluid\"> <div class=\"row\"> <div class=\"{{ listGetClass }}\"> <ul class=\"nav {{ buttonClass }}\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\"> <li *ngFor=\"let tabz of tabs;let i = index\" [ngClass]=\"['nav-item', tabz.customClass || '']\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\" (click)=\"click($event, i)\"> <a #tabEl href=\"javascript:void(0);\" class=\"nav-link\" [ngClass]=\"{'waves-light': !disableWaves}\" [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\"> <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span> <span *ngIf=\"tabz.removable\"> <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"fas fa-times ml-2\"> </span> </span> </a> </li> </ul> </div> <div class=\"{{ tabsGetClass }}\"> <div class=\"tab-content {{ contentClass }}\"> <ng-content></ng-content> </div> </div> </div> </div> ",
                 providers: [WavesDirective]
             },] },
 ];
@@ -13014,7 +13039,8 @@ TabsetComponent.decorators = [
 TabsetComponent.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
     { type: TabsetConfig },
-    { type: WavesDirective }
+    { type: WavesDirective },
+    { type: ChangeDetectorRef }
 ];
 TabsetComponent.propDecorators = {
     clazz: [{ type: HostBinding, args: ['class.tab-container',] }],
@@ -13041,12 +13067,11 @@ class TabDirective {
      * @param {?} platformId
      * @param {?} tabset
      * @param {?} el
+     * @param {?} renderer
      */
-    constructor(platformId, tabset, el) {
-        /**
-         * if true tab can not be activated
-         */
-        this.disabled = false;
+    constructor(platformId, tabset, el, renderer) {
+        this.renderer = renderer;
+        this._disabled = false;
         /**
          * fired when tab became active, $event:Tab equals to selected instance of Tab component
          */
@@ -13063,10 +13088,28 @@ class TabDirective {
         this.test = true;
         // public el: ElementRef = null;
         this.el = null;
+        this._active = false;
         this.isBrowser = null;
         this.isBrowser = isPlatformBrowser(platformId);
         this.el = el;
         this.tabset = tabset;
+    }
+    /**
+     * if true tab can not be activated
+     * @return {?}
+     */
+    get disabled() {
+        return this._disabled;
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set disabled(value) {
+        this._disabled = value;
+        if (this._disabled && this._active) {
+            this.tabset.initActiveTab();
+        }
     }
     /**
      * tab active state toggle
@@ -13081,19 +13124,17 @@ class TabDirective {
      */
     set active(active) {
         if (this.disabled && active || !active) {
-            if (!active) {
-                this.removeClass(this.el.nativeElement, 'show');
-                setTimeout(() => {
-                    this._active = active;
-                    this.deselect.emit(this);
-                }, 0);
+            if (this._active && !active) {
+                this.renderer.removeClass(this.el.nativeElement, 'show');
+                this.renderer.removeClass(this.el.nativeElement, 'active');
+                this._active = active;
+                this.deselect.emit(this);
             }
             return;
         }
-        setTimeout(() => {
-            this._active = active;
-            this.classAdd(this.el.nativeElement, 'show');
-        }, 0);
+        this.renderer.addClass(this.el.nativeElement, 'show');
+        this.renderer.addClass(this.el.nativeElement, 'active');
+        this._active = active;
         this.select.emit(this);
         this.tabset.tabs.forEach((mdbTab) => {
             if (mdbTab !== this) {
@@ -13109,47 +13150,6 @@ class TabDirective {
         this.tabset.addTab(this);
     }
     /**
-     * @param {?} el
-     * @param {?} className
-     * @return {?}
-     */
-    hasClass(el, className) {
-        if (el.classList) {
-            return el.classList.contains(className);
-        }
-        else {
-            return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
-        }
-    }
-    /**
-     * @param {?} el
-     * @param {?} className
-     * @return {?}
-     */
-    classAdd(el, className) {
-        if (el.classList) {
-            el.classList.add(className);
-        }
-        else if (!this.hasClass(el, className)) {
-            el.className += ' ' + className;
-        }
-    }
-    /**
-     * @param {?} el
-     * @param {?} className
-     * @return {?}
-     */
-    removeClass(el, className) {
-        if (el.classList) {
-            el.classList.remove(className);
-        }
-        else if (this.hasClass(el, className)) {
-            /** @type {?} */
-            const reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
-            el.className = el.className.replace(reg, ' ');
-        }
-    }
-    /**
      * @return {?}
      */
     ngOnDestroy() {
@@ -13163,7 +13163,8 @@ TabDirective.decorators = [
 TabDirective.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
     { type: TabsetComponent },
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: Renderer2 }
 ];
 TabDirective.propDecorators = {
     heading: [{ type: Input }],
@@ -13171,7 +13172,7 @@ TabDirective.propDecorators = {
     removable: [{ type: Input }],
     customClass: [{ type: Input }],
     tabOrder: [{ type: Input }],
-    active: [{ type: HostBinding, args: ['class.active',] }, { type: Input }],
+    active: [{ type: Input }],
     select: [{ type: Output }],
     deselect: [{ type: Output }],
     removed: [{ type: Output }],
@@ -13360,7 +13361,7 @@ class MaterialChipsComponent {
 MaterialChipsComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-material-chips',
-                template: "<div *ngIf=\"values && values.length\" class=\"md-chip-list\"  [ngClass]=\"focused\"> <span *ngFor=\"let value of values\" class=\"md-chip\" selected >          {{value}} <i class=\"close fa fa-times\" aria-hidden=\"true\" (click)=\"removeValue(value)\" ></i> </span> <span> <input  [(ngModel)]=\"labelToAdd\"  (keyup.enter)=\"addValue(box.value, $event)\" (focus)=\"onFocus()\"  (focusout)=\"focusOutFunction()\"   #box /> </span> </div> <div *ngIf=\"!values || !values.length\"> <input class=\"md-chips-input\" placeholder=\"{{ placeholder }}\" #tbox  (keyup.enter)=\"addValue(tbox.value, $event)\"/> </div>",
+                template: "<div *ngIf=\"values && values.length\" class=\"md-chip-list\"  [ngClass]=\"focused\"> <span *ngFor=\"let value of values\" class=\"md-chip\" selected >          {{value}} <i class=\"close fas fa-times\" aria-hidden=\"true\" (click)=\"removeValue(value)\" ></i> </span> <span> <input  [(ngModel)]=\"labelToAdd\"  (keyup.enter)=\"addValue(box.value, $event)\" (focus)=\"onFocus()\"  (focusout)=\"focusOutFunction()\"   #box /> </span> </div> <div *ngIf=\"!values || !values.length\"> <input class=\"md-chips-input\" placeholder=\"{{ placeholder }}\" #tbox  (keyup.enter)=\"addValue(tbox.value, $event)\"/> </div> ",
                 providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
             },] },
 ];
@@ -13985,6 +13986,19 @@ class ScrollSpyLinkDirective {
     /**
      * @return {?}
      */
+    get section() { return this._section; }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set section(value) {
+        if (value) {
+            this._section = value;
+        }
+    }
+    /**
+     * @return {?}
+     */
     get id() {
         return this._id;
     }
@@ -14052,6 +14066,8 @@ ScrollSpyLinkDirective.propDecorators = {
 class ScrollSpyService {
     constructor() {
         this.scrollSpys = [];
+        this.activeSubject = new Subject();
+        this.active$ = this.activeSubject.asObservable();
     }
     /**
      * @param {?} scrollSpy
@@ -14121,6 +14137,7 @@ class ScrollSpyService {
         if (activeLink) {
             activeLink.active = true;
             activeLink.detectChanges();
+            this.activeSubject.next(activeLink);
         }
     }
     /**
@@ -14155,6 +14172,7 @@ class ScrollSpyDirective {
      */
     constructor(scrollSpyService) {
         this.scrollSpyService = scrollSpyService;
+        this.activeLinkChange = new EventEmitter();
     }
     /**
      * @return {?}
@@ -14174,6 +14192,16 @@ class ScrollSpyDirective {
     /**
      * @return {?}
      */
+    ngOnInit() {
+        this.activeSub = this.scrollSpyService.active$
+            .pipe(distinctUntilChanged())
+            .subscribe((activeLink) => {
+            this.activeLinkChange.emit(activeLink);
+        });
+    }
+    /**
+     * @return {?}
+     */
     ngAfterContentInit() {
         this.scrollSpyService.addScrollSpy({ id: this.id, links: this.links });
     }
@@ -14182,6 +14210,7 @@ class ScrollSpyDirective {
      */
     ngOnDestroy() {
         this.scrollSpyService.removeScrollSpy(this.id);
+        this.activeSub.unsubscribe();
     }
 }
 ScrollSpyDirective.decorators = [
@@ -14195,7 +14224,8 @@ ScrollSpyDirective.ctorParameters = () => [
 ];
 ScrollSpyDirective.propDecorators = {
     links: [{ type: ContentChildren, args: [ScrollSpyLinkDirective, { descendants: true },] }],
-    id: [{ type: Input, args: ['mdbScrollSpy',] }]
+    id: [{ type: Input, args: ['mdbScrollSpy',] }],
+    activeLinkChange: [{ type: Output }]
 };
 
 /**
@@ -14243,7 +14273,7 @@ class ScrollSpyWindowDirective {
         const elTop = this.el.nativeElement.offsetTop - this.offset;
         /** @type {?} */
         const elBottom = elTop + elHeight;
-        return (scrollTop >= elTop && scrollTop < elBottom);
+        return (scrollTop >= elTop && scrollTop <= elBottom);
     }
     /**
      * @param {?} scrollSpyId
@@ -14345,7 +14375,9 @@ class ScrollSpyElementDirective {
         const scrollTop = this.el.nativeElement.parentElement.scrollTop;
         /** @type {?} */
         const elTop = this.el.nativeElement.offsetTop - this.offset;
-        return (scrollTop >= elTop);
+        /** @type {?} */
+        const elHeight = this.el.nativeElement.offsetHeight;
+        return (scrollTop >= elTop && scrollTop < elTop + elHeight);
     }
     /**
      * @param {?} scrollSpyId
@@ -14427,6 +14459,418 @@ ScrollSpyModule.decorators = [
                     ScrollSpyElementDirective
                 ],
                 providers: [ScrollSpyService]
+            },] },
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+class MdbStepComponent {
+    /**
+     * @param {?} el
+     */
+    constructor(el) {
+        this.el = el;
+        this._isActive = false;
+    }
+    /**
+     * @return {?}
+     */
+    get isDone() { return this._isDone; }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set isDone(value) {
+        this._isDone = value;
+    }
+    /**
+     * @return {?}
+     */
+    get isWrong() { return this._isWrong; }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set isWrong(value) {
+        this._isWrong = value;
+    }
+    /**
+     * @return {?}
+     */
+    get isActive() { return this._isActive; }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set isActive(value) {
+        this._isActive = value;
+    }
+    /**
+     * @return {?}
+     */
+    _removeClasses() {
+        this.isActive = false;
+        this.isDone = false;
+        this.isWrong = false;
+    }
+    /**
+     * @return {?}
+     */
+    reset() {
+        if (this.stepForm) {
+            this.stepForm.reset();
+        }
+        this._removeClasses();
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+    }
+}
+MdbStepComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-step',
+                exportAs: 'mdbStep',
+                template: '<ng-template><ng-content></ng-content></ng-template>',
+            },] },
+];
+/** @nocollapse */
+MdbStepComponent.ctorParameters = () => [
+    { type: ElementRef }
+];
+MdbStepComponent.propDecorators = {
+    content: [{ type: ViewChild, args: [TemplateRef,] }],
+    name: [{ type: Input }],
+    label: [{ type: Input }],
+    stepForm: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+class MdbStepperComponent {
+    /**
+     * @param {?} ripple
+     * @param {?} _renderer
+     * @param {?} platformId
+     */
+    constructor(ripple, _renderer, platformId) {
+        this.ripple = ripple;
+        this._renderer = _renderer;
+        this.linear = false;
+        this.disableWaves = false;
+        this.vertical = false;
+        this.horizontal = true;
+        this._stepperBreakpoint = 992;
+        this.isBrowser = isPlatformBrowser(platformId);
+    }
+    /**
+     * @return {?}
+     */
+    get activeStepIndex() { return this._activeStepIndex; }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set activeStepIndex(value) {
+        this._activeStepIndex = value;
+    }
+    /**
+     * @return {?}
+     */
+    onWindowResize() {
+        if (this.isBrowser) {
+            if (win.innerWidth < this._stepperBreakpoint) {
+                this.horizontal = false;
+                this._updateHorizontalStepperHeight(this.activeStepIndex);
+            }
+            else {
+                this.horizontal = true;
+                this._updateHorizontalStepperHeight(this.activeStepIndex);
+            }
+        }
+    }
+    /**
+     * @param {?} index
+     * @param {?} event
+     * @return {?}
+     */
+    onClick(index, event) {
+        if (!this.disableWaves) {
+            /** @type {?} */
+            const clickedEl = this.stepTitles.toArray()[index];
+            this.ripple.el = clickedEl;
+            this.ripple.click(event);
+        }
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+    }
+    /**
+     * @param {?} step
+     * @return {?}
+     */
+    _isStepValid(step) {
+        if (!step.stepForm) {
+            return true;
+        }
+        if (step.stepForm && step.stepForm.valid) {
+            return true;
+        }
+        return false;
+    }
+    /**
+     * @param {?} index
+     * @return {?}
+     */
+    getAnimationState(index) {
+        /** @type {?} */
+        const nextElPosition = index - this.activeStepIndex;
+        if (nextElPosition < 0) {
+            return 'previous';
+        }
+        else if (nextElPosition > 0) {
+            return 'next';
+        }
+        return 'current';
+    }
+    /**
+     * @param {?} index
+     * @return {?}
+     */
+    _getStepByIndex(index) {
+        return this.steps.toArray()[index];
+    }
+    /**
+     * @return {?}
+     */
+    next() {
+        if (this.activeStepIndex < (this.steps.length - 1)) {
+            this.setNewActiveStep(this.activeStepIndex + 1);
+        }
+    }
+    /**
+     * @return {?}
+     */
+    previous() {
+        if (this.activeStepIndex > 0) {
+            this.setNewActiveStep(this.activeStepIndex - 1);
+        }
+    }
+    /**
+     * @return {?}
+     */
+    submit() {
+        if (this.linear) {
+            this._markCurrentAsDone();
+        }
+    }
+    /**
+     * @param {?} index
+     * @return {?}
+     */
+    setNewActiveStep(index) {
+        /** @type {?} */
+        const newStep = this._getStepByIndex(index);
+        if (this.linear && !this._isNewStepLinear(index)) {
+            return;
+        }
+        this._removeStepValidationClasses(newStep);
+        if (this.linear && index > this.activeStepIndex) {
+            if (this._isStepValid(this._activeStep)) {
+                this._markCurrentAsDone();
+                this._removeCurrentActiveStep();
+                this._setActiveStep(index);
+            }
+            else {
+                this._markCurrentAsWrong();
+                this._markStepControlsAsDirty(this._activeStep);
+            }
+        }
+        else {
+            if (index < this.activeStepIndex) {
+                this._removeStepValidationClasses(this._activeStep);
+            }
+            this._removeCurrentActiveStep();
+            this._setActiveStep(index);
+        }
+    }
+    /**
+     * @return {?}
+     */
+    _markCurrentAsDone() {
+        this._activeStep.isDone = true;
+        this._activeStep.isWrong = false;
+    }
+    /**
+     * @return {?}
+     */
+    _markCurrentAsWrong() {
+        this._activeStep.isWrong = true;
+        this._activeStep.isDone = false;
+    }
+    /**
+     * @param {?} step
+     * @return {?}
+     */
+    _markStepControlsAsDirty(step) {
+        /** @type {?} */
+        const controls = step.stepForm.controls;
+        if (step.stepForm.controls) {
+            /** @type {?} */
+            const keys = Object.keys(controls);
+            for (let i = 0; i < keys.length; i++) {
+                /** @type {?} */
+                const control = controls[keys[i]];
+                if (control instanceof FormControl) {
+                    control.markAsTouched();
+                }
+            }
+        }
+    }
+    /**
+     * @param {?} step
+     * @return {?}
+     */
+    _removeStepValidationClasses(step) {
+        step.isDone = false;
+        step.isWrong = false;
+    }
+    /**
+     * @param {?} newStepIndex
+     * @return {?}
+     */
+    _isNewStepLinear(newStepIndex) {
+        return this.activeStepIndex - newStepIndex === 1 || this.activeStepIndex - newStepIndex === -1;
+    }
+    /**
+     * @param {?} index
+     * @return {?}
+     */
+    _setActiveStep(index) {
+        this.steps.toArray()[index].isActive = true;
+        this._updateHorizontalStepperHeight(index);
+        this.activeStepIndex = index;
+        this._activeStep = this._getStepByIndex(this.activeStepIndex);
+    }
+    /**
+     * @return {?}
+     */
+    _removeCurrentActiveStep() {
+        /** @type {?} */
+        const currentActiveStep = this.steps.find(activeStep => activeStep.isActive);
+        if (currentActiveStep) {
+            currentActiveStep.isActive = false;
+        }
+    }
+    /**
+     * @return {?}
+     */
+    resetAll() {
+        this.steps.forEach((step) => {
+            step.reset();
+            this._setActiveStep(0);
+        });
+    }
+    /**
+     * @param {?} index
+     * @return {?}
+     */
+    _updateHorizontalStepperHeight(index) {
+        if (this.horizontal && !this.vertical) {
+            setTimeout(() => {
+                /** @type {?} */
+                const height = this.stepContents.toArray()[index].nativeElement.scrollHeight + 50;
+                this._renderer.setStyle(this.container.nativeElement, 'height', height + 'px');
+            }, 0);
+        }
+        else {
+            this._renderer.removeStyle(this.container.nativeElement, 'height');
+        }
+    }
+    /**
+     * @return {?}
+     */
+    _initStepperVariation() {
+        if (this.isBrowser) {
+            if (this.vertical || win.innerWidth < this._stepperBreakpoint) {
+                setTimeout(() => {
+                    this.horizontal = false;
+                    this._renderer.removeStyle(this.container.nativeElement, 'height');
+                }, 0);
+            }
+        }
+    }
+    /**
+     * @return {?}
+     */
+    ngAfterViewInit() {
+        this._initStepperVariation();
+    }
+    /**
+     * @return {?}
+     */
+    ngAfterContentInit() {
+        this._setActiveStep(0);
+    }
+}
+MdbStepperComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mdb-stepper',
+                exportAs: 'mdbStepper',
+                template: "<div class=\"card-body\"> <ul #container class=\"stepper\" [ngClass]=\"{'horizontal': !vertical && horizontal}\"> <li [ngClass]=\"{'active': step.isActive, 'done': step.isDone, 'wrong': step.isWrong }\" class=\"step\" *ngFor=\"let step of steps; let i = index\"> <div #stepTitle class=\"step-title waves-effect waves-dark\" (click)=\"setNewActiveStep(i); onClick(i, $event)\"> {{ step.name }} <span class=\"step-label\">{{ step.label }}</span> </div> <div #stepContent class=\"step-new-content\" [ngClass]=\"{'d-block': step.isActive }\" [@stepContentTransition]=\"!vertical && getAnimationState(i)\"> <ng-container [ngTemplateOutlet]=\"step.content\"></ng-container> </div> </li> </ul> </div> ",
+                encapsulation: ViewEncapsulation.None,
+                animations: [trigger('stepContentTransition', [
+                        state('previous', style({ transform: 'translateX(-100%)', visibility: 'hidden' })),
+                        state('next', style({ transform: 'translateX(100%)', visibility: 'hidden' })),
+                        state('current', style({ transform: 'none', visibility: 'visible' })),
+                        transition('* => *', animate('600ms ease'))
+                    ])],
+                providers: [WavesDirective]
+            },] },
+];
+/** @nocollapse */
+MdbStepperComponent.ctorParameters = () => [
+    { type: WavesDirective },
+    { type: Renderer2 },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
+];
+MdbStepperComponent.propDecorators = {
+    steps: [{ type: ContentChildren, args: [MdbStepComponent,] }],
+    stepTitles: [{ type: ViewChildren, args: ['stepTitle',] }],
+    stepContents: [{ type: ViewChildren, args: ['stepContent',] }],
+    container: [{ type: ViewChild, args: ['container',] }],
+    linear: [{ type: Input }],
+    disableWaves: [{ type: Input }],
+    vertical: [{ type: Input }],
+    onWindowResize: [{ type: HostListener, args: ['window:resize',] }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+class StepperModule {
+}
+StepperModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [
+                    MdbStepperComponent,
+                    MdbStepComponent
+                ],
+                exports: [
+                    MdbStepperComponent,
+                    MdbStepComponent
+                ],
+                imports: [
+                    CommonModule,
+                ]
             },] },
 ];
 
@@ -15805,7 +16249,7 @@ class CarouselComponent {
 CarouselComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-carousel',
-                template: "<div tabindex=\"0\" (swipeleft)=\"swipe($event.type)\" (swiperight)=\"swipe($event.type)\" (mouseenter)=\"pause()\" (mouseleave)=\"play()\" (mouseup)=\"play()\" class=\"carousel {{ class }} {{ type }}\"> <div class=\"controls-top\" *ngIf=\"slides.length > 1 && !checkNavigation() && isControls\"> <a class=\"btn-floating\" [class.disabled]=\"activeSlide===0&&noWrap\" (click)=\"previousSlide()\"><i class=\"fa fa-chevron-left\"></i></a> <a class=\"btn-floating\" (click)=\"nextSlide()\" [class.disabled]=\"isLast(activeSlide) && noWrap\"><i class=\"fa fa-chevron-right\"></i></a> </div> <ol class=\"carousel-indicators\" *ngIf=\"slides.length > 1 && checkDots() && isControls\"> <li *ngFor=\"let slidez of slides; let i = index;\" [class.active]=\"slidez.active === true\" (click)=\"selectSlide(i)\"></li> </ol> <ol class=\"carousel-indicators\" *ngIf=\"slides.length > 1 && !checkDots() && isControls\"> <li *ngFor=\"let slidez of slides; let i = index;\" [class.active]=\"slidez.active === true\" (click)=\"selectSlide(i)\"> <img  class=\"d-block w-100 img-fluid\" src=\"{{ getImg(slidez) }}\"> </li> </ol> <div class=\"carousel-inner\"><ng-content></ng-content></div> <a class=\"carousel-control-prev\" [class.disabled]=\"activeSlide === 0 && noWrap\" (click)=\"previousSlide()\" *ngIf=\"slides.length > 1 && checkNavigation() && isControls\"> <span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span> <span  class=\"sr-only\">Previous</span> </a> <a class=\"carousel-control-next\" (click)=\"nextSlide()\" [class.disabled]=\"isLast(activeSlide) && noWrap\" *ngIf=\"slides.length > 1 && checkNavigation() && isControls\"> <span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span> <span class=\"sr-only\">Next</span> </a> </div>",
+                template: "<div tabindex=\"0\" (swipeleft)=\"swipe($event.type)\" (swiperight)=\"swipe($event.type)\" (mouseenter)=\"pause()\" (mouseleave)=\"play()\" (mouseup)=\"play()\" class=\"carousel {{ class }} {{ type }}\"> <div class=\"controls-top\" *ngIf=\"slides.length > 1 && !checkNavigation() && isControls\"> <a class=\"btn-floating\" [class.disabled]=\"activeSlide===0&&noWrap\" (click)=\"previousSlide()\"><i class=\"fas fa-chevron-left\"></i></a> <a class=\"btn-floating\" (click)=\"nextSlide()\" [class.disabled]=\"isLast(activeSlide) && noWrap\"><i class=\"fas fa-chevron-right\"></i></a> </div> <ol class=\"carousel-indicators\" *ngIf=\"slides.length > 1 && checkDots() && isControls\"> <li *ngFor=\"let slidez of slides; let i = index;\" [class.active]=\"slidez.active === true\" (click)=\"selectSlide(i)\"></li> </ol> <ol class=\"carousel-indicators\" *ngIf=\"slides.length > 1 && !checkDots() && isControls\"> <li *ngFor=\"let slidez of slides; let i = index;\" [class.active]=\"slidez.active === true\" (click)=\"selectSlide(i)\"> <img  class=\"d-block w-100 img-fluid\" src=\"{{ getImg(slidez) }}\"> </li> </ol> <div class=\"carousel-inner\"><ng-content></ng-content></div> <a class=\"carousel-control-prev\" [class.disabled]=\"activeSlide === 0 && noWrap\" (click)=\"previousSlide()\" *ngIf=\"slides.length > 1 && checkNavigation() && isControls\"> <span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span> <span  class=\"sr-only\">Previous</span> </a> <a class=\"carousel-control-next\" (click)=\"nextSlide()\" [class.disabled]=\"isLast(activeSlide) && noWrap\" *ngIf=\"slides.length > 1 && checkNavigation() && isControls\"> <span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span> <span class=\"sr-only\">Next</span> </a> </div> ",
             },] },
 ];
 /** @nocollapse */
@@ -17305,13 +17749,11 @@ class ComponentLoader {
         this._innerComponent = null;
         if (!this._componentRef) {
             this.onBeforeShow.emit();
-            this._contentRef = this._getContentRef(opts.content);
+            this._contentRef = this._getContentRef(opts.content, opts.data);
             /** @type {?} */
-            const injector = ReflectiveInjector.resolveAndCreate(this._providers, this._injector);
+            const injector = Injector.create({ providers: this._providers, parent: this._injector });
             this._componentRef = this._componentFactory.create(injector, this._contentRef.nodes);
             this._applicationRef.attachView(this._componentRef.hostView);
-            // this._componentRef = this._viewContainerRef
-            //   .createComponent(this._componentFactory, 0, injector, this._contentRef.nodes);
             this.instance = this._componentRef.instance;
             Object.assign(this._componentRef.instance, opts);
             if (this.container instanceof ElementRef) {
@@ -17319,7 +17761,6 @@ class ComponentLoader {
                     .appendChild(this._componentRef.location.nativeElement);
             }
             if (this.container === 'body' && typeof document !== 'undefined') {
-                //  document.querySelector(this.container as string)
                 document.querySelector((/** @type {?} */ (this.container)))
                     .appendChild(this._componentRef.location.nativeElement);
             }
@@ -17360,11 +17801,6 @@ class ComponentLoader {
         if (this._viewContainerRef && this._contentRef.viewRef) {
             this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._contentRef.viewRef));
         }
-        // this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._componentRef.hostView));
-        //
-        // if (this._contentRef.viewRef && this._viewContainerRef.indexOf(this._contentRef.viewRef) !== -1) {
-        //   this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._contentRef.viewRef));
-        // }
         this._contentRef = null;
         this._componentRef = null;
         this.onHidden.emit();
@@ -17445,9 +17881,10 @@ class ComponentLoader {
     }
     /**
      * @param {?} content
+     * @param {?=} data
      * @return {?}
      */
-    _getContentRef(content) {
+    _getContentRef(content, data) {
         if (!content) {
             return new ContentRef([]);
         }
@@ -17466,9 +17903,10 @@ class ComponentLoader {
             /** @type {?} */
             const contentCmptFactory = this._componentFactoryResolver.resolveComponentFactory(content);
             /** @type {?} */
-            const modalContentInjector = ReflectiveInjector.resolveAndCreate([...this._providers], this._injector);
+            const modalContentInjector = Injector.create({ providers: this._providers, parent: this._injector });
             /** @type {?} */
             const componentRef = contentCmptFactory.create(modalContentInjector);
+            Object.assign(componentRef.instance, data);
             this._applicationRef.attachView(componentRef.hostView);
             return new ContentRef([[componentRef.location.nativeElement]], componentRef.hostView, componentRef);
         }
@@ -18066,15 +18504,49 @@ DropdownModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MdbIconComponent {
+    /**
+     * @param {?} _el
+     * @param {?} _renderer
+     */
+    constructor(_el, _renderer) {
+        this._el = _el;
+        this._renderer = _renderer;
+        this.fab = false;
+        this.far = false;
+        this.fal = false;
+        this.fas = true;
+        this.sizeClass = '';
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        if (this.size) {
+            this.sizeClass = `fa-${this.size}`;
+        }
+        if (this._el.nativeElement.parentElement.classList.contains('md-form')) {
+            this._renderer.addClass(this._el.nativeElement, 'prefix');
+        }
+        /** @type {?} */
+        const classList = this._el.nativeElement.classList;
+        this.fab = classList.contains('fab');
+        this.far = classList.contains('far');
+        this.fas = classList.contains('fas');
+        this.fal = classList.contains('fal');
+    }
 }
 MdbIconComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-icon',
-                template: "<i class=\"fa fa-{{icon}} fa-{{size}} {{class}} prefix\"></i>"
+                template: "<i [ngClass]=\"{'fas': fas, 'far': far, 'fab': fab, 'fal': fal}\" class=\"fa-{{icon}} {{class}} {{sizeClass}}\"></i> "
             },] },
 ];
+/** @nocollapse */
+MdbIconComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Renderer2 }
+];
 MdbIconComponent.propDecorators = {
-    iconEl: [{ type: ViewChild, args: ['iconEl',] }],
     icon: [{ type: Input }],
     size: [{ type: Input }],
     class: [{ type: Input }]
@@ -18084,12 +18556,121 @@ MdbIconComponent.propDecorators = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+class FabDirective {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    constructor(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+        this._r.addClass(this._el.nativeElement, 'fab');
+    }
+}
+FabDirective.decorators = [
+    { type: Directive, args: [{ selector: '[fab], [brands]' },] },
+];
+/** @nocollapse */
+FabDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Renderer2 }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+class FarDirective {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    constructor(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+        this._r.addClass(this._el.nativeElement, 'far');
+    }
+}
+FarDirective.decorators = [
+    { type: Directive, args: [{ selector: '[far], [regular]' },] },
+];
+/** @nocollapse */
+FarDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Renderer2 }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+class FasDirective {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    constructor(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+        this._r.addClass(this._el.nativeElement, 'fas');
+    }
+}
+FasDirective.decorators = [
+    { type: Directive, args: [{ selector: '[fas], [solid]' },] },
+];
+/** @nocollapse */
+FasDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Renderer2 }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+class FalDirective {
+    /**
+     * @param {?} _el
+     * @param {?} _r
+     */
+    constructor(_el, _r) {
+        this._el = _el;
+        this._r = _r;
+        this._r.addClass(this._el.nativeElement, 'fal');
+    }
+}
+FalDirective.decorators = [
+    { type: Directive, args: [{ selector: '[fal], [light]' },] },
+];
+/** @nocollapse */
+FalDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Renderer2 }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
 class IconsModule {
 }
 IconsModule.decorators = [
     { type: NgModule, args: [{
-                declarations: [MdbIconComponent],
-                exports: [MdbIconComponent]
+                declarations: [
+                    MdbIconComponent,
+                    FabDirective,
+                    FarDirective,
+                    FasDirective,
+                    FalDirective
+                ],
+                imports: [CommonModule],
+                exports: [
+                    MdbIconComponent,
+                    FabDirective,
+                    FarDirective,
+                    FasDirective,
+                    FalDirective
+                ]
             },] },
 ];
 
@@ -18266,7 +18847,8 @@ class MdbInputDirective {
                 }
             }
         }
-        catch (error) { }
+        catch (error) {
+        }
         this.delayedResize();
     }
     /**
@@ -18278,7 +18860,8 @@ class MdbInputDirective {
                 this.delayedResize();
             }, 0);
         }
-        catch (error) { }
+        catch (error) {
+        }
     }
     /**
      * @return {?}
@@ -18289,7 +18872,8 @@ class MdbInputDirective {
                 this.delayedResize();
             }, 0);
         }
-        catch (error) { }
+        catch (error) {
+        }
     }
     /**
      * @return {?}
@@ -18300,7 +18884,8 @@ class MdbInputDirective {
                 this.delayedResize();
             }, 0);
         }
-        catch (error) { }
+        catch (error) {
+        }
     }
     /**
      * @param {?} value
@@ -18324,6 +18909,14 @@ class MdbInputDirective {
      * @return {?}
      */
     ngOnInit() {
+        try {
+            setTimeout(() => {
+                this.delayedResize();
+            }, 0);
+        }
+        catch (error) {
+            console.log(error);
+        }
         // Inititalise a new <span> wrong/right elements and render it below the host component.
         if (this.mdbValidate) {
             this.wrongTextContainer = this._renderer.createElement('span');
@@ -18456,7 +19049,8 @@ class MdbInputDirective {
             try {
                 this.element = document.querySelector('.md-textarea-auto');
             }
-            catch (error) { }
+            catch (error) {
+            }
         }
         /** @type {?} */
         const type = this.el.nativeElement.type;
@@ -18507,11 +19101,13 @@ class MdbInputDirective {
             try {
                 inputId = this.el.nativeElement.id;
             }
-            catch (err) { }
+            catch (err) {
+            }
             try {
                 inputP = this.el.nativeElement.parentNode;
             }
-            catch (err) { }
+            catch (err) {
+            }
             this.elLabel = inputP.querySelector('label[for="' + inputId + '"]') || inputP.querySelector('label');
             if (this.elLabel && this.el.nativeElement.value !== '') {
                 this._renderer.addClass(this.elLabel, 'active');
@@ -19078,7 +19674,8 @@ const modalConfigDefaults = {
     class: '',
     containerClass: '',
     animated: true,
-    scroll: false
+    scroll: false,
+    data: {}
 };
 /** @type {?} */
 const ClassName = {
@@ -19841,7 +20438,7 @@ class MDBModalService {
             .provide({ provide: MDBModalRef, useValue: mdbModalRef })
             .attach(ModalContainerComponent)
             .to('body')
-            .show({ content, isAnimated: this.config.animated });
+            .show({ content, isAnimated: this.config.animated, data: this.config.data });
         modalContainerRef.instance.level = this.getModalsCount();
         mdbModalRef.hide = () => {
             modalContainerRef.instance.hide();
@@ -20091,7 +20688,7 @@ class NavbarComponent {
         this.shown = false;
         this.duration = 350; // ms
         // ms
-        this.collapse = false;
+        this.collapse = true;
         this.showClass = false;
         this.collapsing = false;
         // tslint:disable-next-line:max-line-length
@@ -20139,24 +20736,17 @@ class NavbarComponent {
      * @return {?}
      */
     ngAfterViewInit() {
-        /* bugfix - bez tego sypie ExpressionChangedAfterItHasBeenCheckedError -
-        https://github.com/angular/angular/issues/6005#issuecomment-165951692 */
-        setTimeout(() => {
-            this.height = this.el.nativeElement.scrollHeight;
-            this.collapse = true;
-            if (!this.containerInside) {
-                /** @type {?} */
-                const childrens = Array.from(this.container.nativeElement.children);
-                childrens.forEach(child => {
-                    // this.navbar.nativeElement.append(child);
-                    this.renderer.appendChild(this.navbar.nativeElement, child);
-                    this.container.nativeElement.remove();
-                });
-            }
-            if (this.el.nativeElement.children.length === 0) {
-                this.el.nativeElement.remove();
-            }
-        });
+        if (!this.containerInside) {
+            /** @type {?} */
+            const childrens = Array.from(this.container.nativeElement.children);
+            childrens.forEach(child => {
+                this.renderer.appendChild(this.navbar.nativeElement, child);
+                this.container.nativeElement.remove();
+            });
+        }
+        if (this.el.nativeElement.children.length === 0) {
+            this.el.nativeElement.remove();
+        }
         this.addTogglerIconClasses();
     }
     /**
@@ -20180,8 +20770,9 @@ class NavbarComponent {
         this.collapse = false;
         this.collapsing = true;
         setTimeout(() => {
+            this.height = this.el.nativeElement.scrollHeight;
             this.renderer.setStyle(this.el.nativeElement, 'height', this.height + 'px');
-        }, 10);
+        }, 0);
         setTimeout(() => {
             this.collapsing = false;
             this.collapse = true;
@@ -20198,7 +20789,7 @@ class NavbarComponent {
         this.collapsing = true;
         setTimeout(() => {
             this.renderer.setStyle(this.el.nativeElement, 'height', '0px');
-        }, 10);
+        }, 0);
         setTimeout(() => {
             this.collapsing = false;
             this.collapse = true;
@@ -21186,7 +21777,7 @@ class MdbTableSortDirective {
      * @return {?}
      */
     onclick() {
-        this.sortDataBy(this.sortBy.toLowerCase());
+        this.sortDataBy(this.sortBy.toString().toLowerCase());
     }
     /**
      * @param {?} key
@@ -21927,6 +22518,11 @@ MDBBootstrapModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
 /** @type {?} */
 const MODULES$1 = [
     AutocompleteModule,
@@ -21948,7 +22544,8 @@ const MODULES$1 = [
     ScrollSpyModule,
     AutoFormatModule,
     RangeModule,
-    AutoCompleterModule
+    AutoCompleterModule,
+    StepperModule
 ];
 class MDBRootModulePro {
 }
@@ -21973,7 +22570,8 @@ MDBRootModulePro.decorators = [
                     ScrollSpyModule,
                     AutoFormatModule,
                     RangeModule,
-                    AutoCompleterModule
+                    AutoCompleterModule,
+                    StepperModule
                 ],
                 exports: [MODULES$1],
                 providers: [],
@@ -22046,5 +22644,5 @@ MDBBootstrapModulesPro.decorators = [
  * Generated bundle index. Do not edit.
  */
 
-export { SBItemBodyComponent, SBItemHeadComponent, SBItemComponent, sbConfig, SqueezeBoxComponent, SQUEEZEBOX_COMPONENTS, AccordionModule, OverlayContainer, OverlayRef, Overlay, OVERLAY_PROVIDERS, DomPortalHost, ComponentPortal, BasePortalHost, ToastComponent, GlobalConfig, ToastPackage, tsConfig, ToastContainerDirective, ToastContainerModule, ToastRef, ToastInjector, ToastModule, ToastService, TOAST_CONFIG, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, CompleterListItemComponent, CompleterComponent, MdbCompleterDirective, CtrRowItem, MdbDropdownDirective, MdbInputCompleteDirective, CtrListContext, MdbListDirective, MdbRowDirective, CompleterBaseData, CompleterService, localDataFactory, remoteDataFactory, LocalDataFactoryProvider, RemoteDataFactoryProvider, LocalData, RemoteData, isNil, MAX_CHARS, MIN_SEARCH_LENGTH, PAUSE, TEXT_SEARCHING, TEXT_NO_RESULTS, CLEAR_TIMEOUT, AutocompleteModule, MdbAutoCompleterComponent, MdbOptionComponent, MdbAutoCompleterDirective, MdbAutoCompleterOptionDirective, AutoCompleterModule, CardRevealComponent, CardRotatingComponent, CardsModule, AutoFormatModule, MdbDateFormatDirective, MdbCreditCardDirective, MdbCvvDirective, InputAutoFillDirective, FocusDirective, LocaleService, UtilService, DatepickerModule, MYDP_VALUE_ACCESSOR, MDBDatePickerComponent, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, humanizeBytes, UploadStatus, MDBUploaderService, MDBFileDropDirective, MDBFileSelectDirective, FileInputModule, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, OptionList, Option, SelectDropdownComponent, SELECT_VALUE_ACCESSOR, SelectComponent, SelectModule, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, MDBSpinningPreloader, ProgressBarComponent, MdProgressSpinnerCssMatStylerDirective, MdProgressSpinnerComponent, MdSpinnerComponent, BarComponent, ProgressSpinnerComponent, ProgressDirective, ProgressbarComponent, ProgressbarConfigComponent, ProgressbarModule, PreloadersModule, ProgressBars, RangeModule, RANGE_VALUE_ACCESOR, MdbRangeInputComponent, SidenavComponent, SidenavModule, PageScrollUtilService, EasingLogic, PageScrollConfig, PageScrollDirective, PageScrollInstance, SmoothscrollModule, PageScrollService, computedStyle, MdbStickyDirective, StickyContentModule, TabHeadingDirective, TabDirective, TabsetComponent, TabsetConfig, NgTranscludeDirective, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TimePickerModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, ScrollSpyModule, ScrollSpyDirective, ScrollSpyWindowDirective, ScrollSpyElementDirective, ScrollSpyLinkDirective, ScrollSpyService, ButtonsModule, CHECKBOX_CONTROL_VALUE_ACCESSOR, ButtonCheckboxDirective, RADIO_CONTROL_VALUE_ACCESSOR, ButtonRadioDirective, MdbBtnDirective, BadgeModule, MDBBadgeComponent, MdbBreadcrumbComponent, MdbBreadcrumbItemComponent, BreadcrumbModule, Direction, CarouselComponent, CarouselConfig, SlideComponent, CarouselModule, CardsFreeModule, MdbCardComponent, MdbCardBodyComponent, MdbCardImageComponent, MdbCardTextComponent, MdbCardTitleComponent, MdbCardFooterComponent, MdbCardHeaderComponent, BaseChartDirective, ChartsModule, CHECKBOX_VALUE_ACCESSOR, MdbCheckboxChange, CheckboxComponent, CheckboxModule, CollapseComponent, CollapseModule, BsDropdownContainerComponent, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownConfig, BsDropdownDirective, BsDropdownState, DropdownModule, IconsModule, MdbIconComponent, InputsModule, MdbInput, MdbInputDirective, EqualValidatorDirective, InputUtilitiesModule, MdbErrorDirective, MdbSuccessDirective, MdbValidateDirective, ModalDirective, ModalOptions, MDBModalRef, modalConfigDefaults, ClassName, Selector, TransitionDurations, DISMISS_REASONS, MDBModalService, ModalBackdropOptions, ModalBackdropComponent, ModalContainerComponent, msConfig, ModalModule, LinksComponent, LogoComponent, NavbarComponent, NavbarService, NavlinksComponent, NavbarModule, PopoverContainerComponent, PopoverConfig, PopoverDirective, PopoverModule, RippleDirective, RippleModule, WavesDirective, WavesModule, MdbTablePaginationComponent, MdbTableRowDirective, MdbTableScrollDirective, MdbTableSortDirective, MdbTableDirective, MdbTableService, TableModule, TooltipContainerComponent, TooltipDirective, TooltipConfig, TooltipModule, BsComponentRef, ComponentLoader, ComponentLoaderFactory, ContentRef, win as window, document$1 as document, location, gc, performance, Event, MouseEvent, KeyboardEvent, EventTarget, History, Location, EventListener, positionElements, Positioning, PositioningService, OnChange, LinkedList, isBs3, Trigger, parseTriggers, listenToTriggers, Utils, MDBBootstrapModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, BadgeModule as ɵdl1, MDBBadgeComponent as ɵdm1, BreadcrumbModule as ɵdp1, MdbBreadcrumbItemComponent as ɵdo1, MdbBreadcrumbComponent as ɵdn1, MdbBtnDirective as ɵdk1, ButtonsModule as ɵdh1, ButtonCheckboxDirective as ɵdi1, ButtonRadioDirective as ɵdj1, CardsFreeModule as ɵdu1, CarouselComponent as ɵdq1, CarouselConfig as ɵdr1, CarouselModule as ɵdt1, SlideComponent as ɵds1, BaseChartDirective as ɵdv1, ChartsModule as ɵdw1, CHECKBOX_VALUE_ACCESSOR as ɵdx1, CheckboxComponent as ɵdy1, CheckboxModule as ɵdz1, CollapseComponent as ɵea1, CollapseModule as ɵeb1, BsDropdownContainerComponent as ɵec1, BsDropdownMenuDirective as ɵed1, BsDropdownToggleDirective as ɵee1, BsDropdownConfig as ɵef1, BsDropdownDirective as ɵeg1, DropdownModule as ɵei1, BsDropdownState as ɵeh1, MdbIconComponent as ɵek1, IconsModule as ɵej1, MdbErrorDirective as ɵep1, InputUtilitiesModule as ɵeo1, MdbSuccessDirective as ɵeq1, MdbValidateDirective as ɵer1, MdbInput as ɵem1, InputsModule as ɵel1, MdbInputDirective as ɵen1, MDBRootModule as ɵfu1, ModalDirective as ɵes1, ModalModule as ɵey1, ModalOptions as ɵet1, MDBModalService as ɵeu1, ModalBackdropComponent as ɵew1, ModalBackdropOptions as ɵev1, ModalContainerComponent as ɵex1, NavbarComponent as ɵez1, NavbarModule as ɵfa1, PopoverContainerComponent as ɵfb1, PopoverConfig as ɵfc1, PopoverDirective as ɵfd1, PopoverModule as ɵfe1, RippleDirective as ɵff1, RippleModule as ɵfg1, MdbTablePaginationComponent as ɵfj1, MdbTableRowDirective as ɵfk1, MdbTableScrollDirective as ɵfl1, MdbTableSortDirective as ɵfm1, MdbTableDirective as ɵfn1, MdbTableService as ɵfo1, TableModule as ɵfp1, TooltipContainerComponent as ɵfq1, TooltipDirective as ɵfr1, TooltipModule as ɵft1, TooltipConfig as ɵfs1, WavesDirective as ɵfh1, WavesModule as ɵfi1, SBItemComponent as ɵc1, SBItemBodyComponent as ɵa1, SBItemHeadComponent as ɵb1, SqueezeBoxComponent as ɵd1, AccordionModule as ɵe1, AutoCompleterModule as ɵu1, MdbAutoCompleterComponent as ɵq1, MdbOptionComponent as ɵr1, MdbAutoCompleterOptionDirective as ɵt1, MdbAutoCompleterDirective as ɵs1, AutoFormatModule as ɵy1, MdbCreditCardDirective as ɵba1, MdbCvvDirective as ɵbb1, MdbDateFormatDirective as ɵz1, CompleterListItemComponent as ɵf1, CompleterComponent as ɵg1, MdbInputCompleteDirective as ɵj1, MdbCompleterDirective as ɵh1, MdbDropdownDirective as ɵi1, MdbListDirective as ɵk1, MdbRowDirective as ɵl1, AutocompleteModule as ɵp1, CompleterService as ɵm1, LocalDataFactoryProvider as ɵn1, RemoteDataFactoryProvider as ɵo1, CardRevealComponent as ɵv1, CardRotatingComponent as ɵw1, CardsModule as ɵx1, MDBDatePickerComponent as ɵbi1, MYDP_VALUE_ACCESSOR as ɵbh1, DatepickerModule as ɵbg1, InputAutoFillDirective as ɵbc1, FocusDirective as ɵbd1, LocaleService as ɵbe1, UtilService as ɵbf1, SimpleChartComponent as ɵbj1, ChartSimpleModule as ɵbl1, EasyPieChartComponent as ɵbk1, MDBFileDropDirective as ɵbm1, MDBFileSelectDirective as ɵbn1, FileInputModule as ɵbo1, CharCounterDirective as ɵbp1, CharCounterModule as ɵbq1, ImageModalComponent as ɵbr1, LightBoxModule as ɵbs1, SelectDropdownComponent as ɵbu1, SELECT_VALUE_ACCESSOR as ɵbv1, SelectComponent as ɵbw1, SelectModule as ɵbx1, MDBRootModulePro as ɵfv1, BarComponent as ɵby1, ProgressBars as ɵce1, MdProgressBarModule as ɵfw1, MdProgressSpinnerModule as ɵfx1, ProgressSpinnerComponent as ɵbz1, ProgressDirective as ɵca1, ProgressbarComponent as ɵcb1, ProgressbarConfigComponent as ɵcc1, ProgressbarModule as ɵcd1, MdbRangeInputComponent as ɵcg1, RangeModule as ɵcf1, ScrollSpyElementDirective as ɵde1, ScrollSpyLinkDirective as ɵdf1, ScrollSpyWindowDirective as ɵdd1, ScrollSpyDirective as ɵdc1, ScrollSpyModule as ɵdb1, ScrollSpyService as ɵdg1, SidenavComponent as ɵch1, SidenavModule as ɵci1, PageScrollDirective as ɵcj1, PageScrollInstance as ɵck1, SmoothscrollModule as ɵcl1, PageScrollService as ɵcm1, MdbStickyDirective as ɵcn1, StickyContentModule as ɵco1, TabHeadingDirective as ɵcp1, TabDirective as ɵcq1, TabsetComponent as ɵcr1, TabsetConfig as ɵcs1, TabsModule as ɵcu1, NgTranscludeDirective as ɵct1, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR as ɵcv1, MaterialChipsComponent as ɵcw1, MaterialChipsModule as ɵcx1, ClockPickerComponent as ɵda1, TIME_PIRCKER_VALUE_ACCESSOT as ɵcz1, TimePickerModule as ɵcy1 };
+export { SBItemBodyComponent, SBItemHeadComponent, SBItemComponent, sbConfig, SqueezeBoxComponent, SQUEEZEBOX_COMPONENTS, AccordionModule, OverlayContainer, OverlayRef, Overlay, OVERLAY_PROVIDERS, DomPortalHost, ComponentPortal, BasePortalHost, ToastComponent, GlobalConfig, ToastPackage, tsConfig, ToastContainerDirective, ToastContainerModule, ToastRef, ToastInjector, ToastModule, ToastService, TOAST_CONFIG, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, CompleterListItemComponent, CompleterComponent, MdbCompleterDirective, CtrRowItem, MdbDropdownDirective, MdbInputCompleteDirective, CtrListContext, MdbListDirective, MdbRowDirective, CompleterBaseData, CompleterService, localDataFactory, remoteDataFactory, LocalDataFactoryProvider, RemoteDataFactoryProvider, LocalData, RemoteData, isNil, MAX_CHARS, MIN_SEARCH_LENGTH, PAUSE, TEXT_SEARCHING, TEXT_NO_RESULTS, CLEAR_TIMEOUT, AutocompleteModule, MdbAutoCompleterComponent, MdbOptionComponent, MdbAutoCompleterDirective, MdbAutoCompleterOptionDirective, AutoCompleterModule, CardRevealComponent, CardRotatingComponent, CardsModule, AutoFormatModule, MdbDateFormatDirective, MdbCreditCardDirective, MdbCvvDirective, InputAutoFillDirective, FocusDirective, LocaleService, UtilService, DatepickerModule, MYDP_VALUE_ACCESSOR, MDBDatePickerComponent, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, humanizeBytes, UploadStatus, MDBUploaderService, MDBFileDropDirective, MDBFileSelectDirective, FileInputModule, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, OptionList, Option, SelectDropdownComponent, SELECT_VALUE_ACCESSOR, SelectComponent, SelectModule, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, MDBSpinningPreloader, ProgressBarComponent, MdProgressSpinnerCssMatStylerDirective, MdProgressSpinnerComponent, MdSpinnerComponent, BarComponent, ProgressSpinnerComponent, ProgressDirective, ProgressbarComponent, ProgressbarConfigComponent, ProgressbarModule, PreloadersModule, ProgressBars, RangeModule, RANGE_VALUE_ACCESOR, MdbRangeInputComponent, SidenavComponent, SidenavModule, PageScrollUtilService, EasingLogic, PageScrollConfig, PageScrollDirective, PageScrollInstance, SmoothscrollModule, PageScrollService, computedStyle, MdbStickyDirective, StickyContentModule, TabHeadingDirective, TabDirective, TabsetComponent, TabsetConfig, NgTranscludeDirective, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TimePickerModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, ScrollSpyModule, ScrollSpyDirective, ScrollSpyWindowDirective, ScrollSpyElementDirective, ScrollSpyLinkDirective, ScrollSpyService, StepperModule, MdbStepperComponent, MdbStepComponent, ButtonsModule, CHECKBOX_CONTROL_VALUE_ACCESSOR, ButtonCheckboxDirective, RADIO_CONTROL_VALUE_ACCESSOR, ButtonRadioDirective, MdbBtnDirective, BadgeModule, MDBBadgeComponent, MdbBreadcrumbComponent, MdbBreadcrumbItemComponent, BreadcrumbModule, Direction, CarouselComponent, CarouselConfig, SlideComponent, CarouselModule, CardsFreeModule, MdbCardComponent, MdbCardBodyComponent, MdbCardImageComponent, MdbCardTextComponent, MdbCardTitleComponent, MdbCardFooterComponent, MdbCardHeaderComponent, BaseChartDirective, ChartsModule, CHECKBOX_VALUE_ACCESSOR, MdbCheckboxChange, CheckboxComponent, CheckboxModule, CollapseComponent, CollapseModule, BsDropdownContainerComponent, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownConfig, BsDropdownDirective, BsDropdownState, DropdownModule, IconsModule, MdbIconComponent, FalDirective, FarDirective, FabDirective, FasDirective, InputsModule, MdbInput, MdbInputDirective, EqualValidatorDirective, InputUtilitiesModule, MdbErrorDirective, MdbSuccessDirective, MdbValidateDirective, ModalDirective, ModalOptions, MDBModalRef, modalConfigDefaults, ClassName, Selector, TransitionDurations, DISMISS_REASONS, MDBModalService, ModalBackdropOptions, ModalBackdropComponent, ModalContainerComponent, msConfig, ModalModule, LinksComponent, LogoComponent, NavbarComponent, NavbarService, NavlinksComponent, NavbarModule, PopoverContainerComponent, PopoverConfig, PopoverDirective, PopoverModule, RippleDirective, RippleModule, WavesDirective, WavesModule, MdbTablePaginationComponent, MdbTableRowDirective, MdbTableScrollDirective, MdbTableSortDirective, MdbTableDirective, MdbTableService, TableModule, TooltipContainerComponent, TooltipDirective, TooltipConfig, TooltipModule, BsComponentRef, ComponentLoader, ComponentLoaderFactory, ContentRef, win as window, document$1 as document, location, gc, performance, Event, MouseEvent, KeyboardEvent, EventTarget, History, Location, EventListener, positionElements, Positioning, PositioningService, OnChange, LinkedList, isBs3, Trigger, parseTriggers, listenToTriggers, Utils, MDBBootstrapModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, BadgeModule as ɵdo1, MDBBadgeComponent as ɵdp1, BreadcrumbModule as ɵds1, MdbBreadcrumbItemComponent as ɵdr1, MdbBreadcrumbComponent as ɵdq1, MdbBtnDirective as ɵdn1, ButtonsModule as ɵdk1, ButtonCheckboxDirective as ɵdl1, ButtonRadioDirective as ɵdm1, CardsFreeModule as ɵdx1, CarouselComponent as ɵdt1, CarouselConfig as ɵdu1, CarouselModule as ɵdw1, SlideComponent as ɵdv1, BaseChartDirective as ɵdy1, ChartsModule as ɵdz1, CHECKBOX_VALUE_ACCESSOR as ɵea1, CheckboxComponent as ɵeb1, CheckboxModule as ɵec1, CollapseComponent as ɵed1, CollapseModule as ɵee1, BsDropdownContainerComponent as ɵef1, BsDropdownMenuDirective as ɵeg1, BsDropdownToggleDirective as ɵeh1, BsDropdownConfig as ɵei1, BsDropdownDirective as ɵej1, DropdownModule as ɵel1, BsDropdownState as ɵek1, FabDirective as ɵeq1, FalDirective as ɵeo1, FarDirective as ɵep1, FasDirective as ɵer1, MdbIconComponent as ɵen1, IconsModule as ɵem1, MdbErrorDirective as ɵew1, InputUtilitiesModule as ɵev1, MdbSuccessDirective as ɵex1, MdbValidateDirective as ɵey1, MdbInput as ɵet1, InputsModule as ɵes1, MdbInputDirective as ɵeu1, MDBRootModule as ɵgb1, ModalDirective as ɵez1, ModalModule as ɵff1, ModalOptions as ɵfa1, MDBModalService as ɵfb1, ModalBackdropComponent as ɵfd1, ModalBackdropOptions as ɵfc1, ModalContainerComponent as ɵfe1, NavbarComponent as ɵfg1, NavbarModule as ɵfh1, PopoverContainerComponent as ɵfi1, PopoverConfig as ɵfj1, PopoverDirective as ɵfk1, PopoverModule as ɵfl1, RippleDirective as ɵfm1, RippleModule as ɵfn1, MdbTablePaginationComponent as ɵfq1, MdbTableRowDirective as ɵfr1, MdbTableScrollDirective as ɵfs1, MdbTableSortDirective as ɵft1, MdbTableDirective as ɵfu1, MdbTableService as ɵfv1, TableModule as ɵfw1, TooltipContainerComponent as ɵfx1, TooltipDirective as ɵfy1, TooltipModule as ɵga1, TooltipConfig as ɵfz1, WavesDirective as ɵfo1, WavesModule as ɵfp1, SBItemComponent as ɵc1, SBItemBodyComponent as ɵa1, SBItemHeadComponent as ɵb1, SqueezeBoxComponent as ɵd1, AccordionModule as ɵe1, AutoCompleterModule as ɵu1, MdbAutoCompleterComponent as ɵq1, MdbOptionComponent as ɵr1, MdbAutoCompleterOptionDirective as ɵt1, MdbAutoCompleterDirective as ɵs1, AutoFormatModule as ɵy1, MdbCreditCardDirective as ɵba1, MdbCvvDirective as ɵbb1, MdbDateFormatDirective as ɵz1, CompleterListItemComponent as ɵf1, CompleterComponent as ɵg1, MdbInputCompleteDirective as ɵj1, MdbCompleterDirective as ɵh1, MdbDropdownDirective as ɵi1, MdbListDirective as ɵk1, MdbRowDirective as ɵl1, AutocompleteModule as ɵp1, CompleterService as ɵm1, LocalDataFactoryProvider as ɵn1, RemoteDataFactoryProvider as ɵo1, CardRevealComponent as ɵv1, CardRotatingComponent as ɵw1, CardsModule as ɵx1, MDBDatePickerComponent as ɵbi1, MYDP_VALUE_ACCESSOR as ɵbh1, DatepickerModule as ɵbg1, InputAutoFillDirective as ɵbc1, FocusDirective as ɵbd1, LocaleService as ɵbe1, UtilService as ɵbf1, SimpleChartComponent as ɵbj1, ChartSimpleModule as ɵbl1, EasyPieChartComponent as ɵbk1, MDBFileDropDirective as ɵbm1, MDBFileSelectDirective as ɵbn1, FileInputModule as ɵbo1, CharCounterDirective as ɵbp1, CharCounterModule as ɵbq1, ImageModalComponent as ɵbr1, LightBoxModule as ɵbs1, SelectDropdownComponent as ɵbu1, SELECT_VALUE_ACCESSOR as ɵbv1, SelectComponent as ɵbw1, SelectModule as ɵbx1, MDBRootModulePro as ɵgc1, BarComponent as ɵby1, ProgressBars as ɵce1, MdProgressBarModule as ɵgd1, MdProgressSpinnerModule as ɵge1, ProgressSpinnerComponent as ɵbz1, ProgressDirective as ɵca1, ProgressbarComponent as ɵcb1, ProgressbarConfigComponent as ɵcc1, ProgressbarModule as ɵcd1, MdbRangeInputComponent as ɵcg1, RangeModule as ɵcf1, ScrollSpyElementDirective as ɵde1, ScrollSpyLinkDirective as ɵdf1, ScrollSpyWindowDirective as ɵdd1, ScrollSpyDirective as ɵdc1, ScrollSpyModule as ɵdb1, ScrollSpyService as ɵdg1, SidenavComponent as ɵch1, SidenavModule as ɵci1, PageScrollDirective as ɵcj1, PageScrollInstance as ɵck1, SmoothscrollModule as ɵcl1, PageScrollService as ɵcm1, MdbStepComponent as ɵdj1, MdbStepperComponent as ɵdi1, StepperModule as ɵdh1, MdbStickyDirective as ɵcn1, StickyContentModule as ɵco1, TabHeadingDirective as ɵcp1, TabDirective as ɵcq1, TabsetComponent as ɵcr1, TabsetConfig as ɵcs1, TabsModule as ɵcu1, NgTranscludeDirective as ɵct1, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR as ɵcv1, MaterialChipsComponent as ɵcw1, MaterialChipsModule as ɵcx1, ClockPickerComponent as ɵda1, TIME_PIRCKER_VALUE_ACCESSOT as ɵcz1, TimePickerModule as ɵcy1 };
 //# sourceMappingURL=ng-uikit-pro-standard.js.map
