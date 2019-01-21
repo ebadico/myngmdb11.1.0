@@ -1,9 +1,9 @@
 /*!
  * Material Design for Bootstrap 4
- * Version: MDB PRO 4.5.16
+ * Version: MDB PRO 4.6.1
  *
  *
- * Copyright: Material Design for Bootstrap
+ * Copyright: Material Design for BootstrapS
  * https://mdbootstrap.com/
  *
  * Read the license: https://mdbootstrap.com/general/license/
@@ -21,7 +21,7 @@
  *
  * Contact: office@mdbootstrap.com
  *
- * Atribution: Animate CSS, Twitter Bootstrap, Materialize CSS, Normalize CSS, Waves JS, WOW JS, Toastr, Chart.js , Hammer.js
+ * Attribution: Animate CSS, Twitter Bootstrap, Materialize CSS, Normalize CSS, Waves JS, WOW JS, Toastr, Chart.js , Hammer.js
  *
  */
 
@@ -122,13 +122,13 @@
 @import "pro/sections/contacts";
 
 // Pro addons
-// @import "addons-pro/steppers";
-// @import "addons-pro/timeline";
+ @import "addons-pro/steppers";
+ @import "addons-pro/timeline";
 // @import "addons-pro/cards-extended";
 // @import "addons-pro/chat";
 
 // Angular
-@import "angular/mdb-angular";
+@import "angular/mdb-angular.scss";
 
 // Your custom styles
 @import "custom-styles";

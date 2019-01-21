@@ -6,6 +6,8 @@ export interface ScrollSpy {
 }
 export declare class ScrollSpyService {
     private scrollSpys;
+    private activeSubject;
+    active$: import("rxjs/internal/Observable").Observable<ScrollSpyLinkDirective>;
     addScrollSpy(scrollSpy: ScrollSpy): void;
     removeScrollSpy(scrollSpyId: string): void;
     updateActiveState(scrollSpyId: string, activeLinkId: string): void;

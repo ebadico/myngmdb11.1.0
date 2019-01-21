@@ -17,7 +17,7 @@ export { CollapseComponent, CollapseModule } from './collapse/index';
 export { ModalBackdropComponent, ModalBackdropOptions, ModalDirective, ModalModule, ModalOptions, MDBModalService, ModalContainerComponent, MDBModalRef } from './modals/index';
 export { TooltipConfig, TooltipContainerComponent, TooltipDirective, TooltipModule } from './tooltip/index';
 export { PopoverConfig, PopoverContainerComponent, PopoverModule, PopoverDirective } from './popover/index';
-export { IconsModule, MdbIconComponent } from './icons/index';
+export { IconsModule, MdbIconComponent, FalDirective, FarDirective, FasDirective, FabDirective } from './icons/index';
 export declare class MDBRootModule {
 }
 export declare class MDBBootstrapModule {

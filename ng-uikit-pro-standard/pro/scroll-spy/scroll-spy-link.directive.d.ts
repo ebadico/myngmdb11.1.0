@@ -5,6 +5,7 @@ export declare class ScrollSpyLinkDirective implements OnInit {
     scrollIntoView: boolean;
     private _scrollIntoView;
     section: HTMLElement;
+    private _section;
     private _id;
     constructor(cdRef: ChangeDetectorRef, document: any);
     id: string;

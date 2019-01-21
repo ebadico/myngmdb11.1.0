@@ -1,4 +1,4 @@
-import { ApplicationRef, ComponentFactoryResolver, ComponentRef, ElementRef, EventEmitter, Injector, NgZone, Provider, Renderer2, TemplateRef, Type, ViewContainerRef } from '@angular/core';
+import { ApplicationRef, ComponentFactoryResolver, ComponentRef, ElementRef, EventEmitter, Injector, NgZone, Renderer2, TemplateRef, Type, ViewContainerRef, StaticProvider } from '@angular/core';
 import { PositioningOptions, PositioningService } from '../positioning/positioning.service';
 export interface ListenOptions {
     target?: ElementRef;
@@ -54,9 +54,10 @@ export declare class ComponentLoader<T> {
     attach(compType: Type<T>): ComponentLoader<T>;
     to(container?: string): ComponentLoader<T>;
     position(opts?: PositioningOptions | any): ComponentLoader<T>;
-    provide(provider: Provider): ComponentLoader<T>;
+    provide(provider: StaticProvider): ComponentLoader<T>;
     show(opts?: {
         content?: string | TemplateRef<any>;
+        data?: any;
         [key: string]: any;
     }): ComponentRef<T>;
     hide(): ComponentLoader<T>;
