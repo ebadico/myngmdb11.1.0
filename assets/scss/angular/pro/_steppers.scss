@@ -8,14 +8,14 @@ ul.stepper {
 
     &.done:before {
       content: '\f00c';
-      font-family: 'Font Awesome 5 Free' !important;
+      font-family: 'Font Awesome Pro', 'Font Awesome 5 Free' !important;
       font-weight: 900;
       font-size: 1rem;
     }
 
     &.wrong:before {
       content: '\f071';
-      font-family: 'Font Awesome 5 Free' !important;
+      font-family: 'Font Awesome Pro', 'Font Awesome 5 Free' !important;
       font-weight: 900;
       font-size: 1.1rem;
     }
@@ -47,7 +47,7 @@ ul.stepper {
 
         &.done .step-title:before {
           content: '\f00c';
-          font-family: 'Font Awesome 5 Free' !important;
+          font-family: 'Font Awesome Pro', 'Font Awesome 5 Free' !important;
           font-weight: 900;
           font-size: 1rem;
           background: #00c851;
@@ -55,7 +55,7 @@ ul.stepper {
 
         &.wrong .step-title:before {
           content: '\f071';
-          font-family: 'Font Awesome 5 Free' !important;
+          font-family: 'Font Awesome Pro', 'Font Awesome 5 Free' !important;
           font-weight: 900;
           font-size: 1.1rem;
           background-color: #ff3547;
