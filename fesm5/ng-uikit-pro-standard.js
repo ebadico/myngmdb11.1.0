@@ -1529,9 +1529,6 @@ var CarouselComponent = /** @class */ (function () {
         this.class = '';
         this.type = '';
         this.animation = '';
-        /**
-         * Will be emitted when active slide has been changed. Part of two-way-bindable [(activeSlide)] property
-         */
         this.activeSlideChange = new EventEmitter(false);
         this.isBrowser = isPlatformBrowser(platformId);
         Object.assign(this, config);
@@ -1554,9 +1551,7 @@ var CarouselComponent = /** @class */ (function () {
         function () {
             return this._currentActiveSlide;
         },
-        /** Index of currently displayed slide(started for 0) */
         set: /**
-         * Index of currently displayed slide(started for 0)
          * @param {?} index
          * @return {?}
          */
@@ -1604,11 +1599,7 @@ var CarouselComponent = /** @class */ (function () {
         return slide.el.nativeElement.querySelector('img').src;
     };
     Object.defineProperty(CarouselComponent.prototype, "interval", {
-        /**
-         * Delay of item cycling in milliseconds. If false, carousel won't cycle automatically.
-         */
         get: /**
-         * Delay of item cycling in milliseconds. If false, carousel won't cycle automatically.
          * @return {?}
          */
         function () {
@@ -1645,16 +1636,10 @@ var CarouselComponent = /** @class */ (function () {
         this.destroyed = true;
     };
     /**
-     * Adds new slide. If this slide is first in collection - set it as active and starts auto changing
-     * @param slide
-     */
-    /**
-     * Adds new slide. If this slide is first in collection - set it as active and starts auto changing
      * @param {?} slide
      * @return {?}
      */
     CarouselComponent.prototype.addSlide = /**
-     * Adds new slide. If this slide is first in collection - set it as active and starts auto changing
      * @param {?} slide
      * @return {?}
      */
@@ -1682,16 +1667,10 @@ var CarouselComponent = /** @class */ (function () {
         }
     };
     /**
-     * Removes specified slide. If this slide is active - will roll to another slide
-     * @param slide
-     */
-    /**
-     * Removes specified slide. If this slide is active - will roll to another slide
      * @param {?} slide
      * @return {?}
      */
     CarouselComponent.prototype.removeSlide = /**
-     * Removes specified slide. If this slide is active - will roll to another slide
      * @param {?} slide
      * @return {?}
      */
@@ -1700,18 +1679,13 @@ var CarouselComponent = /** @class */ (function () {
         /** @type {?} */
         var remIndex = this._slides.indexOf(slide);
         if (this._currentActiveSlide === remIndex) {
-            // removing of active slide
-            //  let nextSlideIndex: number = void 0;
             /** @type {?} */
             var nextSlideIndex_1 = void 0;
             if (this._slides.length > 1) {
-                // if this slide last - will roll to first slide, if noWrap flag is FALSE or to previous, if noWrap is TRUE
-                // in case, if this slide in middle of collection, index of next slide is same to removed
                 nextSlideIndex_1 = !this.isLast(remIndex) ? remIndex :
                     this.noWrap ? remIndex - 1 : 0;
             }
             this._slides.remove(remIndex);
-            // prevents exception with changing some value after checking
             setTimeout(function () {
                 _this._select(nextSlideIndex_1);
             }, 0);
@@ -1721,21 +1695,16 @@ var CarouselComponent = /** @class */ (function () {
             /** @type {?} */
             var currentSlideIndex_1 = this.getCurrentSlideIndex();
             setTimeout(function () {
-                // after removing, need to actualize index of current active slide
                 _this._currentActiveSlide = currentSlideIndex_1;
                 _this.activeSlideChange.emit(_this._currentActiveSlide);
             }, 0);
         }
     };
-    // Fixed problem while cannot swipe next / previous image while using HammerJS.
-    // Fixed problem while cannot swipe next / previous image while using HammerJS.
     /**
      * @param {?=} action
      * @return {?}
      */
-    CarouselComponent.prototype.swipe = 
-    // Fixed problem while cannot swipe next / previous image while using HammerJS.
-    /**
+    CarouselComponent.prototype.swipe = /**
      * @param {?=} action
      * @return {?}
      */
@@ -1743,22 +1712,18 @@ var CarouselComponent = /** @class */ (function () {
         if (action === void 0) { action = this.SWIPE_ACTION.RIGHT; }
         if (action === this.SWIPE_ACTION.RIGHT) {
             this.previousSlide();
+            this.cdRef.markForCheck();
         }
         if (action === this.SWIPE_ACTION.LEFT) {
             this.nextSlide();
+            this.cdRef.markForCheck();
         }
     };
     /**
-     * Rolling to next slide
-     * @param force: {boolean} if true - will ignore noWrap flag
-     */
-    /**
-     * Rolling to next slide
      * @param {?=} force
      * @return {?}
      */
     CarouselComponent.prototype.nextSlide = /**
-     * Rolling to next slide
      * @param {?=} force
      * @return {?}
      */
@@ -1785,16 +1750,10 @@ var CarouselComponent = /** @class */ (function () {
         }
     };
     /**
-     * Rolling to previous slide
-     * @param force: {boolean} if true - will ignore noWrap flag
-     */
-    /**
-     * Rolling to previous slide
      * @param {?=} force
      * @return {?}
      */
     CarouselComponent.prototype.previousSlide = /**
-     * Rolling to previous slide
      * @param {?=} force
      * @return {?}
      */
@@ -1832,7 +1791,6 @@ var CarouselComponent = /** @class */ (function () {
      */
     function (goToIndex) {
         var _this = this;
-        // const currentSlide = this._slides.get(this._currentActiveSlide);
         /** @type {?} */
         var goToSlide = this._slides.get(goToIndex);
         if (this.animationEnd) {
@@ -1845,7 +1803,8 @@ var CarouselComponent = /** @class */ (function () {
                     _this.activeSlide = goToIndex;
                     _this.activeSlideChange.emit({ 'direction': 'Next', 'relatedTarget': _this.activeSlide });
                     _this.play();
-                }, 99);
+                    _this.cdRef.markForCheck();
+                }, 0);
             }
         }
     };
@@ -1875,7 +1834,8 @@ var CarouselComponent = /** @class */ (function () {
                     setTimeout(function () {
                         goToSlide.directionLeft = true;
                         currentSlide.directionLeft = true;
-                    }, 99);
+                        _this.cdRef.markForCheck();
+                    }, 100);
                 }
             }
             if (direction === Direction.PREV) {
@@ -1885,7 +1845,8 @@ var CarouselComponent = /** @class */ (function () {
                     setTimeout(function () {
                         goToSlide.directionRight = true;
                         currentSlide.directionRight = true;
-                    }, 99);
+                        _this.cdRef.markForCheck();
+                    }, 100);
                 }
             }
             if (this.isBrowser) {
@@ -1910,21 +1871,16 @@ var CarouselComponent = /** @class */ (function () {
                     }
                     _this.activeSlideChange.emit({ 'direction': directionName, 'relatedTarget': _this.activeSlide });
                     _this.play();
-                }, 100);
+                    _this.cdRef.markForCheck();
+                }, 700);
             }
         }
     };
     /**
-     * Rolling to specified slide
-     * @param index: {number} index of slide, which must be shown
-     */
-    /**
-     * Rolling to specified slide
      * @param {?} index
      * @return {?}
      */
     CarouselComponent.prototype.selectSlide = /**
-     * Rolling to specified slide
      * @param {?} index
      * @return {?}
      */
@@ -1946,14 +1902,9 @@ var CarouselComponent = /** @class */ (function () {
         this.play();
     };
     /**
-     * Starts a auto changing of slides
-     */
-    /**
-     * Starts a auto changing of slides
      * @return {?}
      */
     CarouselComponent.prototype.play = /**
-     * Starts a auto changing of slides
      * @return {?}
      */
     function () {
@@ -1963,14 +1914,9 @@ var CarouselComponent = /** @class */ (function () {
         }
     };
     /**
-     * Stops a auto changing of slides
-     */
-    /**
-     * Stops a auto changing of slides
      * @return {?}
      */
     CarouselComponent.prototype.pause = /**
-     * Stops a auto changing of slides
      * @return {?}
      */
     function () {
@@ -1980,29 +1926,19 @@ var CarouselComponent = /** @class */ (function () {
         }
     };
     /**
-     * Finds and returns index of currently displayed slide
-     */
-    /**
-     * Finds and returns index of currently displayed slide
      * @return {?}
      */
     CarouselComponent.prototype.getCurrentSlideIndex = /**
-     * Finds and returns index of currently displayed slide
      * @return {?}
      */
     function () {
         return this._slides.findIndex(function (slide) { return slide.active; });
     };
     /**
-     * Defines, whether the specified index is last in collection
-     */
-    /**
-     * Defines, whether the specified index is last in collection
      * @param {?} index
      * @return {?}
      */
     CarouselComponent.prototype.isLast = /**
-     * Defines, whether the specified index is last in collection
      * @param {?} index
      * @return {?}
      */
@@ -2010,20 +1946,12 @@ var CarouselComponent = /** @class */ (function () {
         return index + 1 >= this._slides.length;
     };
     /**
-     * Defines next slide index, depending of direction
-     * @param direction: Direction(UNKNOWN|PREV|NEXT)
-     * @param force: {boolean} if TRUE - will ignore noWrap flag, else will return undefined if next slide require wrapping
-  
-     */
-    /**
-     * Defines next slide index, depending of direction
      * @private
      * @param {?} direction
      * @param {?} force
      * @return {?}
      */
     CarouselComponent.prototype.findNextSlideIndex = /**
-     * Defines next slide index, depending of direction
      * @private
      * @param {?} direction
      * @param {?} force
@@ -2037,12 +1965,10 @@ var CarouselComponent = /** @class */ (function () {
         }
         switch (direction) {
             case Direction.NEXT:
-                // if this is last slide, not force, looping is disabled and need to going forward - select current slide, as a next
                 nextSlideIndex = (!this.isLast(this._currentActiveSlide)) ? this._currentActiveSlide + 1 :
                     (!force && this.noWrap) ? this._currentActiveSlide : 0;
                 break;
             case Direction.PREV:
-                // if this is first slide, not force, looping is disabled and need to going backward - select current slide, as a next
                 nextSlideIndex = (this._currentActiveSlide > 0) ? this._currentActiveSlide - 1 :
                     (!force && this.noWrap) ? this._currentActiveSlide : this._slides.length - 1;
                 break;
@@ -2052,17 +1978,11 @@ var CarouselComponent = /** @class */ (function () {
         return nextSlideIndex;
     };
     /**
-     * Sets a slide, which specified through index, as active
-     * @param index
-     */
-    /**
-     * Sets a slide, which specified through index, as active
      * @private
      * @param {?} index
      * @return {?}
      */
     CarouselComponent.prototype._select = /**
-     * Sets a slide, which specified through index, as active
      * @private
      * @param {?} index
      * @return {?}
@@ -2083,19 +2003,13 @@ var CarouselComponent = /** @class */ (function () {
             this._currentActiveSlide = index;
             nextSlide.active = true;
             this.activeSlide = index;
-            // this.activeSlideChange.emit(index);
         }
     };
     /**
-     * Starts loop of auto changing of slides
-     */
-    /**
-     * Starts loop of auto changing of slides
      * @private
      * @return {?}
      */
     CarouselComponent.prototype.restartTimer = /**
-     * Starts loop of auto changing of slides
      * @private
      * @return {?}
      */
@@ -2120,15 +2034,10 @@ var CarouselComponent = /** @class */ (function () {
         }
     };
     /**
-     * Stops loop of auto changing of slides
-     */
-    /**
-     * Stops loop of auto changing of slides
      * @private
      * @return {?}
      */
     CarouselComponent.prototype.resetTimer = /**
-     * Stops loop of auto changing of slides
      * @private
      * @return {?}
      */
@@ -2232,7 +2141,7 @@ var CarouselComponent = /** @class */ (function () {
     CarouselComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mdb-carousel',
-                    template: "<div tabindex=\"0\" (swipeleft)=\"swipe($event.type)\" (swiperight)=\"swipe($event.type)\" (mouseenter)=\"pause()\" (mouseleave)=\"play()\" (mouseup)=\"play()\" class=\"carousel {{ class }} {{ type }}\">\n  <div class=\"controls-top\" *ngIf=\"slides.length > 1 && !checkNavigation() && isControls\">\n    <a class=\"btn-floating\" [class.disabled]=\"activeSlide===0&&noWrap\" (click)=\"previousSlide()\"><i class=\"fas fa-chevron-left\"></i></a>\n    <a class=\"btn-floating\" (click)=\"nextSlide()\" [class.disabled]=\"isLast(activeSlide) && noWrap\"><i class=\"fas fa-chevron-right\"></i></a>\n  </div>\n  <ol class=\"carousel-indicators\" *ngIf=\"slides.length > 1 && checkDots() && isControls\">\n   <li *ngFor=\"let slidez of slides; let i = index;\" [class.active]=\"slidez.active === true\" (click)=\"selectSlide(i)\"></li>\n  </ol>\n  <ol class=\"carousel-indicators\" *ngIf=\"slides.length > 1 && !checkDots() && isControls\">\n   <li *ngFor=\"let slidez of slides; let i = index;\" [class.active]=\"slidez.active === true\" (click)=\"selectSlide(i)\">\n    <img  class=\"d-block w-100 img-fluid\" src=\"{{ getImg(slidez) }}\">\n   </li>\n  </ol>\n  <div class=\"carousel-inner\"><ng-content></ng-content></div>\n  <a class=\"carousel-control-prev\" [class.disabled]=\"activeSlide === 0 && noWrap\" (click)=\"previousSlide()\" *ngIf=\"slides.length > 1 && checkNavigation() && isControls\">\n  <span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span>\n  <span  class=\"sr-only\">Previous</span>\n  </a>\n  <a class=\"carousel-control-next\" (click)=\"nextSlide()\" [class.disabled]=\"isLast(activeSlide) && noWrap\" *ngIf=\"slides.length > 1 && checkNavigation() && isControls\">\n  <span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span>\n  <span class=\"sr-only\">Next</span>\n  </a>\n</div>\n"
+                    template: "<div tabindex=\"0\" (swipeleft)=\"swipe($event.type)\" (swiperight)=\"swipe($event.type)\" (mouseenter)=\"pause()\" (mouseleave)=\"play()\" (mouseup)=\"play()\" class=\"carousel {{ class }} {{ type }}\">\n  <div class=\"controls-top\" *ngIf=\"slides.length > 1 && !checkNavigation() && isControls\">\n    <a class=\"btn-floating\" [class.disabled]=\"activeSlide===0&&noWrap\" (click)=\"previousSlide()\"><i class=\"fas fa-chevron-left\"></i></a>\n    <a class=\"btn-floating\" (click)=\"nextSlide()\" [class.disabled]=\"isLast(activeSlide) && noWrap\"><i class=\"fas fa-chevron-right\"></i></a>\n  </div>\n  <ol class=\"carousel-indicators\" *ngIf=\"slides.length > 1 && checkDots() && isControls\">\n    <li *ngFor=\"let slidez of slides; let i = index;\" [class.active]=\"slidez.active === true\" (click)=\"selectSlide(i)\"></li>\n  </ol>\n  <ol class=\"carousel-indicators\" *ngIf=\"slides.length > 1 && !checkDots() && isControls\">\n    <li *ngFor=\"let slidez of slides; let i = index;\" [class.active]=\"slidez.active === true\" (click)=\"selectSlide(i)\">\n      <img  class=\"d-block w-100 img-fluid\" src=\"{{ getImg(slidez) }}\">\n    </li>\n  </ol>\n  <div class=\"carousel-inner\"><ng-content></ng-content></div>\n  <a class=\"carousel-control-prev\" [class.disabled]=\"activeSlide === 0 && noWrap\" (click)=\"previousSlide()\" *ngIf=\"slides.length > 1 && checkNavigation() && isControls\">\n    <span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span>\n    <span  class=\"sr-only\">Previous</span>\n  </a>\n  <a class=\"carousel-control-next\" (click)=\"nextSlide()\" [class.disabled]=\"isLast(activeSlide) && noWrap\" *ngIf=\"slides.length > 1 && checkNavigation() && isControls\">\n    <span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span>\n    <span class=\"sr-only\">Next</span>\n  </a>\n</div>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -8569,6 +8478,8 @@ var TooltipDirective = /** @class */ (function () {
         this.delay = 0;
         this.fadeDuration = 150;
         this.isBrowser = false;
+        this.xxx = _viewContainerRef;
+        this.yyy = cis;
         this.isBrowser = isPlatformBrowser((this.platformId));
         this._tooltip = cis
             .createLoader(this._elementRef, _viewContainerRef, _renderer)
@@ -8717,20 +8628,24 @@ var TooltipDirective = /** @class */ (function () {
     /**
      * Opens an element’s tooltip. This is considered a “manual” triggering of
      * the tooltip.
+     * @param {?=} event
      * @return {?}
      */
     TooltipDirective.prototype.show = /**
      * Opens an element’s tooltip. This is considered a “manual” triggering of
      * the tooltip.
+     * @param {?=} event
      * @return {?}
      */
-    function () {
+    function (event) {
         var _this = this;
         if (this.isOpen || this.isDisabled || this._delayTimeoutId || !this.mdbTooltip) {
             return;
         }
         if (!this.customHeight) {
-            if (this.placement === 'top' && this._elementRef.nativeElement.offsetTop < 40) {
+            /** @type {?} */
+            var elPosition = event ? event.target.getBoundingClientRect() : this._elementRef.nativeElement.getBoundingClientRect();
+            if (this.placement === 'top' && elPosition.top < 40) {
                 this.placement = 'bottom';
             }
             if (this.placement === 'bottom' && (/** @type {?} */ (this.getBottomOffset())) < 60) {
@@ -17703,262 +17618,6 @@ var CharCounterModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-// import * as screenfull from 'screenfull/dist/screenfull';
-// import 'hammerjs';
-var ImageModalComponent = /** @class */ (function () {
-    function ImageModalComponent(platformId, element, renderer) {
-        this.element = element;
-        this.renderer = renderer;
-        this.opened = false;
-        this.loading = false;
-        this.showRepeat = false;
-        this.isMobile = null;
-        this.clicked = false;
-        this.isBrowser = false;
-        this.zoomed = 'inactive';
-        this.SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
-        this.smooth = true;
-        this.cancelEvent = new EventEmitter();
-        this.isBrowser = isPlatformBrowser(platformId);
-        this._element = this.element.nativeElement;
-        if (this.isBrowser) {
-            this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        }
-    }
-    /**
-     * @return {?}
-     */
-    ImageModalComponent.prototype.toggleZoomed = /**
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var imgRef = this.element.nativeElement.lastElementChild.lastElementChild.firstElementChild;
-        if (!this.clicked) {
-            this.renderer.setStyle(imgRef, 'transform', 'scale(1.0, 1.0');
-            this.renderer.setStyle(imgRef, 'animate', '300ms ease-out');
-            this.renderer.setStyle(imgRef, 'cursor', 'zoom-out');
-            this.clicked = true;
-        }
-        else if (this.clicked) {
-            this.renderer.setStyle(imgRef, 'transform', 'scale(0.9, 0.9');
-            this.renderer.setStyle(imgRef, 'animate', '300ms ease-in');
-            this.renderer.setStyle(imgRef, 'cursor', 'zoom-in');
-            this.clicked = false;
-        }
-    };
-    /**
-     * @return {?}
-     */
-    ImageModalComponent.prototype.toggleRestart = /**
-     * @return {?}
-     */
-    function () {
-        this.zoomed = (this.zoomed === 'inactive') ? 'active' : 'inactive';
-    };
-    /**
-     * @return {?}
-     */
-    ImageModalComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        this.loading = true;
-        if (this.imagePointer >= 0) {
-            this.showRepeat = false;
-            this.openGallery(this.imagePointer);
-        }
-        else {
-            this.showRepeat = true;
-        }
-    };
-    /**
-     * @return {?}
-     */
-    ImageModalComponent.prototype.closeGallery = /**
-     * @return {?}
-     */
-    function () {
-        this.zoom = false;
-        if (screenfull.enabled) {
-            screenfull.exit();
-        }
-        this.opened = false;
-        this.cancelEvent.emit(null);
-    };
-    /**
-     * @return {?}
-     */
-    ImageModalComponent.prototype.prevImage = /**
-     * @return {?}
-     */
-    function () {
-        this.loading = true;
-        this.currentImageIndex--;
-        if (this.currentImageIndex < 0) {
-            this.currentImageIndex = this.modalImages.length - 1;
-        }
-        this.openGallery(this.currentImageIndex);
-    };
-    /**
-     * @return {?}
-     */
-    ImageModalComponent.prototype.nextImage = /**
-     * @return {?}
-     */
-    function () {
-        this.loading = true;
-        this.currentImageIndex++;
-        if (this.modalImages.length === this.currentImageIndex) {
-            this.currentImageIndex = 0;
-        }
-        this.openGallery(this.currentImageIndex);
-    };
-    /**
-     * @param {?} index
-     * @return {?}
-     */
-    ImageModalComponent.prototype.openGallery = /**
-     * @param {?} index
-     * @return {?}
-     */
-    function (index) {
-        if (!index) {
-            this.currentImageIndex = 1;
-        }
-        this.currentImageIndex = index;
-        this.opened = true;
-        for (var i = 0; i < this.modalImages.length; i++) {
-            if (i === this.currentImageIndex) {
-                this.imgSrc = this.modalImages[i].img;
-                this.caption = this.modalImages[i].caption;
-                this.loading = false;
-                break;
-            }
-        }
-    };
-    /**
-     * @return {?}
-     */
-    ImageModalComponent.prototype.fullScreen = /**
-     * @return {?}
-     */
-    function () {
-        if (screenfull.enabled) {
-            screenfull.toggle();
-        }
-    };
-    Object.defineProperty(ImageModalComponent.prototype, "is_iPhone_or_iPod", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            if (this.isBrowser) {
-                if (navigator && navigator.userAgent && navigator.userAgent != null) {
-                    /** @type {?} */
-                    var strUserAgent = navigator.userAgent.toLowerCase();
-                    /** @type {?} */
-                    var arrMatches = strUserAgent.match(/ipad/);
-                    if (arrMatches != null) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    ImageModalComponent.prototype.keyboardControl = /**
-     * @param {?} event
-     * @return {?}
-     */
-    function (event) {
-        if (this.opened) {
-            if (event.keyCode === 39) {
-                this.nextImage();
-            }
-            if (event.keyCode === 37) {
-                this.prevImage();
-            }
-            if (event.keyCode === 27) {
-                this.closeGallery();
-            }
-        }
-    };
-    /**
-     * @param {?=} action
-     * @return {?}
-     */
-    ImageModalComponent.prototype.swipe = /**
-     * @param {?=} action
-     * @return {?}
-     */
-    function (action) {
-        if (action === void 0) { action = this.SWIPE_ACTION.RIGHT; }
-        if (action === this.SWIPE_ACTION.RIGHT) {
-            this.prevImage();
-        }
-        if (action === this.SWIPE_ACTION.LEFT) {
-            this.nextImage();
-        }
-    };
-    ImageModalComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'mdb-image-modal',
-                    template: "<div class=\"ng-gallery mdb-lightbox {{ type }}\" *ngIf=\"modalImages && showRepeat\">\n  <figure class=\"col-md-4\" *ngFor=\"let i of modalImages; let index = index\">\n    <img src=\"{{ !i.thumb ? i.img : i.thumb }}\" class=\"ng-thumb\" (click)=\"openGallery(index)\"\n         alt=\"Image {{ index + 1 }}\"/>\n  </figure>\n</div>\n<div tabindex=\"0\" class=\"ng-overlay\" [class.hide_lightbox]=\"opened == false\">\n  <div class=\"top-bar\" style='z-index: 100000'>\n    <span *ngIf=\"modalImages\" class=\"info-text\">{{ currentImageIndex + 1 }}/{{ modalImages.length }}</span>\n    <a class=\"close-popup\" (click)=\"closeGallery()\" (click)=\"toggleRestart()\"></a>\n    <a *ngIf=\"!is_iPhone_or_iPod\" class=\"fullscreen-toogle\" [class.toggled]='fullscreen' (click)=\"fullScreen()\"></a>\n    <a class=\"zoom-toogle\" [class.zoom]='zoom' (click)=\"toggleZoomed()\" *ngIf=\"!isMobile\"></a>\n  </div>\n  <div class=\"ng-gallery-content\">\n    <img *ngIf=\"!loading\" src=\"{{imgSrc}}\" [class.smooth]='smooth' class=\"effect\" (swipeleft)=\"swipe($event.type)\"\n         (swiperight)=\"swipe($event.type)\" (click)=\"toggleZoomed()\" style=\"\"/>\n\n    <div class=\"uil-ring-css\" *ngIf=\"loading\">\n      <div></div>\n    </div>\n    <a class=\"nav-left\" *ngIf=\"modalImages && modalImages.length >1 && !isMobile\" (click)=\"prevImage()\">\n      <span></span>\n    </a>\n    <a class=\"nav-right\" *ngIf=\"modalImages && modalImages.length >1 && !isMobile\" (click)=\"nextImage()\">\n      <span></span>\n    </a>\n  </div>\n  <div class=\"row\" *ngIf=\"caption\">\n    <div class=\"col-md-12 mx-auto bottom-bar text-center\">\n      <figcaption class=\"text-white lightbox-caption\">{{caption}}</figcaption>\n    </div>\n  </div>\n</div>\n<div *ngIf=\"openModalWindow\">\n  <mdb-image-modal [imagePointer]=\"imagePointer\"></mdb-image-modal>\n</div>\n",
-                    styles: ['.bottom-bar {z-index: 100000; position: absolute; bottom: 2rem; left: 0; right: 0; width: 100%;} ']
-                }] }
-    ];
-    /** @nocollapse */
-    ImageModalComponent.ctorParameters = function () { return [
-        { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
-        { type: ElementRef },
-        { type: Renderer2 }
-    ]; };
-    ImageModalComponent.propDecorators = {
-        modalImages: [{ type: Input, args: ['modalImages',] }],
-        imagePointer: [{ type: Input, args: ['imagePointer',] }],
-        fullscreen: [{ type: Input, args: ['fullscreen',] }],
-        zoom: [{ type: Input, args: ['zoom',] }],
-        smooth: [{ type: Input, args: ['smooth',] }],
-        type: [{ type: Input, args: ['type',] }],
-        cancelEvent: [{ type: Output, args: ['cancelEvent',] }],
-        keyboardControl: [{ type: HostListener, args: ['document:keyup', ['$event'],] }]
-    };
-    return ImageModalComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var LightBoxModule = /** @class */ (function () {
-    function LightBoxModule() {
-    }
-    LightBoxModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [CommonModule, FormsModule],
-                    declarations: [ImageModalComponent],
-                    exports: [ImageModalComponent]
-                },] }
-    ];
-    return LightBoxModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 var Diacritics = /** @class */ (function () {
     function Diacritics() {
     }
@@ -19357,6 +19016,14 @@ var SelectDropdownComponent = /** @class */ (function () {
     function () {
         this.hasOptionsItems = this.optionList.filtered.length > 0;
         this.updateSelectAllState();
+    };
+    /**
+     * @return {?}
+     */
+    SelectDropdownComponent.prototype.onkeydown = /**
+     * @return {?}
+     */
+    function () {
         this.setOptionHeight();
     };
     /**
@@ -19605,25 +19272,21 @@ var SelectDropdownComponent = /** @class */ (function () {
         }
     };
     /**
-     * @param {?} event
      * @return {?}
      */
     SelectDropdownComponent.prototype.onAnimationDone = /**
-     * @param {?} event
      * @return {?}
      */
-    function (event) {
+    function () {
         this.animationDone.emit();
     };
     /**
-     * @param {?} event
      * @return {?}
      */
     SelectDropdownComponent.prototype.onAnimationStart = /**
-     * @param {?} event
      * @return {?}
      */
-    function (event) {
+    function () {
         this.animationStart.emit();
     };
     /**
@@ -19688,7 +19351,7 @@ var SelectDropdownComponent = /** @class */ (function () {
     SelectDropdownComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mdb-select-dropdown',
-                    template: "<div (click)=\"$event.stopPropagation()\" class=\"dropdown-content\" #dropdownContent [ngStyle]=\"{'top.px': top, 'left.px': left, 'width.px': width}\"\n[@dropdownAnimation]=\"{value: state, params: {startHeight: startHeight, endHeight: endHeight}}\" (@dropdownAnimation.done)=\"onAnimationDone($event)\" (@dropdownAnimation.start)=\"onAnimationStart($event)\">\n  <div class=\"filter md-form px-2\" *ngIf=\"filterEnabled\">\n    <input\n    type=\"text\"\n    class=\"search form-control w-100 d-block\"\n    #filterInput\n    autocomplete=\"on\"\n    [placeholder]=\"placeholder\"\n    (input)=\"onSingleFilterInput($event)\"\n    (keydown)=\"onSingleFilterKeydown($event)\">\n  </div>\n\n  <div class=\"options\" #optionsList>\n    <ul class=\"select-dropdown\" [ngClass]=\"{'multiple-select-dropdown': multiple}\"\n    (wheel)=\"onOptionsWheel($event)\">\n      <li [ngStyle]=\"{ 'height.px': optionHeight }\" *ngIf=\"multiple && enableSelectAll && this.hasOptionsItems\" (click)=\"onSelectAllClick()\">\n        <span class=\"filtrable\" *ngIf=\"multiple\">\n          <input type=\"checkbox\" [checked]=\"selectAllSelected\" class=\"form-check-input {{customClass}}\">\n          <label></label>\n          {{selectAllLabel}}\n        </span>\n      </li>\n      <li *ngFor=\"let option of optionList.filtered\"\n        [ngClass]=\"{'active': option.highlighted, 'selected': option.selected, 'disabled': option.disabled, 'optgroup': option.group, 'd-flex justify-content-between flex-row-reverse align-items-center': option.icon}\"\n        [ngStyle]=\"{'height': optionHeight, 'background-color': getOptionStyle(option)['background-color'], 'color': getOptionStyle(option)['color']}\"\n        (click)=\"onOptionClick(option)\"\n        (mouseover)=\"option.hovered = true\"\n        (mouseleave)=\"option.hovered = false\">\n        <img class=\"rounded-circle\" [src]=\"option.icon\" *ngIf=\"option.icon !== ''\">\n        <span class=\"deselect-option\" *ngIf=\"!multiple\">{{option.label}}</span>\n        <span class=\"deselect-option\" *ngIf=\"multiple\">\n          <input type=\"checkbox\" [checked]=\"option.selected\" class=\"form-check-input {{customClass}}\" [disabled]=\"option.disabled\">\n          <label></label>\n          {{option.label}}\n        </span>\n      </li>\n      <li *ngIf=\"!this.hasOptionsItems\" class=\"message disabled\">\n        <span>{{notFoundMsg}}</span>\n      </li>\n    </ul>\n  </div>\n</div>\n",
+                    template: "<div (click)=\"$event.stopPropagation()\" class=\"dropdown-content\" #dropdownContent [ngStyle]=\"{'top.px': top, 'left.px': left, 'width.px': width}\"\n[@dropdownAnimation]=\"{value: state, params: {startHeight: startHeight, endHeight: endHeight}}\" (@dropdownAnimation.done)=\"onAnimationDone()\" (@dropdownAnimation.start)=\"onAnimationStart()\">\n  <div class=\"filter md-form px-2\" *ngIf=\"filterEnabled\">\n    <input\n    type=\"text\"\n    class=\"search form-control w-100 d-block\"\n    #filterInput\n    autocomplete=\"on\"\n    [placeholder]=\"placeholder\"\n    (input)=\"onSingleFilterInput($event)\"\n    (keydown)=\"onSingleFilterKeydown($event)\">\n  </div>\n\n  <div class=\"options\" #optionsList>\n    <ul class=\"select-dropdown\" [ngClass]=\"{'multiple-select-dropdown': multiple}\"\n    (wheel)=\"onOptionsWheel($event)\">\n      <li [ngStyle]=\"{ 'height.px': optionHeight }\" *ngIf=\"multiple && enableSelectAll && this.hasOptionsItems\" (click)=\"onSelectAllClick()\">\n        <span class=\"filtrable\" *ngIf=\"multiple\">\n          <input type=\"checkbox\" [checked]=\"selectAllSelected\" class=\"form-check-input {{customClass}}\">\n          <label></label>\n          {{selectAllLabel}}\n        </span>\n      </li>\n      <li *ngFor=\"let option of optionList.filtered\"\n        [ngClass]=\"{'active': option.highlighted, 'selected': option.selected, 'disabled': option.disabled, 'optgroup': option.group, 'd-flex justify-content-between flex-row-reverse align-items-center': option.icon}\"\n        [ngStyle]=\"{'height': optionHeight, 'background-color': getOptionStyle(option)['background-color'], 'color': getOptionStyle(option)['color']}\"\n        (click)=\"onOptionClick(option)\"\n        (mouseover)=\"option.hovered = true\"\n        (mouseleave)=\"option.hovered = false\">\n        <img class=\"rounded-circle\" [src]=\"option.icon\" *ngIf=\"option.icon !== ''\">\n        <span class=\"deselect-option\" *ngIf=\"!multiple\">{{option.label}}</span>\n        <span class=\"deselect-option\" *ngIf=\"multiple\">\n          <input type=\"checkbox\" [checked]=\"option.selected\" class=\"form-check-input {{customClass}}\" [disabled]=\"option.disabled\">\n          <label></label>\n          {{option.label}}\n        </span>\n      </li>\n      <li *ngIf=\"!this.hasOptionsItems\" class=\"message disabled\">\n        <span>{{notFoundMsg}}</span>\n      </li>\n    </ul>\n  </div>\n</div>\n",
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.Default,
                     animations: [trigger('dropdownAnimation', [
@@ -19734,7 +19397,8 @@ var SelectDropdownComponent = /** @class */ (function () {
         filterInput: [{ type: ViewChild, args: ['filterInput',] }],
         optionsList: [{ type: ViewChild, args: ['optionsList',] }],
         dropdownContent: [{ type: ViewChild, args: ['dropdownContent',] }],
-        onkeyup: [{ type: HostListener, args: ['keyup',] }]
+        onkeyup: [{ type: HostListener, args: ['keyup',] }],
+        onkeydown: [{ type: HostListener, args: ['input',] }]
     };
     return SelectDropdownComponent;
 }());
@@ -20755,22 +20419,24 @@ var SelectComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        /** @type {?} */
-        var selectRect = this.el.nativeElement.getBoundingClientRect();
-        /** @type {?} */
-        var scrollTop = this.document.documentElement.scrollTop || this.document.body.scrollTop;
-        /** @type {?} */
-        var offsetTop = selectRect.top + scrollTop;
-        /** @type {?} */
-        var height = selectRect.height;
-        /** @type {?} */
-        var dropdownHeight = this.dropdownMaxHeight > this.dropdownHeight ? this.dropdownHeight : this.dropdownMaxHeight;
-        this.left = selectRect.left;
-        if (offsetTop + dropdownHeight + this.filterHeight > scrollTop + this.document.documentElement.clientHeight) {
-            this.top = offsetTop - dropdownHeight + height - this.filterHeight;
-        }
-        else {
-            this.top = offsetTop;
+        if (this.isBrowser) {
+            /** @type {?} */
+            var selectRect = this.el.nativeElement.getBoundingClientRect();
+            /** @type {?} */
+            var scrollTop = this.document.documentElement.scrollTop || this.document.body.scrollTop;
+            /** @type {?} */
+            var offsetTop = selectRect.top + scrollTop;
+            /** @type {?} */
+            var height = selectRect.height;
+            /** @type {?} */
+            var dropdownHeight = this.dropdownMaxHeight > this.dropdownHeight ? this.dropdownHeight : this.dropdownMaxHeight;
+            this.left = selectRect.left;
+            if (offsetTop + dropdownHeight + this.filterHeight > scrollTop + this.document.documentElement.clientHeight) {
+                this.top = offsetTop - dropdownHeight + height - this.filterHeight;
+            }
+            else {
+                this.top = offsetTop;
+            }
         }
     };
     /**
@@ -20782,12 +20448,14 @@ var SelectComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        /** @type {?} */
-        var body = this.document.querySelector('body');
-        /** @type {?} */
-        var dropdown = this.dropdown._elementRef.nativeElement;
-        if (body) {
-            this.renderer.appendChild(body, dropdown);
+        if (this.isBrowser) {
+            /** @type {?} */
+            var body = this.document.querySelector('body');
+            /** @type {?} */
+            var dropdown = this.dropdown._elementRef.nativeElement;
+            if (body) {
+                this.renderer.appendChild(body, dropdown);
+            }
         }
     };
     /**
@@ -27170,7 +26838,6 @@ var MODULES$1 = [
     SelectModule,
     DatepickerModule,
     TimePickerModule,
-    LightBoxModule,
     SidenavModule,
     ChartSimpleModule,
     AccordionModule,
@@ -27197,7 +26864,6 @@ var MDBRootModulePro = /** @class */ (function () {
                         SelectModule,
                         DatepickerModule,
                         TimePickerModule,
-                        LightBoxModule,
                         SidenavModule,
                         ChartSimpleModule,
                         AccordionModule,
@@ -27288,6 +26954,6 @@ var MDBBootstrapModulesPro = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { BadgeModule, MDBBadgeComponent, MdbBreadcrumbComponent, MdbBreadcrumbItemComponent, BreadcrumbModule, MdbBtnDirective, ButtonsModule, ButtonRadioDirective, ButtonCheckboxDirective, CardsFreeModule, MdbCardComponent, MdbCardBodyComponent, MdbCardImageComponent, MdbCardTextComponent, MdbCardTitleComponent, MdbCardFooterComponent, MdbCardHeaderComponent, CarouselComponent, CarouselModule, SlideComponent, CarouselConfig, ChartsModule, BaseChartDirective, CHECKBOX_VALUE_ACCESSOR, CheckboxComponent, CheckboxModule, CollapseComponent, CollapseModule, BsDropdownDirective, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownContainerComponent, BsDropdownState, BsDropdownConfig, DropdownModule, MdbIconComponent, FalDirective, FarDirective, FasDirective, FabDirective, IconsModule, InputUtilitiesModule, MdbErrorDirective, MdbSuccessDirective, MdbValidateDirective, InputsModule, EqualValidatorDirective, MdbInputDirective, MdbInput, ModalBackdropComponent, ModalBackdropOptions, ModalOptions, MDBModalRef, ModalDirective, ModalModule, MDBModalService, ModalContainerComponent, NavbarComponent, NavbarModule, PopoverDirective, PopoverModule, PopoverConfig, PopoverContainerComponent, TableModule, MdbTablePaginationComponent, MdbTableRowDirective, MdbTableScrollDirective, MdbTableSortDirective, MdbTableDirective, MdbTableService, TooltipContainerComponent, TooltipDirective, TooltipModule, TooltipConfig, WavesDirective, WavesModule, MDBRootModule, MDBBootstrapModule, SQUEEZEBOX_COMPONENTS, SBItemComponent, SBItemHeadComponent, SBItemBodyComponent, SqueezeBoxComponent, AccordionModule, ComponentPortal, BasePortalHost, Overlay, OVERLAY_PROVIDERS, OverlayContainer, OverlayRef, ToastContainerDirective, ToastContainerModule, ToastComponent, ToastService, GlobalConfig, ToastPackage, tsConfig, ToastModule, ToastRef, ToastInjector, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, MdbAutoCompleterComponent, MdbOptionComponent, MdbAutoCompleterDirective, MdbAutoCompleterOptionDirective, AutoCompleterModule, AutoFormatModule, MdbDateFormatDirective, MdbCreditCardDirective, MdbCvvDirective, AutocompleteModule, CompleterComponent, CompleterListItemComponent, CompleterService, localDataFactory, LocalDataFactoryProvider, remoteDataFactory, RemoteDataFactoryProvider, LocalData, RemoteData, CompleterBaseData, MdbCompleterDirective, MdbDropdownDirective, MdbInputCompleteDirective, MdbListDirective, MdbRowDirective, CardsModule, CardRevealComponent, CardRotatingComponent, LocaleService, UtilService, FocusDirective, InputAutoFillDirective, MDBDatePickerComponent, MYDP_VALUE_ACCESSOR, DatepickerModule, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, FileInputModule, UploadStatus, humanizeBytes, MDBUploaderService, MDBFileSelectDirective, MDBFileDropDirective, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, Option, OptionList, SELECT_VALUE_ACCESSOR, SelectComponent, SelectDropdownComponent, SelectModule, MDBSpinningPreloader, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, BarComponent, ProgressDirective, ProgressbarComponent, ProgressbarModule, ProgressbarConfigComponent, ProgressSpinnerComponent, PreloadersModule, ProgressBars, RangeModule, MdbRangeInputComponent, ScrollSpyDirective, ScrollSpyWindowDirective, ScrollSpyElementDirective, ScrollSpyLinkDirective, ScrollSpyService, ScrollSpyModule, SidenavComponent, SidenavModule, PageScrollDirective, PageScrollService, EasingLogic, PageScrollConfig, PageScrollInstance, PageScrollUtilService, SmoothscrollModule, MdbStepperComponent, MdbStepComponent, StepperModule, MdbStickyDirective, StickyContentModule, NgTranscludeDirective, TabDirective, TabHeadingDirective, TabsetComponent, TabsetConfig, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, TimePickerModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, CHECKBOX_CONTROL_VALUE_ACCESSOR as ɵb, RADIO_CONTROL_VALUE_ACCESSOR as ɵa, CHECKBOX_VALUE_ACCESSOR as ɵc, CheckboxComponent as ɵd, LinksComponent as ɵds, LogoComponent as ɵdt, NavbarService as ɵdr, NavlinksComponent as ɵdu, ComponentLoaderFactory as ɵdp, OnChange as ɵdv, PositioningService as ɵdq, SBItemComponent as ɵf, SBItemBodyComponent as ɵh, SBItemHeadComponent as ɵg, SqueezeBoxComponent as ɵi, AccordionModule as ɵe, TOAST_CONFIG as ɵdw, AutoCompleterModule as ɵn, MdbAutoCompleterComponent as ɵj, MdbOptionComponent as ɵk, MdbAutoCompleterOptionDirective as ɵm, MdbAutoCompleterDirective as ɵl, AutoFormatModule as ɵo, MdbCreditCardDirective as ɵq, MdbCvvDirective as ɵr, MdbDateFormatDirective as ɵp, CompleterListItemComponent as ɵu, CompleterComponent as ɵt, MdbInputCompleteDirective as ɵba, MdbCompleterDirective as ɵy, MdbDropdownDirective as ɵz, CtrListContext as ɵbb, MdbListDirective as ɵbc, MdbRowDirective as ɵbd, AutocompleteModule as ɵs, CompleterService as ɵv, LocalDataFactoryProvider as ɵw, RemoteDataFactoryProvider as ɵx, CardRevealComponent as ɵbf, CardRotatingComponent as ɵbg, CardsModule as ɵbe, MDBDatePickerComponent as ɵbm, MYDP_VALUE_ACCESSOR as ɵbl, DatepickerModule as ɵbn, InputAutoFillDirective as ɵbk, FocusDirective as ɵbj, LocaleService as ɵbh, UtilService as ɵbi, SimpleChartComponent as ɵbo, ChartSimpleModule as ɵbq, EasyPieChartComponent as ɵbp, MDBFileDropDirective as ɵbt, MDBFileSelectDirective as ɵbs, FileInputModule as ɵbr, CharCounterDirective as ɵbu, CharCounterModule as ɵbv, ImageModalComponent as ɵbw, LightBoxModule as ɵbx, SelectDropdownComponent as ɵcb, SELECT_VALUE_ACCESSOR as ɵbz, SelectComponent as ɵca, SelectModule as ɵcc, MDBRootModulePro as ɵdo, BarComponent as ɵce, ProgressBars as ɵcd, MdProgressBarModule as ɵdx, ProgressBarComponent as ɵdy, MdProgressSpinnerModule as ɵdz, MdProgressSpinnerComponent as ɵeb, MdProgressSpinnerCssMatStylerDirective as ɵea, MdSpinnerComponent as ɵec, ProgressSpinnerComponent as ɵcj, ProgressDirective as ɵcf, ProgressbarComponent as ɵcg, ProgressbarConfigComponent as ɵci, ProgressbarModule as ɵch, MdbRangeInputComponent as ɵcm, RANGE_VALUE_ACCESOR as ɵcl, RangeModule as ɵck, ScrollSpyElementDirective as ɵcp, ScrollSpyLinkDirective as ɵcq, ScrollSpyWindowDirective as ɵco, ScrollSpyDirective as ɵcn, ScrollSpyModule as ɵcs, ScrollSpyService as ɵcr, SidenavComponent as ɵct, SidenavModule as ɵcu, PageScrollDirective as ɵcv, PageScrollInstance as ɵcx, SmoothscrollModule as ɵcy, PageScrollService as ɵcw, MdbStepComponent as ɵda, MdbStepperComponent as ɵcz, StepperModule as ɵdb, MdbStickyDirective as ɵdc, StickyContentModule as ɵdd, TabHeadingDirective as ɵdg, TabDirective as ɵdf, TabsetComponent as ɵdh, TabsetConfig as ɵdi, TabsModule as ɵdj, NgTranscludeDirective as ɵde, MaterialChipsComponent as ɵdk, MaterialChipsModule as ɵdl, ClockPickerComponent as ɵdm, TimePickerModule as ɵdn };
+export { BadgeModule, MDBBadgeComponent, MdbBreadcrumbComponent, MdbBreadcrumbItemComponent, BreadcrumbModule, MdbBtnDirective, ButtonsModule, ButtonRadioDirective, ButtonCheckboxDirective, CardsFreeModule, MdbCardComponent, MdbCardBodyComponent, MdbCardImageComponent, MdbCardTextComponent, MdbCardTitleComponent, MdbCardFooterComponent, MdbCardHeaderComponent, CarouselComponent, CarouselModule, SlideComponent, CarouselConfig, ChartsModule, BaseChartDirective, CHECKBOX_VALUE_ACCESSOR, CheckboxComponent, CheckboxModule, CollapseComponent, CollapseModule, BsDropdownDirective, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownContainerComponent, BsDropdownState, BsDropdownConfig, DropdownModule, MdbIconComponent, FalDirective, FarDirective, FasDirective, FabDirective, IconsModule, InputUtilitiesModule, MdbErrorDirective, MdbSuccessDirective, MdbValidateDirective, InputsModule, EqualValidatorDirective, MdbInputDirective, MdbInput, ModalBackdropComponent, ModalBackdropOptions, ModalOptions, MDBModalRef, ModalDirective, ModalModule, MDBModalService, ModalContainerComponent, NavbarComponent, NavbarModule, PopoverDirective, PopoverModule, PopoverConfig, PopoverContainerComponent, TableModule, MdbTablePaginationComponent, MdbTableRowDirective, MdbTableScrollDirective, MdbTableSortDirective, MdbTableDirective, MdbTableService, TooltipContainerComponent, TooltipDirective, TooltipModule, TooltipConfig, WavesDirective, WavesModule, MDBRootModule, MDBBootstrapModule, SQUEEZEBOX_COMPONENTS, SBItemComponent, SBItemHeadComponent, SBItemBodyComponent, SqueezeBoxComponent, AccordionModule, ComponentPortal, BasePortalHost, Overlay, OVERLAY_PROVIDERS, OverlayContainer, OverlayRef, ToastContainerDirective, ToastContainerModule, ToastComponent, ToastService, GlobalConfig, ToastPackage, tsConfig, ToastModule, ToastRef, ToastInjector, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, MdbAutoCompleterComponent, MdbOptionComponent, MdbAutoCompleterDirective, MdbAutoCompleterOptionDirective, AutoCompleterModule, AutoFormatModule, MdbDateFormatDirective, MdbCreditCardDirective, MdbCvvDirective, AutocompleteModule, CompleterComponent, CompleterListItemComponent, CompleterService, localDataFactory, LocalDataFactoryProvider, remoteDataFactory, RemoteDataFactoryProvider, LocalData, RemoteData, CompleterBaseData, MdbCompleterDirective, MdbDropdownDirective, MdbInputCompleteDirective, MdbListDirective, MdbRowDirective, CardsModule, CardRevealComponent, CardRotatingComponent, LocaleService, UtilService, FocusDirective, InputAutoFillDirective, MDBDatePickerComponent, MYDP_VALUE_ACCESSOR, DatepickerModule, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, FileInputModule, UploadStatus, humanizeBytes, MDBUploaderService, MDBFileSelectDirective, MDBFileDropDirective, CharCounterDirective, CharCounterModule, Diacritics, Option, OptionList, SELECT_VALUE_ACCESSOR, SelectComponent, SelectDropdownComponent, SelectModule, MDBSpinningPreloader, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, BarComponent, ProgressDirective, ProgressbarComponent, ProgressbarModule, ProgressbarConfigComponent, ProgressSpinnerComponent, PreloadersModule, ProgressBars, RangeModule, MdbRangeInputComponent, ScrollSpyDirective, ScrollSpyWindowDirective, ScrollSpyElementDirective, ScrollSpyLinkDirective, ScrollSpyService, ScrollSpyModule, SidenavComponent, SidenavModule, PageScrollDirective, PageScrollService, EasingLogic, PageScrollConfig, PageScrollInstance, PageScrollUtilService, SmoothscrollModule, MdbStepperComponent, MdbStepComponent, StepperModule, MdbStickyDirective, StickyContentModule, NgTranscludeDirective, TabDirective, TabHeadingDirective, TabsetComponent, TabsetConfig, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, TimePickerModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, CHECKBOX_CONTROL_VALUE_ACCESSOR as ɵb, RADIO_CONTROL_VALUE_ACCESSOR as ɵa, CHECKBOX_VALUE_ACCESSOR as ɵc, CheckboxComponent as ɵd, LinksComponent as ɵdq, LogoComponent as ɵdr, NavbarService as ɵdp, NavlinksComponent as ɵds, ComponentLoaderFactory as ɵdn, OnChange as ɵdt, PositioningService as ɵdo, SBItemComponent as ɵf, SBItemBodyComponent as ɵh, SBItemHeadComponent as ɵg, SqueezeBoxComponent as ɵi, AccordionModule as ɵe, TOAST_CONFIG as ɵdu, AutoCompleterModule as ɵn, MdbAutoCompleterComponent as ɵj, MdbOptionComponent as ɵk, MdbAutoCompleterOptionDirective as ɵm, MdbAutoCompleterDirective as ɵl, AutoFormatModule as ɵo, MdbCreditCardDirective as ɵq, MdbCvvDirective as ɵr, MdbDateFormatDirective as ɵp, CompleterListItemComponent as ɵu, CompleterComponent as ɵt, MdbInputCompleteDirective as ɵba, MdbCompleterDirective as ɵy, MdbDropdownDirective as ɵz, CtrListContext as ɵbb, MdbListDirective as ɵbc, MdbRowDirective as ɵbd, AutocompleteModule as ɵs, CompleterService as ɵv, LocalDataFactoryProvider as ɵw, RemoteDataFactoryProvider as ɵx, CardRevealComponent as ɵbf, CardRotatingComponent as ɵbg, CardsModule as ɵbe, MDBDatePickerComponent as ɵbm, MYDP_VALUE_ACCESSOR as ɵbl, DatepickerModule as ɵbn, InputAutoFillDirective as ɵbk, FocusDirective as ɵbj, LocaleService as ɵbh, UtilService as ɵbi, SimpleChartComponent as ɵbo, ChartSimpleModule as ɵbq, EasyPieChartComponent as ɵbp, MDBFileDropDirective as ɵbt, MDBFileSelectDirective as ɵbs, FileInputModule as ɵbr, CharCounterDirective as ɵbu, CharCounterModule as ɵbv, SelectDropdownComponent as ɵbz, SELECT_VALUE_ACCESSOR as ɵbx, SelectComponent as ɵby, SelectModule as ɵca, MDBRootModulePro as ɵdm, BarComponent as ɵcc, ProgressBars as ɵcb, MdProgressBarModule as ɵdv, ProgressBarComponent as ɵdw, MdProgressSpinnerModule as ɵdx, MdProgressSpinnerComponent as ɵdz, MdProgressSpinnerCssMatStylerDirective as ɵdy, MdSpinnerComponent as ɵea, ProgressSpinnerComponent as ɵch, ProgressDirective as ɵcd, ProgressbarComponent as ɵce, ProgressbarConfigComponent as ɵcg, ProgressbarModule as ɵcf, MdbRangeInputComponent as ɵck, RANGE_VALUE_ACCESOR as ɵcj, RangeModule as ɵci, ScrollSpyElementDirective as ɵcn, ScrollSpyLinkDirective as ɵco, ScrollSpyWindowDirective as ɵcm, ScrollSpyDirective as ɵcl, ScrollSpyModule as ɵcq, ScrollSpyService as ɵcp, SidenavComponent as ɵcr, SidenavModule as ɵcs, PageScrollDirective as ɵct, PageScrollInstance as ɵcv, SmoothscrollModule as ɵcw, PageScrollService as ɵcu, MdbStepComponent as ɵcy, MdbStepperComponent as ɵcx, StepperModule as ɵcz, MdbStickyDirective as ɵda, StickyContentModule as ɵdb, TabHeadingDirective as ɵde, TabDirective as ɵdd, TabsetComponent as ɵdf, TabsetConfig as ɵdg, TabsModule as ɵdh, NgTranscludeDirective as ɵdc, MaterialChipsComponent as ɵdi, MaterialChipsModule as ɵdj, ClockPickerComponent as ɵdk, TimePickerModule as ɵdl };
 
 //# sourceMappingURL=ng-uikit-pro-standard.js.map

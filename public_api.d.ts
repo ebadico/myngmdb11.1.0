@@ -28,7 +28,6 @@ export * from './lib/pro/date-picker/index';
 export * from './lib/pro/easy-charts/index';
 export * from './lib/pro/file-input/index';
 export * from './lib/pro/inputs/index';
-export * from './lib/pro/lightbox/index';
 export * from './lib/pro/material-select/index';
 export * from './lib/pro/preloader/index';
 export * from './lib/pro/progressbars/index';

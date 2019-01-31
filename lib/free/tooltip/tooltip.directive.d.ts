@@ -48,6 +48,8 @@ export declare class TooltipDirective implements OnInit, OnDestroy, OnChanges {
     protected _delayTimeoutId: any;
     isBrowser: any;
     private _tooltip;
+    xxx: any;
+    yyy: any;
     constructor(_viewContainerRef: ViewContainerRef, _renderer: Renderer2, _elementRef: ElementRef, cis: ComponentLoaderFactory, config: TooltipConfig, platformId: string);
     onclick(event: any): void;
     onblur(): void;
@@ -64,7 +66,7 @@ export declare class TooltipDirective implements OnInit, OnDestroy, OnChanges {
      * Opens an element’s tooltip. This is considered a “manual” triggering of
      * the tooltip.
      */
-    show(): void;
+    show(event?: any): void;
     /**
      * Closes an element’s tooltip. This is considered a “manual” triggering of
      * the tooltip.

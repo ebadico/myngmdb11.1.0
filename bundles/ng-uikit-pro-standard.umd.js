@@ -1536,9 +1536,6 @@
             this.class = '';
             this.type = '';
             this.animation = '';
-            /**
-             * Will be emitted when active slide has been changed. Part of two-way-bindable [(activeSlide)] property
-             */
             this.activeSlideChange = new i0.EventEmitter(false);
             this.isBrowser = common.isPlatformBrowser(platformId);
             Object.assign(this, config);
@@ -1559,9 +1556,7 @@
              */ function () {
                 return this._currentActiveSlide;
             },
-            /** Index of currently displayed slide(started for 0) */
             set: /**
-             * Index of currently displayed slide(started for 0)
              * @param {?} index
              * @return {?}
              */ function (index) {
@@ -1608,11 +1603,7 @@
                 return slide.el.nativeElement.querySelector('img').src;
             };
         Object.defineProperty(CarouselComponent.prototype, "interval", {
-            /**
-             * Delay of item cycling in milliseconds. If false, carousel won't cycle automatically.
-             */
             get: /**
-             * Delay of item cycling in milliseconds. If false, carousel won't cycle automatically.
              * @return {?}
              */ function () {
                 return this._interval;
@@ -1646,16 +1637,10 @@
                 this.destroyed = true;
             };
         /**
-         * Adds new slide. If this slide is first in collection - set it as active and starts auto changing
-         * @param slide
-         */
-        /**
-         * Adds new slide. If this slide is first in collection - set it as active and starts auto changing
          * @param {?} slide
          * @return {?}
          */
         CarouselComponent.prototype.addSlide = /**
-         * Adds new slide. If this slide is first in collection - set it as active and starts auto changing
          * @param {?} slide
          * @return {?}
          */
@@ -1683,16 +1668,10 @@
                 }
             };
         /**
-         * Removes specified slide. If this slide is active - will roll to another slide
-         * @param slide
-         */
-        /**
-         * Removes specified slide. If this slide is active - will roll to another slide
          * @param {?} slide
          * @return {?}
          */
         CarouselComponent.prototype.removeSlide = /**
-         * Removes specified slide. If this slide is active - will roll to another slide
          * @param {?} slide
          * @return {?}
          */
@@ -1701,18 +1680,13 @@
                 /** @type {?} */
                 var remIndex = this._slides.indexOf(slide);
                 if (this._currentActiveSlide === remIndex) {
-                    // removing of active slide
-                    //  let nextSlideIndex: number = void 0;
                     /** @type {?} */
                     var nextSlideIndex_1 = void 0;
                     if (this._slides.length > 1) {
-                        // if this slide last - will roll to first slide, if noWrap flag is FALSE or to previous, if noWrap is TRUE
-                        // in case, if this slide in middle of collection, index of next slide is same to removed
                         nextSlideIndex_1 = !this.isLast(remIndex) ? remIndex :
                             this.noWrap ? remIndex - 1 : 0;
                     }
                     this._slides.remove(remIndex);
-                    // prevents exception with changing some value after checking
                     setTimeout(function () {
                         _this._select(nextSlideIndex_1);
                     }, 0);
@@ -1722,46 +1696,37 @@
                     /** @type {?} */
                     var currentSlideIndex_1 = this.getCurrentSlideIndex();
                     setTimeout(function () {
-                        // after removing, need to actualize index of current active slide
                         _this._currentActiveSlide = currentSlideIndex_1;
                         _this.activeSlideChange.emit(_this._currentActiveSlide);
                     }, 0);
                 }
             };
-        // Fixed problem while cannot swipe next / previous image while using HammerJS.
-        // Fixed problem while cannot swipe next / previous image while using HammerJS.
         /**
          * @param {?=} action
          * @return {?}
          */
-        CarouselComponent.prototype.swipe =
-            // Fixed problem while cannot swipe next / previous image while using HammerJS.
-            /**
-             * @param {?=} action
-             * @return {?}
-             */
+        CarouselComponent.prototype.swipe = /**
+         * @param {?=} action
+         * @return {?}
+         */
             function (action) {
                 if (action === void 0) {
                     action = this.SWIPE_ACTION.RIGHT;
                 }
                 if (action === this.SWIPE_ACTION.RIGHT) {
                     this.previousSlide();
+                    this.cdRef.markForCheck();
                 }
                 if (action === this.SWIPE_ACTION.LEFT) {
                     this.nextSlide();
+                    this.cdRef.markForCheck();
                 }
             };
         /**
-         * Rolling to next slide
-         * @param force: {boolean} if true - will ignore noWrap flag
-         */
-        /**
-         * Rolling to next slide
          * @param {?=} force
          * @return {?}
          */
         CarouselComponent.prototype.nextSlide = /**
-         * Rolling to next slide
          * @param {?=} force
          * @return {?}
          */
@@ -1790,16 +1755,10 @@
                 }
             };
         /**
-         * Rolling to previous slide
-         * @param force: {boolean} if true - will ignore noWrap flag
-         */
-        /**
-         * Rolling to previous slide
          * @param {?=} force
          * @return {?}
          */
         CarouselComponent.prototype.previousSlide = /**
-         * Rolling to previous slide
          * @param {?=} force
          * @return {?}
          */
@@ -1839,7 +1798,6 @@
          */
             function (goToIndex) {
                 var _this = this;
-                // const currentSlide = this._slides.get(this._currentActiveSlide);
                 /** @type {?} */
                 var goToSlide = this._slides.get(goToIndex);
                 if (this.animationEnd) {
@@ -1852,7 +1810,8 @@
                             _this.activeSlide = goToIndex;
                             _this.activeSlideChange.emit({ 'direction': 'Next', 'relatedTarget': _this.activeSlide });
                             _this.play();
-                        }, 99);
+                            _this.cdRef.markForCheck();
+                        }, 0);
                     }
                 }
             };
@@ -1882,7 +1841,8 @@
                             setTimeout(function () {
                                 goToSlide.directionLeft = true;
                                 currentSlide.directionLeft = true;
-                            }, 99);
+                                _this.cdRef.markForCheck();
+                            }, 100);
                         }
                     }
                     if (direction === Direction.PREV) {
@@ -1892,7 +1852,8 @@
                             setTimeout(function () {
                                 goToSlide.directionRight = true;
                                 currentSlide.directionRight = true;
-                            }, 99);
+                                _this.cdRef.markForCheck();
+                            }, 100);
                         }
                     }
                     if (this.isBrowser) {
@@ -1917,21 +1878,16 @@
                             }
                             _this.activeSlideChange.emit({ 'direction': directionName, 'relatedTarget': _this.activeSlide });
                             _this.play();
-                        }, 100);
+                            _this.cdRef.markForCheck();
+                        }, 700);
                     }
                 }
             };
         /**
-         * Rolling to specified slide
-         * @param index: {number} index of slide, which must be shown
-         */
-        /**
-         * Rolling to specified slide
          * @param {?} index
          * @return {?}
          */
         CarouselComponent.prototype.selectSlide = /**
-         * Rolling to specified slide
          * @param {?} index
          * @return {?}
          */
@@ -1953,14 +1909,9 @@
                 this.play();
             };
         /**
-         * Starts a auto changing of slides
-         */
-        /**
-         * Starts a auto changing of slides
          * @return {?}
          */
         CarouselComponent.prototype.play = /**
-         * Starts a auto changing of slides
          * @return {?}
          */
             function () {
@@ -1970,14 +1921,9 @@
                 }
             };
         /**
-         * Stops a auto changing of slides
-         */
-        /**
-         * Stops a auto changing of slides
          * @return {?}
          */
         CarouselComponent.prototype.pause = /**
-         * Stops a auto changing of slides
          * @return {?}
          */
             function () {
@@ -1987,29 +1933,19 @@
                 }
             };
         /**
-         * Finds and returns index of currently displayed slide
-         */
-        /**
-         * Finds and returns index of currently displayed slide
          * @return {?}
          */
         CarouselComponent.prototype.getCurrentSlideIndex = /**
-         * Finds and returns index of currently displayed slide
          * @return {?}
          */
             function () {
                 return this._slides.findIndex(function (slide) { return slide.active; });
             };
         /**
-         * Defines, whether the specified index is last in collection
-         */
-        /**
-         * Defines, whether the specified index is last in collection
          * @param {?} index
          * @return {?}
          */
         CarouselComponent.prototype.isLast = /**
-         * Defines, whether the specified index is last in collection
          * @param {?} index
          * @return {?}
          */
@@ -2017,20 +1953,12 @@
                 return index + 1 >= this._slides.length;
             };
         /**
-         * Defines next slide index, depending of direction
-         * @param direction: Direction(UNKNOWN|PREV|NEXT)
-         * @param force: {boolean} if TRUE - will ignore noWrap flag, else will return undefined if next slide require wrapping
-      
-         */
-        /**
-         * Defines next slide index, depending of direction
          * @private
          * @param {?} direction
          * @param {?} force
          * @return {?}
          */
         CarouselComponent.prototype.findNextSlideIndex = /**
-         * Defines next slide index, depending of direction
          * @private
          * @param {?} direction
          * @param {?} force
@@ -2044,12 +1972,10 @@
                 }
                 switch (direction) {
                     case Direction.NEXT:
-                        // if this is last slide, not force, looping is disabled and need to going forward - select current slide, as a next
                         nextSlideIndex = (!this.isLast(this._currentActiveSlide)) ? this._currentActiveSlide + 1 :
                             (!force && this.noWrap) ? this._currentActiveSlide : 0;
                         break;
                     case Direction.PREV:
-                        // if this is first slide, not force, looping is disabled and need to going backward - select current slide, as a next
                         nextSlideIndex = (this._currentActiveSlide > 0) ? this._currentActiveSlide - 1 :
                             (!force && this.noWrap) ? this._currentActiveSlide : this._slides.length - 1;
                         break;
@@ -2059,17 +1985,11 @@
                 return nextSlideIndex;
             };
         /**
-         * Sets a slide, which specified through index, as active
-         * @param index
-         */
-        /**
-         * Sets a slide, which specified through index, as active
          * @private
          * @param {?} index
          * @return {?}
          */
         CarouselComponent.prototype._select = /**
-         * Sets a slide, which specified through index, as active
          * @private
          * @param {?} index
          * @return {?}
@@ -2090,19 +2010,13 @@
                     this._currentActiveSlide = index;
                     nextSlide.active = true;
                     this.activeSlide = index;
-                    // this.activeSlideChange.emit(index);
                 }
             };
         /**
-         * Starts loop of auto changing of slides
-         */
-        /**
-         * Starts loop of auto changing of slides
          * @private
          * @return {?}
          */
         CarouselComponent.prototype.restartTimer = /**
-         * Starts loop of auto changing of slides
          * @private
          * @return {?}
          */
@@ -2127,15 +2041,10 @@
                 }
             };
         /**
-         * Stops loop of auto changing of slides
-         */
-        /**
-         * Stops loop of auto changing of slides
          * @private
          * @return {?}
          */
         CarouselComponent.prototype.resetTimer = /**
-         * Stops loop of auto changing of slides
          * @private
          * @return {?}
          */
@@ -2239,7 +2148,7 @@
         CarouselComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'mdb-carousel',
-                        template: "<div tabindex=\"0\" (swipeleft)=\"swipe($event.type)\" (swiperight)=\"swipe($event.type)\" (mouseenter)=\"pause()\" (mouseleave)=\"play()\" (mouseup)=\"play()\" class=\"carousel {{ class }} {{ type }}\">\n  <div class=\"controls-top\" *ngIf=\"slides.length > 1 && !checkNavigation() && isControls\">\n    <a class=\"btn-floating\" [class.disabled]=\"activeSlide===0&&noWrap\" (click)=\"previousSlide()\"><i class=\"fas fa-chevron-left\"></i></a>\n    <a class=\"btn-floating\" (click)=\"nextSlide()\" [class.disabled]=\"isLast(activeSlide) && noWrap\"><i class=\"fas fa-chevron-right\"></i></a>\n  </div>\n  <ol class=\"carousel-indicators\" *ngIf=\"slides.length > 1 && checkDots() && isControls\">\n   <li *ngFor=\"let slidez of slides; let i = index;\" [class.active]=\"slidez.active === true\" (click)=\"selectSlide(i)\"></li>\n  </ol>\n  <ol class=\"carousel-indicators\" *ngIf=\"slides.length > 1 && !checkDots() && isControls\">\n   <li *ngFor=\"let slidez of slides; let i = index;\" [class.active]=\"slidez.active === true\" (click)=\"selectSlide(i)\">\n    <img  class=\"d-block w-100 img-fluid\" src=\"{{ getImg(slidez) }}\">\n   </li>\n  </ol>\n  <div class=\"carousel-inner\"><ng-content></ng-content></div>\n  <a class=\"carousel-control-prev\" [class.disabled]=\"activeSlide === 0 && noWrap\" (click)=\"previousSlide()\" *ngIf=\"slides.length > 1 && checkNavigation() && isControls\">\n  <span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span>\n  <span  class=\"sr-only\">Previous</span>\n  </a>\n  <a class=\"carousel-control-next\" (click)=\"nextSlide()\" [class.disabled]=\"isLast(activeSlide) && noWrap\" *ngIf=\"slides.length > 1 && checkNavigation() && isControls\">\n  <span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span>\n  <span class=\"sr-only\">Next</span>\n  </a>\n</div>\n"
+                        template: "<div tabindex=\"0\" (swipeleft)=\"swipe($event.type)\" (swiperight)=\"swipe($event.type)\" (mouseenter)=\"pause()\" (mouseleave)=\"play()\" (mouseup)=\"play()\" class=\"carousel {{ class }} {{ type }}\">\n  <div class=\"controls-top\" *ngIf=\"slides.length > 1 && !checkNavigation() && isControls\">\n    <a class=\"btn-floating\" [class.disabled]=\"activeSlide===0&&noWrap\" (click)=\"previousSlide()\"><i class=\"fas fa-chevron-left\"></i></a>\n    <a class=\"btn-floating\" (click)=\"nextSlide()\" [class.disabled]=\"isLast(activeSlide) && noWrap\"><i class=\"fas fa-chevron-right\"></i></a>\n  </div>\n  <ol class=\"carousel-indicators\" *ngIf=\"slides.length > 1 && checkDots() && isControls\">\n    <li *ngFor=\"let slidez of slides; let i = index;\" [class.active]=\"slidez.active === true\" (click)=\"selectSlide(i)\"></li>\n  </ol>\n  <ol class=\"carousel-indicators\" *ngIf=\"slides.length > 1 && !checkDots() && isControls\">\n    <li *ngFor=\"let slidez of slides; let i = index;\" [class.active]=\"slidez.active === true\" (click)=\"selectSlide(i)\">\n      <img  class=\"d-block w-100 img-fluid\" src=\"{{ getImg(slidez) }}\">\n    </li>\n  </ol>\n  <div class=\"carousel-inner\"><ng-content></ng-content></div>\n  <a class=\"carousel-control-prev\" [class.disabled]=\"activeSlide === 0 && noWrap\" (click)=\"previousSlide()\" *ngIf=\"slides.length > 1 && checkNavigation() && isControls\">\n    <span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span>\n    <span  class=\"sr-only\">Previous</span>\n  </a>\n  <a class=\"carousel-control-next\" (click)=\"nextSlide()\" [class.disabled]=\"isLast(activeSlide) && noWrap\" *ngIf=\"slides.length > 1 && checkNavigation() && isControls\">\n    <span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span>\n    <span class=\"sr-only\">Next</span>\n  </a>\n</div>\n"
                     }] }
         ];
         /** @nocollapse */
@@ -8725,6 +8634,8 @@
             this.delay = 0;
             this.fadeDuration = 150;
             this.isBrowser = false;
+            this.xxx = _viewContainerRef;
+            this.yyy = cis;
             this.isBrowser = common.isPlatformBrowser((this.platformId));
             this._tooltip = cis
                 .createLoader(this._elementRef, _viewContainerRef, _renderer)
@@ -8871,20 +8782,24 @@
         /**
          * Opens an element’s tooltip. This is considered a “manual” triggering of
          * the tooltip.
+         * @param {?=} event
          * @return {?}
          */
         TooltipDirective.prototype.show = /**
          * Opens an element’s tooltip. This is considered a “manual” triggering of
          * the tooltip.
+         * @param {?=} event
          * @return {?}
          */
-            function () {
+            function (event) {
                 var _this = this;
                 if (this.isOpen || this.isDisabled || this._delayTimeoutId || !this.mdbTooltip) {
                     return;
                 }
                 if (!this.customHeight) {
-                    if (this.placement === 'top' && this._elementRef.nativeElement.offsetTop < 40) {
+                    /** @type {?} */
+                    var elPosition = event ? event.target.getBoundingClientRect() : this._elementRef.nativeElement.getBoundingClientRect();
+                    if (this.placement === 'top' && elPosition.top < 40) {
                         this.placement = 'bottom';
                     }
                     if (this.placement === 'bottom' && ( /** @type {?} */(this.getBottomOffset())) < 60) {
@@ -17938,265 +17853,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    // import * as screenfull from 'screenfull/dist/screenfull';
-    // import 'hammerjs';
-    var ImageModalComponent = /** @class */ (function () {
-        function ImageModalComponent(platformId, element, renderer) {
-            this.element = element;
-            this.renderer = renderer;
-            this.opened = false;
-            this.loading = false;
-            this.showRepeat = false;
-            this.isMobile = null;
-            this.clicked = false;
-            this.isBrowser = false;
-            this.zoomed = 'inactive';
-            this.SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
-            this.smooth = true;
-            this.cancelEvent = new i0.EventEmitter();
-            this.isBrowser = common.isPlatformBrowser(platformId);
-            this._element = this.element.nativeElement;
-            if (this.isBrowser) {
-                this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-            }
-        }
-        /**
-         * @return {?}
-         */
-        ImageModalComponent.prototype.toggleZoomed = /**
-         * @return {?}
-         */
-            function () {
-                /** @type {?} */
-                var imgRef = this.element.nativeElement.lastElementChild.lastElementChild.firstElementChild;
-                if (!this.clicked) {
-                    this.renderer.setStyle(imgRef, 'transform', 'scale(1.0, 1.0');
-                    this.renderer.setStyle(imgRef, 'animate', '300ms ease-out');
-                    this.renderer.setStyle(imgRef, 'cursor', 'zoom-out');
-                    this.clicked = true;
-                }
-                else if (this.clicked) {
-                    this.renderer.setStyle(imgRef, 'transform', 'scale(0.9, 0.9');
-                    this.renderer.setStyle(imgRef, 'animate', '300ms ease-in');
-                    this.renderer.setStyle(imgRef, 'cursor', 'zoom-in');
-                    this.clicked = false;
-                }
-            };
-        /**
-         * @return {?}
-         */
-        ImageModalComponent.prototype.toggleRestart = /**
-         * @return {?}
-         */
-            function () {
-                this.zoomed = (this.zoomed === 'inactive') ? 'active' : 'inactive';
-            };
-        /**
-         * @return {?}
-         */
-        ImageModalComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                this.loading = true;
-                if (this.imagePointer >= 0) {
-                    this.showRepeat = false;
-                    this.openGallery(this.imagePointer);
-                }
-                else {
-                    this.showRepeat = true;
-                }
-            };
-        /**
-         * @return {?}
-         */
-        ImageModalComponent.prototype.closeGallery = /**
-         * @return {?}
-         */
-            function () {
-                this.zoom = false;
-                if (screenfull.enabled) {
-                    screenfull.exit();
-                }
-                this.opened = false;
-                this.cancelEvent.emit(null);
-            };
-        /**
-         * @return {?}
-         */
-        ImageModalComponent.prototype.prevImage = /**
-         * @return {?}
-         */
-            function () {
-                this.loading = true;
-                this.currentImageIndex--;
-                if (this.currentImageIndex < 0) {
-                    this.currentImageIndex = this.modalImages.length - 1;
-                }
-                this.openGallery(this.currentImageIndex);
-            };
-        /**
-         * @return {?}
-         */
-        ImageModalComponent.prototype.nextImage = /**
-         * @return {?}
-         */
-            function () {
-                this.loading = true;
-                this.currentImageIndex++;
-                if (this.modalImages.length === this.currentImageIndex) {
-                    this.currentImageIndex = 0;
-                }
-                this.openGallery(this.currentImageIndex);
-            };
-        /**
-         * @param {?} index
-         * @return {?}
-         */
-        ImageModalComponent.prototype.openGallery = /**
-         * @param {?} index
-         * @return {?}
-         */
-            function (index) {
-                if (!index) {
-                    this.currentImageIndex = 1;
-                }
-                this.currentImageIndex = index;
-                this.opened = true;
-                for (var i = 0; i < this.modalImages.length; i++) {
-                    if (i === this.currentImageIndex) {
-                        this.imgSrc = this.modalImages[i].img;
-                        this.caption = this.modalImages[i].caption;
-                        this.loading = false;
-                        break;
-                    }
-                }
-            };
-        /**
-         * @return {?}
-         */
-        ImageModalComponent.prototype.fullScreen = /**
-         * @return {?}
-         */
-            function () {
-                if (screenfull.enabled) {
-                    screenfull.toggle();
-                }
-            };
-        Object.defineProperty(ImageModalComponent.prototype, "is_iPhone_or_iPod", {
-            get: /**
-             * @return {?}
-             */ function () {
-                if (this.isBrowser) {
-                    if (navigator && navigator.userAgent && navigator.userAgent != null) {
-                        /** @type {?} */
-                        var strUserAgent = navigator.userAgent.toLowerCase();
-                        /** @type {?} */
-                        var arrMatches = strUserAgent.match(/ipad/);
-                        if (arrMatches != null) {
-                            return true;
-                        }
-                    }
-                    return false;
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-        /**
-         * @param {?} event
-         * @return {?}
-         */
-        ImageModalComponent.prototype.keyboardControl = /**
-         * @param {?} event
-         * @return {?}
-         */
-            function (event) {
-                if (this.opened) {
-                    if (event.keyCode === 39) {
-                        this.nextImage();
-                    }
-                    if (event.keyCode === 37) {
-                        this.prevImage();
-                    }
-                    if (event.keyCode === 27) {
-                        this.closeGallery();
-                    }
-                }
-            };
-        /**
-         * @param {?=} action
-         * @return {?}
-         */
-        ImageModalComponent.prototype.swipe = /**
-         * @param {?=} action
-         * @return {?}
-         */
-            function (action) {
-                if (action === void 0) {
-                    action = this.SWIPE_ACTION.RIGHT;
-                }
-                if (action === this.SWIPE_ACTION.RIGHT) {
-                    this.prevImage();
-                }
-                if (action === this.SWIPE_ACTION.LEFT) {
-                    this.nextImage();
-                }
-            };
-        ImageModalComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'mdb-image-modal',
-                        template: "<div class=\"ng-gallery mdb-lightbox {{ type }}\" *ngIf=\"modalImages && showRepeat\">\n  <figure class=\"col-md-4\" *ngFor=\"let i of modalImages; let index = index\">\n    <img src=\"{{ !i.thumb ? i.img : i.thumb }}\" class=\"ng-thumb\" (click)=\"openGallery(index)\"\n         alt=\"Image {{ index + 1 }}\"/>\n  </figure>\n</div>\n<div tabindex=\"0\" class=\"ng-overlay\" [class.hide_lightbox]=\"opened == false\">\n  <div class=\"top-bar\" style='z-index: 100000'>\n    <span *ngIf=\"modalImages\" class=\"info-text\">{{ currentImageIndex + 1 }}/{{ modalImages.length }}</span>\n    <a class=\"close-popup\" (click)=\"closeGallery()\" (click)=\"toggleRestart()\"></a>\n    <a *ngIf=\"!is_iPhone_or_iPod\" class=\"fullscreen-toogle\" [class.toggled]='fullscreen' (click)=\"fullScreen()\"></a>\n    <a class=\"zoom-toogle\" [class.zoom]='zoom' (click)=\"toggleZoomed()\" *ngIf=\"!isMobile\"></a>\n  </div>\n  <div class=\"ng-gallery-content\">\n    <img *ngIf=\"!loading\" src=\"{{imgSrc}}\" [class.smooth]='smooth' class=\"effect\" (swipeleft)=\"swipe($event.type)\"\n         (swiperight)=\"swipe($event.type)\" (click)=\"toggleZoomed()\" style=\"\"/>\n\n    <div class=\"uil-ring-css\" *ngIf=\"loading\">\n      <div></div>\n    </div>\n    <a class=\"nav-left\" *ngIf=\"modalImages && modalImages.length >1 && !isMobile\" (click)=\"prevImage()\">\n      <span></span>\n    </a>\n    <a class=\"nav-right\" *ngIf=\"modalImages && modalImages.length >1 && !isMobile\" (click)=\"nextImage()\">\n      <span></span>\n    </a>\n  </div>\n  <div class=\"row\" *ngIf=\"caption\">\n    <div class=\"col-md-12 mx-auto bottom-bar text-center\">\n      <figcaption class=\"text-white lightbox-caption\">{{caption}}</figcaption>\n    </div>\n  </div>\n</div>\n<div *ngIf=\"openModalWindow\">\n  <mdb-image-modal [imagePointer]=\"imagePointer\"></mdb-image-modal>\n</div>\n",
-                        styles: ['.bottom-bar {z-index: 100000; position: absolute; bottom: 2rem; left: 0; right: 0; width: 100%;} ']
-                    }] }
-        ];
-        /** @nocollapse */
-        ImageModalComponent.ctorParameters = function () {
-            return [
-                { type: String, decorators: [{ type: i0.Inject, args: [i0.PLATFORM_ID,] }] },
-                { type: i0.ElementRef },
-                { type: i0.Renderer2 }
-            ];
-        };
-        ImageModalComponent.propDecorators = {
-            modalImages: [{ type: i0.Input, args: ['modalImages',] }],
-            imagePointer: [{ type: i0.Input, args: ['imagePointer',] }],
-            fullscreen: [{ type: i0.Input, args: ['fullscreen',] }],
-            zoom: [{ type: i0.Input, args: ['zoom',] }],
-            smooth: [{ type: i0.Input, args: ['smooth',] }],
-            type: [{ type: i0.Input, args: ['type',] }],
-            cancelEvent: [{ type: i0.Output, args: ['cancelEvent',] }],
-            keyboardControl: [{ type: i0.HostListener, args: ['document:keyup', ['$event'],] }]
-        };
-        return ImageModalComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var LightBoxModule = /** @class */ (function () {
-        function LightBoxModule() {
-        }
-        LightBoxModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [common.CommonModule, forms.FormsModule],
-                        declarations: [ImageModalComponent],
-                        exports: [ImageModalComponent]
-                    },] }
-        ];
-        return LightBoxModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var Diacritics = /** @class */ (function () {
         function Diacritics() {
         }
@@ -20567,22 +20223,24 @@
          * @return {?}
          */
             function () {
-                /** @type {?} */
-                var selectRect = this.el.nativeElement.getBoundingClientRect();
-                /** @type {?} */
-                var scrollTop = this.document.documentElement.scrollTop || this.document.body.scrollTop;
-                /** @type {?} */
-                var offsetTop = selectRect.top + scrollTop;
-                /** @type {?} */
-                var height = selectRect.height;
-                /** @type {?} */
-                var dropdownHeight = this.dropdownMaxHeight > this.dropdownHeight ? this.dropdownHeight : this.dropdownMaxHeight;
-                this.left = selectRect.left;
-                if (offsetTop + dropdownHeight + this.filterHeight > scrollTop + this.document.documentElement.clientHeight) {
-                    this.top = offsetTop - dropdownHeight + height - this.filterHeight;
-                }
-                else {
-                    this.top = offsetTop;
+                if (this.isBrowser) {
+                    /** @type {?} */
+                    var selectRect = this.el.nativeElement.getBoundingClientRect();
+                    /** @type {?} */
+                    var scrollTop = this.document.documentElement.scrollTop || this.document.body.scrollTop;
+                    /** @type {?} */
+                    var offsetTop = selectRect.top + scrollTop;
+                    /** @type {?} */
+                    var height = selectRect.height;
+                    /** @type {?} */
+                    var dropdownHeight = this.dropdownMaxHeight > this.dropdownHeight ? this.dropdownHeight : this.dropdownMaxHeight;
+                    this.left = selectRect.left;
+                    if (offsetTop + dropdownHeight + this.filterHeight > scrollTop + this.document.documentElement.clientHeight) {
+                        this.top = offsetTop - dropdownHeight + height - this.filterHeight;
+                    }
+                    else {
+                        this.top = offsetTop;
+                    }
                 }
             };
         /**
@@ -20594,12 +20252,14 @@
          * @return {?}
          */
             function () {
-                /** @type {?} */
-                var body = this.document.querySelector('body');
-                /** @type {?} */
-                var dropdown = this.dropdown._elementRef.nativeElement;
-                if (body) {
-                    this.renderer.appendChild(body, dropdown);
+                if (this.isBrowser) {
+                    /** @type {?} */
+                    var body = this.document.querySelector('body');
+                    /** @type {?} */
+                    var dropdown = this.dropdown._elementRef.nativeElement;
+                    if (body) {
+                        this.renderer.appendChild(body, dropdown);
+                    }
                 }
             };
         /**
@@ -20717,6 +20377,14 @@
             function () {
                 this.hasOptionsItems = this.optionList.filtered.length > 0;
                 this.updateSelectAllState();
+            };
+        /**
+         * @return {?}
+         */
+        SelectDropdownComponent.prototype.onkeydown = /**
+         * @return {?}
+         */
+            function () {
                 this.setOptionHeight();
             };
         /**
@@ -20967,25 +20635,21 @@
                 }
             };
         /**
-         * @param {?} event
          * @return {?}
          */
         SelectDropdownComponent.prototype.onAnimationDone = /**
-         * @param {?} event
          * @return {?}
          */
-            function (event) {
+            function () {
                 this.animationDone.emit();
             };
         /**
-         * @param {?} event
          * @return {?}
          */
         SelectDropdownComponent.prototype.onAnimationStart = /**
-         * @param {?} event
          * @return {?}
          */
-            function (event) {
+            function () {
                 this.animationStart.emit();
             };
         /**
@@ -21050,7 +20714,7 @@
         SelectDropdownComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'mdb-select-dropdown',
-                        template: "<div (click)=\"$event.stopPropagation()\" class=\"dropdown-content\" #dropdownContent [ngStyle]=\"{'top.px': top, 'left.px': left, 'width.px': width}\"\n[@dropdownAnimation]=\"{value: state, params: {startHeight: startHeight, endHeight: endHeight}}\" (@dropdownAnimation.done)=\"onAnimationDone($event)\" (@dropdownAnimation.start)=\"onAnimationStart($event)\">\n  <div class=\"filter md-form px-2\" *ngIf=\"filterEnabled\">\n    <input\n    type=\"text\"\n    class=\"search form-control w-100 d-block\"\n    #filterInput\n    autocomplete=\"on\"\n    [placeholder]=\"placeholder\"\n    (input)=\"onSingleFilterInput($event)\"\n    (keydown)=\"onSingleFilterKeydown($event)\">\n  </div>\n\n  <div class=\"options\" #optionsList>\n    <ul class=\"select-dropdown\" [ngClass]=\"{'multiple-select-dropdown': multiple}\"\n    (wheel)=\"onOptionsWheel($event)\">\n      <li [ngStyle]=\"{ 'height.px': optionHeight }\" *ngIf=\"multiple && enableSelectAll && this.hasOptionsItems\" (click)=\"onSelectAllClick()\">\n        <span class=\"filtrable\" *ngIf=\"multiple\">\n          <input type=\"checkbox\" [checked]=\"selectAllSelected\" class=\"form-check-input {{customClass}}\">\n          <label></label>\n          {{selectAllLabel}}\n        </span>\n      </li>\n      <li *ngFor=\"let option of optionList.filtered\"\n        [ngClass]=\"{'active': option.highlighted, 'selected': option.selected, 'disabled': option.disabled, 'optgroup': option.group, 'd-flex justify-content-between flex-row-reverse align-items-center': option.icon}\"\n        [ngStyle]=\"{'height': optionHeight, 'background-color': getOptionStyle(option)['background-color'], 'color': getOptionStyle(option)['color']}\"\n        (click)=\"onOptionClick(option)\"\n        (mouseover)=\"option.hovered = true\"\n        (mouseleave)=\"option.hovered = false\">\n        <img class=\"rounded-circle\" [src]=\"option.icon\" *ngIf=\"option.icon !== ''\">\n        <span class=\"deselect-option\" *ngIf=\"!multiple\">{{option.label}}</span>\n        <span class=\"deselect-option\" *ngIf=\"multiple\">\n          <input type=\"checkbox\" [checked]=\"option.selected\" class=\"form-check-input {{customClass}}\" [disabled]=\"option.disabled\">\n          <label></label>\n          {{option.label}}\n        </span>\n      </li>\n      <li *ngIf=\"!this.hasOptionsItems\" class=\"message disabled\">\n        <span>{{notFoundMsg}}</span>\n      </li>\n    </ul>\n  </div>\n</div>\n",
+                        template: "<div (click)=\"$event.stopPropagation()\" class=\"dropdown-content\" #dropdownContent [ngStyle]=\"{'top.px': top, 'left.px': left, 'width.px': width}\"\n[@dropdownAnimation]=\"{value: state, params: {startHeight: startHeight, endHeight: endHeight}}\" (@dropdownAnimation.done)=\"onAnimationDone()\" (@dropdownAnimation.start)=\"onAnimationStart()\">\n  <div class=\"filter md-form px-2\" *ngIf=\"filterEnabled\">\n    <input\n    type=\"text\"\n    class=\"search form-control w-100 d-block\"\n    #filterInput\n    autocomplete=\"on\"\n    [placeholder]=\"placeholder\"\n    (input)=\"onSingleFilterInput($event)\"\n    (keydown)=\"onSingleFilterKeydown($event)\">\n  </div>\n\n  <div class=\"options\" #optionsList>\n    <ul class=\"select-dropdown\" [ngClass]=\"{'multiple-select-dropdown': multiple}\"\n    (wheel)=\"onOptionsWheel($event)\">\n      <li [ngStyle]=\"{ 'height.px': optionHeight }\" *ngIf=\"multiple && enableSelectAll && this.hasOptionsItems\" (click)=\"onSelectAllClick()\">\n        <span class=\"filtrable\" *ngIf=\"multiple\">\n          <input type=\"checkbox\" [checked]=\"selectAllSelected\" class=\"form-check-input {{customClass}}\">\n          <label></label>\n          {{selectAllLabel}}\n        </span>\n      </li>\n      <li *ngFor=\"let option of optionList.filtered\"\n        [ngClass]=\"{'active': option.highlighted, 'selected': option.selected, 'disabled': option.disabled, 'optgroup': option.group, 'd-flex justify-content-between flex-row-reverse align-items-center': option.icon}\"\n        [ngStyle]=\"{'height': optionHeight, 'background-color': getOptionStyle(option)['background-color'], 'color': getOptionStyle(option)['color']}\"\n        (click)=\"onOptionClick(option)\"\n        (mouseover)=\"option.hovered = true\"\n        (mouseleave)=\"option.hovered = false\">\n        <img class=\"rounded-circle\" [src]=\"option.icon\" *ngIf=\"option.icon !== ''\">\n        <span class=\"deselect-option\" *ngIf=\"!multiple\">{{option.label}}</span>\n        <span class=\"deselect-option\" *ngIf=\"multiple\">\n          <input type=\"checkbox\" [checked]=\"option.selected\" class=\"form-check-input {{customClass}}\" [disabled]=\"option.disabled\">\n          <label></label>\n          {{option.label}}\n        </span>\n      </li>\n      <li *ngIf=\"!this.hasOptionsItems\" class=\"message disabled\">\n        <span>{{notFoundMsg}}</span>\n      </li>\n    </ul>\n  </div>\n</div>\n",
                         encapsulation: i0.ViewEncapsulation.None,
                         changeDetection: i0.ChangeDetectionStrategy.Default,
                         animations: [animations.trigger('dropdownAnimation', [
@@ -21098,7 +20762,8 @@
             filterInput: [{ type: i0.ViewChild, args: ['filterInput',] }],
             optionsList: [{ type: i0.ViewChild, args: ['optionsList',] }],
             dropdownContent: [{ type: i0.ViewChild, args: ['dropdownContent',] }],
-            onkeyup: [{ type: i0.HostListener, args: ['keyup',] }]
+            onkeyup: [{ type: i0.HostListener, args: ['keyup',] }],
+            onkeydown: [{ type: i0.HostListener, args: ['input',] }]
         };
         return SelectDropdownComponent;
     }());
@@ -27396,7 +27061,6 @@
         SelectModule,
         DatepickerModule,
         TimePickerModule,
-        LightBoxModule,
         SidenavModule,
         ChartSimpleModule,
         AccordionModule,
@@ -27423,7 +27087,6 @@
                             SelectModule,
                             DatepickerModule,
                             TimePickerModule,
-                            LightBoxModule,
                             SidenavModule,
                             ChartSimpleModule,
                             AccordionModule,
@@ -27668,8 +27331,6 @@
     exports.MDBFileDropDirective = MDBFileDropDirective;
     exports.CharCounterDirective = CharCounterDirective;
     exports.CharCounterModule = CharCounterModule;
-    exports.ImageModalComponent = ImageModalComponent;
-    exports.LightBoxModule = LightBoxModule;
     exports.Diacritics = Diacritics;
     exports.Option = Option;
     exports.OptionList = OptionList;
@@ -27733,19 +27394,19 @@
     exports.ɵa = RADIO_CONTROL_VALUE_ACCESSOR;
     exports.ɵc = CHECKBOX_VALUE_ACCESSOR;
     exports.ɵd = CheckboxComponent;
-    exports.ɵds = LinksComponent;
-    exports.ɵdt = LogoComponent;
-    exports.ɵdr = NavbarService;
-    exports.ɵdu = NavlinksComponent;
-    exports.ɵdp = ComponentLoaderFactory;
-    exports.ɵdv = OnChange;
-    exports.ɵdq = PositioningService;
+    exports.ɵdq = LinksComponent;
+    exports.ɵdr = LogoComponent;
+    exports.ɵdp = NavbarService;
+    exports.ɵds = NavlinksComponent;
+    exports.ɵdn = ComponentLoaderFactory;
+    exports.ɵdt = OnChange;
+    exports.ɵdo = PositioningService;
     exports.ɵf = SBItemComponent;
     exports.ɵh = SBItemBodyComponent;
     exports.ɵg = SBItemHeadComponent;
     exports.ɵi = SqueezeBoxComponent;
     exports.ɵe = AccordionModule;
-    exports.ɵdw = TOAST_CONFIG;
+    exports.ɵdu = TOAST_CONFIG;
     exports.ɵn = AutoCompleterModule;
     exports.ɵj = MdbAutoCompleterComponent;
     exports.ɵk = MdbOptionComponent;
@@ -27785,56 +27446,54 @@
     exports.ɵbr = FileInputModule;
     exports.ɵbu = CharCounterDirective;
     exports.ɵbv = CharCounterModule;
-    exports.ɵbw = ImageModalComponent;
-    exports.ɵbx = LightBoxModule;
-    exports.ɵcb = SelectDropdownComponent;
-    exports.ɵbz = SELECT_VALUE_ACCESSOR;
-    exports.ɵca = SelectComponent;
-    exports.ɵcc = SelectModule;
-    exports.ɵdo = MDBRootModulePro;
-    exports.ɵce = BarComponent;
-    exports.ɵcd = ProgressBars;
-    exports.ɵdx = MdProgressBarModule;
-    exports.ɵdy = ProgressBarComponent;
-    exports.ɵdz = MdProgressSpinnerModule;
-    exports.ɵeb = MdProgressSpinnerComponent;
-    exports.ɵea = MdProgressSpinnerCssMatStylerDirective;
-    exports.ɵec = MdSpinnerComponent;
-    exports.ɵcj = ProgressSpinnerComponent;
-    exports.ɵcf = ProgressDirective;
-    exports.ɵcg = ProgressbarComponent;
-    exports.ɵci = ProgressbarConfigComponent;
-    exports.ɵch = ProgressbarModule;
-    exports.ɵcm = MdbRangeInputComponent;
-    exports.ɵcl = RANGE_VALUE_ACCESOR;
-    exports.ɵck = RangeModule;
-    exports.ɵcp = ScrollSpyElementDirective;
-    exports.ɵcq = ScrollSpyLinkDirective;
-    exports.ɵco = ScrollSpyWindowDirective;
-    exports.ɵcn = ScrollSpyDirective;
-    exports.ɵcs = ScrollSpyModule;
-    exports.ɵcr = ScrollSpyService;
-    exports.ɵct = SidenavComponent;
-    exports.ɵcu = SidenavModule;
-    exports.ɵcv = PageScrollDirective;
-    exports.ɵcx = PageScrollInstance;
-    exports.ɵcy = SmoothscrollModule;
-    exports.ɵcw = PageScrollService;
-    exports.ɵda = MdbStepComponent;
-    exports.ɵcz = MdbStepperComponent;
-    exports.ɵdb = StepperModule;
-    exports.ɵdc = MdbStickyDirective;
-    exports.ɵdd = StickyContentModule;
-    exports.ɵdg = TabHeadingDirective;
-    exports.ɵdf = TabDirective;
-    exports.ɵdh = TabsetComponent;
-    exports.ɵdi = TabsetConfig;
-    exports.ɵdj = TabsModule;
-    exports.ɵde = NgTranscludeDirective;
-    exports.ɵdk = MaterialChipsComponent;
-    exports.ɵdl = MaterialChipsModule;
-    exports.ɵdm = ClockPickerComponent;
-    exports.ɵdn = TimePickerModule;
+    exports.ɵbz = SelectDropdownComponent;
+    exports.ɵbx = SELECT_VALUE_ACCESSOR;
+    exports.ɵby = SelectComponent;
+    exports.ɵca = SelectModule;
+    exports.ɵdm = MDBRootModulePro;
+    exports.ɵcc = BarComponent;
+    exports.ɵcb = ProgressBars;
+    exports.ɵdv = MdProgressBarModule;
+    exports.ɵdw = ProgressBarComponent;
+    exports.ɵdx = MdProgressSpinnerModule;
+    exports.ɵdz = MdProgressSpinnerComponent;
+    exports.ɵdy = MdProgressSpinnerCssMatStylerDirective;
+    exports.ɵea = MdSpinnerComponent;
+    exports.ɵch = ProgressSpinnerComponent;
+    exports.ɵcd = ProgressDirective;
+    exports.ɵce = ProgressbarComponent;
+    exports.ɵcg = ProgressbarConfigComponent;
+    exports.ɵcf = ProgressbarModule;
+    exports.ɵck = MdbRangeInputComponent;
+    exports.ɵcj = RANGE_VALUE_ACCESOR;
+    exports.ɵci = RangeModule;
+    exports.ɵcn = ScrollSpyElementDirective;
+    exports.ɵco = ScrollSpyLinkDirective;
+    exports.ɵcm = ScrollSpyWindowDirective;
+    exports.ɵcl = ScrollSpyDirective;
+    exports.ɵcq = ScrollSpyModule;
+    exports.ɵcp = ScrollSpyService;
+    exports.ɵcr = SidenavComponent;
+    exports.ɵcs = SidenavModule;
+    exports.ɵct = PageScrollDirective;
+    exports.ɵcv = PageScrollInstance;
+    exports.ɵcw = SmoothscrollModule;
+    exports.ɵcu = PageScrollService;
+    exports.ɵcy = MdbStepComponent;
+    exports.ɵcx = MdbStepperComponent;
+    exports.ɵcz = StepperModule;
+    exports.ɵda = MdbStickyDirective;
+    exports.ɵdb = StickyContentModule;
+    exports.ɵde = TabHeadingDirective;
+    exports.ɵdd = TabDirective;
+    exports.ɵdf = TabsetComponent;
+    exports.ɵdg = TabsetConfig;
+    exports.ɵdh = TabsModule;
+    exports.ɵdc = NgTranscludeDirective;
+    exports.ɵdi = MaterialChipsComponent;
+    exports.ɵdj = MaterialChipsModule;
+    exports.ɵdk = ClockPickerComponent;
+    exports.ɵdl = TimePickerModule;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

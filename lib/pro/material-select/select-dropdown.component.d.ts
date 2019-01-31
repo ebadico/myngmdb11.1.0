@@ -43,6 +43,7 @@ export declare class SelectDropdownComponent implements AfterViewInit, OnChanges
     constructor(_elementRef: ElementRef, _renderer: Renderer2, cdRef: ChangeDetectorRef);
     /** Event handlers. **/
     onkeyup(): void;
+    onkeydown(): void;
     ngOnInit(): void;
     setDropdownHeight(): void;
     setVisibleOptionsNumber(): void;
@@ -61,8 +62,8 @@ export declare class SelectDropdownComponent implements AfterViewInit, OnChanges
     onSelectAllClick(): void;
     updateSelectAllState(): void;
     clearFilterInput(): void;
-    onAnimationDone(event: any): void;
-    onAnimationStart(event: any): void;
+    onAnimationDone(): void;
+    onAnimationStart(): void;
     moveHighlightedIntoView(): void;
     private handleOptionsWheel;
 }

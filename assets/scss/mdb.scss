@@ -72,7 +72,6 @@
 @import "pro/dropdowns";
 @import "pro/navbars";
 @import "pro/scrollspy";
-@import "pro/modules/lightbox/module";
 @import "pro/chips";
 @import "pro/msc";
 @import "pro/forms";
@@ -115,8 +114,8 @@
 @import "pro/sections/pricing";
 @import "pro/sections/contacts";
 // Pro addons
-// @import "addons-pro/steppers";
-// @import "addons-pro/timeline";
+@import "addons-pro/steppers";
+@import "addons-pro/timeline";
 // @import "addons-pro/cards-extended";
 // @import "addons-pro/chat";
 // Angular
