@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-export * from './ng-uikit-pro-standard/index';
- 
-=======
 export * from './lib/free/badge/index';
 export * from './lib/free/breadcrumbs/index';
 export * from './lib/free/buttons/index';
@@ -32,6 +28,7 @@ export * from './lib/pro/date-picker/index';
 export * from './lib/pro/easy-charts/index';
 export * from './lib/pro/file-input/index';
 export * from './lib/pro/inputs/index';
+export * from './lib/pro/lightbox/index';
 export * from './lib/pro/material-select/index';
 export * from './lib/pro/preloader/index';
 export * from './lib/pro/progressbars/index';
@@ -45,4 +42,3 @@ export * from './lib/pro/tabs-pills/index';
 export * from './lib/pro/tags/index';
 export * from './lib/pro/time-picker/index';
 export * from './lib/mdb.module';
->>>>>>> f220af6587333cb3d5c3dc93eb66e89014e9b3e4

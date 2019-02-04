@@ -11147,40 +11147,42 @@
          * @return {?}
          */
             function (event) {
-                switch (event.key) {
-                    case 'ArrowDown':
-                        this.moveHighlightedIntoView(event.key);
-                        if (!this.isOpen()) {
-                            this.show();
-                        }
-                        if (this._selectedItemIndex === 0) {
-                            this.highlightRow(0);
-                        }
-                        if (this._selectedItemIndex + 1 <= this._allItems.length - 1) {
-                            this.highlightRow(++this._selectedItemIndex);
-                        }
-                        else if (this._selectedItemIndex + 1 === this._allItems.length) {
-                            this.highlightRow(0);
-                        }
-                        break;
-                    case 'ArrowUp':
-                        this.moveHighlightedIntoView(event.key);
-                        if (this._selectedItemIndex === -1 || this._selectedItemIndex === 0) {
-                            this.highlightRow(this._allItems.length);
-                        }
-                        this.highlightRow(--this._selectedItemIndex);
-                        break;
-                    case 'Escape':
-                        this.hide();
-                        break;
-                    case 'Enter':
-                        /** @type {?} */
-                        var selectedOption = this.mdbOptions.map(function (el) { return el; })[this._selectedItemIndex];
-                        if (selectedOption) {
-                            this.setSelectedItem({ text: selectedOption.value, element: selectedOption });
-                        }
-                        this.hide();
-                        break;
+                if (this.dropdown) {
+                    switch (event.key) {
+                        case 'ArrowDown':
+                            this.moveHighlightedIntoView(event.key);
+                            if (!this.isOpen()) {
+                                this.show();
+                            }
+                            if (this._selectedItemIndex === 0) {
+                                this.highlightRow(0);
+                            }
+                            if (this._selectedItemIndex + 1 <= this._allItems.length - 1) {
+                                this.highlightRow(++this._selectedItemIndex);
+                            }
+                            else if (this._selectedItemIndex + 1 === this._allItems.length) {
+                                this.highlightRow(0);
+                            }
+                            break;
+                        case 'ArrowUp':
+                            this.moveHighlightedIntoView(event.key);
+                            if (this._selectedItemIndex === -1 || this._selectedItemIndex === 0) {
+                                this.highlightRow(this._allItems.length);
+                            }
+                            this.highlightRow(--this._selectedItemIndex);
+                            break;
+                        case 'Escape':
+                            this.hide();
+                            break;
+                        case 'Enter':
+                            /** @type {?} */
+                            var selectedOption = this.mdbOptions.map(function (el) { return el; })[this._selectedItemIndex];
+                            if (selectedOption) {
+                                this.setSelectedItem({ text: selectedOption.value, element: selectedOption });
+                            }
+                            this.hide();
+                            break;
+                    }
                 }
             };
         /**
@@ -17842,6 +17844,265 @@
                     },] }
         ];
         return CharCounterModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    // import * as screenfull from 'screenfull/dist/screenfull';
+    // import 'hammerjs';
+    var ImageModalComponent = /** @class */ (function () {
+        function ImageModalComponent(platformId, element, renderer) {
+            this.element = element;
+            this.renderer = renderer;
+            this.opened = false;
+            this.loading = false;
+            this.showRepeat = false;
+            this.isMobile = null;
+            this.clicked = false;
+            this.isBrowser = false;
+            this.zoomed = 'inactive';
+            this.SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
+            this.smooth = true;
+            this.cancelEvent = new i0.EventEmitter();
+            this.isBrowser = common.isPlatformBrowser(platformId);
+            this._element = this.element.nativeElement;
+            if (this.isBrowser) {
+                this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            }
+        }
+        /**
+         * @return {?}
+         */
+        ImageModalComponent.prototype.toggleZoomed = /**
+         * @return {?}
+         */
+            function () {
+                /** @type {?} */
+                var imgRef = this.element.nativeElement.lastElementChild.lastElementChild.firstElementChild;
+                if (!this.clicked) {
+                    this.renderer.setStyle(imgRef, 'transform', 'scale(1.0, 1.0');
+                    this.renderer.setStyle(imgRef, 'animate', '300ms ease-out');
+                    this.renderer.setStyle(imgRef, 'cursor', 'zoom-out');
+                    this.clicked = true;
+                }
+                else if (this.clicked) {
+                    this.renderer.setStyle(imgRef, 'transform', 'scale(0.9, 0.9');
+                    this.renderer.setStyle(imgRef, 'animate', '300ms ease-in');
+                    this.renderer.setStyle(imgRef, 'cursor', 'zoom-in');
+                    this.clicked = false;
+                }
+            };
+        /**
+         * @return {?}
+         */
+        ImageModalComponent.prototype.toggleRestart = /**
+         * @return {?}
+         */
+            function () {
+                this.zoomed = (this.zoomed === 'inactive') ? 'active' : 'inactive';
+            };
+        /**
+         * @return {?}
+         */
+        ImageModalComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                this.loading = true;
+                if (this.imagePointer >= 0) {
+                    this.showRepeat = false;
+                    this.openGallery(this.imagePointer);
+                }
+                else {
+                    this.showRepeat = true;
+                }
+            };
+        /**
+         * @return {?}
+         */
+        ImageModalComponent.prototype.closeGallery = /**
+         * @return {?}
+         */
+            function () {
+                this.zoom = false;
+                if (screenfull.enabled) {
+                    screenfull.exit();
+                }
+                this.opened = false;
+                this.cancelEvent.emit(null);
+            };
+        /**
+         * @return {?}
+         */
+        ImageModalComponent.prototype.prevImage = /**
+         * @return {?}
+         */
+            function () {
+                this.loading = true;
+                this.currentImageIndex--;
+                if (this.currentImageIndex < 0) {
+                    this.currentImageIndex = this.modalImages.length - 1;
+                }
+                this.openGallery(this.currentImageIndex);
+            };
+        /**
+         * @return {?}
+         */
+        ImageModalComponent.prototype.nextImage = /**
+         * @return {?}
+         */
+            function () {
+                this.loading = true;
+                this.currentImageIndex++;
+                if (this.modalImages.length === this.currentImageIndex) {
+                    this.currentImageIndex = 0;
+                }
+                this.openGallery(this.currentImageIndex);
+            };
+        /**
+         * @param {?} index
+         * @return {?}
+         */
+        ImageModalComponent.prototype.openGallery = /**
+         * @param {?} index
+         * @return {?}
+         */
+            function (index) {
+                if (!index) {
+                    this.currentImageIndex = 1;
+                }
+                this.currentImageIndex = index;
+                this.opened = true;
+                for (var i = 0; i < this.modalImages.length; i++) {
+                    if (i === this.currentImageIndex) {
+                        this.imgSrc = this.modalImages[i].img;
+                        this.caption = this.modalImages[i].caption;
+                        this.loading = false;
+                        break;
+                    }
+                }
+            };
+        /**
+         * @return {?}
+         */
+        ImageModalComponent.prototype.fullScreen = /**
+         * @return {?}
+         */
+            function () {
+                if (screenfull.enabled) {
+                    screenfull.toggle();
+                }
+            };
+        Object.defineProperty(ImageModalComponent.prototype, "is_iPhone_or_iPod", {
+            get: /**
+             * @return {?}
+             */ function () {
+                if (this.isBrowser) {
+                    if (navigator && navigator.userAgent && navigator.userAgent != null) {
+                        /** @type {?} */
+                        var strUserAgent = navigator.userAgent.toLowerCase();
+                        /** @type {?} */
+                        var arrMatches = strUserAgent.match(/ipad/);
+                        if (arrMatches != null) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+        ImageModalComponent.prototype.keyboardControl = /**
+         * @param {?} event
+         * @return {?}
+         */
+            function (event) {
+                if (this.opened) {
+                    if (event.keyCode === 39) {
+                        this.nextImage();
+                    }
+                    if (event.keyCode === 37) {
+                        this.prevImage();
+                    }
+                    if (event.keyCode === 27) {
+                        this.closeGallery();
+                    }
+                }
+            };
+        /**
+         * @param {?=} action
+         * @return {?}
+         */
+        ImageModalComponent.prototype.swipe = /**
+         * @param {?=} action
+         * @return {?}
+         */
+            function (action) {
+                if (action === void 0) {
+                    action = this.SWIPE_ACTION.RIGHT;
+                }
+                if (action === this.SWIPE_ACTION.RIGHT) {
+                    this.prevImage();
+                }
+                if (action === this.SWIPE_ACTION.LEFT) {
+                    this.nextImage();
+                }
+            };
+        ImageModalComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'mdb-image-modal',
+                        template: "<div class=\"ng-gallery mdb-lightbox {{ type }}\" *ngIf=\"modalImages && showRepeat\">\n  <figure class=\"col-md-4\" *ngFor=\"let i of modalImages; let index = index\">\n    <img src=\"{{ !i.thumb ? i.img : i.thumb }}\" class=\"ng-thumb\" (click)=\"openGallery(index)\"\n         alt=\"Image {{ index + 1 }}\"/>\n  </figure>\n</div>\n<div tabindex=\"0\" class=\"ng-overlay\" [class.hide_lightbox]=\"opened == false\">\n  <div class=\"top-bar\" style='z-index: 100000'>\n    <span *ngIf=\"modalImages\" class=\"info-text\">{{ currentImageIndex + 1 }}/{{ modalImages.length }}</span>\n    <a class=\"close-popup\" (click)=\"closeGallery()\" (click)=\"toggleRestart()\"></a>\n    <a *ngIf=\"!is_iPhone_or_iPod\" class=\"fullscreen-toogle\" [class.toggled]='fullscreen' (click)=\"fullScreen()\"></a>\n    <a class=\"zoom-toogle\" [class.zoom]='zoom' (click)=\"toggleZoomed()\" *ngIf=\"!isMobile\"></a>\n  </div>\n  <div class=\"ng-gallery-content\">\n    <img *ngIf=\"!loading\" src=\"{{imgSrc}}\" [class.smooth]='smooth' class=\"effect\" (swipeleft)=\"swipe($event.type)\"\n         (swiperight)=\"swipe($event.type)\" (click)=\"toggleZoomed()\" style=\"\"/>\n\n    <div class=\"uil-ring-css\" *ngIf=\"loading\">\n      <div></div>\n    </div>\n    <a class=\"nav-left\" *ngIf=\"modalImages && modalImages.length >1 && !isMobile\" (click)=\"prevImage()\">\n      <span></span>\n    </a>\n    <a class=\"nav-right\" *ngIf=\"modalImages && modalImages.length >1 && !isMobile\" (click)=\"nextImage()\">\n      <span></span>\n    </a>\n  </div>\n  <div class=\"row\" *ngIf=\"caption\">\n    <div class=\"col-md-12 mx-auto bottom-bar text-center\">\n      <figcaption class=\"text-white lightbox-caption\">{{caption}}</figcaption>\n    </div>\n  </div>\n</div>\n<div *ngIf=\"openModalWindow\">\n  <mdb-image-modal [imagePointer]=\"imagePointer\"></mdb-image-modal>\n</div>\n",
+                        styles: ['.bottom-bar {z-index: 100000; position: absolute; bottom: 2rem; left: 0; right: 0; width: 100%;} ']
+                    }] }
+        ];
+        /** @nocollapse */
+        ImageModalComponent.ctorParameters = function () {
+            return [
+                { type: String, decorators: [{ type: i0.Inject, args: [i0.PLATFORM_ID,] }] },
+                { type: i0.ElementRef },
+                { type: i0.Renderer2 }
+            ];
+        };
+        ImageModalComponent.propDecorators = {
+            modalImages: [{ type: i0.Input, args: ['modalImages',] }],
+            imagePointer: [{ type: i0.Input, args: ['imagePointer',] }],
+            fullscreen: [{ type: i0.Input, args: ['fullscreen',] }],
+            zoom: [{ type: i0.Input, args: ['zoom',] }],
+            smooth: [{ type: i0.Input, args: ['smooth',] }],
+            type: [{ type: i0.Input, args: ['type',] }],
+            cancelEvent: [{ type: i0.Output, args: ['cancelEvent',] }],
+            keyboardControl: [{ type: i0.HostListener, args: ['document:keyup', ['$event'],] }]
+        };
+        return ImageModalComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var LightBoxModule = /** @class */ (function () {
+        function LightBoxModule() {
+        }
+        LightBoxModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [common.CommonModule, forms.FormsModule],
+                        declarations: [ImageModalComponent],
+                        exports: [ImageModalComponent]
+                    },] }
+        ];
+        return LightBoxModule;
     }());
 
     /**
@@ -27061,6 +27322,7 @@
         SelectModule,
         DatepickerModule,
         TimePickerModule,
+        LightBoxModule,
         SidenavModule,
         ChartSimpleModule,
         AccordionModule,
@@ -27087,6 +27349,7 @@
                             SelectModule,
                             DatepickerModule,
                             TimePickerModule,
+                            LightBoxModule,
                             SidenavModule,
                             ChartSimpleModule,
                             AccordionModule,
@@ -27331,6 +27594,8 @@
     exports.MDBFileDropDirective = MDBFileDropDirective;
     exports.CharCounterDirective = CharCounterDirective;
     exports.CharCounterModule = CharCounterModule;
+    exports.ImageModalComponent = ImageModalComponent;
+    exports.LightBoxModule = LightBoxModule;
     exports.Diacritics = Diacritics;
     exports.Option = Option;
     exports.OptionList = OptionList;
@@ -27394,19 +27659,19 @@
     exports.ɵa = RADIO_CONTROL_VALUE_ACCESSOR;
     exports.ɵc = CHECKBOX_VALUE_ACCESSOR;
     exports.ɵd = CheckboxComponent;
-    exports.ɵdq = LinksComponent;
-    exports.ɵdr = LogoComponent;
-    exports.ɵdp = NavbarService;
-    exports.ɵds = NavlinksComponent;
-    exports.ɵdn = ComponentLoaderFactory;
-    exports.ɵdt = OnChange;
-    exports.ɵdo = PositioningService;
+    exports.ɵds = LinksComponent;
+    exports.ɵdt = LogoComponent;
+    exports.ɵdr = NavbarService;
+    exports.ɵdu = NavlinksComponent;
+    exports.ɵdp = ComponentLoaderFactory;
+    exports.ɵdv = OnChange;
+    exports.ɵdq = PositioningService;
     exports.ɵf = SBItemComponent;
     exports.ɵh = SBItemBodyComponent;
     exports.ɵg = SBItemHeadComponent;
     exports.ɵi = SqueezeBoxComponent;
     exports.ɵe = AccordionModule;
-    exports.ɵdu = TOAST_CONFIG;
+    exports.ɵdw = TOAST_CONFIG;
     exports.ɵn = AutoCompleterModule;
     exports.ɵj = MdbAutoCompleterComponent;
     exports.ɵk = MdbOptionComponent;
@@ -27446,54 +27711,56 @@
     exports.ɵbr = FileInputModule;
     exports.ɵbu = CharCounterDirective;
     exports.ɵbv = CharCounterModule;
-    exports.ɵbz = SelectDropdownComponent;
-    exports.ɵbx = SELECT_VALUE_ACCESSOR;
-    exports.ɵby = SelectComponent;
-    exports.ɵca = SelectModule;
-    exports.ɵdm = MDBRootModulePro;
-    exports.ɵcc = BarComponent;
-    exports.ɵcb = ProgressBars;
-    exports.ɵdv = MdProgressBarModule;
-    exports.ɵdw = ProgressBarComponent;
-    exports.ɵdx = MdProgressSpinnerModule;
-    exports.ɵdz = MdProgressSpinnerComponent;
-    exports.ɵdy = MdProgressSpinnerCssMatStylerDirective;
-    exports.ɵea = MdSpinnerComponent;
-    exports.ɵch = ProgressSpinnerComponent;
-    exports.ɵcd = ProgressDirective;
-    exports.ɵce = ProgressbarComponent;
-    exports.ɵcg = ProgressbarConfigComponent;
-    exports.ɵcf = ProgressbarModule;
-    exports.ɵck = MdbRangeInputComponent;
-    exports.ɵcj = RANGE_VALUE_ACCESOR;
-    exports.ɵci = RangeModule;
-    exports.ɵcn = ScrollSpyElementDirective;
-    exports.ɵco = ScrollSpyLinkDirective;
-    exports.ɵcm = ScrollSpyWindowDirective;
-    exports.ɵcl = ScrollSpyDirective;
-    exports.ɵcq = ScrollSpyModule;
-    exports.ɵcp = ScrollSpyService;
-    exports.ɵcr = SidenavComponent;
-    exports.ɵcs = SidenavModule;
-    exports.ɵct = PageScrollDirective;
-    exports.ɵcv = PageScrollInstance;
-    exports.ɵcw = SmoothscrollModule;
-    exports.ɵcu = PageScrollService;
-    exports.ɵcy = MdbStepComponent;
-    exports.ɵcx = MdbStepperComponent;
-    exports.ɵcz = StepperModule;
-    exports.ɵda = MdbStickyDirective;
-    exports.ɵdb = StickyContentModule;
-    exports.ɵde = TabHeadingDirective;
-    exports.ɵdd = TabDirective;
-    exports.ɵdf = TabsetComponent;
-    exports.ɵdg = TabsetConfig;
-    exports.ɵdh = TabsModule;
-    exports.ɵdc = NgTranscludeDirective;
-    exports.ɵdi = MaterialChipsComponent;
-    exports.ɵdj = MaterialChipsModule;
-    exports.ɵdk = ClockPickerComponent;
-    exports.ɵdl = TimePickerModule;
+    exports.ɵbw = ImageModalComponent;
+    exports.ɵbx = LightBoxModule;
+    exports.ɵcb = SelectDropdownComponent;
+    exports.ɵbz = SELECT_VALUE_ACCESSOR;
+    exports.ɵca = SelectComponent;
+    exports.ɵcc = SelectModule;
+    exports.ɵdo = MDBRootModulePro;
+    exports.ɵce = BarComponent;
+    exports.ɵcd = ProgressBars;
+    exports.ɵdx = MdProgressBarModule;
+    exports.ɵdy = ProgressBarComponent;
+    exports.ɵdz = MdProgressSpinnerModule;
+    exports.ɵeb = MdProgressSpinnerComponent;
+    exports.ɵea = MdProgressSpinnerCssMatStylerDirective;
+    exports.ɵec = MdSpinnerComponent;
+    exports.ɵcj = ProgressSpinnerComponent;
+    exports.ɵcf = ProgressDirective;
+    exports.ɵcg = ProgressbarComponent;
+    exports.ɵci = ProgressbarConfigComponent;
+    exports.ɵch = ProgressbarModule;
+    exports.ɵcm = MdbRangeInputComponent;
+    exports.ɵcl = RANGE_VALUE_ACCESOR;
+    exports.ɵck = RangeModule;
+    exports.ɵcp = ScrollSpyElementDirective;
+    exports.ɵcq = ScrollSpyLinkDirective;
+    exports.ɵco = ScrollSpyWindowDirective;
+    exports.ɵcn = ScrollSpyDirective;
+    exports.ɵcs = ScrollSpyModule;
+    exports.ɵcr = ScrollSpyService;
+    exports.ɵct = SidenavComponent;
+    exports.ɵcu = SidenavModule;
+    exports.ɵcv = PageScrollDirective;
+    exports.ɵcx = PageScrollInstance;
+    exports.ɵcy = SmoothscrollModule;
+    exports.ɵcw = PageScrollService;
+    exports.ɵda = MdbStepComponent;
+    exports.ɵcz = MdbStepperComponent;
+    exports.ɵdb = StepperModule;
+    exports.ɵdc = MdbStickyDirective;
+    exports.ɵdd = StickyContentModule;
+    exports.ɵdg = TabHeadingDirective;
+    exports.ɵdf = TabDirective;
+    exports.ɵdh = TabsetComponent;
+    exports.ɵdi = TabsetConfig;
+    exports.ɵdj = TabsModule;
+    exports.ɵde = NgTranscludeDirective;
+    exports.ɵdk = MaterialChipsComponent;
+    exports.ɵdl = MaterialChipsModule;
+    exports.ɵdm = ClockPickerComponent;
+    exports.ɵdn = TimePickerModule;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
