@@ -1,6 +1,6 @@
 /*!
  * Material Design for Bootstrap 4
- * Version: MDB PRO 4.6.1
+ * Version: MDB PRO 4.7.0
  *
  *
  * Copyright: Material Design for BootstrapS
@@ -30,7 +30,6 @@
 // Bootstrap
 @import "core/bootstrap/functions";
 @import "core/bootstrap/variables";
-
 // CORE
 @import "core/mixins";
 // Your custom variables
@@ -42,7 +41,6 @@
 @import "core/typography";
 @import "core/masks";
 @import "core/waves";
-
 // FREE
 @import "free/animations-basic";
 @import "free/modules/animations-extended/module";
@@ -60,13 +58,11 @@
 @import "free/footers";
 @import "free/list-group";
 @import "free/tables";
-@import "free/switch";
 @import "free/depreciated";
 @import "free/steppers";
 @import "free/loader";
 // Free addons
 // @import "addons/datatables";
-
 // PRO
 @import "pro/variables";
 @import "pro/buttons";
@@ -76,7 +72,6 @@
 @import "pro/dropdowns";
 @import "pro/navbars";
 @import "pro/scrollspy";
-@import "pro/modules/lightbox/module";
 @import "pro/chips";
 @import "pro/msc";
 @import "pro/forms";
@@ -106,12 +101,10 @@
 @import "custom-skin";
 @import "pro/skins";
 @import "pro/depreciated";
-
 // Picker
 @import "pro/picker/default";
 @import "pro/picker/default-time";
 @import "pro/picker/default-date";
-
 // Sections
 @import "pro/sections/templates";
 @import "pro/sections/social";
@@ -120,15 +113,12 @@
 @import "pro/sections/magazine";
 @import "pro/sections/pricing";
 @import "pro/sections/contacts";
-
 // Pro addons
- @import "addons-pro/steppers";
- @import "addons-pro/timeline";
+@import "addons-pro/steppers";
+@import "addons-pro/timeline";
 // @import "addons-pro/cards-extended";
 // @import "addons-pro/chat";
-
 // Angular
-@import "angular/mdb-angular.scss";
-
+@import "angular/mdb-angular";
 // Your custom styles
 @import "custom-styles";
