@@ -5,7 +5,6 @@ export declare class MdbInput implements AfterViewChecked, AfterViewInit {
     elLabel: ElementRef | any;
     elIcon: Element | any;
     element: any;
-    placeholder: string;
     focusCheckbox: boolean;
     focusRadio: boolean;
     isBrowser: any;

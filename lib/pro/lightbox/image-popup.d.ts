@@ -1,5 +1,5 @@
-import { ElementRef, EventEmitter, OnInit, Renderer2 } from '@angular/core';
-export declare class ImageModalComponent implements OnInit {
+import { ElementRef, EventEmitter, OnInit, Renderer2, AfterViewInit } from '@angular/core';
+export declare class ImageModalComponent implements OnInit, AfterViewInit {
     element: ElementRef;
     renderer: Renderer2;
     _element: any;
@@ -24,17 +24,20 @@ export declare class ImageModalComponent implements OnInit {
     zoom: boolean;
     smooth: boolean;
     type: String;
+    galleryImg: ElementRef;
+    galleryDescription: ElementRef;
     cancelEvent: EventEmitter<any>;
     constructor(platformId: string, element: ElementRef, renderer: Renderer2);
     toggleZoomed(): void;
     toggleRestart(): void;
+    ngAfterViewInit(): void;
     ngOnInit(): void;
     closeGallery(): void;
     prevImage(): void;
     nextImage(): void;
     openGallery(index: any): void;
     fullScreen(): any;
-    readonly is_iPhone_or_iPod: boolean;
+    readonly is_iPhone_or_iPod: boolean | undefined;
     keyboardControl(event: KeyboardEvent): void;
     swipe(action?: String): void;
 }

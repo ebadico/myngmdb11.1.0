@@ -86,6 +86,7 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     ngOnChanges(changes: SimpleChanges): void;
     hideKeyboard(): void;
     removeBtnClicked(): void;
+    closeBtnClicked(): void;
     openBtnClicked(): void;
     setVisibleMonth(): void;
     monthList(): void;

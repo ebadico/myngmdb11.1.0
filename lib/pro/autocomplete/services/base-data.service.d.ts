@@ -13,7 +13,7 @@ export declare abstract class CompleterBaseData extends Subject<CompleterItem[]>
     titleField(titleField: string): this;
     descriptionField(descriptionField: string): this;
     imageField(imageField: string): this;
-    convertToItem(data: any): CompleterItem;
+    convertToItem(data: any): CompleterItem | null;
     protected extractMatches(data: any[], term: string): any[];
     protected extractTitle(item: any): any;
     protected extractValue(obj: any, key: string): any;

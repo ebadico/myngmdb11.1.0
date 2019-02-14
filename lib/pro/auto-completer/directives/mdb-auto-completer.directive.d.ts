@@ -10,6 +10,7 @@ export declare class MdbAutoCompleterDirective implements AfterViewInit, OnDestr
     private _clearButton;
     isBrowser: boolean;
     constructor(renderer: Renderer2, el: ElementRef, platformId: string, document: any);
+    private _getClosestEl;
     private _renderClearButton;
     private _setStyles;
     private _addClass;
@@ -19,9 +20,11 @@ export declare class MdbAutoCompleterDirective implements AfterViewInit, OnDestr
     protected _handleFocusIn(): void;
     protected _handleBlurIn(): void;
     protected _handleMouseDown(): void;
+    getCoords(elem: any): any;
     private _isOpen;
     private _show;
     private _hide;
+    private _appendDropdownToInput;
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
 }

@@ -37,6 +37,6 @@ export declare class MdbTablePaginationComponent implements OnInit, OnChanges {
     nextPage(): void;
     nextPageObservable(): Observable<any>;
     previousPageObservable(): Observable<any>;
-    checkIfNextShouldBeDisabled(): boolean;
-    checkIfPreviousShouldBeDisabled(): boolean;
+    checkIfNextShouldBeDisabled(): true | undefined;
+    checkIfPreviousShouldBeDisabled(): true | undefined;
 }

@@ -9,7 +9,6 @@ export declare class MdbInputDirective implements AfterViewChecked, OnInit, Afte
     elIcon: Element | any;
     element: any;
     mdbInputDirective: MdbInputDirective;
-    placeholder: string;
     customRegex: any;
     mdbValidate: boolean;
     validateSuccess: boolean;

@@ -22,13 +22,17 @@ export declare class CheckboxComponent implements OnInit, OnChanges {
     inline: boolean;
     tabIndex: number;
     change: EventEmitter<MdbCheckboxChange>;
+    private checkboxClicked;
     constructor();
+    onLabelClick(event: any): void;
+    onDocumentClick(): void;
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
     readonly changeEvent: MdbCheckboxChange;
     toggle(): void;
     onCheckboxClick(event: any): void;
     onCheckboxChange(event: any): void;
+    onBlur(): void;
     onChange: (_: any) => void;
     onTouched: () => void;
     writeValue(value: any): void;

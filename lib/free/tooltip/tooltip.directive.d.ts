@@ -48,15 +48,13 @@ export declare class TooltipDirective implements OnInit, OnDestroy, OnChanges {
     protected _delayTimeoutId: any;
     isBrowser: any;
     private _tooltip;
-    xxx: any;
-    yyy: any;
     constructor(_viewContainerRef: ViewContainerRef, _renderer: Renderer2, _elementRef: ElementRef, cis: ComponentLoaderFactory, config: TooltipConfig, platformId: string);
     onclick(event: any): void;
     onblur(): void;
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
     changePositionIfNotFit(): void;
-    getBottomOffset(): number;
+    getBottomOffset(): number | undefined;
     /**
      * Toggles an element’s tooltip. This is considered a “manual” triggering of
      * the tooltip.

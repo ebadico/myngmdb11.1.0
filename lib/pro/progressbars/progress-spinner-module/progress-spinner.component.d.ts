@@ -30,8 +30,8 @@ export declare class MdProgressSpinnerComponent implements OnDestroy {
     * because voiceover does not report the progress indicator as indeterminate if the aria min
     * and/or max value are number values.
     */
-    readonly _ariaValueMin: number;
-    readonly _ariaValueMax: number;
+    readonly _ariaValueMin: 0 | null;
+    readonly _ariaValueMax: 100 | null;
     /** @docs-private */
     /** @docs-private */
     interdeterminateInterval: any;
