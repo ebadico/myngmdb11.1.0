@@ -207,10 +207,11 @@ mdb-image-modal {
 
 .lightbox-caption {
   font-size: 13px;
+  max-height: 50px;
 }
 
 .effect {
-  max-height: 80% !important;
+  //max-height: 80% !important;
   transform: scale(0.9, 0.9) !important;
 }
 

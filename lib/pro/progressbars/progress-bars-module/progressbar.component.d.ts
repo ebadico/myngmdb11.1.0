@@ -28,5 +28,5 @@ export declare class ProgressBarComponent {
     */
     _bufferTransform(): {
         transform: string;
-    };
+    } | undefined;
 }

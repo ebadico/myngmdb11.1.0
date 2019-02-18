@@ -52,6 +52,8 @@ mdb-select {
             line-height: 2rem;
             overflow: hidden;
             white-space: nowrap;
+            text-overflow: ellipsis;
+            padding-right: 1.2rem !important;
             color: #292b2c;
             padding: 0;
             padding-bottom: 5px;
@@ -316,6 +318,13 @@ mdb-select-dropdown {
 .dropdown-content li>a,
 .dropdown-content li>span {
   font-size: 0.9rem;
+}
+
+.select-dropdown {
+  li {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 

@@ -18,12 +18,14 @@ $data in $skins {
       .nav-item {
         .dropdown-menu a {
           color: $black;
+
           &:hover,
           &:focus,
           &:active {
-            background-color: darken( map-get($data, skin-accent), 5%) !important;
+            background-color: darken(map-get($data, skin-accent), 5%) !important;
           }
         }
+
         @if $skin=="white" {
           a {
             color: map-get($data, skin-text);
@@ -72,7 +74,9 @@ $data in $skins {
         border-bottom: $skins-white-search-border-bottom solid $skins-border-color;
       } */
 
-      form.search-form>div {
+
+
+      form.search-form > div {
         overflow-x: hidden;
       }
 
@@ -110,16 +114,29 @@ $data in $skins {
           }
 
           &.active {
+            > mdb-accordion-item-head {
+              background-color: map-get($data, skin-sidenav-item);
+              @if $skin=="white" {
+                color: map-get($data, skin-sidenav-item);
+                background-color: transparent;
+              }
+
+              .card-header {
+                a {
+                  h5 {
+                    @if $skin=="white" {
+                      color: map-get($data, skin-sidenav-item);
+                      background-color: transparent;
+                    }
+                  }
+                }
+              }
+            }
+
             .card-header {
               a {
                 h5 {
                   color: map-get($data, skin-text);
-                  background-color: map-get($data, skin-sidenav-item-hover);
-
-                  @if $skin=="white" {
-                    color: map-get($data, skin-sidenav-item);
-                    background-color: transparent;
-                  }
 
                   .fa {
                     color: map-get($data, skin-text);

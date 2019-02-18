@@ -1,6 +1,6 @@
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 export { FileInputModule } from './module/mdb-uploader.module';
 export { UploadStatus, humanizeBytes, MDBUploaderService } from './classes/mdb-uploader.class';

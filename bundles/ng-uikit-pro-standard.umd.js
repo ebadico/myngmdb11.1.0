@@ -6,7 +6,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MDBBadgeComponent = /** @class */ (function () {
         function MDBBadgeComponent(_el, _renderer) {
@@ -25,9 +25,12 @@
                 if (this.color) {
                     /** @type {?} */
                     var customClassArr = this.color.split(' ');
-                    customClassArr.forEach(function (el) {
+                    customClassArr.forEach(( /**
+                     * @param {?} el
+                     * @return {?}
+                     */function (el) {
                         _this._renderer.addClass(_this._el.nativeElement, el);
-                    });
+                    }));
                 }
             };
         MDBBadgeComponent.decorators = [
@@ -59,7 +62,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var BadgeModule = /** @class */ (function () {
         function BadgeModule() {
@@ -75,12 +78,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbBreadcrumbComponent = /** @class */ (function () {
         function MdbBreadcrumbComponent() {
@@ -100,7 +103,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbBreadcrumbItemComponent = /** @class */ (function () {
         function MdbBreadcrumbItemComponent(_el, _renderer) {
@@ -137,7 +140,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var BreadcrumbModule = /** @class */ (function () {
         function BreadcrumbModule() {
@@ -154,12 +157,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbBtnDirective = /** @class */ (function () {
         function MdbBtnDirective(el, renderer) {
@@ -267,13 +270,15 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     // TODO: config: activeClass - Class to apply to the checked buttons
     /** @type {?} */
     var CHECKBOX_CONTROL_VALUE_ACCESSOR = {
         provide: forms.NG_VALUE_ACCESSOR,
-        useExisting: i0.forwardRef(function () { return ButtonCheckboxDirective; }),
+        useExisting: i0.forwardRef(( /**
+         * @return {?}
+         */function () { return ButtonCheckboxDirective; })),
         multi: true
     };
     /**
@@ -421,12 +426,14 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
     var RADIO_CONTROL_VALUE_ACCESSOR = {
         provide: forms.NG_VALUE_ACCESSOR,
-        useExisting: i0.forwardRef(function () { return ButtonRadioDirective; }),
+        useExisting: i0.forwardRef(( /**
+         * @return {?}
+         */function () { return ButtonRadioDirective; })),
         multi: true
     };
     /**
@@ -465,12 +472,18 @@
             function (event) {
                 var _this = this;
                 try {
-                    this.el.nativeElement.parentElement.childNodes.forEach(function (element) {
+                    this.el.nativeElement.parentElement.childNodes.forEach(( /**
+                     * @param {?} element
+                     * @return {?}
+                     */function (element) {
                         _this.radioElementsArray.push(element);
-                    });
-                    this.radioElementsArray.forEach(function (element) {
+                    }));
+                    this.radioElementsArray.forEach(( /**
+                     * @param {?} element
+                     * @return {?}
+                     */function (element) {
                         _this.renderer.removeClass(element, 'active');
-                    });
+                    }));
                     this.renderer.addClass(event.target, 'active');
                 }
                 catch (error) {
@@ -567,7 +580,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ButtonsModule = /** @class */ (function () {
         function ButtonsModule() {
@@ -592,12 +605,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbCardFooterComponent = /** @class */ (function () {
         function MdbCardFooterComponent(_el, _r) {
@@ -614,9 +627,12 @@
                 var _this = this;
                 this._r.addClass(this._el.nativeElement, 'card-footer');
                 if (this.class) {
-                    this.class.split(' ').forEach(function (element) {
+                    this.class.split(' ').forEach(( /**
+                     * @param {?} element
+                     * @return {?}
+                     */function (element) {
                         _this._r.addClass(_this._el.nativeElement, element);
-                    });
+                    }));
                 }
             };
         MdbCardFooterComponent.decorators = [
@@ -640,7 +656,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbCardTitleComponent = /** @class */ (function () {
         function MdbCardTitleComponent(_el, _r) {
@@ -674,7 +690,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbCardTextComponent = /** @class */ (function () {
         function MdbCardTextComponent() {
@@ -693,7 +709,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbCardBodyComponent = /** @class */ (function () {
         function MdbCardBodyComponent(_el, _r) {
@@ -722,9 +738,12 @@
                 var _this = this;
                 this._r.addClass(this._el.nativeElement, 'card-body');
                 if (this.class) {
-                    this.class.split(' ').forEach(function (element) {
+                    this.class.split(' ').forEach(( /**
+                     * @param {?} element
+                     * @return {?}
+                     */function (element) {
                         _this._r.addClass(_this._el.nativeElement, element);
-                    });
+                    }));
                 }
             };
         MdbCardBodyComponent.decorators = [
@@ -750,7 +769,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbCardComponent = /** @class */ (function () {
         function MdbCardComponent(_el, _r) {
@@ -836,9 +855,12 @@
                     this._r.addClass(this._el.nativeElement, 'narrower');
                 }
                 if (this.class) {
-                    this.class.split(' ').forEach(function (element) {
+                    this.class.split(' ').forEach(( /**
+                     * @param {?} element
+                     * @return {?}
+                     */function (element) {
                         _this._r.addClass(_this._el.nativeElement, element);
-                    });
+                    }));
                 }
                 if (this._el.nativeElement.parentElement.classList.contains('card-deck')) {
                     this._r.addClass(this.card.nativeElement, 'w-100');
@@ -874,7 +896,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbCardImageComponent = /** @class */ (function () {
         function MdbCardImageComponent() {
@@ -894,7 +916,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbCardHeaderComponent = /** @class */ (function () {
         function MdbCardHeaderComponent(_el, _r) {
@@ -911,9 +933,12 @@
                 var _this = this;
                 this._r.addClass(this._el.nativeElement, 'card-header');
                 if (this.class) {
-                    this.class.split(' ').forEach(function (element) {
+                    this.class.split(' ').forEach(( /**
+                     * @param {?} element
+                     * @return {?}
+                     */function (element) {
                         _this._r.addClass(_this._el.nativeElement, element);
-                    });
+                    }));
                 }
             };
         MdbCardHeaderComponent.decorators = [
@@ -937,7 +962,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CardsFreeModule = /** @class */ (function () {
         function CardsFreeModule() {
@@ -979,12 +1004,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /*tslint:disable */
     /**
@@ -1004,7 +1029,11 @@
     /** @type {?} */
     var location = win.location;
     /** @type {?} */
-    var gc = win['gc'] ? function () { return win['gc'](); } : function () { return null; };
+    var gc = win['gc'] ? ( /**
+     * @return {?}
+     */function () { return win['gc'](); }) : ( /**
+     * @return {?}
+     */function () { return null; });
     /** @type {?} */
     var performance = win['performance'] ? win['performance'] : null;
     /** @type {?} */
@@ -1024,7 +1053,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * @return {?}
@@ -1035,7 +1064,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * @template T
@@ -1277,9 +1306,12 @@
                 for (var _i = 0; _i < arguments.length; _i++) {
                     args[_i] = arguments[_i];
                 }
-                args.forEach(function (arg) {
+                args.forEach(( /**
+                 * @param {?} arg
+                 * @return {?}
+                 */function (arg) {
                     _this.add(arg);
-                });
+                }));
                 return this.length;
             };
         // public pop(): T {
@@ -1316,9 +1348,12 @@
                     args[_i] = arguments[_i];
                 }
                 args.reverse();
-                args.forEach(function (arg) {
+                args.forEach(( /**
+                 * @param {?} arg
+                 * @return {?}
+                 */function (arg) {
                     _this.add(arg, 0);
-                });
+                }));
                 return this.length;
             };
         // public shift(): T {
@@ -1485,7 +1520,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CarouselConfig = /** @class */ (function () {
         function CarouselConfig() {
@@ -1511,7 +1546,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @enum {number} */
     var Direction = {
@@ -1661,10 +1696,12 @@
             function () {
                 var _this = this;
                 if (this.activeSlideIndex) {
-                    setTimeout(function () {
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         _this._select(_this.activeSlideIndex);
                         _this.activeSlideChange.emit({ 'relatedTarget': _this.activeSlide });
-                    }, 0);
+                    }), 0);
                 }
             };
         /**
@@ -1687,18 +1724,22 @@
                             this.noWrap ? remIndex - 1 : 0;
                     }
                     this._slides.remove(remIndex);
-                    setTimeout(function () {
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         _this._select(nextSlideIndex_1);
-                    }, 0);
+                    }), 0);
                 }
                 else {
                     this._slides.remove(remIndex);
                     /** @type {?} */
                     var currentSlideIndex_1 = this.getCurrentSlideIndex();
-                    setTimeout(function () {
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         _this._currentActiveSlide = currentSlideIndex_1;
                         _this.activeSlideChange.emit(_this._currentActiveSlide);
-                    }, 0);
+                    }), 0);
                 }
             };
         /**
@@ -1804,14 +1845,16 @@
                     this.animationEnd = false;
                     goToSlide.directionNext = true;
                     if (this.isBrowser) {
-                        setTimeout(function () {
+                        setTimeout(( /**
+                         * @return {?}
+                         */function () {
                             goToSlide.directionNext = false;
                             _this.animationEnd = true;
                             _this.activeSlide = goToIndex;
                             _this.activeSlideChange.emit({ 'direction': 'Next', 'relatedTarget': _this.activeSlide });
                             _this.play();
                             _this.cdRef.markForCheck();
-                        }, 0);
+                        }), 0);
                     }
                 }
             };
@@ -1838,26 +1881,32 @@
                         this.animationEnd = false;
                         goToSlide.directionNext = true;
                         if (this.isBrowser) {
-                            setTimeout(function () {
+                            setTimeout(( /**
+                             * @return {?}
+                             */function () {
                                 goToSlide.directionLeft = true;
                                 currentSlide.directionLeft = true;
                                 _this.cdRef.markForCheck();
-                            }, 100);
+                            }), 100);
                         }
                     }
                     if (direction === Direction.PREV) {
                         this.animationEnd = false;
                         goToSlide.directionPrev = true;
                         if (this.isBrowser) {
-                            setTimeout(function () {
+                            setTimeout(( /**
+                             * @return {?}
+                             */function () {
                                 goToSlide.directionRight = true;
                                 currentSlide.directionRight = true;
                                 _this.cdRef.markForCheck();
-                            }, 100);
+                            }), 100);
                         }
                     }
                     if (this.isBrowser) {
-                        setTimeout(function () {
+                        setTimeout(( /**
+                         * @return {?}
+                         */function () {
                             goToSlide.directionLeft = false;
                             goToSlide.directionNext = false;
                             currentSlide.directionLeft = false;
@@ -1879,7 +1928,7 @@
                             _this.activeSlideChange.emit({ 'direction': directionName, 'relatedTarget': _this.activeSlide });
                             _this.play();
                             _this.cdRef.markForCheck();
-                        }, 700);
+                        }), 700);
                     }
                 }
             };
@@ -1939,7 +1988,10 @@
          * @return {?}
          */
             function () {
-                return this._slides.findIndex(function (slide) { return slide.active; });
+                return this._slides.findIndex(( /**
+                 * @param {?} slide
+                 * @return {?}
+                 */function (slide) { return slide.active; }));
             };
         /**
          * @param {?} index
@@ -2027,7 +2079,9 @@
                     /** @type {?} */
                     var interval = +this.interval;
                     if (!isNaN(interval) && interval > 0) {
-                        this.currentInterval = setInterval(function () {
+                        this.currentInterval = setInterval(( /**
+                         * @return {?}
+                         */function () {
                             /** @type {?} */
                             var nInterval = +_this.interval;
                             if (_this.isPlaying && !isNaN(_this.interval) && nInterval > 0 && _this.slides.length) {
@@ -2036,7 +2090,7 @@
                             else {
                                 _this.pause();
                             }
-                        }, interval);
+                        }), interval);
                     }
                 }
             };
@@ -2182,7 +2236,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var SlideComponent = /** @class */ (function () {
         function SlideComponent(carousel, el) {
@@ -2250,7 +2304,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CarouselModule = /** @class */ (function () {
         function CarouselModule() {
@@ -2277,12 +2331,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var BaseChartDirective = /** @class */ (function () {
         function BaseChartDirective(element, platformId) {
@@ -2372,16 +2426,24 @@
                 // hock for onHover and onClick events
                 options.hover = options.hover || {};
                 if (!options.hover.onHover) {
-                    options.hover.onHover = function (event, active) {
+                    options.hover.onHover = ( /**
+                     * @param {?} event
+                     * @param {?} active
+                     * @return {?}
+                     */function (event, active) {
                         if (active && active.length) {
                             _this.chartHover.emit({ event: event, active: active });
                         }
-                    };
+                    });
                 }
                 if (!options.onClick) {
-                    options.onClick = function (event, active) {
+                    options.onClick = ( /**
+                     * @param {?} event
+                     * @param {?} active
+                     * @return {?}
+                     */function (event, active) {
                         _this.chartClick.emit({ event: event, active: active });
-                    };
+                    });
                 }
                 /** @type {?} */
                 var opts = {
@@ -2406,12 +2468,16 @@
          */
             function (newDataValues) {
                 if (Array.isArray(newDataValues[0].data)) {
-                    this.chart.data.datasets.forEach(function (dataset, i) {
+                    this.chart.data.datasets.forEach(( /**
+                     * @param {?} dataset
+                     * @param {?} i
+                     * @return {?}
+                     */function (dataset, i) {
                         dataset.data = newDataValues[i].data;
                         if (newDataValues[i].label) {
                             dataset.label = newDataValues[i].label;
                         }
-                    });
+                    }));
                 }
                 else {
                     this.chart.data.datasets[0].data = newDataValues;
@@ -2432,9 +2498,13 @@
                 // in case if datasets is not provided, but data is present
                 if (!this.datasets || !this.datasets.length && (this.data && this.data.length)) {
                     if (Array.isArray(this.data[0])) {
-                        datasets = (( /** @type {?} */(this.data))).map(function (data, index) {
+                        datasets = (( /** @type {?} */(this.data))).map(( /**
+                         * @param {?} data
+                         * @param {?} index
+                         * @return {?}
+                         */function (data, index) {
                             return { data: data, label: _this.labels[index] || "Label " + index };
-                        });
+                        }));
                     }
                     else {
                         datasets = [{ data: this.data, label: "Label 0" }];
@@ -2443,7 +2513,11 @@
                 if (this.datasets && this.datasets.length ||
                     (datasets && datasets.length)) {
                     datasets = (this.datasets || datasets)
-                        .map(function (elm, index) {
+                        .map(( /**
+                 * @param {?} elm
+                 * @param {?} index
+                 * @return {?}
+                 */function (elm, index) {
                         /** @type {?} */
                         var newElm = Object.assign({}, elm);
                         if (_this.colors && _this.colors.length) {
@@ -2453,7 +2527,7 @@
                             Object.assign(newElm, getColors(_this.chartType, index, newElm.data.length));
                         }
                         return newElm;
-                    });
+                    }));
                 }
                 if (!datasets) {
                     throw new Error("ng-charts configuration error,\n      data or datasets field are required to render char " + this.chartType);
@@ -2557,12 +2631,28 @@
      */
     function formatPieColors(colors) {
         return {
-            backgroundColor: colors.map(function (color) { return rgba(color, 0.6); }),
-            borderColor: colors.map(function () { return '#fff'; }),
-            pointBackgroundColor: colors.map(function (color) { return rgba(color, 1); }),
-            pointBorderColor: colors.map(function () { return '#fff'; }),
-            pointHoverBackgroundColor: colors.map(function (color) { return rgba(color, 1); }),
-            pointHoverBorderColor: colors.map(function (color) { return rgba(color, 1); })
+            backgroundColor: colors.map(( /**
+             * @param {?} color
+             * @return {?}
+             */function (color) { return rgba(color, 0.6); })),
+            borderColor: colors.map(( /**
+             * @return {?}
+             */function () { return '#fff'; })),
+            pointBackgroundColor: colors.map(( /**
+             * @param {?} color
+             * @return {?}
+             */function (color) { return rgba(color, 1); })),
+            pointBorderColor: colors.map(( /**
+             * @return {?}
+             */function () { return '#fff'; })),
+            pointHoverBackgroundColor: colors.map(( /**
+             * @param {?} color
+             * @return {?}
+             */function (color) { return rgba(color, 1); })),
+            pointHoverBorderColor: colors.map(( /**
+             * @param {?} color
+             * @return {?}
+             */function (color) { return rgba(color, 1); }))
         };
     }
     /**
@@ -2571,10 +2661,22 @@
      */
     function formatPolarAreaColors(colors) {
         return {
-            backgroundColor: colors.map(function (color) { return rgba(color, 0.6); }),
-            borderColor: colors.map(function (color) { return rgba(color, 1); }),
-            hoverBackgroundColor: colors.map(function (color) { return rgba(color, 0.8); }),
-            hoverBorderColor: colors.map(function (color) { return rgba(color, 1); })
+            backgroundColor: colors.map(( /**
+             * @param {?} color
+             * @return {?}
+             */function (color) { return rgba(color, 0.6); })),
+            borderColor: colors.map(( /**
+             * @param {?} color
+             * @return {?}
+             */function (color) { return rgba(color, 1); })),
+            hoverBackgroundColor: colors.map(( /**
+             * @param {?} color
+             * @return {?}
+             */function (color) { return rgba(color, 0.8); })),
+            hoverBorderColor: colors.map(( /**
+             * @param {?} color
+             * @return {?}
+             */function (color) { return rgba(color, 1); }))
         };
     }
     /**
@@ -2629,7 +2731,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ChartsModule = /** @class */ (function () {
         function ChartsModule() {
@@ -2650,17 +2752,19 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
     var CHECKBOX_VALUE_ACCESSOR = {
         provide: forms.NG_VALUE_ACCESSOR,
-        useExisting: i0.forwardRef(function () { return CheckboxComponent; }),
+        useExisting: i0.forwardRef(( /**
+         * @return {?}
+         */function () { return CheckboxComponent; })),
         multi: true
     };
     /** @type {?} */
@@ -2682,10 +2786,37 @@
             this.default = false;
             this.inline = false;
             this.change = new i0.EventEmitter();
+            this.checkboxClicked = new rxjs.Subject();
             // Control Value Accessor Methods
-            this.onChange = function (_) { };
-            this.onTouched = function () { };
+            this.onChange = ( /**
+             * @param {?} _
+             * @return {?}
+             */function (_) { });
+            this.onTouched = ( /**
+             * @return {?}
+             */function () { });
         }
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+        CheckboxComponent.prototype.onLabelClick = /**
+         * @param {?} event
+         * @return {?}
+         */
+            function (event) {
+                event.stopPropagation();
+                this.checkboxClicked.next(true);
+            };
+        /**
+         * @return {?}
+         */
+        CheckboxComponent.prototype.onDocumentClick = /**
+         * @return {?}
+         */
+            function () {
+                this.checkboxClicked.next(false);
+            };
         /**
          * @return {?}
          */
@@ -2762,6 +2893,23 @@
                 this.change.emit(this.changeEvent);
             };
         /**
+         * @return {?}
+         */
+        CheckboxComponent.prototype.onBlur = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.checkboxClicked.pipe(operators.take(1)).subscribe(( /**
+                 * @param {?} val
+                 * @return {?}
+                 */function (val) {
+                    if (!val) {
+                        _this.onTouched();
+                    }
+                }));
+            };
+        /**
          * @param {?} value
          * @return {?}
          */
@@ -2809,7 +2957,7 @@
         CheckboxComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'mdb-checkbox',
-                        template: "<div\n  [ngClass]=\"{ \n  'custom-control custom-checkbox': default,\n  'form-check': !default,\n  'custom-control-inline': inline,\n  'form-check-inline': inline && !default }\">\n  <input \n    #input\n    type=\"checkbox\"\n    class=\"custom-control-input\"\n    [ngClass]=\"{ \n      'filled-in': filledIn || rounded,\n      'custom-control-input': default,\n      'form-check-input': !default }\"\n    [id]=\"id\"\n    [checked]=\"checked\"\n    [disabled]=\"disabled\"\n    [required]=\"required\"\n    [indeterminate]=\"indeterminate\"\n    [attr.name]=\"name\"\n    [attr.value]=\"value\"\n    [tabIndex]=\"tabIndex\"\n    (click)=\"onCheckboxClick($event)\"\n    (change)=\"onCheckboxChange($event)\"\n  >\n  <label\n    [ngClass]=\"{ \n      'custom-control-label': default,\n      'form-check-label': !default,\n      'label-before': checkboxPosition === 'right', \n      'checkbox-rounded': rounded,\n      'disabled': disabled }\"\n    [attr.for]=\"id\">\n    <ng-content></ng-content>\n  </label>\n</div>",
+                        template: "<div\n  [ngClass]=\"{\n  'custom-control custom-checkbox': default,\n  'form-check': !default,\n  'custom-control-inline': inline,\n  'form-check-inline': inline && !default }\">\n  <input\n    #input\n    type=\"checkbox\"\n    class=\"custom-control-input\"\n    [ngClass]=\"{\n      'filled-in': filledIn || rounded,\n      'custom-control-input': default,\n      'form-check-input': !default }\"\n    [id]=\"id\"\n    [checked]=\"checked\"\n    [disabled]=\"disabled\"\n    [required]=\"required\"\n    [indeterminate]=\"indeterminate\"\n    [attr.name]=\"name\"\n    [attr.value]=\"value\"\n    [tabIndex]=\"tabIndex\"\n    (blur)=\"onBlur()\"\n    (click)=\"onCheckboxClick($event)\"\n    (change)=\"onCheckboxChange($event)\"\n  >\n  <label\n    [ngClass]=\"{\n      'custom-control-label': default,\n      'form-check-label': !default,\n      'label-before': checkboxPosition === 'right',\n      'checkbox-rounded': rounded,\n      'disabled': disabled }\"\n    [attr.for]=\"id\">\n    <ng-content></ng-content>\n  </label>\n</div>",
                         providers: [CHECKBOX_VALUE_ACCESSOR]
                     }] }
         ];
@@ -2831,14 +2979,16 @@
             default: [{ type: i0.Input }],
             inline: [{ type: i0.Input }],
             tabIndex: [{ type: i0.Input }],
-            change: [{ type: i0.Output }]
+            change: [{ type: i0.Output }],
+            onLabelClick: [{ type: i0.HostListener, args: ['click', ['$event'],] }],
+            onDocumentClick: [{ type: i0.HostListener, args: ['document:click',] }]
         };
         return CheckboxComponent;
     }());
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CheckboxModule = /** @class */ (function () {
         function CheckboxModule() {
@@ -2862,12 +3012,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CollapseComponent = /** @class */ (function () {
         function CollapseComponent() {
@@ -2980,7 +3130,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CollapseModule = /** @class */ (function () {
         function CollapseModule() {
@@ -3005,7 +3155,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /*! *****************************************************************************
@@ -3106,7 +3256,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * @copyright Valor Software
@@ -3129,7 +3279,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
     var DEFAULT_ALIASES = {
@@ -3152,15 +3302,24 @@
         }
         /** @type {?} */
         var parsedTriggers = trimmedTriggers.split(/\s+/)
-            .map(function (trigger) { return trigger.split(':'); })
-            .map(function (triggerPair) {
+            .map(( /**
+     * @param {?} trigger
+     * @return {?}
+     */function (trigger) { return trigger.split(':'); }))
+            .map(( /**
+     * @param {?} triggerPair
+     * @return {?}
+     */function (triggerPair) {
             /** @type {?} */
             var alias = aliases[triggerPair[0]] || triggerPair;
             return new Trigger(alias[0], alias[1]);
-        });
+        }));
         /** @type {?} */
         var manualTriggers = parsedTriggers
-            .filter(function (triggerPair) { return triggerPair.isManual(); });
+            .filter(( /**
+     * @param {?} triggerPair
+     * @return {?}
+     */function (triggerPair) { return triggerPair.isManual(); }));
         if (manualTriggers.length > 1) {
             throw new Error('Triggers parse error: only one manual trigger is allowed');
         }
@@ -3187,29 +3346,45 @@
             return Function.prototype;
         }
         //  parsedTriggers.forEach((trigger: Trigger) => {
-        parsedTriggers.forEach(function (trigger) {
+        parsedTriggers.forEach(( /**
+         * @param {?} trigger
+         * @return {?}
+         */function (trigger) {
             if (trigger.open === trigger.close) {
-                listeners.push(renderer.listen(target, trigger.open, function () {
+                listeners.push(renderer.listen(target, trigger.open, ( /**
+                 * @return {?}
+                 */function () {
                     toggleFn();
-                }));
+                })));
                 // listeners.push(renderer.listen(target, trigger.open, toggleFn));
                 return;
             }
-            listeners.push(renderer.listen(target, trigger.open, function () {
+            listeners.push(renderer.listen(target, trigger.open, ( /**
+             * @return {?}
+             */function () {
                 showFn();
-            }), 
+            })), 
             // renderer.listen(target, trigger.open, showFn),
-            renderer.listen(target, trigger.close, function () {
+            renderer.listen(target, trigger.close, ( /**
+             * @return {?}
+             */function () {
                 hideFn();
-            }));
+            })));
             // renderer.listen(target, trigger.close, hideFn));
+        }));
+        return ( /**
+         * @return {?}
+         */function () {
+            listeners.forEach(( /**
+             * @param {?} unsubscribeFn
+             * @return {?}
+             */function (unsubscribeFn) { return unsubscribeFn(); }));
         });
-        return function () { listeners.forEach(function (unsubscribeFn) { return unsubscribeFn(); }); };
     }
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * @copyright Valor Software
@@ -3226,7 +3401,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * @template T
@@ -3440,13 +3615,19 @@
                 var _this = this;
                 this.triggers = listenOpts.triggers || this.triggers;
                 listenOpts.target = listenOpts.target || this._elementRef;
-                listenOpts.show = listenOpts.show || (function () { return _this.show(); });
-                listenOpts.hide = listenOpts.hide || (function () { return _this.hide(); });
-                listenOpts.toggle = listenOpts.toggle || (function () {
+                listenOpts.show = listenOpts.show || (( /**
+                 * @return {?}
+                 */function () { return _this.show(); }));
+                listenOpts.hide = listenOpts.hide || (( /**
+                 * @return {?}
+                 */function () { return _this.hide(); }));
+                listenOpts.toggle = listenOpts.toggle || (( /**
+                 * @return {?}
+                 */function () {
                     return _this.isShown
                         ? listenOpts.hide()
                         : listenOpts.show();
-                });
+                }));
                 this._unregisterListenersFn = listenToTriggers(this._renderer, listenOpts.target.nativeElement, this.triggers, listenOpts.show, listenOpts.hide, listenOpts.toggle);
                 return this;
             };
@@ -3473,7 +3654,9 @@
                     return;
                 }
                 this._zoneSubscription = this._ngZone
-                    .onStable.subscribe(function () {
+                    .onStable.subscribe(( /**
+             * @return {?}
+             */function () {
                     if (!_this._componentRef) {
                         return;
                     }
@@ -3483,7 +3666,7 @@
                         attachment: _this.attachment,
                         appendToBody: _this.container === 'body'
                     });
-                });
+                }));
             };
         /**
          * @private
@@ -3545,7 +3728,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * @copyright Valor Software
@@ -3793,7 +3976,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var PositioningService = /** @class */ (function () {
         function PositioningService() {
@@ -3842,7 +4025,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ComponentLoaderFactory = /** @class */ (function () {
         function ComponentLoaderFactory(_componentFactoryResolver, _ngZone, _injector, _posService, _applicationRef) {
@@ -3895,7 +4078,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * Default dropdown configuration
@@ -3915,7 +4098,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var BsDropdownState = /** @class */ (function () {
         function BsDropdownState() {
@@ -3924,9 +4107,12 @@
             this.isOpenChange = new i0.EventEmitter();
             this.isDisabledChange = new i0.EventEmitter();
             this.toggleClick = new i0.EventEmitter();
-            this.dropdownMenu = new Promise(function (resolve) {
+            this.dropdownMenu = new Promise(( /**
+             * @param {?} resolve
+             * @return {?}
+             */function (resolve) {
                 _this.resolveDropdownMenu = resolve;
-            });
+            }));
         }
         BsDropdownState.decorators = [
             { type: i0.Injectable }
@@ -3938,7 +4124,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var BsDropdownContainerComponent = /** @class */ (function () {
         function BsDropdownContainerComponent(_state) {
@@ -3947,9 +4133,12 @@
             this.isOpen = false;
             this.display = 'block';
             this.position = 'absolute';
-            this._subscription = _state.isOpenChange.subscribe(function (value) {
+            this._subscription = _state.isOpenChange.subscribe(( /**
+             * @param {?} value
+             * @return {?}
+             */function (value) {
                 _this.isOpen = value;
-            });
+            }));
         }
         Object.defineProperty(BsDropdownContainerComponent.prototype, "direction", {
             get: /**
@@ -3991,7 +4180,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var BsDropdownDirective = /** @class */ (function () {
         function BsDropdownDirective(_elementRef, _renderer, _viewContainerRef, _cis, _config, _state) {
@@ -4116,25 +4305,36 @@
                 // attach DOM listeners
                 this._dropdown.listen({
                     triggers: this.triggers,
-                    show: function () { return _this.show(); }
+                    show: ( /**
+                     * @return {?}
+                     */function () { return _this.show(); })
                 });
                 // toggle visibility on toggle element click
                 this._subscriptions.push(this._state
-                    .toggleClick.subscribe(function (value) { return _this.toggle(value); }));
+                    .toggleClick.subscribe(( /**
+             * @param {?} value
+             * @return {?}
+             */function (value) { return _this.toggle(value); })));
                 // hide dropdown if set disabled while opened
                 this._subscriptions.push(this._state
                     .isDisabledChange
-                    .subscribe(function (element) {
+                    .subscribe(( /**
+             * @param {?} element
+             * @return {?}
+             */function (element) {
                     if (element === true) {
                         _this.hide();
                     }
-                }));
+                })));
                 // attach dropdown menu inside of dropdown
                 if (this._showInline) {
                     this._state.dropdownMenu
-                        .then(function (dropdownMenu) {
+                        .then(( /**
+                 * @param {?} dropdownMenu
+                 * @return {?}
+                 */function (dropdownMenu) {
                         _this._inlinedMenu = dropdownMenu.viewContainer.createEmbeddedView(dropdownMenu.templateRef);
-                    });
+                    }));
                 }
             };
         /**
@@ -4160,7 +4360,9 @@
                 // const parent = this._elementRef.nativeElement.classList;
                 /** @type {?} */
                 var container = this._elementRef.nativeElement.lastElementChild;
-                setTimeout(function () { container.classList.add('fadeInDropdown'); }, 200);
+                setTimeout(( /**
+                 * @return {?}
+                 */function () { container.classList.add('fadeInDropdown'); }), 200);
                 if (this._showInline) {
                     this._isInlineOpen = true;
                     this.onShown.emit(true);
@@ -4169,7 +4371,10 @@
                     return;
                 }
                 this._state.dropdownMenu
-                    .then(function (dropdownMenu) {
+                    .then(( /**
+             * @param {?} dropdownMenu
+             * @return {?}
+             */function (dropdownMenu) {
                     // check direction in which dropdown should be opened
                     /** @type {?} */
                     var _dropup = _this.dropup === true ||
@@ -4188,7 +4393,7 @@
                         placement: _placement
                     });
                     _this._state.isOpenChange.emit(true);
-                });
+                }));
             };
         /**
          * Closes an element’s popover. This is considered a “manual” triggering of
@@ -4215,7 +4420,9 @@
                 var container = this._elementRef.nativeElement.lastElementChild;
                 if ((parent.value === 'dropdown open show') || (parent.value === 'btn-group dropup open show')) {
                     container.classList.remove('fadeInDropdown');
-                    setTimeout(function () {
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         if (_this._showInline) {
                             _this._isInlineOpen = false;
                             _this.onHidden.emit(true);
@@ -4225,7 +4432,7 @@
                             _this._dropdown.hide();
                         }
                         _this._state.isOpenChange.emit(false);
-                    }, 560);
+                    }), 560);
                 }
                 else {
                     if (this._showInline) {
@@ -4328,7 +4535,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var BsDropdownMenuDirective = /** @class */ (function () {
         function BsDropdownMenuDirective(_state, _viewContainer, _templateRef) {
@@ -4356,7 +4563,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var BsDropdownToggleDirective = /** @class */ (function () {
         function BsDropdownToggleDirective(_state, _element) {
@@ -4369,12 +4576,18 @@
             this.isDisabled = null;
             // sync is open value with state
             this._subscriptions.push(this._state
-                .isOpenChange.subscribe(function (value) { return _this.isOpen = value; }));
+                .isOpenChange.subscribe(( /**
+         * @param {?} value
+         * @return {?}
+         */function (value) { return _this.isOpen = value; })));
             // populate disabled state
             this._subscriptions.push(this._state
                 .isDisabledChange
                 // .subscribe((value: boolean) => this.isDisabled = value || null));
-                .subscribe(function (value) { return _this.isDisabled = value || null; }));
+                .subscribe(( /**
+         * @param {?} value
+         * @return {?}
+         */function (value) { return _this.isDisabled = value || null; })));
         }
         /**
          * @return {?}
@@ -4467,7 +4680,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var DropdownModule = /** @class */ (function () {
         function DropdownModule() {
@@ -4511,12 +4724,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbIconComponent = /** @class */ (function () {
         function MdbIconComponent(_el, _renderer) {
@@ -4571,7 +4784,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var FalDirective = /** @class */ (function () {
         function FalDirective(_el, _r) {
@@ -4594,7 +4807,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var FarDirective = /** @class */ (function () {
         function FarDirective(_el, _r) {
@@ -4617,7 +4830,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var FasDirective = /** @class */ (function () {
         function FasDirective(_el, _r) {
@@ -4640,7 +4853,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var FabDirective = /** @class */ (function () {
         function FabDirective(_el, _r) {
@@ -4663,7 +4876,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var IconsModule = /** @class */ (function () {
         function IconsModule() {
@@ -4692,12 +4905,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
     var defaultIdNumber$1 = 0;
@@ -4722,7 +4935,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
     var defaultIdNumber$2 = 0;
@@ -4747,7 +4960,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbValidateDirective = /** @class */ (function () {
         function MdbValidateDirective(renderer, el) {
@@ -4862,7 +5075,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var InputUtilitiesModule = /** @class */ (function () {
         function InputUtilitiesModule() {
@@ -4879,12 +5092,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var EqualValidatorDirective = /** @class */ (function () {
         function EqualValidatorDirective(validateEqual, reverse) {
@@ -4946,7 +5159,9 @@
             { type: i0.Directive, args: [{
                         selector: '[mdb-validateEqual][formControlName],[validateEqual][formControl],[validateEqual][ngModel]',
                         providers: [
-                            { provide: forms.NG_VALIDATORS, useExisting: i0.forwardRef(function () { return EqualValidatorDirective; }), multi: true }
+                            { provide: forms.NG_VALIDATORS, useExisting: i0.forwardRef(( /**
+                                     * @return {?}
+                                     */function () { return EqualValidatorDirective; })), multi: true }
                         ]
                     },] }
         ];
@@ -4962,7 +5177,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbInputDirective = /** @class */ (function () {
         function MdbInputDirective(_elRef, _renderer, platformId) {
@@ -5081,9 +5296,11 @@
             function () {
                 var _this = this;
                 try {
-                    setTimeout(function () {
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         _this.delayedResize();
-                    }, 0);
+                    }), 0);
                 }
                 catch (error) {
                 }
@@ -5097,9 +5314,11 @@
             function () {
                 var _this = this;
                 try {
-                    setTimeout(function () {
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         _this.delayedResize();
-                    }, 0);
+                    }), 0);
                 }
                 catch (error) {
                 }
@@ -5113,9 +5332,11 @@
             function () {
                 var _this = this;
                 try {
-                    setTimeout(function () {
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         _this.delayedResize();
-                    }, 0);
+                    }), 0);
                 }
                 catch (error) {
                 }
@@ -5155,9 +5376,11 @@
             function () {
                 var _this = this;
                 try {
-                    setTimeout(function () {
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         _this.delayedResize();
-                    }, 0);
+                    }), 0);
                 }
                 catch (error) {
                     console.log(error);
@@ -5270,7 +5493,9 @@
          */
             function () {
                 var _this = this;
-                setTimeout(function () {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     if (_this._elRef.nativeElement.classList.contains('ng-invalid')) {
                         _this._renderer.removeClass(_this._elRef.nativeElement, 'counter-success');
                         _this._renderer.removeClass(_this._elRef.nativeElement, 'counter-danger');
@@ -5295,7 +5520,7 @@
                             _this._renderer.setStyle(_this.wrongTextContainer, 'top', _this._elRef.nativeElement.offsetHeight + 'px');
                         }
                     }
-                }, 0);
+                }), 0);
             };
         /**
          * @return {?}
@@ -5354,9 +5579,11 @@
          */
             function () {
                 var _this = this;
-                setTimeout(function () {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     _this.resize();
-                }, 0);
+                }), 0);
             };
         /**
          * @return {?}
@@ -5433,9 +5660,8 @@
         };
         MdbInputDirective.propDecorators = {
             mdbInputDirective: [{ type: i0.Input, args: ['mdbInputDirective',] }],
-            placeholder: [{ type: i0.Input, args: ['placeholder',] }],
             customRegex: [{ type: i0.Input, args: ['customRegex',] }],
-            mdbValidate: [{ type: i0.Input, args: ['mdbValidate',] }],
+            mdbValidate: [{ type: i0.Input, args: ['mdbValidation',] }],
             validateSuccess: [{ type: i0.Input, args: ['validateSuccess',] }],
             validateError: [{ type: i0.Input, args: ['validateError',] }],
             focusCheckbox: [{ type: i0.Input, args: ['focusCheckbox',] }],
@@ -5456,7 +5682,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbInput = /** @class */ (function () {
         function MdbInput(el, _renderer, platformId) {
@@ -5567,9 +5793,11 @@
             function () {
                 var _this = this;
                 try {
-                    setTimeout(function () {
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         _this.delayedResize();
-                    }, 0);
+                    }), 0);
                 }
                 catch (error) { }
             };
@@ -5582,9 +5810,11 @@
             function () {
                 var _this = this;
                 try {
-                    setTimeout(function () {
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         _this.delayedResize();
-                    }, 0);
+                    }), 0);
                 }
                 catch (error) { }
             };
@@ -5597,9 +5827,11 @@
             function () {
                 var _this = this;
                 try {
-                    setTimeout(function () {
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         _this.delayedResize();
-                    }, 0);
+                    }), 0);
                 }
                 catch (error) { }
             };
@@ -5655,9 +5887,11 @@
          */
             function () {
                 var _this = this;
-                setTimeout(function () {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     _this.resize();
-                }, 0);
+                }), 0);
             };
         /**
          * @return {?}
@@ -5729,7 +5963,6 @@
             ];
         };
         MdbInput.propDecorators = {
-            placeholder: [{ type: i0.Input, args: ['placeholder',] }],
             focusCheckbox: [{ type: i0.Input, args: ['focusCheckbox',] }],
             focusRadio: [{ type: i0.Input, args: ['focusRadio',] }],
             onfocus: [{ type: i0.HostListener, args: ['focus',] }],
@@ -5746,7 +5979,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var InputsModule = /** @class */ (function () {
         function InputsModule() {
@@ -5772,12 +6005,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ModalOptions = /** @class */ (function () {
         function ModalOptions() {
@@ -5843,7 +6076,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var Utils = /** @class */ (function () {
         function Utils() {
@@ -5857,7 +6090,10 @@
          * @return {?}
          */
             function (element) {
-                (function (bs) { return bs; })(element.offsetHeight);
+                (( /**
+                 * @param {?} bs
+                 * @return {?}
+                 */function (bs) { return bs; }))(element.offsetHeight);
             };
         // source: https://github.com/jquery/jquery/blob/master/src/css/var/getStyles.js
         // source: https://github.com/jquery/jquery/blob/master/src/css/var/getStyles.js
@@ -5887,7 +6123,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ModalBackdropOptions = /** @class */ (function () {
         function ModalBackdropOptions(options) {
@@ -5986,7 +6222,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
     var TRANSITION_DURATION = 300;
@@ -6114,11 +6350,13 @@
             function () {
                 var _this = this;
                 this._config = this._config || this.getConfig();
-                setTimeout(function () {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     if (_this._config.show) {
                         _this.show();
                     }
-                }, 0);
+                }), 0);
             };
         /* Public methods */
         /** Allows to manually toggle modal visibility */
@@ -6165,9 +6403,11 @@
                         this._renderer.addClass(document$1.body, ClassName.OPEN);
                     }
                 }
-                this.showBackdrop(function () {
+                this.showBackdrop(( /**
+                 * @return {?}
+                 */function () {
                     _this.showElement();
-                });
+                }));
             };
         /** Allows to manually close modal */
         /**
@@ -6199,7 +6439,9 @@
                     this._renderer.removeClass(this._element.nativeElement, ClassName.SHOW);
                 }
                 if (this.isAnimated) {
-                    this.timerHideModal = setTimeout(function () { return _this.hideModal(); }, TRANSITION_DURATION);
+                    this.timerHideModal = setTimeout(( /**
+                     * @return {?}
+                     */function () { return _this.hideModal(); }), TRANSITION_DURATION);
                 }
                 else {
                     this.hideModal();
@@ -6258,13 +6500,15 @@
                     this._renderer.addClass(this._element.nativeElement, ClassName.SHOW);
                 }
                 /** @type {?} */
-                var transitionComplete = function () {
+                var transitionComplete = ( /**
+                 * @return {?}
+                 */function () {
                     if (_this._config.focus) {
                         _this._element.nativeElement.focus();
                     }
                     _this.onShown.emit(_this);
                     _this.opened.emit(_this);
-                };
+                });
                 if (this.isAnimated) {
                     setTimeout(transitionComplete, TRANSITION_DURATION);
                 }
@@ -6287,7 +6531,9 @@
                 var _this = this;
                 this._renderer.setAttribute(this._element.nativeElement, 'aria-hidden', 'true');
                 this._renderer.setStyle(this._element.nativeElement, 'display', 'none');
-                this.showBackdrop(function () {
+                this.showBackdrop(( /**
+                 * @return {?}
+                 */function () {
                     if (!_this.isNested) {
                         if (document$1 && document$1.body) {
                             _this._renderer.removeClass(document$1.body, ClassName.OPEN);
@@ -6298,7 +6544,7 @@
                     _this.focusOtherModal();
                     _this.onHidden.emit(_this);
                     _this.closed.emit(_this);
-                });
+                }));
             };
         // todo: original show was calling a callback when done, but we can use promise
         /** @internal */
@@ -6338,12 +6584,14 @@
                 else if (!this._isShown && this.backdrop) {
                     this.backdrop.instance.isShown = false;
                     /** @type {?} */
-                    var callbackRemove = function () {
+                    var callbackRemove = ( /**
+                     * @return {?}
+                     */function () {
                         _this.removeBackdrop();
                         if (callback) {
                             callback();
                         }
-                    };
+                    });
                     if (this.backdrop.instance.isAnimated) {
                         this.timerRmBackDrop = setTimeout(callbackRemove, BACKDROP_TRANSITION_DURATION);
                     }
@@ -6505,7 +6753,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
     var msConfig = {
@@ -6514,7 +6762,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ModalContainerComponent = /** @class */ (function () {
         function ModalContainerComponent(options, _element, _renderer) {
@@ -6571,10 +6819,12 @@
                     this._renderer.addClass(this._element.nativeElement, 'fade');
                 }
                 this._renderer.setStyle(this._element.nativeElement, 'display', 'block');
-                setTimeout(function () {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     _this.isShown = true;
                     _this._renderer.addClass(_this._element.nativeElement, isBs3() ? ClassName.IN : ClassName.SHOW);
-                }, this.isAnimated ? TransitionDurations.BACKDROP : 0);
+                }), this.isAnimated ? TransitionDurations.BACKDROP : 0);
                 if (document && document.body) {
                     if (this.mdbModalService.getModalsCount() === 1) {
                         this.mdbModalService.checkScrollbar();
@@ -6630,7 +6880,9 @@
                 }
                 this.isModalHiding = true;
                 this._renderer.removeClass(this._element.nativeElement, isBs3() ? ClassName.IN : ClassName.SHOW);
-                setTimeout(function () {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     _this.isShown = false;
                     if (document &&
                         document.body &&
@@ -6639,7 +6891,7 @@
                     }
                     _this.mdbModalService.hide(_this.level);
                     _this.isModalHiding = false;
-                }, this.isAnimated ? TransitionDurations.MODAL : 0);
+                }), this.isAnimated ? TransitionDurations.MODAL : 0);
             };
         ModalContainerComponent.decorators = [
             { type: i0.Component, args: [{
@@ -6667,7 +6919,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MDBModalService = /** @class */ (function () {
         // public constructor(private clf: ComponentLoaderFactory) {
@@ -6727,10 +6979,12 @@
                     this.resetScrollbar();
                 }
                 this.modalsCount = this.modalsCount >= 1 ? this.modalsCount - 1 : 0;
-                setTimeout(function () {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     _this._hideModal(level);
                     _this.removeLoaders(level);
-                }, this.config.animated ? TransitionDurations.BACKDROP : 0);
+                }), this.config.animated ? TransitionDurations.BACKDROP : 0);
             };
         /**
          * @return {?}
@@ -6768,7 +7022,9 @@
                 this.backdropRef.instance.isShown = false;
                 /** @type {?} */
                 var duration = this.config.animated ? TransitionDurations.BACKDROP : 0;
-                setTimeout(function () { return _this.removeBackdrop(); }, duration);
+                setTimeout(( /**
+                 * @return {?}
+                 */function () { return _this.removeBackdrop(); }), duration);
             };
         /**
          * @param {?} content
@@ -6791,9 +7047,11 @@
                     .to('body')
                     .show({ content: content, isAnimated: this.config.animated, data: this.config.data });
                 modalContainerRef.instance.level = this.getModalsCount();
-                mdbModalRef.hide = function () {
+                mdbModalRef.hide = ( /**
+                 * @return {?}
+                 */function () {
                     modalContainerRef.instance.hide();
-                };
+                });
                 mdbModalRef.content = modalLoader.getInnerComponent() || null;
                 return mdbModalRef;
             };
@@ -6941,9 +7199,13 @@
          */
             function (level) {
                 this.loaders.splice(level - 1, 1);
-                this.loaders.forEach(function (loader, i) {
+                this.loaders.forEach(( /**
+                 * @param {?} loader
+                 * @param {?} i
+                 * @return {?}
+                 */function (loader, i) {
                     loader.instance.level = i + 1;
-                });
+                }));
             };
         /**
          * @private
@@ -6959,9 +7221,11 @@
          */
             function (from, to) {
                 var _this = this;
-                from.subscribe(function () {
+                from.subscribe(( /**
+                 * @return {?}
+                 */function () {
                     to.emit(_this.lastDismissReason);
-                });
+                }));
             };
         MDBModalService.decorators = [
             { type: i0.Injectable }
@@ -6978,7 +7242,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ModalModule = /** @class */ (function () {
         function ModalModule() {
@@ -7005,12 +7269,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var NavbarService = /** @class */ (function () {
         function NavbarService() {
@@ -7042,7 +7306,67 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var LinksComponent = /** @class */ (function () {
+        function LinksComponent(_navbarService) {
+            this._navbarService = _navbarService;
+            this.linkClick = new i0.EventEmitter();
+        }
+        /**
+         * @return {?}
+         */
+        LinksComponent.prototype.ngAfterContentInit = /**
+         * @return {?}
+         */
+            function () {
+                /** @type {?} */
+                var that = this;
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
+                    that.links.forEach(( /**
+                     * @param {?} element
+                     * @return {?}
+                     */function (element) {
+                        element.nativeElement.onclick = ( /**
+                         * @return {?}
+                         */function () {
+                            that._navbarService.setNavbarLinkClicks();
+                        });
+                    }));
+                }), 0);
+            };
+        /**
+         * @return {?}
+         */
+        LinksComponent.prototype.ngAfterViewInit = /**
+         * @return {?}
+         */
+            function () {
+            };
+        LinksComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'links',
+                        template: "\n        <ng-content></ng-content>\n    "
+                    }] }
+        ];
+        /** @nocollapse */
+        LinksComponent.ctorParameters = function () {
+            return [
+                { type: NavbarService }
+            ];
+        };
+        LinksComponent.propDecorators = {
+            links: [{ type: i0.ContentChildren, args: [router.RouterLinkWithHref, { read: i0.ElementRef, descendants: true },] }],
+            linkClick: [{ type: i0.Output }]
+        };
+        return LinksComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var NavbarComponent = /** @class */ (function () {
         function NavbarComponent(renderer, _navbarService) {
@@ -7056,8 +7380,14 @@
             this.collapse = true;
             this.showClass = false;
             this.collapsing = false;
+            this._itemsLength = 0;
             // tslint:disable-next-line:max-line-length
-            this.subscription = this._navbarService.getNavbarLinkClicks().subscribe(function (navbarLinkClicks) { _this.closeNavbarOnClick(navbarLinkClicks); });
+            this.subscription = this._navbarService.getNavbarLinkClicks().subscribe(( /**
+             * @param {?} navbarLinkClicks
+             * @return {?}
+             */function (navbarLinkClicks) {
+                _this.closeNavbarOnClick(navbarLinkClicks);
+            }));
         }
         /**
          * @param {?} navbarLinkClicks
@@ -7083,9 +7413,12 @@
                 var _this = this;
                 if (this.iconBackground) {
                     if (Array.isArray(this.iconBackground)) {
-                        this.iconBackground.forEach(function (iconClass) {
+                        this.iconBackground.forEach(( /**
+                         * @param {?} iconClass
+                         * @return {?}
+                         */function (iconClass) {
                             _this.renderer.addClass(_this.toggler.nativeElement, iconClass);
-                        });
+                        }));
                     }
                     else {
                         this.renderer.addClass(this.toggler.nativeElement, this.iconBackground);
@@ -7119,10 +7452,13 @@
                 if (!this.containerInside) {
                     /** @type {?} */
                     var childrens = Array.from(this.container.nativeElement.children);
-                    childrens.forEach(function (child) {
+                    childrens.forEach(( /**
+                     * @param {?} child
+                     * @return {?}
+                     */function (child) {
                         _this.renderer.appendChild(_this.navbar.nativeElement, child);
                         _this.container.nativeElement.remove();
-                    });
+                    }));
                 }
                 if (this.el.nativeElement.children.length === 0) {
                     this.el.nativeElement.remove();
@@ -7156,15 +7492,19 @@
                 this.shown = true;
                 this.collapse = false;
                 this.collapsing = true;
-                setTimeout(function () {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     _this.height = _this.el.nativeElement.scrollHeight;
                     _this.renderer.setStyle(_this.el.nativeElement, 'height', _this.height + 'px');
-                }, 0);
-                setTimeout(function () {
+                }), 0);
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     _this.collapsing = false;
                     _this.collapse = true;
                     _this.showClass = true;
-                }, this.duration);
+                }), this.duration);
             };
         /**
          * @return {?}
@@ -7174,17 +7514,23 @@
          */
             function () {
                 var _this = this;
-                this.shown = false;
-                this.collapse = false;
-                this.showClass = false;
-                this.collapsing = true;
-                setTimeout(function () {
-                    _this.renderer.setStyle(_this.el.nativeElement, 'height', '0px');
-                }, 0);
-                setTimeout(function () {
-                    _this.collapsing = false;
-                    _this.collapse = true;
-                }, this.duration);
+                if (this.shown) {
+                    this.shown = false;
+                    this.collapse = false;
+                    this.showClass = false;
+                    this.collapsing = true;
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
+                        _this.renderer.setStyle(_this.el.nativeElement, 'height', '0px');
+                    }), 0);
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
+                        _this.collapsing = false;
+                        _this.collapse = true;
+                    }), this.duration);
+                }
             };
         Object.defineProperty(NavbarComponent.prototype, "displayStyle", {
             get: /**
@@ -7232,11 +7578,13 @@
                         this.collapse = false;
                         this.renderer.setStyle(this.el.nativeElement, 'height', '0px');
                         this.renderer.setStyle(this.el.nativeElement, 'opacity', '0');
-                        setTimeout(function () {
+                        setTimeout(( /**
+                         * @return {?}
+                         */function () {
                             _this.height = _this.el.nativeElement.scrollHeight;
                             _this.collapse = true;
                             _this.renderer.setStyle(_this.el.nativeElement, 'opacity', '');
-                        }, 4);
+                        }), 4);
                     }
                 }
                 else {
@@ -7263,6 +7611,21 @@
                     }
                 }
             };
+        /**
+         * @return {?}
+         */
+        NavbarComponent.prototype.ngAfterContentChecked = /**
+         * @return {?}
+         */
+            function () {
+                if (this.el.nativeElement.firstElementChild) {
+                    if (this._itemsLength !== this.el.nativeElement.firstElementChild.firstElementChild.children.length) {
+                        this.height = this.el.nativeElement.firstElementChild.firstElementChild.clientHeight;
+                        this.renderer.setStyle(this.el.nativeElement, 'height', this.height + 'px');
+                    }
+                    this._itemsLength = this.el.nativeElement.firstElementChild.firstElementChild.children.length;
+                }
+            };
         NavbarComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'mdb-navbar',
@@ -7285,6 +7648,7 @@
             navbar: [{ type: i0.ViewChild, args: ['nav',] }],
             container: [{ type: i0.ViewChild, args: ['container',] }],
             toggler: [{ type: i0.ViewChild, args: ['toggler',] }],
+            links: [{ type: i0.ContentChild, args: [LinksComponent,] }],
             onResize: [{ type: i0.HostListener, args: ['window:resize', ['$event'],] }],
             onScroll: [{ type: i0.HostListener, args: ['document:scroll',] }]
         };
@@ -7293,60 +7657,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var LinksComponent = /** @class */ (function () {
-        function LinksComponent(_navbarService) {
-            this._navbarService = _navbarService;
-            this.linkClick = new i0.EventEmitter();
-        }
-        /**
-         * @return {?}
-         */
-        LinksComponent.prototype.ngAfterContentInit = /**
-         * @return {?}
-         */
-            function () {
-                /** @type {?} */
-                var that = this;
-                setTimeout(function () {
-                    that.links.forEach(function (element) {
-                        element.nativeElement.onclick = function () {
-                            that._navbarService.setNavbarLinkClicks();
-                        };
-                    });
-                }, 0);
-            };
-        /**
-         * @return {?}
-         */
-        LinksComponent.prototype.ngAfterViewInit = /**
-         * @return {?}
-         */
-            function () {
-            };
-        LinksComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'links',
-                        template: "\n        <ng-content></ng-content>\n    "
-                    }] }
-        ];
-        /** @nocollapse */
-        LinksComponent.ctorParameters = function () {
-            return [
-                { type: NavbarService }
-            ];
-        };
-        LinksComponent.propDecorators = {
-            links: [{ type: i0.ContentChildren, args: [router.RouterLinkWithHref, { read: i0.ElementRef, descendants: true },] }],
-            linkClick: [{ type: i0.Output }]
-        };
-        return LinksComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var LogoComponent = /** @class */ (function () {
         function LogoComponent() {
@@ -7362,7 +7673,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var NavlinksComponent = /** @class */ (function () {
         function NavlinksComponent(_navbarService) {
@@ -7378,13 +7689,20 @@
             function () {
                 /** @type {?} */
                 var that = this;
-                setTimeout(function () {
-                    that.links.forEach(function (element) {
-                        element.nativeElement.onclick = function () {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
+                    that.links.forEach(( /**
+                     * @param {?} element
+                     * @return {?}
+                     */function (element) {
+                        element.nativeElement.onclick = ( /**
+                         * @return {?}
+                         */function () {
                             that._navbarService.setNavbarLinkClicks();
-                        };
-                    });
-                }, 0);
+                        });
+                    }));
+                }), 0);
             };
         /**
          * @return {?}
@@ -7415,7 +7733,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var NavbarModule = /** @class */ (function () {
         function NavbarModule() {
@@ -7433,12 +7751,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * Configuration service for the Popover directive.
@@ -7466,7 +7784,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var PopoverContainerComponent = /** @class */ (function () {
         function PopoverContainerComponent(config) {
@@ -7517,7 +7835,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * A lightweight, extensible directive for fancy popover creation.
@@ -7661,7 +7979,9 @@
                 var _this = this;
                 this._popover.listen({
                     triggers: this.triggers,
-                    show: function () { return _this.show(); }
+                    show: ( /**
+                     * @return {?}
+                     */function () { return _this.show(); })
                 });
             };
         /**
@@ -7715,7 +8035,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var PopoverModule = /** @class */ (function () {
         function PopoverModule() {
@@ -7745,12 +8065,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbTableDirective = /** @class */ (function () {
         function MdbTableDirective(el, renderer) {
@@ -7814,7 +8134,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbTableSortDirective = /** @class */ (function () {
         function MdbTableSortDirective() {
@@ -7841,7 +8161,11 @@
          */
             function (key) {
                 var _this = this;
-                this.dataSource.sort(function (a, b) {
+                this.dataSource.sort(( /**
+                 * @param {?} a
+                 * @param {?} b
+                 * @return {?}
+                 */function (a, b) {
                     if (a[key] < b[key]) {
                         return _this.sorted ? 1 : -1;
                     }
@@ -7849,7 +8173,7 @@
                         return _this.sorted ? -1 : 1;
                     }
                     return 0;
-                });
+                }));
                 this.sorted = !this.sorted;
             };
         MdbTableSortDirective.decorators = [
@@ -7869,7 +8193,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbTableScrollDirective = /** @class */ (function () {
         function MdbTableScrollDirective(renderer, el) {
@@ -7967,7 +8291,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbTableRowDirective = /** @class */ (function () {
         function MdbTableRowDirective(el) {
@@ -8013,7 +8337,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbTableService = /** @class */ (function () {
         function MdbTableService() {
@@ -8063,9 +8387,12 @@
          */
             function () {
                 /** @type {?} */
-                var rowRemoved = rxjs.Observable.create(function (observer) {
+                var rowRemoved = rxjs.Observable.create(( /**
+                 * @param {?} observer
+                 * @return {?}
+                 */function (observer) {
                     observer.next(true);
-                });
+                }));
                 return rowRemoved;
             };
         /**
@@ -8116,11 +8443,17 @@
          * @return {?}
          */
             function (searchKey) {
-                return this.getDataSource().filter(function (obj) {
-                    return Object.keys(obj).some(function (key) {
+                return this.getDataSource().filter(( /**
+                 * @param {?} obj
+                 * @return {?}
+                 */function (obj) {
+                    return Object.keys(obj).some(( /**
+                     * @param {?} key
+                     * @return {?}
+                     */function (key) {
                         return (obj[key].toLowerCase()).includes(searchKey);
-                    });
-                });
+                    }));
+                }));
             };
         /**
          * @param {?} searchKey
@@ -8149,9 +8482,12 @@
             function (searchKey) {
                 var _this = this;
                 /** @type {?} */
-                var observable = rxjs.Observable.create(function (observer) {
+                var observable = rxjs.Observable.create(( /**
+                 * @param {?} observer
+                 * @return {?}
+                 */function (observer) {
                     observer.next(_this.searchLocalDataBy(searchKey));
-                });
+                }));
                 return observable;
             };
         MdbTableService.decorators = [
@@ -8167,7 +8503,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbTablePaginationComponent = /** @class */ (function () {
         function MdbTablePaginationComponent(tableService, cdRef) {
@@ -8190,7 +8526,10 @@
             this.pagination = new rxjs.Subject();
             this.nextPageClick = new i0.EventEmitter();
             this.previousPageClick = new i0.EventEmitter();
-            this.tableService.dataSourceChange().subscribe(function (data) {
+            this.tableService.dataSourceChange().subscribe(( /**
+             * @param {?} data
+             * @return {?}
+             */function (data) {
                 _this.allItemsLength = data.length;
                 _this.lastVisibleItemIndex = data.length;
                 _this.calculateFirstItemIndex();
@@ -8199,7 +8538,7 @@
                 if (_this.maxVisibleItems > _this.allItemsLength) {
                     _this.maxVisibleItems = _this.allItemsLength;
                 }
-            });
+            }));
         }
         /**
          * @return {?}
@@ -8267,9 +8606,12 @@
             function () {
                 var _this = this;
                 /** @type {?} */
-                var observable = rxjs.Observable.create(function (observer) {
+                var observable = rxjs.Observable.create(( /**
+                 * @param {?} observer
+                 * @return {?}
+                 */function (observer) {
                     observer.next(_this.searchText);
-                });
+                }));
                 return observable;
             };
         /**
@@ -8376,9 +8718,12 @@
             function () {
                 var _this = this;
                 /** @type {?} */
-                var obs = rxjs.Observable.create(function (observer) {
+                var obs = rxjs.Observable.create(( /**
+                 * @param {?} observer
+                 * @return {?}
+                 */function (observer) {
                     observer.next(_this.firstItemIndex);
-                });
+                }));
                 return obs;
             };
         /**
@@ -8390,9 +8735,12 @@
             function () {
                 var _this = this;
                 /** @type {?} */
-                var obs = rxjs.Observable.create(function (observer) {
+                var obs = rxjs.Observable.create(( /**
+                 * @param {?} observer
+                 * @return {?}
+                 */function (observer) {
                     observer.next(_this.lastVisibleItemIndex);
-                });
+                }));
                 return obs;
             };
         /**
@@ -8449,7 +8797,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var TableModule = /** @class */ (function () {
         function TableModule() {
@@ -8480,12 +8828,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * Default values provider for tooltip
@@ -8509,7 +8857,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var TooltipContainerComponent = /** @class */ (function () {
         function TooltipContainerComponent(config, r) {
@@ -8544,7 +8892,9 @@
                 if (this.popupClass) {
                     this.classMap[this.popupClass] = true;
                 }
-                setTimeout(function () {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     /** @type {?} */
                     var arrowClassList = _this.tooltipArrow.nativeElement.classList;
                     /** @type {?} */
@@ -8558,7 +8908,7 @@
                     else if (arrowClassList.contains('right')) {
                         _this.r.setStyle(_this.tooltipArrow.nativeElement, 'top', (tooltipHeight / 2) + 'px');
                     }
-                }, 0);
+                }), 0);
             };
         TooltipContainerComponent.decorators = [
             { type: i0.Component, args: [{
@@ -8588,7 +8938,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /*tslint:disable:no-invalid-this */
     /**
@@ -8597,7 +8947,11 @@
     function OnChange() {
         /** @type {?} */
         var sufix = 'Change';
-        return function OnChangeHandler(target, propertyKey) {
+        return ( /**
+         * @param {?} target
+         * @param {?} propertyKey
+         * @return {?}
+         */function OnChangeHandler(target, propertyKey) {
             /** @type {?} */
             var _key = " __" + propertyKey + "Value";
             Object.defineProperty(target, propertyKey, {
@@ -8616,12 +8970,12 @@
                     }
                 }
             });
-        };
+        });
     }
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var TooltipDirective = /** @class */ (function () {
         function TooltipDirective(_viewContainerRef, _renderer, _elementRef, cis, config, platformId) {
@@ -8634,8 +8988,6 @@
             this.delay = 0;
             this.fadeDuration = 150;
             this.isBrowser = false;
-            this.xxx = _viewContainerRef;
-            this.yyy = cis;
             this.isBrowser = common.isPlatformBrowser((this.platformId));
             this._tooltip = cis
                 .createLoader(this._elementRef, _viewContainerRef, _renderer)
@@ -8705,13 +9057,18 @@
                 var _this = this;
                 this._tooltip.listen({
                     triggers: this.triggers,
-                    show: function () { return _this.show(); }
+                    show: ( /**
+                     * @return {?}
+                     */function () { return _this.show(); })
                 });
-                this.tooltipChange.subscribe(function (value) {
+                this.tooltipChange.subscribe(( /**
+                 * @param {?} value
+                 * @return {?}
+                 */function (value) {
                     if (!value) {
                         _this._tooltip.hide();
                     }
-                });
+                }));
             };
         /**
          * @param {?} changes
@@ -8810,7 +9167,9 @@
                     this.changePositionIfNotFit();
                 }
                 /** @type {?} */
-                var showTooltip = function () {
+                var showTooltip = ( /**
+                 * @return {?}
+                 */function () {
                     return _this._tooltip
                         .attach(TooltipContainerComponent)
                         .to(_this.container)
@@ -8819,11 +9178,13 @@
                         content: _this.mdbTooltip,
                         placement: _this.placement
                     });
-                };
+                });
                 if (this.delay) {
-                    this._delayTimeoutId = setTimeout(function () {
+                    this._delayTimeoutId = setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         showTooltip();
-                    }, this.delay);
+                    }), this.delay);
                 }
                 else {
                     showTooltip();
@@ -8853,9 +9214,11 @@
                     return;
                 }
                 this._tooltip.instance.classMap.in = false;
-                setTimeout(function () {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     _this._tooltip.hide();
-                }, this.fadeDuration);
+                }), this.fadeDuration);
             };
         /**
          * @return {?}
@@ -8919,7 +9282,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var TooltipModule = /** @class */ (function () {
         function TooltipModule() {
@@ -8949,12 +9312,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var WavesDirective = /** @class */ (function () {
         function WavesDirective(el) {
@@ -9015,12 +9378,16 @@
          */
             function (button, ripple) {
                 ripple.classList.remove('waves-rippling');
-                setTimeout(function () {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     ripple.style.opacity = '0';
-                    setTimeout(function () {
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         button.removeChild(ripple);
-                    }, 750);
-                }, 200);
+                    }), 750);
+                }), 200);
             };
         WavesDirective.decorators = [
             { type: i0.Directive, args: [{
@@ -9041,7 +9408,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var WavesModule = /** @class */ (function () {
         function WavesModule() {
@@ -9066,12 +9433,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
     var MODULES = [
@@ -9145,7 +9512,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var SBItemBodyComponent = /** @class */ (function () {
         function SBItemBodyComponent() {
@@ -9162,9 +9529,11 @@
          */
             function (collapsed) {
                 var _this = this;
-                setTimeout(function () {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     collapsed ? _this.expandAnimationState = 'collapsed' : _this.expandAnimationState = 'expanded';
-                }, 0);
+                }), 0);
             };
         /**
          * @param {?} activeUrl
@@ -9177,13 +9546,18 @@
             function (activeUrl) {
                 var _this = this;
                 /** @type {?} */
-                var activeLink = this.routerLinks.find(function (link) {
+                var activeLink = this.routerLinks.find(( /**
+                 * @param {?} link
+                 * @return {?}
+                 */function (link) {
                     return link.href === activeUrl;
-                });
+                }));
                 if (activeLink) {
-                    setTimeout(function () {
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         _this.expandAnimationState = 'expanded';
-                    }, 40);
+                    }), 40);
                 }
             };
         /**
@@ -9221,16 +9595,18 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
     var sbConfig = {
         serviceInstance: new Object()
     };
+    /** @type {?} */
+    var sbItems = new Array();
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var SBItemComponent = /** @class */ (function () {
         function SBItemComponent() {
@@ -9246,9 +9622,11 @@
             function () {
                 var _this = this;
                 if (this.body !== undefined) {
-                    setTimeout(function () {
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         _this.collapsed ? _this.body.expandAnimationState = 'collapsed' : _this.body.expandAnimationState = 'expanded';
-                    }, 0);
+                    }), 0);
                     this.body.toggle(this.collapsed);
                 }
             };
@@ -9260,11 +9638,13 @@
          */
             function () {
                 var _this = this;
-                setTimeout(function () {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     if (_this.body && _this.body.expandAnimationState === 'expanded') {
                         _this.collapsed = false;
                     }
-                }, 40);
+                }), 40);
             };
         /**
          * @param {?} collapsed
@@ -9311,7 +9691,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var SqueezeBoxComponent = /** @class */ (function () {
         function SqueezeBoxComponent() {
@@ -9329,11 +9709,47 @@
             function (item) {
                 // on not multiple, it will collpase the rest of items
                 if (!this.multiple) {
-                    this.items.toArray().forEach(function (i) {
-                        if (i !== item) {
-                            i.applyToggle(true);
+                    sbItems.forEach(( /**
+                     * @param {?} el
+                     * @return {?}
+                     */function (el) {
+                        if (el !== item) {
+                            el.applyToggle(true);
                         }
-                    });
+                        if (el === item) {
+                            /** @type {?} */
+                            var collapsed_1 = el.collapsed ? true : false;
+                            setTimeout(( /**
+                             * @return {?}
+                             */function () {
+                                el.applyToggle(collapsed_1);
+                            }), 0);
+                        }
+                    }));
+                }
+            };
+        /**
+         * @return {?}
+         */
+        SqueezeBoxComponent.prototype.ngAfterContentInit = /**
+         * @return {?}
+         */
+            function () {
+                this.items.forEach(( /**
+                 * @param {?} el
+                 * @return {?}
+                 */function (el) {
+                    sbItems.push(el);
+                }));
+                if (!this.multiple) {
+                    sbItems.forEach(( /**
+                     * @param {?} el
+                     * @return {?}
+                     */function (el) {
+                        /** @type {?} */
+                        var collapsed = el.collapsed ? true : false;
+                        el.applyToggle(collapsed);
+                    }));
                 }
             };
         SqueezeBoxComponent.decorators = [
@@ -9347,14 +9763,16 @@
         SqueezeBoxComponent.ctorParameters = function () { return []; };
         SqueezeBoxComponent.propDecorators = {
             multiple: [{ type: i0.Input }],
-            items: [{ type: i0.ContentChildren, args: [i0.forwardRef(function () { return SBItemComponent; }),] }]
+            items: [{ type: i0.ContentChildren, args: [i0.forwardRef(( /**
+                                     * @return {?}
+                                     */function () { return SBItemComponent; })),] }]
         };
         return SqueezeBoxComponent;
     }());
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var SBItemHeadComponent = /** @class */ (function () {
         function SBItemHeadComponent(sbItem) {
@@ -9400,7 +9818,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
     var SQUEEZEBOX_COMPONENTS = [SqueezeBoxComponent, SBItemComponent, SBItemHeadComponent, SBItemBodyComponent];
@@ -9419,7 +9837,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * A `ComponentPortal` is a portal that instantiates some Component upon attachment.
@@ -9560,7 +9978,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * A PortalHost for attaching portals to an arbitrary DOM element outside of the Angular
@@ -9617,10 +10035,12 @@
                 // in Angular core. The change detector must also be deregistered when the component
                 // is destroyed to prevent memory leaks.
                 this._appRef.attachView(componentRef.hostView);
-                this.setDisposeFn(function () {
+                this.setDisposeFn(( /**
+                 * @return {?}
+                 */function () {
                     _this._appRef.detachView(componentRef.hostView);
                     componentRef.destroy();
-                });
+                }));
                 // At this point the component has been instantiated, so we move it to the location in the DOM
                 // where we want it to be rendered.
                 if (newestOnTop) {
@@ -9652,7 +10072,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * Reference to an overlay that has been created with the Overlay service.
@@ -9698,7 +10118,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * The OverlayContainer is the container in which all overlays will load.
@@ -9762,7 +10182,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * Service to create Overlays. Overlays are dynamically added pieces of floating UI, meant to be
@@ -9909,7 +10329,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ToastContainerDirective = /** @class */ (function () {
         function ToastContainerDirective(el) {
@@ -9964,7 +10384,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     // WARNING: interface has both a type and a value, skipping emit
     /**
@@ -10048,7 +10468,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ToastComponent = /** @class */ (function () {
         function ToastComponent(toastPackage, appRef) {
@@ -10072,12 +10492,16 @@
             this.title = toastPackage.title;
             this.options = toastPackage.config;
             this.toastClasses = toastPackage.toastType + " " + toastPackage.config.toastClass;
-            this.sub = toastPackage.toastRef.afterActivate().subscribe(function () {
+            this.sub = toastPackage.toastRef.afterActivate().subscribe(( /**
+             * @return {?}
+             */function () {
                 _this.activateToast();
-            });
-            this.sub1 = toastPackage.toastRef.manualClosed().subscribe(function () {
+            }));
+            this.sub1 = toastPackage.toastRef.manualClosed().subscribe(( /**
+             * @return {?}
+             */function () {
                 _this.remove();
-            });
+            }));
         }
         /**
          * @return {?}
@@ -10106,12 +10530,16 @@
                 var _this = this;
                 this.state = 'active';
                 if (this.options.timeOut !== 0) {
-                    this.timeout = setTimeout(function () {
+                    this.timeout = setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         _this.remove();
-                    }, this.options.timeOut);
+                    }), this.options.timeOut);
                     this.hideTime = new Date().getTime() + this.options.timeOut;
                     if (this.options.progressBar) {
-                        this.intervalId = setInterval(function () { return _this.updateProgress(); }, 10);
+                        this.intervalId = setInterval(( /**
+                         * @return {?}
+                         */function () { return _this.updateProgress(); }), 10);
                     }
                 }
                 if (this.options.onActivateTick) {
@@ -10160,9 +10588,11 @@
                 }
                 clearTimeout(this.timeout);
                 this.state = 'removed';
-                this.timeout = setTimeout(function () {
+                this.timeout = setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     return _this.toastService.remove(_this.toastPackage.toastId);
-                }, 300);
+                }), 300);
             };
         /**
          * @return {?}
@@ -10217,12 +10647,16 @@
                 if (+this.options.extendedTimeOut === 0 || this.state === 'removed') {
                     return;
                 }
-                this.timeout = setTimeout(function () { return _this.remove(); }, this.options.extendedTimeOut);
+                this.timeout = setTimeout(( /**
+                 * @return {?}
+                 */function () { return _this.remove(); }), this.options.extendedTimeOut);
                 this.options.timeOut = +this.options.extendedTimeOut;
                 this.hideTime = new Date().getTime() + this.options.timeOut;
                 this.width = 100;
                 if (this.options.progressBar) {
-                    this.intervalId = setInterval(function () { return _this.updateProgress(); }, 10);
+                    this.intervalId = setInterval(( /**
+                     * @return {?}
+                     */function () { return _this.updateProgress(); }), 10);
                 }
             };
         ToastComponent.decorators = [
@@ -10262,7 +10696,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * Reference to a toast opened via the Toast service.
@@ -10392,14 +10826,14 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
     var TOAST_CONFIG = new i0.InjectionToken('ToastConfig');
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ToastService = /** @class */ (function () {
         function ToastService(toastConfig, overlay, _injector, sanitizer) {
@@ -10810,10 +11244,12 @@
                 var component = new ComponentPortal(config.toastComponent, toastInjector);
                 ins.portal = overlayRef.attach(component, this.toastConfig.newestOnTop);
                 if (!keepInactive) {
-                    setTimeout(function () {
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         ins.toastRef.activate();
                         _this.currentlyActive = _this.currentlyActive + 1;
-                    });
+                    }));
                 }
                 this.toasts.push(ins);
                 return ins;
@@ -10835,7 +11271,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ToastModule = /** @class */ (function () {
         function ToastModule(parentModule) {
@@ -10881,12 +11317,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     // SideNav
     /** @type {?} */
@@ -10959,7 +11395,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbOptionComponent = /** @class */ (function () {
         function MdbOptionComponent(el) {
@@ -11001,17 +11437,21 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbAutoCompleterComponent = /** @class */ (function () {
-        function MdbAutoCompleterComponent(renderer) {
+        function MdbAutoCompleterComponent(renderer, el, platformId) {
             this.renderer = renderer;
+            this.el = el;
             this.clearButton = true;
             this.clearButtonTabIndex = 0;
+            this._isDropdownOpen = new rxjs.Subject();
             this._allItems = [];
             this._isOpen = false;
             this._selectedItemIndex = -1;
             this._selectedItemChanged = new rxjs.Subject();
+            this._isBrowser = false;
+            this._isBrowser = common.isPlatformBrowser(platformId);
         }
         /**
          * @return {?}
@@ -11022,14 +11462,26 @@
             function () {
                 /** @type {?} */
                 var selectedElement = ( /** @type {?} */({}));
-                this.mdbOptions.forEach(function (el) {
+                this.mdbOptions.forEach(( /**
+                 * @param {?} el
+                 * @return {?}
+                 */function (el) {
                     if (el.clicked === true) {
                         selectedElement = el;
                     }
                     el.clicked = false;
-                });
+                }));
                 this.setSelectedItem({ text: selectedElement.value, element: selectedElement });
                 this.highlightRow(0);
+            };
+        /**
+         * @return {?}
+         */
+        MdbAutoCompleterComponent.prototype.windowMouseDown = /**
+         * @return {?}
+         */
+            function () {
+                this.hide();
             };
         /**
          * @param {?} item
@@ -11077,7 +11529,24 @@
          * @return {?}
          */
             function () {
-                this._isOpen = true;
+                var _this = this;
+                if (!this.disabled) {
+                    this._isOpen = true;
+                    this._isDropdownOpen.next(this.isOpen());
+                }
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
+                    if (_this.dropdown && !_this.appendToBody) {
+                        /** @type {?} */
+                        var top_1 = _this.dropdown.nativeElement.clientHeight > _this.parameters.bottom ?
+                            "-" + (_this.dropdown.nativeElement.clientHeight - _this.parameters.inputHeight) :
+                            _this.parameters.inputHeight + 3;
+                        _this.renderer.setStyle(_this.dropdown.nativeElement, 'top', top_1 + 'px');
+                        _this.renderer.setStyle(_this.dropdown.nativeElement, 'left', 0 + 'px');
+                        _this.renderer.setStyle(_this.dropdown.nativeElement, 'width', _this.parameters.width + 'px');
+                    }
+                }), 0);
             };
         /**
          * @return {?}
@@ -11086,7 +11555,19 @@
          * @return {?}
          */
             function () {
-                this._isOpen = false;
+                if (!this.disabled) {
+                    this._isOpen = false;
+                    this._isDropdownOpen.next(this.isOpen());
+                }
+            };
+        /**
+         * @return {?}
+         */
+        MdbAutoCompleterComponent.prototype.isDropdownOpen = /**
+         * @return {?}
+         */
+            function () {
+                return this._isDropdownOpen;
             };
         /**
          * @param {?} index
@@ -11098,20 +11579,29 @@
          */
             function (index) {
                 var _this = this;
-                setTimeout(function () {
-                    _this.optionList.forEach(function (el, i) {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
+                    _this.optionList.forEach(( /**
+                     * @param {?} el
+                     * @param {?} i
+                     * @return {?}
+                     */function (el, i) {
                         /** @type {?} */
                         var completerRow = el.nativeElement.querySelectorAll('.completer-row');
                         if (i === index) {
                             _this.renderer.addClass(el.nativeElement.firstElementChild, 'highlight-row');
                         }
                         else if (i !== index) {
-                            completerRow.forEach(function (elem) {
+                            completerRow.forEach(( /**
+                             * @param {?} elem
+                             * @return {?}
+                             */function (elem) {
                                 _this.renderer.removeClass(elem, 'highlight-row');
-                            });
+                            }));
                         }
-                    });
-                }, 0);
+                    }));
+                }), 0);
             };
         /**
          * @param {?} index
@@ -11124,17 +11614,27 @@
             function (index) {
                 var _this = this;
                 this._allItems = this.optionList
-                    .filter(function (el) { return el.nativeElement.firstElementChild.classList.contains('completer-row'); })
-                    .map(function (elem) { return elem.nativeElement; });
+                    .filter(( /**
+             * @param {?} el
+             * @return {?}
+             */function (el) { return el.nativeElement.firstElementChild.classList.contains('completer-row'); }))
+                    .map(( /**
+             * @param {?} elem
+             * @return {?}
+             */function (elem) { return elem.nativeElement; }));
                 if (this._allItems[index]) {
-                    this.optionList.forEach(function (el, i) {
+                    this.optionList.forEach(( /**
+                     * @param {?} el
+                     * @param {?} i
+                     * @return {?}
+                     */function (el, i) {
                         /** @type {?} */
                         var completerRow = el.nativeElement.querySelectorAll('.completer-row');
                         if (index === i) {
                             _this.removeHighlight(index);
                             _this.renderer.addClass(completerRow[completerRow.length - 1], 'highlight-row');
                         }
-                    });
+                    }));
                 }
                 this._selectedItemIndex = index;
             };
@@ -11176,7 +11676,10 @@
                             break;
                         case 'Enter':
                             /** @type {?} */
-                            var selectedOption = this.mdbOptions.map(function (el) { return el; })[this._selectedItemIndex];
+                            var selectedOption = this.mdbOptions.map(( /**
+                             * @param {?} el
+                             * @return {?}
+                             */function (el) { return el; }))[this._selectedItemIndex];
                             if (selectedOption) {
                                 this.setSelectedItem({ text: selectedOption.value, element: selectedOption });
                             }
@@ -11198,20 +11701,27 @@
                 var listHeight = 0;
                 /** @type {?} */
                 var itemIndex = this._selectedItemIndex;
-                this.optionList.forEach(function (el) {
+                this.optionList.forEach(( /**
+                 * @param {?} el
+                 * @return {?}
+                 */function (el) {
                     listHeight += el.nativeElement.offsetHeight;
-                });
+                }));
                 if (itemIndex > -1) {
                     /** @type {?} */
                     var item_1 = null;
                     /** @type {?} */
                     var itemHeight_1 = 0;
-                    this.optionList.forEach(function (el, i) {
+                    this.optionList.forEach(( /**
+                     * @param {?} el
+                     * @param {?} i
+                     * @return {?}
+                     */function (el, i) {
                         if (i === itemIndex + 1) {
                             item_1 = el.nativeElement;
                             itemHeight_1 = item_1.offsetHeight;
                         }
-                    });
+                    }));
                     /** @type {?} */
                     var itemTop = (itemIndex + 1) * itemHeight_1;
                     /** @type {?} */
@@ -11238,6 +11748,50 @@
                 }
             };
         /**
+         * @param {?} parameters
+         * @return {?}
+         */
+        MdbAutoCompleterComponent.prototype.updatePosition = /**
+         * @param {?} parameters
+         * @return {?}
+         */
+            function (parameters) {
+                var _this = this;
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
+                    if (_this.dropdown) {
+                        /** @type {?} */
+                        var top_2 = _this.dropdown.nativeElement.clientHeight > parameters.bottom ?
+                            parameters.top - _this.dropdown.nativeElement.clientHeight :
+                            parameters.top;
+                        _this.renderer.setStyle(_this.dropdown.nativeElement, 'top', top_2 + 'px');
+                        _this.renderer.setStyle(_this.dropdown.nativeElement, 'left', parameters.left + 'px');
+                        _this.renderer.setStyle(_this.dropdown.nativeElement, 'width', parameters.width + 'px');
+                    }
+                }), 0);
+            };
+        /**
+         * @param {?} parameters
+         * @return {?}
+         */
+        MdbAutoCompleterComponent.prototype.appendDropdown = /**
+         * @param {?} parameters
+         * @return {?}
+         */
+            function (parameters) {
+                if (this._isBrowser && this.appendToBody) {
+                    /** @type {?} */
+                    var body = document.querySelector('body');
+                    /** @type {?} */
+                    var dropdown = this.el.nativeElement;
+                    if (body) {
+                        this.renderer.appendChild(body, dropdown);
+                        this.updatePosition(parameters);
+                    }
+                }
+            };
+        /**
          * @return {?}
          */
         MdbAutoCompleterComponent.prototype.ngOnInit = /**
@@ -11260,31 +11814,37 @@
         MdbAutoCompleterComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'mdb-auto-completer',
-                        template: "<div class=\"completer-dropdown-holder\" *ngIf=\"isOpen()\">\n  <div class=\"completer-dropdown\" #dropdown>\n    <div class=\"completer-row-wrapper\">\n      <div *ngIf=\"optionList.length === 0 \" class=\"completer-no-results\">{{textNoResults}}</div>\n      <ng-content #content></ng-content>\n    </div>\n  </div>\n</div>\n",
+                        template: "<div class=\"completer-dropdown-holder\" *ngIf=\"isOpen()\">\n  <div class=\"completer-dropdown\" #dropdown [ngStyle]=\"{'pointer-events': optionList.length === 0 ? 'none': 'auto'}\">\n    <div class=\"completer-row-wrapper\">\n      <div *ngIf=\"optionList.length === 0 \" class=\"completer-no-results\" #noResults>{{textNoResults}}</div>\n      <ng-content #content></ng-content>\n    </div>\n  </div>\n</div>\n",
                         exportAs: 'mdbAutoCompleter'
                     }] }
         ];
         /** @nocollapse */
         MdbAutoCompleterComponent.ctorParameters = function () {
             return [
-                { type: i0.Renderer2 }
+                { type: i0.Renderer2 },
+                { type: i0.ElementRef },
+                { type: String, decorators: [{ type: i0.Inject, args: [i0.PLATFORM_ID,] }] }
             ];
         };
         MdbAutoCompleterComponent.propDecorators = {
             textNoResults: [{ type: i0.Input }],
             clearButton: [{ type: i0.Input }],
             clearButtonTabIndex: [{ type: i0.Input }],
+            appendToBody: [{ type: i0.Input }],
+            disabled: [{ type: i0.Input }],
             optionList: [{ type: i0.ContentChildren, args: [MdbOptionComponent, { descendants: true, read: i0.ElementRef },] }],
             mdbOptions: [{ type: i0.ContentChildren, args: [MdbOptionComponent, { descendants: true, read: MdbOptionComponent },] }],
             dropdown: [{ type: i0.ViewChild, args: ['dropdown',] }],
-            onItemClick: [{ type: i0.HostListener, args: ['mousedown',] }]
+            noResultsEl: [{ type: i0.ViewChild, args: ['noResults',] }],
+            onItemClick: [{ type: i0.HostListener, args: ['mousedown',] }],
+            windowMouseDown: [{ type: i0.HostListener, args: ['window:mousedown',] }]
         };
         return MdbAutoCompleterComponent;
     }());
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbAutoCompleterDirective = /** @class */ (function () {
         function MdbAutoCompleterDirective(renderer, el, platformId, document) {
@@ -11294,6 +11854,26 @@
             this.ngModelChange = new i0.EventEmitter();
             this.isBrowser = common.isPlatformBrowser(platformId);
         }
+        /**
+         * @private
+         * @param {?} el
+         * @param {?} selector
+         * @return {?}
+         */
+        MdbAutoCompleterDirective.prototype._getClosestEl = /**
+         * @private
+         * @param {?} el
+         * @param {?} selector
+         * @return {?}
+         */
+            function (el, selector) {
+                for (; el && el !== document; el = el.parentNode) {
+                    if (el.matches(selector)) {
+                        return el;
+                    }
+                }
+                return null;
+            };
         /**
          * @private
          * @return {?}
@@ -11316,7 +11896,7 @@
                 this.renderer.setAttribute(el, 'tabindex', this.mdbAutoCompleter.clearButtonTabIndex.toString());
                 if (this.isBrowser) {
                     /** @type {?} */
-                    var parent_1 = this.el.nativeElement.offsetParent || this.el.nativeElement.parentElement;
+                    var parent_1 = this._getClosestEl(this.el.nativeElement, '.md-form') || this.el.nativeElement;
                     this.renderer.appendChild(parent_1, el);
                 }
             };
@@ -11338,9 +11918,12 @@
          */
             function (target, styles) {
                 var _this = this;
-                Object.keys(styles).forEach(function (prop) {
+                Object.keys(styles).forEach(( /**
+                 * @param {?} prop
+                 * @return {?}
+                 */function (prop) {
                     ( /** @type {?} */(_this)).renderer.setStyle(target, prop, styles[prop]);
-                });
+                }));
                 return ( /** @type {?} */(this));
             };
         /**
@@ -11357,9 +11940,12 @@
          */
             function (target, name) {
                 var _this = this;
-                name.forEach(function (el) {
+                name.forEach(( /**
+                 * @param {?} el
+                 * @return {?}
+                 */function (el) {
                     _this.renderer.addClass(target, el);
-                });
+                }));
             };
         /**
          * @private
@@ -11445,6 +12031,37 @@
                 this.mdbAutoCompleter.highlightRow(0);
             };
         /**
+         * @param {?} elem
+         * @return {?}
+         */
+        MdbAutoCompleterDirective.prototype.getCoords = /**
+         * @param {?} elem
+         * @return {?}
+         */
+            function (elem) {
+                if (this.isBrowser) {
+                    /** @type {?} */
+                    var box = elem.getBoundingClientRect();
+                    /** @type {?} */
+                    var body = document.body;
+                    /** @type {?} */
+                    var docEl = document.documentElement;
+                    /** @type {?} */
+                    var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+                    /** @type {?} */
+                    var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+                    /** @type {?} */
+                    var clientTop = docEl.clientTop || body.clientTop || 0;
+                    /** @type {?} */
+                    var clientLeft = docEl.clientLeft || body.clientLeft || 0;
+                    /** @type {?} */
+                    var top_1 = box.top + scrollTop - clientTop;
+                    /** @type {?} */
+                    var left = box.left + scrollLeft - clientLeft;
+                    return { top: Math.round(top_1), left: Math.round(left) };
+                }
+            };
+        /**
          * @private
          * @return {?}
          */
@@ -11465,6 +12082,7 @@
          */
             function () {
                 this.mdbAutoCompleter.show();
+                this._appendDropdownToInput();
             };
         /**
          * @private
@@ -11478,6 +12096,46 @@
                 this.mdbAutoCompleter.hide();
             };
         /**
+         * @private
+         * @return {?}
+         */
+        MdbAutoCompleterDirective.prototype._appendDropdownToInput = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                /** @type {?} */
+                var position = this.el.nativeElement.getBoundingClientRect();
+                /** @type {?} */
+                var el = this.el.nativeElement;
+                /** @type {?} */
+                var style = window.getComputedStyle(this.el.nativeElement);
+                /** @type {?} */
+                var height = ['height', 'padding-top', 'padding-bottom', 'margin-top', 'margin-bottom']
+                    .map(( /**
+             * @param {?} key
+             * @return {?}
+             */function (key) { return parseInt(style.getPropertyValue(key), 10); }))
+                    .reduce(( /**
+             * @param {?} prev
+             * @param {?} cur
+             * @return {?}
+             */function (prev, cur) { return prev + cur; }));
+                this.mdbAutoCompleter.parameters = {
+                    left: this.getCoords(el).left,
+                    top: this.getCoords(el).top + height,
+                    width: position.width,
+                    bottom: window.innerHeight - height - this.getCoords(el).top,
+                    inputHeight: height
+                };
+                this.mdbAutoCompleter.appendDropdown({
+                    left: this.getCoords(el).left,
+                    top: this.getCoords(el).top + height,
+                    width: position.width,
+                    bottom: window.innerHeight - height - this.getCoords(el).top
+                });
+            };
+        /**
          * @return {?}
          */
         MdbAutoCompleterDirective.prototype.ngAfterViewInit = /**
@@ -11485,56 +12143,88 @@
          */
             function () {
                 var _this = this;
-                this.mdbAutoCompleter.selectedItemChanged().subscribe(function (item) {
+                this.mdbAutoCompleter.selectedItemChanged().subscribe(( /**
+                 * @param {?} item
+                 * @return {?}
+                 */function (item) {
                     _this.el.nativeElement.value = item.text;
                     /** @type {?} */
                     var clearButtonVisibility = _this.el.nativeElement.value.length > 0 ? 'visible' : 'hidden';
-                    _this._setStyles(_this._clearButton, { visibility: clearButtonVisibility });
-                });
+                    /** @type {?} */
+                    var clearButton = _this.el.nativeElement.parentElement.lastElementChild;
+                    _this._setStyles(clearButton, { visibility: clearButtonVisibility });
+                }));
+                this.mdbAutoCompleter.isDropdownOpen().subscribe(( /**
+                 * @param {?} state
+                 * @return {?}
+                 */function (state) {
+                    if (state) {
+                        _this._appendDropdownToInput();
+                    }
+                }));
                 if (this.mdbAutoCompleter.clearButton && this.isBrowser) {
                     this._renderClearButton();
                     /** @type {?} */
                     var clearButton_1 = this.el.nativeElement.parentElement.querySelectorAll('.mdb-autocomplete-clear')[0];
                     this._clearButton = this.document.querySelector('.mdb-autocomplete-clear');
-                    this.renderer.listen(clearButton_1, 'focus', function () {
-                        ['click', 'keydown:space', 'keydown:enter'].forEach(function (event) {
-                            return _this.renderer.listen(clearButton_1, event, function () {
+                    this.renderer.listen(clearButton_1, 'focus', ( /**
+                     * @return {?}
+                     */function () {
+                        ['click', 'keydown:space', 'keydown:enter'].forEach(( /**
+                         * @param {?} event
+                         * @return {?}
+                         */function (event) {
+                            return _this.renderer.listen(clearButton_1, event, ( /**
+                             * @return {?}
+                             */function () {
                                 _this._clearInput();
-                            });
-                        });
+                            }));
+                        }));
                         _this._setStyles(clearButton_1, {
                             transform: 'scale(1.2, 1.2)',
                             transition: '200ms'
                         });
-                    });
-                    this.renderer.listen(clearButton_1, 'mouseenter', function () {
+                    }));
+                    this.renderer.listen(clearButton_1, 'mouseenter', ( /**
+                     * @return {?}
+                     */function () {
                         _this._setStyles(clearButton_1, {
                             transform: 'scale(1.2, 1.2)',
                             transition: '200ms'
                         });
-                    });
-                    this.renderer.listen(clearButton_1, 'mouseleave', function () {
+                    }));
+                    this.renderer.listen(clearButton_1, 'mouseleave', ( /**
+                     * @return {?}
+                     */function () {
                         _this._setStyles(clearButton_1, {
                             transform: 'scale(1.0, 1.0)',
                             transition: '200ms'
                         });
-                    });
-                    this.renderer.listen(clearButton_1, 'blur', function () {
+                    }));
+                    this.renderer.listen(clearButton_1, 'blur', ( /**
+                     * @return {?}
+                     */function () {
                         _this._setStyles(clearButton_1, {
                             transform: 'scale(1.0, 1.0)',
                             transition: '200ms'
                         });
-                    });
+                    }));
                     if (this.el.nativeElement.disabled) {
                         this.renderer.setAttribute(clearButton_1, 'disabled', 'true');
                     }
-                    this._autocompleterInputChanges = new MutationObserver(function (mutations) {
-                        mutations.forEach(function (mutation) {
+                    this._autocompleterInputChanges = new MutationObserver(( /**
+                     * @param {?} mutations
+                     * @return {?}
+                     */function (mutations) {
+                        mutations.forEach(( /**
+                         * @param {?} mutation
+                         * @return {?}
+                         */function (mutation) {
                             if (mutation.attributeName === 'disabled') {
                                 _this.renderer.setAttribute(_this._clearButton, 'disabled', 'true');
                             }
-                        });
-                    });
+                        }));
+                    }));
                     this._autocompleterInputChanges.observe(this.el.nativeElement, {
                         attributes: true,
                         childList: true,
@@ -11584,7 +12274,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbAutoCompleterOptionDirective = /** @class */ (function () {
         function MdbAutoCompleterOptionDirective(_el) {
@@ -11605,7 +12295,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var AutoCompleterModule = /** @class */ (function () {
         function AutoCompleterModule() {
@@ -11622,12 +12312,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbDateFormatDirective = /** @class */ (function () {
         function MdbDateFormatDirective() {
@@ -11677,9 +12367,12 @@
             function () {
                 /** @type {?} */
                 var resLength = 0;
-                this.format.forEach(function (value) {
+                this.format.forEach(( /**
+                 * @param {?} value
+                 * @return {?}
+                 */function (value) {
                     resLength += value.length;
-                });
+                }));
                 this.resultLength = resLength + this.separatorsNumber;
             };
         /**
@@ -11695,9 +12388,13 @@
                 /** @type {?} */
                 var dateParts = this.getDateParts(date);
                 /** @type {?} */
-                var result = dateParts.map(function (part, index) {
+                var result = dateParts.map(( /**
+                 * @param {?} part
+                 * @param {?} index
+                 * @return {?}
+                 */function (part, index) {
                     return part = _this.formatDateParts(part, index);
-                });
+                }));
                 return result.join(this.separator).slice(0, this.resultLength);
             };
         /**
@@ -11819,7 +12516,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbCreditCardDirective = /** @class */ (function () {
         function MdbCreditCardDirective() {
@@ -12045,9 +12742,12 @@
          */
             function (value) {
                 /** @type {?} */
-                var cardType = this.cards.find(function (card) {
+                var cardType = this.cards.find(( /**
+                 * @param {?} card
+                 * @return {?}
+                 */function (card) {
                     return card.re.test(value);
-                });
+                }));
                 if (!cardType) {
                     return this.defaultCard;
                 }
@@ -12063,9 +12763,12 @@
          */
             function (newCards) {
                 var _this = this;
-                newCards.forEach(function (card) {
+                newCards.forEach(( /**
+                 * @param {?} card
+                 * @return {?}
+                 */function (card) {
                     _this.cards.push(card);
-                });
+                }));
             };
         MdbCreditCardDirective.decorators = [
             { type: i0.Directive, args: [{
@@ -12086,7 +12789,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbCvvDirective = /** @class */ (function () {
         function MdbCvvDirective() {
@@ -12155,7 +12858,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var AutoFormatModule = /** @class */ (function () {
         function AutoFormatModule() {
@@ -12179,12 +12882,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbCompleterDirective = /** @class */ (function () {
         function MdbCompleterDirective() {
@@ -12419,7 +13122,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
     var MAX_CHARS = 524288;
@@ -12444,7 +13147,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * @abstract
@@ -12585,12 +13288,24 @@
                 /** @type {?} */
                 var searchFields = this._searchFields ? this._searchFields.split(',') : null;
                 if (this._searchFields !== null && this._searchFields !== undefined && term !== '') {
-                    matches = data.filter(function (item) {
+                    matches = data.filter(( /**
+                     * @param {?} item
+                     * @return {?}
+                     */function (item) {
                         /** @type {?} */
                         var values = searchFields ?
-                            searchFields.map(function (searchField) { return _this.extractValue(item, searchField); }).filter(function (value) { return !!value; }) : [item];
-                        return values.some(function (value) { return value.toString().toLowerCase().indexOf(term.toString().toLowerCase()) >= 0; });
-                    });
+                            searchFields.map(( /**
+                             * @param {?} searchField
+                             * @return {?}
+                             */function (searchField) { return _this.extractValue(item, searchField); })).filter(( /**
+                             * @param {?} value
+                             * @return {?}
+                             */function (value) { return !!value; })) : [item];
+                        return values.some(( /**
+                         * @param {?} value
+                         * @return {?}
+                         */function (value) { return value.toString().toLowerCase().indexOf(term.toString().toLowerCase()) >= 0; }));
+                    }));
                 }
                 else {
                     matches = data;
@@ -12611,10 +13326,17 @@
                 var _this = this;
                 // split title fields and run extractValue for each and join with ' '
                 return this._titleField.split(',')
-                    .map(function (field) {
+                    .map(( /**
+             * @param {?} field
+             * @return {?}
+             */function (field) {
                     return _this.extractValue(item, field);
-                })
-                    .reduce(function (acc, titlePart) { return acc ? acc + " " + titlePart : titlePart; });
+                }))
+                    .reduce(( /**
+             * @param {?} acc
+             * @param {?} titlePart
+             * @return {?}
+             */function (acc, titlePart) { return acc ? acc + " " + titlePart : titlePart; }));
             };
         /**
          * @protected
@@ -12678,7 +13400,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var LocalData = /** @class */ (function (_super) {
         __extends(LocalData, _super);
@@ -12700,12 +13422,15 @@
             function (data) {
                 var _this = this;
                 if (data instanceof rxjs.Observable) {
-                    (( /** @type {?} */(data))).subscribe(function (res) {
+                    (( /** @type {?} */(data))).subscribe(( /**
+                     * @param {?} res
+                     * @return {?}
+                     */function (res) {
                         ( /** @type {?} */(_this))._data = res;
                         if (( /** @type {?} */(_this)).savedTerm) {
                             ( /** @type {?} */(_this)).search(( /** @type {?} */(_this)).savedTerm);
                         }
-                    });
+                    }));
                 }
                 else {
                     ( /** @type {?} */(this))._data = ( /** @type {?} */(data));
@@ -12756,7 +13481,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var RemoteData = /** @class */ (function (_super) {
         __extends(RemoteData, _super);
@@ -12865,20 +13590,32 @@
                 //   this._requestOptions = new RequestOptions();
                 //   (this._requestOptions.headers as any) = this._headers || new HttpHeaders();
                 // }
-                this.remoteSearch = this.http.get(url, this._requestOptions).pipe(operators.map(function (res) { return res; }), operators.map(function (data) {
+                this.remoteSearch = this.http.get(url, this._requestOptions).pipe(operators.map(( /**
+                 * @param {?} res
+                 * @return {?}
+                 */function (res) { return res; })), operators.map(( /**
+                 * @param {?} data
+                 * @return {?}
+                 */function (data) {
                     /** @type {?} */
                     var matches = _this.extractValue(data, _this._dataField);
                     return _this.extractMatches(matches, term);
-                }), operators.map(function (matches) {
+                })), operators.map(( /**
+                 * @param {?} matches
+                 * @return {?}
+                 */function (matches) {
                     /** @type {?} */
                     var results = _this.processResults(matches);
                     _this.next(results);
                     return results;
-                }), operators.catchError(function (err) {
+                })), operators.catchError(( /**
+                 * @param {?} err
+                 * @return {?}
+                 */function (err) {
                     _this.error(err);
                     // return null;
                     return _this.setToNullValue;
-                }))
+                })))
                     .subscribe();
             };
         /**
@@ -12912,7 +13649,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CompleterService = /** @class */ (function () {
         function CompleterService(localDataFactory, // Using any instead of () => LocalData because on AoT errors
@@ -12988,14 +13725,18 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
-    var noop = function () { };
+    var noop = ( /**
+     * @return {?}
+     */function () { });
     /** @type {?} */
     var COMPLETER_CONTROL_VALUE_ACCESSOR = {
         provide: forms.NG_VALUE_ACCESSOR,
-        useExisting: i0.forwardRef(function () { return CompleterComponent; }),
+        useExisting: i0.forwardRef(( /**
+         * @return {?}
+         */function () { return CompleterComponent; })),
         multi: true
     };
     var CompleterComponent = /** @class */ (function () {
@@ -13254,16 +13995,25 @@
          */
             function () {
                 var _this = this;
-                this.completer.selected.subscribe(function (item) {
+                this.completer.selected.subscribe(( /**
+                 * @param {?} item
+                 * @return {?}
+                 */function (item) {
                     _this.selected.emit(item);
-                });
-                this.completer.highlighted.subscribe(function (item) {
+                }));
+                this.completer.highlighted.subscribe(( /**
+                 * @param {?} item
+                 * @return {?}
+                 */function (item) {
                     _this.highlighted.emit(item);
-                });
-                this.completer.opened.subscribe(function (isOpen) {
+                }));
+                this.completer.opened.subscribe(( /**
+                 * @param {?} isOpen
+                 * @return {?}
+                 */function (isOpen) {
                     _this._open = isOpen;
                     _this.opened.emit(isOpen);
-                });
+                }));
                 if (this.initialValue) {
                     this.searchStr = this.initialValue;
                     this.onFocus();
@@ -13290,9 +14040,11 @@
          */
             function () {
                 var _this = this;
-                setTimeout(function () {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     _this.focused = true;
-                }, 0);
+                }), 0);
                 this.focusEvent.emit({ focused: true, element: this.el });
             };
         /**
@@ -13414,7 +14166,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CompleterListItemComponent = /** @class */ (function () {
         function CompleterListItemComponent() {
@@ -13474,24 +14226,28 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * @return {?}
      */
     function localDataFactory() {
-        return function () {
+        return ( /**
+         * @return {?}
+         */function () {
             return new LocalData();
-        };
+        });
     }
     /**
      * @param {?} http
      * @return {?}
      */
     function remoteDataFactory(http$$1) {
-        return function () {
+        return ( /**
+         * @return {?}
+         */function () {
             return new RemoteData(http$$1);
-        };
+        });
     }
     /** @type {?} */
     var LocalDataFactoryProvider = { provide: LocalData, useFactory: localDataFactory };
@@ -13500,7 +14256,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CtrRowItem = /** @class */ (function () {
         function CtrRowItem(row, index) {
@@ -13549,9 +14305,11 @@
                 /** @type {?} */
                 var autoHighlightIndex = this.completer.autoHighlightIndex;
                 if (autoHighlightIndex) {
-                    setTimeout(function () {
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         _this.highlightRow(autoHighlightIndex);
-                    }, 0);
+                    }), 0);
                 }
             };
         /**
@@ -13564,9 +14322,11 @@
                 var _this = this;
                 // Support for canceling blur on IE (issue #158)
                 this.completer.cancelBlur(true);
-                setTimeout(function () {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     _this.completer.cancelBlur(false);
-                }, 0);
+                }), 0);
             };
         /**
          * @param {?} row
@@ -13589,7 +14349,10 @@
          */
             function (index) {
                 /** @type {?} */
-                var highlighted = this.rows.find(function (row) { return row.index === index; });
+                var highlighted = this.rows.find(( /**
+                 * @param {?} row
+                 * @return {?}
+                 */function (row) { return row.index === index; }));
                 if (index < 0) {
                     if (this.currHighlighted) {
                         this.currHighlighted.row.setHighlighted(false);
@@ -13767,7 +14530,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     // keyboard events
     /** @type {?} */
@@ -13802,7 +14565,10 @@
             // private blurTimer: Subscription = null;
             this.blurTimer = null;
             this.ngModel = this.tempngModel;
-            this.completer.selected.subscribe(function (item) {
+            this.completer.selected.subscribe(( /**
+             * @param {?} item
+             * @return {?}
+             */function (item) {
                 if (!item) {
                     return;
                 }
@@ -13813,8 +14579,11 @@
                     _this.searchStr = item.title;
                 }
                 _this.ngModelChange.emit(_this.searchStr);
-            });
-            this.completer.highlighted.subscribe(function (item) {
+            }));
+            this.completer.highlighted.subscribe(( /**
+             * @param {?} item
+             * @return {?}
+             */function (item) {
                 if (_this.fillHighlighted) {
                     if (item) {
                         _this._displayStr = item.title;
@@ -13825,16 +14594,19 @@
                         _this.ngModelChange.emit(_this.searchStr);
                     }
                 }
-            });
+            }));
             // this.ngModel.valueChanges.subscribe(value => {
-            this.ngModel.valueChanges.subscribe(function (value) {
+            this.ngModel.valueChanges.subscribe(( /**
+             * @param {?} value
+             * @return {?}
+             */function (value) {
                 if (!isNil(value) && _this._displayStr !== value) {
                     if (_this.searchStr !== value) {
                         _this.completer.search(value);
                     }
                     _this.searchStr = value;
                 }
-            });
+            }));
         }
         /**
          * @param {?} event
@@ -13909,13 +14681,17 @@
                 var _this = this;
                 // Check if we need to cancel Blur for IE
                 if (this.completer.isCancelBlur()) {
-                    setTimeout(function () {
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         // get the focus back
                         _this.el.nativeElement.focus();
-                    }, 0);
+                    }), 0);
                     return;
                 }
-                this.blurTimer = rxjs.timer(200).subscribe(function () {
+                this.blurTimer = rxjs.timer(200).subscribe(( /**
+                 * @return {?}
+                 */function () {
                     _this.blurTimer.unsubscribe();
                     _this.blurTimer = null;
                     if (_this.overrideSuggested) {
@@ -13931,7 +14707,7 @@
                         }
                     }
                     _this.completer.clear();
-                });
+                }));
             };
         /**
          * @return {?}
@@ -14030,7 +14806,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CtrListContext = /** @class */ (function () {
         function CtrListContext(results, searching, searchInitialized, isOpen) {
@@ -14086,7 +14862,10 @@
                         // .catch(err => this.handleError(err))
                         // .catch((err: any) => this.handleError(err))
                         // .subscribe(results => {
-                        .subscribe(function (results) {
+                        .subscribe(( /**
+                 * @param {?} results
+                 * @return {?}
+                 */function (results) {
                         try {
                             _this.ctx.searchInitialized = true;
                             _this.ctx.searching = false;
@@ -14108,7 +14887,7 @@
                         }
                         catch (err) {
                         }
-                    });
+                    }));
                 }
             },
             enumerable: true,
@@ -14121,13 +14900,15 @@
              */ function (value) {
                 var _this = this;
                 if (this._dataService && typeof this._dataService.convertToItem === 'function') {
-                    setTimeout(function () {
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         /** @type {?} */
                         var initialItem = _this._dataService.convertToItem(value);
                         if (initialItem) {
                             _this.completer.onSelected(initialItem, false);
                         }
-                    });
+                    }));
                 }
                 else if (!this._dataService) {
                     this._initialValue = value;
@@ -14160,13 +14941,15 @@
                     if (this.clearTimer) {
                         this.clearTimer.unsubscribe();
                     }
-                    this.searchTimer = rxjs.timer(this.mdbListPause).subscribe(function () {
+                    this.searchTimer = rxjs.timer(this.mdbListPause).subscribe(( /**
+                     * @return {?}
+                     */function () {
                         try {
                             _this.searchTimerComplete(term);
                         }
                         catch (err) {
                         }
-                    });
+                    }));
                 }
                 else if (!isNil(term) && term.length < this.mdbListMinSearchLength) {
                     this.clear();
@@ -14183,9 +14966,11 @@
                 if (this.searchTimer) {
                     this.searchTimer.unsubscribe();
                 }
-                this.clearTimer = rxjs.timer(CLEAR_TIMEOUT).subscribe(function () {
+                this.clearTimer = rxjs.timer(CLEAR_TIMEOUT).subscribe(( /**
+                 * @return {?}
+                 */function () {
                     _this._clear();
-                });
+                }));
             };
         /**
          * @return {?}
@@ -14318,14 +15103,23 @@
                 }
                 // First try to find the exact term
                 /** @type {?} */
-                var bestMatch = this.ctx.results.findIndex(function (item) { return item.title.toLowerCase() === _this.term.toLocaleLowerCase(); });
+                var bestMatch = this.ctx.results.findIndex(( /**
+                 * @param {?} item
+                 * @return {?}
+                 */function (item) { return item.title.toLowerCase() === _this.term.toLocaleLowerCase(); }));
                 // If not try to find the first item that starts with the term
                 if (bestMatch < 0) {
-                    bestMatch = this.ctx.results.findIndex(function (item) { return item.title.toLowerCase().startsWith(_this.term.toLocaleLowerCase()); });
+                    bestMatch = this.ctx.results.findIndex(( /**
+                     * @param {?} item
+                     * @return {?}
+                     */function (item) { return item.title.toLowerCase().startsWith(_this.term.toLocaleLowerCase()); }));
                 }
                 // If not try to find the first item that includes the term
                 if (bestMatch < 0) {
-                    bestMatch = this.ctx.results.findIndex(function (item) { return item.title.toLowerCase().includes(_this.term.toLocaleLowerCase()); });
+                    bestMatch = this.ctx.results.findIndex(( /**
+                     * @param {?} item
+                     * @return {?}
+                     */function (item) { return item.title.toLowerCase().includes(_this.term.toLocaleLowerCase()); }));
                 }
                 return bestMatch < 0 ? null : bestMatch;
             };
@@ -14356,7 +15150,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbRowDirective = /** @class */ (function () {
         function MdbRowDirective(el, renderer, dropdown) {
@@ -14471,7 +15265,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var AutocompleteModule = /** @class */ (function () {
         function AutocompleteModule() {
@@ -14513,12 +15307,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CardRevealComponent = /** @class */ (function () {
         function CardRevealComponent(_r) {
@@ -14534,7 +15328,9 @@
                 var _this = this;
                 this.show = !this.show;
                 this.socials = (this.socials === 'active') ? 'inactive' : 'active';
-                setTimeout(function () {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     try {
                         /** @type {?} */
                         var height = _this.cardFront.nativeElement.offsetHeight;
@@ -14542,7 +15338,7 @@
                         _this._r.setStyle(_this.cardOverflow.nativeElement, 'height', height + 'px');
                     }
                     catch (error) { }
-                }, 0);
+                }), 0);
             };
         CardRevealComponent.decorators = [
             { type: i0.Component, args: [{
@@ -14567,7 +15363,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CardRotatingComponent = /** @class */ (function () {
         function CardRotatingComponent() {
@@ -14593,7 +15389,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CardsModule = /** @class */ (function () {
         function CardsModule() {
@@ -14619,12 +15415,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var LocaleService = /** @class */ (function () {
         function LocaleService() {
@@ -14693,7 +15489,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
     var M = 'm';
@@ -15251,7 +16047,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var FocusDirective = /** @class */ (function () {
         function FocusDirective(el) {
@@ -15298,7 +16094,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @enum {number} */
     var KeyCode = {
@@ -15482,12 +16278,14 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
     var MYDP_VALUE_ACCESSOR = {
         provide: forms.NG_VALUE_ACCESSOR,
-        useExisting: i0.forwardRef(function () { return MDBDatePickerComponent; }),
+        useExisting: i0.forwardRef(( /**
+         * @return {?}
+         */function () { return MDBDatePickerComponent; })),
         multi: true
     };
     /** @enum {number} */
@@ -15611,14 +16409,21 @@
             this.modalHeightBefore = null;
             this.isMobile = null;
             this.isBrowser = false;
-            this.onChangeCb = function () { };
-            this.onTouchedCb = function () { };
+            this.onChangeCb = ( /**
+             * @return {?}
+             */function () { });
+            this.onTouchedCb = ( /**
+             * @return {?}
+             */function () { });
             this.isBrowser = common.isPlatformBrowser(platformId);
             if (this.isBrowser) {
                 this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
             }
             this.setLocaleOptions();
-            renderer.listen(this.elem.nativeElement, 'click', function (event) {
+            renderer.listen(this.elem.nativeElement, 'click', ( /**
+             * @param {?} event
+             * @return {?}
+             */function (event) {
                 if (_this.showSelector &&
                     event.target &&
                     _this.elem.nativeElement !== event.target &&
@@ -15636,7 +16441,7 @@
                     _this.resetMonthYearEdit();
                     _this.cdRef.detectChanges();
                 }
-            });
+            }));
         }
         /**
          * @return {?}
@@ -15647,9 +16452,11 @@
             function () {
                 var _this = this;
                 if (this.opts.startDate) {
-                    setTimeout(function () {
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         _this.onUserDateInput(_this.opts.startDate);
-                    }, 0);
+                    }), 0);
                 }
             };
         /**
@@ -15661,20 +16468,25 @@
             function () {
                 var _this = this;
                 if (this.isBrowser) {
-                    setTimeout(function () {
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         // Fix for visible date / time picker input when picker plate is visible.
                         try {
                             /** @type {?} */
                             var openedPicker = document.querySelector('.picker--opened');
                             /** @type {?} */
                             var allPickers = document.querySelectorAll('.picker');
-                            allPickers.forEach(function (element) {
+                            allPickers.forEach(( /**
+                             * @param {?} element
+                             * @return {?}
+                             */function (element) {
                                 _this.renderer.setStyle(element, 'z-index', '0');
-                            });
+                            }));
                             _this.renderer.setStyle(openedPicker, 'z-index', '100');
                         }
                         catch (error) { }
-                    }, 0);
+                    }), 0);
                 }
             };
         /**
@@ -15702,9 +16514,11 @@
                     }
                 }
                 catch (error) { }
-                setTimeout(function () {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     (( /** @type {?} */(document.documentElement))).style.removeProperty('overflow');
-                }, 155);
+                }), 155);
                 this.labelActive = false;
             };
         /**
@@ -15717,9 +16531,12 @@
                 var _this = this;
                 /** @type {?} */
                 var opts = this.localeService.getLocaleOptions(this.locale);
-                Object.keys(opts).forEach(function (k) {
+                Object.keys(opts).forEach(( /**
+                 * @param {?} k
+                 * @return {?}
+                 */function (k) {
                     _this.opts[k] = opts[k];
-                });
+                }));
             };
         /**
          * @param {?} locale
@@ -15732,9 +16549,11 @@
             function (locale) {
                 var _this = this;
                 this.localeService.locales = Object.assign({}, this.localeService.locales, locale);
-                setTimeout(function () {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     _this.setLocaleOptions();
-                }, 0);
+                }), 0);
             };
         /**
          * @return {?}
@@ -15749,9 +16568,12 @@
                 /** @type {?} */
                 var currentYear = thisYear.getFullYear();
                 if (this.options !== undefined) {
-                    Object.keys(this.options).forEach(function (k) {
+                    Object.keys(this.options).forEach(( /**
+                     * @param {?} k
+                     * @return {?}
+                     */function (k) {
                         _this.opts[k] = _this.options[k];
-                    });
+                    }));
                 }
                 if (this.disabled !== undefined) {
                     this.opts.componentDisabled = this.disabled;
@@ -15998,9 +16820,11 @@
                         sd.currentValue !== '' &&
                         Object.keys(sd.currentValue).length !== 0) {
                         this.selectedDate = this.parseSelectedDate(sd.currentValue);
-                        setTimeout(function () {
+                        setTimeout(( /**
+                         * @return {?}
+                         */function () {
                             _this.onChangeCb(_this.getDateModel(_this.selectedDate));
-                        });
+                        }));
                         this.isDateSelected = true;
                     }
                     else {
@@ -16023,7 +16847,9 @@
             function () {
                 var _this = this;
                 try {
-                    setTimeout(function () {
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         /** @type {?} */
                         var field = _this.renderer.createElement('input');
                         _this.renderer.appendChild(_this.elem.nativeElement, field);
@@ -16033,17 +16859,23 @@
                         _this.renderer.setAttribute(inputReference, 'type', 'text');
                         _this.renderer.setStyle(inputReference, 'opacity', '0');
                         _this.renderer.setStyle(inputReference, '-webkit-user-modify', 'read-write-plaintext-only');
-                        field.onfocus = function () {
-                            setTimeout(function () {
+                        field.onfocus = ( /**
+                         * @return {?}
+                         */function () {
+                            setTimeout(( /**
+                             * @return {?}
+                             */function () {
                                 _this.renderer.setStyle(field, 'display', 'none');
-                                setTimeout(function () {
+                                setTimeout(( /**
+                                 * @return {?}
+                                 */function () {
                                     _this.renderer.removeChild(_this.elem.nativeElement, field);
                                     document.body.focus();
-                                }, 0);
-                            }, 0);
-                        };
+                                }), 0);
+                            }), 0);
+                        });
                         field.focus();
-                    }, 0);
+                    }), 0);
                 }
                 catch (error) {
                 }
@@ -16060,6 +16892,18 @@
                     this.calendarToggle.emit(CalToggle.CloseByCalBtn);
                 }
                 this.isDateSelected = false;
+                this.cdRef.markForCheck();
+            };
+        /**
+         * @return {?}
+         */
+        MDBDatePickerComponent.prototype.closeBtnClicked = /**
+         * @return {?}
+         */
+            function () {
+                this.showSelector = false;
+                this.removeInlineStyle();
+                this.cdRef.markForCheck();
             };
         /**
          * @return {?}
@@ -16421,7 +17265,10 @@
                 var toReplace = this.opts.dateFormat.split(/(d{1,4}|m{1,4}|y{4}|yy|!.)/g);
                 /** @type {?} */
                 var formatted = '';
-                toReplace.forEach(function (el) {
+                toReplace.forEach(( /**
+                 * @param {?} el
+                 * @return {?}
+                 */function (el) {
                     switch (el) {
                         case 'dddd':
                             el = el.replace(el, dddd);
@@ -16455,7 +17302,7 @@
                             break;
                     }
                     formatted += el;
-                });
+                }));
                 return formatted;
             };
         /**
@@ -16862,7 +17709,7 @@
             { type: i0.Component, args: [{
                         selector: 'mdb-date-picker',
                         exportAs: 'mdbdatepicker',
-                        template: "<!-- Line 27: Deleted (focus)=\"onFocusInput($event)\" for better use in Firefox. If other strange problems will occur, please paste it in line 27. -->\r\n<div class=\"mydp picker\" [ngClass]=\"{'picker--opened': showSelector}\" [ngStyle]=\"{'width': opts.width}\">\r\n  <div class=\"md-form\">\r\n    <label (click)=\"openBtnClicked()\" *ngIf=\"label.length > 0\" [ngClass]=\"{\r\n          'active': checkActive(),\r\n          'disabled': opts.componentDisabled\r\n        }\">{{ label }}</label>\r\n    <input #dateInput type=\"text\" class=\"form-control mydp-date\" [attr.aria-label]=\"opts.ariaLabelInputField\" (click)=\"openBtnClicked()\"\r\n      [attr.maxlength]=\"opts.dateFormat.length\" [ngClass]=\"{\r\n        'selectiondisabled': opts.componentDisabled,\r\n        'disabled': opts.componentDisabled\r\n      }\" placeholder=\"{{ placeholder }}\" [ngModel]=\"selectionDayTxt\" (ngModelChange)=\"onUserDateInput($event)\" [value]=\"selectionDayTxt\"\r\n      [ngStyle]=\"{\r\n        'font-size': opts.selectionTxtFontSize\r\n      }\" (blur)=\"onBlurInput($event)\" [disabled]=\"opts.componentDisabled\" autocomplete=\"off\" [tabindex]=\"tabIndex\">\r\n  </div>\r\n  <div *ngIf=\"showSelector\" class=\"selector picker__holder selectorarrow selectorarrowleft selectorarrowright\" #divFocus [ngClass]=\"{'alignselectorright': opts.alignSelectorRight}\"\r\n    tabindex=\"0\">\r\n    <div class=\"picker__frame picker__box\" #pickerFrame>\r\n      <div class=\"picker__header\">\r\n        <div class=\"picker__date-display\">\r\n          <div class=\"picker__weekday-display\">\r\n            {{ weekText(getWeekday(tmp)) }}\r\n          </div>\r\n          <div class=\"picker__month-display\">\r\n            <div>{{ monthText(tmp.month) }}</div>\r\n          </div>\r\n          <div class=\"picker__day-display\">\r\n            <div>{{ tmp.day }}</div>\r\n          </div>\r\n          <div class=\"picker__year-display\">\r\n            <div>{{ tmp.year }}</div>\r\n          </div>\r\n        </div>\r\n        <select class=\"picker__select--year\" [(ngModel)]=\"visibleMonth.year\" (ngModelChange)=\"onUserYearInput($event)\" role=\"menu\"\r\n          aria-label=\"Year selector\">\r\n          <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option>\r\n        </select>\r\n        <select class=\"picker__select--month\" [(ngModel)]=\"visibleMonth.monthTxt\" (ngModelChange)=\"onUserMonthInput($event)\" role=\"menu\"\r\n          aria-label=\"Month selector\">\r\n          <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option>\r\n        </select>\r\n        <button class=\"picker__nav--prev\" data-nav=\"-1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Previous month\"\r\n          (click)=\"prevMonth()\" [disabled]=\"prevMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled}\"></button>\r\n        <button class=\"picker__nav--next\" data-nav=\"1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Next month\"\r\n          (click)=\"nextMonth()\" [disabled]=\"nextMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled}\"></button>\r\n      </div>\r\n      <table class=\"picker__table\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"picker__weekday weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#</th>\r\n            <th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let w of dates\">\r\n            <td class=\"picker__day daycellweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td>\r\n            <td class=\"picker__day\" *ngFor=\"let d of w.week\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId&&!d.disabled, 'disabled': d.disabled, 'tablesingleday': d.cmo===currMonthId&&!d.disabled}\">\r\n              <div *ngIf=\"d.markedDate.marked\" class=\"markdate\" [ngStyle]=\"{'background-color': d.markedDate.color}\"></div>\r\n              <div class=\"picker__day\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId,'picker__day--outfocus': (d.cmo===nextMonthId || d.cmo===prevMonthId), 'picker__day--today':d.currDay&&opts.markCurrentDay, 'picker__day--selected picker__day--highlighted':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId}\"\r\n                (click)=\"!d.disabled&&cellClicked(d);$event.stopPropagation()\" (keydown)=\"cellKeyDown($event, d)\" tabindex=\"0\">\r\n                {{d.dateObj.day}}\r\n              </div>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <div class=\"picker__footer\">\r\n        <button type=\"button\" *ngIf=\"opts.showTodayBtn\" class=\"picker__button--today\" (click)=\"todayClicked()\" role=\"button\" [attr.aria-label]=\"opts.todayBtnTxt\">\r\n          {{opts.todayBtnTxt}}\r\n        </button>\r\n        <button type=\"button\" *ngIf=\"opts.showClearDateBtn\" class=\"picker__button--clear\" (click)=\"removeBtnClicked()\" role=\"button\"\r\n          [attr.aria-label]=\"opts.clearBtnTxt\">\r\n          {{opts.clearBtnTxt}}\r\n        </button>\r\n        <button type=\"button\" [ngClass]=\"{'ml-auto': !opts.showTodayBtn}\" class=\"picker__button--close\" (click)=\"showSelector = false; removeInlineStyle();\"\r\n          role=\"button\" [attr.aria-label]=\"opts.closeBtnTxt\">\r\n          {{opts.closeBtnTxt}}\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>",
+                        template: "<!-- Line 27: Deleted (focus)=\"onFocusInput($event)\" for better use in Firefox. If other strange problems will occur, please paste it in line 27. -->\r\n<div class=\"mydp picker\" [ngClass]=\"{'picker--opened': showSelector}\" [ngStyle]=\"{'width': opts.width}\">\r\n  <div class=\"md-form\">\r\n    <label (click)=\"openBtnClicked()\" *ngIf=\"label.length > 0\" [ngClass]=\"{\r\n          'active': checkActive(),\r\n          'disabled': opts.componentDisabled\r\n        }\">{{ label }}</label>\r\n    <input #dateInput type=\"text\" class=\"form-control mydp-date\" [attr.aria-label]=\"opts.ariaLabelInputField\" (click)=\"openBtnClicked()\"\r\n      [attr.maxlength]=\"opts.dateFormat.length\" [ngClass]=\"{\r\n        'selectiondisabled': opts.componentDisabled,\r\n        'disabled': opts.componentDisabled\r\n      }\" placeholder=\"{{ placeholder }}\" [ngModel]=\"selectionDayTxt\" (ngModelChange)=\"onUserDateInput($event)\" [value]=\"selectionDayTxt\"\r\n      [ngStyle]=\"{\r\n        'font-size': opts.selectionTxtFontSize\r\n      }\" (blur)=\"onBlurInput($event)\" [disabled]=\"opts.componentDisabled\" autocomplete=\"off\" [tabindex]=\"tabIndex\">\r\n  </div>\r\n  <div *ngIf=\"showSelector\" class=\"selector picker__holder selectorarrow selectorarrowleft selectorarrowright\" #divFocus [ngClass]=\"{'alignselectorright': opts.alignSelectorRight}\"\r\n    tabindex=\"0\">\r\n    <div class=\"picker__frame picker__box\" #pickerFrame>\r\n      <div class=\"picker__header\">\r\n        <div class=\"picker__date-display\">\r\n          <div class=\"picker__weekday-display\">\r\n            {{ weekText(getWeekday(tmp)) }}\r\n          </div>\r\n          <div class=\"picker__month-display\">\r\n            <div>{{ monthText(tmp.month) }}</div>\r\n          </div>\r\n          <div class=\"picker__day-display\">\r\n            <div>{{ tmp.day }}</div>\r\n          </div>\r\n          <div class=\"picker__year-display\">\r\n            <div>{{ tmp.year }}</div>\r\n          </div>\r\n        </div>\r\n        <select class=\"picker__select--year\" [(ngModel)]=\"visibleMonth.year\" (ngModelChange)=\"onUserYearInput($event)\" role=\"menu\"\r\n          aria-label=\"Year selector\">\r\n          <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option>\r\n        </select>\r\n        <select class=\"picker__select--month\" [(ngModel)]=\"visibleMonth.monthTxt\" (ngModelChange)=\"onUserMonthInput($event)\" role=\"menu\"\r\n          aria-label=\"Month selector\">\r\n          <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option>\r\n        </select>\r\n        <button class=\"picker__nav--prev\" data-nav=\"-1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Previous month\"\r\n          (click)=\"prevMonth()\" [disabled]=\"prevMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled}\"></button>\r\n        <button class=\"picker__nav--next\" data-nav=\"1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Next month\"\r\n          (click)=\"nextMonth()\" [disabled]=\"nextMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled}\"></button>\r\n      </div>\r\n      <table class=\"picker__table\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"picker__weekday weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#</th>\r\n            <th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let w of dates\">\r\n            <td class=\"picker__day daycellweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td>\r\n            <td class=\"picker__day\" *ngFor=\"let d of w.week\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId&&!d.disabled, 'disabled': d.disabled, 'tablesingleday': d.cmo===currMonthId&&!d.disabled}\">\r\n              <div *ngIf=\"d.markedDate.marked\" class=\"markdate\" [ngStyle]=\"{'background-color': d.markedDate.color}\"></div>\r\n              <div class=\"picker__day\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId,'picker__day--outfocus': (d.cmo===nextMonthId || d.cmo===prevMonthId), 'picker__day--today':d.currDay&&opts.markCurrentDay, 'picker__day--selected picker__day--highlighted':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId}\"\r\n                (click)=\"!d.disabled&&cellClicked(d);$event.stopPropagation()\" (keydown)=\"cellKeyDown($event, d)\" tabindex=\"0\">\r\n                {{d.dateObj.day}}\r\n              </div>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <div class=\"picker__footer\">\r\n        <button type=\"button\" *ngIf=\"opts.showTodayBtn\" class=\"picker__button--today\" (click)=\"todayClicked()\" role=\"button\" [attr.aria-label]=\"opts.todayBtnTxt\">\r\n          {{opts.todayBtnTxt}}\r\n        </button>\r\n        <button type=\"button\" *ngIf=\"opts.showClearDateBtn\" class=\"picker__button--clear\" (click)=\"removeBtnClicked()\" role=\"button\"\r\n          [attr.aria-label]=\"opts.clearBtnTxt\">\r\n          {{opts.clearBtnTxt}}\r\n        </button>\r\n        <button type=\"button\" [ngClass]=\"{'ml-auto': !opts.showTodayBtn}\" class=\"picker__button--close\" (click)=\"closeBtnClicked()\"\r\n          role=\"button\" [attr.aria-label]=\"opts.closeBtnTxt\">\r\n          {{opts.closeBtnTxt}}\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>",
                         providers: [LocaleService, UtilService, MYDP_VALUE_ACCESSOR],
                         encapsulation: i0.ViewEncapsulation.None,
                         changeDetection: i0.ChangeDetectionStrategy.OnPush
@@ -16903,7 +17750,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var DatepickerModule = /** @class */ (function () {
         function DatepickerModule() {
@@ -16920,12 +17767,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var SimpleChartComponent = /** @class */ (function () {
         function SimpleChartComponent() {
@@ -16993,7 +17840,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var EasyPieChartComponent = /** @class */ (function () {
         function EasyPieChartComponent(el, platformId, _r) {
@@ -17077,7 +17924,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ChartSimpleModule = /** @class */ (function () {
         function ChartSimpleModule() {
@@ -17098,12 +17945,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @enum {number} */
     var UploadStatus = {
@@ -17151,8 +17998,14 @@
             this.contentTypes = contentTypes;
             this.maxUploads = maxUploads;
             this.uploadScheduler
-                .pipe(operators.mergeMap(function (upload) { return _this.startUpload(upload); }, concurrency))
-                .subscribe(function (uploadOutput) { return _this.serviceEvents.emit(uploadOutput); });
+                .pipe(operators.mergeMap(( /**
+         * @param {?} upload
+         * @return {?}
+         */function (upload) { return _this.startUpload(upload); }), concurrency))
+                .subscribe(( /**
+         * @param {?} uploadOutput
+         * @return {?}
+         */function (uploadOutput) { return _this.serviceEvents.emit(uploadOutput); }));
         }
         /**
          * @param {?} incomingFiles
@@ -17166,7 +18019,12 @@
                 var _this = this;
                 var _a;
                 /** @type {?} */
-                var allowedIncomingFiles = [].reduce.call(incomingFiles, function (acc, checkFile, i) {
+                var allowedIncomingFiles = [].reduce.call(incomingFiles, ( /**
+                 * @param {?} acc
+                 * @param {?} checkFile
+                 * @param {?} i
+                 * @return {?}
+                 */function (acc, checkFile, i) {
                     /** @type {?} */
                     var futureQueueLength = acc.length + _this.queue.length + 1;
                     if (_this.isContentTypeAllowed(checkFile.type) && futureQueueLength <= _this.maxUploads) {
@@ -17178,13 +18036,17 @@
                         _this.serviceEvents.emit({ type: 'rejected', file: rejectedFile });
                     }
                     return acc;
-                }, []);
-                (_a = this.queue).push.apply(_a, __spread([].map.call(allowedIncomingFiles, function (file, i) {
+                }), []);
+                (_a = this.queue).push.apply(_a, __spread([].map.call(allowedIncomingFiles, ( /**
+                 * @param {?} file
+                 * @param {?} i
+                 * @return {?}
+                 */function (file, i) {
                     /** @type {?} */
                     var uploadFile = _this.makeUploadFile(file, i);
                     _this.serviceEvents.emit({ type: 'addedToQueue', file: uploadFile });
                     return uploadFile;
-                })));
+                }))));
                 this.serviceEvents.emit({ type: 'allAddedToQueue' });
             };
         /**
@@ -17197,19 +18059,31 @@
          */
             function (input) {
                 var _this = this;
-                return input.subscribe(function (event) {
+                return input.subscribe(( /**
+                 * @param {?} event
+                 * @return {?}
+                 */function (event) {
                     switch (event.type) {
                         case 'uploadFile':
                             /** @type {?} */
-                            var uploadFileIndex = _this.queue.findIndex(function (file) { return file === event.file; });
+                            var uploadFileIndex = _this.queue.findIndex(( /**
+                             * @param {?} file
+                             * @return {?}
+                             */function (file) { return file === event.file; }));
                             if (uploadFileIndex !== -1 && event.file) {
                                 _this.uploadScheduler.next({ file: _this.queue[uploadFileIndex], event: event });
                             }
                             break;
                         case 'uploadAll':
                             /** @type {?} */
-                            var files = _this.queue.filter(function (file) { return file.progress.status === UploadStatus.Queue; });
-                            files.forEach(function (file) { return _this.uploadScheduler.next({ file: file, event: event }); });
+                            var files = _this.queue.filter(( /**
+                             * @param {?} file
+                             * @return {?}
+                             */function (file) { return file.progress.status === UploadStatus.Queue; }));
+                            files.forEach(( /**
+                             * @param {?} file
+                             * @return {?}
+                             */function (file) { return _this.uploadScheduler.next({ file: file, event: event }); }));
                             break;
                         case 'cancel':
                             /** @type {?} */
@@ -17218,11 +18092,17 @@
                                 return;
                             }
                             /** @type {?} */
-                            var index = _this.subs.findIndex(function (sub) { return sub.id === id_1; });
+                            var index = _this.subs.findIndex(( /**
+                             * @param {?} sub
+                             * @return {?}
+                             */function (sub) { return sub.id === id_1; }));
                             if (index !== -1 && _this.subs[index].sub) {
                                 _this.subs[index].sub.unsubscribe();
                                 /** @type {?} */
-                                var fileIndex = _this.queue.findIndex(function (file) { return file.id === id_1; });
+                                var fileIndex = _this.queue.findIndex(( /**
+                                 * @param {?} file
+                                 * @return {?}
+                                 */function (file) { return file.id === id_1; }));
                                 if (fileIndex !== -1) {
                                     _this.queue[fileIndex].progress.status = UploadStatus.Cancelled;
                                     _this.serviceEvents.emit({ type: 'cancelled', file: _this.queue[fileIndex] });
@@ -17230,24 +18110,33 @@
                             }
                             break;
                         case 'cancelAll':
-                            _this.subs.forEach(function (sub) {
+                            _this.subs.forEach(( /**
+                             * @param {?} sub
+                             * @return {?}
+                             */function (sub) {
                                 if (sub.sub) {
                                     sub.sub.unsubscribe();
                                 }
                                 /** @type {?} */
-                                var file = _this.queue.find(function (uploadFile) { return uploadFile.id === sub.id; });
+                                var file = _this.queue.find(( /**
+                                 * @param {?} uploadFile
+                                 * @return {?}
+                                 */function (uploadFile) { return uploadFile.id === sub.id; }));
                                 if (file) {
                                     file.progress.status = UploadStatus.Cancelled;
                                     _this.serviceEvents.emit({ type: 'cancelled', file: file });
                                 }
-                            });
+                            }));
                             break;
                         case 'remove':
                             if (!event.id) {
                                 return;
                             }
                             /** @type {?} */
-                            var i = _this.queue.findIndex(function (file) { return file.id === event.id; });
+                            var i = _this.queue.findIndex(( /**
+                             * @param {?} file
+                             * @return {?}
+                             */function (file) { return file.id === event.id; }));
                             if (i !== -1) {
                                 /** @type {?} */
                                 var file = _this.queue[i];
@@ -17262,7 +18151,7 @@
                             }
                             break;
                     }
-                });
+                }));
             };
         /**
          * @param {?} upload
@@ -17274,19 +18163,30 @@
          */
             function (upload) {
                 var _this = this;
-                return new rxjs.Observable(function (observer) {
+                return new rxjs.Observable(( /**
+                 * @param {?} observer
+                 * @return {?}
+                 */function (observer) {
                     /** @type {?} */
                     var sub = _this.uploadFile(upload.file, upload.event)
-                        .subscribe(function (output) {
+                        .subscribe(( /**
+                 * @param {?} output
+                 * @return {?}
+                 */function (output) {
                         observer.next(output);
-                    }, function (err) {
+                    }), ( /**
+                     * @param {?} err
+                     * @return {?}
+                     */function (err) {
                         observer.error(err);
                         observer.complete();
-                    }, function () {
+                    }), ( /**
+                     * @return {?}
+                     */function () {
                         observer.complete();
-                    });
+                    }));
                     _this.subs.push({ id: upload.file.id, sub: sub });
-                });
+                }));
             };
         /**
          * @param {?} file
@@ -17300,7 +18200,10 @@
          */
             function (file, event) {
                 var _this = this;
-                return new rxjs.Observable(function (observer) {
+                return new rxjs.Observable(( /**
+                 * @param {?} observer
+                 * @return {?}
+                 */function (observer) {
                     /** @type {?} */
                     var url = event.url || '';
                     /** @type {?} */
@@ -17319,7 +18222,10 @@
                     var speed = 0;
                     /** @type {?} */
                     var eta = null;
-                    xhr.upload.addEventListener('progress', function (e) {
+                    xhr.upload.addEventListener('progress', ( /**
+                     * @param {?} e
+                     * @return {?}
+                     */function (e) {
                         if (e.lengthComputable) {
                             /** @type {?} */
                             var percentage = Math.round((e.loaded * 100) / e.total);
@@ -17342,12 +18248,17 @@
                             };
                             observer.next({ type: 'uploading', file: file });
                         }
-                    }, false);
-                    xhr.upload.addEventListener('error', function (e) {
+                    }), false);
+                    xhr.upload.addEventListener('error', ( /**
+                     * @param {?} e
+                     * @return {?}
+                     */function (e) {
                         observer.error(e);
                         observer.complete();
-                    });
-                    xhr.onreadystatechange = function () {
+                    }));
+                    xhr.onreadystatechange = ( /**
+                     * @return {?}
+                     */function () {
                         if (xhr.readyState === XMLHttpRequest.DONE) {
                             /** @type {?} */
                             var speedAverage = Math.round(file.size / (new Date().getTime() - progressStartTime) * 1000);
@@ -17374,19 +18285,28 @@
                             observer.next({ type: 'done', file: file });
                             observer.complete();
                         }
-                    };
+                    });
                     xhr.open(method, url, true);
                     xhr.withCredentials = event.withCredentials ? true : false;
                     try {
                         /** @type {?} */
                         var uploadFile_1 = ( /** @type {?} */(file.nativeFile));
                         /** @type {?} */
-                        var uploadIndex = _this.queue.findIndex(function (outFile) { return outFile.nativeFile === uploadFile_1; });
+                        var uploadIndex = _this.queue.findIndex(( /**
+                         * @param {?} outFile
+                         * @return {?}
+                         */function (outFile) { return outFile.nativeFile === uploadFile_1; }));
                         if (_this.queue[uploadIndex].progress.status === UploadStatus.Cancelled) {
                             observer.complete();
                         }
-                        Object.keys(data).forEach(function (key) { return file.form.append(key, data[key]); });
-                        Object.keys(headers).forEach(function (key) { return xhr.setRequestHeader(key, headers[key]); });
+                        Object.keys(data).forEach(( /**
+                         * @param {?} key
+                         * @return {?}
+                         */function (key) { return file.form.append(key, data[key]); }));
+                        Object.keys(headers).forEach(( /**
+                         * @param {?} key
+                         * @return {?}
+                         */function (key) { return xhr.setRequestHeader(key, headers[key]); }));
                         file.form.append(event.fieldName || 'file', uploadFile_1, uploadFile_1.name);
                         _this.serviceEvents.emit({ type: 'start', file: file });
                         xhr.send(file.form);
@@ -17394,10 +18314,12 @@
                     catch (e) {
                         observer.complete();
                     }
-                    return function () {
+                    return ( /**
+                     * @return {?}
+                     */function () {
                         xhr.abort();
-                    };
-                });
+                    });
+                }));
             };
         /**
          * @param {?} sec
@@ -17429,7 +18351,10 @@
          */
             function (contentTypes) {
                 if (typeof contentTypes !== 'undefined' && contentTypes instanceof Array) {
-                    if (contentTypes.find(function (type) { return type === '*'; }) !== undefined) {
+                    if (contentTypes.find(( /**
+                     * @param {?} type
+                     * @return {?}
+                     */function (type) { return type === '*'; })) !== undefined) {
                         this.contentTypes = ['*'];
                     }
                     else {
@@ -17446,7 +18371,10 @@
          * @return {?}
          */
             function () {
-                return this.contentTypes.find(function (type) { return type === '*'; }) !== undefined;
+                return this.contentTypes.find(( /**
+                 * @param {?} type
+                 * @return {?}
+                 */function (type) { return type === '*'; })) !== undefined;
             };
         /**
          * @param {?} mimetype
@@ -17460,7 +18388,10 @@
                 if (this.allContentTypesAllowed()) {
                     return true;
                 }
-                return this.contentTypes.find(function (type) { return type === mimetype; }) !== undefined;
+                return this.contentTypes.find(( /**
+                 * @param {?} type
+                 * @return {?}
+                 */function (type) { return type === mimetype; })) !== undefined;
             };
         /**
          * @param {?} file
@@ -17512,29 +18443,42 @@
                     return;
                 }
                 return httpHeaders.split('\n')
-                    .map(function (x) { return x.split(/: */, 2); })
-                    .filter(function (x) { return x[0]; })
-                    .reduce(function (ac, x) {
+                    .map(( /**
+             * @param {?} x
+             * @return {?}
+             */function (x) { return x.split(/: */, 2); }))
+                    .filter(( /**
+             * @param {?} x
+             * @return {?}
+             */function (x) { return x[0]; }))
+                    .reduce(( /**
+             * @param {?} ac
+             * @param {?} x
+             * @return {?}
+             */function (ac, x) {
                     ac[x[0]] = x[1];
                     return ac;
-                }, {});
+                }), {});
             };
         return MDBUploaderService;
     }());
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MDBFileDropDirective = /** @class */ (function () {
         function MDBFileDropDirective(platform_id, elementRef) {
             this.platform_id = platform_id;
             this.elementRef = elementRef;
             this.isServer = common.isPlatformServer(this.platform_id);
-            this.stopEvent = function (e) {
+            this.stopEvent = ( /**
+             * @param {?} e
+             * @return {?}
+             */function (e) {
                 e.stopPropagation();
                 e.preventDefault();
-            };
+            });
             this.upload = new MDBUploaderService();
             this.uploadOutput = new i0.EventEmitter();
         }
@@ -17550,9 +18494,12 @@
                     return;
                 }
                 this.el = this.elementRef.nativeElement;
-                this.upload.serviceEvents.subscribe(function (event) {
+                this.upload.serviceEvents.subscribe(( /**
+                 * @param {?} event
+                 * @return {?}
+                 */function (event) {
                     _this.uploadOutput.emit(event);
-                });
+                }));
                 if (this.uploadInput instanceof i0.EventEmitter) {
                     this.upload.initInputEvents(this.uploadInput);
                 }
@@ -17647,7 +18594,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MDBFileSelectDirective = /** @class */ (function () {
         function MDBFileSelectDirective(platform_id, elementRef) {
@@ -17655,9 +18602,11 @@
             this.platform_id = platform_id;
             this.elementRef = elementRef;
             this.isServer = common.isPlatformServer(this.platform_id);
-            this.fileListener = function () {
+            this.fileListener = ( /**
+             * @return {?}
+             */function () {
                 _this.upload.handleFiles(_this.el.files);
-            };
+            });
             this.upload = new MDBUploaderService();
             this.uploadOutput = new i0.EventEmitter();
         }
@@ -17674,9 +18623,12 @@
                 }
                 this.el = this.elementRef.nativeElement;
                 this.el.addEventListener('change', this.fileListener, false);
-                this.upload.serviceEvents.subscribe(function (event) {
+                this.upload.serviceEvents.subscribe(( /**
+                 * @param {?} event
+                 * @return {?}
+                 */function (event) {
                     _this.uploadOutput.emit(event);
-                });
+                }));
                 if (this.uploadInput instanceof i0.EventEmitter) {
                     this.upload.initInputEvents(this.uploadInput);
                 }
@@ -17717,7 +18669,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var FileInputModule = /** @class */ (function () {
         function FileInputModule() {
@@ -17739,12 +18691,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CharCounterDirective = /** @class */ (function () {
         function CharCounterDirective(_elRef, _renderer) {
@@ -17823,7 +18775,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CharCounterModule = /** @class */ (function () {
         function CharCounterModule() {
@@ -17848,12 +18800,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     // import * as screenfull from 'screenfull/dist/screenfull';
     // import 'hammerjs';
@@ -17907,6 +18859,14 @@
          */
             function () {
                 this.zoomed = (this.zoomed === 'inactive') ? 'active' : 'inactive';
+            };
+        /**
+         * @return {?}
+         */
+        ImageModalComponent.prototype.ngAfterViewInit = /**
+         * @return {?}
+         */
+            function () {
             };
         /**
          * @return {?}
@@ -17975,6 +18935,7 @@
          * @return {?}
          */
             function (index) {
+                var _this = this;
                 if (!index) {
                     this.currentImageIndex = 1;
                 }
@@ -17988,6 +18949,13 @@
                         break;
                     }
                 }
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
+                    /** @type {?} */
+                    var descriptionHeight = _this.galleryDescription.nativeElement.clientHeight;
+                    _this.renderer.setStyle(_this.galleryImg.nativeElement, 'max-height', "calc(100% - " + (descriptionHeight + 25) + "px)");
+                }), 0);
             };
         /**
          * @return {?}
@@ -18063,7 +19031,7 @@
         ImageModalComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'mdb-image-modal',
-                        template: "<div class=\"ng-gallery mdb-lightbox {{ type }}\" *ngIf=\"modalImages && showRepeat\">\n  <figure class=\"col-md-4\" *ngFor=\"let i of modalImages; let index = index\">\n    <img src=\"{{ !i.thumb ? i.img : i.thumb }}\" class=\"ng-thumb\" (click)=\"openGallery(index)\"\n         alt=\"Image {{ index + 1 }}\"/>\n  </figure>\n</div>\n<div tabindex=\"0\" class=\"ng-overlay\" [class.hide_lightbox]=\"opened == false\">\n  <div class=\"top-bar\" style='z-index: 100000'>\n    <span *ngIf=\"modalImages\" class=\"info-text\">{{ currentImageIndex + 1 }}/{{ modalImages.length }}</span>\n    <a class=\"close-popup\" (click)=\"closeGallery()\" (click)=\"toggleRestart()\"></a>\n    <a *ngIf=\"!is_iPhone_or_iPod\" class=\"fullscreen-toogle\" [class.toggled]='fullscreen' (click)=\"fullScreen()\"></a>\n    <a class=\"zoom-toogle\" [class.zoom]='zoom' (click)=\"toggleZoomed()\" *ngIf=\"!isMobile\"></a>\n  </div>\n  <div class=\"ng-gallery-content\">\n    <img *ngIf=\"!loading\" src=\"{{imgSrc}}\" [class.smooth]='smooth' class=\"effect\" (swipeleft)=\"swipe($event.type)\"\n         (swiperight)=\"swipe($event.type)\" (click)=\"toggleZoomed()\" style=\"\"/>\n\n    <div class=\"uil-ring-css\" *ngIf=\"loading\">\n      <div></div>\n    </div>\n    <a class=\"nav-left\" *ngIf=\"modalImages && modalImages.length >1 && !isMobile\" (click)=\"prevImage()\">\n      <span></span>\n    </a>\n    <a class=\"nav-right\" *ngIf=\"modalImages && modalImages.length >1 && !isMobile\" (click)=\"nextImage()\">\n      <span></span>\n    </a>\n  </div>\n  <div class=\"row\" *ngIf=\"caption\">\n    <div class=\"col-md-12 mx-auto bottom-bar text-center\">\n      <figcaption class=\"text-white lightbox-caption\">{{caption}}</figcaption>\n    </div>\n  </div>\n</div>\n<div *ngIf=\"openModalWindow\">\n  <mdb-image-modal [imagePointer]=\"imagePointer\"></mdb-image-modal>\n</div>\n",
+                        template: "<div class=\"ng-gallery mdb-lightbox {{ type }}\" *ngIf=\"modalImages && showRepeat\">\n  <figure class=\"col-md-4\" *ngFor=\"let i of modalImages; let index = index\">\n    <img src=\"{{ !i.thumb ? i.img : i.thumb }}\" class=\"ng-thumb\" (click)=\"openGallery(index)\"\n         alt=\"Image {{ index + 1 }}\"/>\n  </figure>\n</div>\n<div tabindex=\"0\" class=\"ng-overlay\" [class.hide_lightbox]=\"opened == false\">\n  <div class=\"top-bar\" style='z-index: 100000'>\n    <span *ngIf=\"modalImages\" class=\"info-text\">{{ currentImageIndex + 1 }}/{{ modalImages.length }}</span>\n    <a class=\"close-popup\" (click)=\"closeGallery()\" (click)=\"toggleRestart()\"></a>\n    <a *ngIf=\"!is_iPhone_or_iPod\" class=\"fullscreen-toogle\" [class.toggled]='fullscreen' (click)=\"fullScreen()\"></a>\n    <a class=\"zoom-toogle\" [class.zoom]='zoom' (click)=\"toggleZoomed()\" *ngIf=\"!isMobile\"></a>\n  </div>\n  <div class=\"ng-gallery-content\">\n    <img #galleryImg *ngIf=\"!loading\" src=\"{{imgSrc}}\" [class.smooth]='smooth' class=\"effect\" (swipeleft)=\"swipe($event.type)\"\n         (swiperight)=\"swipe($event.type)\" (click)=\"toggleZoomed()\" style=\"\"/>\n\n    <div class=\"uil-ring-css\" *ngIf=\"loading\">\n      <div></div>\n    </div>\n    <a class=\"nav-left\" *ngIf=\"modalImages && modalImages.length >1 && !isMobile\" (click)=\"prevImage()\">\n      <span></span>\n    </a>\n    <a class=\"nav-right\" *ngIf=\"modalImages && modalImages.length >1 && !isMobile\" (click)=\"nextImage()\">\n      <span></span>\n    </a>\n  </div>\n  <div class=\"row\" *ngIf=\"caption\">\n    <div class=\"col-md-12 mx-auto bottom-bar text-center\">\n      <figcaption #galleryDescription class=\"text-white lightbox-caption\">{{caption}}</figcaption>\n    </div>\n  </div>\n</div>\n<div *ngIf=\"openModalWindow\">\n  <mdb-image-modal [imagePointer]=\"imagePointer\"></mdb-image-modal>\n</div>\n",
                         styles: ['.bottom-bar {z-index: 100000; position: absolute; bottom: 2rem; left: 0; right: 0; width: 100%;} ']
                     }] }
         ];
@@ -18082,6 +19050,8 @@
             zoom: [{ type: i0.Input, args: ['zoom',] }],
             smooth: [{ type: i0.Input, args: ['smooth',] }],
             type: [{ type: i0.Input, args: ['type',] }],
+            galleryImg: [{ type: i0.ViewChild, args: ['galleryImg',] }],
+            galleryDescription: [{ type: i0.ViewChild, args: ['galleryDescription',] }],
             cancelEvent: [{ type: i0.Output, args: ['cancelEvent',] }],
             keyboardControl: [{ type: i0.HostListener, args: ['document:keyup', ['$event'],] }]
         };
@@ -18090,7 +19060,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var LightBoxModule = /** @class */ (function () {
         function LightBoxModule() {
@@ -18107,12 +19077,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var Diacritics = /** @class */ (function () {
         function Diacritics() {
@@ -18128,9 +19098,12 @@
             function (text) {
                 var _this = this;
                 /** @type {?} */
-                var match = function (a) {
+                var match = ( /**
+                 * @param {?} a
+                 * @return {?}
+                 */function (a) {
                     return _this.DIACRITICS[a] || a;
-                };
+                });
                 return text.replace(/[^\u0000-\u007E]/g, match);
             };
         Diacritics.DIACRITICS = {
@@ -18979,7 +19952,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var Option = /** @class */ (function () {
         function Option(option) {
@@ -19027,7 +20000,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var OptionList = /** @class */ (function () {
         function OptionList(options) {
@@ -19041,7 +20014,10 @@
             if (typeof options === 'undefined' || options === null) {
                 options = [];
             }
-            this._options = options.map(function (option) {
+            this._options = options.map(( /**
+             * @param {?} option
+             * @return {?}
+             */function (option) {
                 /** @type {?} */
                 var o = new Option(option);
                 if (option.disabled) {
@@ -19052,7 +20028,7 @@
                     o.group = true;
                 }
                 return o;
-            });
+            }));
             this._hasShown = this._options.length > 0;
             this.highlight();
         }
@@ -19091,9 +20067,13 @@
                 var a = v0.slice().sort();
                 /** @type {?} */
                 var b = v1.slice().sort();
-                return a.every(function (v, i) {
+                return a.every(( /**
+                 * @param {?} v
+                 * @param {?} i
+                 * @return {?}
+                 */function (v, i) {
                     return v === b[i];
-                });
+                }));
             };
         Object.defineProperty(OptionList.prototype, "options", {
             /** Options. **/
@@ -19115,9 +20095,12 @@
          * @return {?}
          */
             function (value) {
-                return this.options.filter(function (option) {
+                return this.options.filter(( /**
+                 * @param {?} option
+                 * @return {?}
+                 */function (option) {
                     return option.value === value;
-                });
+                }));
             };
         Object.defineProperty(OptionList.prototype, "value", {
             /** Value. **/
@@ -19125,18 +20108,24 @@
              * Value. *
              * @return {?}
              */ function () {
-                return this.selection.map(function (selectedOption) {
+                return this.selection.map(( /**
+                 * @param {?} selectedOption
+                 * @return {?}
+                 */function (selectedOption) {
                     return selectedOption.value;
-                });
+                }));
             },
             set: /**
              * @param {?} v
              * @return {?}
              */ function (v) {
                 v = typeof v === 'undefined' || v === null ? [] : v;
-                this.options.forEach(function (option) {
+                this.options.forEach(( /**
+                 * @param {?} option
+                 * @return {?}
+                 */function (option) {
                     option.selected = v.indexOf(option.value) > -1;
-                });
+                }));
             },
             enumerable: true,
             configurable: true
@@ -19147,9 +20136,12 @@
              * Selection. *
              * @return {?}
              */ function () {
-                return this.options.filter(function (option) {
+                return this.options.filter(( /**
+                 * @param {?} option
+                 * @return {?}
+                 */function (option) {
                     return option.selected;
-                });
+                }));
             },
             enumerable: true,
             configurable: true
@@ -19188,9 +20180,12 @@
          * @return {?}
          */
             function () {
-                this.options.forEach(function (option) {
+                this.options.forEach(( /**
+                 * @param {?} option
+                 * @return {?}
+                 */function (option) {
                     option.selected = false;
-                });
+                }));
             };
         Object.defineProperty(OptionList.prototype, "filtered", {
             /** Filter. **/
@@ -19198,9 +20193,12 @@
              * Filter. *
              * @return {?}
              */ function () {
-                return this.options.filter(function (option) {
+                return this.options.filter(( /**
+                 * @param {?} option
+                 * @return {?}
+                 */function (option) {
                     return option.shown;
-                });
+                }));
             },
             enumerable: true,
             configurable: true
@@ -19221,7 +20219,10 @@
                     anyShown = this.options.length > 0;
                 }
                 else {
-                    this.options.forEach(function (option) {
+                    this.options.forEach(( /**
+                     * @param {?} option
+                     * @return {?}
+                     */function (option) {
                         /** @type {?} */
                         var l = Diacritics.strip(option.label).toUpperCase();
                         /** @type {?} */
@@ -19230,7 +20231,7 @@
                         if (option.shown) {
                             anyShown = true;
                         }
-                    });
+                    }));
                 }
                 this.highlight();
                 this._hasShown = anyShown;
@@ -19245,9 +20246,12 @@
          * @return {?}
          */
             function () {
-                this.options.forEach(function (option) {
+                this.options.forEach(( /**
+                 * @param {?} option
+                 * @return {?}
+                 */function (option) {
                     option.shown = true;
-                });
+                }));
             };
         Object.defineProperty(OptionList.prototype, "highlightedOption", {
             /** Highlight. **/
@@ -19382,9 +20386,12 @@
          * @return {?}
          */
             function () {
-                return this.options.some(function (option) {
+                return this.options.some(( /**
+                 * @param {?} option
+                 * @return {?}
+                 */function (option) {
                     return option.selected;
-                });
+                }));
             };
         /**
          * @return {?}
@@ -19393,9 +20400,12 @@
          * @return {?}
          */
             function () {
-                return this.options.some(function (option) {
+                return this.options.some(( /**
+                 * @param {?} option
+                 * @return {?}
+                 */function (option) {
                     return option.shown && option.selected;
-                });
+                }));
             };
         /**
          * @private
@@ -19470,12 +20480,14 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
     var SELECT_VALUE_ACCESSOR = {
         provide: forms.NG_VALUE_ACCESSOR,
-        useExisting: i0.forwardRef(function () { return SelectComponent; }),
+        useExisting: i0.forwardRef(( /**
+         * @return {?}
+         */function () { return SelectComponent; })),
         multi: true
     };
     var SelectComponent = /** @class */ (function () {
@@ -19532,8 +20544,13 @@
             this.selectContainerClicked = false;
             this.filterHeight = 0;
             this.itemsBefore = [];
-            this.onChange = function (_) { };
-            this.onTouched = function () { };
+            this.onChange = ( /**
+             * @param {?} _
+             * @return {?}
+             */function (_) { });
+            this.onTouched = ( /**
+             * @return {?}
+             */function () { });
             this.isBrowser = common.isPlatformBrowser(platformId);
         }
         /** Event handlers. **/
@@ -19922,9 +20939,11 @@
             // TODO fix issues with global click/key handler that closes the dropdown.
             function () {
                 var _this = this;
-                Promise.resolve().then(function () {
+                Promise.resolve().then(( /**
+                 * @return {?}
+                 */function () {
                     _this.openDropdown();
-                });
+                }));
             };
         /**
          * @return {?}
@@ -19982,9 +21001,12 @@
          */
             function (value) {
                 var _this = this;
-                this.optionList.getOptionsByValue(value).forEach(function (option) {
+                this.optionList.getOptionsByValue(value).forEach(( /**
+                 * @param {?} option
+                 * @return {?}
+                 */function (option) {
                     _this.selectOption(option);
-                });
+                }));
             };
         /** ControlValueAccessor interface methods. **/
         /**
@@ -20120,9 +21142,11 @@
                     this.renderer.setStyle(this.selectionSpan.nativeElement.children[0].children[this.selectionSpan.nativeElement.children[0].children.length - 2], 'visibility', 'hidden');
                     this.isOpen = true;
                     if (this.appendToBody) {
-                        setTimeout(function () {
+                        setTimeout(( /**
+                         * @return {?}
+                         */function () {
                             _this._appendDropdown();
-                        }, 0);
+                        }), 0);
                     }
                     this.updateWidth();
                     this.appendToBody ? this._updateAppendedPosition() : this.updatePosition();
@@ -20226,9 +21250,12 @@
                         this.deselected.emit(selection[0].wrappedOption);
                     }
                     else {
-                        this.deselected.emit(selection.map(function (option) {
+                        this.deselected.emit(selection.map(( /**
+                         * @param {?} option
+                         * @return {?}
+                         */function (option) {
                             return option.wrappedOption;
-                        }));
+                        })));
                     }
                 }
             };
@@ -20287,14 +21314,20 @@
             function (isSelected) {
                 var _this = this;
                 if (isSelected) {
-                    this.optionList.filtered.forEach(function (option) {
+                    this.optionList.filtered.forEach(( /**
+                     * @param {?} option
+                     * @return {?}
+                     */function (option) {
                         _this.selectOption(option);
-                    });
+                    }));
                 }
                 else {
-                    this.optionList.filtered.forEach(function (option) {
+                    this.optionList.filtered.forEach(( /**
+                     * @param {?} option
+                     * @return {?}
+                     */function (option) {
                         _this.deselectOption(option);
-                    });
+                    }));
                 }
             };
         /** Filter. **/
@@ -20596,7 +21629,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var SelectDropdownComponent = /** @class */ (function () {
         function SelectDropdownComponent(_elementRef, _renderer, cdRef) {
@@ -20668,16 +21701,21 @@
          */
             function () {
                 var _this = this;
-                this.optionList.options.filter(function (el) {
-                    return function () {
+                this.optionList.options.filter(( /**
+                 * @param {?} el
+                 * @return {?}
+                 */function (el) {
+                    return ( /**
+                     * @return {?}
+                     */function () {
                         if (el.icon) {
                             _this._renderer.setStyle(_this.optionsList.nativeElement, 'height', (_this.dropdownHeight + 8) + 'px');
                         }
                         else {
                             _this._renderer.setStyle(_this.optionsList.nativeElement, 'height', _this.dropdownHeight + 'px');
                         }
-                    };
-                });
+                    });
+                }));
             };
         /**
          * @return {?}
@@ -20698,14 +21736,17 @@
                 var _this = this;
                 /** @type {?} */
                 var optionsItems = Array.from(this.optionsList.nativeElement.firstElementChild.children);
-                optionsItems.forEach(function (el) {
+                optionsItems.forEach(( /**
+                 * @param {?} el
+                 * @return {?}
+                 */function (el) {
                     if (_this.optionHeight && el.firstElementChild.tagName !== 'IMG') {
                         _this._renderer.setStyle(el.firstElementChild, 'height', _this.optionHeight + "px");
                     }
                     if (el.firstElementChild.tagName !== 'IMG') {
                         _this._renderer.setStyle(el.firstElementChild, 'line-height', _this.optionHeight + "px");
                     }
-                });
+                }));
             };
         /**
          * @param {?} changes
@@ -20724,9 +21765,11 @@
                 }
                 /** @type {?} */
                 var container = this._elementRef.nativeElement.classList;
-                setTimeout(function () {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     container.add('fadeInSelect');
-                }, 200);
+                }), 200);
             };
         /**
          * @return {?}
@@ -20750,9 +21793,11 @@
                 this.setOptionHeight();
                 this.moveHighlightedIntoView();
                 if (this.filterEnabled) {
-                    setTimeout(function () {
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         _this.filterInput.nativeElement.focus();
-                    }, 0);
+                    }), 0);
                 }
             };
         // Filter input (single select).
@@ -20878,9 +21923,12 @@
          */
             function () {
                 /** @type {?} */
-                var areAllSelected = this.optionList.filtered.every(function (option) {
+                var areAllSelected = this.optionList.filtered.every(( /**
+                 * @param {?} option
+                 * @return {?}
+                 */function (option) {
                     return option.selected ? true : false;
-                });
+                }));
                 areAllSelected ? this.selectAllSelected = true : this.selectAllSelected = false;
                 this.cdRef.detectChanges();
             };
@@ -21031,7 +22079,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var SelectModule = /** @class */ (function () {
         function SelectModule() {
@@ -21056,12 +22104,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
     var CONTAINER_CLASS_NAME = 'spinning-preloader-container';
@@ -21078,7 +22126,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MDBSpinningPreloader = /** @class */ (function () {
         function MDBSpinningPreloader(document) {
@@ -21141,12 +22189,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     // todo: progress element conflict with bootstrap.css
     // todo: need hack: replace host element with div
@@ -21169,9 +22217,12 @@
              * @return {?}
              */ function (v) {
                 this._max = v;
-                this.bars.forEach(function (bar) {
+                this.bars.forEach(( /**
+                 * @param {?} bar
+                 * @return {?}
+                 */function (bar) {
                     bar.recalculatePercentage();
-                });
+                }));
             },
             enumerable: true,
             configurable: true
@@ -21214,7 +22265,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     // todo: number pipe
     // todo: use query from progress?
@@ -21271,9 +22322,13 @@
             function () {
                 this.percent = +(100 * this.value / this.progress.max).toFixed(2);
                 /** @type {?} */
-                var totalPercentage = this.progress.bars.reduce(function (total, bar) {
+                var totalPercentage = this.progress.bars.reduce(( /**
+                 * @param {?} total
+                 * @param {?} bar
+                 * @return {?}
+                 */function (total, bar) {
                     return total + bar.percent;
-                }, 0);
+                }), 0);
                 if (totalPercentage > 100) {
                     this.percent -= totalPercentage - 100;
                 }
@@ -21299,7 +22354,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ProgressbarConfigComponent = /** @class */ (function () {
         function ProgressbarConfigComponent() {
@@ -21320,7 +22375,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ProgressbarComponent = /** @class */ (function () {
         function ProgressbarComponent(config) {
@@ -21349,7 +22404,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ProgressbarModule = /** @class */ (function () {
         function ProgressbarModule() {
@@ -21375,7 +22430,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ProgressSpinnerComponent = /** @class */ (function () {
         function ProgressSpinnerComponent(el, platformId) {
@@ -21431,7 +22486,9 @@
                 /** @type {?} */
                 var hostElem = this.el.nativeElement;
                 if (this.isBrowser) {
-                    setInterval(function () {
+                    setInterval(( /**
+                     * @return {?}
+                     */function () {
                         switch (counter) {
                             case 0:
                                 _this.addClass = 'spinner-red-only mat-progress-spinner ';
@@ -21453,7 +22510,7 @@
                         else {
                             counter = 0;
                         }
-                    }, 1333);
+                    }), 1333);
                 }
             };
         ProgressSpinnerComponent.decorators = [
@@ -21478,7 +22535,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     // TODO(josephperrott): Benchpress tests.
     /**
@@ -21734,7 +22791,9 @@
                 }
                 else {
                     /** @type {?} */
-                    var animation_1 = function () {
+                    var animation_1 = ( /**
+                     * @return {?}
+                     */function () {
                         /** @type {?} */
                         var elapsedTime = Math.max(0, Math.min(Date.now() - startTime, duration));
                         _this._renderArc(ease(elapsedTime, animateFrom, changeInValue, duration), rotation);
@@ -21743,7 +22802,7 @@
                         if (id === _this._lastAnimationId && elapsedTime < duration) {
                             requestAnimationFrame(animation_1);
                         }
-                    };
+                    });
                     // Run the animation outside of Angular's zone, in order to avoid
                     // hitting ZoneJS and change detection on each frame.
                     this._ngZone.runOutsideAngular(animation_1);
@@ -21773,7 +22832,9 @@
                 /** @type {?} */
                 var duration = DURATION_INDETERMINATE;
                 /** @type {?} */
-                var animate = function () {
+                var animate = ( /**
+                 * @return {?}
+                 */function () {
                     _this._animateCircle(start, end, materialEase, duration, rotationStartPoint);
                     // Prevent rotation from reaching Number.MAX_SAFE_INTEGER.
                     rotationStartPoint = (rotationStartPoint + end) % 100;
@@ -21781,13 +22842,15 @@
                     var temp = start;
                     start = -end;
                     end = -temp;
-                };
+                });
                 if (this.isBrowser) {
                     if (!this.interdeterminateInterval) {
-                        this._ngZone.runOutsideAngular(function () {
+                        this._ngZone.runOutsideAngular(( /**
+                         * @return {?}
+                         */function () {
                             _this.interdeterminateInterval = setInterval(animate, duration + 50, 0, false);
                             animate();
-                        });
+                        }));
                     }
                 }
             };
@@ -22048,7 +23111,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdProgressSpinnerModule = /** @class */ (function () {
         function MdProgressSpinnerModule() {
@@ -22089,7 +23152,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     // TODO(josephperrott): Benchpress tests.
     // TODO(josephperrott): Add ARIA attributes for progressbar "for".
@@ -22209,7 +23272,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdProgressBarModule = /** @class */ (function () {
         function MdProgressBarModule() {
@@ -22241,7 +23304,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
     var MATERIAL_MODULES = [
@@ -22293,12 +23356,14 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
     var RANGE_VALUE_ACCESOR = {
         provide: forms.NG_VALUE_ACCESSOR,
-        useExisting: i0.forwardRef(function () { return MdbRangeInputComponent; }),
+        useExisting: i0.forwardRef(( /**
+         * @return {?}
+         */function () { return MdbRangeInputComponent; })),
         multi: true
     };
     var MdbRangeInputComponent = /** @class */ (function () {
@@ -22312,8 +23377,13 @@
             this.cloudRange = 0;
             this.visibility = false;
             // Control Value Accessor Methods
-            this.onChange = function (_) { };
-            this.onTouched = function () { };
+            this.onChange = ( /**
+             * @param {?} _
+             * @return {?}
+             */function (_) { });
+            this.onTouched = ( /**
+             * @return {?}
+             */function () { });
         }
         /**
          * @param {?} event
@@ -22531,7 +23601,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var RangeModule = /** @class */ (function () {
         function RangeModule() {
@@ -22548,12 +23618,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ScrollSpyLinkDirective = /** @class */ (function () {
         function ScrollSpyLinkDirective(cdRef, document) {
@@ -22668,7 +23738,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ScrollSpyService = /** @class */ (function () {
         function ScrollSpyService() {
@@ -22697,9 +23767,12 @@
          */
             function (scrollSpyId) {
                 /** @type {?} */
-                var scrollSpyIndex = this.scrollSpys.findIndex(function (spy) {
+                var scrollSpyIndex = this.scrollSpys.findIndex(( /**
+                 * @param {?} spy
+                 * @return {?}
+                 */function (spy) {
                     return spy.id === scrollSpyId;
-                });
+                }));
                 this.scrollSpys.splice(scrollSpyIndex, 1);
             };
         /**
@@ -22714,16 +23787,22 @@
          */
             function (scrollSpyId, activeLinkId) {
                 /** @type {?} */
-                var scrollSpy = this.scrollSpys.find(function (spy) {
+                var scrollSpy = this.scrollSpys.find(( /**
+                 * @param {?} spy
+                 * @return {?}
+                 */function (spy) {
                     return spy.id === scrollSpyId;
-                });
+                }));
                 if (!scrollSpy) {
                     return;
                 }
                 /** @type {?} */
-                var activeLink = scrollSpy.links.find(function (link) {
+                var activeLink = scrollSpy.links.find(( /**
+                 * @param {?} link
+                 * @return {?}
+                 */function (link) {
                     return link.id === activeLinkId;
-                });
+                }));
                 this.setActiveLink(activeLink);
             };
         /**
@@ -22738,16 +23817,22 @@
          */
             function (scrollSpyId, activeLinkId) {
                 /** @type {?} */
-                var scrollSpy = this.scrollSpys.find(function (spy) {
+                var scrollSpy = this.scrollSpys.find(( /**
+                 * @param {?} spy
+                 * @return {?}
+                 */function (spy) {
                     return spy.id === scrollSpyId;
-                });
+                }));
                 if (!scrollSpy) {
                     return;
                 }
                 /** @type {?} */
-                var activeLink = scrollSpy.links.find(function (link) {
+                var activeLink = scrollSpy.links.find(( /**
+                 * @param {?} link
+                 * @return {?}
+                 */function (link) {
                     return link.id === activeLinkId;
-                });
+                }));
                 if (!activeLink) {
                     return;
                 }
@@ -22779,16 +23864,22 @@
          */
             function (scrollSpyId) {
                 /** @type {?} */
-                var scrollSpy = this.scrollSpys.find(function (spy) {
+                var scrollSpy = this.scrollSpys.find(( /**
+                 * @param {?} spy
+                 * @return {?}
+                 */function (spy) {
                     return spy.id === scrollSpyId;
-                });
+                }));
                 if (!scrollSpy) {
                     return;
                 }
-                scrollSpy.links.forEach(function (link) {
+                scrollSpy.links.forEach(( /**
+                 * @param {?} link
+                 * @return {?}
+                 */function (link) {
                     link.active = false;
                     link.detectChanges();
-                });
+                }));
             };
         ScrollSpyService.decorators = [
             { type: i0.Injectable }
@@ -22798,7 +23889,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ScrollSpyDirective = /** @class */ (function () {
         function ScrollSpyDirective(scrollSpyService) {
@@ -22832,9 +23923,12 @@
                 var _this = this;
                 this.activeSub = this.scrollSpyService.active$
                     .pipe(operators.distinctUntilChanged())
-                    .subscribe(function (activeLink) {
+                    .subscribe(( /**
+             * @param {?} activeLink
+             * @return {?}
+             */function (activeLink) {
                     _this.activeLinkChange.emit(activeLink);
-                });
+                }));
             };
         /**
          * @return {?}
@@ -22876,7 +23970,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ScrollSpyWindowDirective = /** @class */ (function () {
         function ScrollSpyWindowDirective(document, el, renderer, ngZone, scrollSpyService) {
@@ -22954,9 +24048,11 @@
          */
             function () {
                 var _this = this;
-                this.renderer.listen(window, 'scroll', function () {
+                this.renderer.listen(window, 'scroll', ( /**
+                 * @return {?}
+                 */function () {
                     _this.onScroll();
-                });
+                }));
             };
         /**
          * @return {?}
@@ -22976,9 +24072,11 @@
          */
             function () {
                 var _this = this;
-                setTimeout(function () {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     _this.updateActiveState(_this.scrollSpyId, _this.id);
-                }, 0);
+                }), 0);
             };
         ScrollSpyWindowDirective.decorators = [
             { type: i0.Directive, args: [{
@@ -23004,7 +24102,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ScrollSpyElementDirective = /** @class */ (function () {
         function ScrollSpyElementDirective(el, renderer, ngZone, scrollSpyService) {
@@ -23077,9 +24175,11 @@
          */
             function () {
                 var _this = this;
-                this.renderer.listen(this.el.nativeElement.parentElement, 'scroll', function () {
+                this.renderer.listen(this.el.nativeElement.parentElement, 'scroll', ( /**
+                 * @return {?}
+                 */function () {
                     _this.onScroll();
-                });
+                }));
             };
         /**
          * @return {?}
@@ -23100,9 +24200,11 @@
          */
             function () {
                 var _this = this;
-                setTimeout(function () {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     _this.updateActiveState(_this.scrollSpyId, _this.id);
-                }, 0);
+                }), 0);
             };
         ScrollSpyElementDirective.decorators = [
             { type: i0.Directive, args: [{
@@ -23127,7 +24229,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ScrollSpyModule = /** @class */ (function () {
         function ScrollSpyModule() {
@@ -23154,12 +24256,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var SidenavComponent = /** @class */ (function () {
         function SidenavComponent(platformId, el, renderer) {
@@ -23440,9 +24542,11 @@
             function () {
                 var _this = this;
                 this.renderer.setStyle(this.overlay.nativeElement, 'display', 'block');
-                setTimeout(function () {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     _this.renderer.setStyle(_this.overlay.nativeElement, 'opacity', '1');
-                }, 0);
+                }), 0);
             };
         /**
          * @return {?}
@@ -23453,9 +24557,11 @@
             function () {
                 var _this = this;
                 this.renderer.setStyle(this.overlay.nativeElement, 'opacity', '0');
-                setTimeout(function () {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     _this.renderer.setStyle(_this.overlay.nativeElement, 'display', 'none');
-                }, 200);
+                }), 200);
             };
         /**
          * @param {?} value
@@ -23467,9 +24573,11 @@
          */
             function (value) {
                 var _this = this;
-                setTimeout(function () {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
                     _this.shown = value;
-                }, 510);
+                }), 510);
             };
         /**
          * @return {?}
@@ -23512,7 +24620,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var SidenavModule = /** @class */ (function () {
         function SidenavModule() {
@@ -23535,12 +24643,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * @abstract
@@ -23637,17 +24745,23 @@
          */
         PageScrollConfig.defaultInterruptible = true;
         PageScrollConfig._easingLogic = {
-            ease: function (t, b, c, d) {
+            ease: ( /**
+             * @param {?} t
+             * @param {?} b
+             * @param {?} c
+             * @param {?} d
+             * @return {?}
+             */function (t, b, c, d) {
                 // Linear easing
                 return c * t / d + b;
-            }
+            })
         };
         return PageScrollConfig;
     }());
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * Created by sebastianfuss on 02.09.16.
@@ -23721,14 +24835,18 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var PageScrollService = /** @class */ (function () {
         function PageScrollService() {
             var _this = this;
             this.runningInstances = [];
             this.onInterrupted = {
-                report: function (event, pageScrollInstance) {
+                report: ( /**
+                 * @param {?} event
+                 * @param {?} pageScrollInstance
+                 * @return {?}
+                 */function (event, pageScrollInstance) {
                     if (!pageScrollInstance.interruptible) {
                         // Non-interruptible anyway, so do not stop anything
                         return;
@@ -23745,7 +24863,10 @@
                     else if (event.type === 'mousedown') {
                         // For mousedown events we only stop the scroll animation of the mouse has
                         // been clicked inside the scrolling container
-                        if (!pageScrollInstance.scrollingViews.some(function (scrollingView) { return scrollingView.contains(event.target); })) {
+                        if (!pageScrollInstance.scrollingViews.some(( /**
+                         * @param {?} scrollingView
+                         * @return {?}
+                         */function (scrollingView) { return scrollingView.contains(event.target); }))) {
                             // Mouse clicked an element which is not inside any of the the scrolling containers
                             shouldStop = false;
                         }
@@ -23753,7 +24874,7 @@
                     if (shouldStop) {
                         _this.stopAll(pageScrollInstance.namespace);
                     }
-                }
+                })
             };
             if (PageScrollService.instanceCounter > 0 && i0.isDevMode()) {
                 console.warn('An instance of PageScrollService already exists, usually ' +
@@ -23831,7 +24952,10 @@
                 // Reset start scroll position to 0. If any of the scrollingViews has a different one, it will be extracted next
                 pageScrollInstance.startScrollPosition = 0;
                 // Get the start scroll position from the scrollingViews (e.g. if the user already scrolled down the content)
-                pageScrollInstance.scrollingViews.forEach(function (scrollingView) {
+                pageScrollInstance.scrollingViews.forEach(( /**
+                 * @param {?} scrollingView
+                 * @return {?}
+                 */function (scrollingView) {
                     if (PageScrollUtilService.isUndefinedOrNull(scrollingView)) {
                         return;
                     }
@@ -23845,7 +24969,7 @@
                         pageScrollInstance.startScrollPosition = scrollPosition;
                         startScrollPositionFound = true;
                     }
-                });
+                }));
                 /** @type {?} */
                 var pageScrollOffset = pageScrollInstance.getCurrentOffset();
                 // Calculate the target position that the scroll animation should go to
@@ -23892,7 +25016,10 @@
                 pageScrollInstance.startTime = new Date().getTime();
                 // .. and calculate the end time (when we need to finish at last)
                 pageScrollInstance.endTime = pageScrollInstance.startTime + pageScrollInstance.executionDuration;
-                pageScrollInstance.timer = setInterval(function (_pageScrollInstance) {
+                pageScrollInstance.timer = setInterval(( /**
+                 * @param {?} _pageScrollInstance
+                 * @return {?}
+                 */function (_pageScrollInstance) {
                     // Take the current time
                     /** @type {?} */
                     var currentTime = new Date().getTime();
@@ -23921,7 +25048,7 @@
                     if (stopNow) {
                         _this.stopInternal(false, _pageScrollInstance);
                     }
-                }, PageScrollConfig._interval, pageScrollInstance);
+                }), PageScrollConfig._interval, pageScrollInstance);
                 // Register the instance as running one
                 this.runningInstances.push(pageScrollInstance);
             };
@@ -23986,7 +25113,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * Represents a scrolling action
@@ -24462,7 +25589,11 @@
                     console.warn('Scroll Position: ' + position);
                 }
                 // Set the new scrollTop/scrollLeft to all scrollingViews elements
-                return this.scrollingViews.reduce(function (oneAlreadyWorked, scrollingView) {
+                return this.scrollingViews.reduce(( /**
+                 * @param {?} oneAlreadyWorked
+                 * @param {?} scrollingView
+                 * @return {?}
+                 */function (oneAlreadyWorked, scrollingView) {
                     /** @type {?} */
                     var startScrollPropertyValue = _this.getScrollPropertyValue(scrollingView);
                     if (scrollingView && !PageScrollUtilService.isUndefinedOrNull(startScrollPropertyValue)) {
@@ -24490,7 +25621,7 @@
                         }
                     }
                     return oneAlreadyWorked;
-                }, false);
+                }), false);
             };
         /**
          * Trigger firing a animation finish event
@@ -24543,10 +25674,16 @@
                     // Detach possibly existing listeners first
                     this.detachInterruptListeners();
                 }
-                this._interruptListener = function (event) {
+                this._interruptListener = ( /**
+                 * @param {?} event
+                 * @return {?}
+                 */function (event) {
                     interruptReporter.report(event, _this);
-                };
-                PageScrollConfig._interruptEvents.forEach(function (event) { return _this.document.body.addEventListener(event, _this._interruptListener); });
+                });
+                PageScrollConfig._interruptEvents.forEach(( /**
+                 * @param {?} event
+                 * @return {?}
+                 */function (event) { return _this.document.body.addEventListener(event, _this._interruptListener); }));
                 this._interruptListenersAttached = true;
             };
         /**
@@ -24565,7 +25702,10 @@
          */
             function () {
                 var _this = this;
-                PageScrollConfig._interruptEvents.forEach(function (event) { return _this.document.body.removeEventListener(event, _this._interruptListener); });
+                PageScrollConfig._interruptEvents.forEach(( /**
+                 * @param {?} event
+                 * @return {?}
+                 */function (event) { return _this.document.body.removeEventListener(event, _this._interruptListener); }));
                 this._interruptListenersAttached = false;
             };
         Object.defineProperty(PageScrollInstance.prototype, "namespace", {
@@ -24759,7 +25899,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var PageScrollDirective = /** @class */ (function () {
         function PageScrollDirective(pageScrollService, router$$1, document) {
@@ -24881,7 +26021,10 @@
                         // Navigation is handled by the routerLink directive
                         // so we only need to listen for route change
                         /** @type {?} */
-                        var subscription_1 = ( /** @type {?} */(this.router.events.subscribe(function (routerEvent) {
+                        var subscription_1 = ( /** @type {?} */(this.router.events.subscribe(( /**
+                         * @param {?} routerEvent
+                         * @return {?}
+                         */function (routerEvent) {
                             if (routerEvent instanceof router.NavigationEnd) {
                                 subscription_1.unsubscribe();
                                 _this.scroll();
@@ -24889,7 +26032,7 @@
                             else if (routerEvent instanceof router.NavigationError || routerEvent instanceof router.NavigationCancel) {
                                 subscription_1.unsubscribe();
                             }
-                        })));
+                        }))));
                         return false; // to preventDefault()
                     }
                 }
@@ -24928,7 +26071,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var SmoothscrollModule = /** @class */ (function () {
         function SmoothscrollModule() {
@@ -24959,12 +26102,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbStepComponent = /** @class */ (function () {
         function MdbStepComponent(el) {
@@ -25067,7 +26210,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbStepperComponent = /** @class */ (function () {
         function MdbStepperComponent(ripple, _renderer, platformId) {
@@ -25357,7 +26500,10 @@
          */
             function () {
                 /** @type {?} */
-                var currentActiveStep = this.steps.find(function (activeStep) { return activeStep.isActive; });
+                var currentActiveStep = this.steps.find(( /**
+                 * @param {?} activeStep
+                 * @return {?}
+                 */function (activeStep) { return activeStep.isActive; }));
                 if (currentActiveStep) {
                     currentActiveStep.isActive = false;
                 }
@@ -25370,10 +26516,13 @@
          */
             function () {
                 var _this = this;
-                this.steps.forEach(function (step) {
+                this.steps.forEach(( /**
+                 * @param {?} step
+                 * @return {?}
+                 */function (step) {
                     step.reset();
                     _this._setActiveStep(0);
-                });
+                }));
             };
         /**
          * @private
@@ -25388,11 +26537,13 @@
             function (index) {
                 var _this = this;
                 if (this.horizontal && !this.vertical) {
-                    setTimeout(function () {
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         /** @type {?} */
                         var height = _this.stepContents.toArray()[index].nativeElement.scrollHeight + 50;
                         _this._renderer.setStyle(_this.container.nativeElement, 'height', height + 'px');
-                    }, 0);
+                    }), 0);
                 }
                 else {
                     this._renderer.removeStyle(this.container.nativeElement, 'height');
@@ -25410,10 +26561,12 @@
                 var _this = this;
                 if (this.isBrowser) {
                     if (this.vertical || win.innerWidth < this._stepperBreakpoint) {
-                        setTimeout(function () {
+                        setTimeout(( /**
+                         * @return {?}
+                         */function () {
                             _this.horizontal = false;
                             _this._renderer.removeStyle(_this.container.nativeElement, 'height');
-                        }, 0);
+                        }), 0);
                     }
                 }
             };
@@ -25473,7 +26626,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var StepperModule = /** @class */ (function () {
         function StepperModule() {
@@ -25498,12 +26651,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * returns coumputed style of given element
@@ -25529,13 +26682,19 @@
         }
         else if (el['currentStyle']) { // IE
             // sanitize property name to camelCase
-            styleProp = styleProp.replace(/\-(\w)/g, function (letter) {
+            styleProp = styleProp.replace(/\-(\w)/g, ( /**
+             * @param {?} letter
+             * @return {?}
+             */function (letter) {
                 return letter.toUpperCase();
-            });
+            }));
             value = el['currentStyle'][styleProp];
             // convert other units to pixels on IE
             if (/^\d+(em|pt|%|ex)?$/i.test(value)) {
-                return (function (val) {
+                return (( /**
+                 * @param {?} val
+                 * @return {?}
+                 */function (val) {
                     /** @type {?} */
                     var oldLeft = el.style.left;
                     /** @type {?} */
@@ -25546,7 +26705,7 @@
                     el.style.left = oldLeft;
                     el['runtimeStyle'].left = oldRsLeft;
                     return val;
-                })(value);
+                }))(value);
             }
             return value;
         }
@@ -25554,7 +26713,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MdbStickyDirective = /** @class */ (function () {
         function MdbStickyDirective(el, platformId) {
@@ -25562,7 +26721,9 @@
             // css selector to be sticky after
             this.isBrowser = false;
             this.stickyOffsetTop = 0;
-            this.scrollHandler = function () {
+            this.scrollHandler = ( /**
+             * @return {?}
+             */function () {
                 // let elRect: ClientRect = this.el.getBoundingClientRect();
                 /** @type {?} */
                 var parentRect = _this.el.parentElement.getBoundingClientRect();
@@ -25638,7 +26799,7 @@
                         left: _this.original.left
                     }, dynProps);
                 }
-            };
+            });
             this.el = this.el = el.nativeElement;
             this.parentEl = this.el.parentElement;
             this.isBrowser = common.isPlatformBrowser(platformId);
@@ -25742,7 +26903,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var StickyContentModule = /** @class */ (function () {
         function StickyContentModule() {
@@ -25759,12 +26920,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var NgTranscludeDirective = /** @class */ (function () {
         function NgTranscludeDirective(viewRef) {
@@ -25807,7 +26968,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var TabsetConfig = /** @class */ (function () {
         function TabsetConfig() {
@@ -25824,7 +26985,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     // todo: add active event to tab
     var TabsetComponent = /** @class */ (function () {
@@ -25977,12 +27138,16 @@
             function () {
                 var e_1, _a;
                 /** @type {?} */
-                var tabs = this.tabs.map(function (object, index) {
+                var tabs = this.tabs.map(( /**
+                 * @param {?} object
+                 * @param {?} index
+                 * @return {?}
+                 */function (object, index) {
                     return {
                         index: index,
                         object: object
                     };
-                });
+                }));
                 try {
                     for (var tabs_1 = __values(tabs), tabs_1_1 = tabs_1.next(); !tabs_1_1.done; tabs_1_1 = tabs_1.next()) {
                         var tab = tabs_1_1.value;
@@ -26015,7 +27180,10 @@
          */
             function (tab) {
                 /** @type {?} */
-                var insertPos = this.tabs.findIndex(function (aTab) { return aTab.tabOrder > tab.tabOrder; });
+                var insertPos = this.tabs.findIndex(( /**
+                 * @param {?} aTab
+                 * @return {?}
+                 */function (aTab) { return aTab.tabOrder > tab.tabOrder; }));
                 if (insertPos >= 0) {
                     this.tabs.splice(insertPos, 0, tab);
                 }
@@ -26151,12 +27319,16 @@
             function () {
                 var e_2, _a;
                 /** @type {?} */
-                var tabs = this.tabs.map(function (object, index) {
+                var tabs = this.tabs.map(( /**
+                 * @param {?} object
+                 * @param {?} index
+                 * @return {?}
+                 */function (object, index) {
                     return {
                         index: index,
                         object: object
                     };
-                });
+                }));
                 try {
                     for (var tabs_2 = __values(tabs), tabs_2_1 = tabs_2.next(); !tabs_2_1.done; tabs_2_1 = tabs_2.next()) {
                         var tab = tabs_2_1.value;
@@ -26203,9 +27375,12 @@
          */
             function () {
                 /** @type {?} */
-                var activeTabs = this.tabs.filter(function (tab) {
+                var activeTabs = this.tabs.filter(( /**
+                 * @param {?} tab
+                 * @return {?}
+                 */function (tab) {
                     return !tab.disabled;
-                });
+                }));
                 return this.tabs.indexOf(activeTabs[0]);
             };
         /**
@@ -26217,9 +27392,12 @@
          * @return {?}
          */
             function () {
-                this.tabs.forEach(function (tab) {
+                this.tabs.forEach(( /**
+                 * @param {?} tab
+                 * @return {?}
+                 */function (tab) {
                     tab.active = false;
-                });
+                }));
             };
         /**
          * @return {?}
@@ -26255,11 +27433,17 @@
          */
             function () {
                 this.initActiveTab();
-                if (this.tabs.findIndex(function (el) { return el.type === 'content'; }) !== -1) {
+                if (this.tabs.findIndex(( /**
+                 * @param {?} el
+                 * @return {?}
+                 */function (el) { return el.type === 'content'; })) !== -1) {
                     /** @type {?} */
                     var spacer = this.renderer.createElement('li');
                     /** @type {?} */
-                    var firstContentTypeItemIndex = this.tabs.findIndex(function (el) { return el.type === 'content'; });
+                    var firstContentTypeItemIndex = this.tabs.findIndex(( /**
+                     * @param {?} el
+                     * @return {?}
+                     */function (el) { return el.type === 'content'; }));
                     this.renderer.addClass(spacer, 'nav-item');
                     this.renderer.addClass(spacer, 'flex-fill');
                     this.renderer.insertBefore(this.itemsList.nativeElement, spacer, this.itemsList.nativeElement.children[firstContentTypeItemIndex]);
@@ -26268,7 +27452,7 @@
         TabsetComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'mdb-tabset',
-                        template: "<div class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"{{ listGetClass }}\">\n      <ul class=\"nav {{ buttonClass }}\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\" #itemsList>\n        <li *ngFor=\"let tabz of tabs;let i = index\" [ngClass]=\"{'ml-auto': tabz.type === 'content' && i === 0, 'nav-item': tabz.type !== 'content', 'mx-auto': vertical}\" class=\"{{tabz.customClass}}\"\n            [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\" (click)=\"click($event, i)\">\n          <span class=\"d-flex flex-fill\" *ngIf=\"tabs[i].type !== 'content' && tabs[i + 1] && tabs[i + 1].type === 'content'\"></span>\n          <a *ngIf=\"tabz.type !== 'content'\" #tabEl href=\"javascript:void(0);\" class=\"nav-link\" [ngClass]=\"{'waves-light': !disableWaves}\"\n             [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\">\n            <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span>\n            <span *ngIf=\"tabz.removable\">\n              <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"fas fa-times ml-2\">\n              </span>\n            </span>\n          </a>\n          <a *ngIf=\"tabz.type === 'content'\" #tabEl class=\"nav-link\" [ngClass]=\"{'waves-light': !disableWaves}\"\n             [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\">\n            <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span>\n            <span *ngIf=\"tabz.removable\">\n              <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"fas fa-times ml-2\">\n              </span>\n            </span>\n          </a>\n        </li>\n      </ul>\n    </div>\n    <div class=\"{{ tabsGetClass }}\">\n      <div class=\"tab-content {{ contentClass }}\">\n        <ng-content></ng-content>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                        template: "<div class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"{{ listGetClass }}\">\n      <ul class=\"nav {{ buttonClass }}\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\" #itemsList>\n        <li *ngFor=\"let tabz of tabs;let i = index\"\n            [ngClass]=\"{'ml-auto': tabz.type === 'content' && i === 0, 'list-group-item-action': buttonClass.includes('list-group'), 'nav-item': tabz.type !== 'content', 'mx-auto': vertical}\"\n            class=\"{{tabz.customClass}}\"\n            [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\" (click)=\"click($event, i)\">\n          <span class=\"d-flex flex-fill\"\n                *ngIf=\"tabs[i].type !== 'content' && tabs[i + 1] && tabs[i + 1].type === 'content'\"></span>\n          <a *ngIf=\"tabz.type !== 'content'\" #tabEl href=\"javascript:void(0);\" class=\"nav-link\"\n             [ngClass]=\"{'waves-light': !disableWaves}\"\n             [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\">\n            <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span>\n            <span *ngIf=\"tabz.removable\">\n              <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"fas fa-times ml-2\">\n              </span>\n            </span>\n          </a>\n          <a *ngIf=\"tabz.type === 'content'\" #tabEl class=\"nav-link\" [ngClass]=\"{'waves-light': !disableWaves}\"\n             [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\">\n            <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span>\n            <span *ngIf=\"tabz.removable\">\n              <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"fas fa-times ml-2\">\n              </span>\n            </span>\n          </a>\n        </li>\n      </ul>\n    </div>\n    <div class=\"{{ tabsGetClass }}\">\n      <div class=\"tab-content {{ contentClass }}\">\n        <ng-content></ng-content>\n      </div>\n    </div>\n  </div>\n</div>\n",
                         providers: [WavesDirective]
                     }] }
         ];
@@ -26303,7 +27487,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var TabDirective = /** @class */ (function () {
         function TabDirective(platformId, tabset, el, renderer) {
@@ -26377,11 +27561,14 @@
                 this.renderer.addClass(this.el.nativeElement, 'active');
                 this._active = active;
                 this.select.emit(this);
-                this.tabset.tabs.forEach(function (mdbTab) {
+                this.tabset.tabs.forEach(( /**
+                 * @param {?} mdbTab
+                 * @return {?}
+                 */function (mdbTab) {
                     if (mdbTab !== _this) {
                         mdbTab.active = false;
                     }
-                });
+                }));
             },
             enumerable: true,
             configurable: true
@@ -26436,7 +27623,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * Should be used to mark <template> element as a template for tab heading
@@ -26460,7 +27647,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var TabsModule = /** @class */ (function () {
         function TabsModule() {
@@ -26489,17 +27676,19 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
     var CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = {
         provide: forms.NG_VALUE_ACCESSOR,
-        useExisting: i0.forwardRef(function () { return MaterialChipsComponent; }),
+        useExisting: i0.forwardRef(( /**
+         * @return {?}
+         */function () { return MaterialChipsComponent; })),
         multi: true
     };
     var MaterialChipsComponent = /** @class */ (function () {
@@ -26630,7 +27819,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MaterialChipsModule = /** @class */ (function () {
         function MaterialChipsModule() {
@@ -26647,17 +27836,19 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
     var TIME_PIRCKER_VALUE_ACCESSOT = {
         provide: forms.NG_VALUE_ACCESSOR,
-        useExisting: i0.forwardRef(function () { return ClockPickerComponent; }),
+        useExisting: i0.forwardRef(( /**
+         * @return {?}
+         */function () { return ClockPickerComponent; })),
         multi: true
     };
     var ClockPickerComponent = /** @class */ (function () {
@@ -26690,10 +27881,17 @@
             this.mousedownEvent = 'mousedown' + (this.touchSupported ? ' touchstart' : '');
             this.mousemoveEvent = 'mousemove' + (this.touchSupported ? ' touchmove' : '');
             this.mouseupEvent = 'mouseup' + (this.touchSupported ? ' touchend' : '');
-            this.onChangeCb = function () { };
-            this.onTouchedCb = function () { };
+            this.onChangeCb = ( /**
+             * @return {?}
+             */function () { });
+            this.onTouchedCb = ( /**
+             * @return {?}
+             */function () { });
             this.isBrowser = common.isPlatformBrowser(platformId);
-            renderer.listen(this.elem.nativeElement, 'click', function (event) {
+            renderer.listen(this.elem.nativeElement, 'click', ( /**
+             * @param {?} event
+             * @return {?}
+             */function (event) {
                 if (_this.showClock &&
                     event.target &&
                     _this.elem.nativeElement !== event.target &&
@@ -26703,7 +27901,7 @@
                 if (event.target.classList.contains('picker__holder')) {
                     _this.showClock = false;
                 }
-            });
+            }));
         }
         /**
          * @param {?} event
@@ -26717,9 +27915,12 @@
                 var _this = this;
                 // Rotating Time Picker on mobile
                 if (event.target.parentElement.classList.contains('clockpicker-dial')) {
-                    (( /** @type {?} */(this.elem.nativeElement.querySelectorAll('.clockpicker-tick')))).forEach(function (element) {
+                    (( /** @type {?} */(this.elem.nativeElement.querySelectorAll('.clockpicker-tick')))).forEach(( /**
+                     * @param {?} element
+                     * @return {?}
+                     */function (element) {
                         _this.renderer.setStyle(element, 'background-color', 'rgba(0, 150, 136, 0');
-                    });
+                    }));
                     this.mousedown(event);
                 }
             };
@@ -26743,9 +27944,12 @@
          */
             function () {
                 var _this = this;
-                this.renderer.listen(this.elem.nativeElement.querySelector('.clockpicker-plate'), 'mousedown', function (event) {
+                this.renderer.listen(this.elem.nativeElement.querySelector('.clockpicker-plate'), 'mousedown', ( /**
+                 * @param {?} event
+                 * @return {?}
+                 */function (event) {
                     _this.mousedown(event, false);
-                });
+                }));
             };
         /**
          * @return {?}
@@ -26762,9 +27966,12 @@
                         var openedPicker = document.querySelector('.picker--opened');
                         /** @type {?} */
                         var allPickers = document.querySelectorAll('.picker');
-                        allPickers.forEach(function (element) {
+                        allPickers.forEach(( /**
+                         * @param {?} element
+                         * @return {?}
+                         */function (element) {
                             _this.renderer.setStyle(element, 'z-index', '0');
-                        });
+                        }));
                         this.renderer.setStyle(openedPicker, 'z-index', '1000');
                     }
                     catch (error) { }
@@ -26839,7 +28046,10 @@
                     this.setHand(dx, dy, false);
                 }
                 /** @type {?} */
-                var mousemoveEventMethod = function (event) {
+                var mousemoveEventMethod = ( /**
+                 * @param {?} event
+                 * @return {?}
+                 */function (event) {
                     event.preventDefault();
                     event.stopPropagation();
                     /** @type {?} */
@@ -26851,9 +28061,12 @@
                     }
                     moved = true;
                     _this.setHand(x, y, false);
-                };
+                });
                 /** @type {?} */
-                var mouseupEventMethod = function (event) {
+                var mouseupEventMethod = ( /**
+                 * @param {?} event
+                 * @return {?}
+                 */function (event) {
                     document.removeEventListener(_this.mousemoveEvent, mousemoveEventMethod);
                     e.preventDefault();
                     /** @type {?} */
@@ -26865,7 +28078,7 @@
                     }
                     _this.showMinutesClock();
                     document.removeEventListener(_this.mouseupEvent, mouseupEventMethod);
-                };
+                });
                 document.addEventListener(this.mousemoveEvent, mousemoveEventMethod);
                 document.addEventListener('mouseup', mouseupEventMethod);
             };
@@ -26880,7 +28093,9 @@
                 // this set timeout needed for case when hideKeyborad
                 // is called inside of 'onfocus' event handler
                 try {
-                    setTimeout(function () {
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
                         // creating temp field
                         // const field = document.createElement('input');
                         /** @type {?} */
@@ -26895,19 +28110,25 @@
                         // // hiding temp field from peoples eyes
                         // // -webkit-user-modify is nessesary for Android 4.x
                         // adding onfocus event handler for out temp field
-                        field.onfocus = function () {
+                        field.onfocus = ( /**
+                         * @return {?}
+                         */function () {
                             // this timeout of 200ms is nessasary for Android 2.3.x
-                            setTimeout(function () {
+                            setTimeout(( /**
+                             * @return {?}
+                             */function () {
                                 _this.renderer.setStyle(field, 'display', 'none');
-                                setTimeout(function () {
+                                setTimeout(( /**
+                                 * @return {?}
+                                 */function () {
                                     _this.renderer.removeChild(_this.elem.nativeElement, field);
                                     document.body.focus();
-                                }, 0);
-                            }, 0);
-                        };
+                                }), 0);
+                            }), 0);
+                        });
                         // focusing it
                         field.focus();
-                    }, 0);
+                    }), 0);
                 }
                 catch (error) {
                 }
@@ -27287,7 +28508,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var TimePickerModule = /** @class */ (function () {
         function TimePickerModule() {
@@ -27304,12 +28525,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
     var MODULES$1 = [
@@ -27389,7 +28610,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
     var MODULES$2 = [
@@ -27432,12 +28653,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     exports.BadgeModule = BadgeModule;
@@ -27465,6 +28686,7 @@
     exports.BaseChartDirective = BaseChartDirective;
     exports.CHECKBOX_VALUE_ACCESSOR = CHECKBOX_VALUE_ACCESSOR;
     exports.CheckboxComponent = CheckboxComponent;
+    exports.MdbCheckboxChange = MdbCheckboxChange;
     exports.CheckboxModule = CheckboxModule;
     exports.CollapseComponent = CollapseComponent;
     exports.CollapseModule = CollapseModule;
@@ -27499,6 +28721,10 @@
     exports.ModalContainerComponent = ModalContainerComponent;
     exports.NavbarComponent = NavbarComponent;
     exports.NavbarModule = NavbarModule;
+    exports.LinksComponent = LinksComponent;
+    exports.NavlinksComponent = NavlinksComponent;
+    exports.LogoComponent = LogoComponent;
+    exports.NavbarService = NavbarService;
     exports.PopoverDirective = PopoverDirective;
     exports.PopoverModule = PopoverModule;
     exports.PopoverConfig = PopoverConfig;
@@ -27659,19 +28885,15 @@
     exports.ɵa = RADIO_CONTROL_VALUE_ACCESSOR;
     exports.ɵc = CHECKBOX_VALUE_ACCESSOR;
     exports.ɵd = CheckboxComponent;
-    exports.ɵds = LinksComponent;
-    exports.ɵdt = LogoComponent;
-    exports.ɵdr = NavbarService;
-    exports.ɵdu = NavlinksComponent;
     exports.ɵdp = ComponentLoaderFactory;
-    exports.ɵdv = OnChange;
+    exports.ɵdr = OnChange;
     exports.ɵdq = PositioningService;
     exports.ɵf = SBItemComponent;
     exports.ɵh = SBItemBodyComponent;
     exports.ɵg = SBItemHeadComponent;
     exports.ɵi = SqueezeBoxComponent;
     exports.ɵe = AccordionModule;
-    exports.ɵdw = TOAST_CONFIG;
+    exports.ɵds = TOAST_CONFIG;
     exports.ɵn = AutoCompleterModule;
     exports.ɵj = MdbAutoCompleterComponent;
     exports.ɵk = MdbOptionComponent;
@@ -27720,12 +28942,12 @@
     exports.ɵdo = MDBRootModulePro;
     exports.ɵce = BarComponent;
     exports.ɵcd = ProgressBars;
-    exports.ɵdx = MdProgressBarModule;
-    exports.ɵdy = ProgressBarComponent;
-    exports.ɵdz = MdProgressSpinnerModule;
-    exports.ɵeb = MdProgressSpinnerComponent;
-    exports.ɵea = MdProgressSpinnerCssMatStylerDirective;
-    exports.ɵec = MdSpinnerComponent;
+    exports.ɵdt = MdProgressBarModule;
+    exports.ɵdu = ProgressBarComponent;
+    exports.ɵdv = MdProgressSpinnerModule;
+    exports.ɵdx = MdProgressSpinnerComponent;
+    exports.ɵdw = MdProgressSpinnerCssMatStylerDirective;
+    exports.ɵdy = MdSpinnerComponent;
     exports.ɵcj = ProgressSpinnerComponent;
     exports.ɵcf = ProgressDirective;
     exports.ɵcg = ProgressbarComponent;

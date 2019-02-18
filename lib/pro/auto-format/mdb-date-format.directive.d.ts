@@ -12,6 +12,6 @@ export declare class MdbDateFormatDirective implements OnInit {
     getDateParts(date: string): string[];
     getDigits(value: string): string;
     formatDateParts(datePart: any, index: number): any;
-    getFormattedDay(value: string): string;
-    getFormattedMonth(value: string): string;
+    getFormattedDay(value: string): string | undefined;
+    getFormattedMonth(value: string): string | undefined;
 }

@@ -2,7 +2,7 @@ import { __decorate, __metadata } from 'tslib';
 import { DomSanitizer, DOCUMENT } from '@angular/platform-browser';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Subject, Observable, timer } from 'rxjs';
-import { catchError, map, mergeMap, distinctUntilChanged } from 'rxjs/operators';
+import { take, catchError, map, mergeMap, distinctUntilChanged } from 'rxjs/operators';
 import { RouterLinkWithHref, Router, NavigationEnd, NavigationError, NavigationCancel } from '@angular/router';
 import { state, style, trigger, transition, animate } from '@angular/animations';
 import { CommonModule, isPlatformBrowser, isPlatformServer, DOCUMENT as DOCUMENT$1 } from '@angular/common';
@@ -11,7 +11,7 @@ import { Component, ElementRef, Renderer2, Input, HostBinding, NgModule, Directi
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MDBBadgeComponent {
     /**
@@ -30,9 +30,13 @@ class MDBBadgeComponent {
         if (this.color) {
             /** @type {?} */
             const customClassArr = this.color.split(' ');
-            customClassArr.forEach((el) => {
+            customClassArr.forEach((/**
+             * @param {?} el
+             * @return {?}
+             */
+            (el) => {
                 this._renderer.addClass(this._el.nativeElement, el);
-            });
+            }));
         }
     }
 }
@@ -61,7 +65,7 @@ MDBBadgeComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class BadgeModule {
 }
@@ -74,12 +78,12 @@ BadgeModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbBreadcrumbComponent {
 }
@@ -96,7 +100,7 @@ MdbBreadcrumbComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbBreadcrumbItemComponent {
     /**
@@ -131,7 +135,7 @@ MdbBreadcrumbItemComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class BreadcrumbModule {
 }
@@ -145,12 +149,12 @@ BreadcrumbModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbBtnDirective {
     /**
@@ -256,13 +260,16 @@ MdbBtnDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // TODO: config: activeClass - Class to apply to the checked buttons
 /** @type {?} */
 const CHECKBOX_CONTROL_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => ButtonCheckboxDirective),
+    useExisting: forwardRef((/**
+     * @return {?}
+     */
+    () => ButtonCheckboxDirective)),
     multi: true
 };
 /**
@@ -369,12 +376,15 @@ ButtonCheckboxDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const RADIO_CONTROL_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => ButtonRadioDirective),
+    useExisting: forwardRef((/**
+     * @return {?}
+     */
+    () => ButtonRadioDirective)),
     multi: true
 };
 /**
@@ -406,12 +416,20 @@ class ButtonRadioDirective {
      */
     onClick(event) {
         try {
-            this.el.nativeElement.parentElement.childNodes.forEach((element) => {
+            this.el.nativeElement.parentElement.childNodes.forEach((/**
+             * @param {?} element
+             * @return {?}
+             */
+            (element) => {
                 this.radioElementsArray.push(element);
-            });
-            this.radioElementsArray.forEach(element => {
+            }));
+            this.radioElementsArray.forEach((/**
+             * @param {?} element
+             * @return {?}
+             */
+            element => {
                 this.renderer.removeClass(element, 'active');
-            });
+            }));
             this.renderer.addClass(event.target, 'active');
         }
         catch (error) {
@@ -482,7 +500,7 @@ ButtonRadioDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ButtonsModule {
     /**
@@ -501,12 +519,12 @@ ButtonsModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbCardFooterComponent {
     /**
@@ -523,9 +541,13 @@ class MdbCardFooterComponent {
     ngOnInit() {
         this._r.addClass(this._el.nativeElement, 'card-footer');
         if (this.class) {
-            this.class.split(' ').forEach((element) => {
+            this.class.split(' ').forEach((/**
+             * @param {?} element
+             * @return {?}
+             */
+            (element) => {
                 this._r.addClass(this._el.nativeElement, element);
-            });
+            }));
         }
     }
 }
@@ -546,7 +568,7 @@ MdbCardFooterComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbCardTitleComponent {
     /**
@@ -578,7 +600,7 @@ MdbCardTitleComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbCardTextComponent {
 }
@@ -594,7 +616,7 @@ MdbCardTextComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbCardBodyComponent {
     /**
@@ -620,9 +642,13 @@ class MdbCardBodyComponent {
     ngOnInit() {
         this._r.addClass(this._el.nativeElement, 'card-body');
         if (this.class) {
-            this.class.split(' ').forEach((element) => {
+            this.class.split(' ').forEach((/**
+             * @param {?} element
+             * @return {?}
+             */
+            (element) => {
                 this._r.addClass(this._el.nativeElement, element);
-            });
+            }));
         }
     }
 }
@@ -645,7 +671,7 @@ MdbCardBodyComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbCardComponent {
     /**
@@ -716,9 +742,13 @@ class MdbCardComponent {
             this._r.addClass(this._el.nativeElement, 'narrower');
         }
         if (this.class) {
-            this.class.split(' ').forEach((element) => {
+            this.class.split(' ').forEach((/**
+             * @param {?} element
+             * @return {?}
+             */
+            (element) => {
                 this._r.addClass(this._el.nativeElement, element);
-            });
+            }));
         }
         if (this._el.nativeElement.parentElement.classList.contains('card-deck')) {
             this._r.addClass(this.card.nativeElement, 'w-100');
@@ -751,7 +781,7 @@ MdbCardComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbCardImageComponent {
 }
@@ -768,7 +798,7 @@ MdbCardImageComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbCardHeaderComponent {
     /**
@@ -785,9 +815,13 @@ class MdbCardHeaderComponent {
     ngOnInit() {
         this._r.addClass(this._el.nativeElement, 'card-header');
         if (this.class) {
-            this.class.split(' ').forEach((element) => {
+            this.class.split(' ').forEach((/**
+             * @param {?} element
+             * @return {?}
+             */
+            (element) => {
                 this._r.addClass(this._el.nativeElement, element);
-            });
+            }));
         }
     }
 }
@@ -808,7 +842,7 @@ MdbCardHeaderComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CardsFreeModule {
     /**
@@ -844,12 +878,12 @@ CardsFreeModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /*tslint:disable */
 /**
@@ -869,7 +903,13 @@ var document$1 = win.document;
 /** @type {?} */
 var location = win.location;
 /** @type {?} */
-var gc = win['gc'] ? () => win['gc']() : () => null;
+var gc = win['gc'] ? (/**
+ * @return {?}
+ */
+() => win['gc']()) : (/**
+ * @return {?}
+ */
+() => null);
 /** @type {?} */
 var performance = win['performance'] ? win['performance'] : null;
 /** @type {?} */
@@ -889,7 +929,7 @@ const EventListener = win['EventListener'];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @return {?}
@@ -900,7 +940,7 @@ function isBs3() {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @template T
@@ -1085,9 +1125,13 @@ class LinkedList {
      * @return {?}
      */
     push(...args) {
-        args.forEach((arg) => {
+        args.forEach((/**
+         * @param {?} arg
+         * @return {?}
+         */
+        (arg) => {
             this.add(arg);
-        });
+        }));
         return this.length;
     }
     // public pop(): T {
@@ -1109,9 +1153,13 @@ class LinkedList {
      */
     unshift(...args) {
         args.reverse();
-        args.forEach((arg) => {
+        args.forEach((/**
+         * @param {?} arg
+         * @return {?}
+         */
+        (arg) => {
             this.add(arg, 0);
-        });
+        }));
         return this.length;
     }
     // public shift(): T {
@@ -1241,7 +1289,7 @@ class LinkedList {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CarouselConfig {
     constructor() {
@@ -1266,7 +1314,7 @@ CarouselConfig.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {number} */
 const Direction = {
@@ -1391,10 +1439,13 @@ class CarouselComponent {
      */
     ngAfterViewInit() {
         if (this.activeSlideIndex) {
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 this._select(this.activeSlideIndex);
                 this.activeSlideChange.emit({ 'relatedTarget': this.activeSlide });
-            }, 0);
+            }), 0);
         }
     }
     /**
@@ -1412,18 +1463,24 @@ class CarouselComponent {
                     this.noWrap ? remIndex - 1 : 0;
             }
             this._slides.remove(remIndex);
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 this._select(nextSlideIndex);
-            }, 0);
+            }), 0);
         }
         else {
             this._slides.remove(remIndex);
             /** @type {?} */
             const currentSlideIndex = this.getCurrentSlideIndex();
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 this._currentActiveSlide = currentSlideIndex;
                 this.activeSlideChange.emit(this._currentActiveSlide);
-            }, 0);
+            }), 0);
         }
     }
     /**
@@ -1502,14 +1559,17 @@ class CarouselComponent {
             this.animationEnd = false;
             goToSlide.directionNext = true;
             if (this.isBrowser) {
-                setTimeout(() => {
+                setTimeout((/**
+                 * @return {?}
+                 */
+                () => {
                     goToSlide.directionNext = false;
                     this.animationEnd = true;
                     this.activeSlide = goToIndex;
                     this.activeSlideChange.emit({ 'direction': 'Next', 'relatedTarget': this.activeSlide });
                     this.play();
                     this.cdRef.markForCheck();
-                }, 0);
+                }), 0);
             }
         }
     }
@@ -1529,26 +1589,35 @@ class CarouselComponent {
                 this.animationEnd = false;
                 goToSlide.directionNext = true;
                 if (this.isBrowser) {
-                    setTimeout(() => {
+                    setTimeout((/**
+                     * @return {?}
+                     */
+                    () => {
                         goToSlide.directionLeft = true;
                         currentSlide.directionLeft = true;
                         this.cdRef.markForCheck();
-                    }, 100);
+                    }), 100);
                 }
             }
             if (direction === Direction.PREV) {
                 this.animationEnd = false;
                 goToSlide.directionPrev = true;
                 if (this.isBrowser) {
-                    setTimeout(() => {
+                    setTimeout((/**
+                     * @return {?}
+                     */
+                    () => {
                         goToSlide.directionRight = true;
                         currentSlide.directionRight = true;
                         this.cdRef.markForCheck();
-                    }, 100);
+                    }), 100);
                 }
             }
             if (this.isBrowser) {
-                setTimeout(() => {
+                setTimeout((/**
+                 * @return {?}
+                 */
+                () => {
                     goToSlide.directionLeft = false;
                     goToSlide.directionNext = false;
                     currentSlide.directionLeft = false;
@@ -1570,7 +1639,7 @@ class CarouselComponent {
                     this.activeSlideChange.emit({ 'direction': directionName, 'relatedTarget': this.activeSlide });
                     this.play();
                     this.cdRef.markForCheck();
-                }, 700);
+                }), 700);
             }
         }
     }
@@ -1617,7 +1686,11 @@ class CarouselComponent {
      * @return {?}
      */
     getCurrentSlideIndex() {
-        return this._slides.findIndex((slide) => slide.active);
+        return this._slides.findIndex((/**
+         * @param {?} slide
+         * @return {?}
+         */
+        (slide) => slide.active));
     }
     /**
      * @param {?} index
@@ -1685,7 +1758,10 @@ class CarouselComponent {
             /** @type {?} */
             const interval = +this.interval;
             if (!isNaN(interval) && interval > 0) {
-                this.currentInterval = setInterval(() => {
+                this.currentInterval = setInterval((/**
+                 * @return {?}
+                 */
+                () => {
                     /** @type {?} */
                     const nInterval = +this.interval;
                     if (this.isPlaying && !isNaN(this.interval) && nInterval > 0 && this.slides.length) {
@@ -1694,7 +1770,7 @@ class CarouselComponent {
                     else {
                         this.pause();
                     }
-                }, interval);
+                }), interval);
             }
         }
     }
@@ -1808,7 +1884,7 @@ CarouselComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class SlideComponent {
     /**
@@ -1869,7 +1945,7 @@ SlideComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CarouselModule {
     /**
@@ -1890,12 +1966,12 @@ CarouselModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class BaseChartDirective {
     /**
@@ -1974,16 +2050,26 @@ class BaseChartDirective {
         // hock for onHover and onClick events
         options.hover = options.hover || {};
         if (!options.hover.onHover) {
-            options.hover.onHover = (event, active) => {
+            options.hover.onHover = (/**
+             * @param {?} event
+             * @param {?} active
+             * @return {?}
+             */
+            (event, active) => {
                 if (active && active.length) {
                     this.chartHover.emit({ event, active });
                 }
-            };
+            });
         }
         if (!options.onClick) {
-            options.onClick = (event, active) => {
+            options.onClick = (/**
+             * @param {?} event
+             * @param {?} active
+             * @return {?}
+             */
+            (event, active) => {
                 this.chartClick.emit({ event, active });
-            };
+            });
         }
         /** @type {?} */
         const opts = {
@@ -2003,12 +2089,17 @@ class BaseChartDirective {
      */
     updateChartData(newDataValues) {
         if (Array.isArray(newDataValues[0].data)) {
-            this.chart.data.datasets.forEach((dataset, i) => {
+            this.chart.data.datasets.forEach((/**
+             * @param {?} dataset
+             * @param {?} i
+             * @return {?}
+             */
+            (dataset, i) => {
                 dataset.data = newDataValues[i].data;
                 if (newDataValues[i].label) {
                     dataset.label = newDataValues[i].label;
                 }
-            });
+            }));
         }
         else {
             this.chart.data.datasets[0].data = newDataValues;
@@ -2024,9 +2115,14 @@ class BaseChartDirective {
         // in case if datasets is not provided, but data is present
         if (!this.datasets || !this.datasets.length && (this.data && this.data.length)) {
             if (Array.isArray(this.data[0])) {
-                datasets = ((/** @type {?} */ (this.data))).map((data, index) => {
+                datasets = ((/** @type {?} */ (this.data))).map((/**
+                 * @param {?} data
+                 * @param {?} index
+                 * @return {?}
+                 */
+                (data, index) => {
                     return { data, label: this.labels[index] || `Label ${index}` };
-                });
+                }));
             }
             else {
                 datasets = [{ data: this.data, label: `Label 0` }];
@@ -2035,7 +2131,12 @@ class BaseChartDirective {
         if (this.datasets && this.datasets.length ||
             (datasets && datasets.length)) {
             datasets = (this.datasets || datasets)
-                .map((elm, index) => {
+                .map((/**
+             * @param {?} elm
+             * @param {?} index
+             * @return {?}
+             */
+            (elm, index) => {
                 /** @type {?} */
                 const newElm = Object.assign({}, elm);
                 if (this.colors && this.colors.length) {
@@ -2045,7 +2146,7 @@ class BaseChartDirective {
                     Object.assign(newElm, getColors(this.chartType, index, newElm.data.length));
                 }
                 return newElm;
-            });
+            }));
         }
         if (!datasets) {
             throw new Error(`ng-charts configuration error,
@@ -2143,12 +2244,34 @@ function formatBarColor(colors) {
  */
 function formatPieColors(colors) {
     return {
-        backgroundColor: colors.map((color) => rgba(color, 0.6)),
-        borderColor: colors.map(() => '#fff'),
-        pointBackgroundColor: colors.map((color) => rgba(color, 1)),
-        pointBorderColor: colors.map(() => '#fff'),
-        pointHoverBackgroundColor: colors.map((color) => rgba(color, 1)),
-        pointHoverBorderColor: colors.map((color) => rgba(color, 1))
+        backgroundColor: colors.map((/**
+         * @param {?} color
+         * @return {?}
+         */
+        (color) => rgba(color, 0.6))),
+        borderColor: colors.map((/**
+         * @return {?}
+         */
+        () => '#fff')),
+        pointBackgroundColor: colors.map((/**
+         * @param {?} color
+         * @return {?}
+         */
+        (color) => rgba(color, 1))),
+        pointBorderColor: colors.map((/**
+         * @return {?}
+         */
+        () => '#fff')),
+        pointHoverBackgroundColor: colors.map((/**
+         * @param {?} color
+         * @return {?}
+         */
+        (color) => rgba(color, 1))),
+        pointHoverBorderColor: colors.map((/**
+         * @param {?} color
+         * @return {?}
+         */
+        (color) => rgba(color, 1)))
     };
 }
 /**
@@ -2157,10 +2280,26 @@ function formatPieColors(colors) {
  */
 function formatPolarAreaColors(colors) {
     return {
-        backgroundColor: colors.map((color) => rgba(color, 0.6)),
-        borderColor: colors.map((color) => rgba(color, 1)),
-        hoverBackgroundColor: colors.map((color) => rgba(color, 0.8)),
-        hoverBorderColor: colors.map((color) => rgba(color, 1))
+        backgroundColor: colors.map((/**
+         * @param {?} color
+         * @return {?}
+         */
+        (color) => rgba(color, 0.6))),
+        borderColor: colors.map((/**
+         * @param {?} color
+         * @return {?}
+         */
+        (color) => rgba(color, 1))),
+        hoverBackgroundColor: colors.map((/**
+         * @param {?} color
+         * @return {?}
+         */
+        (color) => rgba(color, 0.8))),
+        hoverBorderColor: colors.map((/**
+         * @param {?} color
+         * @return {?}
+         */
+        (color) => rgba(color, 1)))
     };
 }
 /**
@@ -2215,7 +2354,7 @@ function getColors(chartType, index, count) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ChartsModule {
 }
@@ -2233,17 +2372,20 @@ ChartsModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const CHECKBOX_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => CheckboxComponent),
+    useExisting: forwardRef((/**
+     * @return {?}
+     */
+    () => CheckboxComponent)),
     multi: true
 };
 /** @type {?} */
@@ -2262,9 +2404,31 @@ class CheckboxComponent {
         this.default = false;
         this.inline = false;
         this.change = new EventEmitter();
+        this.checkboxClicked = new Subject();
         // Control Value Accessor Methods
-        this.onChange = (_) => { };
-        this.onTouched = () => { };
+        this.onChange = (/**
+         * @param {?} _
+         * @return {?}
+         */
+        (_) => { });
+        this.onTouched = (/**
+         * @return {?}
+         */
+        () => { });
+    }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    onLabelClick(event) {
+        event.stopPropagation();
+        this.checkboxClicked.next(true);
+    }
+    /**
+     * @return {?}
+     */
+    onDocumentClick() {
+        this.checkboxClicked.next(false);
     }
     /**
      * @return {?}
@@ -2321,6 +2485,20 @@ class CheckboxComponent {
         this.change.emit(this.changeEvent);
     }
     /**
+     * @return {?}
+     */
+    onBlur() {
+        this.checkboxClicked.pipe(take(1)).subscribe((/**
+         * @param {?} val
+         * @return {?}
+         */
+        val => {
+            if (!val) {
+                this.onTouched();
+            }
+        }));
+    }
+    /**
      * @param {?} value
      * @return {?}
      */
@@ -2353,7 +2531,7 @@ class CheckboxComponent {
 CheckboxComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-checkbox',
-                template: "<div\n  [ngClass]=\"{ \n  'custom-control custom-checkbox': default,\n  'form-check': !default,\n  'custom-control-inline': inline,\n  'form-check-inline': inline && !default }\">\n  <input \n    #input\n    type=\"checkbox\"\n    class=\"custom-control-input\"\n    [ngClass]=\"{ \n      'filled-in': filledIn || rounded,\n      'custom-control-input': default,\n      'form-check-input': !default }\"\n    [id]=\"id\"\n    [checked]=\"checked\"\n    [disabled]=\"disabled\"\n    [required]=\"required\"\n    [indeterminate]=\"indeterminate\"\n    [attr.name]=\"name\"\n    [attr.value]=\"value\"\n    [tabIndex]=\"tabIndex\"\n    (click)=\"onCheckboxClick($event)\"\n    (change)=\"onCheckboxChange($event)\"\n  >\n  <label\n    [ngClass]=\"{ \n      'custom-control-label': default,\n      'form-check-label': !default,\n      'label-before': checkboxPosition === 'right', \n      'checkbox-rounded': rounded,\n      'disabled': disabled }\"\n    [attr.for]=\"id\">\n    <ng-content></ng-content>\n  </label>\n</div>",
+                template: "<div\n  [ngClass]=\"{\n  'custom-control custom-checkbox': default,\n  'form-check': !default,\n  'custom-control-inline': inline,\n  'form-check-inline': inline && !default }\">\n  <input\n    #input\n    type=\"checkbox\"\n    class=\"custom-control-input\"\n    [ngClass]=\"{\n      'filled-in': filledIn || rounded,\n      'custom-control-input': default,\n      'form-check-input': !default }\"\n    [id]=\"id\"\n    [checked]=\"checked\"\n    [disabled]=\"disabled\"\n    [required]=\"required\"\n    [indeterminate]=\"indeterminate\"\n    [attr.name]=\"name\"\n    [attr.value]=\"value\"\n    [tabIndex]=\"tabIndex\"\n    (blur)=\"onBlur()\"\n    (click)=\"onCheckboxClick($event)\"\n    (change)=\"onCheckboxChange($event)\"\n  >\n  <label\n    [ngClass]=\"{\n      'custom-control-label': default,\n      'form-check-label': !default,\n      'label-before': checkboxPosition === 'right',\n      'checkbox-rounded': rounded,\n      'disabled': disabled }\"\n    [attr.for]=\"id\">\n    <ng-content></ng-content>\n  </label>\n</div>",
                 providers: [CHECKBOX_VALUE_ACCESSOR]
             }] }
 ];
@@ -2375,12 +2553,14 @@ CheckboxComponent.propDecorators = {
     default: [{ type: Input }],
     inline: [{ type: Input }],
     tabIndex: [{ type: Input }],
-    change: [{ type: Output }]
+    change: [{ type: Output }],
+    onLabelClick: [{ type: HostListener, args: ['click', ['$event'],] }],
+    onDocumentClick: [{ type: HostListener, args: ['document:click',] }]
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CheckboxModule {
 }
@@ -2401,12 +2581,12 @@ CheckboxModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CollapseComponent {
     constructor() {
@@ -2499,7 +2679,7 @@ CollapseComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CollapseModule {
     /**
@@ -2518,12 +2698,12 @@ CollapseModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @copyright Valor Software
@@ -2546,7 +2726,7 @@ class Trigger {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const DEFAULT_ALIASES = {
@@ -2566,15 +2746,27 @@ function parseTriggers(triggers, aliases = DEFAULT_ALIASES) {
     }
     /** @type {?} */
     const parsedTriggers = trimmedTriggers.split(/\s+/)
-        .map((trigger$$1) => trigger$$1.split(':'))
-        .map((triggerPair) => {
+        .map((/**
+     * @param {?} trigger
+     * @return {?}
+     */
+    (trigger$$1) => trigger$$1.split(':')))
+        .map((/**
+     * @param {?} triggerPair
+     * @return {?}
+     */
+    (triggerPair) => {
         /** @type {?} */
         const alias = aliases[triggerPair[0]] || triggerPair;
         return new Trigger(alias[0], alias[1]);
-    });
+    }));
     /** @type {?} */
     const manualTriggers = parsedTriggers
-        .filter((triggerPair) => triggerPair.isManual());
+        .filter((/**
+     * @param {?} triggerPair
+     * @return {?}
+     */
+    (triggerPair) => triggerPair.isManual()));
     if (manualTriggers.length > 1) {
         throw new Error('Triggers parse error: only one manual trigger is allowed');
     }
@@ -2601,29 +2793,49 @@ function listenToTriggers(renderer, target, triggers, showFn, hideFn, toggleFn) 
         return Function.prototype;
     }
     //  parsedTriggers.forEach((trigger: Trigger) => {
-    parsedTriggers.forEach((trigger$$1) => {
+    parsedTriggers.forEach((/**
+     * @param {?} trigger
+     * @return {?}
+     */
+    (trigger$$1) => {
         if (trigger$$1.open === trigger$$1.close) {
-            listeners.push(renderer.listen(target, trigger$$1.open, () => {
+            listeners.push(renderer.listen(target, trigger$$1.open, (/**
+             * @return {?}
+             */
+            () => {
                 toggleFn();
-            }));
+            })));
             // listeners.push(renderer.listen(target, trigger.open, toggleFn));
             return;
         }
-        listeners.push(renderer.listen(target, trigger$$1.open, () => {
+        listeners.push(renderer.listen(target, trigger$$1.open, (/**
+         * @return {?}
+         */
+        () => {
             showFn();
-        }), 
+        })), 
         // renderer.listen(target, trigger.open, showFn),
-        renderer.listen(target, trigger$$1.close, () => {
+        renderer.listen(target, trigger$$1.close, (/**
+         * @return {?}
+         */
+        () => {
             hideFn();
-        }));
+        })));
         // renderer.listen(target, trigger.close, hideFn));
-    });
-    return () => { listeners.forEach((unsubscribeFn) => unsubscribeFn()); };
+    }));
+    return (/**
+     * @return {?}
+     */
+    () => { listeners.forEach((/**
+     * @param {?} unsubscribeFn
+     * @return {?}
+     */
+    (unsubscribeFn) => unsubscribeFn())); });
 }
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @copyright Valor Software
@@ -2644,7 +2856,7 @@ class ContentRef {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @template T
@@ -2818,11 +3030,20 @@ class ComponentLoader {
     listen(listenOpts) {
         this.triggers = listenOpts.triggers || this.triggers;
         listenOpts.target = listenOpts.target || this._elementRef;
-        listenOpts.show = listenOpts.show || (() => this.show());
-        listenOpts.hide = listenOpts.hide || (() => this.hide());
-        listenOpts.toggle = listenOpts.toggle || (() => this.isShown
+        listenOpts.show = listenOpts.show || ((/**
+         * @return {?}
+         */
+        () => this.show()));
+        listenOpts.hide = listenOpts.hide || ((/**
+         * @return {?}
+         */
+        () => this.hide()));
+        listenOpts.toggle = listenOpts.toggle || ((/**
+         * @return {?}
+         */
+        () => this.isShown
             ? listenOpts.hide()
-            : listenOpts.show());
+            : listenOpts.show()));
         this._unregisterListenersFn = listenToTriggers(this._renderer, listenOpts.target.nativeElement, this.triggers, listenOpts.show, listenOpts.hide, listenOpts.toggle);
         return this;
     }
@@ -2841,7 +3062,10 @@ class ComponentLoader {
             return;
         }
         this._zoneSubscription = this._ngZone
-            .onStable.subscribe(() => {
+            .onStable.subscribe((/**
+         * @return {?}
+         */
+        () => {
             if (!this._componentRef) {
                 return;
             }
@@ -2851,7 +3075,7 @@ class ComponentLoader {
                 attachment: this.attachment,
                 appendToBody: this.container === 'body'
             });
-        });
+        }));
     }
     /**
      * @private
@@ -2902,7 +3126,7 @@ class ComponentLoader {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @copyright Valor Software
@@ -3104,7 +3328,7 @@ function positionElements(hostElement, targetElement, placement, appendToBody) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class PositioningService {
     //  public position(options: PositioningOptions): void {
@@ -3138,7 +3362,7 @@ PositioningService.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ComponentLoaderFactory {
     /**
@@ -3181,7 +3405,7 @@ ComponentLoaderFactory.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Default dropdown configuration
@@ -3200,7 +3424,7 @@ BsDropdownConfig.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class BsDropdownState {
     constructor() {
@@ -3208,9 +3432,13 @@ class BsDropdownState {
         this.isOpenChange = new EventEmitter();
         this.isDisabledChange = new EventEmitter();
         this.toggleClick = new EventEmitter();
-        this.dropdownMenu = new Promise((resolve) => {
+        this.dropdownMenu = new Promise((/**
+         * @param {?} resolve
+         * @return {?}
+         */
+        (resolve) => {
             this.resolveDropdownMenu = resolve;
-        });
+        }));
     }
 }
 BsDropdownState.decorators = [
@@ -3221,7 +3449,7 @@ BsDropdownState.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class BsDropdownContainerComponent {
     /**
@@ -3232,9 +3460,13 @@ class BsDropdownContainerComponent {
         this.isOpen = false;
         this.display = 'block';
         this.position = 'absolute';
-        this._subscription = _state.isOpenChange.subscribe((value) => {
+        this._subscription = _state.isOpenChange.subscribe((/**
+         * @param {?} value
+         * @return {?}
+         */
+        (value) => {
             this.isOpen = value;
-        });
+        }));
     }
     /**
      * @return {?}
@@ -3274,7 +3506,7 @@ BsDropdownContainerComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class BsDropdownDirective {
     /**
@@ -3384,25 +3616,40 @@ class BsDropdownDirective {
         // attach DOM listeners
         this._dropdown.listen({
             triggers: this.triggers,
-            show: () => this.show()
+            show: (/**
+             * @return {?}
+             */
+            () => this.show())
         });
         // toggle visibility on toggle element click
         this._subscriptions.push(this._state
-            .toggleClick.subscribe((value) => this.toggle(value)));
+            .toggleClick.subscribe((/**
+         * @param {?} value
+         * @return {?}
+         */
+        (value) => this.toggle(value))));
         // hide dropdown if set disabled while opened
         this._subscriptions.push(this._state
             .isDisabledChange
-            .subscribe((element) => {
+            .subscribe((/**
+         * @param {?} element
+         * @return {?}
+         */
+        (element) => {
             if (element === true) {
                 this.hide();
             }
-        }));
+        })));
         // attach dropdown menu inside of dropdown
         if (this._showInline) {
             this._state.dropdownMenu
-                .then((dropdownMenu) => {
+                .then((/**
+             * @param {?} dropdownMenu
+             * @return {?}
+             */
+            (dropdownMenu) => {
                 this._inlinedMenu = dropdownMenu.viewContainer.createEmbeddedView(dropdownMenu.templateRef);
-            });
+            }));
         }
     }
     /**
@@ -3418,7 +3665,10 @@ class BsDropdownDirective {
         // const parent = this._elementRef.nativeElement.classList;
         /** @type {?} */
         const container = this._elementRef.nativeElement.lastElementChild;
-        setTimeout(() => { container.classList.add('fadeInDropdown'); }, 200);
+        setTimeout((/**
+         * @return {?}
+         */
+        () => { container.classList.add('fadeInDropdown'); }), 200);
         if (this._showInline) {
             this._isInlineOpen = true;
             this.onShown.emit(true);
@@ -3427,7 +3677,11 @@ class BsDropdownDirective {
             return;
         }
         this._state.dropdownMenu
-            .then((dropdownMenu) => {
+            .then((/**
+         * @param {?} dropdownMenu
+         * @return {?}
+         */
+        (dropdownMenu) => {
             // check direction in which dropdown should be opened
             /** @type {?} */
             const _dropup = this.dropup === true ||
@@ -3446,7 +3700,7 @@ class BsDropdownDirective {
                 placement: _placement
             });
             this._state.isOpenChange.emit(true);
-        });
+        }));
     }
     /**
      * Closes an element’s popover. This is considered a “manual” triggering of
@@ -3463,7 +3717,10 @@ class BsDropdownDirective {
         const container = this._elementRef.nativeElement.lastElementChild;
         if ((parent.value === 'dropdown open show') || (parent.value === 'btn-group dropup open show')) {
             container.classList.remove('fadeInDropdown');
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 if (this._showInline) {
                     this._isInlineOpen = false;
                     this.onHidden.emit(true);
@@ -3473,7 +3730,7 @@ class BsDropdownDirective {
                     this._dropdown.hide();
                 }
                 this._state.isOpenChange.emit(false);
-            }, 560);
+            }), 560);
         }
         else {
             if (this._showInline) {
@@ -3543,7 +3800,7 @@ BsDropdownDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class BsDropdownMenuDirective {
     /**
@@ -3573,7 +3830,7 @@ BsDropdownMenuDirective.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class BsDropdownToggleDirective {
     /**
@@ -3589,12 +3846,20 @@ class BsDropdownToggleDirective {
         this.isDisabled = null;
         // sync is open value with state
         this._subscriptions.push(this._state
-            .isOpenChange.subscribe((value) => this.isOpen = value));
+            .isOpenChange.subscribe((/**
+         * @param {?} value
+         * @return {?}
+         */
+        (value) => this.isOpen = value)));
         // populate disabled state
         this._subscriptions.push(this._state
             .isDisabledChange
             // .subscribe((value: boolean) => this.isDisabled = value || null));
-            .subscribe((value) => this.isDisabled = value || null));
+            .subscribe((/**
+         * @param {?} value
+         * @return {?}
+         */
+        (value) => this.isDisabled = value || null)));
     }
     /**
      * @return {?}
@@ -3654,7 +3919,7 @@ BsDropdownToggleDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class DropdownModule {
     /**
@@ -3691,12 +3956,12 @@ DropdownModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbIconComponent {
     /**
@@ -3749,7 +4014,7 @@ MdbIconComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class FalDirective {
     /**
@@ -3773,7 +4038,7 @@ FalDirective.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class FarDirective {
     /**
@@ -3797,7 +4062,7 @@ FarDirective.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class FasDirective {
     /**
@@ -3821,7 +4086,7 @@ FasDirective.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class FabDirective {
     /**
@@ -3845,7 +4110,7 @@ FabDirective.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class IconsModule {
 }
@@ -3871,12 +4136,12 @@ IconsModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 let defaultIdNumber$1 = 0;
@@ -3900,7 +4165,7 @@ MdbErrorDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 let defaultIdNumber$2 = 0;
@@ -3924,7 +4189,7 @@ MdbSuccessDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbValidateDirective {
     /**
@@ -4025,7 +4290,7 @@ MdbValidateDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class InputUtilitiesModule {
 }
@@ -4039,12 +4304,12 @@ InputUtilitiesModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class EqualValidatorDirective {
     /**
@@ -4104,7 +4369,10 @@ EqualValidatorDirective.decorators = [
     { type: Directive, args: [{
                 selector: '[mdb-validateEqual][formControlName],[validateEqual][formControl],[validateEqual][ngModel]',
                 providers: [
-                    { provide: NG_VALIDATORS, useExisting: forwardRef(() => EqualValidatorDirective), multi: true }
+                    { provide: NG_VALIDATORS, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => EqualValidatorDirective)), multi: true }
                 ]
             },] }
 ];
@@ -4116,7 +4384,7 @@ EqualValidatorDirective.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbInputDirective {
     /**
@@ -4220,9 +4488,12 @@ class MdbInputDirective {
      */
     oncut() {
         try {
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 this.delayedResize();
-            }, 0);
+            }), 0);
         }
         catch (error) {
         }
@@ -4232,9 +4503,12 @@ class MdbInputDirective {
      */
     onpaste() {
         try {
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 this.delayedResize();
-            }, 0);
+            }), 0);
         }
         catch (error) {
         }
@@ -4244,9 +4518,12 @@ class MdbInputDirective {
      */
     ondrop() {
         try {
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 this.delayedResize();
-            }, 0);
+            }), 0);
         }
         catch (error) {
         }
@@ -4274,9 +4551,12 @@ class MdbInputDirective {
      */
     ngOnInit() {
         try {
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 this.delayedResize();
-            }, 0);
+            }), 0);
         }
         catch (error) {
             console.log(error);
@@ -4378,7 +4658,10 @@ class MdbInputDirective {
      * @return {?}
      */
     validationFunction() {
-        setTimeout(() => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             if (this._elRef.nativeElement.classList.contains('ng-invalid')) {
                 this._renderer.removeClass(this._elRef.nativeElement, 'counter-success');
                 this._renderer.removeClass(this._elRef.nativeElement, 'counter-danger');
@@ -4403,7 +4686,7 @@ class MdbInputDirective {
                     this._renderer.setStyle(this.wrongTextContainer, 'top', this._elRef.nativeElement.offsetHeight + 'px');
                 }
             }
-        }, 0);
+        }), 0);
     }
     /**
      * @return {?}
@@ -4449,9 +4732,12 @@ class MdbInputDirective {
      * @return {?}
      */
     delayedResize() {
-        setTimeout(() => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             this.resize();
-        }, 0);
+        }), 0);
     }
     /**
      * @return {?}
@@ -4520,9 +4806,8 @@ MdbInputDirective.ctorParameters = () => [
 ];
 MdbInputDirective.propDecorators = {
     mdbInputDirective: [{ type: Input, args: ['mdbInputDirective',] }],
-    placeholder: [{ type: Input, args: ['placeholder',] }],
     customRegex: [{ type: Input, args: ['customRegex',] }],
-    mdbValidate: [{ type: Input, args: ['mdbValidate',] }],
+    mdbValidate: [{ type: Input, args: ['mdbValidation',] }],
     validateSuccess: [{ type: Input, args: ['validateSuccess',] }],
     validateError: [{ type: Input, args: ['validateError',] }],
     focusCheckbox: [{ type: Input, args: ['focusCheckbox',] }],
@@ -4541,7 +4826,7 @@ MdbInputDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbInput {
     /**
@@ -4637,9 +4922,12 @@ class MdbInput {
      */
     oncut() {
         try {
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 this.delayedResize();
-            }, 0);
+            }), 0);
         }
         catch (error) { }
     }
@@ -4648,9 +4936,12 @@ class MdbInput {
      */
     onpaste() {
         try {
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 this.delayedResize();
-            }, 0);
+            }), 0);
         }
         catch (error) { }
     }
@@ -4659,9 +4950,12 @@ class MdbInput {
      */
     ondrop() {
         try {
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 this.delayedResize();
-            }, 0);
+            }), 0);
         }
         catch (error) { }
     }
@@ -4704,9 +4998,12 @@ class MdbInput {
      * @return {?}
      */
     delayedResize() {
-        setTimeout(() => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             this.resize();
-        }, 0);
+        }), 0);
     }
     /**
      * @return {?}
@@ -4770,7 +5067,6 @@ MdbInput.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
 ];
 MdbInput.propDecorators = {
-    placeholder: [{ type: Input, args: ['placeholder',] }],
     focusCheckbox: [{ type: Input, args: ['focusCheckbox',] }],
     focusRadio: [{ type: Input, args: ['focusRadio',] }],
     onfocus: [{ type: HostListener, args: ['focus',] }],
@@ -4785,7 +5081,7 @@ MdbInput.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class InputsModule {
     /**
@@ -4805,12 +5101,12 @@ InputsModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ModalOptions {
 }
@@ -4863,7 +5159,7 @@ const DISMISS_REASONS = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class Utils {
     /**
@@ -4871,7 +5167,11 @@ class Utils {
      * @return {?}
      */
     static reflow(element) {
-        ((bs) => bs)(element.offsetHeight);
+        ((/**
+         * @param {?} bs
+         * @return {?}
+         */
+        (bs) => bs))(element.offsetHeight);
     }
     // source: https://github.com/jquery/jquery/blob/master/src/css/var/getStyles.js
     /**
@@ -4893,7 +5193,7 @@ class Utils {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ModalBackdropOptions {
     /**
@@ -4988,7 +5288,7 @@ ModalBackdropComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const TRANSITION_DURATION = 300;
@@ -5096,11 +5396,14 @@ class ModalDirective {
      */
     ngAfterViewInit() {
         this._config = this._config || this.getConfig();
-        setTimeout(() => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             if (this._config.show) {
                 this.show();
             }
-        }, 0);
+        }), 0);
     }
     /* Public methods */
     /**
@@ -5134,9 +5437,12 @@ class ModalDirective {
                 this._renderer.addClass(document$1.body, ClassName.OPEN);
             }
         }
-        this.showBackdrop(() => {
+        this.showBackdrop((/**
+         * @return {?}
+         */
+        () => {
             this.showElement();
-        });
+        }));
     }
     /**
      * Allows to manually close modal
@@ -5161,7 +5467,10 @@ class ModalDirective {
             this._renderer.removeClass(this._element.nativeElement, ClassName.SHOW);
         }
         if (this.isAnimated) {
-            this.timerHideModal = setTimeout(() => this.hideModal(), TRANSITION_DURATION);
+            this.timerHideModal = setTimeout((/**
+             * @return {?}
+             */
+            () => this.hideModal()), TRANSITION_DURATION);
         }
         else {
             this.hideModal();
@@ -5202,13 +5511,16 @@ class ModalDirective {
             this._renderer.addClass(this._element.nativeElement, ClassName.SHOW);
         }
         /** @type {?} */
-        const transitionComplete = () => {
+        const transitionComplete = (/**
+         * @return {?}
+         */
+        () => {
             if (this._config.focus) {
                 this._element.nativeElement.focus();
             }
             this.onShown.emit(this);
             this.opened.emit(this);
-        };
+        });
         if (this.isAnimated) {
             setTimeout(transitionComplete, TRANSITION_DURATION);
         }
@@ -5224,7 +5536,10 @@ class ModalDirective {
     hideModal() {
         this._renderer.setAttribute(this._element.nativeElement, 'aria-hidden', 'true');
         this._renderer.setStyle(this._element.nativeElement, 'display', 'none');
-        this.showBackdrop(() => {
+        this.showBackdrop((/**
+         * @return {?}
+         */
+        () => {
             if (!this.isNested) {
                 if (document$1 && document$1.body) {
                     this._renderer.removeClass(document$1.body, ClassName.OPEN);
@@ -5235,7 +5550,7 @@ class ModalDirective {
             this.focusOtherModal();
             this.onHidden.emit(this);
             this.closed.emit(this);
-        });
+        }));
     }
     // todo: original show was calling a callback when done, but we can use promise
     /**
@@ -5264,12 +5579,15 @@ class ModalDirective {
         else if (!this._isShown && this.backdrop) {
             this.backdrop.instance.isShown = false;
             /** @type {?} */
-            const callbackRemove = () => {
+            const callbackRemove = (/**
+             * @return {?}
+             */
+            () => {
                 this.removeBackdrop();
                 if (callback) {
                     callback();
                 }
-            };
+            });
             if (this.backdrop.instance.isAnimated) {
                 this.timerRmBackDrop = setTimeout(callbackRemove, BACKDROP_TRANSITION_DURATION);
             }
@@ -5389,7 +5707,7 @@ ModalDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const msConfig = {
@@ -5398,7 +5716,7 @@ const msConfig = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ModalContainerComponent {
     /**
@@ -5449,10 +5767,13 @@ class ModalContainerComponent {
             this._renderer.addClass(this._element.nativeElement, 'fade');
         }
         this._renderer.setStyle(this._element.nativeElement, 'display', 'block');
-        setTimeout(() => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             this.isShown = true;
             this._renderer.addClass(this._element.nativeElement, isBs3() ? ClassName.IN : ClassName.SHOW);
-        }, this.isAnimated ? TransitionDurations.BACKDROP : 0);
+        }), this.isAnimated ? TransitionDurations.BACKDROP : 0);
         if (document && document.body) {
             if (this.mdbModalService.getModalsCount() === 1) {
                 this.mdbModalService.checkScrollbar();
@@ -5498,7 +5819,10 @@ class ModalContainerComponent {
         }
         this.isModalHiding = true;
         this._renderer.removeClass(this._element.nativeElement, isBs3() ? ClassName.IN : ClassName.SHOW);
-        setTimeout(() => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             this.isShown = false;
             if (document &&
                 document.body &&
@@ -5507,7 +5831,7 @@ class ModalContainerComponent {
             }
             this.mdbModalService.hide(this.level);
             this.isModalHiding = false;
-        }, this.isAnimated ? TransitionDurations.MODAL : 0);
+        }), this.isAnimated ? TransitionDurations.MODAL : 0);
     }
 }
 ModalContainerComponent.decorators = [
@@ -5532,7 +5856,7 @@ ModalContainerComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MDBModalService {
     // public constructor(private clf: ComponentLoaderFactory) {
@@ -5584,10 +5908,13 @@ class MDBModalService {
             this.resetScrollbar();
         }
         this.modalsCount = this.modalsCount >= 1 ? this.modalsCount - 1 : 0;
-        setTimeout(() => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             this._hideModal(level);
             this.removeLoaders(level);
-        }, this.config.animated ? TransitionDurations.BACKDROP : 0);
+        }), this.config.animated ? TransitionDurations.BACKDROP : 0);
     }
     /**
      * @return {?}
@@ -5618,7 +5945,10 @@ class MDBModalService {
         this.backdropRef.instance.isShown = false;
         /** @type {?} */
         const duration = this.config.animated ? TransitionDurations.BACKDROP : 0;
-        setTimeout(() => this.removeBackdrop(), duration);
+        setTimeout((/**
+         * @return {?}
+         */
+        () => this.removeBackdrop()), duration);
     }
     /**
      * @param {?} content
@@ -5637,9 +5967,12 @@ class MDBModalService {
             .to('body')
             .show({ content, isAnimated: this.config.animated, data: this.config.data });
         modalContainerRef.instance.level = this.getModalsCount();
-        mdbModalRef.hide = () => {
+        mdbModalRef.hide = (/**
+         * @return {?}
+         */
+        () => {
             modalContainerRef.instance.hide();
-        };
+        });
         mdbModalRef.content = modalLoader.getInnerComponent() || null;
         return mdbModalRef;
     }
@@ -5740,9 +6073,14 @@ class MDBModalService {
      */
     removeLoaders(level) {
         this.loaders.splice(level - 1, 1);
-        this.loaders.forEach((loader, i) => {
+        this.loaders.forEach((/**
+         * @param {?} loader
+         * @param {?} i
+         * @return {?}
+         */
+        (loader, i) => {
             loader.instance.level = i + 1;
-        });
+        }));
     }
     /**
      * @private
@@ -5751,9 +6089,12 @@ class MDBModalService {
      * @return {?}
      */
     copyEvent(from, to) {
-        from.subscribe(() => {
+        from.subscribe((/**
+         * @return {?}
+         */
+        () => {
             to.emit(this.lastDismissReason);
-        });
+        }));
     }
 }
 MDBModalService.decorators = [
@@ -5767,7 +6108,7 @@ MDBModalService.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ModalModule {
     /**
@@ -5788,12 +6129,12 @@ ModalModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class NavbarService {
     constructor() {
@@ -5818,7 +6159,66 @@ NavbarService.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class LinksComponent {
+    /**
+     * @param {?} _navbarService
+     */
+    constructor(_navbarService) {
+        this._navbarService = _navbarService;
+        this.linkClick = new EventEmitter();
+    }
+    /**
+     * @return {?}
+     */
+    ngAfterContentInit() {
+        /** @type {?} */
+        const that = this;
+        setTimeout((/**
+         * @return {?}
+         */
+        function () {
+            that.links.forEach((/**
+             * @param {?} element
+             * @return {?}
+             */
+            function (element) {
+                element.nativeElement.onclick = (/**
+                 * @return {?}
+                 */
+                function () {
+                    that._navbarService.setNavbarLinkClicks();
+                });
+            }));
+        }), 0);
+    }
+    /**
+     * @return {?}
+     */
+    ngAfterViewInit() {
+    }
+}
+LinksComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'links',
+                template: `
+        <ng-content></ng-content>
+    `
+            }] }
+];
+/** @nocollapse */
+LinksComponent.ctorParameters = () => [
+    { type: NavbarService }
+];
+LinksComponent.propDecorators = {
+    links: [{ type: ContentChildren, args: [RouterLinkWithHref, { read: ElementRef, descendants: true },] }],
+    linkClick: [{ type: Output }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class NavbarComponent {
     /**
@@ -5835,8 +6235,15 @@ class NavbarComponent {
         this.collapse = true;
         this.showClass = false;
         this.collapsing = false;
+        this._itemsLength = 0;
         // tslint:disable-next-line:max-line-length
-        this.subscription = this._navbarService.getNavbarLinkClicks().subscribe(navbarLinkClicks => { this.closeNavbarOnClick(navbarLinkClicks); });
+        this.subscription = this._navbarService.getNavbarLinkClicks().subscribe((/**
+         * @param {?} navbarLinkClicks
+         * @return {?}
+         */
+        navbarLinkClicks => {
+            this.closeNavbarOnClick(navbarLinkClicks);
+        }));
     }
     /**
      * @param {?} navbarLinkClicks
@@ -5854,9 +6261,13 @@ class NavbarComponent {
     addTogglerIconClasses() {
         if (this.iconBackground) {
             if (Array.isArray(this.iconBackground)) {
-                this.iconBackground.forEach((iconClass) => {
+                this.iconBackground.forEach((/**
+                 * @param {?} iconClass
+                 * @return {?}
+                 */
+                (iconClass) => {
                     this.renderer.addClass(this.toggler.nativeElement, iconClass);
-                });
+                }));
             }
             else {
                 this.renderer.addClass(this.toggler.nativeElement, this.iconBackground);
@@ -5883,10 +6294,14 @@ class NavbarComponent {
         if (!this.containerInside) {
             /** @type {?} */
             const childrens = Array.from(this.container.nativeElement.children);
-            childrens.forEach(child => {
+            childrens.forEach((/**
+             * @param {?} child
+             * @return {?}
+             */
+            child => {
                 this.renderer.appendChild(this.navbar.nativeElement, child);
                 this.container.nativeElement.remove();
-            });
+            }));
         }
         if (this.el.nativeElement.children.length === 0) {
             this.el.nativeElement.remove();
@@ -5913,31 +6328,45 @@ class NavbarComponent {
         this.shown = true;
         this.collapse = false;
         this.collapsing = true;
-        setTimeout(() => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             this.height = this.el.nativeElement.scrollHeight;
             this.renderer.setStyle(this.el.nativeElement, 'height', this.height + 'px');
-        }, 0);
-        setTimeout(() => {
+        }), 0);
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             this.collapsing = false;
             this.collapse = true;
             this.showClass = true;
-        }, this.duration);
+        }), this.duration);
     }
     /**
      * @return {?}
      */
     hide() {
-        this.shown = false;
-        this.collapse = false;
-        this.showClass = false;
-        this.collapsing = true;
-        setTimeout(() => {
-            this.renderer.setStyle(this.el.nativeElement, 'height', '0px');
-        }, 0);
-        setTimeout(() => {
-            this.collapsing = false;
-            this.collapse = true;
-        }, this.duration);
+        if (this.shown) {
+            this.shown = false;
+            this.collapse = false;
+            this.showClass = false;
+            this.collapsing = true;
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
+                this.renderer.setStyle(this.el.nativeElement, 'height', '0px');
+            }), 0);
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
+                this.collapsing = false;
+                this.collapse = true;
+            }), this.duration);
+        }
     }
     /**
      * @return {?}
@@ -5977,11 +6406,14 @@ class NavbarComponent {
                 this.collapse = false;
                 this.renderer.setStyle(this.el.nativeElement, 'height', '0px');
                 this.renderer.setStyle(this.el.nativeElement, 'opacity', '0');
-                setTimeout(() => {
+                setTimeout((/**
+                 * @return {?}
+                 */
+                () => {
                     this.height = this.el.nativeElement.scrollHeight;
                     this.collapse = true;
                     this.renderer.setStyle(this.el.nativeElement, 'opacity', '');
-                }, 4);
+                }), 4);
             }
         }
         else {
@@ -6005,6 +6437,18 @@ class NavbarComponent {
             }
         }
     }
+    /**
+     * @return {?}
+     */
+    ngAfterContentChecked() {
+        if (this.el.nativeElement.firstElementChild) {
+            if (this._itemsLength !== this.el.nativeElement.firstElementChild.firstElementChild.children.length) {
+                this.height = this.el.nativeElement.firstElementChild.firstElementChild.clientHeight;
+                this.renderer.setStyle(this.el.nativeElement, 'height', this.height + 'px');
+            }
+            this._itemsLength = this.el.nativeElement.firstElementChild.firstElementChild.children.length;
+        }
+    }
 }
 NavbarComponent.decorators = [
     { type: Component, args: [{
@@ -6026,62 +6470,14 @@ NavbarComponent.propDecorators = {
     navbar: [{ type: ViewChild, args: ['nav',] }],
     container: [{ type: ViewChild, args: ['container',] }],
     toggler: [{ type: ViewChild, args: ['toggler',] }],
+    links: [{ type: ContentChild, args: [LinksComponent,] }],
     onResize: [{ type: HostListener, args: ['window:resize', ['$event'],] }],
     onScroll: [{ type: HostListener, args: ['document:scroll',] }]
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class LinksComponent {
-    /**
-     * @param {?} _navbarService
-     */
-    constructor(_navbarService) {
-        this._navbarService = _navbarService;
-        this.linkClick = new EventEmitter();
-    }
-    /**
-     * @return {?}
-     */
-    ngAfterContentInit() {
-        /** @type {?} */
-        const that = this;
-        setTimeout(function () {
-            that.links.forEach(function (element) {
-                element.nativeElement.onclick = function () {
-                    that._navbarService.setNavbarLinkClicks();
-                };
-            });
-        }, 0);
-    }
-    /**
-     * @return {?}
-     */
-    ngAfterViewInit() {
-    }
-}
-LinksComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'links',
-                template: `
-        <ng-content></ng-content>
-    `
-            }] }
-];
-/** @nocollapse */
-LinksComponent.ctorParameters = () => [
-    { type: NavbarService }
-];
-LinksComponent.propDecorators = {
-    links: [{ type: ContentChildren, args: [RouterLinkWithHref, { read: ElementRef, descendants: true },] }],
-    linkClick: [{ type: Output }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class LogoComponent {
 }
@@ -6096,7 +6492,7 @@ LogoComponent.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class NavlinksComponent {
     /**
@@ -6112,13 +6508,23 @@ class NavlinksComponent {
     ngAfterContentInit() {
         /** @type {?} */
         const that = this;
-        setTimeout(function () {
-            that.links.forEach(function (element) {
-                element.nativeElement.onclick = function () {
+        setTimeout((/**
+         * @return {?}
+         */
+        function () {
+            that.links.forEach((/**
+             * @param {?} element
+             * @return {?}
+             */
+            function (element) {
+                element.nativeElement.onclick = (/**
+                 * @return {?}
+                 */
+                function () {
                     that._navbarService.setNavbarLinkClicks();
-                };
-            });
-        }, 0);
+                });
+            }));
+        }), 0);
     }
     /**
      * @return {?}
@@ -6145,7 +6551,7 @@ NavlinksComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class NavbarModule {
 }
@@ -6160,12 +6566,12 @@ NavbarModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Configuration service for the Popover directive.
@@ -6192,7 +6598,7 @@ PopoverConfig.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class PopoverContainerComponent {
     /**
@@ -6241,7 +6647,7 @@ PopoverContainerComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * A lightweight, extensible directive for fancy popover creation.
@@ -6349,7 +6755,10 @@ class PopoverDirective {
     ngOnInit() {
         this._popover.listen({
             triggers: this.triggers,
-            show: () => this.show()
+            show: (/**
+             * @return {?}
+             */
+            () => this.show())
         });
     }
     /**
@@ -6394,7 +6803,7 @@ PopoverDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class PopoverModule {
     /**
@@ -6418,12 +6827,12 @@ PopoverModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbTableDirective {
     /**
@@ -6485,7 +6894,7 @@ MdbTableDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbTableSortDirective {
     constructor() {
@@ -6504,7 +6913,12 @@ class MdbTableSortDirective {
      * @return {?}
      */
     sortDataBy(key) {
-        this.dataSource.sort((a, b) => {
+        this.dataSource.sort((/**
+         * @param {?} a
+         * @param {?} b
+         * @return {?}
+         */
+        (a, b) => {
             if (a[key] < b[key]) {
                 return this.sorted ? 1 : -1;
             }
@@ -6512,7 +6926,7 @@ class MdbTableSortDirective {
                 return this.sorted ? -1 : 1;
             }
             return 0;
-        });
+        }));
         this.sorted = !this.sorted;
     }
 }
@@ -6531,7 +6945,7 @@ MdbTableSortDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbTableScrollDirective {
     /**
@@ -6615,7 +7029,7 @@ MdbTableScrollDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbTableRowDirective {
     /**
@@ -6655,7 +7069,7 @@ MdbTableRowDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbTableService {
     constructor() {
@@ -6689,9 +7103,13 @@ class MdbTableService {
      */
     rowRemoved() {
         /** @type {?} */
-        const rowRemoved = Observable.create((observer) => {
+        const rowRemoved = Observable.create((/**
+         * @param {?} observer
+         * @return {?}
+         */
+        (observer) => {
             observer.next(true);
-        });
+        }));
         return rowRemoved;
     }
     /**
@@ -6725,11 +7143,19 @@ class MdbTableService {
      * @return {?}
      */
     filterLocalDataBy(searchKey) {
-        return this.getDataSource().filter((obj) => {
-            return Object.keys(obj).some((key) => {
+        return this.getDataSource().filter((/**
+         * @param {?} obj
+         * @return {?}
+         */
+        (obj) => {
+            return Object.keys(obj).some((/**
+             * @param {?} key
+             * @return {?}
+             */
+            (key) => {
                 return (obj[key].toLowerCase()).includes(searchKey);
-            });
-        });
+            }));
+        }));
     }
     /**
      * @param {?} searchKey
@@ -6749,9 +7175,13 @@ class MdbTableService {
      */
     searchDataObservable(searchKey) {
         /** @type {?} */
-        const observable = Observable.create((observer) => {
+        const observable = Observable.create((/**
+         * @param {?} observer
+         * @return {?}
+         */
+        (observer) => {
             observer.next(this.searchLocalDataBy(searchKey));
-        });
+        }));
         return observable;
     }
 }
@@ -6766,7 +7196,7 @@ MdbTableService.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbTablePaginationComponent {
     /**
@@ -6792,7 +7222,11 @@ class MdbTablePaginationComponent {
         this.pagination = new Subject();
         this.nextPageClick = new EventEmitter();
         this.previousPageClick = new EventEmitter();
-        this.tableService.dataSourceChange().subscribe((data) => {
+        this.tableService.dataSourceChange().subscribe((/**
+         * @param {?} data
+         * @return {?}
+         */
+        (data) => {
             this.allItemsLength = data.length;
             this.lastVisibleItemIndex = data.length;
             this.calculateFirstItemIndex();
@@ -6801,7 +7235,7 @@ class MdbTablePaginationComponent {
             if (this.maxVisibleItems > this.allItemsLength) {
                 this.maxVisibleItems = this.allItemsLength;
             }
-        });
+        }));
     }
     /**
      * @return {?}
@@ -6854,9 +7288,13 @@ class MdbTablePaginationComponent {
      */
     searchTextObs() {
         /** @type {?} */
-        const observable = Observable.create((observer) => {
+        const observable = Observable.create((/**
+         * @param {?} observer
+         * @return {?}
+         */
+        (observer) => {
             observer.next(this.searchText);
-        });
+        }));
         return observable;
     }
     /**
@@ -6937,9 +7375,13 @@ class MdbTablePaginationComponent {
      */
     nextPageObservable() {
         /** @type {?} */
-        const obs = Observable.create((observer) => {
+        const obs = Observable.create((/**
+         * @param {?} observer
+         * @return {?}
+         */
+        (observer) => {
             observer.next(this.firstItemIndex);
-        });
+        }));
         return obs;
     }
     /**
@@ -6947,9 +7389,13 @@ class MdbTablePaginationComponent {
      */
     previousPageObservable() {
         /** @type {?} */
-        const obs = Observable.create((observer) => {
+        const obs = Observable.create((/**
+         * @param {?} observer
+         * @return {?}
+         */
+        (observer) => {
             observer.next(this.lastVisibleItemIndex);
-        });
+        }));
         return obs;
     }
     /**
@@ -6997,7 +7443,7 @@ MdbTablePaginationComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class TableModule {
 }
@@ -7025,12 +7471,12 @@ TableModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Default values provider for tooltip
@@ -7053,7 +7499,7 @@ TooltipConfig.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class TooltipContainerComponent {
     /**
@@ -7085,7 +7531,10 @@ class TooltipContainerComponent {
         if (this.popupClass) {
             this.classMap[this.popupClass] = true;
         }
-        setTimeout(() => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             /** @type {?} */
             const arrowClassList = this.tooltipArrow.nativeElement.classList;
             /** @type {?} */
@@ -7099,7 +7548,7 @@ class TooltipContainerComponent {
             else if (arrowClassList.contains('right')) {
                 this.r.setStyle(this.tooltipArrow.nativeElement, 'top', (tooltipHeight / 2) + 'px');
             }
-        }, 0);
+        }), 0);
     }
 }
 TooltipContainerComponent.decorators = [
@@ -7129,7 +7578,7 @@ TooltipContainerComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /*tslint:disable:no-invalid-this */
 /**
@@ -7138,7 +7587,12 @@ TooltipContainerComponent.propDecorators = {
 function OnChange() {
     /** @type {?} */
     const sufix = 'Change';
-    return function OnChangeHandler(target, propertyKey) {
+    return (/**
+     * @param {?} target
+     * @param {?} propertyKey
+     * @return {?}
+     */
+    function OnChangeHandler(target, propertyKey) {
         /** @type {?} */
         const _key = ` __${propertyKey}Value`;
         Object.defineProperty(target, propertyKey, {
@@ -7159,12 +7613,12 @@ function OnChange() {
                 }
             }
         });
-    };
+    });
 }
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class TooltipDirective {
     /**
@@ -7185,8 +7639,6 @@ class TooltipDirective {
         this.delay = 0;
         this.fadeDuration = 150;
         this.isBrowser = false;
-        this.xxx = _viewContainerRef;
-        this.yyy = cis;
         this.isBrowser = isPlatformBrowser((this.platformId));
         this._tooltip = cis
             .createLoader(this._elementRef, _viewContainerRef, _renderer)
@@ -7240,13 +7692,20 @@ class TooltipDirective {
     ngOnInit() {
         this._tooltip.listen({
             triggers: this.triggers,
-            show: () => this.show()
+            show: (/**
+             * @return {?}
+             */
+            () => this.show())
         });
-        this.tooltipChange.subscribe((value) => {
+        this.tooltipChange.subscribe((/**
+         * @param {?} value
+         * @return {?}
+         */
+        (value) => {
             if (!value) {
                 this._tooltip.hide();
             }
-        });
+        }));
     }
     /**
      * @param {?} changes
@@ -7315,18 +7774,24 @@ class TooltipDirective {
             this.changePositionIfNotFit();
         }
         /** @type {?} */
-        const showTooltip = () => this._tooltip
+        const showTooltip = (/**
+         * @return {?}
+         */
+        () => this._tooltip
             .attach(TooltipContainerComponent)
             .to(this.container)
             .position({ attachment: this.placement })
             .show({
             content: this.mdbTooltip,
             placement: this.placement
-        });
+        }));
         if (this.delay) {
-            this._delayTimeoutId = setTimeout(() => {
+            this._delayTimeoutId = setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 showTooltip();
-            }, this.delay);
+            }), this.delay);
         }
         else {
             showTooltip();
@@ -7346,9 +7811,12 @@ class TooltipDirective {
             return;
         }
         this._tooltip.instance.classMap.in = false;
-        setTimeout(() => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             this._tooltip.hide();
-        }, this.fadeDuration);
+        }), this.fadeDuration);
     }
     /**
      * @return {?}
@@ -7403,7 +7871,7 @@ __decorate([
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class TooltipModule {
     /**
@@ -7427,12 +7895,12 @@ TooltipModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class WavesDirective {
     /**
@@ -7487,12 +7955,18 @@ class WavesDirective {
      */
     removeRipple(button, ripple) {
         ripple.classList.remove('waves-rippling');
-        setTimeout(() => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             ripple.style.opacity = '0';
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 button.removeChild(ripple);
-            }, 750);
-        }, 200);
+            }), 750);
+        }), 200);
     }
 }
 WavesDirective.decorators = [
@@ -7510,7 +7984,7 @@ WavesDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class WavesModule {
     /**
@@ -7529,12 +8003,12 @@ WavesModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const MODULES = [
@@ -7599,7 +8073,7 @@ MDBBootstrapModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class SBItemBodyComponent {
     constructor() {
@@ -7611,9 +8085,12 @@ class SBItemBodyComponent {
      * @return {?}
      */
     toggle(collapsed) {
-        setTimeout(() => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             collapsed ? this.expandAnimationState = 'collapsed' : this.expandAnimationState = 'expanded';
-        }, 0);
+        }), 0);
     }
     /**
      * @param {?} activeUrl
@@ -7621,13 +8098,20 @@ class SBItemBodyComponent {
      */
     openSidenavOnActiveLink(activeUrl) {
         /** @type {?} */
-        const activeLink = this.routerLinks.find((link) => {
+        const activeLink = this.routerLinks.find((/**
+         * @param {?} link
+         * @return {?}
+         */
+        (link) => {
             return link.href === activeUrl;
-        });
+        }));
         if (activeLink) {
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 this.expandAnimationState = 'expanded';
-            }, 40);
+            }), 40);
         }
     }
     /**
@@ -7661,16 +8145,18 @@ SBItemBodyComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const sbConfig = {
     serviceInstance: new Object()
 };
+/** @type {?} */
+const sbItems = new Array();
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class SBItemComponent {
     constructor() {
@@ -7682,9 +8168,12 @@ class SBItemComponent {
      */
     ngAfterViewInit() {
         if (this.body !== undefined) {
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 this.collapsed ? this.body.expandAnimationState = 'collapsed' : this.body.expandAnimationState = 'expanded';
-            }, 0);
+            }), 0);
             this.body.toggle(this.collapsed);
         }
     }
@@ -7692,11 +8181,14 @@ class SBItemComponent {
      * @return {?}
      */
     ngAfterContentInit() {
-        setTimeout(() => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             if (this.body && this.body.expandAnimationState === 'expanded') {
                 this.collapsed = false;
             }
-        }, 40);
+        }), 40);
     }
     /**
      * @param {?} collapsed
@@ -7734,7 +8226,7 @@ SBItemComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class SqueezeBoxComponent {
     constructor() {
@@ -7748,13 +8240,51 @@ class SqueezeBoxComponent {
     didItemToggled(item) {
         // on not multiple, it will collpase the rest of items
         if (!this.multiple) {
-            this.items.toArray().forEach(function (i) {
-                if (i !== item) {
-                    i.applyToggle(true);
+            sbItems.forEach((/**
+             * @param {?} el
+             * @return {?}
+             */
+            (el) => {
+                if (el !== item) {
+                    el.applyToggle(true);
                 }
-            });
+                if (el === item) {
+                    /** @type {?} */
+                    const collapsed = el.collapsed ? true : false;
+                    setTimeout((/**
+                     * @return {?}
+                     */
+                    () => {
+                        el.applyToggle(collapsed);
+                    }), 0);
+                }
+            }));
         }
     }
+    /**
+     * @return {?}
+     */
+    ngAfterContentInit() {
+        this.items.forEach((/**
+         * @param {?} el
+         * @return {?}
+         */
+        (el) => {
+            sbItems.push(el);
+        }));
+        if (!this.multiple) {
+            sbItems.forEach((/**
+             * @param {?} el
+             * @return {?}
+             */
+            (el) => {
+                /** @type {?} */
+                const collapsed = el.collapsed ? true : false;
+                el.applyToggle(collapsed);
+            }));
+        }
+    }
+    ;
 }
 SqueezeBoxComponent.decorators = [
     { type: Component, args: [{
@@ -7767,12 +8297,15 @@ SqueezeBoxComponent.decorators = [
 SqueezeBoxComponent.ctorParameters = () => [];
 SqueezeBoxComponent.propDecorators = {
     multiple: [{ type: Input }],
-    items: [{ type: ContentChildren, args: [forwardRef(() => SBItemComponent),] }]
+    items: [{ type: ContentChildren, args: [forwardRef((/**
+                 * @return {?}
+                 */
+                () => SBItemComponent)),] }]
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class SBItemHeadComponent {
     /**
@@ -7814,7 +8347,7 @@ SBItemHeadComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const SQUEEZEBOX_COMPONENTS = [SqueezeBoxComponent, SBItemComponent, SBItemHeadComponent, SBItemBodyComponent];
@@ -7830,7 +8363,7 @@ AccordionModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * A `ComponentPortal` is a portal that instantiates some Component upon attachment.
@@ -7926,7 +8459,7 @@ class BasePortalHost {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * A PortalHost for attaching portals to an arbitrary DOM element outside of the Angular
@@ -7969,10 +8502,13 @@ class DomPortalHost extends BasePortalHost {
         // in Angular core. The change detector must also be deregistered when the component
         // is destroyed to prevent memory leaks.
         this._appRef.attachView(componentRef.hostView);
-        this.setDisposeFn(() => {
+        this.setDisposeFn((/**
+         * @return {?}
+         */
+        () => {
             this._appRef.detachView(componentRef.hostView);
             componentRef.destroy();
-        });
+        }));
         // At this point the component has been instantiated, so we move it to the location in the DOM
         // where we want it to be rendered.
         if (newestOnTop) {
@@ -7996,7 +8532,7 @@ class DomPortalHost extends BasePortalHost {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Reference to an overlay that has been created with the Overlay service.
@@ -8028,7 +8564,7 @@ class OverlayRef {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * The OverlayContainer is the container in which all overlays will load.
@@ -8064,7 +8600,7 @@ class OverlayContainer {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Service to create Overlays. Overlays are dynamically added pieces of floating UI, meant to be
@@ -8166,7 +8702,7 @@ const OVERLAY_PROVIDERS = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ToastContainerDirective {
     /**
@@ -8212,7 +8748,7 @@ ToastContainerModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // WARNING: interface has both a type and a value, skipping emit
 /**
@@ -8279,7 +8815,7 @@ const tsConfig = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ToastComponent {
     /**
@@ -8306,12 +8842,18 @@ class ToastComponent {
         this.title = toastPackage.title;
         this.options = toastPackage.config;
         this.toastClasses = `${toastPackage.toastType} ${toastPackage.config.toastClass}`;
-        this.sub = toastPackage.toastRef.afterActivate().subscribe(() => {
+        this.sub = toastPackage.toastRef.afterActivate().subscribe((/**
+         * @return {?}
+         */
+        () => {
             this.activateToast();
-        });
-        this.sub1 = toastPackage.toastRef.manualClosed().subscribe(() => {
+        }));
+        this.sub1 = toastPackage.toastRef.manualClosed().subscribe((/**
+         * @return {?}
+         */
+        () => {
             this.remove();
-        });
+        }));
     }
     /**
      * @return {?}
@@ -8329,12 +8871,18 @@ class ToastComponent {
     activateToast() {
         this.state = 'active';
         if (this.options.timeOut !== 0) {
-            this.timeout = setTimeout(() => {
+            this.timeout = setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 this.remove();
-            }, this.options.timeOut);
+            }), this.options.timeOut);
             this.hideTime = new Date().getTime() + this.options.timeOut;
             if (this.options.progressBar) {
-                this.intervalId = setInterval(() => this.updateProgress(), 10);
+                this.intervalId = setInterval((/**
+                 * @return {?}
+                 */
+                () => this.updateProgress()), 10);
             }
         }
         if (this.options.onActivateTick) {
@@ -8368,7 +8916,10 @@ class ToastComponent {
         }
         clearTimeout(this.timeout);
         this.state = 'removed';
-        this.timeout = setTimeout(() => this.toastService.remove(this.toastPackage.toastId), 300);
+        this.timeout = setTimeout((/**
+         * @return {?}
+         */
+        () => this.toastService.remove(this.toastPackage.toastId)), 300);
     }
     /**
      * @return {?}
@@ -8410,12 +8961,18 @@ class ToastComponent {
         if (+this.options.extendedTimeOut === 0 || this.state === 'removed') {
             return;
         }
-        this.timeout = setTimeout(() => this.remove(), this.options.extendedTimeOut);
+        this.timeout = setTimeout((/**
+         * @return {?}
+         */
+        () => this.remove()), this.options.extendedTimeOut);
         this.options.timeOut = +this.options.extendedTimeOut;
         this.hideTime = new Date().getTime() + this.options.timeOut;
         this.width = 100;
         if (this.options.progressBar) {
-            this.intervalId = setInterval(() => this.updateProgress(), 10);
+            this.intervalId = setInterval((/**
+             * @return {?}
+             */
+            () => this.updateProgress()), 10);
         }
     }
 }
@@ -8452,7 +9009,7 @@ ToastComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Reference to a toast opened via the Toast service.
@@ -8548,14 +9105,14 @@ class ToastInjector {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const TOAST_CONFIG = new InjectionToken('ToastConfig');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ToastService {
     /**
@@ -8843,10 +9400,13 @@ class ToastService {
         const component = new ComponentPortal(config.toastComponent, toastInjector);
         ins.portal = overlayRef.attach(component, this.toastConfig.newestOnTop);
         if (!keepInactive) {
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 ins.toastRef.activate();
                 this.currentlyActive = this.currentlyActive + 1;
-            });
+            }));
         }
         this.toasts.push(ins);
         return ins;
@@ -8865,7 +9425,7 @@ ToastService.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ToastModule {
     /**
@@ -8907,12 +9467,12 @@ ToastModule.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // SideNav
 /** @type {?} */
@@ -8985,7 +9545,7 @@ const flyInOut = trigger('flyInOut', [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbOptionComponent {
     /**
@@ -9023,20 +9583,26 @@ MdbOptionComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbAutoCompleterComponent {
     /**
      * @param {?} renderer
+     * @param {?} el
+     * @param {?} platformId
      */
-    constructor(renderer) {
+    constructor(renderer, el, platformId) {
         this.renderer = renderer;
+        this.el = el;
         this.clearButton = true;
         this.clearButtonTabIndex = 0;
+        this._isDropdownOpen = new Subject();
         this._allItems = [];
         this._isOpen = false;
         this._selectedItemIndex = -1;
         this._selectedItemChanged = new Subject();
+        this._isBrowser = false;
+        this._isBrowser = isPlatformBrowser(platformId);
     }
     /**
      * @return {?}
@@ -9044,14 +9610,24 @@ class MdbAutoCompleterComponent {
     onItemClick() {
         /** @type {?} */
         let selectedElement = (/** @type {?} */ ({}));
-        this.mdbOptions.forEach((el) => {
+        this.mdbOptions.forEach((/**
+         * @param {?} el
+         * @return {?}
+         */
+        (el) => {
             if (el.clicked === true) {
                 selectedElement = el;
             }
             el.clicked = false;
-        });
+        }));
         this.setSelectedItem({ text: selectedElement.value, element: selectedElement });
         this.highlightRow(0);
+    }
+    /**
+     * @return {?}
+     */
+    windowMouseDown() {
+        this.hide();
     }
     /**
      * @param {?} item
@@ -9083,33 +9659,71 @@ class MdbAutoCompleterComponent {
      * @return {?}
      */
     show() {
-        this._isOpen = true;
+        if (!this.disabled) {
+            this._isOpen = true;
+            this._isDropdownOpen.next(this.isOpen());
+        }
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
+            if (this.dropdown && !this.appendToBody) {
+                /** @type {?} */
+                const top = this.dropdown.nativeElement.clientHeight > this.parameters.bottom ?
+                    `-${this.dropdown.nativeElement.clientHeight - this.parameters.inputHeight}` :
+                    this.parameters.inputHeight + 3;
+                this.renderer.setStyle(this.dropdown.nativeElement, 'top', top + 'px');
+                this.renderer.setStyle(this.dropdown.nativeElement, 'left', 0 + 'px');
+                this.renderer.setStyle(this.dropdown.nativeElement, 'width', this.parameters.width + 'px');
+            }
+        }), 0);
     }
     /**
      * @return {?}
      */
     hide() {
-        this._isOpen = false;
+        if (!this.disabled) {
+            this._isOpen = false;
+            this._isDropdownOpen.next(this.isOpen());
+        }
+    }
+    /**
+     * @return {?}
+     */
+    isDropdownOpen() {
+        return this._isDropdownOpen;
     }
     /**
      * @param {?} index
      * @return {?}
      */
     removeHighlight(index) {
-        setTimeout(() => {
-            this.optionList.forEach((el, i) => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
+            this.optionList.forEach((/**
+             * @param {?} el
+             * @param {?} i
+             * @return {?}
+             */
+            (el, i) => {
                 /** @type {?} */
                 const completerRow = el.nativeElement.querySelectorAll('.completer-row');
                 if (i === index) {
                     this.renderer.addClass(el.nativeElement.firstElementChild, 'highlight-row');
                 }
                 else if (i !== index) {
-                    completerRow.forEach((elem) => {
+                    completerRow.forEach((/**
+                     * @param {?} elem
+                     * @return {?}
+                     */
+                    (elem) => {
                         this.renderer.removeClass(elem, 'highlight-row');
-                    });
+                    }));
                 }
-            });
-        }, 0);
+            }));
+        }), 0);
     }
     /**
      * @param {?} index
@@ -9117,17 +9731,30 @@ class MdbAutoCompleterComponent {
      */
     highlightRow(index) {
         this._allItems = this.optionList
-            .filter(el => el.nativeElement.firstElementChild.classList.contains('completer-row'))
-            .map(elem => elem.nativeElement);
+            .filter((/**
+         * @param {?} el
+         * @return {?}
+         */
+        el => el.nativeElement.firstElementChild.classList.contains('completer-row')))
+            .map((/**
+         * @param {?} elem
+         * @return {?}
+         */
+        elem => elem.nativeElement));
         if (this._allItems[index]) {
-            this.optionList.forEach((el, i) => {
+            this.optionList.forEach((/**
+             * @param {?} el
+             * @param {?} i
+             * @return {?}
+             */
+            (el, i) => {
                 /** @type {?} */
                 const completerRow = el.nativeElement.querySelectorAll('.completer-row');
                 if (index === i) {
                     this.removeHighlight(index);
                     this.renderer.addClass(completerRow[completerRow.length - 1], 'highlight-row');
                 }
-            });
+            }));
         }
         this._selectedItemIndex = index;
     }
@@ -9165,7 +9792,11 @@ class MdbAutoCompleterComponent {
                     break;
                 case 'Enter':
                     /** @type {?} */
-                    const selectedOption = this.mdbOptions.map(el => el)[this._selectedItemIndex];
+                    const selectedOption = this.mdbOptions.map((/**
+                     * @param {?} el
+                     * @return {?}
+                     */
+                    el => el))[this._selectedItemIndex];
                     if (selectedOption) {
                         this.setSelectedItem({ text: selectedOption.value, element: selectedOption });
                     }
@@ -9183,20 +9814,29 @@ class MdbAutoCompleterComponent {
         let listHeight = 0;
         /** @type {?} */
         let itemIndex = this._selectedItemIndex;
-        this.optionList.forEach((el) => {
+        this.optionList.forEach((/**
+         * @param {?} el
+         * @return {?}
+         */
+        (el) => {
             listHeight += el.nativeElement.offsetHeight;
-        });
+        }));
         if (itemIndex > -1) {
             /** @type {?} */
             let item = null;
             /** @type {?} */
             let itemHeight = 0;
-            this.optionList.forEach((el, i) => {
+            this.optionList.forEach((/**
+             * @param {?} el
+             * @param {?} i
+             * @return {?}
+             */
+            (el, i) => {
                 if (i === itemIndex + 1) {
                     item = el.nativeElement;
                     itemHeight = item.offsetHeight;
                 }
-            });
+            }));
             /** @type {?} */
             const itemTop = (itemIndex + 1) * itemHeight;
             /** @type {?} */
@@ -9223,6 +9863,42 @@ class MdbAutoCompleterComponent {
         }
     }
     /**
+     * @param {?} parameters
+     * @return {?}
+     */
+    updatePosition(parameters) {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
+            if (this.dropdown) {
+                /** @type {?} */
+                const top = this.dropdown.nativeElement.clientHeight > parameters.bottom ?
+                    parameters.top - this.dropdown.nativeElement.clientHeight :
+                    parameters.top;
+                this.renderer.setStyle(this.dropdown.nativeElement, 'top', top + 'px');
+                this.renderer.setStyle(this.dropdown.nativeElement, 'left', parameters.left + 'px');
+                this.renderer.setStyle(this.dropdown.nativeElement, 'width', parameters.width + 'px');
+            }
+        }), 0);
+    }
+    /**
+     * @param {?} parameters
+     * @return {?}
+     */
+    appendDropdown(parameters) {
+        if (this._isBrowser && this.appendToBody) {
+            /** @type {?} */
+            const body = document.querySelector('body');
+            /** @type {?} */
+            const dropdown = this.el.nativeElement;
+            if (body) {
+                this.renderer.appendChild(body, dropdown);
+                this.updatePosition(parameters);
+            }
+        }
+    }
+    /**
      * @return {?}
      */
     ngOnInit() {
@@ -9240,27 +9916,33 @@ class MdbAutoCompleterComponent {
 MdbAutoCompleterComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-auto-completer',
-                template: "<div class=\"completer-dropdown-holder\" *ngIf=\"isOpen()\">\n  <div class=\"completer-dropdown\" #dropdown>\n    <div class=\"completer-row-wrapper\">\n      <div *ngIf=\"optionList.length === 0 \" class=\"completer-no-results\">{{textNoResults}}</div>\n      <ng-content #content></ng-content>\n    </div>\n  </div>\n</div>\n",
+                template: "<div class=\"completer-dropdown-holder\" *ngIf=\"isOpen()\">\n  <div class=\"completer-dropdown\" #dropdown [ngStyle]=\"{'pointer-events': optionList.length === 0 ? 'none': 'auto'}\">\n    <div class=\"completer-row-wrapper\">\n      <div *ngIf=\"optionList.length === 0 \" class=\"completer-no-results\" #noResults>{{textNoResults}}</div>\n      <ng-content #content></ng-content>\n    </div>\n  </div>\n</div>\n",
                 exportAs: 'mdbAutoCompleter'
             }] }
 ];
 /** @nocollapse */
 MdbAutoCompleterComponent.ctorParameters = () => [
-    { type: Renderer2 }
+    { type: Renderer2 },
+    { type: ElementRef },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
 ];
 MdbAutoCompleterComponent.propDecorators = {
     textNoResults: [{ type: Input }],
     clearButton: [{ type: Input }],
     clearButtonTabIndex: [{ type: Input }],
+    appendToBody: [{ type: Input }],
+    disabled: [{ type: Input }],
     optionList: [{ type: ContentChildren, args: [MdbOptionComponent, { descendants: true, read: ElementRef },] }],
     mdbOptions: [{ type: ContentChildren, args: [MdbOptionComponent, { descendants: true, read: MdbOptionComponent },] }],
     dropdown: [{ type: ViewChild, args: ['dropdown',] }],
-    onItemClick: [{ type: HostListener, args: ['mousedown',] }]
+    noResultsEl: [{ type: ViewChild, args: ['noResults',] }],
+    onItemClick: [{ type: HostListener, args: ['mousedown',] }],
+    windowMouseDown: [{ type: HostListener, args: ['window:mousedown',] }]
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbAutoCompleterDirective {
     /**
@@ -9275,6 +9957,20 @@ class MdbAutoCompleterDirective {
         this.document = document;
         this.ngModelChange = new EventEmitter();
         this.isBrowser = isPlatformBrowser(platformId);
+    }
+    /**
+     * @private
+     * @param {?} el
+     * @param {?} selector
+     * @return {?}
+     */
+    _getClosestEl(el, selector) {
+        for (; el && el !== document; el = el.parentNode) {
+            if (el.matches(selector)) {
+                return el;
+            }
+        }
+        return null;
     }
     /**
      * @private
@@ -9294,7 +9990,7 @@ class MdbAutoCompleterDirective {
         this.renderer.setAttribute(el, 'tabindex', this.mdbAutoCompleter.clearButtonTabIndex.toString());
         if (this.isBrowser) {
             /** @type {?} */
-            const parent = this.el.nativeElement.offsetParent || this.el.nativeElement.parentElement;
+            const parent = this._getClosestEl(this.el.nativeElement, '.md-form') || this.el.nativeElement;
             this.renderer.appendChild(parent, el);
         }
     }
@@ -9307,9 +10003,13 @@ class MdbAutoCompleterDirective {
      * @return {THIS}
      */
     _setStyles(target, styles) {
-        Object.keys(styles).forEach((prop) => {
+        Object.keys(styles).forEach((/**
+         * @param {?} prop
+         * @return {?}
+         */
+        (prop) => {
             (/** @type {?} */ (this)).renderer.setStyle(target, prop, styles[prop]);
-        });
+        }));
         return (/** @type {?} */ (this));
     }
     /**
@@ -9319,9 +10019,13 @@ class MdbAutoCompleterDirective {
      * @return {?}
      */
     _addClass(target, name) {
-        name.forEach((el) => {
+        name.forEach((/**
+         * @param {?} el
+         * @return {?}
+         */
+        (el) => {
             this.renderer.addClass(target, el);
-        });
+        }));
     }
     /**
      * @private
@@ -9381,6 +10085,33 @@ class MdbAutoCompleterDirective {
         this.mdbAutoCompleter.highlightRow(0);
     }
     /**
+     * @param {?} elem
+     * @return {?}
+     */
+    getCoords(elem) {
+        if (this.isBrowser) {
+            /** @type {?} */
+            const box = elem.getBoundingClientRect();
+            /** @type {?} */
+            const body = document.body;
+            /** @type {?} */
+            const docEl = document.documentElement;
+            /** @type {?} */
+            const scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+            /** @type {?} */
+            const scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+            /** @type {?} */
+            const clientTop = docEl.clientTop || body.clientTop || 0;
+            /** @type {?} */
+            const clientLeft = docEl.clientLeft || body.clientLeft || 0;
+            /** @type {?} */
+            const top = box.top + scrollTop - clientTop;
+            /** @type {?} */
+            const left = box.left + scrollLeft - clientLeft;
+            return { top: Math.round(top), left: Math.round(left) };
+        }
+    }
+    /**
      * @private
      * @return {?}
      */
@@ -9393,6 +10124,7 @@ class MdbAutoCompleterDirective {
      */
     _show() {
         this.mdbAutoCompleter.show();
+        this._appendDropdownToInput();
     }
     /**
      * @private
@@ -9402,57 +10134,137 @@ class MdbAutoCompleterDirective {
         this.mdbAutoCompleter.hide();
     }
     /**
+     * @private
+     * @return {?}
+     */
+    _appendDropdownToInput() {
+        /** @type {?} */
+        const position = this.el.nativeElement.getBoundingClientRect();
+        /** @type {?} */
+        const el = this.el.nativeElement;
+        /** @type {?} */
+        const style$$1 = window.getComputedStyle(this.el.nativeElement);
+        /** @type {?} */
+        const height = ['height', 'padding-top', 'padding-bottom', 'margin-top', 'margin-bottom']
+            .map((/**
+         * @param {?} key
+         * @return {?}
+         */
+        (key) => parseInt(style$$1.getPropertyValue(key), 10)))
+            .reduce((/**
+         * @param {?} prev
+         * @param {?} cur
+         * @return {?}
+         */
+        (prev, cur) => prev + cur));
+        this.mdbAutoCompleter.parameters = {
+            left: this.getCoords(el).left,
+            top: this.getCoords(el).top + height,
+            width: position.width,
+            bottom: window.innerHeight - height - this.getCoords(el).top,
+            inputHeight: height
+        };
+        this.mdbAutoCompleter.appendDropdown({
+            left: this.getCoords(el).left,
+            top: this.getCoords(el).top + height,
+            width: position.width,
+            bottom: window.innerHeight - height - this.getCoords(el).top
+        });
+    }
+    /**
      * @return {?}
      */
     ngAfterViewInit() {
-        this.mdbAutoCompleter.selectedItemChanged().subscribe((item) => {
+        this.mdbAutoCompleter.selectedItemChanged().subscribe((/**
+         * @param {?} item
+         * @return {?}
+         */
+        (item) => {
             this.el.nativeElement.value = item.text;
             /** @type {?} */
             const clearButtonVisibility = this.el.nativeElement.value.length > 0 ? 'visible' : 'hidden';
-            this._setStyles(this._clearButton, { visibility: clearButtonVisibility });
-        });
+            /** @type {?} */
+            const clearButton = this.el.nativeElement.parentElement.lastElementChild;
+            this._setStyles(clearButton, { visibility: clearButtonVisibility });
+        }));
+        this.mdbAutoCompleter.isDropdownOpen().subscribe((/**
+         * @param {?} state
+         * @return {?}
+         */
+        (state$$1) => {
+            if (state$$1) {
+                this._appendDropdownToInput();
+            }
+        }));
         if (this.mdbAutoCompleter.clearButton && this.isBrowser) {
             this._renderClearButton();
             /** @type {?} */
             const clearButton = this.el.nativeElement.parentElement.querySelectorAll('.mdb-autocomplete-clear')[0];
             this._clearButton = this.document.querySelector('.mdb-autocomplete-clear');
-            this.renderer.listen(clearButton, 'focus', () => {
-                ['click', 'keydown:space', 'keydown:enter'].forEach(event => this.renderer.listen(clearButton, event, () => {
+            this.renderer.listen(clearButton, 'focus', (/**
+             * @return {?}
+             */
+            () => {
+                ['click', 'keydown:space', 'keydown:enter'].forEach((/**
+                 * @param {?} event
+                 * @return {?}
+                 */
+                event => this.renderer.listen(clearButton, event, (/**
+                 * @return {?}
+                 */
+                () => {
                     this._clearInput();
-                }));
+                }))));
                 this._setStyles(clearButton, {
                     transform: 'scale(1.2, 1.2)',
                     transition: '200ms'
                 });
-            });
-            this.renderer.listen(clearButton, 'mouseenter', () => {
+            }));
+            this.renderer.listen(clearButton, 'mouseenter', (/**
+             * @return {?}
+             */
+            () => {
                 this._setStyles(clearButton, {
                     transform: 'scale(1.2, 1.2)',
                     transition: '200ms'
                 });
-            });
-            this.renderer.listen(clearButton, 'mouseleave', () => {
+            }));
+            this.renderer.listen(clearButton, 'mouseleave', (/**
+             * @return {?}
+             */
+            () => {
                 this._setStyles(clearButton, {
                     transform: 'scale(1.0, 1.0)',
                     transition: '200ms'
                 });
-            });
-            this.renderer.listen(clearButton, 'blur', () => {
+            }));
+            this.renderer.listen(clearButton, 'blur', (/**
+             * @return {?}
+             */
+            () => {
                 this._setStyles(clearButton, {
                     transform: 'scale(1.0, 1.0)',
                     transition: '200ms'
                 });
-            });
+            }));
             if (this.el.nativeElement.disabled) {
                 this.renderer.setAttribute(clearButton, 'disabled', 'true');
             }
-            this._autocompleterInputChanges = new MutationObserver((mutations) => {
-                mutations.forEach((mutation) => {
+            this._autocompleterInputChanges = new MutationObserver((/**
+             * @param {?} mutations
+             * @return {?}
+             */
+            (mutations) => {
+                mutations.forEach((/**
+                 * @param {?} mutation
+                 * @return {?}
+                 */
+                (mutation) => {
                     if (mutation.attributeName === 'disabled') {
                         this.renderer.setAttribute(this._clearButton, 'disabled', 'true');
                     }
-                });
-            });
+                }));
+            }));
             this._autocompleterInputChanges.observe(this.el.nativeElement, {
                 attributes: true,
                 childList: true,
@@ -9496,7 +10308,7 @@ MdbAutoCompleterDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbAutoCompleterOptionDirective {
     /**
@@ -9517,7 +10329,7 @@ MdbAutoCompleterOptionDirective.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class AutoCompleterModule {
 }
@@ -9531,12 +10343,12 @@ AutoCompleterModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbDateFormatDirective {
     constructor() {
@@ -9573,9 +10385,13 @@ class MdbDateFormatDirective {
     setResultLength() {
         /** @type {?} */
         let resLength = 0;
-        this.format.forEach((value) => {
+        this.format.forEach((/**
+         * @param {?} value
+         * @return {?}
+         */
+        (value) => {
             resLength += value.length;
-        });
+        }));
         this.resultLength = resLength + this.separatorsNumber;
     }
     /**
@@ -9586,9 +10402,14 @@ class MdbDateFormatDirective {
         /** @type {?} */
         const dateParts = this.getDateParts(date);
         /** @type {?} */
-        const result = dateParts.map((part, index) => {
+        const result = dateParts.map((/**
+         * @param {?} part
+         * @param {?} index
+         * @return {?}
+         */
+        (part, index) => {
             return part = this.formatDateParts(part, index);
-        });
+        }));
         return result.join(this.separator).slice(0, this.resultLength);
     }
     /**
@@ -9688,7 +10509,7 @@ MdbDateFormatDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbCreditCardDirective {
     constructor() {
@@ -9870,9 +10691,13 @@ class MdbCreditCardDirective {
      */
     findCardByNumber(value) {
         /** @type {?} */
-        const cardType = this.cards.find((card) => {
+        const cardType = this.cards.find((/**
+         * @param {?} card
+         * @return {?}
+         */
+        (card) => {
             return card.re.test(value);
-        });
+        }));
         if (!cardType) {
             return this.defaultCard;
         }
@@ -9883,9 +10708,13 @@ class MdbCreditCardDirective {
      * @return {?}
      */
     addCards(newCards) {
-        newCards.forEach((card) => {
+        newCards.forEach((/**
+         * @param {?} card
+         * @return {?}
+         */
+        (card) => {
             this.cards.push(card);
-        });
+        }));
     }
 }
 MdbCreditCardDirective.decorators = [
@@ -9905,7 +10734,7 @@ MdbCreditCardDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbCvvDirective {
     constructor() {
@@ -9957,7 +10786,7 @@ MdbCvvDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class AutoFormatModule {
 }
@@ -9978,12 +10807,12 @@ AutoFormatModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbCompleterDirective {
     constructor() {
@@ -10161,7 +10990,7 @@ MdbCompleterDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const MAX_CHARS = 524288;
@@ -10186,7 +11015,7 @@ function isNil(value) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @abstract
@@ -10286,12 +11115,28 @@ class CompleterBaseData extends Subject {
         /** @type {?} */
         const searchFields = this._searchFields ? this._searchFields.split(',') : null;
         if (this._searchFields !== null && this._searchFields !== undefined && term !== '') {
-            matches = data.filter(item => {
+            matches = data.filter((/**
+             * @param {?} item
+             * @return {?}
+             */
+            item => {
                 /** @type {?} */
                 const values = searchFields ?
-                    searchFields.map(searchField => this.extractValue(item, searchField)).filter(value => !!value) : [item];
-                return values.some(value => value.toString().toLowerCase().indexOf(term.toString().toLowerCase()) >= 0);
-            });
+                    searchFields.map((/**
+                     * @param {?} searchField
+                     * @return {?}
+                     */
+                    searchField => this.extractValue(item, searchField))).filter((/**
+                     * @param {?} value
+                     * @return {?}
+                     */
+                    value => !!value)) : [item];
+                return values.some((/**
+                 * @param {?} value
+                 * @return {?}
+                 */
+                value => value.toString().toLowerCase().indexOf(term.toString().toLowerCase()) >= 0));
+            }));
         }
         else {
             matches = data;
@@ -10306,10 +11151,19 @@ class CompleterBaseData extends Subject {
     extractTitle(item) {
         // split title fields and run extractValue for each and join with ' '
         return this._titleField.split(',')
-            .map((field) => {
+            .map((/**
+         * @param {?} field
+         * @return {?}
+         */
+        (field) => {
             return this.extractValue(item, field);
-        })
-            .reduce((acc, titlePart) => acc ? `${acc} ${titlePart}` : titlePart);
+        }))
+            .reduce((/**
+         * @param {?} acc
+         * @param {?} titlePart
+         * @return {?}
+         */
+        (acc, titlePart) => acc ? `${acc} ${titlePart}` : titlePart));
     }
     /**
      * @protected
@@ -10361,7 +11215,7 @@ class CompleterBaseData extends Subject {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class LocalData extends CompleterBaseData {
     constructor() {
@@ -10375,12 +11229,16 @@ class LocalData extends CompleterBaseData {
      */
     data(data) {
         if (data instanceof Observable) {
-            ((/** @type {?} */ (data))).subscribe((res) => {
+            ((/** @type {?} */ (data))).subscribe((/**
+             * @param {?} res
+             * @return {?}
+             */
+            (res) => {
                 (/** @type {?} */ (this))._data = res;
                 if ((/** @type {?} */ (this)).savedTerm) {
                     (/** @type {?} */ (this)).search((/** @type {?} */ (this)).savedTerm);
                 }
-            });
+            }));
         }
         else {
             (/** @type {?} */ (this))._data = (/** @type {?} */ (data));
@@ -10419,7 +11277,7 @@ LocalData.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class RemoteData extends CompleterBaseData {
     /**
@@ -10498,20 +11356,36 @@ class RemoteData extends CompleterBaseData {
         //   this._requestOptions = new RequestOptions();
         //   (this._requestOptions.headers as any) = this._headers || new HttpHeaders();
         // }
-        this.remoteSearch = this.http.get(url, this._requestOptions).pipe(map((res) => res), map((data) => {
+        this.remoteSearch = this.http.get(url, this._requestOptions).pipe(map((/**
+         * @param {?} res
+         * @return {?}
+         */
+        (res) => res)), map((/**
+         * @param {?} data
+         * @return {?}
+         */
+        (data) => {
             /** @type {?} */
             const matches = this.extractValue(data, this._dataField);
             return this.extractMatches(matches, term);
-        }), map((matches) => {
+        })), map((/**
+         * @param {?} matches
+         * @return {?}
+         */
+        (matches) => {
             /** @type {?} */
             const results = this.processResults(matches);
             this.next(results);
             return results;
-        }), catchError((err) => {
+        })), catchError((/**
+         * @param {?} err
+         * @return {?}
+         */
+        (err) => {
             this.error(err);
             // return null;
             return this.setToNullValue;
-        }))
+        })))
             .subscribe();
     }
     /**
@@ -10534,7 +11408,7 @@ class RemoteData extends CompleterBaseData {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CompleterService {
     /**
@@ -10587,14 +11461,20 @@ CompleterService.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
-const noop = () => { };
+const noop = (/**
+ * @return {?}
+ */
+() => { });
 /** @type {?} */
 const COMPLETER_CONTROL_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => CompleterComponent),
+    useExisting: forwardRef((/**
+     * @return {?}
+     */
+    () => CompleterComponent)),
     multi: true
 };
 class CompleterComponent {
@@ -10800,16 +11680,28 @@ class CompleterComponent {
      * @return {?}
      */
     ngOnInit() {
-        this.completer.selected.subscribe((item) => {
+        this.completer.selected.subscribe((/**
+         * @param {?} item
+         * @return {?}
+         */
+        (item) => {
             this.selected.emit(item);
-        });
-        this.completer.highlighted.subscribe((item) => {
+        }));
+        this.completer.highlighted.subscribe((/**
+         * @param {?} item
+         * @return {?}
+         */
+        (item) => {
             this.highlighted.emit(item);
-        });
-        this.completer.opened.subscribe((isOpen) => {
+        }));
+        this.completer.opened.subscribe((/**
+         * @param {?} isOpen
+         * @return {?}
+         */
+        (isOpen) => {
             this._open = isOpen;
             this.opened.emit(isOpen);
-        });
+        }));
         if (this.initialValue) {
             this.searchStr = this.initialValue;
             this.onFocus();
@@ -10829,9 +11721,12 @@ class CompleterComponent {
      * @return {?}
      */
     onFocus() {
-        setTimeout(() => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             this.focused = true;
-        }, 0);
+        }), 0);
         this.focusEvent.emit({ focused: true, element: this.el });
     }
     /**
@@ -10934,7 +11829,7 @@ CompleterComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CompleterListItemComponent {
     constructor() {
@@ -10990,24 +11885,30 @@ CompleterListItemComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @return {?}
  */
 function localDataFactory() {
-    return () => {
+    return (/**
+     * @return {?}
+     */
+    () => {
         return new LocalData();
-    };
+    });
 }
 /**
  * @param {?} http
  * @return {?}
  */
 function remoteDataFactory(http) {
-    return () => {
+    return (/**
+     * @return {?}
+     */
+    () => {
         return new RemoteData(http);
-    };
+    });
 }
 /** @type {?} */
 let LocalDataFactoryProvider = { provide: LocalData, useFactory: localDataFactory };
@@ -11016,7 +11917,7 @@ let RemoteDataFactoryProvider = { provide: RemoteData, useFactory: remoteDataFac
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CtrRowItem {
     /**
@@ -11062,9 +11963,12 @@ class MdbDropdownDirective {
         /** @type {?} */
         const autoHighlightIndex = this.completer.autoHighlightIndex;
         if (autoHighlightIndex) {
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 this.highlightRow(autoHighlightIndex);
-            }, 0);
+            }), 0);
         }
     }
     /**
@@ -11073,9 +11977,12 @@ class MdbDropdownDirective {
     onMouseDown() {
         // Support for canceling blur on IE (issue #158)
         this.completer.cancelBlur(true);
-        setTimeout(() => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             this.completer.cancelBlur(false);
-        }, 0);
+        }), 0);
     }
     /**
      * @param {?} row
@@ -11090,7 +11997,11 @@ class MdbDropdownDirective {
      */
     highlightRow(index) {
         /** @type {?} */
-        const highlighted = this.rows.find(row => row.index === index);
+        const highlighted = this.rows.find((/**
+         * @param {?} row
+         * @return {?}
+         */
+        row => row.index === index));
         if (index < 0) {
             if (this.currHighlighted) {
                 this.currHighlighted.row.setHighlighted(false);
@@ -11231,7 +12142,7 @@ MdbDropdownDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // keyboard events
 /** @type {?} */
@@ -11270,7 +12181,11 @@ class MdbInputCompleteDirective {
         // private blurTimer: Subscription = null;
         this.blurTimer = null;
         this.ngModel = this.tempngModel;
-        this.completer.selected.subscribe((item) => {
+        this.completer.selected.subscribe((/**
+         * @param {?} item
+         * @return {?}
+         */
+        (item) => {
             if (!item) {
                 return;
             }
@@ -11281,8 +12196,12 @@ class MdbInputCompleteDirective {
                 this.searchStr = item.title;
             }
             this.ngModelChange.emit(this.searchStr);
-        });
-        this.completer.highlighted.subscribe((item) => {
+        }));
+        this.completer.highlighted.subscribe((/**
+         * @param {?} item
+         * @return {?}
+         */
+        (item) => {
             if (this.fillHighlighted) {
                 if (item) {
                     this._displayStr = item.title;
@@ -11293,16 +12212,20 @@ class MdbInputCompleteDirective {
                     this.ngModelChange.emit(this.searchStr);
                 }
             }
-        });
+        }));
         // this.ngModel.valueChanges.subscribe(value => {
-        this.ngModel.valueChanges.subscribe((value) => {
+        this.ngModel.valueChanges.subscribe((/**
+         * @param {?} value
+         * @return {?}
+         */
+        (value) => {
             if (!isNil(value) && this._displayStr !== value) {
                 if (this.searchStr !== value) {
                     this.completer.search(value);
                 }
                 this.searchStr = value;
             }
-        });
+        }));
     }
     /**
      * @param {?} event
@@ -11365,13 +12288,19 @@ class MdbInputCompleteDirective {
     onBlur() {
         // Check if we need to cancel Blur for IE
         if (this.completer.isCancelBlur()) {
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 // get the focus back
                 this.el.nativeElement.focus();
-            }, 0);
+            }), 0);
             return;
         }
-        this.blurTimer = timer(200).subscribe(() => {
+        this.blurTimer = timer(200).subscribe((/**
+         * @return {?}
+         */
+        () => {
             this.blurTimer.unsubscribe();
             this.blurTimer = null;
             if (this.overrideSuggested) {
@@ -11387,7 +12316,7 @@ class MdbInputCompleteDirective {
                 }
             }
             this.completer.clear();
-        });
+        }));
     }
     /**
      * @return {?}
@@ -11470,7 +12399,7 @@ MdbInputCompleteDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CtrListContext {
     /**
@@ -11533,7 +12462,11 @@ class MdbListDirective {
                 // .catch(err => this.handleError(err))
                 // .catch((err: any) => this.handleError(err))
                 // .subscribe(results => {
-                .subscribe((results) => {
+                .subscribe((/**
+             * @param {?} results
+             * @return {?}
+             */
+            (results) => {
                 try {
                     this.ctx.searchInitialized = true;
                     this.ctx.searching = false;
@@ -11555,7 +12488,7 @@ class MdbListDirective {
                 }
                 catch (err) {
                 }
-            });
+            }));
         }
     }
     /**
@@ -11564,13 +12497,16 @@ class MdbListDirective {
      */
     set initialValue(value) {
         if (this._dataService && typeof this._dataService.convertToItem === 'function') {
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 /** @type {?} */
                 const initialItem = this._dataService.convertToItem(value);
                 if (initialItem) {
                     this.completer.onSelected(initialItem, false);
                 }
-            });
+            }));
         }
         else if (!this._dataService) {
             this._initialValue = value;
@@ -11595,13 +12531,16 @@ class MdbListDirective {
             if (this.clearTimer) {
                 this.clearTimer.unsubscribe();
             }
-            this.searchTimer = timer(this.mdbListPause).subscribe(() => {
+            this.searchTimer = timer(this.mdbListPause).subscribe((/**
+             * @return {?}
+             */
+            () => {
                 try {
                     this.searchTimerComplete(term);
                 }
                 catch (err) {
                 }
-            });
+            }));
         }
         else if (!isNil(term) && term.length < this.mdbListMinSearchLength) {
             this.clear();
@@ -11614,9 +12553,12 @@ class MdbListDirective {
         if (this.searchTimer) {
             this.searchTimer.unsubscribe();
         }
-        this.clearTimer = timer(CLEAR_TIMEOUT).subscribe(() => {
+        this.clearTimer = timer(CLEAR_TIMEOUT).subscribe((/**
+         * @return {?}
+         */
+        () => {
             this._clear();
-        });
+        }));
     }
     /**
      * @return {?}
@@ -11697,14 +12639,26 @@ class MdbListDirective {
         }
         // First try to find the exact term
         /** @type {?} */
-        let bestMatch = this.ctx.results.findIndex(item => item.title.toLowerCase() === this.term.toLocaleLowerCase());
+        let bestMatch = this.ctx.results.findIndex((/**
+         * @param {?} item
+         * @return {?}
+         */
+        item => item.title.toLowerCase() === this.term.toLocaleLowerCase()));
         // If not try to find the first item that starts with the term
         if (bestMatch < 0) {
-            bestMatch = this.ctx.results.findIndex(item => item.title.toLowerCase().startsWith(this.term.toLocaleLowerCase()));
+            bestMatch = this.ctx.results.findIndex((/**
+             * @param {?} item
+             * @return {?}
+             */
+            item => item.title.toLowerCase().startsWith(this.term.toLocaleLowerCase())));
         }
         // If not try to find the first item that includes the term
         if (bestMatch < 0) {
-            bestMatch = this.ctx.results.findIndex(item => item.title.toLowerCase().includes(this.term.toLocaleLowerCase()));
+            bestMatch = this.ctx.results.findIndex((/**
+             * @param {?} item
+             * @return {?}
+             */
+            item => item.title.toLowerCase().includes(this.term.toLocaleLowerCase())));
         }
         return bestMatch < 0 ? null : bestMatch;
     }
@@ -11732,7 +12686,7 @@ MdbListDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbRowDirective {
     /**
@@ -11824,7 +12778,7 @@ MdbRowDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class AutocompleteModule {
 }
@@ -11863,12 +12817,12 @@ AutocompleteModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CardRevealComponent {
     /**
@@ -11883,7 +12837,10 @@ class CardRevealComponent {
     toggle() {
         this.show = !this.show;
         this.socials = (this.socials === 'active') ? 'inactive' : 'active';
-        setTimeout(() => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             try {
                 /** @type {?} */
                 const height = this.cardFront.nativeElement.offsetHeight;
@@ -11891,7 +12848,7 @@ class CardRevealComponent {
                 this._r.setStyle(this.cardOverflow.nativeElement, 'height', height + 'px');
             }
             catch (error) { }
-        }, 0);
+        }), 0);
     }
 }
 CardRevealComponent.decorators = [
@@ -11913,7 +12870,7 @@ CardRevealComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CardRotatingComponent {
     constructor() {
@@ -11935,7 +12892,7 @@ CardRotatingComponent.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CardsModule {
     /**
@@ -11955,12 +12912,12 @@ CardsModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class LocaleService {
     constructor() {
@@ -12024,7 +12981,7 @@ LocaleService.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const M = 'm';
@@ -12382,7 +13339,7 @@ UtilService.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class FocusDirective {
     /**
@@ -12423,7 +13380,7 @@ FocusDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {number} */
 const KeyCode = {
@@ -12562,12 +13519,15 @@ InputAutoFillDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const MYDP_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => MDBDatePickerComponent),
+    useExisting: forwardRef((/**
+     * @return {?}
+     */
+    () => MDBDatePickerComponent)),
     multi: true
 };
 /** @enum {number} */
@@ -12698,14 +13658,24 @@ class MDBDatePickerComponent {
         this.modalHeightBefore = null;
         this.isMobile = null;
         this.isBrowser = false;
-        this.onChangeCb = () => { };
-        this.onTouchedCb = () => { };
+        this.onChangeCb = (/**
+         * @return {?}
+         */
+        () => { });
+        this.onTouchedCb = (/**
+         * @return {?}
+         */
+        () => { });
         this.isBrowser = isPlatformBrowser(platformId);
         if (this.isBrowser) {
             this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         }
         this.setLocaleOptions();
-        renderer.listen(this.elem.nativeElement, 'click', (event) => {
+        renderer.listen(this.elem.nativeElement, 'click', (/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => {
             if (this.showSelector &&
                 event.target &&
                 this.elem.nativeElement !== event.target &&
@@ -12723,16 +13693,19 @@ class MDBDatePickerComponent {
                 this.resetMonthYearEdit();
                 this.cdRef.detectChanges();
             }
-        });
+        }));
     }
     /**
      * @return {?}
      */
     ngAfterViewInit() {
         if (this.opts.startDate) {
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 this.onUserDateInput(this.opts.startDate);
-            }, 0);
+            }), 0);
         }
     }
     /**
@@ -12740,20 +13713,27 @@ class MDBDatePickerComponent {
      */
     ChangeZIndex() {
         if (this.isBrowser) {
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 // Fix for visible date / time picker input when picker plate is visible.
                 try {
                     /** @type {?} */
                     const openedPicker = document.querySelector('.picker--opened');
                     /** @type {?} */
                     const allPickers = document.querySelectorAll('.picker');
-                    allPickers.forEach((element) => {
+                    allPickers.forEach((/**
+                     * @param {?} element
+                     * @return {?}
+                     */
+                    (element) => {
                         this.renderer.setStyle(element, 'z-index', '0');
-                    });
+                    }));
                     this.renderer.setStyle(openedPicker, 'z-index', '100');
                 }
                 catch (error) { }
-            }, 0);
+            }), 0);
         }
     }
     /**
@@ -12774,9 +13754,12 @@ class MDBDatePickerComponent {
             }
         }
         catch (error) { }
-        setTimeout(() => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             ((/** @type {?} */ (document.documentElement))).style.removeProperty('overflow');
-        }, 155);
+        }), 155);
         this.labelActive = false;
     }
     /**
@@ -12785,9 +13768,13 @@ class MDBDatePickerComponent {
     setLocaleOptions() {
         /** @type {?} */
         const opts = this.localeService.getLocaleOptions(this.locale);
-        Object.keys(opts).forEach((k) => {
+        Object.keys(opts).forEach((/**
+         * @param {?} k
+         * @return {?}
+         */
+        (k) => {
             this.opts[k] = opts[k];
-        });
+        }));
     }
     /**
      * @param {?} locale
@@ -12795,9 +13782,12 @@ class MDBDatePickerComponent {
      */
     addLocale(locale) {
         this.localeService.locales = Object.assign({}, this.localeService.locales, locale);
-        setTimeout(() => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             this.setLocaleOptions();
-        }, 0);
+        }), 0);
     }
     /**
      * @return {?}
@@ -12808,9 +13798,13 @@ class MDBDatePickerComponent {
         /** @type {?} */
         const currentYear = thisYear.getFullYear();
         if (this.options !== undefined) {
-            Object.keys(this.options).forEach((k) => {
+            Object.keys(this.options).forEach((/**
+             * @param {?} k
+             * @return {?}
+             */
+            (k) => {
                 this.opts[k] = this.options[k];
-            });
+            }));
         }
         if (this.disabled !== undefined) {
             this.opts.componentDisabled = this.disabled;
@@ -13011,9 +14005,12 @@ class MDBDatePickerComponent {
                 sd.currentValue !== '' &&
                 Object.keys(sd.currentValue).length !== 0) {
                 this.selectedDate = this.parseSelectedDate(sd.currentValue);
-                setTimeout(() => {
+                setTimeout((/**
+                 * @return {?}
+                 */
+                () => {
                     this.onChangeCb(this.getDateModel(this.selectedDate));
-                });
+                }));
                 this.isDateSelected = true;
             }
             else {
@@ -13032,7 +14029,10 @@ class MDBDatePickerComponent {
      */
     hideKeyboard() {
         try {
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 /** @type {?} */
                 const field = this.renderer.createElement('input');
                 this.renderer.appendChild(this.elem.nativeElement, field);
@@ -13042,17 +14042,26 @@ class MDBDatePickerComponent {
                 this.renderer.setAttribute(inputReference, 'type', 'text');
                 this.renderer.setStyle(inputReference, 'opacity', '0');
                 this.renderer.setStyle(inputReference, '-webkit-user-modify', 'read-write-plaintext-only');
-                field.onfocus = () => {
-                    setTimeout(() => {
+                field.onfocus = (/**
+                 * @return {?}
+                 */
+                () => {
+                    setTimeout((/**
+                     * @return {?}
+                     */
+                    () => {
                         this.renderer.setStyle(field, 'display', 'none');
-                        setTimeout(() => {
+                        setTimeout((/**
+                         * @return {?}
+                         */
+                        () => {
                             this.renderer.removeChild(this.elem.nativeElement, field);
                             document.body.focus();
-                        }, 0);
-                    }, 0);
-                };
+                        }), 0);
+                    }), 0);
+                });
                 field.focus();
-            }, 0);
+            }), 0);
         }
         catch (error) {
         }
@@ -13066,6 +14075,15 @@ class MDBDatePickerComponent {
             this.calendarToggle.emit(CalToggle.CloseByCalBtn);
         }
         this.isDateSelected = false;
+        this.cdRef.markForCheck();
+    }
+    /**
+     * @return {?}
+     */
+    closeBtnClicked() {
+        this.showSelector = false;
+        this.removeInlineStyle();
+        this.cdRef.markForCheck();
     }
     /**
      * @return {?}
@@ -13367,7 +14385,11 @@ class MDBDatePickerComponent {
         const toReplace = this.opts.dateFormat.split(/(d{1,4}|m{1,4}|y{4}|yy|!.)/g);
         /** @type {?} */
         let formatted = '';
-        toReplace.forEach((el) => {
+        toReplace.forEach((/**
+         * @param {?} el
+         * @return {?}
+         */
+        (el) => {
             switch (el) {
                 case 'dddd':
                     el = el.replace(el, dddd);
@@ -13401,7 +14423,7 @@ class MDBDatePickerComponent {
                     break;
             }
             formatted += el;
-        });
+        }));
         return formatted;
     }
     /**
@@ -13728,7 +14750,7 @@ MDBDatePickerComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-date-picker',
                 exportAs: 'mdbdatepicker',
-                template: "<!-- Line 27: Deleted (focus)=\"onFocusInput($event)\" for better use in Firefox. If other strange problems will occur, please paste it in line 27. -->\r\n<div class=\"mydp picker\" [ngClass]=\"{'picker--opened': showSelector}\" [ngStyle]=\"{'width': opts.width}\">\r\n  <div class=\"md-form\">\r\n    <label (click)=\"openBtnClicked()\" *ngIf=\"label.length > 0\" [ngClass]=\"{\r\n          'active': checkActive(),\r\n          'disabled': opts.componentDisabled\r\n        }\">{{ label }}</label>\r\n    <input #dateInput type=\"text\" class=\"form-control mydp-date\" [attr.aria-label]=\"opts.ariaLabelInputField\" (click)=\"openBtnClicked()\"\r\n      [attr.maxlength]=\"opts.dateFormat.length\" [ngClass]=\"{\r\n        'selectiondisabled': opts.componentDisabled,\r\n        'disabled': opts.componentDisabled\r\n      }\" placeholder=\"{{ placeholder }}\" [ngModel]=\"selectionDayTxt\" (ngModelChange)=\"onUserDateInput($event)\" [value]=\"selectionDayTxt\"\r\n      [ngStyle]=\"{\r\n        'font-size': opts.selectionTxtFontSize\r\n      }\" (blur)=\"onBlurInput($event)\" [disabled]=\"opts.componentDisabled\" autocomplete=\"off\" [tabindex]=\"tabIndex\">\r\n  </div>\r\n  <div *ngIf=\"showSelector\" class=\"selector picker__holder selectorarrow selectorarrowleft selectorarrowright\" #divFocus [ngClass]=\"{'alignselectorright': opts.alignSelectorRight}\"\r\n    tabindex=\"0\">\r\n    <div class=\"picker__frame picker__box\" #pickerFrame>\r\n      <div class=\"picker__header\">\r\n        <div class=\"picker__date-display\">\r\n          <div class=\"picker__weekday-display\">\r\n            {{ weekText(getWeekday(tmp)) }}\r\n          </div>\r\n          <div class=\"picker__month-display\">\r\n            <div>{{ monthText(tmp.month) }}</div>\r\n          </div>\r\n          <div class=\"picker__day-display\">\r\n            <div>{{ tmp.day }}</div>\r\n          </div>\r\n          <div class=\"picker__year-display\">\r\n            <div>{{ tmp.year }}</div>\r\n          </div>\r\n        </div>\r\n        <select class=\"picker__select--year\" [(ngModel)]=\"visibleMonth.year\" (ngModelChange)=\"onUserYearInput($event)\" role=\"menu\"\r\n          aria-label=\"Year selector\">\r\n          <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option>\r\n        </select>\r\n        <select class=\"picker__select--month\" [(ngModel)]=\"visibleMonth.monthTxt\" (ngModelChange)=\"onUserMonthInput($event)\" role=\"menu\"\r\n          aria-label=\"Month selector\">\r\n          <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option>\r\n        </select>\r\n        <button class=\"picker__nav--prev\" data-nav=\"-1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Previous month\"\r\n          (click)=\"prevMonth()\" [disabled]=\"prevMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled}\"></button>\r\n        <button class=\"picker__nav--next\" data-nav=\"1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Next month\"\r\n          (click)=\"nextMonth()\" [disabled]=\"nextMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled}\"></button>\r\n      </div>\r\n      <table class=\"picker__table\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"picker__weekday weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#</th>\r\n            <th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let w of dates\">\r\n            <td class=\"picker__day daycellweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td>\r\n            <td class=\"picker__day\" *ngFor=\"let d of w.week\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId&&!d.disabled, 'disabled': d.disabled, 'tablesingleday': d.cmo===currMonthId&&!d.disabled}\">\r\n              <div *ngIf=\"d.markedDate.marked\" class=\"markdate\" [ngStyle]=\"{'background-color': d.markedDate.color}\"></div>\r\n              <div class=\"picker__day\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId,'picker__day--outfocus': (d.cmo===nextMonthId || d.cmo===prevMonthId), 'picker__day--today':d.currDay&&opts.markCurrentDay, 'picker__day--selected picker__day--highlighted':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId}\"\r\n                (click)=\"!d.disabled&&cellClicked(d);$event.stopPropagation()\" (keydown)=\"cellKeyDown($event, d)\" tabindex=\"0\">\r\n                {{d.dateObj.day}}\r\n              </div>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <div class=\"picker__footer\">\r\n        <button type=\"button\" *ngIf=\"opts.showTodayBtn\" class=\"picker__button--today\" (click)=\"todayClicked()\" role=\"button\" [attr.aria-label]=\"opts.todayBtnTxt\">\r\n          {{opts.todayBtnTxt}}\r\n        </button>\r\n        <button type=\"button\" *ngIf=\"opts.showClearDateBtn\" class=\"picker__button--clear\" (click)=\"removeBtnClicked()\" role=\"button\"\r\n          [attr.aria-label]=\"opts.clearBtnTxt\">\r\n          {{opts.clearBtnTxt}}\r\n        </button>\r\n        <button type=\"button\" [ngClass]=\"{'ml-auto': !opts.showTodayBtn}\" class=\"picker__button--close\" (click)=\"showSelector = false; removeInlineStyle();\"\r\n          role=\"button\" [attr.aria-label]=\"opts.closeBtnTxt\">\r\n          {{opts.closeBtnTxt}}\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>",
+                template: "<!-- Line 27: Deleted (focus)=\"onFocusInput($event)\" for better use in Firefox. If other strange problems will occur, please paste it in line 27. -->\r\n<div class=\"mydp picker\" [ngClass]=\"{'picker--opened': showSelector}\" [ngStyle]=\"{'width': opts.width}\">\r\n  <div class=\"md-form\">\r\n    <label (click)=\"openBtnClicked()\" *ngIf=\"label.length > 0\" [ngClass]=\"{\r\n          'active': checkActive(),\r\n          'disabled': opts.componentDisabled\r\n        }\">{{ label }}</label>\r\n    <input #dateInput type=\"text\" class=\"form-control mydp-date\" [attr.aria-label]=\"opts.ariaLabelInputField\" (click)=\"openBtnClicked()\"\r\n      [attr.maxlength]=\"opts.dateFormat.length\" [ngClass]=\"{\r\n        'selectiondisabled': opts.componentDisabled,\r\n        'disabled': opts.componentDisabled\r\n      }\" placeholder=\"{{ placeholder }}\" [ngModel]=\"selectionDayTxt\" (ngModelChange)=\"onUserDateInput($event)\" [value]=\"selectionDayTxt\"\r\n      [ngStyle]=\"{\r\n        'font-size': opts.selectionTxtFontSize\r\n      }\" (blur)=\"onBlurInput($event)\" [disabled]=\"opts.componentDisabled\" autocomplete=\"off\" [tabindex]=\"tabIndex\">\r\n  </div>\r\n  <div *ngIf=\"showSelector\" class=\"selector picker__holder selectorarrow selectorarrowleft selectorarrowright\" #divFocus [ngClass]=\"{'alignselectorright': opts.alignSelectorRight}\"\r\n    tabindex=\"0\">\r\n    <div class=\"picker__frame picker__box\" #pickerFrame>\r\n      <div class=\"picker__header\">\r\n        <div class=\"picker__date-display\">\r\n          <div class=\"picker__weekday-display\">\r\n            {{ weekText(getWeekday(tmp)) }}\r\n          </div>\r\n          <div class=\"picker__month-display\">\r\n            <div>{{ monthText(tmp.month) }}</div>\r\n          </div>\r\n          <div class=\"picker__day-display\">\r\n            <div>{{ tmp.day }}</div>\r\n          </div>\r\n          <div class=\"picker__year-display\">\r\n            <div>{{ tmp.year }}</div>\r\n          </div>\r\n        </div>\r\n        <select class=\"picker__select--year\" [(ngModel)]=\"visibleMonth.year\" (ngModelChange)=\"onUserYearInput($event)\" role=\"menu\"\r\n          aria-label=\"Year selector\">\r\n          <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option>\r\n        </select>\r\n        <select class=\"picker__select--month\" [(ngModel)]=\"visibleMonth.monthTxt\" (ngModelChange)=\"onUserMonthInput($event)\" role=\"menu\"\r\n          aria-label=\"Month selector\">\r\n          <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option>\r\n        </select>\r\n        <button class=\"picker__nav--prev\" data-nav=\"-1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Previous month\"\r\n          (click)=\"prevMonth()\" [disabled]=\"prevMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled}\"></button>\r\n        <button class=\"picker__nav--next\" data-nav=\"1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Next month\"\r\n          (click)=\"nextMonth()\" [disabled]=\"nextMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled}\"></button>\r\n      </div>\r\n      <table class=\"picker__table\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"picker__weekday weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#</th>\r\n            <th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let w of dates\">\r\n            <td class=\"picker__day daycellweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td>\r\n            <td class=\"picker__day\" *ngFor=\"let d of w.week\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId&&!d.disabled, 'disabled': d.disabled, 'tablesingleday': d.cmo===currMonthId&&!d.disabled}\">\r\n              <div *ngIf=\"d.markedDate.marked\" class=\"markdate\" [ngStyle]=\"{'background-color': d.markedDate.color}\"></div>\r\n              <div class=\"picker__day\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId,'picker__day--outfocus': (d.cmo===nextMonthId || d.cmo===prevMonthId), 'picker__day--today':d.currDay&&opts.markCurrentDay, 'picker__day--selected picker__day--highlighted':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId}\"\r\n                (click)=\"!d.disabled&&cellClicked(d);$event.stopPropagation()\" (keydown)=\"cellKeyDown($event, d)\" tabindex=\"0\">\r\n                {{d.dateObj.day}}\r\n              </div>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <div class=\"picker__footer\">\r\n        <button type=\"button\" *ngIf=\"opts.showTodayBtn\" class=\"picker__button--today\" (click)=\"todayClicked()\" role=\"button\" [attr.aria-label]=\"opts.todayBtnTxt\">\r\n          {{opts.todayBtnTxt}}\r\n        </button>\r\n        <button type=\"button\" *ngIf=\"opts.showClearDateBtn\" class=\"picker__button--clear\" (click)=\"removeBtnClicked()\" role=\"button\"\r\n          [attr.aria-label]=\"opts.clearBtnTxt\">\r\n          {{opts.clearBtnTxt}}\r\n        </button>\r\n        <button type=\"button\" [ngClass]=\"{'ml-auto': !opts.showTodayBtn}\" class=\"picker__button--close\" (click)=\"closeBtnClicked()\"\r\n          role=\"button\" [attr.aria-label]=\"opts.closeBtnTxt\">\r\n          {{opts.closeBtnTxt}}\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>",
                 providers: [LocaleService, UtilService, MYDP_VALUE_ACCESSOR],
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush
@@ -13765,7 +14787,7 @@ MDBDatePickerComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class DatepickerModule {
 }
@@ -13779,12 +14801,12 @@ DatepickerModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class SimpleChartComponent {
     constructor() {
@@ -13848,7 +14870,7 @@ SimpleChartComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class EasyPieChartComponent {
     /**
@@ -13927,7 +14949,7 @@ EasyPieChartComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ChartSimpleModule {
 }
@@ -13945,12 +14967,12 @@ ChartSimpleModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {number} */
 const UploadStatus = {
@@ -13993,8 +15015,16 @@ class MDBUploaderService {
         this.contentTypes = contentTypes;
         this.maxUploads = maxUploads;
         this.uploadScheduler
-            .pipe(mergeMap(upload => this.startUpload(upload), concurrency))
-            .subscribe(uploadOutput => this.serviceEvents.emit(uploadOutput));
+            .pipe(mergeMap((/**
+         * @param {?} upload
+         * @return {?}
+         */
+        upload => this.startUpload(upload)), concurrency))
+            .subscribe((/**
+         * @param {?} uploadOutput
+         * @return {?}
+         */
+        uploadOutput => this.serviceEvents.emit(uploadOutput)));
     }
     /**
      * @param {?} incomingFiles
@@ -14002,7 +15032,13 @@ class MDBUploaderService {
      */
     handleFiles(incomingFiles) {
         /** @type {?} */
-        const allowedIncomingFiles = [].reduce.call(incomingFiles, (acc, checkFile, i) => {
+        const allowedIncomingFiles = [].reduce.call(incomingFiles, (/**
+         * @param {?} acc
+         * @param {?} checkFile
+         * @param {?} i
+         * @return {?}
+         */
+        (acc, checkFile, i) => {
             /** @type {?} */
             const futureQueueLength = acc.length + this.queue.length + 1;
             if (this.isContentTypeAllowed(checkFile.type) && futureQueueLength <= this.maxUploads) {
@@ -14014,13 +15050,18 @@ class MDBUploaderService {
                 this.serviceEvents.emit({ type: 'rejected', file: rejectedFile });
             }
             return acc;
-        }, []);
-        this.queue.push(...[].map.call(allowedIncomingFiles, (file, i) => {
+        }), []);
+        this.queue.push(...[].map.call(allowedIncomingFiles, (/**
+         * @param {?} file
+         * @param {?} i
+         * @return {?}
+         */
+        (file, i) => {
             /** @type {?} */
             const uploadFile = this.makeUploadFile(file, i);
             this.serviceEvents.emit({ type: 'addedToQueue', file: uploadFile });
             return uploadFile;
-        }));
+        })));
         this.serviceEvents.emit({ type: 'allAddedToQueue' });
     }
     /**
@@ -14028,19 +15069,35 @@ class MDBUploaderService {
      * @return {?}
      */
     initInputEvents(input) {
-        return input.subscribe((event) => {
+        return input.subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => {
             switch (event.type) {
                 case 'uploadFile':
                     /** @type {?} */
-                    const uploadFileIndex = this.queue.findIndex(file => file === event.file);
+                    const uploadFileIndex = this.queue.findIndex((/**
+                     * @param {?} file
+                     * @return {?}
+                     */
+                    file => file === event.file));
                     if (uploadFileIndex !== -1 && event.file) {
                         this.uploadScheduler.next({ file: this.queue[uploadFileIndex], event: event });
                     }
                     break;
                 case 'uploadAll':
                     /** @type {?} */
-                    const files = this.queue.filter(file => file.progress.status === UploadStatus.Queue);
-                    files.forEach(file => this.uploadScheduler.next({ file: file, event: event }));
+                    const files = this.queue.filter((/**
+                     * @param {?} file
+                     * @return {?}
+                     */
+                    file => file.progress.status === UploadStatus.Queue));
+                    files.forEach((/**
+                     * @param {?} file
+                     * @return {?}
+                     */
+                    file => this.uploadScheduler.next({ file: file, event: event })));
                     break;
                 case 'cancel':
                     /** @type {?} */
@@ -14049,11 +15106,19 @@ class MDBUploaderService {
                         return;
                     }
                     /** @type {?} */
-                    const index = this.subs.findIndex(sub => sub.id === id);
+                    const index = this.subs.findIndex((/**
+                     * @param {?} sub
+                     * @return {?}
+                     */
+                    sub => sub.id === id));
                     if (index !== -1 && this.subs[index].sub) {
                         this.subs[index].sub.unsubscribe();
                         /** @type {?} */
-                        const fileIndex = this.queue.findIndex(file => file.id === id);
+                        const fileIndex = this.queue.findIndex((/**
+                         * @param {?} file
+                         * @return {?}
+                         */
+                        file => file.id === id));
                         if (fileIndex !== -1) {
                             this.queue[fileIndex].progress.status = UploadStatus.Cancelled;
                             this.serviceEvents.emit({ type: 'cancelled', file: this.queue[fileIndex] });
@@ -14061,24 +15126,36 @@ class MDBUploaderService {
                     }
                     break;
                 case 'cancelAll':
-                    this.subs.forEach(sub => {
+                    this.subs.forEach((/**
+                     * @param {?} sub
+                     * @return {?}
+                     */
+                    sub => {
                         if (sub.sub) {
                             sub.sub.unsubscribe();
                         }
                         /** @type {?} */
-                        const file = this.queue.find(uploadFile => uploadFile.id === sub.id);
+                        const file = this.queue.find((/**
+                         * @param {?} uploadFile
+                         * @return {?}
+                         */
+                        uploadFile => uploadFile.id === sub.id));
                         if (file) {
                             file.progress.status = UploadStatus.Cancelled;
                             this.serviceEvents.emit({ type: 'cancelled', file: file });
                         }
-                    });
+                    }));
                     break;
                 case 'remove':
                     if (!event.id) {
                         return;
                     }
                     /** @type {?} */
-                    const i = this.queue.findIndex(file => file.id === event.id);
+                    const i = this.queue.findIndex((/**
+                     * @param {?} file
+                     * @return {?}
+                     */
+                    file => file.id === event.id));
                     if (i !== -1) {
                         /** @type {?} */
                         const file = this.queue[i];
@@ -14093,26 +15170,41 @@ class MDBUploaderService {
                     }
                     break;
             }
-        });
+        }));
     }
     /**
      * @param {?} upload
      * @return {?}
      */
     startUpload(upload) {
-        return new Observable(observer => {
+        return new Observable((/**
+         * @param {?} observer
+         * @return {?}
+         */
+        observer => {
             /** @type {?} */
             const sub = this.uploadFile(upload.file, upload.event)
-                .subscribe(output => {
+                .subscribe((/**
+             * @param {?} output
+             * @return {?}
+             */
+            output => {
                 observer.next(output);
-            }, err => {
+            }), (/**
+             * @param {?} err
+             * @return {?}
+             */
+            err => {
                 observer.error(err);
                 observer.complete();
-            }, () => {
+            }), (/**
+             * @return {?}
+             */
+            () => {
                 observer.complete();
-            });
+            }));
             this.subs.push({ id: upload.file.id, sub: sub });
-        });
+        }));
     }
     /**
      * @param {?} file
@@ -14120,7 +15212,11 @@ class MDBUploaderService {
      * @return {?}
      */
     uploadFile(file, event) {
-        return new Observable(observer => {
+        return new Observable((/**
+         * @param {?} observer
+         * @return {?}
+         */
+        observer => {
             /** @type {?} */
             const url = event.url || '';
             /** @type {?} */
@@ -14139,7 +15235,11 @@ class MDBUploaderService {
             let speed = 0;
             /** @type {?} */
             let eta = null;
-            xhr.upload.addEventListener('progress', (e) => {
+            xhr.upload.addEventListener('progress', (/**
+             * @param {?} e
+             * @return {?}
+             */
+            (e) => {
                 if (e.lengthComputable) {
                     /** @type {?} */
                     const percentage = Math.round((e.loaded * 100) / e.total);
@@ -14162,12 +15262,19 @@ class MDBUploaderService {
                     };
                     observer.next({ type: 'uploading', file: file });
                 }
-            }, false);
-            xhr.upload.addEventListener('error', (e) => {
+            }), false);
+            xhr.upload.addEventListener('error', (/**
+             * @param {?} e
+             * @return {?}
+             */
+            (e) => {
                 observer.error(e);
                 observer.complete();
-            });
-            xhr.onreadystatechange = () => {
+            }));
+            xhr.onreadystatechange = (/**
+             * @return {?}
+             */
+            () => {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     /** @type {?} */
                     const speedAverage = Math.round(file.size / (new Date().getTime() - progressStartTime) * 1000);
@@ -14194,19 +15301,31 @@ class MDBUploaderService {
                     observer.next({ type: 'done', file: file });
                     observer.complete();
                 }
-            };
+            });
             xhr.open(method, url, true);
             xhr.withCredentials = event.withCredentials ? true : false;
             try {
                 /** @type {?} */
                 const uploadFile = (/** @type {?} */ (file.nativeFile));
                 /** @type {?} */
-                const uploadIndex = this.queue.findIndex(outFile => outFile.nativeFile === uploadFile);
+                const uploadIndex = this.queue.findIndex((/**
+                 * @param {?} outFile
+                 * @return {?}
+                 */
+                outFile => outFile.nativeFile === uploadFile));
                 if (this.queue[uploadIndex].progress.status === UploadStatus.Cancelled) {
                     observer.complete();
                 }
-                Object.keys(data).forEach(key => file.form.append(key, data[key]));
-                Object.keys(headers).forEach(key => xhr.setRequestHeader(key, headers[key]));
+                Object.keys(data).forEach((/**
+                 * @param {?} key
+                 * @return {?}
+                 */
+                key => file.form.append(key, data[key])));
+                Object.keys(headers).forEach((/**
+                 * @param {?} key
+                 * @return {?}
+                 */
+                key => xhr.setRequestHeader(key, headers[key])));
                 file.form.append(event.fieldName || 'file', uploadFile, uploadFile.name);
                 this.serviceEvents.emit({ type: 'start', file: file });
                 xhr.send(file.form);
@@ -14214,10 +15333,13 @@ class MDBUploaderService {
             catch (e) {
                 observer.complete();
             }
-            return () => {
+            return (/**
+             * @return {?}
+             */
+            () => {
                 xhr.abort();
-            };
-        });
+            });
+        }));
     }
     /**
      * @param {?} sec
@@ -14238,7 +15360,11 @@ class MDBUploaderService {
      */
     setContentTypes(contentTypes) {
         if (typeof contentTypes !== 'undefined' && contentTypes instanceof Array) {
-            if (contentTypes.find((type) => type === '*') !== undefined) {
+            if (contentTypes.find((/**
+             * @param {?} type
+             * @return {?}
+             */
+            (type) => type === '*')) !== undefined) {
                 this.contentTypes = ['*'];
             }
             else {
@@ -14252,7 +15378,11 @@ class MDBUploaderService {
      * @return {?}
      */
     allContentTypesAllowed() {
-        return this.contentTypes.find((type) => type === '*') !== undefined;
+        return this.contentTypes.find((/**
+         * @param {?} type
+         * @return {?}
+         */
+        (type) => type === '*')) !== undefined;
     }
     /**
      * @param {?} mimetype
@@ -14262,7 +15392,11 @@ class MDBUploaderService {
         if (this.allContentTypesAllowed()) {
             return true;
         }
-        return this.contentTypes.find((type) => type === mimetype) !== undefined;
+        return this.contentTypes.find((/**
+         * @param {?} type
+         * @return {?}
+         */
+        (type) => type === mimetype)) !== undefined;
     }
     /**
      * @param {?} file
@@ -14304,18 +15438,31 @@ class MDBUploaderService {
             return;
         }
         return httpHeaders.split('\n')
-            .map((x) => x.split(/: */, 2))
-            .filter((x) => x[0])
-            .reduce((ac, x) => {
+            .map((/**
+         * @param {?} x
+         * @return {?}
+         */
+        (x) => x.split(/: */, 2)))
+            .filter((/**
+         * @param {?} x
+         * @return {?}
+         */
+        (x) => x[0]))
+            .reduce((/**
+         * @param {?} ac
+         * @param {?} x
+         * @return {?}
+         */
+        (ac, x) => {
             ac[x[0]] = x[1];
             return ac;
-        }, {});
+        }), {});
     }
 }
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MDBFileDropDirective {
     /**
@@ -14326,10 +15473,14 @@ class MDBFileDropDirective {
         this.platform_id = platform_id;
         this.elementRef = elementRef;
         this.isServer = isPlatformServer(this.platform_id);
-        this.stopEvent = (e) => {
+        this.stopEvent = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        (e) => {
             e.stopPropagation();
             e.preventDefault();
-        };
+        });
         this.upload = new MDBUploaderService();
         this.uploadOutput = new EventEmitter();
     }
@@ -14341,9 +15492,13 @@ class MDBFileDropDirective {
             return;
         }
         this.el = this.elementRef.nativeElement;
-        this.upload.serviceEvents.subscribe((event) => {
+        this.upload.serviceEvents.subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => {
             this.uploadOutput.emit(event);
-        });
+        }));
         if (this.uploadInput instanceof EventEmitter) {
             this.upload.initInputEvents(this.uploadInput);
         }
@@ -14420,7 +15575,7 @@ MDBFileDropDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MDBFileSelectDirective {
     /**
@@ -14431,9 +15586,12 @@ class MDBFileSelectDirective {
         this.platform_id = platform_id;
         this.elementRef = elementRef;
         this.isServer = isPlatformServer(this.platform_id);
-        this.fileListener = () => {
+        this.fileListener = (/**
+         * @return {?}
+         */
+        () => {
             this.upload.handleFiles(this.el.files);
-        };
+        });
         this.upload = new MDBUploaderService();
         this.uploadOutput = new EventEmitter();
     }
@@ -14446,9 +15604,13 @@ class MDBFileSelectDirective {
         }
         this.el = this.elementRef.nativeElement;
         this.el.addEventListener('change', this.fileListener, false);
-        this.upload.serviceEvents.subscribe((event) => {
+        this.upload.serviceEvents.subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => {
             this.uploadOutput.emit(event);
-        });
+        }));
         if (this.uploadInput instanceof EventEmitter) {
             this.upload.initInputEvents(this.uploadInput);
         }
@@ -14483,7 +15645,7 @@ MDBFileSelectDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class FileInputModule {
 }
@@ -14502,12 +15664,12 @@ FileInputModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CharCounterDirective {
     /**
@@ -14575,7 +15737,7 @@ CharCounterDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CharCounterModule {
     /**
@@ -14594,12 +15756,12 @@ CharCounterModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // import * as screenfull from 'screenfull/dist/screenfull';
 // import 'hammerjs';
@@ -14652,6 +15814,11 @@ class ImageModalComponent {
      */
     toggleRestart() {
         this.zoomed = (this.zoomed === 'inactive') ? 'active' : 'inactive';
+    }
+    /**
+     * @return {?}
+     */
+    ngAfterViewInit() {
     }
     /**
      * @return {?}
@@ -14717,6 +15884,14 @@ class ImageModalComponent {
                 break;
             }
         }
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
+            /** @type {?} */
+            const descriptionHeight = this.galleryDescription.nativeElement.clientHeight;
+            this.renderer.setStyle(this.galleryImg.nativeElement, 'max-height', `calc(100% - ${descriptionHeight + 25}px)`);
+        }), 0);
     }
     /**
      * @return {?}
@@ -14776,7 +15951,7 @@ class ImageModalComponent {
 ImageModalComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-image-modal',
-                template: "<div class=\"ng-gallery mdb-lightbox {{ type }}\" *ngIf=\"modalImages && showRepeat\">\n  <figure class=\"col-md-4\" *ngFor=\"let i of modalImages; let index = index\">\n    <img src=\"{{ !i.thumb ? i.img : i.thumb }}\" class=\"ng-thumb\" (click)=\"openGallery(index)\"\n         alt=\"Image {{ index + 1 }}\"/>\n  </figure>\n</div>\n<div tabindex=\"0\" class=\"ng-overlay\" [class.hide_lightbox]=\"opened == false\">\n  <div class=\"top-bar\" style='z-index: 100000'>\n    <span *ngIf=\"modalImages\" class=\"info-text\">{{ currentImageIndex + 1 }}/{{ modalImages.length }}</span>\n    <a class=\"close-popup\" (click)=\"closeGallery()\" (click)=\"toggleRestart()\"></a>\n    <a *ngIf=\"!is_iPhone_or_iPod\" class=\"fullscreen-toogle\" [class.toggled]='fullscreen' (click)=\"fullScreen()\"></a>\n    <a class=\"zoom-toogle\" [class.zoom]='zoom' (click)=\"toggleZoomed()\" *ngIf=\"!isMobile\"></a>\n  </div>\n  <div class=\"ng-gallery-content\">\n    <img *ngIf=\"!loading\" src=\"{{imgSrc}}\" [class.smooth]='smooth' class=\"effect\" (swipeleft)=\"swipe($event.type)\"\n         (swiperight)=\"swipe($event.type)\" (click)=\"toggleZoomed()\" style=\"\"/>\n\n    <div class=\"uil-ring-css\" *ngIf=\"loading\">\n      <div></div>\n    </div>\n    <a class=\"nav-left\" *ngIf=\"modalImages && modalImages.length >1 && !isMobile\" (click)=\"prevImage()\">\n      <span></span>\n    </a>\n    <a class=\"nav-right\" *ngIf=\"modalImages && modalImages.length >1 && !isMobile\" (click)=\"nextImage()\">\n      <span></span>\n    </a>\n  </div>\n  <div class=\"row\" *ngIf=\"caption\">\n    <div class=\"col-md-12 mx-auto bottom-bar text-center\">\n      <figcaption class=\"text-white lightbox-caption\">{{caption}}</figcaption>\n    </div>\n  </div>\n</div>\n<div *ngIf=\"openModalWindow\">\n  <mdb-image-modal [imagePointer]=\"imagePointer\"></mdb-image-modal>\n</div>\n",
+                template: "<div class=\"ng-gallery mdb-lightbox {{ type }}\" *ngIf=\"modalImages && showRepeat\">\n  <figure class=\"col-md-4\" *ngFor=\"let i of modalImages; let index = index\">\n    <img src=\"{{ !i.thumb ? i.img : i.thumb }}\" class=\"ng-thumb\" (click)=\"openGallery(index)\"\n         alt=\"Image {{ index + 1 }}\"/>\n  </figure>\n</div>\n<div tabindex=\"0\" class=\"ng-overlay\" [class.hide_lightbox]=\"opened == false\">\n  <div class=\"top-bar\" style='z-index: 100000'>\n    <span *ngIf=\"modalImages\" class=\"info-text\">{{ currentImageIndex + 1 }}/{{ modalImages.length }}</span>\n    <a class=\"close-popup\" (click)=\"closeGallery()\" (click)=\"toggleRestart()\"></a>\n    <a *ngIf=\"!is_iPhone_or_iPod\" class=\"fullscreen-toogle\" [class.toggled]='fullscreen' (click)=\"fullScreen()\"></a>\n    <a class=\"zoom-toogle\" [class.zoom]='zoom' (click)=\"toggleZoomed()\" *ngIf=\"!isMobile\"></a>\n  </div>\n  <div class=\"ng-gallery-content\">\n    <img #galleryImg *ngIf=\"!loading\" src=\"{{imgSrc}}\" [class.smooth]='smooth' class=\"effect\" (swipeleft)=\"swipe($event.type)\"\n         (swiperight)=\"swipe($event.type)\" (click)=\"toggleZoomed()\" style=\"\"/>\n\n    <div class=\"uil-ring-css\" *ngIf=\"loading\">\n      <div></div>\n    </div>\n    <a class=\"nav-left\" *ngIf=\"modalImages && modalImages.length >1 && !isMobile\" (click)=\"prevImage()\">\n      <span></span>\n    </a>\n    <a class=\"nav-right\" *ngIf=\"modalImages && modalImages.length >1 && !isMobile\" (click)=\"nextImage()\">\n      <span></span>\n    </a>\n  </div>\n  <div class=\"row\" *ngIf=\"caption\">\n    <div class=\"col-md-12 mx-auto bottom-bar text-center\">\n      <figcaption #galleryDescription class=\"text-white lightbox-caption\">{{caption}}</figcaption>\n    </div>\n  </div>\n</div>\n<div *ngIf=\"openModalWindow\">\n  <mdb-image-modal [imagePointer]=\"imagePointer\"></mdb-image-modal>\n</div>\n",
                 styles: ['.bottom-bar {z-index: 100000; position: absolute; bottom: 2rem; left: 0; right: 0; width: 100%;} ']
             }] }
 ];
@@ -14793,13 +15968,15 @@ ImageModalComponent.propDecorators = {
     zoom: [{ type: Input, args: ['zoom',] }],
     smooth: [{ type: Input, args: ['smooth',] }],
     type: [{ type: Input, args: ['type',] }],
+    galleryImg: [{ type: ViewChild, args: ['galleryImg',] }],
+    galleryDescription: [{ type: ViewChild, args: ['galleryDescription',] }],
     cancelEvent: [{ type: Output, args: ['cancelEvent',] }],
     keyboardControl: [{ type: HostListener, args: ['document:keyup', ['$event'],] }]
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class LightBoxModule {
 }
@@ -14813,12 +15990,12 @@ LightBoxModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class Diacritics {
     /**
@@ -14827,9 +16004,13 @@ class Diacritics {
      */
     static strip(text) {
         /** @type {?} */
-        const match = (a) => {
+        const match = (/**
+         * @param {?} a
+         * @return {?}
+         */
+        (a) => {
             return this.DIACRITICS[a] || a;
-        };
+        });
         return text.replace(/[^\u0000-\u007E]/g, match);
     }
 }
@@ -15677,7 +16858,7 @@ Diacritics.DIACRITICS = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class Option {
     /**
@@ -15718,7 +16899,7 @@ class Option {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class OptionList {
     /**
@@ -15735,7 +16916,11 @@ class OptionList {
         if (typeof options === 'undefined' || options === null) {
             options = [];
         }
-        this._options = options.map((option) => {
+        this._options = options.map((/**
+         * @param {?} option
+         * @return {?}
+         */
+        (option) => {
             /** @type {?} */
             const o = new Option(option);
             if (option.disabled) {
@@ -15746,7 +16931,7 @@ class OptionList {
                 o.group = true;
             }
             return o;
-        });
+        }));
         this._hasShown = this._options.length > 0;
         this.highlight();
     }
@@ -15775,9 +16960,14 @@ class OptionList {
         const a = v0.slice().sort();
         /** @type {?} */
         const b = v1.slice().sort();
-        return a.every((v, i) => {
+        return a.every((/**
+         * @param {?} v
+         * @param {?} i
+         * @return {?}
+         */
+        (v, i) => {
             return v === b[i];
-        });
+        }));
     }
     /**
      * Options. *
@@ -15791,18 +16981,26 @@ class OptionList {
      * @return {?}
      */
     getOptionsByValue(value) {
-        return this.options.filter((option) => {
+        return this.options.filter((/**
+         * @param {?} option
+         * @return {?}
+         */
+        (option) => {
             return option.value === value;
-        });
+        }));
     }
     /**
      * Value. *
      * @return {?}
      */
     get value() {
-        return this.selection.map((selectedOption) => {
+        return this.selection.map((/**
+         * @param {?} selectedOption
+         * @return {?}
+         */
+        (selectedOption) => {
             return selectedOption.value;
-        });
+        }));
     }
     /**
      * @param {?} v
@@ -15810,18 +17008,26 @@ class OptionList {
      */
     set value(v) {
         v = typeof v === 'undefined' || v === null ? [] : v;
-        this.options.forEach((option) => {
+        this.options.forEach((/**
+         * @param {?} option
+         * @return {?}
+         */
+        (option) => {
             option.selected = v.indexOf(option.value) > -1;
-        });
+        }));
     }
     /**
      * Selection. *
      * @return {?}
      */
     get selection() {
-        return this.options.filter((option) => {
+        return this.options.filter((/**
+         * @param {?} option
+         * @return {?}
+         */
+        (option) => {
             return option.selected;
-        });
+        }));
     }
     /**
      * @param {?} option
@@ -15845,18 +17051,26 @@ class OptionList {
      * @return {?}
      */
     clearSelection() {
-        this.options.forEach((option) => {
+        this.options.forEach((/**
+         * @param {?} option
+         * @return {?}
+         */
+        (option) => {
             option.selected = false;
-        });
+        }));
     }
     /**
      * Filter. *
      * @return {?}
      */
     get filtered() {
-        return this.options.filter((option) => {
+        return this.options.filter((/**
+         * @param {?} option
+         * @return {?}
+         */
+        (option) => {
             return option.shown;
-        });
+        }));
     }
     /**
      * @param {?} term
@@ -15870,7 +17084,11 @@ class OptionList {
             anyShown = this.options.length > 0;
         }
         else {
-            this.options.forEach((option) => {
+            this.options.forEach((/**
+             * @param {?} option
+             * @return {?}
+             */
+            (option) => {
                 /** @type {?} */
                 const l = Diacritics.strip(option.label).toUpperCase();
                 /** @type {?} */
@@ -15879,7 +17097,7 @@ class OptionList {
                 if (option.shown) {
                     anyShown = true;
                 }
-            });
+            }));
         }
         this.highlight();
         this._hasShown = anyShown;
@@ -15890,9 +17108,13 @@ class OptionList {
      * @return {?}
      */
     resetFilter() {
-        this.options.forEach((option) => {
+        this.options.forEach((/**
+         * @param {?} option
+         * @return {?}
+         */
+        (option) => {
             option.shown = true;
-        });
+        }));
     }
     /**
      * Highlight. *
@@ -15991,17 +17213,25 @@ class OptionList {
      * @return {?}
      */
     hasSelected() {
-        return this.options.some((option) => {
+        return this.options.some((/**
+         * @param {?} option
+         * @return {?}
+         */
+        (option) => {
             return option.selected;
-        });
+        }));
     }
     /**
      * @return {?}
      */
     hasShownSelected() {
-        return this.options.some((option) => {
+        return this.options.some((/**
+         * @param {?} option
+         * @return {?}
+         */
+        (option) => {
             return option.shown && option.selected;
-        });
+        }));
     }
     /**
      * @private
@@ -16033,7 +17263,7 @@ class OptionList {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class SelectDropdownComponent {
     /**
@@ -16093,14 +17323,21 @@ class SelectDropdownComponent {
      * @return {?}
      */
     setDropdownHeight() {
-        this.optionList.options.filter(el => () => {
+        this.optionList.options.filter((/**
+         * @param {?} el
+         * @return {?}
+         */
+        el => (/**
+         * @return {?}
+         */
+        () => {
             if (el.icon) {
                 this._renderer.setStyle(this.optionsList.nativeElement, 'height', (this.dropdownHeight + 8) + 'px');
             }
             else {
                 this._renderer.setStyle(this.optionsList.nativeElement, 'height', this.dropdownHeight + 'px');
             }
-        });
+        })));
     }
     /**
      * @return {?}
@@ -16114,14 +17351,18 @@ class SelectDropdownComponent {
     setOptionHeight() {
         /** @type {?} */
         const optionsItems = Array.from(this.optionsList.nativeElement.firstElementChild.children);
-        optionsItems.forEach((el) => {
+        optionsItems.forEach((/**
+         * @param {?} el
+         * @return {?}
+         */
+        (el) => {
             if (this.optionHeight && el.firstElementChild.tagName !== 'IMG') {
                 this._renderer.setStyle(el.firstElementChild, 'height', `${this.optionHeight}px`);
             }
             if (el.firstElementChild.tagName !== 'IMG') {
                 this._renderer.setStyle(el.firstElementChild, 'line-height', `${this.optionHeight}px`);
             }
-        });
+        }));
     }
     /**
      * @param {?} changes
@@ -16136,9 +17377,12 @@ class SelectDropdownComponent {
         }
         /** @type {?} */
         const container = this._elementRef.nativeElement.classList;
-        setTimeout(() => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             container.add('fadeInSelect');
-        }, 200);
+        }), 200);
     }
     /**
      * @return {?}
@@ -16158,9 +17402,12 @@ class SelectDropdownComponent {
         this.setOptionHeight();
         this.moveHighlightedIntoView();
         if (this.filterEnabled) {
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 this.filterInput.nativeElement.focus();
-            }, 0);
+            }), 0);
         }
     }
     // Filter input (single select).
@@ -16243,9 +17490,13 @@ class SelectDropdownComponent {
      */
     updateSelectAllState() {
         /** @type {?} */
-        const areAllSelected = this.optionList.filtered.every((option) => {
+        const areAllSelected = this.optionList.filtered.every((/**
+         * @param {?} option
+         * @return {?}
+         */
+        (option) => {
             return option.selected ? true : false;
-        });
+        }));
         areAllSelected ? this.selectAllSelected = true : this.selectAllSelected = false;
         this.cdRef.detectChanges();
     }
@@ -16376,12 +17627,15 @@ SelectDropdownComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const SELECT_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => SelectComponent),
+    useExisting: forwardRef((/**
+     * @return {?}
+     */
+    () => SelectComponent)),
     multi: true
 };
 class SelectComponent {
@@ -16445,8 +17699,15 @@ class SelectComponent {
         this.selectContainerClicked = false;
         this.filterHeight = 0;
         this.itemsBefore = [];
-        this.onChange = (_) => { };
-        this.onTouched = () => { };
+        this.onChange = (/**
+         * @param {?} _
+         * @return {?}
+         */
+        (_) => { });
+        this.onTouched = (/**
+         * @return {?}
+         */
+        () => { });
         this.isBrowser = isPlatformBrowser(platformId);
     }
     /**
@@ -16719,9 +17980,12 @@ class SelectComponent {
      */
     // TODO fix issues with global click/key handler that closes the dropdown.
     open() {
-        Promise.resolve().then(() => {
+        Promise.resolve().then((/**
+         * @return {?}
+         */
+        () => {
             this.openDropdown();
-        });
+        }));
     }
     /**
      * @return {?}
@@ -16766,9 +18030,13 @@ class SelectComponent {
      * @return {?}
      */
     select(value) {
-        this.optionList.getOptionsByValue(value).forEach(option => {
+        this.optionList.getOptionsByValue(value).forEach((/**
+         * @param {?} option
+         * @return {?}
+         */
+        option => {
             this.selectOption(option);
-        });
+        }));
     }
     /**
      * ControlValueAccessor interface methods. *
@@ -16862,9 +18130,12 @@ class SelectComponent {
             this.renderer.setStyle(this.selectionSpan.nativeElement.children[0].children[this.selectionSpan.nativeElement.children[0].children.length - 2], 'visibility', 'hidden');
             this.isOpen = true;
             if (this.appendToBody) {
-                setTimeout(() => {
+                setTimeout((/**
+                 * @return {?}
+                 */
+                () => {
                     this._appendDropdown();
-                }, 0);
+                }), 0);
             }
             this.updateWidth();
             this.appendToBody ? this._updateAppendedPosition() : this.updatePosition();
@@ -16948,9 +18219,13 @@ class SelectComponent {
                 this.deselected.emit(selection[0].wrappedOption);
             }
             else {
-                this.deselected.emit(selection.map(option => {
+                this.deselected.emit(selection.map((/**
+                 * @param {?} option
+                 * @return {?}
+                 */
+                option => {
                     return option.wrappedOption;
-                }));
+                })));
             }
         }
     }
@@ -16994,14 +18269,22 @@ class SelectComponent {
      */
     onSelectAll(isSelected) {
         if (isSelected) {
-            this.optionList.filtered.forEach((option) => {
+            this.optionList.filtered.forEach((/**
+             * @param {?} option
+             * @return {?}
+             */
+            (option) => {
                 this.selectOption(option);
-            });
+            }));
         }
         else {
-            this.optionList.filtered.forEach((option) => {
+            this.optionList.filtered.forEach((/**
+             * @param {?} option
+             * @return {?}
+             */
+            (option) => {
                 this.deselectOption(option);
-            });
+            }));
         }
     }
     /**
@@ -17254,7 +18537,7 @@ SelectComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class SelectModule {
 }
@@ -17276,12 +18559,12 @@ SelectModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const CONTAINER_CLASS_NAME = 'spinning-preloader-container';
@@ -17298,12 +18581,12 @@ const EMULATE_ELEMENT_NAME = 'div';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MDBSpinningPreloader {
     /**
@@ -17355,12 +18638,12 @@ MDBSpinningPreloader.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // todo: progress element conflict with bootstrap.css
 // todo: need hack: replace host element with div
@@ -17383,9 +18666,13 @@ class ProgressDirective {
      */
     set max(v) {
         this._max = v;
-        this.bars.forEach((bar) => {
+        this.bars.forEach((/**
+         * @param {?} bar
+         * @return {?}
+         */
+        (bar) => {
             bar.recalculatePercentage();
-        });
+        }));
     }
     /**
      * @param {?} bar
@@ -17416,7 +18703,7 @@ ProgressDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // todo: number pipe
 // todo: use query from progress?
@@ -17464,9 +18751,14 @@ class BarComponent {
     recalculatePercentage() {
         this.percent = +(100 * this.value / this.progress.max).toFixed(2);
         /** @type {?} */
-        const totalPercentage = this.progress.bars.reduce(function (total, bar) {
+        const totalPercentage = this.progress.bars.reduce((/**
+         * @param {?} total
+         * @param {?} bar
+         * @return {?}
+         */
+        function (total, bar) {
             return total + bar.percent;
-        }, 0);
+        }), 0);
         if (totalPercentage > 100) {
             this.percent -= totalPercentage - 100;
         }
@@ -17489,7 +18781,7 @@ BarComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProgressbarConfigComponent {
     constructor() {
@@ -17509,7 +18801,7 @@ ProgressbarConfigComponent.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProgressbarComponent {
     /**
@@ -17538,7 +18830,7 @@ ProgressbarComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProgressbarModule {
     /**
@@ -17558,7 +18850,7 @@ ProgressbarModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProgressSpinnerComponent {
     /**
@@ -17611,7 +18903,10 @@ class ProgressSpinnerComponent {
         /** @type {?} */
         const hostElem = this.el.nativeElement;
         if (this.isBrowser) {
-            setInterval(() => {
+            setInterval((/**
+             * @return {?}
+             */
+            () => {
                 switch (counter) {
                     case 0:
                         this.addClass = 'spinner-red-only mat-progress-spinner ';
@@ -17633,7 +18928,7 @@ class ProgressSpinnerComponent {
                 else {
                     counter = 0;
                 }
-            }, 1333);
+            }), 1333);
         }
     }
 }
@@ -17655,7 +18950,7 @@ ProgressSpinnerComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // TODO(josephperrott): Benchpress tests.
 /**
@@ -17846,7 +19141,10 @@ class MdProgressSpinnerComponent {
         }
         else {
             /** @type {?} */
-            const animation = () => {
+            const animation = (/**
+             * @return {?}
+             */
+            () => {
                 /** @type {?} */
                 const elapsedTime = Math.max(0, Math.min(Date.now() - startTime, duration));
                 this._renderArc(ease(elapsedTime, animateFrom, changeInValue, duration), rotation);
@@ -17855,7 +19153,7 @@ class MdProgressSpinnerComponent {
                 if (id === this._lastAnimationId && elapsedTime < duration) {
                     requestAnimationFrame(animation);
                 }
-            };
+            });
             // Run the animation outside of Angular's zone, in order to avoid
             // hitting ZoneJS and change detection on each frame.
             this._ngZone.runOutsideAngular(animation);
@@ -17876,7 +19174,10 @@ class MdProgressSpinnerComponent {
         /** @type {?} */
         const duration = DURATION_INDETERMINATE;
         /** @type {?} */
-        const animate$$1 = () => {
+        const animate$$1 = (/**
+         * @return {?}
+         */
+        () => {
             this._animateCircle(start, end, materialEase, duration, rotationStartPoint);
             // Prevent rotation from reaching Number.MAX_SAFE_INTEGER.
             rotationStartPoint = (rotationStartPoint + end) % 100;
@@ -17884,13 +19185,16 @@ class MdProgressSpinnerComponent {
             const temp = start;
             start = -end;
             end = -temp;
-        };
+        });
         if (this.isBrowser) {
             if (!this.interdeterminateInterval) {
-                this._ngZone.runOutsideAngular(() => {
+                this._ngZone.runOutsideAngular((/**
+                 * @return {?}
+                 */
+                () => {
                     this.interdeterminateInterval = setInterval(animate$$1, duration + 50, 0, false);
                     animate$$1();
-                });
+                }));
             }
         }
     }
@@ -18103,7 +19407,7 @@ function getSvgArc(currentValue, rotation) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdProgressSpinnerModule {
     /**
@@ -18136,7 +19440,7 @@ MdProgressSpinnerModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // TODO(josephperrott): Benchpress tests.
 // TODO(josephperrott): Add ARIA attributes for progressbar "for".
@@ -18229,7 +19533,7 @@ function clamp$1(v, min = 0, max = 100) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdProgressBarModule {
     /**
@@ -18253,7 +19557,7 @@ MdProgressBarModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const MATERIAL_MODULES = [
@@ -18294,12 +19598,15 @@ ProgressBars.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const RANGE_VALUE_ACCESOR = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => MdbRangeInputComponent),
+    useExisting: forwardRef((/**
+     * @return {?}
+     */
+    () => MdbRangeInputComponent)),
     multi: true
 };
 class MdbRangeInputComponent {
@@ -18317,8 +19624,15 @@ class MdbRangeInputComponent {
         this.cloudRange = 0;
         this.visibility = false;
         // Control Value Accessor Methods
-        this.onChange = (_) => { };
-        this.onTouched = () => { };
+        this.onChange = (/**
+         * @param {?} _
+         * @return {?}
+         */
+        (_) => { });
+        this.onTouched = (/**
+         * @return {?}
+         */
+        () => { });
     }
     /**
      * @param {?} event
@@ -18487,7 +19801,7 @@ MdbRangeInputComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class RangeModule {
 }
@@ -18501,12 +19815,12 @@ RangeModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ScrollSpyLinkDirective {
     /**
@@ -18604,7 +19918,7 @@ ScrollSpyLinkDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ScrollSpyService {
     constructor() {
@@ -18625,9 +19939,13 @@ class ScrollSpyService {
      */
     removeScrollSpy(scrollSpyId) {
         /** @type {?} */
-        const scrollSpyIndex = this.scrollSpys.findIndex((spy) => {
+        const scrollSpyIndex = this.scrollSpys.findIndex((/**
+         * @param {?} spy
+         * @return {?}
+         */
+        (spy) => {
             return spy.id === scrollSpyId;
-        });
+        }));
         this.scrollSpys.splice(scrollSpyIndex, 1);
     }
     /**
@@ -18637,16 +19955,24 @@ class ScrollSpyService {
      */
     updateActiveState(scrollSpyId, activeLinkId) {
         /** @type {?} */
-        const scrollSpy = this.scrollSpys.find(spy => {
+        const scrollSpy = this.scrollSpys.find((/**
+         * @param {?} spy
+         * @return {?}
+         */
+        spy => {
             return spy.id === scrollSpyId;
-        });
+        }));
         if (!scrollSpy) {
             return;
         }
         /** @type {?} */
-        const activeLink = scrollSpy.links.find(link => {
+        const activeLink = scrollSpy.links.find((/**
+         * @param {?} link
+         * @return {?}
+         */
+        link => {
             return link.id === activeLinkId;
-        });
+        }));
         this.setActiveLink(activeLink);
     }
     /**
@@ -18656,16 +19982,24 @@ class ScrollSpyService {
      */
     removeActiveState(scrollSpyId, activeLinkId) {
         /** @type {?} */
-        const scrollSpy = this.scrollSpys.find(spy => {
+        const scrollSpy = this.scrollSpys.find((/**
+         * @param {?} spy
+         * @return {?}
+         */
+        spy => {
             return spy.id === scrollSpyId;
-        });
+        }));
         if (!scrollSpy) {
             return;
         }
         /** @type {?} */
-        const activeLink = scrollSpy.links.find(link => {
+        const activeLink = scrollSpy.links.find((/**
+         * @param {?} link
+         * @return {?}
+         */
+        link => {
             return link.id === activeLinkId;
-        });
+        }));
         if (!activeLink) {
             return;
         }
@@ -18689,16 +20023,24 @@ class ScrollSpyService {
      */
     removeActiveLinks(scrollSpyId) {
         /** @type {?} */
-        const scrollSpy = this.scrollSpys.find(spy => {
+        const scrollSpy = this.scrollSpys.find((/**
+         * @param {?} spy
+         * @return {?}
+         */
+        spy => {
             return spy.id === scrollSpyId;
-        });
+        }));
         if (!scrollSpy) {
             return;
         }
-        scrollSpy.links.forEach(link => {
+        scrollSpy.links.forEach((/**
+         * @param {?} link
+         * @return {?}
+         */
+        link => {
             link.active = false;
             link.detectChanges();
-        });
+        }));
     }
 }
 ScrollSpyService.decorators = [
@@ -18707,7 +20049,7 @@ ScrollSpyService.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ScrollSpyDirective {
     /**
@@ -18738,9 +20080,13 @@ class ScrollSpyDirective {
     ngOnInit() {
         this.activeSub = this.scrollSpyService.active$
             .pipe(distinctUntilChanged())
-            .subscribe((activeLink) => {
+            .subscribe((/**
+         * @param {?} activeLink
+         * @return {?}
+         */
+        (activeLink) => {
             this.activeLinkChange.emit(activeLink);
-        });
+        }));
     }
     /**
      * @return {?}
@@ -18773,7 +20119,7 @@ ScrollSpyDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ScrollSpyWindowDirective {
     /**
@@ -18841,9 +20187,12 @@ class ScrollSpyWindowDirective {
      * @return {?}
      */
     listenToScroll() {
-        this.renderer.listen(window, 'scroll', () => {
+        this.renderer.listen(window, 'scroll', (/**
+         * @return {?}
+         */
+        () => {
             this.onScroll();
-        });
+        }));
     }
     /**
      * @return {?}
@@ -18856,9 +20205,12 @@ class ScrollSpyWindowDirective {
      * @return {?}
      */
     ngAfterViewInit() {
-        setTimeout(() => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             this.updateActiveState(this.scrollSpyId, this.id);
-        }, 0);
+        }), 0);
     }
 }
 ScrollSpyWindowDirective.decorators = [
@@ -18881,7 +20233,7 @@ ScrollSpyWindowDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ScrollSpyElementDirective {
     /**
@@ -18943,9 +20295,12 @@ class ScrollSpyElementDirective {
      * @return {?}
      */
     listenToScroll() {
-        this.renderer.listen(this.el.nativeElement.parentElement, 'scroll', () => {
+        this.renderer.listen(this.el.nativeElement.parentElement, 'scroll', (/**
+         * @return {?}
+         */
+        () => {
             this.onScroll();
-        });
+        }));
     }
     /**
      * @return {?}
@@ -18959,9 +20314,12 @@ class ScrollSpyElementDirective {
      * @return {?}
      */
     ngAfterViewInit() {
-        setTimeout(() => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             this.updateActiveState(this.scrollSpyId, this.id);
-        }, 0);
+        }), 0);
     }
 }
 ScrollSpyElementDirective.decorators = [
@@ -18983,7 +20341,7 @@ ScrollSpyElementDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ScrollSpyModule {
 }
@@ -19007,12 +20365,12 @@ ScrollSpyModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class SidenavComponent {
     /**
@@ -19279,27 +20637,36 @@ class SidenavComponent {
      */
     showOverlay() {
         this.renderer.setStyle(this.overlay.nativeElement, 'display', 'block');
-        setTimeout(() => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             this.renderer.setStyle(this.overlay.nativeElement, 'opacity', '1');
-        }, 0);
+        }), 0);
     }
     /**
      * @return {?}
      */
     hideOverlay() {
         this.renderer.setStyle(this.overlay.nativeElement, 'opacity', '0');
-        setTimeout(() => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             this.renderer.setStyle(this.overlay.nativeElement, 'display', 'none');
-        }, 200);
+        }), 200);
     }
     /**
      * @param {?} value
      * @return {?}
      */
     setShown(value) {
-        setTimeout(() => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             this.shown = value;
-        }, 510);
+        }), 510);
     }
     /**
      * @return {?}
@@ -19336,7 +20703,7 @@ SidenavComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class SidenavModule {
 }
@@ -19356,12 +20723,12 @@ SidenavModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @abstract
@@ -19447,15 +20814,22 @@ PageScrollConfig._interruptKeys = [33, 34, 35, 36, 38, 40];
  */
 PageScrollConfig.defaultInterruptible = true;
 PageScrollConfig._easingLogic = {
-    ease: (t, b, c, d) => {
+    ease: (/**
+     * @param {?} t
+     * @param {?} b
+     * @param {?} c
+     * @param {?} d
+     * @return {?}
+     */
+    (t, b, c, d) => {
         // Linear easing
         return c * t / d + b;
-    }
+    })
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Created by sebastianfuss on 02.09.16.
@@ -19510,13 +20884,18 @@ class PageScrollUtilService {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class PageScrollService {
     constructor() {
         this.runningInstances = [];
         this.onInterrupted = {
-            report: (event, pageScrollInstance) => {
+            report: (/**
+             * @param {?} event
+             * @param {?} pageScrollInstance
+             * @return {?}
+             */
+            (event, pageScrollInstance) => {
                 if (!pageScrollInstance.interruptible) {
                     // Non-interruptible anyway, so do not stop anything
                     return;
@@ -19533,7 +20912,11 @@ class PageScrollService {
                 else if (event.type === 'mousedown') {
                     // For mousedown events we only stop the scroll animation of the mouse has
                     // been clicked inside the scrolling container
-                    if (!pageScrollInstance.scrollingViews.some(scrollingView => scrollingView.contains(event.target))) {
+                    if (!pageScrollInstance.scrollingViews.some((/**
+                     * @param {?} scrollingView
+                     * @return {?}
+                     */
+                    scrollingView => scrollingView.contains(event.target)))) {
                         // Mouse clicked an element which is not inside any of the the scrolling containers
                         shouldStop = false;
                     }
@@ -19541,7 +20924,7 @@ class PageScrollService {
                 if (shouldStop) {
                     this.stopAll(pageScrollInstance.namespace);
                 }
-            }
+            })
         };
         if (PageScrollService.instanceCounter > 0 && isDevMode()) {
             console.warn('An instance of PageScrollService already exists, usually ' +
@@ -19597,7 +20980,11 @@ class PageScrollService {
         // Reset start scroll position to 0. If any of the scrollingViews has a different one, it will be extracted next
         pageScrollInstance.startScrollPosition = 0;
         // Get the start scroll position from the scrollingViews (e.g. if the user already scrolled down the content)
-        pageScrollInstance.scrollingViews.forEach((scrollingView) => {
+        pageScrollInstance.scrollingViews.forEach((/**
+         * @param {?} scrollingView
+         * @return {?}
+         */
+        (scrollingView) => {
             if (PageScrollUtilService.isUndefinedOrNull(scrollingView)) {
                 return;
             }
@@ -19611,7 +20998,7 @@ class PageScrollService {
                 pageScrollInstance.startScrollPosition = scrollPosition;
                 startScrollPositionFound = true;
             }
-        });
+        }));
         /** @type {?} */
         const pageScrollOffset = pageScrollInstance.getCurrentOffset();
         // Calculate the target position that the scroll animation should go to
@@ -19658,7 +21045,11 @@ class PageScrollService {
         pageScrollInstance.startTime = new Date().getTime();
         // .. and calculate the end time (when we need to finish at last)
         pageScrollInstance.endTime = pageScrollInstance.startTime + pageScrollInstance.executionDuration;
-        pageScrollInstance.timer = setInterval((_pageScrollInstance) => {
+        pageScrollInstance.timer = setInterval((/**
+         * @param {?} _pageScrollInstance
+         * @return {?}
+         */
+        (_pageScrollInstance) => {
             // Take the current time
             /** @type {?} */
             const currentTime = new Date().getTime();
@@ -19687,7 +21078,7 @@ class PageScrollService {
             if (stopNow) {
                 this.stopInternal(false, _pageScrollInstance);
             }
-        }, PageScrollConfig._interval, pageScrollInstance);
+        }), PageScrollConfig._interval, pageScrollInstance);
         // Register the instance as running one
         this.runningInstances.push(pageScrollInstance);
     }
@@ -19734,7 +21125,7 @@ PageScrollService.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Represents a scrolling action
@@ -20035,7 +21426,12 @@ class PageScrollInstance {
             console.warn('Scroll Position: ' + position);
         }
         // Set the new scrollTop/scrollLeft to all scrollingViews elements
-        return this.scrollingViews.reduce((oneAlreadyWorked, scrollingView) => {
+        return this.scrollingViews.reduce((/**
+         * @param {?} oneAlreadyWorked
+         * @param {?} scrollingView
+         * @return {?}
+         */
+        (oneAlreadyWorked, scrollingView) => {
             /** @type {?} */
             const startScrollPropertyValue = this.getScrollPropertyValue(scrollingView);
             if (scrollingView && !PageScrollUtilService.isUndefinedOrNull(startScrollPropertyValue)) {
@@ -20063,7 +21459,7 @@ class PageScrollInstance {
                 }
             }
             return oneAlreadyWorked;
-        }, false);
+        }), false);
     }
     /**
      * Trigger firing a animation finish event
@@ -20089,10 +21485,18 @@ class PageScrollInstance {
             // Detach possibly existing listeners first
             this.detachInterruptListeners();
         }
-        this._interruptListener = (event) => {
+        this._interruptListener = (/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => {
             interruptReporter.report(event, this);
-        };
-        PageScrollConfig._interruptEvents.forEach((event) => this.document.body.addEventListener(event, this._interruptListener));
+        });
+        PageScrollConfig._interruptEvents.forEach((/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => this.document.body.addEventListener(event, this._interruptListener)));
         this._interruptListenersAttached = true;
     }
     /**
@@ -20101,7 +21505,11 @@ class PageScrollInstance {
      * @return {?}
      */
     detachInterruptListeners() {
-        PageScrollConfig._interruptEvents.forEach((event) => this.document.body.removeEventListener(event, this._interruptListener));
+        PageScrollConfig._interruptEvents.forEach((/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => this.document.body.removeEventListener(event, this._interruptListener)));
         this._interruptListenersAttached = false;
     }
     /**
@@ -20253,7 +21661,7 @@ class PageScrollInstance {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class PageScrollDirective {
     /**
@@ -20355,7 +21763,11 @@ class PageScrollDirective {
                 // Navigation is handled by the routerLink directive
                 // so we only need to listen for route change
                 /** @type {?} */
-                const subscription = (/** @type {?} */ (this.router.events.subscribe((routerEvent) => {
+                const subscription = (/** @type {?} */ (this.router.events.subscribe((/**
+                 * @param {?} routerEvent
+                 * @return {?}
+                 */
+                (routerEvent) => {
                     if (routerEvent instanceof NavigationEnd) {
                         subscription.unsubscribe();
                         this.scroll();
@@ -20363,7 +21775,7 @@ class PageScrollDirective {
                     else if (routerEvent instanceof NavigationError || routerEvent instanceof NavigationCancel) {
                         subscription.unsubscribe();
                     }
-                })));
+                }))));
                 return false; // to preventDefault()
             }
         }
@@ -20399,7 +21811,7 @@ PageScrollDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class SmoothscrollModule {
     /**
@@ -20424,12 +21836,12 @@ SmoothscrollModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbStepComponent {
     /**
@@ -20516,7 +21928,7 @@ MdbStepComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbStepperComponent {
     /**
@@ -20739,7 +22151,11 @@ class MdbStepperComponent {
      */
     _removeCurrentActiveStep() {
         /** @type {?} */
-        const currentActiveStep = this.steps.find(activeStep => activeStep.isActive);
+        const currentActiveStep = this.steps.find((/**
+         * @param {?} activeStep
+         * @return {?}
+         */
+        activeStep => activeStep.isActive));
         if (currentActiveStep) {
             currentActiveStep.isActive = false;
         }
@@ -20748,10 +22164,14 @@ class MdbStepperComponent {
      * @return {?}
      */
     resetAll() {
-        this.steps.forEach((step) => {
+        this.steps.forEach((/**
+         * @param {?} step
+         * @return {?}
+         */
+        (step) => {
             step.reset();
             this._setActiveStep(0);
-        });
+        }));
     }
     /**
      * @private
@@ -20760,11 +22180,14 @@ class MdbStepperComponent {
      */
     _updateHorizontalStepperHeight(index) {
         if (this.horizontal && !this.vertical) {
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 /** @type {?} */
                 const height = this.stepContents.toArray()[index].nativeElement.scrollHeight + 50;
                 this._renderer.setStyle(this.container.nativeElement, 'height', height + 'px');
-            }, 0);
+            }), 0);
         }
         else {
             this._renderer.removeStyle(this.container.nativeElement, 'height');
@@ -20777,10 +22200,13 @@ class MdbStepperComponent {
     _initStepperVariation() {
         if (this.isBrowser) {
             if (this.vertical || win.innerWidth < this._stepperBreakpoint) {
-                setTimeout(() => {
+                setTimeout((/**
+                 * @return {?}
+                 */
+                () => {
                     this.horizontal = false;
                     this._renderer.removeStyle(this.container.nativeElement, 'height');
-                }, 0);
+                }), 0);
             }
         }
     }
@@ -20831,7 +22257,7 @@ MdbStepperComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class StepperModule {
 }
@@ -20853,12 +22279,12 @@ StepperModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * returns coumputed style of given element
@@ -20884,13 +22310,21 @@ function computedStyle(element, styleProp) {
     }
     else if (el['currentStyle']) { // IE
         // sanitize property name to camelCase
-        styleProp = styleProp.replace(/\-(\w)/g, function (letter) {
+        styleProp = styleProp.replace(/\-(\w)/g, (/**
+         * @param {?} letter
+         * @return {?}
+         */
+        function (letter) {
             return letter.toUpperCase();
-        });
+        }));
         value = el['currentStyle'][styleProp];
         // convert other units to pixels on IE
         if (/^\d+(em|pt|%|ex)?$/i.test(value)) {
-            return (function (val) {
+            return ((/**
+             * @param {?} val
+             * @return {?}
+             */
+            function (val) {
                 /** @type {?} */
                 const oldLeft = el.style.left;
                 /** @type {?} */
@@ -20901,7 +22335,7 @@ function computedStyle(element, styleProp) {
                 el.style.left = oldLeft;
                 el['runtimeStyle'].left = oldRsLeft;
                 return val;
-            })(value);
+            }))(value);
         }
         return value;
     }
@@ -20909,7 +22343,7 @@ function computedStyle(element, styleProp) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbStickyDirective {
     /**
@@ -20920,7 +22354,10 @@ class MdbStickyDirective {
         // css selector to be sticky after
         this.isBrowser = false;
         this.stickyOffsetTop = 0;
-        this.scrollHandler = () => {
+        this.scrollHandler = (/**
+         * @return {?}
+         */
+        () => {
             // let elRect: ClientRect = this.el.getBoundingClientRect();
             /** @type {?} */
             const parentRect = this.el.parentElement.getBoundingClientRect();
@@ -20996,7 +22433,7 @@ class MdbStickyDirective {
                     left: this.original.left
                 }, dynProps);
             }
-        };
+        });
         this.el = this.el = el.nativeElement;
         this.parentEl = this.el.parentElement;
         this.isBrowser = isPlatformBrowser(platformId);
@@ -21085,7 +22522,7 @@ MdbStickyDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class StickyContentModule {
 }
@@ -21099,12 +22536,12 @@ StickyContentModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class NgTranscludeDirective {
     /**
@@ -21145,7 +22582,7 @@ NgTranscludeDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class TabsetConfig {
     constructor() {
@@ -21161,7 +22598,7 @@ TabsetConfig.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // todo: add active event to tab
 class TabsetComponent {
@@ -21294,12 +22731,17 @@ class TabsetComponent {
      */
     getActive() {
         /** @type {?} */
-        const tabs = this.tabs.map((object, index) => {
+        const tabs = this.tabs.map((/**
+         * @param {?} object
+         * @param {?} index
+         * @return {?}
+         */
+        (object, index) => {
             return {
                 index: index,
                 object: object
             };
-        });
+        }));
         for (const tab of tabs) {
             if (tab.object.active) {
                 return tab.index;
@@ -21312,7 +22754,11 @@ class TabsetComponent {
      */
     addTab(tab) {
         /** @type {?} */
-        const insertPos = this.tabs.findIndex(aTab => aTab.tabOrder > tab.tabOrder);
+        const insertPos = this.tabs.findIndex((/**
+         * @param {?} aTab
+         * @return {?}
+         */
+        aTab => aTab.tabOrder > tab.tabOrder));
         if (insertPos >= 0) {
             this.tabs.splice(insertPos, 0, tab);
         }
@@ -21420,12 +22866,17 @@ class TabsetComponent {
      */
     getActiveElement() {
         /** @type {?} */
-        const tabs = this.tabs.map((object, index) => {
+        const tabs = this.tabs.map((/**
+         * @param {?} object
+         * @param {?} index
+         * @return {?}
+         */
+        (object, index) => {
             return {
                 index: index,
                 object: object
             };
-        });
+        }));
         for (const tab of tabs) {
             if (tab.object.active) {
                 return {
@@ -21449,9 +22900,13 @@ class TabsetComponent {
      */
     getFirstActiveTabIndex() {
         /** @type {?} */
-        const activeTabs = this.tabs.filter((tab) => {
+        const activeTabs = this.tabs.filter((/**
+         * @param {?} tab
+         * @return {?}
+         */
+        (tab) => {
             return !tab.disabled;
-        });
+        }));
         return this.tabs.indexOf(activeTabs[0]);
     }
     /**
@@ -21459,9 +22914,13 @@ class TabsetComponent {
      * @return {?}
      */
     removeActiveTabs() {
-        this.tabs.forEach((tab) => {
+        this.tabs.forEach((/**
+         * @param {?} tab
+         * @return {?}
+         */
+        (tab) => {
             tab.active = false;
-        });
+        }));
     }
     /**
      * @return {?}
@@ -21488,11 +22947,19 @@ class TabsetComponent {
      */
     ngAfterViewInit() {
         this.initActiveTab();
-        if (this.tabs.findIndex(el => el.type === 'content') !== -1) {
+        if (this.tabs.findIndex((/**
+         * @param {?} el
+         * @return {?}
+         */
+        el => el.type === 'content')) !== -1) {
             /** @type {?} */
             const spacer = this.renderer.createElement('li');
             /** @type {?} */
-            const firstContentTypeItemIndex = this.tabs.findIndex(el => el.type === 'content');
+            const firstContentTypeItemIndex = this.tabs.findIndex((/**
+             * @param {?} el
+             * @return {?}
+             */
+            el => el.type === 'content'));
             this.renderer.addClass(spacer, 'nav-item');
             this.renderer.addClass(spacer, 'flex-fill');
             this.renderer.insertBefore(this.itemsList.nativeElement, spacer, this.itemsList.nativeElement.children[firstContentTypeItemIndex]);
@@ -21502,7 +22969,7 @@ class TabsetComponent {
 TabsetComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-tabset',
-                template: "<div class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"{{ listGetClass }}\">\n      <ul class=\"nav {{ buttonClass }}\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\" #itemsList>\n        <li *ngFor=\"let tabz of tabs;let i = index\" [ngClass]=\"{'ml-auto': tabz.type === 'content' && i === 0, 'nav-item': tabz.type !== 'content', 'mx-auto': vertical}\" class=\"{{tabz.customClass}}\"\n            [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\" (click)=\"click($event, i)\">\n          <span class=\"d-flex flex-fill\" *ngIf=\"tabs[i].type !== 'content' && tabs[i + 1] && tabs[i + 1].type === 'content'\"></span>\n          <a *ngIf=\"tabz.type !== 'content'\" #tabEl href=\"javascript:void(0);\" class=\"nav-link\" [ngClass]=\"{'waves-light': !disableWaves}\"\n             [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\">\n            <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span>\n            <span *ngIf=\"tabz.removable\">\n              <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"fas fa-times ml-2\">\n              </span>\n            </span>\n          </a>\n          <a *ngIf=\"tabz.type === 'content'\" #tabEl class=\"nav-link\" [ngClass]=\"{'waves-light': !disableWaves}\"\n             [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\">\n            <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span>\n            <span *ngIf=\"tabz.removable\">\n              <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"fas fa-times ml-2\">\n              </span>\n            </span>\n          </a>\n        </li>\n      </ul>\n    </div>\n    <div class=\"{{ tabsGetClass }}\">\n      <div class=\"tab-content {{ contentClass }}\">\n        <ng-content></ng-content>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                template: "<div class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"{{ listGetClass }}\">\n      <ul class=\"nav {{ buttonClass }}\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\" #itemsList>\n        <li *ngFor=\"let tabz of tabs;let i = index\"\n            [ngClass]=\"{'ml-auto': tabz.type === 'content' && i === 0, 'list-group-item-action': buttonClass.includes('list-group'), 'nav-item': tabz.type !== 'content', 'mx-auto': vertical}\"\n            class=\"{{tabz.customClass}}\"\n            [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\" (click)=\"click($event, i)\">\n          <span class=\"d-flex flex-fill\"\n                *ngIf=\"tabs[i].type !== 'content' && tabs[i + 1] && tabs[i + 1].type === 'content'\"></span>\n          <a *ngIf=\"tabz.type !== 'content'\" #tabEl href=\"javascript:void(0);\" class=\"nav-link\"\n             [ngClass]=\"{'waves-light': !disableWaves}\"\n             [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\">\n            <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span>\n            <span *ngIf=\"tabz.removable\">\n              <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"fas fa-times ml-2\">\n              </span>\n            </span>\n          </a>\n          <a *ngIf=\"tabz.type === 'content'\" #tabEl class=\"nav-link\" [ngClass]=\"{'waves-light': !disableWaves}\"\n             [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\">\n            <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span>\n            <span *ngIf=\"tabz.removable\">\n              <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"fas fa-times ml-2\">\n              </span>\n            </span>\n          </a>\n        </li>\n      </ul>\n    </div>\n    <div class=\"{{ tabsGetClass }}\">\n      <div class=\"tab-content {{ contentClass }}\">\n        <ng-content></ng-content>\n      </div>\n    </div>\n  </div>\n</div>\n",
                 providers: [WavesDirective]
             }] }
 ];
@@ -21533,7 +23000,7 @@ TabsetComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class TabDirective {
     /**
@@ -21609,11 +23076,15 @@ class TabDirective {
         this.renderer.addClass(this.el.nativeElement, 'active');
         this._active = active;
         this.select.emit(this);
-        this.tabset.tabs.forEach((mdbTab) => {
+        this.tabset.tabs.forEach((/**
+         * @param {?} mdbTab
+         * @return {?}
+         */
+        (mdbTab) => {
             if (mdbTab !== this) {
                 mdbTab.active = false;
             }
-        });
+        }));
     }
     /**
      * @return {?}
@@ -21656,7 +23127,7 @@ TabDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Should be used to mark <template> element as a template for tab heading
@@ -21681,7 +23152,7 @@ TabHeadingDirective.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class TabsModule {
     /**
@@ -21704,17 +23175,20 @@ TabsModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => MaterialChipsComponent),
+    useExisting: forwardRef((/**
+     * @return {?}
+     */
+    () => MaterialChipsComponent)),
     multi: true
 };
 class MaterialChipsComponent {
@@ -21814,7 +23288,7 @@ MaterialChipsComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MaterialChipsModule {
 }
@@ -21828,17 +23302,20 @@ MaterialChipsModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const TIME_PIRCKER_VALUE_ACCESSOT = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => ClockPickerComponent),
+    useExisting: forwardRef((/**
+     * @return {?}
+     */
+    () => ClockPickerComponent)),
     multi: true
 };
 class ClockPickerComponent {
@@ -21875,10 +23352,20 @@ class ClockPickerComponent {
         this.mousedownEvent = 'mousedown' + (this.touchSupported ? ' touchstart' : '');
         this.mousemoveEvent = 'mousemove' + (this.touchSupported ? ' touchmove' : '');
         this.mouseupEvent = 'mouseup' + (this.touchSupported ? ' touchend' : '');
-        this.onChangeCb = () => { };
-        this.onTouchedCb = () => { };
+        this.onChangeCb = (/**
+         * @return {?}
+         */
+        () => { });
+        this.onTouchedCb = (/**
+         * @return {?}
+         */
+        () => { });
         this.isBrowser = isPlatformBrowser(platformId);
-        renderer.listen(this.elem.nativeElement, 'click', (event) => {
+        renderer.listen(this.elem.nativeElement, 'click', (/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => {
             if (this.showClock &&
                 event.target &&
                 this.elem.nativeElement !== event.target &&
@@ -21888,7 +23375,7 @@ class ClockPickerComponent {
             if (event.target.classList.contains('picker__holder')) {
                 this.showClock = false;
             }
-        });
+        }));
     }
     /**
      * @param {?} event
@@ -21897,9 +23384,13 @@ class ClockPickerComponent {
     ontouchmove(event) {
         // Rotating Time Picker on mobile
         if (event.target.parentElement.classList.contains('clockpicker-dial')) {
-            ((/** @type {?} */ (this.elem.nativeElement.querySelectorAll('.clockpicker-tick')))).forEach((element) => {
+            ((/** @type {?} */ (this.elem.nativeElement.querySelectorAll('.clockpicker-tick')))).forEach((/**
+             * @param {?} element
+             * @return {?}
+             */
+            (element) => {
                 this.renderer.setStyle(element, 'background-color', 'rgba(0, 150, 136, 0');
-            });
+            }));
             this.mousedown(event);
         }
     }
@@ -21916,9 +23407,13 @@ class ClockPickerComponent {
      * @return {?}
      */
     ngAfterViewInit() {
-        this.renderer.listen(this.elem.nativeElement.querySelector('.clockpicker-plate'), 'mousedown', (event) => {
+        this.renderer.listen(this.elem.nativeElement.querySelector('.clockpicker-plate'), 'mousedown', (/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => {
             this.mousedown(event, false);
-        });
+        }));
     }
     /**
      * @return {?}
@@ -21931,9 +23426,13 @@ class ClockPickerComponent {
                 const openedPicker = document.querySelector('.picker--opened');
                 /** @type {?} */
                 const allPickers = document.querySelectorAll('.picker');
-                allPickers.forEach((element) => {
+                allPickers.forEach((/**
+                 * @param {?} element
+                 * @return {?}
+                 */
+                (element) => {
                     this.renderer.setStyle(element, 'z-index', '0');
-                });
+                }));
                 this.renderer.setStyle(openedPicker, 'z-index', '1000');
             }
             catch (error) { }
@@ -21999,7 +23498,11 @@ class ClockPickerComponent {
             this.setHand(dx, dy, false);
         }
         /** @type {?} */
-        const mousemoveEventMethod = (event) => {
+        const mousemoveEventMethod = (/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => {
             event.preventDefault();
             event.stopPropagation();
             /** @type {?} */
@@ -22011,9 +23514,13 @@ class ClockPickerComponent {
             }
             moved = true;
             this.setHand(x, y, false);
-        };
+        });
         /** @type {?} */
-        const mouseupEventMethod = (event) => {
+        const mouseupEventMethod = (/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => {
             document.removeEventListener(this.mousemoveEvent, mousemoveEventMethod);
             e.preventDefault();
             /** @type {?} */
@@ -22025,7 +23532,7 @@ class ClockPickerComponent {
             }
             this.showMinutesClock();
             document.removeEventListener(this.mouseupEvent, mouseupEventMethod);
-        };
+        });
         document.addEventListener(this.mousemoveEvent, mousemoveEventMethod);
         document.addEventListener('mouseup', mouseupEventMethod);
     }
@@ -22036,7 +23543,10 @@ class ClockPickerComponent {
         // this set timeout needed for case when hideKeyborad
         // is called inside of 'onfocus' event handler
         try {
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 // creating temp field
                 // const field = document.createElement('input');
                 /** @type {?} */
@@ -22051,19 +23561,28 @@ class ClockPickerComponent {
                 // // hiding temp field from peoples eyes
                 // // -webkit-user-modify is nessesary for Android 4.x
                 // adding onfocus event handler for out temp field
-                field.onfocus = () => {
+                field.onfocus = (/**
+                 * @return {?}
+                 */
+                () => {
                     // this timeout of 200ms is nessasary for Android 2.3.x
-                    setTimeout(() => {
+                    setTimeout((/**
+                     * @return {?}
+                     */
+                    () => {
                         this.renderer.setStyle(field, 'display', 'none');
-                        setTimeout(() => {
+                        setTimeout((/**
+                         * @return {?}
+                         */
+                        () => {
                             this.renderer.removeChild(this.elem.nativeElement, field);
                             document.body.focus();
-                        }, 0);
-                    }, 0);
-                };
+                        }), 0);
+                    }), 0);
+                });
                 // focusing it
                 field.focus();
-            }, 0);
+            }), 0);
         }
         catch (error) {
         }
@@ -22388,7 +23907,7 @@ ClockPickerComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class TimePickerModule {
 }
@@ -22402,12 +23921,12 @@ TimePickerModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const MODULES$1 = [
@@ -22478,7 +23997,7 @@ MDBBootstrapModulePro.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const MODULES$2 = [
@@ -22512,14 +24031,14 @@ MDBBootstrapModulesPro.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { BadgeModule, MDBBadgeComponent, MdbBreadcrumbComponent, MdbBreadcrumbItemComponent, BreadcrumbModule, MdbBtnDirective, ButtonsModule, ButtonRadioDirective, ButtonCheckboxDirective, CardsFreeModule, MdbCardComponent, MdbCardBodyComponent, MdbCardImageComponent, MdbCardTextComponent, MdbCardTitleComponent, MdbCardFooterComponent, MdbCardHeaderComponent, CarouselComponent, CarouselModule, SlideComponent, CarouselConfig, ChartsModule, BaseChartDirective, CHECKBOX_VALUE_ACCESSOR, CheckboxComponent, CheckboxModule, CollapseComponent, CollapseModule, BsDropdownDirective, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownContainerComponent, BsDropdownState, BsDropdownConfig, DropdownModule, MdbIconComponent, FalDirective, FarDirective, FasDirective, FabDirective, IconsModule, InputUtilitiesModule, MdbErrorDirective, MdbSuccessDirective, MdbValidateDirective, InputsModule, EqualValidatorDirective, MdbInputDirective, MdbInput, ModalBackdropComponent, ModalBackdropOptions, ModalOptions, MDBModalRef, ModalDirective, ModalModule, MDBModalService, ModalContainerComponent, NavbarComponent, NavbarModule, PopoverDirective, PopoverModule, PopoverConfig, PopoverContainerComponent, TableModule, MdbTablePaginationComponent, MdbTableRowDirective, MdbTableScrollDirective, MdbTableSortDirective, MdbTableDirective, MdbTableService, TooltipContainerComponent, TooltipDirective, TooltipModule, TooltipConfig, WavesDirective, WavesModule, MDBRootModule, MDBBootstrapModule, SQUEEZEBOX_COMPONENTS, SBItemComponent, SBItemHeadComponent, SBItemBodyComponent, SqueezeBoxComponent, AccordionModule, ComponentPortal, BasePortalHost, Overlay, OVERLAY_PROVIDERS, OverlayContainer, OverlayRef, ToastContainerDirective, ToastContainerModule, ToastComponent, ToastService, GlobalConfig, ToastPackage, tsConfig, ToastModule, ToastRef, ToastInjector, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, MdbAutoCompleterComponent, MdbOptionComponent, MdbAutoCompleterDirective, MdbAutoCompleterOptionDirective, AutoCompleterModule, AutoFormatModule, MdbDateFormatDirective, MdbCreditCardDirective, MdbCvvDirective, AutocompleteModule, CompleterComponent, CompleterListItemComponent, CompleterService, localDataFactory, LocalDataFactoryProvider, remoteDataFactory, RemoteDataFactoryProvider, LocalData, RemoteData, CompleterBaseData, MdbCompleterDirective, MdbDropdownDirective, MdbInputCompleteDirective, MdbListDirective, MdbRowDirective, CardsModule, CardRevealComponent, CardRotatingComponent, LocaleService, UtilService, FocusDirective, InputAutoFillDirective, MDBDatePickerComponent, MYDP_VALUE_ACCESSOR, DatepickerModule, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, FileInputModule, UploadStatus, humanizeBytes, MDBUploaderService, MDBFileSelectDirective, MDBFileDropDirective, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, Option, OptionList, SELECT_VALUE_ACCESSOR, SelectComponent, SelectDropdownComponent, SelectModule, MDBSpinningPreloader, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, BarComponent, ProgressDirective, ProgressbarComponent, ProgressbarModule, ProgressbarConfigComponent, ProgressSpinnerComponent, PreloadersModule, ProgressBars, RangeModule, MdbRangeInputComponent, ScrollSpyDirective, ScrollSpyWindowDirective, ScrollSpyElementDirective, ScrollSpyLinkDirective, ScrollSpyService, ScrollSpyModule, SidenavComponent, SidenavModule, PageScrollDirective, PageScrollService, EasingLogic, PageScrollConfig, PageScrollInstance, PageScrollUtilService, SmoothscrollModule, MdbStepperComponent, MdbStepComponent, StepperModule, MdbStickyDirective, StickyContentModule, NgTranscludeDirective, TabDirective, TabHeadingDirective, TabsetComponent, TabsetConfig, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, TimePickerModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, CHECKBOX_CONTROL_VALUE_ACCESSOR as ɵb, RADIO_CONTROL_VALUE_ACCESSOR as ɵa, CHECKBOX_VALUE_ACCESSOR as ɵc, CheckboxComponent as ɵd, LinksComponent as ɵds, LogoComponent as ɵdt, NavbarService as ɵdr, NavlinksComponent as ɵdu, ComponentLoaderFactory as ɵdp, OnChange as ɵdv, PositioningService as ɵdq, SBItemComponent as ɵf, SBItemBodyComponent as ɵh, SBItemHeadComponent as ɵg, SqueezeBoxComponent as ɵi, AccordionModule as ɵe, TOAST_CONFIG as ɵdw, AutoCompleterModule as ɵn, MdbAutoCompleterComponent as ɵj, MdbOptionComponent as ɵk, MdbAutoCompleterOptionDirective as ɵm, MdbAutoCompleterDirective as ɵl, AutoFormatModule as ɵo, MdbCreditCardDirective as ɵq, MdbCvvDirective as ɵr, MdbDateFormatDirective as ɵp, CompleterListItemComponent as ɵu, CompleterComponent as ɵt, MdbInputCompleteDirective as ɵba, MdbCompleterDirective as ɵy, MdbDropdownDirective as ɵz, CtrListContext as ɵbb, MdbListDirective as ɵbc, MdbRowDirective as ɵbd, AutocompleteModule as ɵs, CompleterService as ɵv, LocalDataFactoryProvider as ɵw, RemoteDataFactoryProvider as ɵx, CardRevealComponent as ɵbf, CardRotatingComponent as ɵbg, CardsModule as ɵbe, MDBDatePickerComponent as ɵbm, MYDP_VALUE_ACCESSOR as ɵbl, DatepickerModule as ɵbn, InputAutoFillDirective as ɵbk, FocusDirective as ɵbj, LocaleService as ɵbh, UtilService as ɵbi, SimpleChartComponent as ɵbo, ChartSimpleModule as ɵbq, EasyPieChartComponent as ɵbp, MDBFileDropDirective as ɵbt, MDBFileSelectDirective as ɵbs, FileInputModule as ɵbr, CharCounterDirective as ɵbu, CharCounterModule as ɵbv, ImageModalComponent as ɵbw, LightBoxModule as ɵbx, SelectDropdownComponent as ɵcb, SELECT_VALUE_ACCESSOR as ɵbz, SelectComponent as ɵca, SelectModule as ɵcc, MDBRootModulePro as ɵdo, BarComponent as ɵce, ProgressBars as ɵcd, MdProgressBarModule as ɵdx, ProgressBarComponent as ɵdy, MdProgressSpinnerModule as ɵdz, MdProgressSpinnerComponent as ɵeb, MdProgressSpinnerCssMatStylerDirective as ɵea, MdSpinnerComponent as ɵec, ProgressSpinnerComponent as ɵcj, ProgressDirective as ɵcf, ProgressbarComponent as ɵcg, ProgressbarConfigComponent as ɵci, ProgressbarModule as ɵch, MdbRangeInputComponent as ɵcm, RANGE_VALUE_ACCESOR as ɵcl, RangeModule as ɵck, ScrollSpyElementDirective as ɵcp, ScrollSpyLinkDirective as ɵcq, ScrollSpyWindowDirective as ɵco, ScrollSpyDirective as ɵcn, ScrollSpyModule as ɵcs, ScrollSpyService as ɵcr, SidenavComponent as ɵct, SidenavModule as ɵcu, PageScrollDirective as ɵcv, PageScrollInstance as ɵcx, SmoothscrollModule as ɵcy, PageScrollService as ɵcw, MdbStepComponent as ɵda, MdbStepperComponent as ɵcz, StepperModule as ɵdb, MdbStickyDirective as ɵdc, StickyContentModule as ɵdd, TabHeadingDirective as ɵdg, TabDirective as ɵdf, TabsetComponent as ɵdh, TabsetConfig as ɵdi, TabsModule as ɵdj, NgTranscludeDirective as ɵde, MaterialChipsComponent as ɵdk, MaterialChipsModule as ɵdl, ClockPickerComponent as ɵdm, TimePickerModule as ɵdn };
+export { BadgeModule, MDBBadgeComponent, MdbBreadcrumbComponent, MdbBreadcrumbItemComponent, BreadcrumbModule, MdbBtnDirective, ButtonsModule, ButtonRadioDirective, ButtonCheckboxDirective, CardsFreeModule, MdbCardComponent, MdbCardBodyComponent, MdbCardImageComponent, MdbCardTextComponent, MdbCardTitleComponent, MdbCardFooterComponent, MdbCardHeaderComponent, CarouselComponent, CarouselModule, SlideComponent, CarouselConfig, ChartsModule, BaseChartDirective, CHECKBOX_VALUE_ACCESSOR, CheckboxComponent, MdbCheckboxChange, CheckboxModule, CollapseComponent, CollapseModule, BsDropdownDirective, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownContainerComponent, BsDropdownState, BsDropdownConfig, DropdownModule, MdbIconComponent, FalDirective, FarDirective, FasDirective, FabDirective, IconsModule, InputUtilitiesModule, MdbErrorDirective, MdbSuccessDirective, MdbValidateDirective, InputsModule, EqualValidatorDirective, MdbInputDirective, MdbInput, ModalBackdropComponent, ModalBackdropOptions, ModalOptions, MDBModalRef, ModalDirective, ModalModule, MDBModalService, ModalContainerComponent, NavbarComponent, NavbarModule, LinksComponent, NavlinksComponent, LogoComponent, NavbarService, PopoverDirective, PopoverModule, PopoverConfig, PopoverContainerComponent, TableModule, MdbTablePaginationComponent, MdbTableRowDirective, MdbTableScrollDirective, MdbTableSortDirective, MdbTableDirective, MdbTableService, TooltipContainerComponent, TooltipDirective, TooltipModule, TooltipConfig, WavesDirective, WavesModule, MDBRootModule, MDBBootstrapModule, SQUEEZEBOX_COMPONENTS, SBItemComponent, SBItemHeadComponent, SBItemBodyComponent, SqueezeBoxComponent, AccordionModule, ComponentPortal, BasePortalHost, Overlay, OVERLAY_PROVIDERS, OverlayContainer, OverlayRef, ToastContainerDirective, ToastContainerModule, ToastComponent, ToastService, GlobalConfig, ToastPackage, tsConfig, ToastModule, ToastRef, ToastInjector, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, MdbAutoCompleterComponent, MdbOptionComponent, MdbAutoCompleterDirective, MdbAutoCompleterOptionDirective, AutoCompleterModule, AutoFormatModule, MdbDateFormatDirective, MdbCreditCardDirective, MdbCvvDirective, AutocompleteModule, CompleterComponent, CompleterListItemComponent, CompleterService, localDataFactory, LocalDataFactoryProvider, remoteDataFactory, RemoteDataFactoryProvider, LocalData, RemoteData, CompleterBaseData, MdbCompleterDirective, MdbDropdownDirective, MdbInputCompleteDirective, MdbListDirective, MdbRowDirective, CardsModule, CardRevealComponent, CardRotatingComponent, LocaleService, UtilService, FocusDirective, InputAutoFillDirective, MDBDatePickerComponent, MYDP_VALUE_ACCESSOR, DatepickerModule, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, FileInputModule, UploadStatus, humanizeBytes, MDBUploaderService, MDBFileSelectDirective, MDBFileDropDirective, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, Option, OptionList, SELECT_VALUE_ACCESSOR, SelectComponent, SelectDropdownComponent, SelectModule, MDBSpinningPreloader, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, BarComponent, ProgressDirective, ProgressbarComponent, ProgressbarModule, ProgressbarConfigComponent, ProgressSpinnerComponent, PreloadersModule, ProgressBars, RangeModule, MdbRangeInputComponent, ScrollSpyDirective, ScrollSpyWindowDirective, ScrollSpyElementDirective, ScrollSpyLinkDirective, ScrollSpyService, ScrollSpyModule, SidenavComponent, SidenavModule, PageScrollDirective, PageScrollService, EasingLogic, PageScrollConfig, PageScrollInstance, PageScrollUtilService, SmoothscrollModule, MdbStepperComponent, MdbStepComponent, StepperModule, MdbStickyDirective, StickyContentModule, NgTranscludeDirective, TabDirective, TabHeadingDirective, TabsetComponent, TabsetConfig, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, TimePickerModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, CHECKBOX_CONTROL_VALUE_ACCESSOR as ɵb, RADIO_CONTROL_VALUE_ACCESSOR as ɵa, CHECKBOX_VALUE_ACCESSOR as ɵc, CheckboxComponent as ɵd, ComponentLoaderFactory as ɵdp, OnChange as ɵdr, PositioningService as ɵdq, SBItemComponent as ɵf, SBItemBodyComponent as ɵh, SBItemHeadComponent as ɵg, SqueezeBoxComponent as ɵi, AccordionModule as ɵe, TOAST_CONFIG as ɵds, AutoCompleterModule as ɵn, MdbAutoCompleterComponent as ɵj, MdbOptionComponent as ɵk, MdbAutoCompleterOptionDirective as ɵm, MdbAutoCompleterDirective as ɵl, AutoFormatModule as ɵo, MdbCreditCardDirective as ɵq, MdbCvvDirective as ɵr, MdbDateFormatDirective as ɵp, CompleterListItemComponent as ɵu, CompleterComponent as ɵt, MdbInputCompleteDirective as ɵba, MdbCompleterDirective as ɵy, MdbDropdownDirective as ɵz, CtrListContext as ɵbb, MdbListDirective as ɵbc, MdbRowDirective as ɵbd, AutocompleteModule as ɵs, CompleterService as ɵv, LocalDataFactoryProvider as ɵw, RemoteDataFactoryProvider as ɵx, CardRevealComponent as ɵbf, CardRotatingComponent as ɵbg, CardsModule as ɵbe, MDBDatePickerComponent as ɵbm, MYDP_VALUE_ACCESSOR as ɵbl, DatepickerModule as ɵbn, InputAutoFillDirective as ɵbk, FocusDirective as ɵbj, LocaleService as ɵbh, UtilService as ɵbi, SimpleChartComponent as ɵbo, ChartSimpleModule as ɵbq, EasyPieChartComponent as ɵbp, MDBFileDropDirective as ɵbt, MDBFileSelectDirective as ɵbs, FileInputModule as ɵbr, CharCounterDirective as ɵbu, CharCounterModule as ɵbv, ImageModalComponent as ɵbw, LightBoxModule as ɵbx, SelectDropdownComponent as ɵcb, SELECT_VALUE_ACCESSOR as ɵbz, SelectComponent as ɵca, SelectModule as ɵcc, MDBRootModulePro as ɵdo, BarComponent as ɵce, ProgressBars as ɵcd, MdProgressBarModule as ɵdt, ProgressBarComponent as ɵdu, MdProgressSpinnerModule as ɵdv, MdProgressSpinnerComponent as ɵdx, MdProgressSpinnerCssMatStylerDirective as ɵdw, MdSpinnerComponent as ɵdy, ProgressSpinnerComponent as ɵcj, ProgressDirective as ɵcf, ProgressbarComponent as ɵcg, ProgressbarConfigComponent as ɵci, ProgressbarModule as ɵch, MdbRangeInputComponent as ɵcm, RANGE_VALUE_ACCESOR as ɵcl, RangeModule as ɵck, ScrollSpyElementDirective as ɵcp, ScrollSpyLinkDirective as ɵcq, ScrollSpyWindowDirective as ɵco, ScrollSpyDirective as ɵcn, ScrollSpyModule as ɵcs, ScrollSpyService as ɵcr, SidenavComponent as ɵct, SidenavModule as ɵcu, PageScrollDirective as ɵcv, PageScrollInstance as ɵcx, SmoothscrollModule as ɵcy, PageScrollService as ɵcw, MdbStepComponent as ɵda, MdbStepperComponent as ɵcz, StepperModule as ɵdb, MdbStickyDirective as ɵdc, StickyContentModule as ɵdd, TabHeadingDirective as ɵdg, TabDirective as ɵdf, TabsetComponent as ɵdh, TabsetConfig as ɵdi, TabsModule as ɵdj, NgTranscludeDirective as ɵde, MaterialChipsComponent as ɵdk, MaterialChipsModule as ɵdl, ClockPickerComponent as ɵdm, TimePickerModule as ɵdn };
 
 //# sourceMappingURL=ng-uikit-pro-standard.js.map

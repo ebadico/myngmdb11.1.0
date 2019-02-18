@@ -9,6 +9,24 @@ ng2-completer {
   }
 }
 
+mdb-auto-completer {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.mdb-autocomplete {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.mdb-autocomplete-clear {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 .completer-dropdown {
   margin-top: 1px;
   position: absolute;
