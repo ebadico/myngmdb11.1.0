@@ -4,5 +4,6 @@ export declare class MdbTableSortDirective {
     sorted: boolean;
     onclick(): void;
     constructor();
+    trimWhiteSigns(headElement: any): any;
     sortDataBy(key: string | any): void;
 }

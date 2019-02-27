@@ -95,6 +95,11 @@
             }
           }
         }
+        @media (max-width: 1024px) {
+          max-height: 300px;
+          overflow-x: hidden;
+          overflow-y: auto;
+        }
       }
     }
   }

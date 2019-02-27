@@ -122,7 +122,9 @@
         }
         .collapsible-body a {
           color: map-get($data, skin-text);
-          &:hover {
+          &:hover,
+          &.active,
+          &:active {
             color: map-get($data, skin-sn-child);
           }
         }

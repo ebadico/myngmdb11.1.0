@@ -2655,8 +2655,8 @@ CollapseComponent.decorators = [
                 template: '<ng-content></ng-content>',
                 animations: [
                     trigger('expandBody', [
-                        state('collapsed', style({ height: '0px', visibility: 'hidden', overflow: 'hidden' })),
-                        state('expanded', style({ height: '*', visibility: 'visible', overflow: 'visible' })),
+                        state('collapsed', style({ height: '0px' })),
+                        state('expanded', style({ height: '*' })),
                         transition('expanded <=> collapsed', animate('500ms ease')),
                     ])
                 ]
@@ -6898,7 +6898,6 @@ MdbTableDirective.propDecorators = {
  */
 class MdbTableSortDirective {
     constructor() {
-        // tslint:disable-next-line:no-input-rename
         this.dataSource = [];
         this.sorted = false;
     }
@@ -6906,7 +6905,14 @@ class MdbTableSortDirective {
      * @return {?}
      */
     onclick() {
-        this.sortDataBy(this.sortBy.toString().toLowerCase());
+        this.sortDataBy(this.trimWhiteSigns(this.sortBy.toString().toLowerCase()));
+    }
+    /**
+     * @param {?} headElement
+     * @return {?}
+     */
+    trimWhiteSigns(headElement) {
+        return headElement.replace(/ /g, '');
     }
     /**
      * @param {?} key
@@ -7153,7 +7159,7 @@ class MdbTableService {
              * @return {?}
              */
             (key) => {
-                return (obj[key].toLowerCase()).includes(searchKey);
+                return (obj[key].toString().toLowerCase()).includes(searchKey);
             }));
         }));
     }
@@ -15888,9 +15894,11 @@ class ImageModalComponent {
          * @return {?}
          */
         () => {
-            /** @type {?} */
-            const descriptionHeight = this.galleryDescription.nativeElement.clientHeight;
-            this.renderer.setStyle(this.galleryImg.nativeElement, 'max-height', `calc(100% - ${descriptionHeight + 25}px)`);
+            if (this.galleryDescription) {
+                /** @type {?} */
+                const descriptionHeight = this.galleryDescription.nativeElement.clientHeight;
+                this.renderer.setStyle(this.galleryImg.nativeElement, 'max-height', `calc(100% - ${descriptionHeight + 25}px)`);
+            }
         }), 0);
     }
     /**

@@ -3104,8 +3104,8 @@
                         template: '<ng-content></ng-content>',
                         animations: [
                             animations.trigger('expandBody', [
-                                animations.state('collapsed', animations.style({ height: '0px', visibility: 'hidden', overflow: 'hidden' })),
-                                animations.state('expanded', animations.style({ height: '*', visibility: 'visible', overflow: 'visible' })),
+                                animations.state('collapsed', animations.style({ height: '0px' })),
+                                animations.state('expanded', animations.style({ height: '*' })),
                                 animations.transition('expanded <=> collapsed', animations.animate('500ms ease')),
                             ])
                         ]
@@ -8138,7 +8138,6 @@
      */
     var MdbTableSortDirective = /** @class */ (function () {
         function MdbTableSortDirective() {
-            // tslint:disable-next-line:no-input-rename
             this.dataSource = [];
             this.sorted = false;
         }
@@ -8149,7 +8148,18 @@
          * @return {?}
          */
             function () {
-                this.sortDataBy(this.sortBy.toString().toLowerCase());
+                this.sortDataBy(this.trimWhiteSigns(this.sortBy.toString().toLowerCase()));
+            };
+        /**
+         * @param {?} headElement
+         * @return {?}
+         */
+        MdbTableSortDirective.prototype.trimWhiteSigns = /**
+         * @param {?} headElement
+         * @return {?}
+         */
+            function (headElement) {
+                return headElement.replace(/ /g, '');
             };
         /**
          * @param {?} key
@@ -8451,7 +8461,7 @@
                      * @param {?} key
                      * @return {?}
                      */function (key) {
-                        return (obj[key].toLowerCase()).includes(searchKey);
+                        return (obj[key].toString().toLowerCase()).includes(searchKey);
                     }));
                 }));
             };
@@ -18952,9 +18962,11 @@
                 setTimeout(( /**
                  * @return {?}
                  */function () {
-                    /** @type {?} */
-                    var descriptionHeight = _this.galleryDescription.nativeElement.clientHeight;
-                    _this.renderer.setStyle(_this.galleryImg.nativeElement, 'max-height', "calc(100% - " + (descriptionHeight + 25) + "px)");
+                    if (_this.galleryDescription) {
+                        /** @type {?} */
+                        var descriptionHeight = _this.galleryDescription.nativeElement.clientHeight;
+                        _this.renderer.setStyle(_this.galleryImg.nativeElement, 'max-height', "calc(100% - " + (descriptionHeight + 25) + "px)");
+                    }
                 }), 0);
             };
         /**
