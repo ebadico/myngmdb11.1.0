@@ -1,10 +1,13 @@
 {
   "name": "ng-uikit-pro-standard",
-  "version": "7.4.1",
+  "version": "7.4.2",
   "peerDependencies": {
     "@angular/common": "^7.0.0",
     "@angular/core": "^7.0.0"
   },
+  "files": [
+    "**/*"
+  ],
   "main": "bundles/ng-uikit-pro-standard.umd.js",
   "module": "fesm5/ng-uikit-pro-standard.js",
   "es2015": "fesm2015/ng-uikit-pro-standard.js",

@@ -4,7 +4,7 @@ import { Subject, Observable, timer } from 'rxjs';
 import { take, catchError, map, mergeMap, distinctUntilChanged } from 'rxjs/operators';
 import { RouterLinkWithHref, Router, NavigationEnd, NavigationError, NavigationCancel } from '@angular/router';
 import { state, style, trigger, transition, animate } from '@angular/animations';
-import { __values, __extends, __spread, __assign, __decorate, __metadata } from 'tslib';
+import { __values, __extends, __spread, __decorate, __metadata, __assign } from 'tslib';
 import { CommonModule, isPlatformBrowser, isPlatformServer, DOCUMENT as DOCUMENT$1 } from '@angular/common';
 import { NG_VALUE_ACCESSOR, FormsModule, NG_VALIDATORS, FormControl, NgModel } from '@angular/forms';
 import { Component, ElementRef, Renderer2, Input, HostBinding, NgModule, Directive, HostListener, forwardRef, ViewEncapsulation, ViewChild, Injectable, Output, EventEmitter, Inject, PLATFORM_ID, ChangeDetectorRef, Injector, TemplateRef, NgZone, ComponentFactoryResolver, ApplicationRef, ChangeDetectionStrategy, ViewContainerRef, Attribute, NO_ERRORS_SCHEMA, RendererFactory2, ContentChildren, ContentChild, Host, InjectionToken, Optional, ViewChildren, isDevMode, SkipSelf, defineInjectable, SecurityContext } from '@angular/core';
@@ -3133,8 +3133,8 @@ var CollapseComponent = /** @class */ (function () {
                     template: '<ng-content></ng-content>',
                     animations: [
                         trigger('expandBody', [
-                            state('collapsed', style({ height: '0px', visibility: 'hidden', overflow: 'hidden' })),
-                            state('expanded', style({ height: '*', visibility: 'visible', overflow: 'visible' })),
+                            state('collapsed', style({ height: '0px' })),
+                            state('expanded', style({ height: '*' })),
                             transition('expanded <=> collapsed', animate('500ms ease')),
                         ])
                     ]
@@ -8090,7 +8090,6 @@ var MdbTableDirective = /** @class */ (function () {
  */
 var MdbTableSortDirective = /** @class */ (function () {
     function MdbTableSortDirective() {
-        // tslint:disable-next-line:no-input-rename
         this.dataSource = [];
         this.sorted = false;
     }
@@ -8101,7 +8100,18 @@ var MdbTableSortDirective = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.sortDataBy(this.sortBy.toString().toLowerCase());
+        this.sortDataBy(this.trimWhiteSigns(this.sortBy.toString().toLowerCase()));
+    };
+    /**
+     * @param {?} headElement
+     * @return {?}
+     */
+    MdbTableSortDirective.prototype.trimWhiteSigns = /**
+     * @param {?} headElement
+     * @return {?}
+     */
+    function (headElement) {
+        return headElement.replace(/ /g, '');
     };
     /**
      * @param {?} key
@@ -8403,7 +8413,7 @@ var MdbTableService = /** @class */ (function () {
              * @return {?}
              */
             function (key) {
-                return (obj[key].toLowerCase()).includes(searchKey);
+                return (obj[key].toString().toLowerCase()).includes(searchKey);
             }));
         }));
     };
@@ -18975,9 +18985,11 @@ var ImageModalComponent = /** @class */ (function () {
          * @return {?}
          */
         function () {
-            /** @type {?} */
-            var descriptionHeight = _this.galleryDescription.nativeElement.clientHeight;
-            _this.renderer.setStyle(_this.galleryImg.nativeElement, 'max-height', "calc(100% - " + (descriptionHeight + 25) + "px)");
+            if (_this.galleryDescription) {
+                /** @type {?} */
+                var descriptionHeight = _this.galleryDescription.nativeElement.clientHeight;
+                _this.renderer.setStyle(_this.galleryImg.nativeElement, 'max-height', "calc(100% - " + (descriptionHeight + 25) + "px)");
+            }
         }), 0);
     };
     /**
