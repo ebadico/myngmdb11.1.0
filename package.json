@@ -6,7 +6,20 @@
     "@angular/core": "^7.0.0"
   },
   "files": [
-    "**/*"
+    "assets/**/*",
+    "bundles/**/*",
+    "esm5/**/*",
+    "esm2015/**/*",
+    "fesm5/**/*",
+    "fesm2015/**/*",
+    "lib/**/*",
+    ".gitignore",
+    "changelog",
+    "license.pdf",
+    "ng-uikit-pro-standard.d.ts",
+    "ng-uikit-pro-standard.metadata.json",
+    "package.json",
+    "public_api.d.ts"
   ],
   "main": "bundles/ng-uikit-pro-standard.umd.js",
   "module": "fesm5/ng-uikit-pro-standard.js",
