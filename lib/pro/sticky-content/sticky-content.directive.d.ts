@@ -1,6 +1,7 @@
 import { ElementRef, OnDestroy, AfterViewInit } from '@angular/core';
 export declare class MdbStickyDirective implements OnDestroy, AfterViewInit {
     stickyAfter: string;
+    stickyAfterAlias: string;
     isBrowser: boolean;
     el: HTMLElement | any;
     parentEl: HTMLElement | any;

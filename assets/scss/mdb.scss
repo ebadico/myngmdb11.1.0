@@ -1,6 +1,6 @@
 /*!
  * Material Design for Bootstrap 4
- * Version: MDB PRO 4.7.3
+ * Version: MDB PRO 4.7.4
  *
  *
  * Copyright: Material Design for BootstrapS
@@ -30,6 +30,7 @@
 // Bootstrap
 @import "core/bootstrap/functions";
 @import "core/bootstrap/variables";
+@import "core/bootstrap/rfs";
 
 // CORE
 @import "core/mixins";
@@ -124,7 +125,7 @@
  @import "addons-pro/timeline";
 
 // Angular
-@import "angular/mdb-angular";
+@import "angular/mdb-angular.scss";
 
 // Your custom styles
 @import "custom-styles";
