@@ -9,6 +9,7 @@ export declare class MDBBadgeComponent implements OnInit {
     warning: boolean;
     danger: boolean;
     pill: boolean;
+    classInside: string;
     color: string;
     class: string;
     constructor(_el: ElementRef, _renderer: Renderer2);

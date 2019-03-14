@@ -5,6 +5,7 @@ export declare class MdbIconComponent implements OnInit {
     icon: string;
     size: string;
     class: string;
+    classInside: string;
     fab: boolean;
     far: boolean;
     fal: boolean;
@@ -12,4 +13,5 @@ export declare class MdbIconComponent implements OnInit {
     sizeClass: string;
     constructor(_el: ElementRef, _renderer: Renderer2);
     ngOnInit(): void;
+    private _getClosestEl;
 }
