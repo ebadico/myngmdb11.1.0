@@ -1,4 +1,4 @@
-import { ElementRef, EventEmitter, OnInit, Renderer2, AfterViewInit } from '@angular/core';
+import { AfterViewInit, ElementRef, EventEmitter, OnInit, Renderer2 } from '@angular/core';
 export declare class ImageModalComponent implements OnInit, AfterViewInit {
     element: ElementRef;
     renderer: Renderer2;
