@@ -63,11 +63,11 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     width: number;
     top: number;
     left: number;
+    documentClickFun: Function;
     itemsBefore: Array<any>;
     onChange: (_: any) => void;
     onTouched: () => void;
     /** Event handlers. **/
-    closeSelect($event: any): void;
     constructor(el: ElementRef, renderer: Renderer2, document: any, platformId: string, cdRef: ChangeDetectorRef);
     ngOnInit(): void;
     updateFilterHeight(): void;
