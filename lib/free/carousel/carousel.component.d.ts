@@ -1,4 +1,4 @@
-import { OnDestroy, EventEmitter, ElementRef, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { OnDestroy, EventEmitter, ElementRef, AfterViewInit, ChangeDetectorRef, Renderer2 } from '@angular/core';
 import { LinkedList } from '../utils/linked-list.class';
 import { SlideComponent } from './slide.component';
 import { CarouselConfig } from './carousel.config';
@@ -12,6 +12,7 @@ export declare enum Direction {
  */
 export declare class CarouselComponent implements OnDestroy, AfterViewInit {
     private cdRef;
+    private renderer;
     SWIPE_ACTION: {
         LEFT: string;
         RIGHT: string;
@@ -24,6 +25,7 @@ export declare class CarouselComponent implements OnDestroy, AfterViewInit {
     protected el: ElementRef | any;
     protected animationEnd: boolean;
     protected _currentActiveSlide: number | any;
+    protected carouselIndicators: any;
     isBrowser: any;
     noWrap: boolean;
     noPause: boolean;
@@ -41,7 +43,7 @@ export declare class CarouselComponent implements OnDestroy, AfterViewInit {
     getImg(slide: any): any;
     interval: number;
     readonly isBs4: boolean;
-    constructor(config: CarouselConfig, el: ElementRef, platformId: string, cdRef: ChangeDetectorRef);
+    constructor(config: CarouselConfig, el: ElementRef, platformId: string, cdRef: ChangeDetectorRef, renderer: Renderer2);
     ngOnDestroy(): void;
     addSlide(slide: SlideComponent): void;
     ngAfterViewInit(): void;
@@ -49,7 +51,7 @@ export declare class CarouselComponent implements OnDestroy, AfterViewInit {
     swipe(action?: string): void;
     nextSlide(force?: boolean): void;
     previousSlide(force?: boolean): void;
-    protected fadeAnimation(goToIndex: number): void;
+    protected fadeAnimation(goToIndex: number, direction?: any): void;
     protected slideAnimation(goToIndex: number, direction: any): void;
     selectSlide(index: number): void;
     play(): void;
