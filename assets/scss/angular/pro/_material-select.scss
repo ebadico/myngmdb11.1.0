@@ -220,6 +220,7 @@ mdb-select-dropdown {
       height: 38px;
     }
     .options {
+      position: relative;
       overflow-y: auto;
       ul {
         list-style: none;

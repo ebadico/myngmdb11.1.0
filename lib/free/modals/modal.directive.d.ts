@@ -1,4 +1,5 @@
 import { AfterViewInit, ComponentRef, ElementRef, EventEmitter, OnDestroy, Renderer2, ViewContainerRef } from '@angular/core';
+import { Utils } from '../utils/utils.class';
 import { ModalBackdropComponent } from './modalBackdrop.component';
 import { ModalOptions } from './modal.options';
 import { ComponentLoaderFactory } from '../utils/component-loader/component-loader.factory';
@@ -36,6 +37,8 @@ export declare class ModalDirective implements AfterViewInit, OnDestroy {
     private _backdrop;
     _dialog: any;
     isNested: boolean;
+    utils: Utils;
+    onKeyDown(event: any): void;
     onClick(event: any): void;
     onEsc(): void;
     constructor(_element: ElementRef, _viewContainerRef: ViewContainerRef, _renderer: Renderer2, clf: ComponentLoaderFactory);

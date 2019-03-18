@@ -1,8 +1,8 @@
-import { AfterContentInit, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { AfterContentInit, ElementRef, EventEmitter, Renderer2 } from '@angular/core';
 import { MdbOptionComponent } from './mdb-option.component';
 import { ISelectedOption } from '../interfaces/selected-option.interface';
 import { Observable } from 'rxjs';
-export declare class MdbAutoCompleterComponent implements OnInit, AfterContentInit {
+export declare class MdbAutoCompleterComponent implements AfterContentInit {
     private renderer;
     private el;
     textNoResults: string;
@@ -10,6 +10,10 @@ export declare class MdbAutoCompleterComponent implements OnInit, AfterContentIn
     clearButtonTabIndex: number;
     appendToBody: boolean;
     disabled: boolean;
+    select: EventEmitter<{
+        text: string;
+        element: any;
+    }>;
     optionList: Array<any>;
     mdbOptions: MdbOptionComponent[];
     dropdown: ElementRef;
@@ -54,6 +58,5 @@ export declare class MdbAutoCompleterComponent implements OnInit, AfterContentIn
         width: any;
         bottom: number;
     }): void;
-    ngOnInit(): void;
     ngAfterContentInit(): void;
 }
