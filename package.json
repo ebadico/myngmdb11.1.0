@@ -2,7 +2,20 @@
   "name": "ng-uikit-pro-standard",
   "version": "7.4.4",
   "files": [
-    "**/*"
+    "assets/**/*",
+    "bundles/**/*",
+    "esm5/**/*",
+    "esm2015/**/*",
+    "fesm5/**/*",
+    "fesm2015/**/*",
+    "lib/**/*",
+    ".gitignore",
+    "changelog",
+    "license.pdf",
+    "ng-uikit-pro-standard.d.ts",
+    "ng-uikit-pro-standard.metadata.json",
+    "package.json",
+    "public_api.d.ts"
   ],
   "peerDependencies": {
     "@angular/common": "^7.0.0",
