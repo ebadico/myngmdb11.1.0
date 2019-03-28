@@ -3,7 +3,7 @@ export declare class MdbTableSortDirective {
     sortBy: string;
     sorted: boolean;
     onclick(): void;
-    constructor();
     trimWhiteSigns(headElement: any): string;
+    moveArrayItem(arr: any, oldIndex: number, newIndex: number): any;
     sortDataBy(key: string | any): void;
 }

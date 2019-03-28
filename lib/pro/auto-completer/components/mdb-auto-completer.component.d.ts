@@ -33,8 +33,8 @@ export declare class MdbAutoCompleterComponent implements AfterContentInit {
     private _selectedItemChanged;
     private _isBrowser;
     constructor(renderer: Renderer2, el: ElementRef, platformId: string);
-    onItemClick(): void;
-    windowMouseDown(): void;
+    onItemClick(event: any): void;
+    windowMouseDown(event: any): void;
     setSelectedItem(item: ISelectedOption): void;
     getSelectedItem(): ISelectedOption;
     selectedItemChanged(): Observable<any>;
