@@ -4987,16 +4987,78 @@
     /** @type {?} */
     var defaultIdNumber$1 = 0;
     var MdbErrorDirective = /** @class */ (function () {
-        function MdbErrorDirective() {
+        function MdbErrorDirective(el, renderer) {
+            this.el = el;
+            this.renderer = renderer;
             this.id = "mdb-error-" + defaultIdNumber$1++;
             this.errorMsg = true;
             this.messageId = this.id;
         }
+        /**
+         * @private
+         * @param {?} el
+         * @param {?} selector
+         * @return {?}
+         */
+        MdbErrorDirective.prototype._getClosestEl = /**
+         * @private
+         * @param {?} el
+         * @param {?} selector
+         * @return {?}
+         */
+            function (el, selector) {
+                for (; el && el !== document; el = el.previousElementSibling) {
+                    if (el.matches(selector)) {
+                        return el;
+                    }
+                }
+                return null;
+            };
+        /**
+         * @return {?}
+         */
+        MdbErrorDirective.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                /** @type {?} */
+                var textarea = this._getClosestEl(this.el.nativeElement, '.md-textarea');
+                if (textarea) {
+                    /** @type {?} */
+                    var height_1 = textarea.offsetHeight + 4 + 'px';
+                    this.renderer.setStyle(this.el.nativeElement, 'top', height_1);
+                    this.textareaListenFunction = this.renderer.listen(textarea, 'keyup', ( /**
+                     * @return {?}
+                     */function () {
+                        height_1 = textarea.offsetHeight + 4 + 'px';
+                        _this.renderer.setStyle(_this.el.nativeElement, 'top', height_1);
+                    }));
+                }
+            };
+        /**
+         * @return {?}
+         */
+        MdbErrorDirective.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+            function () {
+                if (this.textareaListenFunction) {
+                    this.textareaListenFunction();
+                }
+            };
         MdbErrorDirective.decorators = [
             { type: i0.Directive, args: [{
                         selector: 'mdb-error'
                     },] }
         ];
+        /** @nocollapse */
+        MdbErrorDirective.ctorParameters = function () {
+            return [
+                { type: i0.ElementRef },
+                { type: i0.Renderer2 }
+            ];
+        };
         MdbErrorDirective.propDecorators = {
             id: [{ type: i0.Input }],
             errorMsg: [{ type: i0.HostBinding, args: ['class.error-message',] }],
@@ -5012,16 +5074,78 @@
     /** @type {?} */
     var defaultIdNumber$2 = 0;
     var MdbSuccessDirective = /** @class */ (function () {
-        function MdbSuccessDirective() {
+        function MdbSuccessDirective(el, renderer) {
+            this.el = el;
+            this.renderer = renderer;
             this.id = "mdb-success-" + defaultIdNumber$2++;
             this.successMsg = true;
             this.messageId = this.id;
         }
+        /**
+         * @private
+         * @param {?} el
+         * @param {?} selector
+         * @return {?}
+         */
+        MdbSuccessDirective.prototype._getClosestEl = /**
+         * @private
+         * @param {?} el
+         * @param {?} selector
+         * @return {?}
+         */
+            function (el, selector) {
+                for (; el && el !== document; el = el.previousElementSibling) {
+                    if (el.matches(selector)) {
+                        return el;
+                    }
+                }
+                return null;
+            };
+        /**
+         * @return {?}
+         */
+        MdbSuccessDirective.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                /** @type {?} */
+                var textarea = this._getClosestEl(this.el.nativeElement, '.md-textarea');
+                if (textarea) {
+                    /** @type {?} */
+                    var height_1 = textarea.offsetHeight + 4 + 'px';
+                    this.renderer.setStyle(this.el.nativeElement, 'top', height_1);
+                    this.textareaListenFunction = this.renderer.listen(textarea, 'keyup', ( /**
+                     * @return {?}
+                     */function () {
+                        height_1 = textarea.offsetHeight + 4 + 'px';
+                        _this.renderer.setStyle(_this.el.nativeElement, 'top', height_1);
+                    }));
+                }
+            };
+        /**
+         * @return {?}
+         */
+        MdbSuccessDirective.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+            function () {
+                if (this.textareaListenFunction) {
+                    this.textareaListenFunction();
+                }
+            };
         MdbSuccessDirective.decorators = [
             { type: i0.Directive, args: [{
                         selector: 'mdb-success'
                     },] }
         ];
+        /** @nocollapse */
+        MdbSuccessDirective.ctorParameters = function () {
+            return [
+                { type: i0.ElementRef },
+                { type: i0.Renderer2 }
+            ];
+        };
         MdbSuccessDirective.propDecorators = {
             id: [{ type: i0.Input }],
             successMsg: [{ type: i0.HostBinding, args: ['class.success-message',] }],
@@ -8293,6 +8417,35 @@
                 return headElement.replace(/ /g, '');
             };
         /**
+         * @param {?} arr
+         * @param {?} oldIndex
+         * @param {?} newIndex
+         * @return {?}
+         */
+        MdbTableSortDirective.prototype.moveArrayItem = /**
+         * @param {?} arr
+         * @param {?} oldIndex
+         * @param {?} newIndex
+         * @return {?}
+         */
+            function (arr, oldIndex, newIndex) {
+                while (oldIndex < 0) {
+                    oldIndex += arr.length;
+                }
+                while (newIndex < 0) {
+                    newIndex += arr.length;
+                }
+                if (newIndex >= arr.length) {
+                    /** @type {?} */
+                    var k = newIndex - arr.length;
+                    while ((k--) + 1) {
+                        arr.push(null);
+                    }
+                }
+                arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
+                return arr;
+            };
+        /**
          * @param {?} key
          * @return {?}
          */
@@ -8321,6 +8474,9 @@
                     else if (a > b) {
                         return _this.sorted ? -1 : 1;
                     }
+                    else if (a == null || b == null) {
+                        return 1;
+                    }
                     else {
                         return 0;
                     }
@@ -8332,8 +8488,6 @@
                         selector: '[mdbTableSort]'
                     },] }
         ];
-        /** @nocollapse */
-        MdbTableSortDirective.ctorParameters = function () { return []; };
         MdbTableSortDirective.propDecorators = {
             dataSource: [{ type: i0.Input, args: ['mdbTableSort',] }],
             sortBy: [{ type: i0.Input }],
@@ -8602,7 +8756,9 @@
                      * @param {?} key
                      * @return {?}
                      */function (key) {
-                        return (obj[key].toString().toLowerCase()).includes(searchKey);
+                        if (obj[key]) {
+                            return (obj[key].toString().toLowerCase()).includes(searchKey);
+                        }
                     }));
                 }));
             };
@@ -8619,7 +8775,7 @@
                     return this.getDataSource();
                 }
                 if (searchKey) {
-                    return this.filterLocalDataBy(searchKey);
+                    return this.filterLocalDataBy(searchKey.toLowerCase());
                 }
             };
         /**
@@ -8937,7 +9093,7 @@
         MdbTablePaginationComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'mdb-table-pagination',
-                        template: "<!--Pagination -->\n<nav>\n  <ul class=\"pagination pagination-circle pg-blue d-flex flex-center\" [ngClass]=\"{\n      'justify-content-end': paginationAlign =='end',\n      'justify-content-start': paginationAlign =='start'\n    }\">\n\n    <p *ngIf=\"!hideDescription\">{{firstItemIndex}} - {{lastVisibleItemIndex}} of {{allItemsLength}}</p>\n    <!--Arrow left-->\n    <li class=\"page-item\" [ngClass]=\"{'disabled': checkIfPreviousShouldBeDisabled()}\">\n      <a class=\"page-link\" mdbWavesEffect aria-label=\"Previous\" (click)=\"previousPage()\">\n        <span aria-hidden=\"true\">\u00AB</span>\n      </a>\n    </li>\n\n    <!--Arrow right-->\n    <li class=\"page-item\" [ngClass]=\"{'disabled': checkIfNextShouldBeDisabled()}\">\n      <a class=\"page-link\" mdbWavesEffect aria-label=\"Next\" (click)=\"nextPage()\">\n        <span aria-hidden=\"true\">\u00BB</span>\n      </a>\n    </li>\n\n  </ul>\n</nav>\n<!--/Pagination -->\n"
+                        template: "<!--Pagination -->\n<nav>\n  <ul class=\"pagination pagination-circle pg-blue d-flex flex-center\" [ngClass]=\"{\n      'justify-content-end': paginationAlign =='end',\n      'justify-content-start': paginationAlign =='start'\n    }\">\n\n    <li *ngIf=\"!hideDescription\">{{firstItemIndex}} - {{lastVisibleItemIndex}} of {{allItemsLength}}</li>\n    <!--Arrow left-->\n    <li class=\"page-item\" [ngClass]=\"{'disabled': checkIfPreviousShouldBeDisabled()}\">\n      <a class=\"page-link\" mdbWavesEffect aria-label=\"Previous\" (click)=\"previousPage()\">\n        <span aria-hidden=\"true\">\u00AB</span>\n      </a>\n    </li>\n\n    <!--Arrow right-->\n    <li class=\"page-item\" [ngClass]=\"{'disabled': checkIfNextShouldBeDisabled()}\">\n      <a class=\"page-link\" mdbWavesEffect aria-label=\"Next\" (click)=\"nextPage()\">\n        <span aria-hidden=\"true\">\u00BB</span>\n      </a>\n    </li>\n\n  </ul>\n</nav>\n<!--/Pagination -->\n"
                     }] }
         ];
         /** @nocollapse */
@@ -11618,12 +11774,14 @@
             this._isBrowser = common.isPlatformBrowser(platformId);
         }
         /**
+         * @param {?} event
          * @return {?}
          */
         MdbAutoCompleterComponent.prototype.onItemClick = /**
+         * @param {?} event
          * @return {?}
          */
-            function () {
+            function (event) {
                 /** @type {?} */
                 var selectedElement = ( /** @type {?} */({}));
                 this.mdbOptions.forEach(( /**
@@ -11635,18 +11793,24 @@
                     }
                     el.clicked = false;
                 }));
-                this.setSelectedItem({ text: selectedElement.value, element: selectedElement });
-                this.highlightRow(0);
-                this.select.emit({ text: selectedElement.value, element: selectedElement });
+                if (event.target !== this.dropdown.nativeElement) {
+                    this.setSelectedItem({ text: selectedElement.value, element: selectedElement });
+                    this.highlightRow(0);
+                    this.select.emit({ text: selectedElement.value, element: selectedElement });
+                }
             };
         /**
+         * @param {?} event
          * @return {?}
          */
         MdbAutoCompleterComponent.prototype.windowMouseDown = /**
+         * @param {?} event
          * @return {?}
          */
-            function () {
-                this.hide();
+            function (event) {
+                if (this.dropdown && event.target !== this.dropdown.nativeElement) {
+                    this.hide();
+                }
             };
         /**
          * @param {?} item
@@ -12008,8 +12172,8 @@
             mdbOptions: [{ type: i0.ContentChildren, args: [MdbOptionComponent, { descendants: true, read: MdbOptionComponent },] }],
             dropdown: [{ type: i0.ViewChild, args: ['dropdown',] }],
             noResultsEl: [{ type: i0.ViewChild, args: ['noResults',] }],
-            onItemClick: [{ type: i0.HostListener, args: ['mousedown',] }],
-            windowMouseDown: [{ type: i0.HostListener, args: ['window:mousedown',] }]
+            onItemClick: [{ type: i0.HostListener, args: ['mousedown', ['$event'],] }],
+            windowMouseDown: [{ type: i0.HostListener, args: ['window:mousedown', ['$event'],] }]
         };
         return MdbAutoCompleterComponent;
     }());
@@ -12253,8 +12417,18 @@
          * @return {?}
          */
             function () {
+                var _this = this;
                 this.mdbAutoCompleter.show();
                 this._appendDropdownToInput();
+                if (this.mdbAutoCompleter.appendToBody) {
+                    if (this._getClosestEl(this.el.nativeElement, '.modal-body')) {
+                        setTimeout(( /**
+                         * @return {?}
+                         */function () {
+                            _this.renderer.setStyle(_this.mdbAutoCompleter.dropdown.nativeElement, 'z-index', '1100');
+                        }), 0);
+                    }
+                }
             };
         /**
          * @private
@@ -21497,18 +21671,28 @@
             function (isSelected) {
                 var _this = this;
                 if (isSelected) {
-                    this.optionList.filtered.forEach(( /**
-                     * @param {?} option
-                     * @return {?}
-                     */function (option) {
+                    this.optionList.filtered
+                        .filter(( /**
+                 * @param {?} option
+                 * @return {?}
+                 */function (option) { return !option.disabled; }))
+                        .forEach(( /**
+                 * @param {?} option
+                 * @return {?}
+                 */function (option) {
                         _this.selectOption(option);
                     }));
                 }
                 else {
-                    this.optionList.filtered.forEach(( /**
-                     * @param {?} option
-                     * @return {?}
-                     */function (option) {
+                    this.optionList.filtered
+                        .filter(( /**
+                 * @param {?} option
+                 * @return {?}
+                 */function (option) { return !option.disabled; }))
+                        .forEach(( /**
+                 * @param {?} option
+                 * @return {?}
+                 */function (option) {
                         _this.deselectOption(option);
                     }));
                 }
@@ -22111,10 +22295,15 @@
          */
             function () {
                 /** @type {?} */
-                var areAllSelected = this.optionList.filtered.every(( /**
-                 * @param {?} option
-                 * @return {?}
-                 */function (option) {
+                var areAllSelected = this.optionList.filtered
+                    .filter(( /**
+             * @param {?} option
+             * @return {?}
+             */function (option) { return !option.disabled; }))
+                    .every(( /**
+             * @param {?} option
+             * @return {?}
+             */function (option) {
                     return option.selected ? true : false;
                 }));
                 areAllSelected ? this.selectAllSelected = true : this.selectAllSelected = false;
@@ -28059,6 +28248,7 @@
             this.duration = 300;
             this.showClock = false;
             this.disabled = false;
+            this.timeChanged = new i0.EventEmitter();
             this.isMobile = null;
             this.touchDevice = ('ontouchstart' in (( /** @type {?} */(document.documentElement))));
             this.showHours = false;
@@ -28364,6 +28554,7 @@
                 }
                 this.onChangeCb(this.endHours);
                 this.onTouchedCb();
+                this.timeChanged.emit(this.endHours);
                 this.showClock = false;
             };
         /**
@@ -28697,6 +28888,7 @@
             buttonLabel: [{ type: i0.Input }],
             disabled: [{ type: i0.Input }],
             tabIndex: [{ type: i0.Input }],
+            timeChanged: [{ type: i0.Output }],
             ontouchmove: [{ type: i0.HostListener, args: ['touchmove', ['$event'],] }]
         };
         return ClockPickerComponent;

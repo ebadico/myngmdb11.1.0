@@ -1,6 +1,6 @@
 {
   "name": "ng-uikit-pro-standard",
-  "version": "7.4.3",
+  "version": "7.4.4",
   "files": [
     "assets/**/*",
     "bundles/**/*",
@@ -17,7 +17,6 @@
     "package.json",
     "public_api.d.ts"
   ],
-
   "peerDependencies": {
     "@angular/common": "^7.0.0",
     "@angular/core": "^7.0.0"
