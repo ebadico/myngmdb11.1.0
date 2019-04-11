@@ -1,9 +1,14 @@
-import { QueryList, AfterContentInit } from '@angular/core';
+import { QueryList, AfterContentInit, OnInit, OnDestroy } from '@angular/core';
 import { SBItemComponent } from './sb-item';
-export declare class SqueezeBoxComponent implements AfterContentInit {
+import { MdbAccordionService } from '../mdb-accordion.service';
+export declare class SqueezeBoxComponent implements OnInit, AfterContentInit, OnDestroy {
+    private accordionService;
+    private itemsChanges;
     multiple: boolean;
+    private _multiple;
     items: QueryList<SBItemComponent>;
-    constructor();
-    didItemToggled(item: SBItemComponent): void;
+    constructor(accordionService: MdbAccordionService);
+    ngOnInit(): void;
     ngAfterContentInit(): void;
+    ngOnDestroy(): void;
 }

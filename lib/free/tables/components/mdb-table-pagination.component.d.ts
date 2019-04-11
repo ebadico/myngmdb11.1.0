@@ -1,9 +1,9 @@
-import { OnInit, EventEmitter, ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
-import { MdbTableService } from '../services/mdb-table.service';
+import { OnInit, EventEmitter, ChangeDetectorRef, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-export declare class MdbTablePaginationComponent implements OnInit, OnChanges {
-    private tableService;
+import { MdbTableDirective } from "../directives/mdb-table.directive";
+export declare class MdbTablePaginationComponent implements OnInit, OnChanges, AfterViewInit {
     private cdRef;
+    tableEl: MdbTableDirective;
     searchPagination: boolean;
     searchDataSource: any;
     paginationAlign: string;
@@ -23,8 +23,9 @@ export declare class MdbTablePaginationComponent implements OnInit, OnChanges {
     }>;
     nextPageClick: EventEmitter<any>;
     previousPageClick: EventEmitter<any>;
-    constructor(tableService: MdbTableService, cdRef: ChangeDetectorRef);
+    constructor(cdRef: ChangeDetectorRef);
     ngOnInit(): void;
+    ngAfterViewInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
     setMaxVisibleItemsNumberTo(value: number): void;
     searchTextObs(): Observable<any>;

@@ -21,7 +21,7 @@ export declare class ModalDirective implements AfterViewInit, OnDestroy {
     closed: EventEmitter<ModalDirective>;
     isAnimated: boolean;
     /** This field contains last dismiss reason.
-    Possible values: `backdrop-click`, `esc` and `null` (if modal was closed by direct call of `.hide()`). */
+     Possible values: `backdrop-click`, `esc` and `null` (if modal was closed by direct call of `.hide()`). */
     dismissReason: string | any;
     readonly isShown: boolean;
     protected _config: ModalOptions | any;

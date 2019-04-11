@@ -1,13 +1,14 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DomSanitizer, DOCUMENT } from '@angular/platform-browser';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { Subject, timer, Observable } from 'rxjs';
-import { take, catchError, map, mergeMap, distinctUntilChanged } from 'rxjs/operators';
 import { RouterLinkWithHref, Router, NavigationEnd, NavigationError, NavigationCancel } from '@angular/router';
 import { state, style, trigger, transition, animate } from '@angular/animations';
-import { __values, __extends, __spread, __decorate, __metadata, __assign } from 'tslib';
+import { Subject, timer, fromEvent, Observable, from } from 'rxjs';
+import { take, distinctUntilChanged, filter, map, pairwise, share, skip, throttleTime, catchError, mergeMap } from 'rxjs/operators';
+import { __spread, __values, __extends, __read, __decorate, __metadata, __assign } from 'tslib';
 import { CommonModule, isPlatformBrowser, isPlatformServer, DOCUMENT as DOCUMENT$1 } from '@angular/common';
 import { NG_VALUE_ACCESSOR, FormsModule, NG_VALIDATORS, FormControl, NgModel } from '@angular/forms';
-import { Component, ElementRef, Renderer2, Input, HostBinding, NgModule, Directive, HostListener, forwardRef, ViewEncapsulation, ViewChild, Injectable, Output, EventEmitter, Inject, PLATFORM_ID, ChangeDetectorRef, Injector, TemplateRef, NgZone, ComponentFactoryResolver, ApplicationRef, ChangeDetectionStrategy, ViewContainerRef, Attribute, NO_ERRORS_SCHEMA, RendererFactory2, ContentChildren, ContentChild, Host, InjectionToken, Optional, ViewChildren, isDevMode, SkipSelf, defineInjectable, SecurityContext } from '@angular/core';
+import { Component, ElementRef, Renderer2, Input, HostBinding, NgModule, Directive, HostListener, forwardRef, ViewEncapsulation, ViewChild, Injectable, Output, EventEmitter, Inject, PLATFORM_ID, ChangeDetectorRef, Injector, TemplateRef, NgZone, ComponentFactoryResolver, ApplicationRef, ChangeDetectionStrategy, ViewContainerRef, Attribute, NO_ERRORS_SCHEMA, RendererFactory2, ContentChildren, ContentChild, Host, InjectionToken, Optional, isDevMode, ViewChildren, SkipSelf, defineInjectable, SecurityContext } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -1058,6 +1059,8 @@ var History = win['History'];
 var Location = win['Location'];
 /** @type {?} */
 var EventListener = win['EventListener'];
+/** @type {?} */
+var navigator$1 = win['navigator'];
 
 /**
  * @fileoverview added by tsickle
@@ -3100,6 +3103,7 @@ var CollapseComponent = /** @class */ (function () {
         if (event.toState === 'expanded') {
             this.shownBsCollapse.emit(this);
             this.expanded.emit(this);
+            this.overflow = 'visible';
         }
         else {
             this.hiddenBsCollapse.emit(this);
@@ -3133,6 +3137,7 @@ var CollapseComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
+        this.overflow = 'hidden';
         this.expandAnimationState = 'collapsed';
         this.isCollapsed = true;
         this.hideBsCollapse.emit(this);
@@ -6274,18 +6279,65 @@ var Utils = /** @class */ (function () {
         lastFocusableElement = focusableElements[focusableElements.length - 1];
         if (event.key === 'Tab' || event.keyCode === KEYCODE_TAB) {
             if (event.shiftKey) {
-                if (document && document.activeElement === firstFocusableElement) {
+                if (document$1 && document$1.activeElement === firstFocusableElement) {
                     lastFocusableElement.focus();
                     event.preventDefault();
                 }
             }
             else {
-                if (document && document.activeElement === lastFocusableElement) {
+                if (document$1 && document$1.activeElement === lastFocusableElement) {
                     firstFocusableElement.focus();
                     event.preventDefault();
                 }
             }
         }
+    };
+    /**
+     * @param {?} el
+     * @param {?} selector
+     * @return {?}
+     */
+    Utils.prototype.getClosestEl = /**
+     * @param {?} el
+     * @param {?} selector
+     * @return {?}
+     */
+    function (el, selector) {
+        for (; el && el !== document$1; el = el.parentNode) {
+            if (el.matches && el.matches(selector)) {
+                return el;
+            }
+        }
+        return null;
+    };
+    /**
+     * @param {?} elem
+     * @return {?}
+     */
+    Utils.prototype.getCoords = /**
+     * @param {?} elem
+     * @return {?}
+     */
+    function (elem) {
+        /** @type {?} */
+        var box = elem.getBoundingClientRect();
+        /** @type {?} */
+        var body = document$1.body;
+        /** @type {?} */
+        var docEl = document$1.documentElement;
+        /** @type {?} */
+        var scrollTop = win.pageYOffset || docEl.scrollTop || body.scrollTop;
+        /** @type {?} */
+        var scrollLeft = win.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+        /** @type {?} */
+        var clientTop = docEl.clientTop || body.clientTop || 0;
+        /** @type {?} */
+        var clientLeft = docEl.clientLeft || body.clientLeft || 0;
+        /** @type {?} */
+        var top = box.top + scrollTop - clientTop;
+        /** @type {?} */
+        var left = box.left + scrollLeft - clientLeft;
+        return { top: Math.round(top), left: Math.round(left) };
     };
     return Utils;
 }());
@@ -6595,6 +6647,17 @@ var ModalDirective = /** @class */ (function () {
         function () {
             _this.showElement();
         }));
+        if (!this.config.backdrop && this.config.ignoreBackdropClick) {
+            /** @type {?} */
+            var modalHeight = this._element.nativeElement.firstElementChild.firstElementChild.clientHeight + 12;
+            this._renderer.setStyle(this._element.nativeElement, 'position', 'fixed');
+            this._renderer.setStyle(this._element.nativeElement, 'height', modalHeight + "px");
+            if (navigator$1.userAgent.indexOf('Safari') != -1 && navigator$1.userAgent.indexOf('Chrome') == -1) {
+                this._renderer.setStyle(this._element.nativeElement, 'overflow', 'unset');
+                this._renderer.setStyle(this._element.nativeElement, 'overflow-y', 'unset');
+                this._renderer.setStyle(this._element.nativeElement, 'overflow-x', 'unset');
+            }
+        }
     };
     /** Allows to manually close modal */
     /**
@@ -6826,7 +6889,8 @@ var ModalDirective = /** @class */ (function () {
             //  this._renderer.invokeElementMethod(otherOpenedModals[otherOpenedModals.length - 1], 'focus');
             otherOpenedModals[otherOpenedModals.length - 1].nativeElement.focus();
         }
-        catch (error) { }
+        catch (error) {
+        }
     };
     /** @internal */
     /**
@@ -7422,9 +7486,9 @@ var MDBModalService = /** @class */ (function () {
      * @param {?} to
      * @return {?}
      */
-    function (from, to) {
+    function (from$$1, to) {
         var _this = this;
-        from.subscribe((/**
+        from$$1.subscribe((/**
          * @return {?}
          */
         function () {
@@ -7577,6 +7641,7 @@ var NavbarComponent = /** @class */ (function () {
         this.renderer = renderer;
         this._navbarService = _navbarService;
         this.containerInside = true;
+        this.collapseId = 'navbarCollapse';
         this.shown = false;
         this.duration = 350; // ms
         // ms
@@ -7584,6 +7649,7 @@ var NavbarComponent = /** @class */ (function () {
         this.showClass = false;
         this.collapsing = false;
         this._itemsLength = 0;
+        this.ariaExpanded = false;
         // tslint:disable-next-line:max-line-length
         this.subscription = this._navbarService.getNavbarLinkClicks().subscribe((/**
          * @param {?} navbarLinkClicks
@@ -7698,6 +7764,7 @@ var NavbarComponent = /** @class */ (function () {
         this.shown = true;
         this.collapse = false;
         this.collapsing = true;
+        this.ariaExpanded = true;
         setTimeout((/**
          * @return {?}
          */
@@ -7727,6 +7794,7 @@ var NavbarComponent = /** @class */ (function () {
             this.collapse = false;
             this.showClass = false;
             this.collapsing = true;
+            this.ariaExpanded = false;
             setTimeout((/**
              * @return {?}
              */
@@ -7804,6 +7872,7 @@ var NavbarComponent = /** @class */ (function () {
             this.shown = false;
             this.showClass = false;
             this.collapse = true;
+            this.ariaExpanded = false;
             this.renderer.setStyle(this.el.nativeElement, 'height', '');
         }
     };
@@ -7841,7 +7910,7 @@ var NavbarComponent = /** @class */ (function () {
     NavbarComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mdb-navbar',
-                    template: "<nav class=\"{{SideClass}}\" #nav>\n  <div [ngClass]=\"{'container': containerInside}\" [ngStyle]=\"{'display': displayStyle}\" #container>\n      <ng-content select=\"mdb-navbar-brand\"></ng-content>\n      <ng-content select=\"logo\"></ng-content>\n      <ng-content></ng-content>\n    <ng-content *ngIf=\"this.doubleNav == true\" select=\"navlinks\"></ng-content>\n    <div *ngIf=\"this.doubleNav == false\">\n      <button #toggler class=\"navbar-toggler\" type=\"button\" (click)=\"toggle(); $event.preventDefault()\" mdbWavesEffect *ngIf=\"this.el.nativeElement.children.length !== 0\">\n        <span class=\"navbar-toggler-icon\">\n        </span>\n      </button>\n    </div>\n    <div #navbar [style.height]=\"height\" class=\"navbar-collapse collapse\" [ngClass]=\"{'collapse': collapse, 'show': showClass, 'collapsing': collapsing}\">\n      <ng-content select=\"links\"></ng-content>\n    </div>\n  </div>\n</nav>\n"
+                    template: "<nav class=\"{{SideClass}}\" #nav>\n  <div [ngClass]=\"{'container': containerInside}\" [ngStyle]=\"{'display': displayStyle}\" #container>\n      <ng-content select=\"mdb-navbar-brand\"></ng-content>\n      <ng-content select=\"logo\"></ng-content>\n      <ng-content></ng-content>\n    <ng-content *ngIf=\"this.doubleNav == true\" select=\"navlinks\"></ng-content>\n    <div *ngIf=\"this.doubleNav == false\">\n      <button #toggler class=\"navbar-toggler\" type=\"button\" [attr.aria-controls]=\"collapseId\" [attr.aria-expanded]=\"ariaExpanded\" aria-label=\"Toggle navigation\" (click)=\"toggle(); $event.preventDefault()\" mdbWavesEffect *ngIf=\"this.el.nativeElement.children.length !== 0\">\n        <span class=\"navbar-toggler-icon\">\n        </span>\n      </button>\n    </div>\n    <div #navbar [attr.id]=\"collapseId\" [style.height]=\"height\" class=\"navbar-collapse collapse\" [ngClass]=\"{'collapse': collapse, 'show': showClass, 'collapsing': collapsing}\">\n      <ng-content select=\"links\"></ng-content>\n    </div>\n  </div>\n</nav>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -7853,6 +7922,7 @@ var NavbarComponent = /** @class */ (function () {
         iconBackground: [{ type: Input }],
         SideClass: [{ type: Input }],
         containerInside: [{ type: Input }],
+        collapseId: [{ type: Input }],
         el: [{ type: ViewChild, args: ['navbar',] }],
         mobile: [{ type: ViewChild, args: ['mobile',] }],
         navbar: [{ type: ViewChild, args: ['nav',] }],
@@ -8283,6 +8353,120 @@ var PopoverModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @enum {string} */
+var Direction$1 = {
+    Up: 'Up',
+    Down: 'Down',
+};
+var StickyHeaderDirective = /** @class */ (function () {
+    function StickyHeaderDirective(_renderer, _el) {
+        this._renderer = _renderer;
+        this._el = _el;
+        this.animationDuration = 200;
+        this.transitionEnd = new EventEmitter();
+    }
+    /**
+     * @return {?}
+     */
+    StickyHeaderDirective.prototype.ngAfterViewInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        /** @type {?} */
+        var scroll$ = fromEvent(win, 'scroll').pipe(throttleTime(10), map((/**
+         * @return {?}
+         */
+        function () { return win.pageYOffset; })), pairwise(), map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = __read(_a, 2), y1 = _b[0], y2 = _b[1];
+            return (y2 < y1 ? Direction$1.Up : Direction$1.Down);
+        })), distinctUntilChanged(), share());
+        this.scrollUp$ = scroll$.pipe(filter((/**
+         * @param {?} direction
+         * @return {?}
+         */
+        function (direction) { return direction === Direction$1.Up; })));
+        this.scrollDown$ = scroll$.pipe(filter((/**
+         * @param {?} direction
+         * @return {?}
+         */
+        function (direction) { return direction === Direction$1.Down; })));
+        this._renderer.setStyle(this._el.nativeElement, 'position', 'fixed');
+        this._renderer.setStyle(this._el.nativeElement, 'top', '0');
+        this._renderer.setStyle(this._el.nativeElement, 'width', '100%');
+        setTimeout((/**
+         * @return {?}
+         */
+        function () {
+            _this.scrollUp$.pipe(skip(0)).subscribe((/**
+             * @return {?}
+             */
+            function () {
+                _this._renderer.setStyle(_this._el.nativeElement, 'transition', "all " + _this.animationDuration + "ms ease-in");
+                _this._renderer.setStyle(_this._el.nativeElement, 'transform', 'translateY(0%)');
+                _this.transitionEnd.emit({ state: 'Visible' });
+            }));
+            _this.scrollDown$.pipe(skip(0)).subscribe((/**
+             * @return {?}
+             */
+            function () {
+                _this._renderer.setStyle(_this._el.nativeElement, 'transition', "all " + _this.animationDuration + "ms ease-in");
+                _this._renderer.setStyle(_this._el.nativeElement, 'transform', 'translateY(-100%)');
+                _this.transitionEnd.emit({ state: 'Hidden' });
+            }));
+        }), 0);
+    };
+    StickyHeaderDirective.decorators = [
+        { type: Directive, args: [{
+                    selector: '[mdbStickyHeader]',
+                    exportAs: 'mdbStickyHeader'
+                },] }
+    ];
+    /** @nocollapse */
+    StickyHeaderDirective.ctorParameters = function () { return [
+        { type: Renderer2 },
+        { type: ElementRef }
+    ]; };
+    StickyHeaderDirective.propDecorators = {
+        animationDuration: [{ type: Input }],
+        transitionEnd: [{ type: Output }]
+    };
+    return StickyHeaderDirective;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var StickyHeaderModule = /** @class */ (function () {
+    function StickyHeaderModule() {
+    }
+    StickyHeaderModule.decorators = [
+        { type: NgModule, args: [{
+                    declarations: [StickyHeaderDirective],
+                    exports: [StickyHeaderDirective],
+                    imports: [
+                        CommonModule,
+                        BrowserAnimationsModule
+                    ]
+                },] }
+    ];
+    return StickyHeaderModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var MdbTableDirective = /** @class */ (function () {
     function MdbTableDirective(el, renderer) {
         this.el = el;
@@ -8290,7 +8474,161 @@ var MdbTableDirective = /** @class */ (function () {
         this.stickyHeader = false;
         this.stickyHeaderBgColor = '';
         this.stickyHeaderTextColor = '';
+        this._dataSource = [];
+        this._dataSourceChanged = new Subject();
     }
+    /**
+     * @param {?} newRow
+     * @return {?}
+     */
+    MdbTableDirective.prototype.addRow = /**
+     * @param {?} newRow
+     * @return {?}
+     */
+    function (newRow) {
+        this.getDataSource().push(newRow);
+    };
+    /**
+     * @param {?} index
+     * @param {?} row
+     * @return {?}
+     */
+    MdbTableDirective.prototype.addRowAfter = /**
+     * @param {?} index
+     * @param {?} row
+     * @return {?}
+     */
+    function (index, row) {
+        this.getDataSource().splice(index, 0, row);
+    };
+    /**
+     * @param {?} index
+     * @return {?}
+     */
+    MdbTableDirective.prototype.removeRow = /**
+     * @param {?} index
+     * @return {?}
+     */
+    function (index) {
+        this.getDataSource().splice(index, 1);
+    };
+    /**
+     * @return {?}
+     */
+    MdbTableDirective.prototype.rowRemoved = /**
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var rowRemoved = Observable.create((/**
+         * @param {?} observer
+         * @return {?}
+         */
+        function (observer) {
+            observer.next(true);
+        }));
+        return rowRemoved;
+    };
+    /**
+     * @return {?}
+     */
+    MdbTableDirective.prototype.removeLastRow = /**
+     * @return {?}
+     */
+    function () {
+        this.getDataSource().pop();
+    };
+    /**
+     * @return {?}
+     */
+    MdbTableDirective.prototype.getDataSource = /**
+     * @return {?}
+     */
+    function () {
+        return this._dataSource;
+    };
+    /**
+     * @param {?} data
+     * @return {?}
+     */
+    MdbTableDirective.prototype.setDataSource = /**
+     * @param {?} data
+     * @return {?}
+     */
+    function (data) {
+        this._dataSource = data;
+        this._dataSourceChanged.next(this.getDataSource());
+    };
+    /**
+     * @return {?}
+     */
+    MdbTableDirective.prototype.dataSourceChange = /**
+     * @return {?}
+     */
+    function () {
+        return this._dataSourceChanged;
+    };
+    /**
+     * @param {?} searchKey
+     * @return {?}
+     */
+    MdbTableDirective.prototype.filterLocalDataBy = /**
+     * @param {?} searchKey
+     * @return {?}
+     */
+    function (searchKey) {
+        return this.getDataSource().filter((/**
+         * @param {?} obj
+         * @return {?}
+         */
+        function (obj) {
+            return Object.keys(obj).some((/**
+             * @param {?} key
+             * @return {?}
+             */
+            function (key) {
+                if (obj[key]) {
+                    return (obj[key].toString().toLowerCase()).includes(searchKey);
+                }
+            }));
+        }));
+    };
+    /**
+     * @param {?} searchKey
+     * @return {?}
+     */
+    MdbTableDirective.prototype.searchLocalDataBy = /**
+     * @param {?} searchKey
+     * @return {?}
+     */
+    function (searchKey) {
+        if (!searchKey) {
+            return this.getDataSource();
+        }
+        if (searchKey) {
+            return this.filterLocalDataBy(searchKey.toLowerCase());
+        }
+    };
+    /**
+     * @param {?} searchKey
+     * @return {?}
+     */
+    MdbTableDirective.prototype.searchDataObservable = /**
+     * @param {?} searchKey
+     * @return {?}
+     */
+    function (searchKey) {
+        var _this = this;
+        /** @type {?} */
+        var observable = Observable.create((/**
+         * @param {?} observer
+         * @return {?}
+         */
+        function (observer) {
+            observer.next(_this.searchLocalDataBy(searchKey));
+        }));
+        return observable;
+    };
     /**
      * @return {?}
      */
@@ -8319,7 +8657,8 @@ var MdbTableDirective = /** @class */ (function () {
     };
     MdbTableDirective.decorators = [
         { type: Directive, args: [{
-                    selector: '[mdbTable]'
+                    selector: '[mdbTable]',
+                    exportAs: 'mdbTable'
                 },] }
     ];
     /** @nocollapse */
@@ -8346,9 +8685,12 @@ var MdbTableDirective = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var MdbTableSortDirective = /** @class */ (function () {
-    function MdbTableSortDirective() {
-        this.dataSource = [];
+    function MdbTableSortDirective(el, renderer) {
+        this.el = el;
+        this.renderer = renderer;
         this.sorted = true;
+        this.dataSource = [];
+        this.sortEnd = new EventEmitter();
     }
     /**
      * @return {?}
@@ -8357,7 +8699,8 @@ var MdbTableSortDirective = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.sortDataBy(this.trimWhiteSigns(this.sortBy.toString().toLowerCase()));
+        this.sortDataBy(this.trimWhiteSigns(this.sortBy.toString()));
+        this.sortEnd.emit(this.dataSource);
     };
     /**
      * @param {?} headElement
@@ -8424,9 +8767,13 @@ var MdbTableSortDirective = /** @class */ (function () {
                 i++;
             }
             if (a < b) {
+                _this.renderer.setAttribute(_this.el.nativeElement, 'aria-sort', 'ascending');
+                _this.renderer.setAttribute(_this.el.nativeElement, 'aria-label', key + ": activate to sort column descending");
                 return _this.sorted ? 1 : -1;
             }
             else if (a > b) {
+                _this.renderer.setAttribute(_this.el.nativeElement, 'aria-sort', 'descending');
+                _this.renderer.setAttribute(_this.el.nativeElement, 'aria-label', key + ": activate to sort column ascending");
                 return _this.sorted ? -1 : 1;
             }
             else if (a == null || b == null) {
@@ -8438,14 +8785,31 @@ var MdbTableSortDirective = /** @class */ (function () {
         }));
         this.sorted = !this.sorted;
     };
+    /**
+     * @return {?}
+     */
+    MdbTableSortDirective.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var key = this.trimWhiteSigns(this.sortBy.toString()).split('.');
+        this.renderer.setAttribute(this.el.nativeElement, 'aria-label', key + ": activate to sort column descending");
+    };
     MdbTableSortDirective.decorators = [
         { type: Directive, args: [{
                     selector: '[mdbTableSort]'
                 },] }
     ];
+    /** @nocollapse */
+    MdbTableSortDirective.ctorParameters = function () { return [
+        { type: ElementRef },
+        { type: Renderer2 }
+    ]; };
     MdbTableSortDirective.propDecorators = {
         dataSource: [{ type: Input, args: ['mdbTableSort',] }],
         sortBy: [{ type: Input }],
+        sortEnd: [{ type: Output }],
         onclick: [{ type: HostListener, args: ['click',] }]
     };
     return MdbTableSortDirective;
@@ -8768,9 +9132,7 @@ var MdbTableService = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var MdbTablePaginationComponent = /** @class */ (function () {
-    function MdbTablePaginationComponent(tableService, cdRef) {
-        var _this = this;
-        this.tableService = tableService;
+    function MdbTablePaginationComponent(cdRef) {
         this.cdRef = cdRef;
         this.searchPagination = false;
         this.searchDataSource = null;
@@ -8788,36 +9150,6 @@ var MdbTablePaginationComponent = /** @class */ (function () {
         this.pagination = new Subject();
         this.nextPageClick = new EventEmitter();
         this.previousPageClick = new EventEmitter();
-        this.tableService.dataSourceChange().subscribe((/**
-         * @param {?} data
-         * @return {?}
-         */
-        function (data) {
-            _this.allItemsLength = data.length;
-            _this.lastVisibleItemIndex = data.length;
-            _this.calculateFirstItemIndex();
-            _this.calculateLastItemIndex();
-            _this.disableNextButton(data);
-            if (_this.maxVisibleItems > _this.allItemsLength) {
-                _this.maxVisibleItems = _this.allItemsLength;
-            }
-            if (_this.searchDataSource) {
-                setTimeout((/**
-                 * @return {?}
-                 */
-                function () {
-                    if (_this.searchDataSource.length !== data.length) {
-                        _this.activePageNumber = 1;
-                        _this.firstItemIndex = 1;
-                    }
-                    else {
-                        if (_this.firstItemIndex <= _this.maxVisibleItems) {
-                            _this.lastVisibleItemIndex = _this.maxVisibleItems;
-                        }
-                    }
-                }), 0);
-            }
-        }));
     }
     /**
      * @return {?}
@@ -8826,7 +9158,55 @@ var MdbTablePaginationComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.allItemsLength = this.tableService.getDataSource().length;
+        if (this.tableEl) {
+            this.allItemsLength = this.tableEl.getDataSource().length;
+        }
+    };
+    /**
+     * @return {?}
+     */
+    MdbTablePaginationComponent.prototype.ngAfterViewInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        if (this.tableEl) {
+            this.tableEl.dataSourceChange().subscribe((/**
+             * @param {?} data
+             * @return {?}
+             */
+            function (data) {
+                _this.allItemsLength = data.length;
+                _this.lastVisibleItemIndex = data.length;
+                _this.calculateFirstItemIndex();
+                _this.calculateLastItemIndex();
+                _this.disableNextButton(data);
+                if (_this.searchDataSource) {
+                    setTimeout((/**
+                     * @return {?}
+                     */
+                    function () {
+                        if (_this.searchDataSource.length !== data.length) {
+                            _this.activePageNumber = 1;
+                            _this.firstItemIndex = 1;
+                        }
+                        else {
+                            if (_this.firstItemIndex <= _this.maxVisibleItems && _this.lastVisibleItemIndex <= data.length) {
+                                _this.lastVisibleItemIndex = _this.maxVisibleItems;
+                            }
+                        }
+                    }), 0);
+                }
+            }));
+        }
+        this.paginationChange().subscribe((/**
+         * @param {?} data
+         * @return {?}
+         */
+        function (data) {
+            _this.firstItemIndex = data.first;
+            _this.lastVisibleItemIndex = data.last;
+        }));
     };
     /**
      * @param {?} changes
@@ -8932,9 +9312,9 @@ var MdbTablePaginationComponent = /** @class */ (function () {
         else if (!this.searchDataSource) {
             this.lastVisibleItemIndex = this.lastItemIndex;
         }
-        if (this.lastItemIndex > this.tableService.getDataSource().length) {
-            this.lastItemIndex = this.tableService.getDataSource().length;
-            this.lastVisibleItemIndex = this.tableService.getDataSource().length;
+        if (this.lastItemIndex > this.tableEl.getDataSource().length) {
+            this.lastItemIndex = this.tableEl.getDataSource().length;
+            this.lastVisibleItemIndex = this.tableEl.getDataSource().length;
         }
         this.pagination.next({ first: this.firstItemIndex, last: this.lastItemIndex });
     };
@@ -8954,7 +9334,7 @@ var MdbTablePaginationComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        return Math.ceil(this.tableService.getDataSource().length / this.maxVisibleItems);
+        return Math.ceil(this.tableEl.getDataSource().length / this.maxVisibleItems);
     };
     /**
      * @return {?}
@@ -8978,8 +9358,8 @@ var MdbTablePaginationComponent = /** @class */ (function () {
         this.activePageNumber++;
         this.calculateFirstItemIndex();
         this.calculateLastItemIndex();
-        if (this.lastItemIndex > this.tableService.getDataSource().length) {
-            this.lastItemIndex = this.tableService.getDataSource().length;
+        if (this.lastItemIndex > this.tableEl.getDataSource().length) {
+            this.lastItemIndex = this.tableEl.getDataSource().length;
         }
         if (this.lastVisibleItemIndex > this.allItemsLength) {
             this.lastVisibleItemIndex = this.allItemsLength;
@@ -9058,10 +9438,10 @@ var MdbTablePaginationComponent = /** @class */ (function () {
     ];
     /** @nocollapse */
     MdbTablePaginationComponent.ctorParameters = function () { return [
-        { type: MdbTableService },
         { type: ChangeDetectorRef }
     ]; };
     MdbTablePaginationComponent.propDecorators = {
+        tableEl: [{ type: Input }],
         searchPagination: [{ type: Input }],
         searchDataSource: [{ type: Input }],
         paginationAlign: [{ type: Input }],
@@ -9742,7 +10122,8 @@ var MODULES = [
     TableModule,
     BadgeModule,
     BreadcrumbModule,
-    InputUtilitiesModule
+    InputUtilitiesModule,
+    StickyHeaderModule
 ];
 var MDBRootModule = /** @class */ (function () {
     function MDBRootModule() {
@@ -9767,7 +10148,8 @@ var MDBRootModule = /** @class */ (function () {
                         TableModule,
                         BadgeModule,
                         BreadcrumbModule,
-                        InputUtilitiesModule
+                        InputUtilitiesModule,
+                        StickyHeaderModule
                     ],
                     exports: MODULES,
                     schemas: [NO_ERRORS_SCHEMA]
@@ -9883,21 +10265,90 @@ var SBItemBodyComponent = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-/** @type {?} */
-var sbConfig = {
-    serviceInstance: new Object()
-};
-/** @type {?} */
-var sbItems = new Array();
+var MdbAccordionService = /** @class */ (function () {
+    function MdbAccordionService() {
+        this._items = [];
+        this._multiple = false;
+    }
+    /**
+     * @param {?} item
+     * @return {?}
+     */
+    MdbAccordionService.prototype.addItem = /**
+     * @param {?} item
+     * @return {?}
+     */
+    function (item) {
+        this._items.push(item);
+    };
+    /**
+     * @param {?} items
+     * @return {?}
+     */
+    MdbAccordionService.prototype.updateItemsArray = /**
+     * @param {?} items
+     * @return {?}
+     */
+    function (items) {
+        this._items = __spread(items);
+    };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    MdbAccordionService.prototype.updateMultipleState = /**
+     * @param {?} value
+     * @return {?}
+     */
+    function (value) {
+        this._multiple = value;
+    };
+    /**
+     * @param {?} item
+     * @return {?}
+     */
+    MdbAccordionService.prototype.didItemToggled = /**
+     * @param {?} item
+     * @return {?}
+     */
+    function (item) {
+        // on not multiple, it will collpase the rest of items
+        if (!this._multiple) {
+            this._items.forEach((/**
+             * @param {?} el
+             * @return {?}
+             */
+            function (el) {
+                if (el !== item) {
+                    el.applyToggle(true);
+                }
+                if (el === item) {
+                    /** @type {?} */
+                    var collapsed_1 = el.collapsed ? true : false;
+                    setTimeout((/**
+                     * @return {?}
+                     */
+                    function () {
+                        el.applyToggle(collapsed_1);
+                    }), 0);
+                }
+            }));
+        }
+    };
+    MdbAccordionService.decorators = [
+        { type: Injectable }
+    ];
+    return MdbAccordionService;
+}());
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var SBItemComponent = /** @class */ (function () {
-    function SBItemComponent() {
+    function SBItemComponent(accordionService) {
+        this.accordionService = accordionService;
         this.collapsed = true;
-        this.squeezebox = sbConfig.serviceInstance;
     }
     /**
      * @return {?}
@@ -9943,7 +10394,7 @@ var SBItemComponent = /** @class */ (function () {
      * @return {?}
      */
     function (collapsed) {
-        this.squeezebox.didItemToggled(this);
+        this.accordionService.didItemToggled(this);
         this.applyToggle(collapsed);
     };
     /**
@@ -9968,7 +10419,9 @@ var SBItemComponent = /** @class */ (function () {
                 }] }
     ];
     /** @nocollapse */
-    SBItemComponent.ctorParameters = function () { return []; };
+    SBItemComponent.ctorParameters = function () { return [
+        { type: MdbAccordionService }
+    ]; };
     SBItemComponent.propDecorators = {
         collapsed: [{ type: Input }],
         customClass: [{ type: Input }],
@@ -9982,41 +10435,34 @@ var SBItemComponent = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var SqueezeBoxComponent = /** @class */ (function () {
-    function SqueezeBoxComponent() {
-        this.multiple = true;
-        sbConfig.serviceInstance = this;
+    function SqueezeBoxComponent(accordionService) {
+        this.accordionService = accordionService;
+        this._multiple = true;
     }
+    Object.defineProperty(SqueezeBoxComponent.prototype, "multiple", {
+        get: /**
+         * @return {?}
+         */
+        function () { return this._multiple; },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._multiple = value;
+            this.accordionService.updateMultipleState(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
-     * @param {?} item
      * @return {?}
      */
-    SqueezeBoxComponent.prototype.didItemToggled = /**
-     * @param {?} item
+    SqueezeBoxComponent.prototype.ngOnInit = /**
      * @return {?}
      */
-    function (item) {
-        // on not multiple, it will collpase the rest of items
-        if (!this.multiple) {
-            sbItems.forEach((/**
-             * @param {?} el
-             * @return {?}
-             */
-            function (el) {
-                if (el !== item) {
-                    el.applyToggle(true);
-                }
-                if (el === item) {
-                    /** @type {?} */
-                    var collapsed_1 = el.collapsed ? true : false;
-                    setTimeout((/**
-                     * @return {?}
-                     */
-                    function () {
-                        el.applyToggle(collapsed_1);
-                    }), 0);
-                }
-            }));
-        }
+    function () {
+        this.accordionService.updateMultipleState(this.multiple);
     };
     /**
      * @return {?}
@@ -10025,15 +10471,9 @@ var SqueezeBoxComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.items.forEach((/**
-         * @param {?} el
-         * @return {?}
-         */
-        function (el) {
-            sbItems.push(el);
-        }));
+        var _this = this;
         if (!this.multiple) {
-            sbItems.forEach((/**
+            this.items.forEach((/**
              * @param {?} el
              * @return {?}
              */
@@ -10043,22 +10483,48 @@ var SqueezeBoxComponent = /** @class */ (function () {
                 el.applyToggle(collapsed);
             }));
         }
+        this.itemsChanges = this.items.changes.subscribe((/**
+         * @param {?} accordionItems
+         * @return {?}
+         */
+        function (accordionItems) {
+            _this.items = accordionItems;
+            /** @type {?} */
+            var accordionItemsArray = accordionItems.toArray();
+            _this.accordionService.updateItemsArray(accordionItemsArray);
+        }));
+        this.items.forEach((/**
+         * @param {?} item
+         * @return {?}
+         */
+        function (item) { return _this.accordionService.addItem(item); }));
+    };
+    /**
+     * @return {?}
+     */
+    SqueezeBoxComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        if (this.itemsChanges) {
+            this.itemsChanges.unsubscribe();
+        }
     };
     SqueezeBoxComponent.decorators = [
         { type: Component, args: [{
                     exportAs: 'squeezebox',
                     selector: 'mdb-squeezebox, mdb-accordion',
-                    template: "<div class=\"accordion md-accordion\">\n  <ng-content></ng-content>\n</div>"
+                    template: "<div class=\"accordion md-accordion\">\n  <ng-content></ng-content>\n</div>",
+                    providers: [MdbAccordionService]
                 }] }
     ];
     /** @nocollapse */
-    SqueezeBoxComponent.ctorParameters = function () { return []; };
+    SqueezeBoxComponent.ctorParameters = function () { return [
+        { type: MdbAccordionService }
+    ]; };
     SqueezeBoxComponent.propDecorators = {
         multiple: [{ type: Input }],
-        items: [{ type: ContentChildren, args: [forwardRef((/**
-                     * @return {?}
-                     */
-                    function () { return SBItemComponent; })),] }]
+        items: [{ type: ContentChildren, args: [SBItemComponent,] }]
     };
     return SqueezeBoxComponent;
 }());
@@ -11734,6 +12200,7 @@ var MdbAutoCompleterComponent = /** @class */ (function () {
         this.clearButton = true;
         this.clearButtonTabIndex = 0;
         this.select = new EventEmitter();
+        this.utils = new Utils();
         this._isDropdownOpen = new Subject();
         this._allItems = [];
         this._isOpen = false;
@@ -11839,7 +12306,30 @@ var MdbAutoCompleterComponent = /** @class */ (function () {
         function () {
             if (_this.dropdown && !_this.appendToBody) {
                 /** @type {?} */
-                var top_1 = _this.dropdown.nativeElement.clientHeight > _this.parameters.bottom ?
+                var modalEl = _this.utils.getClosestEl(_this.el.nativeElement, '.modal-dialog');
+                /** @type {?} */
+                var style_1 = win.getComputedStyle(document$1.querySelector('.completer-dropdown'));
+                /** @type {?} */
+                var height = ['height', 'padding-top', 'padding-bottom', 'margin-top', 'margin-bottom']
+                    .map((/**
+                 * @param {?} key
+                 * @return {?}
+                 */
+                function (key) { return parseInt(style_1.getPropertyValue(key), 10); }))
+                    .reduce((/**
+                 * @param {?} prev
+                 * @param {?} cur
+                 * @return {?}
+                 */
+                function (prev, cur) { return prev + cur; }));
+                /** @type {?} */
+                var topRect = document$1.querySelector('.completer-dropdown').getBoundingClientRect().top;
+                /** @type {?} */
+                var bottom = modalEl ?
+                    win.innerHeight - height - topRect :
+                    _this.parameters.bottom;
+                /** @type {?} */
+                var top_1 = _this.dropdown.nativeElement.clientHeight > bottom ?
                     "-" + (_this.dropdown.nativeElement.clientHeight - _this.parameters.inputHeight) :
                     _this.parameters.inputHeight + 3;
                 _this.renderer.setStyle(_this.dropdown.nativeElement, 'top', top_1 + 'px');
@@ -11957,6 +12447,7 @@ var MdbAutoCompleterComponent = /** @class */ (function () {
         if (this.dropdown) {
             switch (event.key) {
                 case 'ArrowDown':
+                    event.preventDefault();
                     this.moveHighlightedIntoView(event.key);
                     if (!this.isOpen()) {
                         this.show();
@@ -11982,6 +12473,7 @@ var MdbAutoCompleterComponent = /** @class */ (function () {
                     }
                     break;
                 case 'ArrowUp':
+                    event.preventDefault();
                     this.moveHighlightedIntoView(event.key);
                     if (this._selectedItemIndex === -1 || this._selectedItemIndex === 0) {
                         /** @type {?} */
@@ -11999,9 +12491,11 @@ var MdbAutoCompleterComponent = /** @class */ (function () {
                     this.select.emit({ text: selectedItem.value, element: selectedItem });
                     break;
                 case 'Escape':
+                    event.preventDefault();
                     this.hide();
                     break;
                 case 'Enter':
+                    event.preventDefault();
                     /** @type {?} */
                     var selectedOption = this.mdbOptions.map((/**
                      * @param {?} el
@@ -12185,7 +12679,7 @@ var MdbAutoCompleterDirective = /** @class */ (function () {
      */
     function (el, selector) {
         for (; el && el !== document; el = el.parentNode) {
-            if (el.matches(selector)) {
+            if (el.matches && el.matches(selector)) {
                 return el;
             }
         }
@@ -16618,6 +17112,11 @@ var InputAutoFillDirective = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 /** @type {?} */
 var MYDP_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -16671,11 +17170,16 @@ var MDBDatePickerComponent = /** @class */ (function () {
         this.label = '';
         this.placeholder = '';
         this.openOnFocus = true;
+        this.inline = false;
+        this.inlineIcon = 'far fa-calendar-alt';
         this.dateChanged = new EventEmitter();
         this.inputFieldChanged = new EventEmitter();
         this.calendarViewChanged = new EventEmitter();
         this.calendarToggle = new EventEmitter();
         this.inputFocusBlur = new EventEmitter();
+        this.closeButtonClicked = new EventEmitter();
+        this.clearButtonClicked = new EventEmitter();
+        this.todayButtonClicked = new EventEmitter();
         this.isDateSelected = false;
         this.labelActive = false;
         this.showSelector = false;
@@ -16753,11 +17257,15 @@ var MDBDatePickerComponent = /** @class */ (function () {
         this.onChangeCb = (/**
          * @return {?}
          */
-        function () { });
+        function () {
+        });
         this.onTouchedCb = (/**
          * @return {?}
          */
-        function () { });
+        function () {
+        });
+        // INLINE DATE PICKER
+        this.utils = new Utils();
         this.isBrowser = isPlatformBrowser(platformId);
         if (this.isBrowser) {
             this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -16830,7 +17338,8 @@ var MDBDatePickerComponent = /** @class */ (function () {
                     }));
                     _this.renderer.setStyle(openedPicker, 'z-index', '100');
                 }
-                catch (error) { }
+                catch (error) {
+                }
             }), 0);
         }
     };
@@ -16858,7 +17367,8 @@ var MDBDatePickerComponent = /** @class */ (function () {
                 this.elem.nativeElement.parentElement.parentElement.style.height = this.modalHeightBefore + 'px';
             }
         }
-        catch (error) { }
+        catch (error) {
+        }
         setTimeout((/**
          * @return {?}
          */
@@ -16964,13 +17474,18 @@ var MDBDatePickerComponent = /** @class */ (function () {
             var date = this.utilService.isDateValid(value, this.opts.dateFormat, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDays, this.opts.disableDateRanges, this.opts.monthLabels, this.opts.enableDays);
             if (this.utilService.isInitializedDate(date)) {
                 this.selectDate(date);
+                this.setVisibleMonth();
             }
             else {
                 this.invalidDate = true;
             }
         }
         if (this.invalidDate) {
-            this.inputFieldChanged.emit({ value: value, dateFormat: this.opts.dateFormat, valid: !(value.length === 0 || this.invalidDate) });
+            this.inputFieldChanged.emit({
+                value: value,
+                dateFormat: this.opts.dateFormat,
+                valid: !(value.length === 0 || this.invalidDate)
+            });
             this.onChangeCb('');
             this.onTouchedCb();
         }
@@ -17248,6 +17763,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
             this.calendarToggle.emit(CalToggle.CloseByCalBtn);
         }
         this.isDateSelected = false;
+        this.clearButtonClicked.emit(this);
         this.cdRef.markForCheck();
     };
     /**
@@ -17260,6 +17776,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
         this.showSelector = false;
         this.removeInlineStyle();
         this.isOpen = false;
+        this.closeButtonClicked.emit(this);
         this.cdRef.markForCheck();
     };
     /**
@@ -17281,7 +17798,8 @@ var MDBDatePickerComponent = /** @class */ (function () {
                 this.elem.nativeElement.parentElement.parentElement.style.height = this.modalHeightBefore + this.pickerFrame.nativeElement.offsetHeight + 'px';
             }
         }
-        catch (error) { }
+        catch (error) {
+        }
         // Open selector button clicked
         this.showSelector = !this.showSelector;
         if (this.showSelector) {
@@ -17433,6 +17951,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
             this.visibleMonth = { monthTxt: this.opts.monthLabels[today.month], monthNbr: today.month, year: today.year };
             this.generateCalendar(today.month, today.year, true);
         }
+        this.todayButtonClicked.emit(this);
     };
     /**
      * @param {?} cell
@@ -17516,10 +18035,10 @@ var MDBDatePickerComponent = /** @class */ (function () {
         // this.dateChanged.emit({ previousDate: this.selectionDayTxt, actualDate: dateModel });
         this.dateChanged.emit({
             date: date,
-            jsdate: null,
+            jsdate: this.getDate(date.year, date.month, date.day),
             previousDateFormatted: this.selectionDayTxt,
             actualDateFormatted: dateModel,
-            epoc: 0
+            epoc: Math.round(this.getTimeInMilliseconds(date) / 1000.0)
         });
         this.onChangeCb(dateModel);
         this.onTouchedCb();
@@ -18063,11 +18582,43 @@ var MDBDatePickerComponent = /** @class */ (function () {
         }
         return false;
     };
+    /**
+     * @return {?}
+     */
+    MDBDatePickerComponent.prototype.toggleInlineDatePicker = /**
+     * @return {?}
+     */
+    function () {
+        if (this.isOpen) {
+            this.closeBtnClicked();
+        }
+        else {
+            this.openBtnClicked();
+        }
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    MDBDatePickerComponent.prototype.onWindowClick = /**
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        if (this.isOpen &&
+            this.inline &&
+            !this.utils.getClosestEl(event.target, '.datepicker-inline-icon') &&
+            !this.utils.getClosestEl(event.target, '.datepicker-inline-icon') &&
+            !this.utils.getClosestEl(event.target, '.picker__frame') &&
+            !this.utils.getClosestEl(event.target, '.mydp-date')) {
+            this.closeBtnClicked();
+        }
+    };
     MDBDatePickerComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mdb-date-picker',
                     exportAs: 'mdbdatepicker',
-                    template: "<!-- Line 27: Deleted (focus)=\"onFocusInput($event)\" for better use in Firefox. If other strange problems will occur, please paste it in line 27. -->\r\n<div class=\"mydp picker\" [ngClass]=\"{'picker--opened': showSelector}\" [ngStyle]=\"{'width': opts.width}\">\r\n  <div class=\"md-form\">\r\n    <label (click)=\"openBtnClicked()\" *ngIf=\"label.length > 0\" [ngClass]=\"{\r\n          'active': checkActive(),\r\n          'disabled': opts.componentDisabled\r\n        }\">{{ label }}</label>\r\n    <input #dateInput type=\"text\" class=\"form-control mydp-date\" [attr.aria-label]=\"opts.ariaLabelInputField\" (mousedown)=\"openBtnClicked()\"\r\n      [attr.maxlength]=\"opts.dateFormat.length\" [ngClass]=\"{\r\n        'selectiondisabled': opts.componentDisabled,\r\n        'disabled': opts.componentDisabled\r\n      }\" placeholder=\"{{ placeholder }}\" [ngModel]=\"selectionDayTxt\" (ngModelChange)=\"onUserDateInput($event)\" [value]=\"selectionDayTxt\"\r\n      [ngStyle]=\"{\r\n        'font-size': opts.selectionTxtFontSize\r\n      }\" (blur)=\"onBlurInput($event)\" (focus)=\"onFocusInput($event)\" [disabled]=\"opts.componentDisabled\" autocomplete=\"off\" [tabindex]=\"tabIndex\">\r\n  </div>\r\n  <div *ngIf=\"showSelector\" class=\"selector picker__holder selectorarrow selectorarrowleft selectorarrowright\" #divFocus [ngClass]=\"{'alignselectorright': opts.alignSelectorRight}\"\r\n    tabindex=\"0\">\r\n    <div class=\"picker__frame picker__box\" #pickerFrame>\r\n      <div class=\"picker__header\">\r\n        <div class=\"picker__date-display\">\r\n          <div class=\"picker__weekday-display\">\r\n            {{ weekText(getWeekday(tmp)) }}\r\n          </div>\r\n          <div class=\"picker__month-display\">\r\n            <div>{{ monthText(tmp.month) }}</div>\r\n          </div>\r\n          <div class=\"picker__day-display\">\r\n            <div>{{ tmp.day }}</div>\r\n          </div>\r\n          <div class=\"picker__year-display\">\r\n            <div>{{ tmp.year }}</div>\r\n          </div>\r\n        </div>\r\n        <select class=\"picker__select--year\" [(ngModel)]=\"visibleMonth.year\" (ngModelChange)=\"onUserYearInput($event)\" role=\"menu\"\r\n          aria-label=\"Year selector\">\r\n          <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option>\r\n        </select>\r\n        <select class=\"picker__select--month\" [(ngModel)]=\"visibleMonth.monthTxt\" (ngModelChange)=\"onUserMonthInput($event)\" role=\"menu\"\r\n          aria-label=\"Month selector\">\r\n          <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option>\r\n        </select>\r\n        <button class=\"picker__nav--prev\" data-nav=\"-1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Previous month\"\r\n          (click)=\"prevMonth()\" [disabled]=\"prevMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled}\"></button>\r\n        <button class=\"picker__nav--next\" data-nav=\"1\" type=\"button\" aria-controls=\"date-picker-example_table\" title=\"Next month\"\r\n          (click)=\"nextMonth()\" [disabled]=\"nextMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled}\"></button>\r\n      </div>\r\n      <table class=\"picker__table\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"picker__weekday weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#</th>\r\n            <th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let w of dates\">\r\n            <td class=\"picker__day daycellweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td>\r\n            <td class=\"picker__day\" *ngFor=\"let d of w.week\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId&&!d.disabled, 'disabled': d.disabled, 'tablesingleday': d.cmo===currMonthId&&!d.disabled}\">\r\n              <div *ngIf=\"d.markedDate.marked\" class=\"markdate\" [ngStyle]=\"{'background-color': d.markedDate.color}\"></div>\r\n              <div class=\"picker__day\" [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId,'picker__day--outfocus': (d.cmo===nextMonthId || d.cmo===prevMonthId), 'picker__day--today':d.currDay&&opts.markCurrentDay, 'picker__day--selected picker__day--highlighted':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId}\"\r\n                (click)=\"!d.disabled&&cellClicked(d);$event.stopPropagation()\" (keydown)=\"cellKeyDown($event, d)\" tabindex=\"0\">\r\n                {{d.dateObj.day}}\r\n              </div>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <div class=\"picker__footer\">\r\n        <button type=\"button\" *ngIf=\"opts.showTodayBtn\" class=\"picker__button--today\" (click)=\"todayClicked()\" role=\"button\" [attr.aria-label]=\"opts.todayBtnTxt\">\r\n          {{opts.todayBtnTxt}}\r\n        </button>\r\n        <button type=\"button\" *ngIf=\"opts.showClearDateBtn\" class=\"picker__button--clear\" (click)=\"removeBtnClicked()\" role=\"button\"\r\n          [attr.aria-label]=\"opts.clearBtnTxt\">\r\n          {{opts.clearBtnTxt}}\r\n        </button>\r\n        <button type=\"button\" [ngClass]=\"{'ml-auto': !opts.showTodayBtn}\" class=\"picker__button--close\" (click)=\"closeBtnClicked()\"\r\n          role=\"button\" [attr.aria-label]=\"opts.closeBtnTxt\">\r\n          {{opts.closeBtnTxt}}\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>",
+                    template: "<!-- Line 27: Deleted (focus)=\"onFocusInput($event)\" for better use in Firefox. If other strange problems will occur, please paste it in line 27. -->\r\n<div class=\"mydp picker\" [ngClass]=\"{'picker--opened': showSelector}\" [ngStyle]=\"{'width': opts.width}\" *ngIf=\"!inline\">\r\n  <div class=\"md-form\">\r\n    <label (click)=\"openBtnClicked()\" *ngIf=\"label.length > 0\" [ngClass]=\"{\r\n          'active': checkActive(),\r\n          'disabled': opts.componentDisabled\r\n        }\">{{ label }}</label>\r\n    <input #dateInput type=\"text\" class=\"form-control mydp-date\" [attr.aria-label]=\"opts.ariaLabelInputField\"\r\n           (mousedown)=\"openBtnClicked()\"\r\n           [attr.maxlength]=\"opts.dateFormat.length\" [ngClass]=\"{\r\n        'selectiondisabled': opts.componentDisabled,\r\n        'disabled': opts.componentDisabled\r\n      }\" placeholder=\"{{ placeholder }}\" [ngModel]=\"selectionDayTxt\" (ngModelChange)=\"onUserDateInput($event)\"\r\n           [value]=\"selectionDayTxt\"\r\n           [ngStyle]=\"{\r\n        'font-size': opts.selectionTxtFontSize\r\n      }\" (blur)=\"onBlurInput($event)\" (focus)=\"onFocusInput($event)\" [disabled]=\"opts.componentDisabled\"\r\n           autocomplete=\"off\" [tabindex]=\"tabIndex\">\r\n  </div>\r\n  <div *ngIf=\"showSelector\" class=\"selector picker__holder selectorarrow selectorarrowleft selectorarrowright\" #divFocus\r\n       [ngClass]=\"{'alignselectorright': opts.alignSelectorRight}\"\r\n       tabindex=\"0\">\r\n    <div class=\"picker__frame picker__box\" #pickerFrame>\r\n      <div class=\"picker__header\">\r\n        <div class=\"picker__date-display\">\r\n          <div class=\"picker__weekday-display\">\r\n            {{ weekText(getWeekday(tmp)) }}\r\n          </div>\r\n          <div class=\"picker__month-display\">\r\n            <div>{{ monthText(tmp.month) }}</div>\r\n          </div>\r\n          <div class=\"picker__day-display\">\r\n            <div>{{ tmp.day }}</div>\r\n          </div>\r\n          <div class=\"picker__year-display\">\r\n            <div>{{ tmp.year }}</div>\r\n          </div>\r\n        </div>\r\n        <select class=\"picker__select--year\" [(ngModel)]=\"visibleMonth.year\" (ngModelChange)=\"onUserYearInput($event)\"\r\n                role=\"menu\"\r\n                aria-label=\"Year selector\">\r\n          <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option>\r\n        </select>\r\n        <select class=\"picker__select--month\" [(ngModel)]=\"visibleMonth.monthTxt\"\r\n                (ngModelChange)=\"onUserMonthInput($event)\" role=\"menu\"\r\n                aria-label=\"Month selector\">\r\n          <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option>\r\n        </select>\r\n        <button class=\"picker__nav--prev\" data-nav=\"-1\" type=\"button\" aria-controls=\"date-picker-example_table\"\r\n                title=\"Previous month\"\r\n                (click)=\"prevMonth()\" [disabled]=\"prevMonthDisabled\"\r\n                [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled}\"></button>\r\n        <button class=\"picker__nav--next\" data-nav=\"1\" type=\"button\" aria-controls=\"date-picker-example_table\"\r\n                title=\"Next month\"\r\n                (click)=\"nextMonth()\" [disabled]=\"nextMonthDisabled\"\r\n                [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled}\"></button>\r\n      </div>\r\n      <table class=\"picker__table\">\r\n        <thead>\r\n        <tr>\r\n          <th class=\"picker__weekday weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#\r\n          </th>\r\n          <th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th>\r\n        </tr>\r\n        </thead>\r\n        <tbody>\r\n        <tr *ngFor=\"let w of dates\">\r\n          <td class=\"picker__day daycellweeknbr\"\r\n              *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td>\r\n          <td class=\"picker__day\" *ngFor=\"let d of w.week\"\r\n              [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId&&!d.disabled, 'disabled': d.disabled, 'tablesingleday': d.cmo===currMonthId&&!d.disabled}\">\r\n            <div *ngIf=\"d.markedDate.marked\" class=\"markdate\"\r\n                 [ngStyle]=\"{'background-color': d.markedDate.color}\"></div>\r\n            <div class=\"picker__day\"\r\n                 [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId,'picker__day--outfocus': (d.cmo===nextMonthId || d.cmo===prevMonthId), 'picker__day--today':d.currDay&&opts.markCurrentDay, 'picker__day--selected picker__day--highlighted':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId}\"\r\n                 (click)=\"!d.disabled&&cellClicked(d);$event.stopPropagation()\" (keydown)=\"cellKeyDown($event, d)\"\r\n                 tabindex=\"0\">\r\n              {{d.dateObj.day}}\r\n            </div>\r\n          </td>\r\n        </tr>\r\n        </tbody>\r\n      </table>\r\n      <div class=\"picker__footer\">\r\n        <button type=\"button\" *ngIf=\"opts.showTodayBtn\" class=\"picker__button--today\" (click)=\"todayClicked()\"\r\n                role=\"button\" [attr.aria-label]=\"opts.todayBtnTxt\">\r\n          {{opts.todayBtnTxt}}\r\n        </button>\r\n        <button type=\"button\" *ngIf=\"opts.showClearDateBtn\" class=\"picker__button--clear\" (click)=\"removeBtnClicked()\"\r\n                role=\"button\"\r\n                [attr.aria-label]=\"opts.clearBtnTxt\">\r\n          {{opts.clearBtnTxt}}\r\n        </button>\r\n        <button type=\"button\" [ngClass]=\"{'ml-auto': !opts.showTodayBtn}\" class=\"picker__button--close\"\r\n                (click)=\"closeBtnClicked()\"\r\n                role=\"button\" [attr.aria-label]=\"opts.closeBtnTxt\">\r\n          {{opts.closeBtnTxt}}\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n<div class=\"md-form my-0 d-flex align-items-center justify-content-center\" *ngIf=\"inline\">\r\n  <label (click)=\"openBtnClicked()\" *ngIf=\"label.length > 0\" [ngClass]=\"{\r\n          'active': checkActive(),\r\n          'disabled': opts.componentDisabled\r\n        }\">{{ label }}</label>\r\n  <input #dateInput type=\"text\" class=\"form-control mydp-date\" [attr.aria-label]=\"opts.ariaLabelInputField\"\r\n         [attr.maxlength]=\"opts.dateFormat.length\" [ngClass]=\"{\r\n        'selectiondisabled': opts.componentDisabled,\r\n        'disabled': opts.componentDisabled\r\n      }\" placeholder=\"{{ placeholder }}\" [ngModel]=\"selectionDayTxt\" (ngModelChange)=\"onUserDateInput($event)\"\r\n         [value]=\"selectionDayTxt\"\r\n         [ngStyle]=\"{\r\n        'font-size': opts.selectionTxtFontSize\r\n      }\" (focus)=\"onFocusInput($event)\" (blur)=\"onBlurInput($event)\" [disabled]=\"opts.componentDisabled\"\r\n         autocomplete=\"off\" [tabindex]=\"tabIndex\">\r\n  <i [ngClass]=\"inlineIcon\" class=\"datepicker-inline-icon\" (click)=\"toggleInlineDatePicker()\"></i>\r\n</div>\r\n<div class=\"mydp picker datepicker-inline\" [ngClass]=\"{'picker--opened': showSelector}\" *ngIf=\"inline && isOpen\">\r\n\r\n  <div class=\"picker__frame picker__box z-depth-1\" #pickerFrame [ngClass]=\"{'d-none': !isOpen}\">\r\n    <div class=\"picker__header d-flex flex-center\">\r\n\r\n      <select class=\"picker__select--year\" [(ngModel)]=\"visibleMonth.year\" (ngModelChange)=\"onUserYearInput($event)\"\r\n              role=\"menu\"\r\n              aria-label=\"Year selector\">\r\n        <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option>\r\n      </select>\r\n      <select class=\"picker__select--month\" [(ngModel)]=\"visibleMonth.monthTxt\"\r\n              (ngModelChange)=\"onUserMonthInput($event)\" role=\"menu\"\r\n              aria-label=\"Month selector\">\r\n        <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option>\r\n      </select>\r\n      <button class=\"picker__nav--prev\" data-nav=\"-1\" type=\"button\" aria-controls=\"date-picker-example_table\"\r\n              title=\"Previous month\"\r\n              (click)=\"prevMonth()\" [disabled]=\"prevMonthDisabled\"\r\n              [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled}\"></button>\r\n      <button class=\"picker__nav--next\" data-nav=\"1\" type=\"button\" aria-controls=\"date-picker-example_table\"\r\n              title=\"Next month\"\r\n              (click)=\"nextMonth()\" [disabled]=\"nextMonthDisabled\"\r\n              [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled}\"></button>\r\n    </div>\r\n    <table class=\"picker__table\">\r\n      <thead>\r\n      <tr>\r\n        <th class=\"picker__weekday weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#</th>\r\n        <th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th>\r\n      </tr>\r\n      </thead>\r\n      <tbody>\r\n      <tr *ngFor=\"let w of dates\">\r\n        <td class=\"picker__day daycellweeknbr\"\r\n            *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td>\r\n        <td class=\"picker__day\" *ngFor=\"let d of w.week\"\r\n            [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId&&!d.disabled, 'disabled': d.disabled, 'tablesingleday': d.cmo===currMonthId&&!d.disabled}\">\r\n          <div *ngIf=\"d.markedDate.marked\" class=\"markdate\" [ngStyle]=\"{'background-color': d.markedDate.color}\"></div>\r\n          <div class=\"picker__day\"\r\n               [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId,'picker__day--outfocus': (d.cmo===nextMonthId || d.cmo===prevMonthId), 'picker__day--today':d.currDay&&opts.markCurrentDay, 'picker__day--selected picker__day--highlighted':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId}\"\r\n               (click)=\"!d.disabled&&cellClicked(d);$event.stopPropagation()\" (keydown)=\"cellKeyDown($event, d)\"\r\n               tabindex=\"0\">\r\n            {{d.dateObj.day}}\r\n          </div>\r\n        </td>\r\n      </tr>\r\n      </tbody>\r\n    </table>\r\n    <div class=\"picker__footer\">\r\n      <button type=\"button\" *ngIf=\"opts.showTodayBtn\" class=\"picker__button--today\" (click)=\"todayClicked()\"\r\n              role=\"button\" [attr.aria-label]=\"opts.todayBtnTxt\">\r\n        {{opts.todayBtnTxt}}\r\n      </button>\r\n      <button type=\"button\" *ngIf=\"opts.showClearDateBtn\" class=\"picker__button--clear\" (click)=\"removeBtnClicked()\"\r\n              role=\"button\"\r\n              [attr.aria-label]=\"opts.clearBtnTxt\">\r\n        {{opts.clearBtnTxt}}\r\n      </button>\r\n      <button type=\"button\" [ngClass]=\"{'ml-auto': !opts.showTodayBtn}\" class=\"picker__button--close\"\r\n              (click)=\"closeBtnClicked()\"\r\n              role=\"button\" [attr.aria-label]=\"opts.closeBtnTxt\">\r\n        {{opts.closeBtnTxt}}\r\n      </button>\r\n    </div>\r\n  </div>\r\n</div>\r\n",
                     providers: [LocaleService, UtilService, MYDP_VALUE_ACCESSOR],
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.OnPush
@@ -18093,14 +18644,20 @@ var MDBDatePickerComponent = /** @class */ (function () {
         selector: [{ type: Input }],
         disabled: [{ type: Input }],
         openOnFocus: [{ type: Input }],
+        inline: [{ type: Input }],
+        inlineIcon: [{ type: Input }],
         dateChanged: [{ type: Output }],
         inputFieldChanged: [{ type: Output }],
         calendarViewChanged: [{ type: Output }],
         calendarToggle: [{ type: Output }],
         inputFocusBlur: [{ type: Output }],
+        closeButtonClicked: [{ type: Output }],
+        clearButtonClicked: [{ type: Output }],
+        todayButtonClicked: [{ type: Output }],
         divFocus: [{ type: ViewChild, args: ['divFocus',] }],
         pickerFrame: [{ type: ViewChild, args: ['pickerFrame',] }],
-        dateInput: [{ type: ViewChild, args: ['dateInput',] }]
+        dateInput: [{ type: ViewChild, args: ['dateInput',] }],
+        onWindowClick: [{ type: HostListener, args: ['window:click', ['$event'],] }]
     };
     return MDBDatePickerComponent;
 }());
@@ -26714,13 +27271,17 @@ var MdbStepperComponent = /** @class */ (function () {
         this.vertical = false;
         this.horizontal = true;
         this._stepperBreakpoint = 992;
+        this.stepTextContent = '';
+        this.stepChangeSubject = new Subject();
         this.isBrowser = isPlatformBrowser(platformId);
     }
     Object.defineProperty(MdbStepperComponent.prototype, "activeStepIndex", {
         get: /**
          * @return {?}
          */
-        function () { return this._activeStepIndex; },
+        function () {
+            return this._activeStepIndex;
+        },
         set: /**
          * @param {?} value
          * @return {?}
@@ -26731,6 +27292,15 @@ var MdbStepperComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    /**
+     * @return {?}
+     */
+    MdbStepperComponent.prototype.getStepChange$ = /**
+     * @return {?}
+     */
+    function () {
+        return this.stepChangeSubject;
+    };
     /**
      * @return {?}
      */
@@ -27024,14 +27594,16 @@ var MdbStepperComponent = /** @class */ (function () {
     /**
      * @private
      * @param {?} index
+     * @param {?=} height
      * @return {?}
      */
     MdbStepperComponent.prototype._updateHorizontalStepperHeight = /**
      * @private
      * @param {?} index
+     * @param {?=} height
      * @return {?}
      */
-    function (index) {
+    function (index, height) {
         var _this = this;
         if (this.horizontal && !this.vertical) {
             setTimeout((/**
@@ -27039,8 +27611,8 @@ var MdbStepperComponent = /** @class */ (function () {
              */
             function () {
                 /** @type {?} */
-                var height = _this.stepContents.toArray()[index].nativeElement.scrollHeight + 50;
-                _this._renderer.setStyle(_this.container.nativeElement, 'height', height + 'px');
+                var stepHeight = height ? height + 50 : _this.stepContents.toArray()[index].nativeElement.scrollHeight + 50;
+                _this._renderer.setStyle(_this.container.nativeElement, 'height', stepHeight + 'px');
             }), 0);
         }
         else {
@@ -27085,7 +27657,45 @@ var MdbStepperComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
+        var _this = this;
         this._setActiveStep(0);
+        this.stepChange$ = from(this.steps.toArray());
+        this.getStepChange$().pipe(distinctUntilChanged()).subscribe((/**
+         * @return {?}
+         */
+        function () {
+            if (_this.container.nativeElement.children[_this.activeStepIndex]) {
+                /** @type {?} */
+                var stepElContent = _this.container.nativeElement.children[_this._activeStepIndex].lastElementChild;
+                _this._updateHorizontalStepperHeight(_this.activeStepIndex, stepElContent.clientHeight);
+            }
+        }));
+    };
+    /**
+     * @return {?}
+     */
+    MdbStepperComponent.prototype.ngAfterContentChecked = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        if (this.stepContents) {
+            /** @type {?} */
+            var activeStep = this.stepContents.filter((/**
+             * @param {?} el
+             * @param {?} index
+             * @return {?}
+             */
+            function (el, index) { return el && index == _this.activeStepIndex; })).map((/**
+             * @param {?} el
+             * @return {?}
+             */
+            function (el) { return el.nativeElement; }))[0];
+            if (activeStep.innerHTMl !== this.stepTextContent) {
+                this.stepChangeSubject.next(activeStep.innerHTML);
+            }
+            this.stepTextContent = activeStep.innerHTML;
+        }
     };
     MdbStepperComponent.decorators = [
         { type: Component, args: [{
@@ -27513,7 +28123,9 @@ var TabsetComponent = /** @class */ (function () {
         Object.assign(this, config);
     }
     Object.defineProperty(TabsetComponent.prototype, "vertical", {
+        /** if true tabs will be placed vertically */
         get: /**
+         * if true tabs will be placed vertically
          * @return {?}
          */
         function () {
@@ -27798,10 +28410,10 @@ var TabsetComponent = /** @class */ (function () {
      */
     function () {
         if (this.vertical) {
-            this.listGetClass = 'col-md-3';
+            this.listGetClass = this.tabsButtonsClass ? this.tabsButtonsClass : 'col-md-3';
         }
         else {
-            this.listGetClass = 'col-md-12';
+            this.listGetClass = this.tabsButtonsClass ? this.tabsButtonsClass : 'col-md-12';
         }
     };
     /**
@@ -27812,10 +28424,10 @@ var TabsetComponent = /** @class */ (function () {
      */
     function () {
         if (this.vertical) {
-            this.tabsGetClass = 'col-md-9';
+            this.tabsGetClass = this.tabsContentClass ? this.tabsContentClass : 'col-md-9';
         }
         else {
-            this.tabsGetClass = 'col-md-12';
+            this.tabsGetClass = this.tabsContentClass ? this.tabsContentClass : 'col-md-12';
         }
     };
     /**
@@ -27976,6 +28588,8 @@ var TabsetComponent = /** @class */ (function () {
         disableWaves: [{ type: Input }],
         buttonClass: [{ type: Input }],
         contentClass: [{ type: Input }],
+        tabsButtonsClass: [{ type: Input }],
+        tabsContentClass: [{ type: Input }],
         itemsList: [{ type: ViewChild, args: ['itemsList',] }],
         tabEl: [{ type: ViewChildren, args: ['tabEl', { read: ElementRef },] }],
         showBsTab: [{ type: Output }],
@@ -29183,6 +29797,6 @@ var MDBBootstrapModulesPro = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { BadgeModule, MDBBadgeComponent, MdbBreadcrumbComponent, MdbBreadcrumbItemComponent, BreadcrumbModule, MdbBtnDirective, ButtonsModule, ButtonRadioDirective, ButtonCheckboxDirective, CardsFreeModule, MdbCardComponent, MdbCardBodyComponent, MdbCardImageComponent, MdbCardTextComponent, MdbCardTitleComponent, MdbCardFooterComponent, MdbCardHeaderComponent, CarouselComponent, CarouselModule, SlideComponent, CarouselConfig, ChartsModule, BaseChartDirective, CHECKBOX_VALUE_ACCESSOR, CheckboxComponent, MdbCheckboxChange, CheckboxModule, CollapseComponent, CollapseModule, BsDropdownDirective, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownContainerComponent, BsDropdownState, BsDropdownConfig, DropdownModule, MdbIconComponent, FalDirective, FarDirective, FasDirective, FabDirective, IconsModule, InputUtilitiesModule, MdbErrorDirective, MdbSuccessDirective, MdbValidateDirective, InputsModule, EqualValidatorDirective, MdbInputDirective, MdbInput, ModalBackdropComponent, ModalBackdropOptions, ModalOptions, MDBModalRef, ModalDirective, ModalModule, MDBModalService, ModalContainerComponent, NavbarComponent, NavbarModule, LinksComponent, NavlinksComponent, LogoComponent, NavbarService, PopoverDirective, PopoverModule, PopoverConfig, PopoverContainerComponent, TableModule, MdbTablePaginationComponent, MdbTableRowDirective, MdbTableScrollDirective, MdbTableSortDirective, MdbTableDirective, MdbTableService, TooltipContainerComponent, TooltipDirective, TooltipModule, TooltipConfig, WavesDirective, WavesModule, MDBRootModule, MDBBootstrapModule, SQUEEZEBOX_COMPONENTS, SBItemComponent, SBItemHeadComponent, SBItemBodyComponent, SqueezeBoxComponent, AccordionModule, ComponentPortal, BasePortalHost, Overlay, OVERLAY_PROVIDERS, OverlayContainer, OverlayRef, ToastContainerDirective, ToastContainerModule, ToastComponent, ToastService, GlobalConfig, ToastPackage, tsConfig, ToastModule, ToastRef, ToastInjector, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, MdbAutoCompleterComponent, MdbOptionComponent, MdbAutoCompleterDirective, MdbAutoCompleterOptionDirective, AutoCompleterModule, AutoFormatModule, MdbDateFormatDirective, MdbCreditCardDirective, MdbCvvDirective, AutocompleteModule, CompleterComponent, CompleterListItemComponent, CompleterService, localDataFactory, LocalDataFactoryProvider, remoteDataFactory, RemoteDataFactoryProvider, LocalData, RemoteData, CompleterBaseData, MdbCompleterDirective, MdbDropdownDirective, MdbInputCompleteDirective, MdbListDirective, MdbRowDirective, CardsModule, CardRevealComponent, CardRotatingComponent, LocaleService, UtilService, FocusDirective, InputAutoFillDirective, MDBDatePickerComponent, MYDP_VALUE_ACCESSOR, DatepickerModule, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, FileInputModule, UploadStatus, humanizeBytes, MDBUploaderService, MDBFileSelectDirective, MDBFileDropDirective, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, Option, OptionList, SELECT_VALUE_ACCESSOR, SelectComponent, SelectDropdownComponent, SelectModule, MDBSpinningPreloader, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, BarComponent, ProgressDirective, ProgressbarComponent, ProgressbarModule, ProgressbarConfigComponent, ProgressSpinnerComponent, PreloadersModule, ProgressBars, RangeModule, MdbRangeInputComponent, ScrollSpyDirective, ScrollSpyWindowDirective, ScrollSpyElementDirective, ScrollSpyLinkDirective, ScrollSpyService, ScrollSpyModule, SidenavComponent, SidenavModule, PageScrollDirective, PageScrollService, EasingLogic, PageScrollConfig, PageScrollInstance, PageScrollUtilService, SmoothscrollModule, MdbStepperComponent, MdbStepComponent, StepperModule, MdbStickyDirective, StickyContentModule, NgTranscludeDirective, TabDirective, TabHeadingDirective, TabsetComponent, TabsetConfig, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, TimePickerModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, CHECKBOX_CONTROL_VALUE_ACCESSOR as ɵb, RADIO_CONTROL_VALUE_ACCESSOR as ɵa, CHECKBOX_VALUE_ACCESSOR as ɵc, CheckboxComponent as ɵd, ComponentLoaderFactory as ɵdp, OnChange as ɵdr, PositioningService as ɵdq, SBItemComponent as ɵf, SBItemBodyComponent as ɵh, SBItemHeadComponent as ɵg, SqueezeBoxComponent as ɵi, AccordionModule as ɵe, TOAST_CONFIG as ɵds, AutoCompleterModule as ɵn, MdbAutoCompleterComponent as ɵj, MdbOptionComponent as ɵk, MdbAutoCompleterOptionDirective as ɵm, MdbAutoCompleterDirective as ɵl, AutoFormatModule as ɵo, MdbCreditCardDirective as ɵq, MdbCvvDirective as ɵr, MdbDateFormatDirective as ɵp, CompleterListItemComponent as ɵu, CompleterComponent as ɵt, MdbInputCompleteDirective as ɵba, MdbCompleterDirective as ɵy, MdbDropdownDirective as ɵz, CtrListContext as ɵbb, MdbListDirective as ɵbc, MdbRowDirective as ɵbd, AutocompleteModule as ɵs, CompleterService as ɵv, LocalDataFactoryProvider as ɵw, RemoteDataFactoryProvider as ɵx, CardRevealComponent as ɵbf, CardRotatingComponent as ɵbg, CardsModule as ɵbe, MDBDatePickerComponent as ɵbm, MYDP_VALUE_ACCESSOR as ɵbl, DatepickerModule as ɵbn, InputAutoFillDirective as ɵbk, FocusDirective as ɵbj, LocaleService as ɵbh, UtilService as ɵbi, SimpleChartComponent as ɵbo, ChartSimpleModule as ɵbq, EasyPieChartComponent as ɵbp, MDBFileDropDirective as ɵbt, MDBFileSelectDirective as ɵbs, FileInputModule as ɵbr, CharCounterDirective as ɵbu, CharCounterModule as ɵbv, ImageModalComponent as ɵbw, LightBoxModule as ɵbx, SelectDropdownComponent as ɵcb, SELECT_VALUE_ACCESSOR as ɵbz, SelectComponent as ɵca, SelectModule as ɵcc, MDBRootModulePro as ɵdo, BarComponent as ɵce, ProgressBars as ɵcd, MdProgressBarModule as ɵdt, ProgressBarComponent as ɵdu, MdProgressSpinnerModule as ɵdv, MdProgressSpinnerComponent as ɵdx, MdProgressSpinnerCssMatStylerDirective as ɵdw, MdSpinnerComponent as ɵdy, ProgressSpinnerComponent as ɵcj, ProgressDirective as ɵcf, ProgressbarComponent as ɵcg, ProgressbarConfigComponent as ɵci, ProgressbarModule as ɵch, MdbRangeInputComponent as ɵcm, RANGE_VALUE_ACCESOR as ɵcl, RangeModule as ɵck, ScrollSpyElementDirective as ɵcp, ScrollSpyLinkDirective as ɵcq, ScrollSpyWindowDirective as ɵco, ScrollSpyDirective as ɵcn, ScrollSpyModule as ɵcs, ScrollSpyService as ɵcr, SidenavComponent as ɵct, SidenavModule as ɵcu, PageScrollDirective as ɵcv, PageScrollInstance as ɵcx, SmoothscrollModule as ɵcy, PageScrollService as ɵcw, MdbStepComponent as ɵda, MdbStepperComponent as ɵcz, StepperModule as ɵdb, MdbStickyDirective as ɵdc, StickyContentModule as ɵdd, TabHeadingDirective as ɵdg, TabDirective as ɵdf, TabsetComponent as ɵdh, TabsetConfig as ɵdi, TabsModule as ɵdj, NgTranscludeDirective as ɵde, MaterialChipsComponent as ɵdk, MaterialChipsModule as ɵdl, ClockPickerComponent as ɵdm, TimePickerModule as ɵdn };
+export { BadgeModule, MDBBadgeComponent, MdbBreadcrumbComponent, MdbBreadcrumbItemComponent, BreadcrumbModule, MdbBtnDirective, ButtonsModule, ButtonRadioDirective, ButtonCheckboxDirective, CardsFreeModule, MdbCardComponent, MdbCardBodyComponent, MdbCardImageComponent, MdbCardTextComponent, MdbCardTitleComponent, MdbCardFooterComponent, MdbCardHeaderComponent, CarouselComponent, CarouselModule, SlideComponent, CarouselConfig, ChartsModule, BaseChartDirective, CHECKBOX_VALUE_ACCESSOR, CheckboxComponent, MdbCheckboxChange, CheckboxModule, CollapseComponent, CollapseModule, BsDropdownDirective, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownContainerComponent, BsDropdownState, BsDropdownConfig, DropdownModule, MdbIconComponent, FalDirective, FarDirective, FasDirective, FabDirective, IconsModule, InputUtilitiesModule, MdbErrorDirective, MdbSuccessDirective, MdbValidateDirective, InputsModule, EqualValidatorDirective, MdbInputDirective, MdbInput, ModalBackdropComponent, ModalBackdropOptions, ModalOptions, MDBModalRef, ModalDirective, ModalModule, MDBModalService, ModalContainerComponent, NavbarComponent, NavbarModule, LinksComponent, NavlinksComponent, LogoComponent, NavbarService, PopoverDirective, PopoverModule, PopoverConfig, PopoverContainerComponent, StickyHeaderDirective, StickyHeaderModule, TableModule, MdbTablePaginationComponent, MdbTableRowDirective, MdbTableScrollDirective, MdbTableSortDirective, MdbTableDirective, MdbTableService, TooltipContainerComponent, TooltipDirective, TooltipModule, TooltipConfig, WavesDirective, WavesModule, MDBRootModule, MDBBootstrapModule, SQUEEZEBOX_COMPONENTS, SBItemComponent, SBItemHeadComponent, SBItemBodyComponent, SqueezeBoxComponent, AccordionModule, ComponentPortal, BasePortalHost, Overlay, OVERLAY_PROVIDERS, OverlayContainer, OverlayRef, ToastContainerDirective, ToastContainerModule, ToastComponent, ToastService, GlobalConfig, ToastPackage, tsConfig, ToastModule, ToastRef, ToastInjector, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, MdbAutoCompleterComponent, MdbOptionComponent, MdbAutoCompleterDirective, MdbAutoCompleterOptionDirective, AutoCompleterModule, AutoFormatModule, MdbDateFormatDirective, MdbCreditCardDirective, MdbCvvDirective, AutocompleteModule, CompleterComponent, CompleterListItemComponent, CompleterService, localDataFactory, LocalDataFactoryProvider, remoteDataFactory, RemoteDataFactoryProvider, LocalData, RemoteData, CompleterBaseData, MdbCompleterDirective, MdbDropdownDirective, MdbInputCompleteDirective, MdbListDirective, MdbRowDirective, CardsModule, CardRevealComponent, CardRotatingComponent, LocaleService, UtilService, FocusDirective, InputAutoFillDirective, MDBDatePickerComponent, MYDP_VALUE_ACCESSOR, DatepickerModule, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, FileInputModule, UploadStatus, humanizeBytes, MDBUploaderService, MDBFileSelectDirective, MDBFileDropDirective, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, Option, OptionList, SELECT_VALUE_ACCESSOR, SelectComponent, SelectDropdownComponent, SelectModule, MDBSpinningPreloader, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, BarComponent, ProgressDirective, ProgressbarComponent, ProgressbarModule, ProgressbarConfigComponent, ProgressSpinnerComponent, PreloadersModule, ProgressBars, RangeModule, MdbRangeInputComponent, ScrollSpyDirective, ScrollSpyWindowDirective, ScrollSpyElementDirective, ScrollSpyLinkDirective, ScrollSpyService, ScrollSpyModule, SidenavComponent, SidenavModule, PageScrollDirective, PageScrollService, EasingLogic, PageScrollConfig, PageScrollInstance, PageScrollUtilService, SmoothscrollModule, MdbStepperComponent, MdbStepComponent, StepperModule, MdbStickyDirective, StickyContentModule, NgTranscludeDirective, TabDirective, TabHeadingDirective, TabsetComponent, TabsetConfig, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, TimePickerModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, CHECKBOX_CONTROL_VALUE_ACCESSOR as ɵb, RADIO_CONTROL_VALUE_ACCESSOR as ɵa, CHECKBOX_VALUE_ACCESSOR as ɵc, CheckboxComponent as ɵd, ComponentLoaderFactory as ɵdp, OnChange as ɵdr, PositioningService as ɵdq, SBItemComponent as ɵf, SBItemBodyComponent as ɵh, SBItemHeadComponent as ɵg, SqueezeBoxComponent as ɵi, AccordionModule as ɵe, MdbAccordionService as ɵds, TOAST_CONFIG as ɵdt, AutoCompleterModule as ɵn, MdbAutoCompleterComponent as ɵj, MdbOptionComponent as ɵk, MdbAutoCompleterOptionDirective as ɵm, MdbAutoCompleterDirective as ɵl, AutoFormatModule as ɵo, MdbCreditCardDirective as ɵq, MdbCvvDirective as ɵr, MdbDateFormatDirective as ɵp, CompleterListItemComponent as ɵu, CompleterComponent as ɵt, MdbInputCompleteDirective as ɵba, MdbCompleterDirective as ɵy, MdbDropdownDirective as ɵz, CtrListContext as ɵbb, MdbListDirective as ɵbc, MdbRowDirective as ɵbd, AutocompleteModule as ɵs, CompleterService as ɵv, LocalDataFactoryProvider as ɵw, RemoteDataFactoryProvider as ɵx, CardRevealComponent as ɵbf, CardRotatingComponent as ɵbg, CardsModule as ɵbe, MDBDatePickerComponent as ɵbm, MYDP_VALUE_ACCESSOR as ɵbl, DatepickerModule as ɵbn, InputAutoFillDirective as ɵbk, FocusDirective as ɵbj, LocaleService as ɵbh, UtilService as ɵbi, SimpleChartComponent as ɵbo, ChartSimpleModule as ɵbq, EasyPieChartComponent as ɵbp, MDBFileDropDirective as ɵbt, MDBFileSelectDirective as ɵbs, FileInputModule as ɵbr, CharCounterDirective as ɵbu, CharCounterModule as ɵbv, ImageModalComponent as ɵbw, LightBoxModule as ɵbx, SelectDropdownComponent as ɵcb, SELECT_VALUE_ACCESSOR as ɵbz, SelectComponent as ɵca, SelectModule as ɵcc, MDBRootModulePro as ɵdo, BarComponent as ɵce, ProgressBars as ɵcd, MdProgressBarModule as ɵdu, ProgressBarComponent as ɵdv, MdProgressSpinnerModule as ɵdw, MdProgressSpinnerComponent as ɵdy, MdProgressSpinnerCssMatStylerDirective as ɵdx, MdSpinnerComponent as ɵdz, ProgressSpinnerComponent as ɵcj, ProgressDirective as ɵcf, ProgressbarComponent as ɵcg, ProgressbarConfigComponent as ɵci, ProgressbarModule as ɵch, MdbRangeInputComponent as ɵcm, RANGE_VALUE_ACCESOR as ɵcl, RangeModule as ɵck, ScrollSpyElementDirective as ɵcp, ScrollSpyLinkDirective as ɵcq, ScrollSpyWindowDirective as ɵco, ScrollSpyDirective as ɵcn, ScrollSpyModule as ɵcs, ScrollSpyService as ɵcr, SidenavComponent as ɵct, SidenavModule as ɵcu, PageScrollDirective as ɵcv, PageScrollInstance as ɵcx, SmoothscrollModule as ɵcy, PageScrollService as ɵcw, MdbStepComponent as ɵda, MdbStepperComponent as ɵcz, StepperModule as ɵdb, MdbStickyDirective as ɵdc, StickyContentModule as ɵdd, TabHeadingDirective as ɵdg, TabDirective as ɵdf, TabsetComponent as ɵdh, TabsetConfig as ɵdi, TabsModule as ɵdj, NgTranscludeDirective as ɵde, MaterialChipsComponent as ɵdk, MaterialChipsModule as ɵdl, ClockPickerComponent as ɵdm, TimePickerModule as ɵdn };
 
 //# sourceMappingURL=ng-uikit-pro-standard.js.map

@@ -1,4 +1,5 @@
 import { ModuleWithProviders } from '@angular/core';
+export { StickyHeaderDirective, StickyHeaderModule } from './sticky-header/index';
 export { MdbErrorDirective, MdbSuccessDirective, MdbValidateDirective, InputUtilitiesModule } from './input-utilities/index';
 export { MdbBreadcrumbComponent, MdbBreadcrumbItemComponent, BreadcrumbModule } from './breadcrumbs/index';
 export { MDBBadgeComponent, BadgeModule } from './badge/index';

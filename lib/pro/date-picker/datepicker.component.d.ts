@@ -21,11 +21,16 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     selector: number;
     disabled: boolean;
     openOnFocus: boolean;
+    inline: boolean;
+    inlineIcon: string;
     dateChanged: EventEmitter<any>;
     inputFieldChanged: EventEmitter<IMyInputFieldChanged>;
     calendarViewChanged: EventEmitter<IMyCalendarViewChanged>;
     calendarToggle: EventEmitter<number>;
     inputFocusBlur: EventEmitter<IMyInputFocusBlur>;
+    closeButtonClicked: EventEmitter<MDBDatePickerComponent>;
+    clearButtonClicked: EventEmitter<MDBDatePickerComponent>;
+    todayButtonClicked: EventEmitter<MDBDatePickerComponent>;
     divFocus: any;
     pickerFrame: ElementRef;
     dateInput: ElementRef;
@@ -124,4 +129,7 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     parseSelectedMonth(ms: string): IMyMonth;
     setHeaderBtnDisabledState(m: number, y: number): void;
     checkActive(): boolean;
+    private utils;
+    toggleInlineDatePicker(): void;
+    onWindowClick(event: any): void;
 }
