@@ -1,13 +1,14 @@
 import { NavbarService } from './navbar.service';
 import { ElementRef, Renderer2, AfterViewInit, OnInit, AfterContentChecked } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { LinksComponent } from "./links.component";
+import { LinksComponent } from './links.component';
 export declare class NavbarComponent implements AfterViewInit, OnInit, AfterContentChecked {
     renderer: Renderer2;
     private _navbarService;
     iconBackground: string | string[];
     SideClass: string;
     containerInside: boolean;
+    collapseId: string;
     subscription: Subscription;
     navbarLinkClicks: any;
     shown: boolean;
@@ -18,6 +19,7 @@ export declare class NavbarComponent implements AfterViewInit, OnInit, AfterCont
     showClass: boolean;
     collapsing: boolean;
     private _itemsLength;
+    ariaExpanded: boolean;
     el: ElementRef;
     mobile: ElementRef;
     navbar: ElementRef;

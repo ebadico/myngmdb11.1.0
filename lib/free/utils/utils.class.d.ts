@@ -4,4 +4,6 @@ export declare class Utils {
     static reflow(element: any): void;
     static getStyles(elem: any): any;
     focusTrapModal(event: KeyboardEvent | any, el: ElementRef): void;
+    getClosestEl(el: any, selector: string): any;
+    getCoords(elem: any): any;
 }

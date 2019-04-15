@@ -18,6 +18,7 @@ export declare class MdbAutoCompleterComponent implements AfterContentInit {
     mdbOptions: MdbOptionComponent[];
     dropdown: ElementRef;
     noResultsEl: ElementRef;
+    private utils;
     parameters: {
         left: number;
         top: number;

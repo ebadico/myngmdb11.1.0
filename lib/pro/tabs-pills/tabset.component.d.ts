@@ -19,7 +19,8 @@ export declare class TabsetComponent implements OnDestroy, OnInit, AfterViewInit
     disableWaves: boolean;
     buttonClass: String;
     contentClass: String;
-    /** if true tabs will be placed vertically */
+    tabsButtonsClass: string;
+    tabsContentClass: string;
     itemsList: ElementRef;
     tabEl: any;
     showBsTab: EventEmitter<any>;
@@ -27,6 +28,7 @@ export declare class TabsetComponent implements OnDestroy, OnInit, AfterViewInit
     hideBsTab: EventEmitter<any>;
     hiddenBsTab: EventEmitter<any>;
     getActiveTab: EventEmitter<any>;
+    /** if true tabs will be placed vertically */
     vertical: boolean;
     setActiveTab(index: number): void;
     /** if true tabs fill the container and have a consistent width */

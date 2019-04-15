@@ -1,6 +1,7 @@
 import { QueryList, OnInit, AfterContentInit, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
 import { MdbStepComponent } from './step.component';
 import { WavesDirective } from '../../free/waves/waves-effect.directive';
+import { Observable, Subject } from "rxjs";
 export declare class MdbStepperComponent implements OnInit, AfterContentInit, AfterViewInit {
     ripple: WavesDirective;
     private _renderer;
@@ -18,6 +19,10 @@ export declare class MdbStepperComponent implements OnInit, AfterContentInit, Af
     activeStepIndex: number;
     private _activeStepIndex;
     private _activeStep;
+    private stepTextContent;
+    stepChangeSubject: Subject<any>;
+    stepChange$: Observable<any>;
+    getStepChange$(): Observable<any>;
     onWindowResize(): void;
     onClick(index: number, event: any): void;
     ngOnInit(): void;
@@ -40,4 +45,5 @@ export declare class MdbStepperComponent implements OnInit, AfterContentInit, Af
     private _initStepperVariation;
     ngAfterViewInit(): void;
     ngAfterContentInit(): void;
+    ngAfterContentChecked(): void;
 }
