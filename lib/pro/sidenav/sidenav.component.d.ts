@@ -4,10 +4,13 @@ export declare class SidenavComponent implements AfterViewInit, OnDestroy {
     renderer: Renderer2;
     windwosWidth: number;
     shown: boolean;
+    private _sidenavTransform;
     isBrowser: any;
     class: string;
     fixed: boolean;
     sidenavBreakpoint: any;
+    side: string;
+    private _side;
     sideNav: ElementRef;
     overlay: any;
     constructor(platformId: string, el: ElementRef, renderer: Renderer2);

@@ -9,6 +9,7 @@ export declare class NavbarComponent implements AfterViewInit, OnInit, AfterCont
     SideClass: string;
     containerInside: boolean;
     collapseId: string;
+    scrollSensitivity: number;
     subscription: Subscription;
     navbarLinkClicks: any;
     shown: boolean;

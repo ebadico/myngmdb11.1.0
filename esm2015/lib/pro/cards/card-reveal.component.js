@@ -2,7 +2,7 @@
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
+import { Component, ElementRef, ViewChild, Renderer2, HostListener } from '@angular/core';
 import { socialsState } from '../animations/animations.component';
 export class CardRevealComponent {
     /**
@@ -14,6 +14,17 @@ export class CardRevealComponent {
     /**
      * @return {?}
      */
+    onWindowResize() {
+        if (this.cardOverflow && this.cardFront && this.cardReveal) {
+            /** @type {?} */
+            const height = this.cardFront.nativeElement.offsetHeight;
+            this._r.setStyle(this.cardOverflow.nativeElement, 'height', height + 'px');
+            this._r.setStyle(this.cardReveal.nativeElement.firstElementChild, 'height', height + 'px');
+        }
+    }
+    /**
+     * @return {?}
+     */
     toggle() {
         this.show = !this.show;
         this.socials = (this.socials === 'active') ? 'inactive' : 'active';
@@ -21,20 +32,19 @@ export class CardRevealComponent {
          * @return {?}
          */
         () => {
-            try {
-                /** @type {?} */
-                const height = this.cardFront.nativeElement.offsetHeight;
+            /** @type {?} */
+            const height = this.cardFront.nativeElement.offsetHeight;
+            this._r.setStyle(this.cardOverflow.nativeElement, 'height', height + 'px');
+            if (this.cardReveal) {
                 this._r.setStyle(this.cardReveal.nativeElement.firstElementChild, 'height', height + 'px');
-                this._r.setStyle(this.cardOverflow.nativeElement, 'height', height + 'px');
             }
-            catch (error) { }
         }), 0);
     }
 }
 CardRevealComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-card-reveal',
-                template: "<div #cardOverflow class=\"card-overflow col-12\" >\n  <div #cardFront class=\"card-front\">\n    <ng-content select=\".card-front\" ></ng-content>\n  </div>\n  <div #cardReveal class=\"card-reveal\" *ngIf=\"show\"  [@socialsState]=\"socials\">\n    <ng-content select=\".card-reveal\"></ng-content>\n  </div>\n</div>\n",
+                template: "<div #cardOverflow class=\"card-overflow\">\n  <div #cardFront class=\"card-front\">\n    <ng-content select=\".card-front\" ></ng-content>\n  </div>\n  <div #cardReveal class=\"card-reveal\" *ngIf=\"show\"  [@socialsState]=\"socials\">\n    <ng-content select=\".card-reveal\"></ng-content>\n  </div>\n</div>\n",
                 animations: [socialsState]
             }] }
 ];
@@ -45,7 +55,8 @@ CardRevealComponent.ctorParameters = () => [
 CardRevealComponent.propDecorators = {
     cardReveal: [{ type: ViewChild, args: ['cardReveal',] }],
     cardFront: [{ type: ViewChild, args: ['cardFront',] }],
-    cardOverflow: [{ type: ViewChild, args: ['cardOverflow',] }]
+    cardOverflow: [{ type: ViewChild, args: ['cardOverflow',] }],
+    onWindowResize: [{ type: HostListener, args: ['window:resize',] }]
 };
 if (false) {
     /** @type {?} */
@@ -64,4 +75,4 @@ if (false) {
      */
     CardRevealComponent.prototype._r;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2FyZC1yZXZlYWwuY29tcG9uZW50LmpzIiwic291cmNlUm9vdCI6Im5nOi8vbmctdWlraXQtcHJvLXN0YW5kYXJkLyIsInNvdXJjZXMiOlsibGliL3Byby9jYXJkcy9jYXJkLXJldmVhbC5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLE9BQU8sRUFBRSxTQUFTLEVBQUUsVUFBVSxFQUFFLFNBQVMsRUFBRSxTQUFTLEVBQUUsTUFBTSxlQUFlLENBQUM7QUFDNUUsT0FBTyxFQUFFLFlBQVksRUFBRSxNQUFNLG9DQUFvQyxDQUFDO0FBUWxFLE1BQU0sT0FBTyxtQkFBbUI7Ozs7SUFPOUIsWUFBb0IsRUFBYTtRQUFiLE9BQUUsR0FBRixFQUFFLENBQVc7SUFBSSxDQUFDOzs7O0lBQ3RDLE1BQU07UUFDSixJQUFJLENBQUMsSUFBSSxHQUFHLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQztRQUN2QixJQUFJLENBQUMsT0FBTyxHQUFHLENBQUMsSUFBSSxDQUFDLE9BQU8sS0FBSyxRQUFRLENBQUMsQ0FBQyxDQUFDLENBQUMsVUFBVSxDQUFDLENBQUMsQ0FBQyxRQUFRLENBQUM7UUFDbkUsVUFBVTs7O1FBQUMsR0FBRyxFQUFFO1lBQ2QsSUFBSTs7c0JBQ0ksTUFBTSxHQUFHLElBQUksQ0FBQyxTQUFTLENBQUMsYUFBYSxDQUFDLFlBQVk7Z0JBQ3hELElBQUksQ0FBQyxFQUFFLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsYUFBYSxDQUFDLGlCQUFpQixFQUFFLFFBQVEsRUFBRSxNQUFNLEdBQUcsSUFBSSxDQUFDLENBQUM7Z0JBQzNGLElBQUksQ0FBQyxFQUFFLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsYUFBYSxFQUFFLFFBQVEsRUFBRSxNQUFNLEdBQUcsSUFBSSxDQUFDLENBQUM7YUFDNUU7WUFBQyxPQUFPLEtBQUssRUFBRSxHQUFHO1FBQ3JCLENBQUMsR0FBRSxDQUFDLENBQUMsQ0FBQztJQUNSLENBQUM7OztZQXhCRixTQUFTLFNBQUM7Z0JBQ1QsUUFBUSxFQUFFLGlCQUFpQjtnQkFDM0IsMlVBQXlDO2dCQUN6QyxVQUFVLEVBQUUsQ0FBQyxZQUFZLENBQUM7YUFDM0I7Ozs7WUFQMEMsU0FBUzs7O3lCQVVqRCxTQUFTLFNBQUMsWUFBWTt3QkFDdEIsU0FBUyxTQUFDLFdBQVc7MkJBQ3JCLFNBQVMsU0FBQyxjQUFjOzs7O0lBRnpCLHlDQUFnRDs7SUFDaEQsd0NBQThDOztJQUM5QywyQ0FBb0Q7O0lBQ3BELHNDQUFvQjs7SUFDcEIsbUNBQXFCOzs7OztJQUVULGlDQUFxQiIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENvbXBvbmVudCwgRWxlbWVudFJlZiwgVmlld0NoaWxkLCBSZW5kZXJlcjIgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IHNvY2lhbHNTdGF0ZSB9IGZyb20gJy4uL2FuaW1hdGlvbnMvYW5pbWF0aW9ucy5jb21wb25lbnQnO1xuXG5AQ29tcG9uZW50KHtcbiAgc2VsZWN0b3I6ICdtZGItY2FyZC1yZXZlYWwnLFxuICB0ZW1wbGF0ZVVybDogJ2NhcmQtcmV2ZWFsLmNvbXBvbmVudC5odG1sJyxcbiAgYW5pbWF0aW9uczogW3NvY2lhbHNTdGF0ZV1cbn0pXG5cbmV4cG9ydCBjbGFzcyBDYXJkUmV2ZWFsQ29tcG9uZW50IHtcbiAgQFZpZXdDaGlsZCgnY2FyZFJldmVhbCcpIGNhcmRSZXZlYWw6IEVsZW1lbnRSZWY7XG4gIEBWaWV3Q2hpbGQoJ2NhcmRGcm9udCcpIGNhcmRGcm9udDogRWxlbWVudFJlZjtcbiAgQFZpZXdDaGlsZCgnY2FyZE92ZXJmbG93JykgY2FyZE92ZXJmbG93OiBFbGVtZW50UmVmO1xuICBwdWJsaWMgc29jaWFsczogYW55O1xuICBwdWJsaWMgc2hvdzogYm9vbGVhbjtcblxuICBjb25zdHJ1Y3Rvcihwcml2YXRlIF9yOiBSZW5kZXJlcjIpIHsgfVxuICB0b2dnbGUoKSB7XG4gICAgdGhpcy5zaG93ID0gIXRoaXMuc2hvdztcbiAgICB0aGlzLnNvY2lhbHMgPSAodGhpcy5zb2NpYWxzID09PSAnYWN0aXZlJykgPyAnaW5hY3RpdmUnIDogJ2FjdGl2ZSc7XG4gICAgc2V0VGltZW91dCgoKSA9PiB7XG4gICAgICB0cnkge1xuICAgICAgICBjb25zdCBoZWlnaHQgPSB0aGlzLmNhcmRGcm9udC5uYXRpdmVFbGVtZW50Lm9mZnNldEhlaWdodDtcbiAgICAgICAgdGhpcy5fci5zZXRTdHlsZSh0aGlzLmNhcmRSZXZlYWwubmF0aXZlRWxlbWVudC5maXJzdEVsZW1lbnRDaGlsZCwgJ2hlaWdodCcsIGhlaWdodCArICdweCcpO1xuICAgICAgICB0aGlzLl9yLnNldFN0eWxlKHRoaXMuY2FyZE92ZXJmbG93Lm5hdGl2ZUVsZW1lbnQsICdoZWlnaHQnLCBoZWlnaHQgKyAncHgnKTtcbiAgICAgIH0gY2F0Y2ggKGVycm9yKSB7IH1cbiAgICB9LCAwKTtcbiAgfVxufVxuIl19
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2FyZC1yZXZlYWwuY29tcG9uZW50LmpzIiwic291cmNlUm9vdCI6Im5nOi8vbmctdWlraXQtcHJvLXN0YW5kYXJkLyIsInNvdXJjZXMiOlsibGliL3Byby9jYXJkcy9jYXJkLXJldmVhbC5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLE9BQU8sRUFBRSxTQUFTLEVBQUUsVUFBVSxFQUFFLFNBQVMsRUFBRSxTQUFTLEVBQUUsWUFBWSxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBQzFGLE9BQU8sRUFBRSxZQUFZLEVBQUUsTUFBTSxvQ0FBb0MsQ0FBQztBQVFsRSxNQUFNLE9BQU8sbUJBQW1COzs7O0lBZ0I5QixZQUFvQixFQUFhO1FBQWIsT0FBRSxHQUFGLEVBQUUsQ0FBVztJQUFJLENBQUM7Ozs7SUFSdEMsY0FBYztRQUNaLElBQUksSUFBSSxDQUFDLFlBQVksSUFBSSxJQUFJLENBQUMsU0FBUyxJQUFJLElBQUksQ0FBQyxVQUFVLEVBQUU7O2tCQUNwRCxNQUFNLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBQyxhQUFhLENBQUMsWUFBWTtZQUN4RCxJQUFJLENBQUMsRUFBRSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsWUFBWSxDQUFDLGFBQWEsRUFBRSxRQUFRLEVBQUUsTUFBTSxHQUFHLElBQUksQ0FBQyxDQUFDO1lBQzNFLElBQUksQ0FBQyxFQUFFLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsYUFBYSxDQUFDLGlCQUFpQixFQUFFLFFBQVEsRUFBRSxNQUFNLEdBQUcsSUFBSSxDQUFDLENBQUM7U0FDNUY7SUFDSCxDQUFDOzs7O0lBR0QsTUFBTTtRQUNKLElBQUksQ0FBQyxJQUFJLEdBQUcsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDO1FBQ3ZCLElBQUksQ0FBQyxPQUFPLEdBQUcsQ0FBQyxJQUFJLENBQUMsT0FBTyxLQUFLLFFBQVEsQ0FBQyxDQUFDLENBQUMsQ0FBQyxVQUFVLENBQUMsQ0FBQyxDQUFDLFFBQVEsQ0FBQztRQUNuRSxVQUFVOzs7UUFBQyxHQUFHLEVBQUU7O2tCQUNOLE1BQU0sR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDLGFBQWEsQ0FBQyxZQUFZO1lBQ3hELElBQUksQ0FBQyxFQUFFLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsYUFBYSxFQUFFLFFBQVEsRUFBRSxNQUFNLEdBQUcsSUFBSSxDQUFDLENBQUM7WUFFM0UsSUFBSSxJQUFJLENBQUMsVUFBVSxFQUFFO2dCQUNuQixJQUFJLENBQUMsRUFBRSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLGFBQWEsQ0FBQyxpQkFBaUIsRUFBRSxRQUFRLEVBQUUsTUFBTSxHQUFHLElBQUksQ0FBQyxDQUFDO2FBQzVGO1FBQ0wsQ0FBQyxHQUFFLENBQUMsQ0FBQyxDQUFDO0lBQ1IsQ0FBQzs7O1lBbENGLFNBQVMsU0FBQztnQkFDVCxRQUFRLEVBQUUsaUJBQWlCO2dCQUMzQixtVUFBeUM7Z0JBQ3pDLFVBQVUsRUFBRSxDQUFDLFlBQVksQ0FBQzthQUMzQjs7OztZQVAwQyxTQUFTOzs7eUJBVWpELFNBQVMsU0FBQyxZQUFZO3dCQUN0QixTQUFTLFNBQUMsV0FBVzsyQkFDckIsU0FBUyxTQUFDLGNBQWM7NkJBSXhCLFlBQVksU0FBQyxlQUFlOzs7O0lBTjdCLHlDQUFnRDs7SUFDaEQsd0NBQThDOztJQUM5QywyQ0FBb0Q7O0lBQ3BELHNDQUFvQjs7SUFDcEIsbUNBQXFCOzs7OztJQVdULGlDQUFxQiIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENvbXBvbmVudCwgRWxlbWVudFJlZiwgVmlld0NoaWxkLCBSZW5kZXJlcjIsIEhvc3RMaXN0ZW5lciB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHsgc29jaWFsc1N0YXRlIH0gZnJvbSAnLi4vYW5pbWF0aW9ucy9hbmltYXRpb25zLmNvbXBvbmVudCc7XG5cbkBDb21wb25lbnQoe1xuICBzZWxlY3RvcjogJ21kYi1jYXJkLXJldmVhbCcsXG4gIHRlbXBsYXRlVXJsOiAnY2FyZC1yZXZlYWwuY29tcG9uZW50Lmh0bWwnLFxuICBhbmltYXRpb25zOiBbc29jaWFsc1N0YXRlXVxufSlcblxuZXhwb3J0IGNsYXNzIENhcmRSZXZlYWxDb21wb25lbnQge1xuICBAVmlld0NoaWxkKCdjYXJkUmV2ZWFsJykgY2FyZFJldmVhbDogRWxlbWVudFJlZjtcbiAgQFZpZXdDaGlsZCgnY2FyZEZyb250JykgY2FyZEZyb250OiBFbGVtZW50UmVmO1xuICBAVmlld0NoaWxkKCdjYXJkT3ZlcmZsb3cnKSBjYXJkT3ZlcmZsb3c6IEVsZW1lbnRSZWY7XG4gIHB1YmxpYyBzb2NpYWxzOiBhbnk7XG4gIHB1YmxpYyBzaG93OiBib29sZWFuO1xuXG4gIEBIb3N0TGlzdGVuZXIoJ3dpbmRvdzpyZXNpemUnKVxuICBvbldpbmRvd1Jlc2l6ZSgpIHtcbiAgICBpZiAodGhpcy5jYXJkT3ZlcmZsb3cgJiYgdGhpcy5jYXJkRnJvbnQgJiYgdGhpcy5jYXJkUmV2ZWFsKSB7XG4gICAgICBjb25zdCBoZWlnaHQgPSB0aGlzLmNhcmRGcm9udC5uYXRpdmVFbGVtZW50Lm9mZnNldEhlaWdodDtcbiAgICAgIHRoaXMuX3Iuc2V0U3R5bGUodGhpcy5jYXJkT3ZlcmZsb3cubmF0aXZlRWxlbWVudCwgJ2hlaWdodCcsIGhlaWdodCArICdweCcpO1xuICAgICAgdGhpcy5fci5zZXRTdHlsZSh0aGlzLmNhcmRSZXZlYWwubmF0aXZlRWxlbWVudC5maXJzdEVsZW1lbnRDaGlsZCwgJ2hlaWdodCcsIGhlaWdodCArICdweCcpO1xuICAgIH1cbiAgfVxuXG4gIGNvbnN0cnVjdG9yKHByaXZhdGUgX3I6IFJlbmRlcmVyMikgeyB9XG4gIHRvZ2dsZSgpIHtcbiAgICB0aGlzLnNob3cgPSAhdGhpcy5zaG93O1xuICAgIHRoaXMuc29jaWFscyA9ICh0aGlzLnNvY2lhbHMgPT09ICdhY3RpdmUnKSA/ICdpbmFjdGl2ZScgOiAnYWN0aXZlJztcbiAgICBzZXRUaW1lb3V0KCgpID0+IHtcbiAgICAgICAgY29uc3QgaGVpZ2h0ID0gdGhpcy5jYXJkRnJvbnQubmF0aXZlRWxlbWVudC5vZmZzZXRIZWlnaHQ7XG4gICAgICAgIHRoaXMuX3Iuc2V0U3R5bGUodGhpcy5jYXJkT3ZlcmZsb3cubmF0aXZlRWxlbWVudCwgJ2hlaWdodCcsIGhlaWdodCArICdweCcpO1xuXG4gICAgICAgIGlmICh0aGlzLmNhcmRSZXZlYWwpIHtcbiAgICAgICAgICB0aGlzLl9yLnNldFN0eWxlKHRoaXMuY2FyZFJldmVhbC5uYXRpdmVFbGVtZW50LmZpcnN0RWxlbWVudENoaWxkLCAnaGVpZ2h0JywgaGVpZ2h0ICsgJ3B4Jyk7XG4gICAgICAgIH1cbiAgICB9LCAwKTtcbiAgfVxufVxuIl19

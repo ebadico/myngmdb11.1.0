@@ -1,7 +1,7 @@
 import { QueryList, OnInit, AfterContentInit, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
 import { MdbStepComponent } from './step.component';
 import { WavesDirective } from '../../free/waves/waves-effect.directive';
-import { Observable, Subject } from "rxjs";
+import { Observable, Subject } from 'rxjs';
 export declare class MdbStepperComponent implements OnInit, AfterContentInit, AfterViewInit {
     ripple: WavesDirective;
     private _renderer;

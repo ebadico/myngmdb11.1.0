@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 export declare class MdbStepComponent implements OnInit {
     el: ElementRef;
     content: TemplateRef<any>;
+    editable: boolean;
     name: string;
     label: string;
     stepForm: FormGroup;
