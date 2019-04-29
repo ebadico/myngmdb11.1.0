@@ -5,7 +5,7 @@ export { MdbBreadcrumbComponent, MdbBreadcrumbItemComponent, BreadcrumbModule } 
 export { MDBBadgeComponent, BadgeModule } from './badge/index';
 export { MdbTablePaginationComponent, MdbTableRowDirective, MdbTableScrollDirective, MdbTableSortDirective, MdbTableDirective, MdbTableService, TableModule } from './tables/index';
 export { CHECKBOX_VALUE_ACCESSOR, CheckboxComponent, CheckboxModule } from './checkbox/index';
-export { ButtonsModule, ButtonRadioDirective, ButtonCheckboxDirective, MdbBtnDirective } from './buttons/index';
+export { ButtonsModule, ButtonRadioDirective, ButtonCheckboxDirective, MdbBtnDirective, FixedButtonCaptionDirective } from './buttons/index';
 export { CardsFreeModule, MdbCardComponent, MdbCardBodyComponent, MdbCardImageComponent, MdbCardTextComponent, MdbCardTitleComponent, MdbCardFooterComponent, MdbCardHeaderComponent } from './cards/index';
 export { WavesModule, WavesDirective } from './waves/index';
 export { InputsModule, MdbInputDirective, MdbInput } from './inputs/index';

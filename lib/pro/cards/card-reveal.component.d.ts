@@ -6,6 +6,7 @@ export declare class CardRevealComponent {
     cardOverflow: ElementRef;
     socials: any;
     show: boolean;
+    onWindowResize(): void;
     constructor(_r: Renderer2);
     toggle(): void;
 }
