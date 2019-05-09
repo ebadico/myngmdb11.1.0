@@ -299,10 +299,51 @@ $data in $skins {
     }
 
     // Select colors
-    .dropdown-content {
-      li:not(.disabled) {
-        span {
-          color: map-get($data, skin-accent);
+    // .dropdown-content {
+    //   li:not(.disabled) {
+    //     span {
+    //       color: map-get($data, skin-accent);
+    //     }
+    //   }
+    // }
+
+    .select-wrapper {
+      &.colorful-select {
+        &.md-form {
+          &.md-outline {
+            span {
+              &.caret {
+                &.active {
+                  color: map-get($data, skin-accent) !important;
+                }
+              }
+            }
+            input {
+              &.select-dropdown {
+                &:focus {
+                  border-color: map-get($data, skin-accent);
+                  box-shadow: inset 0px 0px 0px 1px map-get($data, skin-accent);
+                }
+              }
+            }
+            &+label {
+              &.active {
+                color: map-get($data, skin-accent);
+              }
+            }
+          }
+          .dropdown-content li {
+            &.active,
+            a,
+            span:hover {
+              background-color: map-get($data, skin-accent) !important;
+            }
+            &.disabled {
+              &.active {
+                background-color: transparent !important;
+              }
+            }
+          }
         }
       }
     }

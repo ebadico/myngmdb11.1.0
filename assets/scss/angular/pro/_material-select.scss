@@ -82,6 +82,9 @@ mdb-select {
             transform: translateY(-50%);
             font-size: 10px;
           }
+          &.toggle:before {
+            content: "\25B2"
+          }
           &.clear:hover,
           &.toggle:hover {
             background-color: #ececec;
@@ -447,16 +450,6 @@ mdb-select-dropdown {
   }
 }
 
-mdb-select + label {
-  position: absolute;
-  transform: translateY(-120%);
-  top: 7px;
-  font-size: .8rem;
-  left: 6px;
-  color: #757575;
-  left: 15px;
-}
-
 .multiple-select-dropdown li [type="checkbox"]+label {
   height: 10px;
   top: 0 !important;
@@ -474,14 +467,6 @@ mdb-select .clear {
   transform: translateY(-50%);
 }
 
-.md-form mdb-select + label {
-  position: absolute;
-  transform: translateY(-120%);
-  font-size: .8rem;
-  color: #757575;
-  left: 0px;
-}
-
 .md-form mdb-select .form-control {
   height: calc(2.25rem + 2px);
   padding: 0;
@@ -495,6 +480,39 @@ mdb-select .clear {
   top: 7px;
   left: 0;
   transition: .2s ease-out;
+  transform: translateY(0%);
+  cursor: text;
+
+  &.active {
+    font-size: .8rem;
+    transform: translateY(-120%);
+  }
+}
+
+.md-form mdb-select + label {
+  color: #757575;
+  font-size: 1rem;
+  position: absolute;
+  top: 7px;
+  left: 0;
+  transition: .2s ease-out;
+  transform: translateY(0%);
+  cursor: text;
+
+  &.active {
+    font-size: .8rem;
+    transform: translateY(-120%);
+  }
+}
+
+mdb-select + label {
+  color: #757575;
+  font-size: 1rem;
+  position: absolute;
+  top: 7px;
+  left: 15px;
+  transition: .2s ease-out;
+  transform: translateY(0%);
   cursor: text;
 
   &.active {
@@ -507,13 +525,14 @@ mdb-select .form-control {
   border-radius: 0;
 }
 
-mdb-select.validate-success.ng-valid div.single,
-mdb-select.validate-success.ng-valid div.multiple {
+mdb-select.validate-success.ng-valid.ng-touched div.single,
+mdb-select.validate-success.ng-valid.ng-touched div.multiple {
   border-bottom: 1px solid $input-success-color !important;
 	box-shadow: 0 1px 0 0 $input-success-color !important;
 }
 
-mdb-select.validate-success.ng-valid label {
+mdb-select.validate-success.ng-valid.ng-touched label,
+mdb-select.validate-success.ng-valid.ng-touched + label {
   color: $input-success-color !important;
 }
 
@@ -526,6 +545,26 @@ mdb-select.validate-error.ng-invalid.ng-touched div.multiple,
 }
 
 mdb-select.validate-error.ng-invalid.ng-touched label,
-.form-submitted mdb-select.validate-error.ng-invalid.ng-touched label  {
+mdb-select.validate-error.ng-invalid.ng-touched + label,
+.form-submitted mdb-select.validate-error.ng-invalid.ng-touched label
+.form-submitted mdb-select.validate-error.ng-invalid.ng-touched + label {
   color: $input-error-color !important;
+}
+
+.mdb-select-toggle {
+  float: right;
+  color: black;
+  line-height: 2rem;
+  text-align: center;
+  width: 30px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-top: -2px;
+  transform: translateY(-50%);
+  font-size: 14px;
+}
+
+.mdb-select-toggle:before {
+  content: "\25BC";
 }

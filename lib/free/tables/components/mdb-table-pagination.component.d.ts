@@ -1,6 +1,6 @@
 import { OnInit, EventEmitter, ChangeDetectorRef, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { MdbTableDirective } from "../directives/mdb-table.directive";
+import { MdbTableDirective } from '../directives/mdb-table.directive';
 export declare class MdbTablePaginationComponent implements OnInit, OnChanges, AfterViewInit {
     private cdRef;
     tableEl: MdbTableDirective;
