@@ -6,10 +6,12 @@ export declare class TooltipContainerComponent implements AfterViewInit {
     placement: string;
     popupClass: string;
     animation: boolean;
+    el: ElementRef;
     tooltipInner: ElementRef;
     tooltipArrow: ElementRef;
     show: boolean;
     readonly isBs3: boolean;
-    constructor(config: TooltipConfig, r: Renderer2);
+    constructor(config: TooltipConfig, r: Renderer2, elem: ElementRef);
     ngAfterViewInit(): void;
+    alignArrow(placement?: string): void;
 }

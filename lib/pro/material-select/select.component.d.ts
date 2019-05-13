@@ -54,6 +54,8 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     isDisabled: boolean;
     placeholderView: string;
     labelActive: boolean;
+    labelRef: HTMLElement;
+    labelRefActive: boolean;
     dropdownAnimationDone: boolean;
     clearClicked: boolean;
     selectContainerClicked: boolean;
@@ -70,14 +72,13 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     /** Event handlers. **/
     constructor(el: ElementRef, renderer: Renderer2, document: any, platformId: string, cdRef: ChangeDetectorRef);
     ngOnInit(): void;
+    private _getLabelRef;
     updateFilterHeight(): void;
     updateDropdownHeight(): void;
     onDropdownAnimationDone(): void;
     onDropdownAnimationStart(): void;
     ngAfterViewInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
-    setArrowUpIcon(): void;
-    setArrowDownIcon(): void;
     isChild(elemnt: any): boolean;
     onWindowResize(): void;
     onSelectContainerClick(event: any): void;
@@ -109,6 +110,7 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     /** Initialization. **/
     updateOptionsList(options: Array<IOption>): void;
     updateLabelState(): void;
+    updateLabelRefState(): void;
     /** Dropdown. **/
     toggleDropdown(): void;
     openDropdown(): void;

@@ -53,7 +53,6 @@ export declare class TooltipDirective implements OnInit, OnDestroy, OnChanges {
     onblur(): void;
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
-    changePositionIfNotFit(): void;
     getBottomOffset(): number | undefined;
     /**
      * Toggles an element’s tooltip. This is considered a “manual” triggering of
@@ -65,6 +64,8 @@ export declare class TooltipDirective implements OnInit, OnDestroy, OnChanges {
      * the tooltip.
      */
     show(event?: any): void;
+    private getCorrectAlignment;
+    private showTooltip;
     /**
      * Closes an element’s tooltip. This is considered a “manual” triggering of
      * the tooltip.

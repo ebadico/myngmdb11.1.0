@@ -33,7 +33,6 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     todayButtonClicked: EventEmitter<MDBDatePickerComponent>;
     divFocus: any;
     pickerFrame: ElementRef;
-    dateInput: ElementRef;
     isDateSelected: boolean;
     labelActive: boolean;
     showSelector: boolean;
@@ -59,12 +58,14 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     currMonthId: number;
     nextMonthId: number;
     isOpen: boolean;
+    isDisabled: boolean;
     tmp: IMyDate;
     opts: any;
     months: any;
     years: any;
     elements: HTMLCollectionOf<Element>;
     elementNumber: any;
+    private utils;
     firstTimeOpenedModal: boolean;
     modalHeightBefore: any;
     isMobile: any;
@@ -129,7 +130,6 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     parseSelectedMonth(ms: string): IMyMonth;
     setHeaderBtnDisabledState(m: number, y: number): void;
     checkActive(): boolean;
-    private utils;
     toggleInlineDatePicker(): void;
     onWindowClick(event: any): void;
 }
