@@ -69,10 +69,6 @@ mdb-accordion-item-head {
 
 .mdb-accordion-indicator {
   &::after {
-    //position: absolute;
-    //margin-right: 20px;
-    //top: 20px;
-    //right: 0;
     content: '';
     display: block;
     border-style: solid;

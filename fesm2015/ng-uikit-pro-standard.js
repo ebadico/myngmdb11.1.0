@@ -9970,9 +9970,7 @@ class SBItemComponent {
                 this.collapsed = false;
             }
         }), 40);
-        if (this.body) {
-            this.body.id = `mdb-accordion-body-${this.idModifier}`;
-        }
+        this.body.id = `mdb-accordion-body-${this.idModifier}`;
     }
     /**
      * @param {?} collapsed
@@ -10143,10 +10141,8 @@ class SBItemHeadComponent {
          * @return {?}
          */
         () => {
-            if (this.sbItem.body) {
-                this.ariaControls = this.sbItem.body.id;
-                this.sbItem.body.ariaLabelledBy = this.id;
-            }
+            this.ariaControls = this.sbItem.body.id;
+            this.sbItem.body.ariaLabelledBy = this.id;
         }), 0);
     }
 }
@@ -10154,7 +10150,7 @@ SBItemHeadComponent.decorators = [
     { type: Component, args: [{
                 exportAs: 'sbItemHead',
                 selector: 'mdb-item-head, mdb-accordion-item-head',
-                template: "<div class=\"card-header {{ customClass }}\" [ngClass]=\"{ 'item-disabled': isDisabled }\" (click)=\"toggleClick($event)\"\n     [id]=\"id\">\n  <a role=\"button\" href=\"javascript:;\" [attr.aria-expanded]=\"ariaExpanded\"\n     [attr.aria-controls]=\"ariaControls\">\n    <h5 class=\"mb-0 d-flex justify-content-between align-items-center\">\n      <span class=\"d-flex align-self-start align-items-center\">\n        <ng-content></ng-content>\n      </span>\n      <i *ngIf=\"indicator\" class=\"mdb-accordion-indicator rotate-icon\" aria-hidden=\"true\"></i>\n    </h5>\n  </a>\n</div>\n"
+                template: "<div class=\"card-header {{ customClass }}\" [ngClass]=\"{ 'item-disabled': isDisabled }\" (click)=\"toggleClick($event)\" [id]=\"id\">\n  <a role=\"button\" href=\"\" [attr.aria-expanded]=\"ariaExpanded\" [attr.aria-controls]=\"ariaControls\">\n    <h5 class=\"mb-0 d-flex justify-content-between align-items-center\">\n    <ng-content></ng-content>\n    <i *ngIf=\"indicator\" class=\"mdb-accordion-indicator rotate-icon\" aria-hidden=\"true\"></i>\n    </h5>\n  </a>\n</div>\n"
             }] }
 ];
 /** @nocollapse */
