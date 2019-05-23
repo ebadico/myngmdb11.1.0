@@ -568,3 +568,7 @@ mdb-select.validate-error.ng-invalid.ng-touched + label,
 .mdb-select-toggle:before {
   content: "\25BC";
 }
+
+.dropdown-content .custom-select-content:hover {
+  background-color: transparent;
+}

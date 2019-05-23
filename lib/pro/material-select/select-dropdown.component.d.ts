@@ -6,6 +6,7 @@ export declare class SelectDropdownComponent implements AfterViewInit, OnChanges
     _renderer: Renderer2;
     private cdRef;
     filterEnabled: boolean;
+    filterAutocomplete: boolean;
     highlightColor: string;
     highlightTextColor: string;
     left: number;
@@ -33,6 +34,7 @@ export declare class SelectDropdownComponent implements AfterViewInit, OnChanges
     filterInput: any;
     optionsList: any;
     dropdownContent: ElementRef;
+    customContent: ElementRef;
     disabledColor: string;
     disabledTextColor: string;
     state: string;
@@ -41,6 +43,11 @@ export declare class SelectDropdownComponent implements AfterViewInit, OnChanges
     hasOptionsItems: boolean;
     selectAllSelected: boolean;
     constructor(_elementRef: ElementRef, _renderer: Renderer2, cdRef: ChangeDetectorRef);
+    highlightedItem: any;
+    searchIndex: number;
+    previousKey: string;
+    onWindowKeyUp(event: any): void;
+    navigateThroughArray(key: string, itemSource: any): void;
     /** Event handlers. **/
     onkeyup(): void;
     onkeydown(): void;

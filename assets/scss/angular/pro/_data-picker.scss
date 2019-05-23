@@ -34,6 +34,10 @@
   border-radius: 50%;
 }
 
+.picker__weekday-display, .picker__month-display, .picker__day-display {
+  font-size: 2.0rem !important;
+}
+
 .clockpicker-am-pm-block {
   button {
     color: #fff !important;
@@ -148,11 +152,15 @@
   margin: 0;
 }
 
+
 .datepicker-inline-icon {
   position: absolute;
-  top: 0;
+  top: 5px;
   right: 0;
   padding: 0.5rem;
+}
+.md-outline > .datepicker-inline-icon {
+    top: 4px;
 }
 
 .datepicker-inline {
@@ -172,9 +180,5 @@
     position: unset !important;
     margin: unset;
     border: 0;
-  }
-
-  .picker--opened .picker__frame {
-
   }
 }
