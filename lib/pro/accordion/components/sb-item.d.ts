@@ -5,6 +5,7 @@ export declare class SBItemComponent implements AfterViewInit, AfterContentInit 
     private accordionService;
     collapsed: boolean;
     customClass: string;
+    idModifier: number;
     body: SBItemBodyComponent;
     constructor(accordionService: MdbAccordionService);
     ngAfterViewInit(): void;

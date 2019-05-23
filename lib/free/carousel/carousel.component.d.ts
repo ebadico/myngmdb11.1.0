@@ -1,5 +1,4 @@
-import { OnDestroy, EventEmitter, ElementRef, AfterViewInit, ChangeDetectorRef, Renderer2 } from '@angular/core';
-import { LinkedList } from '../utils/linked-list.class';
+import { OnDestroy, EventEmitter, ElementRef, AfterViewInit, ChangeDetectorRef, Renderer2, QueryList } from '@angular/core';
 import { SlideComponent } from './slide.component';
 import { CarouselConfig } from './carousel.config';
 export declare enum Direction {
@@ -17,14 +16,14 @@ export declare class CarouselComponent implements OnDestroy, AfterViewInit {
         LEFT: string;
         RIGHT: string;
     };
-    protected _slides: LinkedList<SlideComponent>;
+    _slidesList: QueryList<SlideComponent>;
     readonly slides: SlideComponent[];
     protected currentInterval: any;
     protected isPlaying: boolean;
     protected destroyed: boolean;
     protected el: ElementRef | any;
     protected animationEnd: boolean;
-    protected _currentActiveSlide: number | any;
+    protected _currentActiveSlide: number;
     protected carouselIndicators: any;
     isBrowser: any;
     noWrap: boolean;
@@ -45,9 +44,7 @@ export declare class CarouselComponent implements OnDestroy, AfterViewInit {
     readonly isBs4: boolean;
     constructor(config: CarouselConfig, el: ElementRef, platformId: string, cdRef: ChangeDetectorRef, renderer: Renderer2);
     ngOnDestroy(): void;
-    addSlide(slide: SlideComponent): void;
     ngAfterViewInit(): void;
-    removeSlide(slide: SlideComponent): void;
     swipe(action?: string): void;
     nextSlide(force?: boolean): void;
     previousSlide(force?: boolean): void;

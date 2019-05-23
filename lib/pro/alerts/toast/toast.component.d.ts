@@ -1,4 +1,4 @@
-import { OnDestroy, ApplicationRef } from '@angular/core';
+import { ApplicationRef, OnDestroy } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { GlobalConfig, ToastPackage } from './toast.config';

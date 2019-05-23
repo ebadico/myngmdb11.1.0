@@ -1,4 +1,4 @@
-import { ElementRef } from "@angular/core";
+import { ElementRef } from '@angular/core';
 export declare class Utils {
     constructor();
     static reflow(element: any): void;
