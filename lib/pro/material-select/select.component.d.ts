@@ -24,6 +24,7 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     filterPlaceholder: string;
     label: string;
     filterEnabled: boolean;
+    filterAutocomplete: boolean;
     visibleOptions: number;
     optionHeight: number;
     tabindex: number;

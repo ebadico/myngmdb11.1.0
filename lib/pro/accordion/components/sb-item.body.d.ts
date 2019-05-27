@@ -5,6 +5,8 @@ export declare class SBItemBodyComponent implements AfterContentInit {
     routerLinks: QueryList<RouterLinkWithHref>;
     height: string;
     expandAnimationState: string;
+    id: string;
+    ariaLabelledBy: string;
     bodyEl: ElementRef;
     constructor();
     toggle(collapsed: boolean): void;

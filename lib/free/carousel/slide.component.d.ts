@@ -1,7 +1,5 @@
 import { OnDestroy, OnInit, ElementRef } from '@angular/core';
-import { CarouselComponent } from './carousel.component';
 export declare class SlideComponent implements OnInit, OnDestroy {
-    carousel: CarouselComponent;
     /** Is current slide active */
     active: boolean;
     animated: boolean;
@@ -11,7 +9,7 @@ export declare class SlideComponent implements OnInit, OnDestroy {
     directionRight: boolean;
     /** Wraps element by appropriate CSS classes */
     el: ElementRef | any;
-    constructor(carousel: CarouselComponent, el: ElementRef);
+    constructor(el: ElementRef);
     /** Fires changes in container collection after adding a new slide instance */
     ngOnInit(): void;
     /** Fires changes in container collection after removing of this slide instance */

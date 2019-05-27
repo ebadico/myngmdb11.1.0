@@ -1,9 +1,10 @@
-import { ElementRef } from '@angular/core';
+import { ElementRef, RendererFactory2 } from '@angular/core';
+import { Options } from './models/index';
 export interface PositioningOptions {
     /** The DOM element, ElementRef, or a selector string of an element which will be moved */
-    element?: HTMLElement | ElementRef | string;
+    element?: any;
     /** The DOM element, ElementRef, or a selector string of an element which the element will be attached to  */
-    target?: HTMLElement | ElementRef | string;
+    target?: any;
     /**
      * A string of the form 'vert-attachment horiz-attachment' or 'placement'
      * - placement can be "top", "bottom", "left", "right"
@@ -11,9 +12,10 @@ export interface PositioningOptions {
      * - vert-attachment can be any of 'top', 'middle', 'bottom'
      * - horiz-attachment can be any of 'left', 'center', 'right'
      */
-    attachment?: string | any;
+    attachment?: any;
     /** A string similar to `attachment`. The one difference is that, if it's not provided,
-    `targetAttachment` will assume the mirror image of `attachment`. */
+     * `targetAttachment` will assume the mirror image of `attachment`.
+     */
     targetAttachment?: string;
     /** A string of the form 'vert-offset horiz-offset'
      * - vert-offset and horiz-offset can be of the form "20px" or "55%"
@@ -25,6 +27,13 @@ export interface PositioningOptions {
     appendToBody?: boolean;
 }
 export declare class PositioningService {
-    position(options: PositioningOptions | any): void;
-    private _getHtmlElement;
+    options: Options;
+    private update$$;
+    private positionElements;
+    constructor(rendererFactory: RendererFactory2, platformId: number);
+    position(options: PositioningOptions): void;
+    addPositionElement(options: PositioningOptions): void;
+    calcPosition(): void;
+    deletePositionElement(elRef: ElementRef): void;
+    setOptions(options: Options): void;
 }

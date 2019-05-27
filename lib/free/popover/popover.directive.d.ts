@@ -1,10 +1,12 @@
 import { EventEmitter, OnInit, OnDestroy, Renderer2, ElementRef, TemplateRef, ViewContainerRef } from '@angular/core';
 import { PopoverConfig } from './popover.config';
 import { ComponentLoaderFactory } from '../utils/component-loader/component-loader.factory';
+import { PositioningService } from '../utils/positioning/positioning.service';
 /**
  * A lightweight, extensible directive for fancy popover creation.
  */
 export declare class PopoverDirective implements OnInit, OnDestroy {
+    private _positionService;
     /**
      * Content to be displayed as popover.
      */
@@ -32,6 +34,8 @@ export declare class PopoverDirective implements OnInit, OnDestroy {
      * Returns whether or not the popover is currently being shown
      */
     isOpen: boolean;
+    dynamicPosition: boolean;
+    outsideClick: boolean;
     /**
      * Emits an event when the popover is shown
      */
@@ -43,7 +47,7 @@ export declare class PopoverDirective implements OnInit, OnDestroy {
     onHidden: EventEmitter<any>;
     hidden: EventEmitter<any>;
     private _popover;
-    constructor(_elementRef: ElementRef, _renderer: Renderer2, _viewContainerRef: ViewContainerRef, _config: PopoverConfig, cis: ComponentLoaderFactory);
+    constructor(_elementRef: ElementRef, _renderer: Renderer2, _viewContainerRef: ViewContainerRef, _config: PopoverConfig, cis: ComponentLoaderFactory, _positionService: PositioningService);
     /**
      * Opens an element’s popover. This is considered a “manual” triggering of
      * the popover.

@@ -22,6 +22,7 @@ export declare class ClockPickerComponent implements OnInit, AfterViewInit, Cont
     buttonLabel: string;
     disabled: boolean;
     tabIndex: any;
+    outlineInput: boolean;
     timeChanged: EventEmitter<string>;
     isMobile: any;
     touchDevice: boolean;

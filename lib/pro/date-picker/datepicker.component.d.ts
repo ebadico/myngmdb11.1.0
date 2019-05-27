@@ -21,6 +21,7 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     selector: number;
     disabled: boolean;
     openOnFocus: boolean;
+    outlineInput: boolean;
     inline: boolean;
     inlineIcon: string;
     dateChanged: EventEmitter<any>;

@@ -67,7 +67,14 @@ export interface IndividualConfig {
      * default: false
      */
     onActivateTick?: boolean;
+    /**
+     * actionButton - Field will create action button in toast, and assing parameter's value as button text
+     */
     actionButton?: string;
+    /**
+     * - Adds class to the toast action button
+     */
+    actionButtonClass?: string;
 }
 export interface ToastIconClasses {
     error?: string;

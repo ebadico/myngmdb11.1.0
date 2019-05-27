@@ -1137,456 +1137,67 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    /**
-     * @template T
-     */
-    var /**
-     * @template T
-     */ LinkedList = /** @class */ (function () {
-        function LinkedList() {
-            // public length: = 0;
-            this.length = 0;
-            this.asArray = [];
-            // Array methods overriding END
+    // import { CarouselComponent } from './carousel.component';
+    var SlideComponent = /** @class */ (function () {
+        function SlideComponent(el) {
+            this.animated = false;
+            this.directionNext = false;
+            this.directionLeft = false;
+            this.directionPrev = false;
+            this.directionRight = false;
+            /**
+             * Wraps element by appropriate CSS classes
+             */
+            this.el = null;
+            // this.carousel = carousel;
+            this.el = el;
         }
+        /** Fires changes in container collection after adding a new slide instance */
         /**
-         * @protected
-         * @param {?} position
+         * Fires changes in container collection after adding a new slide instance
          * @return {?}
          */
-        LinkedList.prototype.getNode = /**
-         * @protected
-         * @param {?} position
-         * @return {?}
-         */
-            function (position) {
-                if (this.length === 0 || position < 0 || position >= this.length) {
-                    throw new Error('Position is out of the list');
-                }
-                /** @type {?} */
-                var current = this.head;
-                for (var index = 0; index < position; index++) {
-                    current = current.next;
-                }
-                return current;
-            };
-        /**
-         * @protected
-         * @return {?}
-         */
-        LinkedList.prototype.createInternalArrayRepresentation = /**
-         * @protected
+        SlideComponent.prototype.ngOnInit = /**
+         * Fires changes in container collection after adding a new slide instance
          * @return {?}
          */
             function () {
-                /** @type {?} */
-                var outArray = [];
-                /** @type {?} */
-                var current = this.head;
-                while (current) {
-                    outArray.push(current.value);
-                    current = current.next;
-                }
-                this.asArray = outArray;
+                // this.carousel.addSlide(this);
             };
-        // public get(position: number): T {
-        // public get(position: number): T {
+        /** Fires changes in container collection after removing of this slide instance */
         /**
-         * @param {?} position
+         * Fires changes in container collection after removing of this slide instance
          * @return {?}
          */
-        LinkedList.prototype.get =
-            // public get(position: number): T {
-            /**
-             * @param {?} position
-             * @return {?}
-             */
-            function (position) {
-                if (this.length === 0 || position < 0 || position >= this.length) {
-                    return void 0;
-                }
-                /** @type {?} */
-                var current = this.head;
-                for (var index = 0; index < position; index++) {
-                    current = current.next;
-                }
-                return current.value;
-            };
-        /**
-         * @param {?} value
-         * @param {?=} position
-         * @return {?}
-         */
-        LinkedList.prototype.add = /**
-         * @param {?} value
-         * @param {?=} position
-         * @return {?}
-         */
-            function (value, position) {
-                if (position === void 0) {
-                    position = this.length;
-                }
-                if (position < 0 || position > this.length) {
-                    throw new Error('Position is out of the list');
-                }
-                /** @type {?} */
-                var node = {
-                    value: ( /** @type {?} */(value)),
-                    next: ( /** @type {?} */(undefined)),
-                    previous: ( /** @type {?} */(undefined))
-                };
-                if (this.length === 0) {
-                    this.head = node;
-                    this.tail = node;
-                    this.current = node;
-                }
-                else {
-                    if (position === 0) {
-                        // first node
-                        node.next = this.head;
-                        this.head.previous = node;
-                        this.head = node;
-                    }
-                    else if (position === this.length) {
-                        // last node
-                        this.tail.next = node;
-                        node.previous = this.tail;
-                        this.tail = node;
-                    }
-                    else {
-                        // node in middle
-                        /** @type {?} */
-                        var currentPreviousNode = this.getNode(position - 1);
-                        /** @type {?} */
-                        var currentNextNode = currentPreviousNode.next;
-                        currentPreviousNode.next = node;
-                        currentNextNode.previous = node;
-                        node.previous = currentPreviousNode;
-                        node.next = currentNextNode;
-                    }
-                }
-                this.length++;
-                this.createInternalArrayRepresentation();
-            };
-        /**
-         * @param {?=} position
-         * @return {?}
-         */
-        LinkedList.prototype.remove = /**
-         * @param {?=} position
-         * @return {?}
-         */
-            function (position) {
-                if (position === void 0) {
-                    position = 0;
-                }
-                if (this.length === 0 || position < 0 || position >= this.length) {
-                    throw new Error('Position is out of the list');
-                }
-                if (position === 0) {
-                    // first node
-                    this.head = this.head.next;
-                    if (this.head) {
-                        // there is no second node
-                        this.head.previous = undefined;
-                    }
-                    else {
-                        // there is no second node
-                        this.tail = undefined;
-                    }
-                }
-                else if (position === this.length - 1) {
-                    // last node
-                    this.tail = this.tail.previous;
-                    this.tail.next = undefined;
-                }
-                else {
-                    // middle node
-                    /** @type {?} */
-                    var removedNode = this.getNode(position);
-                    removedNode.next.previous = removedNode.previous;
-                    removedNode.previous.next = removedNode.next;
-                }
-                this.length--;
-                this.createInternalArrayRepresentation();
-            };
-        /**
-         * @param {?} position
-         * @param {?} value
-         * @return {?}
-         */
-        LinkedList.prototype.set = /**
-         * @param {?} position
-         * @param {?} value
-         * @return {?}
-         */
-            function (position, value) {
-                if (this.length === 0 || position < 0 || position >= this.length) {
-                    throw new Error('Position is out of the list');
-                }
-                /** @type {?} */
-                var node = this.getNode(position);
-                node.value = value;
-                this.createInternalArrayRepresentation();
-            };
-        /**
-         * @return {?}
-         */
-        LinkedList.prototype.toArray = /**
+        SlideComponent.prototype.ngOnDestroy = /**
+         * Fires changes in container collection after removing of this slide instance
          * @return {?}
          */
             function () {
-                return this.asArray;
+                // this.carousel.removeSlide(this);
             };
-        /**
-         * @param {?} fn
-         * @return {?}
-         */
-        LinkedList.prototype.findAll = /**
-         * @param {?} fn
-         * @return {?}
-         */
-            function (fn) {
-                /** @type {?} */
-                var current = this.head;
-                /** @type {?} */
-                var result = [];
-                for (var index = 0; index < this.length; index++) {
-                    if (fn(current.value, index)) {
-                        result.push({ index: index, value: current.value });
-                    }
-                    current = current.next;
-                }
-                return result;
-            };
-        // Array methods overriding start
-        // Array methods overriding start
-        /**
-         * @param {...?} args
-         * @return {?}
-         */
-        LinkedList.prototype.push =
-            // Array methods overriding start
-            /**
-             * @param {...?} args
-             * @return {?}
-             */
-            function () {
-                var _this = this;
-                var args = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    args[_i] = arguments[_i];
-                }
-                args.forEach(( /**
-                 * @param {?} arg
-                 * @return {?}
-                 */function (arg) {
-                    _this.add(arg);
-                }));
-                return this.length;
-            };
-        // public pop(): T {
-        // public pop(): T {
-        /**
-         * @return {?}
-         */
-        LinkedList.prototype.pop =
-            // public pop(): T {
-            /**
-             * @return {?}
-             */
-            function () {
-                if (this.length === 0) {
-                    return undefined;
-                }
-                /** @type {?} */
-                var last = this.tail;
-                this.remove(this.length - 1);
-                return last.value;
-            };
-        /**
-         * @param {...?} args
-         * @return {?}
-         */
-        LinkedList.prototype.unshift = /**
-         * @param {...?} args
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                var args = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    args[_i] = arguments[_i];
-                }
-                args.reverse();
-                args.forEach(( /**
-                 * @param {?} arg
-                 * @return {?}
-                 */function (arg) {
-                    _this.add(arg, 0);
-                }));
-                return this.length;
-            };
-        // public shift(): T {
-        // public shift(): T {
-        /**
-         * @return {?}
-         */
-        LinkedList.prototype.shift =
-            // public shift(): T {
-            /**
-             * @return {?}
-             */
-            function () {
-                if (this.length === 0) {
-                    return undefined;
-                }
-                /** @type {?} */
-                var lastItem = this.head.value;
-                this.remove();
-                return lastItem;
-            };
-        /**
-         * @param {?} fn
-         * @return {?}
-         */
-        LinkedList.prototype.forEach = /**
-         * @param {?} fn
-         * @return {?}
-         */
-            function (fn) {
-                /** @type {?} */
-                var current = this.head;
-                for (var index = 0; index < this.length; index++) {
-                    fn(current.value, index);
-                    current = current.next;
-                }
-            };
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-        LinkedList.prototype.indexOf = /**
-         * @param {?} value
-         * @return {?}
-         */
-            function (value) {
-                /** @type {?} */
-                var current = this.head;
-                /** @type {?} */
-                var position = 0;
-                for (var index = 0; index < this.length; index++) {
-                    if (current.value === value) {
-                        position = index;
-                        break;
-                    }
-                    current = current.next;
-                }
-                return position;
-            };
-        /**
-         * @param {?} fn
-         * @return {?}
-         */
-        LinkedList.prototype.some = /**
-         * @param {?} fn
-         * @return {?}
-         */
-            function (fn) {
-                /** @type {?} */
-                var current = this.head;
-                /** @type {?} */
-                var result = false;
-                while (current && !result) {
-                    if (fn(current.value)) {
-                        result = true;
-                        break;
-                    }
-                    current = current.next;
-                }
-                return result;
-            };
-        /**
-         * @param {?} fn
-         * @return {?}
-         */
-        LinkedList.prototype.every = /**
-         * @param {?} fn
-         * @return {?}
-         */
-            function (fn) {
-                /** @type {?} */
-                var current = this.head;
-                /** @type {?} */
-                var result = true;
-                while (current && result) {
-                    if (!fn(current.value)) {
-                        result = false;
-                    }
-                    current = current.next;
-                }
-                return result;
-            };
-        /**
-         * @return {?}
-         */
-        LinkedList.prototype.toString = /**
-         * @return {?}
-         */
-            function () {
-                return '[Linked List]';
-            };
-        // public find(fn: any): T {
-        // public find(fn: any): T {
-        /**
-         * @param {?} fn
-         * @return {?}
-         */
-        LinkedList.prototype.find =
-            // public find(fn: any): T {
-            /**
-             * @param {?} fn
-             * @return {?}
-             */
-            function (fn) {
-                /** @type {?} */
-                var current = this.head;
-                // let result: T;
-                /** @type {?} */
-                var result;
-                for (var index = 0; index < this.length; index++) {
-                    if (fn(current.value, index)) {
-                        result = current.value;
-                        break;
-                    }
-                    current = current.next;
-                }
-                return result;
-            };
-        /**
-         * @param {?} fn
-         * @return {?}
-         */
-        LinkedList.prototype.findIndex = /**
-         * @param {?} fn
-         * @return {?}
-         */
-            function (fn) {
-                /** @type {?} */
-                var current = this.head;
-                // let result: number;
-                /** @type {?} */
-                var result;
-                for (var index = 0; index < this.length; index++) {
-                    if (fn(current.value, index)) {
-                        result = index;
-                        break;
-                    }
-                    current = current.next;
-                }
-                return result;
-            };
-        return LinkedList;
+        SlideComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'mdb-slide, mdb-carousel-item',
+                        template: "\n  <ng-content></ng-content>\n  "
+                    }] }
+        ];
+        /** @nocollapse */
+        SlideComponent.ctorParameters = function () {
+            return [
+                { type: i0.ElementRef }
+            ];
+        };
+        SlideComponent.propDecorators = {
+            active: [{ type: i0.HostBinding, args: ['class.active',] }, { type: i0.Input }],
+            animated: [{ type: i0.HostBinding, args: ['class.animated',] }],
+            directionNext: [{ type: i0.HostBinding, args: ['class.carousel-item-next',] }],
+            directionLeft: [{ type: i0.HostBinding, args: ['class.carousel-item-left',] }],
+            directionPrev: [{ type: i0.HostBinding, args: ['class.carousel-item-prev',] }],
+            directionRight: [{ type: i0.HostBinding, args: ['class.carousel-item-right',] }],
+            el: [{ type: i0.HostBinding, args: ['class.carousel-item',] }]
+        };
+        return SlideComponent;
     }());
 
     /**
@@ -1634,7 +1245,6 @@
             this.cdRef = cdRef;
             this.renderer = renderer;
             this.SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
-            this._slides = new LinkedList();
             this.destroyed = false;
             this.el = null;
             this.animationEnd = true;
@@ -1652,7 +1262,7 @@
             get: /**
              * @return {?}
              */ function () {
-                return this._slides.toArray();
+                return this._slidesList.toArray();
             },
             enumerable: true,
             configurable: true
@@ -1667,7 +1277,7 @@
              * @param {?} index
              * @return {?}
              */ function (index) {
-                if (this._slides.length && index !== this._currentActiveSlide) {
+                if (this._slidesList && index !== this._currentActiveSlide) {
                     this._select(index);
                 }
             },
@@ -1744,22 +1354,6 @@
                 this.destroyed = true;
             };
         /**
-         * @param {?} slide
-         * @return {?}
-         */
-        CarouselComponent.prototype.addSlide = /**
-         * @param {?} slide
-         * @return {?}
-         */
-            function (slide) {
-                this._slides.add(slide);
-                if (this._slides.length === 1) {
-                    this._currentActiveSlide = void 0;
-                    this.activeSlide = 0;
-                    this.play();
-                }
-            };
-        /**
          * @return {?}
          */
         CarouselComponent.prototype.ngAfterViewInit = /**
@@ -1767,6 +1361,17 @@
          */
             function () {
                 var _this = this;
+                this._slidesList.changes.subscribe(( /**
+                 * @param {?} slidesList
+                 * @return {?}
+                 */function (slidesList) {
+                    _this._slidesList = slidesList;
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
+                        _this._select(0);
+                    }), 0);
+                }));
                 if (this.activeSlideIndex) {
                     setTimeout(( /**
                      * @return {?}
@@ -1775,49 +1380,21 @@
                         _this.activeSlideChange.emit({ 'relatedTarget': _this.activeSlide });
                     }), 0);
                 }
+                else {
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
+                        _this._select(0);
+                    }), 0);
+                }
                 if (this.isControls) {
                     this.carouselIndicators = this.el.nativeElement.querySelectorAll('.carousel-indicators > li');
-                    if (this.carouselIndicators.length) {
+                    if (this.carouselIndicators.length && this.activeSlideIndex) {
+                        this.renderer.addClass(this.carouselIndicators[this.activeSlideIndex], 'active');
+                    }
+                    else {
                         this.renderer.addClass(this.carouselIndicators[0], 'active');
                     }
-                }
-            };
-        /**
-         * @param {?} slide
-         * @return {?}
-         */
-        CarouselComponent.prototype.removeSlide = /**
-         * @param {?} slide
-         * @return {?}
-         */
-            function (slide) {
-                var _this = this;
-                /** @type {?} */
-                var remIndex = this._slides.indexOf(slide);
-                if (this._currentActiveSlide === remIndex) {
-                    /** @type {?} */
-                    var nextSlideIndex_1 = void 0;
-                    if (this._slides.length > 1) {
-                        nextSlideIndex_1 = !this.isLast(remIndex) ? remIndex :
-                            this.noWrap ? remIndex - 1 : 0;
-                    }
-                    this._slides.remove(remIndex);
-                    setTimeout(( /**
-                     * @return {?}
-                     */function () {
-                        _this._select(nextSlideIndex_1);
-                    }), 0);
-                }
-                else {
-                    this._slides.remove(remIndex);
-                    /** @type {?} */
-                    var currentSlideIndex_1 = this.getCurrentSlideIndex();
-                    setTimeout(( /**
-                     * @return {?}
-                     */function () {
-                        _this._currentActiveSlide = currentSlideIndex_1;
-                        _this.activeSlideChange.emit(_this._currentActiveSlide);
-                    }), 0);
                 }
             };
         /**
@@ -1920,7 +1497,7 @@
             function (goToIndex, direction) {
                 var _this = this;
                 /** @type {?} */
-                var goToSlide = this._slides.get(goToIndex);
+                var goToSlide = this.slides[goToIndex];
                 if (this.animationEnd) {
                     this.animationEnd = false;
                     goToSlide.directionNext = true;
@@ -1929,7 +1506,7 @@
                          * @return {?}
                          */function () {
                             /** @type {?} */
-                            var previous = _this._slides.get(_this._currentActiveSlide).el.nativeElement;
+                            var previous = _this.slides[_this._currentActiveSlide].el.nativeElement;
                             _this.renderer.setStyle(previous, 'opacity', '0');
                             _this.renderer.setStyle(previous, 'transition', 'all 600ms');
                             _this.renderer.setStyle(previous, 'display', 'block');
@@ -1967,9 +1544,9 @@
             function (goToIndex, direction) {
                 var _this = this;
                 /** @type {?} */
-                var currentSlide = this._slides.get(this._currentActiveSlide);
+                var currentSlide = this.slides[this._currentActiveSlide];
                 /** @type {?} */
-                var goToSlide = this._slides.get(goToIndex);
+                var goToSlide = this.slides[goToIndex];
                 if (this.animationEnd) {
                     if (direction === Direction.NEXT) {
                         this.animationEnd = false;
@@ -2082,7 +1659,7 @@
          * @return {?}
          */
             function () {
-                return this._slides.findIndex(( /**
+                return this.slides.findIndex(( /**
                  * @param {?} slide
                  * @return {?}
                  */function (slide) { return slide.active; }));
@@ -2096,7 +1673,7 @@
          * @return {?}
          */
             function (index) {
-                return index + 1 >= this._slides.length;
+                return index + 1 >= this.slides.length;
             };
         /**
          * @private
@@ -2123,7 +1700,7 @@
                         break;
                     case Direction.PREV:
                         nextSlideIndex = (this._currentActiveSlide > 0) ? this._currentActiveSlide - 1 :
-                            (!force && this.noWrap) ? this._currentActiveSlide : this._slides.length - 1;
+                            (!force && this.noWrap) ? this._currentActiveSlide : this.slides.length - 1;
                         break;
                     default:
                         throw new Error('Unknown direction');
@@ -2146,12 +1723,12 @@
                     return;
                 }
                 /** @type {?} */
-                var currentSlide = this._slides.get(this._currentActiveSlide);
+                var currentSlide = this.slides[this._currentActiveSlide];
                 if (currentSlide) {
                     currentSlide.active = false;
                 }
                 /** @type {?} */
-                var nextSlide = this._slides.get(index);
+                var nextSlide = this.slides[index];
                 if (nextSlide) {
                     this._currentActiveSlide = index;
                     nextSlide.active = true;
@@ -2310,13 +1887,14 @@
             ];
         };
         CarouselComponent.propDecorators = {
+            _slidesList: [{ type: i0.ContentChildren, args: [SlideComponent,] }],
             noWrap: [{ type: i0.Input }],
             noPause: [{ type: i0.Input }],
-            isControls: [{ type: i0.Input, args: ['isControls',] }],
+            isControls: [{ type: i0.Input }],
             keyboard: [{ type: i0.Input }],
-            class: [{ type: i0.Input, args: ['class',] }],
-            type: [{ type: i0.Input, args: ['type',] }],
-            animation: [{ type: i0.Input, args: ['animation',] }],
+            class: [{ type: i0.Input }],
+            type: [{ type: i0.Input }],
+            animation: [{ type: i0.Input }],
             activeSlideIndex: [{ type: i0.Input }],
             activeSlideChange: [{ type: i0.Output }],
             activeSlide: [{ type: i0.Input }],
@@ -2327,74 +1905,6 @@
             focus: [{ type: i0.HostListener, args: ['click',] }]
         };
         return CarouselComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var SlideComponent = /** @class */ (function () {
-        function SlideComponent(carousel, el) {
-            this.carousel = carousel;
-            this.animated = false;
-            this.directionNext = false;
-            this.directionLeft = false;
-            this.directionPrev = false;
-            this.directionRight = false;
-            /**
-             * Wraps element by appropriate CSS classes
-             */
-            this.el = null;
-            // this.carousel = carousel;
-            this.el = el;
-        }
-        /** Fires changes in container collection after adding a new slide instance */
-        /**
-         * Fires changes in container collection after adding a new slide instance
-         * @return {?}
-         */
-        SlideComponent.prototype.ngOnInit = /**
-         * Fires changes in container collection after adding a new slide instance
-         * @return {?}
-         */
-            function () {
-                this.carousel.addSlide(this);
-            };
-        /** Fires changes in container collection after removing of this slide instance */
-        /**
-         * Fires changes in container collection after removing of this slide instance
-         * @return {?}
-         */
-        SlideComponent.prototype.ngOnDestroy = /**
-         * Fires changes in container collection after removing of this slide instance
-         * @return {?}
-         */
-            function () {
-                this.carousel.removeSlide(this);
-            };
-        SlideComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'mdb-slide, mdb-carousel-item',
-                        template: "\n  <ng-content></ng-content>\n  "
-                    }] }
-        ];
-        /** @nocollapse */
-        SlideComponent.ctorParameters = function () {
-            return [
-                { type: CarouselComponent },
-                { type: i0.ElementRef }
-            ];
-        };
-        SlideComponent.propDecorators = {
-            active: [{ type: i0.HostBinding, args: ['class.active',] }, { type: i0.Input }],
-            animated: [{ type: i0.HostBinding, args: ['class.animated',] }],
-            directionNext: [{ type: i0.HostBinding, args: ['class.carousel-item-next',] }],
-            directionLeft: [{ type: i0.HostBinding, args: ['class.carousel-item-left',] }],
-            directionPrev: [{ type: i0.HostBinding, args: ['class.carousel-item-prev',] }],
-            directionRight: [{ type: i0.HostBinding, args: ['class.carousel-item-right',] }],
-            el: [{ type: i0.HostBinding, args: ['class.carousel-item',] }]
-        };
-        return SlideComponent;
     }());
 
     /**
@@ -3375,7 +2885,9 @@
         Trigger.prototype.isManual = /**
          * @return {?}
          */
-            function () { return this.open === 'manual' || this.close === 'manual'; };
+            function () {
+                return this.open === 'manual' || this.close === 'manual';
+            };
         return Trigger;
     }());
 
@@ -3388,6 +2900,7 @@
         hover: ['mouseover', 'mouseout'],
         focus: ['focusin', 'focusout']
     };
+    /* tslint:disable-next-line: no-any */
     /**
      * @param {?} triggers
      * @param {?=} aliases
@@ -3403,7 +2916,8 @@
             return [];
         }
         /** @type {?} */
-        var parsedTriggers = trimmedTriggers.split(/\s+/)
+        var parsedTriggers = trimmedTriggers
+            .split(/\s+/)
             .map(( /**
      * @param {?} trigger
      * @return {?}
@@ -3417,11 +2931,12 @@
             return new Trigger(alias[0], alias[1]);
         }));
         /** @type {?} */
-        var manualTriggers = parsedTriggers
-            .filter(( /**
-     * @param {?} triggerPair
-     * @return {?}
-     */function (triggerPair) { return triggerPair.isManual(); }));
+        var manualTriggers = parsedTriggers.filter(( /**
+         * @param {?} triggerPair
+         * @return {?}
+         */function (triggerPair) {
+            return triggerPair.isManual();
+        }));
         if (manualTriggers.length > 1) {
             throw new Error('Triggers parse error: only one manual trigger is allowed');
         }
@@ -3432,47 +2947,56 @@
     }
     /**
      * @param {?} renderer
-     * @param {?} target
-     * @param {?} triggers
-     * @param {?} showFn
-     * @param {?} hideFn
-     * @param {?} toggleFn
+     * @param {?} options
      * @return {?}
      */
-    function listenToTriggers(renderer, target, triggers, showFn, hideFn, toggleFn) {
+    function listenToTriggersV2(renderer, options) {
         /** @type {?} */
-        var parsedTriggers = parseTriggers(triggers);
+        var parsedTriggers = parseTriggers(options.triggers);
         /** @type {?} */
-        var listeners = [];
+        var target = options.target;
+        // do nothing
         if (parsedTriggers.length === 1 && parsedTriggers[0].isManual()) {
             return Function.prototype;
         }
-        //  parsedTriggers.forEach((trigger: Trigger) => {
+        // all listeners
+        /* tslint:disable-next-line: no-any */
+        /** @type {?} */
+        var listeners = [];
+        // lazy listeners registration
+        /** @type {?} */
+        var _registerHide = [];
+        /** @type {?} */
+        var registerHide = ( /**
+         * @return {?}
+         */function () {
+            // add hide listeners to unregister array
+            _registerHide.forEach(( /**
+             * @param {?} fn
+             * @return {?}
+             */function (fn) { return listeners.push(fn()); }));
+            // register hide events only once
+            _registerHide.length = 0;
+        });
+        // register open\close\toggle listeners
         parsedTriggers.forEach(( /**
          * @param {?} trigger
          * @return {?}
          */function (trigger) {
-            if (trigger.open === trigger.close) {
-                listeners.push(renderer.listen(target, trigger.open, ( /**
+            /** @type {?} */
+            var useToggle = trigger.open === trigger.close;
+            /** @type {?} */
+            var showFn = useToggle ? options.toggle : options.show;
+            if (!useToggle) {
+                _registerHide.push(( /**
                  * @return {?}
                  */function () {
-                    toggleFn();
-                })));
-                // listeners.push(renderer.listen(target, trigger.open, toggleFn));
-                return;
+                    return renderer.listen(target, trigger.close, options.hide);
+                }));
             }
             listeners.push(renderer.listen(target, trigger.open, ( /**
              * @return {?}
-             */function () {
-                showFn();
-            })), 
-            // renderer.listen(target, trigger.open, showFn),
-            renderer.listen(target, trigger.close, ( /**
-             * @return {?}
-             */function () {
-                hideFn();
-            })));
-            // renderer.listen(target, trigger.close, hideFn));
+             */function () { return showFn(registerHide); })));
         }));
         return ( /**
          * @return {?}
@@ -3483,6 +3007,132 @@
              */function (unsubscribeFn) { return unsubscribeFn(); }));
         });
     }
+    /**
+     * @param {?} renderer
+     * @param {?} options
+     * @return {?}
+     */
+    function registerOutsideClick(renderer, options) {
+        if (!options.outsideClick) {
+            return Function.prototype;
+        }
+        /* tslint:disable-next-line: no-any */
+        return renderer.listen('document', 'click', ( /**
+         * @param {?} event
+         * @return {?}
+         */function (event) {
+            if (options.target && options.target.contains(event.target)) {
+                return undefined;
+            }
+            if (options.targets &&
+                options.targets.some(( /**
+                 * @param {?} target
+                 * @return {?}
+                 */function (target) { return target.contains(event.target); }))) {
+                return undefined;
+            }
+            options.hide();
+        }));
+    }
+    /**
+     * @param {?} renderer
+     * @param {?} options
+     * @return {?}
+     */
+    function registerEscClick(renderer, options) {
+        if (!options.outsideEsc) {
+            return Function.prototype;
+        }
+        return renderer.listen('document', 'keyup.esc', ( /**
+         * @param {?} event
+         * @return {?}
+         */function (event) {
+            if (options.target && options.target.contains(event.target)) {
+                return undefined;
+            }
+            if (options.targets &&
+                options.targets.some(( /**
+                 * @param {?} target
+                 * @return {?}
+                 */function (target) { return target.contains(event.target); }))) {
+                return undefined;
+            }
+            options.hide();
+        }));
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
+     * JS version of browser APIs. This library can only run in the browser.
+     * @type {?}
+     */
+    var win$1 = (typeof window !== 'undefined' && window) || ( /** @type {?} */({}));
+    /** @type {?} */
+    var document$2 = win$1.document;
+    /** @type {?} */
+    var location$1 = win$1.location;
+    /** @type {?} */
+    var gc$1 = win$1.gc ? ( /**
+     * @return {?}
+     */function () { return win$1.gc(); }) : ( /**
+     * @return {?}
+     */function () { return null; });
+    /** @type {?} */
+    var performance$1 = win$1.performance ? win$1.performance : null;
+    /** @type {?} */
+    var Event$1 = win$1.Event;
+    /** @type {?} */
+    var MouseEvent$1 = win$1.MouseEvent;
+    /** @type {?} */
+    var KeyboardEvent$1 = win$1.KeyboardEvent;
+    /** @type {?} */
+    var EventTarget$1 = win$1.EventTarget;
+    /** @type {?} */
+    var History$1 = win$1.History;
+    /** @type {?} */
+    var Location$1 = win$1.Location;
+    /** @type {?} */
+    var EventListener$1 = win$1.EventListener;
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
 
     /**
      * @fileoverview added by tsickle
@@ -3493,7 +3143,11 @@
      * @copyright Angular ng-bootstrap team
      */
     var ContentRef = /** @class */ (function () {
-        function ContentRef(nodes, viewRef, componentRef) {
+        function ContentRef(
+        /* tslint:disable-next-line: no-any */
+        nodes, viewRef, 
+        /* tslint:disable-next-line: no-any */
+        componentRef) {
             this.nodes = nodes;
             this.viewRef = viewRef;
             this.componentRef = componentRef;
@@ -3527,17 +3181,29 @@
             this._applicationRef = _applicationRef;
             this._posService = _posService;
             this.onBeforeShow = new i0.EventEmitter();
+            /* tslint:disable-next-line: no-any*/
             this.onShown = new i0.EventEmitter();
-            this.shown = new i0.EventEmitter();
+            /* tslint:disable-next-line: no-any*/
             this.onBeforeHide = new i0.EventEmitter();
             this.onHidden = new i0.EventEmitter();
+            this.shown = new i0.EventEmitter();
             this.hidden = new i0.EventEmitter();
             this._providers = [];
+            this._isHiding = false;
+            /**
+             * A selector used if container element was not found
+             */
+            this.containerDefaultSelector = 'body';
+            this._listenOpts = {};
+            this._globalListener = Function.prototype;
         }
         Object.defineProperty(ComponentLoader.prototype, "isShown", {
             get: /**
              * @return {?}
              */ function () {
+                if (this._isHiding) {
+                    return false;
+                }
                 return !!this._componentRef;
             },
             enumerable: true,
@@ -3582,7 +3248,7 @@
          */
             function (opts) {
                 this.attachment = opts.attachment || this.attachment;
-                this._elementRef = ( /** @type {?} */(opts.target)) || this._elementRef;
+                this._elementRef = (( /** @type {?} */(opts.target))) || this._elementRef;
                 return this;
             };
         /**
@@ -3619,22 +3285,31 @@
                     this.onBeforeShow.emit();
                     this._contentRef = this._getContentRef(opts.content, opts.data);
                     /** @type {?} */
-                    var injector = i0.Injector.create({ providers: this._providers, parent: this._injector });
+                    var injector = i0.Injector.create({
+                        providers: this._providers,
+                        parent: this._injector
+                    });
                     this._componentRef = this._componentFactory.create(injector, this._contentRef.nodes);
                     this._applicationRef.attachView(this._componentRef.hostView);
+                    // this._componentRef = this._viewContainerRef
+                    //   .createComponent(this._componentFactory, 0, injector, this._contentRef.nodes);
                     this.instance = this._componentRef.instance;
                     Object.assign(this._componentRef.instance, opts);
                     if (this.container instanceof i0.ElementRef) {
-                        this.container.nativeElement
-                            .appendChild(this._componentRef.location.nativeElement);
+                        this.container.nativeElement.appendChild(this._componentRef.location.nativeElement);
                     }
-                    if (this.container === 'body' && typeof document !== 'undefined') {
-                        document.querySelector(( /** @type {?} */(this.container)))
-                            .appendChild(this._componentRef.location.nativeElement);
+                    if (typeof this.container === 'string' && typeof document !== 'undefined') {
+                        /** @type {?} */
+                        var selectedElement = document.querySelector(this.container) ||
+                            document.querySelector(this.containerDefaultSelector);
+                        if (selectedElement) {
+                            selectedElement.appendChild(this._componentRef.location.nativeElement);
+                        }
                     }
-                    if (!this.container && this._elementRef && this._elementRef.nativeElement.parentElement) {
-                        this._elementRef.nativeElement.parentElement
-                            .appendChild(this._componentRef.location.nativeElement);
+                    if (!this.container &&
+                        this._elementRef &&
+                        this._elementRef.nativeElement.parentElement) {
+                        this._elementRef.nativeElement.parentElement.appendChild(this._componentRef.location.nativeElement);
                     }
                     // we need to manually invoke change detection since events registered
                     // via
@@ -3649,6 +3324,7 @@
                     this._componentRef.changeDetectorRef.detectChanges();
                     this.onShown.emit(this._componentRef.instance);
                 }
+                this._registerOutsideClick();
                 return this._componentRef;
             };
         /**
@@ -3661,6 +3337,7 @@
                 if (!this._componentRef) {
                     return this;
                 }
+                this._posService.deletePositionElement(this._componentRef.location);
                 this.onBeforeHide.emit(this._componentRef.instance);
                 /** @type {?} */
                 var componentEl = this._componentRef.location.nativeElement;
@@ -3672,8 +3349,12 @@
                 if (this._viewContainerRef && this._contentRef.viewRef) {
                     this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._contentRef.viewRef));
                 }
+                if (this._contentRef.viewRef) {
+                    this._contentRef.viewRef.destroy();
+                }
                 this._contentRef = null;
                 this._componentRef = null;
+                this._removeGlobalListener();
                 this.onHidden.emit();
                 return this;
             };
@@ -3716,22 +3397,105 @@
             function (listenOpts) {
                 var _this = this;
                 this.triggers = listenOpts.triggers || this.triggers;
-                listenOpts.target = listenOpts.target || this._elementRef;
-                listenOpts.show = listenOpts.show || (( /**
-                 * @return {?}
-                 */function () { return _this.show(); }));
-                listenOpts.hide = listenOpts.hide || (( /**
-                 * @return {?}
-                 */function () { return _this.hide(); }));
-                listenOpts.toggle = listenOpts.toggle || (( /**
+                this._listenOpts.outsideClick = listenOpts.outsideClick;
+                this._listenOpts.outsideEsc = listenOpts.outsideEsc;
+                listenOpts.target = listenOpts.target || this._elementRef.nativeElement;
+                /** @type {?} */
+                var hide = (this._listenOpts.hide = ( /**
                  * @return {?}
                  */function () {
-                    return _this.isShown
-                        ? listenOpts.hide()
-                        : listenOpts.show();
+                    return listenOpts.hide ? listenOpts.hide() : void _this.hide();
                 }));
-                this._unregisterListenersFn = listenToTriggers(this._renderer, listenOpts.target.nativeElement, this.triggers, listenOpts.show, listenOpts.hide, listenOpts.toggle);
+                /** @type {?} */
+                var show = (this._listenOpts.show = ( /**
+                 * @param {?} registerHide
+                 * @return {?}
+                 */function (registerHide) {
+                    listenOpts.show ? listenOpts.show(registerHide) : _this.show(registerHide);
+                    registerHide();
+                }));
+                /** @type {?} */
+                var toggle = ( /**
+                 * @param {?} registerHide
+                 * @return {?}
+                 */function (registerHide) {
+                    _this.isShown ? hide() : show(registerHide);
+                });
+                this._unregisterListenersFn = listenToTriggersV2(this._renderer, {
+                    target: listenOpts.target,
+                    triggers: listenOpts.triggers,
+                    show: show,
+                    hide: hide,
+                    toggle: toggle
+                });
                 return this;
+            };
+        /**
+         * @return {?}
+         */
+        ComponentLoader.prototype._removeGlobalListener = /**
+         * @return {?}
+         */
+            function () {
+                if (this._globalListener) {
+                    this._globalListener();
+                    this._globalListener = null;
+                }
+            };
+        /**
+         * @param {?} vRef
+         * @param {?} template
+         * @return {?}
+         */
+        ComponentLoader.prototype.attachInline = /**
+         * @param {?} vRef
+         * @param {?} template
+         * @return {?}
+         */
+            function (vRef, 
+            /* tslint:disable-next-line: no-any*/
+            template) {
+                this._inlineViewRef = vRef.createEmbeddedView(template);
+                return this;
+            };
+        /**
+         * @return {?}
+         */
+        ComponentLoader.prototype._registerOutsideClick = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                if (!this._componentRef || !this._componentRef.location) {
+                    return;
+                }
+                // why: should run after first event bubble
+                if (this._listenOpts && this._listenOpts.outsideClick) {
+                    /** @type {?} */
+                    var target_1 = this._componentRef.location.nativeElement;
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () {
+                        _this._globalListener = registerOutsideClick(_this._renderer, {
+                            targets: [target_1, _this._elementRef.nativeElement],
+                            outsideClick: _this._listenOpts.outsideClick,
+                            hide: ( /**
+                             * @return {?}
+                             */function () { return _this._listenOpts.hide(); })
+                        });
+                    }));
+                }
+                if (this._listenOpts.outsideEsc) {
+                    /** @type {?} */
+                    var target = this._componentRef.location.nativeElement;
+                    this._globalListener = registerEscClick(this._renderer, {
+                        targets: [target, this._elementRef.nativeElement],
+                        outsideEsc: this._listenOpts.outsideEsc,
+                        hide: ( /**
+                         * @return {?}
+                         */function () { return _this._listenOpts.hide(); })
+                    });
+                }
             };
         /**
          * @return {?}
@@ -3755,19 +3519,23 @@
                 if (this._zoneSubscription || !this.attachment) {
                     return;
                 }
-                this._zoneSubscription = this._ngZone
-                    .onStable.subscribe(( /**
-             * @return {?}
-             */function () {
-                    if (!_this._componentRef) {
-                        return;
-                    }
+                this.onShown.subscribe(( /**
+                 * @return {?}
+                 */function () {
                     _this._posService.position({
                         element: _this._componentRef.location,
                         target: _this._elementRef,
                         attachment: _this.attachment,
                         appendToBody: _this.container === 'body'
                     });
+                }));
+                this._zoneSubscription = this._ngZone.onStable.subscribe(( /**
+                 * @return {?}
+                 */function () {
+                    if (!_this._componentRef) {
+                        return;
+                    }
+                    _this._posService.calcPosition();
                 }));
             };
         /**
@@ -3797,15 +3565,21 @@
          * @param {?=} data
          * @return {?}
          */
-            function (content, data) {
+            function (
+            /* tslint:disable-next-line: no-any*/
+            content, 
+            /* tslint:disable-next-line: no-any*/
+            data) {
                 if (!content) {
                     return new ContentRef([]);
                 }
                 if (content instanceof i0.TemplateRef) {
                     if (this._viewContainerRef) {
                         /** @type {?} */
-                        var viewRef_1 = this._viewContainerRef.createEmbeddedView(content);
-                        return new ContentRef([viewRef_1.rootNodes], viewRef_1);
+                        var _viewRef = this._viewContainerRef
+                            .createEmbeddedView(content);
+                        _viewRef.markForCheck();
+                        return new ContentRef([_viewRef.rootNodes], _viewRef);
                     }
                     /** @type {?} */
                     var viewRef = content.createEmbeddedView({});
@@ -3816,7 +3590,10 @@
                     /** @type {?} */
                     var contentCmptFactory = this._componentFactoryResolver.resolveComponentFactory(content);
                     /** @type {?} */
-                    var modalContentInjector = i0.Injector.create({ providers: this._providers, parent: this._injector });
+                    var modalContentInjector = i0.Injector.create({
+                        providers: this._providers,
+                        parent: this._injector
+                    });
                     /** @type {?} */
                     var componentRef = contentCmptFactory.create(modalContentInjector);
                     Object.assign(componentRef.instance, data);
@@ -3833,230 +3610,1354 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
-     * @copyright Valor Software
-     * @copyright Angular ng-bootstrap team
+     * Get CSS computed property of the given element
+     * @param {?} element
+     * @param {?=} property
+     * @return {?}
      */
-    // previous version:
-    // https://github.com/angular-ui/bootstrap/blob/07c31d0731f7cb068a1932b8e01d2312b796b4ec/src/position/position.js
-    // tslint:disable
-    var 
-    // previous version:
-    // https://github.com/angular-ui/bootstrap/blob/07c31d0731f7cb068a1932b8e01d2312b796b4ec/src/position/position.js
-    // tslint:disable
-    Positioning = /** @class */ (function () {
+    function getStyleComputedProperty(element, property) {
+        if (element.nodeType !== 1) {
+            return [];
+        }
+        // NOTE: 1 DOM access here
+        /** @type {?} */
+        var window = element.ownerDocument.defaultView;
+        /** @type {?} */
+        var css = window.getComputedStyle(element, null);
+        return property ? css[( /** @type {?} */(property))] : css;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Returns the parentNode or the host of the element
+     * @param {?} element
+     * @return {?}
+     */
+    function getParentNode(element) {
+        if (element.nodeName === 'HTML') {
+            return element;
+        }
+        return element.parentNode || element.host;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    function getScrollParent(element) {
+        // Return body, `getScroll` will take care to get the correct `scrollTop` from it
+        if (!element) {
+            return document.body;
+        }
+        switch (element.nodeName) {
+            case 'HTML':
+            case 'BODY':
+                return element.ownerDocument.body;
+            case '#document':
+                return element.body;
+            default:
+        }
+        // Firefox want us to check `-x` and `-y` variations as well
+        var _a = getStyleComputedProperty(element), overflow = _a.overflow, overflowX = _a.overflowX, overflowY = _a.overflowY;
+        if (/(auto|scroll|overlay)/.test(String(overflow) + String(overflowY) + String(overflowX))) {
+            return element;
+        }
+        return getScrollParent(getParentNode(element));
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var isIE11 = isBrowser && !!((( /** @type {?} */(window))).MSInputMethodContext && (( /** @type {?} */(document))).documentMode);
+    /** @type {?} */
+    var isIE10 = isBrowser && !!((( /** @type {?} */(window))).MSInputMethodContext && /MSIE 10/.test((( /** @type {?} */(navigator))).userAgent));
+    /**
+     * @param {?=} version
+     * @return {?}
+     */
+    function isIE(version) {
+        if (version === 11) {
+            return isIE11;
+        }
+        if (version === 10) {
+            return isIE10;
+        }
+        return isIE11 || isIE10;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    function getOffsetParent(element) {
+        if (!element) {
+            return document.documentElement;
+        }
+        /** @type {?} */
+        var noOffsetParent = isIE(10) ? document.body : null;
+        // NOTE: 1 DOM access here
+        /** @type {?} */
+        var offsetParent = element.offsetParent || null;
+        // Skip hidden elements which don't have an offsetParent
+        /** @type {?} */
+        var sibling;
+        while (offsetParent === noOffsetParent && element.nextElementSibling && element.nodeName !== 'BODY') {
+            sibling = element.nextElementSibling;
+            offsetParent = sibling.offsetParent;
+        }
+        /** @type {?} */
+        var nodeName = offsetParent && offsetParent.nodeName;
+        if (!nodeName || nodeName === 'BODY' || nodeName === 'HTML') {
+            return sibling ? sibling.ownerDocument.documentElement : document.documentElement;
+        }
+        // .offsetParent will return the closest TH, TD or TABLE in case
+        // no offsetParent is present, I hate this job...
+        if (['TH', 'TD', 'TABLE'].indexOf(offsetParent.nodeName) !== -1 &&
+            getStyleComputedProperty(offsetParent, 'position') === 'static') {
+            return getOffsetParent(offsetParent);
+        }
+        return offsetParent;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    function isOffsetContainer(element) {
+        var nodeName = element.nodeName;
+        if (nodeName === 'BODY') {
+            return false;
+        }
+        return (nodeName === 'HTML' || getOffsetParent(element.firstElementChild) === element);
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Finds the root node (document, shadowDOM root) of the given element
+     * @param {?} node
+     * @return {?}
+     */
+    function getRoot(node) {
+        if (node.parentNode !== null) {
+            return getRoot(node.parentNode);
+        }
+        return node;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} element1
+     * @param {?} element2
+     * @return {?}
+     */
+    function findCommonOffsetParent(element1, element2) {
+        // This check is needed to avoid errors in case one of the elements isn't defined for any reason
+        if (!element1 || !element1.nodeType || !element2 || !element2.nodeType) {
+            return document.documentElement;
+        }
+        // Here we make sure to give as "start" the element that comes first in the DOM
+        /* tslint:disable-next-line: no-bitwise */
+        /** @type {?} */
+        var order = element1.compareDocumentPosition(element2) & Node.DOCUMENT_POSITION_FOLLOWING;
+        /** @type {?} */
+        var start = order ? element1 : element2;
+        /** @type {?} */
+        var end = order ? element2 : element1;
+        // Get common ancestor container
+        /** @type {?} */
+        var range = document.createRange();
+        range.setStart(start, 0);
+        range.setEnd(end, 0);
+        var commonAncestorContainer = range.commonAncestorContainer;
+        // Both nodes are inside #document
+        if ((element1 !== commonAncestorContainer &&
+            element2 !== commonAncestorContainer) ||
+            start.contains(end)) {
+            if (isOffsetContainer(commonAncestorContainer)) {
+                return commonAncestorContainer;
+            }
+            return getOffsetParent(commonAncestorContainer);
+        }
+        // one of the nodes is inside shadowDOM, find which one
+        /** @type {?} */
+        var element1root = getRoot(element1);
+        if (element1root.host) {
+            return findCommonOffsetParent(element1root.host, element2);
+        }
+        else {
+            return findCommonOffsetParent(element1, getRoot(element2).host);
+        }
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Helper to detect borders of a given element
+     */
+    /**
+     * @param {?} styles
+     * @param {?} axis
+     * @return {?}
+     */
+    function getBordersSize(styles, axis) {
+        /** @type {?} */
+        var sideA = axis === 'x' ? 'Left' : 'Top';
+        /** @type {?} */
+        var sideB = sideA === 'Left' ? 'Right' : 'Bottom';
+        return (parseFloat(styles[( /** @type {?} */("border" + sideA + "Width"))]) +
+            parseFloat(styles[( /** @type {?} */("border" + sideB + "Width"))]));
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} axis
+     * @param {?} body
+     * @param {?} html
+     * @param {?} computedStyle
+     * @return {?}
+     */
+    function getSize(axis, body, html, computedStyle) {
+        return Math.max((( /** @type {?} */(body)))["offset" + axis], (( /** @type {?} */(body)))["scroll" + axis], (( /** @type {?} */(html)))["client" + axis], (( /** @type {?} */(html)))["offset" + axis], (( /** @type {?} */(html)))["scroll" + axis], isIE(10)
+            ? (parseInt((( /** @type {?} */(html)))["offset" + axis], 10) +
+                parseInt(computedStyle[( /** @type {?} */("margin" + (axis === 'Height' ? 'Top' : 'Left')))], 10) +
+                parseInt(computedStyle[( /** @type {?} */("margin" + (axis === 'Height' ? 'Bottom' : 'Right')))], 10))
+            : 0);
+    }
+    /**
+     * @param {?} document
+     * @return {?}
+     */
+    function getWindowSizes(document) {
+        /** @type {?} */
+        var body = document.body;
+        /** @type {?} */
+        var html = document.documentElement;
+        /** @type {?} */
+        var computedStyle = isIE(10) && getComputedStyle(html);
+        return {
+            height: getSize('Height', body, html, computedStyle),
+            width: getSize('Width', body, html, computedStyle)
+        };
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Gets the scroll value of the given element in the given side (top and left)
+     * @param {?} element
+     * @param {?=} side
+     * @return {?}
+     */
+    function getScroll(element, side) {
+        if (side === void 0) {
+            side = 'top';
+        }
+        /** @type {?} */
+        var upperSide = side === 'top' ? 'scrollTop' : 'scrollLeft';
+        /** @type {?} */
+        var nodeName = element.nodeName;
+        if (nodeName === 'BODY' || nodeName === 'HTML') {
+            /** @type {?} */
+            var html = element.ownerDocument.documentElement;
+            /** @type {?} */
+            var scrollingElement = element.ownerDocument.scrollingElement || html;
+            return scrollingElement[upperSide];
+        }
+        return element[upperSide];
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} offsets
+     * @return {?}
+     */
+    function getClientRect(offsets) {
+        return __assign({}, offsets, { right: offsets.left + offsets.width, bottom: offsets.top + offsets.height });
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    function getBoundingClientRect(element) {
+        /** @type {?} */
+        var rect = {};
+        // IE10 10 FIX: Please, don't ask, the element isn't
+        // considered in DOM in some circumstances...
+        // This isn't reproducible in IE10 compatibility mode of IE11
+        try {
+            if (isIE(10)) {
+                rect = element.getBoundingClientRect();
+                /** @type {?} */
+                var scrollTop = getScroll(element, 'top');
+                /** @type {?} */
+                var scrollLeft = getScroll(element, 'left');
+                rect.top += scrollTop;
+                rect.left += scrollLeft;
+                rect.bottom += scrollTop;
+                rect.right += scrollLeft;
+            }
+            else {
+                rect = element.getBoundingClientRect();
+            }
+        }
+        catch (e) {
+            return undefined;
+        }
+        /** @type {?} */
+        var result = {
+            left: rect.left,
+            top: rect.top,
+            width: rect.right - rect.left,
+            height: rect.bottom - rect.top
+        };
+        // subtract scrollbar size from sizes
+        /** @type {?} */
+        var sizes = element.nodeName === 'HTML' ? getWindowSizes(element.ownerDocument) : {};
+        /** @type {?} */
+        var width = sizes.width || element.clientWidth || result.right - result.left;
+        /** @type {?} */
+        var height = sizes.height || element.clientHeight || result.bottom - result.top;
+        /** @type {?} */
+        var horizScrollbar = element.offsetWidth - width;
+        /** @type {?} */
+        var vertScrollbar = element.offsetHeight - height;
+        // if an hypothetical scrollbar is detected, we must be sure it's not a `border`
+        // we make this check conditional for performance reasons
+        if (horizScrollbar || vertScrollbar) {
+            /** @type {?} */
+            var styles = getStyleComputedProperty(element);
+            horizScrollbar -= getBordersSize(styles, 'x');
+            vertScrollbar -= getBordersSize(styles, 'y');
+            result.width -= horizScrollbar;
+            result.height -= vertScrollbar;
+        }
+        return getClientRect(result);
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} rect
+     * @param {?} element
+     * @param {?=} subtract
+     * @return {?}
+     */
+    function includeScroll(rect, element, subtract) {
+        if (subtract === void 0) {
+            subtract = false;
+        }
+        /** @type {?} */
+        var scrollTop = getScroll(element, 'top');
+        /** @type {?} */
+        var scrollLeft = getScroll(element, 'left');
+        /** @type {?} */
+        var modifier = subtract ? -1 : 1;
+        rect.top += scrollTop * modifier;
+        rect.bottom += scrollTop * modifier;
+        rect.left += scrollLeft * modifier;
+        rect.right += scrollLeft * modifier;
+        return rect;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} children
+     * @param {?} parent
+     * @param {?=} fixedPosition
+     * @return {?}
+     */
+    function getOffsetRectRelativeToArbitraryNode(children, parent, fixedPosition) {
+        if (fixedPosition === void 0) {
+            fixedPosition = false;
+        }
+        /** @type {?} */
+        var isIE10 = isIE(10);
+        /** @type {?} */
+        var isHTML = parent.nodeName === 'HTML';
+        /** @type {?} */
+        var childrenRect = getBoundingClientRect(children);
+        /** @type {?} */
+        var parentRect = getBoundingClientRect(parent);
+        /** @type {?} */
+        var scrollParent = getScrollParent(children);
+        /** @type {?} */
+        var styles = getStyleComputedProperty(parent);
+        /** @type {?} */
+        var borderTopWidth = parseFloat(styles.borderTopWidth);
+        /** @type {?} */
+        var borderLeftWidth = parseFloat(styles.borderLeftWidth);
+        // In cases where the parent is fixed, we must ignore negative scroll in offset calc
+        if (fixedPosition && isHTML) {
+            parentRect.top = Math.max(parentRect.top, 0);
+            parentRect.left = Math.max(parentRect.left, 0);
+        }
+        /** @type {?} */
+        var offsets = getClientRect({
+            top: childrenRect.top - parentRect.top - borderTopWidth,
+            left: childrenRect.left - parentRect.left - borderLeftWidth,
+            width: childrenRect.width,
+            height: childrenRect.height
+        });
+        offsets.marginTop = 0;
+        offsets.marginLeft = 0;
+        // Subtract margins of documentElement in case it's being used as parent
+        // we do this only on HTML because it's the only element that behaves
+        // differently when margins are applied to it. The margins are included in
+        // the box of the documentElement, in the other cases not.
+        if (!isIE10 && isHTML) {
+            /** @type {?} */
+            var marginTop = parseFloat(styles.marginTop);
+            /** @type {?} */
+            var marginLeft = parseFloat(styles.marginLeft);
+            offsets.top -= borderTopWidth - marginTop;
+            offsets.bottom -= borderTopWidth - marginTop;
+            offsets.left -= borderLeftWidth - marginLeft;
+            offsets.right -= borderLeftWidth - marginLeft;
+            // Attach marginTop and marginLeft because in some circumstances we may need them
+            offsets.marginTop = marginTop;
+            offsets.marginLeft = marginLeft;
+        }
+        if (isIE10 && !fixedPosition
+            ? parent.contains(scrollParent)
+            : parent === scrollParent && scrollParent.nodeName !== 'BODY') {
+            offsets = includeScroll(offsets, parent);
+        }
+        return offsets;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} element
+     * @param {?=} excludeScroll
+     * @return {?}
+     */
+    function getViewportOffsetRectRelativeToArtbitraryNode(element, excludeScroll) {
+        if (excludeScroll === void 0) {
+            excludeScroll = false;
+        }
+        /** @type {?} */
+        var html = element.ownerDocument.documentElement;
+        /** @type {?} */
+        var relativeOffset = getOffsetRectRelativeToArbitraryNode(element, html);
+        /** @type {?} */
+        var width = Math.max(html.clientWidth, window.innerWidth || 0);
+        /** @type {?} */
+        var height = Math.max(html.clientHeight, window.innerHeight || 0);
+        /** @type {?} */
+        var scrollTop = !excludeScroll ? getScroll(html) : 0;
+        /** @type {?} */
+        var scrollLeft = !excludeScroll ? getScroll(html, 'left') : 0;
+        /** @type {?} */
+        var offset = {
+            top: scrollTop - Number(relativeOffset.top) + Number(relativeOffset.marginTop),
+            left: scrollLeft - Number(relativeOffset.left) + Number(relativeOffset.marginLeft),
+            width: width,
+            height: height
+        };
+        return getClientRect(offset);
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    function isFixed(element) {
+        /** @type {?} */
+        var nodeName = element.nodeName;
+        if (nodeName === 'BODY' || nodeName === 'HTML') {
+            return false;
+        }
+        if (getStyleComputedProperty(element, 'position') === 'fixed') {
+            return true;
+        }
+        return isFixed(getParentNode(element));
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    function getFixedPositionOffsetParent(element) {
+        // This check is needed to avoid errors in case one of the elements isn't defined for any reason
+        if (!element || !element.parentElement || isIE()) {
+            return document.documentElement;
+        }
+        /** @type {?} */
+        var el = element.parentElement;
+        while (el && getStyleComputedProperty(el, 'transform') === 'none') {
+            el = el.parentElement;
+        }
+        return el || document.documentElement;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} target
+     * @param {?} host
+     * @param {?=} padding
+     * @param {?=} boundariesElement
+     * @param {?=} fixedPosition
+     * @return {?}
+     */
+    function getBoundaries(target, host, padding, boundariesElement, fixedPosition) {
+        // NOTE: 1 DOM access here
+        if (padding === void 0) {
+            padding = 0;
+        }
+        if (fixedPosition === void 0) {
+            fixedPosition = false;
+        }
+        // NOTE: 1 DOM access here
+        /** @type {?} */
+        var boundaries = { top: 0, left: 0 };
+        /** @type {?} */
+        var offsetParent = fixedPosition ? getFixedPositionOffsetParent(target) : findCommonOffsetParent(target, host);
+        // Handle viewport case
+        if (boundariesElement === 'viewport') {
+            boundaries = getViewportOffsetRectRelativeToArtbitraryNode(offsetParent, fixedPosition);
+        }
+        else {
+            // Handle other cases based on DOM element used as boundaries
+            /** @type {?} */
+            var boundariesNode = void 0;
+            if (boundariesElement === 'scrollParent') {
+                boundariesNode = getScrollParent(getParentNode(host));
+                if (boundariesNode.nodeName === 'BODY') {
+                    boundariesNode = target.ownerDocument.documentElement;
+                }
+            }
+            else if (boundariesElement === 'window') {
+                boundariesNode = target.ownerDocument.documentElement;
+            }
+            else {
+                boundariesNode = boundariesElement;
+            }
+            /** @type {?} */
+            var offsets = getOffsetRectRelativeToArbitraryNode(boundariesNode, offsetParent, fixedPosition);
+            // In case of HTML, we need a different computation
+            if (boundariesNode.nodeName === 'HTML' && !isFixed(offsetParent)) {
+                var _a = getWindowSizes(target.ownerDocument), height = _a.height, width = _a.width;
+                boundaries.top += offsets.top - offsets.marginTop;
+                boundaries.bottom = Number(height) + Number(offsets.top);
+                boundaries.left += offsets.left - offsets.marginLeft;
+                boundaries.right = Number(width) + Number(offsets.left);
+            }
+            else {
+                // for all the other DOM elements, this one is good
+                boundaries = offsets;
+            }
+        }
+        // Add paddings
+        boundaries.left += padding;
+        boundaries.top += padding;
+        boundaries.right -= padding;
+        boundaries.bottom -= padding;
+        return boundaries;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} __0
+     * @return {?}
+     */
+    function getArea(_a) {
+        var width = _a.width, height = _a.height;
+        return width * height;
+    }
+    /**
+     * @param {?} placement
+     * @param {?} refRect
+     * @param {?} target
+     * @param {?} host
+     * @param {?=} allowedPositions
+     * @param {?=} boundariesElement
+     * @param {?=} padding
+     * @return {?}
+     */
+    function computeAutoPlacement(placement, refRect, target, host, allowedPositions, boundariesElement, padding) {
+        if (allowedPositions === void 0) {
+            allowedPositions = ['top', 'left', 'bottom', 'right'];
+        }
+        if (boundariesElement === void 0) {
+            boundariesElement = 'viewport';
+        }
+        if (padding === void 0) {
+            padding = 0;
+        }
+        if (placement.indexOf('auto') === -1) {
+            return placement;
+        }
+        /** @type {?} */
+        var boundaries = getBoundaries(target, host, padding, boundariesElement);
+        /** @type {?} */
+        var rects = {
+            top: {
+                width: boundaries.width,
+                height: refRect.top - boundaries.top
+            },
+            right: {
+                width: boundaries.right - refRect.right,
+                height: boundaries.height
+            },
+            bottom: {
+                width: boundaries.width,
+                height: boundaries.bottom - refRect.bottom
+            },
+            left: {
+                width: refRect.left - boundaries.left,
+                height: boundaries.height
+            }
+        };
+        /** @type {?} */
+        var sortedAreas = Object.keys(rects)
+            .map(( /**
+     * @param {?} key
+     * @return {?}
+     */function (key) { return (__assign({ key: key }, rects[key], { area: getArea(rects[key]) })); }))
+            .sort(( /**
+     * @param {?} a
+     * @param {?} b
+     * @return {?}
+     */function (a, b) { return b.area - a.area; }));
+        /** @type {?} */
+        var filteredAreas = sortedAreas.filter(( /**
+         * @param {?} __0
+         * @return {?}
+         */function (_a) {
+            var width = _a.width, height = _a.height;
+            return width >= target.clientWidth && height >= target.clientHeight;
+        }));
+        filteredAreas = allowedPositions
+            .reduce(( /**
+     * @param {?} obj
+     * @param {?} key
+     * @return {?}
+     */function (obj, key) {
+            var _a;
+            return __assign({}, obj, (_a = {}, _a[key] = filteredAreas[key], _a));
+        }), {});
+        /** @type {?} */
+        var computedPlacement = filteredAreas.length > 0
+            ? filteredAreas[0].key
+            : sortedAreas[0].key;
+        /** @type {?} */
+        var variation = placement.split(' ')[1];
+        target.className = target.className.replace(/auto/g, computedPlacement);
+        return computedPlacement + (variation ? "-" + variation : '');
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} data
+     * @return {?}
+     */
+    function getOffsets(data) {
+        return {
+            width: data.offsets.target.width,
+            height: data.offsets.target.height,
+            left: Math.floor(data.offsets.target.left),
+            top: Math.round(data.offsets.target.top),
+            bottom: Math.round(data.offsets.target.bottom),
+            right: Math.floor(data.offsets.target.right)
+        };
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Get the opposite placement of the given one
+     * @param {?} placement
+     * @return {?}
+     */
+    function getOppositePlacement(placement) {
+        /** @type {?} */
+        var hash = { left: 'right', right: 'left', bottom: 'top', top: 'bottom' };
+        return placement.replace(/left|right|bottom|top/g, ( /**
+         * @param {?} matched
+         * @return {?}
+         */function (matched) { return (( /** @type {?} */(hash)))[matched]; }));
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Get the opposite placement variation of the given one
+     * @param {?} variation
+     * @return {?}
+     */
+    function getOppositeVariation(variation) {
+        if (variation === 'right') {
+            return 'left';
+        }
+        else if (variation === 'left') {
+            return 'right';
+        }
+        return variation;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Get the outer sizes of the given element (offset size + margins)
+     * @param {?} element
+     * @return {?}
+     */
+    function getOuterSizes(element) {
+        /** @type {?} */
+        var window = element.ownerDocument.defaultView;
+        /** @type {?} */
+        var styles = window.getComputedStyle(element);
+        /** @type {?} */
+        var x = parseFloat(styles.marginTop || 0) + parseFloat(styles.marginBottom || 0);
+        /** @type {?} */
+        var y = parseFloat(styles.marginLeft || 0) + parseFloat(styles.marginRight || 0);
+        return {
+            width: Number(element.offsetWidth) + y,
+            height: Number(element.offsetHeight) + x
+        };
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} target
+     * @param {?} host
+     * @param {?=} fixedPosition
+     * @return {?}
+     */
+    function getReferenceOffsets(target, host, fixedPosition) {
+        if (fixedPosition === void 0) {
+            fixedPosition = null;
+        }
+        /** @type {?} */
+        var commonOffsetParent = fixedPosition
+            ? getFixedPositionOffsetParent(target)
+            : findCommonOffsetParent(target, host);
+        return getOffsetRectRelativeToArbitraryNode(host, commonOffsetParent, fixedPosition);
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} target
+     * @param {?} hostOffsets
+     * @param {?} position
+     * @return {?}
+     */
+    function getTargetOffsets(target, hostOffsets, position) {
+        /** @type {?} */
+        var placement = position.split(' ')[0];
+        // Get target node sizes
+        /** @type {?} */
+        var targetRect = getOuterSizes(target);
+        // Add position, width and height to our offsets object
+        /** @type {?} */
+        var targetOffsets = {
+            width: targetRect.width,
+            height: targetRect.height
+        };
+        // depending by the target placement we have to compute its offsets slightly differently
+        /** @type {?} */
+        var isHoriz = ['right', 'left'].indexOf(placement) !== -1;
+        /** @type {?} */
+        var mainSide = isHoriz ? 'top' : 'left';
+        /** @type {?} */
+        var secondarySide = isHoriz ? 'left' : 'top';
+        /** @type {?} */
+        var measurement = isHoriz ? 'height' : 'width';
+        /** @type {?} */
+        var secondaryMeasurement = !isHoriz ? 'height' : 'width';
+        (( /** @type {?} */(targetOffsets)))[mainSide] =
+            hostOffsets[mainSide] +
+                hostOffsets[measurement] / 2 -
+                targetRect[measurement] / 2;
+        (( /** @type {?} */(targetOffsets)))[secondarySide] = placement === secondarySide
+            ? hostOffsets[secondarySide] - targetRect[secondaryMeasurement]
+            : (( /** @type {?} */(hostOffsets)))[getOppositePlacement(secondarySide)];
+        return targetOffsets;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Helper used to know if the given modifier is enabled.
+     * @param {?} options
+     * @param {?} modifierName
+     * @return {?}
+     */
+    function isModifierEnabled(options, modifierName) {
+        return options
+            && options.modifiers
+            && options.modifiers[modifierName]
+            && options.modifiers[modifierName].enabled;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Tells if a given input is a number
+     * @param {?} n
+     * @return {?}
+     */
+    function isNumeric(n) {
+        return n !== '' && !isNaN(parseFloat(n)) && isFinite(n);
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} element
+     * @param {?} styles
+     * @param {?=} renderer
+     * @return {?}
+     */
+    function setStyles(element, styles, renderer) {
+        Object.keys(styles).forEach(( /**
+         * @param {?} prop
+         * @return {?}
+         */function (prop) {
+            /** @type {?} */
+            var unit = '';
+            // add unit if the value is numeric and is one of the following
+            if (['width', 'height', 'top', 'right', 'bottom', 'left'].indexOf(prop) !== -1 &&
+                isNumeric(styles[prop])) {
+                unit = 'px';
+            }
+            if (renderer) {
+                renderer.setStyle(element, prop, "" + String(styles[prop]) + unit);
+                return;
+            }
+            element.style[prop] = String(styles[prop]) + unit;
+        }));
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} data
+     * @param {?=} renderer
+     * @return {?}
+     */
+    function setAllStyles(data, renderer) {
+        /** @type {?} */
+        var target = data.instance.target;
+        /** @type {?} */
+        var offsets = getOffsets(data);
+        setStyles(target, {
+            'will-change': 'transform',
+            top: '0px',
+            left: '0px',
+            transform: "translate3d(" + offsets.left + "px, " + offsets.top + "px, 0px)"
+        }, renderer);
+        if (data.instance.arrow) {
+            setStyles(data.instance.arrow, data.offsets.arrow, renderer);
+        }
+        if (data.placementAuto) {
+            if (renderer) {
+                renderer.setAttribute(target, 'class', target.className.replace(/bs-popover-auto/g, "bs-popover-" + data.placement));
+                renderer.setAttribute(target, 'class', target.className.replace(/bs-tooltip-auto/g, "bs-tooltip-" + data.placement));
+                renderer.setAttribute(target, 'class', target.className.replace(/\sauto/g, "s" + data.placement));
+                if (target.className.match(/popover/g)) {
+                    renderer.addClass(target, 'popover-auto');
+                }
+                if (target.className.match(/tooltip/g)) {
+                    renderer.addClass(target, 'tooltip-auto');
+                }
+            }
+            else {
+                target.className = target.className.replace(/bs-popover-auto/g, "bs-popover-" + data.placement);
+                target.className = target.className.replace(/bs-tooltip-auto/g, "bs-tooltip-" + data.placement);
+                target.className = target.className.replace(/\sauto/g, "s" + data.placement);
+                if (target.className.match(/popover/g)) {
+                    target.classList.add('popover-auto');
+                }
+                if (target.className.match(/tooltip/g)) {
+                    target.classList.add('tooltip-auto');
+                }
+            }
+        }
+        if (renderer) {
+            renderer.setAttribute(target, 'class', target.className.replace(/left|right|top|bottom/g, "" + data.placement.split(' ')[0]));
+        }
+        else {
+            target.className = target.className.replace(/left|right|top|bottom/g, "" + data.placement.split(' ')[0]);
+        }
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} data
+     * @return {?}
+     */
+    function arrow(data) {
+        var _a;
+        /** @type {?} */
+        var targetOffsets = data.offsets.target;
+        // if arrowElement is a string, suppose it's a CSS selector
+        /** @type {?} */
+        var arrowElement = data.instance.target.querySelector('.arrow');
+        // if arrowElement is not found, don't run the modifier
+        if (!arrowElement) {
+            return data;
+        }
+        /** @type {?} */
+        var isVertical = ['left', 'right'].indexOf(data.placement) !== -1;
+        /** @type {?} */
+        var len = isVertical ? 'height' : 'width';
+        /** @type {?} */
+        var sideCapitalized = isVertical ? 'Top' : 'Left';
+        /** @type {?} */
+        var side = sideCapitalized.toLowerCase();
+        /** @type {?} */
+        var altSide = isVertical ? 'left' : 'top';
+        /** @type {?} */
+        var opSide = isVertical ? 'bottom' : 'right';
+        /** @type {?} */
+        var arrowElementSize = getOuterSizes(arrowElement)[len];
+        // top/left side
+        if (data.offsets.host[opSide] - arrowElementSize < (( /** @type {?} */(targetOffsets)))[side]) {
+            (( /** @type {?} */(targetOffsets)))[side] -=
+                (( /** @type {?} */(targetOffsets)))[side] - (data.offsets.host[opSide] - arrowElementSize);
+        }
+        // bottom/right side
+        if (Number((( /** @type {?} */(data))).offsets.host[side]) + Number(arrowElementSize) > (( /** @type {?} */(targetOffsets)))[opSide]) {
+            (( /** @type {?} */(targetOffsets)))[side] +=
+                Number((( /** @type {?} */(data))).offsets.host[side]) + Number(arrowElementSize) - Number((( /** @type {?} */(targetOffsets)))[opSide]);
+        }
+        targetOffsets = getClientRect(targetOffsets);
+        // compute center of the target
+        /** @type {?} */
+        var center = Number((( /** @type {?} */(data))).offsets.host[side]) + Number(data.offsets.host[len] / 2 - arrowElementSize / 2);
+        // Compute the sideValue using the updated target offsets
+        // take target margin in account because we don't have this info available
+        /** @type {?} */
+        var css = getStyleComputedProperty(data.instance.target);
+        /** @type {?} */
+        var targetMarginSide = parseFloat(css["margin" + sideCapitalized]);
+        /** @type {?} */
+        var targetBorderSide = parseFloat(css["border" + sideCapitalized + "Width"]);
+        /** @type {?} */
+        var sideValue = center - (( /** @type {?} */(targetOffsets)))[side] - targetMarginSide - targetBorderSide;
+        // prevent arrowElement from being placed not contiguously to its target
+        sideValue = Math.max(Math.min(targetOffsets[len] - arrowElementSize, sideValue), 0);
+        data.offsets.arrow = (_a = {},
+            _a[side] = Math.round(sideValue),
+            _a[altSide] = '' // make sure to unset any eventual altSide value from the DOM node
+            ,
+                _a);
+        data.instance.arrow = arrowElement;
+        return data;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} data
+     * @return {?}
+     */
+    function flip(data) {
+        data.offsets.target = getClientRect(data.offsets.target);
+        if (!isModifierEnabled(data.options, 'flip')) {
+            data.offsets.target = __assign({}, data.offsets.target, getTargetOffsets(data.instance.target, data.offsets.host, data.placement));
+            return data;
+        }
+        /** @type {?} */
+        var boundaries = getBoundaries(data.instance.target, data.instance.host, 0, // padding
+        'viewport', false // positionFixed
+        );
+        /** @type {?} */
+        var placement = data.placement.split(' ')[0];
+        /** @type {?} */
+        var variation = data.placement.split(' ')[1] || '';
+        /** @type {?} */
+        var offsetsHost = data.offsets.host;
+        /** @type {?} */
+        var target = data.instance.target;
+        /** @type {?} */
+        var host = data.instance.host;
+        /** @type {?} */
+        var adaptivePosition = variation
+            ? computeAutoPlacement('auto', offsetsHost, target, host, ['top', 'bottom'])
+            : computeAutoPlacement('auto', offsetsHost, target, host);
+        /** @type {?} */
+        var flipOrder = [placement, adaptivePosition];
+        /* tslint:disable-next-line: cyclomatic-complexity */
+        flipOrder.forEach(( /**
+         * @param {?} step
+         * @param {?} index
+         * @return {?}
+         */function (step, index) {
+            if (placement !== step || flipOrder.length === index + 1) {
+                return data;
+            }
+            placement = data.placement.split(' ')[0];
+            // using floor because the host offsets may contain decimals we are not going to consider here
+            /** @type {?} */
+            var overlapsRef = (placement === 'left' &&
+                Math.floor(data.offsets.target.right) > Math.floor(data.offsets.host.left)) ||
+                (placement === 'right' &&
+                    Math.floor(data.offsets.target.left) < Math.floor(data.offsets.host.right)) ||
+                (placement === 'top' &&
+                    Math.floor(data.offsets.target.bottom) > Math.floor(data.offsets.host.top)) ||
+                (placement === 'bottom' &&
+                    Math.floor(data.offsets.target.top) < Math.floor(data.offsets.host.bottom));
+            /** @type {?} */
+            var overflowsLeft = Math.floor(data.offsets.target.left) < Math.floor(boundaries.left);
+            /** @type {?} */
+            var overflowsRight = Math.floor(data.offsets.target.right) > Math.floor(boundaries.right);
+            /** @type {?} */
+            var overflowsTop = Math.floor(data.offsets.target.top) < Math.floor(boundaries.top);
+            /** @type {?} */
+            var overflowsBottom = Math.floor(data.offsets.target.bottom) > Math.floor(boundaries.bottom);
+            /** @type {?} */
+            var overflowsBoundaries = (placement === 'left' && overflowsLeft) ||
+                (placement === 'right' && overflowsRight) ||
+                (placement === 'top' && overflowsTop) ||
+                (placement === 'bottom' && overflowsBottom);
+            // flip the variation if required
+            /** @type {?} */
+            var isVertical = ['top', 'bottom'].indexOf(placement) !== -1;
+            /** @type {?} */
+            var flippedVariation = ((isVertical && variation === 'left' && overflowsLeft) ||
+                (isVertical && variation === 'right' && overflowsRight) ||
+                (!isVertical && variation === 'left' && overflowsTop) ||
+                (!isVertical && variation === 'right' && overflowsBottom));
+            if (overlapsRef || overflowsBoundaries || flippedVariation) {
+                if (overlapsRef || overflowsBoundaries) {
+                    placement = flipOrder[index + 1];
+                }
+                if (flippedVariation) {
+                    variation = getOppositeVariation(variation);
+                }
+                data.placement = placement + (variation ? " " + variation : '');
+                data.offsets.target = __assign({}, data.offsets.target, getTargetOffsets(data.instance.target, data.offsets.host, data.placement));
+            }
+        }));
+        return data;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} targetElement
+     * @param {?} hostElement
+     * @param {?} position
+     * @param {?} options
+     * @return {?}
+     */
+    function initData(targetElement, hostElement, position, options) {
+        /** @type {?} */
+        var hostElPosition = getReferenceOffsets(targetElement, hostElement);
+        /** @type {?} */
+        var placementAuto = !!position.match(/auto/g);
+        // support old placements 'auto left|right|top|bottom'
+        /** @type {?} */
+        var placement = !!position.match(/auto\s(left|right|top|bottom)/g)
+            ? position.split(' ')[1] || ''
+            : position;
+        /** @type {?} */
+        var targetOffset = getTargetOffsets(targetElement, hostElPosition, placement);
+        placement = computeAutoPlacement(placement, hostElPosition, targetElement, hostElement);
+        return {
+            options: options,
+            instance: {
+                target: targetElement,
+                host: hostElement,
+                arrow: null
+            },
+            offsets: {
+                target: targetOffset,
+                host: hostElPosition,
+                arrow: null
+            },
+            positionFixed: false,
+            placement: placement,
+            placementAuto: placementAuto
+        };
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} data
+     * @return {?}
+     */
+    function preventOverflow(data) {
+        if (!isModifierEnabled(data.options, 'preventOverflow')) {
+            return data;
+        }
+        // NOTE: DOM access here
+        // resets the targetOffsets's position so that the document size can be calculated excluding
+        // the size of the targetOffsets element itself
+        /** @type {?} */
+        var transformProp = 'transform';
+        /** @type {?} */
+        var targetStyles = data.instance.target.style;
+        // assignment to help minification
+        var top = targetStyles.top, left = targetStyles.left, _a = transformProp, transform = targetStyles[_a];
+        targetStyles.top = '';
+        targetStyles.left = '';
+        targetStyles[transformProp] = '';
+        /** @type {?} */
+        var boundaries = getBoundaries(data.instance.target, data.instance.host, 0, // padding
+        'scrollParent', false // positionFixed
+        );
+        // NOTE: DOM access here
+        // restores the original style properties after the offsets have been computed
+        targetStyles.top = top;
+        targetStyles.left = left;
+        targetStyles[transformProp] = transform;
+        /** @type {?} */
+        var order = ['left', 'right', 'top', 'bottom'];
+        /** @type {?} */
+        var check = {
+            primary: /**
+             * @param {?} placement
+             * @return {?}
+             */ function (placement) {
+                var _a;
+                /** @type {?} */
+                var value = (( /** @type {?} */(data))).offsets.target[placement];
+                if ((( /** @type {?} */(data))).offsets.target[placement] < boundaries[placement] &&
+                    !false // options.escapeWithReference
+                ) {
+                    value = Math.max((( /** @type {?} */(data))).offsets.target[placement], boundaries[placement]);
+                }
+                return _a = {}, _a[placement] = value, _a;
+            },
+            secondary: /**
+             * @param {?} placement
+             * @return {?}
+             */ function (placement) {
+                var _a;
+                /** @type {?} */
+                var mainSide = placement === 'right' ? 'left' : 'top';
+                /** @type {?} */
+                var value = data.offsets.target[mainSide];
+                if ((( /** @type {?} */(data))).offsets.target[placement] > boundaries[placement] &&
+                    !false // escapeWithReference
+                ) {
+                    value = Math.min(data.offsets.target[mainSide], boundaries[placement] -
+                        (placement === 'right' ? data.offsets.target.width : data.offsets.target.height));
+                }
+                return _a = {}, _a[mainSide] = value, _a;
+            }
+        };
+        /** @type {?} */
+        var side;
+        order.forEach(( /**
+         * @param {?} placement
+         * @return {?}
+         */function (placement) {
+            side = ['left', 'top']
+                .indexOf(placement) !== -1
+                ? 'primary'
+                : 'secondary';
+            data.offsets.target = __assign({}, data.offsets.target, (( /** @type {?} */(check)))[side](placement));
+        }));
+        return data;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} data
+     * @return {?}
+     */
+    function shift(data) {
+        var _a, _b;
+        /** @type {?} */
+        var placement = data.placement;
+        /** @type {?} */
+        var basePlacement = placement.split(' ')[0];
+        /** @type {?} */
+        var shiftvariation = placement.split(' ')[1];
+        if (shiftvariation) {
+            var _c = data.offsets, host = _c.host, target = _c.target;
+            /** @type {?} */
+            var isVertical = ['bottom', 'top'].indexOf(basePlacement) !== -1;
+            /** @type {?} */
+            var side = isVertical ? 'left' : 'top';
+            /** @type {?} */
+            var measurement = isVertical ? 'width' : 'height';
+            /** @type {?} */
+            var shiftOffsets = {
+                left: (_a = {}, _a[side] = host[side], _a),
+                right: (_b = {},
+                    _b[side] = host[side] + host[measurement] - host[measurement],
+                    _b)
+            };
+            data.offsets.target = __assign({}, target, (( /** @type {?} */(shiftOffsets)))[shiftvariation]);
+        }
+        return data;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var Positioning = /** @class */ (function () {
         function Positioning() {
         }
         /**
-         * @param {?} element
-         * @param {?=} round
+         * @param {?} hostElement
+         * @param {?} targetElement
          * @return {?}
          */
         Positioning.prototype.position = /**
-         * @param {?} element
-         * @param {?=} round
+         * @param {?} hostElement
+         * @param {?} targetElement
          * @return {?}
          */
-            function (element, round) {
-                if (round === void 0) {
-                    round = true;
-                }
-                /** @type {?} */
-                var elPosition;
-                /** @type {?} */
-                var parentOffset = { width: 0, height: 0, top: 0, bottom: 0, left: 0, right: 0 };
-                if (this.getStyle(element, 'position') === 'fixed') {
-                    /** @type {?} */
-                    var bcRect = element.getBoundingClientRect();
-                    elPosition = {
-                        width: bcRect.width,
-                        height: bcRect.height,
-                        top: bcRect.top,
-                        bottom: bcRect.bottom,
-                        left: bcRect.left,
-                        right: bcRect.right
-                    };
-                }
-                else {
-                    /** @type {?} */
-                    var offsetParentEl = this.offsetParent(element);
-                    elPosition = this.offset(element, false);
-                    if (offsetParentEl !== document.documentElement) {
-                        parentOffset = this.offset(offsetParentEl, false);
-                    }
-                    parentOffset.top += offsetParentEl.clientTop;
-                    parentOffset.left += offsetParentEl.clientLeft;
-                }
-                elPosition.top -= parentOffset.top;
-                elPosition.bottom -= parentOffset.top;
-                elPosition.left -= parentOffset.left;
-                elPosition.right -= parentOffset.left;
-                if (round) {
-                    elPosition.top = Math.round(elPosition.top);
-                    elPosition.bottom = Math.round(elPosition.bottom);
-                    elPosition.left = Math.round(elPosition.left);
-                    elPosition.right = Math.round(elPosition.right);
-                }
-                return elPosition;
-            };
-        /**
-         * @param {?} element
-         * @param {?=} round
-         * @return {?}
-         */
-        Positioning.prototype.offset = /**
-         * @param {?} element
-         * @param {?=} round
-         * @return {?}
-         */
-            function (element, round) {
-                if (round === void 0) {
-                    round = true;
-                }
-                /** @type {?} */
-                var elBcr = element.getBoundingClientRect();
-                /** @type {?} */
-                var viewportOffset = {
-                    top: window.pageYOffset - (( /** @type {?} */(document.documentElement))).clientTop,
-                    left: window.pageXOffset - (( /** @type {?} */(document.documentElement))).clientLeft
-                };
-                /** @type {?} */
-                var elOffset = {
-                    height: elBcr.height || element.offsetHeight,
-                    width: elBcr.width || element.offsetWidth,
-                    top: elBcr.top + viewportOffset.top,
-                    bottom: elBcr.bottom + viewportOffset.top,
-                    left: elBcr.left + viewportOffset.left,
-                    right: elBcr.right + viewportOffset.left
-                };
-                if (round) {
-                    elOffset.height = Math.round(elOffset.height);
-                    elOffset.width = Math.round(elOffset.width);
-                    elOffset.top = Math.round(elOffset.top);
-                    elOffset.bottom = Math.round(elOffset.bottom);
-                    elOffset.left = Math.round(elOffset.left);
-                    elOffset.right = Math.round(elOffset.right);
-                }
-                return elOffset;
+            function (hostElement, targetElement) {
+                return this.offset(hostElement, targetElement);
             };
         /**
          * @param {?} hostElement
          * @param {?} targetElement
-         * @param {?} placement
-         * @param {?=} appendToBody
+         * @return {?}
+         */
+        Positioning.prototype.offset = /**
+         * @param {?} hostElement
+         * @param {?} targetElement
+         * @return {?}
+         */
+            function (hostElement, targetElement) {
+                return getReferenceOffsets(targetElement, hostElement);
+            };
+        /**
+         * @param {?} hostElement
+         * @param {?} targetElement
+         * @param {?} position
+         * @param {?=} _appendToBody
+         * @param {?=} options
          * @return {?}
          */
         Positioning.prototype.positionElements = /**
          * @param {?} hostElement
          * @param {?} targetElement
-         * @param {?} placement
-         * @param {?=} appendToBody
+         * @param {?} position
+         * @param {?=} _appendToBody
+         * @param {?=} options
          * @return {?}
          */
-            function (hostElement, targetElement, placement, appendToBody) {
+            function (hostElement, targetElement, position, _appendToBody, options) {
                 /** @type {?} */
-                var hostElPosition = appendToBody ? this.offset(hostElement, false) : this.position(hostElement, false);
-                /** @type {?} */
-                var shiftWidth = {
-                    left: hostElPosition.left,
-                    center: hostElPosition.left + hostElPosition.width / 2 - targetElement.offsetWidth / 2,
-                    right: hostElPosition.left + hostElPosition.width
-                };
-                /** @type {?} */
-                var shiftHeight = {
-                    top: hostElPosition.top,
-                    center: hostElPosition.top + hostElPosition.height / 2 - targetElement.offsetHeight / 2,
-                    bottom: hostElPosition.top + hostElPosition.height
-                };
-                /** @type {?} */
-                var targetElBCR = targetElement.getBoundingClientRect();
-                /** @type {?} */
-                var placementPrimary = placement.split(' ')[0] || 'top';
-                /** @type {?} */
-                var placementSecondary = placement.split(' ')[1] || 'center';
-                /** @type {?} */
-                var targetElPosition = {
-                    height: targetElBCR.height || targetElement.offsetHeight,
-                    width: targetElBCR.width || targetElement.offsetWidth,
-                    top: 0,
-                    bottom: targetElBCR.height || targetElement.offsetHeight,
-                    left: 0,
-                    right: targetElBCR.width || targetElement.offsetWidth
-                };
-                switch (placementPrimary) {
-                    case 'top':
-                        targetElPosition.top = hostElPosition.top - targetElement.offsetHeight;
-                        targetElPosition.bottom += hostElPosition.top - targetElement.offsetHeight;
-                        targetElPosition.left = shiftWidth[placementSecondary];
-                        targetElPosition.right += shiftWidth[placementSecondary];
-                        break;
-                    case 'bottom':
-                        targetElPosition.top = shiftHeight[placementPrimary];
-                        targetElPosition.bottom += shiftHeight[placementPrimary];
-                        targetElPosition.left = shiftWidth[placementSecondary];
-                        targetElPosition.right += shiftWidth[placementSecondary];
-                        break;
-                    case 'left':
-                        targetElPosition.top = shiftHeight[placementSecondary];
-                        targetElPosition.bottom += shiftHeight[placementSecondary];
-                        targetElPosition.left = hostElPosition.left - targetElement.offsetWidth;
-                        targetElPosition.right += hostElPosition.left - targetElement.offsetWidth;
-                        break;
-                    case 'right':
-                        targetElPosition.top = shiftHeight[placementSecondary];
-                        targetElPosition.bottom += shiftHeight[placementSecondary];
-                        targetElPosition.left = shiftWidth[placementPrimary];
-                        targetElPosition.right += shiftWidth[placementPrimary];
-                        break;
-                }
-                targetElPosition.top = Math.round(targetElPosition.top);
-                targetElPosition.bottom = Math.round(targetElPosition.bottom);
-                targetElPosition.left = Math.round(targetElPosition.left);
-                targetElPosition.right = Math.round(targetElPosition.right);
-                return targetElPosition;
-            };
-        /**
-         * @private
-         * @param {?} element
-         * @param {?} prop
-         * @return {?}
-         */
-        Positioning.prototype.getStyle = /**
-         * @private
-         * @param {?} element
-         * @param {?} prop
-         * @return {?}
-         */
-            function (element, prop) { return (( /** @type {?} */(window.getComputedStyle(element))))[prop]; };
-        /**
-         * @private
-         * @param {?} element
-         * @return {?}
-         */
-        Positioning.prototype.isStaticPositioned = /**
-         * @private
-         * @param {?} element
-         * @return {?}
-         */
-            function (element) {
-                return (this.getStyle(element, 'position') || 'static') === 'static';
-            };
-        /**
-         * @private
-         * @param {?} element
-         * @return {?}
-         */
-        Positioning.prototype.offsetParent = /**
-         * @private
-         * @param {?} element
-         * @return {?}
-         */
-            function (element) {
-                /** @type {?} */
-                var offsetParentEl = ( /** @type {?} */(element.offsetParent)) || document.documentElement;
-                while (offsetParentEl && offsetParentEl !== document.documentElement && this.isStaticPositioned(offsetParentEl)) {
-                    offsetParentEl = ( /** @type {?} */(offsetParentEl.offsetParent));
-                }
-                return offsetParentEl || document.documentElement;
+                var chainOfModifiers = [flip, shift, preventOverflow, arrow];
+                return chainOfModifiers.reduce(( /**
+                 * @param {?} modifiedData
+                 * @param {?} modifier
+                 * @return {?}
+                 */function (modifiedData, modifier) { return modifier(modifiedData); }), initData(targetElement, hostElement, position, options));
             };
         return Positioning;
     }());
@@ -4067,13 +4968,14 @@
      * @param {?} targetElement
      * @param {?} placement
      * @param {?=} appendToBody
+     * @param {?=} options
+     * @param {?=} renderer
      * @return {?}
      */
-    function positionElements(hostElement, targetElement, placement, appendToBody) {
+    function positionElements(hostElement, targetElement, placement, appendToBody, options, renderer) {
         /** @type {?} */
-        var pos = positionService.positionElements(hostElement, targetElement, placement, appendToBody);
-        targetElement.style.top = pos.top + "px";
-        targetElement.style.left = pos.left + "px";
+        var data = positionService.positionElements(hostElement, targetElement, placement, appendToBody, options);
+        setAllStyles(data, renderer);
     }
 
     /**
@@ -4081,49 +4983,104 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var PositioningService = /** @class */ (function () {
-        function PositioningService() {
+        function PositioningService(rendererFactory, platformId) {
+            var _this = this;
+            this.update$$ = new rxjs.Subject();
+            this.positionElements = new Map();
+            if (common.isPlatformBrowser(platformId)) {
+                rxjs.merge(rxjs.fromEvent(window, 'scroll'), rxjs.fromEvent(window, 'resize'), rxjs.of(0, rxjs.animationFrameScheduler), this.update$$)
+                    .subscribe(( /**
+             * @return {?}
+             */function () {
+                    _this.positionElements
+                        .forEach(( /**
+                 * @param {?} positionElement
+                 * @return {?}
+                 */function (positionElement) {
+                        positionElements(_getHtmlElement(positionElement.target), _getHtmlElement(positionElement.element), positionElement.attachment, positionElement.appendToBody, _this.options, rendererFactory.createRenderer(null, null));
+                    }));
+                }));
+            }
         }
-        //  public position(options: PositioningOptions): void {
-        //  public position(options: PositioningOptions): void {
         /**
          * @param {?} options
          * @return {?}
          */
-        PositioningService.prototype.position =
-            //  public position(options: PositioningOptions): void {
-            /**
-             * @param {?} options
-             * @return {?}
-             */
+        PositioningService.prototype.position = /**
+         * @param {?} options
+         * @return {?}
+         */
             function (options) {
-                var element = options.element, target = options.target, attachment = options.attachment, appendToBody = options.appendToBody;
-                positionElements(this._getHtmlElement(target), this._getHtmlElement(element), attachment, appendToBody);
+                this.addPositionElement(options);
             };
         /**
-         * @private
-         * @param {?} element
+         * @param {?} options
          * @return {?}
          */
-        PositioningService.prototype._getHtmlElement = /**
-         * @private
-         * @param {?} element
+        PositioningService.prototype.addPositionElement = /**
+         * @param {?} options
          * @return {?}
          */
-            function (element) {
-                // it means that we got a selector
-                if (typeof element === 'string') {
-                    return ( /** @type {?} */(document.querySelector(element)));
-                }
-                if (element instanceof i0.ElementRef) {
-                    return element.nativeElement;
-                }
-                return ( /** @type {?} */(element));
+            function (options) {
+                this.positionElements.set(_getHtmlElement(options.element), options);
+            };
+        /**
+         * @return {?}
+         */
+        PositioningService.prototype.calcPosition = /**
+         * @return {?}
+         */
+            function () {
+                this.update$$.next();
+            };
+        /**
+         * @param {?} elRef
+         * @return {?}
+         */
+        PositioningService.prototype.deletePositionElement = /**
+         * @param {?} elRef
+         * @return {?}
+         */
+            function (elRef) {
+                this.positionElements.delete(_getHtmlElement(elRef));
+            };
+        /**
+         * @param {?} options
+         * @return {?}
+         */
+        PositioningService.prototype.setOptions = /**
+         * @param {?} options
+         * @return {?}
+         */
+            function (options) {
+                this.options = options;
             };
         PositioningService.decorators = [
             { type: i0.Injectable }
         ];
+        /** @nocollapse */
+        PositioningService.ctorParameters = function () {
+            return [
+                { type: i0.RendererFactory2 },
+                { type: Number, decorators: [{ type: i0.Inject, args: [i0.PLATFORM_ID,] }] }
+            ];
+        };
         return PositioningService;
     }());
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    function _getHtmlElement(element) {
+        // it means that we got a selector
+        if (element && typeof element === 'string') {
+            return document.querySelector(element);
+        }
+        if (element instanceof i0.ElementRef) {
+            return element.nativeElement;
+        }
+        return element;
+    }
 
     /**
      * @fileoverview added by tsickle
@@ -4138,13 +5095,6 @@
             this._applicationRef = _applicationRef;
         }
         /**
-         *
-         * @param _elementRef
-         * @param _viewContainerRef
-         * @param _renderer2
-         */
-        /**
-         *
          * @template T
          * @param {?} _elementRef
          * @param {?} _viewContainerRef
@@ -4152,7 +5102,6 @@
          * @return {?}
          */
         ComponentLoaderFactory.prototype.createLoader = /**
-         *
          * @template T
          * @param {?} _elementRef
          * @param {?} _viewContainerRef
@@ -6368,7 +7317,7 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var Utils = /** @class */ (function () {
+    var Utils$1 = /** @class */ (function () {
         function Utils() {
         }
         /**
@@ -6427,6 +7376,7 @@
                 var lastFocusableElement;
                 /** @type {?} */
                 var KEYCODE_TAB = 9;
+                /*tslint:disable-next-line:max-line-length */
                 focusableElements = el.nativeElement.querySelectorAll('a[href], button, textarea, input, select, form, mdb-select, mdb-auto-completer, mdb-checkbox, mdb-range-input');
                 firstFocusableElement = focusableElements[0];
                 lastFocusableElement = focusableElements[focusableElements.length - 1];
@@ -6567,11 +7517,11 @@
             function () {
                 if (this.isAnimated) {
                     this.renderer.addClass(this.element.nativeElement, "" + ClassName.FADE);
-                    Utils.reflow(this.element.nativeElement);
+                    Utils$1.reflow(this.element.nativeElement);
                 }
                 else {
                     this.renderer.addClass(this.element.nativeElement, "" + ClassName.FADE);
-                    Utils.reflow(this.element.nativeElement);
+                    Utils$1.reflow(this.element.nativeElement);
                 }
                 this.isShown = true;
             };
@@ -6636,7 +7586,7 @@
             this.timerHideModal = 0;
             this.timerRmBackDrop = 0;
             this.isNested = false;
-            this.utils = new Utils();
+            this.utils = new Utils$1();
             this._element = _element;
             this._renderer = _renderer;
             this._backdrop = clf.createLoader(_element, _viewContainerRef, _renderer);
@@ -6890,7 +7840,7 @@
                 this._renderer.setStyle(this._element.nativeElement, 'display', 'block');
                 this._renderer.setProperty(this._element.nativeElement, 'scrollTop', 0);
                 if (this.isAnimated) {
-                    Utils.reflow(this._element.nativeElement);
+                    Utils$1.reflow(this._element.nativeElement);
                 }
                 this._renderer.addClass(this._element.nativeElement, ClassName.IN);
                 if (!isBs3()) {
@@ -7784,6 +8734,7 @@
             this.containerInside = true;
             this.collapseId = 'navbarCollapse';
             this.scrollSensitivity = 120;
+            this.scrollableNavbar = false;
             this.shown = false;
             this.duration = 350; // ms
             // ms
@@ -7875,6 +8826,9 @@
                     this.el.nativeElement.remove();
                 }
                 this.addTogglerIconClasses();
+                if (this.scrollableNavbar) {
+                    this.renderer.addClass(this.el.nativeElement, 'collapsed-navbar-scroll');
+                }
             };
         /**
          * @return {?}
@@ -8059,6 +9013,7 @@
             containerInside: [{ type: i0.Input }],
             collapseId: [{ type: i0.Input }],
             scrollSensitivity: [{ type: i0.Input }],
+            scrollableNavbar: [{ type: i0.Input }],
             el: [{ type: i0.ViewChild, args: ['navbar',] }],
             mobile: [{ type: i0.ViewChild, args: ['mobile',] }],
             navbar: [{ type: i0.ViewChild, args: ['nav',] }],
@@ -8257,7 +9212,10 @@
      * A lightweight, extensible directive for fancy popover creation.
      */
     var PopoverDirective = /** @class */ (function () {
-        function PopoverDirective(_elementRef, _renderer, _viewContainerRef, _config, cis) {
+        function PopoverDirective(_elementRef, _renderer, _viewContainerRef, _config, cis, _positionService) {
+            this._positionService = _positionService;
+            this.dynamicPosition = true;
+            this.outsideClick = false;
             this._popover = cis
                 .createLoader(_elementRef, _viewContainerRef, _renderer)
                 .provide({ provide: PopoverConfig, useValue: _config });
@@ -8309,6 +9267,16 @@
                 if (this._popover.isShown) {
                     return;
                 }
+                this._positionService.setOptions({
+                    modifiers: {
+                        flip: {
+                            enabled: this.dynamicPosition
+                        },
+                        preventOverflow: {
+                            enabled: this.dynamicPosition
+                        }
+                    }
+                });
                 this._popover
                     .attach(PopoverContainerComponent)
                     .to(this.container)
@@ -8319,6 +9287,10 @@
                     title: this.mdbPopoverHeader || this.popoverTitle
                 });
                 this.isOpen = true;
+                if (!this.dynamicPosition) {
+                    this._positionService.calcPosition();
+                    this._positionService.deletePositionElement(this._popover._componentRef.location);
+                }
             };
         /**
          * Closes an element’s popover. This is considered a “manual” triggering of
@@ -8395,6 +9367,7 @@
                 var _this = this;
                 this._popover.listen({
                     triggers: this.triggers,
+                    outsideClick: this.outsideClick,
                     show: ( /**
                      * @return {?}
                      */function () { return _this.show(); })
@@ -8428,7 +9401,8 @@
                 { type: i0.Renderer2 },
                 { type: i0.ViewContainerRef },
                 { type: PopoverConfig },
-                { type: ComponentLoaderFactory }
+                { type: ComponentLoaderFactory },
+                { type: PositioningService }
             ];
         };
         PopoverDirective.propDecorators = {
@@ -8439,6 +9413,8 @@
             triggers: [{ type: i0.Input }],
             container: [{ type: i0.Input }],
             isOpen: [{ type: i0.Input }],
+            dynamicPosition: [{ type: i0.Input }],
+            outsideClick: [{ type: i0.Input }],
             onShown: [{ type: i0.Output }],
             shown: [{ type: i0.Output }],
             onHidden: [{ type: i0.Output }],
@@ -9636,8 +10612,8 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var TooltipContainerComponent = /** @class */ (function () {
-        function TooltipContainerComponent(config, r, elem) {
-            this.r = r;
+        function TooltipContainerComponent(config, elem) {
+            this.containerClass = '';
             this.show = !this.isBs3;
             this.el = elem;
             Object.assign(this, config);
@@ -9658,7 +10634,6 @@
          * @return {?}
          */
             function () {
-                var _this = this;
                 this.classMap = { in: false, fade: false };
                 this.classMap[this.placement] = true;
                 this.classMap['tooltip-' + this.placement] = true;
@@ -9669,57 +10644,26 @@
                 if (this.popupClass) {
                     this.classMap[this.popupClass] = true;
                 }
-                setTimeout(( /**
-                 * @return {?}
-                 */function () {
-                    _this.alignArrow();
-                }), 0);
-            };
-        /**
-         * @param {?=} placement
-         * @return {?}
-         */
-        TooltipContainerComponent.prototype.alignArrow = /**
-         * @param {?=} placement
-         * @return {?}
-         */
-            function (placement) {
-                /** @type {?} */
-                var arrowClassList = this.tooltipArrow.nativeElement.classList;
-                /** @type {?} */
-                var tooltipHeight = this.tooltipInner.nativeElement.clientHeight;
-                if (placement) {
-                    this.r.addClass(this.tooltipArrow.nativeElement, placement);
-                }
-                if (arrowClassList.contains('top')) {
-                    this.r.setStyle(this.tooltipArrow.nativeElement, 'top', tooltipHeight + 6 + 'px');
-                }
-                else if (arrowClassList.contains('left')) {
-                    this.r.setStyle(this.tooltipArrow.nativeElement, 'top', (tooltipHeight / 2) + 'px');
-                }
-                else if (arrowClassList.contains('right')) {
-                    this.r.setStyle(this.tooltipArrow.nativeElement, 'top', (tooltipHeight / 2) + 'px');
-                }
             };
         TooltipContainerComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'mdb-tooltip-container',
                         changeDetection: i0.ChangeDetectionStrategy.OnPush,
                         host: {
-                            '[class]': '"tooltip-fadeIn tooltip in tooltip-" + placement'
+                            '[class]': '"tooltip-fadeIn tooltip in tooltip-" + placement + " " + "bs-tooltip-" + placement + " " + placement + " " + containerClass'
                         },
-                        template: "\n    <div #tooltipArrow class=\"tooltip-arrow\"\n         [ngClass]=\"{'left': placement == 'left', 'right': placement == 'right', 'top': placement == 'top'}\"></div>\n    <div #tooltipInner class=\"tooltip-inner\">\n      <ng-content></ng-content>\n    </div>\n  "
+                        template: "\n    <div #tooltipArrow class=\"tooltip-arrow arrow\"></div>\n    <div #tooltipInner class=\"tooltip-inner\">\n      <ng-content></ng-content>\n    </div>\n  "
                     }] }
         ];
         /** @nocollapse */
         TooltipContainerComponent.ctorParameters = function () {
             return [
                 { type: TooltipConfig },
-                { type: i0.Renderer2 },
                 { type: i0.ElementRef }
             ];
         };
         TooltipContainerComponent.propDecorators = {
+            containerClass: [{ type: i0.Input }],
             tooltipInner: [{ type: i0.ViewChild, args: ['tooltipInner',] }],
             tooltipArrow: [{ type: i0.ViewChild, args: ['tooltipArrow',] }],
             show: [{ type: i0.HostBinding, args: ['class.show',] }]
@@ -9735,7 +10679,7 @@
     /**
      * @return {?}
      */
-    function OnChange() {
+    function OnChange$1() {
         /** @type {?} */
         var sufix = 'Change';
         return ( /**
@@ -9769,13 +10713,15 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var TooltipDirective = /** @class */ (function () {
-        function TooltipDirective(_viewContainerRef, _renderer, _elementRef, cis, config, platformId) {
+        function TooltipDirective(_renderer, _elementRef, _positionService, _viewContainerRef, cis, config, platformId) {
             this._elementRef = _elementRef;
+            this._positionService = _positionService;
             this.platformId = platformId;
             /**
              * Fired when tooltip content changes
              */
             this.tooltipChange = new i0.EventEmitter();
+            this.dynamicPosition = true;
             this.delay = 0;
             this.fadeDuration = 150;
             this.isBrowser = false;
@@ -9814,31 +10760,6 @@
             configurable: true
         });
         /**
-         * @param {?} event
-         * @return {?}
-         */
-        TooltipDirective.prototype.onclick = /**
-         * @param {?} event
-         * @return {?}
-         */
-            function (event) {
-                if (this.triggers.toString().includes('focus')) {
-                    event.stopPropagation();
-                    this.show();
-                }
-            };
-        /**
-         * @return {?}
-         */
-        TooltipDirective.prototype.onblur = /**
-         * @return {?}
-         */
-            function () {
-                if (this.triggers.toString().includes('focus') && this.isOpen) {
-                    this.hide();
-                }
-            };
-        /**
          * @return {?}
          */
         TooltipDirective.prototype.ngOnInit = /**
@@ -9860,17 +10781,6 @@
                         _this._tooltip.hide();
                     }
                 }));
-                this.shown.subscribe(( /**
-                 * @return {?}
-                 */function () {
-                    setTimeout(( /**
-                     * @return {?}
-                     */function () {
-                        if (_this._tooltip.instance.placement !== _this.placement && _this.isOpen) {
-                            _this._tooltip.instance.alignArrow(_this.placement);
-                        }
-                    }), 0);
-                }));
             };
         /**
          * @param {?} changes
@@ -9883,21 +10793,6 @@
             function (changes) {
                 if (!changes['mdbTooltip'].isFirstChange()) {
                     this.tooltipChange.emit(this.mdbTooltip);
-                }
-            };
-        /**
-         * @return {?}
-         */
-        TooltipDirective.prototype.getBottomOffset = /**
-         * @return {?}
-         */
-            function () {
-                if (this.isBrowser) {
-                    /** @type {?} */
-                    var windowHeight = window.innerHeight;
-                    /** @type {?} */
-                    var bottom = this._elementRef.nativeElement.getBoundingClientRect().bottom;
-                    return windowHeight - bottom;
                 }
             };
         /**
@@ -9927,127 +10822,42 @@
         /**
          * Opens an element’s tooltip. This is considered a “manual” triggering of
          * the tooltip.
-         * @param {?=} event
          * @return {?}
          */
         TooltipDirective.prototype.show = /**
          * Opens an element’s tooltip. This is considered a “manual” triggering of
          * the tooltip.
-         * @param {?=} event
          * @return {?}
          */
-            function (event) {
+            function () {
                 var _this = this;
                 if (this.isOpen || this.isDisabled || this._delayTimeoutId || !this.mdbTooltip) {
                     return;
                 }
+                this._positionService.setOptions({
+                    modifiers: {
+                        flip: {
+                            enabled: this.dynamicPosition
+                        },
+                        preventOverflow: {
+                            enabled: this.dynamicPosition
+                        }
+                    }
+                });
                 /** @type {?} */
                 var showTooltip = ( /**
                  * @return {?}
                  */function () {
-                    return _this._tooltip
+                    _this._tooltip
                         .attach(TooltipContainerComponent)
                         .to(_this.container)
                         .position({ attachment: _this.placement })
                         .show({
                         content: _this.mdbTooltip,
-                        placement: _this.placement
+                        placement: _this.placement,
                     });
                 });
                 this.showTooltip(showTooltip);
-                /** @type {?} */
-                var elPosition = event ? event.target.getBoundingClientRect() : this._elementRef.nativeElement.getBoundingClientRect();
-                /** @type {?} */
-                var tooltipEl = this._tooltip.instance['el'].nativeElement;
-                this.getCorrectAlignment(tooltipEl, elPosition);
-                this.showTooltip(showTooltip);
-            };
-        /**
-         * @private
-         * @param {?} tooltipEl
-         * @param {?} elPosition
-         * @return {?}
-         */
-        TooltipDirective.prototype.getCorrectAlignment = /**
-         * @private
-         * @param {?} tooltipEl
-         * @param {?} elPosition
-         * @return {?}
-         */
-            function (tooltipEl, elPosition) {
-                var _this = this;
-                /** @type {?} */
-                var right = window.innerWidth - elPosition.width - elPosition.left;
-                /** @type {?} */
-                var position = ['left', 'right', 'bottom', 'top'];
-                /** @type {?} */
-                var heightForTop = this.customHeight ? (parseInt(this.customHeight, 10) + 16) : 40;
-                /** @type {?} */
-                var heightForBottom = this.customHeight ? (parseInt(this.customHeight, 10) + 32) : 60;
-                if (this.placement == 'left') {
-                    [
-                        elPosition.left >= tooltipEl.clientWidth,
-                        elPosition.left <= tooltipEl.clientWidth && right > tooltipEl.clientWidth,
-                        elPosition.left <= tooltipEl.clientWidth && right <= tooltipEl.clientWidth && ( /** @type {?} */(this.getBottomOffset())) >= heightForBottom,
-                        elPosition.left <= tooltipEl.clientWidth && right <= tooltipEl.clientWidth && ( /** @type {?} */(this.getBottomOffset())) < heightForBottom && elPosition.top >= heightForTop
-                    ].forEach(( /**
-                     * @param {?} el
-                     * @param {?} index
-                     * @return {?}
-                     */function (el, index) {
-                        if (el) {
-                            _this.placement = position[index];
-                        }
-                    }));
-                }
-                if (this.placement == 'right') {
-                    [
-                        right <= tooltipEl.clientWidth && elPosition.left > tooltipEl.clientWidth,
-                        right >= tooltipEl.clientWidth,
-                        right <= tooltipEl.clientWidth && elPosition.left <= tooltipEl.clientWidth && ( /** @type {?} */(this.getBottomOffset())) >= heightForBottom,
-                        right <= tooltipEl.clientWidth && elPosition.left <= tooltipEl.clientWidth && ( /** @type {?} */(this.getBottomOffset())) < heightForBottom && elPosition.top >= heightForTop
-                    ].forEach(( /**
-                     * @param {?} el
-                     * @param {?} index
-                     * @return {?}
-                     */function (el, index) {
-                        if (el) {
-                            _this.placement = position[index];
-                        }
-                    }));
-                }
-                if (this.placement == 'top') {
-                    [
-                        elPosition.top < heightForTop && ( /** @type {?} */(this.getBottomOffset())) < heightForBottom && elPosition.left >= tooltipEl.clientWidth,
-                        elPosition.top < heightForTop && ( /** @type {?} */(this.getBottomOffset())) < heightForBottom && elPosition.left < tooltipEl.clientWidth && right >= tooltipEl.clientWidth,
-                        elPosition.top < heightForTop && ( /** @type {?} */(this.getBottomOffset())) >= heightForBottom,
-                        elPosition.top >= heightForTop
-                    ].forEach(( /**
-                     * @param {?} el
-                     * @param {?} index
-                     * @return {?}
-                     */function (el, index) {
-                        if (el) {
-                            _this.placement = position[index];
-                        }
-                    }));
-                }
-                if (this.placement == 'bottom') {
-                    [
-                        ( /** @type {?} */(this.getBottomOffset())) < heightForBottom && elPosition.top < heightForTop && elPosition.left >= tooltipEl.clientWidth,
-                        ( /** @type {?} */(this.getBottomOffset())) < heightForBottom && elPosition.top < heightForTop && elPosition.left < tooltipEl.clientWidth && right >= tooltipEl.clientWidth,
-                        ( /** @type {?} */(this.getBottomOffset())) < heightForBottom && elPosition.top >= heightForTop,
-                        ( /** @type {?} */(this.getBottomOffset())) <= heightForTop
-                    ].forEach(( /**
-                     * @param {?} el
-                     * @param {?} index
-                     * @return {?}
-                     */function (el, index) {
-                        if (el) {
-                            _this.placement = position[index];
-                        }
-                    }));
-                }
             };
         /**
          * @private
@@ -10128,9 +10938,10 @@
         /** @nocollapse */
         TooltipDirective.ctorParameters = function () {
             return [
-                { type: i0.ViewContainerRef },
                 { type: i0.Renderer2 },
                 { type: i0.ElementRef },
+                { type: PositioningService },
+                { type: i0.ViewContainerRef },
                 { type: ComponentLoaderFactory },
                 { type: TooltipConfig },
                 { type: String, decorators: [{ type: i0.Inject, args: [i0.PLATFORM_ID,] }] }
@@ -10144,18 +10955,17 @@
             container: [{ type: i0.Input }],
             isOpen: [{ type: i0.Input }],
             isDisabled: [{ type: i0.Input }],
+            dynamicPosition: [{ type: i0.Input }],
             onShown: [{ type: i0.Output }],
             shown: [{ type: i0.Output }],
             onHidden: [{ type: i0.Output }],
             hidden: [{ type: i0.Output }],
             delay: [{ type: i0.Input }],
             customHeight: [{ type: i0.Input }],
-            fadeDuration: [{ type: i0.Input }],
-            onclick: [{ type: i0.HostListener, args: ['click', ['$event'],] }],
-            onblur: [{ type: i0.HostListener, args: ['window:click',] }]
+            fadeDuration: [{ type: i0.Input }]
         };
         __decorate([
-            OnChange(),
+            OnChange$1(),
             __metadata("design:type", Object)
         ], TooltipDirective.prototype, "mdbTooltip", void 0);
         return TooltipDirective;
@@ -10401,6 +11211,8 @@
         function SBItemBodyComponent() {
             this.height = '0';
             this.expandAnimationState = 'collapsed';
+            this.id = "mdb-accordion-";
+            this.ariaLabelledBy = '';
         }
         /**
          * @param {?} collapsed
@@ -10456,7 +11268,7 @@
             { type: i0.Component, args: [{
                         exportAs: 'sbItemBody',
                         selector: 'mdb-item-body, mdb-accordion-item-body',
-                        template: "<div #body class=\"sb-item-body\" [style.height]=\"height\" [@expandBody]=\"expandAnimationState\">\n    <div class=\"card-body {{ customClass }}\">\n    \t<ng-content></ng-content>\n    </div>\n</div>",
+                        template: "<div #body class=\"sb-item-body\" [style.height]=\"height\" [@expandBody]=\"expandAnimationState\" [id]=\"id\" role=\"region\" [attr.aria-labelledby]=\"ariaLabelledBy\">\n    <div class=\"card-body {{ customClass }}\">\n    \t<ng-content></ng-content>\n    </div>\n</div>\n",
                         animations: [
                             animations.trigger('expandBody', [
                                 animations.state('collapsed', animations.style({ height: '0px', visibility: 'hidden' })),
@@ -10562,6 +11374,7 @@
         function SBItemComponent(accordionService) {
             this.accordionService = accordionService;
             this.collapsed = true;
+            this.idModifier = Math.floor(Math.random() * 1000);
         }
         /**
          * @return {?}
@@ -10595,6 +11408,7 @@
                         _this.collapsed = false;
                     }
                 }), 40);
+                this.body.id = "mdb-accordion-body-" + this.idModifier;
             };
         /**
          * @param {?} collapsed
@@ -10748,7 +11562,24 @@
             this.sbItem = sbItem;
             this.isDisabled = false;
             this.indicator = true;
+            this.id = "mdb-accordion-";
+            this.ariaExpanded = false;
+            this.ariaControls = '';
+            this.id = "mdb-accordion-head-" + this.sbItem.idModifier;
         }
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+        SBItemHeadComponent.prototype.onKeyDown = /**
+         * @param {?} event
+         * @return {?}
+         */
+            function (event) {
+                if (event.keyCode === 32) {
+                    this.toggleClick(event);
+                }
+            };
         /**
          * @param {?} event
          * @return {?}
@@ -10762,13 +11593,29 @@
                 if (!this.isDisabled) {
                     this.sbItem.collapsed = !this.sbItem.collapsed;
                     this.sbItem.toggle(this.sbItem.collapsed);
+                    this.ariaExpanded = !this.ariaExpanded;
                 }
+            };
+        /**
+         * @return {?}
+         */
+        SBItemHeadComponent.prototype.ngAfterViewInit = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
+                    _this.ariaControls = _this.sbItem.body.id;
+                    _this.sbItem.body.ariaLabelledBy = _this.id;
+                }), 0);
             };
         SBItemHeadComponent.decorators = [
             { type: i0.Component, args: [{
                         exportAs: 'sbItemHead',
                         selector: 'mdb-item-head, mdb-accordion-item-head',
-                        template: "<div class=\"card-header {{ customClass }}\" [ngClass]=\"{ 'item-disabled': isDisabled }\" (click)=\"toggleClick($event)\">\n  <a role=\"button\">\n    <h5 class=\"mb-0\">\n    <ng-content></ng-content>\n    <i *ngIf=\"indicator\" class=\"fas fa-angle-down rotate-icon\"></i>\n    </h5>\n  </a>\n</div>\n"
+                        template: "<div class=\"card-header {{ customClass }}\" [ngClass]=\"{ 'item-disabled': isDisabled }\" (click)=\"toggleClick($event)\" [id]=\"id\">\n  <a role=\"button\" href=\"\" [attr.aria-expanded]=\"ariaExpanded\" [attr.aria-controls]=\"ariaControls\">\n    <h5 class=\"mb-0 d-flex justify-content-between align-items-center\">\n    <ng-content></ng-content>\n    <i *ngIf=\"indicator\" class=\"mdb-accordion-indicator rotate-icon\" aria-hidden=\"true\"></i>\n    </h5>\n  </a>\n</div>\n"
                     }] }
         ];
         /** @nocollapse */
@@ -10780,7 +11627,8 @@
         SBItemHeadComponent.propDecorators = {
             isDisabled: [{ type: i0.Input }],
             customClass: [{ type: i0.Input }],
-            indicator: [{ type: i0.Input }]
+            indicator: [{ type: i0.Input }],
+            onKeyDown: [{ type: i0.HostListener, args: ['keydown', ['$event'],] }]
         };
         return SBItemHeadComponent;
     }());
@@ -11631,7 +12479,7 @@
         ToastComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'mdb-toast-component',
-                        template: "<button *ngIf=\"options.closeButton\" (click)=\"remove()\" class=\"md-toast-close-button\">\n  &times;\n</button>\n<div *ngIf=\"title\" class=\"{{options.titleClass}}\" [attr.aria-label]=\"title\">\n  {{title}}\n</div>\n<div *ngIf=\"message && options.enableHtml\" class=\"{{options.messageClass}}\" [innerHTML]=\"message\">\n</div>\n<div *ngIf=\"message && !options.enableHtml\" class=\"{{options.messageClass}}\" [attr.aria-label]=\"message\">\n  {{message}}\n</div>\n<button *ngIf=\"options.actionButton\" class=\"btn btn-block md-toast-action mt-2\" (click)=\"onActionClick()\">{{ options.actionButton }}</button>\n<div *ngIf=\"options.progressBar\">\n  <div class=\"md-toast-progress\" [style.width.%]=\"width\"></div>\n</div>\n",
+                        template: "<button *ngIf=\"options.closeButton\" (click)=\"remove()\" class=\"md-toast-close-button\">\n  &times;\n</button>\n<div *ngIf=\"title\" class=\"{{options.titleClass}}\" [attr.aria-label]=\"title\">\n  {{title}}\n</div>\n<div *ngIf=\"message && options.enableHtml\" class=\"{{options.messageClass}}\" [innerHTML]=\"message\">\n</div>\n<div *ngIf=\"message && !options.enableHtml\" class=\"{{options.messageClass}}\" [attr.aria-label]=\"message\">\n  {{message}}\n</div>\n<button *ngIf=\"options.actionButton\" class=\"btn btn-block md-toast-action mt-2\" [ngClass]=\"options.actionButtonClass\"\n        (click)=\"onActionClick()\">{{ options.actionButton }}</button>\n<div *ngIf=\"options.progressBar\">\n  <div class=\"md-toast-progress\" [style.width.%]=\"width\"></div>\n</div>\n",
                         animations: [
                             animations.trigger('flyInOut', [
                                 animations.state('inactive', animations.style({ opacity: 0 })),
@@ -11848,6 +12696,7 @@
             this.toastConfig.toastComponent = use(this.toastConfig.toastComponent, ToastComponent);
             this.toastConfig.onActivateTick = use(this.toastConfig.onActivateTick, false);
             this.toastConfig.actionButton = use(this.toastConfig.actionButton, '');
+            this.toastConfig.actionButtonClass = use(this.toastConfig.actionButtonClass, '');
         }
         /** show successful toast */
         // show(message: string, title?: string, override?: IndividualConfig, type = '') {
@@ -12116,6 +12965,7 @@
                 current.toastComponent = use(override.toastComponent, current.toastComponent);
                 current.onActivateTick = use(override.onActivateTick, current.onActivateTick);
                 current.actionButton = use(override.actionButton, current.actionButton);
+                current.actionButtonClass = use(override.actionButtonClass, current.actionButtonClass);
                 return current;
             };
         /**
@@ -12412,7 +13262,7 @@
             this.clearButton = true;
             this.clearButtonTabIndex = 0;
             this.select = new i0.EventEmitter();
-            this.utils = new Utils();
+            this.utils = new Utils$1();
             this._isDropdownOpen = new rxjs.Subject();
             this._allItems = [];
             this._isOpen = false;
@@ -16401,6 +17251,9 @@
     var CardRotatingComponent = /** @class */ (function () {
         function CardRotatingComponent() {
             this.rotate = false;
+            this.ANIMATION_TRANSITION_TIME = 1000;
+            this.animationStart = new i0.EventEmitter();
+            this.animationEnd = new i0.EventEmitter();
         }
         /**
          * @return {?}
@@ -16409,7 +17262,14 @@
          * @return {?}
          */
             function () {
+                var _this = this;
                 this.rotate = !this.rotate;
+                this.animationStart.emit();
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
+                    _this.animationEnd.emit();
+                }), this.ANIMATION_TRANSITION_TIME);
             };
         CardRotatingComponent.decorators = [
             { type: i0.Component, args: [{
@@ -16417,6 +17277,10 @@
                         template: "<div class=\"flip-container card-wrapper\" [ngClass]=\"{'rotate': rotate}\">\n  <div class=\"flipper card-rotating effect__click tp-box\">\n    <ng-content></ng-content>\n  </div>\n</div>\n"
                     }] }
         ];
+        CardRotatingComponent.propDecorators = {
+            animationStart: [{ type: i0.Output }],
+            animationEnd: [{ type: i0.Output }]
+        };
         return CardRotatingComponent;
     }());
 
@@ -16498,6 +17362,25 @@
                 }
             };
         }
+        /**
+         * @param {?} locale
+         * @return {?}
+         */
+        LocaleService.prototype.setLocaleOptions = /**
+         * @param {?} locale
+         * @return {?}
+         */
+            function (locale) {
+                var _this = this;
+                Object.entries(locale).forEach(( /**
+                 * @param {?} loc
+                 * @return {?}
+                 */function (loc) {
+                    /** @type {?} */
+                    var localeIdentifier = loc[0];
+                    _this.locales[localeIdentifier] = loc[1];
+                }));
+            };
         /**
          * @param {?} locale
          * @return {?}
@@ -17318,6 +18201,16 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     /** @type {?} */
     var MYDP_VALUE_ACCESSOR = {
         provide: forms.NG_VALUE_ACCESSOR,
@@ -17370,6 +18263,7 @@
             this.label = '';
             this.placeholder = '';
             this.openOnFocus = true;
+            this.outlineInput = false;
             this.inline = false;
             this.inlineIcon = 'far fa-calendar-alt';
             this.dateChanged = new i0.EventEmitter();
@@ -17425,6 +18319,7 @@
                 disableSince: ( /** @type {?} */({ year: 0, month: 0, day: 0 })),
                 disableDays: ( /** @type {?} */([])),
                 enableDays: ( /** @type {?} */([])),
+                editableDateField: ( /** @type {?} */(true)),
                 markDates: ( /** @type {?} */([])),
                 markWeekends: ( /** @type {?} */({})),
                 disableDateRanges: ( /** @type {?} */([])),
@@ -17451,7 +18346,7 @@
             this.months = [];
             this.years = [];
             this.elements = document.getElementsByClassName('mydp picker');
-            this.utils = new Utils();
+            this.utils = new Utils$1();
             this.firstTimeOpenedModal = true;
             this.modalHeightBefore = null;
             this.isMobile = null;
@@ -18819,8 +19714,8 @@
             { type: i0.Component, args: [{
                         selector: 'mdb-date-picker',
                         exportAs: 'mdbdatepicker',
-                        template: "<!-- Line 27: Deleted (focus)=\"onFocusInput($event)\" for better use in Firefox. If other strange problems will occur, please paste it in line 27. -->\r\n<div class=\"mydp picker\" [ngClass]=\"{'picker--opened': showSelector}\" [ngStyle]=\"{'width': opts.width}\" *ngIf=\"!inline\">\r\n  <div class=\"md-form\">\r\n    <label (click)=\"openBtnClicked()\" *ngIf=\"label.length > 0\" [ngClass]=\"{\r\n          'active': checkActive(),\r\n          'disabled': opts.componentDisabled\r\n        }\">{{ label }}</label>\r\n    <input type=\"text\" class=\"form-control mydp-date\" [attr.aria-label]=\"opts.ariaLabelInputField\"\r\n           (mousedown)=\"openBtnClicked()\"\r\n           [attr.maxlength]=\"opts.dateFormat.length\" [ngClass]=\"{\r\n        'selectiondisabled': opts.componentDisabled,\r\n        'disabled': opts.componentDisabled\r\n      }\" placeholder=\"{{ placeholder }}\" [ngModel]=\"selectionDayTxt\" (ngModelChange)=\"onUserDateInput($event)\"\r\n           [value]=\"selectionDayTxt\"\r\n           [ngStyle]=\"{\r\n        'font-size': opts.selectionTxtFontSize\r\n      }\" (blur)=\"onBlurInput($event)\" (focus)=\"onFocusInput($event)\" [disabled]=\"opts.componentDisabled || isDisabled\"\r\n           autocomplete=\"off\" [tabindex]=\"tabIndex\">\r\n  </div>\r\n  <div *ngIf=\"showSelector\" class=\"selector picker__holder selectorarrow selectorarrowleft selectorarrowright\" #divFocus\r\n       [ngClass]=\"{'alignselectorright': opts.alignSelectorRight}\"\r\n       tabindex=\"0\">\r\n    <div class=\"picker__frame picker__box\" #pickerFrame>\r\n      <div class=\"picker__header\">\r\n        <div class=\"picker__date-display\">\r\n          <div class=\"picker__weekday-display\">\r\n            {{ weekText(getWeekday(tmp)) }}\r\n          </div>\r\n          <div class=\"picker__month-display\">\r\n            <div>{{ monthText(tmp.month) }}</div>\r\n          </div>\r\n          <div class=\"picker__day-display\">\r\n            <div>{{ tmp.day }}</div>\r\n          </div>\r\n          <div class=\"picker__year-display\">\r\n            <div>{{ tmp.year }}</div>\r\n          </div>\r\n        </div>\r\n        <select class=\"picker__select--year\" [(ngModel)]=\"visibleMonth.year\" (ngModelChange)=\"onUserYearInput($event)\"\r\n                role=\"menu\"\r\n                aria-label=\"Year selector\">\r\n          <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option>\r\n        </select>\r\n        <select class=\"picker__select--month\" [(ngModel)]=\"visibleMonth.monthTxt\"\r\n                (ngModelChange)=\"onUserMonthInput($event)\" role=\"menu\"\r\n                aria-label=\"Month selector\">\r\n          <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option>\r\n        </select>\r\n        <button class=\"picker__nav--prev\" data-nav=\"-1\" type=\"button\" aria-controls=\"date-picker-example_table\"\r\n                title=\"Previous month\"\r\n                (click)=\"prevMonth()\" [disabled]=\"prevMonthDisabled\"\r\n                [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled}\"></button>\r\n        <button class=\"picker__nav--next\" data-nav=\"1\" type=\"button\" aria-controls=\"date-picker-example_table\"\r\n                title=\"Next month\"\r\n                (click)=\"nextMonth()\" [disabled]=\"nextMonthDisabled\"\r\n                [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled}\"></button>\r\n      </div>\r\n      <table class=\"picker__table\">\r\n        <thead>\r\n        <tr>\r\n          <th class=\"picker__weekday weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#\r\n          </th>\r\n          <th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th>\r\n        </tr>\r\n        </thead>\r\n        <tbody>\r\n        <tr *ngFor=\"let w of dates\">\r\n          <td class=\"picker__day daycellweeknbr\"\r\n              *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td>\r\n          <td class=\"picker__day\" *ngFor=\"let d of w.week\"\r\n              [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId&&!d.disabled, 'disabled': d.disabled, 'tablesingleday': d.cmo===currMonthId&&!d.disabled}\">\r\n            <div *ngIf=\"d.markedDate.marked\" class=\"markdate\"\r\n                 [ngStyle]=\"{'background-color': d.markedDate.color}\"></div>\r\n            <div class=\"picker__day\"\r\n                 [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId,'picker__day--outfocus': (d.cmo===nextMonthId || d.cmo===prevMonthId), 'picker__day--today':d.currDay&&opts.markCurrentDay, 'picker__day--selected picker__day--highlighted':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId}\"\r\n                 (click)=\"!d.disabled&&cellClicked(d);$event.stopPropagation()\" (keydown)=\"cellKeyDown($event, d)\"\r\n                 tabindex=\"0\">\r\n              {{d.dateObj.day}}\r\n            </div>\r\n          </td>\r\n        </tr>\r\n        </tbody>\r\n      </table>\r\n      <div class=\"picker__footer\">\r\n        <button type=\"button\" *ngIf=\"opts.showTodayBtn\" class=\"picker__button--today\" (click)=\"todayClicked()\"\r\n                role=\"button\" [attr.aria-label]=\"opts.todayBtnTxt\">\r\n          {{opts.todayBtnTxt}}\r\n        </button>\r\n        <button type=\"button\" *ngIf=\"opts.showClearDateBtn\" class=\"picker__button--clear\" (click)=\"removeBtnClicked()\"\r\n                role=\"button\"\r\n                [attr.aria-label]=\"opts.clearBtnTxt\">\r\n          {{opts.clearBtnTxt}}\r\n        </button>\r\n        <button type=\"button\" [ngClass]=\"{'ml-auto': !opts.showTodayBtn}\" class=\"picker__button--close\"\r\n                (click)=\"closeBtnClicked()\"\r\n                role=\"button\" [attr.aria-label]=\"opts.closeBtnTxt\">\r\n          {{opts.closeBtnTxt}}\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n<div class=\"md-form my-0 d-flex align-items-center justify-content-center\" *ngIf=\"inline\">\r\n  <label (click)=\"openBtnClicked()\" *ngIf=\"label.length > 0\" [ngClass]=\"{\r\n          'active': checkActive(),\r\n          'disabled': opts.componentDisabled\r\n        }\">{{ label }}</label>\r\n  <input type=\"text\" class=\"form-control mydp-date\" [attr.aria-label]=\"opts.ariaLabelInputField\"\r\n         [attr.maxlength]=\"opts.dateFormat.length\" [ngClass]=\"{\r\n        'selectiondisabled': opts.componentDisabled,\r\n        'disabled': opts.componentDisabled\r\n      }\" placeholder=\"{{ placeholder }}\" [ngModel]=\"selectionDayTxt\" (ngModelChange)=\"onUserDateInput($event)\"\r\n         [value]=\"selectionDayTxt\"\r\n         [ngStyle]=\"{\r\n        'font-size': opts.selectionTxtFontSize\r\n      }\" (focus)=\"onFocusInput($event)\" (blur)=\"onBlurInput($event)\" [disabled]=\"opts.componentDisabled || isDisabled\"\r\n         autocomplete=\"off\" [tabindex]=\"tabIndex\">\r\n  <i [ngClass]=\"inlineIcon\" class=\"datepicker-inline-icon\" (click)=\"toggleInlineDatePicker()\"></i>\r\n</div>\r\n<div class=\"mydp picker datepicker-inline\" [ngClass]=\"{'picker--opened': showSelector}\" *ngIf=\"inline && isOpen\">\r\n\r\n  <div class=\"picker__frame picker__box z-depth-1\" #pickerFrame [ngClass]=\"{'d-none': !isOpen}\">\r\n    <div class=\"picker__header d-flex flex-center\">\r\n\r\n      <select class=\"picker__select--year\" [(ngModel)]=\"visibleMonth.year\" (ngModelChange)=\"onUserYearInput($event)\"\r\n              role=\"menu\"\r\n              aria-label=\"Year selector\">\r\n        <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option>\r\n      </select>\r\n      <select class=\"picker__select--month\" [(ngModel)]=\"visibleMonth.monthTxt\"\r\n              (ngModelChange)=\"onUserMonthInput($event)\" role=\"menu\"\r\n              aria-label=\"Month selector\">\r\n        <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option>\r\n      </select>\r\n      <button class=\"picker__nav--prev\" data-nav=\"-1\" type=\"button\" aria-controls=\"date-picker-example_table\"\r\n              title=\"Previous month\"\r\n              (click)=\"prevMonth()\" [disabled]=\"prevMonthDisabled\"\r\n              [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled}\"></button>\r\n      <button class=\"picker__nav--next\" data-nav=\"1\" type=\"button\" aria-controls=\"date-picker-example_table\"\r\n              title=\"Next month\"\r\n              (click)=\"nextMonth()\" [disabled]=\"nextMonthDisabled\"\r\n              [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled}\"></button>\r\n    </div>\r\n    <table class=\"picker__table\">\r\n      <thead>\r\n      <tr>\r\n        <th class=\"picker__weekday weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#</th>\r\n        <th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th>\r\n      </tr>\r\n      </thead>\r\n      <tbody>\r\n      <tr *ngFor=\"let w of dates\">\r\n        <td class=\"picker__day daycellweeknbr\"\r\n            *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td>\r\n        <td class=\"picker__day\" *ngFor=\"let d of w.week\"\r\n            [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId&&!d.disabled, 'disabled': d.disabled, 'tablesingleday': d.cmo===currMonthId&&!d.disabled}\">\r\n          <div *ngIf=\"d.markedDate.marked\" class=\"markdate\" [ngStyle]=\"{'background-color': d.markedDate.color}\"></div>\r\n          <div class=\"picker__day\"\r\n               [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId,'picker__day--outfocus': (d.cmo===nextMonthId || d.cmo===prevMonthId), 'picker__day--today':d.currDay&&opts.markCurrentDay, 'picker__day--selected picker__day--highlighted':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId}\"\r\n               (click)=\"!d.disabled&&cellClicked(d);$event.stopPropagation()\" (keydown)=\"cellKeyDown($event, d)\"\r\n               tabindex=\"0\">\r\n            {{d.dateObj.day}}\r\n          </div>\r\n        </td>\r\n      </tr>\r\n      </tbody>\r\n    </table>\r\n    <div class=\"picker__footer\">\r\n      <button type=\"button\" *ngIf=\"opts.showTodayBtn\" class=\"picker__button--today\" (click)=\"todayClicked()\"\r\n              role=\"button\" [attr.aria-label]=\"opts.todayBtnTxt\">\r\n        {{opts.todayBtnTxt}}\r\n      </button>\r\n      <button type=\"button\" *ngIf=\"opts.showClearDateBtn\" class=\"picker__button--clear\" (click)=\"removeBtnClicked()\"\r\n              role=\"button\"\r\n              [attr.aria-label]=\"opts.clearBtnTxt\">\r\n        {{opts.clearBtnTxt}}\r\n      </button>\r\n      <button type=\"button\" [ngClass]=\"{'ml-auto': !opts.showTodayBtn}\" class=\"picker__button--close\"\r\n              (click)=\"closeBtnClicked()\"\r\n              role=\"button\" [attr.aria-label]=\"opts.closeBtnTxt\">\r\n        {{opts.closeBtnTxt}}\r\n      </button>\r\n    </div>\r\n  </div>\r\n</div>\r\n",
-                        providers: [LocaleService, UtilService, MYDP_VALUE_ACCESSOR],
+                        template: "<!-- Line 27: Deleted (focus)=\"onFocusInput($event)\" for better use in Firefox. If other strange problems will occur, please paste it in line 27. -->\r\n<div class=\"mydp picker\" [ngClass]=\"{'picker--opened': showSelector}\" [ngStyle]=\"{'width': opts.width}\" *ngIf=\"!inline\">\r\n  <div class=\"md-form\" [ngClass]=\"{'md-outline': outlineInput}\">\r\n\r\n    <input type=\"text\" class=\"form-control mydp-date\" [readonly]=\"!opts.editableDateField\" [attr.aria-label]=\"opts.ariaLabelInputField\"\r\n           (mousedown)=\"openBtnClicked()\"\r\n           [attr.maxlength]=\"opts.dateFormat.length\" [ngClass]=\"{\r\n        'selectiondisabled': opts.componentDisabled,\r\n        'disabled': opts.componentDisabled\r\n      }\" placeholder=\"{{ placeholder }}\" [ngModel]=\"selectionDayTxt\" (ngModelChange)=\"onUserDateInput($event)\"\r\n           [value]=\"selectionDayTxt\"\r\n           [ngStyle]=\"{\r\n        'font-size': opts.selectionTxtFontSize\r\n      }\" (blur)=\"onBlurInput($event)\" (focus)=\"onFocusInput($event)\" [disabled]=\"opts.componentDisabled || isDisabled\"\r\n           autocomplete=\"off\" [tabindex]=\"tabIndex\">\r\n    <label (click)=\"openBtnClicked()\" *ngIf=\"label.length > 0\" [ngClass]=\"{\r\n          'active': checkActive(),\r\n          'disabled': opts.componentDisabled\r\n        }\">{{ label }}</label>\r\n  </div>\r\n  <div *ngIf=\"showSelector\" class=\"selector picker__holder selectorarrow selectorarrowleft selectorarrowright\" #divFocus\r\n       [ngClass]=\"{'alignselectorright': opts.alignSelectorRight}\"\r\n       tabindex=\"0\">\r\n    <div class=\"picker__frame picker__box\" #pickerFrame>\r\n      <div class=\"picker__header\">\r\n        <div class=\"picker__date-display\">\r\n          <div class=\"picker__weekday-display\">\r\n            {{ weekText(getWeekday(tmp)) }}\r\n          </div>\r\n          <div class=\"picker__month-display\">\r\n            <div>{{ monthText(tmp.month) }}</div>\r\n          </div>\r\n          <div class=\"picker__day-display\">\r\n            <div>{{ tmp.day }}</div>\r\n          </div>\r\n          <div class=\"picker__year-display\">\r\n            <div>{{ tmp.year }}</div>\r\n          </div>\r\n        </div>\r\n        <select class=\"picker__select--year\" [(ngModel)]=\"visibleMonth.year\" (ngModelChange)=\"onUserYearInput($event)\"\r\n                role=\"menu\"\r\n                aria-label=\"Year selector\">\r\n          <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option>\r\n        </select>\r\n        <select class=\"picker__select--month\" [(ngModel)]=\"visibleMonth.monthTxt\"\r\n                (ngModelChange)=\"onUserMonthInput($event)\" role=\"menu\"\r\n                aria-label=\"Month selector\">\r\n          <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option>\r\n        </select>\r\n        <button class=\"picker__nav--prev\" data-nav=\"-1\" type=\"button\" aria-controls=\"date-picker-example_table\"\r\n                title=\"Previous month\"\r\n                (click)=\"prevMonth()\" [disabled]=\"prevMonthDisabled\"\r\n                [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled}\"></button>\r\n        <button class=\"picker__nav--next\" data-nav=\"1\" type=\"button\" aria-controls=\"date-picker-example_table\"\r\n                title=\"Next month\"\r\n                (click)=\"nextMonth()\" [disabled]=\"nextMonthDisabled\"\r\n                [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled}\"></button>\r\n      </div>\r\n      <table class=\"picker__table\">\r\n        <thead>\r\n        <tr>\r\n          <th class=\"picker__weekday weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#\r\n          </th>\r\n          <th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th>\r\n        </tr>\r\n        </thead>\r\n        <tbody>\r\n        <tr *ngFor=\"let w of dates\">\r\n          <td class=\"picker__day daycellweeknbr\"\r\n              *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td>\r\n          <td class=\"picker__day\" *ngFor=\"let d of w.week\"\r\n              [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId&&!d.disabled, 'disabled': d.disabled, 'tablesingleday': d.cmo===currMonthId&&!d.disabled}\">\r\n            <div *ngIf=\"d.markedDate.marked\" class=\"markdate\"\r\n                 [ngStyle]=\"{'background-color': d.markedDate.color}\"></div>\r\n            <div class=\"picker__day\"\r\n                 [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId,'picker__day--outfocus': (d.cmo===nextMonthId || d.cmo===prevMonthId), 'picker__day--today':d.currDay&&opts.markCurrentDay, 'picker__day--selected picker__day--highlighted':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId}\"\r\n                 (click)=\"!d.disabled&&cellClicked(d);$event.stopPropagation()\" (keydown)=\"cellKeyDown($event, d)\"\r\n                 tabindex=\"0\">\r\n              {{d.dateObj.day}}\r\n            </div>\r\n          </td>\r\n        </tr>\r\n        </tbody>\r\n      </table>\r\n      <div class=\"picker__footer\">\r\n        <button type=\"button\" *ngIf=\"opts.showTodayBtn\" class=\"picker__button--today\" (click)=\"todayClicked()\"\r\n                role=\"button\" [attr.aria-label]=\"opts.todayBtnTxt\">\r\n          {{opts.todayBtnTxt}}\r\n        </button>\r\n        <button type=\"button\" *ngIf=\"opts.showClearDateBtn\" class=\"picker__button--clear\" (click)=\"removeBtnClicked()\"\r\n                role=\"button\"\r\n                [attr.aria-label]=\"opts.clearBtnTxt\">\r\n          {{opts.clearBtnTxt}}\r\n        </button>\r\n        <button type=\"button\" [ngClass]=\"{'ml-auto': !opts.showTodayBtn}\" class=\"picker__button--close\"\r\n                (click)=\"closeBtnClicked()\"\r\n                role=\"button\" [attr.aria-label]=\"opts.closeBtnTxt\">\r\n          {{opts.closeBtnTxt}}\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n<div class=\"md-form my-0 d-flex align-items-center justify-content-center\" *ngIf=\"inline\" [ngClass]=\"{'md-outline': outlineInput}\">\r\n  <input type=\"text\" class=\"form-control mydp-date\" [readonly]=\"!opts.editableDateField\" [attr.aria-label]=\"opts.ariaLabelInputField\"\r\n         [attr.maxlength]=\"opts.dateFormat.length\" [ngClass]=\"{\r\n        'selectiondisabled': opts.componentDisabled,\r\n        'disabled': opts.componentDisabled\r\n      }\" placeholder=\"{{ placeholder }}\" [ngModel]=\"selectionDayTxt\" (ngModelChange)=\"onUserDateInput($event)\"\r\n         [value]=\"selectionDayTxt\"\r\n         [ngStyle]=\"{\r\n        'font-size': opts.selectionTxtFontSize\r\n      }\" (focus)=\"onFocusInput($event)\" (blur)=\"onBlurInput($event)\" [disabled]=\"opts.componentDisabled || isDisabled\"\r\n         autocomplete=\"off\" [tabindex]=\"tabIndex\">\r\n  <label (click)=\"openBtnClicked()\" *ngIf=\"label.length > 0\" [ngClass]=\"{\r\n          'active': checkActive(),\r\n          'disabled': opts.componentDisabled\r\n        }\">{{ label }}</label>\r\n  <i [ngClass]=\"inlineIcon\" class=\"datepicker-inline-icon\" (click)=\"toggleInlineDatePicker()\"></i>\r\n</div>\r\n<div class=\"mydp picker datepicker-inline\" [ngClass]=\"{'picker--opened': showSelector}\" *ngIf=\"inline && isOpen\">\r\n\r\n  <div class=\"picker__frame picker__box z-depth-1\" #pickerFrame [ngClass]=\"{'d-none': !isOpen}\">\r\n    <div class=\"picker__header d-flex flex-center\">\r\n\r\n      <select class=\"picker__select--year\" [(ngModel)]=\"visibleMonth.year\" (ngModelChange)=\"onUserYearInput($event)\"\r\n              role=\"menu\"\r\n              aria-label=\"Year selector\">\r\n        <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option>\r\n      </select>\r\n      <select class=\"picker__select--month\" [(ngModel)]=\"visibleMonth.monthTxt\"\r\n              (ngModelChange)=\"onUserMonthInput($event)\" role=\"menu\"\r\n              aria-label=\"Month selector\">\r\n        <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option>\r\n      </select>\r\n      <button class=\"picker__nav--prev\" data-nav=\"-1\" type=\"button\" aria-controls=\"date-picker-example_table\"\r\n              title=\"Previous month\"\r\n              (click)=\"prevMonth()\" [disabled]=\"prevMonthDisabled\"\r\n              [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled}\"></button>\r\n      <button class=\"picker__nav--next\" data-nav=\"1\" type=\"button\" aria-controls=\"date-picker-example_table\"\r\n              title=\"Next month\"\r\n              (click)=\"nextMonth()\" [disabled]=\"nextMonthDisabled\"\r\n              [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled}\"></button>\r\n    </div>\r\n    <table class=\"picker__table\">\r\n      <thead>\r\n      <tr>\r\n        <th class=\"picker__weekday weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#</th>\r\n        <th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th>\r\n      </tr>\r\n      </thead>\r\n      <tbody>\r\n      <tr *ngFor=\"let w of dates\">\r\n        <td class=\"picker__day daycellweeknbr\"\r\n            *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td>\r\n        <td class=\"picker__day\" *ngFor=\"let d of w.week\"\r\n            [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId&&!d.disabled, 'disabled': d.disabled, 'tablesingleday': d.cmo===currMonthId&&!d.disabled}\">\r\n          <div *ngIf=\"d.markedDate.marked\" class=\"markdate\" [ngStyle]=\"{'background-color': d.markedDate.color}\"></div>\r\n          <div class=\"picker__day\"\r\n               [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId,'picker__day--outfocus': (d.cmo===nextMonthId || d.cmo===prevMonthId), 'picker__day--today':d.currDay&&opts.markCurrentDay, 'picker__day--selected picker__day--highlighted':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId}\"\r\n               (click)=\"!d.disabled&&cellClicked(d);$event.stopPropagation()\" (keydown)=\"cellKeyDown($event, d)\"\r\n               tabindex=\"0\">\r\n            {{d.dateObj.day}}\r\n          </div>\r\n        </td>\r\n      </tr>\r\n      </tbody>\r\n    </table>\r\n    <div class=\"picker__footer\">\r\n      <button type=\"button\" *ngIf=\"opts.showTodayBtn\" class=\"picker__button--today\" (click)=\"todayClicked()\"\r\n              role=\"button\" [attr.aria-label]=\"opts.todayBtnTxt\">\r\n        {{opts.todayBtnTxt}}\r\n      </button>\r\n      <button type=\"button\" *ngIf=\"opts.showClearDateBtn\" class=\"picker__button--clear\" (click)=\"removeBtnClicked()\"\r\n              role=\"button\"\r\n              [attr.aria-label]=\"opts.clearBtnTxt\">\r\n        {{opts.clearBtnTxt}}\r\n      </button>\r\n      <button type=\"button\" [ngClass]=\"{'ml-auto': !opts.showTodayBtn}\" class=\"picker__button--close\"\r\n              (click)=\"closeBtnClicked()\"\r\n              role=\"button\" [attr.aria-label]=\"opts.closeBtnTxt\">\r\n        {{opts.closeBtnTxt}}\r\n      </button>\r\n    </div>\r\n  </div>\r\n</div>\r\n",
+                        providers: [UtilService, MYDP_VALUE_ACCESSOR],
                         encapsulation: i0.ViewEncapsulation.None,
                         changeDetection: i0.ChangeDetectionStrategy.OnPush
                     }] }
@@ -18847,6 +19742,7 @@
             selector: [{ type: i0.Input }],
             disabled: [{ type: i0.Input }],
             openOnFocus: [{ type: i0.Input }],
+            outlineInput: [{ type: i0.Input }],
             inline: [{ type: i0.Input }],
             inlineIcon: [{ type: i0.Input }],
             dateChanged: [{ type: i0.Output }],
@@ -18875,7 +19771,8 @@
             { type: i0.NgModule, args: [{
                         imports: [common.CommonModule, forms.FormsModule],
                         declarations: [MDBDatePickerComponent, FocusDirective, InputAutoFillDirective],
-                        exports: [MDBDatePickerComponent, FocusDirective, InputAutoFillDirective]
+                        exports: [MDBDatePickerComponent, FocusDirective, InputAutoFillDirective],
+                        providers: [LocaleService]
                     },] }
         ];
         return DatepickerModule;
@@ -21639,6 +22536,7 @@
             this.filterPlaceholder = '';
             this.label = '';
             this.filterEnabled = false;
+            this.filterAutocomplete = true;
             this.optionHeight = 37;
             this.enableSelectAll = true;
             this.selectAllLabel = 'Select all';
@@ -21679,10 +22577,12 @@
             this.onChange = ( /**
              * @param {?} _
              * @return {?}
-             */function (_) { });
+             */function (_) {
+            });
             this.onTouched = ( /**
              * @return {?}
-             */function () { });
+             */function () {
+            });
             this.isBrowser = common.isPlatformBrowser(platformId);
         }
         /**
@@ -21737,15 +22637,19 @@
          * @return {?}
          */
             function () {
-                if (this.multiple && this.enableSelectAll) {
-                    // tslint:disable-next-line:max-line-length
-                    this.dropdownMaxHeight = this.visibleOptions ? this.optionHeight * (this.visibleOptions + 1) : this.optionHeight * (this.visibleOptionsDefault + 1);
-                    this.dropdownHeight = this.optionHeight * (this.optionList.options.length + 1);
-                }
-                else {
-                    // tslint:disable-next-line:max-line-length
-                    this.dropdownMaxHeight = this.visibleOptions ? this.optionHeight * this.visibleOptions : this.optionHeight * this.visibleOptionsDefault;
-                    this.dropdownHeight = this.optionHeight * this.optionList.options.length;
+                if (this.dropdown) {
+                    /** @type {?} */
+                    var customContentHeight = this.dropdown.customContent.nativeElement.clientHeight;
+                    if (this.multiple && this.enableSelectAll) {
+                        // tslint:disable-next-line:max-line-length
+                        this.dropdownMaxHeight = this.visibleOptions ? (this.optionHeight * (this.visibleOptions + 1)) + customContentHeight : (this.optionHeight * (this.visibleOptionsDefault + 1)) + customContentHeight;
+                        this.dropdownHeight = (this.optionHeight * (this.optionList.options.length + 1)) + customContentHeight;
+                    }
+                    else {
+                        // tslint:disable-next-line:max-line-length
+                        this.dropdownMaxHeight = this.visibleOptions ? (this.optionHeight * this.visibleOptions) + customContentHeight : (this.optionHeight * this.visibleOptionsDefault) + customContentHeight;
+                        this.dropdownHeight = (this.optionHeight * this.optionList.options.length) + customContentHeight;
+                    }
                 }
             };
         /**
@@ -22636,7 +23540,8 @@
                         this.selectionSpan.nativeElement.focus();
                     }
                 }
-                catch (error) { }
+                catch (error) {
+                }
             };
         /**
          * @return {?}
@@ -22682,6 +23587,7 @@
                     var bottom = docEl.scrollTop + docEl.clientHeight;
                     /** @type {?} */
                     var dropdownHeight = _this.dropdownMaxHeight > _this.dropdownHeight ? _this.dropdownHeight : _this.dropdownMaxHeight;
+                    _this.updateDropdownHeight();
                     if (elPosition + dropdownHeight >= bottom) {
                         _this.top = selectSpan.offsetHeight - dropdownHeight - _this.filterHeight;
                     }
@@ -22758,7 +23664,7 @@
         SelectComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'mdb-select',
-                        template: "<label *ngIf=\"label !== ''\" [ngClass]=\"{'active': labelActive }\">\n  {{label}}\n</label>\n<div\n  #selection\n  [attr.tabindex]=\"disabled ? null : 0\"\n  [ngClass]=\"{'open': isOpen, 'focus': hasFocus, 'below': isBelow, 'disabled': disabled}\"\n  [tabindex]=\"tabindex\"\n  (mousedown)=\"onSelectContainerClick($event)\"\n  (focus)=\"onSelectContainerFocus()\"\n  (blur)=\"onSelectContainerBlur()\"\n  (keydown)=\"onSelectContainerKeydown($event)\"\n  (window:resize)=\"onWindowResize()\">\n\n  <div class=\"single form-control\"\n    *ngIf=\"!multiple\">\n    <div class=\"value\"\n      *ngIf=\"optionList.hasSelected()\">\n      {{optionList.selection[0].label}}\n    </div>\n    <div class=\"placeholder\"\n      *ngIf=\"!optionList.hasSelected()\">\n      {{placeholderView}}\n    </div>\n    <div #clear class=\"clear\"\n      *ngIf=\"allowClear && hasSelected\"\n      (mousedown)=\"onClearSelectionClick($event)\">\n      &#x2715;\n    </div>\n    <span class=\"mdb-select-toggle\"></span>\n  </div>\n\n  <div class=\"multiple form-control\"\n      *ngIf=\"multiple\">\n      <div class=\"placeholder\"\n        *ngIf=\"!optionList.hasSelected()\">\n        {{placeholderView}}\n      </div>\n\n      <div [ngStyle]=\"allowClear && { 'width.%': 90}\" class=\"option\">\n        <span *ngFor=\"let option of optionList.selection\">\n          {{option.label}}<span class=\"deselect-option\">,</span>\n        </span>\n      </div>\n\n      <div #clear class=\"clear\"\n      *ngIf=\"allowClear && hasSelected\"\n      (mousedown)=\"onClearSelectionClick($event)\">\n      &#x2715;\n    </div>\n\n    <span class=\"mdb-select-toggle\"></span>\n\n  </div>\n</div>\n<mdb-select-dropdown\n  *ngIf=\"isOpen\"\n  #dropdown\n  [enableSelectAll]=\"enableSelectAll\"\n  [multiple]=\"multiple\"\n  [dropdownHeight]=\"dropdownHeight\"\n  [dropdownMaxHeight]=\"dropdownMaxHeight\"\n  [optionHeight]=\"optionHeight\"\n  [optionList]=\"optionList\"\n  [notFoundMsg]=\"notFoundMsg\"\n  [customClass]=\"customClass\"\n  [highlightColor]=\"highlightColor\"\n  [highlightTextColor]=\"highlightTextColor\"\n  [filterEnabled]=\"filterEnabled\"\n  [placeholder]=\"filterPlaceholder\"\n  [selectAllLabel]=\"selectAllLabel\"\n  [top]=\"top\"\n  [left]=\"left\"\n  [width]=\"width\"\n  (close)=\"onDropdownClose($event)\"\n  (optionClicked)=\"onDropdownOptionClicked($event)\"\n  (singleFilterClick)=\"onSingleFilterClick()\"\n  (singleFilterInput)=\"onSingleFilterInput($event)\"\n  (singleFilterKeydown)=\"onSingleFilterKeydown($event)\"\n  (selectAll)=\"onSelectAll($event)\"\n  (animationDone)=\"onDropdownAnimationDone()\"\n  (animationStart)=\"onDropdownAnimationStart()\">\n</mdb-select-dropdown>\n",
+                        template: "<label *ngIf=\"label !== ''\" [ngClass]=\"{'active': labelActive }\">\n  {{label}}\n</label>\n<div\n  #selection\n  [attr.tabindex]=\"disabled ? null : 0\"\n  [ngClass]=\"{'open': isOpen, 'focus': hasFocus, 'below': isBelow, 'disabled': disabled}\"\n  [tabindex]=\"tabindex\"\n  (mousedown)=\"onSelectContainerClick($event)\"\n  (focus)=\"onSelectContainerFocus()\"\n  (blur)=\"onSelectContainerBlur()\"\n  (keydown)=\"onSelectContainerKeydown($event)\"\n  (window:resize)=\"onWindowResize()\">\n\n  <div class=\"single form-control\"\n    *ngIf=\"!multiple\">\n    <div class=\"value\"\n      *ngIf=\"optionList.hasSelected()\">\n      {{optionList.selection[0].label}}\n    </div>\n    <div class=\"placeholder\"\n      *ngIf=\"!optionList.hasSelected()\">\n      {{placeholderView}}\n    </div>\n    <div #clear class=\"clear\"\n      *ngIf=\"allowClear && hasSelected\"\n      (mousedown)=\"onClearSelectionClick($event)\">\n      &#x2715;\n    </div>\n    <span class=\"mdb-select-toggle\"></span>\n  </div>\n\n  <div class=\"multiple form-control\"\n      *ngIf=\"multiple\">\n      <div class=\"placeholder\"\n        *ngIf=\"!optionList.hasSelected()\">\n        {{placeholderView}}\n      </div>\n\n      <div [ngStyle]=\"allowClear && { 'width.%': 90}\" class=\"option\">\n        <span *ngFor=\"let option of optionList.selection\">\n          {{option.label}}<span class=\"deselect-option\">,</span>\n        </span>\n      </div>\n\n      <div #clear class=\"clear\"\n      *ngIf=\"allowClear && hasSelected\"\n      (mousedown)=\"onClearSelectionClick($event)\">\n      &#x2715;\n    </div>\n\n    <span class=\"mdb-select-toggle\"></span>\n\n  </div>\n</div>\n<mdb-select-dropdown\n  *ngIf=\"isOpen\"\n  #dropdown\n  [enableSelectAll]=\"enableSelectAll\"\n  [multiple]=\"multiple\"\n  [dropdownHeight]=\"dropdownHeight\"\n  [dropdownMaxHeight]=\"dropdownMaxHeight\"\n  [optionHeight]=\"optionHeight\"\n  [optionList]=\"optionList\"\n  [notFoundMsg]=\"notFoundMsg\"\n  [customClass]=\"customClass\"\n  [highlightColor]=\"highlightColor\"\n  [highlightTextColor]=\"highlightTextColor\"\n  [filterEnabled]=\"filterEnabled\"\n  [filterAutocomplete]=\"filterAutocomplete\"\n  [placeholder]=\"filterPlaceholder\"\n  [selectAllLabel]=\"selectAllLabel\"\n  [top]=\"top\"\n  [left]=\"left\"\n  [width]=\"width\"\n  (close)=\"onDropdownClose($event)\"\n  (optionClicked)=\"onDropdownOptionClicked($event)\"\n  (singleFilterClick)=\"onSingleFilterClick()\"\n  (singleFilterInput)=\"onSingleFilterInput($event)\"\n  (singleFilterKeydown)=\"onSingleFilterKeydown($event)\"\n  (selectAll)=\"onSelectAll($event)\"\n  (animationDone)=\"onDropdownAnimationDone()\"\n  (animationStart)=\"onDropdownAnimationStart()\">\n  <ng-content></ng-content>\n</mdb-select-dropdown>\n",
                         providers: [SELECT_VALUE_ACCESSOR],
                         encapsulation: i0.ViewEncapsulation.None,
                         changeDetection: i0.ChangeDetectionStrategy.OnPush
@@ -22789,6 +23695,7 @@
             filterPlaceholder: [{ type: i0.Input }],
             label: [{ type: i0.Input }],
             filterEnabled: [{ type: i0.Input }],
+            filterAutocomplete: [{ type: i0.Input }],
             visibleOptions: [{ type: i0.Input }],
             optionHeight: [{ type: i0.Input }],
             tabindex: [{ type: i0.Input }],
@@ -22837,7 +23744,67 @@
             this.endHeight = 45;
             this.hasOptionsItems = true;
             this.selectAllSelected = false;
+            this.searchIndex = 0;
+            this.previousKey = '';
         }
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+        SelectDropdownComponent.prototype.onWindowKeyUp = /**
+         * @param {?} event
+         * @return {?}
+         */
+            function (event) {
+                /** @type {?} */
+                var searchKey = event.key.toString().replace('"', '');
+                /** @type {?} */
+                var items = Array.from(this.optionList['_options'])
+                    .filter(( /**
+             * @param {?} elem
+             * @return {?}
+             */function (elem) { return !elem.group; }))
+                    .filter(( /**
+             * @param {?} elem
+             * @return {?}
+             */function (elem) { return !elem.disabled; }))
+                    .map(( /**
+             * @param {?} el
+             * @return {?}
+             */function (el) { return el.wrappedOption.label || el.wrappedOption.value; }));
+                this.navigateThroughArray(searchKey, items);
+                this.previousKey = searchKey;
+            };
+        /**
+         * @param {?} key
+         * @param {?} itemSource
+         * @return {?}
+         */
+        SelectDropdownComponent.prototype.navigateThroughArray = /**
+         * @param {?} key
+         * @param {?} itemSource
+         * @return {?}
+         */
+            function (key, itemSource) {
+                var _this = this;
+                /** @type {?} */
+                var items = itemSource.filter(( /**
+                 * @param {?} el
+                 * @return {?}
+                 */function (el) { return el.toString().toLowerCase().charAt(0).includes(key.toString().toLowerCase()); }));
+                if (this.searchIndex > items.length - 1 || key !== this.previousKey) {
+                    this.searchIndex = 0;
+                }
+                this.highlightedItem = this.optionList.filtered.find(( /**
+                 * @param {?} el
+                 * @return {?}
+                 */function (el) { return el.wrappedOption.label === items[_this.searchIndex]; }));
+                this.searchIndex++;
+                if (this.highlightedItem) {
+                    this.optionList.highlightOption(this.highlightedItem);
+                }
+                this.moveHighlightedIntoView();
+            };
         /** Event handlers. **/
         // Angular life cycle hooks.
         /**
@@ -22922,11 +23889,15 @@
                  * @param {?} el
                  * @return {?}
                  */function (el) {
-                    if (_this.optionHeight && el.firstElementChild.tagName !== 'IMG') {
-                        _this._renderer.setStyle(el.firstElementChild, 'height', _this.optionHeight + "px");
-                    }
-                    if (el.firstElementChild.tagName !== 'IMG') {
-                        _this._renderer.setStyle(el.firstElementChild, 'line-height', _this.optionHeight + "px");
+                    /** @type {?} */
+                    var isCustomElement = el.classList.contains('custom-select-content');
+                    if (el.firstElementChild) {
+                        if (_this.optionHeight && el.firstElementChild.tagName !== 'IMG' && !isCustomElement) {
+                            _this._renderer.setStyle(el.firstElementChild, 'height', _this.optionHeight + "px");
+                        }
+                        if (el.firstElementChild.tagName !== 'IMG' && !isCustomElement) {
+                            _this._renderer.setStyle(el.firstElementChild, 'line-height', _this.optionHeight + "px");
+                        }
                     }
                 }));
             };
@@ -23210,7 +24181,7 @@
         SelectDropdownComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'mdb-select-dropdown',
-                        template: "<div (click)=\"$event.stopPropagation()\" class=\"dropdown-content\" #dropdownContent [ngStyle]=\"{'top.px': top, 'left.px': left, 'width.px': width}\"\n[@dropdownAnimation]=\"{value: state, params: {startHeight: startHeight, endHeight: endHeight}}\" (@dropdownAnimation.done)=\"onAnimationDone()\" (@dropdownAnimation.start)=\"onAnimationStart()\">\n  <div class=\"filter md-form px-2\" *ngIf=\"filterEnabled\">\n    <input\n    type=\"text\"\n    class=\"search form-control w-100 d-block\"\n    #filterInput\n    autocomplete=\"on\"\n    [placeholder]=\"placeholder\"\n    (input)=\"onSingleFilterInput($event)\"\n    (keydown)=\"onSingleFilterKeydown($event)\">\n  </div>\n\n  <div class=\"options\" #optionsList>\n    <ul class=\"select-dropdown\" [ngClass]=\"{'multiple-select-dropdown': multiple}\"\n    (wheel)=\"onOptionsWheel($event)\">\n      <li [ngStyle]=\"{ 'height.px': optionHeight }\" *ngIf=\"multiple && enableSelectAll && this.hasOptionsItems\" (click)=\"onSelectAllClick()\">\n        <span class=\"filtrable\" *ngIf=\"multiple\">\n          <input type=\"checkbox\" [checked]=\"selectAllSelected\" class=\"form-check-input {{customClass}}\">\n          <label></label>\n          {{selectAllLabel}}\n        </span>\n      </li>\n      <li *ngFor=\"let option of optionList.filtered\"\n        [ngClass]=\"{'active': option.highlighted, 'selected': option.selected, 'disabled': option.disabled, 'optgroup': option.group, 'd-flex justify-content-between flex-row-reverse align-items-center': option.icon}\"\n        [ngStyle]=\"{'height.px': optionHeight, 'line-height.px': optionHeight, 'background-color': getOptionStyle(option)['background-color'], 'color': getOptionStyle(option)['color']}\"\n        (click)=\"onOptionClick(option)\"\n        (mouseover)=\"option.hovered = true\"\n        (mouseleave)=\"option.hovered = false\">\n        <img class=\"rounded-circle\" [src]=\"option.icon\" *ngIf=\"option.icon !== ''\">\n        <span class=\"deselect-option\" *ngIf=\"!multiple\">{{option.label}}</span>\n        <span class=\"deselect-option\" *ngIf=\"multiple\">\n          <input type=\"checkbox\" [checked]=\"option.selected\" class=\"form-check-input {{customClass}}\" [disabled]=\"option.disabled\">\n          <label></label>\n          {{option.label}}\n        </span>\n      </li>\n      <li *ngIf=\"!this.hasOptionsItems\" class=\"message disabled\">\n        <span>{{notFoundMsg}}</span>\n      </li>\n    </ul>\n  </div>\n</div>\n",
+                        template: "<div (click)=\"$event.stopPropagation()\" class=\"dropdown-content\" #dropdownContent [ngStyle]=\"{'top.px': top, 'left.px': left, 'width.px': width}\"\n[@dropdownAnimation]=\"{value: state, params: {startHeight: startHeight, endHeight: endHeight}}\" (@dropdownAnimation.done)=\"onAnimationDone()\" (@dropdownAnimation.start)=\"onAnimationStart()\">\n  <div class=\"filter md-form px-2\" *ngIf=\"filterEnabled\">\n    <input\n    type=\"text\"\n    class=\"search form-control w-100 d-block\"\n    #filterInput\n    [attr.autocomplete]=\"filterAutocomplete ? 'on' : 'off'\"\n    [placeholder]=\"placeholder\"\n    (input)=\"onSingleFilterInput($event)\"\n    (keydown)=\"onSingleFilterKeydown($event)\">\n  </div>\n\n  <div class=\"options\" #optionsList>\n    <ul class=\"select-dropdown\" [ngClass]=\"{'multiple-select-dropdown': multiple}\"\n    (wheel)=\"onOptionsWheel($event)\">\n      <li [ngStyle]=\"{ 'height.px': optionHeight }\" *ngIf=\"multiple && enableSelectAll && this.hasOptionsItems\" (click)=\"onSelectAllClick()\">\n        <span class=\"filtrable\" *ngIf=\"multiple\">\n          <input type=\"checkbox\" [checked]=\"selectAllSelected\" class=\"form-check-input {{customClass}}\">\n          <label></label>\n          {{selectAllLabel}}\n        </span>\n      </li>\n      <li *ngFor=\"let option of optionList.filtered\"\n        [ngClass]=\"{'active': option.highlighted, 'selected': option.selected, 'disabled': option.disabled, 'optgroup': option.group, 'd-flex justify-content-between flex-row-reverse align-items-center': option.icon}\"\n        [ngStyle]=\"{'height.px': optionHeight, 'line-height.px': optionHeight, 'background-color': getOptionStyle(option)['background-color'], 'color': getOptionStyle(option)['color']}\"\n        (click)=\"onOptionClick(option)\"\n        (mouseover)=\"option.hovered = true\"\n        (mouseleave)=\"option.hovered = false\">\n        <img class=\"rounded-circle\" [src]=\"option.icon\" *ngIf=\"option.icon !== ''\">\n        <span class=\"deselect-option\" *ngIf=\"!multiple\">{{option.label}}</span>\n        <span class=\"deselect-option\" *ngIf=\"multiple\">\n          <input type=\"checkbox\" [checked]=\"option.selected\" class=\"form-check-input {{customClass}}\" [disabled]=\"option.disabled\">\n          <label></label>\n          {{option.label}}\n        </span>\n      </li>\n      <li *ngIf=\"!this.hasOptionsItems\" class=\"message disabled\" [ngStyle]=\"{'height.px': optionHeight}\">\n        <span>{{notFoundMsg}}</span>\n      </li>\n      <li #customContent class=\"custom-select-content\">\n        <ng-content></ng-content>\n      </li>\n    </ul>\n  </div>\n</div>\n",
                         encapsulation: i0.ViewEncapsulation.None,
                         changeDetection: i0.ChangeDetectionStrategy.Default,
                         animations: [animations.trigger('dropdownAnimation', [
@@ -23231,6 +24202,7 @@
         };
         SelectDropdownComponent.propDecorators = {
             filterEnabled: [{ type: i0.Input }],
+            filterAutocomplete: [{ type: i0.Input }],
             highlightColor: [{ type: i0.Input }],
             highlightTextColor: [{ type: i0.Input }],
             left: [{ type: i0.Input }],
@@ -23258,6 +24230,8 @@
             filterInput: [{ type: i0.ViewChild, args: ['filterInput',] }],
             optionsList: [{ type: i0.ViewChild, args: ['optionsList',] }],
             dropdownContent: [{ type: i0.ViewChild, args: ['dropdownContent',] }],
+            customContent: [{ type: i0.ViewChild, args: ['customContent',] }],
+            onWindowKeyUp: [{ type: i0.HostListener, args: ['window:keyup', ['$event'],] }],
             onkeyup: [{ type: i0.HostListener, args: ['keyup',] }],
             onkeydown: [{ type: i0.HostListener, args: ['input',] }]
         };
@@ -24611,6 +25585,15 @@
         /**
          * @return {?}
          */
+        MdbRangeInputComponent.prototype.onTouchStart = /**
+         * @return {?}
+         */
+            function () {
+                this.focusRangeInput();
+            };
+        /**
+         * @return {?}
+         */
         MdbRangeInputComponent.prototype.onmouseleave = /**
          * @return {?}
          */
@@ -24752,7 +25735,7 @@
         MdbRangeInputComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'mdb-range-input',
-                        template: "<div *ngIf=\"!default\" class=\"range-field\" #rangeField>\n    <div class=\"track\">\n      <div #rangeCloud class=\"range-cloud\" title=\"range\" [ngClass]=\"{'visible': this.visibility, 'hidden': !this.visibility}\">\n        <span class=\"text-transform\">{{range}}</span>\n      </div>\n    </div>\n    <input #input\n    [name]=\"name\"\n    type=\"range\"\n    [disabled]=\"disabled\"\n    [id]=\"id\"\n    [min]=\"min\"\n    [max]=\"max\"\n    [step]=\"step\"\n    [value]=\"value\"\n    [(ngModel)]=\"range\"\n    (focus)=\"this.visibility = true\"\n    (blur)=\"this.visibility = false\"\n    (input)=\"coverage($event)\">\n</div>\n\n<div *ngIf=\"default\">\n    <label for=\"customRange1\">Example range</label>\n    <input #input\n    class=\"custom-range\"\n    [name]=\"name\"\n    type=\"range\"\n    [id]=\"id\"\n    [min]=\"min\"\n    [max]=\"max\"\n    [step]=\"step\"\n    [attr.value]=\"value\"\n    [value]=\"value\"\n    [(ngModel)]=\"range\"\n    (focus)=\"this.visibility = true\"\n    (blur)=\"this.visibility = false\"\n    (input)=\"coverage($event)\">\n    <span class=\"{{defaultRangeCounterClass}}\">{{ range }}</span>\n  </div>",
+                        template: "<div *ngIf=\"!default\" class=\"range-field\" #rangeField>\n  <div class=\"track\">\n    <div #rangeCloud class=\"range-cloud\" title=\"range\"\n         [ngClass]=\"{'visible': this.visibility, 'hidden': !this.visibility}\">\n      <span class=\"text-transform\">{{range}}</span>\n    </div>\n  </div>\n  <input #input\n         [name]=\"name\"\n         type=\"range\"\n         [disabled]=\"disabled\"\n         [id]=\"id\"\n         [min]=\"min\"\n         [max]=\"max\"\n         [step]=\"step\"\n         [value]=\"value\"\n         [(ngModel)]=\"range\"\n         (focus)=\"this.visibility = true\"\n         (blur)=\"this.visibility = false\"\n         (input)=\"coverage($event)\">\n</div>\n\n<div *ngIf=\"default\">\n  <label for=\"customRange1\">Example range</label>\n  <input #input\n         class=\"custom-range\"\n         [name]=\"name\"\n         type=\"range\"\n         [id]=\"id\"\n         [min]=\"min\"\n         [max]=\"max\"\n         [step]=\"step\"\n         [attr.value]=\"value\"\n         [value]=\"value\"\n         [(ngModel)]=\"range\"\n         (focus)=\"this.visibility = true\"\n         (blur)=\"this.visibility = false\"\n         (input)=\"coverage($event)\"\n         (touchend)=\"blurRangeInput()\">\n  <span class=\"{{defaultRangeCounterClass}}\">{{ range }}</span>\n</div>\n",
                         providers: [RANGE_VALUE_ACCESOR]
                     }] }
         ];
@@ -24781,9 +25764,252 @@
             onchange: [{ type: i0.HostListener, args: ['change', ['$event'],] }],
             oninput: [{ type: i0.HostListener, args: ['input', ['$event'],] }],
             onclick: [{ type: i0.HostListener, args: ['click',] }],
+            onTouchStart: [{ type: i0.HostListener, args: ['touchstart',] }],
             onmouseleave: [{ type: i0.HostListener, args: ['mouseleave',] }]
         };
         return MdbRangeInputComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var RANGE_VALUE_ACCESOR$1 = {
+        provide: forms.NG_VALUE_ACCESSOR,
+        useExisting: i0.forwardRef(( /**
+         * @return {?}
+         */function () { return MdbMultiRangeInputComponent; })),
+        multi: true
+    };
+    var MdbMultiRangeInputComponent = /** @class */ (function () {
+        function MdbMultiRangeInputComponent(renderer) {
+            this.renderer = renderer;
+            this.value = { first: 0, second: 0 };
+            this.min = 0;
+            this.max = 100;
+            this.rangeValueChange = new i0.EventEmitter();
+            this.firstVisibility = false;
+            this.secondVisibility = false;
+            this.cloudRange = 0;
+            // Control Value Accessor Methods
+            this.onChange = ( /**
+             * @param {?} _
+             * @return {?}
+             */function (_) {
+            });
+            this.onTouched = ( /**
+             * @return {?}
+             */function () {
+            });
+        }
+        /**
+         * @return {?}
+         */
+        MdbMultiRangeInputComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                this.range = this.value;
+            };
+        /**
+         * @return {?}
+         */
+        MdbMultiRangeInputComponent.prototype.ngAfterViewInit = /**
+         * @return {?}
+         */
+            function () {
+                this.steps = this.max - this.min;
+            };
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+        MdbMultiRangeInputComponent.prototype.firstRangeInput = /**
+         * @param {?} event
+         * @return {?}
+         */
+            function (event) {
+                this.rangeValueChange.emit(this.range);
+                if (typeof this.range === 'object' && this.range.first == 0) {
+                    return this.range;
+                }
+                this.focusRangeInput('first');
+                this.moveValueCloud(event, 'first');
+            };
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+        MdbMultiRangeInputComponent.prototype.secondRangeInput = /**
+         * @param {?} event
+         * @return {?}
+         */
+            function (event) {
+                this.rangeValueChange.emit(this.range);
+                if (typeof this.range === 'object' && this.range.second == 0) {
+                    return this.range;
+                }
+                this.focusRangeInput('second');
+                this.moveValueCloud(event, 'second');
+            };
+        /**
+         * @private
+         * @param {?} event
+         * @param {?} element
+         * @return {?}
+         */
+        MdbMultiRangeInputComponent.prototype.moveValueCloud = /**
+         * @private
+         * @param {?} event
+         * @param {?} element
+         * @return {?}
+         */
+            function (event, element) {
+                /** @type {?} */
+                var newValue = event.target.value;
+                /** @type {?} */
+                var newRelativeGain = newValue - this.min;
+                /** @type {?} */
+                var inputWidth = element === 'first' ? this.firstInput.nativeElement.offsetWidth : this.secondInput.nativeElement.offsetWidth;
+                /** @type {?} */
+                var thumbOffset = 0;
+                /** @type {?} */
+                var offsetAmmount = 15;
+                /** @type {?} */
+                var distanceFromMiddle = newRelativeGain - (this.steps / 2);
+                this.stepLength = inputWidth / this.steps;
+                thumbOffset = (distanceFromMiddle / this.steps) * offsetAmmount;
+                this.cloudRange = (this.stepLength * newRelativeGain) - thumbOffset;
+                this.renderer.setStyle(element === 'first' ?
+                    this.firstRangeCloud.nativeElement :
+                    this.secondRangeCloud.nativeElement, 'left', this.cloudRange + 'px');
+            };
+        /**
+         * @param {?} element
+         * @return {?}
+         */
+        MdbMultiRangeInputComponent.prototype.focusRangeInput = /**
+         * @param {?} element
+         * @return {?}
+         */
+            function (element) {
+                if (this.checkIfSafari()) {
+                    element === 'first' ? this.firstInput.nativeElement.focus() : this.secondInput.nativeElement.focus();
+                }
+                element === 'first' ? this.firstVisibility = true : this.secondVisibility = true;
+            };
+        /**
+         * @param {?} element
+         * @return {?}
+         */
+        MdbMultiRangeInputComponent.prototype.blurRangeInput = /**
+         * @param {?} element
+         * @return {?}
+         */
+            function (element) {
+                if (this.checkIfSafari()) {
+                    element === 'first' ? this.firstInput.nativeElement.blur() : this.secondInput.nativeElement.blur();
+                }
+                element === 'first' ? this.firstVisibility = false : this.secondVisibility = false;
+            };
+        /**
+         * @return {?}
+         */
+        MdbMultiRangeInputComponent.prototype.checkIfSafari = /**
+         * @return {?}
+         */
+            function () {
+                /** @type {?} */
+                var isSafari = navigator.userAgent.indexOf('Safari') > -1;
+                /** @type {?} */
+                var isChrome = navigator.userAgent.indexOf('Chrome') > -1;
+                /** @type {?} */
+                var isFirefox = navigator.userAgent.indexOf('Firefox') > -1;
+                /** @type {?} */
+                var isOpera = navigator.userAgent.indexOf('Opera') > -1;
+                if (isSafari && !isChrome && !isFirefox && !isOpera) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            };
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        MdbMultiRangeInputComponent.prototype.writeValue = /**
+         * @param {?} value
+         * @return {?}
+         */
+            function (value) {
+                this.value = value;
+                this.range = value;
+            };
+        /**
+         * @param {?} fn
+         * @return {?}
+         */
+        MdbMultiRangeInputComponent.prototype.registerOnChange = /**
+         * @param {?} fn
+         * @return {?}
+         */
+            function (fn) {
+                this.onChange = fn;
+            };
+        /**
+         * @param {?} fn
+         * @return {?}
+         */
+        MdbMultiRangeInputComponent.prototype.registerOnTouched = /**
+         * @param {?} fn
+         * @return {?}
+         */
+            function (fn) {
+                this.onTouched = fn;
+            };
+        /**
+         * @param {?} isDisabled
+         * @return {?}
+         */
+        MdbMultiRangeInputComponent.prototype.setDisabledState = /**
+         * @param {?} isDisabled
+         * @return {?}
+         */
+            function (isDisabled) {
+                this.disabled = isDisabled;
+            };
+        MdbMultiRangeInputComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'mdb-multi-range-input',
+                        template: "<div class=\"multi-range-field my-5 pb-5\">\n  <div class=\"range-field\" #rangeField>\n    <div class=\"track\">\n      <div #firstRangeCloud class=\"range-cloud\" title=\"range\"\n           [ngClass]=\"{'visible': this.firstVisibility, 'hidden': !this.firstVisibility}\">\n        <span class=\"text-transform\">{{range.first}}</span>\n      </div>\n    </div>\n    <input #firstInput\n           [value]=\"value.first\"\n           [attr.value]=\"value.first\"\n           [name]=\"name\"\n           [id]=\"id\"\n           [min]=\"min\"\n           [max]=\"max\"\n           [step]=\"step\"\n           [disabled]=\"disabled\"\n           type=\"range\"\n           class=\"mdbMultiRange original active\"\n           (input)=\"firstRangeInput($event)\"\n           [(ngModel)]=\"range.first\"\n           (focus)=\"this.firstVisibility = true\"\n           (blur)=\"this.firstVisibility = false; blurRangeInput('first')\"\n           (touchend)=\"blurRangeInput('first')\"\n           (click)=\"focusRangeInput('first')\">\n\n\n    <div class=\"track\">\n      <div #secondRangeCloud class=\"range-cloud\" title=\"range\"\n           [ngClass]=\"{'visible': this.secondVisibility, 'hidden': !this.secondVisibility}\">\n        <span class=\"text-transform\">{{range.second}}</span>\n      </div>\n    </div>\n    <input #secondInput\n           [value]=\"value.second\"\n           [attr.value]=\"value.second\"\n           [name]=\"name\"\n           [id]=\"id\"\n           [min]=\"min\"\n           [max]=\"max\"\n           [step]=\"step\"\n           [disabled]=\"disabled\"\n           type=\"range\"\n           class=\"mdbMultiRange original ghost active\"\n           (input)=\"secondRangeInput($event)\"\n           [(ngModel)]=\"range.second\"\n           (focus)=\"this.secondVisibility = true\"\n           (blur)=\"this.secondVisibility = false; blurRangeInput('second')\"\n           (touchend)=\"blurRangeInput('second')\"\n           (click)=\"focusRangeInput('second')\">\n  </div>\n</div>\n",
+                        providers: [RANGE_VALUE_ACCESOR$1]
+                    }] }
+        ];
+        /** @nocollapse */
+        MdbMultiRangeInputComponent.ctorParameters = function () {
+            return [
+                { type: i0.Renderer2 }
+            ];
+        };
+        MdbMultiRangeInputComponent.propDecorators = {
+            id: [{ type: i0.Input }],
+            required: [{ type: i0.Input }],
+            name: [{ type: i0.Input }],
+            value: [{ type: i0.Input }],
+            disabled: [{ type: i0.Input }],
+            min: [{ type: i0.Input }],
+            max: [{ type: i0.Input }],
+            step: [{ type: i0.Input }],
+            rangeValueChange: [{ type: i0.Output }],
+            firstInput: [{ type: i0.ViewChild, args: ['firstInput',] }],
+            secondInput: [{ type: i0.ViewChild, args: ['secondInput',] }],
+            firstRangeCloud: [{ type: i0.ViewChild, args: ['firstRangeCloud',] }],
+            secondRangeCloud: [{ type: i0.ViewChild, args: ['secondRangeCloud',] }],
+            rangeField: [{ type: i0.ViewChild, args: ['rangeField',] }]
+        };
+        return MdbMultiRangeInputComponent;
     }());
 
     /**
@@ -24796,8 +26022,8 @@
         RangeModule.decorators = [
             { type: i0.NgModule, args: [{
                         imports: [common.CommonModule, forms.FormsModule],
-                        declarations: [MdbRangeInputComponent],
-                        exports: [MdbRangeInputComponent]
+                        declarations: [MdbRangeInputComponent, MdbMultiRangeInputComponent],
+                        exports: [MdbRangeInputComponent, MdbMultiRangeInputComponent]
                     },] }
         ];
         return RangeModule;
@@ -29197,6 +30423,7 @@
             this.duration = 300;
             this.showClock = false;
             this.disabled = false;
+            this.outlineInput = false;
             this.timeChanged = new i0.EventEmitter();
             this.isMobile = null;
             this.touchDevice = ('ontouchstart' in (( /** @type {?} */(document.documentElement))));
@@ -29806,7 +31033,7 @@
         ClockPickerComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'mdb-time-picker',
-                        template: "<div class=\"tp\">\n  <div class=\"md-form\">\n    <label class=\"active\">{{ label }}</label>\n    <input [disabled]=\"disabled\" [tabindex]=\"tabIndex\" [placeholder]=\"placeholder\" [value]=\"endHours\" type=\"text\" class=\"form-control timepicker\" (click)=\"openBtnClicked()\" [(ngModel)]=\"endHours\">\n  </div>\n  <div class=\"clockpicker picker\" [hidden]=\"!showClock\" [ngClass]=\"{'picker--opened': showClock, 'darktheme': darktheme}\">\n    <div class=\"picker__holder\">\n      <div class=\"picker__frame\">\n        <div class=\"picker__wrap\">\n          <div class=\"picker__box\">\n            <div class=\"picker__date-display\">\n              <div class=\"clockpicker-display\">\n                <div class=\"clockpicker-display-column\">\n                  <span class=\"clockpicker-span-hours text-primary\" [ngClass]=\"{'text-primary': showHours}\" (click)=\"showHoursClock()\">\n                    {{ selectedHours.h }}</span>:<span class=\"clockpicker-span-minutes\" [ngClass]=\"{'text-primary': !showHours}\"\n                      (click)=\"showMinutesClock()\">{{selectedHours.m }}</span>\n                </div>\n                <div class=\"clockpicker-display-column clockpicker-display-am-pm\" *ngIf=\"twelvehour\">\n                  <div class=\"clockpicker-span-am-pm\">{{ selectedHours.ampm }}</div>\n                </div>\n              </div>\n            </div>\n            <div class=\"picker__calendar-container\">\n              <div class=\"clockpicker-plate\" #plate>\n                  <div class=\"clockpicker-canvas\">\n                  <svg class=\"clockpicker-svg\" width=\"270\" height=\"270\" #svg>\n                      <g transform=\"translate(135,135)\" #g>\n                      <line x1=\"0\" y1=\"0\" x2=\"77.94228634059948\" y2=\"-45.00000000000001\" #hand></line>\n                      <circle class=\"clockpicker-canvas-fg\" r=\"5\" cx=\"95.26279441628824\" cy=\"-55.000000000000014\" #fg></circle>\n                      <circle class=\"clockpicker-canvas-bg\" r=\"20\" cx=\"95.26279441628824\" cy=\"-55.000000000000014\" #bg></circle>\n                      <circle class=\"clockpicker-canvas-bearing\" cx=\"0\" cy=\"0\" r=\"2\" #bearing></circle>\n                      </g>\n                  </svg>\n                  </div>\n                  <div class=\"clockpicker-dial clockpicker-hours\" #hoursPlate [ngClass]=\"{'clockpicker-dial-out': !showHours}\" [ngStyle]=\"{'visibility': !showHours ? 'hidden' : 'visible'}\">\n                  <div *ngFor=\"let tick of hoursTicks\" class=\"clockpicker-tick\" style=\"font-size: 140%;\" [ngStyle]=\"{'left': tick.left+'px', 'top': tick.top+'px'}\"\n                      id=\"{{ tick.hour }}\">\n                      {{ tick.hour }}\n                  </div>\n                  </div>\n                  <div class=\"clockpicker-dial clockpicker-minutes\" #minutesPlate [ngClass]=\"{'clockpicker-dial-out': showHours}\" [ngStyle]=\"{'visibility': showHours ? 'hidden' : 'visible'}\">\n                  <div *ngFor=\"let tick of minutesTicks\" class=\"clockpicker-tick\" style=\"font-size: 120%;\" [ngStyle]=\"{'left': tick.left+'px', 'top': tick.top+'px'}\">\n                      {{ tick.min }}\n                  </div>\n                  </div>\n              </div>\n              <div class=\"clockpicker-am-pm-block\" *ngIf=\"twelvehour\">\n                <button type=\"button\" class=\"btn-floating btn-flat clockpicker-button am-button\" [ngClass]=\"{'active': selectedHours.ampm=='AM'}\"\n                  (click)=\"setAmPm('AM')\">\n                  AM\n                </button>\n                <button type=\"button\" class=\"btn-floating btn-flat clockpicker-button pm-button\" [ngClass]=\"{'active': selectedHours.ampm=='PM'}\"\n                  (click)=\"setAmPm('PM')\">\n                  PM\n                </button>\n              </div>\n            </div>\n            <div class=\"picker__footer\">\n              <button type=\"button\" *ngIf=\"buttonLabel\" class=\"btn-flat clockpicker-button\" (click)=\"closeBtnClicked()\">\n                {{buttonLabel}}\n              </button>\n              <button type=\"button\" *ngIf=\"!buttonLabel\" class=\"btn-flat clockpicker-button\" (click)=\"closeBtnClicked()\">\n                Done\n              </button>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>",
+                        template: "<div class=\"tp\">\n  <div class=\"md-form\" [ngClass]=\"{'md-outline': outlineInput}\">\n    <input [disabled]=\"disabled\" [tabindex]=\"tabIndex\" [placeholder]=\"placeholder\" [value]=\"endHours\" type=\"text\" class=\"form-control timepicker\" (click)=\"openBtnClicked()\" [(ngModel)]=\"endHours\">\n    <label class=\"active\">{{ label }}</label>\n\n  </div>\n  <div class=\"clockpicker picker\" [hidden]=\"!showClock\" [ngClass]=\"{'picker--opened': showClock, 'darktheme': darktheme}\">\n    <div class=\"picker__holder\">\n      <div class=\"picker__frame\">\n        <div class=\"picker__wrap\">\n          <div class=\"picker__box\">\n            <div class=\"picker__date-display\">\n              <div class=\"clockpicker-display\">\n                <div class=\"clockpicker-display-column\">\n                  <span class=\"clockpicker-span-hours text-primary\" [ngClass]=\"{'text-primary': showHours}\" (click)=\"showHoursClock()\">\n                    {{ selectedHours.h }}</span>:<span class=\"clockpicker-span-minutes\" [ngClass]=\"{'text-primary': !showHours}\"\n                      (click)=\"showMinutesClock()\">{{selectedHours.m }}</span>\n                </div>\n                <div class=\"clockpicker-display-column clockpicker-display-am-pm\" *ngIf=\"twelvehour\">\n                  <div class=\"clockpicker-span-am-pm\">{{ selectedHours.ampm }}</div>\n                </div>\n              </div>\n            </div>\n            <div class=\"picker__calendar-container\">\n              <div class=\"clockpicker-plate\" #plate>\n                  <div class=\"clockpicker-canvas\">\n                  <svg class=\"clockpicker-svg\" width=\"270\" height=\"270\" #svg>\n                      <g transform=\"translate(135,135)\" #g>\n                      <line x1=\"0\" y1=\"0\" x2=\"77.94228634059948\" y2=\"-45.00000000000001\" #hand></line>\n                      <circle class=\"clockpicker-canvas-fg\" r=\"5\" cx=\"95.26279441628824\" cy=\"-55.000000000000014\" #fg></circle>\n                      <circle class=\"clockpicker-canvas-bg\" r=\"20\" cx=\"95.26279441628824\" cy=\"-55.000000000000014\" #bg></circle>\n                      <circle class=\"clockpicker-canvas-bearing\" cx=\"0\" cy=\"0\" r=\"2\" #bearing></circle>\n                      </g>\n                  </svg>\n                  </div>\n                  <div class=\"clockpicker-dial clockpicker-hours\" #hoursPlate [ngClass]=\"{'clockpicker-dial-out': !showHours}\" [ngStyle]=\"{'visibility': !showHours ? 'hidden' : 'visible'}\">\n                  <div *ngFor=\"let tick of hoursTicks\" class=\"clockpicker-tick\" style=\"font-size: 140%;\" [ngStyle]=\"{'left': tick.left+'px', 'top': tick.top+'px'}\"\n                      id=\"{{ tick.hour }}\">\n                      {{ tick.hour }}\n                  </div>\n                  </div>\n                  <div class=\"clockpicker-dial clockpicker-minutes\" #minutesPlate [ngClass]=\"{'clockpicker-dial-out': showHours}\" [ngStyle]=\"{'visibility': showHours ? 'hidden' : 'visible'}\">\n                  <div *ngFor=\"let tick of minutesTicks\" class=\"clockpicker-tick\" style=\"font-size: 120%;\" [ngStyle]=\"{'left': tick.left+'px', 'top': tick.top+'px'}\">\n                      {{ tick.min }}\n                  </div>\n                  </div>\n              </div>\n              <div class=\"clockpicker-am-pm-block\" *ngIf=\"twelvehour\">\n                <button type=\"button\" class=\"btn-floating btn-flat clockpicker-button am-button\" [ngClass]=\"{'active': selectedHours.ampm=='AM'}\"\n                  (click)=\"setAmPm('AM')\">\n                  AM\n                </button>\n                <button type=\"button\" class=\"btn-floating btn-flat clockpicker-button pm-button\" [ngClass]=\"{'active': selectedHours.ampm=='PM'}\"\n                  (click)=\"setAmPm('PM')\">\n                  PM\n                </button>\n              </div>\n            </div>\n            <div class=\"picker__footer\">\n              <button type=\"button\" *ngIf=\"buttonLabel\" class=\"btn-flat clockpicker-button\" (click)=\"closeBtnClicked()\">\n                {{buttonLabel}}\n              </button>\n              <button type=\"button\" *ngIf=\"!buttonLabel\" class=\"btn-flat clockpicker-button\" (click)=\"closeBtnClicked()\">\n                Done\n              </button>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
                         providers: [TIME_PIRCKER_VALUE_ACCESSOT]
                     }] }
         ];
@@ -29837,6 +31064,7 @@
             buttonLabel: [{ type: i0.Input }],
             disabled: [{ type: i0.Input }],
             tabIndex: [{ type: i0.Input }],
+            outlineInput: [{ type: i0.Input }],
             timeChanged: [{ type: i0.Output }],
             ontouchmove: [{ type: i0.HostListener, args: ['touchmove', ['$event'],] }]
         };
@@ -30186,6 +31414,7 @@
     exports.ProgressBars = ProgressBars;
     exports.RangeModule = RangeModule;
     exports.MdbRangeInputComponent = MdbRangeInputComponent;
+    exports.MdbMultiRangeInputComponent = MdbMultiRangeInputComponent;
     exports.ScrollSpyDirective = ScrollSpyDirective;
     exports.ScrollSpyWindowDirective = ScrollSpyWindowDirective;
     exports.ScrollSpyElementDirective = ScrollSpyElementDirective;
@@ -30225,16 +31454,16 @@
     exports.ɵa = RADIO_CONTROL_VALUE_ACCESSOR;
     exports.ɵc = CHECKBOX_VALUE_ACCESSOR;
     exports.ɵd = CheckboxComponent;
-    exports.ɵdp = ComponentLoaderFactory;
-    exports.ɵdr = OnChange;
-    exports.ɵdq = PositioningService;
+    exports.ɵdq = ComponentLoaderFactory;
+    exports.ɵds = OnChange$1;
+    exports.ɵdr = PositioningService;
     exports.ɵf = SBItemComponent;
     exports.ɵh = SBItemBodyComponent;
     exports.ɵg = SBItemHeadComponent;
     exports.ɵi = SqueezeBoxComponent;
     exports.ɵe = AccordionModule;
-    exports.ɵds = MdbAccordionService;
-    exports.ɵdt = TOAST_CONFIG;
+    exports.ɵdt = MdbAccordionService;
+    exports.ɵdu = TOAST_CONFIG;
     exports.ɵn = AutoCompleterModule;
     exports.ɵj = MdbAutoCompleterComponent;
     exports.ɵk = MdbOptionComponent;
@@ -30280,15 +31509,15 @@
     exports.ɵbz = SELECT_VALUE_ACCESSOR;
     exports.ɵca = SelectComponent;
     exports.ɵcc = SelectModule;
-    exports.ɵdo = MDBRootModulePro;
+    exports.ɵdp = MDBRootModulePro;
     exports.ɵce = BarComponent;
     exports.ɵcd = ProgressBars;
-    exports.ɵdu = MdProgressBarModule;
-    exports.ɵdv = ProgressBarComponent;
-    exports.ɵdw = MdProgressSpinnerModule;
-    exports.ɵdy = MdProgressSpinnerComponent;
-    exports.ɵdx = MdProgressSpinnerCssMatStylerDirective;
-    exports.ɵdz = MdSpinnerComponent;
+    exports.ɵdv = MdProgressBarModule;
+    exports.ɵdw = ProgressBarComponent;
+    exports.ɵdx = MdProgressSpinnerModule;
+    exports.ɵdz = MdProgressSpinnerComponent;
+    exports.ɵdy = MdProgressSpinnerCssMatStylerDirective;
+    exports.ɵea = MdSpinnerComponent;
     exports.ɵcj = ProgressSpinnerComponent;
     exports.ɵcf = ProgressDirective;
     exports.ɵcg = ProgressbarComponent;
@@ -30296,34 +31525,35 @@
     exports.ɵch = ProgressbarModule;
     exports.ɵcm = MdbRangeInputComponent;
     exports.ɵcl = RANGE_VALUE_ACCESOR;
+    exports.ɵcn = RANGE_VALUE_ACCESOR$1;
     exports.ɵck = RangeModule;
-    exports.ɵcp = ScrollSpyElementDirective;
-    exports.ɵcq = ScrollSpyLinkDirective;
-    exports.ɵco = ScrollSpyWindowDirective;
-    exports.ɵcn = ScrollSpyDirective;
-    exports.ɵcs = ScrollSpyModule;
-    exports.ɵcr = ScrollSpyService;
-    exports.ɵct = SidenavComponent;
-    exports.ɵcu = SidenavModule;
-    exports.ɵcv = PageScrollDirective;
-    exports.ɵcx = PageScrollInstance;
-    exports.ɵcy = SmoothscrollModule;
-    exports.ɵcw = PageScrollService;
-    exports.ɵda = MdbStepComponent;
-    exports.ɵcz = MdbStepperComponent;
-    exports.ɵdb = StepperModule;
-    exports.ɵdc = MdbStickyDirective;
-    exports.ɵdd = StickyContentModule;
-    exports.ɵdg = TabHeadingDirective;
-    exports.ɵdf = TabDirective;
-    exports.ɵdh = TabsetComponent;
-    exports.ɵdi = TabsetConfig;
-    exports.ɵdj = TabsModule;
-    exports.ɵde = NgTranscludeDirective;
-    exports.ɵdk = MaterialChipsComponent;
-    exports.ɵdl = MaterialChipsModule;
-    exports.ɵdm = ClockPickerComponent;
-    exports.ɵdn = TimePickerModule;
+    exports.ɵcq = ScrollSpyElementDirective;
+    exports.ɵcr = ScrollSpyLinkDirective;
+    exports.ɵcp = ScrollSpyWindowDirective;
+    exports.ɵco = ScrollSpyDirective;
+    exports.ɵct = ScrollSpyModule;
+    exports.ɵcs = ScrollSpyService;
+    exports.ɵcu = SidenavComponent;
+    exports.ɵcv = SidenavModule;
+    exports.ɵcw = PageScrollDirective;
+    exports.ɵcy = PageScrollInstance;
+    exports.ɵcz = SmoothscrollModule;
+    exports.ɵcx = PageScrollService;
+    exports.ɵdb = MdbStepComponent;
+    exports.ɵda = MdbStepperComponent;
+    exports.ɵdc = StepperModule;
+    exports.ɵdd = MdbStickyDirective;
+    exports.ɵde = StickyContentModule;
+    exports.ɵdh = TabHeadingDirective;
+    exports.ɵdg = TabDirective;
+    exports.ɵdi = TabsetComponent;
+    exports.ɵdj = TabsetConfig;
+    exports.ɵdk = TabsModule;
+    exports.ɵdf = NgTranscludeDirective;
+    exports.ɵdl = MaterialChipsComponent;
+    exports.ɵdm = MaterialChipsModule;
+    exports.ɵdn = ClockPickerComponent;
+    exports.ɵdo = TimePickerModule;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

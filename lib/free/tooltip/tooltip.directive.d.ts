@@ -1,8 +1,10 @@
 import { ElementRef, EventEmitter, OnChanges, OnDestroy, OnInit, Renderer2, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
 import { TooltipConfig } from './tooltip.service';
 import { ComponentLoaderFactory } from '../utils/component-loader/component-loader.factory';
+import { PositioningService } from '../utils/positioning/positioning.service';
 export declare class TooltipDirective implements OnInit, OnDestroy, OnChanges {
     private _elementRef;
+    private _positionService;
     private platformId;
     /**
      * Content to be displayed as tooltip.
@@ -32,6 +34,7 @@ export declare class TooltipDirective implements OnInit, OnDestroy, OnChanges {
      * Allows to disable tooltip
      */
     isDisabled: boolean;
+    dynamicPosition: boolean;
     /**
      * Emits an event when the tooltip is shown
      */
@@ -48,12 +51,9 @@ export declare class TooltipDirective implements OnInit, OnDestroy, OnChanges {
     protected _delayTimeoutId: any;
     isBrowser: any;
     private _tooltip;
-    constructor(_viewContainerRef: ViewContainerRef, _renderer: Renderer2, _elementRef: ElementRef, cis: ComponentLoaderFactory, config: TooltipConfig, platformId: string);
-    onclick(event: any): void;
-    onblur(): void;
+    constructor(_renderer: Renderer2, _elementRef: ElementRef, _positionService: PositioningService, _viewContainerRef: ViewContainerRef, cis: ComponentLoaderFactory, config: TooltipConfig, platformId: string);
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
-    getBottomOffset(): number | undefined;
     /**
      * Toggles an element’s tooltip. This is considered a “manual” triggering of
      * the tooltip.
@@ -63,8 +63,7 @@ export declare class TooltipDirective implements OnInit, OnDestroy, OnChanges {
      * Opens an element’s tooltip. This is considered a “manual” triggering of
      * the tooltip.
      */
-    show(event?: any): void;
-    private getCorrectAlignment;
+    show(): void;
     private showTooltip;
     /**
      * Closes an element’s tooltip. This is considered a “manual” triggering of

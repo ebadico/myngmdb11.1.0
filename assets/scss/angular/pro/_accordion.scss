@@ -53,7 +53,7 @@
         padding: 1.25rem;
     }
 }
-.fa-angle-down.rotate-icon {
+.mdb-accordion-indicator.rotate-icon {
     transition: all 150ms ease-in 0s;
 }
 
@@ -65,4 +65,15 @@
 
 mdb-accordion-item-head {
     outline: none !important;
+}
+
+.mdb-accordion-indicator {
+  &::after {
+    content: '';
+    display: block;
+    border-style: solid;
+    border-width: 0 3px 3px 0;
+    padding: 3.5px;
+    transform: rotate(45deg);
+  }
 }

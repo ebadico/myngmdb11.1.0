@@ -26,6 +26,7 @@ export declare class MdbRangeInputComponent implements ControlValueAccessor, Aft
     onchange(event: any): void;
     oninput(event: any): void;
     onclick(): void;
+    onTouchStart(): void;
     onmouseleave(): void;
     constructor(renderer: Renderer2, cdRef: ChangeDetectorRef);
     focusRangeInput(): void;
