@@ -75,6 +75,7 @@ export interface IndividualConfig {
      * - Adds class to the toast action button
      */
     actionButtonClass?: string;
+    opacity?: number;
 }
 export interface ToastIconClasses {
     error?: string;
@@ -109,6 +110,7 @@ export interface GlobalConfig extends IndividualConfig {
      * default: false
      */
     preventDuplicates?: boolean;
+    opacity?: number;
 }
 /**
  * Remove warning message from angular-cli

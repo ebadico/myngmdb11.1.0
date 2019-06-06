@@ -11,6 +11,7 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     private localeService;
     private utilService;
     private cdRef;
+    private document;
     tabIndex: any;
     options: any;
     locale: string;
@@ -64,14 +65,13 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     opts: any;
     months: any;
     years: any;
-    elements: HTMLCollectionOf<Element>;
     elementNumber: any;
     private utils;
     firstTimeOpenedModal: boolean;
     modalHeightBefore: any;
     isMobile: any;
     isBrowser: any;
-    constructor(elem: ElementRef, renderer: Renderer2, localeService: LocaleService, utilService: UtilService, cdRef: ChangeDetectorRef, platformId: string);
+    constructor(elem: ElementRef, renderer: Renderer2, localeService: LocaleService, utilService: UtilService, cdRef: ChangeDetectorRef, document: any, platformId: string);
     ngAfterViewInit(): void;
     ChangeZIndex(): void;
     onChangeCb: (_: any) => void;
@@ -100,8 +100,8 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     setVisibleMonth(): void;
     monthList(): void;
     yearsList(): void;
-    prevMonth(): void;
-    nextMonth(): void;
+    prevMonth(event?: any): void;
+    nextMonth(event?: any): void;
     prevYear(): void;
     nextYear(): void;
     todayClicked(): void;

@@ -31,6 +31,7 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     enableSelectAll: boolean;
     appendToBody: boolean;
     selectAllLabel: string;
+    outline: boolean;
     opened: EventEmitter<any>;
     closed: EventEmitter<any>;
     selected: EventEmitter<IOption>;

@@ -23,6 +23,7 @@ export declare class SelectDropdownComponent implements AfterViewInit, OnChanges
     optionHeight: number;
     enableSelectAll: boolean;
     selectAllLabel: string;
+    outline: boolean;
     close: EventEmitter<boolean>;
     optionClicked: EventEmitter<Option>;
     singleFilterClick: EventEmitter<null>;
