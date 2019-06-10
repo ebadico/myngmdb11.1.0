@@ -6,8 +6,10 @@ export declare class MdbAutoCompleterDirective implements AfterViewInit, OnDestr
     private document;
     mdbAutoCompleter: MdbAutoCompleterComponent;
     ngModelChange: EventEmitter<any>;
+    clearBtnClicked: EventEmitter<any>;
     private _autocompleterInputChanges;
     private _clearButton;
+    listenToClearClick: Function;
     isBrowser: boolean;
     constructor(renderer: Renderer2, el: ElementRef, platformId: string, document: any);
     private _getClosestEl;
@@ -15,11 +17,11 @@ export declare class MdbAutoCompleterDirective implements AfterViewInit, OnDestr
     private _setStyles;
     private _addClass;
     private _clearInput;
-    protected _handleInput(event: any): void;
-    protected _handleKeyDown(event: any): void;
-    protected _handleFocusIn(): void;
-    protected _handleBlurIn(): void;
-    protected _handleMouseDown(): void;
+    _handleInput(event: any): void;
+    _handleKeyDown(event: any): void;
+    _handleFocusIn(): void;
+    _handleBlurIn(): void;
+    _handleMouseDown(): void;
     getCoords(elem: any): any;
     private _isOpen;
     private _show;

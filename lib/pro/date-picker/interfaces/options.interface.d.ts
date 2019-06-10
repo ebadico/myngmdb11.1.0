@@ -6,7 +6,7 @@ import { IMyMarkedDates } from './markedDates.interface';
 import { IMyMarkedDate } from './markedDate.interface';
 export interface IMyOptions {
     closeAfterSelect?: boolean;
-    startDate?: string;
+    startDate?: string | Date;
     dayLabelsFull?: IMyDayLabels;
     dayLabels?: IMyDayLabels;
     monthLabelsFull?: IMyMonthLabels;

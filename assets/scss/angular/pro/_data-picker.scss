@@ -65,6 +65,10 @@
   bottom: 0;
   border: 0;
   background: transparent;
+
+  &:before {
+    font-family: 'Font Awesome 5 Pro', 'Font Awesome 5 Free' !important;
+  }
 }
 
 .picker__nav--prev {
@@ -76,6 +80,39 @@
   right: -1em;
   padding-left: 1.25em;
 }
+
+.picker__box .picker__header .picker__nav--next,
+.picker__box .picker__header .picker__nav--prev {
+  &:before {
+    font-family: unset;
+    font-weight: unset;
+    content: unset;
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    padding: 2.5px;
+    position: absolute;
+  }
+}
+
+.picker__nav--prev {
+  left: 0 !important;
+
+  &::after {
+    transform: rotate(135deg);
+  }
+}
+
+.picker__nav--next {
+  &::after {
+    transform: rotate(-45deg);
+  }
+}
+
 
 .picker__header {
   overflow: hidden;
@@ -101,6 +138,12 @@
       transition: 0.3s;
 
       &:hover {
+        cursor: pointer;
+        color: #000;
+        font-weight: 500;
+      }
+
+      &:focus {
         cursor: pointer;
         color: #000;
         font-weight: 500;
@@ -159,8 +202,9 @@
   right: 0;
   padding: 0.5rem;
 }
+
 .md-outline > .datepicker-inline-icon {
-    top: 4px;
+  top: 4px;
 }
 
 .datepicker-inline {

@@ -6,6 +6,8 @@ export declare class MdbTablePaginationComponent implements OnInit, OnChanges, A
     tableEl: MdbTableDirective;
     searchPagination: boolean;
     searchDataSource: any;
+    ofKeyword: string;
+    dashKeyword: string;
     paginationAlign: string;
     hideDescription: boolean;
     maxVisibleItems: number;

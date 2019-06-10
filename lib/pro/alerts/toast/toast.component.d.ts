@@ -10,10 +10,17 @@ export declare class ToastComponent implements OnDestroy {
     options: GlobalConfig;
     /** width of progress bar */
     width: number;
+    state: string;
     /** a combination of toast type and options.toastClass */
     toastClasses: string;
     /** controls animation */
-    state: string;
+    readonly animationParams: {
+        value: string;
+        params: {
+            opacity: number | undefined;
+        };
+    };
+    opacity: number | undefined;
     timeout: any;
     intervalId: any;
     hideTime: number;
