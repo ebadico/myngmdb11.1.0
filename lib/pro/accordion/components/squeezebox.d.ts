@@ -1,4 +1,4 @@
-import { QueryList, AfterContentInit, OnInit, OnDestroy } from '@angular/core';
+import { AfterContentInit, OnDestroy, OnInit, QueryList } from '@angular/core';
 import { SBItemComponent } from './sb-item';
 import { MdbAccordionService } from '../mdb-accordion.service';
 export declare class SqueezeBoxComponent implements OnInit, AfterContentInit, OnDestroy {

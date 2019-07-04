@@ -1,4 +1,4 @@
-import { ElementRef, Renderer2, AfterViewInit, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 export declare class SidenavComponent implements AfterViewInit, OnDestroy, OnInit {
     el: ElementRef;
     renderer: Renderer2;

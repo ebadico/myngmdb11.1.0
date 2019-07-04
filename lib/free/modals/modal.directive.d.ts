@@ -70,6 +70,5 @@ export declare class ModalDirective implements AfterViewInit, OnDestroy {
     /** @internal */
     protected checkScrollbar(): void;
     protected setScrollbar(): void;
-    protected resetScrollbar(): void;
     protected getScrollbarWidth(): number;
 }

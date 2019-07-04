@@ -1,4 +1,4 @@
-import { ElementRef, Renderer2, OnInit } from '@angular/core';
+import { ElementRef, OnInit, Renderer2 } from '@angular/core';
 export declare class MdbBreadcrumbItemComponent implements OnInit {
     private _el;
     private _renderer;
