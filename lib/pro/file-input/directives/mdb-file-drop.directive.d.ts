@@ -1,6 +1,5 @@
-import { ElementRef, EventEmitter, OnInit, OnDestroy } from '@angular/core';
-import { MDBUploaderService, UploadOutput, UploadInput } from '../classes/mdb-uploader.class';
-import { UploaderOptions } from '../classes/mdb-uploader.class';
+import { ElementRef, EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { MDBUploaderService, UploaderOptions, UploadInput, UploadOutput } from '../classes/mdb-uploader.class';
 export declare class MDBFileDropDirective implements OnInit, OnDestroy {
     private platform_id;
     private elementRef;

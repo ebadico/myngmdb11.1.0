@@ -2,9 +2,9 @@ import { ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 export declare const RADIO_CONTROL_VALUE_ACCESSOR: any;
 /**
-* Create radio buttons or groups of buttons.
-* A value of a selected button is bound to a variable specified via ngModel.
-*/
+ * Create radio buttons or groups of buttons.
+ * A value of a selected button is bound to a variable specified via ngModel.
+ */
 export declare class ButtonRadioDirective implements ControlValueAccessor, OnInit {
     private renderer;
     onChange: any;

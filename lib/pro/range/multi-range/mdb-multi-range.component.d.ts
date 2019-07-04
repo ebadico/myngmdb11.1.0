@@ -1,7 +1,7 @@
-import { ElementRef, EventEmitter, Renderer2 } from '@angular/core';
-import { ControlValueAccessor } from "@angular/forms";
+import { ElementRef, EventEmitter, Renderer2, OnInit, AfterViewInit } from '@angular/core';
+import { ControlValueAccessor } from '@angular/forms';
 export declare const RANGE_VALUE_ACCESOR: any;
-export declare class MdbMultiRangeInputComponent implements ControlValueAccessor {
+export declare class MdbMultiRangeInputComponent implements OnInit, AfterViewInit, ControlValueAccessor {
     private renderer;
     id: string;
     required: boolean;

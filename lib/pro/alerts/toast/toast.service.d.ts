@@ -2,9 +2,9 @@ import { Injector, ComponentRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Overlay } from '../overlay/overlay';
 import { GlobalConfig, IndividualConfig } from './toast.config';
-import { ToastRef } from './toast.injector';
 import { ToastContainerDirective } from './toast.directive';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ToastRef } from './toast-ref';
 export interface ActiveToast {
     toastId?: number;
     message?: string;

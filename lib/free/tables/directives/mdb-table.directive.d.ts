@@ -1,5 +1,5 @@
-import { OnInit, Renderer2, ElementRef } from '@angular/core';
-import { Observable } from "rxjs";
+import { ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { Observable } from 'rxjs';
 export declare class MdbTableDirective implements OnInit {
     private el;
     private renderer;

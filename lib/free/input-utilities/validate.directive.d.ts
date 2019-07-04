@@ -1,4 +1,4 @@
-import { OnInit, Renderer2, ElementRef } from '@angular/core';
+import { ElementRef, OnInit, Renderer2 } from '@angular/core';
 export declare class MdbValidateDirective implements OnInit {
     private renderer;
     private el;

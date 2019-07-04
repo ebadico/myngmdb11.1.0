@@ -1,4 +1,4 @@
-import { OnInit, ElementRef, Renderer2 } from '@angular/core';
+import { ElementRef, OnInit, Renderer2 } from '@angular/core';
 export declare class MDBBadgeComponent implements OnInit {
     private _el;
     private _renderer;

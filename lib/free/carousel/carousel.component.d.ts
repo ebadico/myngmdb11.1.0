@@ -1,4 +1,4 @@
-import { OnDestroy, EventEmitter, ElementRef, AfterViewInit, ChangeDetectorRef, Renderer2, QueryList } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, ElementRef, EventEmitter, OnDestroy, QueryList, Renderer2 } from '@angular/core';
 import { SlideComponent } from './slide.component';
 import { CarouselConfig } from './carousel.config';
 export declare enum Direction {

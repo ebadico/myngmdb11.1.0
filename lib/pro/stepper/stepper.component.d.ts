@@ -1,8 +1,14 @@
-import { QueryList, OnInit, AfterContentInit, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
+import { QueryList, OnInit, AfterContentInit, ElementRef, AfterViewInit, Renderer2, AfterContentChecked, EventEmitter, OnDestroy } from '@angular/core';
 import { MdbStepComponent } from './step.component';
 import { WavesDirective } from '../../free/waves/waves-effect.directive';
 import { Observable, Subject } from 'rxjs';
-export declare class MdbStepperComponent implements OnInit, AfterContentInit, AfterViewInit {
+export declare class StepChangeEvent {
+    activeStep: MdbStepComponent;
+    activeStepIndex: number;
+    previousStep: MdbStepComponent;
+    previousStepIndex: number;
+}
+export declare class MdbStepperComponent implements OnInit, AfterContentInit, AfterViewInit, AfterContentChecked, OnDestroy {
     ripple: WavesDirective;
     private _renderer;
     steps: QueryList<MdbStepComponent>;
@@ -12,10 +18,12 @@ export declare class MdbStepperComponent implements OnInit, AfterContentInit, Af
     linear: boolean;
     disableWaves: boolean;
     vertical: boolean;
+    private _vertical;
+    stepChange: EventEmitter<StepChangeEvent>;
     constructor(ripple: WavesDirective, _renderer: Renderer2, platformId: string);
+    private _destroy;
     isBrowser: boolean;
     horizontal: boolean;
-    private _stepperBreakpoint;
     activeStepIndex: number;
     private _activeStepIndex;
     private _activeStep;
@@ -23,7 +31,6 @@ export declare class MdbStepperComponent implements OnInit, AfterContentInit, Af
     stepChangeSubject: Subject<any>;
     stepChange$: Observable<any>;
     getStepChange$(): Observable<any>;
-    onWindowResize(): void;
     onClick(index: number, event: any): void;
     ngOnInit(): void;
     private _isStepValid;
@@ -46,4 +53,5 @@ export declare class MdbStepperComponent implements OnInit, AfterContentInit, Af
     ngAfterViewInit(): void;
     ngAfterContentInit(): void;
     ngAfterContentChecked(): void;
+    ngOnDestroy(): void;
 }

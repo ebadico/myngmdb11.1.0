@@ -1,4 +1,4 @@
-import { Renderer2, ElementRef, OnInit } from '@angular/core';
+import { ElementRef, OnInit, Renderer2 } from '@angular/core';
 export declare class MdbBtnDirective implements OnInit {
     private el;
     private renderer;

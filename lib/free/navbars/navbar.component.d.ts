@@ -1,5 +1,5 @@
 import { NavbarService } from './navbar.service';
-import { ElementRef, Renderer2, AfterViewInit, OnInit, AfterContentChecked } from '@angular/core';
+import { AfterContentChecked, AfterViewInit, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LinksComponent } from './links.component';
 export declare class NavbarComponent implements AfterViewInit, OnInit, AfterContentChecked {

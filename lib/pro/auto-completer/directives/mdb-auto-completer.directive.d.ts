@@ -1,6 +1,8 @@
 import { AfterViewInit, ElementRef, EventEmitter, OnDestroy, Renderer2 } from '@angular/core';
 import { MdbAutoCompleterComponent } from '../components/mdb-auto-completer.component';
-export declare class MdbAutoCompleterDirective implements AfterViewInit, OnDestroy {
+import { ControlValueAccessor } from '@angular/forms';
+export declare const MAT_AUTOCOMPLETE_VALUE_ACCESSOR: any;
+export declare class MdbAutoCompleterDirective implements AfterViewInit, OnDestroy, ControlValueAccessor {
     private renderer;
     private el;
     private document;
@@ -11,6 +13,7 @@ export declare class MdbAutoCompleterDirective implements AfterViewInit, OnDestr
     private _clearButton;
     listenToClearClick: Function;
     isBrowser: boolean;
+    onKeydown(event: any): void;
     constructor(renderer: Renderer2, el: ElementRef, platformId: string, document: any);
     private _getClosestEl;
     private _renderClearButton;
@@ -29,4 +32,9 @@ export declare class MdbAutoCompleterDirective implements AfterViewInit, OnDestr
     private _appendDropdownToInput;
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
+    _onChange: (value: any) => void;
+    _onTouched: () => void;
+    writeValue(value: any): void;
+    registerOnChange(fn: (value: any) => {}): void;
+    registerOnTouched(fn: () => {}): void;
 }
