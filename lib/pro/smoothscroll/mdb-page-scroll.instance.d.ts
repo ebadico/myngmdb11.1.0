@@ -1,11 +1,11 @@
 /**
-* Created by sebastianfuss on 29.08.16.
-*/
+ * Created by sebastianfuss on 29.08.16.
+ */
 import { EventEmitter } from '@angular/core';
 import { EasingLogic, PageScrollTarget, PageScrollingViews } from './mdb-page-scroll.config';
 /**
-* An Interface specifying the possible options to be passed into the newInstance() factory method
-*/
+ * An Interface specifying the possible options to be passed into the newInstance() factory method
+ */
 export interface PageScrollOptions {
     /**
      * The document object of the current app
@@ -61,8 +61,8 @@ export interface PageScrollOptions {
     pageScrollFinishListener?: EventEmitter<boolean>;
 }
 /**
-* Represents a scrolling action
-*/
+ * Represents a scrolling action
+ */
 export declare class PageScrollInstance {
     /**
      * These properties will be set during instance construction and default to their defaults from PageScrollConfig
@@ -99,7 +99,6 @@ export declare class PageScrollInstance {
      *
      * @param document The document that contains the body to be scrolled and the scrollTarget elements
      * @param scrollTarget Where to scroll to. Can be a HTMLElement reference or a string like '#elementId'
-     * @param verticalScrolling
      * @param namespace Optional namespace to group scroll animations logically
      *
      **/
@@ -154,8 +153,6 @@ export declare class PageScrollInstance {
      * Use the factory methods to create instances:
      *      {@link PageScrollInstance#simpleInstance}
      *      {@link PageScrollInstance#newInstance}
-     * @param namespace
-     * @param document
      */
     constructor(namespace: string, document: Document);
     getScrollPropertyValue(scrollingView: any): number;
@@ -179,7 +176,6 @@ export declare class PageScrollInstance {
     getCurrentOffset(): number;
     /**
      * Sets the "scrollTop" or "scrollLeft" property for all scrollingViews to the provided value
-     * @param position
      * @return true if at least for one ScrollTopSource the scrollTop/scrollLeft value could be set and it kept the new value.
      *          false if it failed for all ScrollingViews, meaning that we should stop the animation
      *          (probably because we're at the end of the scrolling region)
@@ -196,7 +192,6 @@ export declare class PageScrollInstance {
      *
      * Possibly attached interruptListeners are automatically removed from the body before the new one will be attached.
      *
-     * @param interruptReporter
      */
     attachInterruptListeners(interruptReporter: InterruptReporter): void;
     /**
@@ -222,12 +217,12 @@ export declare class PageScrollInstance {
     readonly interruptListenersAttached: boolean;
 }
 /**
-* An Interface a listener should implement to be notified about possible interrupt events
-* that happened due to user interaction while a scroll animation takes place.
-*
-* The PageScrollService provides an implementation to a PageScrollInstance to be notified
-* about scroll animation interrupts and stop related animations.
-*/
+ * An Interface a listener should implement to be notified about possible interrupt events
+ * that happened due to user interaction while a scroll animation takes place.
+ *
+ * The PageScrollService provides an implementation to a PageScrollInstance to be notified
+ * about scroll animation interrupts and stop related animations.
+ */
 export interface InterruptReporter {
     report: (event: Event, pageScrollInstance: PageScrollInstance) => any;
 }

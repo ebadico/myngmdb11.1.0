@@ -1,4 +1,4 @@
-import { EventEmitter, OnDestroy, OnInit, ElementRef, AfterViewInit, ChangeDetectorRef, Renderer2 } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, ElementRef, EventEmitter, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { TabDirective } from './tab.directive';
 import { TabsetConfig } from './tabset.config';
 import { WavesDirective } from '../../free/waves/waves-effect.directive';

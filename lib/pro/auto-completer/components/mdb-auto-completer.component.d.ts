@@ -1,8 +1,8 @@
-import { AfterContentInit, ElementRef, EventEmitter, Renderer2 } from '@angular/core';
+import { AfterContentInit, ElementRef, EventEmitter, Renderer2, QueryList, OnDestroy } from '@angular/core';
 import { MdbOptionComponent } from './mdb-option.component';
 import { ISelectedOption } from '../interfaces/selected-option.interface';
 import { Observable } from 'rxjs';
-export declare class MdbAutoCompleterComponent implements AfterContentInit {
+export declare class MdbAutoCompleterComponent implements AfterContentInit, OnDestroy {
     private renderer;
     private el;
     textNoResults: string;
@@ -15,9 +15,10 @@ export declare class MdbAutoCompleterComponent implements AfterContentInit {
         element: any;
     }>;
     optionList: Array<any>;
-    mdbOptions: MdbOptionComponent[];
+    mdbOptions: QueryList<MdbOptionComponent>;
     dropdown: ElementRef;
     noResultsEl: ElementRef;
+    private _destroy;
     private utils;
     parameters: {
         left: number;
@@ -34,8 +35,9 @@ export declare class MdbAutoCompleterComponent implements AfterContentInit {
     private _selectedItemChanged;
     private _isBrowser;
     constructor(renderer: Renderer2, el: ElementRef, platformId: string);
-    onItemClick(event: any): void;
     windowMouseDown(event: any): void;
+    private _listenToOptionClick;
+    private _handleOptionClick;
     setSelectedItem(item: ISelectedOption): void;
     getSelectedItem(): ISelectedOption;
     selectedItemChanged(): Observable<any>;
@@ -60,4 +62,5 @@ export declare class MdbAutoCompleterComponent implements AfterContentInit {
         bottom: number;
     }): void;
     ngAfterContentInit(): void;
+    ngOnDestroy(): void;
 }

@@ -1,4 +1,4 @@
-import { OnInit, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { EventEmitter, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 export declare const CHECKBOX_VALUE_ACCESSOR: any;
 export declare class MdbCheckboxChange {
     element: CheckboxComponent;

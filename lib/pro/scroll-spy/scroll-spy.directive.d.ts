@@ -1,4 +1,4 @@
-import { AfterContentInit, QueryList, OnDestroy, OnInit, EventEmitter } from '@angular/core';
+import { AfterContentInit, EventEmitter, OnDestroy, OnInit, QueryList } from '@angular/core';
 import { ScrollSpyLinkDirective } from './scroll-spy-link.directive';
 import { ScrollSpyService } from './scroll-spy.service';
 import { Subscription } from 'rxjs';

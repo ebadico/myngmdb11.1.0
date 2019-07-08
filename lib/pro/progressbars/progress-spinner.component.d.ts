@@ -1,4 +1,4 @@
-import { ElementRef, AfterViewInit } from '@angular/core';
+import { AfterViewInit, ElementRef } from '@angular/core';
 export declare class ProgressSpinnerComponent implements AfterViewInit {
     el: ElementRef;
     addClass: String;

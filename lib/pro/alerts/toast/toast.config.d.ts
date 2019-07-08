@@ -1,20 +1,20 @@
 import { SafeHtml } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { ComponentType } from '../portal/portal';
-import { ToastRef } from './toast.injector';
+import { ToastRef } from './toast-ref';
 /**
  * Configuration for an individual toast.
  */
 export interface IndividualConfig {
     /**
-    * toast time to live in milliseconds
-    * default: 5000
-    */
+     * toast time to live in milliseconds
+     * default: 5000
+     */
     timeOut?: number | any;
     /**
-    * toast show close button
-    * default: false
-    */
+     * toast show close button
+     * default: false
+     */
     closeButton?: boolean;
     /** time to close after a user hovers over toast */
     /**

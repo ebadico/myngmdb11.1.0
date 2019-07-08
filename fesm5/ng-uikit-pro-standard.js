@@ -1,13 +1,13 @@
-import { DomSanitizer, DOCUMENT } from '@angular/platform-browser';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { DomSanitizer } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterLinkWithHref, Router, NavigationEnd, NavigationError, NavigationCancel } from '@angular/router';
 import { state, style, trigger, transition, animate } from '@angular/animations';
 import { Subject, timer, fromEvent, merge, of, animationFrameScheduler, Observable, from } from 'rxjs';
-import { take, distinctUntilChanged, filter, map, pairwise, share, skip, throttleTime, catchError, mergeMap } from 'rxjs/operators';
-import { __spread, __values, __extends, __read, __decorate, __metadata, __assign } from 'tslib';
-import { CommonModule, isPlatformBrowser, DOCUMENT as DOCUMENT$1, isPlatformServer } from '@angular/common';
-import { NG_VALUE_ACCESSOR, FormsModule, NG_VALIDATORS, FormControl, NgModel } from '@angular/forms';
-import { Component, ElementRef, Renderer2, Input, HostBinding, NgModule, Directive, HostListener, forwardRef, ChangeDetectionStrategy, ViewEncapsulation, ViewChild, Injectable, Output, EventEmitter, Inject, PLATFORM_ID, ChangeDetectorRef, ContentChildren, isDevMode, Injector, TemplateRef, RendererFactory2, ApplicationRef, ComponentFactoryResolver, NgZone, ViewContainerRef, Attribute, NO_ERRORS_SCHEMA, ContentChild, Host, InjectionToken, Optional, ViewChildren, SkipSelf, defineInjectable, SecurityContext } from '@angular/core';
+import { take, distinctUntilChanged, filter, map, pairwise, share, skip, throttleTime, startWith, switchMap, takeUntil, mergeMap } from 'rxjs/operators';
+import { __spread, __values, __extends, __assign, __read, __decorate, __metadata } from 'tslib';
+import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
+import { NG_VALUE_ACCESSOR, FormsModule, NG_VALIDATORS, FormControl } from '@angular/forms';
+import { Component, ElementRef, HostBinding, Input, Renderer2, ViewEncapsulation, NgModule, Directive, HostListener, forwardRef, ChangeDetectionStrategy, ViewChild, Injectable, ChangeDetectorRef, ContentChildren, EventEmitter, Inject, Output, PLATFORM_ID, isDevMode, Injector, TemplateRef, RendererFactory2, ApplicationRef, ComponentFactoryResolver, NgZone, ViewContainerRef, Attribute, NO_ERRORS_SCHEMA, ContentChild, Host, Optional, ViewChildren, InjectionToken, SkipSelf, SecurityContext, ɵɵdefineInjectable } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -42,7 +42,9 @@ var MDBBadgeComponent = /** @class */ (function () {
     MDBBadgeComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mdb-badge',
-                    template: "<span class=\"{{class}} {{classInside}}\">\n  <ng-content></ng-content>\n</span>\n"
+                    template: "<span class=\"{{class}} {{classInside}}\">\n  <ng-content></ng-content>\n</span>\n",
+                    encapsulation: ViewEncapsulation.None,
+                    styles: [".badge{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);border-radius:.125rem;color:#fff!important}.badge-pill{border-radius:10rem;padding-right:.6rem;padding-left:.6rem}.badge-primary{background-color:#4285f4!important;color:#fff!important}.badge-danger{background-color:#ff3547!important;color:#fff!important}.badge-warning{background-color:#fb3!important;color:#fff!important}.badge-success{background-color:#00c851!important;color:#fff!important}.badge-info{background-color:#33b5e5!important;color:#fff!important}.badge-default{background-color:#2bbbad!important;color:#fff!important}.badge-secondary{background-color:#a6c!important;color:#fff!important}.badge-dark{background-color:#212121!important;color:#fff!important}.badge-light{background-color:#e0e0e0!important;color:#000!important}"]
                 }] }
     ];
     /** @nocollapse */
@@ -127,7 +129,9 @@ var MdbBreadcrumbItemComponent = /** @class */ (function () {
     MdbBreadcrumbItemComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mdb-breadcrumb-item',
-                    template: "<li class=\"list-inline-item breadcrumb-item font-weight-{{fontWeight}}\">\n  <ng-content></ng-content>\n</li>\n"
+                    template: "<li class=\"list-inline-item breadcrumb-item font-weight-{{fontWeight}}\">\n  <ng-content></ng-content>\n</li>\n",
+                    encapsulation: ViewEncapsulation.None,
+                    styles: [".breadcrumb-item.active{color:#6c757d!important}.light-font .breadcrumb-item:before{color:#fff}.light-font .breadcrumb-item.active{color:#cfd8dc!important}.dark-font .breadcrumb-item:before{color:#000}.dark-font .breadcrumb-item.active{color:#455a64!important}"]
                 }] }
     ];
     /** @nocollapse */
@@ -247,9 +251,13 @@ var MdbBtnDirective = /** @class */ (function () {
         }
     };
     MdbBtnDirective.decorators = [
-        { type: Directive, args: [{
-                    selector: '[mdbBtn]'
-                },] }
+        { type: Component, args: [{
+                    // tslint:disable-next-line:component-selector
+                    selector: '[mdbBtn]',
+                    template: '<ng-content></ng-content>',
+                    encapsulation: ViewEncapsulation.None,
+                    styles: [".mdb-color.lighten-5{background-color:#d0d6e2!important}.mdb-color.lighten-4{background-color:#b1bace!important}.mdb-color.lighten-3{background-color:#929fba!important}.mdb-color.lighten-2{background-color:#7283a7!important}.mdb-color.lighten-1{background-color:#59698d!important}.mdb-color{background-color:#45526e!important}.mdb-color-text{color:#45526e!important}.rgba-mdb-color-slight,.rgba-mdb-color-slight:after{background-color:rgba(69,82,110,.1)}.rgba-mdb-color-light,.rgba-mdb-color-light:after{background-color:rgba(69,82,110,.3)}.rgba-mdb-color-strong,.rgba-mdb-color-strong:after{background-color:rgba(69,82,110,.7)}.mdb-color.darken-1{background-color:#3b465e!important}.mdb-color.darken-2{background-color:#2e3951!important}.mdb-color.darken-3{background-color:#1c2a48!important}.mdb-color.darken-4{background-color:#1c2331!important}.red.lighten-5{background-color:#ffebee!important}.red.lighten-4{background-color:#ffcdd2!important}.red.lighten-3{background-color:#ef9a9a!important}.red.lighten-2{background-color:#e57373!important}.red.lighten-1{background-color:#ef5350!important}.red{background-color:#f44336!important}.red-text{color:#f44336!important}.rgba-red-slight,.rgba-red-slight:after{background-color:rgba(244,67,54,.1)}.rgba-red-light,.rgba-red-light:after{background-color:rgba(244,67,54,.3)}.rgba-red-strong,.rgba-red-strong:after{background-color:rgba(244,67,54,.7)}.red.darken-1{background-color:#e53935!important}.red.darken-2{background-color:#d32f2f!important}.red.darken-3{background-color:#c62828!important}.red.darken-4{background-color:#b71c1c!important}.red.accent-1{background-color:#ff8a80!important}.red.accent-2{background-color:#ff5252!important}.red.accent-3{background-color:#ff1744!important}.red.accent-4{background-color:#d50000!important}.pink.lighten-5{background-color:#fce4ec!important}.pink.lighten-4{background-color:#f8bbd0!important}.pink.lighten-3{background-color:#f48fb1!important}.pink.lighten-2{background-color:#f06292!important}.pink.lighten-1{background-color:#ec407a!important}.pink{background-color:#e91e63!important}.pink-text{color:#e91e63!important}.rgba-pink-slight,.rgba-pink-slight:after{background-color:rgba(233,30,99,.1)}.rgba-pink-light,.rgba-pink-light:after{background-color:rgba(233,30,99,.3)}.rgba-pink-strong,.rgba-pink-strong:after{background-color:rgba(233,30,99,.7)}.pink.darken-1{background-color:#d81b60!important}.pink.darken-2{background-color:#c2185b!important}.pink.darken-3{background-color:#ad1457!important}.pink.darken-4{background-color:#880e4f!important}.pink.accent-1{background-color:#ff80ab!important}.pink.accent-2{background-color:#ff4081!important}.pink.accent-3{background-color:#f50057!important}.pink.accent-4{background-color:#c51162!important}.purple.lighten-5{background-color:#f3e5f5!important}.purple.lighten-4{background-color:#e1bee7!important}.purple.lighten-3{background-color:#ce93d8!important}.purple.lighten-2{background-color:#ba68c8!important}.purple.lighten-1{background-color:#ab47bc!important}.purple{background-color:#9c27b0!important}.purple-text{color:#9c27b0!important}.rgba-purple-slight,.rgba-purple-slight:after{background-color:rgba(156,39,176,.1)}.rgba-purple-light,.rgba-purple-light:after{background-color:rgba(156,39,176,.3)}.rgba-purple-strong,.rgba-purple-strong:after{background-color:rgba(156,39,176,.7)}.purple.darken-1{background-color:#8e24aa!important}.purple.darken-2{background-color:#7b1fa2!important}.purple.darken-3{background-color:#6a1b9a!important}.purple.darken-4{background-color:#4a148c!important}.purple.accent-1{background-color:#ea80fc!important}.purple.accent-2{background-color:#e040fb!important}.purple.accent-3{background-color:#d500f9!important}.purple.accent-4{background-color:#a0f!important}.deep-purple.lighten-5{background-color:#ede7f6!important}.deep-purple.lighten-4{background-color:#d1c4e9!important}.deep-purple.lighten-3{background-color:#b39ddb!important}.deep-purple.lighten-2{background-color:#9575cd!important}.deep-purple.lighten-1{background-color:#7e57c2!important}.deep-purple{background-color:#673ab7!important}.deep-purple-text{color:#673ab7!important}.rgba-deep-purple-slight,.rgba-deep-purple-slight:after{background-color:rgba(103,58,183,.1)}.rgba-deep-purple-light,.rgba-deep-purple-light:after{background-color:rgba(103,58,183,.3)}.rgba-deep-purple-strong,.rgba-deep-purple-strong:after{background-color:rgba(103,58,183,.7)}.deep-purple.darken-1{background-color:#5e35b1!important}.deep-purple.darken-2{background-color:#512da8!important}.deep-purple.darken-3{background-color:#4527a0!important}.deep-purple.darken-4{background-color:#311b92!important}.deep-purple.accent-1{background-color:#b388ff!important}.deep-purple.accent-2{background-color:#7c4dff!important}.deep-purple.accent-3{background-color:#651fff!important}.deep-purple.accent-4{background-color:#6200ea!important}.indigo.lighten-5{background-color:#e8eaf6!important}.indigo.lighten-4{background-color:#c5cae9!important}.indigo.lighten-3{background-color:#9fa8da!important}.indigo.lighten-2{background-color:#7986cb!important}.indigo.lighten-1{background-color:#5c6bc0!important}.indigo{background-color:#3f51b5!important}.indigo-text{color:#3f51b5!important}.rgba-indigo-slight,.rgba-indigo-slight:after{background-color:rgba(63,81,181,.1)}.rgba-indigo-light,.rgba-indigo-light:after{background-color:rgba(63,81,181,.3)}.rgba-indigo-strong,.rgba-indigo-strong:after{background-color:rgba(63,81,181,.7)}.indigo.darken-1{background-color:#3949ab!important}.indigo.darken-2{background-color:#303f9f!important}.indigo.darken-3{background-color:#283593!important}.indigo.darken-4{background-color:#1a237e!important}.indigo.accent-1{background-color:#8c9eff!important}.indigo.accent-2{background-color:#536dfe!important}.indigo.accent-3{background-color:#3d5afe!important}.indigo.accent-4{background-color:#304ffe!important}.blue.lighten-5{background-color:#e3f2fd!important}.blue.lighten-4{background-color:#bbdefb!important}.blue.lighten-3{background-color:#90caf9!important}.blue.lighten-2{background-color:#64b5f6!important}.blue.lighten-1{background-color:#42a5f5!important}.blue{background-color:#2196f3!important}.blue-text{color:#2196f3!important}.rgba-blue-slight,.rgba-blue-slight:after{background-color:rgba(33,150,243,.1)}.rgba-blue-light,.rgba-blue-light:after{background-color:rgba(33,150,243,.3)}.rgba-blue-strong,.rgba-blue-strong:after{background-color:rgba(33,150,243,.7)}.blue.darken-1{background-color:#1e88e5!important}.blue.darken-2{background-color:#1976d2!important}.blue.darken-3{background-color:#1565c0!important}.blue.darken-4{background-color:#0d47a1!important}.blue.accent-1{background-color:#82b1ff!important}.blue.accent-2{background-color:#448aff!important}.blue.accent-3{background-color:#2979ff!important}.blue.accent-4{background-color:#2962ff!important}.light-blue.lighten-5{background-color:#e1f5fe!important}.light-blue.lighten-4{background-color:#b3e5fc!important}.light-blue.lighten-3{background-color:#81d4fa!important}.light-blue.lighten-2{background-color:#4fc3f7!important}.light-blue.lighten-1{background-color:#29b6f6!important}.light-blue{background-color:#03a9f4!important}.light-blue-text{color:#03a9f4!important}.rgba-light-blue-slight,.rgba-light-blue-slight:after{background-color:rgba(3,169,244,.1)}.rgba-light-blue-light,.rgba-light-blue-light:after{background-color:rgba(3,169,244,.3)}.rgba-light-blue-strong,.rgba-light-blue-strong:after{background-color:rgba(3,169,244,.7)}.light-blue.darken-1{background-color:#039be5!important}.light-blue.darken-2{background-color:#0288d1!important}.light-blue.darken-3{background-color:#0277bd!important}.light-blue.darken-4{background-color:#01579b!important}.light-blue.accent-1{background-color:#80d8ff!important}.light-blue.accent-2{background-color:#40c4ff!important}.light-blue.accent-3{background-color:#00b0ff!important}.light-blue.accent-4{background-color:#0091ea!important}.cyan.lighten-5{background-color:#e0f7fa!important}.cyan.lighten-4{background-color:#b2ebf2!important}.cyan.lighten-3{background-color:#80deea!important}.cyan.lighten-2{background-color:#4dd0e1!important}.cyan.lighten-1{background-color:#26c6da!important}.cyan{background-color:#00bcd4!important}.cyan-text{color:#00bcd4!important}.rgba-cyan-slight,.rgba-cyan-slight:after{background-color:rgba(0,188,212,.1)}.rgba-cyan-light,.rgba-cyan-light:after{background-color:rgba(0,188,212,.3)}.rgba-cyan-strong,.rgba-cyan-strong:after{background-color:rgba(0,188,212,.7)}.cyan.darken-1{background-color:#00acc1!important}.cyan.darken-2{background-color:#0097a7!important}.cyan.darken-3{background-color:#00838f!important}.cyan.darken-4{background-color:#006064!important}.cyan.accent-1{background-color:#84ffff!important}.cyan.accent-2{background-color:#18ffff!important}.cyan.accent-3{background-color:#00e5ff!important}.cyan.accent-4{background-color:#00b8d4!important}.teal.lighten-5{background-color:#e0f2f1!important}.teal.lighten-4{background-color:#b2dfdb!important}.teal.lighten-3{background-color:#80cbc4!important}.teal.lighten-2{background-color:#4db6ac!important}.teal.lighten-1{background-color:#26a69a!important}.teal{background-color:#009688!important}.teal-text{color:#009688!important}.rgba-teal-slight,.rgba-teal-slight:after{background-color:rgba(0,150,136,.1)}.rgba-teal-light,.rgba-teal-light:after{background-color:rgba(0,150,136,.3)}.rgba-teal-strong,.rgba-teal-strong:after{background-color:rgba(0,150,136,.7)}.teal.darken-1{background-color:#00897b!important}.teal.darken-2{background-color:#00796b!important}.teal.darken-3{background-color:#00695c!important}.teal.darken-4{background-color:#004d40!important}.teal.accent-1{background-color:#a7ffeb!important}.teal.accent-2{background-color:#64ffda!important}.teal.accent-3{background-color:#1de9b6!important}.teal.accent-4{background-color:#00bfa5!important}.green.lighten-5{background-color:#e8f5e9!important}.green.lighten-4{background-color:#c8e6c9!important}.green.lighten-3{background-color:#a5d6a7!important}.green.lighten-2{background-color:#81c784!important}.green.lighten-1{background-color:#66bb6a!important}.green{background-color:#4caf50!important}.green-text{color:#4caf50!important}.rgba-green-slight,.rgba-green-slight:after{background-color:rgba(76,175,80,.1)}.rgba-green-light,.rgba-green-light:after{background-color:rgba(76,175,80,.3)}.rgba-green-strong,.rgba-green-strong:after{background-color:rgba(76,175,80,.7)}.green.darken-1{background-color:#43a047!important}.green.darken-2{background-color:#388e3c!important}.green.darken-3{background-color:#2e7d32!important}.green.darken-4{background-color:#1b5e20!important}.green.accent-1{background-color:#b9f6ca!important}.green.accent-2{background-color:#69f0ae!important}.green.accent-3{background-color:#00e676!important}.green.accent-4{background-color:#00c853!important}.light-green.lighten-5{background-color:#f1f8e9!important}.light-green.lighten-4{background-color:#dcedc8!important}.light-green.lighten-3{background-color:#c5e1a5!important}.light-green.lighten-2{background-color:#aed581!important}.light-green.lighten-1{background-color:#9ccc65!important}.light-green{background-color:#8bc34a!important}.light-green-text{color:#8bc34a!important}.rgba-light-green-slight,.rgba-light-green-slight:after{background-color:rgba(139,195,74,.1)}.rgba-light-green-light,.rgba-light-green-light:after{background-color:rgba(139,195,74,.3)}.rgba-light-green-strong,.rgba-light-green-strong:after{background-color:rgba(139,195,74,.7)}.light-green.darken-1{background-color:#7cb342!important}.light-green.darken-2{background-color:#689f38!important}.light-green.darken-3{background-color:#558b2f!important}.light-green.darken-4{background-color:#33691e!important}.light-green.accent-1{background-color:#ccff90!important}.light-green.accent-2{background-color:#b2ff59!important}.light-green.accent-3{background-color:#76ff03!important}.light-green.accent-4{background-color:#64dd17!important}.lime.lighten-5{background-color:#f9fbe7!important}.lime.lighten-4{background-color:#f0f4c3!important}.lime.lighten-3{background-color:#e6ee9c!important}.lime.lighten-2{background-color:#dce775!important}.lime.lighten-1{background-color:#d4e157!important}.lime{background-color:#cddc39!important}.lime-text{color:#cddc39!important}.rgba-lime-slight,.rgba-lime-slight:after{background-color:rgba(205,220,57,.1)}.rgba-lime-light,.rgba-lime-light:after{background-color:rgba(205,220,57,.3)}.rgba-lime-strong,.rgba-lime-strong:after{background-color:rgba(205,220,57,.7)}.lime.darken-1{background-color:#c0ca33!important}.lime.darken-2{background-color:#afb42b!important}.lime.darken-3{background-color:#9e9d24!important}.lime.darken-4{background-color:#827717!important}.lime.accent-1{background-color:#f4ff81!important}.lime.accent-2{background-color:#eeff41!important}.lime.accent-3{background-color:#c6ff00!important}.lime.accent-4{background-color:#aeea00!important}.yellow.lighten-5{background-color:#fffde7!important}.yellow.lighten-4{background-color:#fff9c4!important}.yellow.lighten-3{background-color:#fff59d!important}.yellow.lighten-2{background-color:#fff176!important}.yellow.lighten-1{background-color:#ffee58!important}.yellow{background-color:#ffeb3b!important}.yellow-text{color:#ffeb3b!important}.rgba-yellow-slight,.rgba-yellow-slight:after{background-color:rgba(255,235,59,.1)}.rgba-yellow-light,.rgba-yellow-light:after{background-color:rgba(255,235,59,.3)}.rgba-yellow-strong,.rgba-yellow-strong:after{background-color:rgba(255,235,59,.7)}.yellow.darken-1{background-color:#fdd835!important}.yellow.darken-2{background-color:#fbc02d!important}.yellow.darken-3{background-color:#f9a825!important}.yellow.darken-4{background-color:#f57f17!important}.yellow.accent-1{background-color:#ffff8d!important}.yellow.accent-2{background-color:#ff0!important}.yellow.accent-3{background-color:#ffea00!important}.yellow.accent-4{background-color:#ffd600!important}.amber.lighten-5{background-color:#fff8e1!important}.amber.lighten-4{background-color:#ffecb3!important}.amber.lighten-3{background-color:#ffe082!important}.amber.lighten-2{background-color:#ffd54f!important}.amber.lighten-1{background-color:#ffca28!important}.amber{background-color:#ffc107!important}.amber-text{color:#ffc107!important}.rgba-amber-slight,.rgba-amber-slight:after{background-color:rgba(255,193,7,.1)}.rgba-amber-light,.rgba-amber-light:after{background-color:rgba(255,193,7,.3)}.rgba-amber-strong,.rgba-amber-strong:after{background-color:rgba(255,193,7,.7)}.amber.darken-1{background-color:#ffb300!important}.amber.darken-2{background-color:#ffa000!important}.amber.darken-3{background-color:#ff8f00!important}.amber.darken-4{background-color:#ff6f00!important}.amber.accent-1{background-color:#ffe57f!important}.amber.accent-2{background-color:#ffd740!important}.amber.accent-3{background-color:#ffc400!important}.amber.accent-4{background-color:#ffab00!important}.orange.lighten-5{background-color:#fff3e0!important}.orange.lighten-4{background-color:#ffe0b2!important}.orange.lighten-3{background-color:#ffcc80!important}.orange.lighten-2{background-color:#ffb74d!important}.orange.lighten-1{background-color:#ffa726!important}.orange{background-color:#ff9800!important}.orange-text{color:#ff9800!important}.rgba-orange-slight,.rgba-orange-slight:after{background-color:rgba(255,152,0,.1)}.rgba-orange-light,.rgba-orange-light:after{background-color:rgba(255,152,0,.3)}.rgba-orange-strong,.rgba-orange-strong:after{background-color:rgba(255,152,0,.7)}.orange.darken-1{background-color:#fb8c00!important}.orange.darken-2{background-color:#f57c00!important}.orange.darken-3{background-color:#ef6c00!important}.orange.darken-4{background-color:#e65100!important}.orange.accent-1{background-color:#ffd180!important}.orange.accent-2{background-color:#ffab40!important}.orange.accent-3{background-color:#ff9100!important}.orange.accent-4{background-color:#ff6d00!important}.deep-orange.lighten-5{background-color:#fbe9e7!important}.deep-orange.lighten-4{background-color:#ffccbc!important}.deep-orange.lighten-3{background-color:#ffab91!important}.deep-orange.lighten-2{background-color:#ff8a65!important}.deep-orange.lighten-1{background-color:#ff7043!important}.deep-orange{background-color:#ff5722!important}.deep-orange-text{color:#ff5722!important}.rgba-deep-orange-slight,.rgba-deep-orange-slight:after{background-color:rgba(255,87,34,.1)}.rgba-deep-orange-light,.rgba-deep-orange-light:after{background-color:rgba(255,87,34,.3)}.rgba-deep-orange-strong,.rgba-deep-orange-strong:after{background-color:rgba(255,87,34,.7)}.deep-orange.darken-1{background-color:#f4511e!important}.deep-orange.darken-2{background-color:#e64a19!important}.deep-orange.darken-3{background-color:#d84315!important}.deep-orange.darken-4{background-color:#bf360c!important}.deep-orange.accent-1{background-color:#ff9e80!important}.deep-orange.accent-2{background-color:#ff6e40!important}.deep-orange.accent-3{background-color:#ff3d00!important}.deep-orange.accent-4{background-color:#dd2c00!important}.brown.lighten-5{background-color:#efebe9!important}.brown.lighten-4{background-color:#d7ccc8!important}.brown.lighten-3{background-color:#bcaaa4!important}.brown.lighten-2{background-color:#a1887f!important}.brown.lighten-1{background-color:#8d6e63!important}.brown{background-color:#795548!important}.brown-text{color:#795548!important}.rgba-brown-slight,.rgba-brown-slight:after{background-color:rgba(121,85,72,.1)}.rgba-brown-light,.rgba-brown-light:after{background-color:rgba(121,85,72,.3)}.rgba-brown-strong,.rgba-brown-strong:after{background-color:rgba(121,85,72,.7)}.brown.darken-1{background-color:#6d4c41!important}.brown.darken-2{background-color:#5d4037!important}.brown.darken-3{background-color:#4e342e!important}.brown.darken-4{background-color:#3e2723!important}.blue-grey.lighten-5{background-color:#eceff1!important}.blue-grey.lighten-4{background-color:#cfd8dc!important}.blue-grey.lighten-3{background-color:#b0bec5!important}.blue-grey.lighten-2{background-color:#90a4ae!important}.blue-grey.lighten-1{background-color:#78909c!important}.blue-grey{background-color:#607d8b!important}.blue-grey-text{color:#607d8b!important}.rgba-blue-grey-slight,.rgba-blue-grey-slight:after{background-color:rgba(96,125,139,.1)}.rgba-blue-grey-light,.rgba-blue-grey-light:after{background-color:rgba(96,125,139,.3)}.rgba-blue-grey-strong,.rgba-blue-grey-strong:after{background-color:rgba(96,125,139,.7)}.blue-grey.darken-1{background-color:#546e7a!important}.blue-grey.darken-2{background-color:#455a64!important}.blue-grey.darken-3{background-color:#37474f!important}.blue-grey.darken-4{background-color:#263238!important}.grey.lighten-5{background-color:#fafafa!important}.grey.lighten-4{background-color:#f5f5f5!important}.grey.lighten-3{background-color:#eee!important}.grey.lighten-2{background-color:#e0e0e0!important}.grey.lighten-1{background-color:#bdbdbd!important}.grey{background-color:#9e9e9e!important}.grey-text{color:#9e9e9e!important}.rgba-grey-slight,.rgba-grey-slight:after{background-color:rgba(158,158,158,.1)}.rgba-grey-light,.rgba-grey-light:after{background-color:rgba(158,158,158,.3)}.rgba-grey-strong,.rgba-grey-strong:after{background-color:rgba(158,158,158,.7)}.grey.darken-1{background-color:#757575!important}.grey.darken-2{background-color:#616161!important}.grey.darken-3{background-color:#424242!important}.grey.darken-4{background-color:#212121!important}.black{background-color:#000!important}.black-text,.btn.btn-link{color:#000!important}.rgba-black-slight,.rgba-black-slight:after{background-color:rgba(0,0,0,.1)}.rgba-black-light,.rgba-black-light:after{background-color:rgba(0,0,0,.3)}.rgba-black-strong,.rgba-black-strong:after{background-color:rgba(0,0,0,.7)}.white{background-color:#fff!important}.white-text{color:#fff!important}.rgba-white-slight,.rgba-white-slight:after{background-color:rgba(255,255,255,.1)}.rgba-white-light,.rgba-white-light:after{background-color:rgba(255,255,255,.3)}.rgba-white-strong,.rgba-white-strong:after{background-color:rgba(255,255,255,.7)}.rgba-stylish-slight{background-color:rgba(62,69,81,.1)}.rgba-stylish-light{background-color:rgba(62,69,81,.3)}.rgba-stylish-strong{background-color:rgba(62,69,81,.7)}.primary-color{background-color:#4285f4!important}.primary-color-dark{background-color:#0d47a1!important}.secondary-color{background-color:#a6c!important}.secondary-color-dark{background-color:#93c!important}.default-color{background-color:#2bbbad!important}.default-color-dark{background-color:#00695c!important}.info-color{background-color:#33b5e5!important}.info-color-dark{background-color:#09c!important}.success-color{background-color:#00c851!important}.success-color-dark{background-color:#007e33!important}.warning-color{background-color:#fb3!important}.warning-color-dark{background-color:#f80!important}.danger-color{background-color:#ff3547!important}.danger-color-dark{background-color:#c00!important}.elegant-color{background-color:#2e2e2e!important}.elegant-color-dark{background-color:#212121!important}.stylish-color{background-color:#4b515d!important}.stylish-color-dark{background-color:#3e4551!important}.unique-color{background-color:#3f729b!important}.unique-color-dark{background-color:#1c2331!important}.special-color{background-color:#37474f!important}.special-color-dark{background-color:#263238!important}.purple-gradient{background:linear-gradient(40deg,#ff6ec4,#7873f5)!important}.peach-gradient{background:linear-gradient(40deg,#ffd86f,#fc6262)!important}.aqua-gradient{background:linear-gradient(40deg,#2096ff,#05ffa3)!important}.blue-gradient{background:linear-gradient(40deg,#45cafc,#303f9f)!important}.purple-gradient-rgba{background:linear-gradient(40deg,rgba(255,110,196,.9),rgba(120,115,245,.9))!important}.peach-gradient-rgba{background:linear-gradient(40deg,rgba(255,216,111,.9),rgba(252,98,98,.9))!important}.aqua-gradient-rgba{background:linear-gradient(40deg,rgba(32,150,255,.9),rgba(5,255,163,.9))!important}.blue-gradient-rgba{background:linear-gradient(40deg,rgba(69,202,252,.9),rgba(48,63,159,.9))!important}.dark-grey-text,.dark-grey-text:focus,.dark-grey-text:hover{color:#4f4f4f!important}.hoverable{box-shadow:none;transition:.55s ease-in-out}.hoverable:hover{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);transition:.55s ease-in-out}.z-depth-0{box-shadow:none!important}.z-depth-1{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)!important}.z-depth-1-half{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)!important}.z-depth-2{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19)!important}.z-depth-3{box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19)!important}.z-depth-4{box-shadow:0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)!important}.z-depth-5{box-shadow:0 27px 24px 0 rgba(0,0,0,.2),0 40px 77px 0 rgba(0,0,0,.22)!important}.disabled,:disabled{pointer-events:none!important}a{cursor:pointer;text-decoration:none;color:#0275d8;transition:.2s ease-in-out}a:hover{text-decoration:none;color:#014c8c;transition:.2s ease-in-out}a.disabled:hover,a:disabled:hover{color:#0275d8}a:not([href]):not([tabindex]),a:not([href]):not([tabindex]):focus,a:not([href]):not([tabindex]):hover{color:inherit;text-decoration:none}.btn{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);padding:.84rem 2.14rem;font-size:.81rem;transition:.2s ease-in-out;margin:.375rem;border:0;border-radius:.125rem;cursor:pointer;text-transform:uppercase;white-space:normal;word-wrap:break-word;color:inherit}.btn:active,.btn:focus,.btn:hover{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);outline:0}.btn:not([disabled]):not(.disabled).active,.btn:not([disabled]):not(.disabled):active{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn .fab,.btn .far,.btn .fas{position:relative;font-size:.9rem}.btn .fab.right,.btn .far.right,.btn .fas.right{margin-left:.3rem}.btn .fab.left,.btn .far.left,.btn .fas.left{margin-right:.3rem}.btn.btn-lg .fab,.btn.btn-lg .far,.btn.btn-lg .fas{font-size:1rem}.btn.btn-md .fab,.btn.btn-md .far,.btn.btn-md .fas{font-size:.8rem}.btn.btn-sm .fab,.btn.btn-sm .far,.btn.btn-sm .fas{font-size:.7rem}.btn.btn-tb{padding:.3rem 1rem}.btn.disabled:active,.btn.disabled:focus,.btn.disabled:hover,.btn:disabled:active,.btn:disabled:focus,.btn:disabled:hover{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)}.btn.btn-block{margin:inherit}.btn.btn-link{box-shadow:none;background-color:transparent}.btn.btn-link:active,.btn.btn-link:focus,.btn.btn-link:hover{box-shadow:none!important;background-color:transparent}.btn[class*=btn-outline-]{padding-top:.7rem;padding-bottom:.7rem}.btn[class*=btn-outline-].btn-lg{padding-top:.88rem;padding-bottom:.88rem}.btn[class*=btn-outline-].btn-md{padding-top:.58rem;padding-bottom:.58rem}.btn[class*=btn-outline-].btn-sm{padding-top:.38rem;padding-bottom:.38rem}.btn-group .btn{margin:0}.btn .fa-lg,.btn-floating .fa-lg{font-size:1.33333em!important}.btn .fa-xs,.btn-floating .fa-xs{font-size:.75em!important}.btn .fa-sm,.btn-floating .fa-sm{font-size:.875em!important}.btn .fa-1x,.btn-floating .fa-1x{font-size:1em!important}.btn .fa-2x,.btn-floating .fa-2x{font-size:2em!important}.btn .fa-3x,.btn-floating .fa-3x{font-size:3em!important}.btn .fa-4x,.btn-floating .fa-4x{font-size:4em!important}.btn .fa-5x,.btn-floating .fa-5x{font-size:5em!important}.btn .fa-6x,.btn-floating .fa-6x{font-size:6em!important}.btn .fa-7x,.btn-floating .fa-7x{font-size:7em!important}.btn .fa-8x,.btn-floating .fa-8x{font-size:8em!important}.btn .fa-9x,.btn-floating .fa-9x{font-size:9em!important}.btn .fa-10x,.btn-floating .fa-10x{font-size:10em!important}.btn-primary{background-color:#4285f4!important;color:#fff}.btn-primary:hover{background-color:#5a95f5;color:#fff}.btn-primary.focus,.btn-primary:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-primary.active,.btn-primary:active,.btn-primary:focus{background-color:#0b51c5}.btn-primary.dropdown-toggle{background-color:#4285f4!important}.btn-primary.dropdown-toggle:focus,.btn-primary.dropdown-toggle:hover{background-color:#5a95f5!important}.btn-primary:not([disabled]):not(.disabled).active,.btn-primary:not([disabled]):not(.disabled):active,.show>.btn-primary.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#0b51c5!important}.btn-primary:not([disabled]):not(.disabled).active:focus,.btn-primary:not([disabled]):not(.disabled):active:focus,.show>.btn-primary.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.primary-ic{color:#4285f4!important}.primary-ic:focus,.primary-ic:hover{color:#4285f4}table.table a.btn.btn-primary{color:#fff}.btn-outline-primary{border:2px solid #4285f4!important;background-color:transparent!important;color:#4285f4!important}.btn-outline-primary.active,.btn-outline-primary:active,.btn-outline-primary:active:focus,.btn-outline-primary:focus,.btn-outline-primary:hover{border-color:#4285f4!important;background-color:transparent!important;color:#4285f4!important}.btn-outline-primary:not([disabled]):not(.disabled).active,.btn-outline-primary:not([disabled]):not(.disabled):active,.show>.btn-outline-primary.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#4285f4!important}.btn-outline-primary:not([disabled]):not(.disabled).active:focus,.btn-outline-primary:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-primary.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-danger{background-color:#ff3547!important;color:#fff}.btn-danger:hover{background-color:#ff4f5e;color:#fff}.btn-danger.focus,.btn-danger:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-danger.active,.btn-danger:active,.btn-danger:focus{background-color:#ce0012}.btn-danger.dropdown-toggle{background-color:#ff3547!important}.btn-danger.dropdown-toggle:focus,.btn-danger.dropdown-toggle:hover{background-color:#ff4f5e!important}.btn-danger:not([disabled]):not(.disabled).active,.btn-danger:not([disabled]):not(.disabled):active,.show>.btn-danger.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#ce0012!important}.btn-danger:not([disabled]):not(.disabled).active:focus,.btn-danger:not([disabled]):not(.disabled):active:focus,.show>.btn-danger.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.danger-ic{color:#ff3547!important}.danger-ic:focus,.danger-ic:hover{color:#ff3547}table.table a.btn.btn-danger{color:#fff}.btn-outline-danger{border:2px solid #ff3547!important;background-color:transparent!important;color:#ff3547!important}.btn-outline-danger.active,.btn-outline-danger:active,.btn-outline-danger:active:focus,.btn-outline-danger:focus,.btn-outline-danger:hover{border-color:#ff3547!important;background-color:transparent!important;color:#ff3547!important}.btn-outline-danger:not([disabled]):not(.disabled).active,.btn-outline-danger:not([disabled]):not(.disabled):active,.show>.btn-outline-danger.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#ff3547!important}.btn-outline-danger:not([disabled]):not(.disabled).active:focus,.btn-outline-danger:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-danger.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-warning{background-color:#fb3!important;color:#fff}.btn-warning:hover{background-color:#ffc44d;color:#fff}.btn-warning.focus,.btn-warning:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-warning.active,.btn-warning:active,.btn-warning:focus{background-color:#c80}.btn-warning.dropdown-toggle{background-color:#fb3!important}.btn-warning.dropdown-toggle:focus,.btn-warning.dropdown-toggle:hover{background-color:#ffc44d!important}.btn-warning:not([disabled]):not(.disabled).active,.btn-warning:not([disabled]):not(.disabled):active,.show>.btn-warning.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#c80!important}.btn-warning:not([disabled]):not(.disabled).active:focus,.btn-warning:not([disabled]):not(.disabled):active:focus,.show>.btn-warning.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.warning-ic{color:#fb3!important}.warning-ic:focus,.warning-ic:hover{color:#fb3}table.table a.btn.btn-warning{color:#fff}.btn-outline-warning{border:2px solid #fb3!important;background-color:transparent!important;color:#fb3!important}.btn-outline-warning.active,.btn-outline-warning:active,.btn-outline-warning:active:focus,.btn-outline-warning:focus,.btn-outline-warning:hover{border-color:#fb3!important;background-color:transparent!important;color:#fb3!important}.btn-outline-warning:not([disabled]):not(.disabled).active,.btn-outline-warning:not([disabled]):not(.disabled):active,.show>.btn-outline-warning.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#fb3!important}.btn-outline-warning:not([disabled]):not(.disabled).active:focus,.btn-outline-warning:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-warning.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-success{background-color:#00c851!important;color:#fff}.btn-success:hover{background-color:#00e25b;color:#fff}.btn-success.focus,.btn-success:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-success.active,.btn-success:active,.btn-success:focus{background-color:#006228}.btn-success.dropdown-toggle{background-color:#00c851!important}.btn-success.dropdown-toggle:focus,.btn-success.dropdown-toggle:hover{background-color:#00e25b!important}.btn-success:not([disabled]):not(.disabled).active,.btn-success:not([disabled]):not(.disabled):active,.show>.btn-success.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#006228!important}.btn-success:not([disabled]):not(.disabled).active:focus,.btn-success:not([disabled]):not(.disabled):active:focus,.show>.btn-success.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.success-ic{color:#00c851!important}.success-ic:focus,.success-ic:hover{color:#00c851}table.table a.btn.btn-success{color:#fff}.btn-outline-success{border:2px solid #00c851!important;background-color:transparent!important;color:#00c851!important}.btn-outline-success.active,.btn-outline-success:active,.btn-outline-success:active:focus,.btn-outline-success:focus,.btn-outline-success:hover{border-color:#00c851!important;background-color:transparent!important;color:#00c851!important}.btn-outline-success:not([disabled]):not(.disabled).active,.btn-outline-success:not([disabled]):not(.disabled):active,.show>.btn-outline-success.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#00c851!important}.btn-outline-success:not([disabled]):not(.disabled).active:focus,.btn-outline-success:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-success.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-info{background-color:#33b5e5!important;color:#fff}.btn-info:hover{background-color:#4abde8;color:#fff}.btn-info.focus,.btn-info:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-info.active,.btn-info:active,.btn-info:focus{background-color:#14799e}.btn-info.dropdown-toggle{background-color:#33b5e5!important}.btn-info.dropdown-toggle:focus,.btn-info.dropdown-toggle:hover{background-color:#4abde8!important}.btn-info:not([disabled]):not(.disabled).active,.btn-info:not([disabled]):not(.disabled):active,.show>.btn-info.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#14799e!important}.btn-info:not([disabled]):not(.disabled).active:focus,.btn-info:not([disabled]):not(.disabled):active:focus,.show>.btn-info.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.info-ic{color:#33b5e5!important}.info-ic:focus,.info-ic:hover{color:#33b5e5}table.table a.btn.btn-info{color:#fff}.btn-outline-info{border:2px solid #33b5e5!important;background-color:transparent!important;color:#33b5e5!important}.btn-outline-info.active,.btn-outline-info:active,.btn-outline-info:active:focus,.btn-outline-info:focus,.btn-outline-info:hover{border-color:#33b5e5!important;background-color:transparent!important;color:#33b5e5!important}.btn-outline-info:not([disabled]):not(.disabled).active,.btn-outline-info:not([disabled]):not(.disabled):active,.show>.btn-outline-info.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#33b5e5!important}.btn-outline-info:not([disabled]):not(.disabled).active:focus,.btn-outline-info:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-info.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-default{background-color:#2bbbad!important;color:#fff}.btn-default:hover{background-color:#30cfc0;color:#fff}.btn-default.focus,.btn-default:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-default.active,.btn-default:active,.btn-default:focus{background-color:#186860}.btn-default.dropdown-toggle{background-color:#2bbbad!important}.btn-default.dropdown-toggle:focus,.btn-default.dropdown-toggle:hover{background-color:#30cfc0!important}.btn-default:not([disabled]):not(.disabled).active,.btn-default:not([disabled]):not(.disabled):active,.show>.btn-default.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#186860!important}.btn-default:not([disabled]):not(.disabled).active:focus,.btn-default:not([disabled]):not(.disabled):active:focus,.show>.btn-default.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.default-ic{color:#2bbbad!important}.default-ic:focus,.default-ic:hover{color:#2bbbad}table.table a.btn.btn-default{color:#fff}.btn-outline-default{border:2px solid #2bbbad!important;background-color:transparent!important;color:#2bbbad!important}.btn-outline-default.active,.btn-outline-default:active,.btn-outline-default:active:focus,.btn-outline-default:focus,.btn-outline-default:hover{border-color:#2bbbad!important;background-color:transparent!important;color:#2bbbad!important}.btn-outline-default:not([disabled]):not(.disabled).active,.btn-outline-default:not([disabled]):not(.disabled):active,.show>.btn-outline-default.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#2bbbad!important}.btn-outline-default:not([disabled]):not(.disabled).active:focus,.btn-outline-default:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-default.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-secondary{background-color:#a6c!important;color:#fff}.btn-secondary:hover{background-color:#b579d2;color:#fff}.btn-secondary.focus,.btn-secondary:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-secondary.active,.btn-secondary:active,.btn-secondary:focus{background-color:#739}.btn-secondary.dropdown-toggle{background-color:#a6c!important}.btn-secondary.dropdown-toggle:focus,.btn-secondary.dropdown-toggle:hover{background-color:#b579d2!important}.btn-secondary:not([disabled]):not(.disabled).active,.btn-secondary:not([disabled]):not(.disabled):active,.show>.btn-secondary.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#739!important}.btn-secondary:not([disabled]):not(.disabled).active:focus,.btn-secondary:not([disabled]):not(.disabled):active:focus,.show>.btn-secondary.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.secondary-ic{color:#a6c!important}.secondary-ic:focus,.secondary-ic:hover{color:#a6c}table.table a.btn.btn-secondary{color:#fff}.btn-outline-secondary{border:2px solid #a6c!important;background-color:transparent!important;color:#a6c!important}.btn-outline-secondary.active,.btn-outline-secondary:active,.btn-outline-secondary:active:focus,.btn-outline-secondary:focus,.btn-outline-secondary:hover{border-color:#a6c!important;background-color:transparent!important;color:#a6c!important}.btn-outline-secondary:not([disabled]):not(.disabled).active,.btn-outline-secondary:not([disabled]):not(.disabled):active,.show>.btn-outline-secondary.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#a6c!important}.btn-outline-secondary:not([disabled]):not(.disabled).active:focus,.btn-outline-secondary:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-secondary.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-elegant{background-color:#2e2e2e!important;color:#fff}.btn-elegant:hover{background-color:#3b3b3b;color:#fff}.btn-elegant.focus,.btn-elegant:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-elegant.active,.btn-elegant:active,.btn-elegant:focus{background-color:#000}.btn-elegant.dropdown-toggle{background-color:#2e2e2e!important}.btn-elegant.dropdown-toggle:focus,.btn-elegant.dropdown-toggle:hover{background-color:#3b3b3b!important}.btn-elegant:not([disabled]):not(.disabled).active,.btn-elegant:not([disabled]):not(.disabled):active,.show>.btn-elegant.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#000!important}.btn-elegant:not([disabled]):not(.disabled).active:focus,.btn-elegant:not([disabled]):not(.disabled):active:focus,.show>.btn-elegant.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.elegant-ic{color:#2e2e2e!important}.elegant-ic:focus,.elegant-ic:hover{color:#2e2e2e}table.table a.btn.btn-elegant{color:#fff}.btn-outline-elegant{border:2px solid #2e2e2e!important;background-color:transparent!important;color:#2e2e2e!important}.btn-outline-elegant.active,.btn-outline-elegant:active,.btn-outline-elegant:active:focus,.btn-outline-elegant:focus,.btn-outline-elegant:hover{border-color:#2e2e2e!important;background-color:transparent!important;color:#2e2e2e!important}.btn-outline-elegant:not([disabled]):not(.disabled).active,.btn-outline-elegant:not([disabled]):not(.disabled):active,.show>.btn-outline-elegant.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#2e2e2e!important}.btn-outline-elegant:not([disabled]):not(.disabled).active:focus,.btn-outline-elegant:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-elegant.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-unique{background-color:#880e4f!important;color:#fff}.btn-unique:hover{background-color:#9f105c;color:#fff}.btn-unique.focus,.btn-unique:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-unique.active,.btn-unique:active,.btn-unique:focus{background-color:#2c0419}.btn-unique.dropdown-toggle{background-color:#880e4f!important}.btn-unique.dropdown-toggle:focus,.btn-unique.dropdown-toggle:hover{background-color:#9f105c!important}.btn-unique:not([disabled]):not(.disabled).active,.btn-unique:not([disabled]):not(.disabled):active,.show>.btn-unique.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#2c0419!important}.btn-unique:not([disabled]):not(.disabled).active:focus,.btn-unique:not([disabled]):not(.disabled):active:focus,.show>.btn-unique.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.unique-ic{color:#880e4f!important}.unique-ic:focus,.unique-ic:hover{color:#880e4f}table.table a.btn.btn-unique{color:#fff}.btn-outline-unique{border:2px solid #880e4f!important;background-color:transparent!important;color:#880e4f!important}.btn-outline-unique.active,.btn-outline-unique:active,.btn-outline-unique:active:focus,.btn-outline-unique:focus,.btn-outline-unique:hover{border-color:#880e4f!important;background-color:transparent!important;color:#880e4f!important}.btn-outline-unique:not([disabled]):not(.disabled).active,.btn-outline-unique:not([disabled]):not(.disabled):active,.show>.btn-outline-unique.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#880e4f!important}.btn-outline-unique:not([disabled]):not(.disabled).active:focus,.btn-outline-unique:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-unique.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-dark-green{background-color:#388e3c!important;color:#fff}.btn-dark-green:hover{background-color:#3fa044;color:#fff}.btn-dark-green.focus,.btn-dark-green:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-dark-green.active,.btn-dark-green:active,.btn-dark-green:focus{background-color:#1b451d}.btn-dark-green.dropdown-toggle{background-color:#388e3c!important}.btn-dark-green.dropdown-toggle:focus,.btn-dark-green.dropdown-toggle:hover{background-color:#3fa044!important}.btn-dark-green:not([disabled]):not(.disabled).active,.btn-dark-green:not([disabled]):not(.disabled):active,.show>.btn-dark-green.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#1b451d!important}.btn-dark-green:not([disabled]):not(.disabled).active:focus,.btn-dark-green:not([disabled]):not(.disabled):active:focus,.show>.btn-dark-green.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.dark-green-ic{color:#388e3c!important}.dark-green-ic:focus,.dark-green-ic:hover{color:#388e3c}table.table a.btn.btn-dark-green{color:#fff}.btn-outline-dark-green{border:2px solid #388e3c!important;background-color:transparent!important;color:#388e3c!important}.btn-outline-dark-green.active,.btn-outline-dark-green:active,.btn-outline-dark-green:active:focus,.btn-outline-dark-green:focus,.btn-outline-dark-green:hover{border-color:#388e3c!important;background-color:transparent!important;color:#388e3c!important}.btn-outline-dark-green:not([disabled]):not(.disabled).active,.btn-outline-dark-green:not([disabled]):not(.disabled):active,.show>.btn-outline-dark-green.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#388e3c!important}.btn-outline-dark-green:not([disabled]):not(.disabled).active:focus,.btn-outline-dark-green:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-dark-green.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-mdb-color{background-color:#59698d!important;color:#fff}.btn-mdb-color:hover{background-color:#63759d;color:#fff}.btn-mdb-color.focus,.btn-mdb-color:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-mdb-color.active,.btn-mdb-color:active,.btn-mdb-color:focus{background-color:#323a4e}.btn-mdb-color.dropdown-toggle{background-color:#59698d!important}.btn-mdb-color.dropdown-toggle:focus,.btn-mdb-color.dropdown-toggle:hover{background-color:#63759d!important}.btn-mdb-color:not([disabled]):not(.disabled).active,.btn-mdb-color:not([disabled]):not(.disabled):active,.show>.btn-mdb-color.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#323a4e!important}.btn-mdb-color:not([disabled]):not(.disabled).active:focus,.btn-mdb-color:not([disabled]):not(.disabled):active:focus,.show>.btn-mdb-color.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.mdb-color-ic{color:#59698d!important}.mdb-color-ic:focus,.mdb-color-ic:hover{color:#59698d}table.table a.btn.btn-mdb-color{color:#fff}.btn-outline-mdb-color{border:2px solid #59698d!important;background-color:transparent!important;color:#59698d!important}.btn-outline-mdb-color.active,.btn-outline-mdb-color:active,.btn-outline-mdb-color:active:focus,.btn-outline-mdb-color:focus,.btn-outline-mdb-color:hover{border-color:#59698d!important;background-color:transparent!important;color:#59698d!important}.btn-outline-mdb-color:not([disabled]):not(.disabled).active,.btn-outline-mdb-color:not([disabled]):not(.disabled):active,.show>.btn-outline-mdb-color.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#59698d!important}.btn-outline-mdb-color:not([disabled]):not(.disabled).active:focus,.btn-outline-mdb-color:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-mdb-color.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-red{background-color:#d32f2f!important;color:#fff}.btn-red:hover{background-color:#d74444;color:#fff}.btn-red.focus,.btn-red:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-red.active,.btn-red:active,.btn-red:focus{background-color:#811b1b}.btn-red.dropdown-toggle{background-color:#d32f2f!important}.btn-red.dropdown-toggle:focus,.btn-red.dropdown-toggle:hover{background-color:#d74444!important}.btn-red:not([disabled]):not(.disabled).active,.btn-red:not([disabled]):not(.disabled):active,.show>.btn-red.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#811b1b!important}.btn-red:not([disabled]):not(.disabled).active:focus,.btn-red:not([disabled]):not(.disabled):active:focus,.show>.btn-red.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.red-ic{color:#d32f2f!important}.red-ic:focus,.red-ic:hover{color:#d32f2f}table.table a.btn.btn-red{color:#fff}.btn-outline-red{border:2px solid #d32f2f!important;background-color:transparent!important;color:#d32f2f!important}.btn-outline-red.active,.btn-outline-red:active,.btn-outline-red:active:focus,.btn-outline-red:focus,.btn-outline-red:hover{border-color:#d32f2f!important;background-color:transparent!important;color:#d32f2f!important}.btn-outline-red:not([disabled]):not(.disabled).active,.btn-outline-red:not([disabled]):not(.disabled):active,.show>.btn-outline-red.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#d32f2f!important}.btn-outline-red:not([disabled]):not(.disabled).active:focus,.btn-outline-red:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-red.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-pink{background-color:#ec407a!important;color:#fff}.btn-pink:hover{background-color:#ee578a;color:#fff}.btn-pink.focus,.btn-pink:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-pink.active,.btn-pink:active,.btn-pink:focus{background-color:#b41249}.btn-pink.dropdown-toggle{background-color:#ec407a!important}.btn-pink.dropdown-toggle:focus,.btn-pink.dropdown-toggle:hover{background-color:#ee578a!important}.btn-pink:not([disabled]):not(.disabled).active,.btn-pink:not([disabled]):not(.disabled):active,.show>.btn-pink.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#b41249!important}.btn-pink:not([disabled]):not(.disabled).active:focus,.btn-pink:not([disabled]):not(.disabled):active:focus,.show>.btn-pink.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.pink-ic{color:#ec407a!important}.pink-ic:focus,.pink-ic:hover{color:#ec407a}table.table a.btn.btn-pink{color:#fff}.btn-outline-pink{border:2px solid #ec407a!important;background-color:transparent!important;color:#ec407a!important}.btn-outline-pink.active,.btn-outline-pink:active,.btn-outline-pink:active:focus,.btn-outline-pink:focus,.btn-outline-pink:hover{border-color:#ec407a!important;background-color:transparent!important;color:#ec407a!important}.btn-outline-pink:not([disabled]):not(.disabled).active,.btn-outline-pink:not([disabled]):not(.disabled):active,.show>.btn-outline-pink.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#ec407a!important}.btn-outline-pink:not([disabled]):not(.disabled).active:focus,.btn-outline-pink:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-pink.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-purple{background-color:#8e24aa!important;color:#fff}.btn-purple:hover{background-color:#a028bf;color:#fff}.btn-purple.focus,.btn-purple:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-purple.active,.btn-purple:active,.btn-purple:focus{background-color:#481256}.btn-purple.dropdown-toggle{background-color:#8e24aa!important}.btn-purple.dropdown-toggle:focus,.btn-purple.dropdown-toggle:hover{background-color:#a028bf!important}.btn-purple:not([disabled]):not(.disabled).active,.btn-purple:not([disabled]):not(.disabled):active,.show>.btn-purple.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#481256!important}.btn-purple:not([disabled]):not(.disabled).active:focus,.btn-purple:not([disabled]):not(.disabled):active:focus,.show>.btn-purple.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.purple-ic{color:#8e24aa!important}.purple-ic:focus,.purple-ic:hover{color:#8e24aa}table.table a.btn.btn-purple{color:#fff}.btn-outline-purple{border:2px solid #8e24aa!important;background-color:transparent!important;color:#8e24aa!important}.btn-outline-purple.active,.btn-outline-purple:active,.btn-outline-purple:active:focus,.btn-outline-purple:focus,.btn-outline-purple:hover{border-color:#8e24aa!important;background-color:transparent!important;color:#8e24aa!important}.btn-outline-purple:not([disabled]):not(.disabled).active,.btn-outline-purple:not([disabled]):not(.disabled):active,.show>.btn-outline-purple.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#8e24aa!important}.btn-outline-purple:not([disabled]):not(.disabled).active:focus,.btn-outline-purple:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-purple.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-deep-purple{background-color:#512da8!important;color:#fff}.btn-deep-purple:hover{background-color:#5b32bc;color:#fff}.btn-deep-purple.focus,.btn-deep-purple:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-deep-purple.active,.btn-deep-purple:active,.btn-deep-purple:focus{background-color:#2a1758}.btn-deep-purple.dropdown-toggle{background-color:#512da8!important}.btn-deep-purple.dropdown-toggle:focus,.btn-deep-purple.dropdown-toggle:hover{background-color:#5b32bc!important}.btn-deep-purple:not([disabled]):not(.disabled).active,.btn-deep-purple:not([disabled]):not(.disabled):active,.show>.btn-deep-purple.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#2a1758!important}.btn-deep-purple:not([disabled]):not(.disabled).active:focus,.btn-deep-purple:not([disabled]):not(.disabled):active:focus,.show>.btn-deep-purple.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.deep-purple-ic{color:#512da8!important}.deep-purple-ic:focus,.deep-purple-ic:hover{color:#512da8}table.table a.btn.btn-deep-purple{color:#fff}.btn-outline-deep-purple{border:2px solid #512da8!important;background-color:transparent!important;color:#512da8!important}.btn-outline-deep-purple.active,.btn-outline-deep-purple:active,.btn-outline-deep-purple:active:focus,.btn-outline-deep-purple:focus,.btn-outline-deep-purple:hover{border-color:#512da8!important;background-color:transparent!important;color:#512da8!important}.btn-outline-deep-purple:not([disabled]):not(.disabled).active,.btn-outline-deep-purple:not([disabled]):not(.disabled):active,.show>.btn-outline-deep-purple.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#512da8!important}.btn-outline-deep-purple:not([disabled]):not(.disabled).active:focus,.btn-outline-deep-purple:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-deep-purple.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-indigo{background-color:#3f51b5!important;color:#fff}.btn-indigo:hover{background-color:#4d5ec1;color:#fff}.btn-indigo.focus,.btn-indigo:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-indigo.active,.btn-indigo:active,.btn-indigo:focus{background-color:#252f69}.btn-indigo.dropdown-toggle{background-color:#3f51b5!important}.btn-indigo.dropdown-toggle:focus,.btn-indigo.dropdown-toggle:hover{background-color:#4d5ec1!important}.btn-indigo:not([disabled]):not(.disabled).active,.btn-indigo:not([disabled]):not(.disabled):active,.show>.btn-indigo.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#252f69!important}.btn-indigo:not([disabled]):not(.disabled).active:focus,.btn-indigo:not([disabled]):not(.disabled):active:focus,.show>.btn-indigo.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.indigo-ic{color:#3f51b5!important}.indigo-ic:focus,.indigo-ic:hover{color:#3f51b5}table.table a.btn.btn-indigo{color:#fff}.btn-outline-indigo{border:2px solid #3f51b5!important;background-color:transparent!important;color:#3f51b5!important}.btn-outline-indigo.active,.btn-outline-indigo:active,.btn-outline-indigo:active:focus,.btn-outline-indigo:focus,.btn-outline-indigo:hover{border-color:#3f51b5!important;background-color:transparent!important;color:#3f51b5!important}.btn-outline-indigo:not([disabled]):not(.disabled).active,.btn-outline-indigo:not([disabled]):not(.disabled):active,.show>.btn-outline-indigo.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#3f51b5!important}.btn-outline-indigo:not([disabled]):not(.disabled).active:focus,.btn-outline-indigo:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-indigo.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-blue{background-color:#1976d2!important;color:#fff}.btn-blue:hover{background-color:#2083e4;color:#fff}.btn-blue.focus,.btn-blue:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-blue.active,.btn-blue:active,.btn-blue:focus{background-color:#0e4377}.btn-blue.dropdown-toggle{background-color:#1976d2!important}.btn-blue.dropdown-toggle:focus,.btn-blue.dropdown-toggle:hover{background-color:#2083e4!important}.btn-blue:not([disabled]):not(.disabled).active,.btn-blue:not([disabled]):not(.disabled):active,.show>.btn-blue.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#0e4377!important}.btn-blue:not([disabled]):not(.disabled).active:focus,.btn-blue:not([disabled]):not(.disabled):active:focus,.show>.btn-blue.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.blue-ic{color:#1976d2!important}.blue-ic:focus,.blue-ic:hover{color:#1976d2}table.table a.btn.btn-blue{color:#fff}.btn-outline-blue{border:2px solid #1976d2!important;background-color:transparent!important;color:#1976d2!important}.btn-outline-blue.active,.btn-outline-blue:active,.btn-outline-blue:active:focus,.btn-outline-blue:focus,.btn-outline-blue:hover{border-color:#1976d2!important;background-color:transparent!important;color:#1976d2!important}.btn-outline-blue:not([disabled]):not(.disabled).active,.btn-outline-blue:not([disabled]):not(.disabled):active,.show>.btn-outline-blue.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#1976d2!important}.btn-outline-blue:not([disabled]):not(.disabled).active:focus,.btn-outline-blue:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-blue.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-light-blue{background-color:#82b1ff!important;color:#fff}.btn-light-blue:hover{background-color:#9cc1ff;color:#fff}.btn-light-blue.focus,.btn-light-blue:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-light-blue.active,.btn-light-blue:active,.btn-light-blue:focus{background-color:#1c71ff}.btn-light-blue.dropdown-toggle{background-color:#82b1ff!important}.btn-light-blue.dropdown-toggle:focus,.btn-light-blue.dropdown-toggle:hover{background-color:#9cc1ff!important}.btn-light-blue:not([disabled]):not(.disabled).active,.btn-light-blue:not([disabled]):not(.disabled):active,.show>.btn-light-blue.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#1c71ff!important}.btn-light-blue:not([disabled]):not(.disabled).active:focus,.btn-light-blue:not([disabled]):not(.disabled):active:focus,.show>.btn-light-blue.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.light-blue-ic{color:#82b1ff!important}.light-blue-ic:focus,.light-blue-ic:hover{color:#82b1ff}table.table a.btn.btn-light-blue{color:#fff}.btn-outline-light-blue{border:2px solid #82b1ff!important;background-color:transparent!important;color:#82b1ff!important}.btn-outline-light-blue.active,.btn-outline-light-blue:active,.btn-outline-light-blue:active:focus,.btn-outline-light-blue:focus,.btn-outline-light-blue:hover{border-color:#82b1ff!important;background-color:transparent!important;color:#82b1ff!important}.btn-outline-light-blue:not([disabled]):not(.disabled).active,.btn-outline-light-blue:not([disabled]):not(.disabled):active,.show>.btn-outline-light-blue.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#82b1ff!important}.btn-outline-light-blue:not([disabled]):not(.disabled).active:focus,.btn-outline-light-blue:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-light-blue.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-cyan{background-color:#00bcd4!important;color:#fff}.btn-cyan:hover{background-color:#00d3ee;color:#fff}.btn-cyan.focus,.btn-cyan:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-cyan.active,.btn-cyan:active,.btn-cyan:focus{background-color:#00626e}.btn-cyan.dropdown-toggle{background-color:#00bcd4!important}.btn-cyan.dropdown-toggle:focus,.btn-cyan.dropdown-toggle:hover{background-color:#00d3ee!important}.btn-cyan:not([disabled]):not(.disabled).active,.btn-cyan:not([disabled]):not(.disabled):active,.show>.btn-cyan.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#00626e!important}.btn-cyan:not([disabled]):not(.disabled).active:focus,.btn-cyan:not([disabled]):not(.disabled):active:focus,.show>.btn-cyan.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.cyan-ic{color:#00bcd4!important}.cyan-ic:focus,.cyan-ic:hover{color:#00bcd4}table.table a.btn.btn-cyan{color:#fff}.btn-outline-cyan{border:2px solid #00bcd4!important;background-color:transparent!important;color:#00bcd4!important}.btn-outline-cyan.active,.btn-outline-cyan:active,.btn-outline-cyan:active:focus,.btn-outline-cyan:focus,.btn-outline-cyan:hover{border-color:#00bcd4!important;background-color:transparent!important;color:#00bcd4!important}.btn-outline-cyan:not([disabled]):not(.disabled).active,.btn-outline-cyan:not([disabled]):not(.disabled):active,.show>.btn-outline-cyan.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#00bcd4!important}.btn-outline-cyan:not([disabled]):not(.disabled).active:focus,.btn-outline-cyan:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-cyan.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-teal{background-color:#00796b!important;color:#fff}.btn-teal:hover{background-color:#009382;color:#fff}.btn-teal.focus,.btn-teal:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-teal.active,.btn-teal:active,.btn-teal:focus{background-color:#001311}.btn-teal.dropdown-toggle{background-color:#00796b!important}.btn-teal.dropdown-toggle:focus,.btn-teal.dropdown-toggle:hover{background-color:#009382!important}.btn-teal:not([disabled]):not(.disabled).active,.btn-teal:not([disabled]):not(.disabled):active,.show>.btn-teal.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#001311!important}.btn-teal:not([disabled]):not(.disabled).active:focus,.btn-teal:not([disabled]):not(.disabled):active:focus,.show>.btn-teal.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.teal-ic{color:#00796b!important}.teal-ic:focus,.teal-ic:hover{color:#00796b}table.table a.btn.btn-teal{color:#fff}.btn-outline-teal{border:2px solid #00796b!important;background-color:transparent!important;color:#00796b!important}.btn-outline-teal.active,.btn-outline-teal:active,.btn-outline-teal:active:focus,.btn-outline-teal:focus,.btn-outline-teal:hover{border-color:#00796b!important;background-color:transparent!important;color:#00796b!important}.btn-outline-teal:not([disabled]):not(.disabled).active,.btn-outline-teal:not([disabled]):not(.disabled):active,.show>.btn-outline-teal.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#00796b!important}.btn-outline-teal:not([disabled]):not(.disabled).active:focus,.btn-outline-teal:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-teal.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-green{background-color:#388e3c!important;color:#fff}.btn-green:hover{background-color:#3fa044;color:#fff}.btn-green.focus,.btn-green:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-green.active,.btn-green:active,.btn-green:focus{background-color:#1b451d}.btn-green.dropdown-toggle{background-color:#388e3c!important}.btn-green.dropdown-toggle:focus,.btn-green.dropdown-toggle:hover{background-color:#3fa044!important}.btn-green:not([disabled]):not(.disabled).active,.btn-green:not([disabled]):not(.disabled):active,.show>.btn-green.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#1b451d!important}.btn-green:not([disabled]):not(.disabled).active:focus,.btn-green:not([disabled]):not(.disabled):active:focus,.show>.btn-green.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.green-ic{color:#388e3c!important}.green-ic:focus,.green-ic:hover{color:#388e3c}table.table a.btn.btn-green{color:#fff}.btn-outline-green{border:2px solid #388e3c!important;background-color:transparent!important;color:#388e3c!important}.btn-outline-green.active,.btn-outline-green:active,.btn-outline-green:active:focus,.btn-outline-green:focus,.btn-outline-green:hover{border-color:#388e3c!important;background-color:transparent!important;color:#388e3c!important}.btn-outline-green:not([disabled]):not(.disabled).active,.btn-outline-green:not([disabled]):not(.disabled):active,.show>.btn-outline-green.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#388e3c!important}.btn-outline-green:not([disabled]):not(.disabled).active:focus,.btn-outline-green:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-green.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-light-green{background-color:#8bc34a!important;color:#fff}.btn-light-green:hover{background-color:#97c95d;color:#fff}.btn-light-green.focus,.btn-light-green:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-light-green.active,.btn-light-green:active,.btn-light-green:focus{background-color:#577d2a}.btn-light-green.dropdown-toggle{background-color:#8bc34a!important}.btn-light-green.dropdown-toggle:focus,.btn-light-green.dropdown-toggle:hover{background-color:#97c95d!important}.btn-light-green:not([disabled]):not(.disabled).active,.btn-light-green:not([disabled]):not(.disabled):active,.show>.btn-light-green.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#577d2a!important}.btn-light-green:not([disabled]):not(.disabled).active:focus,.btn-light-green:not([disabled]):not(.disabled):active:focus,.show>.btn-light-green.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.light-green-ic{color:#8bc34a!important}.light-green-ic:focus,.light-green-ic:hover{color:#8bc34a}table.table a.btn.btn-light-green{color:#fff}.btn-outline-light-green{border:2px solid #8bc34a!important;background-color:transparent!important;color:#8bc34a!important}.btn-outline-light-green.active,.btn-outline-light-green:active,.btn-outline-light-green:active:focus,.btn-outline-light-green:focus,.btn-outline-light-green:hover{border-color:#8bc34a!important;background-color:transparent!important;color:#8bc34a!important}.btn-outline-light-green:not([disabled]):not(.disabled).active,.btn-outline-light-green:not([disabled]):not(.disabled):active,.show>.btn-outline-light-green.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#8bc34a!important}.btn-outline-light-green:not([disabled]):not(.disabled).active:focus,.btn-outline-light-green:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-light-green.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-lime{background-color:#afb42b!important;color:#fff}.btn-lime:hover{background-color:#c3c930;color:#fff}.btn-lime.focus,.btn-lime:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-lime.active,.btn-lime:active,.btn-lime:focus{background-color:#5f6217}.btn-lime.dropdown-toggle{background-color:#afb42b!important}.btn-lime.dropdown-toggle:focus,.btn-lime.dropdown-toggle:hover{background-color:#c3c930!important}.btn-lime:not([disabled]):not(.disabled).active,.btn-lime:not([disabled]):not(.disabled):active,.show>.btn-lime.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#5f6217!important}.btn-lime:not([disabled]):not(.disabled).active:focus,.btn-lime:not([disabled]):not(.disabled):active:focus,.show>.btn-lime.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.lime-ic{color:#afb42b!important}.lime-ic:focus,.lime-ic:hover{color:#afb42b}table.table a.btn.btn-lime{color:#fff}.btn-outline-lime{border:2px solid #afb42b!important;background-color:transparent!important;color:#afb42b!important}.btn-outline-lime.active,.btn-outline-lime:active,.btn-outline-lime:active:focus,.btn-outline-lime:focus,.btn-outline-lime:hover{border-color:#afb42b!important;background-color:transparent!important;color:#afb42b!important}.btn-outline-lime:not([disabled]):not(.disabled).active,.btn-outline-lime:not([disabled]):not(.disabled):active,.show>.btn-outline-lime.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#afb42b!important}.btn-outline-lime:not([disabled]):not(.disabled).active:focus,.btn-outline-lime:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-lime.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-yellow{background-color:#fbc02d!important;color:#fff}.btn-yellow:hover{background-color:#fbc846;color:#fff}.btn-yellow.focus,.btn-yellow:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-yellow.active,.btn-yellow:active,.btn-yellow:focus{background-color:#be8904}.btn-yellow.dropdown-toggle{background-color:#fbc02d!important}.btn-yellow.dropdown-toggle:focus,.btn-yellow.dropdown-toggle:hover{background-color:#fbc846!important}.btn-yellow:not([disabled]):not(.disabled).active,.btn-yellow:not([disabled]):not(.disabled):active,.show>.btn-yellow.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#be8904!important}.btn-yellow:not([disabled]):not(.disabled).active:focus,.btn-yellow:not([disabled]):not(.disabled):active:focus,.show>.btn-yellow.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.yellow-ic{color:#fbc02d!important}.yellow-ic:focus,.yellow-ic:hover{color:#fbc02d}table.table a.btn.btn-yellow{color:#fff}.btn-outline-yellow{border:2px solid #fbc02d!important;background-color:transparent!important;color:#fbc02d!important}.btn-outline-yellow.active,.btn-outline-yellow:active,.btn-outline-yellow:active:focus,.btn-outline-yellow:focus,.btn-outline-yellow:hover{border-color:#fbc02d!important;background-color:transparent!important;color:#fbc02d!important}.btn-outline-yellow:not([disabled]):not(.disabled).active,.btn-outline-yellow:not([disabled]):not(.disabled):active,.show>.btn-outline-yellow.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#fbc02d!important}.btn-outline-yellow:not([disabled]):not(.disabled).active:focus,.btn-outline-yellow:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-yellow.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-amber{background-color:#ffa000!important;color:#fff}.btn-amber:hover{background-color:#ffaa1a;color:#fff}.btn-amber.focus,.btn-amber:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-amber.active,.btn-amber:active,.btn-amber:focus{background-color:#996000}.btn-amber.dropdown-toggle{background-color:#ffa000!important}.btn-amber.dropdown-toggle:focus,.btn-amber.dropdown-toggle:hover{background-color:#ffaa1a!important}.btn-amber:not([disabled]):not(.disabled).active,.btn-amber:not([disabled]):not(.disabled):active,.show>.btn-amber.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#996000!important}.btn-amber:not([disabled]):not(.disabled).active:focus,.btn-amber:not([disabled]):not(.disabled):active:focus,.show>.btn-amber.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.amber-ic{color:#ffa000!important}.amber-ic:focus,.amber-ic:hover{color:#ffa000}table.table a.btn.btn-amber{color:#fff}.btn-outline-amber{border:2px solid #ffa000!important;background-color:transparent!important;color:#ffa000!important}.btn-outline-amber.active,.btn-outline-amber:active,.btn-outline-amber:active:focus,.btn-outline-amber:focus,.btn-outline-amber:hover{border-color:#ffa000!important;background-color:transparent!important;color:#ffa000!important}.btn-outline-amber:not([disabled]):not(.disabled).active,.btn-outline-amber:not([disabled]):not(.disabled):active,.show>.btn-outline-amber.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#ffa000!important}.btn-outline-amber:not([disabled]):not(.disabled).active:focus,.btn-outline-amber:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-amber.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-orange{background-color:#f57c00!important;color:#fff}.btn-orange:hover{background-color:#ff8910;color:#fff}.btn-orange.focus,.btn-orange:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-orange.active,.btn-orange:active,.btn-orange:focus{background-color:#8f4800}.btn-orange.dropdown-toggle{background-color:#f57c00!important}.btn-orange.dropdown-toggle:focus,.btn-orange.dropdown-toggle:hover{background-color:#ff8910!important}.btn-orange:not([disabled]):not(.disabled).active,.btn-orange:not([disabled]):not(.disabled):active,.show>.btn-orange.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#8f4800!important}.btn-orange:not([disabled]):not(.disabled).active:focus,.btn-orange:not([disabled]):not(.disabled):active:focus,.show>.btn-orange.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.orange-ic{color:#f57c00!important}.orange-ic:focus,.orange-ic:hover{color:#f57c00}table.table a.btn.btn-orange{color:#fff}.btn-outline-orange{border:2px solid #f57c00!important;background-color:transparent!important;color:#f57c00!important}.btn-outline-orange.active,.btn-outline-orange:active,.btn-outline-orange:active:focus,.btn-outline-orange:focus,.btn-outline-orange:hover{border-color:#f57c00!important;background-color:transparent!important;color:#f57c00!important}.btn-outline-orange:not([disabled]):not(.disabled).active,.btn-outline-orange:not([disabled]):not(.disabled):active,.show>.btn-outline-orange.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#f57c00!important}.btn-outline-orange:not([disabled]):not(.disabled).active:focus,.btn-outline-orange:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-orange.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-deep-orange{background-color:#ff7043!important;color:#fff}.btn-deep-orange:hover{background-color:#ff835d;color:#fff}.btn-deep-orange.focus,.btn-deep-orange:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-deep-orange.active,.btn-deep-orange:active,.btn-deep-orange:focus{background-color:#dc3500}.btn-deep-orange.dropdown-toggle{background-color:#ff7043!important}.btn-deep-orange.dropdown-toggle:focus,.btn-deep-orange.dropdown-toggle:hover{background-color:#ff835d!important}.btn-deep-orange:not([disabled]):not(.disabled).active,.btn-deep-orange:not([disabled]):not(.disabled):active,.show>.btn-deep-orange.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#dc3500!important}.btn-deep-orange:not([disabled]):not(.disabled).active:focus,.btn-deep-orange:not([disabled]):not(.disabled):active:focus,.show>.btn-deep-orange.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.deep-orange-ic{color:#ff7043!important}.deep-orange-ic:focus,.deep-orange-ic:hover{color:#ff7043}table.table a.btn.btn-deep-orange{color:#fff}.btn-outline-deep-orange{border:2px solid #ff7043!important;background-color:transparent!important;color:#ff7043!important}.btn-outline-deep-orange.active,.btn-outline-deep-orange:active,.btn-outline-deep-orange:active:focus,.btn-outline-deep-orange:focus,.btn-outline-deep-orange:hover{border-color:#ff7043!important;background-color:transparent!important;color:#ff7043!important}.btn-outline-deep-orange:not([disabled]):not(.disabled).active,.btn-outline-deep-orange:not([disabled]):not(.disabled):active,.show>.btn-outline-deep-orange.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#ff7043!important}.btn-outline-deep-orange:not([disabled]):not(.disabled).active:focus,.btn-outline-deep-orange:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-deep-orange.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-brown{background-color:#795548!important;color:#fff}.btn-brown:hover{background-color:#896052;color:#fff}.btn-brown.focus,.btn-brown:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-brown.active,.btn-brown:active,.btn-brown:focus{background-color:#392822}.btn-brown.dropdown-toggle{background-color:#795548!important}.btn-brown.dropdown-toggle:focus,.btn-brown.dropdown-toggle:hover{background-color:#896052!important}.btn-brown:not([disabled]):not(.disabled).active,.btn-brown:not([disabled]):not(.disabled):active,.show>.btn-brown.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#392822!important}.btn-brown:not([disabled]):not(.disabled).active:focus,.btn-brown:not([disabled]):not(.disabled):active:focus,.show>.btn-brown.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.brown-ic{color:#795548!important}.brown-ic:focus,.brown-ic:hover{color:#795548}table.table a.btn.btn-brown{color:#fff}.btn-outline-brown{border:2px solid #795548!important;background-color:transparent!important;color:#795548!important}.btn-outline-brown.active,.btn-outline-brown:active,.btn-outline-brown:active:focus,.btn-outline-brown:focus,.btn-outline-brown:hover{border-color:#795548!important;background-color:transparent!important;color:#795548!important}.btn-outline-brown:not([disabled]):not(.disabled).active,.btn-outline-brown:not([disabled]):not(.disabled):active,.show>.btn-outline-brown.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#795548!important}.btn-outline-brown:not([disabled]):not(.disabled).active:focus,.btn-outline-brown:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-brown.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-grey{background-color:#616161!important;color:#fff}.btn-grey:hover{background-color:#6e6e6e;color:#fff}.btn-grey.focus,.btn-grey:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-grey.active,.btn-grey:active,.btn-grey:focus{background-color:#2e2e2e}.btn-grey.dropdown-toggle{background-color:#616161!important}.btn-grey.dropdown-toggle:focus,.btn-grey.dropdown-toggle:hover{background-color:#6e6e6e!important}.btn-grey:not([disabled]):not(.disabled).active,.btn-grey:not([disabled]):not(.disabled):active,.show>.btn-grey.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#2e2e2e!important}.btn-grey:not([disabled]):not(.disabled).active:focus,.btn-grey:not([disabled]):not(.disabled):active:focus,.show>.btn-grey.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.grey-ic{color:#616161!important}.grey-ic:focus,.grey-ic:hover{color:#616161}table.table a.btn.btn-grey{color:#fff}.btn-outline-grey{border:2px solid #616161!important;background-color:transparent!important;color:#616161!important}.btn-outline-grey.active,.btn-outline-grey:active,.btn-outline-grey:active:focus,.btn-outline-grey:focus,.btn-outline-grey:hover{border-color:#616161!important;background-color:transparent!important;color:#616161!important}.btn-outline-grey:not([disabled]):not(.disabled).active,.btn-outline-grey:not([disabled]):not(.disabled):active,.show>.btn-outline-grey.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#616161!important}.btn-outline-grey:not([disabled]):not(.disabled).active:focus,.btn-outline-grey:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-grey.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-blue-grey{background-color:#78909c!important;color:#fff}.btn-blue-grey:hover{background-color:#879ca7;color:#fff}.btn-blue-grey.focus,.btn-blue-grey:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-blue-grey.active,.btn-blue-grey:active,.btn-blue-grey:focus{background-color:#4a5b64}.btn-blue-grey.dropdown-toggle{background-color:#78909c!important}.btn-blue-grey.dropdown-toggle:focus,.btn-blue-grey.dropdown-toggle:hover{background-color:#879ca7!important}.btn-blue-grey:not([disabled]):not(.disabled).active,.btn-blue-grey:not([disabled]):not(.disabled):active,.show>.btn-blue-grey.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#4a5b64!important}.btn-blue-grey:not([disabled]):not(.disabled).active:focus,.btn-blue-grey:not([disabled]):not(.disabled):active:focus,.show>.btn-blue-grey.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.blue-grey-ic{color:#78909c!important}.blue-grey-ic:focus,.blue-grey-ic:hover{color:#78909c}table.table a.btn.btn-blue-grey{color:#fff}.btn-outline-blue-grey{border:2px solid #78909c!important;background-color:transparent!important;color:#78909c!important}.btn-outline-blue-grey.active,.btn-outline-blue-grey:active,.btn-outline-blue-grey:active:focus,.btn-outline-blue-grey:focus,.btn-outline-blue-grey:hover{border-color:#78909c!important;background-color:transparent!important;color:#78909c!important}.btn-outline-blue-grey:not([disabled]):not(.disabled).active,.btn-outline-blue-grey:not([disabled]):not(.disabled):active,.show>.btn-outline-blue-grey.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#78909c!important}.btn-outline-blue-grey:not([disabled]):not(.disabled).active:focus,.btn-outline-blue-grey:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-blue-grey.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-dark{background-color:#212121!important;color:#fff}.btn-dark:hover{background-color:#2e2e2e;color:#fff}.btn-dark.focus,.btn-dark:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-dark.active,.btn-dark:active,.btn-dark:focus{background-color:#000}.btn-dark.dropdown-toggle{background-color:#212121!important}.btn-dark.dropdown-toggle:focus,.btn-dark.dropdown-toggle:hover{background-color:#2e2e2e!important}.btn-dark:not([disabled]):not(.disabled).active,.btn-dark:not([disabled]):not(.disabled):active,.show>.btn-dark.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#000!important}.btn-dark:not([disabled]):not(.disabled).active:focus,.btn-dark:not([disabled]):not(.disabled):active:focus,.show>.btn-dark.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.dark-ic{color:#212121!important}.dark-ic:focus,.dark-ic:hover{color:#212121}table.table a.btn.btn-dark{color:#fff}.btn-outline-dark{border:2px solid #212121!important;background-color:transparent!important;color:#212121!important}.btn-outline-dark.active,.btn-outline-dark:active,.btn-outline-dark:active:focus,.btn-outline-dark:focus,.btn-outline-dark:hover{border-color:#212121!important;background-color:transparent!important;color:#212121!important}.btn-outline-dark:not([disabled]):not(.disabled).active,.btn-outline-dark:not([disabled]):not(.disabled):active,.show>.btn-outline-dark.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#212121!important}.btn-outline-dark:not([disabled]):not(.disabled).active:focus,.btn-outline-dark:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-dark.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-light{background-color:#e0e0e0!important;color:#000}.btn-light:hover{background-color:#ededed;color:#000}.btn-light.focus,.btn-light:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-light.active,.btn-light:active,.btn-light:focus{background-color:#adadad}.btn-light.dropdown-toggle{background-color:#e0e0e0!important}.btn-light.dropdown-toggle:focus,.btn-light.dropdown-toggle:hover{background-color:#ededed!important}.btn-light:not([disabled]):not(.disabled).active,.btn-light:not([disabled]):not(.disabled):active,.show>.btn-light.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#adadad!important}.btn-light:not([disabled]):not(.disabled).active:focus,.btn-light:not([disabled]):not(.disabled):active:focus,.show>.btn-light.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.light-ic{color:#e0e0e0!important}.light-ic:focus,.light-ic:hover{color:#e0e0e0}table.table a.btn.btn-light{color:#000}.btn-outline-light{border:2px solid #e0e0e0!important;background-color:transparent!important;color:#e0e0e0!important}.btn-outline-light.active,.btn-outline-light:active,.btn-outline-light:active:focus,.btn-outline-light:focus,.btn-outline-light:hover{border-color:#e0e0e0!important;background-color:transparent!important;color:#e0e0e0!important}.btn-outline-light:not([disabled]):not(.disabled).active,.btn-outline-light:not([disabled]):not(.disabled):active,.show>.btn-outline-light.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#e0e0e0!important}.btn-outline-light:not([disabled]):not(.disabled).active:focus,.btn-outline-light:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-light.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-white{background-color:#fff!important;color:#000}.btn-white:hover{background-color:#fff;color:#000}.btn-white.focus,.btn-white:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-white.active,.btn-white:active,.btn-white:focus{background-color:#ccc}.btn-white.dropdown-toggle,.btn-white.dropdown-toggle:focus,.btn-white.dropdown-toggle:hover{background-color:#fff!important}.btn-white:not([disabled]):not(.disabled).active,.btn-white:not([disabled]):not(.disabled):active,.show>.btn-white.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#ccc!important}.btn-white:not([disabled]):not(.disabled).active:focus,.btn-white:not([disabled]):not(.disabled):active:focus,.show>.btn-white.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.white-ic{color:#fff!important}.white-ic:focus,.white-ic:hover{color:#fff}a.btn:not([href]):not([tabindex]),a.btn:not([href]):not([tabindex]):focus,a.btn:not([href]):not([tabindex]):hover,table.table a.btn.btn-white{color:#000}.btn-outline-white{border:2px solid #fff!important;background-color:transparent!important;color:#fff!important}.btn-outline-white.active,.btn-outline-white:active,.btn-outline-white:active:focus,.btn-outline-white:focus,.btn-outline-white:hover{border-color:#fff!important;background-color:transparent!important;color:#fff!important}.btn-outline-white:not([disabled]):not(.disabled).active,.btn-outline-white:not([disabled]):not(.disabled):active,.show>.btn-outline-white.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#fff!important}.btn-outline-white:not([disabled]):not(.disabled).active:focus,.btn-outline-white:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-white.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-black{background-color:#000!important;color:#fff}.btn-black:hover{background-color:#0d0d0d;color:#fff}.btn-black.focus,.btn-black:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-black.active,.btn-black:active,.btn-black:focus{background-color:#000}.btn-black.dropdown-toggle{background-color:#000!important}.btn-black.dropdown-toggle:focus,.btn-black.dropdown-toggle:hover{background-color:#0d0d0d!important}.btn-black:not([disabled]):not(.disabled).active,.btn-black:not([disabled]):not(.disabled):active,.show>.btn-black.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#000!important}.btn-black:not([disabled]):not(.disabled).active:focus,.btn-black:not([disabled]):not(.disabled):active:focus,.show>.btn-black.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.black-ic{color:#000!important}.black-ic:focus,.black-ic:hover{color:#000}a.btn:not([href]):not([tabindex]),a.btn:not([href]):not([tabindex]):focus,a.btn:not([href]):not([tabindex]):hover,table.table a.btn.btn-black{color:#fff}.btn-outline-black{border:2px solid #000!important;background-color:transparent!important;color:#000!important}.btn-outline-black.active,.btn-outline-black:active,.btn-outline-black:active:focus,.btn-outline-black:focus,.btn-outline-black:hover{border-color:#000!important;background-color:transparent!important;color:#000!important}.btn-outline-black:not([disabled]):not(.disabled).active,.btn-outline-black:not([disabled]):not(.disabled):active,.show>.btn-outline-black.dropdown-toggle{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:transparent!important;border-color:#000!important}.btn-outline-black:not([disabled]):not(.disabled).active:focus,.btn-outline-black:not([disabled]):not(.disabled):active:focus,.show>.btn-outline-black.dropdown-toggle:focus{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.btn-warning:not(:disabled):not(.disabled).active,.btn-warning:not(:disabled):not(.disabled):active,.show>.btn-warning.dropdown-toggle{color:#fff}.btn.purple-gradient{transition:.5s;color:#fff}.btn.purple-gradient:active,.btn.purple-gradient:active:focus .btn.purple-gradient.active,.btn.purple-gradient:focus,.btn.purple-gradient:hover{background:linear-gradient(#ff88ce,#8f8bf7)}.btn.peach-gradient{transition:.5s;color:#fff}.btn.peach-gradient:active,.btn.peach-gradient:active:focus .btn.peach-gradient.active,.btn.peach-gradient:focus,.btn.peach-gradient:hover{background:linear-gradient(#ffdf89,#fc7b7b)}.btn.aqua-gradient{transition:.5s;color:#fff}.btn.aqua-gradient:active,.btn.aqua-gradient:active:focus .btn.aqua-gradient.active,.btn.aqua-gradient:focus,.btn.aqua-gradient:hover{background:linear-gradient(#3aa2ff,#1fffac)}.btn.blue-gradient{transition:.5s;color:#fff}.btn.blue-gradient:active,.btn.blue-gradient:active:focus .btn.blue-gradient.active,.btn.blue-gradient:focus,.btn.blue-gradient:hover{background:linear-gradient(#5ed1fc,#3647b3)}.btn mdb-icon{position:relative;font-size:.9rem}.btn mdb-icon.right{margin-left:.3rem}.btn mdb-icon.left{margin-right:.3rem}.btn.btn-lg{padding:1rem 2.4rem;font-size:.94rem}.btn.btn-lg mdb-icon{font-size:1rem}.btn.btn-md{padding:.7rem 1.6rem;font-size:.7rem}.btn.btn-md mdb-icon{font-size:.8rem}.btn.btn-sm{padding:.5rem 1.6rem;font-size:.64rem}.btn.btn-sm mdb-icon{font-size:.7rem}.btn.btn-flat{font-weight:500;box-shadow:none;background-color:transparent;color:inherit;color:inherit!important}.btn.btn-flat:not([disabled]):not(.disabled):active{box-shadow:none}.btn-floating{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);width:47px;height:47px;position:relative;z-index:1;vertical-align:middle;display:inline-block;overflow:hidden;transition:.2s ease-in-out;margin:10px;border-radius:50%;padding:0;cursor:pointer}.btn-floating i{font-size:1.25rem;line-height:47px;display:inline-block;width:inherit;text-align:center;color:#fff}.fixed-action-btn{margin-bottom:0;padding-top:15px}.fixed-action-btn ul{display:flex;flex-direction:column;transition:height .4s;position:absolute;bottom:64px;height:64px;left:0;right:0;margin:0 0 15px;padding:0;text-align:center}.fixed-action-btn ul li{display:flex;margin-bottom:15px;margin-left:auto;margin-right:auto;z-index:0}.fixed-action-btn ul a.btn-floating{opacity:0;transition-duration:.4s;-webkit-transform:scale(.4) translate(0);transform:scale(.4) translate(0)}.fixed-action-btn ul a.btn-floating.shown{-webkit-transform:scale(1) translate(0);transform:scale(1) translate(0);opacity:1}.fixed-action-btn.active ul{height:300px}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:none;-moz-appearance:none;appearance:none}.btn-rounded{border-radius:10em}.waves-input-wrapper{display:inline-block}.btn-flat{background:0 0;color:inherit!important;position:relative;padding:8px 30px;border:none;margin:10px;text-transform:uppercase;text-decoration:none;outline:0!important;box-shadow:none}.btn-flat:focus,.btn-flat:hover{background-color:transparent;box-shadow:none}.fixed-action-btn{position:fixed;z-index:998;right:auto;bottom:auto}.fixed-action-btn .fixed_collapse{left:0;right:0;text-align:center;position:absolute;bottom:70px;margin:0}.btn-floating mdb-icon{display:inline-block;width:inherit;text-align:center;color:#fff}.btn-floating .fixed-button-caption{background:#000;color:#fff;border-radius:.25rem;padding:.25rem .5rem;white-space:nowrap}.btn-floating:hover{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19)}.btn-floating:before{border-radius:0}.btn-floating.btn-sm{width:36.15385px;height:36.15385px}.btn-floating.btn-sm i{font-size:.96154rem;line-height:36.15385px}.btn-floating.btn-lg{width:61.1px;height:61.1px}.btn-floating.btn-lg i{font-size:1.625rem;line-height:61.1px}.btn.btn-floating{position:fixed}[type=checkbox].onFocusSelect,[type=radio].onFocusSelect{visibility:visible!important;opacity:0!important}"]
+                }] }
     ];
     /** @nocollapse */
     MdbBtnDirective.ctorParameters = function () { return [
@@ -277,11 +285,12 @@ var MdbBtnDirective = /** @class */ (function () {
 /** @type {?} */
 var CHECKBOX_CONTROL_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
+    // tslint:disable-next-line: no-use-before-declare
     useExisting: forwardRef((/**
      * @return {?}
      */
     function () { return ButtonCheckboxDirective; })),
-    multi: true
+    multi: true,
 };
 /**
  * Add checkbox functionality to any element
@@ -332,9 +341,7 @@ var ButtonCheckboxDirective = /** @class */ (function () {
          * @return {?}
          */
         function () {
-            return typeof this.btnCheckboxTrue !== 'undefined'
-                ? this.btnCheckboxTrue
-                : true;
+            return typeof this.btnCheckboxTrue !== 'undefined' ? this.btnCheckboxTrue : true;
         },
         enumerable: true,
         configurable: true
@@ -345,9 +352,7 @@ var ButtonCheckboxDirective = /** @class */ (function () {
          * @return {?}
          */
         function () {
-            return typeof this.btnCheckboxFalse !== 'undefined'
-                ? this.btnCheckboxFalse
-                : false;
+            return typeof this.btnCheckboxFalse !== 'undefined' ? this.btnCheckboxFalse : false;
         },
         enumerable: true,
         configurable: true
@@ -435,11 +440,12 @@ var ButtonCheckboxDirective = /** @class */ (function () {
 /** @type {?} */
 var RADIO_CONTROL_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
+    // tslint:disable-next-line: no-use-before-declare
     useExisting: forwardRef((/**
      * @return {?}
      */
     function () { return ButtonRadioDirective; })),
-    multi: true
+    multi: true,
 };
 /**
  * Create radio buttons or groups of buttons.
@@ -494,8 +500,7 @@ var ButtonRadioDirective = /** @class */ (function () {
             }));
             this.renderer.addClass(event.target, 'active');
         }
-        catch (error) {
-        }
+        catch (error) { }
         if (this.el.nativeElement.attributes.disabled) {
             return;
         }
@@ -669,8 +674,18 @@ var ButtonsModule = /** @class */ (function () {
     };
     ButtonsModule.decorators = [
         { type: NgModule, args: [{
-                    declarations: [ButtonCheckboxDirective, ButtonRadioDirective, MdbBtnDirective, FixedButtonCaptionDirective],
-                    exports: [ButtonCheckboxDirective, ButtonRadioDirective, MdbBtnDirective, FixedButtonCaptionDirective]
+                    declarations: [
+                        ButtonCheckboxDirective,
+                        ButtonRadioDirective,
+                        MdbBtnDirective,
+                        FixedButtonCaptionDirective,
+                    ],
+                    exports: [
+                        ButtonCheckboxDirective,
+                        ButtonRadioDirective,
+                        MdbBtnDirective,
+                        FixedButtonCaptionDirective,
+                    ],
                 },] }
     ];
     return ButtonsModule;
@@ -950,8 +965,10 @@ var MdbCardComponent = /** @class */ (function () {
     MdbCardComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mdb-card',
-                    template: "<div class=\"card\" [ngClass]=\"{'card-cascade': cascade, 'wider': wider}\" #card>\n    <ng-content></ng-content>\n</div>",
-                    changeDetection: ChangeDetectionStrategy.OnPush
+                    template: "<div\n  class=\"card\"\n  [ngClass]=\"{ 'card-cascade': cascade, wider: wider, 'card-image': imageBackground }\"\n  #card\n  [ngStyle]=\"{ 'background-image': imageBackground }\"\n>\n  <ng-content></ng-content>\n</div>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None,
+                    styles: [".mdb-color.lighten-5{background-color:#d0d6e2!important}.mdb-color.lighten-4{background-color:#b1bace!important}.mdb-color.lighten-3{background-color:#929fba!important}.mdb-color.lighten-2{background-color:#7283a7!important}.mdb-color.lighten-1{background-color:#59698d!important}.mdb-color{background-color:#45526e!important}.mdb-color-text{color:#45526e!important}.rgba-mdb-color-slight,.rgba-mdb-color-slight:after{background-color:rgba(69,82,110,.1)}.rgba-mdb-color-light,.rgba-mdb-color-light:after{background-color:rgba(69,82,110,.3)}.rgba-mdb-color-strong,.rgba-mdb-color-strong:after{background-color:rgba(69,82,110,.7)}.mdb-color.darken-1{background-color:#3b465e!important}.mdb-color.darken-2{background-color:#2e3951!important}.mdb-color.darken-3{background-color:#1c2a48!important}.mdb-color.darken-4{background-color:#1c2331!important}.red.lighten-5{background-color:#ffebee!important}.red.lighten-4{background-color:#ffcdd2!important}.red.lighten-3{background-color:#ef9a9a!important}.red.lighten-2{background-color:#e57373!important}.red.lighten-1{background-color:#ef5350!important}.red{background-color:#f44336!important}.red-text{color:#f44336!important}.rgba-red-slight,.rgba-red-slight:after{background-color:rgba(244,67,54,.1)}.rgba-red-light,.rgba-red-light:after{background-color:rgba(244,67,54,.3)}.rgba-red-strong,.rgba-red-strong:after{background-color:rgba(244,67,54,.7)}.red.darken-1{background-color:#e53935!important}.red.darken-2{background-color:#d32f2f!important}.red.darken-3{background-color:#c62828!important}.red.darken-4{background-color:#b71c1c!important}.red.accent-1{background-color:#ff8a80!important}.red.accent-2{background-color:#ff5252!important}.red.accent-3{background-color:#ff1744!important}.red.accent-4{background-color:#d50000!important}.pink.lighten-5{background-color:#fce4ec!important}.pink.lighten-4{background-color:#f8bbd0!important}.pink.lighten-3{background-color:#f48fb1!important}.pink.lighten-2{background-color:#f06292!important}.pink.lighten-1{background-color:#ec407a!important}.pink{background-color:#e91e63!important}.pink-text{color:#e91e63!important}.rgba-pink-slight,.rgba-pink-slight:after{background-color:rgba(233,30,99,.1)}.rgba-pink-light,.rgba-pink-light:after{background-color:rgba(233,30,99,.3)}.rgba-pink-strong,.rgba-pink-strong:after{background-color:rgba(233,30,99,.7)}.pink.darken-1{background-color:#d81b60!important}.pink.darken-2{background-color:#c2185b!important}.pink.darken-3{background-color:#ad1457!important}.pink.darken-4{background-color:#880e4f!important}.pink.accent-1{background-color:#ff80ab!important}.pink.accent-2{background-color:#ff4081!important}.pink.accent-3{background-color:#f50057!important}.pink.accent-4{background-color:#c51162!important}.purple.lighten-5{background-color:#f3e5f5!important}.purple.lighten-4{background-color:#e1bee7!important}.purple.lighten-3{background-color:#ce93d8!important}.purple.lighten-2{background-color:#ba68c8!important}.purple.lighten-1{background-color:#ab47bc!important}.purple{background-color:#9c27b0!important}.purple-text{color:#9c27b0!important}.rgba-purple-slight,.rgba-purple-slight:after{background-color:rgba(156,39,176,.1)}.rgba-purple-light,.rgba-purple-light:after{background-color:rgba(156,39,176,.3)}.rgba-purple-strong,.rgba-purple-strong:after{background-color:rgba(156,39,176,.7)}.purple.darken-1{background-color:#8e24aa!important}.purple.darken-2{background-color:#7b1fa2!important}.purple.darken-3{background-color:#6a1b9a!important}.purple.darken-4{background-color:#4a148c!important}.purple.accent-1{background-color:#ea80fc!important}.purple.accent-2{background-color:#e040fb!important}.purple.accent-3{background-color:#d500f9!important}.purple.accent-4{background-color:#a0f!important}.deep-purple.lighten-5{background-color:#ede7f6!important}.deep-purple.lighten-4{background-color:#d1c4e9!important}.deep-purple.lighten-3{background-color:#b39ddb!important}.deep-purple.lighten-2{background-color:#9575cd!important}.deep-purple.lighten-1{background-color:#7e57c2!important}.deep-purple{background-color:#673ab7!important}.deep-purple-text{color:#673ab7!important}.rgba-deep-purple-slight,.rgba-deep-purple-slight:after{background-color:rgba(103,58,183,.1)}.rgba-deep-purple-light,.rgba-deep-purple-light:after{background-color:rgba(103,58,183,.3)}.rgba-deep-purple-strong,.rgba-deep-purple-strong:after{background-color:rgba(103,58,183,.7)}.deep-purple.darken-1{background-color:#5e35b1!important}.deep-purple.darken-2{background-color:#512da8!important}.deep-purple.darken-3{background-color:#4527a0!important}.deep-purple.darken-4{background-color:#311b92!important}.deep-purple.accent-1{background-color:#b388ff!important}.deep-purple.accent-2{background-color:#7c4dff!important}.deep-purple.accent-3{background-color:#651fff!important}.deep-purple.accent-4{background-color:#6200ea!important}.indigo.lighten-5{background-color:#e8eaf6!important}.indigo.lighten-4{background-color:#c5cae9!important}.indigo.lighten-3{background-color:#9fa8da!important}.indigo.lighten-2{background-color:#7986cb!important}.indigo.lighten-1{background-color:#5c6bc0!important}.indigo{background-color:#3f51b5!important}.indigo-text{color:#3f51b5!important}.rgba-indigo-slight,.rgba-indigo-slight:after{background-color:rgba(63,81,181,.1)}.rgba-indigo-light,.rgba-indigo-light:after{background-color:rgba(63,81,181,.3)}.rgba-indigo-strong,.rgba-indigo-strong:after{background-color:rgba(63,81,181,.7)}.indigo.darken-1{background-color:#3949ab!important}.indigo.darken-2{background-color:#303f9f!important}.indigo.darken-3{background-color:#283593!important}.indigo.darken-4{background-color:#1a237e!important}.indigo.accent-1{background-color:#8c9eff!important}.indigo.accent-2{background-color:#536dfe!important}.indigo.accent-3{background-color:#3d5afe!important}.indigo.accent-4{background-color:#304ffe!important}.blue.lighten-5{background-color:#e3f2fd!important}.blue.lighten-4{background-color:#bbdefb!important}.blue.lighten-3{background-color:#90caf9!important}.blue.lighten-2{background-color:#64b5f6!important}.blue.lighten-1{background-color:#42a5f5!important}.blue{background-color:#2196f3!important}.blue-text{color:#2196f3!important}.rgba-blue-slight,.rgba-blue-slight:after{background-color:rgba(33,150,243,.1)}.rgba-blue-light,.rgba-blue-light:after{background-color:rgba(33,150,243,.3)}.rgba-blue-strong,.rgba-blue-strong:after{background-color:rgba(33,150,243,.7)}.blue.darken-1{background-color:#1e88e5!important}.blue.darken-2{background-color:#1976d2!important}.blue.darken-3{background-color:#1565c0!important}.blue.darken-4{background-color:#0d47a1!important}.blue.accent-1{background-color:#82b1ff!important}.blue.accent-2{background-color:#448aff!important}.blue.accent-3{background-color:#2979ff!important}.blue.accent-4{background-color:#2962ff!important}.light-blue.lighten-5{background-color:#e1f5fe!important}.light-blue.lighten-4{background-color:#b3e5fc!important}.light-blue.lighten-3{background-color:#81d4fa!important}.light-blue.lighten-2{background-color:#4fc3f7!important}.light-blue.lighten-1{background-color:#29b6f6!important}.light-blue{background-color:#03a9f4!important}.light-blue-text{color:#03a9f4!important}.rgba-light-blue-slight,.rgba-light-blue-slight:after{background-color:rgba(3,169,244,.1)}.rgba-light-blue-light,.rgba-light-blue-light:after{background-color:rgba(3,169,244,.3)}.rgba-light-blue-strong,.rgba-light-blue-strong:after{background-color:rgba(3,169,244,.7)}.light-blue.darken-1{background-color:#039be5!important}.light-blue.darken-2{background-color:#0288d1!important}.light-blue.darken-3{background-color:#0277bd!important}.light-blue.darken-4{background-color:#01579b!important}.light-blue.accent-1{background-color:#80d8ff!important}.light-blue.accent-2{background-color:#40c4ff!important}.light-blue.accent-3{background-color:#00b0ff!important}.light-blue.accent-4{background-color:#0091ea!important}.cyan.lighten-5{background-color:#e0f7fa!important}.cyan.lighten-4{background-color:#b2ebf2!important}.cyan.lighten-3{background-color:#80deea!important}.cyan.lighten-2{background-color:#4dd0e1!important}.cyan.lighten-1{background-color:#26c6da!important}.cyan{background-color:#00bcd4!important}.cyan-text{color:#00bcd4!important}.rgba-cyan-slight,.rgba-cyan-slight:after{background-color:rgba(0,188,212,.1)}.rgba-cyan-light,.rgba-cyan-light:after{background-color:rgba(0,188,212,.3)}.rgba-cyan-strong,.rgba-cyan-strong:after{background-color:rgba(0,188,212,.7)}.cyan.darken-1{background-color:#00acc1!important}.cyan.darken-2{background-color:#0097a7!important}.cyan.darken-3{background-color:#00838f!important}.cyan.darken-4{background-color:#006064!important}.cyan.accent-1{background-color:#84ffff!important}.cyan.accent-2{background-color:#18ffff!important}.cyan.accent-3{background-color:#00e5ff!important}.cyan.accent-4{background-color:#00b8d4!important}.teal.lighten-5{background-color:#e0f2f1!important}.teal.lighten-4{background-color:#b2dfdb!important}.teal.lighten-3{background-color:#80cbc4!important}.teal.lighten-2{background-color:#4db6ac!important}.teal.lighten-1{background-color:#26a69a!important}.teal{background-color:#009688!important}.teal-text{color:#009688!important}.rgba-teal-slight,.rgba-teal-slight:after{background-color:rgba(0,150,136,.1)}.rgba-teal-light,.rgba-teal-light:after{background-color:rgba(0,150,136,.3)}.rgba-teal-strong,.rgba-teal-strong:after{background-color:rgba(0,150,136,.7)}.teal.darken-1{background-color:#00897b!important}.teal.darken-2{background-color:#00796b!important}.teal.darken-3{background-color:#00695c!important}.teal.darken-4{background-color:#004d40!important}.teal.accent-1{background-color:#a7ffeb!important}.teal.accent-2{background-color:#64ffda!important}.teal.accent-3{background-color:#1de9b6!important}.teal.accent-4{background-color:#00bfa5!important}.green.lighten-5{background-color:#e8f5e9!important}.green.lighten-4{background-color:#c8e6c9!important}.green.lighten-3{background-color:#a5d6a7!important}.green.lighten-2{background-color:#81c784!important}.green.lighten-1{background-color:#66bb6a!important}.green{background-color:#4caf50!important}.green-text{color:#4caf50!important}.rgba-green-slight,.rgba-green-slight:after{background-color:rgba(76,175,80,.1)}.rgba-green-light,.rgba-green-light:after{background-color:rgba(76,175,80,.3)}.rgba-green-strong,.rgba-green-strong:after{background-color:rgba(76,175,80,.7)}.green.darken-1{background-color:#43a047!important}.green.darken-2{background-color:#388e3c!important}.green.darken-3{background-color:#2e7d32!important}.green.darken-4{background-color:#1b5e20!important}.green.accent-1{background-color:#b9f6ca!important}.green.accent-2{background-color:#69f0ae!important}.green.accent-3{background-color:#00e676!important}.green.accent-4{background-color:#00c853!important}.light-green.lighten-5{background-color:#f1f8e9!important}.light-green.lighten-4{background-color:#dcedc8!important}.light-green.lighten-3{background-color:#c5e1a5!important}.light-green.lighten-2{background-color:#aed581!important}.light-green.lighten-1{background-color:#9ccc65!important}.light-green{background-color:#8bc34a!important}.light-green-text{color:#8bc34a!important}.rgba-light-green-slight,.rgba-light-green-slight:after{background-color:rgba(139,195,74,.1)}.rgba-light-green-light,.rgba-light-green-light:after{background-color:rgba(139,195,74,.3)}.rgba-light-green-strong,.rgba-light-green-strong:after{background-color:rgba(139,195,74,.7)}.light-green.darken-1{background-color:#7cb342!important}.light-green.darken-2{background-color:#689f38!important}.light-green.darken-3{background-color:#558b2f!important}.light-green.darken-4{background-color:#33691e!important}.light-green.accent-1{background-color:#ccff90!important}.light-green.accent-2{background-color:#b2ff59!important}.light-green.accent-3{background-color:#76ff03!important}.light-green.accent-4{background-color:#64dd17!important}.lime.lighten-5{background-color:#f9fbe7!important}.lime.lighten-4{background-color:#f0f4c3!important}.lime.lighten-3{background-color:#e6ee9c!important}.lime.lighten-2{background-color:#dce775!important}.lime.lighten-1{background-color:#d4e157!important}.lime{background-color:#cddc39!important}.lime-text{color:#cddc39!important}.rgba-lime-slight,.rgba-lime-slight:after{background-color:rgba(205,220,57,.1)}.rgba-lime-light,.rgba-lime-light:after{background-color:rgba(205,220,57,.3)}.rgba-lime-strong,.rgba-lime-strong:after{background-color:rgba(205,220,57,.7)}.lime.darken-1{background-color:#c0ca33!important}.lime.darken-2{background-color:#afb42b!important}.lime.darken-3{background-color:#9e9d24!important}.lime.darken-4{background-color:#827717!important}.lime.accent-1{background-color:#f4ff81!important}.lime.accent-2{background-color:#eeff41!important}.lime.accent-3{background-color:#c6ff00!important}.lime.accent-4{background-color:#aeea00!important}.yellow.lighten-5{background-color:#fffde7!important}.yellow.lighten-4{background-color:#fff9c4!important}.yellow.lighten-3{background-color:#fff59d!important}.yellow.lighten-2{background-color:#fff176!important}.yellow.lighten-1{background-color:#ffee58!important}.yellow{background-color:#ffeb3b!important}.yellow-text{color:#ffeb3b!important}.rgba-yellow-slight,.rgba-yellow-slight:after{background-color:rgba(255,235,59,.1)}.rgba-yellow-light,.rgba-yellow-light:after{background-color:rgba(255,235,59,.3)}.rgba-yellow-strong,.rgba-yellow-strong:after{background-color:rgba(255,235,59,.7)}.yellow.darken-1{background-color:#fdd835!important}.yellow.darken-2{background-color:#fbc02d!important}.yellow.darken-3{background-color:#f9a825!important}.yellow.darken-4{background-color:#f57f17!important}.yellow.accent-1{background-color:#ffff8d!important}.yellow.accent-2{background-color:#ff0!important}.yellow.accent-3{background-color:#ffea00!important}.yellow.accent-4{background-color:#ffd600!important}.amber.lighten-5{background-color:#fff8e1!important}.amber.lighten-4{background-color:#ffecb3!important}.amber.lighten-3{background-color:#ffe082!important}.amber.lighten-2{background-color:#ffd54f!important}.amber.lighten-1{background-color:#ffca28!important}.amber{background-color:#ffc107!important}.amber-text{color:#ffc107!important}.rgba-amber-slight,.rgba-amber-slight:after{background-color:rgba(255,193,7,.1)}.rgba-amber-light,.rgba-amber-light:after{background-color:rgba(255,193,7,.3)}.rgba-amber-strong,.rgba-amber-strong:after{background-color:rgba(255,193,7,.7)}.amber.darken-1{background-color:#ffb300!important}.amber.darken-2{background-color:#ffa000!important}.amber.darken-3{background-color:#ff8f00!important}.amber.darken-4{background-color:#ff6f00!important}.amber.accent-1{background-color:#ffe57f!important}.amber.accent-2{background-color:#ffd740!important}.amber.accent-3{background-color:#ffc400!important}.amber.accent-4{background-color:#ffab00!important}.orange.lighten-5{background-color:#fff3e0!important}.orange.lighten-4{background-color:#ffe0b2!important}.orange.lighten-3{background-color:#ffcc80!important}.orange.lighten-2{background-color:#ffb74d!important}.orange.lighten-1{background-color:#ffa726!important}.orange{background-color:#ff9800!important}.orange-text{color:#ff9800!important}.rgba-orange-slight,.rgba-orange-slight:after{background-color:rgba(255,152,0,.1)}.rgba-orange-light,.rgba-orange-light:after{background-color:rgba(255,152,0,.3)}.rgba-orange-strong,.rgba-orange-strong:after{background-color:rgba(255,152,0,.7)}.orange.darken-1{background-color:#fb8c00!important}.orange.darken-2{background-color:#f57c00!important}.orange.darken-3{background-color:#ef6c00!important}.orange.darken-4{background-color:#e65100!important}.orange.accent-1{background-color:#ffd180!important}.orange.accent-2{background-color:#ffab40!important}.orange.accent-3{background-color:#ff9100!important}.orange.accent-4{background-color:#ff6d00!important}.deep-orange.lighten-5{background-color:#fbe9e7!important}.deep-orange.lighten-4{background-color:#ffccbc!important}.deep-orange.lighten-3{background-color:#ffab91!important}.deep-orange.lighten-2{background-color:#ff8a65!important}.deep-orange.lighten-1{background-color:#ff7043!important}.deep-orange{background-color:#ff5722!important}.deep-orange-text{color:#ff5722!important}.rgba-deep-orange-slight,.rgba-deep-orange-slight:after{background-color:rgba(255,87,34,.1)}.rgba-deep-orange-light,.rgba-deep-orange-light:after{background-color:rgba(255,87,34,.3)}.rgba-deep-orange-strong,.rgba-deep-orange-strong:after{background-color:rgba(255,87,34,.7)}.deep-orange.darken-1{background-color:#f4511e!important}.deep-orange.darken-2{background-color:#e64a19!important}.deep-orange.darken-3{background-color:#d84315!important}.deep-orange.darken-4{background-color:#bf360c!important}.deep-orange.accent-1{background-color:#ff9e80!important}.deep-orange.accent-2{background-color:#ff6e40!important}.deep-orange.accent-3{background-color:#ff3d00!important}.deep-orange.accent-4{background-color:#dd2c00!important}.brown.lighten-5{background-color:#efebe9!important}.brown.lighten-4{background-color:#d7ccc8!important}.brown.lighten-3{background-color:#bcaaa4!important}.brown.lighten-2{background-color:#a1887f!important}.brown.lighten-1{background-color:#8d6e63!important}.brown{background-color:#795548!important}.brown-text{color:#795548!important}.rgba-brown-slight,.rgba-brown-slight:after{background-color:rgba(121,85,72,.1)}.rgba-brown-light,.rgba-brown-light:after{background-color:rgba(121,85,72,.3)}.rgba-brown-strong,.rgba-brown-strong:after{background-color:rgba(121,85,72,.7)}.brown.darken-1{background-color:#6d4c41!important}.brown.darken-2{background-color:#5d4037!important}.brown.darken-3{background-color:#4e342e!important}.brown.darken-4{background-color:#3e2723!important}.blue-grey.lighten-5{background-color:#eceff1!important}.blue-grey.lighten-4{background-color:#cfd8dc!important}.blue-grey.lighten-3{background-color:#b0bec5!important}.blue-grey.lighten-2{background-color:#90a4ae!important}.blue-grey.lighten-1{background-color:#78909c!important}.blue-grey{background-color:#607d8b!important}.blue-grey-text{color:#607d8b!important}.rgba-blue-grey-slight,.rgba-blue-grey-slight:after{background-color:rgba(96,125,139,.1)}.rgba-blue-grey-light,.rgba-blue-grey-light:after{background-color:rgba(96,125,139,.3)}.rgba-blue-grey-strong,.rgba-blue-grey-strong:after{background-color:rgba(96,125,139,.7)}.blue-grey.darken-1{background-color:#546e7a!important}.blue-grey.darken-2{background-color:#455a64!important}.blue-grey.darken-3{background-color:#37474f!important}.blue-grey.darken-4{background-color:#263238!important}.grey.lighten-5{background-color:#fafafa!important}.grey.lighten-4{background-color:#f5f5f5!important}.grey.lighten-3{background-color:#eee!important}.grey.lighten-2{background-color:#e0e0e0!important}.grey.lighten-1{background-color:#bdbdbd!important}.grey{background-color:#9e9e9e!important}.grey-text{color:#9e9e9e!important}.rgba-grey-slight,.rgba-grey-slight:after{background-color:rgba(158,158,158,.1)}.rgba-grey-light,.rgba-grey-light:after{background-color:rgba(158,158,158,.3)}.rgba-grey-strong,.rgba-grey-strong:after{background-color:rgba(158,158,158,.7)}.grey.darken-1{background-color:#757575!important}.grey.darken-2{background-color:#616161!important}.grey.darken-3{background-color:#424242!important}.grey.darken-4{background-color:#212121!important}.black{background-color:#000!important}.black-text{color:#000!important}.rgba-black-slight,.rgba-black-slight:after{background-color:rgba(0,0,0,.1)}.rgba-black-light,.rgba-black-light:after{background-color:rgba(0,0,0,.3)}.rgba-black-strong,.rgba-black-strong:after{background-color:rgba(0,0,0,.7)}.white{background-color:#fff!important}.card.card-cascade .view.view-cascade.gradient-card-header,.white-text{color:#fff!important}.rgba-white-slight,.rgba-white-slight:after{background-color:rgba(255,255,255,.1)}.rgba-white-light,.rgba-white-light:after{background-color:rgba(255,255,255,.3)}.rgba-white-strong,.rgba-white-strong:after{background-color:rgba(255,255,255,.7)}.rgba-stylish-slight{background-color:rgba(62,69,81,.1)}.rgba-stylish-light{background-color:rgba(62,69,81,.3)}.rgba-stylish-strong{background-color:rgba(62,69,81,.7)}.primary-color{background-color:#4285f4!important}.primary-color-dark{background-color:#0d47a1!important}.secondary-color{background-color:#a6c!important}.secondary-color-dark{background-color:#93c!important}.default-color{background-color:#2bbbad!important}.default-color-dark{background-color:#00695c!important}.info-color{background-color:#33b5e5!important}.info-color-dark{background-color:#09c!important}.success-color{background-color:#00c851!important}.success-color-dark{background-color:#007e33!important}.warning-color{background-color:#fb3!important}.warning-color-dark{background-color:#f80!important}.danger-color{background-color:#ff3547!important}.danger-color-dark{background-color:#c00!important}.elegant-color{background-color:#2e2e2e!important}.elegant-color-dark{background-color:#212121!important}.stylish-color{background-color:#4b515d!important}.stylish-color-dark{background-color:#3e4551!important}.unique-color{background-color:#3f729b!important}.unique-color-dark{background-color:#1c2331!important}.special-color{background-color:#37474f!important}.special-color-dark{background-color:#263238!important}.purple-gradient{background:linear-gradient(40deg,#ff6ec4,#7873f5)!important}.peach-gradient{background:linear-gradient(40deg,#ffd86f,#fc6262)!important}.aqua-gradient{background:linear-gradient(40deg,#2096ff,#05ffa3)!important}.blue-gradient{background:linear-gradient(40deg,#45cafc,#303f9f)!important}.purple-gradient-rgba{background:linear-gradient(40deg,rgba(255,110,196,.9),rgba(120,115,245,.9))!important}.peach-gradient-rgba{background:linear-gradient(40deg,rgba(255,216,111,.9),rgba(252,98,98,.9))!important}.aqua-gradient-rgba{background:linear-gradient(40deg,rgba(32,150,255,.9),rgba(5,255,163,.9))!important}.blue-gradient-rgba{background:linear-gradient(40deg,rgba(69,202,252,.9),rgba(48,63,159,.9))!important}.dark-grey-text,.dark-grey-text:focus,.dark-grey-text:hover{color:#4f4f4f!important}.hoverable{box-shadow:none;transition:.55s ease-in-out}.hoverable:hover{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);transition:.55s ease-in-out}.z-depth-0{box-shadow:none!important}.z-depth-1{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)!important}.z-depth-1-half{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)!important}.z-depth-2{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19)!important}.z-depth-3{box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19)!important}.z-depth-4{box-shadow:0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)!important}.z-depth-5{box-shadow:0 27px 24px 0 rgba(0,0,0,.2),0 40px 77px 0 rgba(0,0,0,.22)!important}.disabled,:disabled{pointer-events:none!important}a{cursor:pointer;text-decoration:none;color:#0275d8;transition:.2s ease-in-out}a:hover{text-decoration:none;color:#014c8c;transition:.2s ease-in-out}a.disabled:hover,a:disabled:hover{color:#0275d8}a:not([href]):not([tabindex]),a:not([href]):not([tabindex]):focus,a:not([href]):not([tabindex]):hover{color:inherit;text-decoration:none}.card{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);border:0;font-weight:400}.card[class*=border]{border:1px solid #9e9e9e;box-shadow:none}.card .card-body h1,.card .card-body h2,.card .card-body h3,.card .card-body h4,.card .card-body h5,.card .card-body h6{font-weight:400}.card .card-body .card-title a,.card .card-body .card-title a:hover{transition:.2s ease-in-out}.card .card-body .card-text{color:#747373;font-size:.9rem;font-weight:400}.card .md-form label{font-weight:300}.card-text:last-child{margin-bottom:1rem!important}mdb-card-img img.img-fluid{width:100%}.card.card-image{background-size:cover;background-position:center;width:100%}.card.card-image [class*=rgba-]{border-radius:.25rem}.card.card-cascade .view.view-cascade{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);border-radius:.25rem}.card.card-cascade .view.view-cascade.gradient-card-header{padding:1.6rem 1rem;text-align:center}.card.card-cascade .view.view-cascade.gradient-card-header .card-header-title{font-weight:500}.card.card-cascade .view.view-cascade.gradient-card-header .btn-floating{background-color:rgba(255,255,255,.2)}.card.card-cascade.wider{box-shadow:none;background-color:transparent}.card.card-cascade.wider .view.view-cascade{z-index:2}.card.card-cascade.wider .card-body.card-body-cascade{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);margin-left:4%;margin-right:4%;background:#fff;z-index:1;border-radius:0 0 .25rem .25rem}.card.card-cascade.wider .card-body.card-body-cascade .card-footer{margin-left:-1.25rem;margin-right:-1.25rem}.card.card-cascade.wider.reverse .card-body.card-body-cascade{z-index:3;margin-top:-1rem;border-radius:.25rem;box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.card.card-cascade.narrower{margin-top:1.25rem}.card.card-cascade.narrower .view.view-cascade{margin-left:4%;margin-right:4%;margin-top:-1.25rem}.card.card-cascade.panel-cascade .view{text-align:center;color:#fff}.card.card-cascade.panel-cascade .list-group .list-group-item{margin-bottom:0;border:0;border-bottom:1px solid #eee;color:#495057}.card.card-cascade.panel-cascade .list-group .list-group-item:hover{background-color:#eee}.card .btn-action{margin-top:-1.44rem;margin-bottom:-1.44rem}.card .activator{position:absolute;right:0;font-size:1.2rem}.card .card-reveal{position:absolute;width:100%;overflow-y:auto;top:100%;height:100%;z-index:1;display:none}.card .card-reveal .content{position:relative}.card.ovf-hidden{overflow:hidden}.card .card-share{position:relative}.card .card-share .social-reveal{position:absolute;top:-1.44rem;right:1.88rem;visibility:hidden;width:auto;-webkit-transform:translateZ(0);transform:translateZ(0);-webkit-transform:translateX(0);transform:translateX(0);transition:transform .35s;transition:transform .35s,-webkit-transform .35s}.card .card-share .social-reveal-active{z-index:11;visibility:visible;-webkit-transform:translateZ(0);transform:translateZ(0);-webkit-transform:translateX(-48px);transform:translateX(-48px);transition:transform .35s;transition:transform .35s,-webkit-transform .35s}.card .card-reveal .card-title,.card-wrapper .card-rotating .card-title{cursor:pointer}.card .card-reveal .card-title i,.card-wrapper .card-rotating .card-title i{color:#9e9e9e;position:absolute;right:.63rem}.card-wrapper{-webkit-perspective:800px;perspective:800px;position:relative;margin:0;width:100%}.card-wrapper .card-up{height:200px;overflow:hidden}.card-wrapper .card-up img{vertical-align:middle}.card-wrapper .avatar{display:block;margin-top:-60px;overflow:hidden;width:120px}.card-wrapper .avatar img{border:5px solid #fff;background:#fff;width:100%}.card-wrapper .card-rotating{height:100%;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;transition:.5s}.card-wrapper .card-rotating .face{width:100%;position:absolute;background:#fff;-webkit-backface-visibility:hidden;backface-visibility:hidden;z-index:2}.card-wrapper .card-rotating.flipped{-webkit-transform:rotateY(180deg);transform:rotateY(180deg)}.card-wrapper .card-rotating .front{z-index:1}.card-wrapper .card-rotating .back{-webkit-transform:rotateY(-180deg);transform:rotateY(-180deg)}.card-wrapper .card-rotating .back,.card-wrapper .card-rotating .front{transition:1s}.testimonial-card .card-up{overflow:hidden;height:120px;border-top-left-radius:.25rem;border-top-right-radius:.25rem}.testimonial-card .avatar{border-radius:50%;width:120px;margin-top:-60px;overflow:hidden;border:5px solid #fff}.testimonial-card .avatar img{width:100%}.testimonial-card .card-body{text-align:center}"]
                 }] }
     ];
     /** @nocollapse */
@@ -963,7 +980,8 @@ var MdbCardComponent = /** @class */ (function () {
         class: [{ type: Input }],
         cascade: [{ type: Input }],
         wider: [{ type: Input }],
-        card: [{ type: ViewChild, args: ['card',] }],
+        imageBackground: [{ type: Input }],
+        card: [{ type: ViewChild, args: ['card', { static: true },] }],
         narrower: [{ type: Input }],
         reverse: [{ type: Input }],
         dark: [{ type: Input }],
@@ -1044,19 +1062,19 @@ var MdbCardHeaderComponent = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var CardsFreeModule = /** @class */ (function () {
-    function CardsFreeModule() {
+var CardsModule = /** @class */ (function () {
+    function CardsModule() {
     }
     /**
      * @return {?}
      */
-    CardsFreeModule.forRoot = /**
+    CardsModule.forRoot = /**
      * @return {?}
      */
     function () {
-        return { ngModule: CardsFreeModule, providers: [] };
+        return { ngModule: CardsModule, providers: [] };
     };
-    CardsFreeModule.decorators = [
+    CardsModule.decorators = [
         { type: NgModule, args: [{
                     imports: [CommonModule],
                     declarations: [
@@ -1066,7 +1084,7 @@ var CardsFreeModule = /** @class */ (function () {
                         MdbCardTextComponent,
                         MdbCardTitleComponent,
                         MdbCardFooterComponent,
-                        MdbCardHeaderComponent
+                        MdbCardHeaderComponent,
                     ],
                     exports: [
                         MdbCardComponent,
@@ -1075,11 +1093,11 @@ var CardsFreeModule = /** @class */ (function () {
                         MdbCardTextComponent,
                         MdbCardTitleComponent,
                         MdbCardFooterComponent,
-                        MdbCardHeaderComponent
-                    ]
+                        MdbCardHeaderComponent,
+                    ],
                 },] }
     ];
-    return CardsFreeModule;
+    return CardsModule;
 }());
 
 /**
@@ -1243,7 +1261,9 @@ var CarouselConfig = /** @class */ (function () {
  */
 /** @enum {number} */
 var Direction = {
-    UNKNOWN: 0, NEXT: 1, PREV: 2,
+    UNKNOWN: 0,
+    NEXT: 1,
+    PREV: 2,
 };
 Direction[Direction.UNKNOWN] = 'UNKNOWN';
 Direction[Direction.NEXT] = 'NEXT';
@@ -1397,7 +1417,7 @@ var CarouselComponent = /** @class */ (function () {
              */
             function () {
                 _this._select(_this.activeSlideIndex);
-                _this.activeSlideChange.emit({ 'relatedTarget': _this.activeSlide });
+                _this.activeSlideChange.emit({ relatedTarget: _this.activeSlide });
             }), 0);
         }
         else {
@@ -1464,7 +1484,7 @@ var CarouselComponent = /** @class */ (function () {
             this.cdRef.markForCheck();
         }
         if (!this.animation) {
-            this.activeSlideChange.emit({ 'direction': 'Next', 'relatedTarget': this.activeSlide });
+            this.activeSlideChange.emit({ direction: 'Next', relatedTarget: this.activeSlide });
         }
     };
     /**
@@ -1494,7 +1514,7 @@ var CarouselComponent = /** @class */ (function () {
             this.cdRef.markForCheck();
         }
         if (!this.animation) {
-            this.activeSlideChange.emit({ 'direction': 'Prev', 'relatedTarget': this.activeSlide });
+            this.activeSlideChange.emit({ direction: 'Prev', relatedTarget: this.activeSlide });
         }
     };
     /**
@@ -1530,15 +1550,15 @@ var CarouselComponent = /** @class */ (function () {
                     _this.renderer.setStyle(goToSlide.el.nativeElement, 'opacity', '1');
                     _this.renderer.setStyle(goToSlide.el.nativeElement, 'transition', 'all 600ms');
                     if (direction === 1) {
-                        _this.activeSlideChange.emit({ 'direction': 'Next', 'relatedTarget': _this.activeSlide });
+                        _this.activeSlideChange.emit({ direction: 'Next', relatedTarget: _this.activeSlide });
                     }
                     else if (direction === 2) {
-                        _this.activeSlideChange.emit({ 'direction': 'Prev', 'relatedTarget': _this.activeSlide });
+                        _this.activeSlideChange.emit({ direction: 'Prev', relatedTarget: _this.activeSlide });
                     }
                     goToSlide.directionNext = false;
                     _this.animationEnd = true;
                     _this.activeSlide = goToIndex;
-                    _this.activeSlideChange.emit({ 'direction': 'Next', 'relatedTarget': _this.activeSlide });
+                    _this.activeSlideChange.emit({ direction: 'Next', relatedTarget: _this.activeSlide });
                     _this.play();
                     _this.cdRef.markForCheck();
                 }), 0);
@@ -1615,7 +1635,10 @@ var CarouselComponent = /** @class */ (function () {
                     else if (direction === Direction.PREV) {
                         directionName = 'Prev';
                     }
-                    _this.activeSlideChange.emit({ 'direction': directionName, 'relatedTarget': _this.activeSlide });
+                    _this.activeSlideChange.emit({
+                        direction: directionName,
+                        relatedTarget: _this.activeSlide,
+                    });
                     _this.play();
                     _this.cdRef.markForCheck();
                 }), 700);
@@ -1715,12 +1738,19 @@ var CarouselComponent = /** @class */ (function () {
         }
         switch (direction) {
             case Direction.NEXT:
-                nextSlideIndex = (!this.isLast(this._currentActiveSlide)) ? this._currentActiveSlide + 1 :
-                    (!force && this.noWrap) ? this._currentActiveSlide : 0;
+                nextSlideIndex = !this.isLast(this._currentActiveSlide)
+                    ? this._currentActiveSlide + 1
+                    : !force && this.noWrap
+                        ? this._currentActiveSlide
+                        : 0;
                 break;
             case Direction.PREV:
-                nextSlideIndex = (this._currentActiveSlide > 0) ? this._currentActiveSlide - 1 :
-                    (!force && this.noWrap) ? this._currentActiveSlide : this.slides.length - 1;
+                nextSlideIndex =
+                    this._currentActiveSlide > 0
+                        ? this._currentActiveSlide - 1
+                        : !force && this.noWrap
+                            ? this._currentActiveSlide
+                            : this.slides.length - 1;
                 break;
             default:
                 throw new Error('Unknown direction');
@@ -1874,9 +1904,11 @@ var CarouselComponent = /** @class */ (function () {
      */
     function (event) {
         if (this.keyboard) {
+            // tslint:disable-next-line: deprecation
             if (event.keyCode === 39) {
                 this.nextSlide();
             }
+            // tslint:disable-next-line: deprecation
             if (event.keyCode === 37) {
                 this.previousSlide();
             }
@@ -1894,7 +1926,9 @@ var CarouselComponent = /** @class */ (function () {
     CarouselComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mdb-carousel',
-                    template: "<div tabindex=\"0\" (swipeleft)=\"swipe($event.type)\" (swiperight)=\"swipe($event.type)\" (mouseenter)=\"pause()\" (mouseleave)=\"play()\" (mouseup)=\"play()\" class=\"carousel {{ class }} {{ type }}\">\n  <div class=\"controls-top\" *ngIf=\"slides.length > 1 && !checkNavigation() && isControls\">\n    <a class=\"btn-floating\" [class.disabled]=\"activeSlide===0&&noWrap\" (click)=\"previousSlide()\"><i class=\"fas fa-chevron-left\"></i></a>\n    <a class=\"btn-floating\" (click)=\"nextSlide()\" [class.disabled]=\"isLast(activeSlide) && noWrap\"><i class=\"fas fa-chevron-right\"></i></a>\n  </div>\n  <ol class=\"carousel-indicators\" *ngIf=\"slides.length > 1 && checkDots() && isControls\">\n    <li *ngFor=\"let slidez of slides; let i = index;\" [class.active]=\"slidez.active === true\" (click)=\"selectSlide(i)\"></li>\n  </ol>\n  <ol class=\"carousel-indicators\" *ngIf=\"slides.length > 1 && !checkDots() && isControls\">\n    <li *ngFor=\"let slidez of slides; let i = index;\" [class.active]=\"slidez.active === true\" (click)=\"selectSlide(i)\">\n      <img  class=\"d-block w-100 img-fluid\" src=\"{{ getImg(slidez) }}\">\n    </li>\n  </ol>\n  <div class=\"carousel-inner\"><ng-content></ng-content></div>\n  <a class=\"carousel-control-prev\" [class.disabled]=\"activeSlide === 0 && noWrap\" (click)=\"previousSlide()\" *ngIf=\"slides.length > 1 && checkNavigation() && isControls\">\n    <span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span>\n    <span  class=\"sr-only\">Previous</span>\n  </a>\n  <a class=\"carousel-control-next\" (click)=\"nextSlide()\" [class.disabled]=\"isLast(activeSlide) && noWrap\" *ngIf=\"slides.length > 1 && checkNavigation() && isControls\">\n    <span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span>\n    <span class=\"sr-only\">Next</span>\n  </a>\n</div>\n"
+                    template: "<div\n  tabindex=\"0\"\n  (swipeleft)=\"swipe($event.type)\"\n  (swiperight)=\"swipe($event.type)\"\n  (mouseenter)=\"pause()\"\n  (mouseleave)=\"play()\"\n  (mouseup)=\"play()\"\n  class=\"carousel {{ class }} {{ type }}\"\n>\n  <div class=\"controls-top\" *ngIf=\"slides.length > 1 && !checkNavigation() && isControls\">\n    <a\n      mdbBtn\n      floating=\"true\"\n      [class.disabled]=\"activeSlide === 0 && noWrap\"\n      (click)=\"previousSlide()\"\n      ><i class=\"fas fa-chevron-left\"></i\n    ></a>\n    <a mdbBtn floating=\"true\" (click)=\"nextSlide()\" [class.disabled]=\"isLast(activeSlide) && noWrap\"\n      ><i class=\"fas fa-chevron-right\"></i\n    ></a>\n  </div>\n  <ol class=\"carousel-indicators\" *ngIf=\"slides.length > 1 && checkDots() && isControls\">\n    <li\n      *ngFor=\"let slidez of slides; let i = index\"\n      [class.active]=\"slidez.active === true\"\n      (click)=\"selectSlide(i)\"\n    ></li>\n  </ol>\n  <ol class=\"carousel-indicators\" *ngIf=\"slides.length > 1 && !checkDots() && isControls\">\n    <li\n      *ngFor=\"let slidez of slides; let i = index\"\n      [class.active]=\"slidez.active === true\"\n      (click)=\"selectSlide(i)\"\n    >\n      <img class=\"d-block w-100 img-fluid\" src=\"{{ getImg(slidez) }}\" />\n    </li>\n  </ol>\n  <div class=\"carousel-inner\"><ng-content></ng-content></div>\n  <a\n    class=\"carousel-control-prev\"\n    [class.disabled]=\"activeSlide === 0 && noWrap\"\n    (click)=\"previousSlide()\"\n    *ngIf=\"slides.length > 1 && checkNavigation() && isControls\"\n  >\n    <span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span>\n    <span class=\"sr-only\">Previous</span>\n  </a>\n  <a\n    class=\"carousel-control-next\"\n    (click)=\"nextSlide()\"\n    [class.disabled]=\"isLast(activeSlide) && noWrap\"\n    *ngIf=\"slides.length > 1 && checkNavigation() && isControls\"\n  >\n    <span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span>\n    <span class=\"sr-only\">Next</span>\n  </a>\n</div>\n",
+                    encapsulation: ViewEncapsulation.None,
+                    styles: [".mdb-color.lighten-5{background-color:#d0d6e2!important}.mdb-color.lighten-4{background-color:#b1bace!important}.mdb-color.lighten-3{background-color:#929fba!important}.mdb-color.lighten-2{background-color:#7283a7!important}.mdb-color.lighten-1{background-color:#59698d!important}.mdb-color{background-color:#45526e!important}.mdb-color-text{color:#45526e!important}.rgba-mdb-color-slight,.rgba-mdb-color-slight:after{background-color:rgba(69,82,110,.1)}.rgba-mdb-color-light,.rgba-mdb-color-light:after{background-color:rgba(69,82,110,.3)}.rgba-mdb-color-strong,.rgba-mdb-color-strong:after{background-color:rgba(69,82,110,.7)}.mdb-color.darken-1{background-color:#3b465e!important}.mdb-color.darken-2{background-color:#2e3951!important}.mdb-color.darken-3{background-color:#1c2a48!important}.mdb-color.darken-4{background-color:#1c2331!important}.red.lighten-5{background-color:#ffebee!important}.red.lighten-4{background-color:#ffcdd2!important}.red.lighten-3{background-color:#ef9a9a!important}.red.lighten-2{background-color:#e57373!important}.red.lighten-1{background-color:#ef5350!important}.red{background-color:#f44336!important}.red-text{color:#f44336!important}.rgba-red-slight,.rgba-red-slight:after{background-color:rgba(244,67,54,.1)}.rgba-red-light,.rgba-red-light:after{background-color:rgba(244,67,54,.3)}.rgba-red-strong,.rgba-red-strong:after{background-color:rgba(244,67,54,.7)}.red.darken-1{background-color:#e53935!important}.red.darken-2{background-color:#d32f2f!important}.red.darken-3{background-color:#c62828!important}.red.darken-4{background-color:#b71c1c!important}.red.accent-1{background-color:#ff8a80!important}.red.accent-2{background-color:#ff5252!important}.red.accent-3{background-color:#ff1744!important}.red.accent-4{background-color:#d50000!important}.pink.lighten-5{background-color:#fce4ec!important}.pink.lighten-4{background-color:#f8bbd0!important}.pink.lighten-3{background-color:#f48fb1!important}.pink.lighten-2{background-color:#f06292!important}.pink.lighten-1{background-color:#ec407a!important}.pink{background-color:#e91e63!important}.pink-text{color:#e91e63!important}.rgba-pink-slight,.rgba-pink-slight:after{background-color:rgba(233,30,99,.1)}.rgba-pink-light,.rgba-pink-light:after{background-color:rgba(233,30,99,.3)}.rgba-pink-strong,.rgba-pink-strong:after{background-color:rgba(233,30,99,.7)}.pink.darken-1{background-color:#d81b60!important}.pink.darken-2{background-color:#c2185b!important}.pink.darken-3{background-color:#ad1457!important}.pink.darken-4{background-color:#880e4f!important}.pink.accent-1{background-color:#ff80ab!important}.pink.accent-2{background-color:#ff4081!important}.pink.accent-3{background-color:#f50057!important}.pink.accent-4{background-color:#c51162!important}.purple.lighten-5{background-color:#f3e5f5!important}.purple.lighten-4{background-color:#e1bee7!important}.purple.lighten-3{background-color:#ce93d8!important}.purple.lighten-2{background-color:#ba68c8!important}.purple.lighten-1{background-color:#ab47bc!important}.purple{background-color:#9c27b0!important}.purple-text{color:#9c27b0!important}.rgba-purple-slight,.rgba-purple-slight:after{background-color:rgba(156,39,176,.1)}.rgba-purple-light,.rgba-purple-light:after{background-color:rgba(156,39,176,.3)}.rgba-purple-strong,.rgba-purple-strong:after{background-color:rgba(156,39,176,.7)}.purple.darken-1{background-color:#8e24aa!important}.purple.darken-2{background-color:#7b1fa2!important}.purple.darken-3{background-color:#6a1b9a!important}.purple.darken-4{background-color:#4a148c!important}.purple.accent-1{background-color:#ea80fc!important}.purple.accent-2{background-color:#e040fb!important}.purple.accent-3{background-color:#d500f9!important}.purple.accent-4{background-color:#a0f!important}.deep-purple.lighten-5{background-color:#ede7f6!important}.deep-purple.lighten-4{background-color:#d1c4e9!important}.deep-purple.lighten-3{background-color:#b39ddb!important}.deep-purple.lighten-2{background-color:#9575cd!important}.deep-purple.lighten-1{background-color:#7e57c2!important}.deep-purple{background-color:#673ab7!important}.deep-purple-text{color:#673ab7!important}.rgba-deep-purple-slight,.rgba-deep-purple-slight:after{background-color:rgba(103,58,183,.1)}.rgba-deep-purple-light,.rgba-deep-purple-light:after{background-color:rgba(103,58,183,.3)}.rgba-deep-purple-strong,.rgba-deep-purple-strong:after{background-color:rgba(103,58,183,.7)}.deep-purple.darken-1{background-color:#5e35b1!important}.deep-purple.darken-2{background-color:#512da8!important}.deep-purple.darken-3{background-color:#4527a0!important}.deep-purple.darken-4{background-color:#311b92!important}.deep-purple.accent-1{background-color:#b388ff!important}.deep-purple.accent-2{background-color:#7c4dff!important}.deep-purple.accent-3{background-color:#651fff!important}.deep-purple.accent-4{background-color:#6200ea!important}.indigo.lighten-5{background-color:#e8eaf6!important}.indigo.lighten-4{background-color:#c5cae9!important}.indigo.lighten-3{background-color:#9fa8da!important}.indigo.lighten-2{background-color:#7986cb!important}.indigo.lighten-1{background-color:#5c6bc0!important}.indigo{background-color:#3f51b5!important}.indigo-text{color:#3f51b5!important}.rgba-indigo-slight,.rgba-indigo-slight:after{background-color:rgba(63,81,181,.1)}.rgba-indigo-light,.rgba-indigo-light:after{background-color:rgba(63,81,181,.3)}.rgba-indigo-strong,.rgba-indigo-strong:after{background-color:rgba(63,81,181,.7)}.indigo.darken-1{background-color:#3949ab!important}.indigo.darken-2{background-color:#303f9f!important}.indigo.darken-3{background-color:#283593!important}.indigo.darken-4{background-color:#1a237e!important}.indigo.accent-1{background-color:#8c9eff!important}.indigo.accent-2{background-color:#536dfe!important}.indigo.accent-3{background-color:#3d5afe!important}.indigo.accent-4{background-color:#304ffe!important}.blue.lighten-5{background-color:#e3f2fd!important}.blue.lighten-4{background-color:#bbdefb!important}.blue.lighten-3{background-color:#90caf9!important}.blue.lighten-2{background-color:#64b5f6!important}.blue.lighten-1{background-color:#42a5f5!important}.blue{background-color:#2196f3!important}.blue-text{color:#2196f3!important}.rgba-blue-slight,.rgba-blue-slight:after{background-color:rgba(33,150,243,.1)}.rgba-blue-light,.rgba-blue-light:after{background-color:rgba(33,150,243,.3)}.rgba-blue-strong,.rgba-blue-strong:after{background-color:rgba(33,150,243,.7)}.blue.darken-1{background-color:#1e88e5!important}.blue.darken-2{background-color:#1976d2!important}.blue.darken-3{background-color:#1565c0!important}.blue.darken-4{background-color:#0d47a1!important}.blue.accent-1{background-color:#82b1ff!important}.blue.accent-2{background-color:#448aff!important}.blue.accent-3{background-color:#2979ff!important}.blue.accent-4{background-color:#2962ff!important}.light-blue.lighten-5{background-color:#e1f5fe!important}.light-blue.lighten-4{background-color:#b3e5fc!important}.light-blue.lighten-3{background-color:#81d4fa!important}.light-blue.lighten-2{background-color:#4fc3f7!important}.light-blue.lighten-1{background-color:#29b6f6!important}.light-blue{background-color:#03a9f4!important}.light-blue-text{color:#03a9f4!important}.rgba-light-blue-slight,.rgba-light-blue-slight:after{background-color:rgba(3,169,244,.1)}.rgba-light-blue-light,.rgba-light-blue-light:after{background-color:rgba(3,169,244,.3)}.rgba-light-blue-strong,.rgba-light-blue-strong:after{background-color:rgba(3,169,244,.7)}.light-blue.darken-1{background-color:#039be5!important}.light-blue.darken-2{background-color:#0288d1!important}.light-blue.darken-3{background-color:#0277bd!important}.light-blue.darken-4{background-color:#01579b!important}.light-blue.accent-1{background-color:#80d8ff!important}.light-blue.accent-2{background-color:#40c4ff!important}.light-blue.accent-3{background-color:#00b0ff!important}.light-blue.accent-4{background-color:#0091ea!important}.cyan.lighten-5{background-color:#e0f7fa!important}.cyan.lighten-4{background-color:#b2ebf2!important}.cyan.lighten-3{background-color:#80deea!important}.cyan.lighten-2{background-color:#4dd0e1!important}.cyan.lighten-1{background-color:#26c6da!important}.cyan{background-color:#00bcd4!important}.cyan-text{color:#00bcd4!important}.rgba-cyan-slight,.rgba-cyan-slight:after{background-color:rgba(0,188,212,.1)}.rgba-cyan-light,.rgba-cyan-light:after{background-color:rgba(0,188,212,.3)}.rgba-cyan-strong,.rgba-cyan-strong:after{background-color:rgba(0,188,212,.7)}.cyan.darken-1{background-color:#00acc1!important}.cyan.darken-2{background-color:#0097a7!important}.cyan.darken-3{background-color:#00838f!important}.cyan.darken-4{background-color:#006064!important}.cyan.accent-1{background-color:#84ffff!important}.cyan.accent-2{background-color:#18ffff!important}.cyan.accent-3{background-color:#00e5ff!important}.cyan.accent-4{background-color:#00b8d4!important}.teal.lighten-5{background-color:#e0f2f1!important}.teal.lighten-4{background-color:#b2dfdb!important}.teal.lighten-3{background-color:#80cbc4!important}.teal.lighten-2{background-color:#4db6ac!important}.teal.lighten-1{background-color:#26a69a!important}.teal{background-color:#009688!important}.teal-text{color:#009688!important}.rgba-teal-slight,.rgba-teal-slight:after{background-color:rgba(0,150,136,.1)}.rgba-teal-light,.rgba-teal-light:after{background-color:rgba(0,150,136,.3)}.rgba-teal-strong,.rgba-teal-strong:after{background-color:rgba(0,150,136,.7)}.teal.darken-1{background-color:#00897b!important}.teal.darken-2{background-color:#00796b!important}.teal.darken-3{background-color:#00695c!important}.teal.darken-4{background-color:#004d40!important}.teal.accent-1{background-color:#a7ffeb!important}.teal.accent-2{background-color:#64ffda!important}.teal.accent-3{background-color:#1de9b6!important}.teal.accent-4{background-color:#00bfa5!important}.green.lighten-5{background-color:#e8f5e9!important}.green.lighten-4{background-color:#c8e6c9!important}.green.lighten-3{background-color:#a5d6a7!important}.green.lighten-2{background-color:#81c784!important}.green.lighten-1{background-color:#66bb6a!important}.green{background-color:#4caf50!important}.green-text{color:#4caf50!important}.rgba-green-slight,.rgba-green-slight:after{background-color:rgba(76,175,80,.1)}.rgba-green-light,.rgba-green-light:after{background-color:rgba(76,175,80,.3)}.rgba-green-strong,.rgba-green-strong:after{background-color:rgba(76,175,80,.7)}.green.darken-1{background-color:#43a047!important}.green.darken-2{background-color:#388e3c!important}.green.darken-3{background-color:#2e7d32!important}.green.darken-4{background-color:#1b5e20!important}.green.accent-1{background-color:#b9f6ca!important}.green.accent-2{background-color:#69f0ae!important}.green.accent-3{background-color:#00e676!important}.green.accent-4{background-color:#00c853!important}.light-green.lighten-5{background-color:#f1f8e9!important}.light-green.lighten-4{background-color:#dcedc8!important}.light-green.lighten-3{background-color:#c5e1a5!important}.light-green.lighten-2{background-color:#aed581!important}.light-green.lighten-1{background-color:#9ccc65!important}.light-green{background-color:#8bc34a!important}.light-green-text{color:#8bc34a!important}.rgba-light-green-slight,.rgba-light-green-slight:after{background-color:rgba(139,195,74,.1)}.rgba-light-green-light,.rgba-light-green-light:after{background-color:rgba(139,195,74,.3)}.rgba-light-green-strong,.rgba-light-green-strong:after{background-color:rgba(139,195,74,.7)}.light-green.darken-1{background-color:#7cb342!important}.light-green.darken-2{background-color:#689f38!important}.light-green.darken-3{background-color:#558b2f!important}.light-green.darken-4{background-color:#33691e!important}.light-green.accent-1{background-color:#ccff90!important}.light-green.accent-2{background-color:#b2ff59!important}.light-green.accent-3{background-color:#76ff03!important}.light-green.accent-4{background-color:#64dd17!important}.lime.lighten-5{background-color:#f9fbe7!important}.lime.lighten-4{background-color:#f0f4c3!important}.lime.lighten-3{background-color:#e6ee9c!important}.lime.lighten-2{background-color:#dce775!important}.lime.lighten-1{background-color:#d4e157!important}.lime{background-color:#cddc39!important}.lime-text{color:#cddc39!important}.rgba-lime-slight,.rgba-lime-slight:after{background-color:rgba(205,220,57,.1)}.rgba-lime-light,.rgba-lime-light:after{background-color:rgba(205,220,57,.3)}.rgba-lime-strong,.rgba-lime-strong:after{background-color:rgba(205,220,57,.7)}.lime.darken-1{background-color:#c0ca33!important}.lime.darken-2{background-color:#afb42b!important}.lime.darken-3{background-color:#9e9d24!important}.lime.darken-4{background-color:#827717!important}.lime.accent-1{background-color:#f4ff81!important}.lime.accent-2{background-color:#eeff41!important}.lime.accent-3{background-color:#c6ff00!important}.lime.accent-4{background-color:#aeea00!important}.yellow.lighten-5{background-color:#fffde7!important}.yellow.lighten-4{background-color:#fff9c4!important}.yellow.lighten-3{background-color:#fff59d!important}.yellow.lighten-2{background-color:#fff176!important}.yellow.lighten-1{background-color:#ffee58!important}.yellow{background-color:#ffeb3b!important}.yellow-text{color:#ffeb3b!important}.rgba-yellow-slight,.rgba-yellow-slight:after{background-color:rgba(255,235,59,.1)}.rgba-yellow-light,.rgba-yellow-light:after{background-color:rgba(255,235,59,.3)}.rgba-yellow-strong,.rgba-yellow-strong:after{background-color:rgba(255,235,59,.7)}.yellow.darken-1{background-color:#fdd835!important}.yellow.darken-2{background-color:#fbc02d!important}.yellow.darken-3{background-color:#f9a825!important}.yellow.darken-4{background-color:#f57f17!important}.yellow.accent-1{background-color:#ffff8d!important}.yellow.accent-2{background-color:#ff0!important}.yellow.accent-3{background-color:#ffea00!important}.yellow.accent-4{background-color:#ffd600!important}.amber.lighten-5{background-color:#fff8e1!important}.amber.lighten-4{background-color:#ffecb3!important}.amber.lighten-3{background-color:#ffe082!important}.amber.lighten-2{background-color:#ffd54f!important}.amber.lighten-1{background-color:#ffca28!important}.amber{background-color:#ffc107!important}.amber-text{color:#ffc107!important}.rgba-amber-slight,.rgba-amber-slight:after{background-color:rgba(255,193,7,.1)}.rgba-amber-light,.rgba-amber-light:after{background-color:rgba(255,193,7,.3)}.rgba-amber-strong,.rgba-amber-strong:after{background-color:rgba(255,193,7,.7)}.amber.darken-1{background-color:#ffb300!important}.amber.darken-2{background-color:#ffa000!important}.amber.darken-3{background-color:#ff8f00!important}.amber.darken-4{background-color:#ff6f00!important}.amber.accent-1{background-color:#ffe57f!important}.amber.accent-2{background-color:#ffd740!important}.amber.accent-3{background-color:#ffc400!important}.amber.accent-4{background-color:#ffab00!important}.orange.lighten-5{background-color:#fff3e0!important}.orange.lighten-4{background-color:#ffe0b2!important}.orange.lighten-3{background-color:#ffcc80!important}.orange.lighten-2{background-color:#ffb74d!important}.orange.lighten-1{background-color:#ffa726!important}.orange{background-color:#ff9800!important}.orange-text{color:#ff9800!important}.rgba-orange-slight,.rgba-orange-slight:after{background-color:rgba(255,152,0,.1)}.rgba-orange-light,.rgba-orange-light:after{background-color:rgba(255,152,0,.3)}.rgba-orange-strong,.rgba-orange-strong:after{background-color:rgba(255,152,0,.7)}.orange.darken-1{background-color:#fb8c00!important}.orange.darken-2{background-color:#f57c00!important}.orange.darken-3{background-color:#ef6c00!important}.orange.darken-4{background-color:#e65100!important}.orange.accent-1{background-color:#ffd180!important}.orange.accent-2{background-color:#ffab40!important}.orange.accent-3{background-color:#ff9100!important}.orange.accent-4{background-color:#ff6d00!important}.deep-orange.lighten-5{background-color:#fbe9e7!important}.deep-orange.lighten-4{background-color:#ffccbc!important}.deep-orange.lighten-3{background-color:#ffab91!important}.deep-orange.lighten-2{background-color:#ff8a65!important}.deep-orange.lighten-1{background-color:#ff7043!important}.deep-orange{background-color:#ff5722!important}.deep-orange-text{color:#ff5722!important}.rgba-deep-orange-slight,.rgba-deep-orange-slight:after{background-color:rgba(255,87,34,.1)}.rgba-deep-orange-light,.rgba-deep-orange-light:after{background-color:rgba(255,87,34,.3)}.rgba-deep-orange-strong,.rgba-deep-orange-strong:after{background-color:rgba(255,87,34,.7)}.deep-orange.darken-1{background-color:#f4511e!important}.deep-orange.darken-2{background-color:#e64a19!important}.deep-orange.darken-3{background-color:#d84315!important}.deep-orange.darken-4{background-color:#bf360c!important}.deep-orange.accent-1{background-color:#ff9e80!important}.deep-orange.accent-2{background-color:#ff6e40!important}.deep-orange.accent-3{background-color:#ff3d00!important}.deep-orange.accent-4{background-color:#dd2c00!important}.brown.lighten-5{background-color:#efebe9!important}.brown.lighten-4{background-color:#d7ccc8!important}.brown.lighten-3{background-color:#bcaaa4!important}.brown.lighten-2{background-color:#a1887f!important}.brown.lighten-1{background-color:#8d6e63!important}.brown{background-color:#795548!important}.brown-text{color:#795548!important}.rgba-brown-slight,.rgba-brown-slight:after{background-color:rgba(121,85,72,.1)}.rgba-brown-light,.rgba-brown-light:after{background-color:rgba(121,85,72,.3)}.rgba-brown-strong,.rgba-brown-strong:after{background-color:rgba(121,85,72,.7)}.brown.darken-1{background-color:#6d4c41!important}.brown.darken-2{background-color:#5d4037!important}.brown.darken-3{background-color:#4e342e!important}.brown.darken-4{background-color:#3e2723!important}.blue-grey.lighten-5{background-color:#eceff1!important}.blue-grey.lighten-4{background-color:#cfd8dc!important}.blue-grey.lighten-3{background-color:#b0bec5!important}.blue-grey.lighten-2{background-color:#90a4ae!important}.blue-grey.lighten-1{background-color:#78909c!important}.blue-grey{background-color:#607d8b!important}.blue-grey-text{color:#607d8b!important}.rgba-blue-grey-slight,.rgba-blue-grey-slight:after{background-color:rgba(96,125,139,.1)}.rgba-blue-grey-light,.rgba-blue-grey-light:after{background-color:rgba(96,125,139,.3)}.rgba-blue-grey-strong,.rgba-blue-grey-strong:after{background-color:rgba(96,125,139,.7)}.blue-grey.darken-1{background-color:#546e7a!important}.blue-grey.darken-2{background-color:#455a64!important}.blue-grey.darken-3{background-color:#37474f!important}.blue-grey.darken-4{background-color:#263238!important}.grey.lighten-5{background-color:#fafafa!important}.grey.lighten-4{background-color:#f5f5f5!important}.grey.lighten-3{background-color:#eee!important}.grey.lighten-2{background-color:#e0e0e0!important}.grey.lighten-1{background-color:#bdbdbd!important}.grey{background-color:#9e9e9e!important}.grey-text{color:#9e9e9e!important}.rgba-grey-slight,.rgba-grey-slight:after{background-color:rgba(158,158,158,.1)}.rgba-grey-light,.rgba-grey-light:after{background-color:rgba(158,158,158,.3)}.rgba-grey-strong,.rgba-grey-strong:after{background-color:rgba(158,158,158,.7)}.grey.darken-1{background-color:#757575!important}.grey.darken-2{background-color:#616161!important}.grey.darken-3{background-color:#424242!important}.grey.darken-4{background-color:#212121!important}.black{background-color:#000!important}.black-text{color:#000!important}.rgba-black-slight,.rgba-black-slight:after{background-color:rgba(0,0,0,.1)}.rgba-black-light,.rgba-black-light:after{background-color:rgba(0,0,0,.3)}.rgba-black-strong,.rgba-black-strong:after{background-color:rgba(0,0,0,.7)}.carousel-thumbnails .carousel-indicators .active,.white{background-color:#fff!important}.white-text{color:#fff!important}.rgba-white-slight,.rgba-white-slight:after{background-color:rgba(255,255,255,.1)}.rgba-white-light,.rgba-white-light:after{background-color:rgba(255,255,255,.3)}.rgba-white-strong,.rgba-white-strong:after{background-color:rgba(255,255,255,.7)}.rgba-stylish-slight{background-color:rgba(62,69,81,.1)}.rgba-stylish-light{background-color:rgba(62,69,81,.3)}.rgba-stylish-strong{background-color:rgba(62,69,81,.7)}.primary-color{background-color:#4285f4!important}.primary-color-dark{background-color:#0d47a1!important}.secondary-color{background-color:#a6c!important}.secondary-color-dark{background-color:#93c!important}.default-color{background-color:#2bbbad!important}.default-color-dark{background-color:#00695c!important}.info-color{background-color:#33b5e5!important}.info-color-dark{background-color:#09c!important}.success-color{background-color:#00c851!important}.success-color-dark{background-color:#007e33!important}.warning-color{background-color:#fb3!important}.warning-color-dark{background-color:#f80!important}.danger-color{background-color:#ff3547!important}.danger-color-dark{background-color:#c00!important}.elegant-color{background-color:#2e2e2e!important}.elegant-color-dark{background-color:#212121!important}.stylish-color{background-color:#4b515d!important}.stylish-color-dark{background-color:#3e4551!important}.unique-color{background-color:#3f729b!important}.unique-color-dark{background-color:#1c2331!important}.special-color{background-color:#37474f!important}.special-color-dark{background-color:#263238!important}.purple-gradient{background:linear-gradient(40deg,#ff6ec4,#7873f5)!important}.peach-gradient{background:linear-gradient(40deg,#ffd86f,#fc6262)!important}.aqua-gradient{background:linear-gradient(40deg,#2096ff,#05ffa3)!important}.blue-gradient{background:linear-gradient(40deg,#45cafc,#303f9f)!important}.purple-gradient-rgba{background:linear-gradient(40deg,rgba(255,110,196,.9),rgba(120,115,245,.9))!important}.peach-gradient-rgba{background:linear-gradient(40deg,rgba(255,216,111,.9),rgba(252,98,98,.9))!important}.aqua-gradient-rgba{background:linear-gradient(40deg,rgba(32,150,255,.9),rgba(5,255,163,.9))!important}.blue-gradient-rgba{background:linear-gradient(40deg,rgba(69,202,252,.9),rgba(48,63,159,.9))!important}.dark-grey-text,.dark-grey-text:focus,.dark-grey-text:hover{color:#4f4f4f!important}.hoverable{box-shadow:none;transition:.55s ease-in-out}.hoverable:hover{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);transition:.55s ease-in-out}.z-depth-0{box-shadow:none!important}.z-depth-1{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)!important}.z-depth-1-half{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)!important}.z-depth-2{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19)!important}.z-depth-3{box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19)!important}.z-depth-4{box-shadow:0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)!important}.z-depth-5{box-shadow:0 27px 24px 0 rgba(0,0,0,.2),0 40px 77px 0 rgba(0,0,0,.22)!important}.disabled,:disabled{pointer-events:none!important}a{cursor:pointer;text-decoration:none;color:#0275d8;transition:.2s ease-in-out}a:hover{text-decoration:none;color:#014c8c;transition:.2s ease-in-out}a.disabled:hover,a:disabled:hover{color:#0275d8}a:not([href]):not([tabindex]),a:not([href]):not([tabindex]):focus,a:not([href]):not([tabindex]):hover{color:inherit;text-decoration:none}.carousel .carousel-control-next-icon,.carousel .carousel-control-prev-icon{width:2.25rem;height:2.25rem}.carousel .carousel-indicators li{width:.625rem;height:.625rem;border-radius:50%;cursor:pointer}.carousel-fade .carousel-item{opacity:0;transition-duration:.6s;transition-property:opacity}.carousel-fade .carousel-item-next.carousel-item-left,.carousel-fade .carousel-item-prev.carousel-item-right,.carousel-fade .carousel-item.active{opacity:1}.carousel-fade .carousel-item-left.active,.carousel-fade .carousel-item-right.active{opacity:0}.carousel-fade .carousel-item-left.active,.carousel-fade .carousel-item-next,.carousel-fade .carousel-item-prev,.carousel-fade .carousel-item-prev.active,.carousel-fade .carousel-item.active{-webkit-transform:translateX(0);transform:translateX(0)}@supports ((-webkit-transform-style:preserve-3d) or (transform-style:preserve-3d)){.carousel-fade .carousel-item-left.active,.carousel-fade .carousel-item-next,.carousel-fade .carousel-item-prev,.carousel-fade .carousel-item-prev.active,.carousel-fade .carousel-item.active{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}}.carousel-control-next,.carousel-control-prev,.carousel-item-next,.carousel-item-prev,.carousel-item.active{display:flex;overflow:hidden}.carousel,.carousel-multi-item,.carousel-thumbnails{outline:0}.carousel-fade .carousel-inner .carousel-item{opacity:0;transition-property:opacity}.carousel-fade .carousel-inner .active{opacity:1;transition:.6s}.carousel-fade .carousel-inner>.carousel-item.active,.carousel-fade .carousel-inner>.carousel-item.next.left,.carousel-fade .carousel-inner>.carousel-item.prev.right{opacity:1;transition:.6s;-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}.carousel-multi-item{margin-bottom:5rem}.carousel-multi-item .carousel-inner .carousel-item.active,.carousel-multi-item .carousel-item-next,.carousel-multi-item .carousel-item-prev{display:block}.carousel-multi-item .carousel-inner.v-2 .carousel-item-next,.carousel-multi-item .carousel-inner.v-2 .carousel-item-prev,.carousel-multi-item .carousel-inner.v-2 .carousel-item.active{display:flex}.carousel-multi-item .carousel-inner.v-2 .carousel-item-next,.carousel-multi-item .carousel-inner.v-2 .carousel-item-right.active{-webkit-transform:translateX(33%);transform:translateX(33%)}.carousel-multi-item .carousel-inner.v-2 .carousel-item-left.active,.carousel-multi-item .carousel-inner.v-2 .carousel-item-prev{-webkit-transform:translateX(-33%);transform:translateX(-33%)}.carousel-multi-item .carousel-inner.v-2 .carousel-item-left,.carousel-multi-item .carousel-inner.v-2 .carousel-item-right{-webkit-transform:translateX(0);transform:translateX(0)}.carousel-multi-item .carousel-indicators li{height:1.25rem;width:1.25rem;max-width:1.25rem;background-color:#4285f4;margin-bottom:-3.75rem}.carousel-multi-item .carousel-indicators .active{height:1.56rem;width:1.56rem;max-width:1.56rem;background-color:#4285f4;border-radius:50%}.carousel-multi-item .controls-top{text-align:center;margin-bottom:1.88rem}.carousel-multi-item .controls-top .btn-floating{background:#4285f4}.carousel-multi-item .carousel-indicators{margin-bottom:-2em}.carousel-multi-item .card-cascade.narrower{margin-top:1.25rem;margin-bottom:.3rem}@media (min-width:768px){.carousel-multi-item .col-md-4{float:left;width:33.333333%;max-width:100%}}@media only screen and (max-width:992px){.carousel-multi-item .carousel-indicators li{margin-bottom:-1.88rem}}.carousel-thumbnails .carousel-indicators{white-space:nowrap;overflow-x:auto;width:initial;margin-left:initial;margin-right:initial;margin-bottom:-4.69rem;position:absolute;left:0}.carousel-thumbnails .carousel-indicators>li{width:initial;height:initial;text-indent:initial}.carousel-thumbnails .carousel-indicators>li .active img{opacity:1}.wrapper-carousel-fix .carousel-fade .active.carousel-item-left,.wrapper-carousel-fix .carousel-fade .active.carousel-item-right{transition:transform .6s;transition:transform .6s,-webkit-transform .6s;transition-property:opacity}.carousel-thumbnails{margin-bottom:5rem}.carousel-thumbnails .carousel-indicators li{height:auto;width:6.25rem;max-width:6.25rem;border:none}.carousel-thumbnails .carousel-indicators .active{height:auto;width:auto;opacity:1}.carousel-thumbnails .carousel-indicators img{max-width:6.25rem;height:auto;overflow:hidden;display:block}"]
                 }] }
     ];
     /** @nocollapse */
@@ -1944,10 +1978,10 @@ var CarouselModule = /** @class */ (function () {
     };
     CarouselModule.decorators = [
         { type: NgModule, args: [{
-                    imports: [CommonModule],
+                    imports: [CommonModule, ButtonsModule],
                     declarations: [SlideComponent, CarouselComponent],
                     exports: [SlideComponent, CarouselComponent],
-                    providers: [CarouselConfig]
+                    providers: [CarouselConfig],
                 },] }
     ];
     return CarouselModule;
@@ -2399,11 +2433,12 @@ var ChartsModule = /** @class */ (function () {
 /** @type {?} */
 var CHECKBOX_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
+    // tslint:disable-next-line: no-use-before-declare
     useExisting: forwardRef((/**
      * @return {?}
      */
     function () { return CheckboxComponent; })),
-    multi: true
+    multi: true,
 };
 /** @type {?} */
 var defaultIdNumber = 0;
@@ -2430,13 +2465,11 @@ var CheckboxComponent = /** @class */ (function () {
          * @param {?} _
          * @return {?}
          */
-        function (_) {
-        });
+        function (_) { });
         this.onTouched = (/**
          * @return {?}
          */
-        function () {
-        });
+        function () { });
     }
     /**
      * @param {?} event
@@ -2606,13 +2639,15 @@ var CheckboxComponent = /** @class */ (function () {
         { type: Component, args: [{
                     selector: 'mdb-checkbox',
                     template: "<div\n  [ngClass]=\"{\n  'custom-control custom-checkbox': default,\n  'form-check': !default,\n  'custom-control-inline': inline,\n  'form-check-inline': inline && !default }\">\n  <input\n    #input\n    type=\"checkbox\"\n    class=\"custom-control-input\"\n    [ngClass]=\"{\n      'filled-in': filledIn || rounded,\n      'custom-control-input': default,\n      'form-check-input': !default }\"\n    [id]=\"id\"\n    [checked]=\"checked\"\n    [disabled]=\"disabled\"\n    [required]=\"required\"\n    [indeterminate]=\"indeterminate\"\n    [attr.name]=\"name\"\n    [attr.value]=\"value\"\n    [tabIndex]=\"tabIndex\"\n    (blur)=\"onBlur()\"\n    (click)=\"onCheckboxClick($event)\"\n    (change)=\"onCheckboxChange($event)\">\n  <label\n    [ngClass]=\"{\n      'custom-control-label': default,\n      'form-check-label': !default,\n      'label-before': checkboxPosition === 'right',\n      'checkbox-rounded': rounded,\n      'disabled': disabled }\"\n    [attr.for]=\"id\">\n    <ng-content></ng-content>\n  </label>\n</div>\n",
-                    providers: [CHECKBOX_VALUE_ACCESSOR]
+                    encapsulation: ViewEncapsulation.None,
+                    providers: [CHECKBOX_VALUE_ACCESSOR],
+                    styles: [".form-check-label.label-before:after,.form-check-label.label-before:before{top:0!important;right:0!important;left:auto!important}.custom-control-label.label-before:after,.custom-control-label.label-before:before{top:.25rem!important;right:0!important;left:auto!important}.custom-control-label.label-before{position:absolute}.custom-control-inline .label-before{position:relative}.form-check-label.label-before{padding-left:0!important;padding-right:35px}.custom-control-label.label-before{padding-left:0!important;padding-right:25px!important}.form-check-input[type=checkbox]:checked+.label-before:before,label.btn input[type=checkbox]:checked+.label-before:before{top:-4px!important;right:10px!important;left:auto!important}.form-check-input[type=checkbox]:indeterminate+.label-before:before,label.btn input[type=checkbox]:indeterminate+.label-before:before{top:-11px!important;right:16px!important;left:auto!important}.form-check-input[type=checkbox].filled-in+.label-before:before,.form-check-input[type=checkbox].filled-in:checked+.label-before:before,label.btn input[type=checkbox].filled-in+.label-before:before,label.btn input[type=checkbox].filled-in:checked+.label-before:before{top:0!important;right:10px!important;left:auto!important}.form-check-input[type=checkbox].filled-in+.label-before:after,label.btn input[type=checkbox].filled-in+.label-before:after{top:0!important;left:auto!important}.checkbox-rounded:after{border-radius:50%!important}mdb-checkbox .form-check{padding-left:0!important}[type=checkbox]:checked,[type=checkbox]:not(:checked){position:absolute;opacity:0;pointer-events:none}.form-check-input[type=checkbox]+label,label.btn input[type=checkbox]+label{position:relative;padding-left:35px;cursor:pointer;display:inline-block;height:1.5625rem;line-height:1.5625rem;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.form-check-input[type=checkbox]+label:before,.form-check-input[type=checkbox]:not(.filled-in)+label:after,label.btn input[type=checkbox]+label:before,label.btn input[type=checkbox]:not(.filled-in)+label:after{content:'';position:absolute;top:0;left:0;width:18px;height:18px;z-index:0;border:2px solid #8a8a8a;border-radius:1px;margin-top:3px;transition:.2s}.form-check-input[type=checkbox]:not(.filled-in)+label:after,label.btn input[type=checkbox]:not(.filled-in)+label:after{border:0;-webkit-transform:scale(0);transform:scale(0)}.form-check-input[type=checkbox]:not(:checked):disabled+label:before,label.btn input[type=checkbox]:not(:checked):disabled+label:before{border:none;background-color:#bdbdbd}.form-check-input[type=checkbox]:checked+label:before,label.btn input[type=checkbox]:checked+label:before{top:-4px;left:-5px;width:12px;height:1.375rem;border-top:2px solid transparent;border-left:2px solid transparent;border-right:2px solid #4285f4;border-bottom:2px solid #4285f4;-webkit-transform:rotate(40deg);transform:rotate(40deg);-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform-origin:100% 100%;transform-origin:100% 100%}.form-check-input[type=checkbox]:checked:disabled+label:before,label.btn input[type=checkbox]:checked:disabled+label:before{border-right:2px solid #bdbdbd;border-bottom:2px solid #bdbdbd}.form-check-input[type=checkbox]:indeterminate+label:before,label.btn input[type=checkbox]:indeterminate+label:before{top:-11px;left:-12px;width:10px;height:1.375rem;border-top:none;border-left:none;border-right:2px solid #4285f4;border-bottom:none;-webkit-transform:rotate(90deg);transform:rotate(90deg);-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform-origin:100% 100%;transform-origin:100% 100%}.form-check-input[type=checkbox]:indeterminate:disabled+label:before,label.btn input[type=checkbox]:indeterminate:disabled+label:before{border-right:2px solid rgba(0,0,0,.46);background-color:transparent}.form-check-input[type=checkbox].filled-in+label:after,label.btn input[type=checkbox].filled-in+label:after{border-radius:.125rem}.form-check-input[type=checkbox].filled-in+label:after,.form-check-input[type=checkbox].filled-in+label:before,label.btn input[type=checkbox].filled-in+label:after,label.btn input[type=checkbox].filled-in+label:before{content:'';left:0;position:absolute;transition:border .25s,background-color .25s,width .2s .1s,height .2s .1s,top .2s .1s,left .2s .1s;z-index:1}.form-check-input[type=checkbox].filled-in:not(:checked)+label:before,label.btn input[type=checkbox].filled-in:not(:checked)+label:before{width:0;height:0;border:3px solid transparent;left:6px;top:10px;-webkit-transform:rotateZ(37deg);transform:rotateZ(37deg);-webkit-transform-origin:100% 100%;transform-origin:100% 100%}.form-check-input[type=checkbox].filled-in:not(:checked)+label:after,label.btn input[type=checkbox].filled-in:not(:checked)+label:after{height:20px;width:20px;background-color:transparent;border:2px solid #5a5a5a;top:0;z-index:0}.form-check-input[type=checkbox].filled-in:checked+label:before,label.btn input[type=checkbox].filled-in:checked+label:before{top:0;left:1px;width:8px;height:13px;border-top:2px solid transparent;border-left:2px solid transparent;border-right:2px solid #fff;border-bottom:2px solid #fff;-webkit-transform:rotateZ(37deg);transform:rotateZ(37deg);-webkit-transform-origin:100% 100%;transform-origin:100% 100%}.form-check-input[type=checkbox].filled-in:checked+label:after,label.btn input[type=checkbox].filled-in:checked+label:after{top:0;width:20px;height:20px;border:2px solid #a6c;background-color:#a6c;z-index:0}.form-check-input[type=checkbox].filled-in.filled-in-danger:checked+label:after,label.btn input[type=checkbox].filled-in.filled-in-danger:checked+label:after{background-color:#f44336;border-color:#f44336}.form-check-input[type=checkbox]:disabled:not(:checked)+label:before,label.btn input[type=checkbox]:disabled:not(:checked)+label:before{background-color:#bdbdbd;border-color:#bdbdbd}.form-check-input[type=checkbox]:disabled:not(:checked)+label:after,label.btn input[type=checkbox]:disabled:not(:checked)+label:after{border-color:#bdbdbd;background-color:#bdbdbd}.form-check-input[type=checkbox]:disabled:checked+label:before,label.btn input[type=checkbox]:disabled:checked+label:before{background-color:transparent}.form-check-input[type=checkbox]:disabled:checked+label:after,label.btn input[type=checkbox]:disabled:checked+label:after{background-color:#bdbdbd;border-color:#bdbdbd}"]
                 }] }
     ];
     /** @nocollapse */
     CheckboxComponent.ctorParameters = function () { return []; };
     CheckboxComponent.propDecorators = {
-        inputEl: [{ type: ViewChild, args: ['input',] }],
+        inputEl: [{ type: ViewChild, args: ['input', { static: true },] }],
         class: [{ type: Input }],
         id: [{ type: Input }],
         required: [{ type: Input }],
@@ -2687,15 +2722,21 @@ var CollapseComponent = /** @class */ (function () {
      * @return {?}
      */
     function (event) {
-        if (event.toState === 'expanded') {
-            this.shownBsCollapse.emit(this);
-            this.expanded.emit(this);
-            this.overflow = 'visible';
-        }
-        else {
-            this.hiddenBsCollapse.emit(this);
-            this.collapsed.emit(this);
-        }
+        var _this = this;
+        setTimeout((/**
+         * @return {?}
+         */
+        function () {
+            if (event.toState === 'expanded') {
+                _this.shownBsCollapse.emit(_this);
+                _this.expanded.emit(_this);
+                _this.overflow = 'visible';
+            }
+            else {
+                _this.hiddenBsCollapse.emit(_this);
+                _this.collapsed.emit(_this);
+            }
+        }), 0);
     };
     /**
      * @return {?}
@@ -2749,6 +2790,7 @@ var CollapseComponent = /** @class */ (function () {
     };
     CollapseComponent.decorators = [
         { type: Component, args: [{
+                    // tslint:disable-next-line:component-selector
                     selector: '[mdbCollapse]',
                     exportAs: 'bs-collapse',
                     template: '<ng-content></ng-content>',
@@ -2757,7 +2799,7 @@ var CollapseComponent = /** @class */ (function () {
                             state('collapsed', style({ height: '0px' })),
                             state('expanded', style({ height: '*' })),
                             transition('expanded <=> collapsed', animate('500ms ease')),
-                        ])
+                        ]),
                     ]
                 }] }
     ];
@@ -4943,13 +4985,13 @@ var PositioningService = /** @class */ (function () {
         this.update$$ = new Subject();
         this.positionElements = new Map();
         if (isPlatformBrowser(platformId)) {
-            merge(fromEvent(window, 'scroll'), fromEvent(window, 'resize'), of(0, animationFrameScheduler), this.update$$)
-                .subscribe((/**
+            merge(fromEvent(window, 'scroll'), fromEvent(window, 'resize'), 
+            // tslint:disable-next-line: deprecation
+            of(0, animationFrameScheduler), this.update$$).subscribe((/**
              * @return {?}
              */
             function () {
-                _this.positionElements
-                    .forEach((/**
+                _this.positionElements.forEach((/**
                  * @param {?} positionElement
                  * @return {?}
                  */
@@ -5240,7 +5282,9 @@ var BsDropdownDirective = /** @class */ (function () {
         get: /**
          * @return {?}
          */
-        function () { return this._isDisabled; },
+        function () {
+            return this._isDisabled;
+        },
         /**
          * Disables dropdown toggle and hides dropdown menu if opened
          */
@@ -5320,19 +5364,16 @@ var BsDropdownDirective = /** @class */ (function () {
             show: (/**
              * @return {?}
              */
-            function () { return _this.show(); })
+            function () { return _this.show(); }),
         });
         // toggle visibility on toggle element click
-        this._subscriptions.push(this._state
-            .toggleClick.subscribe((/**
+        this._subscriptions.push(this._state.toggleClick.subscribe((/**
          * @param {?} value
          * @return {?}
          */
         function (value) { return _this.toggle(value); })));
         // hide dropdown if set disabled while opened
-        this._subscriptions.push(this._state
-            .isDisabledChange
-            .subscribe((/**
+        this._subscriptions.push(this._state.isDisabledChange.subscribe((/**
          * @param {?} element
          * @return {?}
          */
@@ -5343,8 +5384,7 @@ var BsDropdownDirective = /** @class */ (function () {
         })));
         // attach dropdown menu inside of dropdown
         if (this._showInline) {
-            this._state.dropdownMenu
-                .then((/**
+            this._state.dropdownMenu.then((/**
              * @param {?} dropdownMenu
              * @return {?}
              */
@@ -5361,10 +5401,11 @@ var BsDropdownDirective = /** @class */ (function () {
              */
             function () {
                 /** @type {?} */
-                var dropdownContainer = _this._elementRef.nativeElement.lastElementChild;
+                var dropdownContainer = _this._elementRef.nativeElement.querySelector('.dropdown-menu');
                 /** @type {?} */
                 var left = dropdownContainer.getBoundingClientRect().left;
-                if (dropdownContainer.classList.contains('dropdown-menu-right') && left <= dropdownContainer.clientWidth) {
+                if (dropdownContainer.classList.contains('dropdown-menu-right') &&
+                    left <= dropdownContainer.clientWidth) {
                     if (left < 0) {
                         _this._renderer.setStyle(dropdownContainer, 'right', left + 'px');
                     }
@@ -5397,11 +5438,13 @@ var BsDropdownDirective = /** @class */ (function () {
         // material and dropup dropdown animation
         // const parent = this._elementRef.nativeElement.classList;
         /** @type {?} */
-        var container = this._elementRef.nativeElement.lastElementChild;
+        var container = this._elementRef.nativeElement.querySelector('.dropdown-menu');
         setTimeout((/**
          * @return {?}
          */
-        function () { container.classList.add('fadeInDropdown'); }), 200);
+        function () {
+            container.classList.add('fadeInDropdown');
+        }), 200);
         if (this._showInline) {
             this._isInlineOpen = true;
             this.onShown.emit(true);
@@ -5409,20 +5452,17 @@ var BsDropdownDirective = /** @class */ (function () {
             this._state.isOpenChange.emit(true);
             return;
         }
-        this._state.dropdownMenu
-            .then((/**
+        this._state.dropdownMenu.then((/**
          * @param {?} dropdownMenu
          * @return {?}
          */
         function (dropdownMenu) {
             // check direction in which dropdown should be opened
             /** @type {?} */
-            var _dropup = _this.dropup === true ||
-                (typeof _this.dropup !== 'undefined' && _this.dropup !== false);
+            var _dropup = _this.dropup === true || (typeof _this.dropup !== 'undefined' && _this.dropup !== false);
             _this._state.direction = _dropup ? 'up' : 'down';
             /** @type {?} */
-            var _placement = _this.placement ||
-                (_dropup ? 'top left' : 'bottom left');
+            var _placement = _this.placement || (_dropup ? 'top left' : 'bottom left');
             // show dropdown
             _this._dropdown
                 .attach(BsDropdownContainerComponent)
@@ -5430,7 +5470,7 @@ var BsDropdownDirective = /** @class */ (function () {
                 .position({ attachment: _placement })
                 .show({
                 content: dropdownMenu.templateRef,
-                placement: _placement
+                placement: _placement,
             });
             _this._state.isOpenChange.emit(true);
         }));
@@ -5457,8 +5497,8 @@ var BsDropdownDirective = /** @class */ (function () {
         /** @type {?} */
         var parent = this._elementRef.nativeElement.classList;
         /** @type {?} */
-        var container = this._elementRef.nativeElement.lastElementChild;
-        if ((parent.value === 'dropdown open show') || (parent.value === 'btn-group dropup open show')) {
+        var container = this._elementRef.nativeElement.querySelector('.dropdown-menu');
+        if (parent.value === 'dropdown open show' || parent.value === 'btn-group dropup open show') {
             container.classList.remove('fadeInDropdown');
             setTimeout((/**
              * @return {?}
@@ -5534,11 +5574,15 @@ var BsDropdownDirective = /** @class */ (function () {
         this._dropdown.dispose();
     };
     BsDropdownDirective.decorators = [
-        { type: Directive, args: [{
+        { type: Component, args: [{
+                    // tslint:disable-next-line:component-selector
                     selector: '[mdbDropdown],[dropdown]',
                     exportAs: 'bs-dropdown',
-                    providers: [BsDropdownState]
-                },] }
+                    template: '<ng-content></ng-content>',
+                    encapsulation: ViewEncapsulation.None,
+                    providers: [BsDropdownState],
+                    styles: [".mdb-color.lighten-5{background-color:#d0d6e2!important}.mdb-color.lighten-4{background-color:#b1bace!important}.mdb-color.lighten-3{background-color:#929fba!important}.mdb-color.lighten-2{background-color:#7283a7!important}.mdb-color.lighten-1{background-color:#59698d!important}.mdb-color{background-color:#45526e!important}.mdb-color-text{color:#45526e!important}.rgba-mdb-color-slight,.rgba-mdb-color-slight:after{background-color:rgba(69,82,110,.1)}.rgba-mdb-color-light,.rgba-mdb-color-light:after{background-color:rgba(69,82,110,.3)}.rgba-mdb-color-strong,.rgba-mdb-color-strong:after{background-color:rgba(69,82,110,.7)}.mdb-color.darken-1{background-color:#3b465e!important}.mdb-color.darken-2{background-color:#2e3951!important}.mdb-color.darken-3{background-color:#1c2a48!important}.mdb-color.darken-4{background-color:#1c2331!important}.red.lighten-5{background-color:#ffebee!important}.red.lighten-4{background-color:#ffcdd2!important}.red.lighten-3{background-color:#ef9a9a!important}.red.lighten-2{background-color:#e57373!important}.red.lighten-1{background-color:#ef5350!important}.red{background-color:#f44336!important}.red-text{color:#f44336!important}.rgba-red-slight,.rgba-red-slight:after{background-color:rgba(244,67,54,.1)}.rgba-red-light,.rgba-red-light:after{background-color:rgba(244,67,54,.3)}.rgba-red-strong,.rgba-red-strong:after{background-color:rgba(244,67,54,.7)}.red.darken-1{background-color:#e53935!important}.red.darken-2{background-color:#d32f2f!important}.red.darken-3{background-color:#c62828!important}.red.darken-4{background-color:#b71c1c!important}.red.accent-1{background-color:#ff8a80!important}.red.accent-2{background-color:#ff5252!important}.red.accent-3{background-color:#ff1744!important}.red.accent-4{background-color:#d50000!important}.pink.lighten-5{background-color:#fce4ec!important}.pink.lighten-4{background-color:#f8bbd0!important}.pink.lighten-3{background-color:#f48fb1!important}.pink.lighten-2{background-color:#f06292!important}.pink.lighten-1{background-color:#ec407a!important}.pink{background-color:#e91e63!important}.pink-text{color:#e91e63!important}.rgba-pink-slight,.rgba-pink-slight:after{background-color:rgba(233,30,99,.1)}.rgba-pink-light,.rgba-pink-light:after{background-color:rgba(233,30,99,.3)}.rgba-pink-strong,.rgba-pink-strong:after{background-color:rgba(233,30,99,.7)}.pink.darken-1{background-color:#d81b60!important}.pink.darken-2{background-color:#c2185b!important}.pink.darken-3{background-color:#ad1457!important}.pink.darken-4{background-color:#880e4f!important}.pink.accent-1{background-color:#ff80ab!important}.pink.accent-2{background-color:#ff4081!important}.pink.accent-3{background-color:#f50057!important}.pink.accent-4{background-color:#c51162!important}.purple.lighten-5{background-color:#f3e5f5!important}.purple.lighten-4{background-color:#e1bee7!important}.purple.lighten-3{background-color:#ce93d8!important}.purple.lighten-2{background-color:#ba68c8!important}.purple.lighten-1{background-color:#ab47bc!important}.purple{background-color:#9c27b0!important}.purple-text{color:#9c27b0!important}.rgba-purple-slight,.rgba-purple-slight:after{background-color:rgba(156,39,176,.1)}.rgba-purple-light,.rgba-purple-light:after{background-color:rgba(156,39,176,.3)}.rgba-purple-strong,.rgba-purple-strong:after{background-color:rgba(156,39,176,.7)}.purple.darken-1{background-color:#8e24aa!important}.purple.darken-2{background-color:#7b1fa2!important}.purple.darken-3{background-color:#6a1b9a!important}.purple.darken-4{background-color:#4a148c!important}.purple.accent-1{background-color:#ea80fc!important}.purple.accent-2{background-color:#e040fb!important}.purple.accent-3{background-color:#d500f9!important}.purple.accent-4{background-color:#a0f!important}.deep-purple.lighten-5{background-color:#ede7f6!important}.deep-purple.lighten-4{background-color:#d1c4e9!important}.deep-purple.lighten-3{background-color:#b39ddb!important}.deep-purple.lighten-2{background-color:#9575cd!important}.deep-purple.lighten-1{background-color:#7e57c2!important}.deep-purple{background-color:#673ab7!important}.deep-purple-text{color:#673ab7!important}.rgba-deep-purple-slight,.rgba-deep-purple-slight:after{background-color:rgba(103,58,183,.1)}.rgba-deep-purple-light,.rgba-deep-purple-light:after{background-color:rgba(103,58,183,.3)}.rgba-deep-purple-strong,.rgba-deep-purple-strong:after{background-color:rgba(103,58,183,.7)}.deep-purple.darken-1{background-color:#5e35b1!important}.deep-purple.darken-2{background-color:#512da8!important}.deep-purple.darken-3{background-color:#4527a0!important}.deep-purple.darken-4{background-color:#311b92!important}.deep-purple.accent-1{background-color:#b388ff!important}.deep-purple.accent-2{background-color:#7c4dff!important}.deep-purple.accent-3{background-color:#651fff!important}.deep-purple.accent-4{background-color:#6200ea!important}.indigo.lighten-5{background-color:#e8eaf6!important}.indigo.lighten-4{background-color:#c5cae9!important}.indigo.lighten-3{background-color:#9fa8da!important}.indigo.lighten-2{background-color:#7986cb!important}.indigo.lighten-1{background-color:#5c6bc0!important}.indigo{background-color:#3f51b5!important}.indigo-text{color:#3f51b5!important}.rgba-indigo-slight,.rgba-indigo-slight:after{background-color:rgba(63,81,181,.1)}.rgba-indigo-light,.rgba-indigo-light:after{background-color:rgba(63,81,181,.3)}.rgba-indigo-strong,.rgba-indigo-strong:after{background-color:rgba(63,81,181,.7)}.indigo.darken-1{background-color:#3949ab!important}.indigo.darken-2{background-color:#303f9f!important}.indigo.darken-3{background-color:#283593!important}.indigo.darken-4{background-color:#1a237e!important}.indigo.accent-1{background-color:#8c9eff!important}.indigo.accent-2{background-color:#536dfe!important}.indigo.accent-3{background-color:#3d5afe!important}.indigo.accent-4{background-color:#304ffe!important}.blue.lighten-5{background-color:#e3f2fd!important}.blue.lighten-4{background-color:#bbdefb!important}.blue.lighten-3{background-color:#90caf9!important}.blue.lighten-2{background-color:#64b5f6!important}.blue.lighten-1{background-color:#42a5f5!important}.blue{background-color:#2196f3!important}.blue-text{color:#2196f3!important}.rgba-blue-slight,.rgba-blue-slight:after{background-color:rgba(33,150,243,.1)}.rgba-blue-light,.rgba-blue-light:after{background-color:rgba(33,150,243,.3)}.rgba-blue-strong,.rgba-blue-strong:after{background-color:rgba(33,150,243,.7)}.blue.darken-1{background-color:#1e88e5!important}.blue.darken-2{background-color:#1976d2!important}.blue.darken-3{background-color:#1565c0!important}.blue.darken-4{background-color:#0d47a1!important}.blue.accent-1{background-color:#82b1ff!important}.blue.accent-2{background-color:#448aff!important}.blue.accent-3{background-color:#2979ff!important}.blue.accent-4{background-color:#2962ff!important}.light-blue.lighten-5{background-color:#e1f5fe!important}.light-blue.lighten-4{background-color:#b3e5fc!important}.light-blue.lighten-3{background-color:#81d4fa!important}.light-blue.lighten-2{background-color:#4fc3f7!important}.light-blue.lighten-1{background-color:#29b6f6!important}.light-blue{background-color:#03a9f4!important}.light-blue-text{color:#03a9f4!important}.rgba-light-blue-slight,.rgba-light-blue-slight:after{background-color:rgba(3,169,244,.1)}.rgba-light-blue-light,.rgba-light-blue-light:after{background-color:rgba(3,169,244,.3)}.rgba-light-blue-strong,.rgba-light-blue-strong:after{background-color:rgba(3,169,244,.7)}.light-blue.darken-1{background-color:#039be5!important}.light-blue.darken-2{background-color:#0288d1!important}.light-blue.darken-3{background-color:#0277bd!important}.light-blue.darken-4{background-color:#01579b!important}.light-blue.accent-1{background-color:#80d8ff!important}.light-blue.accent-2{background-color:#40c4ff!important}.light-blue.accent-3{background-color:#00b0ff!important}.light-blue.accent-4{background-color:#0091ea!important}.cyan.lighten-5{background-color:#e0f7fa!important}.cyan.lighten-4{background-color:#b2ebf2!important}.cyan.lighten-3{background-color:#80deea!important}.cyan.lighten-2{background-color:#4dd0e1!important}.cyan.lighten-1{background-color:#26c6da!important}.cyan{background-color:#00bcd4!important}.cyan-text{color:#00bcd4!important}.rgba-cyan-slight,.rgba-cyan-slight:after{background-color:rgba(0,188,212,.1)}.rgba-cyan-light,.rgba-cyan-light:after{background-color:rgba(0,188,212,.3)}.rgba-cyan-strong,.rgba-cyan-strong:after{background-color:rgba(0,188,212,.7)}.cyan.darken-1{background-color:#00acc1!important}.cyan.darken-2{background-color:#0097a7!important}.cyan.darken-3{background-color:#00838f!important}.cyan.darken-4{background-color:#006064!important}.cyan.accent-1{background-color:#84ffff!important}.cyan.accent-2{background-color:#18ffff!important}.cyan.accent-3{background-color:#00e5ff!important}.cyan.accent-4{background-color:#00b8d4!important}.teal.lighten-5{background-color:#e0f2f1!important}.teal.lighten-4{background-color:#b2dfdb!important}.teal.lighten-3{background-color:#80cbc4!important}.teal.lighten-2{background-color:#4db6ac!important}.teal.lighten-1{background-color:#26a69a!important}.teal{background-color:#009688!important}.teal-text{color:#009688!important}.rgba-teal-slight,.rgba-teal-slight:after{background-color:rgba(0,150,136,.1)}.rgba-teal-light,.rgba-teal-light:after{background-color:rgba(0,150,136,.3)}.rgba-teal-strong,.rgba-teal-strong:after{background-color:rgba(0,150,136,.7)}.teal.darken-1{background-color:#00897b!important}.teal.darken-2{background-color:#00796b!important}.teal.darken-3{background-color:#00695c!important}.teal.darken-4{background-color:#004d40!important}.teal.accent-1{background-color:#a7ffeb!important}.teal.accent-2{background-color:#64ffda!important}.teal.accent-3{background-color:#1de9b6!important}.teal.accent-4{background-color:#00bfa5!important}.green.lighten-5{background-color:#e8f5e9!important}.green.lighten-4{background-color:#c8e6c9!important}.green.lighten-3{background-color:#a5d6a7!important}.green.lighten-2{background-color:#81c784!important}.green.lighten-1{background-color:#66bb6a!important}.green{background-color:#4caf50!important}.green-text{color:#4caf50!important}.rgba-green-slight,.rgba-green-slight:after{background-color:rgba(76,175,80,.1)}.rgba-green-light,.rgba-green-light:after{background-color:rgba(76,175,80,.3)}.rgba-green-strong,.rgba-green-strong:after{background-color:rgba(76,175,80,.7)}.green.darken-1{background-color:#43a047!important}.green.darken-2{background-color:#388e3c!important}.green.darken-3{background-color:#2e7d32!important}.green.darken-4{background-color:#1b5e20!important}.green.accent-1{background-color:#b9f6ca!important}.green.accent-2{background-color:#69f0ae!important}.green.accent-3{background-color:#00e676!important}.green.accent-4{background-color:#00c853!important}.light-green.lighten-5{background-color:#f1f8e9!important}.light-green.lighten-4{background-color:#dcedc8!important}.light-green.lighten-3{background-color:#c5e1a5!important}.light-green.lighten-2{background-color:#aed581!important}.light-green.lighten-1{background-color:#9ccc65!important}.light-green{background-color:#8bc34a!important}.light-green-text{color:#8bc34a!important}.rgba-light-green-slight,.rgba-light-green-slight:after{background-color:rgba(139,195,74,.1)}.rgba-light-green-light,.rgba-light-green-light:after{background-color:rgba(139,195,74,.3)}.rgba-light-green-strong,.rgba-light-green-strong:after{background-color:rgba(139,195,74,.7)}.light-green.darken-1{background-color:#7cb342!important}.light-green.darken-2{background-color:#689f38!important}.light-green.darken-3{background-color:#558b2f!important}.light-green.darken-4{background-color:#33691e!important}.light-green.accent-1{background-color:#ccff90!important}.light-green.accent-2{background-color:#b2ff59!important}.light-green.accent-3{background-color:#76ff03!important}.light-green.accent-4{background-color:#64dd17!important}.lime.lighten-5{background-color:#f9fbe7!important}.lime.lighten-4{background-color:#f0f4c3!important}.lime.lighten-3{background-color:#e6ee9c!important}.lime.lighten-2{background-color:#dce775!important}.lime.lighten-1{background-color:#d4e157!important}.lime{background-color:#cddc39!important}.lime-text{color:#cddc39!important}.rgba-lime-slight,.rgba-lime-slight:after{background-color:rgba(205,220,57,.1)}.rgba-lime-light,.rgba-lime-light:after{background-color:rgba(205,220,57,.3)}.rgba-lime-strong,.rgba-lime-strong:after{background-color:rgba(205,220,57,.7)}.lime.darken-1{background-color:#c0ca33!important}.lime.darken-2{background-color:#afb42b!important}.lime.darken-3{background-color:#9e9d24!important}.lime.darken-4{background-color:#827717!important}.lime.accent-1{background-color:#f4ff81!important}.lime.accent-2{background-color:#eeff41!important}.lime.accent-3{background-color:#c6ff00!important}.lime.accent-4{background-color:#aeea00!important}.yellow.lighten-5{background-color:#fffde7!important}.yellow.lighten-4{background-color:#fff9c4!important}.yellow.lighten-3{background-color:#fff59d!important}.yellow.lighten-2{background-color:#fff176!important}.yellow.lighten-1{background-color:#ffee58!important}.yellow{background-color:#ffeb3b!important}.yellow-text{color:#ffeb3b!important}.rgba-yellow-slight,.rgba-yellow-slight:after{background-color:rgba(255,235,59,.1)}.rgba-yellow-light,.rgba-yellow-light:after{background-color:rgba(255,235,59,.3)}.rgba-yellow-strong,.rgba-yellow-strong:after{background-color:rgba(255,235,59,.7)}.yellow.darken-1{background-color:#fdd835!important}.yellow.darken-2{background-color:#fbc02d!important}.yellow.darken-3{background-color:#f9a825!important}.yellow.darken-4{background-color:#f57f17!important}.yellow.accent-1{background-color:#ffff8d!important}.yellow.accent-2{background-color:#ff0!important}.yellow.accent-3{background-color:#ffea00!important}.yellow.accent-4{background-color:#ffd600!important}.amber.lighten-5{background-color:#fff8e1!important}.amber.lighten-4{background-color:#ffecb3!important}.amber.lighten-3{background-color:#ffe082!important}.amber.lighten-2{background-color:#ffd54f!important}.amber.lighten-1{background-color:#ffca28!important}.amber{background-color:#ffc107!important}.amber-text{color:#ffc107!important}.rgba-amber-slight,.rgba-amber-slight:after{background-color:rgba(255,193,7,.1)}.rgba-amber-light,.rgba-amber-light:after{background-color:rgba(255,193,7,.3)}.rgba-amber-strong,.rgba-amber-strong:after{background-color:rgba(255,193,7,.7)}.amber.darken-1{background-color:#ffb300!important}.amber.darken-2{background-color:#ffa000!important}.amber.darken-3{background-color:#ff8f00!important}.amber.darken-4{background-color:#ff6f00!important}.amber.accent-1{background-color:#ffe57f!important}.amber.accent-2{background-color:#ffd740!important}.amber.accent-3{background-color:#ffc400!important}.amber.accent-4{background-color:#ffab00!important}.orange.lighten-5{background-color:#fff3e0!important}.orange.lighten-4{background-color:#ffe0b2!important}.orange.lighten-3{background-color:#ffcc80!important}.orange.lighten-2{background-color:#ffb74d!important}.orange.lighten-1{background-color:#ffa726!important}.orange{background-color:#ff9800!important}.orange-text{color:#ff9800!important}.rgba-orange-slight,.rgba-orange-slight:after{background-color:rgba(255,152,0,.1)}.rgba-orange-light,.rgba-orange-light:after{background-color:rgba(255,152,0,.3)}.rgba-orange-strong,.rgba-orange-strong:after{background-color:rgba(255,152,0,.7)}.orange.darken-1{background-color:#fb8c00!important}.orange.darken-2{background-color:#f57c00!important}.orange.darken-3{background-color:#ef6c00!important}.orange.darken-4{background-color:#e65100!important}.orange.accent-1{background-color:#ffd180!important}.orange.accent-2{background-color:#ffab40!important}.orange.accent-3{background-color:#ff9100!important}.orange.accent-4{background-color:#ff6d00!important}.deep-orange.lighten-5{background-color:#fbe9e7!important}.deep-orange.lighten-4{background-color:#ffccbc!important}.deep-orange.lighten-3{background-color:#ffab91!important}.deep-orange.lighten-2{background-color:#ff8a65!important}.deep-orange.lighten-1{background-color:#ff7043!important}.deep-orange{background-color:#ff5722!important}.deep-orange-text{color:#ff5722!important}.rgba-deep-orange-slight,.rgba-deep-orange-slight:after{background-color:rgba(255,87,34,.1)}.rgba-deep-orange-light,.rgba-deep-orange-light:after{background-color:rgba(255,87,34,.3)}.rgba-deep-orange-strong,.rgba-deep-orange-strong:after{background-color:rgba(255,87,34,.7)}.deep-orange.darken-1{background-color:#f4511e!important}.deep-orange.darken-2{background-color:#e64a19!important}.deep-orange.darken-3{background-color:#d84315!important}.deep-orange.darken-4{background-color:#bf360c!important}.deep-orange.accent-1{background-color:#ff9e80!important}.deep-orange.accent-2{background-color:#ff6e40!important}.deep-orange.accent-3{background-color:#ff3d00!important}.deep-orange.accent-4{background-color:#dd2c00!important}.brown.lighten-5{background-color:#efebe9!important}.brown.lighten-4{background-color:#d7ccc8!important}.brown.lighten-3{background-color:#bcaaa4!important}.brown.lighten-2{background-color:#a1887f!important}.brown.lighten-1{background-color:#8d6e63!important}.brown{background-color:#795548!important}.brown-text{color:#795548!important}.rgba-brown-slight,.rgba-brown-slight:after{background-color:rgba(121,85,72,.1)}.rgba-brown-light,.rgba-brown-light:after{background-color:rgba(121,85,72,.3)}.rgba-brown-strong,.rgba-brown-strong:after{background-color:rgba(121,85,72,.7)}.brown.darken-1{background-color:#6d4c41!important}.brown.darken-2{background-color:#5d4037!important}.brown.darken-3{background-color:#4e342e!important}.brown.darken-4{background-color:#3e2723!important}.blue-grey.lighten-5{background-color:#eceff1!important}.blue-grey.lighten-4{background-color:#cfd8dc!important}.blue-grey.lighten-3{background-color:#b0bec5!important}.blue-grey.lighten-2{background-color:#90a4ae!important}.blue-grey.lighten-1{background-color:#78909c!important}.blue-grey{background-color:#607d8b!important}.blue-grey-text{color:#607d8b!important}.rgba-blue-grey-slight,.rgba-blue-grey-slight:after{background-color:rgba(96,125,139,.1)}.rgba-blue-grey-light,.rgba-blue-grey-light:after{background-color:rgba(96,125,139,.3)}.rgba-blue-grey-strong,.rgba-blue-grey-strong:after{background-color:rgba(96,125,139,.7)}.blue-grey.darken-1{background-color:#546e7a!important}.blue-grey.darken-2{background-color:#455a64!important}.blue-grey.darken-3{background-color:#37474f!important}.blue-grey.darken-4{background-color:#263238!important}.grey.lighten-5{background-color:#fafafa!important}.grey.lighten-4{background-color:#f5f5f5!important}.grey.lighten-3{background-color:#eee!important}.grey.lighten-2{background-color:#e0e0e0!important}.grey.lighten-1{background-color:#bdbdbd!important}.grey{background-color:#9e9e9e!important}.grey-text{color:#9e9e9e!important}.rgba-grey-slight,.rgba-grey-slight:after{background-color:rgba(158,158,158,.1)}.rgba-grey-light,.rgba-grey-light:after{background-color:rgba(158,158,158,.3)}.rgba-grey-strong,.rgba-grey-strong:after{background-color:rgba(158,158,158,.7)}.grey.darken-1{background-color:#757575!important}.grey.darken-2{background-color:#616161!important}.grey.darken-3{background-color:#424242!important}.grey.darken-4{background-color:#212121!important}.black{background-color:#000!important}.black-text{color:#000!important}.rgba-black-slight,.rgba-black-slight:after{background-color:rgba(0,0,0,.1)}.rgba-black-light,.rgba-black-light:after{background-color:rgba(0,0,0,.3)}.rgba-black-strong,.rgba-black-strong:after{background-color:rgba(0,0,0,.7)}.white{background-color:#fff!important}.dropdown .dropdown-menu .dropdown-item:active,.dropdown .dropdown-menu .dropdown-item:hover,.dropleft .dropdown-menu .dropdown-item:active,.dropleft .dropdown-menu .dropdown-item:hover,.dropright .dropdown-menu .dropdown-item:active,.dropright .dropdown-menu .dropdown-item:hover,.dropup .dropdown-menu .dropdown-item:active,.dropup .dropdown-menu .dropdown-item:hover,.white-text{color:#fff!important}.rgba-white-slight,.rgba-white-slight:after{background-color:rgba(255,255,255,.1)}.rgba-white-light,.rgba-white-light:after{background-color:rgba(255,255,255,.3)}.rgba-white-strong,.rgba-white-strong:after{background-color:rgba(255,255,255,.7)}.rgba-stylish-slight{background-color:rgba(62,69,81,.1)}.rgba-stylish-light{background-color:rgba(62,69,81,.3)}.rgba-stylish-strong{background-color:rgba(62,69,81,.7)}.primary-color{background-color:#4285f4!important}.primary-color-dark{background-color:#0d47a1!important}.secondary-color{background-color:#a6c!important}.secondary-color-dark{background-color:#93c!important}.default-color{background-color:#2bbbad!important}.default-color-dark{background-color:#00695c!important}.info-color{background-color:#33b5e5!important}.info-color-dark{background-color:#09c!important}.success-color{background-color:#00c851!important}.success-color-dark{background-color:#007e33!important}.warning-color{background-color:#fb3!important}.warning-color-dark{background-color:#f80!important}.danger-color{background-color:#ff3547!important}.danger-color-dark{background-color:#c00!important}.elegant-color{background-color:#2e2e2e!important}.elegant-color-dark{background-color:#212121!important}.stylish-color{background-color:#4b515d!important}.stylish-color-dark{background-color:#3e4551!important}.unique-color{background-color:#3f729b!important}.unique-color-dark{background-color:#1c2331!important}.special-color{background-color:#37474f!important}.special-color-dark{background-color:#263238!important}.purple-gradient{background:linear-gradient(40deg,#ff6ec4,#7873f5)!important}.peach-gradient{background:linear-gradient(40deg,#ffd86f,#fc6262)!important}.aqua-gradient{background:linear-gradient(40deg,#2096ff,#05ffa3)!important}.blue-gradient{background:linear-gradient(40deg,#45cafc,#303f9f)!important}.purple-gradient-rgba{background:linear-gradient(40deg,rgba(255,110,196,.9),rgba(120,115,245,.9))!important}.peach-gradient-rgba{background:linear-gradient(40deg,rgba(255,216,111,.9),rgba(252,98,98,.9))!important}.aqua-gradient-rgba{background:linear-gradient(40deg,rgba(32,150,255,.9),rgba(5,255,163,.9))!important}.blue-gradient-rgba{background:linear-gradient(40deg,rgba(69,202,252,.9),rgba(48,63,159,.9))!important}.dark-grey-text,.dark-grey-text:focus,.dark-grey-text:hover{color:#4f4f4f!important}.hoverable{box-shadow:none;transition:.55s ease-in-out}.hoverable:hover{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);transition:.55s ease-in-out}.z-depth-0{box-shadow:none!important}.z-depth-1{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)!important}.z-depth-1-half{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)!important}.z-depth-2{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19)!important}.z-depth-3{box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19)!important}.z-depth-4{box-shadow:0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)!important}.z-depth-5{box-shadow:0 27px 24px 0 rgba(0,0,0,.2),0 40px 77px 0 rgba(0,0,0,.22)!important}.disabled,:disabled{pointer-events:none!important}a{cursor:pointer;text-decoration:none;color:#0275d8;transition:.2s ease-in-out}a:hover{text-decoration:none;color:#014c8c;transition:.2s ease-in-out}a.disabled:hover,a:disabled:hover{color:#0275d8}a:not([href]):not([tabindex]),a:not([href]):not([tabindex]):focus,a:not([href]):not([tabindex]):hover{color:inherit;text-decoration:none}.show>.dropdown-menu{display:block}.show>a{outline:0}dropdown .dropdown-menu{display:none;position:absolute;-webkit-transform:translate3d(0,47px,0);transform:translate3d(0,47px,0);top:0;left:0;will-change:transform}.dropup .dropdown-menu{display:none;will-change:transform}.dropup.show .dropdown-menu{display:block;opacity:0;transition:.55s}.dropup.show .fadeInDropdown{opacity:1}.dropdown .dropdown-menu{display:none;position:absolute;-webkit-transform:translate3d(6px,49px,0);transform:translate3d(6px,49px,0);top:0;left:0;will-change:transform}.dropdown.show .dropdown-menu{display:block;opacity:0;transition:.55s}.dropdown.show .fadeInDropdown{opacity:1}.dropdown .dropdown-menu,.dropleft .dropdown-menu,.dropright .dropdown-menu,.dropup .dropdown-menu{padding:.5rem}.dropdown .dropdown-menu.dropdown-primary .dropdown-item.active,.dropdown .dropdown-menu.dropdown-primary .dropdown-item:active,.dropdown .dropdown-menu.dropdown-primary .dropdown-item:hover,.dropleft .dropdown-menu.dropdown-primary .dropdown-item.active,.dropleft .dropdown-menu.dropdown-primary .dropdown-item:active,.dropleft .dropdown-menu.dropdown-primary .dropdown-item:hover,.dropright .dropdown-menu.dropdown-primary .dropdown-item.active,.dropright .dropdown-menu.dropdown-primary .dropdown-item:active,.dropright .dropdown-menu.dropdown-primary .dropdown-item:hover,.dropup .dropdown-menu.dropdown-primary .dropdown-item.active,.dropup .dropdown-menu.dropdown-primary .dropdown-item:active,.dropup .dropdown-menu.dropdown-primary .dropdown-item:hover{background-color:#4285f4!important;box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);border-radius:.125rem}.dropdown .dropdown-menu.dropdown-primary .dropdown-item.active.disabled,.dropdown .dropdown-menu.dropdown-primary .dropdown-item:active.disabled,.dropdown .dropdown-menu.dropdown-primary .dropdown-item:hover.disabled,.dropleft .dropdown-menu.dropdown-primary .dropdown-item.active.disabled,.dropleft .dropdown-menu.dropdown-primary .dropdown-item:active.disabled,.dropleft .dropdown-menu.dropdown-primary .dropdown-item:hover.disabled,.dropright .dropdown-menu.dropdown-primary .dropdown-item.active.disabled,.dropright .dropdown-menu.dropdown-primary .dropdown-item:active.disabled,.dropright .dropdown-menu.dropdown-primary .dropdown-item:hover.disabled,.dropup .dropdown-menu.dropdown-primary .dropdown-item.active.disabled,.dropup .dropdown-menu.dropdown-primary .dropdown-item:active.disabled,.dropup .dropdown-menu.dropdown-primary .dropdown-item:hover.disabled{background-color:transparent;box-shadow:none}.dropdown .dropdown-menu.dropdown-danger .dropdown-item.active,.dropdown .dropdown-menu.dropdown-danger .dropdown-item:active,.dropdown .dropdown-menu.dropdown-danger .dropdown-item:hover,.dropleft .dropdown-menu.dropdown-danger .dropdown-item.active,.dropleft .dropdown-menu.dropdown-danger .dropdown-item:active,.dropleft .dropdown-menu.dropdown-danger .dropdown-item:hover,.dropright .dropdown-menu.dropdown-danger .dropdown-item.active,.dropright .dropdown-menu.dropdown-danger .dropdown-item:active,.dropright .dropdown-menu.dropdown-danger .dropdown-item:hover,.dropup .dropdown-menu.dropdown-danger .dropdown-item.active,.dropup .dropdown-menu.dropdown-danger .dropdown-item:active,.dropup .dropdown-menu.dropdown-danger .dropdown-item:hover{background-color:#c00!important;box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);border-radius:.125rem}.dropdown .dropdown-menu.dropdown-danger .dropdown-item.active.disabled,.dropdown .dropdown-menu.dropdown-danger .dropdown-item:active.disabled,.dropdown .dropdown-menu.dropdown-danger .dropdown-item:hover.disabled,.dropleft .dropdown-menu.dropdown-danger .dropdown-item.active.disabled,.dropleft .dropdown-menu.dropdown-danger .dropdown-item:active.disabled,.dropleft .dropdown-menu.dropdown-danger .dropdown-item:hover.disabled,.dropright .dropdown-menu.dropdown-danger .dropdown-item.active.disabled,.dropright .dropdown-menu.dropdown-danger .dropdown-item:active.disabled,.dropright .dropdown-menu.dropdown-danger .dropdown-item:hover.disabled,.dropup .dropdown-menu.dropdown-danger .dropdown-item.active.disabled,.dropup .dropdown-menu.dropdown-danger .dropdown-item:active.disabled,.dropup .dropdown-menu.dropdown-danger .dropdown-item:hover.disabled{background-color:transparent;box-shadow:none}.dropdown .dropdown-menu.dropdown-default .dropdown-item.active,.dropdown .dropdown-menu.dropdown-default .dropdown-item:active,.dropdown .dropdown-menu.dropdown-default .dropdown-item:hover,.dropleft .dropdown-menu.dropdown-default .dropdown-item.active,.dropleft .dropdown-menu.dropdown-default .dropdown-item:active,.dropleft .dropdown-menu.dropdown-default .dropdown-item:hover,.dropright .dropdown-menu.dropdown-default .dropdown-item.active,.dropright .dropdown-menu.dropdown-default .dropdown-item:active,.dropright .dropdown-menu.dropdown-default .dropdown-item:hover,.dropup .dropdown-menu.dropdown-default .dropdown-item.active,.dropup .dropdown-menu.dropdown-default .dropdown-item:active,.dropup .dropdown-menu.dropdown-default .dropdown-item:hover{background-color:#2bbbad!important;box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);border-radius:.125rem}.dropdown .dropdown-menu.dropdown-default .dropdown-item.active.disabled,.dropdown .dropdown-menu.dropdown-default .dropdown-item:active.disabled,.dropdown .dropdown-menu.dropdown-default .dropdown-item:hover.disabled,.dropleft .dropdown-menu.dropdown-default .dropdown-item.active.disabled,.dropleft .dropdown-menu.dropdown-default .dropdown-item:active.disabled,.dropleft .dropdown-menu.dropdown-default .dropdown-item:hover.disabled,.dropright .dropdown-menu.dropdown-default .dropdown-item.active.disabled,.dropright .dropdown-menu.dropdown-default .dropdown-item:active.disabled,.dropright .dropdown-menu.dropdown-default .dropdown-item:hover.disabled,.dropup .dropdown-menu.dropdown-default .dropdown-item.active.disabled,.dropup .dropdown-menu.dropdown-default .dropdown-item:active.disabled,.dropup .dropdown-menu.dropdown-default .dropdown-item:hover.disabled{background-color:transparent;box-shadow:none}.dropdown .dropdown-menu.dropdown-secondary .dropdown-item.active,.dropdown .dropdown-menu.dropdown-secondary .dropdown-item:active,.dropdown .dropdown-menu.dropdown-secondary .dropdown-item:hover,.dropleft .dropdown-menu.dropdown-secondary .dropdown-item.active,.dropleft .dropdown-menu.dropdown-secondary .dropdown-item:active,.dropleft .dropdown-menu.dropdown-secondary .dropdown-item:hover,.dropright .dropdown-menu.dropdown-secondary .dropdown-item.active,.dropright .dropdown-menu.dropdown-secondary .dropdown-item:active,.dropright .dropdown-menu.dropdown-secondary .dropdown-item:hover,.dropup .dropdown-menu.dropdown-secondary .dropdown-item.active,.dropup .dropdown-menu.dropdown-secondary .dropdown-item:active,.dropup .dropdown-menu.dropdown-secondary .dropdown-item:hover{background-color:#a6c!important;box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);border-radius:.125rem}.dropdown .dropdown-menu.dropdown-secondary .dropdown-item.active.disabled,.dropdown .dropdown-menu.dropdown-secondary .dropdown-item:active.disabled,.dropdown .dropdown-menu.dropdown-secondary .dropdown-item:hover.disabled,.dropleft .dropdown-menu.dropdown-secondary .dropdown-item.active.disabled,.dropleft .dropdown-menu.dropdown-secondary .dropdown-item:active.disabled,.dropleft .dropdown-menu.dropdown-secondary .dropdown-item:hover.disabled,.dropright .dropdown-menu.dropdown-secondary .dropdown-item.active.disabled,.dropright .dropdown-menu.dropdown-secondary .dropdown-item:active.disabled,.dropright .dropdown-menu.dropdown-secondary .dropdown-item:hover.disabled,.dropup .dropdown-menu.dropdown-secondary .dropdown-item.active.disabled,.dropup .dropdown-menu.dropdown-secondary .dropdown-item:active.disabled,.dropup .dropdown-menu.dropdown-secondary .dropdown-item:hover.disabled{background-color:transparent;box-shadow:none}.dropdown .dropdown-menu.dropdown-success .dropdown-item.active,.dropdown .dropdown-menu.dropdown-success .dropdown-item:active,.dropdown .dropdown-menu.dropdown-success .dropdown-item:hover,.dropleft .dropdown-menu.dropdown-success .dropdown-item.active,.dropleft .dropdown-menu.dropdown-success .dropdown-item:active,.dropleft .dropdown-menu.dropdown-success .dropdown-item:hover,.dropright .dropdown-menu.dropdown-success .dropdown-item.active,.dropright .dropdown-menu.dropdown-success .dropdown-item:active,.dropright .dropdown-menu.dropdown-success .dropdown-item:hover,.dropup .dropdown-menu.dropdown-success .dropdown-item.active,.dropup .dropdown-menu.dropdown-success .dropdown-item:active,.dropup .dropdown-menu.dropdown-success .dropdown-item:hover{background-color:#00c851!important;box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);border-radius:.125rem}.dropdown .dropdown-menu.dropdown-success .dropdown-item.active.disabled,.dropdown .dropdown-menu.dropdown-success .dropdown-item:active.disabled,.dropdown .dropdown-menu.dropdown-success .dropdown-item:hover.disabled,.dropleft .dropdown-menu.dropdown-success .dropdown-item.active.disabled,.dropleft .dropdown-menu.dropdown-success .dropdown-item:active.disabled,.dropleft .dropdown-menu.dropdown-success .dropdown-item:hover.disabled,.dropright .dropdown-menu.dropdown-success .dropdown-item.active.disabled,.dropright .dropdown-menu.dropdown-success .dropdown-item:active.disabled,.dropright .dropdown-menu.dropdown-success .dropdown-item:hover.disabled,.dropup .dropdown-menu.dropdown-success .dropdown-item.active.disabled,.dropup .dropdown-menu.dropdown-success .dropdown-item:active.disabled,.dropup .dropdown-menu.dropdown-success .dropdown-item:hover.disabled{background-color:transparent;box-shadow:none}.dropdown .dropdown-menu.dropdown-info .dropdown-item.active,.dropdown .dropdown-menu.dropdown-info .dropdown-item:active,.dropdown .dropdown-menu.dropdown-info .dropdown-item:hover,.dropleft .dropdown-menu.dropdown-info .dropdown-item.active,.dropleft .dropdown-menu.dropdown-info .dropdown-item:active,.dropleft .dropdown-menu.dropdown-info .dropdown-item:hover,.dropright .dropdown-menu.dropdown-info .dropdown-item.active,.dropright .dropdown-menu.dropdown-info .dropdown-item:active,.dropright .dropdown-menu.dropdown-info .dropdown-item:hover,.dropup .dropdown-menu.dropdown-info .dropdown-item.active,.dropup .dropdown-menu.dropdown-info .dropdown-item:active,.dropup .dropdown-menu.dropdown-info .dropdown-item:hover{background-color:#33b5e5!important;box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);border-radius:.125rem}.dropdown .dropdown-menu.dropdown-info .dropdown-item.active.disabled,.dropdown .dropdown-menu.dropdown-info .dropdown-item:active.disabled,.dropdown .dropdown-menu.dropdown-info .dropdown-item:hover.disabled,.dropleft .dropdown-menu.dropdown-info .dropdown-item.active.disabled,.dropleft .dropdown-menu.dropdown-info .dropdown-item:active.disabled,.dropleft .dropdown-menu.dropdown-info .dropdown-item:hover.disabled,.dropright .dropdown-menu.dropdown-info .dropdown-item.active.disabled,.dropright .dropdown-menu.dropdown-info .dropdown-item:active.disabled,.dropright .dropdown-menu.dropdown-info .dropdown-item:hover.disabled,.dropup .dropdown-menu.dropdown-info .dropdown-item.active.disabled,.dropup .dropdown-menu.dropdown-info .dropdown-item:active.disabled,.dropup .dropdown-menu.dropdown-info .dropdown-item:hover.disabled{background-color:transparent;box-shadow:none}.dropdown .dropdown-menu.dropdown-warning .dropdown-item.active,.dropdown .dropdown-menu.dropdown-warning .dropdown-item:active,.dropdown .dropdown-menu.dropdown-warning .dropdown-item:hover,.dropleft .dropdown-menu.dropdown-warning .dropdown-item.active,.dropleft .dropdown-menu.dropdown-warning .dropdown-item:active,.dropleft .dropdown-menu.dropdown-warning .dropdown-item:hover,.dropright .dropdown-menu.dropdown-warning .dropdown-item.active,.dropright .dropdown-menu.dropdown-warning .dropdown-item:active,.dropright .dropdown-menu.dropdown-warning .dropdown-item:hover,.dropup .dropdown-menu.dropdown-warning .dropdown-item.active,.dropup .dropdown-menu.dropdown-warning .dropdown-item:active,.dropup .dropdown-menu.dropdown-warning .dropdown-item:hover{background-color:#fb3!important;box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);border-radius:.125rem}.dropdown .dropdown-menu.dropdown-warning .dropdown-item.active.disabled,.dropdown .dropdown-menu.dropdown-warning .dropdown-item:active.disabled,.dropdown .dropdown-menu.dropdown-warning .dropdown-item:hover.disabled,.dropleft .dropdown-menu.dropdown-warning .dropdown-item.active.disabled,.dropleft .dropdown-menu.dropdown-warning .dropdown-item:active.disabled,.dropleft .dropdown-menu.dropdown-warning .dropdown-item:hover.disabled,.dropright .dropdown-menu.dropdown-warning .dropdown-item.active.disabled,.dropright .dropdown-menu.dropdown-warning .dropdown-item:active.disabled,.dropright .dropdown-menu.dropdown-warning .dropdown-item:hover.disabled,.dropup .dropdown-menu.dropdown-warning .dropdown-item.active.disabled,.dropup .dropdown-menu.dropdown-warning .dropdown-item:active.disabled,.dropup .dropdown-menu.dropdown-warning .dropdown-item:hover.disabled{background-color:transparent;box-shadow:none}.dropdown .dropdown-menu.dropdown-dark .dropdown-item.active,.dropdown .dropdown-menu.dropdown-dark .dropdown-item:active,.dropdown .dropdown-menu.dropdown-dark .dropdown-item:hover,.dropleft .dropdown-menu.dropdown-dark .dropdown-item.active,.dropleft .dropdown-menu.dropdown-dark .dropdown-item:active,.dropleft .dropdown-menu.dropdown-dark .dropdown-item:hover,.dropright .dropdown-menu.dropdown-dark .dropdown-item.active,.dropright .dropdown-menu.dropdown-dark .dropdown-item:active,.dropright .dropdown-menu.dropdown-dark .dropdown-item:hover,.dropup .dropdown-menu.dropdown-dark .dropdown-item.active,.dropup .dropdown-menu.dropdown-dark .dropdown-item:active,.dropup .dropdown-menu.dropdown-dark .dropdown-item:hover{background-color:#2e2e2e!important;box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);border-radius:.125rem}.dropdown .dropdown-menu.dropdown-dark .dropdown-item.active.disabled,.dropdown .dropdown-menu.dropdown-dark .dropdown-item:active.disabled,.dropdown .dropdown-menu.dropdown-dark .dropdown-item:hover.disabled,.dropleft .dropdown-menu.dropdown-dark .dropdown-item.active.disabled,.dropleft .dropdown-menu.dropdown-dark .dropdown-item:active.disabled,.dropleft .dropdown-menu.dropdown-dark .dropdown-item:hover.disabled,.dropright .dropdown-menu.dropdown-dark .dropdown-item.active.disabled,.dropright .dropdown-menu.dropdown-dark .dropdown-item:active.disabled,.dropright .dropdown-menu.dropdown-dark .dropdown-item:hover.disabled,.dropup .dropdown-menu.dropdown-dark .dropdown-item.active.disabled,.dropup .dropdown-menu.dropdown-dark .dropdown-item:active.disabled,.dropup .dropdown-menu.dropdown-dark .dropdown-item:hover.disabled{background-color:transparent;box-shadow:none}.dropdown .dropdown-menu.dropdown-ins .dropdown-item.active,.dropdown .dropdown-menu.dropdown-ins .dropdown-item:active,.dropdown .dropdown-menu.dropdown-ins .dropdown-item:hover,.dropleft .dropdown-menu.dropdown-ins .dropdown-item.active,.dropleft .dropdown-menu.dropdown-ins .dropdown-item:active,.dropleft .dropdown-menu.dropdown-ins .dropdown-item:hover,.dropright .dropdown-menu.dropdown-ins .dropdown-item.active,.dropright .dropdown-menu.dropdown-ins .dropdown-item:active,.dropright .dropdown-menu.dropdown-ins .dropdown-item:hover,.dropup .dropdown-menu.dropdown-ins .dropdown-item.active,.dropup .dropdown-menu.dropdown-ins .dropdown-item:active,.dropup .dropdown-menu.dropdown-ins .dropdown-item:hover{background-color:#2e5e86!important;box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);border-radius:.125rem}.dropdown .dropdown-menu.dropdown-ins .dropdown-item.active.disabled,.dropdown .dropdown-menu.dropdown-ins .dropdown-item:active.disabled,.dropdown .dropdown-menu.dropdown-ins .dropdown-item:hover.disabled,.dropleft .dropdown-menu.dropdown-ins .dropdown-item.active.disabled,.dropleft .dropdown-menu.dropdown-ins .dropdown-item:active.disabled,.dropleft .dropdown-menu.dropdown-ins .dropdown-item:hover.disabled,.dropright .dropdown-menu.dropdown-ins .dropdown-item.active.disabled,.dropright .dropdown-menu.dropdown-ins .dropdown-item:active.disabled,.dropright .dropdown-menu.dropdown-ins .dropdown-item:hover.disabled,.dropup .dropdown-menu.dropdown-ins .dropdown-item.active.disabled,.dropup .dropdown-menu.dropdown-ins .dropdown-item:active.disabled,.dropup .dropdown-menu.dropdown-ins .dropdown-item:hover.disabled{background-color:transparent;box-shadow:none}.dropdown .dropdown-menu .dropdown-item,.dropleft .dropdown-menu .dropdown-item,.dropright .dropdown-menu .dropdown-item,.dropup .dropdown-menu .dropdown-item{padding:.5rem;margin-left:0;font-size:.9rem}.dropdown .dropdown-menu .dropdown-item.disabled,.dropleft .dropdown-menu .dropdown-item.disabled,.dropright .dropdown-menu .dropdown-item.disabled,.dropup .dropdown-menu .dropdown-item.disabled{color:#868e96}.dropdown .dropdown-menu .dropdown-item.disabled:active,.dropdown .dropdown-menu .dropdown-item.disabled:focus,.dropdown .dropdown-menu .dropdown-item.disabled:hover,.dropleft .dropdown-menu .dropdown-item.disabled:active,.dropleft .dropdown-menu .dropdown-item.disabled:focus,.dropleft .dropdown-menu .dropdown-item.disabled:hover,.dropright .dropdown-menu .dropdown-item.disabled:active,.dropright .dropdown-menu .dropdown-item.disabled:focus,.dropright .dropdown-menu .dropdown-item.disabled:hover,.dropup .dropdown-menu .dropdown-item.disabled:active,.dropup .dropdown-menu .dropdown-item.disabled:focus,.dropup .dropdown-menu .dropdown-item.disabled:hover{box-shadow:none;color:#868e96!important;background-color:transparent!important}.dropdown .dropdown-menu .dropdown-item:active,.dropdown .dropdown-menu .dropdown-item:hover,.dropleft .dropdown-menu .dropdown-item:active,.dropleft .dropdown-menu .dropdown-item:hover,.dropright .dropdown-menu .dropdown-item:active,.dropright .dropdown-menu .dropdown-item:hover,.dropup .dropdown-menu .dropdown-item:active,.dropup .dropdown-menu .dropdown-item:hover{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);background-color:#4285f4;border-radius:.125rem;transition:.1s linear}.navbar-nav .dropdown-menu-right{right:0;left:auto}.dropdown-menu.animated{-webkit-animation-duration:.55s;animation-duration:.55s;-webkit-animation-timing-function:ease;animation-timing-function:ease}"]
+                }] }
     ];
     /** @nocollapse */
     BsDropdownDirective.ctorParameters = function () { return [
@@ -5795,7 +5839,7 @@ var MdbIconComponent = /** @class */ (function () {
              * @return {?}
              */
             function (el) {
-                if (el.tagName == 'INPUT') {
+                if (el.tagName === 'INPUT') {
                     _this._renderer.listen(el, 'focus', (/**
                      * @return {?}
                      */
@@ -5856,6 +5900,7 @@ var MdbIconComponent = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+// tslint:disable-next-line:directive-selector
 var FalDirective = /** @class */ (function () {
     function FalDirective(_el, _r) {
         this._el = _el;
@@ -5877,6 +5922,7 @@ var FalDirective = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+// tslint:disable-next-line:directive-selector
 var FarDirective = /** @class */ (function () {
     function FarDirective(_el, _r) {
         this._el = _el;
@@ -5898,6 +5944,7 @@ var FarDirective = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+// tslint:disable-next-line:directive-selector
 var FasDirective = /** @class */ (function () {
     function FasDirective(_el, _r) {
         this._el = _el;
@@ -5919,6 +5966,7 @@ var FasDirective = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+// tslint:disable-next-line:directive-selector
 var FabDirective = /** @class */ (function () {
     function FabDirective(_el, _r) {
         this._el = _el;
@@ -6039,9 +6087,12 @@ var MdbErrorDirective = /** @class */ (function () {
         }
     };
     MdbErrorDirective.decorators = [
-        { type: Directive, args: [{
-                    selector: 'mdb-error'
-                },] }
+        { type: Component, args: [{
+                    selector: 'mdb-error',
+                    template: '<ng-content></ng-content>',
+                    encapsulation: ViewEncapsulation.None,
+                    styles: [".error-message{position:absolute;top:40px;left:0;font-size:.8rem;color:#f44336}.success-message{position:absolute;top:40px;left:0;font-size:.8rem;color:#00c851}"]
+                }] }
     ];
     /** @nocollapse */
     MdbErrorDirective.ctorParameters = function () { return [
@@ -6125,9 +6176,12 @@ var MdbSuccessDirective = /** @class */ (function () {
         }
     };
     MdbSuccessDirective.decorators = [
-        { type: Directive, args: [{
-                    selector: 'mdb-success'
-                },] }
+        { type: Component, args: [{
+                    selector: 'mdb-success',
+                    template: '<ng-content></ng-content>',
+                    encapsulation: ViewEncapsulation.None,
+                    styles: [".error-message{position:absolute;top:40px;left:0;font-size:.8rem;color:#f44336}.success-message{position:absolute;top:40px;left:0;font-size:.8rem;color:#00c851}"]
+                }] }
     ];
     /** @nocollapse */
     MdbSuccessDirective.ctorParameters = function () { return [
@@ -6158,7 +6212,9 @@ var MdbValidateDirective = /** @class */ (function () {
         get: /**
          * @return {?}
          */
-        function () { return this._validate; },
+        function () {
+            return this._validate;
+        },
         set: /**
          * @param {?} value
          * @return {?}
@@ -6175,7 +6231,9 @@ var MdbValidateDirective = /** @class */ (function () {
         get: /**
          * @return {?}
          */
-        function () { return this._validateSuccess; },
+        function () {
+            return this._validateSuccess;
+        },
         set: /**
          * @param {?} value
          * @return {?}
@@ -6191,7 +6249,9 @@ var MdbValidateDirective = /** @class */ (function () {
         get: /**
          * @return {?}
          */
-        function () { return this._validateError; },
+        function () {
+            return this._validateError;
+        },
         set: /**
          * @param {?} value
          * @return {?}
@@ -6244,7 +6304,7 @@ var MdbValidateDirective = /** @class */ (function () {
     };
     MdbValidateDirective.decorators = [
         { type: Directive, args: [{
-                    selector: '[mdbValidate]'
+                    selector: '[mdbValidate]',
                 },] }
     ];
     /** @nocollapse */
@@ -6396,8 +6456,7 @@ var MdbInputDirective = /** @class */ (function () {
             this._renderer.addClass(this.elLabel, 'active');
             this.isClicked = true;
         }
-        catch (error) {
-        }
+        catch (error) { }
     };
     /**
      * @return {?}
@@ -6413,8 +6472,7 @@ var MdbInputDirective = /** @class */ (function () {
             }
             this.isClicked = false;
         }
-        catch (error) {
-        }
+        catch (error) { }
     };
     /**
      * @return {?}
@@ -6426,8 +6484,7 @@ var MdbInputDirective = /** @class */ (function () {
         try {
             this.checkValue();
         }
-        catch (error) {
-        }
+        catch (error) { }
     };
     /**
      * @return {?}
@@ -6471,8 +6528,7 @@ var MdbInputDirective = /** @class */ (function () {
                 }
             }
         }
-        catch (error) {
-        }
+        catch (error) { }
         this.delayedResize();
     };
     /**
@@ -6491,8 +6547,7 @@ var MdbInputDirective = /** @class */ (function () {
                 _this.delayedResize();
             }), 0);
         }
-        catch (error) {
-        }
+        catch (error) { }
     };
     /**
      * @return {?}
@@ -6510,8 +6565,7 @@ var MdbInputDirective = /** @class */ (function () {
                 _this.delayedResize();
             }), 0);
         }
-        catch (error) {
-        }
+        catch (error) { }
     };
     /**
      * @return {?}
@@ -6529,8 +6583,7 @@ var MdbInputDirective = /** @class */ (function () {
                 _this.delayedResize();
             }), 0);
         }
-        catch (error) {
-        }
+        catch (error) { }
     };
     /**
      * @param {?} value
@@ -6585,7 +6638,7 @@ var MdbInputDirective = /** @class */ (function () {
             this._renderer.appendChild(this._elRef.nativeElement.parentElement, this.wrongTextContainer);
             /** @type {?} */
             var textWrong = this._elRef.nativeElement.getAttribute('data-error');
-            this.wrongTextContainer.innerHTML = (textWrong ? textWrong : 'wrong');
+            this.wrongTextContainer.innerHTML = textWrong ? textWrong : 'wrong';
             if (!textWrong && this.errorMessage !== undefined) {
                 this.wrongTextContainer.innerHTML = this.errorMessage;
             }
@@ -6596,7 +6649,7 @@ var MdbInputDirective = /** @class */ (function () {
             this._renderer.appendChild(this._elRef.nativeElement.parentElement, this.rightTextContainer);
             /** @type {?} */
             var textSuccess = this._elRef.nativeElement.getAttribute('data-success');
-            this.rightTextContainer.innerHTML = (textSuccess ? textSuccess : 'success');
+            this.rightTextContainer.innerHTML = textSuccess ? textSuccess : 'success';
             if (!textSuccess && this.successMessage !== undefined) {
                 this.rightTextContainer.innerHTML = this.successMessage;
             }
@@ -6650,9 +6703,10 @@ var MdbInputDirective = /** @class */ (function () {
             this._renderer.setStyle(this.rightTextContainer, 'top', this._elRef.nativeElement.offsetHeight + 'px');
             this._renderer.setStyle(this.wrongTextContainer, 'top', this._elRef.nativeElement.offsetHeight + 'px');
         }
-        if (this._elRef.nativeElement.classList.contains('ng-invalid') &&
+        if ((this._elRef.nativeElement.classList.contains('ng-invalid') &&
             this._elRef.nativeElement.classList.contains('ng-pristine') &&
-            this._elRef.nativeElement.classList.contains('ng-untouched') || this._elRef.nativeElement.disabled) {
+            this._elRef.nativeElement.classList.contains('ng-untouched')) ||
+            this._elRef.nativeElement.disabled) {
             if (this._elRef.nativeElement.classList.contains('counter-success')) {
                 this._renderer.removeClass(this._elRef.nativeElement, 'counter-success');
                 this._renderer.setStyle(this.rightTextContainer, 'visibility', 'hidden');
@@ -6726,8 +6780,7 @@ var MdbInputDirective = /** @class */ (function () {
             try {
                 this.element = document.querySelector('.md-textarea-auto');
             }
-            catch (error) {
-            }
+            catch (error) { }
         }
         /** @type {?} */
         var type = this.el.nativeElement.type;
@@ -6794,14 +6847,13 @@ var MdbInputDirective = /** @class */ (function () {
             try {
                 inputId = this.el.nativeElement.id;
             }
-            catch (err) {
-            }
+            catch (err) { }
             try {
                 inputP = this.el.nativeElement.parentNode;
             }
-            catch (err) {
-            }
-            this.elLabel = inputP.querySelector('label[for="' + inputId + '"]') || inputP.querySelector('label');
+            catch (err) { }
+            this.elLabel =
+                inputP.querySelector('label[for="' + inputId + '"]') || inputP.querySelector('label');
             if (this.elLabel && this.el.nativeElement.value !== '') {
                 this._renderer.addClass(this.elLabel, 'active');
             }
@@ -6831,9 +6883,9 @@ var MdbInputDirective = /** @class */ (function () {
                 }
                 // tslint:disable-next-line:max-line-length
             }
-            if (value === '' && this.isClicked ||
-                value === '' && this.el.nativeElement.placeholder ||
-                value === '' && this.el.nativeElement.attributes.placeholder) {
+            if ((value === '' && this.isClicked) ||
+                (value === '' && this.el.nativeElement.placeholder) ||
+                (value === '' && this.el.nativeElement.attributes.placeholder)) {
                 this._renderer.addClass(this.elLabel, 'active');
             }
             if (this.el.nativeElement.getAttribute('ng-reflect-model') != null) ;
@@ -6841,7 +6893,7 @@ var MdbInputDirective = /** @class */ (function () {
     };
     MdbInputDirective.decorators = [
         { type: Directive, args: [{
-                    selector: '[mdbInputDirective]'
+                    selector: '[mdbInputDirective]',
                 },] }
     ];
     /** @nocollapse */
@@ -6851,13 +6903,13 @@ var MdbInputDirective = /** @class */ (function () {
         { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
     ]; };
     MdbInputDirective.propDecorators = {
-        mdbInputDirective: [{ type: Input, args: ['mdbInputDirective',] }],
-        customRegex: [{ type: Input, args: ['customRegex',] }],
-        mdbValidate: [{ type: Input, args: ['mdbValidation',] }],
-        validateSuccess: [{ type: Input, args: ['validateSuccess',] }],
-        validateError: [{ type: Input, args: ['validateError',] }],
-        focusCheckbox: [{ type: Input, args: ['focusCheckbox',] }],
-        focusRadio: [{ type: Input, args: ['focusRadio',] }],
+        mdbInputDirective: [{ type: Input }],
+        customRegex: [{ type: Input }],
+        mdbValidate: [{ type: Input }],
+        validateSuccess: [{ type: Input }],
+        validateError: [{ type: Input }],
+        focusCheckbox: [{ type: Input }],
+        focusRadio: [{ type: Input }],
         errorMessage: [{ type: Input }],
         successMessage: [{ type: Input }],
         onfocus: [{ type: HostListener, args: ['focus',] }],
@@ -6900,8 +6952,7 @@ var MdbInput = /** @class */ (function () {
             this._renderer.addClass(this.elLabel, 'active');
             this.isClicked = true;
         }
-        catch (error) {
-        }
+        catch (error) { }
     };
     /**
      * @return {?}
@@ -6916,8 +6967,7 @@ var MdbInput = /** @class */ (function () {
             }
             this.isClicked = false;
         }
-        catch (error) {
-        }
+        catch (error) { }
     };
     /**
      * @return {?}
@@ -6929,8 +6979,7 @@ var MdbInput = /** @class */ (function () {
         try {
             this.checkValue();
         }
-        catch (error) {
-        }
+        catch (error) { }
     };
     /**
      * @return {?}
@@ -6938,8 +6987,7 @@ var MdbInput = /** @class */ (function () {
     MdbInput.prototype.oniput = /**
      * @return {?}
      */
-    function () {
-    };
+    function () { };
     /**
      * @param {?} event
      * @return {?}
@@ -7109,7 +7157,8 @@ var MdbInput = /** @class */ (function () {
                 inputP = this.el.nativeElement.parentNode;
             }
             catch (err) { }
-            this.elLabel = inputP.querySelector('label[for="' + inputId + '"]') || inputP.querySelector('label');
+            this.elLabel =
+                inputP.querySelector('label[for="' + inputId + '"]') || inputP.querySelector('label');
             if (this.elLabel && this.el.nativeElement.value !== '') {
                 this._renderer.addClass(this.elLabel, 'active');
             }
@@ -7138,16 +7187,16 @@ var MdbInput = /** @class */ (function () {
                     this._renderer.removeClass(this.elIcon, 'active');
                 }
             }
-            if (value === '' && this.isClicked ||
-                value === '' && this.el.nativeElement.placeholder ||
-                value === '' && this.el.nativeElement.attributes.placeholder) {
+            if ((value === '' && this.isClicked) ||
+                (value === '' && this.el.nativeElement.placeholder) ||
+                (value === '' && this.el.nativeElement.attributes.placeholder)) {
                 this._renderer.addClass(this.elLabel, 'active');
             }
         }
     };
     MdbInput.decorators = [
         { type: Directive, args: [{
-                    selector: '[mdbInput]'
+                    selector: '[mdbInput]',
                 },] }
     ];
     /** @nocollapse */
@@ -7157,8 +7206,8 @@ var MdbInput = /** @class */ (function () {
         { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
     ]; };
     MdbInput.propDecorators = {
-        focusCheckbox: [{ type: Input, args: ['focusCheckbox',] }],
-        focusRadio: [{ type: Input, args: ['focusRadio',] }],
+        focusCheckbox: [{ type: Input }],
+        focusRadio: [{ type: Input }],
         onfocus: [{ type: HostListener, args: ['focus',] }],
         onblur: [{ type: HostListener, args: ['blur',] }],
         onchange: [{ type: HostListener, args: ['change',] }],
@@ -7234,6 +7283,7 @@ var MDBModalRef = /** @class */ (function () {
     ];
     return MDBModalRef;
 }());
+var ɵ0 = {};
 /** @type {?} */
 var modalConfigDefaults = {
     backdrop: true,
@@ -7245,7 +7295,7 @@ var modalConfigDefaults = {
     containerClass: '',
     animated: true,
     scroll: false,
-    data: {}
+    data: ɵ0
 };
 /** @type {?} */
 var ClassName = {
@@ -7518,21 +7568,25 @@ var ModalDirective = /** @class */ (function () {
         /**
          * This event fires immediately when the `show` instance method is called.
          */
+        // tslint:disable-next-line:no-output-on-prefix
         this.onShow = new EventEmitter();
         this.open = new EventEmitter();
         /**
          * This event is fired when the modal has been made visible to the user (will wait for CSS transitions to complete)
          */
+        // tslint:disable-next-line:no-output-on-prefix
         this.onShown = new EventEmitter();
         this.opened = new EventEmitter();
         /**
          * This event is fired immediately when the hide instance method has been called.
          */
+        // tslint:disable-next-line:no-output-on-prefix
         this.onHide = new EventEmitter();
         this.close = new EventEmitter();
         /**
          * This event is fired when the modal has finished being hidden from the user (will wait for CSS transitions to complete).
          */
+        // tslint:disable-next-line:no-output-on-prefix
         this.onHidden = new EventEmitter();
         this.closed = new EventEmitter();
         // seems like an Options
@@ -7601,7 +7655,9 @@ var ModalDirective = /** @class */ (function () {
      * @return {?}
      */
     function (event) {
-        if (this.config.ignoreBackdropClick || this.config.backdrop === 'static' || event.target !== this._element.nativeElement) {
+        if (this.config.ignoreBackdropClick ||
+            this.config.backdrop === 'static' ||
+            event.target !== this._element.nativeElement) {
             return;
         }
         this.dismissReason = DISMISS_REASONS.BACKRDOP;
@@ -7708,10 +7764,24 @@ var ModalDirective = /** @class */ (function () {
         }));
         if (!this.config.backdrop && this.config.ignoreBackdropClick) {
             /** @type {?} */
-            var modalHeight = this._element.nativeElement.firstElementChild.firstElementChild.clientHeight + 12;
+            var style_1 = win.getComputedStyle(this._element.nativeElement.firstElementChild);
+            /** @type {?} */
+            var modalHeight = ['height', 'padding-top', 'padding-bottom', 'margin-top', 'margin-bottom']
+                .map((/**
+             * @param {?} key
+             * @return {?}
+             */
+            function (key) { return parseInt(style_1.getPropertyValue(key), 10); }))
+                .reduce((/**
+             * @param {?} prev
+             * @param {?} cur
+             * @return {?}
+             */
+            function (prev, cur) { return prev + cur; }));
             this._renderer.setStyle(this._element.nativeElement, 'position', 'fixed');
             this._renderer.setStyle(this._element.nativeElement, 'height', modalHeight + "px");
-            if (navigator$1.userAgent.indexOf('Safari') != -1 && navigator$1.userAgent.indexOf('Chrome') == -1) {
+            if (navigator$1.userAgent.indexOf('Safari') !== -1 &&
+                navigator$1.userAgent.indexOf('Chrome') === -1) {
                 this._renderer.setStyle(this._element.nativeElement, 'overflow', 'unset');
                 this._renderer.setStyle(this._element.nativeElement, 'overflow-y', 'unset');
                 this._renderer.setStyle(this._element.nativeElement, 'overflow-x', 'unset');
@@ -7793,7 +7863,7 @@ var ModalDirective = /** @class */ (function () {
         var _this = this;
         // todo: replace this with component loader usage
         if (!this._element.nativeElement.parentNode ||
-            (this._element.nativeElement.parentNode.nodeType !== Node.ELEMENT_NODE)) {
+            this._element.nativeElement.parentNode.nodeType !== Node.ELEMENT_NODE) {
             // don't move modals dom position
             if (document$1 && document$1.body) {
                 document$1.body.appendChild(this._element.nativeElement);
@@ -7850,7 +7920,6 @@ var ModalDirective = /** @class */ (function () {
                 if (document$1 && document$1.body) {
                     _this._renderer.removeClass(document$1.body, ClassName.OPEN);
                 }
-                _this.resetScrollbar();
             }
             _this.resetAdjustments();
             _this.focusOtherModal();
@@ -7877,7 +7946,9 @@ var ModalDirective = /** @class */ (function () {
      */
     function (callback) {
         var _this = this;
-        if (this._isShown && this.config.backdrop && (!this.backdrop || !this.backdrop.instance.isShown)) {
+        if (this._isShown &&
+            this.config.backdrop &&
+            (!this.backdrop || !this.backdrop.instance.isShown)) {
             this.removeBackdrop();
             this._backdrop
                 .attach(ModalBackdropComponent)
@@ -7948,8 +8019,7 @@ var ModalDirective = /** @class */ (function () {
             //  this._renderer.invokeElementMethod(otherOpenedModals[otherOpenedModals.length - 1], 'focus');
             otherOpenedModals[otherOpenedModals.length - 1].nativeElement.focus();
         }
-        catch (error) {
-        }
+        catch (error) { }
     };
     /** @internal */
     /**
@@ -7997,20 +8067,6 @@ var ModalDirective = /** @class */ (function () {
             return;
         }
         this.originalBodyPadding = parseInt(win.getComputedStyle(document$1.body).getPropertyValue('padding-right') || 0, 10);
-        if (this.isBodyOverflowing) {
-            document$1.body.style.paddingRight = this.originalBodyPadding + this.scrollbarWidth + "px";
-        }
-    };
-    /**
-     * @protected
-     * @return {?}
-     */
-    ModalDirective.prototype.resetScrollbar = /**
-     * @protected
-     * @return {?}
-     */
-    function () {
-        document$1.body.style.paddingRight = this.originalBodyPadding;
     };
     // thx d.walsh
     // thx d.walsh
@@ -8035,10 +8091,14 @@ var ModalDirective = /** @class */ (function () {
         return scrollbarWidth;
     };
     ModalDirective.decorators = [
-        { type: Directive, args: [{
+        { type: Component, args: [{
+                    // tslint:disable-next-line:component-selector
                     selector: '[mdbModal]',
-                    exportAs: 'mdb-modal, mdbModal'
-                },] }
+                    template: '<ng-content></ng-content>',
+                    encapsulation: ViewEncapsulation.None,
+                    exportAs: 'mdb-modal, mdbModal',
+                    styles: [".img-fluid,.modal-dialog.cascading-modal.modal-avatar .modal-header,.video-fluid{max-width:100%;height:auto}.flex-center{display:flex;justify-content:center;align-items:center;height:100%}.flex-center p{margin:0}.flex-center ul{text-align:center}.flex-center ul li{margin-bottom:1rem}.flex-center ul li:last-of-type{margin-bottom:0}.hr-light{border-top:1px solid #fff}.hr-dark{border-top:1px solid #666}.w-responsive{width:75%}@media (max-width:740px){.w-responsive{width:100%}}.collapsible-body{display:none}.jumbotron{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);border-radius:.125rem;background-color:#fff}.bg-primary{background-color:#4285f4!important}a.bg-primary:focus,a.bg-primary:hover,button.bg-primary:focus,button.bg-primary:hover{background-color:#1266f1!important}.border-primary{border-color:#4285f4!important}.bg-danger{background-color:#ff3547!important}a.bg-danger:focus,a.bg-danger:hover,button.bg-danger:focus,button.bg-danger:hover{background-color:#ff0219!important}.border-danger{border-color:#ff3547!important}.bg-warning{background-color:#fb3!important}a.bg-warning:focus,a.bg-warning:hover,button.bg-warning:focus,button.bg-warning:hover{background-color:#fa0!important}.border-warning{border-color:#fb3!important}.bg-success{background-color:#00c851!important}a.bg-success:focus,a.bg-success:hover,button.bg-success:focus,button.bg-success:hover{background-color:#00953c!important}.border-success{border-color:#00c851!important}.bg-info{background-color:#33b5e5!important}a.bg-info:focus,a.bg-info:hover,button.bg-info:focus,button.bg-info:hover{background-color:#1a9bcb!important}.border-info{border-color:#33b5e5!important}.bg-default{background-color:#2bbbad!important}a.bg-default:focus,a.bg-default:hover,button.bg-default:focus,button.bg-default:hover{background-color:#219287!important}.border-default{border-color:#2bbbad!important}.bg-secondary{background-color:#a6c!important}a.bg-secondary:focus,a.bg-secondary:hover,button.bg-secondary:focus,button.bg-secondary:hover{background-color:#9540bf!important}.border-secondary{border-color:#a6c!important}.bg-dark{background-color:#212121!important}a.bg-dark:focus,a.bg-dark:hover,button.bg-dark:focus,button.bg-dark:hover{background-color:#080808!important}.border-dark{border-color:#212121!important}.bg-light{background-color:#e0e0e0!important}a.bg-light:focus,a.bg-light:hover,button.bg-light:focus,button.bg-light:hover{background-color:#c7c7c7!important}.border-light{border-color:#e0e0e0!important}.card-img-100{width:100px;height:100px}.card-img-64{width:64px;height:64px}.mml-1{margin-left:-.25rem!important}.flex-1{flex:1}body.modal-open{overflow:auto}.modal-dialog .modal-content .modal-header{border-top-left-radius:.125rem;border-top-right-radius:.125rem}.modal-dialog.cascading-modal .close{opacity:1;text-shadow:none;color:#fff;outline:0}.modal-dialog.cascading-modal .modal-header{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);border-radius:.125rem}.modal-dialog.cascading-modal .modal-header .title .fab,.modal-dialog.cascading-modal .modal-header .title .far,.modal-dialog.cascading-modal .modal-header .title .fas{margin-right:9px}.modal-dialog.cascading-modal .modal-c-tabs .md-tabs{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);display:flex}.modal-dialog.cascading-modal .modal-c-tabs .md-tabs li{flex:1}.modal-dialog.cascading-modal .modal-c-tabs .md-tabs li a{text-align:center}.modal-dialog.cascading-modal .modal-c-tabs .tab-content{box-shadow:unset;padding:1.7rem 0 0}.modal-dialog.cascading-modal.modal-avatar .modal-header img{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);margin-left:auto;margin-right:auto;width:130px}.modal-dialog.modal-notify.modal-primary .modal-header{background-color:#4285f4}.modal-dialog.modal-notify.modal-primary .fab,.modal-dialog.modal-notify.modal-primary .far,.modal-dialog.modal-notify.modal-primary .fas{color:#4285f4}.modal-dialog.modal-notify.modal-primary .badge{background-color:#4285f4}.modal-dialog.modal-notify.modal-primary .btn .fab,.modal-dialog.modal-notify.modal-primary .btn .far,.modal-dialog.modal-notify.modal-primary .btn .fas{color:#fff}.modal-dialog.modal-notify.modal-primary .btn.btn-outline-primary .fab,.modal-dialog.modal-notify.modal-primary .btn.btn-outline-primary .far,.modal-dialog.modal-notify.modal-primary .btn.btn-outline-primary .fas{color:#4285f4}.modal-dialog.modal-notify.modal-danger .fab,.modal-dialog.modal-notify.modal-danger .far,.modal-dialog.modal-notify.modal-danger .fas{color:#ff3547}.modal-dialog.modal-notify.modal-danger .btn .fab,.modal-dialog.modal-notify.modal-danger .btn .far,.modal-dialog.modal-notify.modal-danger .btn .fas{color:#fff}.modal-dialog.modal-notify.modal-danger .btn.btn-outline-danger .fab,.modal-dialog.modal-notify.modal-danger .btn.btn-outline-danger .far,.modal-dialog.modal-notify.modal-danger .btn.btn-outline-danger .fas{color:#ff3547}.modal-dialog.modal-notify.modal-warning .fab,.modal-dialog.modal-notify.modal-warning .far,.modal-dialog.modal-notify.modal-warning .fas{color:#fb3}.modal-dialog.modal-notify.modal-warning .btn .fab,.modal-dialog.modal-notify.modal-warning .btn .far,.modal-dialog.modal-notify.modal-warning .btn .fas{color:#fff}.modal-dialog.modal-notify.modal-warning .btn.btn-outline-warning .fab,.modal-dialog.modal-notify.modal-warning .btn.btn-outline-warning .far,.modal-dialog.modal-notify.modal-warning .btn.btn-outline-warning .fas{color:#fb3}.modal-dialog.modal-notify.modal-success .fab,.modal-dialog.modal-notify.modal-success .far,.modal-dialog.modal-notify.modal-success .fas{color:#00c851}.modal-dialog.modal-notify.modal-success .btn .fab,.modal-dialog.modal-notify.modal-success .btn .far,.modal-dialog.modal-notify.modal-success .btn .fas{color:#fff}.modal-dialog.modal-notify.modal-success .btn.btn-outline-success .fab,.modal-dialog.modal-notify.modal-success .btn.btn-outline-success .far,.modal-dialog.modal-notify.modal-success .btn.btn-outline-success .fas{color:#00c851}.modal-dialog.modal-notify.modal-info .fab,.modal-dialog.modal-notify.modal-info .far,.modal-dialog.modal-notify.modal-info .fas{color:#33b5e5}.modal-dialog.modal-notify.modal-info .btn .fab,.modal-dialog.modal-notify.modal-info .btn .far,.modal-dialog.modal-notify.modal-info .btn .fas{color:#fff}.modal-dialog.modal-notify.modal-info .btn.btn-outline-info .fab,.modal-dialog.modal-notify.modal-info .btn.btn-outline-info .far,.modal-dialog.modal-notify.modal-info .btn.btn-outline-info .fas{color:#33b5e5}@media (min-width:768px){.modal .modal-dialog.modal-top{top:0}.modal .modal-dialog.modal-left{left:0}.modal .modal-dialog.modal-right{right:0}.modal .modal-dialog.modal-bottom{bottom:0}.modal .modal-dialog.modal-top-left{top:10px;left:10px}.modal .modal-dialog.modal-top-right{top:10px;right:10px}.modal .modal-dialog.modal-bottom-left{bottom:10px;left:10px}.modal .modal-dialog.modal-bottom-right{bottom:10px;right:10px}}@media (min-width:992px){.modal.modal-scrolling{position:relative}.modal.modal-scrolling .modal-dialog{position:fixed;z-index:1050}.modal.modal-content-clickable{top:auto;bottom:auto}.modal.modal-content-clickable .modal-dialog{position:fixed}.modal .modal-fluid{width:100%;max-width:100%}.modal .modal-fluid .modal-content{width:100%}.modal .modal-frame{position:absolute;margin:0!important;width:100%;max-width:100%!important}.modal .modal-frame.modal-bottom{bottom:0}.modal .modal-frame.modal-dialog{height:inherit}.modal .modal-full-height{position:absolute;display:flex;margin:0;width:400px;min-height:100%;height:auto;min-height:100%;top:0;right:0}.modal .modal-full-height.modal-bottom,.modal .modal-full-height.modal-top{display:block;width:100%;max-width:100%;height:auto}.modal .modal-full-height.modal-top{bottom:auto}.modal .modal-full-height.modal-bottom{min-height:0;top:auto}.modal .modal-full-height .modal-content{width:100%}.modal .modal-full-height.modal-lg{width:90%;max-width:90%}.modal .modal-side{position:absolute;bottom:10px;right:10px;margin:0;width:400px}}@media (min-width:992px) and (min-width:992px){.modal .modal-full-height.modal-lg{width:800px;max-width:800px}}@media (min-width:992px) and (min-width:1200px){.modal .modal-full-height.modal-lg{width:1000px;max-width:1000px}}body.scrollable{overflow-y:auto}.modal-dialog .modal-content{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);border-radius:.125rem;border:0}.modal{padding-right:0!important}@media (min-width:768px){.modal .modal-dialog.modal-top{top:0;left:0;right:0}.modal .modal-dialog.modal-left{left:0}.modal .modal-dialog.modal-right{right:0}.modal .modal-dialog.modal-bottom>.modal-content{position:absolute;bottom:0}.modal .modal-dialog.modal-top-left{top:10px;left:10px}.modal .modal-dialog.modal-top-right{top:10px;right:10px}.modal .modal-dialog.modal-bottom-left{left:10px;bottom:10px}.modal .modal-dialog.modal-bottom-right{right:10px;bottom:10px}.modal-sm{max-width:300px}}.modal .modal-side.modal-top{top:0}.modal .modal-side.modal-left{left:0}.modal .modal-side.modal-right{right:0}.modal .modal-side.modal-bottom{bottom:0}.modal .modal-side.modal-top-left{top:10px;left:10px}.modal .modal-side.modal-top-right{top:10px;right:10px}.modal .modal-side.modal-bottom-left{left:10px;bottom:10px}.modal .modal-side.modal-bottom-right{right:10px;bottom:10px}.modal.fade.top:not(.show) .modal-dialog{-webkit-transform:translate3d(0,-25%,0);transform:translate3d(0,-25%,0)}.modal.fade.left:not(.show) .modal-dialog{-webkit-transform:translate3d(-25%,0,0);transform:translate3d(-25%,0,0)}.modal.fade.right:not(.show) .modal-dialog{-webkit-transform:translate3d(25%,0,0);transform:translate3d(25%,0,0)}.modal.fade.bottom:not(.show) .modal-dialog{-webkit-transform:translate3d(0,25%,0);transform:translate3d(0,25%,0)}.modal.fade.in{opacity:1}.modal.fade.in .modal-dialog{-webkit-transform:translate(0,0);transform:translate(0,0)}.modal.fade.in .modal-dialog .relative{display:inline-block}.modal.modal-scrolling{position:relative}.modal.modal-scrolling .modal-dialog{position:fixed;z-index:1050}.modal.modal-content-clickable{top:auto;bottom:auto}.modal.modal-content-clickable .modal-dialog{position:fixed}.modal .modal-fluid{max-width:100%}.modal .modal-fluid .modal-content{width:100%}.modal .modal-frame{position:absolute;max-width:100%;margin:0}@media (max-width:767px){.modal .modal-frame{padding:.5rem}}.modal .modal-frame.modal-bottom{bottom:0}.modal .modal-full-height{display:flex;position:absolute;width:400px;min-height:100%;margin:0;top:0;right:0}@media (max-width:576px){.modal .modal-full-height{width:100%;padding:.5rem}}@media (max-width:992px){.modal .modal-full-height{width:100%;height:unset;position:unset}.modal .modal-full-height.modal-left,.modal .modal-full-height.modal-right,.modal .modal-full-height.modal-top{margin:1.75rem auto;min-height:unset}.modal .modal-full-height.modal-bottom,.modal .modal-full-height.modal-left,.modal .modal-full-height.modal-right,.modal .modal-full-height.modal-top{margin-left:auto;margin-right:auto}}@media (min-width:768px) and (max-width:992px){.modal .modal-full-height.modal-bottom{margin-bottom:1.75rem}.modal .modal-full-height.modal-bottom .modal-content{bottom:1rem}}.modal .modal-full-height.modal-bottom,.modal .modal-full-height.modal-top{display:block;width:100%;height:auto}.modal .modal-full-height.modal-top{bottom:auto}.modal .modal-full-height.modal-bottom{bottom:0}.modal .modal-full-height .modal-content{width:100%}.modal .modal-full-height.modal-lg{max-width:90%;width:90%}@media (min-width:992px){.modal .modal-full-height.modal-lg{max-width:800px;width:800px}}@media (min-width:1200px){.modal .modal-full-height.modal-lg{max-width:1000px;width:1000px}}.modal .modal-side{position:absolute;right:10px;bottom:10px;margin:0;min-width:100px}@media (max-width:768px){.modal .modal-full-height.modal-bottom{margin-top:1.75rem}.modal .modal-side{padding-left:.5rem}}.modal-dialog.cascading-modal{margin-top:10%}.modal-dialog.cascading-modal .modal-header{text-align:center;margin:-2rem 1rem 1rem;padding:1.5rem;border:none;flex-direction:column}.modal-dialog.cascading-modal .modal-header .close{margin-right:2.5rem}.modal-dialog.cascading-modal .modal-header.white-text .close{color:#fff;opacity:1}.modal-dialog.cascading-modal .modal-header .title{width:100%;margin-bottom:0;font-size:1.25rem}.modal-dialog.cascading-modal .modal-header .title .fa{margin-right:9px}.modal-dialog.cascading-modal .modal-header .social-buttons{margin-top:1.5rem}.modal-dialog.cascading-modal .modal-header .social-buttons a{font-size:1rem}.modal-dialog.cascading-modal .modal-c-tabs .md-tabs{margin:-1.5rem 1rem 0}.modal-dialog.cascading-modal .modal-body,.modal-dialog.cascading-modal .modal-footer{color:#616161;padding-right:2rem;padding-left:2rem}.modal-dialog.cascading-modal .modal-body .additional-option,.modal-dialog.cascading-modal .modal-footer .additional-option{text-align:center;margin-top:1rem}.modal-dialog.cascading-modal.modal-avatar{margin-top:6rem}.modal-dialog.cascading-modal.modal-avatar .modal-header{box-shadow:none;margin:-6rem 2rem -1rem}.modal-dialog.modal-notify .heading{margin:0;padding:.3rem;color:#fff;font-size:1.15rem}.modal-dialog.modal-notify .modal-header{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);border:0}.modal-dialog.modal-notify .close{opacity:1}.modal-dialog.modal-notify .modal-body{padding:1.5rem;color:#616161}.modal-dialog.modal-notify .btn-outline-secondary-modal{background-color:transparent}.modal-dialog.modal-notify.modal-info .modal-header{background-color:#5394ff}.modal-dialog.modal-notify.modal-info .fa{color:#5394ff}.modal-dialog.modal-notify.modal-info .badge{background-color:#5394ff}.modal-dialog.modal-notify.modal-info .btn-primary-modal{background:#5394ff}.modal-dialog.modal-notify.modal-info .btn-primary-modal:active,.modal-dialog.modal-notify.modal-info .btn-primary-modal:focus,.modal-dialog.modal-notify.modal-info .btn-primary-modal:hover{background-color:#6da4ff!important}.modal-dialog.modal-notify.modal-info .btn-primary-modal.active{background-color:#0059ec!important}.modal-dialog.modal-notify.modal-info .btn-outline-secondary-modal{border:2px solid #5394ff;color:#5394ff!important}.modal-dialog.modal-notify.modal-warning .modal-header{background-color:#ff8e38}.modal-dialog.modal-notify.modal-warning .fa{color:#ff8e38}.modal-dialog.modal-notify.modal-warning .badge{background-color:#ff8e38}.modal-dialog.modal-notify.modal-warning .btn-primary-modal{background:#ff8e38}.modal-dialog.modal-notify.modal-warning .btn-primary-modal:active,.modal-dialog.modal-notify.modal-warning .btn-primary-modal:focus,.modal-dialog.modal-notify.modal-warning .btn-primary-modal:hover{background-color:#ff9c52!important}.modal-dialog.modal-notify.modal-warning .btn-primary-modal.active{background-color:#d15a00!important}.modal-dialog.modal-notify.modal-warning .btn-outline-secondary-modal{border:2px solid #ff8e38;color:#ff8e38!important}.modal-dialog.modal-notify.modal-success .modal-header{background-color:#01d36b}.modal-dialog.modal-notify.modal-success .fa{color:#01d36b}.modal-dialog.modal-notify.modal-success .badge{background-color:#01d36b}.modal-dialog.modal-notify.modal-success .btn-primary-modal{background:#01d36b}.modal-dialog.modal-notify.modal-success .btn-primary-modal:active,.modal-dialog.modal-notify.modal-success .btn-primary-modal:focus,.modal-dialog.modal-notify.modal-success .btn-primary-modal:hover{background-color:#01ec78!important}.modal-dialog.modal-notify.modal-success .btn-primary-modal.active{background-color:#016d38!important}.modal-dialog.modal-notify.modal-success .btn-outline-secondary-modal{border:2px solid #01d36b;color:#01d36b!important}.modal-dialog.modal-notify.modal-danger .modal-header{background-color:#ff4b4b}.modal-dialog.modal-notify.modal-danger .fa{color:#ff4b4b}.modal-dialog.modal-notify.modal-danger .badge{background-color:#ff4b4b}.modal-dialog.modal-notify.modal-danger .btn-primary-modal{background:#ff4b4b}.modal-dialog.modal-notify.modal-danger .btn-primary-modal:active,.modal-dialog.modal-notify.modal-danger .btn-primary-modal:focus,.modal-dialog.modal-notify.modal-danger .btn-primary-modal:hover{background-color:#ff6565!important}.modal-dialog.modal-notify.modal-danger .btn-primary-modal.active{background-color:#e40000!important}.modal-dialog.modal-notify.modal-danger .btn-outline-secondary-modal{border:2px solid #ff4b4b;color:#ff4b4b!important}.modal-sm .modal-content{margin:0 auto;max-width:300px}.modal .modal-fluid,.modal .modal-frame{width:100%;max-width:100%}.modal-ext .modal-content .modal-header{text-align:center}.modal-ext .modal-content .options{float:left}.modal-ext .modal-content .modal-body .text-xs-center fieldset{margin-top:20px}.modal-ext .modal-content .call{margin-top:1rem}.modal-ext .modal-content .modal-body{padding:2rem 2rem 1rem}.modal-content:not(.card-image) .close{position:absolute;right:15px}.modal-cart li p{margin:5px;font-weight:400}.modal-cart li p .badge{margin-left:10px;margin-top:3px;font-weight:400;position:absolute}.modal-cart li p .quantity{font-size:16px;margin-right:7px;font-weight:300}.modal-cart .cartPageLink{margin-left:10px}.modal-cart .cartPageLink a{text-decoration:underline;color:#666}.modal-cart .total{float:right;font-weight:400}.cf-phone{margin-left:7px}.side-modal{position:fixed;height:100%;width:100%;z-index:9999}.side-modal .modal-dialog{position:absolute;bottom:10px;right:10px;width:400px;margin:10px}@media (max-width:760px){.side-modal .modal-dialog{display:none}}.side-modal .modal-header{padding:1rem}.side-modal .modal-header .heading{margin:0;padding:0}.side-modal .modal-content{border:none}.side-modal.fade:not(.show) .modal-dialog{-webkit-transform:translate3d(25%,0,0);transform:translate3d(25%,0,0)}.transparent-bd{opacity:0!important}.modal-backdrop,.modal-backdrop.in{opacity:.5}#exampleModalScroll{overflow-x:hidden;overflow-y:auto}.modal-open .modal{overflow-x:hidden;overflow-y:hidden}.form-dark .card-image{background-size:100%}"]
+                }] }
     ];
     /** @nocollapse */
     ModalDirective.ctorParameters = function () { return [
@@ -8077,6 +8137,61 @@ var msConfig = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/*tslint:disable:no-invalid-this */
+/**
+ * @return {?}
+ */
+function OnChange$1() {
+    /** @type {?} */
+    var sufix = 'Change';
+    return (/**
+     * @param {?} target
+     * @param {?} propertyKey
+     * @return {?}
+     */
+    function OnChangeHandler(target, propertyKey) {
+        /** @type {?} */
+        var _key = " __" + propertyKey + "Value";
+        Object.defineProperty(target, propertyKey, {
+            get: /**
+             * @return {?}
+             */
+            function () { return this[_key]; },
+            set: /**
+             * @param {?} value
+             * @return {?}
+             */
+            function (value) {
+                /** @type {?} */
+                var prevValue = this[_key];
+                this[_key] = value;
+                if (prevValue !== value && this[propertyKey + sufix]) {
+                    this[propertyKey + sufix].emit(value);
+                }
+            }
+        });
+    });
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var ModalContainerComponent = /** @class */ (function () {
     function ModalContainerComponent(options, _element, _renderer) {
         this._renderer = _renderer;
@@ -8086,6 +8201,7 @@ var ModalContainerComponent = /** @class */ (function () {
         this.modal = true;
         this.isShown = false;
         this.isModalHiding = false;
+        this.utils = new Utils$1();
         this.mdbModalService = msConfig.serviceInstance;
         this._element = _element;
         this.config = Object.assign({}, options);
@@ -8114,11 +8230,21 @@ var ModalContainerComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        if (this.config.keyboard &&
-            this.level === this.mdbModalService.getModalsCount()) {
+        if (this.config.keyboard && this.level === this.mdbModalService.getModalsCount()) {
             this.mdbModalService.setDismissReason(DISMISS_REASONS.ESC);
             this.hide();
         }
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    ModalContainerComponent.prototype.onKeyDown = /**
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        this.utils.focusTrapModal(event, this._element);
     };
     /**
      * @return {?}
@@ -8132,8 +8258,14 @@ var ModalContainerComponent = /** @class */ (function () {
             this._renderer.addClass(this._element.nativeElement, 'fade');
         }
         this._renderer.setStyle(this._element.nativeElement, 'display', 'block');
-        if (window && window.navigator.userAgent.indexOf('Edge') !== -1 && this.config && this.config.toString().indexOf('side-modal') === -1 ||
-            window && window.navigator.userAgent.indexOf('Edge') !== -1 && this.config && this.config.toString().indexOf('modal-full-height') === -1) {
+        if ((window &&
+            window.navigator.userAgent.indexOf('Edge') !== -1 &&
+            this.config &&
+            this.config.toString().indexOf('side-modal') === -1) ||
+            (window &&
+                window.navigator.userAgent.indexOf('Edge') !== -1 &&
+                this.config &&
+                this.config.toString().indexOf('modal-full-height') === -1)) {
             this.isShown = true;
             this._renderer.addClass(this._element.nativeElement, isBs3() ? ClassName.IN : ClassName.SHOW);
             this._renderer.setStyle(this._element.nativeElement, 'transition', 'transform 0.3s ease-out');
@@ -8160,6 +8292,17 @@ var ModalContainerComponent = /** @class */ (function () {
         }
         if (this.config.scroll) {
             this._renderer.setStyle(this._element.nativeElement, 'overflow-y', 'auto');
+        }
+    };
+    /**
+     * @return {?}
+     */
+    ModalContainerComponent.prototype.focusModalElement = /**
+     * @return {?}
+     */
+    function () {
+        if (this.config.focus) {
+            this._element.nativeElement.focus();
         }
     };
     /**
@@ -8208,9 +8351,7 @@ var ModalContainerComponent = /** @class */ (function () {
          */
         function () {
             _this.isShown = false;
-            if (document &&
-                document.body &&
-                _this.mdbModalService.getModalsCount() === 1) {
+            if (document && document.body && _this.mdbModalService.getModalsCount() === 1) {
                 _this._renderer.removeClass(document.body, ClassName.OPEN);
             }
             _this.mdbModalService.hide(_this.level);
@@ -8220,7 +8361,9 @@ var ModalContainerComponent = /** @class */ (function () {
     ModalContainerComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mdb-modal-container',
-                    template: "<div [class]=\"'modal-dialog' + (config.class ? ' ' + config.class : '')\" role=\"document\">\n  <div class=\"modal-content\"><ng-content></ng-content></div>\n</div>"
+                    template: "<div [class]=\"'modal-dialog' + (config.class ? ' ' + config.class : '')\" role=\"document\">\n  <div class=\"modal-content\"><ng-content></ng-content></div>\n</div>",
+                    encapsulation: ViewEncapsulation.None,
+                    styles: [".img-fluid,.modal-dialog.cascading-modal.modal-avatar .modal-header,.video-fluid{max-width:100%;height:auto}.flex-center{display:flex;justify-content:center;align-items:center;height:100%}.flex-center p{margin:0}.flex-center ul{text-align:center}.flex-center ul li{margin-bottom:1rem}.flex-center ul li:last-of-type{margin-bottom:0}.hr-light{border-top:1px solid #fff}.hr-dark{border-top:1px solid #666}.w-responsive{width:75%}@media (max-width:740px){.w-responsive{width:100%}}.collapsible-body{display:none}.jumbotron{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);border-radius:.125rem;background-color:#fff}.bg-primary{background-color:#4285f4!important}a.bg-primary:focus,a.bg-primary:hover,button.bg-primary:focus,button.bg-primary:hover{background-color:#1266f1!important}.border-primary{border-color:#4285f4!important}.bg-danger{background-color:#ff3547!important}a.bg-danger:focus,a.bg-danger:hover,button.bg-danger:focus,button.bg-danger:hover{background-color:#ff0219!important}.border-danger{border-color:#ff3547!important}.bg-warning{background-color:#fb3!important}a.bg-warning:focus,a.bg-warning:hover,button.bg-warning:focus,button.bg-warning:hover{background-color:#fa0!important}.border-warning{border-color:#fb3!important}.bg-success{background-color:#00c851!important}a.bg-success:focus,a.bg-success:hover,button.bg-success:focus,button.bg-success:hover{background-color:#00953c!important}.border-success{border-color:#00c851!important}.bg-info{background-color:#33b5e5!important}a.bg-info:focus,a.bg-info:hover,button.bg-info:focus,button.bg-info:hover{background-color:#1a9bcb!important}.border-info{border-color:#33b5e5!important}.bg-default{background-color:#2bbbad!important}a.bg-default:focus,a.bg-default:hover,button.bg-default:focus,button.bg-default:hover{background-color:#219287!important}.border-default{border-color:#2bbbad!important}.bg-secondary{background-color:#a6c!important}a.bg-secondary:focus,a.bg-secondary:hover,button.bg-secondary:focus,button.bg-secondary:hover{background-color:#9540bf!important}.border-secondary{border-color:#a6c!important}.bg-dark{background-color:#212121!important}a.bg-dark:focus,a.bg-dark:hover,button.bg-dark:focus,button.bg-dark:hover{background-color:#080808!important}.border-dark{border-color:#212121!important}.bg-light{background-color:#e0e0e0!important}a.bg-light:focus,a.bg-light:hover,button.bg-light:focus,button.bg-light:hover{background-color:#c7c7c7!important}.border-light{border-color:#e0e0e0!important}.card-img-100{width:100px;height:100px}.card-img-64{width:64px;height:64px}.mml-1{margin-left:-.25rem!important}.flex-1{flex:1}body.modal-open{overflow:auto}.modal-dialog .modal-content .modal-header{border-top-left-radius:.125rem;border-top-right-radius:.125rem}.modal-dialog.cascading-modal .close{opacity:1;text-shadow:none;color:#fff;outline:0}.modal-dialog.cascading-modal .modal-header{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);border-radius:.125rem}.modal-dialog.cascading-modal .modal-header .title .fab,.modal-dialog.cascading-modal .modal-header .title .far,.modal-dialog.cascading-modal .modal-header .title .fas{margin-right:9px}.modal-dialog.cascading-modal .modal-c-tabs .md-tabs{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);display:flex}.modal-dialog.cascading-modal .modal-c-tabs .md-tabs li{flex:1}.modal-dialog.cascading-modal .modal-c-tabs .md-tabs li a{text-align:center}.modal-dialog.cascading-modal .modal-c-tabs .tab-content{box-shadow:unset;padding:1.7rem 0 0}.modal-dialog.cascading-modal.modal-avatar .modal-header img{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);margin-left:auto;margin-right:auto;width:130px}.modal-dialog.modal-notify.modal-primary .modal-header{background-color:#4285f4}.modal-dialog.modal-notify.modal-primary .fab,.modal-dialog.modal-notify.modal-primary .far,.modal-dialog.modal-notify.modal-primary .fas{color:#4285f4}.modal-dialog.modal-notify.modal-primary .badge{background-color:#4285f4}.modal-dialog.modal-notify.modal-primary .btn .fab,.modal-dialog.modal-notify.modal-primary .btn .far,.modal-dialog.modal-notify.modal-primary .btn .fas{color:#fff}.modal-dialog.modal-notify.modal-primary .btn.btn-outline-primary .fab,.modal-dialog.modal-notify.modal-primary .btn.btn-outline-primary .far,.modal-dialog.modal-notify.modal-primary .btn.btn-outline-primary .fas{color:#4285f4}.modal-dialog.modal-notify.modal-danger .fab,.modal-dialog.modal-notify.modal-danger .far,.modal-dialog.modal-notify.modal-danger .fas{color:#ff3547}.modal-dialog.modal-notify.modal-danger .btn .fab,.modal-dialog.modal-notify.modal-danger .btn .far,.modal-dialog.modal-notify.modal-danger .btn .fas{color:#fff}.modal-dialog.modal-notify.modal-danger .btn.btn-outline-danger .fab,.modal-dialog.modal-notify.modal-danger .btn.btn-outline-danger .far,.modal-dialog.modal-notify.modal-danger .btn.btn-outline-danger .fas{color:#ff3547}.modal-dialog.modal-notify.modal-warning .fab,.modal-dialog.modal-notify.modal-warning .far,.modal-dialog.modal-notify.modal-warning .fas{color:#fb3}.modal-dialog.modal-notify.modal-warning .btn .fab,.modal-dialog.modal-notify.modal-warning .btn .far,.modal-dialog.modal-notify.modal-warning .btn .fas{color:#fff}.modal-dialog.modal-notify.modal-warning .btn.btn-outline-warning .fab,.modal-dialog.modal-notify.modal-warning .btn.btn-outline-warning .far,.modal-dialog.modal-notify.modal-warning .btn.btn-outline-warning .fas{color:#fb3}.modal-dialog.modal-notify.modal-success .fab,.modal-dialog.modal-notify.modal-success .far,.modal-dialog.modal-notify.modal-success .fas{color:#00c851}.modal-dialog.modal-notify.modal-success .btn .fab,.modal-dialog.modal-notify.modal-success .btn .far,.modal-dialog.modal-notify.modal-success .btn .fas{color:#fff}.modal-dialog.modal-notify.modal-success .btn.btn-outline-success .fab,.modal-dialog.modal-notify.modal-success .btn.btn-outline-success .far,.modal-dialog.modal-notify.modal-success .btn.btn-outline-success .fas{color:#00c851}.modal-dialog.modal-notify.modal-info .fab,.modal-dialog.modal-notify.modal-info .far,.modal-dialog.modal-notify.modal-info .fas{color:#33b5e5}.modal-dialog.modal-notify.modal-info .btn .fab,.modal-dialog.modal-notify.modal-info .btn .far,.modal-dialog.modal-notify.modal-info .btn .fas{color:#fff}.modal-dialog.modal-notify.modal-info .btn.btn-outline-info .fab,.modal-dialog.modal-notify.modal-info .btn.btn-outline-info .far,.modal-dialog.modal-notify.modal-info .btn.btn-outline-info .fas{color:#33b5e5}@media (min-width:768px){.modal .modal-dialog.modal-top{top:0}.modal .modal-dialog.modal-left{left:0}.modal .modal-dialog.modal-right{right:0}.modal .modal-dialog.modal-bottom{bottom:0}.modal .modal-dialog.modal-top-left{top:10px;left:10px}.modal .modal-dialog.modal-top-right{top:10px;right:10px}.modal .modal-dialog.modal-bottom-left{bottom:10px;left:10px}.modal .modal-dialog.modal-bottom-right{bottom:10px;right:10px}}@media (min-width:992px){.modal.modal-scrolling{position:relative}.modal.modal-scrolling .modal-dialog{position:fixed;z-index:1050}.modal.modal-content-clickable{top:auto;bottom:auto}.modal.modal-content-clickable .modal-dialog{position:fixed}.modal .modal-fluid{width:100%;max-width:100%}.modal .modal-fluid .modal-content{width:100%}.modal .modal-frame{position:absolute;margin:0!important;width:100%;max-width:100%!important}.modal .modal-frame.modal-bottom{bottom:0}.modal .modal-frame.modal-dialog{height:inherit}.modal .modal-full-height{position:absolute;display:flex;margin:0;width:400px;min-height:100%;height:auto;min-height:100%;top:0;right:0}.modal .modal-full-height.modal-bottom,.modal .modal-full-height.modal-top{display:block;width:100%;max-width:100%;height:auto}.modal .modal-full-height.modal-top{bottom:auto}.modal .modal-full-height.modal-bottom{min-height:0;top:auto}.modal .modal-full-height .modal-content{width:100%}.modal .modal-full-height.modal-lg{width:90%;max-width:90%}.modal .modal-side{position:absolute;bottom:10px;right:10px;margin:0;width:400px}}@media (min-width:992px) and (min-width:992px){.modal .modal-full-height.modal-lg{width:800px;max-width:800px}}@media (min-width:992px) and (min-width:1200px){.modal .modal-full-height.modal-lg{width:1000px;max-width:1000px}}body.scrollable{overflow-y:auto}.modal-dialog .modal-content{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);border-radius:.125rem;border:0}.modal{padding-right:0!important}@media (min-width:768px){.modal .modal-dialog.modal-top{top:0;left:0;right:0}.modal .modal-dialog.modal-left{left:0}.modal .modal-dialog.modal-right{right:0}.modal .modal-dialog.modal-bottom>.modal-content{position:absolute;bottom:0}.modal .modal-dialog.modal-top-left{top:10px;left:10px}.modal .modal-dialog.modal-top-right{top:10px;right:10px}.modal .modal-dialog.modal-bottom-left{left:10px;bottom:10px}.modal .modal-dialog.modal-bottom-right{right:10px;bottom:10px}.modal-sm{max-width:300px}}.modal .modal-side.modal-top{top:0}.modal .modal-side.modal-left{left:0}.modal .modal-side.modal-right{right:0}.modal .modal-side.modal-bottom{bottom:0}.modal .modal-side.modal-top-left{top:10px;left:10px}.modal .modal-side.modal-top-right{top:10px;right:10px}.modal .modal-side.modal-bottom-left{left:10px;bottom:10px}.modal .modal-side.modal-bottom-right{right:10px;bottom:10px}.modal.fade.top:not(.show) .modal-dialog{-webkit-transform:translate3d(0,-25%,0);transform:translate3d(0,-25%,0)}.modal.fade.left:not(.show) .modal-dialog{-webkit-transform:translate3d(-25%,0,0);transform:translate3d(-25%,0,0)}.modal.fade.right:not(.show) .modal-dialog{-webkit-transform:translate3d(25%,0,0);transform:translate3d(25%,0,0)}.modal.fade.bottom:not(.show) .modal-dialog{-webkit-transform:translate3d(0,25%,0);transform:translate3d(0,25%,0)}.modal.fade.in{opacity:1}.modal.fade.in .modal-dialog{-webkit-transform:translate(0,0);transform:translate(0,0)}.modal.fade.in .modal-dialog .relative{display:inline-block}.modal.modal-scrolling{position:relative}.modal.modal-scrolling .modal-dialog{position:fixed;z-index:1050}.modal.modal-content-clickable{top:auto;bottom:auto}.modal.modal-content-clickable .modal-dialog{position:fixed}.modal .modal-fluid{max-width:100%}.modal .modal-fluid .modal-content{width:100%}.modal .modal-frame{position:absolute;max-width:100%;margin:0}@media (max-width:767px){.modal .modal-frame{padding:.5rem}}.modal .modal-frame.modal-bottom{bottom:0}.modal .modal-full-height{display:flex;position:absolute;width:400px;min-height:100%;margin:0;top:0;right:0}@media (max-width:576px){.modal .modal-full-height{width:100%;padding:.5rem}}@media (max-width:992px){.modal .modal-full-height{width:100%;height:unset;position:unset}.modal .modal-full-height.modal-left,.modal .modal-full-height.modal-right,.modal .modal-full-height.modal-top{margin:1.75rem auto;min-height:unset}.modal .modal-full-height.modal-bottom,.modal .modal-full-height.modal-left,.modal .modal-full-height.modal-right,.modal .modal-full-height.modal-top{margin-left:auto;margin-right:auto}}@media (min-width:768px) and (max-width:992px){.modal .modal-full-height.modal-bottom{margin-bottom:1.75rem}.modal .modal-full-height.modal-bottom .modal-content{bottom:1rem}}.modal .modal-full-height.modal-bottom,.modal .modal-full-height.modal-top{display:block;width:100%;height:auto}.modal .modal-full-height.modal-top{bottom:auto}.modal .modal-full-height.modal-bottom{bottom:0}.modal .modal-full-height .modal-content{width:100%}.modal .modal-full-height.modal-lg{max-width:90%;width:90%}@media (min-width:992px){.modal .modal-full-height.modal-lg{max-width:800px;width:800px}}@media (min-width:1200px){.modal .modal-full-height.modal-lg{max-width:1000px;width:1000px}}.modal .modal-side{position:absolute;right:10px;bottom:10px;margin:0;min-width:100px}@media (max-width:768px){.modal .modal-full-height.modal-bottom{margin-top:1.75rem}.modal .modal-side{padding-left:.5rem}}.modal-dialog.cascading-modal{margin-top:10%}.modal-dialog.cascading-modal .modal-header{text-align:center;margin:-2rem 1rem 1rem;padding:1.5rem;border:none;flex-direction:column}.modal-dialog.cascading-modal .modal-header .close{margin-right:2.5rem}.modal-dialog.cascading-modal .modal-header.white-text .close{color:#fff;opacity:1}.modal-dialog.cascading-modal .modal-header .title{width:100%;margin-bottom:0;font-size:1.25rem}.modal-dialog.cascading-modal .modal-header .title .fa{margin-right:9px}.modal-dialog.cascading-modal .modal-header .social-buttons{margin-top:1.5rem}.modal-dialog.cascading-modal .modal-header .social-buttons a{font-size:1rem}.modal-dialog.cascading-modal .modal-c-tabs .md-tabs{margin:-1.5rem 1rem 0}.modal-dialog.cascading-modal .modal-body,.modal-dialog.cascading-modal .modal-footer{color:#616161;padding-right:2rem;padding-left:2rem}.modal-dialog.cascading-modal .modal-body .additional-option,.modal-dialog.cascading-modal .modal-footer .additional-option{text-align:center;margin-top:1rem}.modal-dialog.cascading-modal.modal-avatar{margin-top:6rem}.modal-dialog.cascading-modal.modal-avatar .modal-header{box-shadow:none;margin:-6rem 2rem -1rem}.modal-dialog.modal-notify .heading{margin:0;padding:.3rem;color:#fff;font-size:1.15rem}.modal-dialog.modal-notify .modal-header{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);border:0}.modal-dialog.modal-notify .close{opacity:1}.modal-dialog.modal-notify .modal-body{padding:1.5rem;color:#616161}.modal-dialog.modal-notify .btn-outline-secondary-modal{background-color:transparent}.modal-dialog.modal-notify.modal-info .modal-header{background-color:#5394ff}.modal-dialog.modal-notify.modal-info .fa{color:#5394ff}.modal-dialog.modal-notify.modal-info .badge{background-color:#5394ff}.modal-dialog.modal-notify.modal-info .btn-primary-modal{background:#5394ff}.modal-dialog.modal-notify.modal-info .btn-primary-modal:active,.modal-dialog.modal-notify.modal-info .btn-primary-modal:focus,.modal-dialog.modal-notify.modal-info .btn-primary-modal:hover{background-color:#6da4ff!important}.modal-dialog.modal-notify.modal-info .btn-primary-modal.active{background-color:#0059ec!important}.modal-dialog.modal-notify.modal-info .btn-outline-secondary-modal{border:2px solid #5394ff;color:#5394ff!important}.modal-dialog.modal-notify.modal-warning .modal-header{background-color:#ff8e38}.modal-dialog.modal-notify.modal-warning .fa{color:#ff8e38}.modal-dialog.modal-notify.modal-warning .badge{background-color:#ff8e38}.modal-dialog.modal-notify.modal-warning .btn-primary-modal{background:#ff8e38}.modal-dialog.modal-notify.modal-warning .btn-primary-modal:active,.modal-dialog.modal-notify.modal-warning .btn-primary-modal:focus,.modal-dialog.modal-notify.modal-warning .btn-primary-modal:hover{background-color:#ff9c52!important}.modal-dialog.modal-notify.modal-warning .btn-primary-modal.active{background-color:#d15a00!important}.modal-dialog.modal-notify.modal-warning .btn-outline-secondary-modal{border:2px solid #ff8e38;color:#ff8e38!important}.modal-dialog.modal-notify.modal-success .modal-header{background-color:#01d36b}.modal-dialog.modal-notify.modal-success .fa{color:#01d36b}.modal-dialog.modal-notify.modal-success .badge{background-color:#01d36b}.modal-dialog.modal-notify.modal-success .btn-primary-modal{background:#01d36b}.modal-dialog.modal-notify.modal-success .btn-primary-modal:active,.modal-dialog.modal-notify.modal-success .btn-primary-modal:focus,.modal-dialog.modal-notify.modal-success .btn-primary-modal:hover{background-color:#01ec78!important}.modal-dialog.modal-notify.modal-success .btn-primary-modal.active{background-color:#016d38!important}.modal-dialog.modal-notify.modal-success .btn-outline-secondary-modal{border:2px solid #01d36b;color:#01d36b!important}.modal-dialog.modal-notify.modal-danger .modal-header{background-color:#ff4b4b}.modal-dialog.modal-notify.modal-danger .fa{color:#ff4b4b}.modal-dialog.modal-notify.modal-danger .badge{background-color:#ff4b4b}.modal-dialog.modal-notify.modal-danger .btn-primary-modal{background:#ff4b4b}.modal-dialog.modal-notify.modal-danger .btn-primary-modal:active,.modal-dialog.modal-notify.modal-danger .btn-primary-modal:focus,.modal-dialog.modal-notify.modal-danger .btn-primary-modal:hover{background-color:#ff6565!important}.modal-dialog.modal-notify.modal-danger .btn-primary-modal.active{background-color:#e40000!important}.modal-dialog.modal-notify.modal-danger .btn-outline-secondary-modal{border:2px solid #ff4b4b;color:#ff4b4b!important}.modal-sm .modal-content{margin:0 auto;max-width:300px}.modal .modal-fluid,.modal .modal-frame{width:100%;max-width:100%}.modal-ext .modal-content .modal-header{text-align:center}.modal-ext .modal-content .options{float:left}.modal-ext .modal-content .modal-body .text-xs-center fieldset{margin-top:20px}.modal-ext .modal-content .call{margin-top:1rem}.modal-ext .modal-content .modal-body{padding:2rem 2rem 1rem}.modal-content:not(.card-image) .close{position:absolute;right:15px}.modal-cart li p{margin:5px;font-weight:400}.modal-cart li p .badge{margin-left:10px;margin-top:3px;font-weight:400;position:absolute}.modal-cart li p .quantity{font-size:16px;margin-right:7px;font-weight:300}.modal-cart .cartPageLink{margin-left:10px}.modal-cart .cartPageLink a{text-decoration:underline;color:#666}.modal-cart .total{float:right;font-weight:400}.cf-phone{margin-left:7px}.side-modal{position:fixed;height:100%;width:100%;z-index:9999}.side-modal .modal-dialog{position:absolute;bottom:10px;right:10px;width:400px;margin:10px}@media (max-width:760px){.side-modal .modal-dialog{display:none}}.side-modal .modal-header{padding:1rem}.side-modal .modal-header .heading{margin:0;padding:0}.side-modal .modal-content{border:none}.side-modal.fade:not(.show) .modal-dialog{-webkit-transform:translate3d(25%,0,0);transform:translate3d(25%,0,0)}.transparent-bd{opacity:0!important}.modal-backdrop,.modal-backdrop.in{opacity:.5}#exampleModalScroll{overflow-x:hidden;overflow-y:auto}.modal-open .modal{overflow-x:hidden;overflow-y:hidden}.form-dark .card-image{background-size:100%}"]
                 }] }
     ];
     /** @nocollapse */
@@ -8234,7 +8377,8 @@ var ModalContainerComponent = /** @class */ (function () {
         role: [{ type: HostBinding, args: ['role',] }],
         modal: [{ type: HostBinding, args: ['class.modal',] }],
         onClick: [{ type: HostListener, args: ['click', ['$event'],] }],
-        onEsc: [{ type: HostListener, args: ['window:keydown.esc',] }]
+        onEsc: [{ type: HostListener, args: ['window:keydown.esc',] }],
+        onKeyDown: [{ type: HostListener, args: ['keydown', ['$event'],] }]
     };
     return ModalContainerComponent;
 }());
@@ -8370,6 +8514,7 @@ var MDBModalService = /** @class */ (function () {
             .attach(ModalContainerComponent)
             .to('body')
             .show({ content: content, isAnimated: this.config.animated, data: this.config.data });
+        modalContainerRef.instance.focusModalElement();
         modalContainerRef.instance.level = this.getModalsCount();
         mdbModalRef.hide = (/**
          * @return {?}
@@ -8667,8 +8812,9 @@ var LinksComponent = /** @class */ (function () {
     };
     LinksComponent.decorators = [
         { type: Component, args: [{
+                    // tslint:disable-next-line:component-selector
                     selector: 'links',
-                    template: " <ng-content></ng-content> "
+                    template: "\n    <ng-content></ng-content>\n  "
                 }] }
     ];
     /** @nocollapse */
@@ -8956,7 +9102,8 @@ var NavbarComponent = /** @class */ (function () {
      */
     function () {
         if (this.el.nativeElement.firstElementChild) {
-            if (this._itemsLength !== this.el.nativeElement.firstElementChild.firstElementChild.children.length) {
+            if (this._itemsLength !==
+                this.el.nativeElement.firstElementChild.firstElementChild.children.length) {
                 this.height = this.el.nativeElement.firstElementChild.firstElementChild.clientHeight;
                 this.renderer.setStyle(this.el.nativeElement, 'height', this.height + 'px');
             }
@@ -8966,7 +9113,9 @@ var NavbarComponent = /** @class */ (function () {
     NavbarComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mdb-navbar',
-                    template: "<nav class=\"{{SideClass}}\" #nav>\n  <div [ngClass]=\"{'container': containerInside}\" [ngStyle]=\"{'display': displayStyle}\" #container>\n      <ng-content select=\"mdb-navbar-brand\"></ng-content>\n      <ng-content select=\"logo\"></ng-content>\n      <ng-content></ng-content>\n    <ng-content *ngIf=\"this.doubleNav == true\" select=\"navlinks\"></ng-content>\n    <div *ngIf=\"this.doubleNav == false\">\n      <button #toggler class=\"navbar-toggler\" type=\"button\" [attr.aria-controls]=\"collapseId\" [attr.aria-expanded]=\"ariaExpanded\" aria-label=\"Toggle navigation\" (click)=\"toggle(); $event.preventDefault()\" mdbWavesEffect *ngIf=\"this.el.nativeElement.children.length !== 0\">\n        <span class=\"navbar-toggler-icon\">\n        </span>\n      </button>\n    </div>\n    <div #navbar [attr.id]=\"collapseId\" [style.height]=\"height\" class=\"navbar-collapse collapse\" [ngClass]=\"{'collapse': collapse, 'show': showClass, 'collapsing': collapsing}\">\n      <ng-content select=\"links\"></ng-content>\n    </div>\n  </div>\n</nav>\n"
+                    template: "<nav class=\"{{SideClass}}\" #nav>\n  <div [ngClass]=\"{'container': containerInside}\" [ngStyle]=\"{'display': displayStyle}\" #container>\n      <ng-content select=\"mdb-navbar-brand\"></ng-content>\n      <ng-content select=\"logo\"></ng-content>\n      <ng-content></ng-content>\n    <ng-content *ngIf=\"this.doubleNav == true\" select=\"navlinks\"></ng-content>\n    <div *ngIf=\"this.doubleNav == false\">\n      <button #toggler class=\"navbar-toggler\" type=\"button\" [attr.aria-controls]=\"collapseId\" [attr.aria-expanded]=\"ariaExpanded\" aria-label=\"Toggle navigation\" (click)=\"toggle(); $event.preventDefault()\" mdbWavesEffect *ngIf=\"this.el.nativeElement.children.length !== 0\">\n        <span class=\"navbar-toggler-icon\">\n        </span>\n      </button>\n    </div>\n    <div #navbar [attr.id]=\"collapseId\" [style.height]=\"height\" class=\"navbar-collapse collapse\" [ngClass]=\"{'collapse': collapse, 'show': showClass, 'collapsing': collapsing}\">\n      <ng-content select=\"links\"></ng-content>\n    </div>\n  </div>\n</nav>\n",
+                    encapsulation: ViewEncapsulation.None,
+                    styles: [".navbar{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);font-weight:300}.navbar form .md-form input{margin:0 5px 1px 8px}.navbar .breadcrumb{margin:0;padding:.3rem 0 0 1rem;background-color:inherit;font-size:15px;font-weight:300}.navbar .breadcrumb .breadcrumb-item{color:#fff}.navbar .breadcrumb .breadcrumb-item.active,.navbar .breadcrumb .breadcrumb-item:before{color:rgba(255,255,255,.65)}.navbar .navbar-toggler{outline:0;border-width:0}.navbar .nav-flex-icons{flex-direction:row}.navbar .nav-item .nav-link{display:block}.navbar .nav-item .nav-link.disabled:active{pointer-events:none}.navbar .nav-item .nav-link .fab,.navbar .nav-item .nav-link .far,.navbar .nav-item .nav-link .fas{padding-right:3px;padding-left:3px}@media (max-width:992px){.navbar .container{width:100%}.navbar .container .navbar-toggler-right{right:0}.navbar .nav-item .nav-link{padding-right:6px;padding-left:6px}.double-nav{padding-top:4px;padding-bottom:4px}}.navbar .dropdown-menu{position:absolute!important;margin-top:0}.navbar .dropdown-menu a{padding:10px;font-size:.9375rem;font-weight:300;color:#000}@media (max-width:600px){.navbar .dropdown-menu form{width:17rem}}.navbar.navbar-light .navbar-nav .nav-item .nav-link.disbled,.navbar.navbar-light .navbar-nav .nav-item .nav-link.disbled:hover{color:rgba(0,0,0,.5)}.navbar.navbar-light .navbar-toggler-icon{background-image:url(\"data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E\");cursor:pointer}.navbar.navbar-light .breadcrumb .nav-item .nav-link,.navbar.navbar-light .navbar-nav .nav-item .nav-link{color:#000;transition:.35s}.navbar.navbar-light .breadcrumb .nav-item .nav-link:hover,.navbar.navbar-light .navbar-nav .nav-item .nav-link:hover{color:rgba(0,0,0,.75)}.navbar.navbar-light .breadcrumb .nav-item.active>.nav-link,.navbar.navbar-light .navbar-nav .nav-item.active>.nav-link{background-color:rgba(0,0,0,.1)}.navbar.navbar-light .breadcrumb .nav-item.active>.nav-link:hover,.navbar.navbar-light .navbar-nav .nav-item.active>.nav-link:hover,.navbar.navbar-light .navbar-toggler{color:#000}.navbar.navbar-light form .md-form input{border-bottom:1px solid #000}.navbar.navbar-light form .md-form input:focus:not([readonly]){border-color:#4285f4}.navbar.navbar-light form .md-form .form-control{color:#000}.navbar.navbar-light form .md-form .form-control::-webkit-input-placeholder{color:#000;font-weight:300}.navbar.navbar-light form .md-form .form-control::-moz-placeholder{color:#000;font-weight:300}.navbar.navbar-light form .md-form .form-control::-ms-input-placeholder{color:#000;font-weight:300}.navbar.navbar-light form .md-form .form-control::placeholder{color:#000;font-weight:300}.navbar.navbar-dark .navbar-nav .nav-item .nav-link.disbled,.navbar.navbar-dark .navbar-nav .nav-item .nav-link.disbled:hover{color:rgba(255,255,255,.5)}.navbar.navbar-dark .navbar-toggler-icon{background-image:url(\"data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E\");cursor:pointer}.navbar.navbar-dark .breadcrumb .nav-item .nav-link,.navbar.navbar-dark .navbar-nav .nav-item .nav-link{color:#fff;transition:.35s}.navbar.navbar-dark .breadcrumb .nav-item .nav-link:hover,.navbar.navbar-dark .navbar-nav .nav-item .nav-link:hover{color:rgba(255,255,255,.75)}.navbar.navbar-dark .breadcrumb .nav-item.active>.nav-link,.navbar.navbar-dark .navbar-nav .nav-item.active>.nav-link{background-color:rgba(255,255,255,.1)}.navbar.navbar-dark .breadcrumb .nav-item.active>.nav-link:hover,.navbar.navbar-dark .navbar-nav .nav-item.active>.nav-link:hover,.navbar.navbar-dark .navbar-toggler{color:#fff}.navbar.navbar-dark form .md-form input{border-bottom:1px solid #fff}.navbar.navbar-dark form .md-form input:focus:not([readonly]){border-color:#4285f4}.navbar.navbar-dark form .md-form .form-control{color:#fff}.navbar.navbar-dark form .md-form .form-control::-webkit-input-placeholder{color:#fff;font-weight:300}.navbar.navbar-dark form .md-form .form-control::-moz-placeholder{color:#fff;font-weight:300}.navbar.navbar-dark form .md-form .form-control::-ms-input-placeholder{color:#fff;font-weight:300}.navbar.navbar-dark form .md-form .form-control::placeholder{color:#fff;font-weight:300}@media (min-width:600px){.navbar .dropdown-menu form{width:22rem}.navbar.scrolling-navbar{transition:background .5s ease-in-out,padding .5s ease-in-out;padding-top:12px;padding-bottom:12px}.navbar.scrolling-navbar .navbar-nav>li{transition-duration:1s}.navbar.scrolling-navbar.top-nav-collapse{padding-top:5px;padding-bottom:5px}}@media (min-width:400px) and (max-width:767px),(min-width:800px) and (max-width:850px){.navbar.fixed-top .navbar-collapse,.navbar.sticky-top .navbar-collapse{max-height:340px;overflow-x:hidden;overflow-y:auto}}@media (min-width:1200px){.navbar.navbar-expand-xl links,.navbar.navbar-expand-xl navlinks{display:flex;flex-direction:row;align-items:center!important;align-self:center!important;width:100%}}@media (min-width:992px){.navbar>logo>div>a img{margin-left:20px}.navbar.navbar-expand-lg links,.navbar.navbar-expand-lg navlinks{display:flex;flex-direction:row;align-items:center!important;align-self:center!important;width:100%}}@media (min-width:768px){.navbar.navbar-expand-md links,.navbar.navbar-expand-md navlinks{display:flex;flex-direction:row;width:100%}}@media (min-width:576px){.navbar.navbar-expand-sm links,.navbar.navbar-expand-sm navlinks{display:flex;flex-direction:row;width:100%}}@media all and (max-width:992px){.collapsed-navbar-scroll{max-height:calc(100vh - 40px);overflow-y:scroll}}.navbar-container{order:-1;width:50px!important;padding-left:5px;padding-right:5px}.navbar-nav .dropdown-menu-right.dropdown-menu{left:unset}.navbar-nav .dropdown-menu{top:100%!important;-webkit-transform:translate3d(0,0,0)!important;transform:translate3d(0,0,0)!important}.breadcrumbs{display:flex;padding-left:5px;padding-right:5px;order:0;align-items:center}@media (min-width:1441px){.breadcrumbs{margin-left:-.6rem}}@supports (-ms-ime-align:auto){.ie-nav .navbar-toggler{position:absolute;margin-top:-40px;right:0}@media all and (min-width:992px){.ie-nav .navbar-nav.nav-flex-icons{position:absolute;top:30%;right:0}.ie-nav .navbar-nav{position:absolute;top:30%;margin-left:88px}.ie-nav .navbar-brand>img{margin-top:-2px;padding-right:16px}.intro-non-fixed-nav>links .navbar-collapse{display:inline-flex!important;align-items:center!important;justify-content:space-between!important}.intro-fixed-nav .navbar-nav.nav-flex-icons{position:absolute;top:30%;right:0}.intro-fixed-nav .navbar-nav{position:absolute;top:30%;margin-left:88px}.intro-fixed-nav .navbar-brand img{margin-top:-2px;padding-right:16px}}.intro-fixed-nav .navbar-toggler{position:absolute;margin-top:-40px;right:0}}@media all and (-ms-high-contrast:none) and (min-width:992px),all and (-ms-high-contrast:active) and (min-width:992px){.ie-nav .navbar-nav.nav-flex-icons{position:absolute;top:30%;right:0}.ie-nav .navbar-nav{position:absolute;top:30%;margin-left:88px}.ie-nav .navbar-brand>img{margin-top:-2px;padding-right:16px}.intro-non-fixed-nav>links .navbar-collapse{display:inline-flex!important;align-items:center!important;justify-content:space-between!important}.intro-fixed-nav .navbar-nav.nav-flex-icons{position:absolute;top:30%;right:0}.intro-fixed-nav .navbar-nav{position:absolute;top:30%;margin-left:88px}.intro-fixed-nav .navbar-brand img{margin-top:-2px;padding-right:16px}}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.ie-nav .navbar-toggler,.intro-fixed-nav .navbar-toggler{position:absolute;margin-top:-40px;right:0}}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:none}.navbar .nav-item.avatar{padding:0}.navbar .nav-item.avatar.active{background-color:transparent!important}.navbar .nav-item.avatar .dropdown-toggle{padding:0}.navbar .nav-item.avatar .dropdown-toggle img{height:35px}.navbar .nav-item.avatar .dropdown-toggle:after{display:none}@media (max-width:768px){.double-nav .container{padding-left:0;padding-right:0}}.double-nav a{font-size:15px;color:#fff}.double-nav .breadcrumb-dn p{margin:0;padding-top:0;padding-left:1rem}@media (max-width:993px){.double-nav .breadcrumb-dn{display:none}}.double-nav .button-collapse{left:10px;font-size:1.5rem}@media (min-width:1440px){.double-nav .button-collapse{display:none}}@media (max-width:1440px){.double-nav .button-collapse{display:block;position:relative;font-size:1.4rem;margin-right:10px;margin-left:10px}}"]
                 }] }
     ];
     /** @nocollapse */
@@ -8981,12 +9130,12 @@ var NavbarComponent = /** @class */ (function () {
         collapseId: [{ type: Input }],
         scrollSensitivity: [{ type: Input }],
         scrollableNavbar: [{ type: Input }],
-        el: [{ type: ViewChild, args: ['navbar',] }],
-        mobile: [{ type: ViewChild, args: ['mobile',] }],
-        navbar: [{ type: ViewChild, args: ['nav',] }],
-        container: [{ type: ViewChild, args: ['container',] }],
-        toggler: [{ type: ViewChild, args: ['toggler',] }],
-        links: [{ type: ContentChild, args: [LinksComponent,] }],
+        el: [{ type: ViewChild, args: ['navbar', { static: true },] }],
+        mobile: [{ type: ViewChild, args: ['mobile', { static: false },] }],
+        navbar: [{ type: ViewChild, args: ['nav', { static: true },] }],
+        container: [{ type: ViewChild, args: ['container', { static: true },] }],
+        toggler: [{ type: ViewChild, args: ['toggler', { static: false },] }],
+        links: [{ type: ContentChild, args: [LinksComponent, { static: false },] }],
         onResize: [{ type: HostListener, args: ['window:resize', ['$event'],] }],
         onScroll: [{ type: HostListener, args: ['document:scroll',] }]
     };
@@ -9047,8 +9196,9 @@ var NavlinksComponent = /** @class */ (function () {
     };
     NavlinksComponent.decorators = [
         { type: Component, args: [{
+                    // tslint:disable-next-line:component-selector
                     selector: 'navlinks',
-                    template: " <ng-content></ng-content> "
+                    template: "\n    <ng-content></ng-content>\n  "
                 }] }
     ];
     /** @nocollapse */
@@ -9140,13 +9290,21 @@ var PopoverContainerComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.class = 'popover-fadeIn popover in popover-' + this.placement + ' ' + this.placement + ' bs-popover-' + this.placement;
+        this.class =
+            'popover-fadeIn popover in popover-' +
+                this.placement +
+                ' ' +
+                this.placement +
+                ' bs-popover-' +
+                this.placement;
     };
     PopoverContainerComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mdb-popover-container',
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    template: "\n <h3 class=\"popover-header\" *ngIf=\"title\">{{title}}</h3>\n <div class=\"popover-body\">\n <ng-content></ng-content>\n </div>"
+                    template: "\n    <h3 class=\"popover-header\" *ngIf=\"title\">{{ title }}</h3>\n    <div class=\"popover-body\">\n      <ng-content></ng-content>\n    </div>\n  ",
+                    encapsulation: ViewEncapsulation.None,
+                    styles: [".popover.bs-tether-element-attached-bottom,.popover.popover-top{margin-top:-10px}.popover.bs-tether-element-attached-bottom::after,.popover.bs-tether-element-attached-bottom::before,.popover.popover-top::after,.popover.popover-top::before{left:50%;border-bottom-width:0}.popover.bs-tether-element-attached-bottom::before,.popover.popover-top::before{bottom:-11px;margin-left:-11px;border-top-color:rgba(0,0,0,.25)}.popover.bs-tether-element-attached-bottom::after,.popover.popover-top::after{bottom:-10px;margin-left:-10px;border-top-color:#fff}.popover.bs-tether-element-attached-left,.popover.popover-right{margin-left:10px}.popover.bs-tether-element-attached-left::after,.popover.bs-tether-element-attached-left::before,.popover.popover-right::after,.popover.popover-right::before{top:50%;border-left-width:0}.popover.bs-tether-element-attached-left::before,.popover.popover-right::before{left:-11px;margin-top:-11px;border-right-color:rgba(0,0,0,.25)}.popover.bs-tether-element-attached-left::after,.popover.popover-right::after{left:-10px;margin-top:-10px;border-right-color:#fff}.popover.bs-tether-element-attached-top,.popover.popover-bottom{margin-top:10px}.popover.bs-tether-element-attached-top::after,.popover.bs-tether-element-attached-top::before,.popover.popover-bottom::after,.popover.popover-bottom::before{left:50%;border-top-width:0}.popover.bs-tether-element-attached-top::before,.popover.popover-bottom::before{top:-11px;margin-left:-11px;border-bottom-color:rgba(0,0,0,.25)}.popover.bs-tether-element-attached-top::after,.popover.popover-bottom::after{top:-10px;margin-left:-10px;border-bottom-color:#f7f7f7}.popover.bs-tether-element-attached-top .popover-title::before,.popover.popover-bottom .popover-title::before{position:absolute;top:0;left:50%;display:block;width:20px;margin-left:-10px;content:'';border-bottom:1px solid #f7f7f7}.popover.bs-tether-element-attached-right,.popover.popover-left{margin-left:-10px}.popover.bs-tether-element-attached-right::after,.popover.bs-tether-element-attached-right::before,.popover.popover-left::after,.popover.popover-left::before{top:50%;border-right-width:0}.popover.bs-tether-element-attached-right::before,.popover.popover-left::before{right:-11px;margin-top:-11px;border-left-color:rgba(0,0,0,.25)}.popover.bs-tether-element-attached-right::after,.popover.popover-left::after{right:-10px;margin-top:-10px;border-left-color:#fff}.popover::after,.popover::before{position:absolute;display:block;width:0;height:0;border-color:transparent;border-style:solid}.popover::before{content:'';border-width:11px}.popover::after{content:'';border-width:10px}@-webkit-keyframes fadeInPopover{from{opacity:0}to{opacity:1}}@keyframes fadeInPopover{from{opacity:0}to{opacity:1}}.popover-fadeIn{-webkit-animation-name:fadeInPopover;animation-name:fadeInPopover;-webkit-animation-delay:.2s;animation-delay:.2s;-webkit-animation-duration:.2s;animation-duration:.2s;-webkit-animation-fill-mode:both;animation-fill-mode:both}"]
                 }] }
     ];
     /** @nocollapse */
@@ -9231,12 +9389,12 @@ var PopoverDirective = /** @class */ (function () {
         this._positionService.setOptions({
             modifiers: {
                 flip: {
-                    enabled: this.dynamicPosition
+                    enabled: this.dynamicPosition,
                 },
                 preventOverflow: {
-                    enabled: this.dynamicPosition
-                }
-            }
+                    enabled: this.dynamicPosition,
+                },
+            },
         });
         this._popover
             .attach(PopoverContainerComponent)
@@ -9245,7 +9403,7 @@ var PopoverDirective = /** @class */ (function () {
             .show({
             content: this.mdbPopover,
             placement: this.placement,
-            title: this.mdbPopoverHeader || this.popoverTitle
+            title: this.mdbPopoverHeader || this.popoverTitle,
         });
         this.isOpen = true;
         if (!this.dynamicPosition) {
@@ -9332,7 +9490,7 @@ var PopoverDirective = /** @class */ (function () {
             show: (/**
              * @return {?}
              */
-            function () { return _this.show(); })
+            function () { return _this.show(); }),
         });
     };
     /**
@@ -9494,7 +9652,7 @@ var StickyHeaderDirective = /** @class */ (function () {
     StickyHeaderDirective.decorators = [
         { type: Directive, args: [{
                     selector: '[mdbStickyHeader]',
-                    exportAs: 'mdbStickyHeader'
+                    exportAs: 'mdbStickyHeader',
                 },] }
     ];
     /** @nocollapse */
@@ -9589,6 +9747,7 @@ var MdbTableDirective = /** @class */ (function () {
      * @return {?}
      */
     function () {
+        // tslint:disable-next-line: deprecation
         /** @type {?} */
         var rowRemoved = Observable.create((/**
          * @param {?} observer
@@ -9658,7 +9817,10 @@ var MdbTableDirective = /** @class */ (function () {
              */
             function (key) {
                 if (obj[key]) {
-                    return (obj[key].toString().toLowerCase()).includes(searchKey);
+                    return obj[key]
+                        .toString()
+                        .toLowerCase()
+                        .includes(searchKey);
                 }
             }));
         }));
@@ -9689,6 +9851,7 @@ var MdbTableDirective = /** @class */ (function () {
      */
     function (searchKey) {
         var _this = this;
+        // tslint:disable-next-line: deprecation
         /** @type {?} */
         var observable = Observable.create((/**
          * @param {?} observer
@@ -9726,10 +9889,14 @@ var MdbTableDirective = /** @class */ (function () {
         }
     };
     MdbTableDirective.decorators = [
-        { type: Directive, args: [{
+        { type: Component, args: [{
+                    // tslint:disable-next-line:component-selector
                     selector: '[mdbTable]',
-                    exportAs: 'mdbTable'
-                },] }
+                    exportAs: 'mdbTable',
+                    template: '<ng-content></ng-content>',
+                    encapsulation: ViewEncapsulation.None,
+                    styles: ["table th{font-size:.9rem;font-weight:400}table td{font-size:.9rem;font-weight:300}table.table thead th{border-top:none}table.table td,table.table th{padding-top:1.1rem;padding-bottom:1rem}table.table a{margin:0;color:#212529}table.table .label-table{margin:0;padding:0;line-height:.94rem;height:.94rem}table.table.btn-table td{vertical-align:middle}table.table-hover tbody tr:hover{transition:.5s;background-color:rgba(0,0,0,.075)}table .th-lg{min-width:9rem}table .th-sm{min-width:6rem}table.table-sm td,table.table-sm th{padding-top:.6rem;padding-bottom:.6rem}.table-scroll-vertical{max-height:300px;overflow-y:auto}.table-fixed{table-layout:fixed}.table-responsive-lg>.table-bordered,.table-responsive-md>.table-bordered,.table-responsive-sm>.table-bordered,.table-responsive-xl>.table-bordered,.table-responsive>.table-bordered{border-top:1px solid #dee2e6}"]
+                }] }
     ];
     /** @nocollapse */
     MdbTableDirective.ctorParameters = function () { return [
@@ -9964,7 +10131,7 @@ var MdbTableScrollDirective = /** @class */ (function () {
     };
     MdbTableScrollDirective.decorators = [
         { type: Directive, args: [{
-                    selector: '[mdbTableScroll]'
+                    selector: '[mdbTableScroll]',
                 },] }
     ];
     /** @nocollapse */
@@ -10076,6 +10243,7 @@ var MdbTableService = /** @class */ (function () {
      * @return {?}
      */
     function () {
+        // tslint:disable-next-line: deprecation
         /** @type {?} */
         var rowRemoved = Observable.create((/**
          * @param {?} observer
@@ -10145,7 +10313,10 @@ var MdbTableService = /** @class */ (function () {
              */
             function (key) {
                 if (obj[key]) {
-                    return (obj[key].toString().toLowerCase()).includes(searchKey);
+                    return obj[key]
+                        .toString()
+                        .toLowerCase()
+                        .includes(searchKey);
                 }
             }));
         }));
@@ -10176,6 +10347,7 @@ var MdbTableService = /** @class */ (function () {
      */
     function (searchKey) {
         var _this = this;
+        // tslint:disable-next-line: deprecation
         /** @type {?} */
         var observable = Observable.create((/**
          * @param {?} observer
@@ -10188,12 +10360,12 @@ var MdbTableService = /** @class */ (function () {
     };
     MdbTableService.decorators = [
         { type: Injectable, args: [{
-                    providedIn: 'root'
+                    providedIn: 'root',
                 },] }
     ];
     /** @nocollapse */
     MdbTableService.ctorParameters = function () { return []; };
-    /** @nocollapse */ MdbTableService.ngInjectableDef = defineInjectable({ factory: function MdbTableService_Factory() { return new MdbTableService(); }, token: MdbTableService, providedIn: "root" });
+    /** @nocollapse */ MdbTableService.ngInjectableDef = ɵɵdefineInjectable({ factory: function MdbTableService_Factory() { return new MdbTableService(); }, token: MdbTableService, providedIn: "root" });
     return MdbTableService;
 }());
 
@@ -10298,7 +10470,8 @@ var MdbTablePaginationComponent = /** @class */ (function () {
             this.lastVisibleItemIndex = 0;
             this.allItemsLength = 0;
         }
-        if (!searchDataSource.isFirstChange() && searchDataSource.currentValue.length <= this.maxVisibleItems) {
+        if (!searchDataSource.isFirstChange() &&
+            searchDataSource.currentValue.length <= this.maxVisibleItems) {
             this.nextShouldBeDisabled = true;
             this.lastVisibleItemIndex = searchDataSource.currentValue.length;
         }
@@ -10328,6 +10501,7 @@ var MdbTablePaginationComponent = /** @class */ (function () {
      */
     function () {
         var _this = this;
+        // tslint:disable-next-line: deprecation
         /** @type {?} */
         var observable = Observable.create((/**
          * @param {?} observer
@@ -10373,7 +10547,7 @@ var MdbTablePaginationComponent = /** @class */ (function () {
     function () {
         this.lastItemIndex = this.activePageNumber * this.maxVisibleItems;
         this.lastVisibleItemIndex = this.lastItemIndex;
-        if (this.searchDataSource && (this.lastItemIndex > this.searchDataSource.length)) {
+        if (this.searchDataSource && this.lastItemIndex > this.searchDataSource.length) {
             this.lastVisibleItemIndex = this.searchDataSource.length;
         }
         else if (!this.searchDataSource) {
@@ -10441,6 +10615,7 @@ var MdbTablePaginationComponent = /** @class */ (function () {
      */
     function () {
         var _this = this;
+        // tslint:disable-next-line: deprecation
         /** @type {?} */
         var obs = Observable.create((/**
          * @param {?} observer
@@ -10459,6 +10634,7 @@ var MdbTablePaginationComponent = /** @class */ (function () {
      */
     function () {
         var _this = this;
+        // tslint:disable-next-line: deprecation
         /** @type {?} */
         var obs = Observable.create((/**
          * @param {?} observer
@@ -10476,7 +10652,7 @@ var MdbTablePaginationComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        if (this.searchDataSource && (this.lastVisibleItemIndex === this.searchDataSource.length)) {
+        if (this.searchDataSource && this.lastVisibleItemIndex === this.searchDataSource.length) {
             return true;
         }
         if (this.activePageNumber >= this.calculateHowManyPagesShouldBe()) {
@@ -10624,10 +10800,13 @@ var TooltipContainerComponent = /** @class */ (function () {
         { type: Component, args: [{
                     selector: 'mdb-tooltip-container',
                     changeDetection: ChangeDetectionStrategy.OnPush,
+                    // tslint:disable-next-line:no-host-metadata-property
                     host: {
-                        '[class]': '"tooltip-fadeIn tooltip in tooltip-" + placement + " " + "bs-tooltip-" + placement + " " + placement + " " + containerClass'
+                        '[class]': '"tooltip-fadeIn tooltip in tooltip-" + placement + " " + "bs-tooltip-" + placement + " " + placement + " " + containerClass',
                     },
-                    template: "\n    <div #tooltipArrow class=\"tooltip-arrow arrow\"></div>\n    <div #tooltipInner class=\"tooltip-inner\">\n      <ng-content></ng-content>\n    </div>\n  "
+                    template: "\n    <div #tooltipArrow class=\"tooltip-arrow arrow\"></div>\n    <div #tooltipInner class=\"tooltip-inner\">\n      <ng-content></ng-content>\n    </div>\n  ",
+                    encapsulation: ViewEncapsulation.None,
+                    styles: [".mdb-color.lighten-5{background-color:#d0d6e2!important}.mdb-color.lighten-4{background-color:#b1bace!important}.mdb-color.lighten-3{background-color:#929fba!important}.mdb-color.lighten-2{background-color:#7283a7!important}.mdb-color.lighten-1{background-color:#59698d!important}.mdb-color{background-color:#45526e!important}.mdb-color-text{color:#45526e!important}.rgba-mdb-color-slight,.rgba-mdb-color-slight:after{background-color:rgba(69,82,110,.1)}.rgba-mdb-color-light,.rgba-mdb-color-light:after{background-color:rgba(69,82,110,.3)}.rgba-mdb-color-strong,.rgba-mdb-color-strong:after{background-color:rgba(69,82,110,.7)}.mdb-color.darken-1{background-color:#3b465e!important}.mdb-color.darken-2{background-color:#2e3951!important}.mdb-color.darken-3{background-color:#1c2a48!important}.mdb-color.darken-4{background-color:#1c2331!important}.red.lighten-5{background-color:#ffebee!important}.red.lighten-4{background-color:#ffcdd2!important}.red.lighten-3{background-color:#ef9a9a!important}.red.lighten-2{background-color:#e57373!important}.red.lighten-1{background-color:#ef5350!important}.red{background-color:#f44336!important}.red-text{color:#f44336!important}.rgba-red-slight,.rgba-red-slight:after{background-color:rgba(244,67,54,.1)}.rgba-red-light,.rgba-red-light:after{background-color:rgba(244,67,54,.3)}.rgba-red-strong,.rgba-red-strong:after{background-color:rgba(244,67,54,.7)}.red.darken-1{background-color:#e53935!important}.red.darken-2{background-color:#d32f2f!important}.red.darken-3{background-color:#c62828!important}.red.darken-4{background-color:#b71c1c!important}.red.accent-1{background-color:#ff8a80!important}.red.accent-2{background-color:#ff5252!important}.red.accent-3{background-color:#ff1744!important}.red.accent-4{background-color:#d50000!important}.pink.lighten-5{background-color:#fce4ec!important}.pink.lighten-4{background-color:#f8bbd0!important}.pink.lighten-3{background-color:#f48fb1!important}.pink.lighten-2{background-color:#f06292!important}.pink.lighten-1{background-color:#ec407a!important}.pink{background-color:#e91e63!important}.pink-text{color:#e91e63!important}.rgba-pink-slight,.rgba-pink-slight:after{background-color:rgba(233,30,99,.1)}.rgba-pink-light,.rgba-pink-light:after{background-color:rgba(233,30,99,.3)}.rgba-pink-strong,.rgba-pink-strong:after{background-color:rgba(233,30,99,.7)}.pink.darken-1{background-color:#d81b60!important}.pink.darken-2{background-color:#c2185b!important}.pink.darken-3{background-color:#ad1457!important}.pink.darken-4{background-color:#880e4f!important}.pink.accent-1{background-color:#ff80ab!important}.pink.accent-2{background-color:#ff4081!important}.pink.accent-3{background-color:#f50057!important}.pink.accent-4{background-color:#c51162!important}.purple.lighten-5{background-color:#f3e5f5!important}.purple.lighten-4{background-color:#e1bee7!important}.purple.lighten-3{background-color:#ce93d8!important}.purple.lighten-2{background-color:#ba68c8!important}.purple.lighten-1{background-color:#ab47bc!important}.purple{background-color:#9c27b0!important}.purple-text{color:#9c27b0!important}.rgba-purple-slight,.rgba-purple-slight:after{background-color:rgba(156,39,176,.1)}.rgba-purple-light,.rgba-purple-light:after{background-color:rgba(156,39,176,.3)}.rgba-purple-strong,.rgba-purple-strong:after{background-color:rgba(156,39,176,.7)}.purple.darken-1{background-color:#8e24aa!important}.purple.darken-2{background-color:#7b1fa2!important}.purple.darken-3{background-color:#6a1b9a!important}.purple.darken-4{background-color:#4a148c!important}.purple.accent-1{background-color:#ea80fc!important}.purple.accent-2{background-color:#e040fb!important}.purple.accent-3{background-color:#d500f9!important}.purple.accent-4{background-color:#a0f!important}.deep-purple.lighten-5{background-color:#ede7f6!important}.deep-purple.lighten-4{background-color:#d1c4e9!important}.deep-purple.lighten-3{background-color:#b39ddb!important}.deep-purple.lighten-2{background-color:#9575cd!important}.deep-purple.lighten-1{background-color:#7e57c2!important}.deep-purple{background-color:#673ab7!important}.deep-purple-text{color:#673ab7!important}.rgba-deep-purple-slight,.rgba-deep-purple-slight:after{background-color:rgba(103,58,183,.1)}.rgba-deep-purple-light,.rgba-deep-purple-light:after{background-color:rgba(103,58,183,.3)}.rgba-deep-purple-strong,.rgba-deep-purple-strong:after{background-color:rgba(103,58,183,.7)}.deep-purple.darken-1{background-color:#5e35b1!important}.deep-purple.darken-2{background-color:#512da8!important}.deep-purple.darken-3{background-color:#4527a0!important}.deep-purple.darken-4{background-color:#311b92!important}.deep-purple.accent-1{background-color:#b388ff!important}.deep-purple.accent-2{background-color:#7c4dff!important}.deep-purple.accent-3{background-color:#651fff!important}.deep-purple.accent-4{background-color:#6200ea!important}.indigo.lighten-5{background-color:#e8eaf6!important}.indigo.lighten-4{background-color:#c5cae9!important}.indigo.lighten-3{background-color:#9fa8da!important}.indigo.lighten-2{background-color:#7986cb!important}.indigo.lighten-1{background-color:#5c6bc0!important}.indigo{background-color:#3f51b5!important}.indigo-text{color:#3f51b5!important}.rgba-indigo-slight,.rgba-indigo-slight:after{background-color:rgba(63,81,181,.1)}.rgba-indigo-light,.rgba-indigo-light:after{background-color:rgba(63,81,181,.3)}.rgba-indigo-strong,.rgba-indigo-strong:after{background-color:rgba(63,81,181,.7)}.indigo.darken-1{background-color:#3949ab!important}.indigo.darken-2{background-color:#303f9f!important}.indigo.darken-3{background-color:#283593!important}.indigo.darken-4{background-color:#1a237e!important}.indigo.accent-1{background-color:#8c9eff!important}.indigo.accent-2{background-color:#536dfe!important}.indigo.accent-3{background-color:#3d5afe!important}.indigo.accent-4{background-color:#304ffe!important}.blue.lighten-5{background-color:#e3f2fd!important}.blue.lighten-4{background-color:#bbdefb!important}.blue.lighten-3{background-color:#90caf9!important}.blue.lighten-2{background-color:#64b5f6!important}.blue.lighten-1{background-color:#42a5f5!important}.blue{background-color:#2196f3!important}.blue-text{color:#2196f3!important}.rgba-blue-slight,.rgba-blue-slight:after{background-color:rgba(33,150,243,.1)}.rgba-blue-light,.rgba-blue-light:after{background-color:rgba(33,150,243,.3)}.rgba-blue-strong,.rgba-blue-strong:after{background-color:rgba(33,150,243,.7)}.blue.darken-1{background-color:#1e88e5!important}.blue.darken-2{background-color:#1976d2!important}.blue.darken-3{background-color:#1565c0!important}.blue.darken-4{background-color:#0d47a1!important}.blue.accent-1{background-color:#82b1ff!important}.blue.accent-2{background-color:#448aff!important}.blue.accent-3{background-color:#2979ff!important}.blue.accent-4{background-color:#2962ff!important}.light-blue.lighten-5{background-color:#e1f5fe!important}.light-blue.lighten-4{background-color:#b3e5fc!important}.light-blue.lighten-3{background-color:#81d4fa!important}.light-blue.lighten-2{background-color:#4fc3f7!important}.light-blue.lighten-1{background-color:#29b6f6!important}.light-blue{background-color:#03a9f4!important}.light-blue-text{color:#03a9f4!important}.rgba-light-blue-slight,.rgba-light-blue-slight:after{background-color:rgba(3,169,244,.1)}.rgba-light-blue-light,.rgba-light-blue-light:after{background-color:rgba(3,169,244,.3)}.rgba-light-blue-strong,.rgba-light-blue-strong:after{background-color:rgba(3,169,244,.7)}.light-blue.darken-1{background-color:#039be5!important}.light-blue.darken-2{background-color:#0288d1!important}.light-blue.darken-3{background-color:#0277bd!important}.light-blue.darken-4{background-color:#01579b!important}.light-blue.accent-1{background-color:#80d8ff!important}.light-blue.accent-2{background-color:#40c4ff!important}.light-blue.accent-3{background-color:#00b0ff!important}.light-blue.accent-4{background-color:#0091ea!important}.cyan.lighten-5{background-color:#e0f7fa!important}.cyan.lighten-4{background-color:#b2ebf2!important}.cyan.lighten-3{background-color:#80deea!important}.cyan.lighten-2{background-color:#4dd0e1!important}.cyan.lighten-1{background-color:#26c6da!important}.cyan{background-color:#00bcd4!important}.cyan-text{color:#00bcd4!important}.rgba-cyan-slight,.rgba-cyan-slight:after{background-color:rgba(0,188,212,.1)}.rgba-cyan-light,.rgba-cyan-light:after{background-color:rgba(0,188,212,.3)}.rgba-cyan-strong,.rgba-cyan-strong:after{background-color:rgba(0,188,212,.7)}.cyan.darken-1{background-color:#00acc1!important}.cyan.darken-2{background-color:#0097a7!important}.cyan.darken-3{background-color:#00838f!important}.cyan.darken-4{background-color:#006064!important}.cyan.accent-1{background-color:#84ffff!important}.cyan.accent-2{background-color:#18ffff!important}.cyan.accent-3{background-color:#00e5ff!important}.cyan.accent-4{background-color:#00b8d4!important}.teal.lighten-5{background-color:#e0f2f1!important}.teal.lighten-4{background-color:#b2dfdb!important}.teal.lighten-3{background-color:#80cbc4!important}.teal.lighten-2{background-color:#4db6ac!important}.teal.lighten-1{background-color:#26a69a!important}.teal{background-color:#009688!important}.teal-text{color:#009688!important}.rgba-teal-slight,.rgba-teal-slight:after{background-color:rgba(0,150,136,.1)}.rgba-teal-light,.rgba-teal-light:after{background-color:rgba(0,150,136,.3)}.rgba-teal-strong,.rgba-teal-strong:after{background-color:rgba(0,150,136,.7)}.teal.darken-1{background-color:#00897b!important}.teal.darken-2{background-color:#00796b!important}.teal.darken-3{background-color:#00695c!important}.teal.darken-4{background-color:#004d40!important}.teal.accent-1{background-color:#a7ffeb!important}.teal.accent-2{background-color:#64ffda!important}.teal.accent-3{background-color:#1de9b6!important}.teal.accent-4{background-color:#00bfa5!important}.green.lighten-5{background-color:#e8f5e9!important}.green.lighten-4{background-color:#c8e6c9!important}.green.lighten-3{background-color:#a5d6a7!important}.green.lighten-2{background-color:#81c784!important}.green.lighten-1{background-color:#66bb6a!important}.green{background-color:#4caf50!important}.green-text{color:#4caf50!important}.rgba-green-slight,.rgba-green-slight:after{background-color:rgba(76,175,80,.1)}.rgba-green-light,.rgba-green-light:after{background-color:rgba(76,175,80,.3)}.rgba-green-strong,.rgba-green-strong:after{background-color:rgba(76,175,80,.7)}.green.darken-1{background-color:#43a047!important}.green.darken-2{background-color:#388e3c!important}.green.darken-3{background-color:#2e7d32!important}.green.darken-4{background-color:#1b5e20!important}.green.accent-1{background-color:#b9f6ca!important}.green.accent-2{background-color:#69f0ae!important}.green.accent-3{background-color:#00e676!important}.green.accent-4{background-color:#00c853!important}.light-green.lighten-5{background-color:#f1f8e9!important}.light-green.lighten-4{background-color:#dcedc8!important}.light-green.lighten-3{background-color:#c5e1a5!important}.light-green.lighten-2{background-color:#aed581!important}.light-green.lighten-1{background-color:#9ccc65!important}.light-green{background-color:#8bc34a!important}.light-green-text{color:#8bc34a!important}.rgba-light-green-slight,.rgba-light-green-slight:after{background-color:rgba(139,195,74,.1)}.rgba-light-green-light,.rgba-light-green-light:after{background-color:rgba(139,195,74,.3)}.rgba-light-green-strong,.rgba-light-green-strong:after{background-color:rgba(139,195,74,.7)}.light-green.darken-1{background-color:#7cb342!important}.light-green.darken-2{background-color:#689f38!important}.light-green.darken-3{background-color:#558b2f!important}.light-green.darken-4{background-color:#33691e!important}.light-green.accent-1{background-color:#ccff90!important}.light-green.accent-2{background-color:#b2ff59!important}.light-green.accent-3{background-color:#76ff03!important}.light-green.accent-4{background-color:#64dd17!important}.lime.lighten-5{background-color:#f9fbe7!important}.lime.lighten-4{background-color:#f0f4c3!important}.lime.lighten-3{background-color:#e6ee9c!important}.lime.lighten-2{background-color:#dce775!important}.lime.lighten-1{background-color:#d4e157!important}.lime{background-color:#cddc39!important}.lime-text{color:#cddc39!important}.rgba-lime-slight,.rgba-lime-slight:after{background-color:rgba(205,220,57,.1)}.rgba-lime-light,.rgba-lime-light:after{background-color:rgba(205,220,57,.3)}.rgba-lime-strong,.rgba-lime-strong:after{background-color:rgba(205,220,57,.7)}.lime.darken-1{background-color:#c0ca33!important}.lime.darken-2{background-color:#afb42b!important}.lime.darken-3{background-color:#9e9d24!important}.lime.darken-4{background-color:#827717!important}.lime.accent-1{background-color:#f4ff81!important}.lime.accent-2{background-color:#eeff41!important}.lime.accent-3{background-color:#c6ff00!important}.lime.accent-4{background-color:#aeea00!important}.yellow.lighten-5{background-color:#fffde7!important}.yellow.lighten-4{background-color:#fff9c4!important}.yellow.lighten-3{background-color:#fff59d!important}.yellow.lighten-2{background-color:#fff176!important}.yellow.lighten-1{background-color:#ffee58!important}.yellow{background-color:#ffeb3b!important}.yellow-text{color:#ffeb3b!important}.rgba-yellow-slight,.rgba-yellow-slight:after{background-color:rgba(255,235,59,.1)}.rgba-yellow-light,.rgba-yellow-light:after{background-color:rgba(255,235,59,.3)}.rgba-yellow-strong,.rgba-yellow-strong:after{background-color:rgba(255,235,59,.7)}.yellow.darken-1{background-color:#fdd835!important}.yellow.darken-2{background-color:#fbc02d!important}.yellow.darken-3{background-color:#f9a825!important}.yellow.darken-4{background-color:#f57f17!important}.yellow.accent-1{background-color:#ffff8d!important}.yellow.accent-2{background-color:#ff0!important}.yellow.accent-3{background-color:#ffea00!important}.yellow.accent-4{background-color:#ffd600!important}.amber.lighten-5{background-color:#fff8e1!important}.amber.lighten-4{background-color:#ffecb3!important}.amber.lighten-3{background-color:#ffe082!important}.amber.lighten-2{background-color:#ffd54f!important}.amber.lighten-1{background-color:#ffca28!important}.amber{background-color:#ffc107!important}.amber-text{color:#ffc107!important}.rgba-amber-slight,.rgba-amber-slight:after{background-color:rgba(255,193,7,.1)}.rgba-amber-light,.rgba-amber-light:after{background-color:rgba(255,193,7,.3)}.rgba-amber-strong,.rgba-amber-strong:after{background-color:rgba(255,193,7,.7)}.amber.darken-1{background-color:#ffb300!important}.amber.darken-2{background-color:#ffa000!important}.amber.darken-3{background-color:#ff8f00!important}.amber.darken-4{background-color:#ff6f00!important}.amber.accent-1{background-color:#ffe57f!important}.amber.accent-2{background-color:#ffd740!important}.amber.accent-3{background-color:#ffc400!important}.amber.accent-4{background-color:#ffab00!important}.orange.lighten-5{background-color:#fff3e0!important}.orange.lighten-4{background-color:#ffe0b2!important}.orange.lighten-3{background-color:#ffcc80!important}.orange.lighten-2{background-color:#ffb74d!important}.orange.lighten-1{background-color:#ffa726!important}.orange{background-color:#ff9800!important}.orange-text{color:#ff9800!important}.rgba-orange-slight,.rgba-orange-slight:after{background-color:rgba(255,152,0,.1)}.rgba-orange-light,.rgba-orange-light:after{background-color:rgba(255,152,0,.3)}.rgba-orange-strong,.rgba-orange-strong:after{background-color:rgba(255,152,0,.7)}.orange.darken-1{background-color:#fb8c00!important}.orange.darken-2{background-color:#f57c00!important}.orange.darken-3{background-color:#ef6c00!important}.orange.darken-4{background-color:#e65100!important}.orange.accent-1{background-color:#ffd180!important}.orange.accent-2{background-color:#ffab40!important}.orange.accent-3{background-color:#ff9100!important}.orange.accent-4{background-color:#ff6d00!important}.deep-orange.lighten-5{background-color:#fbe9e7!important}.deep-orange.lighten-4{background-color:#ffccbc!important}.deep-orange.lighten-3{background-color:#ffab91!important}.deep-orange.lighten-2{background-color:#ff8a65!important}.deep-orange.lighten-1{background-color:#ff7043!important}.deep-orange{background-color:#ff5722!important}.deep-orange-text{color:#ff5722!important}.rgba-deep-orange-slight,.rgba-deep-orange-slight:after{background-color:rgba(255,87,34,.1)}.rgba-deep-orange-light,.rgba-deep-orange-light:after{background-color:rgba(255,87,34,.3)}.rgba-deep-orange-strong,.rgba-deep-orange-strong:after{background-color:rgba(255,87,34,.7)}.deep-orange.darken-1{background-color:#f4511e!important}.deep-orange.darken-2{background-color:#e64a19!important}.deep-orange.darken-3{background-color:#d84315!important}.deep-orange.darken-4{background-color:#bf360c!important}.deep-orange.accent-1{background-color:#ff9e80!important}.deep-orange.accent-2{background-color:#ff6e40!important}.deep-orange.accent-3{background-color:#ff3d00!important}.deep-orange.accent-4{background-color:#dd2c00!important}.brown.lighten-5{background-color:#efebe9!important}.brown.lighten-4{background-color:#d7ccc8!important}.brown.lighten-3{background-color:#bcaaa4!important}.brown.lighten-2{background-color:#a1887f!important}.brown.lighten-1{background-color:#8d6e63!important}.brown{background-color:#795548!important}.brown-text{color:#795548!important}.rgba-brown-slight,.rgba-brown-slight:after{background-color:rgba(121,85,72,.1)}.rgba-brown-light,.rgba-brown-light:after{background-color:rgba(121,85,72,.3)}.rgba-brown-strong,.rgba-brown-strong:after{background-color:rgba(121,85,72,.7)}.brown.darken-1{background-color:#6d4c41!important}.brown.darken-2{background-color:#5d4037!important}.brown.darken-3{background-color:#4e342e!important}.brown.darken-4{background-color:#3e2723!important}.blue-grey.lighten-5{background-color:#eceff1!important}.blue-grey.lighten-4{background-color:#cfd8dc!important}.blue-grey.lighten-3{background-color:#b0bec5!important}.blue-grey.lighten-2{background-color:#90a4ae!important}.blue-grey.lighten-1{background-color:#78909c!important}.blue-grey{background-color:#607d8b!important}.blue-grey-text{color:#607d8b!important}.rgba-blue-grey-slight,.rgba-blue-grey-slight:after{background-color:rgba(96,125,139,.1)}.rgba-blue-grey-light,.rgba-blue-grey-light:after{background-color:rgba(96,125,139,.3)}.rgba-blue-grey-strong,.rgba-blue-grey-strong:after{background-color:rgba(96,125,139,.7)}.blue-grey.darken-1{background-color:#546e7a!important}.blue-grey.darken-2{background-color:#455a64!important}.blue-grey.darken-3{background-color:#37474f!important}.blue-grey.darken-4{background-color:#263238!important}.grey.lighten-5{background-color:#fafafa!important}.grey.lighten-4{background-color:#f5f5f5!important}.grey.lighten-3{background-color:#eee!important}.grey.lighten-2{background-color:#e0e0e0!important}.grey.lighten-1{background-color:#bdbdbd!important}.grey{background-color:#9e9e9e!important}.grey-text{color:#9e9e9e!important}.rgba-grey-slight,.rgba-grey-slight:after{background-color:rgba(158,158,158,.1)}.rgba-grey-light,.rgba-grey-light:after{background-color:rgba(158,158,158,.3)}.rgba-grey-strong,.rgba-grey-strong:after{background-color:rgba(158,158,158,.7)}.grey.darken-1{background-color:#757575!important}.grey.darken-2{background-color:#616161!important}.grey.darken-3{background-color:#424242!important}.grey.darken-4{background-color:#212121!important}.black{background-color:#000!important}.black-text{color:#000!important}.rgba-black-slight,.rgba-black-slight:after{background-color:rgba(0,0,0,.1)}.rgba-black-light,.rgba-black-light:after{background-color:rgba(0,0,0,.3)}.rgba-black-strong,.rgba-black-strong:after{background-color:rgba(0,0,0,.7)}.white{background-color:#fff!important}.white-text{color:#fff!important}.rgba-white-slight,.rgba-white-slight:after{background-color:rgba(255,255,255,.1)}.rgba-white-light,.rgba-white-light:after{background-color:rgba(255,255,255,.3)}.rgba-white-strong,.rgba-white-strong:after{background-color:rgba(255,255,255,.7)}.rgba-stylish-slight{background-color:rgba(62,69,81,.1)}.rgba-stylish-light{background-color:rgba(62,69,81,.3)}.rgba-stylish-strong{background-color:rgba(62,69,81,.7)}.primary-color{background-color:#4285f4!important}.primary-color-dark{background-color:#0d47a1!important}.secondary-color{background-color:#a6c!important}.secondary-color-dark{background-color:#93c!important}.default-color{background-color:#2bbbad!important}.default-color-dark{background-color:#00695c!important}.info-color{background-color:#33b5e5!important}.info-color-dark{background-color:#09c!important}.success-color{background-color:#00c851!important}.success-color-dark{background-color:#007e33!important}.warning-color{background-color:#fb3!important}.warning-color-dark{background-color:#f80!important}.danger-color{background-color:#ff3547!important}.danger-color-dark{background-color:#c00!important}.elegant-color{background-color:#2e2e2e!important}.elegant-color-dark{background-color:#212121!important}.stylish-color{background-color:#4b515d!important}.stylish-color-dark{background-color:#3e4551!important}.unique-color{background-color:#3f729b!important}.unique-color-dark{background-color:#1c2331!important}.special-color{background-color:#37474f!important}.special-color-dark{background-color:#263238!important}.purple-gradient{background:linear-gradient(40deg,#ff6ec4,#7873f5)!important}.peach-gradient{background:linear-gradient(40deg,#ffd86f,#fc6262)!important}.aqua-gradient{background:linear-gradient(40deg,#2096ff,#05ffa3)!important}.blue-gradient{background:linear-gradient(40deg,#45cafc,#303f9f)!important}.purple-gradient-rgba{background:linear-gradient(40deg,rgba(255,110,196,.9),rgba(120,115,245,.9))!important}.peach-gradient-rgba{background:linear-gradient(40deg,rgba(255,216,111,.9),rgba(252,98,98,.9))!important}.aqua-gradient-rgba{background:linear-gradient(40deg,rgba(32,150,255,.9),rgba(5,255,163,.9))!important}.blue-gradient-rgba{background:linear-gradient(40deg,rgba(69,202,252,.9),rgba(48,63,159,.9))!important}.dark-grey-text,.dark-grey-text:focus,.dark-grey-text:hover{color:#4f4f4f!important}.hoverable{box-shadow:none;transition:.55s ease-in-out}.hoverable:hover{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);transition:.55s ease-in-out}.z-depth-0{box-shadow:none!important}.z-depth-1{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)!important}.tooltip-inner,.z-depth-1-half{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)!important}.z-depth-2{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19)!important}.z-depth-3{box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19)!important}.z-depth-4{box-shadow:0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)!important}.z-depth-5{box-shadow:0 27px 24px 0 rgba(0,0,0,.2),0 40px 77px 0 rgba(0,0,0,.22)!important}.disabled,:disabled{pointer-events:none!important}a{cursor:pointer;text-decoration:none;color:#0275d8;transition:.2s ease-in-out}a:hover{text-decoration:none;color:#014c8c;transition:.2s ease-in-out}a.disabled:hover,a:disabled:hover{color:#0275d8}a:not([href]):not([tabindex]),a:not([href]):not([tabindex]):focus,a:not([href]):not([tabindex]):hover{color:inherit;text-decoration:none}a .tooltip{position:absolute;z-index:1070;display:block;font-family:-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\";font-style:normal;font-weight:400;letter-spacing:normal;line-break:auto;line-height:1.5;text-align:left;text-align:start;text-decoration:none;text-shadow:none;text-transform:none;white-space:normal;word-break:normal;word-spacing:normal;font-size:.875rem;word-wrap:break-word;opacity:0}a .tooltip.show{opacity:.9}a .tooltip.bs-tether-element-attached-bottom,a .tooltip.tooltip-top{padding:.8rem 0;margin-top:0}a .tooltip.bs-tether-element-attached-bottom .tooltip-inner::before,a .tooltip.tooltip-top .tooltip-inner::before{bottom:0;left:50%;margin-left:-.8rem;content:'';border-width:.8rem .8rem 0}a .tooltip.bs-tether-element-attached-left,a .tooltip.tooltip-right{padding:0 .8rem;margin-left:0}a .tooltip.bs-tether-element-attached-left .tooltip-inner::before,a .tooltip.tooltip-right .tooltip-inner::before{top:50%;left:0;margin-top:-.8rem;content:'';border-width:.8rem .8rem .8rem 0}a .tooltip.bs-tether-element-attached-top,a .tooltip.tooltip-bottom{padding:.8rem 0;margin-top:0}a .tooltip.bs-tether-element-attached-top .tooltip-inner::before,a .tooltip.tooltip-bottom .tooltip-inner::before{top:0;left:50%;margin-left:-.8rem;content:'';border-width:0 .8rem .8rem}a .tooltip.bs-tether-element-attached-right,a .tooltip.tooltip-left{padding:0 .8rem;margin-left:0}a .tooltip.bs-tether-element-attached-right .tooltip-inner::before,a .tooltip.tooltip-left .tooltip-inner::before{top:50%;right:0;margin-top:-.8rem;content:'';border-width:.8rem 0 .8rem .8rem}.tooltip-inner{max-width:200px;padding:.2rem .4rem;text-align:center;border-radius:.25rem}.tooltip-inner::before{position:absolute;width:0;height:0;border-color:transparent;border-style:solid}@-webkit-keyframes fadeInTooltip{from{opacity:0}to{opacity:1}}@keyframes fadeInTooltip{from{opacity:0}to{opacity:1}}.tooltip-fadeIn{-webkit-animation-name:fadeInTooltip;animation-name:fadeInTooltip;-webkit-animation-delay:.2s;animation-delay:.2s;-webkit-animation-duration:.2s;animation-duration:.2s;-webkit-animation-fill-mode:both;animation-fill-mode:both}.single-tooltip{padding:.75rem 0 0}.single-tooltip a{padding:0!important}a[tooltip]{margin-left:0!important;padding:0 .5rem}.tooltip-arrow.left{position:relative;margin-right:-.6rem;-webkit-transform:rotate(90deg);transform:rotate(90deg)}.tooltip-arrow.right{position:relative;margin-left:-.6rem;-webkit-transform:rotate(-90deg);transform:rotate(-90deg)}.tooltip-arrow.top{position:relative;-webkit-transform:rotate(-180deg);transform:rotate(-180deg)}.tooltip-top{padding:.4rem 0}.tooltip-top .arrow{bottom:0}.tooltip-top .arrow::before{top:0;border-width:.4rem .4rem 0;border-top-color:#000}.tooltip-right{padding:0 .4rem}.tooltip-right .arrow{left:0}.tooltip-right .arrow::before{right:0;border-width:.4rem .4rem .4rem 0;border-right-color:#000}.tooltip-bottom{padding:.4rem 0}.tooltip-bottom .arrow{top:0}.tooltip-bottom .arrow::before{bottom:0;border-width:0 .4rem .4rem;border-bottom-color:#000}.tooltip-left{padding:0 .4rem}.tooltip-left .arrow{right:0}.tooltip-left .arrow::before{left:0;border-width:.4rem 0 .4rem .4rem;border-left-color:#000}.md-tooltip-email.show,.md-tooltip-main.show,.md-tooltip.show{opacity:1!important}.md-inner{padding:7px 8px;background:rgba(97,97,97,.9)!important;border-radius:4px;font-size:10px;min-height:24px!important}.md-arrow{display:none}.md-inner-main{padding:9px 16px;background:rgba(97,97,97,.9)!important;border-radius:4px;font-size:14px;min-height:32px!important}.md-tooltip,.md-tooltip-main{line-height:1}.md-inner-email{background-color:#232f34!important;border-radius:25px;font-size:12px;padding-left:12px;padding-right:12px}"]
                 }] }
     ];
     /** @nocollapse */
@@ -10637,52 +10816,12 @@ var TooltipContainerComponent = /** @class */ (function () {
     ]; };
     TooltipContainerComponent.propDecorators = {
         containerClass: [{ type: Input }],
-        tooltipInner: [{ type: ViewChild, args: ['tooltipInner',] }],
-        tooltipArrow: [{ type: ViewChild, args: ['tooltipArrow',] }],
+        tooltipInner: [{ type: ViewChild, args: ['tooltipInner', { static: true },] }],
+        tooltipArrow: [{ type: ViewChild, args: ['tooltipArrow', { static: true },] }],
         show: [{ type: HostBinding, args: ['class.show',] }]
     };
     return TooltipContainerComponent;
 }());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/*tslint:disable:no-invalid-this */
-/**
- * @return {?}
- */
-function OnChange$1() {
-    /** @type {?} */
-    var sufix = 'Change';
-    return (/**
-     * @param {?} target
-     * @param {?} propertyKey
-     * @return {?}
-     */
-    function OnChangeHandler(target, propertyKey) {
-        /** @type {?} */
-        var _key = " __" + propertyKey + "Value";
-        Object.defineProperty(target, propertyKey, {
-            get: /**
-             * @return {?}
-             */
-            function () { return this[_key]; },
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
-                /** @type {?} */
-                var prevValue = this[_key];
-                this[_key] = value;
-                if (prevValue !== value && this[propertyKey + sufix]) {
-                    this[propertyKey + sufix].emit(value);
-                }
-            }
-        });
-    });
-}
 
 /**
  * @fileoverview added by tsickle
@@ -10701,7 +10840,7 @@ var TooltipDirective = /** @class */ (function () {
         this.delay = 0;
         this.fadeDuration = 150;
         this.isBrowser = false;
-        this.isBrowser = isPlatformBrowser((this.platformId));
+        this.isBrowser = isPlatformBrowser(this.platformId);
         this._tooltip = cis
             .createLoader(this._elementRef, _viewContainerRef, _renderer)
             .provide({ provide: TooltipConfig, useValue: config });
@@ -10750,7 +10889,7 @@ var TooltipDirective = /** @class */ (function () {
             show: (/**
              * @return {?}
              */
-            function () { return _this.show(); })
+            function () { return _this.show(); }),
         });
         this.tooltipChange.subscribe((/**
          * @param {?} value
@@ -10817,12 +10956,12 @@ var TooltipDirective = /** @class */ (function () {
         this._positionService.setOptions({
             modifiers: {
                 flip: {
-                    enabled: this.dynamicPosition
+                    enabled: this.dynamicPosition,
                 },
                 preventOverflow: {
-                    enabled: this.dynamicPosition
-                }
-            }
+                    enabled: this.dynamicPosition,
+                },
+            },
         });
         /** @type {?} */
         var showTooltip = (/**
@@ -10915,7 +11054,7 @@ var TooltipDirective = /** @class */ (function () {
     TooltipDirective.decorators = [
         { type: Directive, args: [{
                     selector: '[mdbTooltip]',
-                    exportAs: 'mdb-tooltip'
+                    exportAs: 'mdb-tooltip',
                 },] }
     ];
     /** @nocollapse */
@@ -11027,12 +11166,14 @@ var WavesDirective = /** @class */ (function () {
             tmp.style.top = top_1;
             tmp.style.left = left;
             /** @type {?} */
-            var scale = 'scale(' + ((button.clientWidth / 100) * 3) + ') translate(0,0)';
+            var scale = 'scale(' + (button.clientWidth / 100) * 3 + ') translate(0,0)';
+            // tslint:disable-next-line: deprecation
             tmp.style.webkitTransform = scale;
             tmp.style.transform = scale;
             tmp.style.opacity = '1';
             /** @type {?} */
             var duration = 750;
+            // tslint:disable-next-line: deprecation
             tmp.style.webkitTransitionDuration = duration + 'ms';
             tmp.style.transitionDuration = duration + 'ms';
             this.removeRipple(button, ripple);
@@ -11065,7 +11206,7 @@ var WavesDirective = /** @class */ (function () {
     };
     WavesDirective.decorators = [
         { type: Directive, args: [{
-                    selector: '[mdbWavesEffect]'
+                    selector: '[mdbWavesEffect]',
                 },] }
     ];
     /** @nocollapse */
@@ -11115,7 +11256,7 @@ var WavesModule = /** @class */ (function () {
 /** @type {?} */
 var MODULES = [
     ButtonsModule,
-    CardsFreeModule,
+    CardsModule,
     WavesModule,
     InputsModule,
     NavbarModule,
@@ -11132,7 +11273,7 @@ var MODULES = [
     BadgeModule,
     BreadcrumbModule,
     InputUtilitiesModule,
-    StickyHeaderModule
+    StickyHeaderModule,
 ];
 var MDBRootModule = /** @class */ (function () {
     function MDBRootModule() {
@@ -11152,16 +11293,16 @@ var MDBRootModule = /** @class */ (function () {
                         TooltipModule.forRoot(),
                         PopoverModule.forRoot(),
                         IconsModule,
-                        CardsFreeModule.forRoot(),
+                        CardsModule.forRoot(),
                         CheckboxModule,
                         TableModule,
                         BadgeModule,
                         BreadcrumbModule,
                         InputUtilitiesModule,
-                        StickyHeaderModule
+                        StickyHeaderModule,
                     ],
                     exports: MODULES,
-                    schemas: [NO_ERRORS_SCHEMA]
+                    schemas: [NO_ERRORS_SCHEMA],
                 },] }
     ];
     return MDBRootModule;
@@ -11211,7 +11352,9 @@ var SBItemBodyComponent = /** @class */ (function () {
          * @return {?}
          */
         function () {
-            collapsed ? _this.expandAnimationState = 'collapsed' : _this.expandAnimationState = 'expanded';
+            collapsed
+                ? (_this.expandAnimationState = 'collapsed')
+                : (_this.expandAnimationState = 'expanded');
         }), 0);
     };
     /**
@@ -11223,7 +11366,7 @@ var SBItemBodyComponent = /** @class */ (function () {
     function () {
         this.animationStateChange.emit({
             state: this.expandAnimationState,
-            accordionEl: this.el.nativeElement.parentElement.parentElement
+            accordionEl: this.el.nativeElement.parentElement.parentElement,
         });
     };
     /**
@@ -11274,7 +11417,7 @@ var SBItemBodyComponent = /** @class */ (function () {
                             state('collapsed', style({ height: '0px', visibility: 'hidden' })),
                             state('expanded', style({ height: '*', visibility: 'visible' })),
                             transition('expanded <=> collapsed', animate('500ms ease')),
-                        ])
+                        ]),
                     ]
                 }] }
     ];
@@ -11286,7 +11429,7 @@ var SBItemBodyComponent = /** @class */ (function () {
         customClass: [{ type: Input }],
         animationStateChange: [{ type: Output }],
         routerLinks: [{ type: ContentChildren, args: [RouterLinkWithHref,] }],
-        bodyEl: [{ type: ViewChild, args: ['body',] }]
+        bodyEl: [{ type: ViewChild, args: ['body', { static: true },] }]
     };
     return SBItemBodyComponent;
 }());
@@ -11394,7 +11537,9 @@ var SBItemComponent = /** @class */ (function () {
              * @return {?}
              */
             function () {
-                _this.collapsed ? _this.body.expandAnimationState = 'collapsed' : _this.body.expandAnimationState = 'expanded';
+                _this.collapsed
+                    ? (_this.body.expandAnimationState = 'collapsed')
+                    : (_this.body.expandAnimationState = 'expanded');
             }), 0);
             this.body.toggle(this.collapsed);
         }
@@ -11459,7 +11604,7 @@ var SBItemComponent = /** @class */ (function () {
     SBItemComponent.propDecorators = {
         collapsed: [{ type: Input }],
         customClass: [{ type: Input }],
-        body: [{ type: ContentChild, args: [SBItemBodyComponent,] }]
+        body: [{ type: ContentChild, args: [SBItemBodyComponent, { static: false },] }]
     };
     return SBItemComponent;
 }());
@@ -11477,7 +11622,9 @@ var SqueezeBoxComponent = /** @class */ (function () {
         get: /**
          * @return {?}
          */
-        function () { return this._multiple; },
+        function () {
+            return this._multiple;
+        },
         set: /**
          * @param {?} value
          * @return {?}
@@ -11549,7 +11696,9 @@ var SqueezeBoxComponent = /** @class */ (function () {
                     exportAs: 'squeezebox',
                     selector: 'mdb-squeezebox, mdb-accordion',
                     template: "<div class=\"accordion md-accordion\">\n  <ng-content></ng-content>\n</div>",
-                    providers: [MdbAccordionService]
+                    encapsulation: ViewEncapsulation.None,
+                    providers: [MdbAccordionService],
+                    styles: [".md-accordion .card{overflow:visible;box-shadow:none;border-bottom:1px solid #e0e0e0;border-radius:0}.md-accordion .card:first-of-type,.md-accordion .card:not(:first-of-type):not(:last-of-type){border-bottom:1px solid #e0e0e0}.md-accordion .card .card-header{border-bottom:0;padding:1rem 1.5rem;background:0 0}.md-accordion .card .card-header .card-title{font-weight:400}.md-accordion .card .card-header a{transition:.3s ease-in-out}.md-accordion .card .card-header a:not(.collapsed) .rotate-icon{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.md-accordion .card .fa-angle-down{float:right}.md-accordion .card .card-body{font-size:.9rem;line-height:1.7;font-weight:300;color:#626262}.accordion-gradient-bcg{background:linear-gradient(45deg,rgba(234,21,129,.6),rgba(10,23,187,.6) 100%)}.accordion.md-accordion.accordion-1 p,.accordion.md-accordion.accordion-2 p,.accordion.md-accordion.accordion-3 p,.accordion.md-accordion.accordion-4 p,.accordion.md-accordion.accordion-5 p{font-size:1rem}.accordion.md-accordion.accordion-1 .card,.accordion.md-accordion.accordion-1 .card .card-header,.accordion.md-accordion.accordion-2 .card,.accordion.md-accordion.accordion-2 .card .card-header,.accordion.md-accordion.accordion-4 .card,.accordion.md-accordion.accordion-4 .card .card-header,.accordion.md-accordion.accordion-5 .card,.accordion.md-accordion.accordion-5 .card .card-header{border:0}.accordion.md-accordion.accordion-1 .card .card-body{line-height:1.4}.accordion.md-accordion.accordion-2 .card{background-color:transparent}.accordion.md-accordion.accordion-2 .card .card-body{border:0;border-radius:3px}.accordion.md-accordion.accordion-3{border-radius:3px}.accordion.md-accordion.accordion-3 .fab.fa-angle-down,.accordion.md-accordion.accordion-3 .far.fa-angle-down,.accordion.md-accordion.accordion-3 .fas.fa-angle-down{margin-top:-10px}.accordion.md-accordion.accordion-4 .card:last-of-type .card-body{border-bottom-right-radius:3px;border-bottom-left-radius:3px}.accordion.md-accordion.accordion-5 .card{background-color:transparent}.accordion.md-accordion.accordion-5 .card .card-header{background-color:#f44336;transition:.3s}.accordion.md-accordion.accordion-5 .card .card-header:hover{transition:.3s;background-color:#455a64}.accordion.md-accordion.accordion-5 .card .card-header .fab,.accordion.md-accordion.accordion-5 .card .card-header .far,.accordion.md-accordion.accordion-5 .card .card-header .fas{background-color:#fff;border-top-left-radius:3px}.accordion.md-accordion.accordion-5 .card .card-body{border-bottom-right-radius:3px;border-bottom-left-radius:3px}.accordion.md-accordion.accordion-blocks .card{margin-bottom:1.2rem;box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)}.accordion.md-accordion.accordion-blocks .card .card-body{border-top:1px solid #eee}.accordion .waves-effect,.accordion .waves-light{z-index:unset}.accordion .sb-item-body{transition:.5s;overflow:hidden}.accordion .card{border-bottom:1px solid #eee;box-shadow:none}.accordion .card .card-header{color:#0275d8;padding:1rem 1.5rem;background:0 0;border-bottom:0;cursor:pointer}.accordion .card .card-header a .rotate-icon{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.accordion .card .fa-angle-down{float:right}.accordion .card .card-body{padding-top:.25rem}.accordion .card.is-collapsed .card-header a .rotate-icon{-webkit-transform:rotate(0);transform:rotate(0)}.collapsible-body{display:none}.card{position:relative}.card .card-body{flex:1 1 auto;padding:1.25rem}mdb-accordion-item>.card,mdb-item>.card{border:0}.mdb-accordion-indicator.rotate-icon{transition:150ms ease-in}.item-disabled,.item-disabled a>h5{color:#bdbdbd!important;cursor:default!important}mdb-accordion-item-head{outline:0!important}mdb-accordion-item-head .card-header a{color:inherit}.mdb-accordion-indicator{position:absolute;right:0}.mdb-accordion-indicator::after{content:'';display:block;border-style:solid;border-width:0 3px 3px 0;padding:3.5px;-webkit-transform:rotate(45deg);transform:rotate(45deg)}"]
                 }] }
     ];
     /** @nocollapse */
@@ -11586,6 +11735,7 @@ var SBItemHeadComponent = /** @class */ (function () {
      * @return {?}
      */
     function (event) {
+        // tslint:disable-next-line: deprecation
         if (event.keyCode === 32) {
             this.toggleClick(event);
         }
@@ -11628,7 +11778,7 @@ var SBItemHeadComponent = /** @class */ (function () {
         { type: Component, args: [{
                     exportAs: 'sbItemHead',
                     selector: 'mdb-item-head, mdb-accordion-item-head',
-                    template: "<div class=\"card-header {{ customClass }}\" [ngClass]=\"{ 'item-disabled': isDisabled }\" (click)=\"toggleClick($event)\"\n     [id]=\"id\">\n  <a role=\"button\" href=\"javascript:;\" [attr.aria-expanded]=\"ariaExpanded\"\n     [attr.aria-controls]=\"ariaControls\">\n    <h5 class=\"mb-0 d-flex justify-content-between align-items-center\">\n      <span class=\"d-flex align-self-start align-items-center\">\n        <ng-content></ng-content>\n      </span>\n      <i *ngIf=\"indicator\" class=\"mdb-accordion-indicator rotate-icon\" aria-hidden=\"true\"></i>\n    </h5>\n  </a>\n</div>\n"
+                    template: "<div\n  class=\"card-header {{ customClass }}\"\n  [ngClass]=\"{ 'item-disabled': isDisabled }\"\n  (click)=\"toggleClick($event)\"\n  [id]=\"id\"\n>\n  <a\n    role=\"button\"\n    href=\"javascript:;\"\n    [attr.aria-expanded]=\"ariaExpanded\"\n    [attr.aria-controls]=\"ariaControls\"\n  >\n    <h5 class=\"mb-0\">\n      <span class=\"\">\n        <ng-content></ng-content>\n      </span>\n      <i *ngIf=\"indicator\" class=\"mdb-accordion-indicator rotate-icon\" aria-hidden=\"true\"></i>\n    </h5>\n  </a>\n</div>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -12296,7 +12446,7 @@ ToastPackage = /** @class */ (function () {
 }());
 /** @type {?} */
 var tsConfig = {
-    serviceInstance: new Object()
+    serviceInstance: new Object(),
 };
 
 /**
@@ -12346,8 +12496,8 @@ var ToastComponent = /** @class */ (function () {
             return {
                 value: this.state,
                 params: {
-                    opacity: this.opacity
-                }
+                    opacity: this.opacity,
+                },
             };
         },
         enumerable: true,
@@ -12443,9 +12593,7 @@ var ToastComponent = /** @class */ (function () {
         this.timeout = setTimeout((/**
          * @return {?}
          */
-        function () {
-            return _this.toastService.remove(_this.toastPackage.toastId);
-        }), 250);
+        function () { return _this.toastService.remove(_this.toastPackage.toastId); }), 250);
     };
     /**
      * @return {?}
@@ -12518,6 +12666,7 @@ var ToastComponent = /** @class */ (function () {
         { type: Component, args: [{
                     selector: 'mdb-toast-component',
                     template: "<button *ngIf=\"options.closeButton\" (click)=\"remove()\" class=\"md-toast-close-button\">\n  &times;\n</button>\n<div *ngIf=\"title\" class=\"{{options.titleClass}}\" [attr.aria-label]=\"title\">\n  {{title}}\n</div>\n<div *ngIf=\"message && options.enableHtml\" class=\"{{options.messageClass}}\" [innerHTML]=\"message\">\n</div>\n<div *ngIf=\"message && !options.enableHtml\" class=\"{{options.messageClass}}\" [attr.aria-label]=\"message\">\n  {{message}}\n</div>\n<button *ngIf=\"options.actionButton\" class=\"btn btn-block md-toast-action mt-2\" [ngClass]=\"options.actionButtonClass\"\n        (click)=\"onActionClick()\">{{ options.actionButton }}</button>\n<div *ngIf=\"options.progressBar\">\n  <div class=\"md-toast-progress\" [style.width.%]=\"width\"></div>\n</div>\n",
+                    encapsulation: ViewEncapsulation.None,
                     animations: [
                         trigger('flyInOut', [
                             state('inactive', style({ opacity: 0 })),
@@ -12526,7 +12675,8 @@ var ToastComponent = /** @class */ (function () {
                             transition('inactive => active', animate('300ms ease-in')),
                             transition('active => removed', animate('300ms ease-in')),
                         ]),
-                    ]
+                    ],
+                    styles: [".mdb-color.lighten-5{background-color:#d0d6e2!important}.mdb-color.lighten-4{background-color:#b1bace!important}.mdb-color.lighten-3{background-color:#929fba!important}.mdb-color.lighten-2{background-color:#7283a7!important}.mdb-color.lighten-1{background-color:#59698d!important}.mdb-color{background-color:#45526e!important}.mdb-color-text{color:#45526e!important}.rgba-mdb-color-slight,.rgba-mdb-color-slight:after{background-color:rgba(69,82,110,.1)}.rgba-mdb-color-light,.rgba-mdb-color-light:after{background-color:rgba(69,82,110,.3)}.rgba-mdb-color-strong,.rgba-mdb-color-strong:after{background-color:rgba(69,82,110,.7)}.mdb-color.darken-1{background-color:#3b465e!important}.mdb-color.darken-2{background-color:#2e3951!important}.mdb-color.darken-3{background-color:#1c2a48!important}.mdb-color.darken-4{background-color:#1c2331!important}.red.lighten-5{background-color:#ffebee!important}.red.lighten-4{background-color:#ffcdd2!important}.red.lighten-3{background-color:#ef9a9a!important}.red.lighten-2{background-color:#e57373!important}.red.lighten-1{background-color:#ef5350!important}.red{background-color:#f44336!important}.red-text{color:#f44336!important}.rgba-red-slight,.rgba-red-slight:after{background-color:rgba(244,67,54,.1)}.rgba-red-light,.rgba-red-light:after{background-color:rgba(244,67,54,.3)}.rgba-red-strong,.rgba-red-strong:after{background-color:rgba(244,67,54,.7)}.red.darken-1{background-color:#e53935!important}.red.darken-2{background-color:#d32f2f!important}.red.darken-3{background-color:#c62828!important}.red.darken-4{background-color:#b71c1c!important}.red.accent-1{background-color:#ff8a80!important}.red.accent-2{background-color:#ff5252!important}.red.accent-3{background-color:#ff1744!important}.red.accent-4{background-color:#d50000!important}.pink.lighten-5{background-color:#fce4ec!important}.pink.lighten-4{background-color:#f8bbd0!important}.pink.lighten-3{background-color:#f48fb1!important}.pink.lighten-2{background-color:#f06292!important}.pink.lighten-1{background-color:#ec407a!important}.pink{background-color:#e91e63!important}.pink-text{color:#e91e63!important}.rgba-pink-slight,.rgba-pink-slight:after{background-color:rgba(233,30,99,.1)}.rgba-pink-light,.rgba-pink-light:after{background-color:rgba(233,30,99,.3)}.rgba-pink-strong,.rgba-pink-strong:after{background-color:rgba(233,30,99,.7)}.pink.darken-1{background-color:#d81b60!important}.pink.darken-2{background-color:#c2185b!important}.pink.darken-3{background-color:#ad1457!important}.pink.darken-4{background-color:#880e4f!important}.pink.accent-1{background-color:#ff80ab!important}.pink.accent-2{background-color:#ff4081!important}.pink.accent-3{background-color:#f50057!important}.pink.accent-4{background-color:#c51162!important}.purple.lighten-5{background-color:#f3e5f5!important}.purple.lighten-4{background-color:#e1bee7!important}.purple.lighten-3{background-color:#ce93d8!important}.purple.lighten-2{background-color:#ba68c8!important}.purple.lighten-1{background-color:#ab47bc!important}.purple{background-color:#9c27b0!important}.purple-text{color:#9c27b0!important}.rgba-purple-slight,.rgba-purple-slight:after{background-color:rgba(156,39,176,.1)}.rgba-purple-light,.rgba-purple-light:after{background-color:rgba(156,39,176,.3)}.rgba-purple-strong,.rgba-purple-strong:after{background-color:rgba(156,39,176,.7)}.purple.darken-1{background-color:#8e24aa!important}.purple.darken-2{background-color:#7b1fa2!important}.purple.darken-3{background-color:#6a1b9a!important}.purple.darken-4{background-color:#4a148c!important}.purple.accent-1{background-color:#ea80fc!important}.purple.accent-2{background-color:#e040fb!important}.purple.accent-3{background-color:#d500f9!important}.purple.accent-4{background-color:#a0f!important}.deep-purple.lighten-5{background-color:#ede7f6!important}.deep-purple.lighten-4{background-color:#d1c4e9!important}.deep-purple.lighten-3{background-color:#b39ddb!important}.deep-purple.lighten-2{background-color:#9575cd!important}.deep-purple.lighten-1{background-color:#7e57c2!important}.deep-purple{background-color:#673ab7!important}.deep-purple-text{color:#673ab7!important}.rgba-deep-purple-slight,.rgba-deep-purple-slight:after{background-color:rgba(103,58,183,.1)}.rgba-deep-purple-light,.rgba-deep-purple-light:after{background-color:rgba(103,58,183,.3)}.rgba-deep-purple-strong,.rgba-deep-purple-strong:after{background-color:rgba(103,58,183,.7)}.deep-purple.darken-1{background-color:#5e35b1!important}.deep-purple.darken-2{background-color:#512da8!important}.deep-purple.darken-3{background-color:#4527a0!important}.deep-purple.darken-4{background-color:#311b92!important}.deep-purple.accent-1{background-color:#b388ff!important}.deep-purple.accent-2{background-color:#7c4dff!important}.deep-purple.accent-3{background-color:#651fff!important}.deep-purple.accent-4{background-color:#6200ea!important}.indigo.lighten-5{background-color:#e8eaf6!important}.indigo.lighten-4{background-color:#c5cae9!important}.indigo.lighten-3{background-color:#9fa8da!important}.indigo.lighten-2{background-color:#7986cb!important}.indigo.lighten-1{background-color:#5c6bc0!important}.indigo{background-color:#3f51b5!important}.indigo-text{color:#3f51b5!important}.rgba-indigo-slight,.rgba-indigo-slight:after{background-color:rgba(63,81,181,.1)}.rgba-indigo-light,.rgba-indigo-light:after{background-color:rgba(63,81,181,.3)}.rgba-indigo-strong,.rgba-indigo-strong:after{background-color:rgba(63,81,181,.7)}.indigo.darken-1{background-color:#3949ab!important}.indigo.darken-2{background-color:#303f9f!important}.indigo.darken-3{background-color:#283593!important}.indigo.darken-4{background-color:#1a237e!important}.indigo.accent-1{background-color:#8c9eff!important}.indigo.accent-2{background-color:#536dfe!important}.indigo.accent-3{background-color:#3d5afe!important}.indigo.accent-4{background-color:#304ffe!important}.blue.lighten-5{background-color:#e3f2fd!important}.blue.lighten-4{background-color:#bbdefb!important}.blue.lighten-3{background-color:#90caf9!important}.blue.lighten-2{background-color:#64b5f6!important}.blue.lighten-1{background-color:#42a5f5!important}.blue{background-color:#2196f3!important}.blue-text{color:#2196f3!important}.rgba-blue-slight,.rgba-blue-slight:after{background-color:rgba(33,150,243,.1)}.rgba-blue-light,.rgba-blue-light:after{background-color:rgba(33,150,243,.3)}.rgba-blue-strong,.rgba-blue-strong:after{background-color:rgba(33,150,243,.7)}.blue.darken-1{background-color:#1e88e5!important}.blue.darken-2{background-color:#1976d2!important}.blue.darken-3{background-color:#1565c0!important}.blue.darken-4{background-color:#0d47a1!important}.blue.accent-1{background-color:#82b1ff!important}.blue.accent-2{background-color:#448aff!important}.blue.accent-3{background-color:#2979ff!important}.blue.accent-4{background-color:#2962ff!important}.light-blue.lighten-5{background-color:#e1f5fe!important}.light-blue.lighten-4{background-color:#b3e5fc!important}.light-blue.lighten-3{background-color:#81d4fa!important}.light-blue.lighten-2{background-color:#4fc3f7!important}.light-blue.lighten-1{background-color:#29b6f6!important}.light-blue{background-color:#03a9f4!important}.light-blue-text{color:#03a9f4!important}.rgba-light-blue-slight,.rgba-light-blue-slight:after{background-color:rgba(3,169,244,.1)}.rgba-light-blue-light,.rgba-light-blue-light:after{background-color:rgba(3,169,244,.3)}.rgba-light-blue-strong,.rgba-light-blue-strong:after{background-color:rgba(3,169,244,.7)}.light-blue.darken-1{background-color:#039be5!important}.light-blue.darken-2{background-color:#0288d1!important}.light-blue.darken-3{background-color:#0277bd!important}.light-blue.darken-4{background-color:#01579b!important}.light-blue.accent-1{background-color:#80d8ff!important}.light-blue.accent-2{background-color:#40c4ff!important}.light-blue.accent-3{background-color:#00b0ff!important}.light-blue.accent-4{background-color:#0091ea!important}.cyan.lighten-5{background-color:#e0f7fa!important}.cyan.lighten-4{background-color:#b2ebf2!important}.cyan.lighten-3{background-color:#80deea!important}.cyan.lighten-2{background-color:#4dd0e1!important}.cyan.lighten-1{background-color:#26c6da!important}.cyan{background-color:#00bcd4!important}.cyan-text{color:#00bcd4!important}.rgba-cyan-slight,.rgba-cyan-slight:after{background-color:rgba(0,188,212,.1)}.rgba-cyan-light,.rgba-cyan-light:after{background-color:rgba(0,188,212,.3)}.rgba-cyan-strong,.rgba-cyan-strong:after{background-color:rgba(0,188,212,.7)}.cyan.darken-1{background-color:#00acc1!important}.cyan.darken-2{background-color:#0097a7!important}.cyan.darken-3{background-color:#00838f!important}.cyan.darken-4{background-color:#006064!important}.cyan.accent-1{background-color:#84ffff!important}.cyan.accent-2{background-color:#18ffff!important}.cyan.accent-3{background-color:#00e5ff!important}.cyan.accent-4{background-color:#00b8d4!important}.teal.lighten-5{background-color:#e0f2f1!important}.teal.lighten-4{background-color:#b2dfdb!important}.teal.lighten-3{background-color:#80cbc4!important}.teal.lighten-2{background-color:#4db6ac!important}.teal.lighten-1{background-color:#26a69a!important}.teal{background-color:#009688!important}.teal-text{color:#009688!important}.rgba-teal-slight,.rgba-teal-slight:after{background-color:rgba(0,150,136,.1)}.rgba-teal-light,.rgba-teal-light:after{background-color:rgba(0,150,136,.3)}.rgba-teal-strong,.rgba-teal-strong:after{background-color:rgba(0,150,136,.7)}.teal.darken-1{background-color:#00897b!important}.teal.darken-2{background-color:#00796b!important}.teal.darken-3{background-color:#00695c!important}.teal.darken-4{background-color:#004d40!important}.teal.accent-1{background-color:#a7ffeb!important}.teal.accent-2{background-color:#64ffda!important}.teal.accent-3{background-color:#1de9b6!important}.teal.accent-4{background-color:#00bfa5!important}.green.lighten-5{background-color:#e8f5e9!important}.green.lighten-4{background-color:#c8e6c9!important}.green.lighten-3{background-color:#a5d6a7!important}.green.lighten-2{background-color:#81c784!important}.green.lighten-1{background-color:#66bb6a!important}.green{background-color:#4caf50!important}.green-text{color:#4caf50!important}.rgba-green-slight,.rgba-green-slight:after{background-color:rgba(76,175,80,.1)}.rgba-green-light,.rgba-green-light:after{background-color:rgba(76,175,80,.3)}.rgba-green-strong,.rgba-green-strong:after{background-color:rgba(76,175,80,.7)}.green.darken-1{background-color:#43a047!important}.green.darken-2{background-color:#388e3c!important}.green.darken-3{background-color:#2e7d32!important}.green.darken-4{background-color:#1b5e20!important}.green.accent-1{background-color:#b9f6ca!important}.green.accent-2{background-color:#69f0ae!important}.green.accent-3{background-color:#00e676!important}.green.accent-4{background-color:#00c853!important}.light-green.lighten-5{background-color:#f1f8e9!important}.light-green.lighten-4{background-color:#dcedc8!important}.light-green.lighten-3{background-color:#c5e1a5!important}.light-green.lighten-2{background-color:#aed581!important}.light-green.lighten-1{background-color:#9ccc65!important}.light-green{background-color:#8bc34a!important}.light-green-text{color:#8bc34a!important}.rgba-light-green-slight,.rgba-light-green-slight:after{background-color:rgba(139,195,74,.1)}.rgba-light-green-light,.rgba-light-green-light:after{background-color:rgba(139,195,74,.3)}.rgba-light-green-strong,.rgba-light-green-strong:after{background-color:rgba(139,195,74,.7)}.light-green.darken-1{background-color:#7cb342!important}.light-green.darken-2{background-color:#689f38!important}.light-green.darken-3{background-color:#558b2f!important}.light-green.darken-4{background-color:#33691e!important}.light-green.accent-1{background-color:#ccff90!important}.light-green.accent-2{background-color:#b2ff59!important}.light-green.accent-3{background-color:#76ff03!important}.light-green.accent-4{background-color:#64dd17!important}.lime.lighten-5{background-color:#f9fbe7!important}.lime.lighten-4{background-color:#f0f4c3!important}.lime.lighten-3{background-color:#e6ee9c!important}.lime.lighten-2{background-color:#dce775!important}.lime.lighten-1{background-color:#d4e157!important}.lime{background-color:#cddc39!important}.lime-text{color:#cddc39!important}.rgba-lime-slight,.rgba-lime-slight:after{background-color:rgba(205,220,57,.1)}.rgba-lime-light,.rgba-lime-light:after{background-color:rgba(205,220,57,.3)}.rgba-lime-strong,.rgba-lime-strong:after{background-color:rgba(205,220,57,.7)}.lime.darken-1{background-color:#c0ca33!important}.lime.darken-2{background-color:#afb42b!important}.lime.darken-3{background-color:#9e9d24!important}.lime.darken-4{background-color:#827717!important}.lime.accent-1{background-color:#f4ff81!important}.lime.accent-2{background-color:#eeff41!important}.lime.accent-3{background-color:#c6ff00!important}.lime.accent-4{background-color:#aeea00!important}.yellow.lighten-5{background-color:#fffde7!important}.yellow.lighten-4{background-color:#fff9c4!important}.yellow.lighten-3{background-color:#fff59d!important}.yellow.lighten-2{background-color:#fff176!important}.yellow.lighten-1{background-color:#ffee58!important}.yellow{background-color:#ffeb3b!important}.yellow-text{color:#ffeb3b!important}.rgba-yellow-slight,.rgba-yellow-slight:after{background-color:rgba(255,235,59,.1)}.rgba-yellow-light,.rgba-yellow-light:after{background-color:rgba(255,235,59,.3)}.rgba-yellow-strong,.rgba-yellow-strong:after{background-color:rgba(255,235,59,.7)}.yellow.darken-1{background-color:#fdd835!important}.yellow.darken-2{background-color:#fbc02d!important}.yellow.darken-3{background-color:#f9a825!important}.yellow.darken-4{background-color:#f57f17!important}.yellow.accent-1{background-color:#ffff8d!important}.yellow.accent-2{background-color:#ff0!important}.yellow.accent-3{background-color:#ffea00!important}.yellow.accent-4{background-color:#ffd600!important}.amber.lighten-5{background-color:#fff8e1!important}.amber.lighten-4{background-color:#ffecb3!important}.amber.lighten-3{background-color:#ffe082!important}.amber.lighten-2{background-color:#ffd54f!important}.amber.lighten-1{background-color:#ffca28!important}.amber{background-color:#ffc107!important}.amber-text{color:#ffc107!important}.rgba-amber-slight,.rgba-amber-slight:after{background-color:rgba(255,193,7,.1)}.rgba-amber-light,.rgba-amber-light:after{background-color:rgba(255,193,7,.3)}.rgba-amber-strong,.rgba-amber-strong:after{background-color:rgba(255,193,7,.7)}.amber.darken-1{background-color:#ffb300!important}.amber.darken-2{background-color:#ffa000!important}.amber.darken-3{background-color:#ff8f00!important}.amber.darken-4{background-color:#ff6f00!important}.amber.accent-1{background-color:#ffe57f!important}.amber.accent-2{background-color:#ffd740!important}.amber.accent-3{background-color:#ffc400!important}.amber.accent-4{background-color:#ffab00!important}.orange.lighten-5{background-color:#fff3e0!important}.orange.lighten-4{background-color:#ffe0b2!important}.orange.lighten-3{background-color:#ffcc80!important}.orange.lighten-2{background-color:#ffb74d!important}.orange.lighten-1{background-color:#ffa726!important}.orange{background-color:#ff9800!important}.orange-text{color:#ff9800!important}.rgba-orange-slight,.rgba-orange-slight:after{background-color:rgba(255,152,0,.1)}.rgba-orange-light,.rgba-orange-light:after{background-color:rgba(255,152,0,.3)}.rgba-orange-strong,.rgba-orange-strong:after{background-color:rgba(255,152,0,.7)}.orange.darken-1{background-color:#fb8c00!important}.orange.darken-2{background-color:#f57c00!important}.orange.darken-3{background-color:#ef6c00!important}.orange.darken-4{background-color:#e65100!important}.orange.accent-1{background-color:#ffd180!important}.orange.accent-2{background-color:#ffab40!important}.orange.accent-3{background-color:#ff9100!important}.orange.accent-4{background-color:#ff6d00!important}.deep-orange.lighten-5{background-color:#fbe9e7!important}.deep-orange.lighten-4{background-color:#ffccbc!important}.deep-orange.lighten-3{background-color:#ffab91!important}.deep-orange.lighten-2{background-color:#ff8a65!important}.deep-orange.lighten-1{background-color:#ff7043!important}.deep-orange{background-color:#ff5722!important}.deep-orange-text{color:#ff5722!important}.rgba-deep-orange-slight,.rgba-deep-orange-slight:after{background-color:rgba(255,87,34,.1)}.rgba-deep-orange-light,.rgba-deep-orange-light:after{background-color:rgba(255,87,34,.3)}.rgba-deep-orange-strong,.rgba-deep-orange-strong:after{background-color:rgba(255,87,34,.7)}.deep-orange.darken-1{background-color:#f4511e!important}.deep-orange.darken-2{background-color:#e64a19!important}.deep-orange.darken-3{background-color:#d84315!important}.deep-orange.darken-4{background-color:#bf360c!important}.deep-orange.accent-1{background-color:#ff9e80!important}.deep-orange.accent-2{background-color:#ff6e40!important}.deep-orange.accent-3{background-color:#ff3d00!important}.deep-orange.accent-4{background-color:#dd2c00!important}.brown.lighten-5{background-color:#efebe9!important}.brown.lighten-4{background-color:#d7ccc8!important}.brown.lighten-3{background-color:#bcaaa4!important}.brown.lighten-2{background-color:#a1887f!important}.brown.lighten-1{background-color:#8d6e63!important}.brown{background-color:#795548!important}.brown-text{color:#795548!important}.rgba-brown-slight,.rgba-brown-slight:after{background-color:rgba(121,85,72,.1)}.rgba-brown-light,.rgba-brown-light:after{background-color:rgba(121,85,72,.3)}.rgba-brown-strong,.rgba-brown-strong:after{background-color:rgba(121,85,72,.7)}.brown.darken-1{background-color:#6d4c41!important}.brown.darken-2{background-color:#5d4037!important}.brown.darken-3{background-color:#4e342e!important}.brown.darken-4{background-color:#3e2723!important}.blue-grey.lighten-5{background-color:#eceff1!important}.blue-grey.lighten-4{background-color:#cfd8dc!important}.blue-grey.lighten-3{background-color:#b0bec5!important}.blue-grey.lighten-2{background-color:#90a4ae!important}.blue-grey.lighten-1{background-color:#78909c!important}.blue-grey{background-color:#607d8b!important}.blue-grey-text{color:#607d8b!important}.rgba-blue-grey-slight,.rgba-blue-grey-slight:after{background-color:rgba(96,125,139,.1)}.rgba-blue-grey-light,.rgba-blue-grey-light:after{background-color:rgba(96,125,139,.3)}.rgba-blue-grey-strong,.rgba-blue-grey-strong:after{background-color:rgba(96,125,139,.7)}.blue-grey.darken-1{background-color:#546e7a!important}.blue-grey.darken-2{background-color:#455a64!important}.blue-grey.darken-3{background-color:#37474f!important}.blue-grey.darken-4{background-color:#263238!important}.grey.lighten-5{background-color:#fafafa!important}.grey.lighten-4{background-color:#f5f5f5!important}.grey.lighten-3{background-color:#eee!important}.grey.lighten-2{background-color:#e0e0e0!important}.grey.lighten-1{background-color:#bdbdbd!important}.grey{background-color:#9e9e9e!important}.grey-text{color:#9e9e9e!important}.rgba-grey-slight,.rgba-grey-slight:after{background-color:rgba(158,158,158,.1)}.rgba-grey-light,.rgba-grey-light:after{background-color:rgba(158,158,158,.3)}.rgba-grey-strong,.rgba-grey-strong:after{background-color:rgba(158,158,158,.7)}.grey.darken-1{background-color:#757575!important}.grey.darken-2{background-color:#616161!important}.grey.darken-3{background-color:#424242!important}.grey.darken-4{background-color:#212121!important}.black{background-color:#000!important}.black-text,.md-toast-close-button:focus,.md-toast-close-button:hover{color:#000!important}.rgba-black-slight,.rgba-black-slight:after{background-color:rgba(0,0,0,.1)}.rgba-black-light,.rgba-black-light:after{background-color:rgba(0,0,0,.3)}.rgba-black-strong,.rgba-black-strong:after{background-color:rgba(0,0,0,.7)}.white{background-color:#fff!important}#toast-container>div,#toast-container>mdb-toast-component,.md-toast-close-button,.md-toast-message a,.md-toast-message label,.white-text{color:#fff!important}.rgba-white-slight,.rgba-white-slight:after{background-color:rgba(255,255,255,.1)}.rgba-white-light,.rgba-white-light:after{background-color:rgba(255,255,255,.3)}.rgba-white-strong,.rgba-white-strong:after{background-color:rgba(255,255,255,.7)}.rgba-stylish-slight{background-color:rgba(62,69,81,.1)}.rgba-stylish-light{background-color:rgba(62,69,81,.3)}.rgba-stylish-strong{background-color:rgba(62,69,81,.7)}.primary-color{background-color:#4285f4!important}.primary-color-dark{background-color:#0d47a1!important}.secondary-color{background-color:#a6c!important}.secondary-color-dark{background-color:#93c!important}.default-color{background-color:#2bbbad!important}.default-color-dark{background-color:#00695c!important}.info-color{background-color:#33b5e5!important}.info-color-dark{background-color:#09c!important}.success-color{background-color:#00c851!important}.success-color-dark{background-color:#007e33!important}.warning-color{background-color:#fb3!important}.warning-color-dark{background-color:#f80!important}.danger-color{background-color:#ff3547!important}.danger-color-dark{background-color:#c00!important}.elegant-color{background-color:#2e2e2e!important}.elegant-color-dark{background-color:#212121!important}.stylish-color{background-color:#4b515d!important}.stylish-color-dark{background-color:#3e4551!important}.unique-color{background-color:#3f729b!important}.unique-color-dark{background-color:#1c2331!important}.special-color{background-color:#37474f!important}.special-color-dark{background-color:#263238!important}.purple-gradient{background:linear-gradient(40deg,#ff6ec4,#7873f5)!important}.peach-gradient{background:linear-gradient(40deg,#ffd86f,#fc6262)!important}.aqua-gradient{background:linear-gradient(40deg,#2096ff,#05ffa3)!important}.blue-gradient{background:linear-gradient(40deg,#45cafc,#303f9f)!important}.purple-gradient-rgba{background:linear-gradient(40deg,rgba(255,110,196,.9),rgba(120,115,245,.9))!important}.peach-gradient-rgba{background:linear-gradient(40deg,rgba(255,216,111,.9),rgba(252,98,98,.9))!important}.aqua-gradient-rgba{background:linear-gradient(40deg,rgba(32,150,255,.9),rgba(5,255,163,.9))!important}.blue-gradient-rgba{background:linear-gradient(40deg,rgba(69,202,252,.9),rgba(48,63,159,.9))!important}.dark-grey-text,.dark-grey-text:focus,.dark-grey-text:hover{color:#4f4f4f!important}.hoverable{box-shadow:none;transition:.55s ease-in-out}.hoverable:hover{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);transition:.55s ease-in-out}.z-depth-0{box-shadow:none!important}#toast-container>mdb-toast-component,.z-depth-1{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)!important}.z-depth-1-half{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)!important}.z-depth-2{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19)!important}.z-depth-3{box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19)!important}.z-depth-4{box-shadow:0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)!important}.z-depth-5{box-shadow:0 27px 24px 0 rgba(0,0,0,.2),0 40px 77px 0 rgba(0,0,0,.22)!important}.disabled,:disabled{pointer-events:none!important}a{cursor:pointer;text-decoration:none;color:#0275d8;transition:.2s ease-in-out}a:hover{text-decoration:none;color:#014c8c;transition:.2s ease-in-out}a.disabled:hover,a:disabled:hover{color:#0275d8}a:not([href]):not([tabindex]),a:not([href]):not([tabindex]):focus,a:not([href]):not([tabindex]):hover{color:inherit;text-decoration:none}.md-toast-title{font-weight:400}.md-toast-message{word-wrap:break-word}.md-toast-message a:hover{color:#ccc;text-decoration:none}.md-toast-close-button{position:relative;right:-.3em;top:-.3em;float:right;font-size:1.25rem;font-weight:400;text-shadow:0 1px 0 #fff;opacity:.8}.md-toast-close-button:focus,.md-toast-close-button:hover{text-decoration:none;cursor:pointer;opacity:.4}button.md-toast-close-button{padding:0;cursor:pointer;background:0 0;border:0;-webkit-appearance:none;-moz-appearance:none;appearance:none}.md-toast-top-center{top:0;right:0;width:100%}.md-toast-bottom-center{bottom:0;right:0;width:100%}.md-toast-top-full-width{top:0;right:0;width:100%}.md-toast-bottom-full-width{bottom:0;right:0;width:100%}.md-toast-top-left{top:12px;left:12px}.md-toast-top-right{top:12px;right:12px}.md-toast-bottom-right{right:12px;bottom:12px}.md-toast-bottom-left{bottom:12px;left:12px}#toast-container{position:fixed;z-index:999999}#toast-container *{box-sizing:border-box}#toast-container>div{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);position:relative;overflow:hidden;margin:0 0 6px;padding:15px 15px 15px 50px;width:18.75rem;background-position:15px center;background-repeat:no-repeat;opacity:.95}#toast-container>:hover{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);opacity:1;transition:.45s;box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);opacity:1!important;cursor:pointer}#toast-container.md-toast-bottom-center>div,#toast-container.md-toast-top-center>div{width:18.75rem;margin:auto}#toast-container.md-toast-bottom-full-width>div,#toast-container.md-toast-top-full-width>div{width:96%;margin:auto}.md-toast{background-color:#030303}.md-toast-success{background-color:#00c851;background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADsSURBVEhLY2AYBfQMgf///3P8+/evAIgvA/FsIF+BavYDDWMBGroaSMMBiE8VC7AZDrIFaMFnii3AZTjUgsUUWUDA8OdAH6iQbQEhw4HyGsPEcKBXBIC4ARhex4G4BsjmweU1soIFaGg/WtoFZRIZdEvIMhxkCCjXIVsATV6gFGACs4Rsw0EGgIIH3QJYJgHSARQZDrWAB+jawzgs+Q2UO49D7jnRSRGoEFRILcdmEMWGI0cm0JJ2QpYA1RDvcmzJEWhABhD/pqrL0S0CWuABKgnRki9lLseS7g2AlqwHWQSKH4oKLrILpRGhEQCw2LiRUIa4lwAAAABJRU5ErkJggg==)!important}.md-toast-error{background-color:#ff3547;background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHOSURBVEhLrZa/SgNBEMZzh0WKCClSCKaIYOED+AAKeQQLG8HWztLCImBrYadgIdY+gIKNYkBFSwu7CAoqCgkkoGBI/E28PdbLZmeDLgzZzcx83/zZ2SSXC1j9fr+I1Hq93g2yxH4iwM1vkoBWAdxCmpzTxfkN2RcyZNaHFIkSo10+8kgxkXIURV5HGxTmFuc75B2RfQkpxHG8aAgaAFa0tAHqYFfQ7Iwe2yhODk8+J4C7yAoRTWI3w/4klGRgR4lO7Rpn9+gvMyWp+uxFh8+H+ARlgN1nJuJuQAYvNkEnwGFck18Er4q3egEc/oO+mhLdKgRyhdNFiacC0rlOCbhNVz4H9FnAYgDBvU3QIioZlJFLJtsoHYRDfiZoUyIxqCtRpVlANq0EU4dApjrtgezPFad5S19Wgjkc0hNVnuF4HjVA6C7QrSIbylB+oZe3aHgBsqlNqKYH48jXyJKMuAbiyVJ8KzaB3eRc0pg9VwQ4niFryI68qiOi3AbjwdsfnAtk0bCjTLJKr6mrD9g8iq/S/B81hguOMlQTnVyG40wAcjnmgsCNESDrjme7wfftP4P7SP4N3CJZdvzoNyGq2c/HWOXJGsvVg+RA/k2MC/wN6I2YA2Pt8GkAAAAASUVORK5CYII=)!important}.md-toast-info{background-color:#33b5e5;background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGwSURBVEhLtZa9SgNBEMc9sUxxRcoUKSzSWIhXpFMhhYWFhaBg4yPYiWCXZxBLERsLRS3EQkEfwCKdjWJAwSKCgoKCcudv4O5YLrt7EzgXhiU3/4+b2ckmwVjJSpKkQ6wAi4gwhT+z3wRBcEz0yjSseUTrcRyfsHsXmD0AmbHOC9Ii8VImnuXBPglHpQ5wwSVM7sNnTG7Za4JwDdCjxyAiH3nyA2mtaTJufiDZ5dCaqlItILh1NHatfN5skvjx9Z38m69CgzuXmZgVrPIGE763Jx9qKsRozWYw6xOHdER+nn2KkO+Bb+UV5CBN6WC6QtBgbRVozrahAbmm6HtUsgtPC19tFdxXZYBOfkbmFJ1VaHA1VAHjd0pp70oTZzvR+EVrx2Ygfdsq6eu55BHYR8hlcki+n+kERUFG8BrA0BwjeAv2M8WLQBtcy+SD6fNsmnB3AlBLrgTtVW1c2QN4bVWLATaIS60J2Du5y1TiJgjSBvFVZgTmwCU+dAZFoPxGEEs8nyHC9Bwe2GvEJv2WXZb0vjdyFT4Cxk3e/kIqlOGoVLwwPevpYHT+00T+hWwXDf4AJAOUqWcDhbwAAAAASUVORK5CYII=)!important}.md-toast-warning{background-color:#fb3;background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGYSURBVEhL5ZSvTsNQFMbXZGICMYGYmJhAQIJAICYQPAACiSDB8AiICQQJT4CqQEwgJvYASAQCiZiYmJhAIBATCARJy+9rTsldd8sKu1M0+dLb057v6/lbq/2rK0mS/TRNj9cWNAKPYIJII7gIxCcQ51cvqID+GIEX8ASG4B1bK5gIZFeQfoJdEXOfgX4QAQg7kH2A65yQ87lyxb27sggkAzAuFhbbg1K2kgCkB1bVwyIR9m2L7PRPIhDUIXgGtyKw575yz3lTNs6X4JXnjV+LKM/m3MydnTbtOKIjtz6VhCBq4vSm3ncdrD2lk0VgUXSVKjVDJXJzijW1RQdsU7F77He8u68koNZTz8Oz5yGa6J3H3lZ0xYgXBK2QymlWWA+RWnYhskLBv2vmE+hBMCtbA7KX5drWyRT/2JsqZ2IvfB9Y4bWDNMFbJRFmC9E74SoS0CqulwjkC0+5bpcV1CZ8NMej4pjy0U+doDQsGyo1hzVJttIjhQ7GnBtRFN1UarUlH8F3xict+HY07rEzoUGPlWcjRFRr4/gChZgc3ZL2d8oAAAAASUVORK5CYII=)!important}.md-toast-progress{position:absolute;left:0;bottom:0;height:4px;background-color:#000;opacity:.4}#toast-container>mdb-toast-component{display:block;position:relative;overflow:hidden;margin:0 0 6px;padding:15px 15px 15px 50px;width:300px;background-position:15px center;background-repeat:no-repeat;opacity:.8;box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);color:#fff!important}#toast-container.md-toast-bottom-center>mdb-toast-component,#toast-container.md-toast-top-center>mdb-toast-component{width:300px;margin:auto}#toast-container.md-toast-bottom-full-width>mdb-toast-component,#toast-container.md-toast-top-full-width>mdb-toast-component{width:96%;margin:auto}@media all and (max-width:240px){#toast-container>mdb-toast-component{padding:8px 8px 8px 50px;width:11em}#toast-container .md-toast-close-button{right:-.2em;top:-.2em}}@media all and (min-width:241px) and (max-width:480px){#toast-container>mdb-toast-component{padding:8px 8px 8px 50px;width:18em}#toast-container .md-toast-close-button{right:-.2em;top:-.2em}}@media all and (min-width:481px) and (max-width:768px){#toast-container>mdb-toast-component{padding:15px 15px 15px 50px;width:25em}}.md-toast-action{background-color:transparent}"]
                 }] }
     ];
     /** @nocollapse */
@@ -12671,6 +12821,7 @@ ToastInjector = /** @class */ (function () {
         if (token === ToastPackage && this._toastPackage) {
             return this._toastPackage;
         }
+        // tslint:disable-next-line: deprecation
         return this._parentInjector.get(token, notFoundValue);
     };
     return ToastInjector;
@@ -12682,6 +12833,109 @@ ToastInjector = /** @class */ (function () {
  */
 /** @type {?} */
 var TOAST_CONFIG = new InjectionToken('ToastConfig');
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Reference to a toast opened via the Toast service.
+ * @template T
+ */
+var  /**
+ * Reference to a toast opened via the Toast service.
+ * @template T
+ */
+ToastRef$1 = /** @class */ (function () {
+    function ToastRef(_overlayRef) {
+        this._overlayRef = _overlayRef;
+        /**
+         * Subject for notifying the user that the toast has finished closing.
+         */
+        this._afterClosed = new Subject();
+        this._activate = new Subject();
+        this._manualClose = new Subject();
+    }
+    /**
+     * @return {?}
+     */
+    ToastRef.prototype.manualClose = /**
+     * @return {?}
+     */
+    function () {
+        this._manualClose.next();
+        this._manualClose.complete();
+    };
+    /**
+     * @return {?}
+     */
+    ToastRef.prototype.manualClosed = /**
+     * @return {?}
+     */
+    function () {
+        return this._manualClose.asObservable();
+    };
+    /**
+     * Close the toast.
+     */
+    /**
+     * Close the toast.
+     * @return {?}
+     */
+    ToastRef.prototype.close = /**
+     * Close the toast.
+     * @return {?}
+     */
+    function () {
+        this._overlayRef.detach();
+        this._afterClosed.next();
+        this._afterClosed.complete();
+    };
+    /** Gets an observable that is notified when the toast is finished closing. */
+    /**
+     * Gets an observable that is notified when the toast is finished closing.
+     * @return {?}
+     */
+    ToastRef.prototype.afterClosed = /**
+     * Gets an observable that is notified when the toast is finished closing.
+     * @return {?}
+     */
+    function () {
+        return this._afterClosed.asObservable();
+    };
+    /**
+     * @return {?}
+     */
+    ToastRef.prototype.isInactive = /**
+     * @return {?}
+     */
+    function () {
+        return this._activate.isStopped;
+    };
+    /**
+     * @return {?}
+     */
+    ToastRef.prototype.activate = /**
+     * @return {?}
+     */
+    function () {
+        this._activate.next();
+        this._activate.complete();
+    };
+    /** Gets an observable that is notified when the toast has started opening. */
+    /**
+     * Gets an observable that is notified when the toast has started opening.
+     * @return {?}
+     */
+    ToastRef.prototype.afterActivate = /**
+     * Gets an observable that is notified when the toast has started opening.
+     * @return {?}
+     */
+    function () {
+        return this._activate.asObservable();
+    };
+    return ToastRef;
+}());
 
 /**
  * @fileoverview added by tsickle
@@ -12719,8 +12973,10 @@ var ToastService = /** @class */ (function () {
         }
         this.toastConfig.iconClasses.error = this.toastConfig.iconClasses.error || 'md-toast-error';
         this.toastConfig.iconClasses.info = this.toastConfig.iconClasses.info || 'md-toast-info';
-        this.toastConfig.iconClasses.success = this.toastConfig.iconClasses.success || 'md-toast-success';
-        this.toastConfig.iconClasses.warning = this.toastConfig.iconClasses.warning || 'md-toast-warning';
+        this.toastConfig.iconClasses.success =
+            this.toastConfig.iconClasses.success || 'md-toast-success';
+        this.toastConfig.iconClasses.warning =
+            this.toastConfig.iconClasses.warning || 'md-toast-warning';
         // Individual
         this.toastConfig.timeOut = use(this.toastConfig.timeOut, 5000);
         this.toastConfig.closeButton = use(this.toastConfig.closeButton, false);
@@ -13071,7 +13327,7 @@ var ToastService = /** @class */ (function () {
             sanitizedMessage = this.sanitizer.sanitize(SecurityContext.HTML, message);
         }
         /** @type {?} */
-        var toastRef = new ToastRef(overlayRef);
+        var toastRef = new ToastRef$1(overlayRef);
         /** @type {?} */
         var toastPackage = new ToastPackage(this.index, config, sanitizedMessage, title, toastType, toastRef);
         // const ins: ActiveToast = {
@@ -13245,26 +13501,33 @@ var MdbOptionComponent = /** @class */ (function () {
     function MdbOptionComponent(el) {
         this.el = el;
         this.clicked = false;
+        this.clickSource = new Subject();
+        this.click$ = this.clickSource.asObservable();
         this.clicked = false;
     }
     /**
-     * @param {?} event
      * @return {?}
      */
-    MdbOptionComponent.prototype.handleMouseDown = /**
-     * @param {?} event
+    MdbOptionComponent.prototype.onClick = /**
      * @return {?}
      */
-    function (event) {
-        /** @type {?} */
-        var text = this.value || event.target.text || event.target.textContent || event.target.value;
-        this.selectedItem = { text: text.toString().trim(), element: this };
-        this.clicked = true;
+    function () {
+        this.clickSource.next(this);
     };
+    Object.defineProperty(MdbOptionComponent.prototype, "label", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.el.nativeElement.textContent;
+        },
+        enumerable: true,
+        configurable: true
+    });
     MdbOptionComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mdb-option',
-                    template: "<div class=\"completer-row\" (mousedown)=\"handleMouseDown($event)\" mdbAutoCompleterOption>\n  <ng-content></ng-content>\n</div>\n"
+                    template: "<div class=\"completer-row\" mdbAutoCompleterOption>\n  <ng-content></ng-content>\n</div>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -13272,7 +13535,8 @@ var MdbOptionComponent = /** @class */ (function () {
         { type: ElementRef }
     ]; };
     MdbOptionComponent.propDecorators = {
-        value: [{ type: Input }]
+        value: [{ type: Input }],
+        onClick: [{ type: HostListener, args: ['click',] }]
     };
     return MdbOptionComponent;
 }());
@@ -13288,6 +13552,7 @@ var MdbAutoCompleterComponent = /** @class */ (function () {
         this.clearButton = true;
         this.clearButtonTabIndex = 0;
         this.select = new EventEmitter();
+        this._destroy = new Subject();
         this.utils = new Utils$1();
         this._isDropdownOpen = new Subject();
         this._allItems = [];
@@ -13301,41 +13566,58 @@ var MdbAutoCompleterComponent = /** @class */ (function () {
      * @param {?} event
      * @return {?}
      */
-    MdbAutoCompleterComponent.prototype.onItemClick = /**
-     * @param {?} event
-     * @return {?}
-     */
-    function (event) {
-        /** @type {?} */
-        var selectedElement = (/** @type {?} */ ({}));
-        this.mdbOptions.forEach((/**
-         * @param {?} el
-         * @return {?}
-         */
-        function (el) {
-            if (el.clicked === true) {
-                selectedElement = el;
-            }
-            el.clicked = false;
-        }));
-        if (event.target !== this.dropdown.nativeElement) {
-            this.setSelectedItem({ text: selectedElement.value, element: selectedElement });
-            this.highlightRow(0);
-            this.select.emit({ text: selectedElement.value, element: selectedElement });
-        }
-    };
-    /**
-     * @param {?} event
-     * @return {?}
-     */
     MdbAutoCompleterComponent.prototype.windowMouseDown = /**
      * @param {?} event
      * @return {?}
      */
     function (event) {
-        if (this.dropdown && event.target !== this.dropdown.nativeElement) {
+        if (this.dropdown && !this.dropdown.nativeElement.contains((/** @type {?} */ (event.target)))) {
             this.hide();
         }
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype._listenToOptionClick = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.mdbOptions.changes
+            .pipe(startWith(this.mdbOptions), switchMap((/**
+         * @param {?} options
+         * @return {?}
+         */
+        function (options) {
+            return merge.apply(void 0, __spread(options.map((/**
+             * @param {?} option
+             * @return {?}
+             */
+            function (option) { return option.click$; }))));
+        })), takeUntil(this._destroy))
+            .subscribe((/**
+         * @param {?} clickedOption
+         * @return {?}
+         */
+        function (clickedOption) { return _this._handleOptionClick(clickedOption); }));
+    };
+    /**
+     * @private
+     * @param {?} option
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype._handleOptionClick = /**
+     * @private
+     * @param {?} option
+     * @return {?}
+     */
+    function (option) {
+        this.setSelectedItem({ text: option.value, element: option });
+        this.highlightRow(0);
+        this.select.emit({ text: option.value, element: option });
+        this.hide();
     };
     /**
      * @param {?} item
@@ -13413,13 +13695,11 @@ var MdbAutoCompleterComponent = /** @class */ (function () {
                 /** @type {?} */
                 var topRect = document$1.querySelector('.completer-dropdown').getBoundingClientRect().top;
                 /** @type {?} */
-                var bottom = modalEl ?
-                    win.innerHeight - height - topRect :
-                    _this.parameters.bottom;
+                var bottom = modalEl ? win.innerHeight - height - topRect : _this.parameters.bottom;
                 /** @type {?} */
-                var top_1 = _this.dropdown.nativeElement.clientHeight > bottom ?
-                    "-" + (_this.dropdown.nativeElement.clientHeight - _this.parameters.inputHeight) :
-                    _this.parameters.inputHeight + 3;
+                var top_1 = _this.dropdown.nativeElement.clientHeight > bottom
+                    ? "-" + (_this.dropdown.nativeElement.clientHeight - _this.parameters.inputHeight)
+                    : _this.parameters.inputHeight + 3;
                 _this.renderer.setStyle(_this.dropdown.nativeElement, 'top', top_1 + 'px');
                 _this.renderer.setStyle(_this.dropdown.nativeElement, 'left', 0 + 'px');
                 _this.renderer.setStyle(_this.dropdown.nativeElement, 'width', _this.parameters.width + 'px');
@@ -13673,9 +13953,9 @@ var MdbAutoCompleterComponent = /** @class */ (function () {
         function () {
             if (_this.dropdown) {
                 /** @type {?} */
-                var top_2 = _this.dropdown.nativeElement.clientHeight > parameters.bottom ?
-                    parameters.top - _this.dropdown.nativeElement.clientHeight :
-                    parameters.top;
+                var top_2 = _this.dropdown.nativeElement.clientHeight > parameters.bottom
+                    ? parameters.top - _this.dropdown.nativeElement.clientHeight
+                    : parameters.top;
                 _this.renderer.setStyle(_this.dropdown.nativeElement, 'top', top_2 + 'px');
                 _this.renderer.setStyle(_this.dropdown.nativeElement, 'left', parameters.left + 'px');
                 _this.renderer.setStyle(_this.dropdown.nativeElement, 'width', parameters.width + 'px');
@@ -13709,13 +13989,26 @@ var MdbAutoCompleterComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
+        this._listenToOptionClick();
         this.highlightRow(0);
+    };
+    /**
+     * @return {?}
+     */
+    MdbAutoCompleterComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this._destroy.next();
+        this._destroy.complete();
     };
     MdbAutoCompleterComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mdb-auto-completer',
                     template: "<div class=\"completer-dropdown-holder\" *ngIf=\"isOpen()\">\n  <div class=\"completer-dropdown\" #dropdown [ngStyle]=\"{'pointer-events': optionList.length === 0 ? 'none': 'auto'}\">\n    <div class=\"completer-row-wrapper\">\n      <div *ngIf=\"textNoResults && optionList.length === 0 \" class=\"completer-no-results\" #noResults>{{textNoResults}}</div>\n      <ng-content #content></ng-content>\n    </div>\n  </div>\n</div>\n",
-                    exportAs: 'mdbAutoCompleter'
+                    encapsulation: ViewEncapsulation.None,
+                    exportAs: 'mdbAutoCompleter',
+                    styles: [".mdb-autocomplete{margin-bottom:1px}.mdb-autocomplete::-webkit-search-cancel-button,.mdb-autocomplete::-webkit-search-decoration,.mdb-autocomplete::-webkit-search-results-button,.mdb-autocomplete::-webkit-search-results-decoration{-webkit-appearance:none}button:focus{outline:0!important}button.mdb-autocomplete-clear{position:absolute;z-index:2;top:.5rem;right:0;visibility:hidden;border:none;background:0 0;cursor:pointer}button.mdb-autocomplete-clear svg{fill:#a6a6a6}.mdb-autocomplete-wrap{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);position:absolute;z-index:100;left:0;right:0;list-style-type:none;overflow-y:auto;max-height:210px;padding-left:0;background:#fff}.mdb-autocomplete-wrap li{padding:12px 15px;cursor:pointer;font-size:.875rem}.mdb-autocomplete-wrap li:hover{background:#eee}.mdb-autocomplete-wrap li.selected{background-color:#eee}.form-inline .md-form .form-control.mdb-autocomplete{width:15rem}ng2-completer .completer-dropdown-holder{margin-top:-1rem}ng2-completer .md-form label{z-index:-1}.mdb-autocomplete-clear:hover,.mdb-autocomplete:hover,mdb-auto-completer:hover{cursor:pointer}.completer-dropdown{margin-top:1px;position:absolute;left:0;right:0;width:100%;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.25);z-index:110;max-height:210px;overflow-y:auto;overflow-x:hidden}.completer-dropdown .completer-row{width:100%;display:flex;align-items:center;justify-content:space-between;padding:12px 15px;font-size:.875rem}.completer-dropdown .completer-row .completer-description{font-size:14px}.completer-dropdown .completer-row .completer-image-holder .completer-image-default{width:16px;height:16px}.completer-dropdown .completer-no-results,.completer-dropdown .completer-searching{padding:12px 15px;font-size:.875rem}.completer-selected-row{background-color:#eee}.completer-image{width:32px;height:32px;border-radius:50%}.validate-success.ng-valid .completer-input{border-bottom:1px solid #00c851!important;box-shadow:0 1px 0 0 #00c851!important}.validate-success.ng-valid .completer-holder label{color:#00c851!important}.form-submitted .validate-error.ng-invalid .completer-input,.validate-error.ng-invalid.ng-touched .completer-input{border-bottom:1px solid #f44336!important;box-shadow:0 1px 0 0 #f44336!important}.form-submitted .validate-error.ng-invalid .completer-holder label,.validate-error.ng-invalid.ng-touched .completer-holder label{color:#f44336!important}.completer-row:hover,.highlight-row{background-color:#eee}"]
                 }] }
     ];
     /** @nocollapse */
@@ -13732,10 +14025,9 @@ var MdbAutoCompleterComponent = /** @class */ (function () {
         disabled: [{ type: Input }],
         select: [{ type: Output }],
         optionList: [{ type: ContentChildren, args: [MdbOptionComponent, { descendants: true, read: ElementRef },] }],
-        mdbOptions: [{ type: ContentChildren, args: [MdbOptionComponent, { descendants: true, read: MdbOptionComponent },] }],
-        dropdown: [{ type: ViewChild, args: ['dropdown',] }],
-        noResultsEl: [{ type: ViewChild, args: ['noResults',] }],
-        onItemClick: [{ type: HostListener, args: ['mousedown', ['$event'],] }],
+        mdbOptions: [{ type: ContentChildren, args: [MdbOptionComponent, { descendants: true },] }],
+        dropdown: [{ type: ViewChild, args: ['dropdown', { static: false },] }],
+        noResultsEl: [{ type: ViewChild, args: ['noResults', { static: false },] }],
         windowMouseDown: [{ type: HostListener, args: ['window:mousedown', ['$event'],] }]
     };
     return MdbAutoCompleterComponent;
@@ -13745,6 +14037,16 @@ var MdbAutoCompleterComponent = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @type {?} */
+var MAT_AUTOCOMPLETE_VALUE_ACCESSOR = {
+    provide: NG_VALUE_ACCESSOR,
+    // tslint:disable-next-line: no-use-before-declare
+    useExisting: forwardRef((/**
+     * @return {?}
+     */
+    function () { return MdbAutoCompleterDirective; })),
+    multi: true,
+};
 var MdbAutoCompleterDirective = /** @class */ (function () {
     function MdbAutoCompleterDirective(renderer, el, platformId, document) {
         this.renderer = renderer;
@@ -13752,8 +14054,32 @@ var MdbAutoCompleterDirective = /** @class */ (function () {
         this.document = document;
         this.ngModelChange = new EventEmitter();
         this.clearBtnClicked = new EventEmitter();
+        this._onChange = (/**
+         * @return {?}
+         */
+        function () { });
+        this._onTouched = (/**
+         * @return {?}
+         */
+        function () { });
         this.isBrowser = isPlatformBrowser(platformId);
     }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype.onKeydown = /**
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        /** @type {?} */
+        var isTabKey = event.keyCode === 9;
+        if (isTabKey) {
+            this._hide();
+        }
+        this._handleKeyDown(event);
+    };
     /**
      * @private
      * @param {?} el
@@ -13790,7 +14116,7 @@ var MdbAutoCompleterDirective = /** @class */ (function () {
             position: 'absolute',
             top: '25%',
             right: '0',
-            visibility: 'hidden'
+            visibility: 'hidden',
         });
         this._addClass(el, ['mdb-autocomplete-clear', 'fa', 'fa-times']);
         this.renderer.setAttribute(el, 'type', 'button');
@@ -13800,6 +14126,7 @@ var MdbAutoCompleterDirective = /** @class */ (function () {
          */
         function () {
             _this.clearBtnClicked.emit();
+            _this._onChange('');
         }));
         if (this.isBrowser) {
             /** @type {?} */
@@ -13883,6 +14210,7 @@ var MdbAutoCompleterDirective = /** @class */ (function () {
         if (!this._isOpen()) {
             this._show();
         }
+        this._onChange(event.target.value);
         this.mdbAutoCompleter.removeHighlight(0);
         this.mdbAutoCompleter.highlightRow(0);
         /** @type {?} */
@@ -13918,7 +14246,7 @@ var MdbAutoCompleterDirective = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this._hide();
+        this._onTouched();
     };
     /**
      * @return {?}
@@ -14038,13 +14366,13 @@ var MdbAutoCompleterDirective = /** @class */ (function () {
             top: this.getCoords(el).top + height,
             width: position.width,
             bottom: window.innerHeight - height - el.getBoundingClientRect().top,
-            inputHeight: height
+            inputHeight: height,
         };
         this.mdbAutoCompleter.appendDropdown({
             left: this.getCoords(el).left,
             top: this.getCoords(el).top + height,
             width: position.width,
-            bottom: window.innerHeight - height - this.getCoords(el).top
+            bottom: window.innerHeight - height - this.getCoords(el).top,
         });
     };
     /**
@@ -14061,6 +14389,7 @@ var MdbAutoCompleterDirective = /** @class */ (function () {
          */
         function (item) {
             _this.el.nativeElement.value = item.text;
+            _this._onChange(item.text);
             /** @type {?} */
             var clearButtonVisibility = _this.el.nativeElement.value.length > 0 ? 'visible' : 'hidden';
             /** @type {?} */
@@ -14089,16 +14418,24 @@ var MdbAutoCompleterDirective = /** @class */ (function () {
                  * @param {?} event
                  * @return {?}
                  */
-                function (event) { return _this.renderer.listen(clearButton_1, event, (/**
-                 * @return {?}
-                 */
-                function () {
-                    _this._clearInput();
-                })); }));
+                function (event) {
+                    return _this.renderer.listen(clearButton_1, event, (/**
+                     * @return {?}
+                     */
+                    function () {
+                        _this._clearInput();
+                    }));
+                }));
                 _this._setStyles(clearButton_1, {
                     transform: 'scale(1.2, 1.2)',
-                    transition: '200ms'
+                    transition: '200ms',
                 });
+            }));
+            this.renderer.listen(clearButton_1, 'click', (/**
+             * @return {?}
+             */
+            function () {
+                _this._clearInput();
             }));
             this.renderer.listen(clearButton_1, 'mouseenter', (/**
              * @return {?}
@@ -14106,7 +14443,7 @@ var MdbAutoCompleterDirective = /** @class */ (function () {
             function () {
                 _this._setStyles(clearButton_1, {
                     transform: 'scale(1.2, 1.2)',
-                    transition: '200ms'
+                    transition: '200ms',
                 });
             }));
             this.renderer.listen(clearButton_1, 'mouseleave', (/**
@@ -14115,7 +14452,7 @@ var MdbAutoCompleterDirective = /** @class */ (function () {
             function () {
                 _this._setStyles(clearButton_1, {
                     transform: 'scale(1.0, 1.0)',
-                    transition: '200ms'
+                    transition: '200ms',
                 });
             }));
             this.renderer.listen(clearButton_1, 'blur', (/**
@@ -14124,7 +14461,7 @@ var MdbAutoCompleterDirective = /** @class */ (function () {
             function () {
                 _this._setStyles(clearButton_1, {
                     transform: 'scale(1.0, 1.0)',
-                    transition: '200ms'
+                    transition: '200ms',
                 });
             }));
             if (this.el.nativeElement.disabled) {
@@ -14148,7 +14485,7 @@ var MdbAutoCompleterDirective = /** @class */ (function () {
             this._autocompleterInputChanges.observe(this.el.nativeElement, {
                 attributes: true,
                 childList: true,
-                characterData: true
+                characterData: true,
             });
         }
     };
@@ -14166,17 +14503,55 @@ var MdbAutoCompleterDirective = /** @class */ (function () {
             this.listenToClearClick();
         }
     };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype.writeValue = /**
+     * @param {?} value
+     * @return {?}
+     */
+    function (value) {
+        var _this = this;
+        Promise.resolve(null).then((/**
+         * @return {?}
+         */
+        function () { return (_this.el.nativeElement.value = value); }));
+    };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype.registerOnChange = /**
+     * @param {?} fn
+     * @return {?}
+     */
+    function (fn) {
+        this._onChange = fn;
+    };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    MdbAutoCompleterDirective.prototype.registerOnTouched = /**
+     * @param {?} fn
+     * @return {?}
+     */
+    function (fn) {
+        this._onTouched = fn;
+    };
     MdbAutoCompleterDirective.decorators = [
         { type: Directive, args: [{
                     selector: 'input[mdbAutoCompleter], textarea[mdbAutoCompleter]',
+                    // tslint:disable-next-line:no-host-metadata-property
                     host: {
                         '(input)': '_handleInput($event)',
-                        '(keydown)': '_handleKeyDown($event)',
                         '(focusin)': '_handleFocusIn()',
                         '(blur)': '_handleBlurIn()',
-                        '(mousedown)': '_handleMouseDown()'
+                        '(mousedown)': '_handleMouseDown()',
                     },
                     exportAs: 'mdbAutoCompleterTrigger',
+                    providers: [MAT_AUTOCOMPLETE_VALUE_ACCESSOR],
                 },] }
     ];
     /** @nocollapse */
@@ -14189,7 +14564,8 @@ var MdbAutoCompleterDirective = /** @class */ (function () {
     MdbAutoCompleterDirective.propDecorators = {
         mdbAutoCompleter: [{ type: Input }],
         ngModelChange: [{ type: Output }],
-        clearBtnClicked: [{ type: Output }]
+        clearBtnClicked: [{ type: Output }],
+        onKeydown: [{ type: HostListener, args: ['keydown', ['$event'],] }]
     };
     return MdbAutoCompleterDirective;
 }());
@@ -14817,2460 +15193,6 @@ var AutoFormatModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var MdbCompleterDirective = /** @class */ (function () {
-    function MdbCompleterDirective() {
-        this.selected = new EventEmitter();
-        this.highlighted = new EventEmitter();
-        this.opened = new EventEmitter();
-        this._hasHighlighted = false;
-        this._hasSelected = false;
-        this._cancelBlur = false;
-        this._isOpen = false;
-        this.setToNullValue = null;
-    }
-    /**
-     * @param {?} list
-     * @return {?}
-     */
-    MdbCompleterDirective.prototype.registerList = /**
-     * @param {?} list
-     * @return {?}
-     */
-    function (list) {
-        this.list = list;
-    };
-    /**
-     * @param {?} dropdown
-     * @return {?}
-     */
-    MdbCompleterDirective.prototype.registerDropdown = /**
-     * @param {?} dropdown
-     * @return {?}
-     */
-    function (dropdown) {
-        this.dropdown = dropdown;
-    };
-    /**
-     * @param {?} item
-     * @return {?}
-     */
-    MdbCompleterDirective.prototype.onHighlighted = /**
-     * @param {?} item
-     * @return {?}
-     */
-    function (item) {
-        this.highlighted.emit(item);
-        this._hasHighlighted = !!item;
-    };
-    /**
-     * @param {?} item
-     * @param {?=} clearList
-     * @return {?}
-     */
-    MdbCompleterDirective.prototype.onSelected = /**
-     * @param {?} item
-     * @param {?=} clearList
-     * @return {?}
-     */
-    function (item, clearList) {
-        if (clearList === void 0) { clearList = true; }
-        this.selected.emit(item);
-        if (item) {
-            this._hasSelected = true;
-        }
-        if (clearList) {
-            this.clear();
-        }
-    };
-    /**
-     * @param {?} term
-     * @return {?}
-     */
-    MdbCompleterDirective.prototype.search = /**
-     * @param {?} term
-     * @return {?}
-     */
-    function (term) {
-        if (this._hasSelected) {
-            // this.selected.emit(null);
-            this.selected.emit(this.setToNullValue);
-            this._hasSelected = false;
-        }
-        if (this.list) {
-            this.list.search(term);
-        }
-    };
-    /**
-     * @return {?}
-     */
-    MdbCompleterDirective.prototype.clear = /**
-     * @return {?}
-     */
-    function () {
-        if (this.dropdown) {
-            this.dropdown.clear();
-        }
-        if (this.list) {
-            this.list.clear();
-        }
-        this._hasHighlighted = false;
-        this.isOpen = false;
-    };
-    /**
-     * @return {?}
-     */
-    MdbCompleterDirective.prototype.selectCurrent = /**
-     * @return {?}
-     */
-    function () {
-        if (this.dropdown) {
-            this.dropdown.selectCurrent();
-        }
-    };
-    /**
-     * @return {?}
-     */
-    MdbCompleterDirective.prototype.nextRow = /**
-     * @return {?}
-     */
-    function () {
-        if (this.dropdown) {
-            this.dropdown.nextRow();
-        }
-    };
-    /**
-     * @return {?}
-     */
-    MdbCompleterDirective.prototype.prevRow = /**
-     * @return {?}
-     */
-    function () {
-        if (this.dropdown) {
-            this.dropdown.prevRow();
-        }
-    };
-    /**
-     * @return {?}
-     */
-    MdbCompleterDirective.prototype.hasHighlighted = /**
-     * @return {?}
-     */
-    function () {
-        return this._hasHighlighted;
-    };
-    /**
-     * @param {?} cancel
-     * @return {?}
-     */
-    MdbCompleterDirective.prototype.cancelBlur = /**
-     * @param {?} cancel
-     * @return {?}
-     */
-    function (cancel) {
-        this._cancelBlur = cancel;
-    };
-    /**
-     * @return {?}
-     */
-    MdbCompleterDirective.prototype.isCancelBlur = /**
-     * @return {?}
-     */
-    function () {
-        return this._cancelBlur;
-    };
-    /**
-     * @return {?}
-     */
-    MdbCompleterDirective.prototype.open = /**
-     * @return {?}
-     */
-    function () {
-        if (!this._isOpen) {
-            this.isOpen = true;
-            this.list.open();
-        }
-    };
-    Object.defineProperty(MdbCompleterDirective.prototype, "isOpen", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this._isOpen;
-        },
-        set: /**
-         * @param {?} open
-         * @return {?}
-         */
-        function (open) {
-            this._isOpen = open;
-            this.opened.emit(this._isOpen);
-            if (this.list) {
-                this.list.isOpen(open);
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MdbCompleterDirective.prototype, "autoHighlightIndex", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this._autoHighlightIndex;
-        },
-        set: /**
-         * @param {?} index
-         * @return {?}
-         */
-        function (index) {
-            this._autoHighlightIndex = index;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MdbCompleterDirective.prototype, "hasSelected", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this._hasSelected;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    MdbCompleterDirective.decorators = [
-        { type: Directive, args: [{
-                    selector: '[mdbCompleter]',
-                },] }
-    ];
-    MdbCompleterDirective.propDecorators = {
-        selected: [{ type: Output }],
-        highlighted: [{ type: Output }],
-        opened: [{ type: Output }]
-    };
-    return MdbCompleterDirective;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-var MAX_CHARS = 524288;
-// the default max length per the html maxlength attribute
-/** @type {?} */
-var MIN_SEARCH_LENGTH = 3;
-/** @type {?} */
-var PAUSE = 100;
-/** @type {?} */
-var TEXT_SEARCHING = 'Searching...';
-/** @type {?} */
-var TEXT_NO_RESULTS = 'No results found';
-/** @type {?} */
-var CLEAR_TIMEOUT = 50;
-/**
- * @param {?} value
- * @return {?}
- */
-function isNil(value) {
-    return typeof value === 'undefined' || value === null;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @abstract
- */
-var  /**
- * @abstract
- */
-CompleterBaseData = /** @class */ (function (_super) {
-    __extends(CompleterBaseData, _super);
-    function CompleterBaseData() {
-        return _super.call(this) || this;
-    }
-    /**
-     * @return {?}
-     */
-    CompleterBaseData.prototype.cancel = /**
-     * @return {?}
-     */
-    function () { };
-    /**
-     * @template THIS
-     * @this {THIS}
-     * @param {?} searchFields
-     * @return {THIS}
-     */
-    CompleterBaseData.prototype.searchFields = /**
-     * @template THIS
-     * @this {THIS}
-     * @param {?} searchFields
-     * @return {THIS}
-     */
-    function (searchFields) {
-        (/** @type {?} */ (this))._searchFields = searchFields;
-        return (/** @type {?} */ (this));
-    };
-    /**
-     * @template THIS
-     * @this {THIS}
-     * @param {?} titleField
-     * @return {THIS}
-     */
-    CompleterBaseData.prototype.titleField = /**
-     * @template THIS
-     * @this {THIS}
-     * @param {?} titleField
-     * @return {THIS}
-     */
-    function (titleField) {
-        (/** @type {?} */ (this))._titleField = titleField;
-        return (/** @type {?} */ (this));
-    };
-    /**
-     * @template THIS
-     * @this {THIS}
-     * @param {?} descriptionField
-     * @return {THIS}
-     */
-    CompleterBaseData.prototype.descriptionField = /**
-     * @template THIS
-     * @this {THIS}
-     * @param {?} descriptionField
-     * @return {THIS}
-     */
-    function (descriptionField) {
-        (/** @type {?} */ (this))._descriptionField = descriptionField;
-        return (/** @type {?} */ (this));
-    };
-    /**
-     * @template THIS
-     * @this {THIS}
-     * @param {?} imageField
-     * @return {THIS}
-     */
-    CompleterBaseData.prototype.imageField = /**
-     * @template THIS
-     * @this {THIS}
-     * @param {?} imageField
-     * @return {THIS}
-     */
-    function (imageField) {
-        (/** @type {?} */ (this))._imageField = imageField;
-        return (/** @type {?} */ (this));
-    };
-    /**
-     * @param {?} data
-     * @return {?}
-     */
-    CompleterBaseData.prototype.convertToItem = /**
-     * @param {?} data
-     * @return {?}
-     */
-    function (data) {
-        // let image: string = null;
-        /** @type {?} */
-        var image = null;
-        /** @type {?} */
-        var formattedText;
-        // let formattedDesc: string;
-        /** @type {?} */
-        var formattedDesc;
-        if (this._titleField) {
-            formattedText = this.extractTitle(data);
-        }
-        else {
-            formattedText = data;
-        }
-        if (this._descriptionField) {
-            formattedDesc = this.extractValue(data, this._descriptionField);
-        }
-        if (this._imageField) {
-            image = this.extractValue(data, this._imageField);
-        }
-        if (isNil(formattedText)) {
-            return null;
-        }
-        return (/** @type {?} */ ({
-            title: formattedText,
-            description: formattedDesc,
-            image: image,
-            originalObject: data
-        }));
-    };
-    /**
-     * @protected
-     * @param {?} data
-     * @param {?} term
-     * @return {?}
-     */
-    CompleterBaseData.prototype.extractMatches = /**
-     * @protected
-     * @param {?} data
-     * @param {?} term
-     * @return {?}
-     */
-    function (data, term) {
-        var _this = this;
-        /** @type {?} */
-        var matches = [];
-        /** @type {?} */
-        var searchFields = this._searchFields ? this._searchFields.split(',') : null;
-        if (this._searchFields !== null && this._searchFields !== undefined && term !== '') {
-            matches = data.filter((/**
-             * @param {?} item
-             * @return {?}
-             */
-            function (item) {
-                /** @type {?} */
-                var values = searchFields ?
-                    searchFields.map((/**
-                     * @param {?} searchField
-                     * @return {?}
-                     */
-                    function (searchField) { return _this.extractValue(item, searchField); })).filter((/**
-                     * @param {?} value
-                     * @return {?}
-                     */
-                    function (value) { return !!value; })) : [item];
-                return values.some((/**
-                 * @param {?} value
-                 * @return {?}
-                 */
-                function (value) { return value.toString().toLowerCase().indexOf(term.toString().toLowerCase()) >= 0; }));
-            }));
-        }
-        else {
-            matches = data;
-        }
-        return matches;
-    };
-    /**
-     * @protected
-     * @param {?} item
-     * @return {?}
-     */
-    CompleterBaseData.prototype.extractTitle = /**
-     * @protected
-     * @param {?} item
-     * @return {?}
-     */
-    function (item) {
-        var _this = this;
-        // split title fields and run extractValue for each and join with ' '
-        return this._titleField.split(',')
-            .map((/**
-         * @param {?} field
-         * @return {?}
-         */
-        function (field) {
-            return _this.extractValue(item, field);
-        }))
-            .reduce((/**
-         * @param {?} acc
-         * @param {?} titlePart
-         * @return {?}
-         */
-        function (acc, titlePart) { return acc ? acc + " " + titlePart : titlePart; }));
-    };
-    /**
-     * @protected
-     * @param {?} obj
-     * @param {?} key
-     * @return {?}
-     */
-    CompleterBaseData.prototype.extractValue = /**
-     * @protected
-     * @param {?} obj
-     * @param {?} key
-     * @return {?}
-     */
-    function (obj, key) {
-        /** @type {?} */
-        var keys;
-        /** @type {?} */
-        var result;
-        if (key) {
-            keys = key.split('.');
-            result = obj;
-            for (var i = 0; i < keys.length; i++) {
-                if (result) {
-                    result = result[keys[i]];
-                }
-            }
-        }
-        else {
-            result = obj;
-        }
-        return result;
-    };
-    /**
-     * @protected
-     * @param {?} matches
-     * @return {?}
-     */
-    CompleterBaseData.prototype.processResults = /**
-     * @protected
-     * @param {?} matches
-     * @return {?}
-     */
-    function (matches) {
-        /** @type {?} */
-        var i;
-        /** @type {?} */
-        var results = [];
-        if (matches && matches.length > 0) {
-            for (i = 0; i < matches.length; i++) {
-                /** @type {?} */
-                var item = this.convertToItem(matches[i]);
-                if (item) {
-                    results.push(item);
-                }
-            }
-        }
-        return results;
-    };
-    return CompleterBaseData;
-}(Subject));
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var LocalData = /** @class */ (function (_super) {
-    __extends(LocalData, _super);
-    function LocalData() {
-        return _super.call(this) || this;
-    }
-    /**
-     * @template THIS
-     * @this {THIS}
-     * @param {?} data
-     * @return {THIS}
-     */
-    LocalData.prototype.data = /**
-     * @template THIS
-     * @this {THIS}
-     * @param {?} data
-     * @return {THIS}
-     */
-    function (data) {
-        var _this = this;
-        if (data instanceof Observable) {
-            ((/** @type {?} */ (data))).subscribe((/**
-             * @param {?} res
-             * @return {?}
-             */
-            function (res) {
-                (/** @type {?} */ (_this))._data = res;
-                if ((/** @type {?} */ (_this)).savedTerm) {
-                    (/** @type {?} */ (_this)).search((/** @type {?} */ (_this)).savedTerm);
-                }
-            }));
-        }
-        else {
-            (/** @type {?} */ (this))._data = (/** @type {?} */ (data));
-        }
-        return (/** @type {?} */ (this));
-    };
-    /**
-     * @param {?} term
-     * @return {?}
-     */
-    LocalData.prototype.search = /**
-     * @param {?} term
-     * @return {?}
-     */
-    function (term) {
-        if (!this._data) {
-            this.savedTerm = term;
-        }
-        else {
-            this.savedTerm = null;
-            /** @type {?} */
-            var matches = this.extractMatches(this._data, term);
-            this.next(this.processResults(matches));
-        }
-    };
-    // public convertToItem(data: any): CompleterItem {
-    // public convertToItem(data: any): CompleterItem {
-    /**
-     * @param {?} data
-     * @return {?}
-     */
-    LocalData.prototype.convertToItem = 
-    // public convertToItem(data: any): CompleterItem {
-    /**
-     * @param {?} data
-     * @return {?}
-     */
-    function (data) {
-        return _super.prototype.convertToItem.call(this, data);
-    };
-    LocalData.decorators = [
-        { type: Injectable }
-    ];
-    /** @nocollapse */
-    LocalData.ctorParameters = function () { return []; };
-    return LocalData;
-}(CompleterBaseData));
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var RemoteData = /** @class */ (function (_super) {
-    __extends(RemoteData, _super);
-    function RemoteData(http) {
-        var _this = _super.call(this) || this;
-        _this.http = http;
-        _this.setToNullValue = null;
-        // private _urlFormater: (term: string) => string | any = null;
-        _this._urlFormater = _this.setToNullValue;
-        // private _dataField: string = null;
-        _this._dataField = null;
-        return _this;
-    }
-    /**
-     * @template THIS
-     * @this {THIS}
-     * @param {?} remoteUrl
-     * @return {THIS}
-     */
-    RemoteData.prototype.remoteUrl = /**
-     * @template THIS
-     * @this {THIS}
-     * @param {?} remoteUrl
-     * @return {THIS}
-     */
-    function (remoteUrl) {
-        (/** @type {?} */ (this))._remoteUrl = remoteUrl;
-        return (/** @type {?} */ (this));
-    };
-    /**
-     * @param {?} urlFormater
-     * @return {?}
-     */
-    RemoteData.prototype.urlFormater = /**
-     * @param {?} urlFormater
-     * @return {?}
-     */
-    function (urlFormater) {
-        this._urlFormater = urlFormater;
-    };
-    /**
-     * @param {?} dataField
-     * @return {?}
-     */
-    RemoteData.prototype.dataField = /**
-     * @param {?} dataField
-     * @return {?}
-     */
-    function (dataField) {
-        this._dataField = dataField;
-    };
-    /**
-     * @deprecated Please use the requestOptions to pass headers with the search request
-     */
-    /**
-     * @deprecated Please use the requestOptions to pass headers with the search request
-     * @param {?} headers
-     * @return {?}
-     */
-    RemoteData.prototype.headers = /**
-     * @deprecated Please use the requestOptions to pass headers with the search request
-     * @param {?} headers
-     * @return {?}
-     */
-    function (headers) {
-        this._headers = headers;
-    };
-    /**
-     * @param {?} requestOptions
-     * @return {?}
-     */
-    RemoteData.prototype.requestOptions = /**
-     * @param {?} requestOptions
-     * @return {?}
-     */
-    function (requestOptions) {
-        this._requestOptions = requestOptions;
-    };
-    /**
-     * @param {?} term
-     * @return {?}
-     */
-    RemoteData.prototype.search = /**
-     * @param {?} term
-     * @return {?}
-     */
-    function (term) {
-        var _this = this;
-        this.cancel();
-        // let params = {};
-        /** @type {?} */
-        var url = '';
-        if (this._urlFormater) {
-            url = this._urlFormater(term);
-        }
-        else {
-            url = this._remoteUrl + encodeURIComponent(term);
-        }
-        /*
-         * If requestOptions are provided, they will override anything set in headers.
-         *
-         * If no requestOptions are provided, a new RequestOptions object will be instantiated,
-         * and either the provided headers or a new Headers() object will be sent.
-         */
-        // if (!this._requestOptions) {
-        //   this._requestOptions = new RequestOptions();
-        //   (this._requestOptions.headers as any) = this._headers || new HttpHeaders();
-        // }
-        this.remoteSearch = this.http.get(url, this._requestOptions).pipe(map((/**
-         * @param {?} res
-         * @return {?}
-         */
-        function (res) { return res; })), map((/**
-         * @param {?} data
-         * @return {?}
-         */
-        function (data) {
-            /** @type {?} */
-            var matches = _this.extractValue(data, _this._dataField);
-            return _this.extractMatches(matches, term);
-        })), map((/**
-         * @param {?} matches
-         * @return {?}
-         */
-        function (matches) {
-            /** @type {?} */
-            var results = _this.processResults(matches);
-            _this.next(results);
-            return results;
-        })), catchError((/**
-         * @param {?} err
-         * @return {?}
-         */
-        function (err) {
-            _this.error(err);
-            // return null;
-            return _this.setToNullValue;
-        })))
-            .subscribe();
-    };
-    /**
-     * @return {?}
-     */
-    RemoteData.prototype.cancel = /**
-     * @return {?}
-     */
-    function () {
-        if (this.remoteSearch) {
-            this.remoteSearch.unsubscribe();
-        }
-    };
-    // public convertToItem(data: any): CompleterItem {
-    // public convertToItem(data: any): CompleterItem {
-    /**
-     * @param {?} data
-     * @return {?}
-     */
-    RemoteData.prototype.convertToItem = 
-    // public convertToItem(data: any): CompleterItem {
-    /**
-     * @param {?} data
-     * @return {?}
-     */
-    function (data) {
-        return _super.prototype.convertToItem.call(this, data);
-    };
-    return RemoteData;
-}(CompleterBaseData));
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CompleterService = /** @class */ (function () {
-    function CompleterService(localDataFactory, // Using any instead of () => LocalData because on AoT errors
-    remoteDataFactory // Using any instead of () => LocalData because on AoT errors
-    ) {
-        this.localDataFactory = localDataFactory;
-        this.remoteDataFactory = remoteDataFactory;
-    }
-    /**
-     * @param {?} data
-     * @param {?=} searchFields
-     * @param {?=} titleField
-     * @return {?}
-     */
-    CompleterService.prototype.local = /**
-     * @param {?} data
-     * @param {?=} searchFields
-     * @param {?=} titleField
-     * @return {?}
-     */
-    function (data, searchFields, titleField) {
-        if (searchFields === void 0) { searchFields = ''; }
-        if (titleField === void 0) { titleField = ''; }
-        /** @type {?} */
-        var localData = this.localDataFactory();
-        return localData
-            .data(data)
-            .searchFields(searchFields)
-            .titleField(titleField);
-    };
-    /**
-     * @param {?} url
-     * @param {?=} searchFields
-     * @param {?=} titleField
-     * @return {?}
-     */
-    CompleterService.prototype.remote = /**
-     * @param {?} url
-     * @param {?=} searchFields
-     * @param {?=} titleField
-     * @return {?}
-     */
-    function (url, searchFields, titleField) {
-        if (searchFields === void 0) { searchFields = ''; }
-        if (titleField === void 0) { titleField = ''; }
-        /** @type {?} */
-        var remoteData = this.remoteDataFactory();
-        return remoteData
-            .remoteUrl(url)
-            .searchFields(searchFields)
-            .titleField(titleField);
-    };
-    CompleterService.decorators = [
-        { type: Injectable }
-    ];
-    /** @nocollapse */
-    CompleterService.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: Inject, args: [LocalData,] }] },
-        { type: undefined, decorators: [{ type: Inject, args: [RemoteData,] }] }
-    ]; };
-    return CompleterService;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-var noop = (/**
- * @return {?}
- */
-function () { });
-/** @type {?} */
-var COMPLETER_CONTROL_VALUE_ACCESSOR = {
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef((/**
-     * @return {?}
-     */
-    function () { return CompleterComponent; })),
-    multi: true
-};
-var CompleterComponent = /** @class */ (function () {
-    function CompleterComponent(completerService, renderer, el) {
-        this.completerService = completerService;
-        this.renderer = renderer;
-        this.el = el;
-        this.inputName = '';
-        this.inputId = '';
-        this.pause = PAUSE;
-        this.minSearchLength = MIN_SEARCH_LENGTH;
-        this.maxChars = MAX_CHARS;
-        this.overrideSuggested = false;
-        this.clearSelected = false;
-        this.clearUnselected = false;
-        this.fillHighlighted = true;
-        this.placeholder = '';
-        this.autoMatch = false;
-        this.disableInput = false;
-        this.autofocus = false;
-        this.openOnFocus = false;
-        this.autoHighlight = false;
-        this.selected = new EventEmitter();
-        this.highlighted = new EventEmitter();
-        this.blur = new EventEmitter();
-        this.focusEvent = new EventEmitter();
-        this.opened = new EventEmitter();
-        this.keyup = new EventEmitter();
-        this.keydown = new EventEmitter();
-        this.focused = false;
-        // Used in sliding-down animation
-        this.state = 'unfocused';
-        this.searchStr = '';
-        this.control = new FormControl('');
-        this.displaySearching = true;
-        this.displayNoResults = true;
-        this._onTouchedCallback = noop;
-        this._onChangeCallback = noop;
-        this._focus = false;
-        this._open = false;
-        this._textNoResults = TEXT_NO_RESULTS;
-        this._textSearching = TEXT_SEARCHING;
-    }
-    Object.defineProperty(CompleterComponent.prototype, "datasource", {
-        set: /**
-         * @param {?} source
-         * @return {?}
-         */
-        function (source) {
-            if (source) {
-                if (source instanceof Array) {
-                    this.dataService = this.completerService.local(source);
-                }
-                else if (typeof (source) === 'string') {
-                    this.dataService = this.completerService.remote(source);
-                }
-                else {
-                    this.dataService = source;
-                }
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(CompleterComponent.prototype, "textNoResults", {
-        set: /**
-         * @param {?} text
-         * @return {?}
-         */
-        function (text) {
-            if (this._textNoResults !== text) {
-                this._textNoResults = text;
-                this.displayNoResults = this._textNoResults && this._textNoResults !== 'false';
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(CompleterComponent.prototype, "textSearching", {
-        set: /**
-         * @param {?} text
-         * @return {?}
-         */
-        function (text) {
-            if (this._textSearching !== text) {
-                this._textSearching = text;
-                this.displaySearching = this._textSearching && this._textSearching !== 'false';
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    CompleterComponent.prototype.onkeyup = /**
-     * @param {?} event
-     * @return {?}
-     */
-    function (event) {
-        if (event.target.value !== '') {
-            this.renderer.setStyle(event.target.nextElementSibling, 'visibility', 'visible');
-        }
-    };
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    CompleterComponent.prototype.onclick = /**
-     * @param {?} event
-     * @return {?}
-     */
-    function (event) {
-        if (event.target === this.labelEl.nativeElement) {
-            this.renderer.addClass(this.labelEl.nativeElement, 'active');
-            this._focus = true;
-        }
-    };
-    /**
-     * @return {?}
-     */
-    CompleterComponent.prototype.onFocusIn = /**
-     * @return {?}
-     */
-    function () {
-        if (this.labelEl) {
-            this.renderer.addClass(this.labelEl.nativeElement, 'active');
-        }
-    };
-    /**
-     * @return {?}
-     */
-    CompleterComponent.prototype.onFocusOut = /**
-     * @return {?}
-     */
-    function () {
-        if (this.mdbCompleterInput.nativeElement.value === '' && this.labelEl && !this.placeholder) {
-            this.renderer.removeClass(this.labelEl.nativeElement, 'active');
-        }
-    };
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    CompleterComponent.prototype.activateClearButton = /**
-     * @param {?} event
-     * @return {?}
-     */
-    function (event) {
-        this.mdbCompleterInput.nativeElement.value = '';
-        this.value = '';
-        this.renderer.setStyle(event.target, 'visibility', 'hidden');
-    };
-    /**
-     * @param {?} buttonState
-     * @return {?}
-     */
-    CompleterComponent.prototype.triggerClearButtonAnimation = /**
-     * @param {?} buttonState
-     * @return {?}
-     */
-    function (buttonState) {
-        this.state = buttonState;
-    };
-    Object.defineProperty(CompleterComponent.prototype, "value", {
-        get: /**
-         * @return {?}
-         */
-        function () { return this.searchStr; },
-        set: /**
-         * @param {?} v
-         * @return {?}
-         */
-        function (v) {
-            if (v !== this.searchStr) {
-                this.searchStr = v;
-            }
-            // Propagate the change in any case
-            this._onChangeCallback(v);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * @return {?}
-     */
-    CompleterComponent.prototype.ngAfterViewInit = /**
-     * @return {?}
-     */
-    function () {
-        if (this.labelEl) {
-            this.renderer.removeClass(this.labelEl.nativeElement, 'active');
-        }
-        if (this.autofocus) {
-            this._focus = true;
-        }
-        if (this.initialValue || this.searchStr || this.placeholder) {
-            this.renderer.addClass(this.labelEl.nativeElement, 'active');
-        }
-    };
-    /**
-     * @return {?}
-     */
-    CompleterComponent.prototype.ngAfterViewChecked = /**
-     * @return {?}
-     */
-    function () {
-        if (this._focus) {
-            this.mdbCompleterInput.nativeElement.focus();
-            this._focus = false;
-        }
-    };
-    /**
-     * @return {?}
-     */
-    CompleterComponent.prototype.onTouched = /**
-     * @return {?}
-     */
-    function () {
-        this._onTouchedCallback();
-    };
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    CompleterComponent.prototype.writeValue = /**
-     * @param {?} value
-     * @return {?}
-     */
-    function (value) {
-        this.searchStr = value;
-    };
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    CompleterComponent.prototype.registerOnChange = /**
-     * @param {?} fn
-     * @return {?}
-     */
-    function (fn) {
-        this._onChangeCallback = fn;
-    };
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    CompleterComponent.prototype.registerOnTouched = /**
-     * @param {?} fn
-     * @return {?}
-     */
-    function (fn) {
-        this._onTouchedCallback = fn;
-    };
-    /**
-     * @return {?}
-     */
-    CompleterComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this.completer.selected.subscribe((/**
-         * @param {?} item
-         * @return {?}
-         */
-        function (item) {
-            _this.selected.emit(item);
-        }));
-        this.completer.highlighted.subscribe((/**
-         * @param {?} item
-         * @return {?}
-         */
-        function (item) {
-            _this.highlighted.emit(item);
-        }));
-        this.completer.opened.subscribe((/**
-         * @param {?} isOpen
-         * @return {?}
-         */
-        function (isOpen) {
-            _this._open = isOpen;
-            _this.opened.emit(isOpen);
-        }));
-        if (this.initialValue) {
-            this.searchStr = this.initialValue;
-            this.onFocus();
-        }
-    };
-    /**
-     * @return {?}
-     */
-    CompleterComponent.prototype.onBlur = /**
-     * @return {?}
-     */
-    function () {
-        this.onTouched();
-        if (this.searchStr === undefined || this.searchStr === '') {
-            this.focused = false;
-        }
-        this.blur.emit(this);
-    };
-    /**
-     * @return {?}
-     */
-    CompleterComponent.prototype.onFocus = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        setTimeout((/**
-         * @return {?}
-         */
-        function () {
-            _this.focused = true;
-        }), 0);
-        this.focusEvent.emit({ focused: true, element: this.el });
-    };
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    CompleterComponent.prototype.onChange = /**
-     * @param {?} value
-     * @return {?}
-     */
-    function (value) {
-        this.value = value;
-    };
-    /**
-     * @return {?}
-     */
-    CompleterComponent.prototype.open = /**
-     * @return {?}
-     */
-    function () {
-        this.completer.open();
-    };
-    /**
-     * @return {?}
-     */
-    CompleterComponent.prototype.close = /**
-     * @return {?}
-     */
-    function () {
-        this.completer.clear();
-    };
-    /**
-     * @return {?}
-     */
-    CompleterComponent.prototype.focus = /**
-     * @return {?}
-     */
-    function () {
-        if (this.mdbCompleterInput) {
-            this.mdbCompleterInput.nativeElement.focus();
-        }
-        else {
-            this._focus = true;
-        }
-    };
-    /**
-     * @return {?}
-     */
-    CompleterComponent.prototype.isOpen = /**
-     * @return {?}
-     */
-    function () {
-        return this._open;
-    };
-    CompleterComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'mdb-autocomplete, mdb-completer',
-                    template: "<div class=\"completer-holder md-form\" mdbCompleter>\n\n  <input #mdbCompleterInput [attr.id]=\"inputId.length > 0 ? inputId : null\" type=\"search\" class=\"completer-input form-control mdb-autocomplete\"\n    mdbCompleterInput [ngClass]=\"inputClass\" [(ngModel)]=\"searchStr\" (ngModelChange)=\"onChange($event)\" [attr.name]=\"inputName\" [placeholder]=\"placeholder\"\n    [attr.maxlength]=\"maxChars\" [tabindex]=\"fieldTabindex\" [disabled]=\"disableInput\" [clearSelected]=\"clearSelected\" [clearUnselected]=\"clearUnselected\"\n    [overrideSuggested]=\"overrideSuggested\" [openOnFocus]=\"openOnFocus\" [fillHighlighted]=\"fillHighlighted\" (blur)=\"onBlur()\"\n    (focus)=\"onFocus()\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\"\n  />\n  <button type=\"button\"\n  [tabindex]=\"clearButtonTabIndex\"\n  class=\"mdb-autocomplete-clear\"\n  (click)=\"activateClearButton($event)\"\n  (focus)=\"triggerClearButtonAnimation('focused')\"\n  (blur)=\"triggerClearButtonAnimation('unfocused')\"\n  (mouseenter)=\"triggerClearButtonAnimation('focused')\"\n  (mouseleave)=\"triggerClearButtonAnimation('unfocused')\"\n  [@focusAnimation]=\"{value: state}\">\n    &#x2715;\n  </button>\n  <label #labelEl [ngClass]=\"{'active': focused || value || placeholder}\">{{ label }}</label>\n  <div class=\"completer-dropdown-holder\" *mdbList=\"dataService;\n      minSearchLength: minSearchLength;\n      pause: pause;\n      autoMatch: autoMatch;\n      initialValue: initialValue;\n      autoHighlight: autoHighlight;\n      let items = results;\n      let searchActive = searching;\n      let isInitialized = searchInitialized;\n      let isOpen = isOpen;\">\n    <div class=\"completer-dropdown\" mdbAutocompleteDropdown *ngIf=\"isInitialized && isOpen && ((items.length > 0 || displayNoResults) || (searchActive && displaySearching))\">\n      <div *ngIf=\"searchActive && displaySearching\" class=\"completer-searching\">{{_textSearching}}</div>\n      <div *ngIf=\"!searchActive && (!items || items.length === 0)\" class=\"completer-no-results\">{{_textNoResults}}</div>\n      <div class=\"completer-row-wrapper\" *ngFor=\"let item of items; let rowIndex=index\">\n        <div class=\"completer-row\" [mdbRow]=\"rowIndex\" [dataItem]=\"item\">\n          <div class=\"completer-item-text\" [ngClass]=\"{'completer-item-text-image': item.image || item.image === '' }\">\n            <mdb-completer-list-item class=\"completer-title\" [text]=\"item.title\" [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'title'\"></mdb-completer-list-item>\n            <mdb-completer-list-item *ngIf=\"item.description && item.description != ''\" class=\"completer-description\" [text]=\"item.description\"\n              [matchClass]=\"matchClass\" [searchStr]=\"searchStr\" [type]=\"'description'\">\n            </mdb-completer-list-item>\n          </div>\n          <div *ngIf=\"item.image || item.image === ''\" class=\"completer-image-holder\">\n            <img *ngIf=\"item.image != ''\" src=\"{{item.image}}\" class=\"completer-image\" />\n            <div *ngIf=\"item.image === ''\" class=\"completer-image-default\"></div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
-                    providers: [COMPLETER_CONTROL_VALUE_ACCESSOR],
-                    animations: [trigger('focusAnimation', [
-                            state('unfocused', style({ transform: 'scale(1.0, 1.0)', })),
-                            state('focused', style({ transform: 'scale(1.5, 1.5)' })),
-                            transition('unfocused => focused', animate('200ms ease-in')),
-                            transition('focused => unfocused', animate('200ms ease-in'))
-                        ])]
-                }] }
-    ];
-    /** @nocollapse */
-    CompleterComponent.ctorParameters = function () { return [
-        { type: CompleterService },
-        { type: Renderer2 },
-        { type: ElementRef }
-    ]; };
-    CompleterComponent.propDecorators = {
-        dataService: [{ type: Input }],
-        inputName: [{ type: Input }],
-        inputId: [{ type: Input }],
-        pause: [{ type: Input }],
-        minSearchLength: [{ type: Input }],
-        maxChars: [{ type: Input }],
-        overrideSuggested: [{ type: Input }],
-        clearSelected: [{ type: Input }],
-        clearUnselected: [{ type: Input }],
-        fillHighlighted: [{ type: Input }],
-        placeholder: [{ type: Input }],
-        matchClass: [{ type: Input }],
-        fieldTabindex: [{ type: Input }],
-        clearButtonTabIndex: [{ type: Input }],
-        autoMatch: [{ type: Input }],
-        disableInput: [{ type: Input }],
-        inputClass: [{ type: Input }],
-        autofocus: [{ type: Input }],
-        openOnFocus: [{ type: Input }],
-        initialValue: [{ type: Input }],
-        autoHighlight: [{ type: Input }],
-        label: [{ type: Input }],
-        datasource: [{ type: Input }],
-        textNoResults: [{ type: Input }],
-        textSearching: [{ type: Input }],
-        selected: [{ type: Output }],
-        highlighted: [{ type: Output }],
-        blur: [{ type: Output }],
-        focusEvent: [{ type: Output }],
-        opened: [{ type: Output }],
-        keyup: [{ type: Output }],
-        keydown: [{ type: Output }],
-        completer: [{ type: ViewChild, args: [MdbCompleterDirective,] }],
-        mdbCompleterInput: [{ type: ViewChild, args: ['mdbCompleterInput',] }],
-        labelEl: [{ type: ViewChild, args: ['labelEl',] }],
-        onkeyup: [{ type: HostListener, args: ['keyup', ['$event'],] }],
-        onclick: [{ type: HostListener, args: ['click', ['$event'],] }],
-        onFocusIn: [{ type: HostListener, args: ['focusin',] }],
-        onFocusOut: [{ type: HostListener, args: ['focusout',] }]
-    };
-    return CompleterComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CompleterListItemComponent = /** @class */ (function () {
-    function CompleterListItemComponent() {
-        this.parts = [];
-    }
-    /**
-     * @return {?}
-     */
-    CompleterListItemComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        if (!this.searchStr) {
-            this.parts.push({ isMatch: false, text: this.text });
-            return;
-        }
-        /** @type {?} */
-        var matchStr = this.text.toLowerCase();
-        /** @type {?} */
-        var matchPos = matchStr.indexOf(this.searchStr.toLowerCase());
-        /** @type {?} */
-        var startIndex = 0;
-        while (matchPos >= 0) {
-            /** @type {?} */
-            var matchText = this.text.slice(matchPos, matchPos + this.searchStr.length);
-            if (matchPos === 0) {
-                this.parts.push({ isMatch: true, text: matchText });
-                startIndex += this.searchStr.length;
-            }
-            else if (matchPos > 0) {
-                /** @type {?} */
-                var matchPart = this.text.slice(startIndex, matchPos);
-                this.parts.push({ isMatch: false, text: matchPart });
-                this.parts.push({ isMatch: true, text: matchText });
-                startIndex += this.searchStr.length + matchPart.length;
-            }
-            matchPos = matchStr.indexOf(this.searchStr.toLowerCase(), startIndex);
-        }
-        if (startIndex < this.text.length) {
-            this.parts.push({ isMatch: false, text: this.text.slice(startIndex, this.text.length) });
-        }
-    };
-    CompleterListItemComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'mdb-completer-list-item',
-                    template: "<span class=\"completer-list-item-holder\" [ngClass]=\"{'completer-title': type === 'title', 'completer-description': type === 'description'}\" >\n  <span class=\"completer-list-item\" *ngFor=\"let part of parts\" [ngClass]=\"part.isMatch ? matchClass : null\">{{part.text}}</span>\n</span>\n"
-                }] }
-    ];
-    CompleterListItemComponent.propDecorators = {
-        text: [{ type: Input }],
-        searchStr: [{ type: Input }],
-        matchClass: [{ type: Input }],
-        type: [{ type: Input }]
-    };
-    return CompleterListItemComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @return {?}
- */
-function localDataFactory() {
-    return (/**
-     * @return {?}
-     */
-    function () {
-        return new LocalData();
-    });
-}
-/**
- * @param {?} http
- * @return {?}
- */
-function remoteDataFactory(http) {
-    return (/**
-     * @return {?}
-     */
-    function () {
-        return new RemoteData(http);
-    });
-}
-/** @type {?} */
-var LocalDataFactoryProvider = { provide: LocalData, useFactory: localDataFactory };
-/** @type {?} */
-var RemoteDataFactoryProvider = { provide: RemoteData, useFactory: remoteDataFactory, deps: [HttpClient] };
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CtrRowItem = /** @class */ (function () {
-    function CtrRowItem(row, index) {
-        this.row = row;
-        this.index = index;
-    }
-    return CtrRowItem;
-}());
-var MdbDropdownDirective = /** @class */ (function () {
-    function MdbDropdownDirective(completer, el) {
-        this.completer = completer;
-        this.el = el;
-        this.setToNullValue = null;
-        this.rows = [];
-        this.completer.registerDropdown(this);
-    }
-    /**
-     * @return {?}
-     */
-    MdbDropdownDirective.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var css = getComputedStyle(this.el.nativeElement);
-        this.isScrollOn = css.maxHeight && css.overflowY === 'auto';
-    };
-    /**
-     * @return {?}
-     */
-    MdbDropdownDirective.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
-        // this.completer.registerDropdown(null);
-        this.completer.registerDropdown(this.setToNullValue);
-    };
-    /**
-     * @return {?}
-     */
-    MdbDropdownDirective.prototype.ngAfterViewInit = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        /** @type {?} */
-        var autoHighlightIndex = this.completer.autoHighlightIndex;
-        if (autoHighlightIndex) {
-            setTimeout((/**
-             * @return {?}
-             */
-            function () {
-                _this.highlightRow(autoHighlightIndex);
-            }), 0);
-        }
-    };
-    /**
-     * @return {?}
-     */
-    MdbDropdownDirective.prototype.onMouseDown = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        // Support for canceling blur on IE (issue #158)
-        this.completer.cancelBlur(true);
-        setTimeout((/**
-         * @return {?}
-         */
-        function () {
-            _this.completer.cancelBlur(false);
-        }), 0);
-    };
-    /**
-     * @param {?} row
-     * @return {?}
-     */
-    MdbDropdownDirective.prototype.registerRow = /**
-     * @param {?} row
-     * @return {?}
-     */
-    function (row) {
-        this.rows.push(row);
-    };
-    /**
-     * @param {?} index
-     * @return {?}
-     */
-    MdbDropdownDirective.prototype.highlightRow = /**
-     * @param {?} index
-     * @return {?}
-     */
-    function (index) {
-        /** @type {?} */
-        var highlighted = this.rows.find((/**
-         * @param {?} row
-         * @return {?}
-         */
-        function (row) { return row.index === index; }));
-        if (index < 0) {
-            if (this.currHighlighted) {
-                this.currHighlighted.row.setHighlighted(false);
-            }
-            this.currHighlighted = undefined;
-            this.completer.onHighlighted(this.setToNullValue);
-            return;
-        }
-        if (!highlighted) {
-            return;
-        }
-        if (this.currHighlighted) {
-            this.currHighlighted.row.setHighlighted(false);
-        }
-        this.currHighlighted = highlighted;
-        this.currHighlighted.row.setHighlighted(true);
-        this.completer.onHighlighted(this.currHighlighted.row.getDataItem());
-        if (this.isScrollOn && this.currHighlighted) {
-            /** @type {?} */
-            var rowTop = this.dropdownRowTop();
-            if (rowTop < 0) {
-                this.dropdownScrollTopTo(rowTop - 1);
-            }
-            else {
-                /** @type {?} */
-                var row = this.currHighlighted.row.getNativeElement();
-                if (this.dropdownHeight() < row.getBoundingClientRect().bottom) {
-                    this.dropdownScrollTopTo(this.dropdownRowOffsetHeight(row));
-                    if (this.el.nativeElement.getBoundingClientRect().bottom - this.dropdownRowOffsetHeight(row)
-                        < row.getBoundingClientRect().top) {
-                        this.dropdownScrollTopTo(row.getBoundingClientRect().top - (this.el.nativeElement.getBoundingClientRect().top
-                            // + parseInt(getComputedStyle(this.el.nativeElement).paddingTop, 10)));
-                            + parseInt((/** @type {?} */ (getComputedStyle(this.el.nativeElement).paddingTop)), 10)));
-                    }
-                }
-            }
-        }
-    };
-    /**
-     * @return {?}
-     */
-    MdbDropdownDirective.prototype.clear = /**
-     * @return {?}
-     */
-    function () {
-        this.rows = [];
-    };
-    /**
-     * @param {?} item
-     * @return {?}
-     */
-    MdbDropdownDirective.prototype.onSelected = /**
-     * @param {?} item
-     * @return {?}
-     */
-    function (item) {
-        this.completer.onSelected(item);
-    };
-    /**
-     * @return {?}
-     */
-    MdbDropdownDirective.prototype.selectCurrent = /**
-     * @return {?}
-     */
-    function () {
-        if (this.currHighlighted) {
-            this.onSelected(this.currHighlighted.row.getDataItem());
-        }
-        else if (this.rows.length > 0) {
-            this.onSelected(this.rows[0].row.getDataItem());
-        }
-    };
-    /**
-     * @return {?}
-     */
-    MdbDropdownDirective.prototype.nextRow = /**
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var nextRowIndex = 0;
-        if (this.currHighlighted) {
-            nextRowIndex = this.currHighlighted.index + 1;
-        }
-        this.highlightRow(nextRowIndex);
-    };
-    /**
-     * @return {?}
-     */
-    MdbDropdownDirective.prototype.prevRow = /**
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var nextRowIndex = -1;
-        if (this.currHighlighted) {
-            nextRowIndex = this.currHighlighted.index - 1;
-        }
-        this.highlightRow(nextRowIndex);
-    };
-    /**
-     * @private
-     * @param {?} offset
-     * @return {?}
-     */
-    MdbDropdownDirective.prototype.dropdownScrollTopTo = /**
-     * @private
-     * @param {?} offset
-     * @return {?}
-     */
-    function (offset) {
-        this.el.nativeElement.scrollTop = this.el.nativeElement.scrollTop + offset;
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    MdbDropdownDirective.prototype.dropdownRowTop = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        return this.currHighlighted.row.getNativeElement().getBoundingClientRect().top -
-            (this.el.nativeElement.getBoundingClientRect().top +
-                // parseInt(getComputedStyle(this.el.nativeElement).paddingTop, 10));
-                parseInt((/** @type {?} */ (getComputedStyle(this.el.nativeElement).paddingTop)), 10));
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    MdbDropdownDirective.prototype.dropdownHeight = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        return this.el.nativeElement.getBoundingClientRect().top +
-            // parseInt(getComputedStyle(this.el.nativeElement).maxHeight, 10);
-            parseInt((/** @type {?} */ (getComputedStyle(this.el.nativeElement).maxHeight)), 10);
-    };
-    /**
-     * @private
-     * @param {?} row
-     * @return {?}
-     */
-    MdbDropdownDirective.prototype.dropdownRowOffsetHeight = /**
-     * @private
-     * @param {?} row
-     * @return {?}
-     */
-    function (row) {
-        /** @type {?} */
-        var css = getComputedStyle(row);
-        return row.offsetHeight +
-            // parseInt(css.marginTop, 10) + parseInt(css.marginBottom, 10);
-            parseInt((/** @type {?} */ (css.marginTop)), 10) + parseInt((/** @type {?} */ (css.marginBottom)), 10);
-    };
-    MdbDropdownDirective.decorators = [
-        { type: Directive, args: [{
-                    selector: '[mdbAutocompleteDropdown]',
-                },] }
-    ];
-    /** @nocollapse */
-    MdbDropdownDirective.ctorParameters = function () { return [
-        { type: MdbCompleterDirective, decorators: [{ type: Host }] },
-        { type: ElementRef }
-    ]; };
-    MdbDropdownDirective.propDecorators = {
-        onMouseDown: [{ type: HostListener, args: ['mousedown',] }]
-    };
-    return MdbDropdownDirective;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-// keyboard events
-/** @type {?} */
-var KEY_DW = 40;
-/** @type {?} */
-var KEY_RT = 39;
-/** @type {?} */
-var KEY_UP = 38;
-/** @type {?} */
-var KEY_LF = 37;
-/** @type {?} */
-var KEY_ES = 27;
-/** @type {?} */
-var KEY_EN = 13;
-/** @type {?} */
-var KEY_TAB = 9;
-var MdbInputCompleteDirective = /** @class */ (function () {
-    // constructor( @Host() private completer: MdbCompleterDirective, private ngModel: NgModel, private el: ElementRef) {
-    function MdbInputCompleteDirective(completer, tempngModel, el) {
-        var _this = this;
-        this.completer = completer;
-        this.tempngModel = tempngModel;
-        this.el = el;
-        this.clearSelected = false;
-        this.clearUnselected = false;
-        this.overrideSuggested = false;
-        this.fillHighlighted = true;
-        this.openOnFocus = false;
-        this.ngModelChange = new EventEmitter();
-        this._searchStr = '';
-        this._displayStr = '';
-        // private blurTimer: Subscription = null;
-        this.blurTimer = null;
-        this.ngModel = this.tempngModel;
-        this.completer.selected.subscribe((/**
-         * @param {?} item
-         * @return {?}
-         */
-        function (item) {
-            if (!item) {
-                return;
-            }
-            if (_this.clearSelected) {
-                _this.searchStr = '';
-            }
-            else {
-                _this.searchStr = item.title;
-            }
-            _this.ngModelChange.emit(_this.searchStr);
-        }));
-        this.completer.highlighted.subscribe((/**
-         * @param {?} item
-         * @return {?}
-         */
-        function (item) {
-            if (_this.fillHighlighted) {
-                if (item) {
-                    _this._displayStr = item.title;
-                    _this.ngModelChange.emit(item.title);
-                }
-                else {
-                    _this._displayStr = _this.searchStr;
-                    _this.ngModelChange.emit(_this.searchStr);
-                }
-            }
-        }));
-        // this.ngModel.valueChanges.subscribe(value => {
-        this.ngModel.valueChanges.subscribe((/**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
-            if (!isNil(value) && _this._displayStr !== value) {
-                if (_this.searchStr !== value) {
-                    _this.completer.search(value);
-                }
-                _this.searchStr = value;
-            }
-        }));
-    }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    MdbInputCompleteDirective.prototype.keyupHandler = /**
-     * @param {?} event
-     * @return {?}
-     */
-    function (event) {
-        if (event.keyCode === KEY_LF || event.keyCode === KEY_RT || event.keyCode === KEY_TAB) {
-            // do nothing
-            return;
-        }
-        if (event.keyCode === KEY_UP || event.keyCode === KEY_EN) {
-            event.preventDefault();
-        }
-        else if (event.keyCode === KEY_DW) {
-            event.preventDefault();
-            this.completer.search(this.searchStr);
-        }
-        else if (event.keyCode === KEY_ES) {
-            this.restoreSearchValue();
-            this.completer.clear();
-        }
-        else {
-            if (this.searchStr) {
-                this.completer.open();
-            }
-        }
-    };
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    MdbInputCompleteDirective.prototype.keydownHandler = /**
-     * @param {?} event
-     * @return {?}
-     */
-    function (event) {
-        if (event.keyCode === KEY_EN) {
-            if (this.completer.hasHighlighted()) {
-                event.preventDefault();
-            }
-            this.handleSelection();
-        }
-        else if (event.keyCode === KEY_DW) {
-            event.preventDefault();
-            this.completer.open();
-            this.completer.nextRow();
-        }
-        else if (event.keyCode === KEY_UP) {
-            event.preventDefault();
-            this.completer.prevRow();
-        }
-        else if (event.keyCode === KEY_TAB) {
-            this.handleSelection();
-        }
-        else if (event.keyCode === KEY_ES) {
-            // This is very specific to IE10/11 #272
-            // without this, IE clears the input text
-            event.preventDefault();
-        }
-    };
-    /**
-     * @return {?}
-     */
-    MdbInputCompleteDirective.prototype.onBlur = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        // Check if we need to cancel Blur for IE
-        if (this.completer.isCancelBlur()) {
-            setTimeout((/**
-             * @return {?}
-             */
-            function () {
-                // get the focus back
-                _this.el.nativeElement.focus();
-            }), 0);
-            return;
-        }
-        this.blurTimer = timer(200).subscribe((/**
-         * @return {?}
-         */
-        function () {
-            _this.blurTimer.unsubscribe();
-            _this.blurTimer = null;
-            if (_this.overrideSuggested) {
-                _this.completer.onSelected({ title: _this.searchStr, originalObject: null });
-            }
-            else {
-                if (_this.clearUnselected && !_this.completer.hasSelected) {
-                    _this.searchStr = '';
-                    _this.el.nativeElement.value = '';
-                }
-                else {
-                    _this.restoreSearchValue();
-                }
-            }
-            _this.completer.clear();
-        }));
-    };
-    /**
-     * @return {?}
-     */
-    MdbInputCompleteDirective.prototype.onfocus = /**
-     * @return {?}
-     */
-    function () {
-        if (this.blurTimer) {
-            this.blurTimer.unsubscribe();
-            this.blurTimer = null;
-        }
-        if (this.openOnFocus) {
-            this.completer.open();
-        }
-    };
-    Object.defineProperty(MdbInputCompleteDirective.prototype, "searchStr", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this._searchStr;
-        },
-        set: /**
-         * @param {?} term
-         * @return {?}
-         */
-        function (term) {
-            this._searchStr = term;
-            this._displayStr = term;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * @private
-     * @return {?}
-     */
-    MdbInputCompleteDirective.prototype.handleSelection = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        if (this.completer.hasHighlighted()) {
-            this._searchStr = '';
-            this.completer.selectCurrent();
-        }
-        else if (this.overrideSuggested) {
-            this.completer.onSelected({ title: this.searchStr, originalObject: null });
-        }
-        else {
-            this.completer.clear();
-        }
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    MdbInputCompleteDirective.prototype.restoreSearchValue = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        if (this.fillHighlighted) {
-            if (this._displayStr !== this.searchStr) {
-                this._displayStr = this.searchStr;
-                this.ngModelChange.emit(this.searchStr);
-            }
-        }
-    };
-    MdbInputCompleteDirective.decorators = [
-        { type: Directive, args: [{
-                    selector: '[mdbCompleterInput]',
-                },] }
-    ];
-    /** @nocollapse */
-    MdbInputCompleteDirective.ctorParameters = function () { return [
-        { type: MdbCompleterDirective, decorators: [{ type: Host }] },
-        { type: NgModel },
-        { type: ElementRef }
-    ]; };
-    MdbInputCompleteDirective.propDecorators = {
-        clearSelected: [{ type: Input, args: ['clearSelected',] }],
-        clearUnselected: [{ type: Input, args: ['clearUnselected',] }],
-        overrideSuggested: [{ type: Input, args: ['overrideSuggested',] }],
-        fillHighlighted: [{ type: Input, args: ['fillHighlighted',] }],
-        openOnFocus: [{ type: Input, args: ['openOnFocus',] }],
-        ngModelChange: [{ type: Output }],
-        keyupHandler: [{ type: HostListener, args: ['keyup', ['$event'],] }],
-        keydownHandler: [{ type: HostListener, args: ['keydown', ['$event'],] }],
-        onBlur: [{ type: HostListener, args: ['blur',] }],
-        onfocus: [{ type: HostListener, args: ['focus',] }]
-    };
-    return MdbInputCompleteDirective;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CtrListContext = /** @class */ (function () {
-    function CtrListContext(results, searching, searchInitialized, isOpen) {
-        this.results = results;
-        this.searching = searching;
-        this.searchInitialized = searchInitialized;
-        this.isOpen = isOpen;
-    }
-    return CtrListContext;
-}());
-var MdbListDirective = /** @class */ (function () {
-    function MdbListDirective(tmpCompleter, templateRef, viewContainer, cd) {
-        this.tmpCompleter = tmpCompleter;
-        this.templateRef = templateRef;
-        this.viewContainer = viewContainer;
-        this.cd = cd;
-        this.mdbListMinSearchLength = MIN_SEARCH_LENGTH;
-        this.mdbListPause = PAUSE;
-        this.mdbListAutoMatch = false;
-        this.mdbListAutoHighlight = false;
-        // private results: CompleterItem[] = [];
-        this.setToNullValue = null;
-        // private term: string = null;
-        this.term = null;
-        // private searching = false;
-        // private searchTimer: Subscription = null;
-        this.searchTimer = null;
-        // private clearTimer: Subscription = null;
-        this.clearTimer = null;
-        this.ctx = new CtrListContext([], false, false, false);
-        this._initialValue = null;
-        this.completer = this.tmpCompleter;
-    }
-    /**
-     * @return {?}
-     */
-    MdbListDirective.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        this.completer.registerList(this);
-        this.viewContainer.createEmbeddedView(this.templateRef, new CtrListContext([], false, false, false));
-    };
-    Object.defineProperty(MdbListDirective.prototype, "dataService", {
-        set: /**
-         * @param {?} newService
-         * @return {?}
-         */
-        function (newService) {
-            var _this = this;
-            this._dataService = newService;
-            if (this._dataService) {
-                this._dataService
-                    // .catch(err => this.handleError(err))
-                    // .catch((err: any) => this.handleError(err))
-                    // .subscribe(results => {
-                    .subscribe((/**
-                 * @param {?} results
-                 * @return {?}
-                 */
-                function (results) {
-                    try {
-                        _this.ctx.searchInitialized = true;
-                        _this.ctx.searching = false;
-                        _this.ctx.results = results;
-                        if (_this.mdbListAutoMatch && results.length === 1 && results[0].title && !isNil(_this.term) &&
-                            results[0].title.toLocaleLowerCase() === _this.term.toLocaleLowerCase()) {
-                            // Do automatch
-                            _this.completer.onSelected(results[0]);
-                        }
-                        if (_this._initialValue) {
-                            _this.initialValue = _this._initialValue;
-                            // this._initialValue = null;
-                            _this._initialValue = _this.setToNullValue;
-                        }
-                        if (_this.mdbListAutoHighlight) {
-                            _this.completer.autoHighlightIndex = _this.getBestMatchIndex();
-                        }
-                        _this.refreshTemplate();
-                    }
-                    catch (err) {
-                    }
-                }));
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MdbListDirective.prototype, "initialValue", {
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
-            var _this = this;
-            if (this._dataService && typeof this._dataService.convertToItem === 'function') {
-                setTimeout((/**
-                 * @return {?}
-                 */
-                function () {
-                    /** @type {?} */
-                    var initialItem = _this._dataService.convertToItem(value);
-                    if (initialItem) {
-                        _this.completer.onSelected(initialItem, false);
-                    }
-                }));
-            }
-            else if (!this._dataService) {
-                this._initialValue = value;
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * @param {?} term
-     * @return {?}
-     */
-    MdbListDirective.prototype.search = /**
-     * @param {?} term
-     * @return {?}
-     */
-    function (term) {
-        var _this = this;
-        if (!isNil(term) && term.length >= this.mdbListMinSearchLength && this.term !== term) {
-            if (this.searchTimer) {
-                this.searchTimer.unsubscribe();
-                this.searchTimer = null;
-            }
-            if (!this.ctx.searching) {
-                this.ctx.results = [];
-                this.ctx.searching = true;
-                this.ctx.searchInitialized = true;
-                this.refreshTemplate();
-            }
-            if (this.clearTimer) {
-                this.clearTimer.unsubscribe();
-            }
-            this.searchTimer = timer(this.mdbListPause).subscribe((/**
-             * @return {?}
-             */
-            function () {
-                try {
-                    _this.searchTimerComplete(term);
-                }
-                catch (err) {
-                }
-            }));
-        }
-        else if (!isNil(term) && term.length < this.mdbListMinSearchLength) {
-            this.clear();
-        }
-    };
-    /**
-     * @return {?}
-     */
-    MdbListDirective.prototype.clear = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        if (this.searchTimer) {
-            this.searchTimer.unsubscribe();
-        }
-        this.clearTimer = timer(CLEAR_TIMEOUT).subscribe((/**
-         * @return {?}
-         */
-        function () {
-            _this._clear();
-        }));
-    };
-    /**
-     * @return {?}
-     */
-    MdbListDirective.prototype.open = /**
-     * @return {?}
-     */
-    function () {
-        if (!this.ctx.searchInitialized) {
-            this.search('');
-        }
-        this.refreshTemplate();
-    };
-    /**
-     * @param {?} open
-     * @return {?}
-     */
-    MdbListDirective.prototype.isOpen = /**
-     * @param {?} open
-     * @return {?}
-     */
-    function (open) {
-        this.ctx.isOpen = open;
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    MdbListDirective.prototype._clear = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        if (this.searchTimer) {
-            this.searchTimer.unsubscribe();
-            this.searchTimer = null;
-        }
-        if (this.dataService) {
-            this.dataService.cancel();
-        }
-        this.viewContainer.clear();
-    };
-    /**
-     * @private
-     * @param {?} term
-     * @return {?}
-     */
-    MdbListDirective.prototype.searchTimerComplete = /**
-     * @private
-     * @param {?} term
-     * @return {?}
-     */
-    function (term) {
-        // Begin the search
-        if (isNil(term) || term.length < this.mdbListMinSearchLength) {
-            this.ctx.searching = false;
-            return;
-        }
-        this.term = term;
-        this._dataService.search(term);
-    };
-    // private handleError(error: any) {
-    //   this.ctx.searching = false;
-    //   let errMsg = 'search error';
-    //   if (error) {
-    //     errMsg = (error.message) ? error.message :
-    //       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-    //   }
-    //   if (console && console.error) {
-    //     console.error(errMsg); // log to console
-    //   }
-    //   this.refreshTemplate();
-    //   return observableThrowError(errMsg);
-    // }
-    // private handleError(error: any) {
-    //   this.ctx.searching = false;
-    //   let errMsg = 'search error';
-    //   if (error) {
-    //     errMsg = (error.message) ? error.message :
-    //       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-    //   }
-    //   if (console && console.error) {
-    //     console.error(errMsg); // log to console
-    //   }
-    //   this.refreshTemplate();
-    //   return observableThrowError(errMsg);
-    // }
-    /**
-     * @private
-     * @return {?}
-     */
-    MdbListDirective.prototype.refreshTemplate = 
-    // private handleError(error: any) {
-    //   this.ctx.searching = false;
-    //   let errMsg = 'search error';
-    //   if (error) {
-    //     errMsg = (error.message) ? error.message :
-    //       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-    //   }
-    //   if (console && console.error) {
-    //     console.error(errMsg); // log to console
-    //   }
-    //   this.refreshTemplate();
-    //   return observableThrowError(errMsg);
-    // }
-    /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        // Recreate the template
-        this.viewContainer.clear();
-        if (this.ctx.results && this.ctx.isOpen) {
-            this.viewContainer.createEmbeddedView(this.templateRef, this.ctx);
-        }
-        this.cd.markForCheck();
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    MdbListDirective.prototype.getBestMatchIndex = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        if (!this.ctx.results) {
-            return null;
-        }
-        // First try to find the exact term
-        /** @type {?} */
-        var bestMatch = this.ctx.results.findIndex((/**
-         * @param {?} item
-         * @return {?}
-         */
-        function (item) { return item.title.toLowerCase() === _this.term.toLocaleLowerCase(); }));
-        // If not try to find the first item that starts with the term
-        if (bestMatch < 0) {
-            bestMatch = this.ctx.results.findIndex((/**
-             * @param {?} item
-             * @return {?}
-             */
-            function (item) { return item.title.toLowerCase().startsWith(_this.term.toLocaleLowerCase()); }));
-        }
-        // If not try to find the first item that includes the term
-        if (bestMatch < 0) {
-            bestMatch = this.ctx.results.findIndex((/**
-             * @param {?} item
-             * @return {?}
-             */
-            function (item) { return item.title.toLowerCase().includes(_this.term.toLocaleLowerCase()); }));
-        }
-        return bestMatch < 0 ? null : bestMatch;
-    };
-    MdbListDirective.decorators = [
-        { type: Directive, args: [{
-                    selector: '[mdbList]',
-                },] }
-    ];
-    /** @nocollapse */
-    MdbListDirective.ctorParameters = function () { return [
-        { type: MdbCompleterDirective, decorators: [{ type: Host }] },
-        { type: TemplateRef },
-        { type: ViewContainerRef },
-        { type: ChangeDetectorRef }
-    ]; };
-    MdbListDirective.propDecorators = {
-        mdbListMinSearchLength: [{ type: Input }],
-        mdbListPause: [{ type: Input }],
-        mdbListAutoMatch: [{ type: Input }],
-        mdbListAutoHighlight: [{ type: Input }],
-        dataService: [{ type: Input, args: ['mdbList',] }],
-        initialValue: [{ type: Input, args: ['mdbListInitialValue',] }]
-    };
-    return MdbListDirective;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var MdbRowDirective = /** @class */ (function () {
-    function MdbRowDirective(el, renderer, dropdown) {
-        this.el = el;
-        this.renderer = renderer;
-        this.dropdown = dropdown;
-        this.selected = false;
-    }
-    /**
-     * @return {?}
-     */
-    MdbRowDirective.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        this.dropdown.registerRow(new CtrRowItem(this, this._rowIndex));
-    };
-    Object.defineProperty(MdbRowDirective.prototype, "mdbRow", {
-        set: /**
-         * @param {?} index
-         * @return {?}
-         */
-        function (index) {
-            this._rowIndex = index;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MdbRowDirective.prototype, "dataItem", {
-        set: /**
-         * @param {?} item
-         * @return {?}
-         */
-        function (item) {
-            this._item = item;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * @return {?}
-     */
-    MdbRowDirective.prototype.onClick = /**
-     * @return {?}
-     */
-    function () {
-        this.dropdown.onSelected(this._item);
-    };
-    /**
-     * @return {?}
-     */
-    MdbRowDirective.prototype.onMouseEnter = /**
-     * @return {?}
-     */
-    function () {
-        this.dropdown.highlightRow(this._rowIndex);
-    };
-    /**
-     * @param {?} selected
-     * @return {?}
-     */
-    MdbRowDirective.prototype.setHighlighted = /**
-     * @param {?} selected
-     * @return {?}
-     */
-    function (selected) {
-        this.selected = selected;
-        if (this.selected) {
-            this.renderer.addClass(this.el.nativeElement, 'completer-selected-row');
-        }
-        else if (!this.selected) {
-            this.renderer.removeClass(this.el.nativeElement, 'completer-selected-row');
-        }
-    };
-    /**
-     * @return {?}
-     */
-    MdbRowDirective.prototype.getNativeElement = /**
-     * @return {?}
-     */
-    function () {
-        return this.el.nativeElement;
-    };
-    /**
-     * @return {?}
-     */
-    MdbRowDirective.prototype.getDataItem = /**
-     * @return {?}
-     */
-    function () {
-        return this._item;
-    };
-    MdbRowDirective.decorators = [
-        { type: Directive, args: [{
-                    selector: '[mdbRow]',
-                },] }
-    ];
-    /** @nocollapse */
-    MdbRowDirective.ctorParameters = function () { return [
-        { type: ElementRef },
-        { type: Renderer2 },
-        { type: MdbDropdownDirective, decorators: [{ type: Host }] }
-    ]; };
-    MdbRowDirective.propDecorators = {
-        mdbRow: [{ type: Input }],
-        dataItem: [{ type: Input }],
-        onClick: [{ type: HostListener, args: ['click',] }],
-        onMouseEnter: [{ type: HostListener, args: ['mouseenter',] }]
-    };
-    return MdbRowDirective;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var AutocompleteModule = /** @class */ (function () {
-    function AutocompleteModule() {
-    }
-    AutocompleteModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        CommonModule,
-                        FormsModule,
-                        HttpClientModule
-                    ],
-                    declarations: [
-                        CompleterListItemComponent,
-                        MdbCompleterDirective,
-                        MdbDropdownDirective,
-                        MdbInputCompleteDirective,
-                        MdbListDirective,
-                        MdbRowDirective,
-                        CompleterComponent
-                    ],
-                    exports: [
-                        CompleterComponent,
-                        CompleterListItemComponent,
-                        MdbCompleterDirective,
-                        MdbDropdownDirective,
-                        MdbInputCompleteDirective,
-                        MdbListDirective,
-                        MdbRowDirective
-                    ],
-                    providers: [
-                        CompleterService,
-                        LocalDataFactoryProvider,
-                        RemoteDataFactoryProvider
-                    ]
-                },] }
-    ];
-    return AutocompleteModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 var CardRevealComponent = /** @class */ (function () {
     function CardRevealComponent(_r) {
         this._r = _r;
@@ -17298,7 +15220,7 @@ var CardRevealComponent = /** @class */ (function () {
     function () {
         var _this = this;
         this.show = !this.show;
-        this.socials = (this.socials === 'active') ? 'inactive' : 'active';
+        this.socials = this.socials === 'active' ? 'inactive' : 'active';
         setTimeout((/**
          * @return {?}
          */
@@ -17314,8 +15236,10 @@ var CardRevealComponent = /** @class */ (function () {
     CardRevealComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mdb-card-reveal',
-                    template: "<div #cardOverflow class=\"card-overflow\">\n  <div #cardFront class=\"card-front\">\n    <ng-content select=\".card-front\" ></ng-content>\n  </div>\n  <div #cardReveal class=\"card-reveal\" *ngIf=\"show\"  [@socialsState]=\"socials\">\n    <ng-content select=\".card-reveal\"></ng-content>\n  </div>\n</div>\n",
-                    animations: [socialsState]
+                    template: "<div #cardOverflow class=\"card-overflow\">\n  <div #cardFront class=\"card-front\">\n    <ng-content select=\".card-front\"></ng-content>\n  </div>\n  <div #cardReveal class=\"card-reveal\" *ngIf=\"show\" [@socialsState]=\"socials\">\n    <ng-content select=\".card-reveal\"></ng-content>\n  </div>\n</div>\n",
+                    encapsulation: ViewEncapsulation.None,
+                    animations: [socialsState],
+                    styles: ["@charset \"UTF-8\";.mdb-color.lighten-5{background-color:#d0d6e2!important}.mdb-color.lighten-4{background-color:#b1bace!important}.mdb-color.lighten-3{background-color:#929fba!important}.mdb-color.lighten-2{background-color:#7283a7!important}.mdb-color.lighten-1{background-color:#59698d!important}.mdb-color{background-color:#45526e!important}.mdb-color-text{color:#45526e!important}.rgba-mdb-color-slight,.rgba-mdb-color-slight:after{background-color:rgba(69,82,110,.1)}.rgba-mdb-color-light,.rgba-mdb-color-light:after{background-color:rgba(69,82,110,.3)}.rgba-mdb-color-strong,.rgba-mdb-color-strong:after{background-color:rgba(69,82,110,.7)}.mdb-color.darken-1{background-color:#3b465e!important}.mdb-color.darken-2{background-color:#2e3951!important}.mdb-color.darken-3{background-color:#1c2a48!important}.mdb-color.darken-4{background-color:#1c2331!important}.red.lighten-5{background-color:#ffebee!important}.red.lighten-4{background-color:#ffcdd2!important}.red.lighten-3{background-color:#ef9a9a!important}.red.lighten-2{background-color:#e57373!important}.red.lighten-1{background-color:#ef5350!important}.red{background-color:#f44336!important}.red-text{color:#f44336!important}.rgba-red-slight,.rgba-red-slight:after{background-color:rgba(244,67,54,.1)}.rgba-red-light,.rgba-red-light:after{background-color:rgba(244,67,54,.3)}.rgba-red-strong,.rgba-red-strong:after{background-color:rgba(244,67,54,.7)}.red.darken-1{background-color:#e53935!important}.red.darken-2{background-color:#d32f2f!important}.red.darken-3{background-color:#c62828!important}.red.darken-4{background-color:#b71c1c!important}.red.accent-1{background-color:#ff8a80!important}.red.accent-2{background-color:#ff5252!important}.red.accent-3{background-color:#ff1744!important}.red.accent-4{background-color:#d50000!important}.pink.lighten-5{background-color:#fce4ec!important}.pink.lighten-4{background-color:#f8bbd0!important}.pink.lighten-3{background-color:#f48fb1!important}.pink.lighten-2{background-color:#f06292!important}.pink.lighten-1{background-color:#ec407a!important}.pink{background-color:#e91e63!important}.pink-text{color:#e91e63!important}.rgba-pink-slight,.rgba-pink-slight:after{background-color:rgba(233,30,99,.1)}.rgba-pink-light,.rgba-pink-light:after{background-color:rgba(233,30,99,.3)}.rgba-pink-strong,.rgba-pink-strong:after{background-color:rgba(233,30,99,.7)}.pink.darken-1{background-color:#d81b60!important}.pink.darken-2{background-color:#c2185b!important}.pink.darken-3{background-color:#ad1457!important}.pink.darken-4{background-color:#880e4f!important}.pink.accent-1{background-color:#ff80ab!important}.pink.accent-2{background-color:#ff4081!important}.pink.accent-3{background-color:#f50057!important}.pink.accent-4{background-color:#c51162!important}.purple.lighten-5{background-color:#f3e5f5!important}.purple.lighten-4{background-color:#e1bee7!important}.purple.lighten-3{background-color:#ce93d8!important}.purple.lighten-2{background-color:#ba68c8!important}.purple.lighten-1{background-color:#ab47bc!important}.purple{background-color:#9c27b0!important}.purple-text{color:#9c27b0!important}.rgba-purple-slight,.rgba-purple-slight:after{background-color:rgba(156,39,176,.1)}.rgba-purple-light,.rgba-purple-light:after{background-color:rgba(156,39,176,.3)}.rgba-purple-strong,.rgba-purple-strong:after{background-color:rgba(156,39,176,.7)}.purple.darken-1{background-color:#8e24aa!important}.purple.darken-2{background-color:#7b1fa2!important}.purple.darken-3{background-color:#6a1b9a!important}.purple.darken-4{background-color:#4a148c!important}.purple.accent-1{background-color:#ea80fc!important}.purple.accent-2{background-color:#e040fb!important}.purple.accent-3{background-color:#d500f9!important}.purple.accent-4{background-color:#a0f!important}.deep-purple.lighten-5{background-color:#ede7f6!important}.deep-purple.lighten-4{background-color:#d1c4e9!important}.deep-purple.lighten-3{background-color:#b39ddb!important}.deep-purple.lighten-2{background-color:#9575cd!important}.deep-purple.lighten-1{background-color:#7e57c2!important}.deep-purple{background-color:#673ab7!important}.deep-purple-text{color:#673ab7!important}.rgba-deep-purple-slight,.rgba-deep-purple-slight:after{background-color:rgba(103,58,183,.1)}.rgba-deep-purple-light,.rgba-deep-purple-light:after{background-color:rgba(103,58,183,.3)}.rgba-deep-purple-strong,.rgba-deep-purple-strong:after{background-color:rgba(103,58,183,.7)}.deep-purple.darken-1{background-color:#5e35b1!important}.deep-purple.darken-2{background-color:#512da8!important}.deep-purple.darken-3{background-color:#4527a0!important}.deep-purple.darken-4{background-color:#311b92!important}.deep-purple.accent-1{background-color:#b388ff!important}.deep-purple.accent-2{background-color:#7c4dff!important}.deep-purple.accent-3{background-color:#651fff!important}.deep-purple.accent-4{background-color:#6200ea!important}.indigo.lighten-5{background-color:#e8eaf6!important}.indigo.lighten-4{background-color:#c5cae9!important}.indigo.lighten-3{background-color:#9fa8da!important}.indigo.lighten-2{background-color:#7986cb!important}.indigo.lighten-1{background-color:#5c6bc0!important}.indigo{background-color:#3f51b5!important}.indigo-text{color:#3f51b5!important}.rgba-indigo-slight,.rgba-indigo-slight:after{background-color:rgba(63,81,181,.1)}.rgba-indigo-light,.rgba-indigo-light:after{background-color:rgba(63,81,181,.3)}.rgba-indigo-strong,.rgba-indigo-strong:after{background-color:rgba(63,81,181,.7)}.indigo.darken-1{background-color:#3949ab!important}.indigo.darken-2{background-color:#303f9f!important}.indigo.darken-3{background-color:#283593!important}.indigo.darken-4{background-color:#1a237e!important}.indigo.accent-1{background-color:#8c9eff!important}.indigo.accent-2{background-color:#536dfe!important}.indigo.accent-3{background-color:#3d5afe!important}.indigo.accent-4{background-color:#304ffe!important}.blue.lighten-5{background-color:#e3f2fd!important}.blue.lighten-4{background-color:#bbdefb!important}.blue.lighten-3{background-color:#90caf9!important}.blue.lighten-2{background-color:#64b5f6!important}.blue.lighten-1{background-color:#42a5f5!important}.blue{background-color:#2196f3!important}.blue-text{color:#2196f3!important}.rgba-blue-slight,.rgba-blue-slight:after{background-color:rgba(33,150,243,.1)}.rgba-blue-light,.rgba-blue-light:after{background-color:rgba(33,150,243,.3)}.rgba-blue-strong,.rgba-blue-strong:after{background-color:rgba(33,150,243,.7)}.blue.darken-1{background-color:#1e88e5!important}.blue.darken-2{background-color:#1976d2!important}.blue.darken-3{background-color:#1565c0!important}.blue.darken-4{background-color:#0d47a1!important}.blue.accent-1{background-color:#82b1ff!important}.blue.accent-2{background-color:#448aff!important}.blue.accent-3{background-color:#2979ff!important}.blue.accent-4{background-color:#2962ff!important}.light-blue.lighten-5{background-color:#e1f5fe!important}.light-blue.lighten-4{background-color:#b3e5fc!important}.light-blue.lighten-3{background-color:#81d4fa!important}.light-blue.lighten-2{background-color:#4fc3f7!important}.light-blue.lighten-1{background-color:#29b6f6!important}.light-blue{background-color:#03a9f4!important}.light-blue-text{color:#03a9f4!important}.rgba-light-blue-slight,.rgba-light-blue-slight:after{background-color:rgba(3,169,244,.1)}.rgba-light-blue-light,.rgba-light-blue-light:after{background-color:rgba(3,169,244,.3)}.rgba-light-blue-strong,.rgba-light-blue-strong:after{background-color:rgba(3,169,244,.7)}.light-blue.darken-1{background-color:#039be5!important}.light-blue.darken-2{background-color:#0288d1!important}.light-blue.darken-3{background-color:#0277bd!important}.light-blue.darken-4{background-color:#01579b!important}.light-blue.accent-1{background-color:#80d8ff!important}.light-blue.accent-2{background-color:#40c4ff!important}.light-blue.accent-3{background-color:#00b0ff!important}.light-blue.accent-4{background-color:#0091ea!important}.cyan.lighten-5{background-color:#e0f7fa!important}.cyan.lighten-4{background-color:#b2ebf2!important}.cyan.lighten-3{background-color:#80deea!important}.cyan.lighten-2{background-color:#4dd0e1!important}.cyan.lighten-1{background-color:#26c6da!important}.cyan{background-color:#00bcd4!important}.cyan-text{color:#00bcd4!important}.rgba-cyan-slight,.rgba-cyan-slight:after{background-color:rgba(0,188,212,.1)}.rgba-cyan-light,.rgba-cyan-light:after{background-color:rgba(0,188,212,.3)}.rgba-cyan-strong,.rgba-cyan-strong:after{background-color:rgba(0,188,212,.7)}.cyan.darken-1{background-color:#00acc1!important}.cyan.darken-2{background-color:#0097a7!important}.cyan.darken-3{background-color:#00838f!important}.cyan.darken-4{background-color:#006064!important}.cyan.accent-1{background-color:#84ffff!important}.cyan.accent-2{background-color:#18ffff!important}.cyan.accent-3{background-color:#00e5ff!important}.cyan.accent-4{background-color:#00b8d4!important}.teal.lighten-5{background-color:#e0f2f1!important}.teal.lighten-4{background-color:#b2dfdb!important}.teal.lighten-3{background-color:#80cbc4!important}.teal.lighten-2{background-color:#4db6ac!important}.teal.lighten-1{background-color:#26a69a!important}.teal{background-color:#009688!important}.teal-text{color:#009688!important}.rgba-teal-slight,.rgba-teal-slight:after{background-color:rgba(0,150,136,.1)}.rgba-teal-light,.rgba-teal-light:after{background-color:rgba(0,150,136,.3)}.rgba-teal-strong,.rgba-teal-strong:after{background-color:rgba(0,150,136,.7)}.teal.darken-1{background-color:#00897b!important}.teal.darken-2{background-color:#00796b!important}.teal.darken-3{background-color:#00695c!important}.teal.darken-4{background-color:#004d40!important}.teal.accent-1{background-color:#a7ffeb!important}.teal.accent-2{background-color:#64ffda!important}.teal.accent-3{background-color:#1de9b6!important}.teal.accent-4{background-color:#00bfa5!important}.green.lighten-5{background-color:#e8f5e9!important}.green.lighten-4{background-color:#c8e6c9!important}.green.lighten-3{background-color:#a5d6a7!important}.green.lighten-2{background-color:#81c784!important}.green.lighten-1{background-color:#66bb6a!important}.green{background-color:#4caf50!important}.green-text{color:#4caf50!important}.rgba-green-slight,.rgba-green-slight:after{background-color:rgba(76,175,80,.1)}.rgba-green-light,.rgba-green-light:after{background-color:rgba(76,175,80,.3)}.rgba-green-strong,.rgba-green-strong:after{background-color:rgba(76,175,80,.7)}.green.darken-1{background-color:#43a047!important}.green.darken-2{background-color:#388e3c!important}.green.darken-3{background-color:#2e7d32!important}.green.darken-4{background-color:#1b5e20!important}.green.accent-1{background-color:#b9f6ca!important}.green.accent-2{background-color:#69f0ae!important}.green.accent-3{background-color:#00e676!important}.green.accent-4{background-color:#00c853!important}.light-green.lighten-5{background-color:#f1f8e9!important}.light-green.lighten-4{background-color:#dcedc8!important}.light-green.lighten-3{background-color:#c5e1a5!important}.light-green.lighten-2{background-color:#aed581!important}.light-green.lighten-1{background-color:#9ccc65!important}.light-green{background-color:#8bc34a!important}.light-green-text{color:#8bc34a!important}.rgba-light-green-slight,.rgba-light-green-slight:after{background-color:rgba(139,195,74,.1)}.rgba-light-green-light,.rgba-light-green-light:after{background-color:rgba(139,195,74,.3)}.rgba-light-green-strong,.rgba-light-green-strong:after{background-color:rgba(139,195,74,.7)}.light-green.darken-1{background-color:#7cb342!important}.light-green.darken-2{background-color:#689f38!important}.light-green.darken-3{background-color:#558b2f!important}.light-green.darken-4{background-color:#33691e!important}.light-green.accent-1{background-color:#ccff90!important}.light-green.accent-2{background-color:#b2ff59!important}.light-green.accent-3{background-color:#76ff03!important}.light-green.accent-4{background-color:#64dd17!important}.lime.lighten-5{background-color:#f9fbe7!important}.lime.lighten-4{background-color:#f0f4c3!important}.lime.lighten-3{background-color:#e6ee9c!important}.lime.lighten-2{background-color:#dce775!important}.lime.lighten-1{background-color:#d4e157!important}.lime{background-color:#cddc39!important}.lime-text{color:#cddc39!important}.rgba-lime-slight,.rgba-lime-slight:after{background-color:rgba(205,220,57,.1)}.rgba-lime-light,.rgba-lime-light:after{background-color:rgba(205,220,57,.3)}.rgba-lime-strong,.rgba-lime-strong:after{background-color:rgba(205,220,57,.7)}.lime.darken-1{background-color:#c0ca33!important}.lime.darken-2{background-color:#afb42b!important}.lime.darken-3{background-color:#9e9d24!important}.lime.darken-4{background-color:#827717!important}.lime.accent-1{background-color:#f4ff81!important}.lime.accent-2{background-color:#eeff41!important}.lime.accent-3{background-color:#c6ff00!important}.lime.accent-4{background-color:#aeea00!important}.yellow.lighten-5{background-color:#fffde7!important}.yellow.lighten-4{background-color:#fff9c4!important}.yellow.lighten-3{background-color:#fff59d!important}.yellow.lighten-2{background-color:#fff176!important}.yellow.lighten-1{background-color:#ffee58!important}.yellow{background-color:#ffeb3b!important}.yellow-text{color:#ffeb3b!important}.rgba-yellow-slight,.rgba-yellow-slight:after{background-color:rgba(255,235,59,.1)}.rgba-yellow-light,.rgba-yellow-light:after{background-color:rgba(255,235,59,.3)}.rgba-yellow-strong,.rgba-yellow-strong:after{background-color:rgba(255,235,59,.7)}.yellow.darken-1{background-color:#fdd835!important}.yellow.darken-2{background-color:#fbc02d!important}.yellow.darken-3{background-color:#f9a825!important}.yellow.darken-4{background-color:#f57f17!important}.yellow.accent-1{background-color:#ffff8d!important}.yellow.accent-2{background-color:#ff0!important}.yellow.accent-3{background-color:#ffea00!important}.yellow.accent-4{background-color:#ffd600!important}.amber.lighten-5{background-color:#fff8e1!important}.amber.lighten-4{background-color:#ffecb3!important}.amber.lighten-3{background-color:#ffe082!important}.amber.lighten-2{background-color:#ffd54f!important}.amber.lighten-1{background-color:#ffca28!important}.amber{background-color:#ffc107!important}.amber-text{color:#ffc107!important}.rgba-amber-slight,.rgba-amber-slight:after{background-color:rgba(255,193,7,.1)}.rgba-amber-light,.rgba-amber-light:after{background-color:rgba(255,193,7,.3)}.rgba-amber-strong,.rgba-amber-strong:after{background-color:rgba(255,193,7,.7)}.amber.darken-1{background-color:#ffb300!important}.amber.darken-2{background-color:#ffa000!important}.amber.darken-3{background-color:#ff8f00!important}.amber.darken-4{background-color:#ff6f00!important}.amber.accent-1{background-color:#ffe57f!important}.amber.accent-2{background-color:#ffd740!important}.amber.accent-3{background-color:#ffc400!important}.amber.accent-4{background-color:#ffab00!important}.orange.lighten-5{background-color:#fff3e0!important}.orange.lighten-4{background-color:#ffe0b2!important}.orange.lighten-3{background-color:#ffcc80!important}.orange.lighten-2{background-color:#ffb74d!important}.orange.lighten-1{background-color:#ffa726!important}.orange{background-color:#ff9800!important}.orange-text{color:#ff9800!important}.rgba-orange-slight,.rgba-orange-slight:after{background-color:rgba(255,152,0,.1)}.rgba-orange-light,.rgba-orange-light:after{background-color:rgba(255,152,0,.3)}.rgba-orange-strong,.rgba-orange-strong:after{background-color:rgba(255,152,0,.7)}.orange.darken-1{background-color:#fb8c00!important}.orange.darken-2{background-color:#f57c00!important}.orange.darken-3{background-color:#ef6c00!important}.orange.darken-4{background-color:#e65100!important}.orange.accent-1{background-color:#ffd180!important}.orange.accent-2{background-color:#ffab40!important}.orange.accent-3{background-color:#ff9100!important}.orange.accent-4{background-color:#ff6d00!important}.deep-orange.lighten-5{background-color:#fbe9e7!important}.deep-orange.lighten-4{background-color:#ffccbc!important}.deep-orange.lighten-3{background-color:#ffab91!important}.deep-orange.lighten-2{background-color:#ff8a65!important}.deep-orange.lighten-1{background-color:#ff7043!important}.deep-orange{background-color:#ff5722!important}.deep-orange-text{color:#ff5722!important}.rgba-deep-orange-slight,.rgba-deep-orange-slight:after{background-color:rgba(255,87,34,.1)}.rgba-deep-orange-light,.rgba-deep-orange-light:after{background-color:rgba(255,87,34,.3)}.rgba-deep-orange-strong,.rgba-deep-orange-strong:after{background-color:rgba(255,87,34,.7)}.deep-orange.darken-1{background-color:#f4511e!important}.deep-orange.darken-2{background-color:#e64a19!important}.deep-orange.darken-3{background-color:#d84315!important}.deep-orange.darken-4{background-color:#bf360c!important}.deep-orange.accent-1{background-color:#ff9e80!important}.deep-orange.accent-2{background-color:#ff6e40!important}.deep-orange.accent-3{background-color:#ff3d00!important}.deep-orange.accent-4{background-color:#dd2c00!important}.brown.lighten-5{background-color:#efebe9!important}.brown.lighten-4{background-color:#d7ccc8!important}.brown.lighten-3{background-color:#bcaaa4!important}.brown.lighten-2{background-color:#a1887f!important}.brown.lighten-1{background-color:#8d6e63!important}.brown{background-color:#795548!important}.brown-text{color:#795548!important}.rgba-brown-slight,.rgba-brown-slight:after{background-color:rgba(121,85,72,.1)}.rgba-brown-light,.rgba-brown-light:after{background-color:rgba(121,85,72,.3)}.rgba-brown-strong,.rgba-brown-strong:after{background-color:rgba(121,85,72,.7)}.brown.darken-1{background-color:#6d4c41!important}.brown.darken-2{background-color:#5d4037!important}.brown.darken-3{background-color:#4e342e!important}.brown.darken-4{background-color:#3e2723!important}.blue-grey.lighten-5{background-color:#eceff1!important}.blue-grey.lighten-4{background-color:#cfd8dc!important}.blue-grey.lighten-3{background-color:#b0bec5!important}.blue-grey.lighten-2{background-color:#90a4ae!important}.blue-grey.lighten-1{background-color:#78909c!important}.blue-grey{background-color:#607d8b!important}.blue-grey-text{color:#607d8b!important}.rgba-blue-grey-slight,.rgba-blue-grey-slight:after{background-color:rgba(96,125,139,.1)}.rgba-blue-grey-light,.rgba-blue-grey-light:after{background-color:rgba(96,125,139,.3)}.rgba-blue-grey-strong,.rgba-blue-grey-strong:after{background-color:rgba(96,125,139,.7)}.blue-grey.darken-1{background-color:#546e7a!important}.blue-grey.darken-2{background-color:#455a64!important}.blue-grey.darken-3{background-color:#37474f!important}.blue-grey.darken-4{background-color:#263238!important}.grey.lighten-5{background-color:#fafafa!important}.grey.lighten-4{background-color:#f5f5f5!important}.grey.lighten-3{background-color:#eee!important}.grey.lighten-2{background-color:#e0e0e0!important}.grey.lighten-1{background-color:#bdbdbd!important}.grey{background-color:#9e9e9e!important}.grey-text{color:#9e9e9e!important}.rgba-grey-slight,.rgba-grey-slight:after{background-color:rgba(158,158,158,.1)}.rgba-grey-light,.rgba-grey-light:after{background-color:rgba(158,158,158,.3)}.rgba-grey-strong,.rgba-grey-strong:after{background-color:rgba(158,158,158,.7)}.grey.darken-1{background-color:#757575!important}.grey.darken-2{background-color:#616161!important}.grey.darken-3{background-color:#424242!important}.grey.darken-4{background-color:#212121!important}.black{background-color:#000!important}.black-text{color:#000!important}.rgba-black-slight,.rgba-black-slight:after{background-color:rgba(0,0,0,.1)}.rgba-black-light,.rgba-black-light:after{background-color:rgba(0,0,0,.3)}.rgba-black-strong,.rgba-black-strong:after{background-color:rgba(0,0,0,.7)}.white{background-color:#fff!important}.white-text{color:#fff!important}.rgba-white-slight,.rgba-white-slight:after{background-color:rgba(255,255,255,.1)}.rgba-white-light,.rgba-white-light:after{background-color:rgba(255,255,255,.3)}.rgba-white-strong,.rgba-white-strong:after{background-color:rgba(255,255,255,.7)}.rgba-stylish-slight{background-color:rgba(62,69,81,.1)}.rgba-stylish-light{background-color:rgba(62,69,81,.3)}.rgba-stylish-strong{background-color:rgba(62,69,81,.7)}.primary-color{background-color:#4285f4!important}.primary-color-dark{background-color:#0d47a1!important}.secondary-color{background-color:#a6c!important}.secondary-color-dark{background-color:#93c!important}.default-color{background-color:#2bbbad!important}.default-color-dark{background-color:#00695c!important}.info-color{background-color:#33b5e5!important}.info-color-dark{background-color:#09c!important}.success-color{background-color:#00c851!important}.success-color-dark{background-color:#007e33!important}.warning-color{background-color:#fb3!important}.warning-color-dark{background-color:#f80!important}.danger-color{background-color:#ff3547!important}.danger-color-dark{background-color:#c00!important}.elegant-color{background-color:#2e2e2e!important}.elegant-color-dark{background-color:#212121!important}.stylish-color{background-color:#4b515d!important}.stylish-color-dark{background-color:#3e4551!important}.unique-color{background-color:#3f729b!important}.unique-color-dark{background-color:#1c2331!important}.special-color{background-color:#37474f!important}.special-color-dark{background-color:#263238!important}.purple-gradient{background:linear-gradient(40deg,#ff6ec4,#7873f5)!important}.peach-gradient{background:linear-gradient(40deg,#ffd86f,#fc6262)!important}.aqua-gradient{background:linear-gradient(40deg,#2096ff,#05ffa3)!important}.blue-gradient{background:linear-gradient(40deg,#45cafc,#303f9f)!important}.purple-gradient-rgba{background:linear-gradient(40deg,rgba(255,110,196,.9),rgba(120,115,245,.9))!important}.peach-gradient-rgba{background:linear-gradient(40deg,rgba(255,216,111,.9),rgba(252,98,98,.9))!important}.aqua-gradient-rgba{background:linear-gradient(40deg,rgba(32,150,255,.9),rgba(5,255,163,.9))!important}.blue-gradient-rgba{background:linear-gradient(40deg,rgba(69,202,252,.9),rgba(48,63,159,.9))!important}.dark-grey-text,.dark-grey-text:focus,.dark-grey-text:hover{color:#4f4f4f!important}.hoverable{box-shadow:none;transition:.55s ease-in-out}.hoverable:hover{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);transition:.55s ease-in-out}.z-depth-0{box-shadow:none!important}.card-wrapper .back,.card-wrapper .front,.card.gradient-card:focus-within .card-image,.z-depth-1{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)!important}.z-depth-1-half{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)!important}.z-depth-2{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19)!important}.z-depth-3{box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19)!important}.z-depth-4{box-shadow:0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)!important}.z-depth-5{box-shadow:0 27px 24px 0 rgba(0,0,0,.2),0 40px 77px 0 rgba(0,0,0,.22)!important}.disabled,:disabled{pointer-events:none!important}a{cursor:pointer;text-decoration:none;color:#0275d8;transition:.2s ease-in-out}a:hover{text-decoration:none;color:#014c8c;transition:.2s ease-in-out}a.disabled:hover,a:disabled:hover{color:#0275d8}a:not([href]):not([tabindex]),a:not([href]):not([tabindex]):focus,a:not([href]):not([tabindex]):hover{color:inherit;text-decoration:none}.card.promoting-card .fa{transition:.4s}.card.promoting-card .fa[class*=fa-]:hover{transition:.4s;cursor:pointer}.card.weather-card .collapse-content a.collapsed:after{content:'Expand'}.card.weather-card .collapse-content a:not(.collapsed):after{content:'Collapse'}.card.weather-card .degree:after{content:'\u00B0C';position:absolute;font-size:3rem;margin-top:.9rem;font-weight:400}.card.gradient-card{transition:.5s ease-in-out}.card.gradient-card .first-content .card-title{font-weight:500}.card.gradient-card .second-content,.card.gradient-card .third-content{display:none}.card.gradient-card .card-body{transition:.5s ease-in-out;opacity:0;visibility:hidden;overflow:hidden;height:0;padding-bottom:0;padding-top:0}.card.gradient-card .card-image,.card.gradient-card .card-image .mask{border-radius:.25rem}.card.gradient-card:focus-within{margin-top:3rem;transition:.5s ease-in-out}.card.gradient-card:focus-within .card-image{transition:.5s ease-in-out;width:7rem;height:7rem;margin-top:-2rem;margin-left:1rem;border-radius:.25rem;margin-bottom:2rem}.card.gradient-card:focus-within .card-image .mask{border-radius:.25rem}.card.gradient-card:focus-within .card-body{transition:.7s ease-in-out;visibility:visible;opacity:1;overflow:visible;padding-bottom:1.25rem;padding-top:1.25rem;height:auto;border-radius:.25rem}.card.gradient-card:focus-within .card-body .progress{height:.4rem}.card.gradient-card:focus-within .card-body .progress .progress-bar{height:.4rem}.card.gradient-card:focus-within .first-content{display:none}.card.gradient-card:focus-within .second-content{display:block}.card.gradient-card:focus-within .third-content{display:block;margin-top:-6rem}@media (max-device-width:1025px){.card.gradient-card:hover{margin-top:3rem;transition:.5s ease-in-out}.card.gradient-card:hover .card-image{transition:.5s ease-in-out;width:7rem;height:7rem;margin-top:-2rem;margin-left:1rem;border-radius:.25rem;margin-bottom:2rem;box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)}.card.gradient-card:hover .card-image .mask{border-radius:.25rem}.card.gradient-card:hover .card-body{transition:.7s ease-in-out;visibility:visible;opacity:1;overflow:visible;padding-bottom:1.25rem;padding-top:1.25rem;height:auto;border-radius:.25rem}.card.gradient-card:hover .card-body .progress,.card.gradient-card:hover .card-body .progress .progress-bar{height:.4rem}.card.gradient-card:hover .first-content{display:none}.card.gradient-card:hover .second-content{display:block}.card.gradient-card:hover .third-content{display:block;margin-top:-6rem}}.card.booking-card .rating{font-size:.7rem}.card.chart-card .classic-tabs .nav li a.active{border-bottom:2px solid;transition:width .5s,background-color .5s}.card.chart-card .classic-tabs .nav.tabs-white li a{color:#757575;font-weight:500}.card.chart-card .classic-tabs .nav.tabs-white li a.active{color:#673ab7}.card.chart-card .btn-deep-purple-accent{background-color:#b388ff;margin-top:-65px}.card.chart-card .btn-deep-purple-accent i{color:#000!important}.card.chart-card .btn-teal-accent{background-color:#1de9b6;margin-top:-65px}.card.chart-card .btn-teal-accent i{color:#000!important}.card.colorful-card .indigo-accent-text{color:#304ffe}.card.colorful-card .btn-indigo-accent{background-color:#304ffe}.card.colorful-card .yellow-darken-text{color:#fdd835}.card.colorful-card .testimonial-card .avatar{width:55px;margin-top:-30px;border:3px solid #fff}.card.colorful-card .testimonial-card .avatar img{width:50px;height:50px}.card.colorful-card .brown-darken-text{color:#3e2723}.card.colorful-card .btn-red-lighten{background-color:#ffcdd2}.card-wrapper.card-action{min-height:640px}@media (max-width:450px){.card-wrapper.card-action{min-height:790px}}.card-form .md-form input[type=email]:focus:not([readonly]),.card-form .md-form input[type=password]:focus:not([readonly]),.card-form .md-form input[type=text]:focus:not([readonly]){box-shadow:0 1px 0 0 #fff;border-bottom:1px solid #fff}.card-form .card-form-2{border-top-left-radius:21px;border-top-right-radius:21px;margin-top:-35px}.card-form .card-form-2 .form-check-input[type=checkbox].filled-in:checked+label:after,.card-form .card-form-2 label.btn input[type=checkbox].filled-in:checked+label:after{background-color:#e53935;border:2px solid #e53935}.card-form .card-form-2 .btn-outline-red-accent{border:2px solid #e53935;background-color:transparent;color:#e53935}.card-form .card-form-2 .pink-accent-text{color:#c51162}.z-depth-1-bottom{box-shadow:0 5px 5px -2px rgba(0,0,0,.16)}.card-wrapper{height:500px;position:relative;-webkit-perspective:800px;perspective:800px}.card-wrapper .face{position:absolute;width:100%;height:100%;background-color:#fff}.card-wrapper .face h4{margin-bottom:15px}.card-wrapper .face h5{margin-top:30px}.card-wrapper .face .content{text-align:left;padding:15px}.card-wrapper .face .content p{margin-bottom:30px}.card-wrapper .face .content .rotate-btn{padding:1rem;margin-right:-8px;float:right;font-size:1.2rem;color:#000}.card-wrapper .card-up{overflow:hidden;height:50%}.card-wrapper .card-up img{min-width:400px;width:100%}.card-wrapper .avatar{border-radius:50%;display:block;height:120px;margin:-65px auto 0;overflow:hidden;width:120px}.card-wrapper .avatar img{border:5px solid #fff;background:#fff;width:100%}.card-wrapper .card-rotating{text-align:center;position:absolute;width:100%;height:100%;-webkit-transform-style:preserve-3d;transform-style:preserve-3d}.card-wrapper .card-rotating .content{position:relative}.card-wrapper .card-rotating .content .rotate-btn{position:absolute;right:8px;top:0}.card-wrapper .fa-repeat,.card-wrapper .fa-undo{font-size:20px;margin-top:30px}.card-wrapper .fa-undo{margin-top:30px}.card-wrapper .back,.card-wrapper .front{-webkit-backface-visibility:hidden;backface-visibility:hidden;transition:transform 1s;transition:transform 1s,-webkit-transform 1s}.card-wrapper .fron{z-index:2;cursor:auto}.card-wrapper .back{-webkit-transform:rotateY(-180deg);transform:rotateY(-180deg);padding:1rem}.card-wrapper .back .card-title{cursor:pointer}.card-wrapper .back .card-title i{color:#9e9e9e;position:absolute;right:20px}.card-wrapper .card-rotating.effect__click.flipped .front{-webkit-transform:rotateY(180deg);transform:rotateY(180deg)}.card-wrapper .card-rotating.effect__click.flipped .back{-webkit-transform:rotateY(0);transform:rotateY(0)}.embed-responsive-item{background:#000}.tp-box{position:relative;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;transition:transform 1s;transition:transform 1s,-webkit-transform 1s}.tp-box .tp-box_side{width:100%;height:100%;-webkit-backface-visibility:hidden;backface-visibility:hidden;position:absolute;text-align:center}.tp-box .tp-box_back{-webkit-transform:rotateY(179.9deg);transform:rotateY(179.9deg)}.flip-container{-webkit-perspective:1000px;perspective:1000px;-webkit-transform-style:preserve-3d;transform-style:preserve-3d}.flip-container .flipper{transition:1s;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;position:relative}.flip-container .front{z-index:2;-webkit-transform:rotateY(0);transform:rotateY(0)}.flip-container .back{-webkit-transform:rotateY(-180deg);transform:rotateY(-180deg)}.flip-container .back,.flip-container .front{-webkit-backface-visibility:hidden;backface-visibility:hidden;transition:1s;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;position:absolute;top:0;left:0}.flip-container.rotate .back{-webkit-transform:rotateY(0);transform:rotateY(0);background-color:#fff}.flip-container.rotate .front{-webkit-transform:rotateY(180deg);transform:rotateY(180deg)}.card-overflow{overflow:hidden;height:100%;box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)}"]
                 }] }
     ];
     /** @nocollapse */
@@ -17323,9 +15247,9 @@ var CardRevealComponent = /** @class */ (function () {
         { type: Renderer2 }
     ]; };
     CardRevealComponent.propDecorators = {
-        cardReveal: [{ type: ViewChild, args: ['cardReveal',] }],
-        cardFront: [{ type: ViewChild, args: ['cardFront',] }],
-        cardOverflow: [{ type: ViewChild, args: ['cardOverflow',] }],
+        cardReveal: [{ type: ViewChild, args: ['cardReveal', { static: false },] }],
+        cardFront: [{ type: ViewChild, args: ['cardFront', { static: true },] }],
+        cardOverflow: [{ type: ViewChild, args: ['cardOverflow', { static: true },] }],
         onWindowResize: [{ type: HostListener, args: ['window:resize',] }]
     };
     return CardRevealComponent;
@@ -17362,7 +15286,9 @@ var CardRotatingComponent = /** @class */ (function () {
     CardRotatingComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mdb-card-rotating, mdb-flipping-card',
-                    template: "<div class=\"flip-container card-wrapper\" [ngClass]=\"{'rotate': rotate}\">\n  <div class=\"flipper card-rotating effect__click tp-box\">\n    <ng-content></ng-content>\n  </div>\n</div>\n"
+                    template: "<div class=\"flip-container card-wrapper\" [ngClass]=\"{ rotate: rotate }\">\n  <div class=\"flipper card-rotating effect__click tp-box\">\n    <ng-content></ng-content>\n  </div>\n</div>\n",
+                    encapsulation: ViewEncapsulation.None,
+                    styles: ["@charset \"UTF-8\";.mdb-color.lighten-5{background-color:#d0d6e2!important}.mdb-color.lighten-4{background-color:#b1bace!important}.mdb-color.lighten-3{background-color:#929fba!important}.mdb-color.lighten-2{background-color:#7283a7!important}.mdb-color.lighten-1{background-color:#59698d!important}.mdb-color{background-color:#45526e!important}.mdb-color-text{color:#45526e!important}.rgba-mdb-color-slight,.rgba-mdb-color-slight:after{background-color:rgba(69,82,110,.1)}.rgba-mdb-color-light,.rgba-mdb-color-light:after{background-color:rgba(69,82,110,.3)}.rgba-mdb-color-strong,.rgba-mdb-color-strong:after{background-color:rgba(69,82,110,.7)}.mdb-color.darken-1{background-color:#3b465e!important}.mdb-color.darken-2{background-color:#2e3951!important}.mdb-color.darken-3{background-color:#1c2a48!important}.mdb-color.darken-4{background-color:#1c2331!important}.red.lighten-5{background-color:#ffebee!important}.red.lighten-4{background-color:#ffcdd2!important}.red.lighten-3{background-color:#ef9a9a!important}.red.lighten-2{background-color:#e57373!important}.red.lighten-1{background-color:#ef5350!important}.red{background-color:#f44336!important}.red-text{color:#f44336!important}.rgba-red-slight,.rgba-red-slight:after{background-color:rgba(244,67,54,.1)}.rgba-red-light,.rgba-red-light:after{background-color:rgba(244,67,54,.3)}.rgba-red-strong,.rgba-red-strong:after{background-color:rgba(244,67,54,.7)}.red.darken-1{background-color:#e53935!important}.red.darken-2{background-color:#d32f2f!important}.red.darken-3{background-color:#c62828!important}.red.darken-4{background-color:#b71c1c!important}.red.accent-1{background-color:#ff8a80!important}.red.accent-2{background-color:#ff5252!important}.red.accent-3{background-color:#ff1744!important}.red.accent-4{background-color:#d50000!important}.pink.lighten-5{background-color:#fce4ec!important}.pink.lighten-4{background-color:#f8bbd0!important}.pink.lighten-3{background-color:#f48fb1!important}.pink.lighten-2{background-color:#f06292!important}.pink.lighten-1{background-color:#ec407a!important}.pink{background-color:#e91e63!important}.pink-text{color:#e91e63!important}.rgba-pink-slight,.rgba-pink-slight:after{background-color:rgba(233,30,99,.1)}.rgba-pink-light,.rgba-pink-light:after{background-color:rgba(233,30,99,.3)}.rgba-pink-strong,.rgba-pink-strong:after{background-color:rgba(233,30,99,.7)}.pink.darken-1{background-color:#d81b60!important}.pink.darken-2{background-color:#c2185b!important}.pink.darken-3{background-color:#ad1457!important}.pink.darken-4{background-color:#880e4f!important}.pink.accent-1{background-color:#ff80ab!important}.pink.accent-2{background-color:#ff4081!important}.pink.accent-3{background-color:#f50057!important}.pink.accent-4{background-color:#c51162!important}.purple.lighten-5{background-color:#f3e5f5!important}.purple.lighten-4{background-color:#e1bee7!important}.purple.lighten-3{background-color:#ce93d8!important}.purple.lighten-2{background-color:#ba68c8!important}.purple.lighten-1{background-color:#ab47bc!important}.purple{background-color:#9c27b0!important}.purple-text{color:#9c27b0!important}.rgba-purple-slight,.rgba-purple-slight:after{background-color:rgba(156,39,176,.1)}.rgba-purple-light,.rgba-purple-light:after{background-color:rgba(156,39,176,.3)}.rgba-purple-strong,.rgba-purple-strong:after{background-color:rgba(156,39,176,.7)}.purple.darken-1{background-color:#8e24aa!important}.purple.darken-2{background-color:#7b1fa2!important}.purple.darken-3{background-color:#6a1b9a!important}.purple.darken-4{background-color:#4a148c!important}.purple.accent-1{background-color:#ea80fc!important}.purple.accent-2{background-color:#e040fb!important}.purple.accent-3{background-color:#d500f9!important}.purple.accent-4{background-color:#a0f!important}.deep-purple.lighten-5{background-color:#ede7f6!important}.deep-purple.lighten-4{background-color:#d1c4e9!important}.deep-purple.lighten-3{background-color:#b39ddb!important}.deep-purple.lighten-2{background-color:#9575cd!important}.deep-purple.lighten-1{background-color:#7e57c2!important}.deep-purple{background-color:#673ab7!important}.deep-purple-text{color:#673ab7!important}.rgba-deep-purple-slight,.rgba-deep-purple-slight:after{background-color:rgba(103,58,183,.1)}.rgba-deep-purple-light,.rgba-deep-purple-light:after{background-color:rgba(103,58,183,.3)}.rgba-deep-purple-strong,.rgba-deep-purple-strong:after{background-color:rgba(103,58,183,.7)}.deep-purple.darken-1{background-color:#5e35b1!important}.deep-purple.darken-2{background-color:#512da8!important}.deep-purple.darken-3{background-color:#4527a0!important}.deep-purple.darken-4{background-color:#311b92!important}.deep-purple.accent-1{background-color:#b388ff!important}.deep-purple.accent-2{background-color:#7c4dff!important}.deep-purple.accent-3{background-color:#651fff!important}.deep-purple.accent-4{background-color:#6200ea!important}.indigo.lighten-5{background-color:#e8eaf6!important}.indigo.lighten-4{background-color:#c5cae9!important}.indigo.lighten-3{background-color:#9fa8da!important}.indigo.lighten-2{background-color:#7986cb!important}.indigo.lighten-1{background-color:#5c6bc0!important}.indigo{background-color:#3f51b5!important}.indigo-text{color:#3f51b5!important}.rgba-indigo-slight,.rgba-indigo-slight:after{background-color:rgba(63,81,181,.1)}.rgba-indigo-light,.rgba-indigo-light:after{background-color:rgba(63,81,181,.3)}.rgba-indigo-strong,.rgba-indigo-strong:after{background-color:rgba(63,81,181,.7)}.indigo.darken-1{background-color:#3949ab!important}.indigo.darken-2{background-color:#303f9f!important}.indigo.darken-3{background-color:#283593!important}.indigo.darken-4{background-color:#1a237e!important}.indigo.accent-1{background-color:#8c9eff!important}.indigo.accent-2{background-color:#536dfe!important}.indigo.accent-3{background-color:#3d5afe!important}.indigo.accent-4{background-color:#304ffe!important}.blue.lighten-5{background-color:#e3f2fd!important}.blue.lighten-4{background-color:#bbdefb!important}.blue.lighten-3{background-color:#90caf9!important}.blue.lighten-2{background-color:#64b5f6!important}.blue.lighten-1{background-color:#42a5f5!important}.blue{background-color:#2196f3!important}.blue-text{color:#2196f3!important}.rgba-blue-slight,.rgba-blue-slight:after{background-color:rgba(33,150,243,.1)}.rgba-blue-light,.rgba-blue-light:after{background-color:rgba(33,150,243,.3)}.rgba-blue-strong,.rgba-blue-strong:after{background-color:rgba(33,150,243,.7)}.blue.darken-1{background-color:#1e88e5!important}.blue.darken-2{background-color:#1976d2!important}.blue.darken-3{background-color:#1565c0!important}.blue.darken-4{background-color:#0d47a1!important}.blue.accent-1{background-color:#82b1ff!important}.blue.accent-2{background-color:#448aff!important}.blue.accent-3{background-color:#2979ff!important}.blue.accent-4{background-color:#2962ff!important}.light-blue.lighten-5{background-color:#e1f5fe!important}.light-blue.lighten-4{background-color:#b3e5fc!important}.light-blue.lighten-3{background-color:#81d4fa!important}.light-blue.lighten-2{background-color:#4fc3f7!important}.light-blue.lighten-1{background-color:#29b6f6!important}.light-blue{background-color:#03a9f4!important}.light-blue-text{color:#03a9f4!important}.rgba-light-blue-slight,.rgba-light-blue-slight:after{background-color:rgba(3,169,244,.1)}.rgba-light-blue-light,.rgba-light-blue-light:after{background-color:rgba(3,169,244,.3)}.rgba-light-blue-strong,.rgba-light-blue-strong:after{background-color:rgba(3,169,244,.7)}.light-blue.darken-1{background-color:#039be5!important}.light-blue.darken-2{background-color:#0288d1!important}.light-blue.darken-3{background-color:#0277bd!important}.light-blue.darken-4{background-color:#01579b!important}.light-blue.accent-1{background-color:#80d8ff!important}.light-blue.accent-2{background-color:#40c4ff!important}.light-blue.accent-3{background-color:#00b0ff!important}.light-blue.accent-4{background-color:#0091ea!important}.cyan.lighten-5{background-color:#e0f7fa!important}.cyan.lighten-4{background-color:#b2ebf2!important}.cyan.lighten-3{background-color:#80deea!important}.cyan.lighten-2{background-color:#4dd0e1!important}.cyan.lighten-1{background-color:#26c6da!important}.cyan{background-color:#00bcd4!important}.cyan-text{color:#00bcd4!important}.rgba-cyan-slight,.rgba-cyan-slight:after{background-color:rgba(0,188,212,.1)}.rgba-cyan-light,.rgba-cyan-light:after{background-color:rgba(0,188,212,.3)}.rgba-cyan-strong,.rgba-cyan-strong:after{background-color:rgba(0,188,212,.7)}.cyan.darken-1{background-color:#00acc1!important}.cyan.darken-2{background-color:#0097a7!important}.cyan.darken-3{background-color:#00838f!important}.cyan.darken-4{background-color:#006064!important}.cyan.accent-1{background-color:#84ffff!important}.cyan.accent-2{background-color:#18ffff!important}.cyan.accent-3{background-color:#00e5ff!important}.cyan.accent-4{background-color:#00b8d4!important}.teal.lighten-5{background-color:#e0f2f1!important}.teal.lighten-4{background-color:#b2dfdb!important}.teal.lighten-3{background-color:#80cbc4!important}.teal.lighten-2{background-color:#4db6ac!important}.teal.lighten-1{background-color:#26a69a!important}.teal{background-color:#009688!important}.teal-text{color:#009688!important}.rgba-teal-slight,.rgba-teal-slight:after{background-color:rgba(0,150,136,.1)}.rgba-teal-light,.rgba-teal-light:after{background-color:rgba(0,150,136,.3)}.rgba-teal-strong,.rgba-teal-strong:after{background-color:rgba(0,150,136,.7)}.teal.darken-1{background-color:#00897b!important}.teal.darken-2{background-color:#00796b!important}.teal.darken-3{background-color:#00695c!important}.teal.darken-4{background-color:#004d40!important}.teal.accent-1{background-color:#a7ffeb!important}.teal.accent-2{background-color:#64ffda!important}.teal.accent-3{background-color:#1de9b6!important}.teal.accent-4{background-color:#00bfa5!important}.green.lighten-5{background-color:#e8f5e9!important}.green.lighten-4{background-color:#c8e6c9!important}.green.lighten-3{background-color:#a5d6a7!important}.green.lighten-2{background-color:#81c784!important}.green.lighten-1{background-color:#66bb6a!important}.green{background-color:#4caf50!important}.green-text{color:#4caf50!important}.rgba-green-slight,.rgba-green-slight:after{background-color:rgba(76,175,80,.1)}.rgba-green-light,.rgba-green-light:after{background-color:rgba(76,175,80,.3)}.rgba-green-strong,.rgba-green-strong:after{background-color:rgba(76,175,80,.7)}.green.darken-1{background-color:#43a047!important}.green.darken-2{background-color:#388e3c!important}.green.darken-3{background-color:#2e7d32!important}.green.darken-4{background-color:#1b5e20!important}.green.accent-1{background-color:#b9f6ca!important}.green.accent-2{background-color:#69f0ae!important}.green.accent-3{background-color:#00e676!important}.green.accent-4{background-color:#00c853!important}.light-green.lighten-5{background-color:#f1f8e9!important}.light-green.lighten-4{background-color:#dcedc8!important}.light-green.lighten-3{background-color:#c5e1a5!important}.light-green.lighten-2{background-color:#aed581!important}.light-green.lighten-1{background-color:#9ccc65!important}.light-green{background-color:#8bc34a!important}.light-green-text{color:#8bc34a!important}.rgba-light-green-slight,.rgba-light-green-slight:after{background-color:rgba(139,195,74,.1)}.rgba-light-green-light,.rgba-light-green-light:after{background-color:rgba(139,195,74,.3)}.rgba-light-green-strong,.rgba-light-green-strong:after{background-color:rgba(139,195,74,.7)}.light-green.darken-1{background-color:#7cb342!important}.light-green.darken-2{background-color:#689f38!important}.light-green.darken-3{background-color:#558b2f!important}.light-green.darken-4{background-color:#33691e!important}.light-green.accent-1{background-color:#ccff90!important}.light-green.accent-2{background-color:#b2ff59!important}.light-green.accent-3{background-color:#76ff03!important}.light-green.accent-4{background-color:#64dd17!important}.lime.lighten-5{background-color:#f9fbe7!important}.lime.lighten-4{background-color:#f0f4c3!important}.lime.lighten-3{background-color:#e6ee9c!important}.lime.lighten-2{background-color:#dce775!important}.lime.lighten-1{background-color:#d4e157!important}.lime{background-color:#cddc39!important}.lime-text{color:#cddc39!important}.rgba-lime-slight,.rgba-lime-slight:after{background-color:rgba(205,220,57,.1)}.rgba-lime-light,.rgba-lime-light:after{background-color:rgba(205,220,57,.3)}.rgba-lime-strong,.rgba-lime-strong:after{background-color:rgba(205,220,57,.7)}.lime.darken-1{background-color:#c0ca33!important}.lime.darken-2{background-color:#afb42b!important}.lime.darken-3{background-color:#9e9d24!important}.lime.darken-4{background-color:#827717!important}.lime.accent-1{background-color:#f4ff81!important}.lime.accent-2{background-color:#eeff41!important}.lime.accent-3{background-color:#c6ff00!important}.lime.accent-4{background-color:#aeea00!important}.yellow.lighten-5{background-color:#fffde7!important}.yellow.lighten-4{background-color:#fff9c4!important}.yellow.lighten-3{background-color:#fff59d!important}.yellow.lighten-2{background-color:#fff176!important}.yellow.lighten-1{background-color:#ffee58!important}.yellow{background-color:#ffeb3b!important}.yellow-text{color:#ffeb3b!important}.rgba-yellow-slight,.rgba-yellow-slight:after{background-color:rgba(255,235,59,.1)}.rgba-yellow-light,.rgba-yellow-light:after{background-color:rgba(255,235,59,.3)}.rgba-yellow-strong,.rgba-yellow-strong:after{background-color:rgba(255,235,59,.7)}.yellow.darken-1{background-color:#fdd835!important}.yellow.darken-2{background-color:#fbc02d!important}.yellow.darken-3{background-color:#f9a825!important}.yellow.darken-4{background-color:#f57f17!important}.yellow.accent-1{background-color:#ffff8d!important}.yellow.accent-2{background-color:#ff0!important}.yellow.accent-3{background-color:#ffea00!important}.yellow.accent-4{background-color:#ffd600!important}.amber.lighten-5{background-color:#fff8e1!important}.amber.lighten-4{background-color:#ffecb3!important}.amber.lighten-3{background-color:#ffe082!important}.amber.lighten-2{background-color:#ffd54f!important}.amber.lighten-1{background-color:#ffca28!important}.amber{background-color:#ffc107!important}.amber-text{color:#ffc107!important}.rgba-amber-slight,.rgba-amber-slight:after{background-color:rgba(255,193,7,.1)}.rgba-amber-light,.rgba-amber-light:after{background-color:rgba(255,193,7,.3)}.rgba-amber-strong,.rgba-amber-strong:after{background-color:rgba(255,193,7,.7)}.amber.darken-1{background-color:#ffb300!important}.amber.darken-2{background-color:#ffa000!important}.amber.darken-3{background-color:#ff8f00!important}.amber.darken-4{background-color:#ff6f00!important}.amber.accent-1{background-color:#ffe57f!important}.amber.accent-2{background-color:#ffd740!important}.amber.accent-3{background-color:#ffc400!important}.amber.accent-4{background-color:#ffab00!important}.orange.lighten-5{background-color:#fff3e0!important}.orange.lighten-4{background-color:#ffe0b2!important}.orange.lighten-3{background-color:#ffcc80!important}.orange.lighten-2{background-color:#ffb74d!important}.orange.lighten-1{background-color:#ffa726!important}.orange{background-color:#ff9800!important}.orange-text{color:#ff9800!important}.rgba-orange-slight,.rgba-orange-slight:after{background-color:rgba(255,152,0,.1)}.rgba-orange-light,.rgba-orange-light:after{background-color:rgba(255,152,0,.3)}.rgba-orange-strong,.rgba-orange-strong:after{background-color:rgba(255,152,0,.7)}.orange.darken-1{background-color:#fb8c00!important}.orange.darken-2{background-color:#f57c00!important}.orange.darken-3{background-color:#ef6c00!important}.orange.darken-4{background-color:#e65100!important}.orange.accent-1{background-color:#ffd180!important}.orange.accent-2{background-color:#ffab40!important}.orange.accent-3{background-color:#ff9100!important}.orange.accent-4{background-color:#ff6d00!important}.deep-orange.lighten-5{background-color:#fbe9e7!important}.deep-orange.lighten-4{background-color:#ffccbc!important}.deep-orange.lighten-3{background-color:#ffab91!important}.deep-orange.lighten-2{background-color:#ff8a65!important}.deep-orange.lighten-1{background-color:#ff7043!important}.deep-orange{background-color:#ff5722!important}.deep-orange-text{color:#ff5722!important}.rgba-deep-orange-slight,.rgba-deep-orange-slight:after{background-color:rgba(255,87,34,.1)}.rgba-deep-orange-light,.rgba-deep-orange-light:after{background-color:rgba(255,87,34,.3)}.rgba-deep-orange-strong,.rgba-deep-orange-strong:after{background-color:rgba(255,87,34,.7)}.deep-orange.darken-1{background-color:#f4511e!important}.deep-orange.darken-2{background-color:#e64a19!important}.deep-orange.darken-3{background-color:#d84315!important}.deep-orange.darken-4{background-color:#bf360c!important}.deep-orange.accent-1{background-color:#ff9e80!important}.deep-orange.accent-2{background-color:#ff6e40!important}.deep-orange.accent-3{background-color:#ff3d00!important}.deep-orange.accent-4{background-color:#dd2c00!important}.brown.lighten-5{background-color:#efebe9!important}.brown.lighten-4{background-color:#d7ccc8!important}.brown.lighten-3{background-color:#bcaaa4!important}.brown.lighten-2{background-color:#a1887f!important}.brown.lighten-1{background-color:#8d6e63!important}.brown{background-color:#795548!important}.brown-text{color:#795548!important}.rgba-brown-slight,.rgba-brown-slight:after{background-color:rgba(121,85,72,.1)}.rgba-brown-light,.rgba-brown-light:after{background-color:rgba(121,85,72,.3)}.rgba-brown-strong,.rgba-brown-strong:after{background-color:rgba(121,85,72,.7)}.brown.darken-1{background-color:#6d4c41!important}.brown.darken-2{background-color:#5d4037!important}.brown.darken-3{background-color:#4e342e!important}.brown.darken-4{background-color:#3e2723!important}.blue-grey.lighten-5{background-color:#eceff1!important}.blue-grey.lighten-4{background-color:#cfd8dc!important}.blue-grey.lighten-3{background-color:#b0bec5!important}.blue-grey.lighten-2{background-color:#90a4ae!important}.blue-grey.lighten-1{background-color:#78909c!important}.blue-grey{background-color:#607d8b!important}.blue-grey-text{color:#607d8b!important}.rgba-blue-grey-slight,.rgba-blue-grey-slight:after{background-color:rgba(96,125,139,.1)}.rgba-blue-grey-light,.rgba-blue-grey-light:after{background-color:rgba(96,125,139,.3)}.rgba-blue-grey-strong,.rgba-blue-grey-strong:after{background-color:rgba(96,125,139,.7)}.blue-grey.darken-1{background-color:#546e7a!important}.blue-grey.darken-2{background-color:#455a64!important}.blue-grey.darken-3{background-color:#37474f!important}.blue-grey.darken-4{background-color:#263238!important}.grey.lighten-5{background-color:#fafafa!important}.grey.lighten-4{background-color:#f5f5f5!important}.grey.lighten-3{background-color:#eee!important}.grey.lighten-2{background-color:#e0e0e0!important}.grey.lighten-1{background-color:#bdbdbd!important}.grey{background-color:#9e9e9e!important}.grey-text{color:#9e9e9e!important}.rgba-grey-slight,.rgba-grey-slight:after{background-color:rgba(158,158,158,.1)}.rgba-grey-light,.rgba-grey-light:after{background-color:rgba(158,158,158,.3)}.rgba-grey-strong,.rgba-grey-strong:after{background-color:rgba(158,158,158,.7)}.grey.darken-1{background-color:#757575!important}.grey.darken-2{background-color:#616161!important}.grey.darken-3{background-color:#424242!important}.grey.darken-4{background-color:#212121!important}.black{background-color:#000!important}.black-text{color:#000!important}.rgba-black-slight,.rgba-black-slight:after{background-color:rgba(0,0,0,.1)}.rgba-black-light,.rgba-black-light:after{background-color:rgba(0,0,0,.3)}.rgba-black-strong,.rgba-black-strong:after{background-color:rgba(0,0,0,.7)}.white{background-color:#fff!important}.white-text{color:#fff!important}.rgba-white-slight,.rgba-white-slight:after{background-color:rgba(255,255,255,.1)}.rgba-white-light,.rgba-white-light:after{background-color:rgba(255,255,255,.3)}.rgba-white-strong,.rgba-white-strong:after{background-color:rgba(255,255,255,.7)}.rgba-stylish-slight{background-color:rgba(62,69,81,.1)}.rgba-stylish-light{background-color:rgba(62,69,81,.3)}.rgba-stylish-strong{background-color:rgba(62,69,81,.7)}.primary-color{background-color:#4285f4!important}.primary-color-dark{background-color:#0d47a1!important}.secondary-color{background-color:#a6c!important}.secondary-color-dark{background-color:#93c!important}.default-color{background-color:#2bbbad!important}.default-color-dark{background-color:#00695c!important}.info-color{background-color:#33b5e5!important}.info-color-dark{background-color:#09c!important}.success-color{background-color:#00c851!important}.success-color-dark{background-color:#007e33!important}.warning-color{background-color:#fb3!important}.warning-color-dark{background-color:#f80!important}.danger-color{background-color:#ff3547!important}.danger-color-dark{background-color:#c00!important}.elegant-color{background-color:#2e2e2e!important}.elegant-color-dark{background-color:#212121!important}.stylish-color{background-color:#4b515d!important}.stylish-color-dark{background-color:#3e4551!important}.unique-color{background-color:#3f729b!important}.unique-color-dark{background-color:#1c2331!important}.special-color{background-color:#37474f!important}.special-color-dark{background-color:#263238!important}.purple-gradient{background:linear-gradient(40deg,#ff6ec4,#7873f5)!important}.peach-gradient{background:linear-gradient(40deg,#ffd86f,#fc6262)!important}.aqua-gradient{background:linear-gradient(40deg,#2096ff,#05ffa3)!important}.blue-gradient{background:linear-gradient(40deg,#45cafc,#303f9f)!important}.purple-gradient-rgba{background:linear-gradient(40deg,rgba(255,110,196,.9),rgba(120,115,245,.9))!important}.peach-gradient-rgba{background:linear-gradient(40deg,rgba(255,216,111,.9),rgba(252,98,98,.9))!important}.aqua-gradient-rgba{background:linear-gradient(40deg,rgba(32,150,255,.9),rgba(5,255,163,.9))!important}.blue-gradient-rgba{background:linear-gradient(40deg,rgba(69,202,252,.9),rgba(48,63,159,.9))!important}.dark-grey-text,.dark-grey-text:focus,.dark-grey-text:hover{color:#4f4f4f!important}.hoverable{box-shadow:none;transition:.55s ease-in-out}.hoverable:hover{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);transition:.55s ease-in-out}.z-depth-0{box-shadow:none!important}.card-wrapper .back,.card-wrapper .front,.card.gradient-card:focus-within .card-image,.z-depth-1{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)!important}.z-depth-1-half{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)!important}.z-depth-2{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19)!important}.z-depth-3{box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19)!important}.z-depth-4{box-shadow:0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)!important}.z-depth-5{box-shadow:0 27px 24px 0 rgba(0,0,0,.2),0 40px 77px 0 rgba(0,0,0,.22)!important}.disabled,:disabled{pointer-events:none!important}a{cursor:pointer;text-decoration:none;color:#0275d8;transition:.2s ease-in-out}a:hover{text-decoration:none;color:#014c8c;transition:.2s ease-in-out}a.disabled:hover,a:disabled:hover{color:#0275d8}a:not([href]):not([tabindex]),a:not([href]):not([tabindex]):focus,a:not([href]):not([tabindex]):hover{color:inherit;text-decoration:none}.card.promoting-card .fa{transition:.4s}.card.promoting-card .fa[class*=fa-]:hover{transition:.4s;cursor:pointer}.card.weather-card .collapse-content a.collapsed:after{content:'Expand'}.card.weather-card .collapse-content a:not(.collapsed):after{content:'Collapse'}.card.weather-card .degree:after{content:'\u00B0C';position:absolute;font-size:3rem;margin-top:.9rem;font-weight:400}.card.gradient-card{transition:.5s ease-in-out}.card.gradient-card .first-content .card-title{font-weight:500}.card.gradient-card .second-content,.card.gradient-card .third-content{display:none}.card.gradient-card .card-body{transition:.5s ease-in-out;opacity:0;visibility:hidden;overflow:hidden;height:0;padding-bottom:0;padding-top:0}.card.gradient-card .card-image,.card.gradient-card .card-image .mask{border-radius:.25rem}.card.gradient-card:focus-within{margin-top:3rem;transition:.5s ease-in-out}.card.gradient-card:focus-within .card-image{transition:.5s ease-in-out;width:7rem;height:7rem;margin-top:-2rem;margin-left:1rem;border-radius:.25rem;margin-bottom:2rem}.card.gradient-card:focus-within .card-image .mask{border-radius:.25rem}.card.gradient-card:focus-within .card-body{transition:.7s ease-in-out;visibility:visible;opacity:1;overflow:visible;padding-bottom:1.25rem;padding-top:1.25rem;height:auto;border-radius:.25rem}.card.gradient-card:focus-within .card-body .progress{height:.4rem}.card.gradient-card:focus-within .card-body .progress .progress-bar{height:.4rem}.card.gradient-card:focus-within .first-content{display:none}.card.gradient-card:focus-within .second-content{display:block}.card.gradient-card:focus-within .third-content{display:block;margin-top:-6rem}@media (max-device-width:1025px){.card.gradient-card:hover{margin-top:3rem;transition:.5s ease-in-out}.card.gradient-card:hover .card-image{transition:.5s ease-in-out;width:7rem;height:7rem;margin-top:-2rem;margin-left:1rem;border-radius:.25rem;margin-bottom:2rem;box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)}.card.gradient-card:hover .card-image .mask{border-radius:.25rem}.card.gradient-card:hover .card-body{transition:.7s ease-in-out;visibility:visible;opacity:1;overflow:visible;padding-bottom:1.25rem;padding-top:1.25rem;height:auto;border-radius:.25rem}.card.gradient-card:hover .card-body .progress,.card.gradient-card:hover .card-body .progress .progress-bar{height:.4rem}.card.gradient-card:hover .first-content{display:none}.card.gradient-card:hover .second-content{display:block}.card.gradient-card:hover .third-content{display:block;margin-top:-6rem}}.card.booking-card .rating{font-size:.7rem}.card.chart-card .classic-tabs .nav li a.active{border-bottom:2px solid;transition:width .5s,background-color .5s}.card.chart-card .classic-tabs .nav.tabs-white li a{color:#757575;font-weight:500}.card.chart-card .classic-tabs .nav.tabs-white li a.active{color:#673ab7}.card.chart-card .btn-deep-purple-accent{background-color:#b388ff;margin-top:-65px}.card.chart-card .btn-deep-purple-accent i{color:#000!important}.card.chart-card .btn-teal-accent{background-color:#1de9b6;margin-top:-65px}.card.chart-card .btn-teal-accent i{color:#000!important}.card.colorful-card .indigo-accent-text{color:#304ffe}.card.colorful-card .btn-indigo-accent{background-color:#304ffe}.card.colorful-card .yellow-darken-text{color:#fdd835}.card.colorful-card .testimonial-card .avatar{width:55px;margin-top:-30px;border:3px solid #fff}.card.colorful-card .testimonial-card .avatar img{width:50px;height:50px}.card.colorful-card .brown-darken-text{color:#3e2723}.card.colorful-card .btn-red-lighten{background-color:#ffcdd2}.card-wrapper.card-action{min-height:640px}@media (max-width:450px){.card-wrapper.card-action{min-height:790px}}.card-form .md-form input[type=email]:focus:not([readonly]),.card-form .md-form input[type=password]:focus:not([readonly]),.card-form .md-form input[type=text]:focus:not([readonly]){box-shadow:0 1px 0 0 #fff;border-bottom:1px solid #fff}.card-form .card-form-2{border-top-left-radius:21px;border-top-right-radius:21px;margin-top:-35px}.card-form .card-form-2 .form-check-input[type=checkbox].filled-in:checked+label:after,.card-form .card-form-2 label.btn input[type=checkbox].filled-in:checked+label:after{background-color:#e53935;border:2px solid #e53935}.card-form .card-form-2 .btn-outline-red-accent{border:2px solid #e53935;background-color:transparent;color:#e53935}.card-form .card-form-2 .pink-accent-text{color:#c51162}.z-depth-1-bottom{box-shadow:0 5px 5px -2px rgba(0,0,0,.16)}.card-wrapper{height:500px;position:relative;-webkit-perspective:800px;perspective:800px}.card-wrapper .face{position:absolute;width:100%;height:100%;background-color:#fff}.card-wrapper .face h4{margin-bottom:15px}.card-wrapper .face h5{margin-top:30px}.card-wrapper .face .content{text-align:left;padding:15px}.card-wrapper .face .content p{margin-bottom:30px}.card-wrapper .face .content .rotate-btn{padding:1rem;margin-right:-8px;float:right;font-size:1.2rem;color:#000}.card-wrapper .card-up{overflow:hidden;height:50%}.card-wrapper .card-up img{min-width:400px;width:100%}.card-wrapper .avatar{border-radius:50%;display:block;height:120px;margin:-65px auto 0;overflow:hidden;width:120px}.card-wrapper .avatar img{border:5px solid #fff;background:#fff;width:100%}.card-wrapper .card-rotating{text-align:center;position:absolute;width:100%;height:100%;-webkit-transform-style:preserve-3d;transform-style:preserve-3d}.card-wrapper .card-rotating .content{position:relative}.card-wrapper .card-rotating .content .rotate-btn{position:absolute;right:8px;top:0}.card-wrapper .fa-repeat,.card-wrapper .fa-undo{font-size:20px;margin-top:30px}.card-wrapper .fa-undo{margin-top:30px}.card-wrapper .back,.card-wrapper .front{-webkit-backface-visibility:hidden;backface-visibility:hidden;transition:transform 1s;transition:transform 1s,-webkit-transform 1s}.card-wrapper .fron{z-index:2;cursor:auto}.card-wrapper .back{-webkit-transform:rotateY(-180deg);transform:rotateY(-180deg);padding:1rem}.card-wrapper .back .card-title{cursor:pointer}.card-wrapper .back .card-title i{color:#9e9e9e;position:absolute;right:20px}.card-wrapper .card-rotating.effect__click.flipped .front{-webkit-transform:rotateY(180deg);transform:rotateY(180deg)}.card-wrapper .card-rotating.effect__click.flipped .back{-webkit-transform:rotateY(0);transform:rotateY(0)}.embed-responsive-item{background:#000}.tp-box{position:relative;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;transition:transform 1s;transition:transform 1s,-webkit-transform 1s}.tp-box .tp-box_side{width:100%;height:100%;-webkit-backface-visibility:hidden;backface-visibility:hidden;position:absolute;text-align:center}.tp-box .tp-box_back{-webkit-transform:rotateY(179.9deg);transform:rotateY(179.9deg)}.flip-container{-webkit-perspective:1000px;perspective:1000px;-webkit-transform-style:preserve-3d;transform-style:preserve-3d}.flip-container .flipper{transition:1s;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;position:relative}.flip-container .front{z-index:2;-webkit-transform:rotateY(0);transform:rotateY(0)}.flip-container .back{-webkit-transform:rotateY(-180deg);transform:rotateY(-180deg)}.flip-container .back,.flip-container .front{-webkit-backface-visibility:hidden;backface-visibility:hidden;transition:1s;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;position:absolute;top:0;left:0}.flip-container.rotate .back{-webkit-transform:rotateY(0);transform:rotateY(0);background-color:#fff}.flip-container.rotate .front{-webkit-transform:rotateY(180deg);transform:rotateY(180deg)}.card-overflow{overflow:hidden;height:100%;box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)}"]
                 }] }
     ];
     CardRotatingComponent.propDecorators = {
@@ -17376,26 +15302,26 @@ var CardRotatingComponent = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var CardsModule = /** @class */ (function () {
-    function CardsModule() {
+var AnimatedCardsModule = /** @class */ (function () {
+    function AnimatedCardsModule() {
     }
     /**
      * @return {?}
      */
-    CardsModule.forRoot = /**
+    AnimatedCardsModule.forRoot = /**
      * @return {?}
      */
     function () {
-        return { ngModule: CardsModule, providers: [] };
+        return { ngModule: AnimatedCardsModule, providers: [] };
     };
-    CardsModule.decorators = [
+    AnimatedCardsModule.decorators = [
         { type: NgModule, args: [{
                     imports: [CommonModule],
                     declarations: [CardRevealComponent, CardRotatingComponent],
-                    exports: [CardRevealComponent, CardRotatingComponent]
+                    exports: [CardRevealComponent, CardRotatingComponent],
                 },] }
     ];
-    return CardsModule;
+    return AnimatedCardsModule;
 }());
 
 /**
@@ -18071,7 +15997,8 @@ var FocusDirective = /** @class */ (function () {
  */
 /** @enum {number} */
 var KeyCode = {
-    backspace: 8, delete: 46,
+    backspace: 8,
+    delete: 46,
 };
 KeyCode[KeyCode.backspace] = 'backspace';
 KeyCode[KeyCode.delete] = 'delete';
@@ -18089,6 +16016,7 @@ var InputAutoFillDirective = /** @class */ (function () {
      * @return {?}
      */
     function (evt) {
+        // tslint:disable-next-line: deprecation
         if (!this.opts.enabled || evt.keyCode === KeyCode.backspace || evt.keyCode === KeyCode.delete) {
             return;
         }
@@ -18110,15 +16038,13 @@ var InputAutoFillDirective = /** @class */ (function () {
         }
         else if (ews &&
             parts[idx - 1].length < this.getPartLength(idx - 1) &&
-            this.isNumber(parts[idx - 1]) && (this.isDay(idx - 1) || this.isMonth(idx - 1))) {
+            this.isNumber(parts[idx - 1]) &&
+            (this.isDay(idx - 1) || this.isMonth(idx - 1))) {
             this.setInputValue(this.insertPos(val, val.length - 2, '0'));
         }
         else if (parts[idx].length < this.getPartLength(idx) &&
             this.isNumber(parts[idx]) &&
-            (Number(parts[idx]) > 3 &&
-                this.isDay(idx) ||
-                Number(parts[idx]) > 1 &&
-                    this.isMonth(idx))) {
+            ((Number(parts[idx]) > 3 && this.isDay(idx)) || (Number(parts[idx]) > 1 && this.isMonth(idx)))) {
             this.setInputValue(this.insertPos(val, val.length - 1, '0') + (idx < 2 ? this.opts.separator : ''));
         }
     };
@@ -18204,7 +16130,7 @@ var InputAutoFillDirective = /** @class */ (function () {
      * @return {?}
      */
     function (idx) {
-        return this.opts.formatParts[idx].indexOf('m') !== -1 && this.opts.formatParts[idx].length === 2;
+        return (this.opts.formatParts[idx].indexOf('m') !== -1 && this.opts.formatParts[idx].length === 2);
     };
     /**
      * @private
@@ -18232,7 +16158,7 @@ var InputAutoFillDirective = /** @class */ (function () {
     };
     InputAutoFillDirective.decorators = [
         { type: Directive, args: [{
-                    selector: '[mdbInputAutoFill]'
+                    selector: '[mdbInputAutoFill]',
                 },] }
     ];
     /** @nocollapse */
@@ -18251,33 +16177,22 @@ var InputAutoFillDirective = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 /** @type {?} */
 var MYDP_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
+    // tslint:disable-next-line: no-use-before-declare
     useExisting: forwardRef((/**
      * @return {?}
      */
     function () { return MDBDatePickerComponent; })),
-    multi: true
+    multi: true,
 };
 /** @enum {number} */
 var CalToggle = {
-    Open: 1, CloseByDateSel: 2, CloseByCalBtn: 3, CloseByOutClick: 4,
+    Open: 1,
+    CloseByDateSel: 2,
+    CloseByCalBtn: 3,
+    CloseByOutClick: 4,
 };
 CalToggle[CalToggle.Open] = 'Open';
 CalToggle[CalToggle.CloseByDateSel] = 'CloseByDateSel';
@@ -18285,25 +16200,30 @@ CalToggle[CalToggle.CloseByCalBtn] = 'CloseByCalBtn';
 CalToggle[CalToggle.CloseByOutClick] = 'CloseByOutClick';
 /** @enum {number} */
 var Year = {
-    min: 1000, max: 9999,
+    min: 1000,
+    max: 9999,
 };
 Year[Year.min] = 'min';
 Year[Year.max] = 'max';
 /** @enum {number} */
 var InputFocusBlur = {
-    focus: 1, blur: 2,
+    focus: 1,
+    blur: 2,
 };
 InputFocusBlur[InputFocusBlur.focus] = 'focus';
 InputFocusBlur[InputFocusBlur.blur] = 'blur';
 /** @enum {number} */
 var KeyCode$1 = {
-    enter: 13, space: 32,
+    enter: 13,
+    space: 32,
 };
 KeyCode$1[KeyCode$1.enter] = 'enter';
 KeyCode$1[KeyCode$1.space] = 'space';
 /** @enum {number} */
 var MonthId = {
-    prev: 1, curr: 2, next: 3,
+    prev: 1,
+    curr: 2,
+    next: 3,
 };
 MonthId[MonthId.prev] = 'prev';
 MonthId[MonthId.curr] = 'curr';
@@ -18357,7 +16277,11 @@ var MDBDatePickerComponent = /** @class */ (function () {
         this.nextMonthId = MonthId.next;
         this.isOpen = false;
         this.isDisabled = false;
-        this.tmp = { year: this.getToday().year, month: this.getToday().month, day: this.getToday().day };
+        this.tmp = {
+            year: this.getToday().year,
+            month: this.getToday().month,
+            day: this.getToday().day,
+        };
         // Default options
         this.opts = {
             startDate: (/** @type {?} */ ('')),
@@ -18398,7 +16322,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
             ariaLabelPrevMonth: (/** @type {?} */ ('Previous Month')),
             ariaLabelNextMonth: (/** @type {?} */ ('Next Month')),
             ariaLabelPrevYear: (/** @type {?} */ ('Previous Year')),
-            ariaLabelNextYear: (/** @type {?} */ ('Next Year'))
+            ariaLabelNextYear: (/** @type {?} */ ('Next Year')),
         };
         this.months = [];
         this.years = [];
@@ -18410,13 +16334,11 @@ var MDBDatePickerComponent = /** @class */ (function () {
         this.onChangeCb = (/**
          * @return {?}
          */
-        function () {
-        });
+        function () { });
         this.onTouchedCb = (/**
          * @return {?}
          */
-        function () {
-        });
+        function () { });
         this.isBrowser = isPlatformBrowser(platformId);
         if (this.isBrowser) {
             this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -18495,8 +16417,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
                     }));
                     _this.renderer.setStyle(openedPicker, 'z-index', '100');
                 }
-                catch (error) {
-                }
+                catch (error) { }
             }), 0);
         }
     };
@@ -18533,11 +16454,11 @@ var MDBDatePickerComponent = /** @class */ (function () {
         try {
             if (this.elem.nativeElement.parentElement.parentElement.classList.contains('modal-content')) {
                 this.renderer.setStyle(this.elem.nativeElement.parentElement.parentElement, 'transition', 'height 0.3s');
-                this.elem.nativeElement.parentElement.parentElement.style.height = this.modalHeightBefore + 'px';
+                this.elem.nativeElement.parentElement.parentElement.style.height =
+                    this.modalHeightBefore + 'px';
             }
         }
-        catch (error) {
-        }
+        catch (error) { }
         setTimeout((/**
          * @return {?}
          */
@@ -18653,7 +16574,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
             this.inputFieldChanged.emit({
                 value: value,
                 dateFormat: this.opts.dateFormat,
-                valid: !(value.length === 0 || this.invalidDate)
+                valid: !(value.length === 0 || this.invalidDate),
             });
             this.onChangeCb('');
             this.onTouchedCb();
@@ -18703,7 +16624,11 @@ var MDBDatePickerComponent = /** @class */ (function () {
         if (m !== -1) {
             this.editMonth = false;
             if (m !== this.visibleMonth.monthNbr) {
-                this.visibleMonth = { monthTxt: this.monthText(m), monthNbr: m, year: this.visibleMonth.year };
+                this.visibleMonth = {
+                    monthTxt: this.monthText(m),
+                    monthNbr: m,
+                    year: this.visibleMonth.year,
+                };
                 this.generateCalendar(m, this.visibleMonth.year, true);
             }
         }
@@ -18726,7 +16651,11 @@ var MDBDatePickerComponent = /** @class */ (function () {
         if (y !== -1) {
             this.editYear = false;
             if (y !== this.visibleMonth.year) {
-                this.visibleMonth = { monthTxt: this.visibleMonth.monthTxt, monthNbr: this.visibleMonth.monthNbr, year: y };
+                this.visibleMonth = {
+                    monthTxt: this.visibleMonth.monthTxt,
+                    monthNbr: this.visibleMonth.monthNbr,
+                    year: y,
+                };
                 this.generateCalendar(this.visibleMonth.monthNbr, y, true);
             }
         }
@@ -18919,8 +16848,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
                 field.focus();
             }), 0);
         }
-        catch (error) {
-        }
+        catch (error) { }
     };
     /**
      * @return {?}
@@ -18966,11 +16894,11 @@ var MDBDatePickerComponent = /** @class */ (function () {
                 this.firstTimeOpenedModal = false;
                 this.renderer.setStyle(this.elem.nativeElement.parentElement.parentElement, 'transition', 'height 0.3s');
                 // tslint:disable-next-line:max-line-length
-                this.elem.nativeElement.parentElement.parentElement.style.height = this.modalHeightBefore + this.pickerFrame.nativeElement.offsetHeight + 'px';
+                this.elem.nativeElement.parentElement.parentElement.style.height =
+                    this.modalHeightBefore + this.pickerFrame.nativeElement.offsetHeight + 'px';
             }
         }
-        catch (error) {
-        }
+        catch (error) { }
         // Open selector button clicked
         this.showSelector = !this.showSelector;
         if (this.showSelector) {
@@ -19028,7 +16956,11 @@ var MDBDatePickerComponent = /** @class */ (function () {
     function () {
         this.months = [];
         for (var i = 1; i <= 12; i++) {
-            this.months.push({ index: i, short: this.opts.monthLabels[i], label: this.opts.monthLabelsFull[i] });
+            this.months.push({
+                index: i,
+                short: this.opts.monthLabels[i],
+                label: this.opts.monthLabelsFull[i],
+            });
         }
     };
     /**
@@ -19133,7 +17065,11 @@ var MDBDatePickerComponent = /** @class */ (function () {
             this.selectDate(today);
         }
         if (today.year !== this.visibleMonth.year || today.month !== this.visibleMonth.monthNbr) {
-            this.visibleMonth = { monthTxt: this.opts.monthLabels[today.month], monthNbr: today.month, year: today.year };
+            this.visibleMonth = {
+                monthTxt: this.opts.monthLabels[today.month],
+                monthNbr: today.month,
+                year: today.year,
+            };
             this.generateCalendar(today.month, today.year, true);
         }
         this.todayButtonClicked.emit(this);
@@ -19200,7 +17136,11 @@ var MDBDatePickerComponent = /** @class */ (function () {
         this.onChangeCb(null);
         this.onTouchedCb();
         this.updateDateValue(date, true);
-        this.tmp = { year: this.getToday().year, month: this.getToday().month, day: this.getToday().day };
+        this.tmp = {
+            year: this.getToday().year,
+            month: this.getToday().month,
+            day: this.getToday().day,
+        };
         this.setVisibleMonth();
         this.labelActive = false;
     };
@@ -19223,7 +17163,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
             jsdate: this.getDate(date.year, date.month, date.day),
             previousDateFormatted: this.selectionDayTxt,
             actualDateFormatted: dateModel,
-            epoc: Math.round(this.getTimeInMilliseconds(date) / 1000.0)
+            epoc: Math.round(this.getTimeInMilliseconds(date) / 1000.0),
         });
         this.onChangeCb(dateModel);
         this.onTouchedCb();
@@ -19254,7 +17194,11 @@ var MDBDatePickerComponent = /** @class */ (function () {
         this.tmp = date;
         this.isDateSelected = true;
         this.selectionDayTxt = clear ? '' : this.formatDate(date);
-        this.inputFieldChanged.emit({ value: this.selectionDayTxt, dateFormat: this.opts.dateFormat, valid: !clear });
+        this.inputFieldChanged.emit({
+            value: this.selectionDayTxt,
+            dateFormat: this.opts.dateFormat,
+            valid: !clear,
+        });
         this.invalidDate = false;
         this.cdRef.markForCheck();
     };
@@ -19583,10 +17527,12 @@ var MDBDatePickerComponent = /** @class */ (function () {
                     /** @type {?} */
                     var date = { year: y, month: m - 1, day: j };
                     week.push({
-                        dateObj: date, cmo: cmo, currDay: this.isCurrDay(j, m, y, cmo, today),
+                        dateObj: date,
+                        cmo: cmo,
+                        currDay: this.isCurrDay(j, m, y, cmo, today),
                         dayNbr: this.utilService.getDayNumber(date),
                         disabled: this.utilService.isDisabledDay(date, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDays, this.opts.disableDateRanges, this.opts.enableDays),
-                        markedDate: this.utilService.isMarkedDate(date, this.opts.markDates, this.opts.markWeekends)
+                        markedDate: this.utilService.isMarkedDate(date, this.opts.markDates, this.opts.markWeekends),
                     });
                 }
                 cmo = this.currMonthId;
@@ -19597,10 +17543,12 @@ var MDBDatePickerComponent = /** @class */ (function () {
                     /** @type {?} */
                     var date = { year: y, month: m, day: dayNbr };
                     week.push({
-                        dateObj: date, cmo: cmo, currDay: this.isCurrDay(dayNbr, m, y, cmo, today),
+                        dateObj: date,
+                        cmo: cmo,
+                        currDay: this.isCurrDay(dayNbr, m, y, cmo, today),
                         dayNbr: this.utilService.getDayNumber(date),
                         disabled: this.utilService.isDisabledDay(date, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDays, this.opts.disableDateRanges, this.opts.enableDays),
-                        markedDate: this.utilService.isMarkedDate(date, this.opts.markDates, this.opts.markWeekends)
+                        markedDate: this.utilService.isMarkedDate(date, this.opts.markDates, this.opts.markWeekends),
                     });
                     dayNbr++;
                 }
@@ -19614,20 +17562,26 @@ var MDBDatePickerComponent = /** @class */ (function () {
                         cmo = this.nextMonthId;
                     }
                     /** @type {?} */
-                    var date = { year: y, month: cmo === this.currMonthId ? m : m + 1, day: dayNbr };
+                    var date = {
+                        year: y,
+                        month: cmo === this.currMonthId ? m : m + 1,
+                        day: dayNbr,
+                    };
                     week.push({
-                        dateObj: date, cmo: cmo, currDay: this.isCurrDay(dayNbr, m, y, cmo, today),
+                        dateObj: date,
+                        cmo: cmo,
+                        currDay: this.isCurrDay(dayNbr, m, y, cmo, today),
                         dayNbr: this.utilService.getDayNumber(date),
                         disabled: this.utilService.isDisabledDay(date, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDays, this.opts.disableDateRanges, this.opts.enableDays),
-                        markedDate: this.utilService.isMarkedDate(date, this.opts.markDates, this.opts.markWeekends)
+                        markedDate: this.utilService.isMarkedDate(date, this.opts.markDates, this.opts.markWeekends),
                     });
                     dayNbr++;
                 }
             }
             /** @type {?} */
-            var weekNbr = this.opts.showWeekNumbers &&
-                this.opts.firstDayOfWeek === 'mo' ?
-                this.utilService.getWeekNumber(week[0].dateObj) : 0;
+            var weekNbr = this.opts.showWeekNumbers && this.opts.firstDayOfWeek === 'mo'
+                ? this.utilService.getWeekNumber(week[0].dateObj)
+                : 0;
             this.dates.push({ week: week, weekNbr: weekNbr });
         }
         this.setHeaderBtnDisabledState(m, y);
@@ -19641,17 +17595,17 @@ var MDBDatePickerComponent = /** @class */ (function () {
                     weekday: this.getWeekday({
                         year: y,
                         month: m,
-                        day: 1
-                    })
+                        day: 1,
+                    }),
                 },
                 last: {
                     number: dInThisM,
                     weekday: this.getWeekday({
                         year: y,
                         month: m,
-                        day: dInThisM
-                    })
-                }
+                        day: dInThisM,
+                    }),
+                },
             });
         }
         this.monthList();
@@ -19734,23 +17688,23 @@ var MDBDatePickerComponent = /** @class */ (function () {
             dpm = this.utilService.isMonthDisabledByDisableUntil({
                 year: m === 1 ? y - 1 : y,
                 month: m === 1 ? 12 : m - 1,
-                day: this.daysInMonth(m === 1 ? 12 : m - 1, m === 1 ? y - 1 : y)
+                day: this.daysInMonth(m === 1 ? 12 : m - 1, m === 1 ? y - 1 : y),
             }, this.opts.disableUntil);
             dpy = this.utilService.isMonthDisabledByDisableUntil({
                 year: y - 1,
                 month: m,
-                day: this.daysInMonth(m, y - 1)
+                day: this.daysInMonth(m, y - 1),
             }, this.opts.disableUntil);
             dnm = this.utilService.isMonthDisabledByDisableSince({
                 year: m === 12 ? y + 1 : y,
                 month: m === 12 ? 1 : m + 1,
-                day: 1
+                day: 1,
             }, this.opts.disableSince);
             dny = this.utilService.isMonthDisabledByDisableSince({ year: y + 1, month: m, day: 1 }, this.opts.disableSince);
         }
-        this.prevMonthDisabled = m === 1 && y === this.opts.minYear || dpm;
+        this.prevMonthDisabled = (m === 1 && y === this.opts.minYear) || dpm;
         this.prevYearDisabled = y - 1 < this.opts.minYear || dpy;
-        this.nextMonthDisabled = m === 12 && y === this.opts.maxYear || dnm;
+        this.nextMonthDisabled = (m === 12 && y === this.opts.maxYear) || dnm;
         this.nextYearDisabled = y + 1 > this.opts.maxYear || dny;
     };
     /**
@@ -19811,10 +17765,11 @@ var MDBDatePickerComponent = /** @class */ (function () {
         { type: Component, args: [{
                     selector: 'mdb-date-picker',
                     exportAs: 'mdbdatepicker',
-                    template: "<!-- Line 27: Deleted (focus)=\"onFocusInput($event)\" for better use in Firefox. If other strange problems will occur, please paste it in line 27. -->\r\n<div class=\"mydp picker\" [ngClass]=\"{'picker--opened': showSelector}\" [ngStyle]=\"{'width': opts.width}\" *ngIf=\"!inline\">\r\n  <div class=\"md-form\" [ngClass]=\"{'md-outline': outlineInput}\">\r\n\r\n    <input type=\"text\" class=\"form-control mydp-date\" [readonly]=\"!opts.editableDateField\"\r\n           [attr.aria-label]=\"opts.ariaLabelInputField\"\r\n           (mousedown)=\"openBtnClicked()\"\r\n           [attr.maxlength]=\"opts.dateFormat.length\" [ngClass]=\"{\r\n        'selectiondisabled': opts.componentDisabled,\r\n        'disabled': opts.componentDisabled\r\n      }\" placeholder=\"{{ placeholder }}\" [ngModel]=\"selectionDayTxt\" (ngModelChange)=\"onUserDateInput($event)\"\r\n           [value]=\"selectionDayTxt\"\r\n           [ngStyle]=\"{\r\n        'font-size': opts.selectionTxtFontSize\r\n      }\" (blur)=\"onBlurInput($event)\" (focus)=\"onFocusInput($event)\" [disabled]=\"opts.componentDisabled || isDisabled\"\r\n           autocomplete=\"off\" [tabindex]=\"tabIndex\">\r\n    <label (click)=\"openBtnClicked()\" *ngIf=\"label.length > 0\" [ngClass]=\"{\r\n          'active': checkActive(),\r\n          'disabled': opts.componentDisabled\r\n        }\">{{ label }}</label>\r\n  </div>\r\n  <div *ngIf=\"showSelector\" class=\"selector picker__holder selectorarrow selectorarrowleft selectorarrowright\" #divFocus\r\n       [ngClass]=\"{'alignselectorright': opts.alignSelectorRight}\"\r\n       tabindex=\"0\">\r\n    <div class=\"picker__frame picker__box\" #pickerFrame>\r\n      <div class=\"picker__header\">\r\n        <div class=\"picker__date-display\">\r\n          <div class=\"picker__weekday-display\">\r\n            {{ weekText(getWeekday(tmp)) }}\r\n          </div>\r\n          <div class=\"picker__month-display\">\r\n            <div>{{ monthText(tmp.month) }}</div>\r\n          </div>\r\n          <div class=\"picker__day-display\">\r\n            <div>{{ tmp.day }}</div>\r\n          </div>\r\n          <div class=\"picker__year-display\">\r\n            <div>{{ tmp.year }}</div>\r\n          </div>\r\n        </div>\r\n        <select class=\"picker__select--year\" [(ngModel)]=\"visibleMonth.year\" (ngModelChange)=\"onUserYearInput($event)\"\r\n                role=\"menu\"\r\n                aria-label=\"Year selector\">\r\n          <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option>\r\n        </select>\r\n        <select class=\"picker__select--month\" [(ngModel)]=\"visibleMonth.monthTxt\"\r\n                (ngModelChange)=\"onUserMonthInput($event)\" role=\"menu\"\r\n                aria-label=\"Month selector\">\r\n          <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option>\r\n        </select>\r\n        <a href=\"javascript:;\" type=\"button\" role=\"button\" class=\"picker__nav--prev black-text\" data-nav=\"-1\"\r\n           aria-controls=\"date-picker-example_table\"\r\n           title=\"Previous month\"\r\n           (click)=\"prevMonth($event)\"\r\n           (keydown.enter)=\"prevMonth($event)\"\r\n           [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled, 'disabled grey-text': prevMonthDisabled}\"></a>\r\n        <a role=\"button\" href=\"javascript:;\" class=\"picker__nav--next black-text\" data-nav=\"1\" type=\"button\"\r\n           aria-controls=\"date-picker-example_table\"\r\n           title=\"Next month\"\r\n           (click)=\"nextMonth($event)\"\r\n           (keydown.enter)=\"nextMonth($event)\"\r\n           [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled, 'disabled grey-text': nextMonthDisabled}\"></a>\r\n      </div>\r\n      <table class=\"picker__table\">\r\n        <thead>\r\n        <tr>\r\n          <th class=\"picker__weekday weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#\r\n          </th>\r\n          <th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th>\r\n        </tr>\r\n        </thead>\r\n        <tbody>\r\n        <tr *ngFor=\"let w of dates\">\r\n          <td class=\"picker__day daycellweeknbr\"\r\n              *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td>\r\n          <td class=\"picker__day\" *ngFor=\"let d of w.week\"\r\n              [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId&&!d.disabled, 'disabled': d.disabled, 'tablesingleday': d.cmo===currMonthId&&!d.disabled}\">\r\n            <div *ngIf=\"d.markedDate.marked\" class=\"markdate\"\r\n                 [ngStyle]=\"{'background-color': d.markedDate.color}\"></div>\r\n            <div class=\"picker__day\"\r\n                 [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId,'picker__day--outfocus': (d.cmo===nextMonthId || d.cmo===prevMonthId), 'picker__day--today':d.currDay&&opts.markCurrentDay, 'picker__day--selected picker__day--highlighted':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId}\"\r\n                 (click)=\"!d.disabled&&cellClicked(d);$event.stopPropagation()\" (keydown)=\"cellKeyDown($event, d)\"\r\n                 tabindex=\"0\">\r\n              {{d.dateObj.day}}\r\n            </div>\r\n          </td>\r\n        </tr>\r\n        </tbody>\r\n      </table>\r\n      <div class=\"picker__footer\">\r\n        <button type=\"button\" *ngIf=\"opts.showTodayBtn\" class=\"picker__button--today\" (click)=\"todayClicked()\"\r\n                role=\"button\" [attr.aria-label]=\"opts.todayBtnTxt\">\r\n          {{opts.todayBtnTxt}}\r\n        </button>\r\n        <button type=\"button\" *ngIf=\"opts.showClearDateBtn\" class=\"picker__button--clear\" (click)=\"removeBtnClicked()\"\r\n                role=\"button\"\r\n                [attr.aria-label]=\"opts.clearBtnTxt\">\r\n          {{opts.clearBtnTxt}}\r\n        </button>\r\n        <button type=\"button\" [ngClass]=\"{'ml-auto': !opts.showTodayBtn}\" class=\"picker__button--close\"\r\n                (click)=\"closeBtnClicked()\"\r\n                role=\"button\" [attr.aria-label]=\"opts.closeBtnTxt\">\r\n          {{opts.closeBtnTxt}}\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n<div class=\"md-form my-0 d-flex align-items-center justify-content-center\" *ngIf=\"inline\"\r\n     [ngClass]=\"{'md-outline': outlineInput}\">\r\n  <input type=\"text\" class=\"form-control mydp-date\" [readonly]=\"!opts.editableDateField\"\r\n         [attr.aria-label]=\"opts.ariaLabelInputField\"\r\n         [attr.maxlength]=\"opts.dateFormat.length\" [ngClass]=\"{\r\n        'selectiondisabled': opts.componentDisabled,\r\n        'disabled': opts.componentDisabled\r\n      }\" placeholder=\"{{ placeholder }}\" [ngModel]=\"selectionDayTxt\" (ngModelChange)=\"onUserDateInput($event)\"\r\n         [value]=\"selectionDayTxt\"\r\n         [ngStyle]=\"{\r\n        'font-size': opts.selectionTxtFontSize\r\n      }\" (focus)=\"onFocusInput($event)\" (blur)=\"onBlurInput($event)\" [disabled]=\"opts.componentDisabled || isDisabled\"\r\n         autocomplete=\"off\" [tabindex]=\"tabIndex\">\r\n  <label (click)=\"openBtnClicked()\" *ngIf=\"label.length > 0\" [ngClass]=\"{\r\n          'active': checkActive(),\r\n          'disabled': opts.componentDisabled\r\n        }\">{{ label }}</label>\r\n  <i [ngClass]=\"inlineIcon\" class=\"datepicker-inline-icon\" (click)=\"toggleInlineDatePicker()\"></i>\r\n</div>\r\n<div class=\"mydp picker datepicker-inline\" [ngClass]=\"{'picker--opened': showSelector}\" *ngIf=\"inline && isOpen\">\r\n\r\n  <div class=\"picker__frame picker__box z-depth-1\" #pickerFrame [ngClass]=\"{'d-none': !isOpen}\">\r\n    <div class=\"picker__header d-flex flex-center\">\r\n\r\n      <select class=\"picker__select--year\" [(ngModel)]=\"visibleMonth.year\" (ngModelChange)=\"onUserYearInput($event)\"\r\n              role=\"menu\"\r\n              aria-label=\"Year selector\">\r\n        <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option>\r\n      </select>\r\n      <select class=\"picker__select--month\" [(ngModel)]=\"visibleMonth.monthTxt\"\r\n              (ngModelChange)=\"onUserMonthInput($event)\" role=\"menu\"\r\n              aria-label=\"Month selector\">\r\n        <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option>\r\n      </select>\r\n      <a href=\"javascript:;\" type=\"button\" role=\"button\" class=\"picker__nav--prev black-text\" data-nav=\"-1\"\r\n         aria-controls=\"date-picker-example_table\"\r\n         title=\"Previous month\"\r\n         (click)=\"prevMonth($event)\"\r\n         (keydown.enter)=\"prevMonth($event)\"\r\n         [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled, 'disabled grey-text': prevMonthDisabled}\"></a>\r\n      <a href=\"javascript:;\" type=\"button\" role=\"button\" class=\"picker__nav--next black-text\" data-nav=\"1\"\r\n         aria-controls=\"date-picker-example_table\"\r\n         title=\"Next month\"\r\n         (click)=\"nextMonth($event)\"\r\n         (keydown.enter)=\"nextMonth($event)\"\r\n         [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled, 'disabled grey-text': nextMonthDisabled}\"></a>\r\n    </div>\r\n    <table class=\"picker__table\">\r\n      <thead>\r\n      <tr>\r\n        <th class=\"picker__weekday weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#</th>\r\n        <th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th>\r\n      </tr>\r\n      </thead>\r\n      <tbody>\r\n      <tr *ngFor=\"let w of dates\">\r\n        <td class=\"picker__day daycellweeknbr\"\r\n            *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td>\r\n        <td class=\"picker__day\" *ngFor=\"let d of w.week\"\r\n            [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId&&!d.disabled, 'disabled': d.disabled, 'tablesingleday': d.cmo===currMonthId&&!d.disabled}\">\r\n          <div *ngIf=\"d.markedDate.marked\" class=\"markdate\" [ngStyle]=\"{'background-color': d.markedDate.color}\"></div>\r\n          <div class=\"picker__day\"\r\n               [ngClass]=\"{'picker__day--infocus':d.cmo===currMonthId,'picker__day--outfocus': (d.cmo===nextMonthId || d.cmo===prevMonthId), 'picker__day--today':d.currDay&&opts.markCurrentDay, 'picker__day--selected picker__day--highlighted':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId}\"\r\n               (click)=\"!d.disabled&&cellClicked(d);$event.stopPropagation()\" (keydown)=\"cellKeyDown($event, d)\"\r\n               tabindex=\"0\">\r\n            {{d.dateObj.day}}\r\n          </div>\r\n        </td>\r\n      </tr>\r\n      </tbody>\r\n    </table>\r\n    <div class=\"picker__footer\">\r\n      <button type=\"button\" *ngIf=\"opts.showTodayBtn\" class=\"picker__button--today\" (click)=\"todayClicked()\"\r\n              role=\"button\" [attr.aria-label]=\"opts.todayBtnTxt\">\r\n        {{opts.todayBtnTxt}}\r\n      </button>\r\n      <button type=\"button\" *ngIf=\"opts.showClearDateBtn\" class=\"picker__button--clear\" (click)=\"removeBtnClicked()\"\r\n              role=\"button\"\r\n              [attr.aria-label]=\"opts.clearBtnTxt\">\r\n        {{opts.clearBtnTxt}}\r\n      </button>\r\n      <button type=\"button\" [ngClass]=\"{'ml-auto': !opts.showTodayBtn}\" class=\"picker__button--close\"\r\n              (click)=\"closeBtnClicked()\"\r\n              role=\"button\" [attr.aria-label]=\"opts.closeBtnTxt\">\r\n        {{opts.closeBtnTxt}}\r\n      </button>\r\n    </div>\r\n  </div>\r\n</div>\r\n",
+                    template: "<!-- Line 27: Deleted (focus)=\"onFocusInput($event)\" for better use in Firefox. If other strange problems will occur, please paste it in line 27. -->\r\n<div\r\n  class=\"mydp picker\"\r\n  [ngClass]=\"{ 'picker--opened': showSelector }\"\r\n  [ngStyle]=\"{ width: opts.width }\"\r\n  *ngIf=\"!inline\"\r\n>\r\n  <div class=\"md-form\" [ngClass]=\"{ 'md-outline': outlineInput }\">\r\n    <input\r\n      type=\"text\"\r\n      class=\"form-control mydp-date\"\r\n      [readonly]=\"!opts.editableDateField\"\r\n      [attr.aria-label]=\"opts.ariaLabelInputField\"\r\n      (mousedown)=\"openBtnClicked()\"\r\n      [attr.maxlength]=\"opts.dateFormat.length\"\r\n      [ngClass]=\"{\r\n        selectiondisabled: opts.componentDisabled,\r\n        disabled: opts.componentDisabled\r\n      }\"\r\n      placeholder=\"{{ placeholder }}\"\r\n      [ngModel]=\"selectionDayTxt\"\r\n      (ngModelChange)=\"onUserDateInput($event)\"\r\n      [value]=\"selectionDayTxt\"\r\n      [ngStyle]=\"{\r\n        'font-size': opts.selectionTxtFontSize\r\n      }\"\r\n      (blur)=\"onBlurInput($event)\"\r\n      (focus)=\"onFocusInput($event)\"\r\n      [disabled]=\"opts.componentDisabled || isDisabled\"\r\n      autocomplete=\"off\"\r\n      [tabindex]=\"tabIndex\"\r\n    />\r\n    <label\r\n      (click)=\"openBtnClicked()\"\r\n      *ngIf=\"label.length > 0\"\r\n      [ngClass]=\"{\r\n        active: checkActive(),\r\n        disabled: opts.componentDisabled\r\n      }\"\r\n      >{{ label }}</label\r\n    >\r\n  </div>\r\n  <div\r\n    *ngIf=\"showSelector\"\r\n    class=\"selector picker__holder selectorarrow selectorarrowleft selectorarrowright\"\r\n    #divFocus\r\n    [ngClass]=\"{ alignselectorright: opts.alignSelectorRight }\"\r\n    tabindex=\"0\"\r\n  >\r\n    <div class=\"picker__frame picker__box\" #pickerFrame>\r\n      <div class=\"picker__header\">\r\n        <div class=\"picker__date-display\">\r\n          <div class=\"picker__weekday-display\">\r\n            {{ weekText(getWeekday(tmp)) }}\r\n          </div>\r\n          <div class=\"picker__month-display\">\r\n            <div>{{ monthText(tmp.month) }}</div>\r\n          </div>\r\n          <div class=\"picker__day-display\">\r\n            <div>{{ tmp.day }}</div>\r\n          </div>\r\n          <div class=\"picker__year-display\">\r\n            <div>{{ tmp.year }}</div>\r\n          </div>\r\n        </div>\r\n        <select\r\n          class=\"picker__select--year\"\r\n          [(ngModel)]=\"visibleMonth.year\"\r\n          (ngModelChange)=\"onUserYearInput($event)\"\r\n          role=\"menu\"\r\n          aria-label=\"Year selector\"\r\n        >\r\n          <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option>\r\n        </select>\r\n        <select\r\n          class=\"picker__select--month\"\r\n          [(ngModel)]=\"visibleMonth.monthTxt\"\r\n          (ngModelChange)=\"onUserMonthInput($event)\"\r\n          role=\"menu\"\r\n          aria-label=\"Month selector\"\r\n        >\r\n          <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option>\r\n        </select>\r\n        <a\r\n          href=\"javascript:;\"\r\n          role=\"button\"\r\n          class=\"picker__nav--prev black-text\"\r\n          data-nav=\"-1\"\r\n          aria-controls=\"date-picker-example_table\"\r\n          title=\"Previous month\"\r\n          (click)=\"prevMonth($event)\"\r\n          (keydown.enter)=\"prevMonth($event)\"\r\n          [ngClass]=\"{\r\n            headerbtnenabled: !prevMonthDisabled,\r\n            headerbtndisabled: prevMonthDisabled,\r\n            'disabled grey-text': prevMonthDisabled\r\n          }\"\r\n        ></a>\r\n        <a\r\n          role=\"button\"\r\n          href=\"javascript:;\"\r\n          class=\"picker__nav--next black-text\"\r\n          data-nav=\"1\"\r\n          aria-controls=\"date-picker-example_table\"\r\n          title=\"Next month\"\r\n          (click)=\"nextMonth($event)\"\r\n          (keydown.enter)=\"nextMonth($event)\"\r\n          [ngClass]=\"{\r\n            headerbtnenabled: !nextMonthDisabled,\r\n            headerbtndisabled: nextMonthDisabled,\r\n            'disabled grey-text': nextMonthDisabled\r\n          }\"\r\n        ></a>\r\n      </div>\r\n      <table class=\"picker__table\">\r\n        <thead>\r\n          <tr>\r\n            <th\r\n              class=\"picker__weekday weekdaytitleweeknbr\"\r\n              *ngIf=\"opts.showWeekNumbers && opts.firstDayOfWeek === 'mo'\"\r\n            >\r\n              #\r\n            </th>\r\n            <th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{ d }}</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let w of dates\">\r\n            <td\r\n              class=\"picker__day daycellweeknbr\"\r\n              *ngIf=\"opts.showWeekNumbers && opts.firstDayOfWeek === 'mo'\"\r\n            >\r\n              {{ w.weekNbr }}\r\n            </td>\r\n            <td\r\n              class=\"picker__day\"\r\n              *ngFor=\"let d of w.week\"\r\n              [ngClass]=\"{\r\n                'picker__day--infocus': d.cmo === currMonthId && !d.disabled,\r\n                disabled: d.disabled,\r\n                tablesingleday: d.cmo === currMonthId && !d.disabled\r\n              }\"\r\n            >\r\n              <div\r\n                *ngIf=\"d.markedDate.marked\"\r\n                class=\"markdate\"\r\n                [ngStyle]=\"{ 'background-color': d.markedDate.color }\"\r\n              ></div>\r\n              <div\r\n                class=\"picker__day\"\r\n                [ngClass]=\"{\r\n                  'picker__day--infocus': d.cmo === currMonthId,\r\n                  'picker__day--outfocus': d.cmo === nextMonthId || d.cmo === prevMonthId,\r\n                  'picker__day--today': d.currDay && opts.markCurrentDay,\r\n                  'picker__day--selected picker__day--highlighted':\r\n                    selectedDate.day === d.dateObj.day &&\r\n                    selectedDate.month === d.dateObj.month &&\r\n                    selectedDate.year === d.dateObj.year &&\r\n                    d.cmo === currMonthId\r\n                }\"\r\n                (click)=\"!d.disabled && cellClicked(d); $event.stopPropagation()\"\r\n                (keydown)=\"cellKeyDown($event, d)\"\r\n                tabindex=\"0\"\r\n              >\r\n                {{ d.dateObj.day }}\r\n              </div>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <div class=\"picker__footer\">\r\n        <button\r\n          type=\"button\"\r\n          *ngIf=\"opts.showTodayBtn\"\r\n          class=\"picker__button--today\"\r\n          (click)=\"todayClicked()\"\r\n          role=\"button\"\r\n          [attr.aria-label]=\"opts.todayBtnTxt\"\r\n        >\r\n          {{ opts.todayBtnTxt }}\r\n        </button>\r\n        <button\r\n          type=\"button\"\r\n          *ngIf=\"opts.showClearDateBtn\"\r\n          class=\"picker__button--clear\"\r\n          (click)=\"removeBtnClicked()\"\r\n          role=\"button\"\r\n          [attr.aria-label]=\"opts.clearBtnTxt\"\r\n        >\r\n          {{ opts.clearBtnTxt }}\r\n        </button>\r\n        <button\r\n          type=\"button\"\r\n          [ngClass]=\"{ 'ml-auto': !opts.showTodayBtn }\"\r\n          class=\"picker__button--close\"\r\n          (click)=\"closeBtnClicked()\"\r\n          role=\"button\"\r\n          [attr.aria-label]=\"opts.closeBtnTxt\"\r\n        >\r\n          {{ opts.closeBtnTxt }}\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div\r\n  class=\"md-form my-0 d-flex align-items-center justify-content-center\"\r\n  *ngIf=\"inline\"\r\n  [ngClass]=\"{ 'md-outline': outlineInput }\"\r\n>\r\n  <input\r\n    type=\"text\"\r\n    class=\"form-control mydp-date\"\r\n    [readonly]=\"!opts.editableDateField\"\r\n    [attr.aria-label]=\"opts.ariaLabelInputField\"\r\n    [attr.maxlength]=\"opts.dateFormat.length\"\r\n    [ngClass]=\"{\r\n      selectiondisabled: opts.componentDisabled,\r\n      disabled: opts.componentDisabled\r\n    }\"\r\n    placeholder=\"{{ placeholder }}\"\r\n    [ngModel]=\"selectionDayTxt\"\r\n    (ngModelChange)=\"onUserDateInput($event)\"\r\n    [value]=\"selectionDayTxt\"\r\n    [ngStyle]=\"{\r\n      'font-size': opts.selectionTxtFontSize\r\n    }\"\r\n    (focus)=\"onFocusInput($event)\"\r\n    (blur)=\"onBlurInput($event)\"\r\n    [disabled]=\"opts.componentDisabled || isDisabled\"\r\n    autocomplete=\"off\"\r\n    [tabindex]=\"tabIndex\"\r\n  />\r\n  <label\r\n    (click)=\"openBtnClicked()\"\r\n    *ngIf=\"label.length > 0\"\r\n    [ngClass]=\"{\r\n      active: checkActive(),\r\n      disabled: opts.componentDisabled\r\n    }\"\r\n    >{{ label }}</label\r\n  >\r\n  <i [ngClass]=\"inlineIcon\" class=\"datepicker-inline-icon\" (click)=\"toggleInlineDatePicker()\"></i>\r\n</div>\r\n<div\r\n  class=\"mydp picker datepicker-inline\"\r\n  [ngClass]=\"{ 'picker--opened': showSelector }\"\r\n  *ngIf=\"inline && isOpen\"\r\n>\r\n  <div class=\"picker__frame picker__box z-depth-1\" #pickerFrame [ngClass]=\"{ 'd-none': !isOpen }\">\r\n    <div class=\"picker__header d-flex flex-center\">\r\n      <select\r\n        class=\"picker__select--year\"\r\n        [(ngModel)]=\"visibleMonth.year\"\r\n        (ngModelChange)=\"onUserYearInput($event)\"\r\n        role=\"menu\"\r\n        aria-label=\"Year selector\"\r\n      >\r\n        <option *ngFor=\"let year of years\" [value]=\"year\">{{ year }}</option>\r\n      </select>\r\n      <select\r\n        class=\"picker__select--month\"\r\n        [(ngModel)]=\"visibleMonth.monthTxt\"\r\n        (ngModelChange)=\"onUserMonthInput($event)\"\r\n        role=\"menu\"\r\n        aria-label=\"Month selector\"\r\n      >\r\n        <option *ngFor=\"let month of months\" [value]=\"month.short\">{{ month.label }}</option>\r\n      </select>\r\n      <a\r\n        href=\"javascript:;\"\r\n        type=\"button\"\r\n        role=\"button\"\r\n        class=\"picker__nav--prev black-text\"\r\n        data-nav=\"-1\"\r\n        aria-controls=\"date-picker-example_table\"\r\n        title=\"Previous month\"\r\n        (click)=\"prevMonth($event)\"\r\n        (keydown.enter)=\"prevMonth($event)\"\r\n        [ngClass]=\"{\r\n          headerbtnenabled: !prevMonthDisabled,\r\n          headerbtndisabled: prevMonthDisabled,\r\n          'disabled grey-text': prevMonthDisabled\r\n        }\"\r\n      ></a>\r\n      <a\r\n        href=\"javascript:;\"\r\n        type=\"button\"\r\n        role=\"button\"\r\n        class=\"picker__nav--next black-text\"\r\n        data-nav=\"1\"\r\n        aria-controls=\"date-picker-example_table\"\r\n        title=\"Next month\"\r\n        (click)=\"nextMonth($event)\"\r\n        (keydown.enter)=\"nextMonth($event)\"\r\n        [ngClass]=\"{\r\n          headerbtnenabled: !nextMonthDisabled,\r\n          headerbtndisabled: nextMonthDisabled,\r\n          'disabled grey-text': nextMonthDisabled\r\n        }\"\r\n      ></a>\r\n    </div>\r\n    <table class=\"picker__table\">\r\n      <thead>\r\n        <tr>\r\n          <th\r\n            class=\"picker__weekday weekdaytitleweeknbr\"\r\n            *ngIf=\"opts.showWeekNumbers && opts.firstDayOfWeek === 'mo'\"\r\n          >\r\n            #\r\n          </th>\r\n          <th class=\"picker__weekday\" scope=\"col\" *ngFor=\"let d of weekDays\">{{ d }}</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let w of dates\">\r\n          <td\r\n            class=\"picker__day daycellweeknbr\"\r\n            *ngIf=\"opts.showWeekNumbers && opts.firstDayOfWeek === 'mo'\"\r\n          >\r\n            {{ w.weekNbr }}\r\n          </td>\r\n          <td\r\n            class=\"picker__day\"\r\n            *ngFor=\"let d of w.week\"\r\n            [ngClass]=\"{\r\n              'picker__day--infocus': d.cmo === currMonthId && !d.disabled,\r\n              disabled: d.disabled,\r\n              tablesingleday: d.cmo === currMonthId && !d.disabled\r\n            }\"\r\n          >\r\n            <div\r\n              *ngIf=\"d.markedDate.marked\"\r\n              class=\"markdate\"\r\n              [ngStyle]=\"{ 'background-color': d.markedDate.color }\"\r\n            ></div>\r\n            <div\r\n              class=\"picker__day\"\r\n              [ngClass]=\"{\r\n                'picker__day--infocus': d.cmo === currMonthId,\r\n                'picker__day--outfocus': d.cmo === nextMonthId || d.cmo === prevMonthId,\r\n                'picker__day--today': d.currDay && opts.markCurrentDay,\r\n                'picker__day--selected picker__day--highlighted':\r\n                  selectedDate.day === d.dateObj.day &&\r\n                  selectedDate.month === d.dateObj.month &&\r\n                  selectedDate.year === d.dateObj.year &&\r\n                  d.cmo === currMonthId\r\n              }\"\r\n              (click)=\"!d.disabled && cellClicked(d); $event.stopPropagation()\"\r\n              (keydown)=\"cellKeyDown($event, d)\"\r\n              tabindex=\"0\"\r\n            >\r\n              {{ d.dateObj.day }}\r\n            </div>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <div class=\"picker__footer\">\r\n      <button\r\n        type=\"button\"\r\n        *ngIf=\"opts.showTodayBtn\"\r\n        class=\"picker__button--today\"\r\n        (click)=\"todayClicked()\"\r\n        role=\"button\"\r\n        [attr.aria-label]=\"opts.todayBtnTxt\"\r\n      >\r\n        {{ opts.todayBtnTxt }}\r\n      </button>\r\n      <button\r\n        type=\"button\"\r\n        *ngIf=\"opts.showClearDateBtn\"\r\n        class=\"picker__button--clear\"\r\n        (click)=\"removeBtnClicked()\"\r\n        role=\"button\"\r\n        [attr.aria-label]=\"opts.clearBtnTxt\"\r\n      >\r\n        {{ opts.clearBtnTxt }}\r\n      </button>\r\n      <button\r\n        type=\"button\"\r\n        [ngClass]=\"{ 'ml-auto': !opts.showTodayBtn }\"\r\n        class=\"picker__button--close\"\r\n        (click)=\"closeBtnClicked()\"\r\n        role=\"button\"\r\n        [attr.aria-label]=\"opts.closeBtnTxt\"\r\n      >\r\n        {{ opts.closeBtnTxt }}\r\n      </button>\r\n    </div>\r\n  </div>\r\n</div>\r\n",
                     providers: [UtilService, MYDP_VALUE_ACCESSOR],
                     encapsulation: ViewEncapsulation.None,
-                    changeDetection: ChangeDetectionStrategy.OnPush
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    styles: [".mdb-color.lighten-5{background-color:#d0d6e2!important}.mdb-color.lighten-4{background-color:#b1bace!important}.mdb-color.lighten-3{background-color:#929fba!important}.mdb-color.lighten-2{background-color:#7283a7!important}.mdb-color.lighten-1{background-color:#59698d!important}.mdb-color{background-color:#45526e!important}.mdb-color-text{color:#45526e!important}.rgba-mdb-color-slight,.rgba-mdb-color-slight:after{background-color:rgba(69,82,110,.1)}.rgba-mdb-color-light,.rgba-mdb-color-light:after{background-color:rgba(69,82,110,.3)}.rgba-mdb-color-strong,.rgba-mdb-color-strong:after{background-color:rgba(69,82,110,.7)}.mdb-color.darken-1{background-color:#3b465e!important}.mdb-color.darken-2{background-color:#2e3951!important}.mdb-color.darken-3{background-color:#1c2a48!important}.mdb-color.darken-4{background-color:#1c2331!important}.red.lighten-5{background-color:#ffebee!important}.red.lighten-4{background-color:#ffcdd2!important}.red.lighten-3{background-color:#ef9a9a!important}.red.lighten-2{background-color:#e57373!important}.red.lighten-1{background-color:#ef5350!important}.red{background-color:#f44336!important}.red-text{color:#f44336!important}.rgba-red-slight,.rgba-red-slight:after{background-color:rgba(244,67,54,.1)}.rgba-red-light,.rgba-red-light:after{background-color:rgba(244,67,54,.3)}.rgba-red-strong,.rgba-red-strong:after{background-color:rgba(244,67,54,.7)}.red.darken-1{background-color:#e53935!important}.red.darken-2{background-color:#d32f2f!important}.red.darken-3{background-color:#c62828!important}.red.darken-4{background-color:#b71c1c!important}.red.accent-1{background-color:#ff8a80!important}.red.accent-2{background-color:#ff5252!important}.red.accent-3{background-color:#ff1744!important}.red.accent-4{background-color:#d50000!important}.pink.lighten-5{background-color:#fce4ec!important}.pink.lighten-4{background-color:#f8bbd0!important}.pink.lighten-3{background-color:#f48fb1!important}.pink.lighten-2{background-color:#f06292!important}.pink.lighten-1{background-color:#ec407a!important}.pink{background-color:#e91e63!important}.pink-text{color:#e91e63!important}.rgba-pink-slight,.rgba-pink-slight:after{background-color:rgba(233,30,99,.1)}.rgba-pink-light,.rgba-pink-light:after{background-color:rgba(233,30,99,.3)}.rgba-pink-strong,.rgba-pink-strong:after{background-color:rgba(233,30,99,.7)}.pink.darken-1{background-color:#d81b60!important}.pink.darken-2{background-color:#c2185b!important}.pink.darken-3{background-color:#ad1457!important}.pink.darken-4{background-color:#880e4f!important}.pink.accent-1{background-color:#ff80ab!important}.pink.accent-2{background-color:#ff4081!important}.pink.accent-3{background-color:#f50057!important}.pink.accent-4{background-color:#c51162!important}.purple.lighten-5{background-color:#f3e5f5!important}.purple.lighten-4{background-color:#e1bee7!important}.purple.lighten-3{background-color:#ce93d8!important}.purple.lighten-2{background-color:#ba68c8!important}.purple.lighten-1{background-color:#ab47bc!important}.purple{background-color:#9c27b0!important}.purple-text{color:#9c27b0!important}.rgba-purple-slight,.rgba-purple-slight:after{background-color:rgba(156,39,176,.1)}.rgba-purple-light,.rgba-purple-light:after{background-color:rgba(156,39,176,.3)}.rgba-purple-strong,.rgba-purple-strong:after{background-color:rgba(156,39,176,.7)}.purple.darken-1{background-color:#8e24aa!important}.purple.darken-2{background-color:#7b1fa2!important}.purple.darken-3{background-color:#6a1b9a!important}.purple.darken-4{background-color:#4a148c!important}.purple.accent-1{background-color:#ea80fc!important}.purple.accent-2{background-color:#e040fb!important}.purple.accent-3{background-color:#d500f9!important}.purple.accent-4{background-color:#a0f!important}.deep-purple.lighten-5{background-color:#ede7f6!important}.deep-purple.lighten-4{background-color:#d1c4e9!important}.deep-purple.lighten-3{background-color:#b39ddb!important}.deep-purple.lighten-2{background-color:#9575cd!important}.deep-purple.lighten-1{background-color:#7e57c2!important}.deep-purple{background-color:#673ab7!important}.deep-purple-text{color:#673ab7!important}.rgba-deep-purple-slight,.rgba-deep-purple-slight:after{background-color:rgba(103,58,183,.1)}.rgba-deep-purple-light,.rgba-deep-purple-light:after{background-color:rgba(103,58,183,.3)}.rgba-deep-purple-strong,.rgba-deep-purple-strong:after{background-color:rgba(103,58,183,.7)}.deep-purple.darken-1{background-color:#5e35b1!important}.deep-purple.darken-2{background-color:#512da8!important}.deep-purple.darken-3{background-color:#4527a0!important}.deep-purple.darken-4{background-color:#311b92!important}.deep-purple.accent-1{background-color:#b388ff!important}.deep-purple.accent-2{background-color:#7c4dff!important}.deep-purple.accent-3{background-color:#651fff!important}.deep-purple.accent-4{background-color:#6200ea!important}.indigo.lighten-5{background-color:#e8eaf6!important}.indigo.lighten-4{background-color:#c5cae9!important}.indigo.lighten-3{background-color:#9fa8da!important}.indigo.lighten-2{background-color:#7986cb!important}.indigo.lighten-1{background-color:#5c6bc0!important}.indigo{background-color:#3f51b5!important}.indigo-text{color:#3f51b5!important}.rgba-indigo-slight,.rgba-indigo-slight:after{background-color:rgba(63,81,181,.1)}.rgba-indigo-light,.rgba-indigo-light:after{background-color:rgba(63,81,181,.3)}.rgba-indigo-strong,.rgba-indigo-strong:after{background-color:rgba(63,81,181,.7)}.indigo.darken-1{background-color:#3949ab!important}.indigo.darken-2{background-color:#303f9f!important}.indigo.darken-3{background-color:#283593!important}.indigo.darken-4{background-color:#1a237e!important}.indigo.accent-1{background-color:#8c9eff!important}.indigo.accent-2{background-color:#536dfe!important}.indigo.accent-3{background-color:#3d5afe!important}.indigo.accent-4{background-color:#304ffe!important}.blue.lighten-5{background-color:#e3f2fd!important}.blue.lighten-4{background-color:#bbdefb!important}.blue.lighten-3{background-color:#90caf9!important}.blue.lighten-2{background-color:#64b5f6!important}.blue.lighten-1{background-color:#42a5f5!important}.blue{background-color:#2196f3!important}.blue-text{color:#2196f3!important}.rgba-blue-slight,.rgba-blue-slight:after{background-color:rgba(33,150,243,.1)}.rgba-blue-light,.rgba-blue-light:after{background-color:rgba(33,150,243,.3)}.rgba-blue-strong,.rgba-blue-strong:after{background-color:rgba(33,150,243,.7)}.blue.darken-1{background-color:#1e88e5!important}.blue.darken-2{background-color:#1976d2!important}.blue.darken-3{background-color:#1565c0!important}.blue.darken-4{background-color:#0d47a1!important}.blue.accent-1{background-color:#82b1ff!important}.blue.accent-2{background-color:#448aff!important}.blue.accent-3{background-color:#2979ff!important}.blue.accent-4{background-color:#2962ff!important}.light-blue.lighten-5{background-color:#e1f5fe!important}.light-blue.lighten-4{background-color:#b3e5fc!important}.light-blue.lighten-3{background-color:#81d4fa!important}.light-blue.lighten-2{background-color:#4fc3f7!important}.light-blue.lighten-1{background-color:#29b6f6!important}.light-blue{background-color:#03a9f4!important}.light-blue-text{color:#03a9f4!important}.rgba-light-blue-slight,.rgba-light-blue-slight:after{background-color:rgba(3,169,244,.1)}.rgba-light-blue-light,.rgba-light-blue-light:after{background-color:rgba(3,169,244,.3)}.rgba-light-blue-strong,.rgba-light-blue-strong:after{background-color:rgba(3,169,244,.7)}.light-blue.darken-1{background-color:#039be5!important}.light-blue.darken-2{background-color:#0288d1!important}.light-blue.darken-3{background-color:#0277bd!important}.light-blue.darken-4{background-color:#01579b!important}.light-blue.accent-1{background-color:#80d8ff!important}.light-blue.accent-2{background-color:#40c4ff!important}.light-blue.accent-3{background-color:#00b0ff!important}.light-blue.accent-4{background-color:#0091ea!important}.cyan.lighten-5{background-color:#e0f7fa!important}.cyan.lighten-4{background-color:#b2ebf2!important}.cyan.lighten-3{background-color:#80deea!important}.cyan.lighten-2{background-color:#4dd0e1!important}.cyan.lighten-1{background-color:#26c6da!important}.cyan{background-color:#00bcd4!important}.cyan-text{color:#00bcd4!important}.rgba-cyan-slight,.rgba-cyan-slight:after{background-color:rgba(0,188,212,.1)}.rgba-cyan-light,.rgba-cyan-light:after{background-color:rgba(0,188,212,.3)}.rgba-cyan-strong,.rgba-cyan-strong:after{background-color:rgba(0,188,212,.7)}.cyan.darken-1{background-color:#00acc1!important}.cyan.darken-2{background-color:#0097a7!important}.cyan.darken-3{background-color:#00838f!important}.cyan.darken-4{background-color:#006064!important}.cyan.accent-1{background-color:#84ffff!important}.cyan.accent-2{background-color:#18ffff!important}.cyan.accent-3{background-color:#00e5ff!important}.cyan.accent-4{background-color:#00b8d4!important}.teal.lighten-5{background-color:#e0f2f1!important}.teal.lighten-4{background-color:#b2dfdb!important}.teal.lighten-3{background-color:#80cbc4!important}.teal.lighten-2{background-color:#4db6ac!important}.teal.lighten-1{background-color:#26a69a!important}.teal{background-color:#009688!important}.teal-text{color:#009688!important}.rgba-teal-slight,.rgba-teal-slight:after{background-color:rgba(0,150,136,.1)}.rgba-teal-light,.rgba-teal-light:after{background-color:rgba(0,150,136,.3)}.rgba-teal-strong,.rgba-teal-strong:after{background-color:rgba(0,150,136,.7)}.teal.darken-1{background-color:#00897b!important}.teal.darken-2{background-color:#00796b!important}.teal.darken-3{background-color:#00695c!important}.teal.darken-4{background-color:#004d40!important}.teal.accent-1{background-color:#a7ffeb!important}.teal.accent-2{background-color:#64ffda!important}.teal.accent-3{background-color:#1de9b6!important}.teal.accent-4{background-color:#00bfa5!important}.green.lighten-5{background-color:#e8f5e9!important}.green.lighten-4{background-color:#c8e6c9!important}.green.lighten-3{background-color:#a5d6a7!important}.green.lighten-2{background-color:#81c784!important}.green.lighten-1{background-color:#66bb6a!important}.green{background-color:#4caf50!important}.green-text{color:#4caf50!important}.rgba-green-slight,.rgba-green-slight:after{background-color:rgba(76,175,80,.1)}.rgba-green-light,.rgba-green-light:after{background-color:rgba(76,175,80,.3)}.rgba-green-strong,.rgba-green-strong:after{background-color:rgba(76,175,80,.7)}.green.darken-1{background-color:#43a047!important}.green.darken-2{background-color:#388e3c!important}.green.darken-3{background-color:#2e7d32!important}.green.darken-4{background-color:#1b5e20!important}.green.accent-1{background-color:#b9f6ca!important}.green.accent-2{background-color:#69f0ae!important}.green.accent-3{background-color:#00e676!important}.green.accent-4{background-color:#00c853!important}.light-green.lighten-5{background-color:#f1f8e9!important}.light-green.lighten-4{background-color:#dcedc8!important}.light-green.lighten-3{background-color:#c5e1a5!important}.light-green.lighten-2{background-color:#aed581!important}.light-green.lighten-1{background-color:#9ccc65!important}.light-green{background-color:#8bc34a!important}.light-green-text{color:#8bc34a!important}.rgba-light-green-slight,.rgba-light-green-slight:after{background-color:rgba(139,195,74,.1)}.rgba-light-green-light,.rgba-light-green-light:after{background-color:rgba(139,195,74,.3)}.rgba-light-green-strong,.rgba-light-green-strong:after{background-color:rgba(139,195,74,.7)}.light-green.darken-1{background-color:#7cb342!important}.light-green.darken-2{background-color:#689f38!important}.light-green.darken-3{background-color:#558b2f!important}.light-green.darken-4{background-color:#33691e!important}.light-green.accent-1{background-color:#ccff90!important}.light-green.accent-2{background-color:#b2ff59!important}.light-green.accent-3{background-color:#76ff03!important}.light-green.accent-4{background-color:#64dd17!important}.lime.lighten-5{background-color:#f9fbe7!important}.lime.lighten-4{background-color:#f0f4c3!important}.lime.lighten-3{background-color:#e6ee9c!important}.lime.lighten-2{background-color:#dce775!important}.lime.lighten-1{background-color:#d4e157!important}.lime{background-color:#cddc39!important}.lime-text{color:#cddc39!important}.rgba-lime-slight,.rgba-lime-slight:after{background-color:rgba(205,220,57,.1)}.rgba-lime-light,.rgba-lime-light:after{background-color:rgba(205,220,57,.3)}.rgba-lime-strong,.rgba-lime-strong:after{background-color:rgba(205,220,57,.7)}.lime.darken-1{background-color:#c0ca33!important}.lime.darken-2{background-color:#afb42b!important}.lime.darken-3{background-color:#9e9d24!important}.lime.darken-4{background-color:#827717!important}.lime.accent-1{background-color:#f4ff81!important}.lime.accent-2{background-color:#eeff41!important}.lime.accent-3{background-color:#c6ff00!important}.lime.accent-4{background-color:#aeea00!important}.yellow.lighten-5{background-color:#fffde7!important}.yellow.lighten-4{background-color:#fff9c4!important}.yellow.lighten-3{background-color:#fff59d!important}.yellow.lighten-2{background-color:#fff176!important}.yellow.lighten-1{background-color:#ffee58!important}.yellow{background-color:#ffeb3b!important}.yellow-text{color:#ffeb3b!important}.rgba-yellow-slight,.rgba-yellow-slight:after{background-color:rgba(255,235,59,.1)}.rgba-yellow-light,.rgba-yellow-light:after{background-color:rgba(255,235,59,.3)}.rgba-yellow-strong,.rgba-yellow-strong:after{background-color:rgba(255,235,59,.7)}.yellow.darken-1{background-color:#fdd835!important}.yellow.darken-2{background-color:#fbc02d!important}.yellow.darken-3{background-color:#f9a825!important}.yellow.darken-4{background-color:#f57f17!important}.yellow.accent-1{background-color:#ffff8d!important}.yellow.accent-2{background-color:#ff0!important}.yellow.accent-3{background-color:#ffea00!important}.yellow.accent-4{background-color:#ffd600!important}.amber.lighten-5{background-color:#fff8e1!important}.amber.lighten-4{background-color:#ffecb3!important}.amber.lighten-3{background-color:#ffe082!important}.amber.lighten-2{background-color:#ffd54f!important}.amber.lighten-1{background-color:#ffca28!important}.amber{background-color:#ffc107!important}.amber-text{color:#ffc107!important}.rgba-amber-slight,.rgba-amber-slight:after{background-color:rgba(255,193,7,.1)}.rgba-amber-light,.rgba-amber-light:after{background-color:rgba(255,193,7,.3)}.rgba-amber-strong,.rgba-amber-strong:after{background-color:rgba(255,193,7,.7)}.amber.darken-1{background-color:#ffb300!important}.amber.darken-2{background-color:#ffa000!important}.amber.darken-3{background-color:#ff8f00!important}.amber.darken-4{background-color:#ff6f00!important}.amber.accent-1{background-color:#ffe57f!important}.amber.accent-2{background-color:#ffd740!important}.amber.accent-3{background-color:#ffc400!important}.amber.accent-4{background-color:#ffab00!important}.orange.lighten-5{background-color:#fff3e0!important}.orange.lighten-4{background-color:#ffe0b2!important}.orange.lighten-3{background-color:#ffcc80!important}.orange.lighten-2{background-color:#ffb74d!important}.orange.lighten-1{background-color:#ffa726!important}.orange{background-color:#ff9800!important}.orange-text{color:#ff9800!important}.rgba-orange-slight,.rgba-orange-slight:after{background-color:rgba(255,152,0,.1)}.rgba-orange-light,.rgba-orange-light:after{background-color:rgba(255,152,0,.3)}.rgba-orange-strong,.rgba-orange-strong:after{background-color:rgba(255,152,0,.7)}.orange.darken-1{background-color:#fb8c00!important}.orange.darken-2{background-color:#f57c00!important}.orange.darken-3{background-color:#ef6c00!important}.orange.darken-4{background-color:#e65100!important}.orange.accent-1{background-color:#ffd180!important}.orange.accent-2{background-color:#ffab40!important}.orange.accent-3{background-color:#ff9100!important}.orange.accent-4{background-color:#ff6d00!important}.deep-orange.lighten-5{background-color:#fbe9e7!important}.deep-orange.lighten-4{background-color:#ffccbc!important}.deep-orange.lighten-3{background-color:#ffab91!important}.deep-orange.lighten-2{background-color:#ff8a65!important}.deep-orange.lighten-1{background-color:#ff7043!important}.deep-orange{background-color:#ff5722!important}.deep-orange-text{color:#ff5722!important}.rgba-deep-orange-slight,.rgba-deep-orange-slight:after{background-color:rgba(255,87,34,.1)}.rgba-deep-orange-light,.rgba-deep-orange-light:after{background-color:rgba(255,87,34,.3)}.rgba-deep-orange-strong,.rgba-deep-orange-strong:after{background-color:rgba(255,87,34,.7)}.deep-orange.darken-1{background-color:#f4511e!important}.deep-orange.darken-2{background-color:#e64a19!important}.deep-orange.darken-3{background-color:#d84315!important}.deep-orange.darken-4{background-color:#bf360c!important}.deep-orange.accent-1{background-color:#ff9e80!important}.deep-orange.accent-2{background-color:#ff6e40!important}.deep-orange.accent-3{background-color:#ff3d00!important}.deep-orange.accent-4{background-color:#dd2c00!important}.brown.lighten-5{background-color:#efebe9!important}.brown.lighten-4{background-color:#d7ccc8!important}.brown.lighten-3{background-color:#bcaaa4!important}.brown.lighten-2{background-color:#a1887f!important}.brown.lighten-1{background-color:#8d6e63!important}.brown{background-color:#795548!important}.brown-text{color:#795548!important}.rgba-brown-slight,.rgba-brown-slight:after{background-color:rgba(121,85,72,.1)}.rgba-brown-light,.rgba-brown-light:after{background-color:rgba(121,85,72,.3)}.rgba-brown-strong,.rgba-brown-strong:after{background-color:rgba(121,85,72,.7)}.brown.darken-1{background-color:#6d4c41!important}.brown.darken-2{background-color:#5d4037!important}.brown.darken-3{background-color:#4e342e!important}.brown.darken-4{background-color:#3e2723!important}.blue-grey.lighten-5{background-color:#eceff1!important}.blue-grey.lighten-4{background-color:#cfd8dc!important}.blue-grey.lighten-3{background-color:#b0bec5!important}.blue-grey.lighten-2{background-color:#90a4ae!important}.blue-grey.lighten-1{background-color:#78909c!important}.blue-grey{background-color:#607d8b!important}.blue-grey-text{color:#607d8b!important}.rgba-blue-grey-slight,.rgba-blue-grey-slight:after{background-color:rgba(96,125,139,.1)}.rgba-blue-grey-light,.rgba-blue-grey-light:after{background-color:rgba(96,125,139,.3)}.rgba-blue-grey-strong,.rgba-blue-grey-strong:after{background-color:rgba(96,125,139,.7)}.blue-grey.darken-1{background-color:#546e7a!important}.blue-grey.darken-2{background-color:#455a64!important}.blue-grey.darken-3{background-color:#37474f!important}.blue-grey.darken-4{background-color:#263238!important}.grey.lighten-5{background-color:#fafafa!important}.grey.lighten-4{background-color:#f5f5f5!important}.grey.lighten-3{background-color:#eee!important}.grey.lighten-2{background-color:#e0e0e0!important}.grey.lighten-1{background-color:#bdbdbd!important}.grey{background-color:#9e9e9e!important}.grey-text{color:#9e9e9e!important}.rgba-grey-slight,.rgba-grey-slight:after{background-color:rgba(158,158,158,.1)}.rgba-grey-light,.rgba-grey-light:after{background-color:rgba(158,158,158,.3)}.rgba-grey-strong,.rgba-grey-strong:after{background-color:rgba(158,158,158,.7)}.grey.darken-1{background-color:#757575!important}.grey.darken-2{background-color:#616161!important}.grey.darken-3{background-color:#424242!important}.grey.darken-4{background-color:#212121!important}.black{background-color:#000!important}.black-text{color:#000!important}.rgba-black-slight,.rgba-black-slight:after{background-color:rgba(0,0,0,.1)}.rgba-black-light,.rgba-black-light:after{background-color:rgba(0,0,0,.3)}.rgba-black-strong,.rgba-black-strong:after{background-color:rgba(0,0,0,.7)}.picker__box .picker__header .picker__select--month.browser-default,.picker__box .picker__header .picker__select--year.browser-default,.white{background-color:#fff!important}.picker__box .picker__header .picker__date-display,.picker__box .picker__table .picker--focused,.picker__box .picker__table .picker__day--outfocus,.picker__box .picker__table .picker__day--selected,.picker__box .picker__table .picker__day--selected:hover,.white-text{color:#fff!important}.rgba-white-slight,.rgba-white-slight:after{background-color:rgba(255,255,255,.1)}.rgba-white-light,.rgba-white-light:after{background-color:rgba(255,255,255,.3)}.rgba-white-strong,.rgba-white-strong:after{background-color:rgba(255,255,255,.7)}.rgba-stylish-slight{background-color:rgba(62,69,81,.1)}.rgba-stylish-light{background-color:rgba(62,69,81,.3)}.rgba-stylish-strong{background-color:rgba(62,69,81,.7)}.primary-color{background-color:#4285f4!important}.primary-color-dark{background-color:#0d47a1!important}.secondary-color{background-color:#a6c!important}.secondary-color-dark{background-color:#93c!important}.default-color{background-color:#2bbbad!important}.default-color-dark{background-color:#00695c!important}.info-color{background-color:#33b5e5!important}.info-color-dark{background-color:#09c!important}.success-color{background-color:#00c851!important}.success-color-dark{background-color:#007e33!important}.warning-color{background-color:#fb3!important}.warning-color-dark{background-color:#f80!important}.danger-color{background-color:#ff3547!important}.danger-color-dark{background-color:#c00!important}.elegant-color{background-color:#2e2e2e!important}.elegant-color-dark{background-color:#212121!important}.stylish-color{background-color:#4b515d!important}.stylish-color-dark{background-color:#3e4551!important}.unique-color{background-color:#3f729b!important}.unique-color-dark{background-color:#1c2331!important}.special-color{background-color:#37474f!important}.special-color-dark{background-color:#263238!important}.purple-gradient{background:linear-gradient(40deg,#ff6ec4,#7873f5)!important}.peach-gradient{background:linear-gradient(40deg,#ffd86f,#fc6262)!important}.aqua-gradient{background:linear-gradient(40deg,#2096ff,#05ffa3)!important}.blue-gradient{background:linear-gradient(40deg,#45cafc,#303f9f)!important}.purple-gradient-rgba{background:linear-gradient(40deg,rgba(255,110,196,.9),rgba(120,115,245,.9))!important}.peach-gradient-rgba{background:linear-gradient(40deg,rgba(255,216,111,.9),rgba(252,98,98,.9))!important}.aqua-gradient-rgba{background:linear-gradient(40deg,rgba(32,150,255,.9),rgba(5,255,163,.9))!important}.blue-gradient-rgba{background:linear-gradient(40deg,rgba(69,202,252,.9),rgba(48,63,159,.9))!important}.dark-grey-text,.dark-grey-text:focus,.dark-grey-text:hover{color:#4f4f4f!important}.hoverable{box-shadow:none;transition:.55s ease-in-out}.hoverable:hover{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);transition:.55s ease-in-out}.z-depth-0{box-shadow:none!important}.z-depth-1{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)!important}.z-depth-1-half{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)!important}.z-depth-2{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19)!important}.z-depth-3{box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19)!important}.z-depth-4{box-shadow:0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)!important}.z-depth-5{box-shadow:0 27px 24px 0 rgba(0,0,0,.2),0 40px 77px 0 rgba(0,0,0,.22)!important}.disabled,:disabled{pointer-events:none!important}a{cursor:pointer;text-decoration:none;color:#0275d8;transition:.2s ease-in-out}a:hover{text-decoration:none;color:#014c8c;transition:.2s ease-in-out}a.disabled:hover,a:disabled:hover{color:#0275d8}a:not([href]):not([tabindex]),a:not([href]):not([tabindex]):focus,a:not([href]):not([tabindex]):hover{color:inherit;text-decoration:none}.picker__input{cursor:default}.picker__input.picker__input--active{border-color:#0089ec}.picker{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;/*!\n   * Default mobile-first, responsive styling for pickadate.js\n   * Demo: http://amsul.github.io/pickadate.js\n   */z-index:90;font-size:15px;text-align:left;line-height:1.2;color:#000;position:absolute;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.picker .picker__holder{width:100%;overflow-scrolling:touch;position:fixed;transition:background .15s ease-out,top .15s;-webkit-backface-visibility:hidden;backface-visibility:hidden}.picker .picker__frame,.picker .picker__holder{bottom:0;left:0;right:0;top:100%}.picker .picker__frame{position:absolute;margin:0 auto;min-width:16rem;max-width:20.3125rem;width:18.75rem;max-height:21.875rem;opacity:0;transition:.15s ease-out}@media (min-height:40.125em){.picker .picker__frame{margin-bottom:7.5%}}.picker .picker__frame .picker__wrap{display:table;width:100%;height:100%}.picker .picker__box{background:#fff;display:table-cell;vertical-align:middle}@media (min-height:28.875em){.picker .picker__frame{overflow:visible;top:auto;bottom:-100%;max-height:80%}.picker .picker__frame .picker__wrap{display:block}.picker .picker__box{display:block;border:1px solid #777;border-top-color:#898989;border-bottom-width:0;border-radius:5px 5px 0 0;box-shadow:0 .75rem 2.25rem 1rem rgba(0,0,0,.24)}}.picker--opened .picker__holder{top:0;background:rgba(0,0,0,.32);zoom:1;transition:background .15s ease-out}.picker--opened .picker__frame{top:0;opacity:1}@media (min-height:35.875em){.picker--opened .picker__frame{top:10%;bottom:auto}}.datepicker.picker__input.picker__input--active,.timepicker.picker__input.picker__input--active{border-bottom:1px solid #e3f2fd}.picker__box{padding:0;border-radius:.125rem;overflow:hidden}.picker__box .picker__header{text-align:center;position:relative;margin-bottom:1.25rem}.picker__box .picker__header select{display:inline-block!important}.picker__box .picker__header .picker__date-display{display:flex;justify-content:center;background-color:#4285f4;font-weight:400;padding-bottom:.3125rem}.picker__box .picker__header .picker__date-display .picker__weekday-display{padding:.875rem .4375rem .3125rem .5rem;letter-spacing:.5;font-size:2.1rem;margin-top:1.25rem}.picker__box .picker__header .picker__date-display .picker__day-display,.picker__box .picker__header .picker__date-display .picker__month-display{font-size:2.1rem;padding:.875rem .3125rem .25rem;margin-top:1.25rem}.picker__box .picker__header .picker__date-display .picker__year-display{font-size:1.1rem;color:rgba(255,255,255,.4);position:absolute;top:.625rem;left:45%}.picker__box .picker__header .picker__month,.picker__box .picker__header .picker__year{display:inline-block;margin-left:.25em;margin-right:.25em}.picker__box .picker__header .picker__select--month,.picker__box .picker__header .picker__select--year{height:2em;padding:0;margin-left:.25em;margin-right:.25em;display:inline-block;border:none;background:0 0;border-bottom:1px solid #ced4da;outline:0}.picker__box .picker__header .picker__select--month:focus,.picker__box .picker__header .picker__select--year:focus{border-color:rgba(0,0,0,.05)}.picker__box .picker__header .picker__select--year{width:30%}.picker__box .picker__header .picker__select--month.browser-default{display:inline;width:40%}.picker__box .picker__header .picker__select--year.browser-default{display:inline;width:25%}.picker__box .picker__header .picker__nav--next,.picker__box .picker__header .picker__nav--prev{position:absolute;padding:.1875rem .625rem;box-sizing:content-box}.picker__box .picker__header .picker__nav--next:hover,.picker__box .picker__header .picker__nav--prev:hover{cursor:pointer;color:#000}.picker__box .picker__header .picker__nav--next:before,.picker__box .picker__header .picker__nav--prev:before{display:block}.picker__box .picker__header .picker__nav--prev{left:-.5em;padding-right:1.25em}.picker__box .picker__header .picker__nav--prev:before{content:'\\f104'}.picker__box .picker__header .picker__nav--next{right:-.2em;padding-left:1.25em}.picker__box .picker__header .picker__nav--next:before{content:'\\f105'}.picker__box .picker__header .picker__nav--disabled,.picker__box .picker__header .picker__nav--disabled:before,.picker__box .picker__header .picker__nav--disabled:before:hover,.picker__box .picker__header .picker__nav--disabled:hover{cursor:default;background:0 0;border-right-color:#f5f5f5;border-left-color:#f5f5f5}.picker__box .picker__table{text-align:center;border-collapse:collapse;border-spacing:0;table-layout:fixed;font-size:1rem;width:100%;margin-top:.75em;margin-bottom:.5em}.picker__box .picker__table td,.picker__box .picker__table th{text-align:center}.picker__box .picker__table td{margin:0;padding:0}.picker__box .picker__table .picker__weekday{width:14%;font-size:.9em;padding-bottom:.25em;color:#999;font-weight:500}@media (min-height:33.875em){.picker__box .picker__table .picker__weekday{padding-bottom:.25em}}.picker__box .picker__table .picker__day--today{position:relative;letter-spacing:-.3;padding:.75rem 0;font-weight:400;border:1px solid transparent}.picker__box .picker__table .picker__day.picker__day--today{color:#4285f4}.picker__box .picker__table .picker__day--disabled:before{border-top-color:#aaa}.picker__box .picker__table .picker__day--infocus{color:#595959;letter-spacing:-.3;padding:.75rem 0;font-weight:400;border:#595959}.picker__box .picker__table .picker__day--infocus:hover{cursor:pointer;color:#000;font-weight:500}.picker__box .picker__table .picker__day--outfocus{display:none;padding:.75rem 0}.picker__box .picker__table .picker__day--outfocus:hover{cursor:pointer;color:#ddd;font-weight:500}.picker__box .picker__table .picker--focused .picker__day--highlighted,.picker__box .picker__table .picker__day--highlighted:hover{cursor:pointer}.picker__box .picker__table .picker--focused,.picker__box .picker__table .picker__day--selected,.picker__box .picker__table .picker__day--selected:hover{border-radius:50%;-webkit-transform:scale(.9);transform:scale(.9);background-color:#4285f4;box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.picker__box .picker__table .picker--focused.picker__day--outfocus,.picker__box .picker__table .picker__day--selected.picker__day--outfocus,.picker__box .picker__table .picker__day--selected:hover.picker__day--outfocus{background-color:#ecf2fc}.picker__box .picker__table .picker--focused,.picker__box .picker__table .picker__day--disabled,.picker__box .picker__table .picker__day--disabled:hover{background:#f5f5f5;border-color:#f5f5f5;color:#ddd;cursor:default}.picker__box .picker__table .picker__day--highlighted.picker__day--disabled,.picker__box .picker__table .picker__day--highlighted.picker__day--disabled:hover{background:#bbb}.picker__box .picker__footer{text-align:right;padding:.3125rem .625rem;display:flex;align-items:center;justify-content:space-between}.picker__box .picker__footer .picker__button--clear,.picker__box .picker__footer .picker__button--close,.picker__box .picker__footer .picker__button--today{border:1px solid #fff;background:#fff;font-size:.8em;padding:1rem 0 .7rem;font-weight:700;width:33%;display:inline-block;vertical-align:bottom;text-transform:uppercase}.picker__box .picker__footer .picker__button--clear:hover,.picker__box .picker__footer .picker__button--close:hover,.picker__box .picker__footer .picker__button--today:hover{cursor:pointer;color:#000;background:#b1dcfb;border-bottom-color:#b1dcfb}.picker__box .picker__footer .picker__button--clear:focus,.picker__box .picker__footer .picker__button--close:focus,.picker__box .picker__footer .picker__button--today:focus{background:#b1dcfb;border-color:rgba(0,0,0,.05);outline:0}.picker__box .picker__footer .picker__button--clear:before,.picker__box .picker__footer .picker__button--close:before,.picker__box .picker__footer .picker__button--today:before{position:relative;display:inline-block;height:0}.picker__box .picker__footer .picker__button--clear:before,.picker__box .picker__footer .picker__button--today:before{content:' ';margin-right:.45em}.picker__box .picker__footer .picker__button--today:before{top:-.05em;width:0;border-top:.66em solid #0059bc;border-left:.66em solid transparent}.picker__box .picker__footer .picker__button--clear:before{top:-.25em;width:.66em;border-top:3px solid #e20}.picker__box .picker__footer .picker__button--close:before{content:'\\D7';top:-.1em;vertical-align:top;font-size:1.1em;margin-right:.35em;color:#777}.picker__box .picker__footer .picker__button--today[disabled],.picker__box .picker__footer .picker__button--today[disabled]:hover{background:#f5f5f5;border-color:#f5f5f5;color:#ddd;cursor:default}.picker__box .picker__footer .picker__button--today[disabled]:before{border-top-color:#aaa}.picker__calendar-container{padding:0 1rem}.picker__calendar-container thead{border:none}.picker__select--month,.picker__select--year{display:inline-block!important;height:2em;padding:0;margin-left:.25em;margin-right:.25em}.picker .picker__holder{overflow-y:visible;display:none}.picker.picker--opened .picker__holder{display:block}.picker__box .picker__table td.picker__day div.picker__day{border-radius:50%}.picker__day-display,.picker__month-display,.picker__weekday-display{font-size:2rem!important}.clockpicker-am-pm-block button{color:#fff!important}.mydp{line-height:1.1;display:inline-block;position:relative;border-radius:4px}.picker__frame:not{min-height:625px!important}.picker__nav--next,.picker__nav--prev{position:absolute;padding:.5em 1.55em;width:1em;height:1em;box-sizing:content-box;bottom:0;border:0;background:0 0}.picker__nav--next:before,.picker__nav--prev:before{font-family:'Font Awesome 5 Pro','Font Awesome 5 Free'!important}.picker__nav--prev{padding-right:1.25em;left:0!important}.picker__nav--next{right:-1em;padding-left:1.25em}.picker__box .picker__header .picker__nav--next:before,.picker__box .picker__header .picker__nav--prev:before{font-family:unset;font-weight:unset;content:unset}.picker__box .picker__header .picker__nav--next:after,.picker__box .picker__header .picker__nav--prev:after{content:'';display:block;border-style:solid;border-width:0 2px 2px 0;padding:2.5px;position:absolute}.picker__nav--prev::after{-webkit-transform:rotate(135deg);transform:rotate(135deg)}.picker__nav--next::after{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}.picker__header{overflow:hidden}.picker__box .picker__table td.picker__day{padding:0;position:relative}.picker__box .picker__table td.picker__day.disabled{color:#ccc;background:#eee}.picker__box .picker__table td.picker__day div.picker__day{color:#595959;letter-spacing:-.3;padding:.75rem 0;font-weight:400;border:1px solid transparent;outline:0;transition:.3s}.picker__box .picker__table td.picker__day div.picker__day:focus,.picker__box .picker__table td.picker__day div.picker__day:hover{cursor:pointer;color:#000;font-weight:500}.picker__box .picker__table td.picker__day div.picker__day.picker__day--today{color:#4285f4}.mydp .markdate{position:absolute;width:5px;height:5px;border-radius:50%;top:2px;right:2px}@media (max-height:35.875em){.picker--opened .picker__holder{overflow-y:scroll}}.validate-success.ng-valid .mydp-date{border-bottom:1px solid #00c851!important;box-shadow:0 1px 0 0 #00c851!important}.validate-success.ng-valid .mydp label{color:#00c851!important}.form-submitted .validate-error.ng-invalid .mydp-date,.validate-error.ng-invalid.ng-touched .mydp-date{border-bottom:1px solid #f44336!important;box-shadow:0 1px 0 0 #f44336!important}.form-submitted .validate-error.ng-invalid .mydp label,.validate-error.ng-invalid.ng-touched .mydp label{color:#f44336!important}.md-form mdb-date-picker .md-form{margin:0}.datepicker-inline-icon{position:absolute;top:5px;right:0;padding:.5rem}.md-outline>.datepicker-inline-icon{top:4px}.datepicker-inline{position:absolute}.datepicker-inline .picker__header{padding:.3125rem .625rem}.datepicker-inline .picker__nav--next,.datepicker-inline .picker__nav--prev{bottom:unset!important}.datepicker-inline .picker__frame{min-height:unset!important;max-height:unset!important;position:unset!important;margin:unset;border:0}"]
                 }] }
     ];
     /** @nocollapse */
@@ -19824,7 +17779,7 @@ var MDBDatePickerComponent = /** @class */ (function () {
         { type: LocaleService },
         { type: UtilService },
         { type: ChangeDetectorRef },
-        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT$1,] }] },
+        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] },
         { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
     ]; };
     MDBDatePickerComponent.propDecorators = {
@@ -19849,8 +17804,8 @@ var MDBDatePickerComponent = /** @class */ (function () {
         closeButtonClicked: [{ type: Output }],
         clearButtonClicked: [{ type: Output }],
         todayButtonClicked: [{ type: Output }],
-        divFocus: [{ type: ViewChild, args: ['divFocus',] }],
-        pickerFrame: [{ type: ViewChild, args: ['pickerFrame',] }],
+        divFocus: [{ type: ViewChild, args: ['divFocus', { static: false },] }],
+        pickerFrame: [{ type: ViewChild, args: ['pickerFrame', { static: false },] }],
         onWindowClick: [{ type: HostListener, args: ['window:click', ['$event'],] }]
     };
     return MDBDatePickerComponent;
@@ -19868,7 +17823,7 @@ var DatepickerModule = /** @class */ (function () {
                     imports: [CommonModule, FormsModule],
                     declarations: [MDBDatePickerComponent, FocusDirective, InputAutoFillDirective],
                     exports: [MDBDatePickerComponent, FocusDirective, InputAutoFillDirective],
-                    providers: [LocaleService]
+                    providers: [LocaleService],
                 },] }
     ];
     return DatepickerModule;
@@ -19899,8 +17854,8 @@ var SimpleChartComponent = /** @class */ (function () {
             enableAnimation: null,
             animate: {
                 duration: 1000,
-                enabled: true
-            }
+                enabled: true,
+            },
         };
     }
     /**
@@ -19925,24 +17880,26 @@ var SimpleChartComponent = /** @class */ (function () {
     SimpleChartComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mdb-simple-chart',
-                    template: "<span class=\"min-chart\">\n  <span \n  *ngIf=\"customText\"  \n  class=\"chart-custom-text\"\n  [ngStyle]=\"{\n  'line-height': size + 'px',\n  'width': size + 'px',\n  'height': size + 'px'}\">{{ customText }}</span>\n  <span \n  *ngIf=\"!customText\" \n  class=\"percent\">{{ percent }}</span>\n  <mdb-easy-pie-chart [percent]=\"percent\" [options]=\"options\"></mdb-easy-pie-chart>\n</span>"
+                    template: "<span class=\"min-chart\">\n  <span \n  *ngIf=\"customText\"  \n  class=\"chart-custom-text\"\n  [ngStyle]=\"{\n  'line-height': size + 'px',\n  'width': size + 'px',\n  'height': size + 'px'}\">{{ customText }}</span>\n  <span \n  *ngIf=\"!customText\" \n  class=\"percent\">{{ percent }}</span>\n  <mdb-easy-pie-chart [percent]=\"percent\" [options]=\"options\"></mdb-easy-pie-chart>\n</span>",
+                    encapsulation: ViewEncapsulation.None,
+                    styles: [".min-chart{position:relative;display:inline-block;width:110px;height:110px;margin-top:50px;margin-bottom:50px;text-align:center}.min-chart canvas{position:absolute;top:0;left:0}.min-chart .percent{display:inline-block;line-height:110px;z-index:2}.min-chart .percent:after{content:'%';margin-left:.1em;font-size:.8rem}.chart-custom-text{display:inline-block;overflow:hidden;z-index:2}"]
                 }] }
     ];
     /** @nocollapse */
     SimpleChartComponent.ctorParameters = function () { return []; };
     SimpleChartComponent.propDecorators = {
-        customText: [{ type: Input, args: ['customText',] }],
-        percent: [{ type: Input, args: ['percent',] }],
-        barColor: [{ type: Input, args: ['barColor',] }],
-        trackColor: [{ type: Input, args: ['trackColor',] }],
-        scaleColor: [{ type: Input, args: ['scaleColor',] }],
-        scaleLength: [{ type: Input, args: ['scaleLength',] }],
-        lineCap: [{ type: Input, args: ['lineCap',] }],
-        lineWidth: [{ type: Input, args: ['lineWidth',] }],
-        trackWidth: [{ type: Input, args: ['trackWidth',] }],
-        size: [{ type: Input, args: ['size',] }],
-        rotate: [{ type: Input, args: ['rotate',] }],
-        animate: [{ type: Input, args: ['animate',] }]
+        customText: [{ type: Input }],
+        percent: [{ type: Input }],
+        barColor: [{ type: Input }],
+        trackColor: [{ type: Input }],
+        scaleColor: [{ type: Input }],
+        scaleLength: [{ type: Input }],
+        lineCap: [{ type: Input }],
+        lineWidth: [{ type: Input }],
+        trackWidth: [{ type: Input }],
+        size: [{ type: Input }],
+        rotate: [{ type: Input }],
+        animate: [{ type: Input }]
     };
     return SimpleChartComponent;
 }());
@@ -19969,8 +17926,8 @@ var EasyPieChartComponent = /** @class */ (function () {
             rotate: 0,
             animate: {
                 duration: 1000,
-                enabled: true
-            }
+                enabled: true,
+            },
         };
         this.options = Object.assign(options, this.options);
     }
@@ -20023,8 +17980,8 @@ var EasyPieChartComponent = /** @class */ (function () {
         { type: Renderer2 }
     ]; };
     EasyPieChartComponent.propDecorators = {
-        percent: [{ type: Input, args: ['percent',] }],
-        options: [{ type: Input, args: ['options',] }]
+        percent: [{ type: Input }],
+        options: [{ type: Input }]
     };
     return EasyPieChartComponent;
 }());
@@ -20088,10 +18045,10 @@ function humanizeBytes(bytes) {
 }
 var MDBUploaderService = /** @class */ (function () {
     function MDBUploaderService(concurrency, contentTypes, maxUploads) {
+        var _this = this;
         if (concurrency === void 0) { concurrency = Number.POSITIVE_INFINITY; }
         if (contentTypes === void 0) { contentTypes = ['*']; }
         if (maxUploads === void 0) { maxUploads = Number.POSITIVE_INFINITY; }
-        var _this = this;
         this.queue = [];
         this.serviceEvents = new EventEmitter();
         this.uploadScheduler = new Subject();
@@ -20626,11 +18583,11 @@ var MDBFileDropDirective = /** @class */ (function () {
             return;
         }
         /** @type {?} */
-        var concurrency = this.options && this.options.concurrency || Number.POSITIVE_INFINITY;
+        var concurrency = (this.options && this.options.concurrency) || Number.POSITIVE_INFINITY;
         /** @type {?} */
-        var allowedContentTypes = this.options && this.options.allowedContentTypes || ['*'];
+        var allowedContentTypes = (this.options && this.options.allowedContentTypes) || ['*'];
         /** @type {?} */
-        var maxUploads = this.options && this.options.maxUploads || Number.POSITIVE_INFINITY;
+        var maxUploads = (this.options && this.options.maxUploads) || Number.POSITIVE_INFINITY;
         this.upload = new MDBUploaderService(concurrency, allowedContentTypes, maxUploads);
         this.el = this.elementRef.nativeElement;
         this.upload.serviceEvents.subscribe((/**
@@ -20711,9 +18668,13 @@ var MDBFileDropDirective = /** @class */ (function () {
         this.uploadOutput.emit(event);
     };
     MDBFileDropDirective.decorators = [
-        { type: Directive, args: [{
-                    selector: '[mdbFileDrop]'
-                },] }
+        { type: Component, args: [{
+                    // tslint:disable-next-line:component-selector
+                    selector: '[mdbFileDrop]',
+                    template: '<ng-content></ng-content>',
+                    encapsulation: ViewEncapsulation.None,
+                    styles: [".file-field{position:relative;display:flex;flex-direction:row}.file-field .file-path-wrapper{padding-left:10px;height:2.5rem;overflow:visible;display:flex;flex-grow:1}.file-field input[type=file]::-webkit-file-upload-button{display:none}.file-field .file-path-wrapper:after{content:'';clear:both}.file-field input.file-path{background-color:transparent;border:none;border-bottom:1px solid #ccc;border-radius:0;outline:0;height:2.1rem;width:100%;font-size:1rem;box-shadow:none;box-sizing:content-box;transition:.3s}.file-field .btn{position:relative;display:flex;float:none}.file-field .btn:hover{cursor:pointer}.file-field .btn input[type=file]{height:100%}.file-field .btn input[type=file] :hover,.file-field span{cursor:pointer}.file-field input[type=file]{opacity:0;position:absolute;top:0;right:0;left:0;bottom:0;width:100%;margin:0;padding:0;font-size:1px;cursor:pointer;opacity:0}.file-field input[type=file]::-ms-value{display:none}.file-field input[type=file]::-ms-browse{width:100%}.btn-file{padding-top:1px}"]
+                }] }
     ];
     /** @nocollapse */
     MDBFileDropDirective.ctorParameters = function () { return [
@@ -20761,11 +18722,11 @@ var MDBFileSelectDirective = /** @class */ (function () {
             return;
         }
         /** @type {?} */
-        var concurrency = this.options && this.options.concurrency || Number.POSITIVE_INFINITY;
+        var concurrency = (this.options && this.options.concurrency) || Number.POSITIVE_INFINITY;
         /** @type {?} */
-        var allowedContentTypes = this.options && this.options.allowedContentTypes || ['*'];
+        var allowedContentTypes = (this.options && this.options.allowedContentTypes) || ['*'];
         /** @type {?} */
-        var maxUploads = this.options && this.options.maxUploads || Number.POSITIVE_INFINITY;
+        var maxUploads = (this.options && this.options.maxUploads) || Number.POSITIVE_INFINITY;
         this.upload = new MDBUploaderService(concurrency, allowedContentTypes, maxUploads);
         this.el = this.elementRef.nativeElement;
         this.el.addEventListener('change', this.fileListener, false);
@@ -20798,9 +18759,13 @@ var MDBFileSelectDirective = /** @class */ (function () {
         }
     };
     MDBFileSelectDirective.decorators = [
-        { type: Directive, args: [{
-                    selector: '[mdbFileSelect]'
-                },] }
+        { type: Component, args: [{
+                    // tslint:disable-next-line:component-selector
+                    selector: '[mdbFileSelect]',
+                    template: '<ng-content></ng-content>',
+                    encapsulation: ViewEncapsulation.None,
+                    styles: [".file-field{position:relative;display:flex;flex-direction:row}.file-field .file-path-wrapper{padding-left:10px;height:2.5rem;overflow:visible;display:flex;flex-grow:1}.file-field input[type=file]::-webkit-file-upload-button{display:none}.file-field .file-path-wrapper:after{content:'';clear:both}.file-field input.file-path{background-color:transparent;border:none;border-bottom:1px solid #ccc;border-radius:0;outline:0;height:2.1rem;width:100%;font-size:1rem;box-shadow:none;box-sizing:content-box;transition:.3s}.file-field .btn{position:relative;display:flex;float:none}.file-field .btn:hover{cursor:pointer}.file-field .btn input[type=file]{height:100%}.file-field .btn input[type=file] :hover,.file-field span{cursor:pointer}.file-field input[type=file]{opacity:0;position:absolute;top:0;right:0;left:0;bottom:0;width:100%;margin:0;padding:0;font-size:1px;cursor:pointer;opacity:0}.file-field input[type=file]::-ms-value{display:none}.file-field input[type=file]::-ms-browse{width:100%}.btn-file{padding-top:1px}"]
+                }] }
     ];
     /** @nocollapse */
     MDBFileSelectDirective.ctorParameters = function () { return [
@@ -21000,7 +18965,7 @@ var ImageModalComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.zoomed = (this.zoomed === 'inactive') ? 'active' : 'inactive';
+        this.zoomed = this.zoomed === 'inactive' ? 'active' : 'inactive';
     };
     /**
      * @return {?}
@@ -21008,8 +18973,7 @@ var ImageModalComponent = /** @class */ (function () {
     ImageModalComponent.prototype.ngAfterViewInit = /**
      * @return {?}
      */
-    function () {
-    };
+    function () { };
     /**
      * @return {?}
      */
@@ -21144,12 +19108,15 @@ var ImageModalComponent = /** @class */ (function () {
      */
     function (event) {
         if (this.opened) {
+            // tslint:disable-next-line: deprecation
             if (event.keyCode === 39) {
                 this.nextImage();
             }
+            // tslint:disable-next-line: deprecation
             if (event.keyCode === 37) {
                 this.prevImage();
             }
+            // tslint:disable-next-line: deprecation
             if (event.keyCode === 27) {
                 this.closeGallery();
             }
@@ -21176,7 +19143,8 @@ var ImageModalComponent = /** @class */ (function () {
         { type: Component, args: [{
                     selector: 'mdb-image-modal',
                     template: "<div class=\"ng-gallery mdb-lightbox {{ type }}\" *ngIf=\"modalImages && showRepeat\">\n  <figure class=\"col-md-4\" *ngFor=\"let i of modalImages; let index = index\">\n    <img src=\"{{ !i.thumb ? i.img : i.thumb }}\" class=\"ng-thumb\" (click)=\"openGallery(index)\"\n         alt=\"Image {{ index + 1 }}\"/>\n  </figure>\n</div>\n<div tabindex=\"0\" class=\"ng-overlay\" [class.hide_lightbox]=\"opened == false\">\n  <div class=\"top-bar\" style='z-index: 100000'>\n    <span *ngIf=\"modalImages\" class=\"info-text\">{{ currentImageIndex + 1 }}/{{ modalImages.length }}</span>\n    <a class=\"close-popup\" (click)=\"closeGallery()\" (click)=\"toggleRestart()\"></a>\n    <a *ngIf=\"!is_iPhone_or_iPod\" class=\"fullscreen-toogle\" [class.toggled]='fullscreen' (click)=\"fullScreen()\"></a>\n    <a class=\"zoom-toogle\" [class.zoom]='zoom' (click)=\"toggleZoomed()\" *ngIf=\"!isMobile\"></a>\n  </div>\n  <div class=\"ng-gallery-content\">\n    <img #galleryImg *ngIf=\"!loading\" src=\"{{imgSrc}}\" [class.smooth]='smooth' class=\"effect\" (swipeleft)=\"swipe($event.type)\"\n         (swiperight)=\"swipe($event.type)\" (click)=\"toggleZoomed()\" style=\"\"/>\n\n    <div class=\"uil-ring-css\" *ngIf=\"loading\">\n      <div></div>\n    </div>\n    <a class=\"nav-left\" *ngIf=\"modalImages && modalImages.length >1 && !isMobile\" (click)=\"prevImage()\">\n      <span></span>\n    </a>\n    <a class=\"nav-right\" *ngIf=\"modalImages && modalImages.length >1 && !isMobile\" (click)=\"nextImage()\">\n      <span></span>\n    </a>\n  </div>\n  <div class=\"row\" *ngIf=\"caption\">\n    <div class=\"col-md-12 mx-auto bottom-bar text-center\">\n      <figcaption #galleryDescription class=\"text-white lightbox-caption\">{{caption}}</figcaption>\n    </div>\n  </div>\n</div>\n<div *ngIf=\"openModalWindow\">\n  <mdb-image-modal [imagePointer]=\"imagePointer\"></mdb-image-modal>\n</div>\n",
-                    styles: ['.bottom-bar {z-index: 100000; position: absolute; bottom: 2rem; left: 0; right: 0; width: 100%;} ']
+                    encapsulation: ViewEncapsulation.None,
+                    styles: [".bottom-bar{z-index:100000;position:absolute;left:0;right:0;width:100%;bottom:0!important}mdb-image-modal{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-user-drag:none}mdb-image-modal .hide_lightbox{display:none}mdb-image-modal .ng-gallery{display:flex;width:auto;flex-wrap:wrap}mdb-image-modal .ng-gallery img.ng-thumb{width:100%;height:100%;float:none;display:block;cursor:pointer}mdb-image-modal .ng-overlay{outline:0;position:fixed;top:0;left:0;width:100%;height:100%;background:#000;opacity:1;z-index:9999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-user-drag:none}mdb-image-modal .ng-overlay .ng-gallery-content{position:fixed;top:0;left:0;width:100%;height:100%;z-index:10000;text-align:center;overflow:hidden}mdb-image-modal .ng-overlay .ng-gallery-content>a.close-popup{font-size:42px;float:right;color:#fff;text-decoration:none;margin:0 30px 0 0;cursor:pointer;position:absolute;top:20px;right:0}mdb-image-modal .ng-overlay .ng-gallery-content>a.download-image{font-size:42px;float:right;color:#fff;text-decoration:none;margin:0 30px 0 0;cursor:pointer;position:absolute;top:20px;right:63px}mdb-image-modal .ng-overlay .ng-gallery-content .nav-left span{display:block;background-color:transparent}mdb-image-modal .ng-overlay .ng-gallery-content .nav-left span:before{content:' ';display:block;width:32px;height:30px;background-position:-138px -44px;opacity:.75;transition:opacity .2s;background-color:transparent}mdb-image-modal .ng-overlay .ng-gallery-content .nav-left:hover span:before{opacity:1}mdb-image-modal .ng-overlay .ng-gallery-content .nav-right span{display:block;background-color:transparent}mdb-image-modal .ng-overlay .ng-gallery-content .nav-right span:before{content:' ';display:block;width:32px;height:30px;background-position:-94px -44px;opacity:.75;transition:opacity .2s;background-color:transparent}mdb-image-modal .ng-overlay .ng-gallery-content .nav-right:hover span:before{opacity:1}mdb-image-modal .ng-overlay .ng-gallery-content>img{max-width:100%!important;max-width:1600px;max-height:1067px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-user-drag:none;position:absolute;margin:auto;top:0;left:0;right:0;bottom:0}mdb-image-modal .ng-overlay .ng-gallery-content>img.smooth{transition:.2s}mdb-image-modal .ng-overlay .ng-gallery-content>a.nav-left,mdb-image-modal .ng-overlay .ng-gallery-content>a.nav-right{color:#fff;text-decoration:none;font-size:60px;cursor:pointer;outline:0}mdb-image-modal .ng-overlay .ng-gallery-content>a.nav-left{position:fixed;left:10px;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%)}mdb-image-modal .ng-overlay .ng-gallery-content>a.nav-right{position:fixed;right:10px;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%)}mdb-image-modal .ng-overlay .ng-gallery-content>img.effect{-webkit-animation:.5s fadeIn;animation:.5s fadeIn}mdb-image-modal .ng-overlay .ng-gallery-content>span.info-text{color:#fff;display:inline-block;width:100%;height:20px;font-weight:700;text-align:center;position:fixed;left:0;right:0;bottom:100px;font-size:16px}mdb-image-modal .ng-overlay .ng-gallery-content>.ng-thumbnails-wrapper{width:400px;height:70px;text-align:center;position:fixed;bottom:20px;left:0;right:0;margin-left:auto;margin-right:auto;overflow-x:hidden}mdb-image-modal .ng-overlay .ng-gallery-content>.ng-thumbnails-wrapper>.ng-thumbnails{width:4000px;height:70px}mdb-image-modal .ng-overlay .ng-gallery-content>.ng-thumbnails-wrapper>.ng-thumbnails>div>img{width:auto;height:70px;float:left;margin-right:10px;cursor:pointer;opacity:.6}mdb-image-modal .ng-overlay .ng-gallery-content>.ng-thumbnails-wrapper>.ng-thumbnails>div>img.active,mdb-image-modal .ng-overlay .ng-gallery-content>.ng-thumbnails-wrapper>.ng-thumbnails>div>img:hover{transition:opacity .25s;opacity:1}@-webkit-keyframes fadeIn{from{opacity:.3}to{opacity:1}}@keyframes fadeIn{from{opacity:.3}to{opacity:1}}.lightbox-caption{font-size:13px;max-height:50px}.effect{-webkit-transform:scale(.9,.9);transform:scale(.9,.9)}.top-bar{position:absolute;top:0;left:0;right:0;height:44px;width:100%;z-index:10001}.top-bar .info-text{position:absolute;height:44px;top:0;left:0;font-size:16px;line-height:44px;color:#fff;opacity:.75;padding:0 10px}.top-bar .close-popup{position:relative;float:right;background-size:264px 88px;display:block;width:44px;height:44px;background-position:0 -44px;opacity:.75;transition:opacity .2s}.top-bar .close-popup:hover{opacity:1}.top-bar .fullscreen-toogle{position:relative;float:right;background-size:264px 88px;display:block;width:44px;height:44px;opacity:.75;transition:opacity .2s}.top-bar .fullscreen-toogle.toggled{background-position:-44px 0}.top-bar .fullscreen-toogle:hover{opacity:1}.top-bar .zoom-toogle{position:relative;float:right;background-size:264px 88px;display:block;width:44px;height:44px;background-position:-88px 0;opacity:.75;transition:opacity .2s}.top-bar .zoom-toogle.zoom{background-position:-132px 0}.top-bar .zoom-toogle:hover{opacity:1}"]
                 }] }
     ];
     /** @nocollapse */
@@ -21186,15 +19154,15 @@ var ImageModalComponent = /** @class */ (function () {
         { type: Renderer2 }
     ]; };
     ImageModalComponent.propDecorators = {
-        modalImages: [{ type: Input, args: ['modalImages',] }],
-        imagePointer: [{ type: Input, args: ['imagePointer',] }],
-        fullscreen: [{ type: Input, args: ['fullscreen',] }],
-        zoom: [{ type: Input, args: ['zoom',] }],
-        smooth: [{ type: Input, args: ['smooth',] }],
-        type: [{ type: Input, args: ['type',] }],
-        galleryImg: [{ type: ViewChild, args: ['galleryImg',] }],
-        galleryDescription: [{ type: ViewChild, args: ['galleryDescription',] }],
-        cancelEvent: [{ type: Output, args: ['cancelEvent',] }],
+        modalImages: [{ type: Input }],
+        imagePointer: [{ type: Input }],
+        fullscreen: [{ type: Input }],
+        zoom: [{ type: Input }],
+        smooth: [{ type: Input }],
+        type: [{ type: Input }],
+        galleryImg: [{ type: ViewChild, args: ['galleryImg', { static: false },] }],
+        galleryDescription: [{ type: ViewChild, args: ['galleryDescription', { static: false },] }],
+        cancelEvent: [{ type: Output }],
         keyboardControl: [{ type: HostListener, args: ['document:keyup', ['$event'],] }]
     };
     return ImageModalComponent;
@@ -22713,7 +20681,13 @@ var SelectDropdownComponent = /** @class */ (function () {
          * @param {?} el
          * @return {?}
          */
-        function (el) { return el.toString().toLowerCase().charAt(0).includes(key.toString().toLowerCase()); }));
+        function (el) {
+            return el
+                .toString()
+                .toLowerCase()
+                .charAt(0)
+                .includes(key.toString().toLowerCase());
+        }));
         if (this.searchIndex > items.length - 1 || key !== this.previousKey) {
             this.searchIndex = 0;
         }
@@ -22782,7 +20756,7 @@ var SelectDropdownComponent = /** @class */ (function () {
          */
         function () {
             if (el.icon) {
-                _this._renderer.setStyle(_this.optionsList.nativeElement, 'height', (_this.dropdownHeight + 8) + 'px');
+                _this._renderer.setStyle(_this.optionsList.nativeElement, 'height', _this.dropdownHeight + 8 + 'px');
             }
             else {
                 _this._renderer.setStyle(_this.optionsList.nativeElement, 'height', _this.dropdownHeight + 'px');
@@ -22859,7 +20833,7 @@ var SelectDropdownComponent = /** @class */ (function () {
         var _this = this;
         // Sliding-down animation
         this.endHeight = this.dropdownContent.nativeElement.clientHeight;
-        this.state = (this.state === 'invisible' ? 'visible' : 'invisible');
+        this.state = this.state === 'invisible' ? 'visible' : 'invisible';
         this.cdRef.detectChanges();
         if (this.multiple) {
             /** @type {?} */
@@ -23015,7 +20989,7 @@ var SelectDropdownComponent = /** @class */ (function () {
         function (option) {
             return option.selected ? true : false;
         }));
-        areAllSelected ? this.selectAllSelected = true : this.selectAllSelected = false;
+        areAllSelected ? (this.selectAllSelected = true) : (this.selectAllSelected = false);
         this.cdRef.detectChanges();
     };
     /**
@@ -23058,7 +21032,10 @@ var SelectDropdownComponent = /** @class */ (function () {
         var listHeight;
         /** @type {?} */
         var list = this.optionsList.nativeElement;
-        listHeight = this.multiple && this.enableSelectAll ? list.offsetHeight - this.optionHeight : list.offsetHeight;
+        listHeight =
+            this.multiple && this.enableSelectAll
+                ? list.offsetHeight - this.optionHeight
+                : list.offsetHeight;
         /** @type {?} */
         var itemIndex = this.optionList.getHighlightedIndex();
         if (itemIndex > -1) {
@@ -23112,12 +21089,14 @@ var SelectDropdownComponent = /** @class */ (function () {
                     template: "<div (click)=\"$event.stopPropagation()\" class=\"dropdown-content\" #dropdownContent [ngStyle]=\"{'top.px': top, 'left.px': left, 'width.px': width}\"\n[@dropdownAnimation]=\"{value: state, params: {startHeight: startHeight, endHeight: endHeight}}\" (@dropdownAnimation.done)=\"onAnimationDone()\" (@dropdownAnimation.start)=\"onAnimationStart()\">\n  <div class=\"filter md-form px-2\" *ngIf=\"filterEnabled\" [ngClass]=\"{'md-outline': outline}\">\n    <input\n    type=\"text\"\n    class=\"search form-control w-100 d-block\"\n    #filterInput\n    [attr.autocomplete]=\"filterAutocomplete ? 'on' : 'off'\"\n    [placeholder]=\"placeholder\"\n    (input)=\"onSingleFilterInput($event)\"\n    (keydown)=\"onSingleFilterKeydown($event)\">\n  </div>\n\n  <div class=\"options\" #optionsList>\n    <ul class=\"select-dropdown\" [ngClass]=\"{'multiple-select-dropdown': multiple}\"\n    (wheel)=\"onOptionsWheel($event)\">\n      <li [ngStyle]=\"{ 'height.px': optionHeight }\" *ngIf=\"multiple && enableSelectAll && this.hasOptionsItems\" (click)=\"onSelectAllClick()\">\n        <span class=\"filtrable\" *ngIf=\"multiple\">\n          <input type=\"checkbox\" [checked]=\"selectAllSelected\" class=\"form-check-input {{customClass}}\">\n          <label></label>\n          {{selectAllLabel}}\n        </span>\n      </li>\n      <li *ngFor=\"let option of optionList.filtered\"\n        [ngClass]=\"{'active': option.highlighted, 'selected': option.selected, 'disabled': option.disabled, 'optgroup': option.group, 'd-flex justify-content-between flex-row-reverse align-items-center': option.icon}\"\n        [ngStyle]=\"{'height.px': optionHeight, 'line-height.px': optionHeight, 'background-color': getOptionStyle(option)['background-color'], 'color': getOptionStyle(option)['color']}\"\n        (click)=\"onOptionClick(option)\"\n        (mouseover)=\"option.hovered = true\"\n        (mouseleave)=\"option.hovered = false\">\n        <img class=\"rounded-circle\" [src]=\"option.icon\" *ngIf=\"option.icon !== ''\">\n        <span class=\"deselect-option\" *ngIf=\"!multiple\">{{option.label}}</span>\n        <span class=\"deselect-option\" *ngIf=\"multiple\">\n          <input type=\"checkbox\" [checked]=\"option.selected\" class=\"form-check-input {{customClass}}\" [disabled]=\"option.disabled\">\n          <label></label>\n          {{option.label}}\n        </span>\n      </li>\n      <li *ngIf=\"!this.hasOptionsItems\" class=\"message disabled\" [ngStyle]=\"{'height.px': optionHeight}\">\n        <span>{{notFoundMsg}}</span>\n      </li>\n      <li #customContent class=\"custom-select-content\">\n        <ng-content></ng-content>\n      </li>\n    </ul>\n  </div>\n</div>\n",
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    animations: [trigger('dropdownAnimation', [
+                    animations: [
+                        trigger('dropdownAnimation', [
                             state('invisible', style({ opacity: 0, height: '0px' })),
                             state('visible', style({ opacity: 1, height: '*' })),
                             transition('invisible => visible', animate('300ms ease')),
-                            transition('visible => invisible', animate('300ms ease'))
-                        ])]
+                            transition('visible => invisible', animate('300ms ease')),
+                        ]),
+                    ]
                 }] }
     ];
     /** @nocollapse */
@@ -23154,10 +21133,10 @@ var SelectDropdownComponent = /** @class */ (function () {
         animationDone: [{ type: Output }],
         animationStart: [{ type: Output }],
         selectAll: [{ type: Output }],
-        filterInput: [{ type: ViewChild, args: ['filterInput',] }],
-        optionsList: [{ type: ViewChild, args: ['optionsList',] }],
-        dropdownContent: [{ type: ViewChild, args: ['dropdownContent',] }],
-        customContent: [{ type: ViewChild, args: ['customContent',] }],
+        filterInput: [{ type: ViewChild, args: ['filterInput', { static: false },] }],
+        optionsList: [{ type: ViewChild, args: ['optionsList', { static: true },] }],
+        dropdownContent: [{ type: ViewChild, args: ['dropdownContent', { static: true },] }],
+        customContent: [{ type: ViewChild, args: ['customContent', { static: true },] }],
         onWindowKeyUp: [{ type: HostListener, args: ['window:keyup', ['$event'],] }],
         onkeyup: [{ type: HostListener, args: ['keyup',] }],
         onkeydown: [{ type: HostListener, args: ['input',] }]
@@ -23172,11 +21151,12 @@ var SelectDropdownComponent = /** @class */ (function () {
 /** @type {?} */
 var SELECT_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
+    // tslint:disable-next-line: no-use-before-declare
     useExisting: forwardRef((/**
      * @return {?}
      */
     function () { return SelectComponent; })),
-    multi: true
+    multi: true,
 };
 var SelectComponent = /** @class */ (function () {
     /** Event handlers. **/
@@ -23216,7 +21196,7 @@ var SelectComponent = /** @class */ (function () {
             ESC: 27,
             SPACE: 32,
             UP: 38,
-            DOWN: 40
+            DOWN: 40,
         };
         this._value = [];
         this.visibleOptionsDefault = 4;
@@ -23240,13 +21220,11 @@ var SelectComponent = /** @class */ (function () {
          * @param {?} _
          * @return {?}
          */
-        function (_) {
-        });
+        function (_) { });
         this.onTouched = (/**
          * @return {?}
          */
-        function () {
-        });
+        function () { });
         this.isBrowser = isPlatformBrowser(platformId);
     }
     /**
@@ -23302,18 +21280,22 @@ var SelectComponent = /** @class */ (function () {
      */
     function () {
         /** @type {?} */
-        var customContentHeight = this.dropdown ? this.dropdown.customContent.nativeElement.clientHeight : 0;
+        var customContentHeight = this.dropdown
+            ? this.dropdown.customContent.nativeElement.clientHeight
+            : 0;
         if (this.multiple && this.enableSelectAll) {
-            this.dropdownMaxHeight = this.visibleOptions ?
-                (this.optionHeight * (this.visibleOptions + 1)) + customContentHeight :
-                (this.optionHeight * (this.visibleOptionsDefault + 1)) + customContentHeight;
-            this.dropdownHeight = (this.optionHeight * (this.optionList.options.length + 1)) + customContentHeight;
+            this.dropdownMaxHeight = this.visibleOptions
+                ? this.optionHeight * (this.visibleOptions + 1) + customContentHeight
+                : this.optionHeight * (this.visibleOptionsDefault + 1) + customContentHeight;
+            this.dropdownHeight =
+                this.optionHeight * (this.optionList.options.length + 1) + customContentHeight;
         }
         else {
-            this.dropdownMaxHeight = this.visibleOptions ?
-                (this.optionHeight * this.visibleOptions) + customContentHeight :
-                (this.optionHeight * this.visibleOptionsDefault) + customContentHeight;
-            this.dropdownHeight = (this.optionHeight * this.optionList.options.length) + customContentHeight;
+            this.dropdownMaxHeight = this.visibleOptions
+                ? this.optionHeight * this.visibleOptions + customContentHeight
+                : this.optionHeight * this.visibleOptionsDefault + customContentHeight;
+            this.dropdownHeight =
+                this.optionHeight * this.optionList.options.length + customContentHeight;
         }
     };
     /**
@@ -23367,7 +21349,7 @@ var SelectComponent = /** @class */ (function () {
             this.appendToBody ? this._updateAppendedPosition() : this.updatePosition();
             this.changed.emit({
                 previousValue: changes.options.previousValue,
-                currentValue: changes.options.currentValue
+                currentValue: changes.options.currentValue,
             });
         }
         if (changes.hasOwnProperty('noFilter')) {
@@ -23670,9 +21652,7 @@ var SelectComponent = /** @class */ (function () {
             if (typeof v === 'undefined' || v === null || v === '') {
                 v = [];
             }
-            else if (typeof v === 'string' ||
-                typeof v === 'number' ||
-                typeof v === 'boolean') {
+            else if (typeof v === 'string' || typeof v === 'number' || typeof v === 'boolean') {
                 v = [v];
             }
             else if (!Array.isArray(v)) {
@@ -23881,7 +21861,9 @@ var SelectComponent = /** @class */ (function () {
                  * @return {?}
                  */
                 function (event) {
-                    if (!_this.isChild(event.target) && _this.isOpen && _this.dropdownAnimationDone &&
+                    if (!_this.isChild(event.target) &&
+                        _this.isOpen &&
+                        _this.dropdownAnimationDone &&
                         event.target !== _this.el.nativeElement) {
                         _this.closeDropdown();
                         _this.clearFilterInput();
@@ -24182,9 +22164,7 @@ var SelectComponent = /** @class */ (function () {
         /** @type {?} */
         var key = event.which;
         if (key === this.KEYS.BACKSPACE) {
-            if (this.hasSelected &&
-                this.filterEnabled &&
-                this.filterInput.nativeElement.value === '') {
+            if (this.hasSelected && this.filterEnabled && this.filterInput.nativeElement.value === '') {
                 this.deselectLast();
             }
         }
@@ -24227,8 +22207,7 @@ var SelectComponent = /** @class */ (function () {
                 this.selectionSpan.nativeElement.focus();
             }
         }
-        catch (error) {
-        }
+        catch (error) { }
     };
     /**
      * @return {?}
@@ -24266,7 +22245,9 @@ var SelectComponent = /** @class */ (function () {
             /** @type {?} */
             var elPosition = 0;
             if (_this.isBrowser) {
-                elPosition = _this.el.nativeElement.getBoundingClientRect().bottom + _this.document.documentElement.scrollTop;
+                elPosition =
+                    _this.el.nativeElement.getBoundingClientRect().bottom +
+                        _this.document.documentElement.scrollTop;
             }
             /** @type {?} */
             var selectSpan = _this.selectionSpan.nativeElement;
@@ -24306,7 +22287,8 @@ var SelectComponent = /** @class */ (function () {
             /** @type {?} */
             var dropdownHeight = this.dropdownMaxHeight > this.dropdownHeight ? this.dropdownHeight : this.dropdownMaxHeight;
             this.left = selectRect.left;
-            if (offsetTop + dropdownHeight + this.filterHeight > scrollTop + this.document.documentElement.clientHeight) {
+            if (offsetTop + dropdownHeight + this.filterHeight >
+                scrollTop + this.document.documentElement.clientHeight) {
                 this.top = offsetTop - dropdownHeight + height - this.filterHeight;
             }
             else {
@@ -24344,9 +22326,7 @@ var SelectComponent = /** @class */ (function () {
             /** @type {?} */
             var value = this.filterInput.nativeElement.value;
             this.filterInputWidth =
-                value.length === 0
-                    ? 1 + this.placeholderView.length * 10
-                    : 1 + value.length * 10;
+                value.length === 0 ? 1 + this.placeholderView.length * 10 : 1 + value.length * 10;
         }
     };
     SelectComponent.decorators = [
@@ -24355,14 +22335,15 @@ var SelectComponent = /** @class */ (function () {
                     template: "<label *ngIf=\"label !== ''\" [ngClass]=\"{'active': labelActive }\">\n  {{label}}\n</label>\n<div\n  #selection\n  [attr.tabindex]=\"disabled ? null : 0\"\n  [ngClass]=\"{'open': isOpen, 'focus': hasFocus, 'below': isBelow, 'disabled': disabled}\"\n  [tabindex]=\"tabindex\"\n  (mousedown)=\"onSelectContainerClick($event)\"\n  (focus)=\"onSelectContainerFocus()\"\n  (blur)=\"onSelectContainerBlur()\"\n  (keydown)=\"onSelectContainerKeydown($event)\"\n  (window:resize)=\"onWindowResize()\">\n\n  <div class=\"single form-control\"\n    *ngIf=\"!multiple\">\n    <div class=\"value\"\n      *ngIf=\"optionList.hasSelected()\">\n      {{optionList.selection[0].label}}\n    </div>\n    <div class=\"placeholder\"\n      *ngIf=\"!optionList.hasSelected()\">\n      {{placeholderView}}\n    </div>\n    <div #clear class=\"clear\"\n      *ngIf=\"allowClear && hasSelected\"\n      (mousedown)=\"onClearSelectionClick($event)\">\n      &#x2715;\n    </div>\n    <span class=\"mdb-select-toggle\"></span>\n  </div>\n\n  <div class=\"multiple form-control\"\n      *ngIf=\"multiple\">\n      <div class=\"placeholder\"\n        *ngIf=\"!optionList.hasSelected()\">\n        {{placeholderView}}\n      </div>\n\n      <div [ngStyle]=\"allowClear && { 'width.%': 90}\" class=\"option\">\n        <span *ngFor=\"let option of optionList.selection\">\n          {{option.label}}<span class=\"deselect-option\">,</span>\n        </span>\n      </div>\n\n      <div #clear class=\"clear\"\n      *ngIf=\"allowClear && hasSelected\"\n      (mousedown)=\"onClearSelectionClick($event)\">\n      &#x2715;\n    </div>\n\n    <span class=\"mdb-select-toggle\"></span>\n\n  </div>\n</div>\n<mdb-select-dropdown\n  *ngIf=\"isOpen\"\n  #dropdown\n  [enableSelectAll]=\"enableSelectAll\"\n  [multiple]=\"multiple\"\n  [dropdownHeight]=\"dropdownHeight\"\n  [dropdownMaxHeight]=\"dropdownMaxHeight\"\n  [optionHeight]=\"optionHeight\"\n  [optionList]=\"optionList\"\n  [notFoundMsg]=\"notFoundMsg\"\n  [customClass]=\"customClass\"\n  [highlightColor]=\"highlightColor\"\n  [highlightTextColor]=\"highlightTextColor\"\n  [filterEnabled]=\"filterEnabled\"\n  [filterAutocomplete]=\"filterAutocomplete\"\n  [placeholder]=\"filterPlaceholder\"\n  [selectAllLabel]=\"selectAllLabel\"\n  [outline]=\"outline\"\n  [top]=\"top\"\n  [left]=\"left\"\n  [width]=\"width\"\n  (close)=\"onDropdownClose($event)\"\n  (optionClicked)=\"onDropdownOptionClicked($event)\"\n  (singleFilterClick)=\"onSingleFilterClick()\"\n  (singleFilterInput)=\"onSingleFilterInput($event)\"\n  (singleFilterKeydown)=\"onSingleFilterKeydown($event)\"\n  (selectAll)=\"onSelectAll($event)\"\n  (animationDone)=\"onDropdownAnimationDone()\"\n  (animationStart)=\"onDropdownAnimationStart()\">\n  <ng-content></ng-content>\n</mdb-select-dropdown>\n",
                     providers: [SELECT_VALUE_ACCESSOR],
                     encapsulation: ViewEncapsulation.None,
-                    changeDetection: ChangeDetectionStrategy.OnPush
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    styles: [".select-wrapper .select-dropdown{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.select-label{position:absolute}.select-wrapper{position:relative}.select-wrapper input.select-dropdown{position:relative;cursor:pointer;background-color:transparent;border:none;border-bottom:1px solid #ced4da;outline:0;height:38px;line-height:2.9rem;width:100%;font-size:1rem;margin:0 0 .94rem;padding:0;display:block;text-overflow:ellipsis;z-index:2}.select-wrapper input.select-dropdown:disabled{color:rgba(0,0,0,.3);border-bottom-color:rgba(0,0,0,.2);cursor:default}.select-wrapper input.select-dropdown .selected,.select-wrapper input.select-dropdown li:focus{background-color:rgba(0,0,0,.15)}.select-wrapper input.select-dropdown li.active{background:0 0}.select-wrapper input.select-dropdown .fab,.select-wrapper input.select-dropdown .far,.select-wrapper input.select-dropdown .fas{color:inherit}.select-wrapper input.active{box-shadow:0 1px 0 0 #4285f4;border-bottom:1px solid #4285f4}.select-wrapper .search-wrap{padding:1rem 0 0;display:block;margin:0 .7rem}.select-wrapper .search-wrap .md-form{margin-top:0;margin-bottom:1rem}.select-wrapper .search-wrap .md-form input{padding-bottom:.4rem;margin-bottom:0}.select-wrapper span.caret{color:initial;position:absolute;right:0;top:.8rem;font-size:.63rem}.select-wrapper span.caret.disabled{color:rgba(0,0,0,.3)}.select-wrapper+label{position:absolute;top:2.125rem;transition:.2s ease-out;color:#757575;font-weight:300}.select-wrapper+label.active{-webkit-transform:translateY(-14px);transform:translateY(-14px);font-size:.8rem;top:1.5rem;left:15px}.select-wrapper+label.active-check{color:#4285f4}.select-wrapper+label.mdb-main-label{z-index:1}.select-wrapper i,.select-wrapper+label.disabled{color:rgba(0,0,0,.3)}.select-wrapper ul{list-style-type:none;padding-left:0}.select-wrapper.md-form>ul li label{top:0;color:#4285f4;font-size:.9rem;-webkit-transform:none;transform:none}.select-wrapper.md-form>ul li.select-toggle-all label{padding-left:38px}.select-wrapper.md-form.colorful-select>ul li.select-toggle-all:hover label{color:#fff}.select-wrapper.md-form.md-outline span.caret{padding-right:.75rem;padding-left:.75rem;color:#495057!important}.select-wrapper.md-form.md-outline span.caret.active{color:#4285f4!important}.select-wrapper.md-form.md-outline .dropdown-content{top:2.7rem!important}.select-wrapper.md-form.md-outline input.select-dropdown{padding:.375rem .75rem;color:#495057}.select-wrapper.md-form.md-outline input.select-dropdown:focus{border-color:#4285f4;box-shadow:inset 0 0 0 1px #4285f4}.select-wrapper.md-form.md-outline+label{position:absolute;-webkit-transform:translateY(40%);transform:translateY(40%);left:23px;color:#757575;background:#fff;font-size:13px;font-weight:500;padding-right:5px;padding-left:5px;top:.5em!important;z-index:2!important}.select-wrapper.md-form.md-outline+label.active{color:#4285f4}select{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;display:none!important}select.browser-default{display:block!important}select:disabled{color:rgba(0,0,0,.3)}.select-dropdown [type=checkbox]:disabled:not(:checked)+label:before{margin-left:0;margin-top:3px}.select-dropdown ul{list-style-type:none;padding:0}.select-dropdown li img{height:30px;width:30px;margin:.3rem .75rem;float:right}.select-dropdown li.disabled,.select-dropdown li.disabled>span,.select-dropdown li.optgroup{color:rgba(0,0,0,.3);background-color:transparent!important;cursor:context-menu}.select-dropdown li.optgroup{border-top:1px solid #eee}.select-dropdown li.optgroup.selected>span{color:rgba(0,0,0,.7)}.select-dropdown li.optgroup>span{color:rgba(0,0,0,.4)}.dropdown-content{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);background-color:#fff;margin:0;display:none;min-width:6.25rem;max-height:40.625rem;overflow-y:auto;opacity:0;position:absolute;z-index:999;will-change:width,height}.dropdown-content li{clear:both;color:#000;cursor:pointer;line-height:1.3rem;width:100%;text-align:left;text-transform:none}.dropdown-content li.active,.dropdown-content li:hover{background-color:#eee}.dropdown-content li>a,.dropdown-content li>span{color:#4285f4;display:block;padding:.5rem}.dropdown-content li>a>i{height:inherit;line-height:inherit}.colorful-select .dropdown-content{padding:.5rem}.colorful-select .dropdown-content li.active span{color:#fff!important;box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.colorful-select .dropdown-content li.active span [type=checkbox]:checked+label:before{border-color:transparent #fff #fff transparent}.colorful-select .dropdown-content li a:hover,.colorful-select .dropdown-content li span:hover{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);color:#fff!important;transition:.15s;border-radius:.125rem}.colorful-select .dropdown-content li a:hover [type=checkbox]+label:before,.colorful-select .dropdown-content li span:hover [type=checkbox]+label:before{border-color:#fff}.colorful-select .dropdown-content li a:hover [type=checkbox]:checked+label:before,.colorful-select .dropdown-content li span:hover [type=checkbox]:checked+label:before{border-color:transparent #fff #fff transparent}.colorful-select .dropdown-content li.disabled.active span,.colorful-select .dropdown-content li.optgroup.active span,.colorful-select .dropdown-content li:disabled.active span{box-shadow:none;color:rgba(0,0,0,.3)!important;border-bottom-color:rgba(0,0,0,.3);cursor:default}.colorful-select .dropdown-content li.disabled a:hover,.colorful-select .dropdown-content li.disabled span:hover,.colorful-select .dropdown-content li.optgroup a:hover,.colorful-select .dropdown-content li.optgroup span:hover,.colorful-select .dropdown-content li:disabled a:hover,.colorful-select .dropdown-content li:disabled span:hover{box-shadow:none;color:rgba(0,0,0,.3)!important;border-bottom-color:rgba(0,0,0,.3);cursor:default;background-color:#fff!important}.colorful-select .dropdown-content li.disabled label,.colorful-select .dropdown-content li.optgroup label,.colorful-select .dropdown-content li:disabled label{cursor:default}.dropdown-primary .dropdown-content li a,.dropdown-primary .dropdown-content li span:hover,.dropdown-primary .dropdown-content li.active{background-color:#4285f4!important}.dropdown-primary .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-primary .search-wrap input:focus{border-bottom:1px solid #4285f4;box-shadow:0 1px 0 0 #4285f4}.dropdown-danger .dropdown-content li a,.dropdown-danger .dropdown-content li span:hover,.dropdown-danger .dropdown-content li.active{background-color:#c00!important}.dropdown-danger .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-danger .search-wrap input:focus{border-bottom:1px solid #c00;box-shadow:0 1px 0 0 #c00}.dropdown-default .dropdown-content li a,.dropdown-default .dropdown-content li span:hover,.dropdown-default .dropdown-content li.active{background-color:#2bbbad!important}.dropdown-default .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-default .search-wrap input:focus{border-bottom:1px solid #2bbbad;box-shadow:0 1px 0 0 #2bbbad}.dropdown-secondary .dropdown-content li a,.dropdown-secondary .dropdown-content li span:hover,.dropdown-secondary .dropdown-content li.active{background-color:#a6c!important}.dropdown-secondary .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-secondary .search-wrap input:focus{border-bottom:1px solid #a6c;box-shadow:0 1px 0 0 #a6c}.dropdown-success .dropdown-content li a,.dropdown-success .dropdown-content li span:hover,.dropdown-success .dropdown-content li.active{background-color:#00c851!important}.dropdown-success .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-success .search-wrap input:focus{border-bottom:1px solid #00c851;box-shadow:0 1px 0 0 #00c851}.dropdown-info .dropdown-content li a,.dropdown-info .dropdown-content li span:hover,.dropdown-info .dropdown-content li.active{background-color:#33b5e5!important}.dropdown-info .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-info .search-wrap input:focus{border-bottom:1px solid #33b5e5;box-shadow:0 1px 0 0 #33b5e5}.dropdown-warning .dropdown-content li a,.dropdown-warning .dropdown-content li span:hover,.dropdown-warning .dropdown-content li.active{background-color:#fb3!important}.dropdown-warning .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-warning .search-wrap input:focus{border-bottom:1px solid #fb3;box-shadow:0 1px 0 0 #fb3}.dropdown-dark .dropdown-content li a,.dropdown-dark .dropdown-content li span:hover,.dropdown-dark .dropdown-content li.active{background-color:#2e2e2e!important}.dropdown-dark .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-dark .search-wrap input:focus{border-bottom:1px solid #2e2e2e;box-shadow:0 1px 0 0 #2e2e2e}.dropdown-ins .dropdown-content li a,.dropdown-ins .dropdown-content li span:hover,.dropdown-ins .dropdown-content li.active{background-color:#2e5e86!important}.dropdown-ins .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-ins .search-wrap input:focus{border-bottom:1px solid #2e5e86;box-shadow:0 1px 0 0 #2e5e86}.md-dropdown li.disabled.active{background-color:transparent!important}mdb-select{display:inline-block;margin:0;position:relative;vertical-align:middle;width:100%}mdb-select *{box-sizing:border-box;font-family:Roboto,sans-serif;outline:0}mdb-select.mdb-select-outline{transition:.2s}mdb-select.mdb-select-outline>label{padding-left:10px}mdb-select.mdb-select-outline:active label,mdb-select.mdb-select-outline:focus label,mdb-select.mdb-select-outline:focus-within label{color:#4285f4}mdb-select.mdb-select-outline:active .below>.form-control,mdb-select.mdb-select-outline:focus .below>.form-control,mdb-select.mdb-select-outline:focus-within .below>.form-control{border-color:#4285f4;box-shadow:inset 0 0 0 1px #4285f4}mdb-select.mdb-select-outline .form-control{padding:6px 12px;border:1px solid #dadce0;border-radius:4px}mdb-select.mdb-select-outline>label.active{-webkit-transform:translateY(-17px) scale(.8);transform:translateY(-17px) scale(.8);background:#fff;font-weight:500;padding:0;font-size:1rem;z-index:1}mdb-select>div{border:transparent;box-sizing:border-box;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;width:100%}mdb-select>div.disabled{color:#aaa!important;cursor:default;pointer-events:none;background-color:transparent}mdb-select>div.disabled>div.single>div.clear,mdb-select>div.disabled>div.single>div.placeholder,mdb-select>div.disabled>div.single>div.toggle{color:rgba(0,0,0,.3)}mdb-select>div>div.single{position:relative;cursor:pointer;background-color:transparent;border:none;border-bottom:1px solid #ccc;outline:0;line-height:2rem;width:100%;font-size:1rem;margin:0;padding:0;display:block;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;text-align:start}mdb-select>div>div.single>div.value{flex:1;line-height:2rem;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;padding-right:1.2rem!important;color:#292b2c;padding:0 0 5px}mdb-select>div>div.single>div.placeholder{flex:1;line-height:2rem;overflow:hidden;white-space:nowrap;padding:0 0 5px;color:#000}mdb-select>div>div.single>div.clear,mdb-select>div>div.single>div.toggle{float:right;color:#000;line-height:2rem;text-align:center;width:30px;position:absolute;right:0;top:50%;margin-top:-2px;-webkit-transform:translateY(-50%);transform:translateY(-50%)}mdb-select>div>div.single>div.toggle:before{content:'\\25B2'}mdb-select>div>div.single>div.clear:hover,mdb-select>div>div.single>div.toggle:hover{background-color:#ececec}mdb-select>div>div.single>div.clear,mdb-select>div>div.single>div.toggle:hover{background-color:transparent}mdb-select>div>div.single>div.clear{font-size:18px}mdb-select>div>div.single>div.toggle{font-size:14px}mdb-select>div>div.multiple{position:relative;cursor:pointer;background-color:transparent;border:none;border-bottom:1px solid #ccc;outline:0;line-height:2rem;width:100%;font-size:1rem;margin:0;padding:0;display:block;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;text-align:start}mdb-select>div>div.multiple>div.clear,mdb-select>div>div.multiple>div.toggle{float:right;color:#000;line-height:2rem;text-align:center;width:30px;position:absolute;right:0;top:50%;margin-top:-2px;-webkit-transform:translateY(-50%);transform:translateY(-50%)}mdb-select>div>div.multiple>div.clear:hover,mdb-select>div>div.multiple>div.toggle:hover{background-color:#ececec}mdb-select>div>div.multiple>div.clear,mdb-select>div>div.multiple>div.toggle:hover{background-color:transparent}mdb-select>div>div.multiple>div.clear{font-size:18px}mdb-select>div>div.multiple>div.toggle{font-size:14px}mdb-select>div>div.multiple>div.option{overflow:hidden;min-width:0;width:95%;text-overflow:ellipsis;white-space:nowrap;cursor:default;line-height:2rem}mdb-select>div>div.multiple>div.option span:last-child .deselect-option{display:none}mdb-select>div>div.multiple>div.option span.deselect-option{cursor:pointer;height:20px;line-height:2rem;background-color:transparent;border:0;border-radius:0;color:#292b2c;font-size:1rem;margin:0;padding:0}mdb-select>div>div.multiple>div.option span.deselect-option:hover{color:#555}mdb-select>div>div.multiple input{background-color:transparent;border:none;height:30px;line-height:2rem;padding:0}mdb-select>div>div.multiple input:focus{outline:0}mdb-select label{color:#757575;font-size:1rem;position:absolute;top:7px;left:0;transition:.2s ease-out;cursor:text}mdb-select label.active{font-size:.8rem;-webkit-transform:translateY(-120%);transform:translateY(-120%)}mdb-select-dropdown{box-sizing:border-box;font-family:Sans-Serif;color:#4285f4;font-size:19.2px}mdb-select-dropdown *{box-sizing:border-box;font-family:Sans-Serif}mdb-select-dropdown>div{background-color:#fff;outline:transparent;border:0;box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);border-top:none;box-sizing:border-box;position:absolute;z-index:1}mdb-select-dropdown>div .filter{margin-bottom:9.6px!important;margin-top:9.6px!important;height:38px}mdb-select-dropdown>div .options{position:relative;overflow-y:auto}mdb-select-dropdown>div .options ul{list-style:none;margin:0;padding:0}mdb-select-dropdown>div .options ul li{cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}mdb-select-dropdown>div .options ul li .filtrable{flex-direction:row;align-items:center}mdb-select-dropdown>div .options ul .selected{background-color:#eee}mdb-select-dropdown>div .options ul .highlighted{background-color:#eee;color:#4285f4}mdb-select-dropdown>div .options ul .disabled{background-color:#fff;color:#9e9e9e;cursor:default;pointer-events:none}mdb-select-dropdown>div .options::-webkit-scrollbar{width:4px;height:4px}mdb-select-dropdown>div .options::-webkit-scrollbar-button:end:increment,mdb-select-dropdown>div .options::-webkit-scrollbar-button:start:decrement{display:block;height:0;background-color:transparent}mdb-select-dropdown>div .options::-webkit-scrollbar-track-piece{background-color:transparent;border-radius:0 0 4px 4px}mdb-select-dropdown>div .options::-webkit-scrollbar-thumb:vertical{height:50px;background-color:#999;border-radius:4px}mdb-select-dropdown .dropdown-content{background-color:#fff;margin:0;width:100%;display:block;min-width:100px;max-height:unset;overflow-y:hidden;opacity:1;position:absolute;z-index:1000;will-change:width,height}mdb-select-dropdown .dropdown-content li>a,mdb-select-dropdown .dropdown-content li>span{color:#4285f4;padding:0 .5rem}mdb-select-dropdown .dropdown-content li.disabled,mdb-select-dropdown .dropdown-content li.disabled>span{color:rgba(0,0,0,.3);background-color:transparent!important}mdb-select-dropdown .dropdown-content li.optgroup{color:rgba(0,0,0,.3);background-color:transparent!important;border-top:1px solid #eee}mdb-select-dropdown .dropdown-content li.optgroup:first-child{border-top:0}mdb-select-dropdown .dropdown-content li.optgroup>span{color:rgba(0,0,0,.4)!important}.dropdown-content li>a,.dropdown-content li>span{font-size:.9rem}.select-dropdown li{overflow:hidden;text-overflow:ellipsis}.colorful-select .multiple-select-dropdown li.active span.filtrable,.colorful-select .multiple-select-dropdown li.selected span.filtrable{color:#fff}.colorful-select .multiple-select-dropdown li.active [type=checkbox]:checked+label:before,.colorful-select .multiple-select-dropdown li.selected [type=checkbox]:checked+label:before{border-color:transparent #fff #fff transparent!important}.dropdown-primary.colorful-select .dropdown-content li.active,.dropdown-primary.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-primary.colorful-select .dropdown-content li.active span,.dropdown-primary.colorful-select .dropdown-content li.selected span{background-color:#4285f4;color:#fff}.dropdown-danger.colorful-select .dropdown-content li.active,.dropdown-danger.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-danger.colorful-select .dropdown-content li.active span,.dropdown-danger.colorful-select .dropdown-content li.selected span{background-color:#c00;color:#fff}.dropdown-default.colorful-select .dropdown-content li.active,.dropdown-default.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-default.colorful-select .dropdown-content li.active span,.dropdown-default.colorful-select .dropdown-content li.selected span{background-color:#2bbbad;color:#fff}.dropdown-secondary.colorful-select .dropdown-content li.active,.dropdown-secondary.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-secondary.colorful-select .dropdown-content li.active span,.dropdown-secondary.colorful-select .dropdown-content li.selected span{background-color:#a6c;color:#fff}.dropdown-success.colorful-select .dropdown-content li.active,.dropdown-success.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-success.colorful-select .dropdown-content li.active span,.dropdown-success.colorful-select .dropdown-content li.selected span{background-color:#00c851;color:#fff}.dropdown-info.colorful-select .dropdown-content li.active,.dropdown-info.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-info.colorful-select .dropdown-content li.active span,.dropdown-info.colorful-select .dropdown-content li.selected span{background-color:#33b5e5;color:#fff}.dropdown-warning.colorful-select .dropdown-content li.active,.dropdown-warning.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-warning.colorful-select .dropdown-content li.active span,.dropdown-warning.colorful-select .dropdown-content li.selected span{background-color:#fb3;color:#fff}.dropdown-ins.colorful-select .dropdown-content li.active,.dropdown-ins.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-ins.colorful-select .dropdown-content li.active span,.dropdown-ins.colorful-select .dropdown-content li.selected span{background-color:#3f729b;color:#fff}.dropdown-dark.colorful-select .dropdown-content li.active,.dropdown-dark.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-dark.colorful-select .dropdown-content li.active span,.dropdown-dark.colorful-select .dropdown-content li.selected span{background-color:#2e2e2e;color:#fff}.multiple-select-dropdown li [type=checkbox]+label{height:10px;top:0!important;margin-top:-2px!important}mdb-select .clear{position:absolute;top:50%;right:30px!important;font-size:18px;color:#000;width:30px;margin-top:-2px;-webkit-transform:translateY(-50%);transform:translateY(-50%)}.md-form mdb-select .form-control{height:calc(2.25rem + 5px);margin-bottom:0}.md-form mdb-select label{color:#757575;font-size:1rem;position:absolute;top:7px;left:0;transition:.2s ease-out;-webkit-transform:translateY(0);transform:translateY(0);cursor:text}.md-form mdb-select label.active{font-size:.8rem;-webkit-transform:translateY(-120%);transform:translateY(-120%)}.md-form mdb-select+label{color:#757575;font-size:1rem;position:absolute;top:7px;left:0;transition:.2s ease-out;-webkit-transform:translateY(0);transform:translateY(0);cursor:text}.md-form mdb-select+label.active{font-size:.8rem;-webkit-transform:translateY(-120%);transform:translateY(-120%)}mdb-select+label{color:#757575;font-size:1rem;position:absolute;top:7px;left:15px;transition:.2s ease-out;-webkit-transform:translateY(0);transform:translateY(0);cursor:text}mdb-select+label.active{font-size:.8rem;-webkit-transform:translateY(-120%);transform:translateY(-120%)}mdb-select .form-control{border-radius:0}mdb-select.validate-success.ng-valid.ng-touched div.multiple,mdb-select.validate-success.ng-valid.ng-touched div.single{border-bottom:1px solid #00c851!important;box-shadow:0 1px 0 0 #00c851!important}mdb-select.validate-success.ng-valid.ng-touched label,mdb-select.validate-success.ng-valid.ng-touched+label{color:#00c851!important}.form-submitted mdb-select.validate-error.ng-invalid div.multiple,.form-submitted mdb-select.validate-error.ng-invalid div.single,mdb-select.validate-error.ng-invalid.ng-touched div.multiple,mdb-select.validate-error.ng-invalid.ng-touched div.single{border-bottom:1px solid #f44336!important;box-shadow:0 1px 0 0 #f44336!important}.form-submitted mdb-select.validate-error.ng-invalid.ng-touched label .form-submitted mdb-select.validate-error.ng-invalid.ng-touched+label,mdb-select.validate-error.ng-invalid.ng-touched label,mdb-select.validate-error.ng-invalid.ng-touched+label{color:#f44336!important}mdb-select.colorful-select .select-dropdown li.selected,mdb-select.colorful-select .select-dropdown li:hover{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.mdb-select-toggle{float:right;color:#000;line-height:2rem;text-align:center;width:30px;position:absolute;right:0;top:calc(50% + 6.4px);margin-top:-.5rem;-webkit-transform:translateY(-50%);transform:translateY(-50%);font-size:14px}.mdb-select-toggle:before{content:'\\25BC'}.dropdown-content .custom-select-content:hover{background-color:transparent}[type=checkbox]:checked,[type=checkbox]:not(:checked){position:absolute;opacity:0;pointer-events:none}.form-check-input[type=checkbox]+label,label.btn input[type=checkbox]+label{position:relative;padding-left:35px;cursor:pointer;display:inline-block;height:1.5625rem;line-height:1.5625rem;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.form-check-input[type=checkbox]+label:before,.form-check-input[type=checkbox]:not(.filled-in)+label:after,label.btn input[type=checkbox]+label:before,label.btn input[type=checkbox]:not(.filled-in)+label:after{content:'';position:absolute;top:0;left:0;width:18px;height:18px;z-index:0;border:2px solid #8a8a8a;border-radius:1px;margin-top:3px;transition:.2s}.form-check-input[type=checkbox]:not(.filled-in)+label:after,label.btn input[type=checkbox]:not(.filled-in)+label:after{border:0;-webkit-transform:scale(0);transform:scale(0)}.form-check-input[type=checkbox]:not(:checked):disabled+label:before,label.btn input[type=checkbox]:not(:checked):disabled+label:before{border:none;background-color:#bdbdbd}.form-check-input[type=checkbox]:checked+label:before,label.btn input[type=checkbox]:checked+label:before{top:-4px;left:-5px;width:12px;height:1.375rem;border-top:2px solid transparent;border-left:2px solid transparent;border-right:2px solid #4285f4;border-bottom:2px solid #4285f4;-webkit-transform:rotate(40deg);transform:rotate(40deg);-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform-origin:100% 100%;transform-origin:100% 100%}.form-check-input[type=checkbox]:checked:disabled+label:before,label.btn input[type=checkbox]:checked:disabled+label:before{border-right:2px solid #bdbdbd;border-bottom:2px solid #bdbdbd}.form-check-input[type=checkbox]:indeterminate+label:before,label.btn input[type=checkbox]:indeterminate+label:before{top:-11px;left:-12px;width:10px;height:1.375rem;border-top:none;border-left:none;border-right:2px solid #4285f4;border-bottom:none;-webkit-transform:rotate(90deg);transform:rotate(90deg);-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform-origin:100% 100%;transform-origin:100% 100%}.form-check-input[type=checkbox]:indeterminate:disabled+label:before,label.btn input[type=checkbox]:indeterminate:disabled+label:before{border-right:2px solid rgba(0,0,0,.46);background-color:transparent}.form-check-input[type=checkbox].filled-in+label:after,label.btn input[type=checkbox].filled-in+label:after{border-radius:.125rem}.form-check-input[type=checkbox].filled-in+label:after,.form-check-input[type=checkbox].filled-in+label:before,label.btn input[type=checkbox].filled-in+label:after,label.btn input[type=checkbox].filled-in+label:before{content:'';left:0;position:absolute;transition:border .25s,background-color .25s,width .2s .1s,height .2s .1s,top .2s .1s,left .2s .1s;z-index:1}.form-check-input[type=checkbox].filled-in:not(:checked)+label:before,label.btn input[type=checkbox].filled-in:not(:checked)+label:before{width:0;height:0;border:3px solid transparent;left:6px;top:10px;-webkit-transform:rotateZ(37deg);transform:rotateZ(37deg);-webkit-transform-origin:100% 100%;transform-origin:100% 100%}.form-check-input[type=checkbox].filled-in:not(:checked)+label:after,label.btn input[type=checkbox].filled-in:not(:checked)+label:after{height:20px;width:20px;background-color:transparent;border:2px solid #5a5a5a;top:0;z-index:0}.form-check-input[type=checkbox].filled-in:checked+label:before,label.btn input[type=checkbox].filled-in:checked+label:before{top:0;left:1px;width:8px;height:13px;border-top:2px solid transparent;border-left:2px solid transparent;border-right:2px solid #fff;border-bottom:2px solid #fff;-webkit-transform:rotateZ(37deg);transform:rotateZ(37deg);-webkit-transform-origin:100% 100%;transform-origin:100% 100%}.form-check-input[type=checkbox].filled-in:checked+label:after,label.btn input[type=checkbox].filled-in:checked+label:after{top:0;width:20px;height:20px;border:2px solid #a6c;background-color:#a6c;z-index:0}.form-check-input[type=checkbox].filled-in.filled-in-danger:checked+label:after,label.btn input[type=checkbox].filled-in.filled-in-danger:checked+label:after{background-color:#f44336;border-color:#f44336}.form-check-input[type=checkbox]:disabled:not(:checked)+label:before,label.btn input[type=checkbox]:disabled:not(:checked)+label:before{background-color:#bdbdbd;border-color:#bdbdbd}.form-check-input[type=checkbox]:disabled:not(:checked)+label:after,label.btn input[type=checkbox]:disabled:not(:checked)+label:after{border-color:#bdbdbd;background-color:#bdbdbd}.form-check-input[type=checkbox]:disabled:checked+label:before,label.btn input[type=checkbox]:disabled:checked+label:before{background-color:transparent}.form-check-input[type=checkbox]:disabled:checked+label:after,label.btn input[type=checkbox]:disabled:checked+label:after{background-color:#bdbdbd;border-color:#bdbdbd}"]
                 }] }
     ];
     /** @nocollapse */
     SelectComponent.ctorParameters = function () { return [
         { type: ElementRef },
         { type: Renderer2 },
-        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT$1,] }] },
+        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] },
         { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
         { type: ChangeDetectorRef }
     ]; };
@@ -24395,10 +22376,10 @@ var SelectComponent = /** @class */ (function () {
         deselected: [{ type: Output }],
         noOptionsFound: [{ type: Output }],
         changed: [{ type: Output }],
-        selectionSpan: [{ type: ViewChild, args: ['selection',] }],
-        dropdown: [{ type: ViewChild, args: ['dropdown',] }],
-        filterInput: [{ type: ViewChild, args: ['filterInput',] }],
-        clearButton: [{ type: ViewChild, args: ['clear',] }]
+        selectionSpan: [{ type: ViewChild, args: ['selection', { static: true },] }],
+        dropdown: [{ type: ViewChild, args: ['dropdown', { static: false },] }],
+        filterInput: [{ type: ViewChild, args: ['filterInput', { static: false },] }],
+        clearButton: [{ type: ViewChild, args: ['clear', { static: false },] }]
     };
     return SelectComponent;
 }());
@@ -24513,7 +22494,7 @@ var MDBSpinningPreloader = /** @class */ (function () {
     ];
     /** @nocollapse */
     MDBSpinningPreloader.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT$1,] }] }
+        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
     ]; };
     return MDBSpinningPreloader;
 }());
@@ -24719,7 +22700,9 @@ var ProgressbarComponent = /** @class */ (function () {
     ProgressbarComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mdb-progressbar, mdb-progress',
-                    template: "<div mdbProgress [animate]=\"animate\" [max]=\"max\">\n  <mdb-bar [type]=\"type\" [value]=\"value\">\n    <ng-content></ng-content>\n  </mdb-bar>\n</div>\n"
+                    template: "<div mdbProgress [animate]=\"animate\" [max]=\"max\">\n  <mdb-bar [type]=\"type\" [value]=\"value\">\n    <ng-content></ng-content>\n  </mdb-bar>\n</div>\n",
+                    encapsulation: ViewEncapsulation.None,
+                    styles: [""]
                 }] }
     ];
     /** @nocollapse */
@@ -24850,7 +22833,9 @@ var ProgressSpinnerComponent = /** @class */ (function () {
     ProgressSpinnerComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mdb-spinner',
-                    template: "<div class=\"preloader-wrapper active  {{spinnerType}}\">\n    <mdb-Spinners mdbSpinners mode=\"indeterminate\"></mdb-Spinners>\n</div>"
+                    template: "<div class=\"preloader-wrapper active  {{spinnerType}}\">\n    <mdb-Spinners mdbSpinners mode=\"indeterminate\"></mdb-Spinners>\n</div>",
+                    encapsulation: ViewEncapsulation.None,
+                    styles: [""]
                 }] }
     ];
     /** @nocollapse */
@@ -25515,12 +23500,16 @@ var ProgressBarComponent = /** @class */ (function () {
          * Value of the progressbar. Defaults to zero. Mirrored to aria-valuenow.
          * @return {?}
          */
-        function () { return this._value; },
+        function () {
+            return this._value;
+        },
         set: /**
          * @param {?} v
          * @return {?}
          */
-        function (v) { this._value = clamp$1(v || 0); },
+        function (v) {
+            this._value = clamp$1(v || 0);
+        },
         enumerable: true,
         configurable: true
     });
@@ -25530,12 +23519,16 @@ var ProgressBarComponent = /** @class */ (function () {
          * Buffer value of the progress bar. Defaults to zero.
          * @return {?}
          */
-        function () { return this._bufferValue; },
+        function () {
+            return this._bufferValue;
+        },
         set: /**
          * @param {?} v
          * @return {?}
          */
-        function (v) { this._bufferValue = clamp$1(v || 0); },
+        function (v) {
+            this._bufferValue = clamp$1(v || 0);
+        },
         enumerable: true,
         configurable: true
     });
@@ -25554,9 +23547,9 @@ var ProgressBarComponent = /** @class */ (function () {
         return { transform: "scaleX(" + scale + ")" };
     };
     /**
-    * Gets the current transform value for the progress bar's buffer indicator.  Only used if the
-    * progress mode is set to buffer, otherwise returns an undefined, causing no transformation.
-    */
+     * Gets the current transform value for the progress bar's buffer indicator.  Only used if the
+     * progress mode is set to buffer, otherwise returns an undefined, causing no transformation.
+     */
     /**
      * Gets the current transform value for the progress bar's buffer indicator.  Only used if the
      * progress mode is set to buffer, otherwise returns an undefined, causing no transformation.
@@ -25640,20 +23633,18 @@ var MdProgressBarModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
-var MATERIAL_MODULES = [
-    MdProgressBarModule,
-    MdProgressSpinnerModule,
-    ProgressbarModule
-];
+var MATERIAL_MODULES = [MdProgressBarModule, MdProgressSpinnerModule, ProgressbarModule];
 var PreloadersModule = /** @class */ (function () {
     function PreloadersModule() {
     }
     PreloadersModule.decorators = [
         { type: NgModule, args: [{
                     imports: [
+                        // tslint:disable-next-line: deprecation
                         MdProgressBarModule.forRoot(),
+                        // tslint:disable-next-line: deprecation
                         MdProgressSpinnerModule.forRoot(),
-                        ProgressbarModule.forRoot()
+                        ProgressbarModule.forRoot(),
                     ],
                     exports: MATERIAL_MODULES,
                 },] }
@@ -25694,11 +23685,12 @@ var ProgressBars = /** @class */ (function () {
 /** @type {?} */
 var RANGE_VALUE_ACCESOR = {
     provide: NG_VALUE_ACCESSOR,
+    // tslint:disable-next-line: no-use-before-declare
     useExisting: forwardRef((/**
      * @return {?}
      */
     function () { return MdbRangeInputComponent; })),
-    multi: true
+    multi: true,
 };
 var MdbRangeInputComponent = /** @class */ (function () {
     function MdbRangeInputComponent(renderer, cdRef) {
@@ -25821,10 +23813,10 @@ var MdbRangeInputComponent = /** @class */ (function () {
             /** @type {?} */
             var offsetAmmount = 15;
             /** @type {?} */
-            var distanceFromMiddle = newRelativeGain - (this.steps / 2);
+            var distanceFromMiddle = newRelativeGain - this.steps / 2;
             this.stepLength = inputWidth / this.steps;
             thumbOffset = (distanceFromMiddle / this.steps) * offsetAmmount;
-            this.cloudRange = (this.stepLength * newRelativeGain) - thumbOffset;
+            this.cloudRange = this.stepLength * newRelativeGain - thumbOffset;
             this.renderer.setStyle(this.rangeCloud.nativeElement, 'left', this.cloudRange + 'px');
         }
     };
@@ -25911,7 +23903,9 @@ var MdbRangeInputComponent = /** @class */ (function () {
         { type: Component, args: [{
                     selector: 'mdb-range-input',
                     template: "<div *ngIf=\"!default\" class=\"range-field\" #rangeField>\n  <div class=\"track\">\n    <div #rangeCloud class=\"range-cloud\" title=\"range\"\n         [ngClass]=\"{'visible': this.visibility, 'hidden': !this.visibility}\">\n      <span class=\"text-transform\">{{range}}</span>\n    </div>\n  </div>\n  <input #input\n         [name]=\"name\"\n         type=\"range\"\n         [disabled]=\"disabled\"\n         [id]=\"id\"\n         [min]=\"min\"\n         [max]=\"max\"\n         [step]=\"step\"\n         [value]=\"value\"\n         [(ngModel)]=\"range\"\n         (focus)=\"this.visibility = true\"\n         (blur)=\"this.visibility = false\"\n         (input)=\"coverage($event)\">\n</div>\n\n<div *ngIf=\"default\">\n  <label for=\"customRange1\">Example range</label>\n  <input #input\n         class=\"custom-range\"\n         [name]=\"name\"\n         type=\"range\"\n         [id]=\"id\"\n         [min]=\"min\"\n         [max]=\"max\"\n         [step]=\"step\"\n         [attr.value]=\"value\"\n         [value]=\"value\"\n         [(ngModel)]=\"range\"\n         (focus)=\"this.visibility = true\"\n         (blur)=\"this.visibility = false\"\n         (input)=\"coverage($event)\"\n         (touchend)=\"blurRangeInput()\">\n  <span class=\"{{defaultRangeCounterClass}}\">{{ range }}</span>\n</div>\n",
-                    providers: [RANGE_VALUE_ACCESOR]
+                    encapsulation: ViewEncapsulation.None,
+                    providers: [RANGE_VALUE_ACCESOR],
+                    styles: [".range-field input[type=range]{cursor:pointer;position:relative;background-color:transparent;border:1px solid #fff;outline:0;width:100%;margin:15px 0;padding:0;-webkit-appearance:none;-moz-appearance:none;appearance:none}.range-field input[type=range]:focus{outline:0}.range-field input[type=range]+.thumb{position:absolute;border:none;height:0;width:0;border-radius:50%;background-color:#4285f4;top:10px;margin-left:-6px;-webkit-transform-origin:50% 50%;transform-origin:50% 50%;-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}.range-field input[type=range]+.thumb .value{display:block;width:30px;text-align:center;color:#4285f4;font-size:0;-webkit-transform:rotate(45deg);transform:rotate(45deg)}.range-field input[type=range]+.thumb.active{border-radius:50% 50% 50% 0}.range-field input[type=range]+.thumb.active .value{color:#fff;margin-left:-1px;margin-top:8px;font-size:10px}.range-field input[type=range]::-webkit-slider-runnable-track{height:3px;background:#c2c0c2;border:none}.range-field input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;border:none;height:14px;width:14px;border-radius:50%;background-color:#4285f4;-webkit-transform-origin:50% 50%;transform-origin:50% 50%;margin:-5px 0 0;transition:.3s}.range-field input[type=range]:focus::-webkit-slider-runnable-track{background:#ccc}.range-field input[type=range]::-moz-range-track{height:3px;background:#c2c0c2;border:none}.range-field input[type=range]::-moz-range-thumb{border:none;height:14px;width:14px;border-radius:50%;background:#4285f4;margin-top:-5px}.range-field input[type=range]:-moz-focusring{outline:#fff solid 1px;outline-offset:-1px}.range-field input[type=range]:focus::-moz-range-track{background:#c2c0c2}.range-field input[type=range]::-ms-track{height:3px;background:0 0;border-color:transparent;border-width:6px 0;color:transparent}.range-field input[type=range]::-ms-fill-lower{background:#c2c0c2}.range-field input[type=range]::-ms-fill-upper{background:#c2c0c2}.range-field input[type=range]::-ms-thumb{border:none;height:14px;width:14px;border-radius:50%;background:#4285f4}.range-field input[type=range]:focus::-ms-fill-lower{background:#c2c0c2}.range-field input[type=range]:focus::-ms-fill-upper{background:#c2c0c2}@supports (--css:variables){input[type=range].mdbMultiRange{padding:0;margin:0;display:inline-block;vertical-align:top}input[type=range].mdbMultiRange.original{position:absolute}input[type=range].mdbMultiRange.original::-webkit-slider-thumb{position:relative;z-index:2}input[type=range].mdbMultiRange.original::-moz-range-thumb{transform:scale(1);z-index:1}input[type=range].mdbMultiRange::-moz-range-track{border-color:transparent}input[type=range].mdbMultiRange.ghost{position:relative}input[type=range].mdbMultiRange.ghost:nth-of-type(n+1){position:absolute}}.multi-range-field{position:relative}.multi-range-field input[type=range]{cursor:pointer;position:relative;background-color:transparent;border:1px solid #fff;outline:0;width:100%;margin:15px 0;padding:0;-webkit-appearance:none;-moz-appearance:none;appearance:none}.multi-range-field input[type=range]:focus{outline:0}.multi-range-field input[type=range]+.thumb{position:absolute;border:none;height:0;width:0;border-radius:50%;background-color:#4285f4;top:10px;margin-left:-6px;-webkit-transform-origin:50% 50%;transform-origin:50% 50%;-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}.multi-range-field input[type=range]+.thumb .value{display:block;width:30px;text-align:center;color:#4285f4;font-size:0;-webkit-transform:rotate(45deg);transform:rotate(45deg)}.multi-range-field input[type=range]+.thumb.active{border-radius:50% 50% 50% 0}.multi-range-field input[type=range]+.thumb.active .value{color:#fff;margin-left:-1px;margin-top:8px;font-size:10px}.multi-range-field input[type=range]::-webkit-slider-runnable-track{height:3px;background:#c2c0c2;border:none}.multi-range-field input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;border:none;height:14px;width:14px;border-radius:50%;background-color:#4285f4;-webkit-transform-origin:50% 50%;transform-origin:50% 50%;margin:-5px 0 0;transition:.3s}.multi-range-field input[type=range]:focus::-webkit-slider-runnable-track{background:#ccc}.multi-range-field input[type=range]::-moz-range-track{height:3px;background:#c2c0c2;border:none}.multi-range-field input[type=range]::-moz-range-thumb{border:none;height:14px;width:14px;border-radius:50%;background:#4285f4;margin-top:-5px}.multi-range-field input[type=range]:-moz-focusring{outline:#fff solid 1px;outline-offset:-1px}.multi-range-field input[type=range]:focus::-moz-range-track{background:#c2c0c2}.multi-range-field input[type=range]::-ms-track{height:3px;background:0 0;border-color:transparent;border-width:6px 0;color:transparent}.multi-range-field input[type=range]::-ms-fill-lower{background:#c2c0c2}.multi-range-field input[type=range]::-ms-fill-upper{background:#c2c0c2}.multi-range-field input[type=range]::-ms-thumb{border:none;height:14px;width:14px;border-radius:50%;background:#4285f4}.multi-range-field input[type=range]:focus::-ms-fill-lower{background:#c2c0c2}.multi-range-field input[type=range]:focus::-ms-fill-upper{background:#c2c0c2}.thumb-horizontal-wrapper{position:relative;-webkit-transform:rotate(-270deg);transform:rotate(-270deg);top:500px}.multi-range-field input[type=range]+.thumb-horizontal .value{-webkit-transform:rotate(315deg)!important;transform:rotate(315deg)!important}.range-field{position:relative}.range-field .track{position:absolute;right:8px;left:8px;margin-left:-7.5px}.range-field .track .range-cloud{height:30px;width:30px;top:-25px;background-color:#4285f4;position:absolute;color:#fff;border-radius:50%;font-size:12px;-webkit-transform:translateX(-50%);transform:translateX(-50%)}.range-field .track .range-cloud:after{content:'';position:absolute;bottom:0;left:50%;-webkit-transform:translate(-50%,70%);transform:translate(-50%,70%);width:0;height:0;border-style:solid;border-width:7px 7px 0;border-color:#4285f4 transparent transparent}.range-field .track .range-cloud.hidden{display:none}.range-field .track .range-cloud.visible{display:block}.range-field .track .range-cloud .text-transform{position:absolute;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}"]
                 }] }
     ];
     /** @nocollapse */
@@ -25920,9 +23914,9 @@ var MdbRangeInputComponent = /** @class */ (function () {
         { type: ChangeDetectorRef }
     ]; };
     MdbRangeInputComponent.propDecorators = {
-        input: [{ type: ViewChild, args: ['input',] }],
-        rangeCloud: [{ type: ViewChild, args: ['rangeCloud',] }],
-        rangeField: [{ type: ViewChild, args: ['rangeField',] }],
+        input: [{ type: ViewChild, args: ['input', { static: false },] }],
+        rangeCloud: [{ type: ViewChild, args: ['rangeCloud', { static: false },] }],
+        rangeField: [{ type: ViewChild, args: ['rangeField', { static: false },] }],
         id: [{ type: Input }],
         required: [{ type: Input }],
         name: [{ type: Input }],
@@ -25950,11 +23944,12 @@ var MdbRangeInputComponent = /** @class */ (function () {
 /** @type {?} */
 var RANGE_VALUE_ACCESOR$1 = {
     provide: NG_VALUE_ACCESSOR,
+    // tslint:disable-next-line: no-use-before-declare
     useExisting: forwardRef((/**
      * @return {?}
      */
     function () { return MdbMultiRangeInputComponent; })),
-    multi: true
+    multi: true,
 };
 var MdbMultiRangeInputComponent = /** @class */ (function () {
     function MdbMultiRangeInputComponent(renderer) {
@@ -25971,13 +23966,11 @@ var MdbMultiRangeInputComponent = /** @class */ (function () {
          * @param {?} _
          * @return {?}
          */
-        function (_) {
-        });
+        function (_) { });
         this.onTouched = (/**
          * @return {?}
          */
-        function () {
-        });
+        function () { });
     }
     /**
      * @return {?}
@@ -26007,7 +24000,7 @@ var MdbMultiRangeInputComponent = /** @class */ (function () {
      */
     function (event) {
         this.rangeValueChange.emit(this.range);
-        if (typeof this.range === 'object' && this.range.first == 0) {
+        if (typeof this.range === 'object' && this.range.first === 0) {
             return this.range;
         }
         this.focusRangeInput('first');
@@ -26023,7 +24016,7 @@ var MdbMultiRangeInputComponent = /** @class */ (function () {
      */
     function (event) {
         this.rangeValueChange.emit(this.range);
-        if (typeof this.range === 'object' && this.range.second == 0) {
+        if (typeof this.range === 'object' && this.range.second === 0) {
             return this.range;
         }
         this.focusRangeInput('second');
@@ -26047,19 +24040,21 @@ var MdbMultiRangeInputComponent = /** @class */ (function () {
         /** @type {?} */
         var newRelativeGain = newValue - this.min;
         /** @type {?} */
-        var inputWidth = element === 'first' ? this.firstInput.nativeElement.offsetWidth : this.secondInput.nativeElement.offsetWidth;
+        var inputWidth = element === 'first'
+            ? this.firstInput.nativeElement.offsetWidth
+            : this.secondInput.nativeElement.offsetWidth;
         /** @type {?} */
         var thumbOffset = 0;
         /** @type {?} */
         var offsetAmmount = 15;
         /** @type {?} */
-        var distanceFromMiddle = newRelativeGain - (this.steps / 2);
+        var distanceFromMiddle = newRelativeGain - this.steps / 2;
         this.stepLength = inputWidth / this.steps;
         thumbOffset = (distanceFromMiddle / this.steps) * offsetAmmount;
-        this.cloudRange = (this.stepLength * newRelativeGain) - thumbOffset;
-        this.renderer.setStyle(element === 'first' ?
-            this.firstRangeCloud.nativeElement :
-            this.secondRangeCloud.nativeElement, 'left', this.cloudRange + 'px');
+        this.cloudRange = this.stepLength * newRelativeGain - thumbOffset;
+        this.renderer.setStyle(element === 'first'
+            ? this.firstRangeCloud.nativeElement
+            : this.secondRangeCloud.nativeElement, 'left', this.cloudRange + 'px');
     };
     /**
      * @param {?} element
@@ -26071,9 +24066,11 @@ var MdbMultiRangeInputComponent = /** @class */ (function () {
      */
     function (element) {
         if (this.checkIfSafari()) {
-            element === 'first' ? this.firstInput.nativeElement.focus() : this.secondInput.nativeElement.focus();
+            element === 'first'
+                ? this.firstInput.nativeElement.focus()
+                : this.secondInput.nativeElement.focus();
         }
-        element === 'first' ? this.firstVisibility = true : this.secondVisibility = true;
+        element === 'first' ? (this.firstVisibility = true) : (this.secondVisibility = true);
     };
     /**
      * @param {?} element
@@ -26085,9 +24082,11 @@ var MdbMultiRangeInputComponent = /** @class */ (function () {
      */
     function (element) {
         if (this.checkIfSafari()) {
-            element === 'first' ? this.firstInput.nativeElement.blur() : this.secondInput.nativeElement.blur();
+            element === 'first'
+                ? this.firstInput.nativeElement.blur()
+                : this.secondInput.nativeElement.blur();
         }
-        element === 'first' ? this.firstVisibility = false : this.secondVisibility = false;
+        element === 'first' ? (this.firstVisibility = false) : (this.secondVisibility = false);
     };
     /**
      * @return {?}
@@ -26160,7 +24159,9 @@ var MdbMultiRangeInputComponent = /** @class */ (function () {
         { type: Component, args: [{
                     selector: 'mdb-multi-range-input',
                     template: "<div class=\"multi-range-field my-5 pb-5\">\n  <div class=\"range-field\" #rangeField>\n    <div class=\"track\">\n      <div #firstRangeCloud class=\"range-cloud\" title=\"range\"\n           [ngClass]=\"{'visible': this.firstVisibility, 'hidden': !this.firstVisibility}\">\n        <span class=\"text-transform\">{{range.first}}</span>\n      </div>\n    </div>\n    <input #firstInput\n           [value]=\"value.first\"\n           [attr.value]=\"value.first\"\n           [name]=\"name\"\n           [id]=\"id\"\n           [min]=\"min\"\n           [max]=\"max\"\n           [step]=\"step\"\n           [disabled]=\"disabled\"\n           type=\"range\"\n           class=\"mdbMultiRange original active\"\n           (input)=\"firstRangeInput($event)\"\n           [(ngModel)]=\"range.first\"\n           (focus)=\"this.firstVisibility = true\"\n           (blur)=\"this.firstVisibility = false; blurRangeInput('first')\"\n           (touchend)=\"blurRangeInput('first')\"\n           (click)=\"focusRangeInput('first')\">\n\n\n    <div class=\"track\">\n      <div #secondRangeCloud class=\"range-cloud\" title=\"range\"\n           [ngClass]=\"{'visible': this.secondVisibility, 'hidden': !this.secondVisibility}\">\n        <span class=\"text-transform\">{{range.second}}</span>\n      </div>\n    </div>\n    <input #secondInput\n           [value]=\"value.second\"\n           [attr.value]=\"value.second\"\n           [name]=\"name\"\n           [id]=\"id\"\n           [min]=\"min\"\n           [max]=\"max\"\n           [step]=\"step\"\n           [disabled]=\"disabled\"\n           type=\"range\"\n           class=\"mdbMultiRange original ghost active\"\n           (input)=\"secondRangeInput($event)\"\n           [(ngModel)]=\"range.second\"\n           (focus)=\"this.secondVisibility = true\"\n           (blur)=\"this.secondVisibility = false; blurRangeInput('second')\"\n           (touchend)=\"blurRangeInput('second')\"\n           (click)=\"focusRangeInput('second')\">\n  </div>\n</div>\n",
-                    providers: [RANGE_VALUE_ACCESOR$1]
+                    encapsulation: ViewEncapsulation.None,
+                    providers: [RANGE_VALUE_ACCESOR$1],
+                    styles: [".range-field input[type=range]{cursor:pointer;position:relative;background-color:transparent;border:1px solid #fff;outline:0;width:100%;margin:15px 0;padding:0;-webkit-appearance:none;-moz-appearance:none;appearance:none}.range-field input[type=range]:focus{outline:0}.range-field input[type=range]+.thumb{position:absolute;border:none;height:0;width:0;border-radius:50%;background-color:#4285f4;top:10px;margin-left:-6px;-webkit-transform-origin:50% 50%;transform-origin:50% 50%;-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}.range-field input[type=range]+.thumb .value{display:block;width:30px;text-align:center;color:#4285f4;font-size:0;-webkit-transform:rotate(45deg);transform:rotate(45deg)}.range-field input[type=range]+.thumb.active{border-radius:50% 50% 50% 0}.range-field input[type=range]+.thumb.active .value{color:#fff;margin-left:-1px;margin-top:8px;font-size:10px}.range-field input[type=range]::-webkit-slider-runnable-track{height:3px;background:#c2c0c2;border:none}.range-field input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;border:none;height:14px;width:14px;border-radius:50%;background-color:#4285f4;-webkit-transform-origin:50% 50%;transform-origin:50% 50%;margin:-5px 0 0;transition:.3s}.range-field input[type=range]:focus::-webkit-slider-runnable-track{background:#ccc}.range-field input[type=range]::-moz-range-track{height:3px;background:#c2c0c2;border:none}.range-field input[type=range]::-moz-range-thumb{border:none;height:14px;width:14px;border-radius:50%;background:#4285f4;margin-top:-5px}.range-field input[type=range]:-moz-focusring{outline:#fff solid 1px;outline-offset:-1px}.range-field input[type=range]:focus::-moz-range-track{background:#c2c0c2}.range-field input[type=range]::-ms-track{height:3px;background:0 0;border-color:transparent;border-width:6px 0;color:transparent}.range-field input[type=range]::-ms-fill-lower{background:#c2c0c2}.range-field input[type=range]::-ms-fill-upper{background:#c2c0c2}.range-field input[type=range]::-ms-thumb{border:none;height:14px;width:14px;border-radius:50%;background:#4285f4}.range-field input[type=range]:focus::-ms-fill-lower{background:#c2c0c2}.range-field input[type=range]:focus::-ms-fill-upper{background:#c2c0c2}@supports (--css:variables){input[type=range].mdbMultiRange{padding:0;margin:0;display:inline-block;vertical-align:top}input[type=range].mdbMultiRange.original{position:absolute}input[type=range].mdbMultiRange.original::-webkit-slider-thumb{position:relative;z-index:2}input[type=range].mdbMultiRange.original::-moz-range-thumb{transform:scale(1);z-index:1}input[type=range].mdbMultiRange::-moz-range-track{border-color:transparent}input[type=range].mdbMultiRange.ghost{position:relative}input[type=range].mdbMultiRange.ghost:nth-of-type(n+1){position:absolute}}.multi-range-field{position:relative}.multi-range-field input[type=range]{cursor:pointer;position:relative;background-color:transparent;border:1px solid #fff;outline:0;width:100%;margin:15px 0;padding:0;-webkit-appearance:none;-moz-appearance:none;appearance:none}.multi-range-field input[type=range]:focus{outline:0}.multi-range-field input[type=range]+.thumb{position:absolute;border:none;height:0;width:0;border-radius:50%;background-color:#4285f4;top:10px;margin-left:-6px;-webkit-transform-origin:50% 50%;transform-origin:50% 50%;-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}.multi-range-field input[type=range]+.thumb .value{display:block;width:30px;text-align:center;color:#4285f4;font-size:0;-webkit-transform:rotate(45deg);transform:rotate(45deg)}.multi-range-field input[type=range]+.thumb.active{border-radius:50% 50% 50% 0}.multi-range-field input[type=range]+.thumb.active .value{color:#fff;margin-left:-1px;margin-top:8px;font-size:10px}.multi-range-field input[type=range]::-webkit-slider-runnable-track{height:3px;background:#c2c0c2;border:none}.multi-range-field input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;border:none;height:14px;width:14px;border-radius:50%;background-color:#4285f4;-webkit-transform-origin:50% 50%;transform-origin:50% 50%;margin:-5px 0 0;transition:.3s}.multi-range-field input[type=range]:focus::-webkit-slider-runnable-track{background:#ccc}.multi-range-field input[type=range]::-moz-range-track{height:3px;background:#c2c0c2;border:none}.multi-range-field input[type=range]::-moz-range-thumb{border:none;height:14px;width:14px;border-radius:50%;background:#4285f4;margin-top:-5px}.multi-range-field input[type=range]:-moz-focusring{outline:#fff solid 1px;outline-offset:-1px}.multi-range-field input[type=range]:focus::-moz-range-track{background:#c2c0c2}.multi-range-field input[type=range]::-ms-track{height:3px;background:0 0;border-color:transparent;border-width:6px 0;color:transparent}.multi-range-field input[type=range]::-ms-fill-lower{background:#c2c0c2}.multi-range-field input[type=range]::-ms-fill-upper{background:#c2c0c2}.multi-range-field input[type=range]::-ms-thumb{border:none;height:14px;width:14px;border-radius:50%;background:#4285f4}.multi-range-field input[type=range]:focus::-ms-fill-lower{background:#c2c0c2}.multi-range-field input[type=range]:focus::-ms-fill-upper{background:#c2c0c2}.thumb-horizontal-wrapper{position:relative;-webkit-transform:rotate(-270deg);transform:rotate(-270deg);top:500px}.multi-range-field input[type=range]+.thumb-horizontal .value{-webkit-transform:rotate(315deg)!important;transform:rotate(315deg)!important}.range-field{position:relative}.range-field .track{position:absolute;right:8px;left:8px;margin-left:-7.5px}.range-field .track .range-cloud{height:30px;width:30px;top:-25px;background-color:#4285f4;position:absolute;color:#fff;border-radius:50%;font-size:12px;-webkit-transform:translateX(-50%);transform:translateX(-50%)}.range-field .track .range-cloud:after{content:'';position:absolute;bottom:0;left:50%;-webkit-transform:translate(-50%,70%);transform:translate(-50%,70%);width:0;height:0;border-style:solid;border-width:7px 7px 0;border-color:#4285f4 transparent transparent}.range-field .track .range-cloud.hidden{display:none}.range-field .track .range-cloud.visible{display:block}.range-field .track .range-cloud .text-transform{position:absolute;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}"]
                 }] }
     ];
     /** @nocollapse */
@@ -26177,11 +24178,11 @@ var MdbMultiRangeInputComponent = /** @class */ (function () {
         max: [{ type: Input }],
         step: [{ type: Input }],
         rangeValueChange: [{ type: Output }],
-        firstInput: [{ type: ViewChild, args: ['firstInput',] }],
-        secondInput: [{ type: ViewChild, args: ['secondInput',] }],
-        firstRangeCloud: [{ type: ViewChild, args: ['firstRangeCloud',] }],
-        secondRangeCloud: [{ type: ViewChild, args: ['secondRangeCloud',] }],
-        rangeField: [{ type: ViewChild, args: ['rangeField',] }]
+        firstInput: [{ type: ViewChild, args: ['firstInput', { static: true },] }],
+        secondInput: [{ type: ViewChild, args: ['secondInput', { static: true },] }],
+        firstRangeCloud: [{ type: ViewChild, args: ['firstRangeCloud', { static: true },] }],
+        secondRangeCloud: [{ type: ViewChild, args: ['secondRangeCloud', { static: true },] }],
+        rangeField: [{ type: ViewChild, args: ['rangeField', { static: true },] }]
     };
     return MdbMultiRangeInputComponent;
 }());
@@ -26197,7 +24198,7 @@ var RangeModule = /** @class */ (function () {
         { type: NgModule, args: [{
                     imports: [CommonModule, FormsModule],
                     declarations: [MdbRangeInputComponent, MdbMultiRangeInputComponent],
-                    exports: [MdbRangeInputComponent, MdbMultiRangeInputComponent]
+                    exports: [MdbRangeInputComponent, MdbMultiRangeInputComponent],
                 },] }
     ];
     return RangeModule;
@@ -26316,7 +24317,7 @@ var ScrollSpyLinkDirective = /** @class */ (function () {
     /** @nocollapse */
     ScrollSpyLinkDirective.ctorParameters = function () { return [
         { type: ChangeDetectorRef },
-        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT$1,] }] }
+        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
     ]; };
     ScrollSpyLinkDirective.propDecorators = {
         scrollIntoView: [{ type: Input }],
@@ -26551,9 +24552,13 @@ var ScrollSpyDirective = /** @class */ (function () {
         this.activeSub.unsubscribe();
     };
     ScrollSpyDirective.decorators = [
-        { type: Directive, args: [{
-                    selector: '[mdbScrollSpy]'
-                },] }
+        { type: Component, args: [{
+                    // tslint:disable-next-line:component-selector
+                    selector: '[mdbScrollSpy]',
+                    template: '<ng-content></ng-content>',
+                    encapsulation: ViewEncapsulation.None,
+                    styles: [".nav-pills.default-pills .nav-item a{text-align:left;color:#666;border-radius:0}.nav-pills.default-pills .nav-item a:hover{background-color:transparent;color:#45526e;border-left:.0625rem solid #45526e;font-weight:500}.nav-pills.default-pills .nav-item a.active{background-color:transparent;color:#45526e;border-left:.125rem solid #45526e;box-shadow:none;font-weight:500}.nav-pills.default-pills .nav-item a.active:active,.nav-pills.default-pills .nav-item a.active:focus,.nav-pills.default-pills .nav-item a.active:hover{background-color:transparent;color:#45526e;font-weight:500}.nav-pills .nav-item+.nav-item{margin-left:0}@media only screen and (max-width:991px){.sticky,.sticky-placeholder{display:none}}#scrollspy{width:100%}@media only screen and (max-width:992px){.col-lg-4 .sticky,.col-md-4 .sticky,.col-xl-4 .sticky{width:12.5rem}}@media only screen and (min-width:992px){.col-md-4 .sticky .col-lg-4 .sticky,.col-xl-4 .sticky{width:25rem}}@media only screen and (min-width:1200px){.col-md-4 .sticky{width:18.75rem}}@media only screen and (min-width:1440px){.col-md-4 .sticky{width:21.875rem}}.dotted-scrollspy{display:block;position:fixed;top:50%;right:0;-webkit-transform:translateY(-50%);transform:translateY(-50%);background:rgba(0,0,0,.55);border-radius:.125rem 0 0 .125rem}.dotted-scrollspy li{display:block;padding:0 1rem}.dotted-scrollspy li:first-child{padding-top:.625rem}.dotted-scrollspy li:last-child{padding-bottom:.625rem}.dotted-scrollspy li a{padding:.5rem}.dotted-scrollspy li a span{display:block;background-color:rgba(255,255,255,.54);width:.5rem;height:.5rem;border-radius:50%}.dotted-scrollspy li a.active span{background:#fff}.scrollspy-example{overflow-y:scroll;position:relative;height:12.5rem;padding:1rem}.flex-column .nav-link{padding:.5rem 1rem!important}"]
+                }] }
     ];
     /** @nocollapse */
     ScrollSpyDirective.ctorParameters = function () { return [
@@ -26688,7 +24693,7 @@ var ScrollSpyWindowDirective = /** @class */ (function () {
     ];
     /** @nocollapse */
     ScrollSpyWindowDirective.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT$1,] }] },
+        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] },
         { type: ElementRef },
         { type: Renderer2 },
         { type: NgZone },
@@ -27279,7 +25284,9 @@ var SidenavComponent = /** @class */ (function () {
     SidenavComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mdb-sidenav, mdb-side-nav',
-                    template: "<ul #sidenav id=\"slide-out\" class=\"{{ class }} side-nav\">\n  <ng-content></ng-content>\n<!-- <div class=\"sidenav-bg mask-strong\"></div> -->\n\n</ul>\n\n<div (click)=\"hide()\" (touchstart)=\"hide()\" #overlay id=\"sidenav-overlay\" style=\"display: none;\"></div>\n"
+                    template: "<ul #sidenav id=\"slide-out\" class=\"{{ class }} side-nav\">\n  <ng-content></ng-content>\n<!-- <div class=\"sidenav-bg mask-strong\"></div> -->\n\n</ul>\n\n<div (click)=\"hide()\" (touchstart)=\"hide()\" #overlay id=\"sidenav-overlay\" style=\"display: none;\"></div>\n",
+                    encapsulation: ViewEncapsulation.None,
+                    styles: [".mdb-color.lighten-5{background-color:#d0d6e2!important}.mdb-color.lighten-4{background-color:#b1bace!important}.mdb-color.lighten-3{background-color:#929fba!important}.mdb-color.lighten-2{background-color:#7283a7!important}.mdb-color.lighten-1{background-color:#59698d!important}.mdb-color{background-color:#45526e!important}.mdb-color-text{color:#45526e!important}.rgba-mdb-color-slight,.rgba-mdb-color-slight:after{background-color:rgba(69,82,110,.1)}.rgba-mdb-color-light,.rgba-mdb-color-light:after{background-color:rgba(69,82,110,.3)}.rgba-mdb-color-strong,.rgba-mdb-color-strong:after{background-color:rgba(69,82,110,.7)}.mdb-color.darken-1{background-color:#3b465e!important}.mdb-color.darken-2{background-color:#2e3951!important}.mdb-color.darken-3{background-color:#1c2a48!important}.mdb-color.darken-4{background-color:#1c2331!important}.red.lighten-5{background-color:#ffebee!important}.red.lighten-4{background-color:#ffcdd2!important}.red.lighten-3{background-color:#ef9a9a!important}.red.lighten-2{background-color:#e57373!important}.red.lighten-1{background-color:#ef5350!important}.red{background-color:#f44336!important}.red-text{color:#f44336!important}.rgba-red-slight,.rgba-red-slight:after{background-color:rgba(244,67,54,.1)}.rgba-red-light,.rgba-red-light:after{background-color:rgba(244,67,54,.3)}.rgba-red-strong,.rgba-red-strong:after{background-color:rgba(244,67,54,.7)}.red.darken-1{background-color:#e53935!important}.red.darken-2{background-color:#d32f2f!important}.red.darken-3{background-color:#c62828!important}.red.darken-4{background-color:#b71c1c!important}.red.accent-1{background-color:#ff8a80!important}.red.accent-2{background-color:#ff5252!important}.red.accent-3{background-color:#ff1744!important}.red.accent-4{background-color:#d50000!important}.pink.lighten-5{background-color:#fce4ec!important}.pink.lighten-4{background-color:#f8bbd0!important}.pink.lighten-3{background-color:#f48fb1!important}.pink.lighten-2{background-color:#f06292!important}.pink.lighten-1{background-color:#ec407a!important}.pink{background-color:#e91e63!important}.pink-text{color:#e91e63!important}.rgba-pink-slight,.rgba-pink-slight:after{background-color:rgba(233,30,99,.1)}.rgba-pink-light,.rgba-pink-light:after{background-color:rgba(233,30,99,.3)}.rgba-pink-strong,.rgba-pink-strong:after{background-color:rgba(233,30,99,.7)}.pink.darken-1{background-color:#d81b60!important}.pink.darken-2{background-color:#c2185b!important}.pink.darken-3{background-color:#ad1457!important}.pink.darken-4{background-color:#880e4f!important}.pink.accent-1{background-color:#ff80ab!important}.pink.accent-2{background-color:#ff4081!important}.pink.accent-3{background-color:#f50057!important}.pink.accent-4{background-color:#c51162!important}.purple.lighten-5{background-color:#f3e5f5!important}.purple.lighten-4{background-color:#e1bee7!important}.purple.lighten-3{background-color:#ce93d8!important}.purple.lighten-2{background-color:#ba68c8!important}.purple.lighten-1{background-color:#ab47bc!important}.purple{background-color:#9c27b0!important}.purple-text{color:#9c27b0!important}.rgba-purple-slight,.rgba-purple-slight:after{background-color:rgba(156,39,176,.1)}.rgba-purple-light,.rgba-purple-light:after{background-color:rgba(156,39,176,.3)}.rgba-purple-strong,.rgba-purple-strong:after{background-color:rgba(156,39,176,.7)}.purple.darken-1{background-color:#8e24aa!important}.purple.darken-2{background-color:#7b1fa2!important}.purple.darken-3{background-color:#6a1b9a!important}.purple.darken-4{background-color:#4a148c!important}.purple.accent-1{background-color:#ea80fc!important}.purple.accent-2{background-color:#e040fb!important}.purple.accent-3{background-color:#d500f9!important}.purple.accent-4{background-color:#a0f!important}.deep-purple.lighten-5{background-color:#ede7f6!important}.deep-purple.lighten-4{background-color:#d1c4e9!important}.deep-purple.lighten-3{background-color:#b39ddb!important}.deep-purple.lighten-2{background-color:#9575cd!important}.deep-purple.lighten-1{background-color:#7e57c2!important}.deep-purple{background-color:#673ab7!important}.deep-purple-text{color:#673ab7!important}.rgba-deep-purple-slight,.rgba-deep-purple-slight:after{background-color:rgba(103,58,183,.1)}.rgba-deep-purple-light,.rgba-deep-purple-light:after{background-color:rgba(103,58,183,.3)}.rgba-deep-purple-strong,.rgba-deep-purple-strong:after{background-color:rgba(103,58,183,.7)}.deep-purple.darken-1{background-color:#5e35b1!important}.deep-purple.darken-2{background-color:#512da8!important}.deep-purple.darken-3{background-color:#4527a0!important}.deep-purple.darken-4{background-color:#311b92!important}.deep-purple.accent-1{background-color:#b388ff!important}.deep-purple.accent-2{background-color:#7c4dff!important}.deep-purple.accent-3{background-color:#651fff!important}.deep-purple.accent-4{background-color:#6200ea!important}.indigo.lighten-5{background-color:#e8eaf6!important}.indigo.lighten-4{background-color:#c5cae9!important}.indigo.lighten-3{background-color:#9fa8da!important}.indigo.lighten-2{background-color:#7986cb!important}.indigo.lighten-1{background-color:#5c6bc0!important}.indigo{background-color:#3f51b5!important}.indigo-text{color:#3f51b5!important}.rgba-indigo-slight,.rgba-indigo-slight:after{background-color:rgba(63,81,181,.1)}.rgba-indigo-light,.rgba-indigo-light:after{background-color:rgba(63,81,181,.3)}.rgba-indigo-strong,.rgba-indigo-strong:after{background-color:rgba(63,81,181,.7)}.indigo.darken-1{background-color:#3949ab!important}.indigo.darken-2{background-color:#303f9f!important}.indigo.darken-3{background-color:#283593!important}.indigo.darken-4{background-color:#1a237e!important}.indigo.accent-1{background-color:#8c9eff!important}.indigo.accent-2{background-color:#536dfe!important}.indigo.accent-3{background-color:#3d5afe!important}.indigo.accent-4{background-color:#304ffe!important}.blue.lighten-5{background-color:#e3f2fd!important}.blue.lighten-4{background-color:#bbdefb!important}.blue.lighten-3{background-color:#90caf9!important}.blue.lighten-2{background-color:#64b5f6!important}.blue.lighten-1{background-color:#42a5f5!important}.blue{background-color:#2196f3!important}.blue-text{color:#2196f3!important}.rgba-blue-slight,.rgba-blue-slight:after{background-color:rgba(33,150,243,.1)}.rgba-blue-light,.rgba-blue-light:after{background-color:rgba(33,150,243,.3)}.rgba-blue-strong,.rgba-blue-strong:after{background-color:rgba(33,150,243,.7)}.blue.darken-1{background-color:#1e88e5!important}.blue.darken-2{background-color:#1976d2!important}.blue.darken-3{background-color:#1565c0!important}.blue.darken-4{background-color:#0d47a1!important}.blue.accent-1{background-color:#82b1ff!important}.blue.accent-2{background-color:#448aff!important}.blue.accent-3{background-color:#2979ff!important}.blue.accent-4{background-color:#2962ff!important}.light-blue.lighten-5{background-color:#e1f5fe!important}.light-blue.lighten-4{background-color:#b3e5fc!important}.light-blue.lighten-3{background-color:#81d4fa!important}.light-blue.lighten-2{background-color:#4fc3f7!important}.light-blue.lighten-1{background-color:#29b6f6!important}.light-blue{background-color:#03a9f4!important}.light-blue-text{color:#03a9f4!important}.rgba-light-blue-slight,.rgba-light-blue-slight:after{background-color:rgba(3,169,244,.1)}.rgba-light-blue-light,.rgba-light-blue-light:after{background-color:rgba(3,169,244,.3)}.rgba-light-blue-strong,.rgba-light-blue-strong:after{background-color:rgba(3,169,244,.7)}.light-blue.darken-1{background-color:#039be5!important}.light-blue.darken-2{background-color:#0288d1!important}.light-blue.darken-3{background-color:#0277bd!important}.light-blue.darken-4{background-color:#01579b!important}.light-blue.accent-1{background-color:#80d8ff!important}.light-blue.accent-2{background-color:#40c4ff!important}.light-blue.accent-3{background-color:#00b0ff!important}.light-blue.accent-4{background-color:#0091ea!important}.cyan.lighten-5{background-color:#e0f7fa!important}.cyan.lighten-4{background-color:#b2ebf2!important}.cyan.lighten-3{background-color:#80deea!important}.cyan.lighten-2{background-color:#4dd0e1!important}.cyan.lighten-1{background-color:#26c6da!important}.cyan{background-color:#00bcd4!important}.cyan-text{color:#00bcd4!important}.rgba-cyan-slight,.rgba-cyan-slight:after{background-color:rgba(0,188,212,.1)}.rgba-cyan-light,.rgba-cyan-light:after{background-color:rgba(0,188,212,.3)}.rgba-cyan-strong,.rgba-cyan-strong:after{background-color:rgba(0,188,212,.7)}.cyan.darken-1{background-color:#00acc1!important}.cyan.darken-2{background-color:#0097a7!important}.cyan.darken-3{background-color:#00838f!important}.cyan.darken-4{background-color:#006064!important}.cyan.accent-1{background-color:#84ffff!important}.cyan.accent-2{background-color:#18ffff!important}.cyan.accent-3{background-color:#00e5ff!important}.cyan.accent-4{background-color:#00b8d4!important}.teal.lighten-5{background-color:#e0f2f1!important}.teal.lighten-4{background-color:#b2dfdb!important}.teal.lighten-3{background-color:#80cbc4!important}.teal.lighten-2{background-color:#4db6ac!important}.teal.lighten-1{background-color:#26a69a!important}.teal{background-color:#009688!important}.teal-text{color:#009688!important}.rgba-teal-slight,.rgba-teal-slight:after{background-color:rgba(0,150,136,.1)}.rgba-teal-light,.rgba-teal-light:after{background-color:rgba(0,150,136,.3)}.rgba-teal-strong,.rgba-teal-strong:after{background-color:rgba(0,150,136,.7)}.teal.darken-1{background-color:#00897b!important}.teal.darken-2{background-color:#00796b!important}.teal.darken-3{background-color:#00695c!important}.teal.darken-4{background-color:#004d40!important}.teal.accent-1{background-color:#a7ffeb!important}.teal.accent-2{background-color:#64ffda!important}.teal.accent-3{background-color:#1de9b6!important}.teal.accent-4{background-color:#00bfa5!important}.green.lighten-5{background-color:#e8f5e9!important}.green.lighten-4{background-color:#c8e6c9!important}.green.lighten-3{background-color:#a5d6a7!important}.green.lighten-2{background-color:#81c784!important}.green.lighten-1{background-color:#66bb6a!important}.green{background-color:#4caf50!important}.green-text{color:#4caf50!important}.rgba-green-slight,.rgba-green-slight:after{background-color:rgba(76,175,80,.1)}.rgba-green-light,.rgba-green-light:after{background-color:rgba(76,175,80,.3)}.rgba-green-strong,.rgba-green-strong:after{background-color:rgba(76,175,80,.7)}.green.darken-1{background-color:#43a047!important}.green.darken-2{background-color:#388e3c!important}.green.darken-3{background-color:#2e7d32!important}.green.darken-4{background-color:#1b5e20!important}.green.accent-1{background-color:#b9f6ca!important}.green.accent-2{background-color:#69f0ae!important}.green.accent-3{background-color:#00e676!important}.green.accent-4{background-color:#00c853!important}.light-green.lighten-5{background-color:#f1f8e9!important}.light-green.lighten-4{background-color:#dcedc8!important}.light-green.lighten-3{background-color:#c5e1a5!important}.light-green.lighten-2{background-color:#aed581!important}.light-green.lighten-1{background-color:#9ccc65!important}.light-green{background-color:#8bc34a!important}.light-green-text{color:#8bc34a!important}.rgba-light-green-slight,.rgba-light-green-slight:after{background-color:rgba(139,195,74,.1)}.rgba-light-green-light,.rgba-light-green-light:after{background-color:rgba(139,195,74,.3)}.rgba-light-green-strong,.rgba-light-green-strong:after{background-color:rgba(139,195,74,.7)}.light-green.darken-1{background-color:#7cb342!important}.light-green.darken-2{background-color:#689f38!important}.light-green.darken-3{background-color:#558b2f!important}.light-green.darken-4{background-color:#33691e!important}.light-green.accent-1{background-color:#ccff90!important}.light-green.accent-2{background-color:#b2ff59!important}.light-green.accent-3{background-color:#76ff03!important}.light-green.accent-4{background-color:#64dd17!important}.lime.lighten-5{background-color:#f9fbe7!important}.lime.lighten-4{background-color:#f0f4c3!important}.lime.lighten-3{background-color:#e6ee9c!important}.lime.lighten-2{background-color:#dce775!important}.lime.lighten-1{background-color:#d4e157!important}.lime{background-color:#cddc39!important}.lime-text{color:#cddc39!important}.rgba-lime-slight,.rgba-lime-slight:after{background-color:rgba(205,220,57,.1)}.rgba-lime-light,.rgba-lime-light:after{background-color:rgba(205,220,57,.3)}.rgba-lime-strong,.rgba-lime-strong:after{background-color:rgba(205,220,57,.7)}.lime.darken-1{background-color:#c0ca33!important}.lime.darken-2{background-color:#afb42b!important}.lime.darken-3{background-color:#9e9d24!important}.lime.darken-4{background-color:#827717!important}.lime.accent-1{background-color:#f4ff81!important}.lime.accent-2{background-color:#eeff41!important}.lime.accent-3{background-color:#c6ff00!important}.lime.accent-4{background-color:#aeea00!important}.yellow.lighten-5{background-color:#fffde7!important}.yellow.lighten-4{background-color:#fff9c4!important}.yellow.lighten-3{background-color:#fff59d!important}.yellow.lighten-2{background-color:#fff176!important}.yellow.lighten-1{background-color:#ffee58!important}.yellow{background-color:#ffeb3b!important}.yellow-text{color:#ffeb3b!important}.rgba-yellow-slight,.rgba-yellow-slight:after{background-color:rgba(255,235,59,.1)}.rgba-yellow-light,.rgba-yellow-light:after{background-color:rgba(255,235,59,.3)}.rgba-yellow-strong,.rgba-yellow-strong:after{background-color:rgba(255,235,59,.7)}.yellow.darken-1{background-color:#fdd835!important}.yellow.darken-2{background-color:#fbc02d!important}.yellow.darken-3{background-color:#f9a825!important}.yellow.darken-4{background-color:#f57f17!important}.yellow.accent-1{background-color:#ffff8d!important}.yellow.accent-2{background-color:#ff0!important}.yellow.accent-3{background-color:#ffea00!important}.yellow.accent-4{background-color:#ffd600!important}.amber.lighten-5{background-color:#fff8e1!important}.amber.lighten-4{background-color:#ffecb3!important}.amber.lighten-3{background-color:#ffe082!important}.amber.lighten-2{background-color:#ffd54f!important}.amber.lighten-1{background-color:#ffca28!important}.amber{background-color:#ffc107!important}.amber-text{color:#ffc107!important}.rgba-amber-slight,.rgba-amber-slight:after{background-color:rgba(255,193,7,.1)}.rgba-amber-light,.rgba-amber-light:after{background-color:rgba(255,193,7,.3)}.rgba-amber-strong,.rgba-amber-strong:after{background-color:rgba(255,193,7,.7)}.amber.darken-1{background-color:#ffb300!important}.amber.darken-2{background-color:#ffa000!important}.amber.darken-3{background-color:#ff8f00!important}.amber.darken-4{background-color:#ff6f00!important}.amber.accent-1{background-color:#ffe57f!important}.amber.accent-2{background-color:#ffd740!important}.amber.accent-3{background-color:#ffc400!important}.amber.accent-4{background-color:#ffab00!important}.orange.lighten-5{background-color:#fff3e0!important}.orange.lighten-4{background-color:#ffe0b2!important}.orange.lighten-3{background-color:#ffcc80!important}.orange.lighten-2{background-color:#ffb74d!important}.orange.lighten-1{background-color:#ffa726!important}.orange{background-color:#ff9800!important}.orange-text{color:#ff9800!important}.rgba-orange-slight,.rgba-orange-slight:after{background-color:rgba(255,152,0,.1)}.rgba-orange-light,.rgba-orange-light:after{background-color:rgba(255,152,0,.3)}.rgba-orange-strong,.rgba-orange-strong:after{background-color:rgba(255,152,0,.7)}.orange.darken-1{background-color:#fb8c00!important}.orange.darken-2{background-color:#f57c00!important}.orange.darken-3{background-color:#ef6c00!important}.orange.darken-4{background-color:#e65100!important}.orange.accent-1{background-color:#ffd180!important}.orange.accent-2{background-color:#ffab40!important}.orange.accent-3{background-color:#ff9100!important}.orange.accent-4{background-color:#ff6d00!important}.deep-orange.lighten-5{background-color:#fbe9e7!important}.deep-orange.lighten-4{background-color:#ffccbc!important}.deep-orange.lighten-3{background-color:#ffab91!important}.deep-orange.lighten-2{background-color:#ff8a65!important}.deep-orange.lighten-1{background-color:#ff7043!important}.deep-orange{background-color:#ff5722!important}.deep-orange-text{color:#ff5722!important}.rgba-deep-orange-slight,.rgba-deep-orange-slight:after{background-color:rgba(255,87,34,.1)}.rgba-deep-orange-light,.rgba-deep-orange-light:after{background-color:rgba(255,87,34,.3)}.rgba-deep-orange-strong,.rgba-deep-orange-strong:after{background-color:rgba(255,87,34,.7)}.deep-orange.darken-1{background-color:#f4511e!important}.deep-orange.darken-2{background-color:#e64a19!important}.deep-orange.darken-3{background-color:#d84315!important}.deep-orange.darken-4{background-color:#bf360c!important}.deep-orange.accent-1{background-color:#ff9e80!important}.deep-orange.accent-2{background-color:#ff6e40!important}.deep-orange.accent-3{background-color:#ff3d00!important}.deep-orange.accent-4{background-color:#dd2c00!important}.brown.lighten-5{background-color:#efebe9!important}.brown.lighten-4{background-color:#d7ccc8!important}.brown.lighten-3{background-color:#bcaaa4!important}.brown.lighten-2{background-color:#a1887f!important}.brown.lighten-1{background-color:#8d6e63!important}.brown{background-color:#795548!important}.brown-text{color:#795548!important}.rgba-brown-slight,.rgba-brown-slight:after{background-color:rgba(121,85,72,.1)}.rgba-brown-light,.rgba-brown-light:after{background-color:rgba(121,85,72,.3)}.rgba-brown-strong,.rgba-brown-strong:after{background-color:rgba(121,85,72,.7)}.brown.darken-1{background-color:#6d4c41!important}.brown.darken-2{background-color:#5d4037!important}.brown.darken-3{background-color:#4e342e!important}.brown.darken-4{background-color:#3e2723!important}.blue-grey.lighten-5{background-color:#eceff1!important}.blue-grey.lighten-4{background-color:#cfd8dc!important}.blue-grey.lighten-3{background-color:#b0bec5!important}.blue-grey.lighten-2{background-color:#90a4ae!important}.blue-grey.lighten-1{background-color:#78909c!important}.blue-grey{background-color:#607d8b!important}.blue-grey-text{color:#607d8b!important}.rgba-blue-grey-slight,.rgba-blue-grey-slight:after{background-color:rgba(96,125,139,.1)}.rgba-blue-grey-light,.rgba-blue-grey-light:after{background-color:rgba(96,125,139,.3)}.rgba-blue-grey-strong,.rgba-blue-grey-strong:after{background-color:rgba(96,125,139,.7)}.blue-grey.darken-1{background-color:#546e7a!important}.blue-grey.darken-2{background-color:#455a64!important}.blue-grey.darken-3{background-color:#37474f!important}.blue-grey.darken-4{background-color:#263238!important}.grey.lighten-5{background-color:#fafafa!important}.grey.lighten-4{background-color:#f5f5f5!important}.grey.lighten-3{background-color:#eee!important}.grey.lighten-2{background-color:#e0e0e0!important}.grey.lighten-1{background-color:#bdbdbd!important}.grey{background-color:#9e9e9e!important}.grey-text{color:#9e9e9e!important}.rgba-grey-slight,.rgba-grey-slight:after{background-color:rgba(158,158,158,.1)}.rgba-grey-light,.rgba-grey-light:after{background-color:rgba(158,158,158,.3)}.rgba-grey-strong,.rgba-grey-strong:after{background-color:rgba(158,158,158,.7)}.grey.darken-1{background-color:#757575!important}.grey.darken-2{background-color:#616161!important}.grey.darken-3{background-color:#424242!important}.grey.darken-4{background-color:#212121!important}.black{background-color:#000!important}.black-text{color:#000!important}.rgba-black-slight,.rgba-black-slight:after{background-color:rgba(0,0,0,.1)}.rgba-black-light,.rgba-black-light:after{background-color:rgba(0,0,0,.3)}.rgba-black-strong,.rgba-black-strong:after{background-color:rgba(0,0,0,.7)}.white{background-color:#fff!important}.side-nav,.side-nav .search-form .form-control,.white-text{color:#fff!important}.rgba-white-slight,.rgba-white-slight:after{background-color:rgba(255,255,255,.1)}.rgba-white-light,.rgba-white-light:after{background-color:rgba(255,255,255,.3)}.rgba-white-strong,.rgba-white-strong:after{background-color:rgba(255,255,255,.7)}.rgba-stylish-slight{background-color:rgba(62,69,81,.1)}.rgba-stylish-light{background-color:rgba(62,69,81,.3)}.rgba-stylish-strong{background-color:rgba(62,69,81,.7)}.primary-color{background-color:#4285f4!important}.primary-color-dark{background-color:#0d47a1!important}.secondary-color{background-color:#a6c!important}.secondary-color-dark{background-color:#93c!important}.default-color{background-color:#2bbbad!important}.default-color-dark{background-color:#00695c!important}.info-color{background-color:#33b5e5!important}.info-color-dark{background-color:#09c!important}.success-color{background-color:#00c851!important}.success-color-dark{background-color:#007e33!important}.warning-color{background-color:#fb3!important}.warning-color-dark{background-color:#f80!important}.danger-color{background-color:#ff3547!important}.danger-color-dark{background-color:#c00!important}.elegant-color{background-color:#2e2e2e!important}.elegant-color-dark{background-color:#212121!important}.stylish-color{background-color:#4b515d!important}.stylish-color-dark{background-color:#3e4551!important}.unique-color{background-color:#3f729b!important}.unique-color-dark{background-color:#1c2331!important}.special-color{background-color:#37474f!important}.special-color-dark{background-color:#263238!important}.purple-gradient{background:linear-gradient(40deg,#ff6ec4,#7873f5)!important}.peach-gradient{background:linear-gradient(40deg,#ffd86f,#fc6262)!important}.aqua-gradient{background:linear-gradient(40deg,#2096ff,#05ffa3)!important}.blue-gradient{background:linear-gradient(40deg,#45cafc,#303f9f)!important}.purple-gradient-rgba{background:linear-gradient(40deg,rgba(255,110,196,.9),rgba(120,115,245,.9))!important}.peach-gradient-rgba{background:linear-gradient(40deg,rgba(255,216,111,.9),rgba(252,98,98,.9))!important}.aqua-gradient-rgba{background:linear-gradient(40deg,rgba(32,150,255,.9),rgba(5,255,163,.9))!important}.blue-gradient-rgba{background:linear-gradient(40deg,rgba(69,202,252,.9),rgba(48,63,159,.9))!important}.dark-grey-text,.dark-grey-text:focus,.dark-grey-text:hover{color:#4f4f4f!important}.hoverable{box-shadow:none;transition:.55s ease-in-out}.hoverable:hover{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);transition:.55s ease-in-out}.z-depth-0{box-shadow:none!important}.z-depth-1{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)!important}.z-depth-1-half{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)!important}.z-depth-2{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19)!important}.z-depth-3{box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19)!important}.z-depth-4{box-shadow:0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)!important}.z-depth-5{box-shadow:0 27px 24px 0 rgba(0,0,0,.2),0 40px 77px 0 rgba(0,0,0,.22)!important}.disabled,:disabled{pointer-events:none!important}a{cursor:pointer;text-decoration:none;color:#0275d8;transition:.2s ease-in-out}a:hover{text-decoration:none;color:#014c8c;transition:.2s ease-in-out}a.disabled:hover,a:disabled:hover{color:#0275d8}a:not([href]):not([tabindex]),a:not([href]):not([tabindex]):focus,a:not([href]):not([tabindex]):hover{color:inherit;text-decoration:none}.sn-bg-1{background-image:url(https://mdbootstrap.com/img/Photos/Others/sidenav1.jpg)}.sn-bg-2{background-image:url(https://mdbootstrap.com/img/Photos/Others/sidenav2.jpg)}.sn-bg-3{background-image:url(https://mdbootstrap.com/img/Photos/Others/sidenav3.jpg)}.sn-bg-4{background-image:url(https://mdbootstrap.com/img/Photos/Others/sidenav4.jpg)}.side-nav{position:fixed;width:15rem;left:0;top:0;margin:0;-webkit-transform:translateX(-100%);transform:translateX(-100%);height:100%;background-size:cover;background-repeat:no-repeat;background-position:center;z-index:1040;-webkit-backface-visibility:hidden;backface-visibility:hidden;overflow:hidden;will-change:transform;backface-visibility:hidden;list-style-type:none;padding:0;box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);transition:.5s;background-color:#2c2f34;overflow-y:auto}.side-nav.wide{width:15rem;transition-property:all;transition-duration:.2s,.2s,.35s;transition-timing-function:linear,linear,ease}.side-nav.wide .logo-wrapper.sn-ad-avatar-wrapper{height:5rem;padding:19px 10px;border-bottom:1px solid rgba(255,255,255,.65)}.side-nav.wide .logo-wrapper.sn-ad-avatar-wrapper a{line-height:2.6rem;color:#fff}.side-nav.wide .logo-wrapper.sn-ad-avatar-wrapper a span{padding-left:.7rem;margin-top:-1rem}.side-nav.wide .logo-wrapper.sn-ad-avatar-wrapper a img{max-width:2.5rem;padding:0}.side-nav.wide .collapsible a{padding-left:23px;transition:.3s ease-in-out}.side-nav.wide .collapsible a .sv-normal{opacity:1;transition:.1s linear}.side-nav.wide .collapsible a .sv-slim{opacity:0;display:none;transition:.1s linear}.side-nav.wide .collapsible .sv-slim-icon{padding-left:0;width:30px;height:36px;text-align:left;margin-right:0}.side-nav.wide .collapsible-body a{padding-left:47px}.side-nav.wide .fa-angle-down.rotate-icon{opacity:1;display:block}.side-nav.wide.slim{width:3.75rem;transition-property:top,bottom,width;transition-duration:.2s,.2s,.35s;transition-timing-function:linear,linear,ease;right:3.75rem}.side-nav.wide.slim .collapsible a{padding-left:23px;transition:.3s ease-in-out}.side-nav.wide.slim .collapsible a .sv-normal{opacity:0;transition:.1s linear}.side-nav.wide.slim .collapsible a .sv-slim{display:block;opacity:1;transition:.1s linear}.side-nav.wide.slim .collapsible .sv-slim-icon{padding-left:0;width:30px;height:36px;text-align:left;margin-right:0}.side-nav.wide.slim .fa-angle-down.rotate-icon{opacity:0;display:none}.side-nav>ul{max-height:100vh}.side-nav ul{list-style:none;padding-left:0}.side-nav ul li{padding:0}.side-nav.right-aligned{right:0;left:auto;-webkit-transform:translateX(100%);transform:translateX(100%)}.side-nav.side-nav-light .logo-wrapper{border-bottom:1px solid rgba(153,153,153,.3)}.side-nav.side-nav-light .logo-wrapper.sn-ad-avatar-wrapper{color:#555}.side-nav.side-nav-light .about{border-bottom:1px solid rgba(153,153,153,.3)}.side-nav.side-nav-light .about p{color:#555}.side-nav.side-nav-light .social{border-bottom:1px solid rgba(153,153,153,.3)}.side-nav.side-nav-light .social .fab,.side-nav.side-nav-light .social .far,.side-nav.side-nav-light .social .fas{color:#555}.side-nav.side-nav-light .search-form input[type=text]{border-bottom-color:rgba(153,153,153,.3);color:#555!important}.side-nav.side-nav-light .search-form input[type=text]::-webkit-input-placeholder{color:#555!important}.side-nav.side-nav-light .search-form input[type=text]::-moz-placeholder{color:#555!important}.side-nav.side-nav-light .search-form input[type=text]::-ms-input-placeholder{color:#555!important}.side-nav.side-nav-light .search-form input[type=text]::placeholder{color:#555!important}.side-nav.side-nav-light .collapsible a{color:#555}.side-nav.side-nav-light .collapsible-body a{background-color:rgba(0,0,0,.1)}.side-nav.side-nav-light .collapsible li .collapsible-header:hover{background-color:rgba(0,0,0,.05)}.side-nav.side-nav-light .collapsible li .collapsible-header.active{color:#4285f4;background-color:transparent}.side-nav.fixed{left:0;-webkit-transform:translateX(0);transform:translateX(0);position:fixed}.side-nav.fixed.right-aligned{right:0;left:auto}@media only screen and (max-width:1440px){.side-nav.fixed{-webkit-transform:translateX(-105%);transform:translateX(-105%)}.side-nav.fixed.right-aligned{-webkit-transform:translateX(105%);transform:translateX(105%)}}.side-nav .collapsible{margin:1rem 0 0;padding:0}.side-nav .collapsible li a:hover{background-color:rgba(0,0,0,.15)}.side-nav .collapsible>li{border-radius:2px}.side-nav .collapsible>li a.collapsible-header.active,.side-nav .collapsible>li a.collapsible-header:hover{background-color:rgba(255,255,255,.15)}.side-nav .collapsible ul{padding:0;list-style-type:none}.side-nav .collapsible a{color:#fff;font-weight:300;font-size:.8rem;height:36px;line-height:36px}.side-nav .collapsible a.active,.side-nav .collapsible a:hover{border-radius:2px}.side-nav .collapsible .fab,.side-nav .collapsible .far,.side-nav .collapsible .fas{font-size:.8rem;margin-right:13px}.side-nav .collapsible-body a{padding-left:47px;height:36px;line-height:36px;background-color:rgba(0,0,0,.15)}.side-nav a{display:block;font-size:1rem;height:56px;line-height:56px;padding-left:20px}.side-nav .fa-angle-down.rotate-icon{position:absolute;right:0;top:.8rem;margin-right:1.25rem}.side-nav .sidenav-bg{top:0;bottom:0;left:0;right:0;width:15rem;z-index:-1;background-attachment:fixed;position:fixed}.side-nav .sidenav-bg:after{width:100%;display:block;content:'';position:absolute;height:100%;top:0;left:0;bottom:0;z-index:-1;margin-bottom:-99999px;padding-bottom:99999px}.side-nav .logo-wrapper{border-bottom:1px solid rgba(153,153,153,.3);height:8.75rem}.side-nav .logo-wrapper a{height:8.75rem;width:15rem;padding:0}.side-nav .logo-wrapper img{height:auto;padding:20% 50px}@media (max-height:992px){.side-nav .logo-wrapper,.side-nav .logo-wrapper a{height:80px}.side-nav .logo-wrapper img{padding-top:7%;padding-bottom:7%}}.side-nav .logo-wrapper.sn-avatar-wrapper{padding:10% 33%}.side-nav .logo-wrapper.sn-avatar-wrapper img{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);margin:0;padding:0;max-width:90px}@media only screen and (max-height:992px){.side-nav .logo-wrapper.sn-avatar-wrapper{padding-left:40%;padding-right:40%}.side-nav .logo-wrapper.sn-avatar-wrapper img{max-width:50px}}.side-nav .logo-wrapper.sn-ad-avatar-wrapper{height:auto;margin-bottom:0}.side-nav .logo-wrapper.sn-ad-avatar-wrapper img{max-width:3.75rem;padding:1.25rem .63rem;float:left}.side-nav .logo-wrapper.sn-ad-avatar-wrapper p{font-size:.94rem;padding-top:1.25rem;padding-bottom:1.25rem;margin:0}.side-nav .about{padding:1rem;border-bottom:1px solid rgba(255,255,255,.65)}.side-nav .about p{margin-bottom:0;text-align:center}.side-nav .social{padding-top:0;text-align:center;border-bottom:1px solid rgba(255,255,255,.65)}.side-nav .social li{display:inline-block;padding-top:.6rem;padding-bottom:.6rem;margin:0}.side-nav .social a{margin:0;padding:0}.side-nav .social .fab,.side-nav .social .far,.side-nav .social .fas{font-size:.9rem;padding-right:.6rem;padding-left:.6rem;color:#dbe4e7;transition:.3s}.side-nav .social .fab:hover,.side-nav .social .far:hover,.side-nav .social .fas:hover{color:#afc4cb;transition:.3s}.side-nav .search-form{padding:0}.side-nav .search-form input[type=text]{border-bottom:1px solid rgba(255,255,255,.65);font-weight:300;padding-left:1.88rem}.side-nav .search-form input[type=text]::-webkit-input-placeholder{color:#fff}.side-nav .search-form input[type=text]::-moz-placeholder{color:#fff}.side-nav .search-form input[type=text]::-ms-input-placeholder{color:#fff}.side-nav .search-form input[type=text]::placeholder{color:#fff}.side-nav .search-form .form-control{margin-bottom:0}.drag-target{height:100%;width:10px;position:fixed;top:0;z-index:998}#sidenav-overlay{position:fixed;top:0;left:0;right:0;height:120vh;background-color:rgba(0,0,0,.5);z-index:997;will-change:opacity;transition:.5s}.transform-fix-input{-webkit-transform:translateX(0)!important;transform:translateX(0)!important}.side-nav .sidenav-bg::after{margin-bottom:unset;padding-bottom:unset}.side-nav.side-nav-right{left:auto;right:0!important}.side-nav.side-nav-light{background-color:#e5e5e5}.side-nav.side-nav-light .collapsible .card .card-header a h5{color:#555}.side-nav.side-nav-light .collapsible .card .card-header a:hover{background-color:rgba(0,0,0,.05)}.side-nav.side-nav-light .collapsible .card.active .card-header a{background-color:transparent}.side-nav.side-nav-light .collapsible .card.active .card-header a h5,.side-nav.side-nav-light .collapsible .card.active .card-header a h5 i{color:#4285f4}.side-nav.side-nav-light .collapsible .card-body li a{color:#555;background-color:rgba(0,0,0,.1)}.side-nav.side-nav-light .collapsible .card-body li a:hover{background-color:rgba(0,0,0,.15)}.side-nav.side-nav-light a{color:#555;font-weight:400}.side-nav.side-nav-light a .fa{color:#555}.side-nav.side-nav-light input[type=text]{border-bottom-color:rgba(153,153,153,.3);color:#555!important}.side-nav.side-nav-light input[type=text]::-webkit-input-placeholder{color:#555!important}.side-nav.side-nav-light input[type=text]::-moz-placeholder{color:#555!important}.side-nav.side-nav-light input[type=text]:-ms-input-placeholder{color:#555!important}.side-nav.side-nav-light input[type=text]:-moz-placeholder{color:#555!important}.side-nav::-webkit-scrollbar{width:4px;height:4px}.side-nav::-webkit-scrollbar-button:end:increment,.side-nav::-webkit-scrollbar-button:start:decrement{display:block;height:0;background-color:transparent}.side-nav::-webkit-scrollbar-track-piece{background-color:transparent;border-radius:0 0 4px 4px}.side-nav::-webkit-scrollbar-thumb:vertical{height:50px;background-color:#999;border-radius:4px}.side-nav input[type=text]:focus:not([readonly]){border-bottom:1px solid #4285f4;box-shadow:0 1px 0 0 #4285f4}.side-nav .collapsible .no-collase .rotate-icon{display:none}.side-nav .collapsible .card{background-color:transparent;border-bottom:0!important}.side-nav .collapsible .card .card-header{padding:0!important}.side-nav .collapsible .card .card-header a{transition:.3s;height:40px;line-height:40px;border-radius:2px;padding:0}.side-nav .collapsible .card .card-header a h5{padding-left:20px;font-size:.8rem;line-height:40px;font-weight:300;position:relative;color:#fff}.side-nav .collapsible .card .card-header a .fa{font-size:.8rem;margin-right:13px;padding:0}.side-nav .collapsible .card .card-header a .rotate-icon{top:13px;margin-right:20px}.side-nav .collapsible .card.active>mdb-accordion-item-head{background:rgba(255,255,255,.15)}.side-nav .collapsible .card.active .card-header a h5{font-weight:300}.side-nav .collapsible .card-body{padding:0!important}.side-nav .collapsible .card-body li a{background-color:rgba(0,0,0,.15);font-size:.8rem;line-height:32px;height:32px;padding-left:47px;font-weight:300;color:#fff}.side-nav .collapsible .card-body li:first-of-type{border-top:0!important;margin-top:0}.side-nav.wide .slim{width:3.75rem;transition-property:top,bottom,width;transition-duration:.2s,.2s,.35s;transition-timing-function:linear,linear,ease;right:3.75rem}.side-nav.wide .slim .collapsible a{padding-left:23px;transition:.3s ease-in-out}.side-nav.wide .slim .collapsible a .sv-normal{opacity:0;transition:.1s linear}.side-nav.wide .slim .collapsible a .sv-slim{display:block;opacity:1;transition:.1s linear}.side-nav.wide .slim .collapsible .sv-slim-icon{padding-left:0;width:30px;height:36px;text-align:left;margin-right:0}.side-nav.wide .slim .fa-angle-down.rotate-icon{opacity:0;display:none}.slim .mdb-accordion-indicator{display:none}doublenavbar #sidenav-overlay,doublenavbar .side-nav{transition:.2s}doublenavbar links,doublenavbar navlinks{display:flex}header{height:0!important}@media all and (min-width:992px){.double-nav logo{display:flex;flex-direction:row;align-items:center!important;align-self:center!important;width:100%!important}.double-nav .navbar-brand img{margin-top:2px}}@media (max-width:1440px){.double-nav .button-collapse{display:block;left:10px;top:25%;font-size:1.4rem;margin-top:-2px!important;margin-right:10px;margin-left:10px}}.double-nav .button-collapse-non-fixed{left:10px;font-size:1.5rem}@media (min-width:1440px){.double-nav .button-collapse-non-fixed{display:none}}@media all and (max-width:599px){.double-nav .button-collapse-non-fixed{margin-top:-6px}}@media (max-width:1440px){.double-nav .button-collapse-non-fixed{display:block;left:10px;top:15px;font-size:1.4rem;margin-right:10px;margin-left:10px}}.double-nav .hidden-nav-button-collapse{display:block!important}@media all and (min-width:600px) and (max-width:993px){.double-nav .button-collapse-non-fixed{top:10px;margin-top:5px}.double-nav .button-collapse-non-fixed.hidden-nav>i{top:5px!important;margin-top:-5px!important}.double-nav .hidden-nav-button-collapse{top:25%;margin-top:-3px}}@media all and (min-width:994px){.double-nav .hidden-nav-button-collapse{margin-top:-3px}}.double-nav .hidden-nav{display:block;top:13px;left:10px;font-size:1.5rem;margin-left:10px}.double-nav .dropdown .dropdown-menu{margin-left:-68px;display:none;position:absolute;-webkit-transform:translate3d(6px,49px,0);transform:translate3d(6px,49px,0);top:0;left:0;will-change:transform}.double-nav .mega-menu{margin-left:0!important;left:240px!important;width:calc(100% - 240px)!important}@media (max-width:1440px){.double-nav .mega-menu{left:0!important;width:100%!important}}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.ie-hidden-double-nav{box-sizing:content-box;max-height:40.5px}.breadcrumbs{margin-left:25px!important;margin-top:2px}.breadcrumbs img{margin-left:20px}.ie-double-nav{position:absolute;top:30%;right:0}nav.double-nav{min-height:50px!important}.nav-link{padding-top:0!important;padding-bottom:0!important}.button-collapse,.button-collapse-non-fixed{position:absolute;top:30%!important}.hidden-nav-button-collapse{position:absolute}}@media all and (-ms-high-contrast:none) and (max-width:599px),all and (-ms-high-contrast:active) and (max-width:599px){.ie-double-nav{margin-top:-4px}.ie-hidden-double-nav .ie-double-nav{margin-top:0}.button-collapse,.button-collapse-non-fixed{top:5px!important;margin-left:0!important;margin-right:0!important}}@media all and (-ms-high-contrast:none) and (min-width:600px) and (max-width:992px),all and (-ms-high-contrast:active) and (min-width:600px) and (max-width:992px){.button-collapse-non-fixed{margin-top:-4px!important}.button-collapse{margin-top:-6px!important}.ie-double-nav{margin-top:0!important}.hidden-nav-button-collapse i{margin-top:10px!important}.breadcrumbs p{margin-top:-8px!important}}@media all and (-ms-high-contrast:none) and (min-width:993px) and (max-width:1441px),all and (-ms-high-contrast:active) and (min-width:993px) and (max-width:1441px){.button-collapse,.button-collapse-non-fixed{margin-top:-6px!important}.breadcrumbs>p{margin-top:-2px!important}.navbar-brand>img{margin-top:-2px}.breadcrumbs-non-fixed p{margin-top:2px!important}.hidden-nav-button-collapse{position:absolute!important;margin-left:10px!important}}@media all and (-ms-high-contrast:none) and (min-width:1441px),all and (-ms-high-contrast:active) and (min-width:1441px){.hidden-nav-button-collapse{position:absolute!important;margin-left:10px!important}.button-collapse-non-fixed{margin-top:-5px}.breadcrumbs>.navbar-brand img{margin-top:-2px}}@supports (-ms-ime-align:auto){.ie-hidden-double-nav{box-sizing:content-box;max-height:40.5px}.breadcrumbs{margin-left:25px!important;margin-top:2px}.breadcrumbs img{margin-left:20px}.ie-double-nav{position:absolute;top:30%;right:0}nav.double-nav{min-height:50px!important}.nav-link{padding-top:0!important;padding-bottom:0!important}.button-collapse,.button-collapse-non-fixed{position:absolute;top:30%!important}.hidden-nav-button-collapse{position:absolute}@media all and (max-width:599px){.ie-double-nav{margin-top:-4px}.ie-hidden-double-nav .ie-double-nav{margin-top:0}.button-collapse,.button-collapse-non-fixed{top:5px!important;margin-left:0!important;margin-right:0!important}}@media all and (min-width:600px) and (max-width:992px){.button-collapse-non-fixed{margin-top:-4px!important}.button-collapse{margin-top:-6px!important}.ie-double-nav{margin-top:0!important}.hidden-nav-button-collapse i{margin-top:10px!important}.breadcrumbs p{margin-top:-8px!important}}@media all and (min-width:993px) and (max-width:1441px){.button-collapse,.button-collapse-non-fixed{margin-top:-6px!important}.breadcrumbs>p{margin-top:-2px!important}.breadcrumbs>.navbar-brand>img{margin-top:-2px}.breadcrumbs-non-fixed p{margin-top:2px!important}.hidden-nav-button-collapse{position:absolute!important;margin-left:10px!important}}@media all and (min-width:1441px){.hidden-nav-button-collapse{position:absolute!important;margin-left:10px!important}.button-collapse-non-fixed{margin-top:-5px}.breadcrumbs>.navbar-brand img{margin-top:-2px}}}"]
                 }] }
     ];
     /** @nocollapse */
@@ -27293,8 +25300,8 @@ var SidenavComponent = /** @class */ (function () {
         fixed: [{ type: Input }],
         sidenavBreakpoint: [{ type: Input }],
         side: [{ type: Input }],
-        sideNav: [{ type: ViewChild, args: ['sidenav',] }],
-        overlay: [{ type: ViewChild, args: ['overlay',] }],
+        sideNav: [{ type: ViewChild, args: ['sidenav', { static: true },] }],
+        overlay: [{ type: ViewChild, args: ['overlay', { static: true },] }],
         windwosResize: [{ type: HostListener, args: ['window:resize',] }]
     };
     return SidenavComponent;
@@ -27541,6 +25548,7 @@ var PageScrollService = /** @class */ (function () {
                 var shouldStop = true;
                 if (event.type === 'keyup') {
                     // Only stop if specific keys have been pressed, for all others don't stop anything
+                    // tslint:disable-next-line: deprecation
                     if (PageScrollConfig._interruptKeys.indexOf(((/** @type {?} */ (event))).keyCode) === -1) {
                         // The pressed key is not in the list of interrupting keys
                         shouldStop = false;
@@ -27553,7 +25561,9 @@ var PageScrollService = /** @class */ (function () {
                      * @param {?} scrollingView
                      * @return {?}
                      */
-                    function (scrollingView) { return scrollingView.contains(event.target); }))) {
+                    function (scrollingView) {
+                        return scrollingView.contains(event.target);
+                    }))) {
                         // Mouse clicked an element which is not inside any of the the scrolling containers
                         shouldStop = false;
                     }
@@ -27561,7 +25571,7 @@ var PageScrollService = /** @class */ (function () {
                 if (shouldStop) {
                     _this.stopAll(pageScrollInstance.namespace);
                 }
-            })
+            }),
         };
         if (PageScrollService.instanceCounter > 0 && isDevMode()) {
             console.warn('An instance of PageScrollService already exists, usually ' +
@@ -27605,7 +25615,6 @@ var PageScrollService = /** @class */ (function () {
      *
      * This is the core functionality of the whole library.
      *
-     * @param pageScrollInstance
      */
     /**
      * Start a scroll animation. All properties of the animation are stored in the given {\@link PageScrollInstance} object.
@@ -27627,7 +25636,8 @@ var PageScrollService = /** @class */ (function () {
         var _this = this;
         // Stop all possibly running scroll animations in the same namespace
         this.stopAll(pageScrollInstance.namespace);
-        if (pageScrollInstance.scrollingViews === null || pageScrollInstance.scrollingViews.length === 0) {
+        if (pageScrollInstance.scrollingViews === null ||
+            pageScrollInstance.scrollingViews.length === 0) {
             // No scrollingViews specified, thus we can't animate anything
             if (isDevMode()) {
                 console.warn('No scrollingViews specified, this ng2-page-scroll does not know which DOM elements to scroll');
@@ -27663,9 +25673,12 @@ var PageScrollService = /** @class */ (function () {
         // Calculate the target position that the scroll animation should go to
         /** @type {?} */
         var scrollTargetPosition = pageScrollInstance.extractScrollTargetPosition();
-        pageScrollInstance.targetScrollPosition = Math.round((pageScrollInstance.verticalScrolling ? scrollTargetPosition.top : scrollTargetPosition.left) - pageScrollOffset);
+        pageScrollInstance.targetScrollPosition = Math.round((pageScrollInstance.verticalScrolling
+            ? scrollTargetPosition.top
+            : scrollTargetPosition.left) - pageScrollOffset);
         // Calculate the distance we need to go in total
-        pageScrollInstance.distanceToScroll = pageScrollInstance.targetScrollPosition - pageScrollInstance.startScrollPosition;
+        pageScrollInstance.distanceToScroll =
+            pageScrollInstance.targetScrollPosition - pageScrollInstance.startScrollPosition;
         if (isNaN(pageScrollInstance.distanceToScroll)) {
             // We weren't able to find the target position, maybe the element does not exist?
             if (isDevMode()) ;
@@ -27681,9 +25694,11 @@ var PageScrollService = /** @class */ (function () {
         // Default executionDuration is the specified duration
         pageScrollInstance.executionDuration = pageScrollInstance.duration;
         // Maybe we need to pay attention to the speed option?
-        if (!PageScrollUtilService.isUndefinedOrNull(pageScrollInstance.speed) && PageScrollUtilService.isUndefinedOrNull(pageScrollInstance.duration)) {
+        if (!PageScrollUtilService.isUndefinedOrNull(pageScrollInstance.speed) &&
+            PageScrollUtilService.isUndefinedOrNull(pageScrollInstance.duration)) {
             // Speed option is set and no duration => calculate duration based on speed and scroll distance
-            pageScrollInstance.executionDuration = pageScrollInstance.distanceToScroll / pageScrollInstance.speed * 1000;
+            pageScrollInstance.executionDuration =
+                (pageScrollInstance.distanceToScroll / pageScrollInstance.speed) * 1000;
         }
         // We should go there directly, as our "animation" would have one big step
         // only anyway and this way we save the interval stuff
@@ -27697,13 +25712,15 @@ var PageScrollService = /** @class */ (function () {
         }
         // Register the interrupt listeners if we want an interruptible scroll animation
         if (pageScrollInstance.interruptible ||
-            (PageScrollUtilService.isUndefinedOrNull(pageScrollInstance.interruptible) && PageScrollConfig.defaultInterruptible)) {
+            (PageScrollUtilService.isUndefinedOrNull(pageScrollInstance.interruptible) &&
+                PageScrollConfig.defaultInterruptible)) {
             pageScrollInstance.attachInterruptListeners(this.onInterrupted);
         }
         // Let's get started, get the start time...
         pageScrollInstance.startTime = new Date().getTime();
         // .. and calculate the end time (when we need to finish at last)
-        pageScrollInstance.endTime = pageScrollInstance.startTime + pageScrollInstance.executionDuration;
+        pageScrollInstance.endTime =
+            pageScrollInstance.startTime + pageScrollInstance.executionDuration;
         pageScrollInstance.timer = setInterval((/**
          * @param {?} _pageScrollInstance
          * @return {?}
@@ -27744,7 +25761,6 @@ var PageScrollService = /** @class */ (function () {
     /**
      * Stop all running scroll animations. Optionally limit to stop only the ones of specific namespace.
      *
-     * @param namespace
      */
     //   public stopAll(namespace?: string): boolean {
     /**
@@ -27768,7 +25784,8 @@ var PageScrollService = /** @class */ (function () {
             for (var i = 0; i < this.runningInstances.length; ++i) {
                 /** @type {?} */
                 var pageScrollInstance = this.runningInstances[i];
-                if (PageScrollUtilService.isUndefinedOrNull(namespace) || namespace.length === 0 ||
+                if (PageScrollUtilService.isUndefinedOrNull(namespace) ||
+                    namespace.length === 0 ||
                     pageScrollInstance.namespace === namespace) {
                     stoppedSome = true;
                     this.stopInternal(true, pageScrollInstance);
@@ -27816,8 +25833,6 @@ PageScrollInstance = /** @class */ (function () {
      * Use the factory methods to create instances:
      *      {@link PageScrollInstance#simpleInstance}
      *      {@link PageScrollInstance#newInstance}
-     * @param namespace
-     * @param document
      */
     function PageScrollInstance(namespace, document) {
         /**
@@ -27847,7 +25862,7 @@ PageScrollInstance = /** @class */ (function () {
         /* Whether an interrupt listener is attached to the body or not */
         this._interruptListenersAttached = false;
         /* References to the timer instance that is used to perform the scroll animation to be
-           able to clear it on animation end*/
+             able to clear it on animation end*/
         this._timer = null;
         this._namespace = namespace;
         this.document = document;
@@ -27877,7 +25892,7 @@ PageScrollInstance = /** @class */ (function () {
         return PageScrollInstance.newInstance({
             document: document,
             scrollTarget: scrollTarget,
-            namespace: namespace
+            namespace: namespace,
         });
     };
     //   public static newInstance(options: PageScrollOptions) {
@@ -27901,7 +25916,11 @@ PageScrollInstance = /** @class */ (function () {
         var pageScrollInstance = new PageScrollInstance(options.namespace, document);
         if (PageScrollUtilService.isUndefinedOrNull(options.scrollingViews) || options.scrollingViews.length === 0) {
             pageScrollInstance._isInlineScrolling = false;
-            pageScrollInstance._scrollingViews = [document.documentElement, document.body, document.body.parentNode];
+            pageScrollInstance._scrollingViews = [
+                document.documentElement,
+                document.body,
+                document.body.parentNode,
+            ];
         }
         else {
             pageScrollInstance._isInlineScrolling = true;
@@ -27917,7 +25936,8 @@ PageScrollInstance = /** @class */ (function () {
         if (!PageScrollUtilService.isUndefinedOrNull(options.pageScrollEasingLogic)) {
             pageScrollInstance._easingLogic = options.pageScrollEasingLogic;
         }
-        if (PageScrollUtilService.isUndefinedOrNull(options.pageScrollDuration) && !PageScrollUtilService.isUndefinedOrNull(options.pageScrollSpeed)) {
+        if (PageScrollUtilService.isUndefinedOrNull(options.pageScrollDuration) &&
+            !PageScrollUtilService.isUndefinedOrNull(options.pageScrollSpeed)) {
             // No duration specified in the options, only in this case we use the speed option when present
             pageScrollInstance._speed = options.pageScrollSpeed;
             pageScrollInstance._duration = undefined;
@@ -27928,11 +25948,14 @@ PageScrollInstance = /** @class */ (function () {
         if (!PageScrollUtilService.isUndefinedOrNull(options.pageScrollFinishListener)) {
             pageScrollInstance._pageScrollFinish = options.pageScrollFinishListener;
         }
-        pageScrollInstance._interruptible = options.pageScrollInterruptible ||
-            (PageScrollUtilService.isUndefinedOrNull(options.pageScrollInterruptible) && PageScrollConfig.defaultInterruptible);
-        pageScrollInstance._advancedInlineOffsetCalculation = options.advancedInlineOffsetCalculation ||
-            (PageScrollUtilService.isUndefinedOrNull(options.advancedInlineOffsetCalculation) &&
-                PageScrollConfig.defaultAdvancedInlineOffsetCalculation);
+        pageScrollInstance._interruptible =
+            options.pageScrollInterruptible ||
+                (PageScrollUtilService.isUndefinedOrNull(options.pageScrollInterruptible) &&
+                    PageScrollConfig.defaultInterruptible);
+        pageScrollInstance._advancedInlineOffsetCalculation =
+            options.advancedInlineOffsetCalculation ||
+                (PageScrollUtilService.isUndefinedOrNull(options.advancedInlineOffsetCalculation) &&
+                    PageScrollConfig.defaultAdvancedInlineOffsetCalculation);
         return pageScrollInstance;
     };
     /**
@@ -27940,7 +25963,6 @@ PageScrollInstance = /** @class */ (function () {
      *
      * @param document The document that contains the body to be scrolled and the scrollTarget elements
      * @param scrollTarget Where to scroll to. Can be a HTMLElement reference or a string like '#elementId'
-     * @param verticalScrolling
      * @param namespace Optional namespace to group scroll animations logically
      *
      **/
@@ -28021,7 +26043,7 @@ PageScrollInstance = /** @class */ (function () {
             scrollTarget: scrollTarget,
             scrollingViews: [scrollingView],
             verticalScrolling: true,
-            namespace: namespace
+            namespace: namespace,
         });
     };
     /**
@@ -28135,7 +26157,7 @@ PageScrollInstance = /** @class */ (function () {
             pageScrollInterruptible: pageScrollInterruptible,
             pageScrollEasingLogic: pageScrollEasingLogic,
             pageScrollDuration: pageScrollDuration,
-            pageScrollFinishListener: pageScrollFinishListener
+            pageScrollFinishListener: pageScrollFinishListener,
         });
     };
     /**
@@ -28254,7 +26276,6 @@ PageScrollInstance = /** @class */ (function () {
     };
     /**
      * Sets the "scrollTop" or "scrollLeft" property for all scrollingViews to the provided value
-     * @param position
      * @return true if at least for one ScrollTopSource the scrollTop/scrollLeft value could be set and it kept the new value.
      *          false if it failed for all ScrollingViews, meaning that we should stop the animation
      *          (probably because we're at the end of the scrolling region)
@@ -28307,7 +26328,8 @@ PageScrollInstance = /** @class */ (function () {
                 // We consider that it worked if the new scrollTop/scrollLeft value is closer to the
                 // desired scrollTop/scrollLeft than before (it might not be exactly the value we
                 // set due to dpi or rounding irregularities)
-                if (isSmallMovement || scrollDistance > Math.abs(_this.getScrollPropertyValue(scrollingView) - position)) {
+                if (isSmallMovement ||
+                    scrollDistance > Math.abs(_this.getScrollPropertyValue(scrollingView) - position)) {
                     return true;
                 }
             }
@@ -28339,7 +26361,6 @@ PageScrollInstance = /** @class */ (function () {
      *
      * Possibly attached interruptListeners are automatically removed from the body before the new one will be attached.
      *
-     * @param interruptReporter
      */
     /**
      * Attach the interrupt listeners to the PageScrollInstance body. The given interruptReporter
@@ -28376,7 +26397,9 @@ PageScrollInstance = /** @class */ (function () {
          * @param {?} event
          * @return {?}
          */
-        function (event) { return _this.document.body.addEventListener(event, _this._interruptListener); }));
+        function (event) {
+            return _this.document.body.addEventListener(event, _this._interruptListener);
+        }));
         this._interruptListenersAttached = true;
     };
     /**
@@ -28399,7 +26422,9 @@ PageScrollInstance = /** @class */ (function () {
          * @param {?} event
          * @return {?}
          */
-        function (event) { return _this.document.body.removeEventListener(event, _this._interruptListener); }));
+        function (event) {
+            return _this.document.body.removeEventListener(event, _this._interruptListener);
+        }));
         this._interruptListenersAttached = false;
     };
     Object.defineProperty(PageScrollInstance.prototype, "namespace", {
@@ -28766,7 +26791,7 @@ var PageScrollDirective = /** @class */ (function () {
     PageScrollDirective.ctorParameters = function () { return [
         { type: PageScrollService },
         { type: Router, decorators: [{ type: Optional }] },
-        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT$1,] }] }
+        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
     ]; };
     PageScrollDirective.propDecorators = {
         routerLink: [{ type: Input }],
@@ -28835,7 +26860,9 @@ var MdbStepComponent = /** @class */ (function () {
         get: /**
          * @return {?}
          */
-        function () { return this._isDone; },
+        function () {
+            return this._isDone;
+        },
         set: /**
          * @param {?} value
          * @return {?}
@@ -28850,7 +26877,9 @@ var MdbStepComponent = /** @class */ (function () {
         get: /**
          * @return {?}
          */
-        function () { return this._isWrong; },
+        function () {
+            return this._isWrong;
+        },
         set: /**
          * @param {?} value
          * @return {?}
@@ -28865,7 +26894,9 @@ var MdbStepComponent = /** @class */ (function () {
         get: /**
          * @return {?}
          */
-        function () { return this._isActive; },
+        function () {
+            return this._isActive;
+        },
         set: /**
          * @param {?} value
          * @return {?}
@@ -28907,8 +26938,7 @@ var MdbStepComponent = /** @class */ (function () {
     MdbStepComponent.prototype.ngOnInit = /**
      * @return {?}
      */
-    function () {
-    };
+    function () { };
     MdbStepComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mdb-step',
@@ -28921,7 +26951,7 @@ var MdbStepComponent = /** @class */ (function () {
         { type: ElementRef }
     ]; };
     MdbStepComponent.propDecorators = {
-        content: [{ type: ViewChild, args: [TemplateRef,] }],
+        content: [{ type: ViewChild, args: [TemplateRef, { static: true },] }],
         editable: [{ type: Input }],
         name: [{ type: Input }],
         label: [{ type: Input }],
@@ -28940,13 +26970,45 @@ var MdbStepperComponent = /** @class */ (function () {
         this._renderer = _renderer;
         this.linear = false;
         this.disableWaves = false;
-        this.vertical = false;
+        this._vertical = false;
+        this.stepChange = new EventEmitter();
+        this._destroy = new Subject();
         this.horizontal = true;
-        this._stepperBreakpoint = 992;
         this.stepTextContent = '';
         this.stepChangeSubject = new Subject();
         this.isBrowser = isPlatformBrowser(platformId);
     }
+    Object.defineProperty(MdbStepperComponent.prototype, "vertical", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._vertical;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            if (value) {
+                this._vertical = value;
+                this.horizontal = false;
+                this._renderer.removeStyle(this.container.nativeElement, 'height');
+            }
+            else {
+                this._vertical = value;
+                this.horizontal = true;
+                if (this.container.nativeElement.children[this.activeStepIndex]) {
+                    /** @type {?} */
+                    var stepElContent = this.container.nativeElement.children[this._activeStepIndex]
+                        .lastElementChild;
+                    this._updateHorizontalStepperHeight(this.activeStepIndex, stepElContent.clientHeight);
+                }
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(MdbStepperComponent.prototype, "activeStepIndex", {
         get: /**
          * @return {?}
@@ -28974,24 +27036,6 @@ var MdbStepperComponent = /** @class */ (function () {
         return this.stepChangeSubject;
     };
     /**
-     * @return {?}
-     */
-    MdbStepperComponent.prototype.onWindowResize = /**
-     * @return {?}
-     */
-    function () {
-        if (this.isBrowser) {
-            if (win.innerWidth < this._stepperBreakpoint) {
-                this.horizontal = false;
-                this._updateHorizontalStepperHeight(this.activeStepIndex);
-            }
-            else {
-                this.horizontal = true;
-                this._updateHorizontalStepperHeight(this.activeStepIndex);
-            }
-        }
-    };
-    /**
      * @param {?} index
      * @param {?} event
      * @return {?}
@@ -29015,8 +27059,7 @@ var MdbStepperComponent = /** @class */ (function () {
     MdbStepperComponent.prototype.ngOnInit = /**
      * @return {?}
      */
-    function () {
-    };
+    function () { };
     /**
      * @private
      * @param {?} step
@@ -29075,7 +27118,7 @@ var MdbStepperComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        if (this.activeStepIndex < (this.steps.length - 1)) {
+        if (this.activeStepIndex < this.steps.length - 1) {
             this.setNewActiveStep(this.activeStepIndex + 1);
         }
     };
@@ -29111,9 +27154,15 @@ var MdbStepperComponent = /** @class */ (function () {
      */
     function (index) {
         /** @type {?} */
+        var currentStep = this._activeStep;
+        /** @type {?} */
+        var currentStepIndex = this._activeStepIndex;
+        /** @type {?} */
         var newStep = this._getStepByIndex(index);
         /** @type {?} */
-        var newStepIndex = this.steps.toArray().findIndex((/**
+        var newStepIndex = this.steps
+            .toArray()
+            .findIndex((/**
          * @param {?} step
          * @return {?}
          */
@@ -29143,6 +27192,12 @@ var MdbStepperComponent = /** @class */ (function () {
             this._removeCurrentActiveStep();
             this._setActiveStep(index);
         }
+        this.stepChange.emit({
+            activeStep: newStep,
+            activeStepIndex: newStepIndex,
+            previousStep: currentStep,
+            previousStepIndex: currentStepIndex,
+        });
     };
     /**
      * @private
@@ -29292,7 +27347,9 @@ var MdbStepperComponent = /** @class */ (function () {
              */
             function () {
                 /** @type {?} */
-                var stepHeight = height ? height + 50 : _this.stepContents.toArray()[index].nativeElement.scrollHeight + 50;
+                var stepHeight = height
+                    ? height + 50
+                    : _this.stepContents.toArray()[index].nativeElement.scrollHeight + 50;
                 _this._renderer.setStyle(_this.container.nativeElement, 'height', stepHeight + 'px');
             }), 0);
         }
@@ -29311,7 +27368,7 @@ var MdbStepperComponent = /** @class */ (function () {
     function () {
         var _this = this;
         if (this.isBrowser) {
-            if (this.vertical || win.innerWidth < this._stepperBreakpoint) {
+            if (this.vertical) {
                 setTimeout((/**
                  * @return {?}
                  */
@@ -29341,13 +27398,16 @@ var MdbStepperComponent = /** @class */ (function () {
         var _this = this;
         this._setActiveStep(0);
         this.stepChange$ = from(this.steps.toArray());
-        this.getStepChange$().pipe(distinctUntilChanged()).subscribe((/**
+        this.getStepChange$()
+            .pipe(distinctUntilChanged(), takeUntil(this._destroy))
+            .subscribe((/**
          * @return {?}
          */
         function () {
             if (_this.container.nativeElement.children[_this.activeStepIndex]) {
                 /** @type {?} */
-                var stepElContent = _this.container.nativeElement.children[_this._activeStepIndex].lastElementChild;
+                var stepElContent = _this.container.nativeElement.children[_this._activeStepIndex]
+                    .lastElementChild;
                 _this._updateHorizontalStepperHeight(_this.activeStepIndex, stepElContent.clientHeight);
             }
         }));
@@ -29362,12 +27422,14 @@ var MdbStepperComponent = /** @class */ (function () {
         var _this = this;
         if (this.stepContents) {
             /** @type {?} */
-            var activeStep = this.stepContents.filter((/**
+            var activeStep = this.stepContents
+                .filter((/**
              * @param {?} el
              * @param {?} index
              * @return {?}
              */
-            function (el, index) { return el && index == _this.activeStepIndex; })).map((/**
+            function (el, index) { return el && index === _this.activeStepIndex; }))
+                .map((/**
              * @param {?} el
              * @return {?}
              */
@@ -29378,19 +27440,32 @@ var MdbStepperComponent = /** @class */ (function () {
             this.stepTextContent = activeStep.innerHTML;
         }
     };
+    /**
+     * @return {?}
+     */
+    MdbStepperComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this._destroy.next();
+        this._destroy.complete();
+    };
     MdbStepperComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mdb-stepper',
                     exportAs: 'mdbStepper',
-                    template: "<div class=\"card-body\">\n  <ul #container class=\"stepper\" [ngClass]=\"{'horizontal': !vertical && horizontal}\">\n    <li [ngClass]=\"{'active': step.isActive, 'done': step.isDone, 'wrong': step.isWrong }\" class=\"step\" *ngFor=\"let step of steps; let i = index\">\n      <div #stepTitle class=\"step-title waves-effect waves-dark\" (click)=\"setNewActiveStep(i); onClick(i, $event)\">\n        {{ step.name }}\n        <span class=\"step-label\">{{ step.label }}</span>\n      </div>\n      <div #stepContent class=\"step-new-content\" [ngClass]=\"{'d-block': step.isActive }\" [@stepContentTransition]=\"!vertical && getAnimationState(i)\">\n          <ng-container [ngTemplateOutlet]=\"step.content\"></ng-container>\n      </div>\n    </li>\n  </ul>\n</div>\n",
+                    template: "<div class=\"card-body\">\n  <ul #container class=\"stepper\" [ngClass]=\"{ horizontal: !vertical && horizontal }\">\n    <li\n      [ngClass]=\"{ active: step.isActive, done: step.isDone, wrong: step.isWrong }\"\n      class=\"step\"\n      *ngFor=\"let step of steps; let i = index\"\n    >\n      <div\n        #stepTitle\n        class=\"step-title waves-effect waves-dark\"\n        (click)=\"setNewActiveStep(i); onClick(i, $event)\"\n      >\n        <span>{{ step.name }}</span>\n        <span class=\"step-label\">{{ step.label }}</span>\n      </div>\n      <div\n        #stepContent\n        class=\"step-new-content\"\n        [ngClass]=\"{ 'd-block': step.isActive }\"\n        [@stepContentTransition]=\"!vertical && getAnimationState(i)\"\n      >\n        <ng-container [ngTemplateOutlet]=\"step.content\"></ng-container>\n      </div>\n    </li>\n  </ul>\n</div>\n",
                     encapsulation: ViewEncapsulation.None,
-                    animations: [trigger('stepContentTransition', [
+                    animations: [
+                        trigger('stepContentTransition', [
                             state('previous', style({ transform: 'translateX(-100%)', visibility: 'hidden' })),
                             state('next', style({ transform: 'translateX(100%)', visibility: 'hidden' })),
                             state('current', style({ transform: 'none', visibility: 'visible' })),
-                            transition('* => *', animate('600ms ease'))
-                        ])],
-                    providers: [WavesDirective]
+                            transition('* => *', animate('600ms ease')),
+                        ]),
+                    ],
+                    providers: [WavesDirective],
+                    styles: [".mdb-color.lighten-5{background-color:#d0d6e2!important}.mdb-color.lighten-4{background-color:#b1bace!important}.mdb-color.lighten-3{background-color:#929fba!important}.mdb-color.lighten-2{background-color:#7283a7!important}.mdb-color.lighten-1{background-color:#59698d!important}.mdb-color{background-color:#45526e!important}.mdb-color-text{color:#45526e!important}.rgba-mdb-color-slight,.rgba-mdb-color-slight:after{background-color:rgba(69,82,110,.1)}.rgba-mdb-color-light,.rgba-mdb-color-light:after{background-color:rgba(69,82,110,.3)}.rgba-mdb-color-strong,.rgba-mdb-color-strong:after{background-color:rgba(69,82,110,.7)}.mdb-color.darken-1{background-color:#3b465e!important}.mdb-color.darken-2{background-color:#2e3951!important}.mdb-color.darken-3{background-color:#1c2a48!important}.mdb-color.darken-4{background-color:#1c2331!important}.red.lighten-5{background-color:#ffebee!important}.red.lighten-4{background-color:#ffcdd2!important}.red.lighten-3{background-color:#ef9a9a!important}.red.lighten-2{background-color:#e57373!important}.red.lighten-1{background-color:#ef5350!important}.red{background-color:#f44336!important}.red-text{color:#f44336!important}.rgba-red-slight,.rgba-red-slight:after{background-color:rgba(244,67,54,.1)}.rgba-red-light,.rgba-red-light:after{background-color:rgba(244,67,54,.3)}.rgba-red-strong,.rgba-red-strong:after{background-color:rgba(244,67,54,.7)}.red.darken-1{background-color:#e53935!important}.red.darken-2{background-color:#d32f2f!important}.red.darken-3{background-color:#c62828!important}.red.darken-4{background-color:#b71c1c!important}.red.accent-1{background-color:#ff8a80!important}.red.accent-2{background-color:#ff5252!important}.red.accent-3{background-color:#ff1744!important}.red.accent-4{background-color:#d50000!important}.pink.lighten-5{background-color:#fce4ec!important}.pink.lighten-4{background-color:#f8bbd0!important}.pink.lighten-3{background-color:#f48fb1!important}.pink.lighten-2{background-color:#f06292!important}.pink.lighten-1{background-color:#ec407a!important}.pink{background-color:#e91e63!important}.pink-text{color:#e91e63!important}.rgba-pink-slight,.rgba-pink-slight:after{background-color:rgba(233,30,99,.1)}.rgba-pink-light,.rgba-pink-light:after{background-color:rgba(233,30,99,.3)}.rgba-pink-strong,.rgba-pink-strong:after{background-color:rgba(233,30,99,.7)}.pink.darken-1{background-color:#d81b60!important}.pink.darken-2{background-color:#c2185b!important}.pink.darken-3{background-color:#ad1457!important}.pink.darken-4{background-color:#880e4f!important}.pink.accent-1{background-color:#ff80ab!important}.pink.accent-2{background-color:#ff4081!important}.pink.accent-3{background-color:#f50057!important}.pink.accent-4{background-color:#c51162!important}.purple.lighten-5{background-color:#f3e5f5!important}.purple.lighten-4{background-color:#e1bee7!important}.purple.lighten-3{background-color:#ce93d8!important}.purple.lighten-2{background-color:#ba68c8!important}.purple.lighten-1{background-color:#ab47bc!important}.purple{background-color:#9c27b0!important}.purple-text{color:#9c27b0!important}.rgba-purple-slight,.rgba-purple-slight:after{background-color:rgba(156,39,176,.1)}.rgba-purple-light,.rgba-purple-light:after{background-color:rgba(156,39,176,.3)}.rgba-purple-strong,.rgba-purple-strong:after{background-color:rgba(156,39,176,.7)}.purple.darken-1{background-color:#8e24aa!important}.purple.darken-2{background-color:#7b1fa2!important}.purple.darken-3{background-color:#6a1b9a!important}.purple.darken-4{background-color:#4a148c!important}.purple.accent-1{background-color:#ea80fc!important}.purple.accent-2{background-color:#e040fb!important}.purple.accent-3{background-color:#d500f9!important}.purple.accent-4{background-color:#a0f!important}.deep-purple.lighten-5{background-color:#ede7f6!important}.deep-purple.lighten-4{background-color:#d1c4e9!important}.deep-purple.lighten-3{background-color:#b39ddb!important}.deep-purple.lighten-2{background-color:#9575cd!important}.deep-purple.lighten-1{background-color:#7e57c2!important}.deep-purple{background-color:#673ab7!important}.deep-purple-text{color:#673ab7!important}.rgba-deep-purple-slight,.rgba-deep-purple-slight:after{background-color:rgba(103,58,183,.1)}.rgba-deep-purple-light,.rgba-deep-purple-light:after{background-color:rgba(103,58,183,.3)}.rgba-deep-purple-strong,.rgba-deep-purple-strong:after{background-color:rgba(103,58,183,.7)}.deep-purple.darken-1{background-color:#5e35b1!important}.deep-purple.darken-2{background-color:#512da8!important}.deep-purple.darken-3{background-color:#4527a0!important}.deep-purple.darken-4{background-color:#311b92!important}.deep-purple.accent-1{background-color:#b388ff!important}.deep-purple.accent-2{background-color:#7c4dff!important}.deep-purple.accent-3{background-color:#651fff!important}.deep-purple.accent-4{background-color:#6200ea!important}.indigo.lighten-5{background-color:#e8eaf6!important}.indigo.lighten-4{background-color:#c5cae9!important}.indigo.lighten-3{background-color:#9fa8da!important}.indigo.lighten-2{background-color:#7986cb!important}.indigo.lighten-1{background-color:#5c6bc0!important}.indigo{background-color:#3f51b5!important}.indigo-text{color:#3f51b5!important}.rgba-indigo-slight,.rgba-indigo-slight:after{background-color:rgba(63,81,181,.1)}.rgba-indigo-light,.rgba-indigo-light:after{background-color:rgba(63,81,181,.3)}.rgba-indigo-strong,.rgba-indigo-strong:after{background-color:rgba(63,81,181,.7)}.indigo.darken-1{background-color:#3949ab!important}.indigo.darken-2{background-color:#303f9f!important}.indigo.darken-3{background-color:#283593!important}.indigo.darken-4{background-color:#1a237e!important}.indigo.accent-1{background-color:#8c9eff!important}.indigo.accent-2{background-color:#536dfe!important}.indigo.accent-3{background-color:#3d5afe!important}.indigo.accent-4{background-color:#304ffe!important}.blue.lighten-5{background-color:#e3f2fd!important}.blue.lighten-4{background-color:#bbdefb!important}.blue.lighten-3{background-color:#90caf9!important}.blue.lighten-2{background-color:#64b5f6!important}.blue.lighten-1{background-color:#42a5f5!important}.blue{background-color:#2196f3!important}.blue-text{color:#2196f3!important}.rgba-blue-slight,.rgba-blue-slight:after{background-color:rgba(33,150,243,.1)}.rgba-blue-light,.rgba-blue-light:after{background-color:rgba(33,150,243,.3)}.rgba-blue-strong,.rgba-blue-strong:after{background-color:rgba(33,150,243,.7)}.blue.darken-1{background-color:#1e88e5!important}.blue.darken-2{background-color:#1976d2!important}.blue.darken-3{background-color:#1565c0!important}.blue.darken-4{background-color:#0d47a1!important}.blue.accent-1{background-color:#82b1ff!important}.blue.accent-2{background-color:#448aff!important}.blue.accent-3{background-color:#2979ff!important}.blue.accent-4{background-color:#2962ff!important}.light-blue.lighten-5{background-color:#e1f5fe!important}.light-blue.lighten-4{background-color:#b3e5fc!important}.light-blue.lighten-3{background-color:#81d4fa!important}.light-blue.lighten-2{background-color:#4fc3f7!important}.light-blue.lighten-1{background-color:#29b6f6!important}.light-blue{background-color:#03a9f4!important}.light-blue-text{color:#03a9f4!important}.rgba-light-blue-slight,.rgba-light-blue-slight:after{background-color:rgba(3,169,244,.1)}.rgba-light-blue-light,.rgba-light-blue-light:after{background-color:rgba(3,169,244,.3)}.rgba-light-blue-strong,.rgba-light-blue-strong:after{background-color:rgba(3,169,244,.7)}.light-blue.darken-1{background-color:#039be5!important}.light-blue.darken-2{background-color:#0288d1!important}.light-blue.darken-3{background-color:#0277bd!important}.light-blue.darken-4{background-color:#01579b!important}.light-blue.accent-1{background-color:#80d8ff!important}.light-blue.accent-2{background-color:#40c4ff!important}.light-blue.accent-3{background-color:#00b0ff!important}.light-blue.accent-4{background-color:#0091ea!important}.cyan.lighten-5{background-color:#e0f7fa!important}.cyan.lighten-4{background-color:#b2ebf2!important}.cyan.lighten-3{background-color:#80deea!important}.cyan.lighten-2{background-color:#4dd0e1!important}.cyan.lighten-1{background-color:#26c6da!important}.cyan{background-color:#00bcd4!important}.cyan-text{color:#00bcd4!important}.rgba-cyan-slight,.rgba-cyan-slight:after{background-color:rgba(0,188,212,.1)}.rgba-cyan-light,.rgba-cyan-light:after{background-color:rgba(0,188,212,.3)}.rgba-cyan-strong,.rgba-cyan-strong:after{background-color:rgba(0,188,212,.7)}.cyan.darken-1{background-color:#00acc1!important}.cyan.darken-2{background-color:#0097a7!important}.cyan.darken-3{background-color:#00838f!important}.cyan.darken-4{background-color:#006064!important}.cyan.accent-1{background-color:#84ffff!important}.cyan.accent-2{background-color:#18ffff!important}.cyan.accent-3{background-color:#00e5ff!important}.cyan.accent-4{background-color:#00b8d4!important}.teal.lighten-5{background-color:#e0f2f1!important}.teal.lighten-4{background-color:#b2dfdb!important}.teal.lighten-3{background-color:#80cbc4!important}.teal.lighten-2{background-color:#4db6ac!important}.teal.lighten-1{background-color:#26a69a!important}.teal{background-color:#009688!important}.teal-text{color:#009688!important}.rgba-teal-slight,.rgba-teal-slight:after{background-color:rgba(0,150,136,.1)}.rgba-teal-light,.rgba-teal-light:after{background-color:rgba(0,150,136,.3)}.rgba-teal-strong,.rgba-teal-strong:after{background-color:rgba(0,150,136,.7)}.teal.darken-1{background-color:#00897b!important}.teal.darken-2{background-color:#00796b!important}.teal.darken-3{background-color:#00695c!important}.teal.darken-4{background-color:#004d40!important}.teal.accent-1{background-color:#a7ffeb!important}.teal.accent-2{background-color:#64ffda!important}.teal.accent-3{background-color:#1de9b6!important}.teal.accent-4{background-color:#00bfa5!important}.green.lighten-5{background-color:#e8f5e9!important}.green.lighten-4{background-color:#c8e6c9!important}.green.lighten-3{background-color:#a5d6a7!important}.green.lighten-2{background-color:#81c784!important}.green.lighten-1{background-color:#66bb6a!important}.green{background-color:#4caf50!important}.green-text{color:#4caf50!important}.rgba-green-slight,.rgba-green-slight:after{background-color:rgba(76,175,80,.1)}.rgba-green-light,.rgba-green-light:after{background-color:rgba(76,175,80,.3)}.rgba-green-strong,.rgba-green-strong:after{background-color:rgba(76,175,80,.7)}.green.darken-1{background-color:#43a047!important}.green.darken-2{background-color:#388e3c!important}.green.darken-3{background-color:#2e7d32!important}.green.darken-4{background-color:#1b5e20!important}.green.accent-1{background-color:#b9f6ca!important}.green.accent-2{background-color:#69f0ae!important}.green.accent-3{background-color:#00e676!important}.green.accent-4{background-color:#00c853!important}.light-green.lighten-5{background-color:#f1f8e9!important}.light-green.lighten-4{background-color:#dcedc8!important}.light-green.lighten-3{background-color:#c5e1a5!important}.light-green.lighten-2{background-color:#aed581!important}.light-green.lighten-1{background-color:#9ccc65!important}.light-green{background-color:#8bc34a!important}.light-green-text{color:#8bc34a!important}.rgba-light-green-slight,.rgba-light-green-slight:after{background-color:rgba(139,195,74,.1)}.rgba-light-green-light,.rgba-light-green-light:after{background-color:rgba(139,195,74,.3)}.rgba-light-green-strong,.rgba-light-green-strong:after{background-color:rgba(139,195,74,.7)}.light-green.darken-1{background-color:#7cb342!important}.light-green.darken-2{background-color:#689f38!important}.light-green.darken-3{background-color:#558b2f!important}.light-green.darken-4{background-color:#33691e!important}.light-green.accent-1{background-color:#ccff90!important}.light-green.accent-2{background-color:#b2ff59!important}.light-green.accent-3{background-color:#76ff03!important}.light-green.accent-4{background-color:#64dd17!important}.lime.lighten-5{background-color:#f9fbe7!important}.lime.lighten-4{background-color:#f0f4c3!important}.lime.lighten-3{background-color:#e6ee9c!important}.lime.lighten-2{background-color:#dce775!important}.lime.lighten-1{background-color:#d4e157!important}.lime{background-color:#cddc39!important}.lime-text{color:#cddc39!important}.rgba-lime-slight,.rgba-lime-slight:after{background-color:rgba(205,220,57,.1)}.rgba-lime-light,.rgba-lime-light:after{background-color:rgba(205,220,57,.3)}.rgba-lime-strong,.rgba-lime-strong:after{background-color:rgba(205,220,57,.7)}.lime.darken-1{background-color:#c0ca33!important}.lime.darken-2{background-color:#afb42b!important}.lime.darken-3{background-color:#9e9d24!important}.lime.darken-4{background-color:#827717!important}.lime.accent-1{background-color:#f4ff81!important}.lime.accent-2{background-color:#eeff41!important}.lime.accent-3{background-color:#c6ff00!important}.lime.accent-4{background-color:#aeea00!important}.yellow.lighten-5{background-color:#fffde7!important}.yellow.lighten-4{background-color:#fff9c4!important}.yellow.lighten-3{background-color:#fff59d!important}.yellow.lighten-2{background-color:#fff176!important}.yellow.lighten-1{background-color:#ffee58!important}.yellow{background-color:#ffeb3b!important}.yellow-text{color:#ffeb3b!important}.rgba-yellow-slight,.rgba-yellow-slight:after{background-color:rgba(255,235,59,.1)}.rgba-yellow-light,.rgba-yellow-light:after{background-color:rgba(255,235,59,.3)}.rgba-yellow-strong,.rgba-yellow-strong:after{background-color:rgba(255,235,59,.7)}.yellow.darken-1{background-color:#fdd835!important}.yellow.darken-2{background-color:#fbc02d!important}.yellow.darken-3{background-color:#f9a825!important}.yellow.darken-4{background-color:#f57f17!important}.yellow.accent-1{background-color:#ffff8d!important}.yellow.accent-2{background-color:#ff0!important}.yellow.accent-3{background-color:#ffea00!important}.yellow.accent-4{background-color:#ffd600!important}.amber.lighten-5{background-color:#fff8e1!important}.amber.lighten-4{background-color:#ffecb3!important}.amber.lighten-3{background-color:#ffe082!important}.amber.lighten-2{background-color:#ffd54f!important}.amber.lighten-1{background-color:#ffca28!important}.amber{background-color:#ffc107!important}.amber-text{color:#ffc107!important}.rgba-amber-slight,.rgba-amber-slight:after{background-color:rgba(255,193,7,.1)}.rgba-amber-light,.rgba-amber-light:after{background-color:rgba(255,193,7,.3)}.rgba-amber-strong,.rgba-amber-strong:after{background-color:rgba(255,193,7,.7)}.amber.darken-1{background-color:#ffb300!important}.amber.darken-2{background-color:#ffa000!important}.amber.darken-3{background-color:#ff8f00!important}.amber.darken-4{background-color:#ff6f00!important}.amber.accent-1{background-color:#ffe57f!important}.amber.accent-2{background-color:#ffd740!important}.amber.accent-3{background-color:#ffc400!important}.amber.accent-4{background-color:#ffab00!important}.orange.lighten-5{background-color:#fff3e0!important}.orange.lighten-4{background-color:#ffe0b2!important}.orange.lighten-3{background-color:#ffcc80!important}.orange.lighten-2{background-color:#ffb74d!important}.orange.lighten-1{background-color:#ffa726!important}.orange{background-color:#ff9800!important}.orange-text{color:#ff9800!important}.rgba-orange-slight,.rgba-orange-slight:after{background-color:rgba(255,152,0,.1)}.rgba-orange-light,.rgba-orange-light:after{background-color:rgba(255,152,0,.3)}.rgba-orange-strong,.rgba-orange-strong:after{background-color:rgba(255,152,0,.7)}.orange.darken-1{background-color:#fb8c00!important}.orange.darken-2{background-color:#f57c00!important}.orange.darken-3{background-color:#ef6c00!important}.orange.darken-4{background-color:#e65100!important}.orange.accent-1{background-color:#ffd180!important}.orange.accent-2{background-color:#ffab40!important}.orange.accent-3{background-color:#ff9100!important}.orange.accent-4{background-color:#ff6d00!important}.deep-orange.lighten-5{background-color:#fbe9e7!important}.deep-orange.lighten-4{background-color:#ffccbc!important}.deep-orange.lighten-3{background-color:#ffab91!important}.deep-orange.lighten-2{background-color:#ff8a65!important}.deep-orange.lighten-1{background-color:#ff7043!important}.deep-orange{background-color:#ff5722!important}.deep-orange-text{color:#ff5722!important}.rgba-deep-orange-slight,.rgba-deep-orange-slight:after{background-color:rgba(255,87,34,.1)}.rgba-deep-orange-light,.rgba-deep-orange-light:after{background-color:rgba(255,87,34,.3)}.rgba-deep-orange-strong,.rgba-deep-orange-strong:after{background-color:rgba(255,87,34,.7)}.deep-orange.darken-1{background-color:#f4511e!important}.deep-orange.darken-2{background-color:#e64a19!important}.deep-orange.darken-3{background-color:#d84315!important}.deep-orange.darken-4{background-color:#bf360c!important}.deep-orange.accent-1{background-color:#ff9e80!important}.deep-orange.accent-2{background-color:#ff6e40!important}.deep-orange.accent-3{background-color:#ff3d00!important}.deep-orange.accent-4{background-color:#dd2c00!important}.brown.lighten-5{background-color:#efebe9!important}.brown.lighten-4{background-color:#d7ccc8!important}.brown.lighten-3{background-color:#bcaaa4!important}.brown.lighten-2{background-color:#a1887f!important}.brown.lighten-1{background-color:#8d6e63!important}.brown{background-color:#795548!important}.brown-text{color:#795548!important}.rgba-brown-slight,.rgba-brown-slight:after{background-color:rgba(121,85,72,.1)}.rgba-brown-light,.rgba-brown-light:after{background-color:rgba(121,85,72,.3)}.rgba-brown-strong,.rgba-brown-strong:after{background-color:rgba(121,85,72,.7)}.brown.darken-1{background-color:#6d4c41!important}.brown.darken-2{background-color:#5d4037!important}.brown.darken-3{background-color:#4e342e!important}.brown.darken-4{background-color:#3e2723!important}.blue-grey.lighten-5{background-color:#eceff1!important}.blue-grey.lighten-4{background-color:#cfd8dc!important}.blue-grey.lighten-3{background-color:#b0bec5!important}.blue-grey.lighten-2{background-color:#90a4ae!important}.blue-grey.lighten-1{background-color:#78909c!important}.blue-grey{background-color:#607d8b!important}.blue-grey-text{color:#607d8b!important}.rgba-blue-grey-slight,.rgba-blue-grey-slight:after{background-color:rgba(96,125,139,.1)}.rgba-blue-grey-light,.rgba-blue-grey-light:after{background-color:rgba(96,125,139,.3)}.rgba-blue-grey-strong,.rgba-blue-grey-strong:after{background-color:rgba(96,125,139,.7)}.blue-grey.darken-1{background-color:#546e7a!important}.blue-grey.darken-2{background-color:#455a64!important}.blue-grey.darken-3{background-color:#37474f!important}.blue-grey.darken-4{background-color:#263238!important}.grey.lighten-5{background-color:#fafafa!important}.grey.lighten-4{background-color:#f5f5f5!important}.grey.lighten-3{background-color:#eee!important}.grey.lighten-2{background-color:#e0e0e0!important}.grey.lighten-1{background-color:#bdbdbd!important}.grey{background-color:#9e9e9e!important}.grey-text{color:#9e9e9e!important}.rgba-grey-slight,.rgba-grey-slight:after{background-color:rgba(158,158,158,.1)}.rgba-grey-light,.rgba-grey-light:after{background-color:rgba(158,158,158,.3)}.rgba-grey-strong,.rgba-grey-strong:after{background-color:rgba(158,158,158,.7)}.grey.darken-1{background-color:#757575!important}.grey.darken-2{background-color:#616161!important}.grey.darken-3{background-color:#424242!important}.grey.darken-4{background-color:#212121!important}.black{background-color:#000!important}.black-text{color:#000!important}.rgba-black-slight,.rgba-black-slight:after{background-color:rgba(0,0,0,.1)}.rgba-black-light,.rgba-black-light:after{background-color:rgba(0,0,0,.3)}.rgba-black-strong,.rgba-black-strong:after{background-color:rgba(0,0,0,.7)}.white{background-color:#fff!important}.white-text{color:#fff!important}.rgba-white-slight,.rgba-white-slight:after{background-color:rgba(255,255,255,.1)}.rgba-white-light,.rgba-white-light:after{background-color:rgba(255,255,255,.3)}.rgba-white-strong,.rgba-white-strong:after{background-color:rgba(255,255,255,.7)}.rgba-stylish-slight{background-color:rgba(62,69,81,.1)}.rgba-stylish-light{background-color:rgba(62,69,81,.3)}.rgba-stylish-strong{background-color:rgba(62,69,81,.7)}.primary-color,.stepper li.active a .circle,.stepper li.completed a .circle{background-color:#4285f4!important}.primary-color-dark{background-color:#0d47a1!important}.secondary-color{background-color:#a6c!important}.secondary-color-dark{background-color:#93c!important}.default-color{background-color:#2bbbad!important}.default-color-dark{background-color:#00695c!important}.info-color{background-color:#33b5e5!important}.info-color-dark{background-color:#09c!important}.success-color{background-color:#00c851!important}.success-color-dark{background-color:#007e33!important}.warning-color{background-color:#fb3!important}.warning-color-dark{background-color:#f80!important}.danger-color,.stepper li.warning a .circle{background-color:#ff3547!important}.danger-color-dark{background-color:#c00!important}.elegant-color{background-color:#2e2e2e!important}.elegant-color-dark{background-color:#212121!important}.stylish-color{background-color:#4b515d!important}.stylish-color-dark{background-color:#3e4551!important}.unique-color{background-color:#3f729b!important}.unique-color-dark{background-color:#1c2331!important}.special-color{background-color:#37474f!important}.special-color-dark{background-color:#263238!important}.purple-gradient{background:linear-gradient(40deg,#ff6ec4,#7873f5)!important}.peach-gradient{background:linear-gradient(40deg,#ffd86f,#fc6262)!important}.aqua-gradient{background:linear-gradient(40deg,#2096ff,#05ffa3)!important}.blue-gradient{background:linear-gradient(40deg,#45cafc,#303f9f)!important}.purple-gradient-rgba{background:linear-gradient(40deg,rgba(255,110,196,.9),rgba(120,115,245,.9))!important}.peach-gradient-rgba{background:linear-gradient(40deg,rgba(255,216,111,.9),rgba(252,98,98,.9))!important}.aqua-gradient-rgba{background:linear-gradient(40deg,rgba(32,150,255,.9),rgba(5,255,163,.9))!important}.blue-gradient-rgba{background:linear-gradient(40deg,rgba(69,202,252,.9),rgba(48,63,159,.9))!important}.dark-grey-text,.dark-grey-text:focus,.dark-grey-text:hover{color:#4f4f4f!important}.hoverable{box-shadow:none;transition:.55s ease-in-out}.hoverable:hover{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);transition:.55s ease-in-out}.z-depth-0{box-shadow:none!important}.z-depth-1{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)!important}.z-depth-1-half{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)!important}.z-depth-2{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19)!important}.z-depth-3{box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19)!important}.z-depth-4{box-shadow:0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)!important}.z-depth-5{box-shadow:0 27px 24px 0 rgba(0,0,0,.2),0 40px 77px 0 rgba(0,0,0,.22)!important}.disabled,:disabled{pointer-events:none!important}a{cursor:pointer;text-decoration:none;color:#0275d8;transition:.2s ease-in-out}a:hover{text-decoration:none;color:#014c8c;transition:.2s ease-in-out}a.disabled:hover,a:disabled:hover{color:#0275d8}a:not([href]):not([tabindex]),a:not([href]):not([tabindex]):focus,a:not([href]):not([tabindex]):hover{color:inherit;text-decoration:none}.stepper li a{padding:1.5rem;font-size:1em;text-align:center}.stepper li a .circle{display:inline-block;color:#fff;border-radius:50%;background:rgba(0,0,0,.38);width:1.75rem;height:1.75rem;text-align:center;line-height:1.75rem;margin-right:.5rem}.stepper li a .label{display:inline-block;color:rgba(0,0,0,.38)}.stepper li.active a .label,.stepper li.completed a .label{font-weight:600;color:rgba(0,0,0,.87)}.stepper-horizontal{position:relative;display:flex;justify-content:space-between}.stepper-horizontal li{transition:.5s;display:flex;align-items:center;flex:1;position:relative}.stepper-horizontal li a .label{margin-top:.63rem}.stepper-horizontal li:not(:first-child):before,.stepper-horizontal li:not(:last-child):after{content:'';position:relative;flex:1;margin:.5rem 0 0;height:1px;background-color:rgba(0,0,0,.1)}@media (max-width:47.9375rem){.stepper-horizontal{flex-direction:column}.stepper-horizontal li{align-items:flex-start;flex-direction:column}.stepper-horizontal li a .label{flex-flow:column nowrap;order:2;margin-top:.2rem}.stepper-horizontal li:not(:last-child):after{content:'';position:absolute;width:1px;height:calc(100% - 40px);left:2.19rem;top:3.75rem}}.stepper-vertical{position:relative;display:flex;flex-direction:column;justify-content:space-between}.stepper-vertical li{display:flex;align-items:flex-start;flex:1;flex-direction:column;position:relative}.stepper-vertical li a{align-self:flex-start;display:flex;position:relative}.stepper-vertical li a .circle{order:1}.stepper-vertical li a .label{flex-flow:column nowrap;order:2;margin-top:.2rem}.stepper-vertical li.completed a .label{font-weight:500}.stepper-vertical li .step-content{display:block;margin-top:0;margin-left:3.13rem;padding:.94rem}.stepper-vertical li .step-content p{font-size:.88rem}.stepper-vertical li:not(:last-child):after{content:'';position:absolute;width:1px;height:calc(100% - 40px);left:2.19rem;top:3.44rem;background-color:rgba(0,0,0,.1)}label.invalid{font-size:.8rem;font-weight:500;color:red!important;top:50px!important}label.invalid.active{-webkit-transform:translateY(0)!important;transform:translateY(0)!important}ul.stepper .wait-feedback{left:0;right:0;top:0;z-index:2;position:absolute;width:100%;height:100%;text-align:center;display:flex;justify-content:center;align-items:center}ul.stepper .step{position:relative;list-style:none}ul.stepper .step.feedbacking .step-new-content>:not(.wait-feedback){opacity:.1}ul.stepper .step:not(:last-of-type).active{margin-bottom:2.25rem}ul.stepper .step:before{position:absolute;top:.75rem;counter-increment:section;content:counter(section);height:1.75rem;width:1.75rem;color:#fff;background-color:rgba(0,0,0,.3);border-radius:100%;text-align:center;line-height:1.75rem;font-weight:400}ul.stepper .step.active:before{background-color:#4285f4}ul.stepper .step.done:before{content:'\\f00c';background-color:#00c851}ul.stepper .step.wrong:before{content:'\\f071';background-color:#ff3547}ul.stepper>li:not(:last-of-type){margin-bottom:.625rem;transition:margin-bottom .4s}ul.stepper .step-title{margin:0 -1.3rem;cursor:pointer;padding:.9688rem 2.75rem 1.5rem 4rem;display:block;position:relative}ul.stepper .step-title:after{content:attr(data-step-label);display:block;position:absolute;font-size:.8rem;color:#424242;font-weight:400}ul.stepper .step-title:hover{background-color:rgba(0,0,0,.06)}ul.stepper .step-label{font-size:.8rem;color:#424242;font-weight:400;position:absolute;top:40px;left:65px}ul.stepper .step-new-content{position:relative;display:none;width:inherit;margin-left:41px;margin-right:24px}ul.stepper>.step:not(:last-of-type):after{content:'';position:absolute;top:3.125rem;left:.8438rem;width:.0625rem;height:40%;height:calc(100% - 38px);background-color:rgba(0,0,0,.1);transition:.4s}ul.stepper>.step.active:not(:last-child):after{height:93%;height:calc(100% - 12px)}ul.stepper>.step[data-last=true]{margin-bottom:0}ul.stepper>.step[data-last=true]:after{height:0;width:0}ul.stepper .step-actions{display:-webkit-box;-webkit-box-pack:start}ul.stepper .step-actions .btn-flat:not(:last-child),ul.stepper .step-actions .btn-large:not(:last-child),ul.stepper .step-actions .btn:not(:last-child){margin-right:.3125rem}ul.stepper .step-new-content .row{margin-bottom:.4375rem}ul.stepper .validate{margin-bottom:0}ul.stepper.horizontal{position:relative;display:flex;justify-content:space-between;min-height:20rem;margin-left:-1.5rem;margin-right:-1.5rem;padding-left:1.5rem;padding-right:1.5rem;overflow:hidden}ul.stepper.horizontal:before{content:'';background-color:transparent;width:100%;min-height:5.25rem;position:absolute;left:-3px;border-top-left-radius:2px}ul.stepper.horizontal:first-child{margin-top:-2.7rem}ul.stepper.horizontal .step{position:static;margin:0;width:100%;display:flex;align-items:center;height:5.25rem!important}ul.stepper.horizontal .step:not(:last-of-type):after{content:'';position:static;display:inline-block;width:100%;height:.0625rem}ul.stepper.horizontal>.step:last-of-type,ul.stepper.horizontal>.step[data-last=true]{width:auto!important}ul.stepper.horizontal>.step.active:not(:last-of-type):after{content:'';position:static;display:inline-block;width:100%;height:.0625rem}ul.stepper.horizontal .step.active .step-title:before{background-color:#4285f4}ul.stepper.horizontal .step.done .step-title:before{font-family:'Font Awesome 5 Free';font-weight:900;content:'\\f00c';font-size:1rem;background:#00c851}ul.stepper.horizontal .step.wrong .step-title:before{font-family:'Font Awesome 5 Free';font-weight:900;content:'\\f071';font-size:1.1rem;background-color:#ff3547}ul.stepper.horizontal .step-title{position:relative;line-height:5.25rem;height:5.25rem;margin:0;padding:0 1.5625rem 0 4.0625rem;display:inline-block;max-width:13.75rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0}ul.stepper.horizontal .step-label{position:absolute;top:20px;left:65px}ul.stepper.horizontal .step:before{content:none}ul.stepper.horizontal .step .step-title:before{position:absolute;top:1.7813rem;left:1.1875rem;counter-increment:section;content:counter(section);height:1.75rem;width:1.75rem;color:#fff;background-color:rgba(0,0,0,.3);border-radius:100%;text-align:center;line-height:1.75rem;font-weight:400}ul.stepper.horizontal .step-title:after{top:.9375rem}ul.stepper.horizontal .step-new-content{position:absolute;height:calc(100% - 84px);top:6rem;left:0;width:100%;overflow-y:auto;overflow-x:hidden;margin:0;padding:1.25rem 1.25rem 4.75rem}ul.stepper.horizontal .step-actions{position:absolute;bottom:0;left:0;width:100%;padding:20px;flex-direction:row-reverse}ul.stepper.horizontal .step-actions .btn-flat:not(:last-child),ul.stepper.horizontal .step-actions .btn-large:not(:last-child),ul.stepper.horizontal .step-actions .btn:not(:last-child){margin-left:.3125rem;margin-right:0}ul.stepper.horizontal .step-actions,ul.stepper.horizontal .step-new-content{padding-left:2.5rem;padding-right:2.5rem}ul.stepper .md-form label{left:0}ul.stepper .step.done:before{content:'\\f00c';font-family:'Font Awesome 5 Pro','Font Awesome 5 Free'!important;font-weight:900;font-size:1rem}ul.stepper .step.wrong:before{content:'\\f071';font-family:'Font Awesome 5 Pro','Font Awesome 5 Free'!important;font-weight:900;font-size:1.1rem}ul.stepper .step.active .step-title{font-weight:500}ul.stepper .step-new-content{overflow:hidden!important;height:auto!important}.card-body ul.stepper.horizontal li a{padding:.84rem 2.14rem}.card-body ul.stepper.horizontal .step.active .step-title:before{background-color:#4285f4}.card-body ul.stepper.horizontal .step.done .step-title:before{content:'\\f00c';font-family:'Font Awesome 5 Pro','Font Awesome 5 Free'!important;font-weight:900;font-size:1rem;background:#00c851}.card-body ul.stepper.horizontal .step.wrong .step-title:before{content:'\\f071';font-family:'Font Awesome 5 Pro','Font Awesome 5 Free'!important;font-weight:900;font-size:1.1rem;background-color:#ff3547}.card-body ul.stepper.horizontal .step:before{content:none}@media (max-width:420px){ul.stepper.horizontal .step-title{padding-left:10px!important;padding-right:10px!important;line-height:9.25rem!important}}"]
                 }] }
     ];
     /** @nocollapse */
@@ -29403,11 +27478,11 @@ var MdbStepperComponent = /** @class */ (function () {
         steps: [{ type: ContentChildren, args: [MdbStepComponent,] }],
         stepTitles: [{ type: ViewChildren, args: ['stepTitle',] }],
         stepContents: [{ type: ViewChildren, args: ['stepContent',] }],
-        container: [{ type: ViewChild, args: ['container',] }],
+        container: [{ type: ViewChild, args: ['container', { static: true },] }],
         linear: [{ type: Input }],
         disableWaves: [{ type: Input }],
         vertical: [{ type: Input }],
-        onWindowResize: [{ type: HostListener, args: ['window:resize',] }]
+        stepChange: [{ type: Output }]
     };
     return MdbStepperComponent;
 }());
@@ -29537,23 +27612,30 @@ var MdbStickyDirective = /** @class */ (function () {
                 dynProps = { width: parentRect.width + 'px' };
             }
             // console.log('dynProps', dynProps);
-            if (_this.original.marginTop + _this.original.marginBottom +
-                _this.original.boundingClientRect.height + _this.stickyOffsetTop >= parentRect.bottom) {
+            if (_this.original.marginTop +
+                _this.original.marginBottom +
+                _this.original.boundingClientRect.height +
+                _this.stickyOffsetTop >=
+                parentRect.bottom) {
                 // console.log('case 1 (absolute)', parentRect.bottom, this.original.marginBottom);
                 /**
                  * stikcy element reached to the bottom of the container
                  * @type {?}
                  */
-                var floatAdjustment = _this.original.float === 'right' ? { right: 0 } :
-                    _this.original.float === 'left' ? { left: 0 } : {};
+                var floatAdjustment = _this.original.float === 'right'
+                    ? { right: 0 }
+                    : _this.original.float === 'left'
+                        ? { left: 0 }
+                        : {};
                 Object.assign(_this.el.style, {
                     position: 'absolute',
                     float: 'none',
                     top: 'inherit',
-                    bottom: 0
+                    bottom: 0,
                 }, dynProps, floatAdjustment);
             }
-            else if (parentRect.top * -1 + _this.original.marginTop + _this.stickyOffsetTop > _this.original.offsetTop) {
+            else if (parentRect.top * -1 + _this.original.marginTop + _this.stickyOffsetTop >
+                _this.original.offsetTop) {
                 /**
                  * stikcy element is in the middle of container
                  */
@@ -29569,7 +27651,7 @@ var MdbStickyDirective = /** @class */ (function () {
                     // fixed is a lot smoother than absolute
                     float: 'none',
                     top: _this.stickyOffsetTop + 'px',
-                    bottom: 'inherit'
+                    bottom: 'inherit',
                 }, dynProps);
             }
             else {
@@ -29587,7 +27669,7 @@ var MdbStickyDirective = /** @class */ (function () {
                     top: _this.original.top,
                     bottom: _this.original.bottom,
                     width: _this.original.width,
-                    left: _this.original.left
+                    left: _this.original.left,
                 }, dynProps);
             }
         });
@@ -29622,12 +27704,13 @@ var MdbStickyDirective = /** @class */ (function () {
         var allowedPositions = ['absolute', 'fixed', 'relative'];
         /** @type {?} */
         var parentElPosition = computedStyle(this.parentEl, 'position');
-        if (allowedPositions.indexOf(parentElPosition) === -1) { // inherit, initial, unset
+        if (allowedPositions.indexOf(parentElPosition) === -1) {
+            // inherit, initial, unset
             this.parentEl.style.position = 'relative';
         }
         this.diff = {
             top: this.el.offsetTop - this.parentEl.offsetTop,
-            left: this.el.offsetLeft - this.parentEl.offsetLeft
+            left: this.el.offsetLeft - this.parentEl.offsetLeft,
         };
         if (this.isBrowser) {
             /** @type {?} */
@@ -29647,7 +27730,7 @@ var MdbStickyDirective = /** @class */ (function () {
                 marginTop: parseInt(computedStyle(this.el, 'marginTop'), 10),
                 marginBottom: parseInt(computedStyle(this.el, 'marginBottom'), 10),
                 marginLeft: parseInt(computedStyle(this.el, 'marginLeft'), 10),
-                marginRight: parseInt(computedStyle(this.el, 'marginLeft'), 10)
+                marginRight: parseInt(computedStyle(this.el, 'marginLeft'), 10),
             };
         }
         this.attach();
@@ -29683,7 +27766,7 @@ var MdbStickyDirective = /** @class */ (function () {
     };
     MdbStickyDirective.decorators = [
         { type: Directive, args: [{
-                    selector: '[mdbSticky]'
+                    selector: '[mdbSticky]',
                 },] }
     ];
     /** @nocollapse */
@@ -29836,7 +27919,7 @@ var TabsetComponent = /** @class */ (function () {
             this.tabs[index - 1].active = true;
             this.getActiveTab.emit({
                 el: this.tabs[index - 1],
-                activeTabIndex: index - 1
+                activeTabIndex: index - 1,
             });
             this.cdRef.detectChanges();
         }
@@ -29901,11 +27984,11 @@ var TabsetComponent = /** @class */ (function () {
         var clicked = this.tabEl.toArray()[index];
         this.hideBsTab.emit({
             target: clicked,
-            relatedTarget: prev
+            relatedTarget: prev,
         });
         this.showBsTab.emit({
             target: clicked,
-            relatedTarget: prev
+            relatedTarget: prev,
         });
         this.setActiveTab(index + 1);
         if (this.contentClass !== 'vertical' && !this.disableWaves) {
@@ -29914,7 +27997,7 @@ var TabsetComponent = /** @class */ (function () {
         }
         this.hiddenBsTab.emit({
             target: clicked,
-            relatedTarget: prev
+            relatedTarget: prev,
         });
         this.shownBsTab.emit({
             target: clicked,
@@ -29951,7 +28034,7 @@ var TabsetComponent = /** @class */ (function () {
         function (object, index) {
             return {
                 index: index,
-                object: object
+                object: object,
             };
         }));
         try {
@@ -30128,7 +28211,7 @@ var TabsetComponent = /** @class */ (function () {
         function (object, index) {
             return {
                 index: index,
-                object: object
+                object: object,
             };
         }));
         try {
@@ -30137,7 +28220,7 @@ var TabsetComponent = /** @class */ (function () {
                 if (tab.object.active) {
                     return {
                         el: tab.object,
-                        activeTabIndex: tab.index
+                        activeTabIndex: tab.index,
                     };
                 }
             }
@@ -30252,8 +28335,10 @@ var TabsetComponent = /** @class */ (function () {
     TabsetComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mdb-tabset',
-                    template: "<div class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"{{ listGetClass }}\">\n      <ul class=\"nav {{ buttonClass }}\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\" #itemsList>\n        <li *ngFor=\"let tabz of tabs;let i = index\"\n            [ngClass]=\"{'ml-auto': tabz.type === 'content' && i === 0, 'list-group-item-action': buttonClass.includes('list-group'), 'nav-item': tabz.type !== 'content', 'mx-auto': vertical}\"\n            class=\"{{tabz.customClass}}\"\n            [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\" (click)=\"click($event, i)\">\n          <span class=\"d-flex flex-fill\"\n                *ngIf=\"tabs[i].type !== 'content' && tabs[i + 1] && tabs[i + 1].type === 'content'\"></span>\n          <a *ngIf=\"tabz.type !== 'content'\" #tabEl href=\"javascript:void(0);\" class=\"nav-link\"\n             [ngClass]=\"{'waves-light': !disableWaves}\"\n             [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\">\n            <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span>\n            <span *ngIf=\"tabz.removable\">\n              <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"fas fa-times ml-2\">\n              </span>\n            </span>\n          </a>\n          <a *ngIf=\"tabz.type === 'content'\" #tabEl class=\"nav-link\" [ngClass]=\"{'waves-light': !disableWaves}\"\n             [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\">\n            <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span>\n            <span *ngIf=\"tabz.removable\">\n              <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"fas fa-times ml-2\">\n              </span>\n            </span>\n          </a>\n        </li>\n      </ul>\n    </div>\n    <div class=\"{{ tabsGetClass }}\">\n      <div class=\"tab-content {{ contentClass }}\">\n        <ng-content></ng-content>\n      </div>\n    </div>\n  </div>\n</div>\n",
-                    providers: [WavesDirective]
+                    template: "<div class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"{{ listGetClass }}\">\n      <ul\n        class=\"nav {{ buttonClass }}\"\n        [ngClass]=\"classMap\"\n        (click)=\"$event.preventDefault()\"\n        #itemsList\n      >\n        <li\n          *ngFor=\"let tabz of tabs; let i = index\"\n          [ngClass]=\"{\n            'ml-auto': tabz.type === 'content' && i === 0,\n            'list-group-item-action': buttonClass.includes('list-group'),\n            'nav-item': tabz.type !== 'content'\n          }\"\n          class=\"{{ tabz.customClass }}\"\n          [class.active]=\"tabz.active\"\n          [class.disabled]=\"tabz.disabled\"\n          (click)=\"click($event, i)\"\n        >\n          <span\n            class=\"d-flex flex-fill\"\n            *ngIf=\"tabs[i].type !== 'content' && tabs[i + 1] && tabs[i + 1].type === 'content'\"\n          ></span>\n          <a\n            *ngIf=\"tabz.type !== 'content'\"\n            #tabEl\n            href=\"javascript:void(0);\"\n            class=\"nav-link\"\n            [ngClass]=\"{ 'waves-light': !disableWaves }\"\n            [class.active]=\"tabz.active\"\n            [class.disabled]=\"tabz.disabled\"\n          >\n            <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span>\n            <span *ngIf=\"tabz.removable\">\n              <span (click)=\"$event.preventDefault(); removeTab(tabz)\" class=\"fas fa-times ml-2\">\n              </span>\n            </span>\n          </a>\n          <a\n            *ngIf=\"tabz.type === 'content'\"\n            #tabEl\n            class=\"nav-link\"\n            [ngClass]=\"{ 'waves-light': !disableWaves }\"\n            [class.active]=\"tabz.active\"\n            [class.disabled]=\"tabz.disabled\"\n          >\n            <span [mdbNgTransclude]=\"tabz.headingRef\" [innerHTML]=\"tabz.heading\"></span>\n            <span *ngIf=\"tabz.removable\">\n              <span (click)=\"$event.preventDefault(); removeTab(tabz)\" class=\"fas fa-times ml-2\">\n              </span>\n            </span>\n          </a>\n        </li>\n      </ul>\n    </div>\n    <div class=\"{{ tabsGetClass }}\">\n      <div class=\"tab-content {{ contentClass }}\">\n        <ng-content></ng-content>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                    encapsulation: ViewEncapsulation.None,
+                    providers: [WavesDirective],
+                    styles: [".mdb-color.lighten-5{background-color:#d0d6e2!important}.mdb-color.lighten-4{background-color:#b1bace!important}.mdb-color.lighten-3{background-color:#929fba!important}.mdb-color.lighten-2{background-color:#7283a7!important}.mdb-color.lighten-1{background-color:#59698d!important}.mdb-color{background-color:#45526e!important}.mdb-color-text{color:#45526e!important}.rgba-mdb-color-slight,.rgba-mdb-color-slight:after{background-color:rgba(69,82,110,.1)}.rgba-mdb-color-light,.rgba-mdb-color-light:after{background-color:rgba(69,82,110,.3)}.rgba-mdb-color-strong,.rgba-mdb-color-strong:after{background-color:rgba(69,82,110,.7)}.mdb-color.darken-1{background-color:#3b465e!important}.mdb-color.darken-2{background-color:#2e3951!important}.mdb-color.darken-3{background-color:#1c2a48!important}.mdb-color.darken-4{background-color:#1c2331!important}.red.lighten-5{background-color:#ffebee!important}.red.lighten-4{background-color:#ffcdd2!important}.red.lighten-3{background-color:#ef9a9a!important}.red.lighten-2{background-color:#e57373!important}.red.lighten-1{background-color:#ef5350!important}.red{background-color:#f44336!important}.red-text{color:#f44336!important}.rgba-red-slight,.rgba-red-slight:after{background-color:rgba(244,67,54,.1)}.rgba-red-light,.rgba-red-light:after{background-color:rgba(244,67,54,.3)}.rgba-red-strong,.rgba-red-strong:after{background-color:rgba(244,67,54,.7)}.red.darken-1{background-color:#e53935!important}.red.darken-2{background-color:#d32f2f!important}.red.darken-3{background-color:#c62828!important}.red.darken-4{background-color:#b71c1c!important}.red.accent-1{background-color:#ff8a80!important}.red.accent-2{background-color:#ff5252!important}.red.accent-3{background-color:#ff1744!important}.red.accent-4{background-color:#d50000!important}.pink.lighten-5{background-color:#fce4ec!important}.pink.lighten-4{background-color:#f8bbd0!important}.pink.lighten-3{background-color:#f48fb1!important}.pink.lighten-2{background-color:#f06292!important}.pink.lighten-1{background-color:#ec407a!important}.pink{background-color:#e91e63!important}.pink-text{color:#e91e63!important}.rgba-pink-slight,.rgba-pink-slight:after{background-color:rgba(233,30,99,.1)}.rgba-pink-light,.rgba-pink-light:after{background-color:rgba(233,30,99,.3)}.rgba-pink-strong,.rgba-pink-strong:after{background-color:rgba(233,30,99,.7)}.pink.darken-1{background-color:#d81b60!important}.pink.darken-2{background-color:#c2185b!important}.pink.darken-3{background-color:#ad1457!important}.pink.darken-4{background-color:#880e4f!important}.pink.accent-1{background-color:#ff80ab!important}.pink.accent-2{background-color:#ff4081!important}.pink.accent-3{background-color:#f50057!important}.pink.accent-4{background-color:#c51162!important}.purple.lighten-5{background-color:#f3e5f5!important}.purple.lighten-4{background-color:#e1bee7!important}.purple.lighten-3{background-color:#ce93d8!important}.purple.lighten-2{background-color:#ba68c8!important}.purple.lighten-1{background-color:#ab47bc!important}.purple{background-color:#9c27b0!important}.purple-text{color:#9c27b0!important}.rgba-purple-slight,.rgba-purple-slight:after{background-color:rgba(156,39,176,.1)}.rgba-purple-light,.rgba-purple-light:after{background-color:rgba(156,39,176,.3)}.rgba-purple-strong,.rgba-purple-strong:after{background-color:rgba(156,39,176,.7)}.purple.darken-1{background-color:#8e24aa!important}.purple.darken-2{background-color:#7b1fa2!important}.purple.darken-3{background-color:#6a1b9a!important}.purple.darken-4{background-color:#4a148c!important}.purple.accent-1{background-color:#ea80fc!important}.purple.accent-2{background-color:#e040fb!important}.purple.accent-3{background-color:#d500f9!important}.purple.accent-4{background-color:#a0f!important}.deep-purple.lighten-5{background-color:#ede7f6!important}.deep-purple.lighten-4{background-color:#d1c4e9!important}.deep-purple.lighten-3{background-color:#b39ddb!important}.deep-purple.lighten-2{background-color:#9575cd!important}.deep-purple.lighten-1{background-color:#7e57c2!important}.deep-purple{background-color:#673ab7!important}.deep-purple-text{color:#673ab7!important}.rgba-deep-purple-slight,.rgba-deep-purple-slight:after{background-color:rgba(103,58,183,.1)}.rgba-deep-purple-light,.rgba-deep-purple-light:after{background-color:rgba(103,58,183,.3)}.rgba-deep-purple-strong,.rgba-deep-purple-strong:after{background-color:rgba(103,58,183,.7)}.deep-purple.darken-1{background-color:#5e35b1!important}.deep-purple.darken-2{background-color:#512da8!important}.deep-purple.darken-3{background-color:#4527a0!important}.deep-purple.darken-4{background-color:#311b92!important}.deep-purple.accent-1{background-color:#b388ff!important}.deep-purple.accent-2{background-color:#7c4dff!important}.deep-purple.accent-3{background-color:#651fff!important}.deep-purple.accent-4{background-color:#6200ea!important}.indigo.lighten-5{background-color:#e8eaf6!important}.indigo.lighten-4{background-color:#c5cae9!important}.indigo.lighten-3{background-color:#9fa8da!important}.indigo.lighten-2{background-color:#7986cb!important}.indigo.lighten-1{background-color:#5c6bc0!important}.indigo{background-color:#3f51b5!important}.indigo-text{color:#3f51b5!important}.rgba-indigo-slight,.rgba-indigo-slight:after{background-color:rgba(63,81,181,.1)}.rgba-indigo-light,.rgba-indigo-light:after{background-color:rgba(63,81,181,.3)}.rgba-indigo-strong,.rgba-indigo-strong:after{background-color:rgba(63,81,181,.7)}.indigo.darken-1{background-color:#3949ab!important}.indigo.darken-2{background-color:#303f9f!important}.indigo.darken-3{background-color:#283593!important}.indigo.darken-4{background-color:#1a237e!important}.indigo.accent-1{background-color:#8c9eff!important}.indigo.accent-2{background-color:#536dfe!important}.indigo.accent-3{background-color:#3d5afe!important}.indigo.accent-4{background-color:#304ffe!important}.blue.lighten-5{background-color:#e3f2fd!important}.blue.lighten-4{background-color:#bbdefb!important}.blue.lighten-3{background-color:#90caf9!important}.blue.lighten-2{background-color:#64b5f6!important}.blue.lighten-1{background-color:#42a5f5!important}.blue{background-color:#2196f3!important}.blue-text{color:#2196f3!important}.rgba-blue-slight,.rgba-blue-slight:after{background-color:rgba(33,150,243,.1)}.rgba-blue-light,.rgba-blue-light:after{background-color:rgba(33,150,243,.3)}.rgba-blue-strong,.rgba-blue-strong:after{background-color:rgba(33,150,243,.7)}.blue.darken-1{background-color:#1e88e5!important}.blue.darken-2{background-color:#1976d2!important}.blue.darken-3{background-color:#1565c0!important}.blue.darken-4{background-color:#0d47a1!important}.blue.accent-1{background-color:#82b1ff!important}.blue.accent-2{background-color:#448aff!important}.blue.accent-3{background-color:#2979ff!important}.blue.accent-4{background-color:#2962ff!important}.light-blue.lighten-5{background-color:#e1f5fe!important}.light-blue.lighten-4{background-color:#b3e5fc!important}.light-blue.lighten-3{background-color:#81d4fa!important}.light-blue.lighten-2{background-color:#4fc3f7!important}.light-blue.lighten-1{background-color:#29b6f6!important}.light-blue{background-color:#03a9f4!important}.light-blue-text{color:#03a9f4!important}.rgba-light-blue-slight,.rgba-light-blue-slight:after{background-color:rgba(3,169,244,.1)}.rgba-light-blue-light,.rgba-light-blue-light:after{background-color:rgba(3,169,244,.3)}.rgba-light-blue-strong,.rgba-light-blue-strong:after{background-color:rgba(3,169,244,.7)}.light-blue.darken-1{background-color:#039be5!important}.light-blue.darken-2{background-color:#0288d1!important}.light-blue.darken-3{background-color:#0277bd!important}.light-blue.darken-4{background-color:#01579b!important}.light-blue.accent-1{background-color:#80d8ff!important}.light-blue.accent-2{background-color:#40c4ff!important}.light-blue.accent-3{background-color:#00b0ff!important}.light-blue.accent-4{background-color:#0091ea!important}.cyan.lighten-5{background-color:#e0f7fa!important}.cyan.lighten-4{background-color:#b2ebf2!important}.cyan.lighten-3{background-color:#80deea!important}.cyan.lighten-2{background-color:#4dd0e1!important}.cyan.lighten-1{background-color:#26c6da!important}.cyan{background-color:#00bcd4!important}.cyan-text{color:#00bcd4!important}.rgba-cyan-slight,.rgba-cyan-slight:after{background-color:rgba(0,188,212,.1)}.rgba-cyan-light,.rgba-cyan-light:after{background-color:rgba(0,188,212,.3)}.rgba-cyan-strong,.rgba-cyan-strong:after{background-color:rgba(0,188,212,.7)}.cyan.darken-1{background-color:#00acc1!important}.cyan.darken-2{background-color:#0097a7!important}.cyan.darken-3{background-color:#00838f!important}.cyan.darken-4{background-color:#006064!important}.cyan.accent-1{background-color:#84ffff!important}.cyan.accent-2{background-color:#18ffff!important}.cyan.accent-3{background-color:#00e5ff!important}.cyan.accent-4{background-color:#00b8d4!important}.teal.lighten-5{background-color:#e0f2f1!important}.teal.lighten-4{background-color:#b2dfdb!important}.teal.lighten-3{background-color:#80cbc4!important}.teal.lighten-2{background-color:#4db6ac!important}.teal.lighten-1{background-color:#26a69a!important}.teal{background-color:#009688!important}.teal-text{color:#009688!important}.rgba-teal-slight,.rgba-teal-slight:after{background-color:rgba(0,150,136,.1)}.rgba-teal-light,.rgba-teal-light:after{background-color:rgba(0,150,136,.3)}.rgba-teal-strong,.rgba-teal-strong:after{background-color:rgba(0,150,136,.7)}.teal.darken-1{background-color:#00897b!important}.teal.darken-2{background-color:#00796b!important}.teal.darken-3{background-color:#00695c!important}.teal.darken-4{background-color:#004d40!important}.teal.accent-1{background-color:#a7ffeb!important}.teal.accent-2{background-color:#64ffda!important}.teal.accent-3{background-color:#1de9b6!important}.teal.accent-4{background-color:#00bfa5!important}.green.lighten-5{background-color:#e8f5e9!important}.green.lighten-4{background-color:#c8e6c9!important}.green.lighten-3{background-color:#a5d6a7!important}.green.lighten-2{background-color:#81c784!important}.green.lighten-1{background-color:#66bb6a!important}.green{background-color:#4caf50!important}.green-text{color:#4caf50!important}.rgba-green-slight,.rgba-green-slight:after{background-color:rgba(76,175,80,.1)}.rgba-green-light,.rgba-green-light:after{background-color:rgba(76,175,80,.3)}.rgba-green-strong,.rgba-green-strong:after{background-color:rgba(76,175,80,.7)}.green.darken-1{background-color:#43a047!important}.green.darken-2{background-color:#388e3c!important}.green.darken-3{background-color:#2e7d32!important}.green.darken-4{background-color:#1b5e20!important}.green.accent-1{background-color:#b9f6ca!important}.green.accent-2{background-color:#69f0ae!important}.green.accent-3{background-color:#00e676!important}.green.accent-4{background-color:#00c853!important}.light-green.lighten-5{background-color:#f1f8e9!important}.light-green.lighten-4{background-color:#dcedc8!important}.light-green.lighten-3{background-color:#c5e1a5!important}.light-green.lighten-2{background-color:#aed581!important}.light-green.lighten-1{background-color:#9ccc65!important}.light-green{background-color:#8bc34a!important}.light-green-text{color:#8bc34a!important}.rgba-light-green-slight,.rgba-light-green-slight:after{background-color:rgba(139,195,74,.1)}.rgba-light-green-light,.rgba-light-green-light:after{background-color:rgba(139,195,74,.3)}.rgba-light-green-strong,.rgba-light-green-strong:after{background-color:rgba(139,195,74,.7)}.light-green.darken-1{background-color:#7cb342!important}.light-green.darken-2{background-color:#689f38!important}.light-green.darken-3{background-color:#558b2f!important}.light-green.darken-4{background-color:#33691e!important}.light-green.accent-1{background-color:#ccff90!important}.light-green.accent-2{background-color:#b2ff59!important}.light-green.accent-3{background-color:#76ff03!important}.light-green.accent-4{background-color:#64dd17!important}.lime.lighten-5{background-color:#f9fbe7!important}.lime.lighten-4{background-color:#f0f4c3!important}.lime.lighten-3{background-color:#e6ee9c!important}.lime.lighten-2{background-color:#dce775!important}.lime.lighten-1{background-color:#d4e157!important}.lime{background-color:#cddc39!important}.lime-text{color:#cddc39!important}.rgba-lime-slight,.rgba-lime-slight:after{background-color:rgba(205,220,57,.1)}.rgba-lime-light,.rgba-lime-light:after{background-color:rgba(205,220,57,.3)}.rgba-lime-strong,.rgba-lime-strong:after{background-color:rgba(205,220,57,.7)}.lime.darken-1{background-color:#c0ca33!important}.lime.darken-2{background-color:#afb42b!important}.lime.darken-3{background-color:#9e9d24!important}.lime.darken-4{background-color:#827717!important}.lime.accent-1{background-color:#f4ff81!important}.lime.accent-2{background-color:#eeff41!important}.lime.accent-3{background-color:#c6ff00!important}.lime.accent-4{background-color:#aeea00!important}.yellow.lighten-5{background-color:#fffde7!important}.yellow.lighten-4{background-color:#fff9c4!important}.yellow.lighten-3{background-color:#fff59d!important}.yellow.lighten-2{background-color:#fff176!important}.yellow.lighten-1{background-color:#ffee58!important}.yellow{background-color:#ffeb3b!important}.yellow-text{color:#ffeb3b!important}.rgba-yellow-slight,.rgba-yellow-slight:after{background-color:rgba(255,235,59,.1)}.rgba-yellow-light,.rgba-yellow-light:after{background-color:rgba(255,235,59,.3)}.rgba-yellow-strong,.rgba-yellow-strong:after{background-color:rgba(255,235,59,.7)}.yellow.darken-1{background-color:#fdd835!important}.yellow.darken-2{background-color:#fbc02d!important}.yellow.darken-3{background-color:#f9a825!important}.yellow.darken-4{background-color:#f57f17!important}.yellow.accent-1{background-color:#ffff8d!important}.yellow.accent-2{background-color:#ff0!important}.yellow.accent-3{background-color:#ffea00!important}.yellow.accent-4{background-color:#ffd600!important}.amber.lighten-5{background-color:#fff8e1!important}.amber.lighten-4{background-color:#ffecb3!important}.amber.lighten-3{background-color:#ffe082!important}.amber.lighten-2{background-color:#ffd54f!important}.amber.lighten-1{background-color:#ffca28!important}.amber{background-color:#ffc107!important}.amber-text{color:#ffc107!important}.rgba-amber-slight,.rgba-amber-slight:after{background-color:rgba(255,193,7,.1)}.rgba-amber-light,.rgba-amber-light:after{background-color:rgba(255,193,7,.3)}.rgba-amber-strong,.rgba-amber-strong:after{background-color:rgba(255,193,7,.7)}.amber.darken-1{background-color:#ffb300!important}.amber.darken-2{background-color:#ffa000!important}.amber.darken-3{background-color:#ff8f00!important}.amber.darken-4{background-color:#ff6f00!important}.amber.accent-1{background-color:#ffe57f!important}.amber.accent-2{background-color:#ffd740!important}.amber.accent-3{background-color:#ffc400!important}.amber.accent-4{background-color:#ffab00!important}.orange.lighten-5{background-color:#fff3e0!important}.orange.lighten-4{background-color:#ffe0b2!important}.orange.lighten-3{background-color:#ffcc80!important}.orange.lighten-2{background-color:#ffb74d!important}.orange.lighten-1{background-color:#ffa726!important}.orange{background-color:#ff9800!important}.orange-text{color:#ff9800!important}.rgba-orange-slight,.rgba-orange-slight:after{background-color:rgba(255,152,0,.1)}.rgba-orange-light,.rgba-orange-light:after{background-color:rgba(255,152,0,.3)}.rgba-orange-strong,.rgba-orange-strong:after{background-color:rgba(255,152,0,.7)}.orange.darken-1{background-color:#fb8c00!important}.orange.darken-2{background-color:#f57c00!important}.orange.darken-3{background-color:#ef6c00!important}.orange.darken-4{background-color:#e65100!important}.orange.accent-1{background-color:#ffd180!important}.orange.accent-2{background-color:#ffab40!important}.orange.accent-3{background-color:#ff9100!important}.orange.accent-4{background-color:#ff6d00!important}.deep-orange.lighten-5{background-color:#fbe9e7!important}.deep-orange.lighten-4{background-color:#ffccbc!important}.deep-orange.lighten-3{background-color:#ffab91!important}.deep-orange.lighten-2{background-color:#ff8a65!important}.deep-orange.lighten-1{background-color:#ff7043!important}.deep-orange{background-color:#ff5722!important}.deep-orange-text{color:#ff5722!important}.rgba-deep-orange-slight,.rgba-deep-orange-slight:after{background-color:rgba(255,87,34,.1)}.rgba-deep-orange-light,.rgba-deep-orange-light:after{background-color:rgba(255,87,34,.3)}.rgba-deep-orange-strong,.rgba-deep-orange-strong:after{background-color:rgba(255,87,34,.7)}.deep-orange.darken-1{background-color:#f4511e!important}.deep-orange.darken-2{background-color:#e64a19!important}.deep-orange.darken-3{background-color:#d84315!important}.deep-orange.darken-4{background-color:#bf360c!important}.deep-orange.accent-1{background-color:#ff9e80!important}.deep-orange.accent-2{background-color:#ff6e40!important}.deep-orange.accent-3{background-color:#ff3d00!important}.deep-orange.accent-4{background-color:#dd2c00!important}.brown.lighten-5{background-color:#efebe9!important}.brown.lighten-4{background-color:#d7ccc8!important}.brown.lighten-3{background-color:#bcaaa4!important}.brown.lighten-2{background-color:#a1887f!important}.brown.lighten-1{background-color:#8d6e63!important}.brown{background-color:#795548!important}.brown-text{color:#795548!important}.rgba-brown-slight,.rgba-brown-slight:after{background-color:rgba(121,85,72,.1)}.rgba-brown-light,.rgba-brown-light:after{background-color:rgba(121,85,72,.3)}.rgba-brown-strong,.rgba-brown-strong:after{background-color:rgba(121,85,72,.7)}.brown.darken-1{background-color:#6d4c41!important}.brown.darken-2{background-color:#5d4037!important}.brown.darken-3{background-color:#4e342e!important}.brown.darken-4{background-color:#3e2723!important}.blue-grey.lighten-5{background-color:#eceff1!important}.blue-grey.lighten-4{background-color:#cfd8dc!important}.blue-grey.lighten-3{background-color:#b0bec5!important}.blue-grey.lighten-2{background-color:#90a4ae!important}.blue-grey.lighten-1{background-color:#78909c!important}.blue-grey{background-color:#607d8b!important}.blue-grey-text{color:#607d8b!important}.rgba-blue-grey-slight,.rgba-blue-grey-slight:after{background-color:rgba(96,125,139,.1)}.rgba-blue-grey-light,.rgba-blue-grey-light:after{background-color:rgba(96,125,139,.3)}.rgba-blue-grey-strong,.rgba-blue-grey-strong:after{background-color:rgba(96,125,139,.7)}.blue-grey.darken-1{background-color:#546e7a!important}.blue-grey.darken-2{background-color:#455a64!important}.blue-grey.darken-3{background-color:#37474f!important}.blue-grey.darken-4{background-color:#263238!important}.grey.lighten-5{background-color:#fafafa!important}.grey.lighten-4{background-color:#f5f5f5!important}.grey.lighten-3{background-color:#eee!important}.grey.lighten-2{background-color:#e0e0e0!important}.grey.lighten-1{background-color:#bdbdbd!important}.grey{background-color:#9e9e9e!important}.grey-text{color:#9e9e9e!important}.rgba-grey-slight,.rgba-grey-slight:after{background-color:rgba(158,158,158,.1)}.md-pills .nav-link:hover,.md-pills .nav-link:hover:after,.rgba-grey-light,.rgba-grey-light:after,mdb-tabset .white li .nav-link:hover,mdb-tabset .white li .nav-link:hover:after{background-color:rgba(158,158,158,.3)}.rgba-grey-strong,.rgba-grey-strong:after{background-color:rgba(158,158,158,.7)}.grey.darken-1{background-color:#757575!important}.grey.darken-2{background-color:#616161!important}.grey.darken-3{background-color:#424242!important}.grey.darken-4{background-color:#212121!important}.black{background-color:#000!important}.black-text{color:#000!important}.rgba-black-slight,.rgba-black-slight:after{background-color:rgba(0,0,0,.1)}.rgba-black-light,.rgba-black-light:after{background-color:rgba(0,0,0,.3)}.rgba-black-strong,.rgba-black-strong:after{background-color:rgba(0,0,0,.7)}.white{background-color:#fff!important}.white-text{color:#fff!important}.rgba-white-slight,.rgba-white-slight:after{background-color:rgba(255,255,255,.1)}.rgba-white-light,.rgba-white-light:after{background-color:rgba(255,255,255,.3)}.rgba-white-strong,.rgba-white-strong:after{background-color:rgba(255,255,255,.7)}.rgba-stylish-slight{background-color:rgba(62,69,81,.1)}.rgba-stylish-light{background-color:rgba(62,69,81,.3)}.rgba-stylish-strong{background-color:rgba(62,69,81,.7)}.primary-color{background-color:#4285f4!important}.primary-color-dark{background-color:#0d47a1!important}.secondary-color{background-color:#a6c!important}.secondary-color-dark{background-color:#93c!important}.default-color{background-color:#2bbbad!important}.default-color-dark{background-color:#00695c!important}.info-color{background-color:#33b5e5!important}.info-color-dark{background-color:#09c!important}.success-color{background-color:#00c851!important}.success-color-dark{background-color:#007e33!important}.warning-color{background-color:#fb3!important}.warning-color-dark{background-color:#f80!important}.danger-color{background-color:#ff3547!important}.danger-color-dark{background-color:#c00!important}.elegant-color{background-color:#2e2e2e!important}.elegant-color-dark{background-color:#212121!important}.stylish-color{background-color:#4b515d!important}.stylish-color-dark{background-color:#3e4551!important}.unique-color{background-color:#3f729b!important}.unique-color-dark{background-color:#1c2331!important}.special-color{background-color:#37474f!important}.special-color-dark{background-color:#263238!important}.purple-gradient{background:linear-gradient(40deg,#ff6ec4,#7873f5)!important}.peach-gradient{background:linear-gradient(40deg,#ffd86f,#fc6262)!important}.aqua-gradient{background:linear-gradient(40deg,#2096ff,#05ffa3)!important}.blue-gradient{background:linear-gradient(40deg,#45cafc,#303f9f)!important}.purple-gradient-rgba{background:linear-gradient(40deg,rgba(255,110,196,.9),rgba(120,115,245,.9))!important}.peach-gradient-rgba{background:linear-gradient(40deg,rgba(255,216,111,.9),rgba(252,98,98,.9))!important}.aqua-gradient-rgba{background:linear-gradient(40deg,rgba(32,150,255,.9),rgba(5,255,163,.9))!important}.blue-gradient-rgba{background:linear-gradient(40deg,rgba(69,202,252,.9),rgba(48,63,159,.9))!important}.dark-grey-text,.dark-grey-text:focus,.dark-grey-text:hover{color:#4f4f4f!important}.hoverable{box-shadow:none;transition:.55s ease-in-out}.hoverable:hover{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);transition:.55s ease-in-out}.z-depth-0{box-shadow:none!important}.z-depth-1,mdb-tabset .white .active a{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)!important}.z-depth-1-half,mdb-tabset .white .active:hover{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)!important}.z-depth-2{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19)!important}.z-depth-3{box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19)!important}.z-depth-4{box-shadow:0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)!important}.z-depth-5{box-shadow:0 27px 24px 0 rgba(0,0,0,.2),0 40px 77px 0 rgba(0,0,0,.22)!important}.disabled,:disabled{pointer-events:none!important}a{cursor:pointer;text-decoration:none;color:#0275d8;transition:.2s ease-in-out}a:hover{text-decoration:none;color:#014c8c;transition:.2s ease-in-out}a.disabled:hover,a:disabled:hover{color:#0275d8}a:not([href]):not([tabindex]),a:not([href]):not([tabindex]):focus,a:not([href]):not([tabindex]):hover{color:inherit;text-decoration:none}.md-tabs{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);border:0;padding:.7rem;margin-left:1rem;margin-right:1rem;margin-bottom:-20px;background-color:#2bbbad;z-index:1;position:relative;border-radius:.125rem;overflow-y:hidden;display:flex;flex-direction:column}.md-tabs .nav-item+.nav-item{margin-left:0}.md-tabs .nav-item.disabled{pointer-events:none!important}.md-tabs .nav-item.disabled .nav-link{color:#6c757d}.md-tabs .nav-link{transition:.4s;border:0;color:#fff}.md-tabs .nav-item.open .nav-link,.md-tabs .nav-link.active{background-color:rgba(0,0,0,.2);color:#fff;transition:1s;border-radius:.125rem}.md-tabs .nav-item.show .nav-link{background-color:#2bbbad;color:#fff;transition:1s;border-radius:.125rem}.md-tabs .nav-item.show .nav-link.dropdown-toggle{background-color:rgba(0,0,0,.2)}.tab-content{padding:2rem 1rem 1rem;box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)}.tab-content.vertical{padding-top:0}.md-pills{border:0}.md-pills li{padding:.6rem}.md-pills .show>.nav-link{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);color:#fff;background-color:#2bbbad}.md-pills .nav-link{transition:.4s;border-radius:2px;color:#666;text-align:center}.md-pills .nav-link.active{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);color:#fff;background-color:#2bbbad}.md-pills .nav-link.active:hover{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}ul.pills-primary{padding:0}.pills-primary .nav-link.active,.pills-primary .show>.nav-link,.tabs-primary{background-color:#4285f4!important}ul.pills-danger{padding:0}.pills-danger .nav-link.active,.pills-danger .show>.nav-link,.tabs-danger{background-color:#ff3547!important}ul.pills-warning{padding:0}.pills-warning .nav-link.active,.pills-warning .show>.nav-link,.tabs-warning{background-color:#fb3!important}ul.pills-success{padding:0}.pills-success .nav-link.active,.pills-success .show>.nav-link,.tabs-success{background-color:#00c851!important}ul.pills-info{padding:0}.pills-info .nav-link.active,.pills-info .show>.nav-link,.tabs-info{background-color:#33b5e5!important}ul.pills-default{padding:0}.pills-default .nav-link.active,.pills-default .show>.nav-link,.tabs-default{background-color:#2bbbad!important}ul.pills-secondary{padding:0}.pills-secondary .nav-link.active,.pills-secondary .show>.nav-link,.tabs-secondary{background-color:#a6c!important}ul.pills-elegant{padding:0}.pills-elegant .nav-link.active,.pills-elegant .show>.nav-link,.tabs-elegant{background-color:#2e2e2e!important}ul.pills-unique{padding:0}.pills-unique .nav-link.active,.pills-unique .show>.nav-link,.tabs-unique{background-color:#880e4f!important}ul.pills-dark-green{padding:0}.pills-dark-green .nav-link.active,.pills-dark-green .show>.nav-link,.tabs-dark-green{background-color:#388e3c!important}ul.pills-mdb-color{padding:0}.pills-mdb-color .nav-link.active,.pills-mdb-color .show>.nav-link,.tabs-mdb-color{background-color:#59698d!important}ul.pills-red{padding:0}.pills-red .nav-link.active,.pills-red .show>.nav-link,.tabs-red{background-color:#d32f2f!important}ul.pills-pink{padding:0}.pills-pink .nav-link.active,.pills-pink .show>.nav-link,.tabs-pink{background-color:#ec407a!important}ul.pills-purple{padding:0}.pills-purple .nav-link.active,.pills-purple .show>.nav-link,.tabs-purple{background-color:#8e24aa!important}ul.pills-deep-purple{padding:0}.pills-deep-purple .nav-link.active,.pills-deep-purple .show>.nav-link,.tabs-deep-purple{background-color:#512da8!important}ul.pills-indigo{padding:0}.pills-indigo .nav-link.active,.pills-indigo .show>.nav-link,.tabs-indigo{background-color:#3f51b5!important}ul.pills-blue{padding:0}.pills-blue .nav-link.active,.pills-blue .show>.nav-link,.tabs-blue{background-color:#1976d2!important}ul.pills-light-blue{padding:0}.pills-light-blue .nav-link.active,.pills-light-blue .show>.nav-link,.tabs-light-blue{background-color:#82b1ff!important}ul.pills-cyan{padding:0}.pills-cyan .nav-link.active,.pills-cyan .show>.nav-link,.tabs-cyan{background-color:#00bcd4!important}ul.pills-teal{padding:0}.pills-teal .nav-link.active,.pills-teal .show>.nav-link,.tabs-teal{background-color:#00796b!important}ul.pills-green{padding:0}.pills-green .nav-link.active,.pills-green .show>.nav-link,.tabs-green{background-color:#388e3c!important}ul.pills-light-green{padding:0}.pills-light-green .nav-link.active,.pills-light-green .show>.nav-link,.tabs-light-green{background-color:#8bc34a!important}ul.pills-lime{padding:0}.pills-lime .nav-link.active,.pills-lime .show>.nav-link,.tabs-lime{background-color:#afb42b!important}ul.pills-yellow{padding:0}.pills-yellow .nav-link.active,.pills-yellow .show>.nav-link,.tabs-yellow{background-color:#fbc02d!important}ul.pills-amber{padding:0}.pills-amber .nav-link.active,.pills-amber .show>.nav-link,.tabs-amber{background-color:#ffa000!important}ul.pills-orange{padding:0}.pills-orange .nav-link.active,.pills-orange .show>.nav-link,.tabs-orange{background-color:#f57c00!important}ul.pills-deep-orange{padding:0}.pills-deep-orange .nav-link.active,.pills-deep-orange .show>.nav-link,.tabs-deep-orange{background-color:#ff7043!important}ul.pills-brown{padding:0}.pills-brown .nav-link.active,.pills-brown .show>.nav-link,.tabs-brown{background-color:#795548!important}ul.pills-grey{padding:0}.pills-grey .nav-link.active,.pills-grey .show>.nav-link,.tabs-grey{background-color:#616161!important}ul.pills-blue-grey{padding:0}.pills-blue-grey .nav-link.active,.pills-blue-grey .show>.nav-link,.tabs-blue-grey{background-color:#78909c!important}ul.pills-dark{padding:0}.pills-dark .nav-link.active,.pills-dark .show>.nav-link,.tabs-dark{background-color:#212121!important}ul.pills-light{padding:0}.pills-light .nav-link.active,.pills-light .show>.nav-link,.tabs-light{background-color:#e0e0e0!important}ul.pills-white{padding:0}.pills-white .nav-link.active,.pills-white .show>.nav-link,.tabs-white{background-color:#fff!important}ul.pills-black{padding:0}.pills-black .nav-link.active,.pills-black .show>.nav-link,.tabs-black{background-color:#000!important}.classic-tabs .nav{white-space:nowrap;overflow-x:auto;position:relative;border-radius:.3rem .3rem 0 0}@media (min-width:62rem){.classic-tabs .nav{overflow-x:hidden}}.classic-tabs .nav li a{display:block;padding:20px 24px;font-size:13px;text-transform:uppercase;color:rgba(255,255,255,.7);text-align:center;border-radius:0}.classic-tabs .nav li a:not(.active){margin-bottom:3px}.classic-tabs .nav li a.active{border-bottom:3px solid;color:#fff}@media (min-width:62em){.classic-tabs .nav li:first-child{margin-left:56px}}.classic-tabs .nav.tabs-cyan li a.active{border-color:#ffeb3b}.classic-tabs .nav.tabs-orange li a.active{border-color:#e53935}.classic-tabs .nav.tabs-grey li a.active{border-color:#fff}.classic-tabs .nav.tabs-pink li a.active{border-color:#673ab7}.classic-tabs .nav.tabs-green li a.active{border-color:#1565c0}.classic-tabs .nav.tabs-primary li a.active{border-color:#fff}.classic-tabs .nav.tabs-animated li a.active{border:none}.classic-tabs .nav.tabs-animated.tabs-cyan .floor{background-color:#ffeb3b}.classic-tabs .nav.tabs-animated.tabs-orange .floor{background-color:#e53935}.classic-tabs .nav.tabs-animated.tabs-grey .floor{background-color:#fff}.classic-tabs .nav.tabs-animated.tabs-pink .floor{background-color:#673ab7}.classic-tabs .nav.tabs-animated.tabs-green .floor{background-color:#1565c0}.classic-tabs .nav.tabs-animated.tabs-primary .floor{background-color:#fff}.classic-tabs .nav.tabs-animated .floor{display:inline-block;width:30px;height:3px;position:absolute;z-index:1200;bottom:0;transition:.4s linear}.classic-tabs .tab-content.card{border-top-left-radius:0;border-top-right-radius:0}@media screen and (min-width:768px){.md-tabs{flex-direction:row}}.md-tabs .nav-item{flex-basis:0;flex-grow:1;text-align:center;margin-bottom:0}.md-tabs .nav-item a{width:100%}.tab-control{background-color:transparent;border:0;padding-left:10px;padding-right:10px;cursor:pointer}.tab-control-icon{color:#fff}.tab-control-icon.disabled{color:#e0e0e0}mdb-tabset .white{box-shadow:0 0 0 0 transparent,0 4px 15px 0 transparent!important}mdb-tabset .white li{margin:0 1em!important}mdb-tabset .white li .nav-link.active{transition:.4s!important}mdb-tabset .white li .nav-link{color:#666!important}mdb-tabset .white .active a{color:#fff!important}mdb-tabset .margin li{margin:.5em!important}.classic-tabs{white-space:normal}.classic-tabs .nav.classic-tabs{margin:0 5px;overflow-x:auto;white-space:nowrap}.classic-tabs .tab-content{margin:0 5px 5px;padding-top:0}@media all and (min-width:992px){.classic-tabs .nav li:last-child{margin-right:56px}}.classic-tabs .nav li:hover{color:rgba(255,255,255,.7)}.nav-stacked{display:flex;flex-direction:column}"]
                 }] }
     ];
     /** @nocollapse */
@@ -30271,7 +28356,7 @@ var TabsetComponent = /** @class */ (function () {
         contentClass: [{ type: Input }],
         tabsButtonsClass: [{ type: Input }],
         tabsContentClass: [{ type: Input }],
-        itemsList: [{ type: ViewChild, args: ['itemsList',] }],
+        itemsList: [{ type: ViewChild, args: ['itemsList', { static: true },] }],
         tabEl: [{ type: ViewChildren, args: ['tabEl', { read: ElementRef },] }],
         showBsTab: [{ type: Output }],
         shownBsTab: [{ type: Output }],
@@ -30487,11 +28572,12 @@ var TabsModule = /** @class */ (function () {
 /** @type {?} */
 var CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
+    // tslint:disable-next-line: no-use-before-declare
     useExisting: forwardRef((/**
      * @return {?}
      */
     function () { return MaterialChipsComponent; })),
-    multi: true
+    multi: true,
 };
 var MaterialChipsComponent = /** @class */ (function () {
     function MaterialChipsComponent() {
@@ -30501,7 +28587,8 @@ var MaterialChipsComponent = /** @class */ (function () {
         this.labelsChange = new EventEmitter();
         this.onTouchedCallback = this.noop;
         this.onChangeCallback = this.noop;
-        this.onTouchedCallback = this.onTouchedCallback === undefined ? this.noop : this.onTouchedCallback;
+        this.onTouchedCallback =
+            this.onTouchedCallback === undefined ? this.noop : this.onTouchedCallback;
         this.onChangeCallback = this.onChangeCallback === undefined ? this.noop : this.onChangeCallback;
     }
     Object.defineProperty(MaterialChipsComponent.prototype, "tagsfocused", {
@@ -30522,7 +28609,9 @@ var MaterialChipsComponent = /** @class */ (function () {
      * @param {?} fn
      * @return {?}
      */
-    function (fn) { this.onChangeCallback = fn; };
+    function (fn) {
+        this.onChangeCallback = fn;
+    };
     /**
      * @param {?} fn
      * @return {?}
@@ -30531,7 +28620,9 @@ var MaterialChipsComponent = /** @class */ (function () {
      * @param {?} fn
      * @return {?}
      */
-    function (fn) { this.onTouchedCallback = fn; };
+    function (fn) {
+        this.onTouchedCallback = fn;
+    };
     /**
      * @param {?} value
      * @return {?}
@@ -30605,14 +28696,15 @@ var MaterialChipsComponent = /** @class */ (function () {
     MaterialChipsComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mdb-material-chips',
-                    template: "<div *ngIf=\"values && values.length\" class=\"md-chip-list\"  [ngClass]=\"focused\">\n  <span *ngFor=\"let value of values\" class=\"md-chip\" selected >         \n    {{value}} <i class=\"close fas fa-times\" aria-hidden=\"true\" (click)=\"removeValue(value)\" ></i>\n  </span>\n\n  <span>\n    <input  [(ngModel)]=\"labelToAdd\" \n            (keyup.enter)=\"addValue(box.value, $event)\"\n            (focus)=\"onFocus()\" \n            (focusout)=\"focusOutFunction()\"  \n            #box />\n  </span>\n</div>\n<div *ngIf=\"!values || !values.length\">\n  <input class=\"md-chips-input\" placeholder=\"{{ placeholder }}\" #tbox \n    (keyup.enter)=\"addValue(tbox.value, $event)\"/>\n</div>\n",
+                    template: "<div *ngIf=\"values && values.length\" class=\"md-chip-list\" [ngClass]=\"focused\">\n  <span *ngFor=\"let value of values\" class=\"md-chip\" selected>\n    {{ value }} <i class=\"close fas fa-times\" aria-hidden=\"true\" (click)=\"removeValue(value)\"></i>\n  </span>\n\n  <span>\n    <input\n      [(ngModel)]=\"labelToAdd\"\n      (keyup.enter)=\"addValue(box.value, $event)\"\n      (focus)=\"onFocus()\"\n      (focusout)=\"focusOutFunction()\"\n      #box\n    />\n  </span>\n</div>\n<div *ngIf=\"!values || !values.length\">\n  <input\n    class=\"md-chips-input\"\n    placeholder=\"{{ placeholder }}\"\n    #tbox\n    (keyup.enter)=\"addValue(tbox.value, $event)\"\n  />\n</div>\n",
+                    encapsulation: ViewEncapsulation.None,
                     providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
                 }] }
     ];
     /** @nocollapse */
     MaterialChipsComponent.ctorParameters = function () { return []; };
     MaterialChipsComponent.propDecorators = {
-        placeholder: [{ type: Input, args: ['placeholder',] }],
+        placeholder: [{ type: Input }],
         tagsfocusedChange: [{ type: Output }],
         labelsChange: [{ type: Output }],
         tagsfocused: [{ type: Input }]
@@ -30624,17 +28716,17 @@ var MaterialChipsComponent = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var MaterialChipsModule = /** @class */ (function () {
-    function MaterialChipsModule() {
+var ChipsModule = /** @class */ (function () {
+    function ChipsModule() {
     }
-    MaterialChipsModule.decorators = [
+    ChipsModule.decorators = [
         { type: NgModule, args: [{
                     imports: [CommonModule, FormsModule],
                     declarations: [MaterialChipsComponent],
-                    exports: [MaterialChipsComponent]
+                    exports: [MaterialChipsComponent],
                 },] }
     ];
-    return MaterialChipsModule;
+    return ChipsModule;
 }());
 
 /**
@@ -30649,11 +28741,12 @@ var MaterialChipsModule = /** @class */ (function () {
 /** @type {?} */
 var TIME_PIRCKER_VALUE_ACCESSOT = {
     provide: NG_VALUE_ACCESSOR,
+    // tslint:disable-next-line: no-use-before-declare
     useExisting: forwardRef((/**
      * @return {?}
      */
     function () { return ClockPickerComponent; })),
-    multi: true
+    multi: true,
 };
 var ClockPickerComponent = /** @class */ (function () {
     function ClockPickerComponent(elem, renderer, platformId) {
@@ -30670,7 +28763,7 @@ var ClockPickerComponent = /** @class */ (function () {
         this.outlineInput = false;
         this.timeChanged = new EventEmitter();
         this.isMobile = null;
-        this.touchDevice = ('ontouchstart' in ((/** @type {?} */ (document.documentElement))));
+        this.touchDevice = 'ontouchstart' in ((/** @type {?} */ (document.documentElement)));
         this.showHours = false;
         this.elements = document.getElementsByClassName('clockpicker');
         this.dialRadius = 135;
@@ -30681,12 +28774,13 @@ var ClockPickerComponent = /** @class */ (function () {
         this.isBrowser = false;
         this.hoursTicks = [];
         this.minutesTicks = [];
-        this.selectedHours = { 'h': '12', 'm': '00', 'ampm': 'AM' };
+        this.selectedHours = { h: '12', m: '00', ampm: 'AM' };
         this.endHours = '';
         this.touchSupported = 'ontouchstart' in window;
         this.mousedownEvent = 'mousedown' + (this.touchSupported ? ' touchstart' : '');
         this.mousemoveEvent = 'mousemove' + (this.touchSupported ? ' touchmove' : '');
         this.mouseupEvent = 'mouseup' + (this.touchSupported ? ' touchend' : '');
+        this.isMouseDown = false;
         this.onChangeCb = (/**
          * @return {?}
          */
@@ -30721,17 +28815,19 @@ var ClockPickerComponent = /** @class */ (function () {
      * @return {?}
      */
     function (event) {
-        var _this = this;
-        // Rotating Time Picker on mobile
-        if (event.target.parentElement.classList.contains('clockpicker-dial')) {
-            ((/** @type {?} */ (this.elem.nativeElement.querySelectorAll('.clockpicker-tick')))).forEach((/**
-             * @param {?} element
-             * @return {?}
-             */
-            function (element) {
-                _this.renderer.setStyle(element, 'background-color', 'rgba(0, 150, 136, 0');
-            }));
-            this.mousedown(event);
+        this.rotateTimePickerArrow(event);
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    ClockPickerComponent.prototype.onMouseMove = /**
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        if (this.isMouseDown) {
+            this.rotateTimePickerArrow(event);
         }
     };
     /**
@@ -30754,12 +28850,24 @@ var ClockPickerComponent = /** @class */ (function () {
      */
     function () {
         var _this = this;
-        this.renderer.listen(this.elem.nativeElement.querySelector('.clockpicker-plate'), 'mousedown', (/**
+        ['mousedown', 'mouseup'].forEach((/**
          * @param {?} event
          * @return {?}
          */
         function (event) {
-            _this.mousedown(event, false);
+            _this.renderer.listen(_this.elem.nativeElement.querySelector('.clockpicker-plate'), event, (/**
+             * @param {?} ev
+             * @return {?}
+             */
+            function (ev) {
+                if (event === 'mousedown') {
+                    _this.mousedown(ev, false);
+                    _this.isMouseDown = true;
+                }
+                else {
+                    _this.isMouseDown = false;
+                }
+            }));
         }));
     };
     /**
@@ -30787,6 +28895,29 @@ var ClockPickerComponent = /** @class */ (function () {
                 this.renderer.setStyle(openedPicker, 'z-index', '1000');
             }
             catch (error) { }
+        }
+    };
+    /**
+     * @private
+     * @param {?} event
+     * @return {?}
+     */
+    ClockPickerComponent.prototype.rotateTimePickerArrow = /**
+     * @private
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        var _this = this;
+        if (event.target.parentElement.classList.contains('clockpicker-dial')) {
+            ((/** @type {?} */ (this.elem.nativeElement.querySelectorAll('.clockpicker-tick')))).forEach((/**
+             * @param {?} element
+             * @return {?}
+             */
+            function (element) {
+                _this.renderer.setStyle(element, 'background-color', 'rgba(0, 150, 136, 0');
+            }));
+            this.mousedown(event);
         }
     };
     /**
@@ -30846,7 +28977,8 @@ var ClockPickerComponent = /** @class */ (function () {
         var z = Math.sqrt(dx * dx + dy * dy);
         /** @type {?} */
         var moved = false;
-        if (space && (z < this.outerRadius - this.tickRadius || z > this.outerRadius + this.tickRadius)) {
+        if (space &&
+            (z < this.outerRadius - this.tickRadius || z > this.outerRadius + this.tickRadius)) {
             return;
         }
         e.preventDefault();
@@ -30948,8 +29080,7 @@ var ClockPickerComponent = /** @class */ (function () {
                 field.focus();
             }), 0);
         }
-        catch (error) {
-        }
+        catch (error) { }
     };
     /**
      * @return {?}
@@ -30996,7 +29127,7 @@ var ClockPickerComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.selectedHours = { 'h': '12', 'm': '00', 'ampm': 'AM' };
+        this.selectedHours = { h: '12', m: '00', ampm: 'AM' };
         this.endHours = '';
     };
     /**
@@ -31064,14 +29195,14 @@ var ClockPickerComponent = /** @class */ (function () {
         if (this.twelvehour) {
             for (var i = 1; i < 13; i++) {
                 /** @type {?} */
-                var radian = i / 6 * Math.PI;
+                var radian = (i / 6) * Math.PI;
                 /** @type {?} */
                 var radius = this.outerRadius;
                 /** @type {?} */
                 var tick = {
-                    'hour': i,
-                    'left': this.dialRadius + Math.sin(radian) * radius - this.tickRadius,
-                    'top': this.dialRadius - Math.cos(radian) * radius - this.tickRadius,
+                    hour: i,
+                    left: this.dialRadius + Math.sin(radian) * radius - this.tickRadius,
+                    top: this.dialRadius - Math.cos(radian) * radius - this.tickRadius,
                 };
                 this.hoursTicks.push(tick);
             }
@@ -31079,7 +29210,7 @@ var ClockPickerComponent = /** @class */ (function () {
         else {
             for (var i = 0; i < 24; i++) {
                 /** @type {?} */
-                var radian = i / 6 * Math.PI;
+                var radian = (i / 6) * Math.PI;
                 /** @type {?} */
                 var inner = i > 0 && i < 13;
                 /** @type {?} */
@@ -31094,16 +29225,16 @@ var ClockPickerComponent = /** @class */ (function () {
                 }
                 /** @type {?} */
                 var tick = {
-                    'hour': h,
-                    'left': this.dialRadius + Math.sin(radian) * radius - this.tickRadius,
-                    'top': this.dialRadius - Math.cos(radian) * radius - this.tickRadius,
+                    hour: h,
+                    left: this.dialRadius + Math.sin(radian) * radius - this.tickRadius,
+                    top: this.dialRadius - Math.cos(radian) * radius - this.tickRadius,
                 };
                 this.hoursTicks.push(tick);
             }
         }
         for (var i = 0; i < 60; i += 5) {
             /** @type {?} */
-            var radian = i / 30 * Math.PI;
+            var radian = (i / 30) * Math.PI;
             /** @type {?} */
             var min = i.toString();
             if (i < 10) {
@@ -31111,9 +29242,9 @@ var ClockPickerComponent = /** @class */ (function () {
             }
             /** @type {?} */
             var tick = {
-                'min': min,
-                'left': this.dialRadius + Math.sin(radian) * this.outerRadius - this.tickRadius,
-                'top': this.dialRadius - Math.cos(radian) * this.outerRadius - this.tickRadius,
+                min: min,
+                left: this.dialRadius + Math.sin(radian) * this.outerRadius - this.tickRadius,
+                top: this.dialRadius - Math.cos(radian) * this.outerRadius - this.tickRadius,
             };
             this.minutesTicks.push(tick);
         }
@@ -31178,8 +29309,8 @@ var ClockPickerComponent = /** @class */ (function () {
             if (isHours) {
                 value = !inner ? value + 12 : value;
                 value = value === 24 ? 0 : value;
-                value = (inner && value === 0) ? 12 : value;
-                value = (!inner && value === 12) ? 0 : value;
+                value = inner && value === 0 ? 12 : value;
+                value = !inner && value === 12 ? 0 : value;
             }
             else {
                 if (roundBy5) {
@@ -31249,7 +29380,7 @@ var ClockPickerComponent = /** @class */ (function () {
             do {
                 left += obj.offsetLeft;
                 top += obj.offsetTop;
-            } while (obj = obj.offsetParent);
+            } while ((obj = obj.offsetParent));
         }
         return { left: left, top: top };
     };
@@ -31289,8 +29420,10 @@ var ClockPickerComponent = /** @class */ (function () {
     ClockPickerComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mdb-time-picker',
-                    template: "<div class=\"tp\">\n  <div class=\"md-form\" [ngClass]=\"{'md-outline': outlineInput}\">\n    <input [disabled]=\"disabled\" [tabindex]=\"tabIndex\" [placeholder]=\"placeholder\" [value]=\"endHours\" type=\"text\" class=\"form-control timepicker\" (click)=\"openBtnClicked()\" [(ngModel)]=\"endHours\">\n    <label class=\"active\">{{ label }}</label>\n\n  </div>\n  <div class=\"clockpicker picker\" [hidden]=\"!showClock\" [ngClass]=\"{'picker--opened': showClock, 'darktheme': darktheme}\">\n    <div class=\"picker__holder\">\n      <div class=\"picker__frame\">\n        <div class=\"picker__wrap\">\n          <div class=\"picker__box\">\n            <div class=\"picker__date-display\">\n              <div class=\"clockpicker-display\">\n                <div class=\"clockpicker-display-column\">\n                  <span class=\"clockpicker-span-hours text-primary\" [ngClass]=\"{'text-primary': showHours}\" (click)=\"showHoursClock()\">\n                    {{ selectedHours.h }}</span>:<span class=\"clockpicker-span-minutes\" [ngClass]=\"{'text-primary': !showHours}\"\n                      (click)=\"showMinutesClock()\">{{selectedHours.m }}</span>\n                </div>\n                <div class=\"clockpicker-display-column clockpicker-display-am-pm\" *ngIf=\"twelvehour\">\n                  <div class=\"clockpicker-span-am-pm\">{{ selectedHours.ampm }}</div>\n                </div>\n              </div>\n            </div>\n            <div class=\"picker__calendar-container\">\n              <div class=\"clockpicker-plate\" #plate>\n                  <div class=\"clockpicker-canvas\">\n                  <svg class=\"clockpicker-svg\" width=\"270\" height=\"270\" #svg>\n                      <g transform=\"translate(135,135)\" #g>\n                      <line x1=\"0\" y1=\"0\" x2=\"77.94228634059948\" y2=\"-45.00000000000001\" #hand></line>\n                      <circle class=\"clockpicker-canvas-fg\" r=\"5\" cx=\"95.26279441628824\" cy=\"-55.000000000000014\" #fg></circle>\n                      <circle class=\"clockpicker-canvas-bg\" r=\"20\" cx=\"95.26279441628824\" cy=\"-55.000000000000014\" #bg></circle>\n                      <circle class=\"clockpicker-canvas-bearing\" cx=\"0\" cy=\"0\" r=\"2\" #bearing></circle>\n                      </g>\n                  </svg>\n                  </div>\n                  <div class=\"clockpicker-dial clockpicker-hours\" #hoursPlate [ngClass]=\"{'clockpicker-dial-out': !showHours}\" [ngStyle]=\"{'visibility': !showHours ? 'hidden' : 'visible'}\">\n                  <div *ngFor=\"let tick of hoursTicks\" class=\"clockpicker-tick\" style=\"font-size: 140%;\" [ngStyle]=\"{'left': tick.left+'px', 'top': tick.top+'px'}\"\n                      id=\"{{ tick.hour }}\">\n                      {{ tick.hour }}\n                  </div>\n                  </div>\n                  <div class=\"clockpicker-dial clockpicker-minutes\" #minutesPlate [ngClass]=\"{'clockpicker-dial-out': showHours}\" [ngStyle]=\"{'visibility': showHours ? 'hidden' : 'visible'}\">\n                  <div *ngFor=\"let tick of minutesTicks\" class=\"clockpicker-tick\" style=\"font-size: 120%;\" [ngStyle]=\"{'left': tick.left+'px', 'top': tick.top+'px'}\">\n                      {{ tick.min }}\n                  </div>\n                  </div>\n              </div>\n              <div class=\"clockpicker-am-pm-block\" *ngIf=\"twelvehour\">\n                <button type=\"button\" class=\"btn-floating btn-flat clockpicker-button am-button\" [ngClass]=\"{'active': selectedHours.ampm=='AM'}\"\n                  (click)=\"setAmPm('AM')\">\n                  AM\n                </button>\n                <button type=\"button\" class=\"btn-floating btn-flat clockpicker-button pm-button\" [ngClass]=\"{'active': selectedHours.ampm=='PM'}\"\n                  (click)=\"setAmPm('PM')\">\n                  PM\n                </button>\n              </div>\n            </div>\n            <div class=\"picker__footer\">\n              <button type=\"button\" *ngIf=\"buttonLabel\" class=\"btn-flat clockpicker-button\" (click)=\"closeBtnClicked()\">\n                {{buttonLabel}}\n              </button>\n              <button type=\"button\" *ngIf=\"!buttonLabel\" class=\"btn-flat clockpicker-button\" (click)=\"closeBtnClicked()\">\n                Done\n              </button>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
-                    providers: [TIME_PIRCKER_VALUE_ACCESSOT]
+                    template: "<div class=\"tp\">\n  <div class=\"md-form\" [ngClass]=\"{ 'md-outline': outlineInput }\">\n    <input\n      [disabled]=\"disabled\"\n      [tabindex]=\"tabIndex\"\n      [placeholder]=\"placeholder\"\n      [value]=\"endHours\"\n      type=\"text\"\n      class=\"form-control timepicker\"\n      (click)=\"openBtnClicked()\"\n      [(ngModel)]=\"endHours\"\n    />\n    <label class=\"active\">{{ label }}</label>\n  </div>\n  <div\n    class=\"clockpicker picker\"\n    [hidden]=\"!showClock\"\n    [ngClass]=\"{ 'picker--opened': showClock, darktheme: darktheme }\"\n  >\n    <div class=\"picker__holder\">\n      <div class=\"picker__frame\">\n        <div class=\"picker__wrap\">\n          <div class=\"picker__box\">\n            <div class=\"picker__date-display\">\n              <div class=\"clockpicker-display\">\n                <div class=\"clockpicker-display-column\">\n                  <span\n                    class=\"clockpicker-span-hours text-primary\"\n                    [ngClass]=\"{ 'text-primary': showHours }\"\n                    (click)=\"showHoursClock()\"\n                  >\n                    {{ selectedHours.h }}</span\n                  >:<span\n                    class=\"clockpicker-span-minutes\"\n                    [ngClass]=\"{ 'text-primary': !showHours }\"\n                    (click)=\"showMinutesClock()\"\n                    >{{ selectedHours.m }}</span\n                  >\n                </div>\n                <div\n                  class=\"clockpicker-display-column clockpicker-display-am-pm\"\n                  *ngIf=\"twelvehour\"\n                >\n                  <div class=\"clockpicker-span-am-pm\">{{ selectedHours.ampm }}</div>\n                </div>\n              </div>\n            </div>\n            <div class=\"picker__calendar-container\">\n              <div class=\"clockpicker-plate\" #plate>\n                <div class=\"clockpicker-canvas\">\n                  <svg class=\"clockpicker-svg\" width=\"270\" height=\"270\" #svg>\n                    <g transform=\"translate(135,135)\" #g>\n                      <line\n                        x1=\"0\"\n                        y1=\"0\"\n                        x2=\"77.94228634059948\"\n                        y2=\"-45.00000000000001\"\n                        #hand\n                      ></line>\n                      <circle\n                        class=\"clockpicker-canvas-fg\"\n                        r=\"5\"\n                        cx=\"95.26279441628824\"\n                        cy=\"-55.000000000000014\"\n                        #fg\n                      ></circle>\n                      <circle\n                        class=\"clockpicker-canvas-bg\"\n                        r=\"20\"\n                        cx=\"95.26279441628824\"\n                        cy=\"-55.000000000000014\"\n                        #bg\n                      ></circle>\n                      <circle\n                        class=\"clockpicker-canvas-bearing\"\n                        cx=\"0\"\n                        cy=\"0\"\n                        r=\"2\"\n                        #bearing\n                      ></circle>\n                    </g>\n                  </svg>\n                </div>\n                <div\n                  class=\"clockpicker-dial clockpicker-hours\"\n                  #hoursPlate\n                  [ngClass]=\"{ 'clockpicker-dial-out': !showHours }\"\n                  [ngStyle]=\"{ visibility: !showHours ? 'hidden' : 'visible' }\"\n                >\n                  <div\n                    *ngFor=\"let tick of hoursTicks\"\n                    class=\"clockpicker-tick\"\n                    style=\"font-size: 140%;\"\n                    [ngStyle]=\"{ left: tick.left + 'px', top: tick.top + 'px' }\"\n                    id=\"{{ tick.hour }}\"\n                  >\n                    {{ tick.hour }}\n                  </div>\n                </div>\n                <div\n                  class=\"clockpicker-dial clockpicker-minutes\"\n                  #minutesPlate\n                  [ngClass]=\"{ 'clockpicker-dial-out': showHours }\"\n                  [ngStyle]=\"{ visibility: showHours ? 'hidden' : 'visible' }\"\n                >\n                  <div\n                    *ngFor=\"let tick of minutesTicks\"\n                    class=\"clockpicker-tick\"\n                    style=\"font-size: 120%;\"\n                    [ngStyle]=\"{ left: tick.left + 'px', top: tick.top + 'px' }\"\n                  >\n                    {{ tick.min }}\n                  </div>\n                </div>\n              </div>\n              <div class=\"clockpicker-am-pm-block\" *ngIf=\"twelvehour\">\n                <button\n                  type=\"button\"\n                  mdbBtn\n                  floating=\"true\"\n                  flat=\"true\"\n                  mdbWavesEffect\n                  class=\"clockpicker-button am-button\"\n                  [ngClass]=\"{ active: selectedHours.ampm == 'AM' }\"\n                  (click)=\"setAmPm('AM')\"\n                >\n                  AM\n                </button>\n\n                <button\n                  type=\"button\"\n                  mdbBtn\n                  floating=\"true\"\n                  flat=\"true\"\n                  mdbWavesEffect\n                  class=\"clockpicker-button pm-button white-text\"\n                  [ngClass]=\"{ active: selectedHours.ampm == 'PM' }\"\n                  (click)=\"setAmPm('PM')\"\n                >\n                  PM\n                </button>\n              </div>\n            </div>\n            <div class=\"picker__footer\">\n              <button\n                type=\"button\"\n                *ngIf=\"buttonLabel\"\n                mdbBtn\n                flat=\"true\"\n                mdbWavesEffect\n                class=\"clockpicker-button\"\n                (click)=\"closeBtnClicked()\"\n              >\n                {{ buttonLabel }}\n              </button>\n              <button\n                type=\"button\"\n                *ngIf=\"!buttonLabel\"\n                mdbBtn\n                flat=\"true\"\n                mdbWavesEffect\n                class=\"clockpicker-button\"\n                (click)=\"closeBtnClicked()\"\n              >\n                Done\n              </button>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                    encapsulation: ViewEncapsulation.None,
+                    providers: [TIME_PIRCKER_VALUE_ACCESSOT],
+                    styles: [".mdb-color.lighten-5{background-color:#d0d6e2!important}.mdb-color.lighten-4{background-color:#b1bace!important}.mdb-color.lighten-3{background-color:#929fba!important}.mdb-color.lighten-2{background-color:#7283a7!important}.mdb-color.lighten-1{background-color:#59698d!important}.mdb-color{background-color:#45526e!important}.mdb-color-text{color:#45526e!important}.rgba-mdb-color-slight,.rgba-mdb-color-slight:after{background-color:rgba(69,82,110,.1)}.rgba-mdb-color-light,.rgba-mdb-color-light:after{background-color:rgba(69,82,110,.3)}.rgba-mdb-color-strong,.rgba-mdb-color-strong:after{background-color:rgba(69,82,110,.7)}.mdb-color.darken-1{background-color:#3b465e!important}.mdb-color.darken-2{background-color:#2e3951!important}.mdb-color.darken-3{background-color:#1c2a48!important}.mdb-color.darken-4{background-color:#1c2331!important}.red.lighten-5{background-color:#ffebee!important}.red.lighten-4{background-color:#ffcdd2!important}.red.lighten-3{background-color:#ef9a9a!important}.red.lighten-2{background-color:#e57373!important}.red.lighten-1{background-color:#ef5350!important}.red{background-color:#f44336!important}.red-text{color:#f44336!important}.rgba-red-slight,.rgba-red-slight:after{background-color:rgba(244,67,54,.1)}.rgba-red-light,.rgba-red-light:after{background-color:rgba(244,67,54,.3)}.rgba-red-strong,.rgba-red-strong:after{background-color:rgba(244,67,54,.7)}.red.darken-1{background-color:#e53935!important}.red.darken-2{background-color:#d32f2f!important}.red.darken-3{background-color:#c62828!important}.red.darken-4{background-color:#b71c1c!important}.red.accent-1{background-color:#ff8a80!important}.red.accent-2{background-color:#ff5252!important}.red.accent-3{background-color:#ff1744!important}.red.accent-4{background-color:#d50000!important}.pink.lighten-5{background-color:#fce4ec!important}.pink.lighten-4{background-color:#f8bbd0!important}.pink.lighten-3{background-color:#f48fb1!important}.pink.lighten-2{background-color:#f06292!important}.pink.lighten-1{background-color:#ec407a!important}.pink{background-color:#e91e63!important}.pink-text{color:#e91e63!important}.rgba-pink-slight,.rgba-pink-slight:after{background-color:rgba(233,30,99,.1)}.rgba-pink-light,.rgba-pink-light:after{background-color:rgba(233,30,99,.3)}.rgba-pink-strong,.rgba-pink-strong:after{background-color:rgba(233,30,99,.7)}.pink.darken-1{background-color:#d81b60!important}.pink.darken-2{background-color:#c2185b!important}.pink.darken-3{background-color:#ad1457!important}.pink.darken-4{background-color:#880e4f!important}.pink.accent-1{background-color:#ff80ab!important}.pink.accent-2{background-color:#ff4081!important}.pink.accent-3{background-color:#f50057!important}.pink.accent-4{background-color:#c51162!important}.purple.lighten-5{background-color:#f3e5f5!important}.purple.lighten-4{background-color:#e1bee7!important}.purple.lighten-3{background-color:#ce93d8!important}.purple.lighten-2{background-color:#ba68c8!important}.purple.lighten-1{background-color:#ab47bc!important}.purple{background-color:#9c27b0!important}.purple-text{color:#9c27b0!important}.rgba-purple-slight,.rgba-purple-slight:after{background-color:rgba(156,39,176,.1)}.rgba-purple-light,.rgba-purple-light:after{background-color:rgba(156,39,176,.3)}.rgba-purple-strong,.rgba-purple-strong:after{background-color:rgba(156,39,176,.7)}.purple.darken-1{background-color:#8e24aa!important}.purple.darken-2{background-color:#7b1fa2!important}.purple.darken-3{background-color:#6a1b9a!important}.purple.darken-4{background-color:#4a148c!important}.purple.accent-1{background-color:#ea80fc!important}.purple.accent-2{background-color:#e040fb!important}.purple.accent-3{background-color:#d500f9!important}.purple.accent-4{background-color:#a0f!important}.deep-purple.lighten-5{background-color:#ede7f6!important}.deep-purple.lighten-4{background-color:#d1c4e9!important}.deep-purple.lighten-3{background-color:#b39ddb!important}.deep-purple.lighten-2{background-color:#9575cd!important}.deep-purple.lighten-1{background-color:#7e57c2!important}.deep-purple{background-color:#673ab7!important}.deep-purple-text{color:#673ab7!important}.rgba-deep-purple-slight,.rgba-deep-purple-slight:after{background-color:rgba(103,58,183,.1)}.rgba-deep-purple-light,.rgba-deep-purple-light:after{background-color:rgba(103,58,183,.3)}.rgba-deep-purple-strong,.rgba-deep-purple-strong:after{background-color:rgba(103,58,183,.7)}.deep-purple.darken-1{background-color:#5e35b1!important}.deep-purple.darken-2{background-color:#512da8!important}.deep-purple.darken-3{background-color:#4527a0!important}.deep-purple.darken-4{background-color:#311b92!important}.deep-purple.accent-1{background-color:#b388ff!important}.deep-purple.accent-2{background-color:#7c4dff!important}.deep-purple.accent-3{background-color:#651fff!important}.deep-purple.accent-4{background-color:#6200ea!important}.indigo.lighten-5{background-color:#e8eaf6!important}.indigo.lighten-4{background-color:#c5cae9!important}.indigo.lighten-3{background-color:#9fa8da!important}.indigo.lighten-2{background-color:#7986cb!important}.indigo.lighten-1{background-color:#5c6bc0!important}.indigo{background-color:#3f51b5!important}.indigo-text{color:#3f51b5!important}.rgba-indigo-slight,.rgba-indigo-slight:after{background-color:rgba(63,81,181,.1)}.rgba-indigo-light,.rgba-indigo-light:after{background-color:rgba(63,81,181,.3)}.rgba-indigo-strong,.rgba-indigo-strong:after{background-color:rgba(63,81,181,.7)}.indigo.darken-1{background-color:#3949ab!important}.indigo.darken-2{background-color:#303f9f!important}.indigo.darken-3{background-color:#283593!important}.indigo.darken-4{background-color:#1a237e!important}.indigo.accent-1{background-color:#8c9eff!important}.indigo.accent-2{background-color:#536dfe!important}.indigo.accent-3{background-color:#3d5afe!important}.indigo.accent-4{background-color:#304ffe!important}.blue.lighten-5{background-color:#e3f2fd!important}.blue.lighten-4{background-color:#bbdefb!important}.blue.lighten-3{background-color:#90caf9!important}.blue.lighten-2{background-color:#64b5f6!important}.blue.lighten-1{background-color:#42a5f5!important}.blue{background-color:#2196f3!important}.blue-text{color:#2196f3!important}.rgba-blue-slight,.rgba-blue-slight:after{background-color:rgba(33,150,243,.1)}.rgba-blue-light,.rgba-blue-light:after{background-color:rgba(33,150,243,.3)}.rgba-blue-strong,.rgba-blue-strong:after{background-color:rgba(33,150,243,.7)}.blue.darken-1{background-color:#1e88e5!important}.blue.darken-2{background-color:#1976d2!important}.blue.darken-3{background-color:#1565c0!important}.blue.darken-4{background-color:#0d47a1!important}.blue.accent-1{background-color:#82b1ff!important}.blue.accent-2{background-color:#448aff!important}.blue.accent-3{background-color:#2979ff!important}.blue.accent-4{background-color:#2962ff!important}.light-blue.lighten-5{background-color:#e1f5fe!important}.light-blue.lighten-4{background-color:#b3e5fc!important}.light-blue.lighten-3{background-color:#81d4fa!important}.light-blue.lighten-2{background-color:#4fc3f7!important}.light-blue.lighten-1{background-color:#29b6f6!important}.light-blue{background-color:#03a9f4!important}.light-blue-text{color:#03a9f4!important}.rgba-light-blue-slight,.rgba-light-blue-slight:after{background-color:rgba(3,169,244,.1)}.rgba-light-blue-light,.rgba-light-blue-light:after{background-color:rgba(3,169,244,.3)}.rgba-light-blue-strong,.rgba-light-blue-strong:after{background-color:rgba(3,169,244,.7)}.light-blue.darken-1{background-color:#039be5!important}.light-blue.darken-2{background-color:#0288d1!important}.light-blue.darken-3{background-color:#0277bd!important}.light-blue.darken-4{background-color:#01579b!important}.light-blue.accent-1{background-color:#80d8ff!important}.light-blue.accent-2{background-color:#40c4ff!important}.light-blue.accent-3{background-color:#00b0ff!important}.light-blue.accent-4{background-color:#0091ea!important}.cyan.lighten-5{background-color:#e0f7fa!important}.cyan.lighten-4{background-color:#b2ebf2!important}.cyan.lighten-3{background-color:#80deea!important}.cyan.lighten-2{background-color:#4dd0e1!important}.cyan.lighten-1{background-color:#26c6da!important}.cyan{background-color:#00bcd4!important}.cyan-text{color:#00bcd4!important}.rgba-cyan-slight,.rgba-cyan-slight:after{background-color:rgba(0,188,212,.1)}.rgba-cyan-light,.rgba-cyan-light:after{background-color:rgba(0,188,212,.3)}.rgba-cyan-strong,.rgba-cyan-strong:after{background-color:rgba(0,188,212,.7)}.cyan.darken-1{background-color:#00acc1!important}.cyan.darken-2{background-color:#0097a7!important}.cyan.darken-3{background-color:#00838f!important}.cyan.darken-4{background-color:#006064!important}.cyan.accent-1{background-color:#84ffff!important}.cyan.accent-2{background-color:#18ffff!important}.cyan.accent-3{background-color:#00e5ff!important}.cyan.accent-4{background-color:#00b8d4!important}.teal.lighten-5{background-color:#e0f2f1!important}.teal.lighten-4{background-color:#b2dfdb!important}.teal.lighten-3{background-color:#80cbc4!important}.teal.lighten-2{background-color:#4db6ac!important}.teal.lighten-1{background-color:#26a69a!important}.teal{background-color:#009688!important}.teal-text{color:#009688!important}.rgba-teal-slight,.rgba-teal-slight:after{background-color:rgba(0,150,136,.1)}.rgba-teal-light,.rgba-teal-light:after{background-color:rgba(0,150,136,.3)}.rgba-teal-strong,.rgba-teal-strong:after{background-color:rgba(0,150,136,.7)}.teal.darken-1{background-color:#00897b!important}.teal.darken-2{background-color:#00796b!important}.teal.darken-3{background-color:#00695c!important}.teal.darken-4{background-color:#004d40!important}.teal.accent-1{background-color:#a7ffeb!important}.teal.accent-2{background-color:#64ffda!important}.teal.accent-3{background-color:#1de9b6!important}.teal.accent-4{background-color:#00bfa5!important}.green.lighten-5{background-color:#e8f5e9!important}.green.lighten-4{background-color:#c8e6c9!important}.green.lighten-3{background-color:#a5d6a7!important}.green.lighten-2{background-color:#81c784!important}.green.lighten-1{background-color:#66bb6a!important}.green{background-color:#4caf50!important}.green-text{color:#4caf50!important}.rgba-green-slight,.rgba-green-slight:after{background-color:rgba(76,175,80,.1)}.rgba-green-light,.rgba-green-light:after{background-color:rgba(76,175,80,.3)}.rgba-green-strong,.rgba-green-strong:after{background-color:rgba(76,175,80,.7)}.green.darken-1{background-color:#43a047!important}.green.darken-2{background-color:#388e3c!important}.green.darken-3{background-color:#2e7d32!important}.green.darken-4{background-color:#1b5e20!important}.green.accent-1{background-color:#b9f6ca!important}.green.accent-2{background-color:#69f0ae!important}.green.accent-3{background-color:#00e676!important}.green.accent-4{background-color:#00c853!important}.light-green.lighten-5{background-color:#f1f8e9!important}.light-green.lighten-4{background-color:#dcedc8!important}.light-green.lighten-3{background-color:#c5e1a5!important}.light-green.lighten-2{background-color:#aed581!important}.light-green.lighten-1{background-color:#9ccc65!important}.light-green{background-color:#8bc34a!important}.light-green-text{color:#8bc34a!important}.rgba-light-green-slight,.rgba-light-green-slight:after{background-color:rgba(139,195,74,.1)}.rgba-light-green-light,.rgba-light-green-light:after{background-color:rgba(139,195,74,.3)}.rgba-light-green-strong,.rgba-light-green-strong:after{background-color:rgba(139,195,74,.7)}.light-green.darken-1{background-color:#7cb342!important}.light-green.darken-2{background-color:#689f38!important}.light-green.darken-3{background-color:#558b2f!important}.light-green.darken-4{background-color:#33691e!important}.light-green.accent-1{background-color:#ccff90!important}.light-green.accent-2{background-color:#b2ff59!important}.light-green.accent-3{background-color:#76ff03!important}.light-green.accent-4{background-color:#64dd17!important}.lime.lighten-5{background-color:#f9fbe7!important}.lime.lighten-4{background-color:#f0f4c3!important}.lime.lighten-3{background-color:#e6ee9c!important}.lime.lighten-2{background-color:#dce775!important}.lime.lighten-1{background-color:#d4e157!important}.lime{background-color:#cddc39!important}.lime-text{color:#cddc39!important}.rgba-lime-slight,.rgba-lime-slight:after{background-color:rgba(205,220,57,.1)}.rgba-lime-light,.rgba-lime-light:after{background-color:rgba(205,220,57,.3)}.rgba-lime-strong,.rgba-lime-strong:after{background-color:rgba(205,220,57,.7)}.lime.darken-1{background-color:#c0ca33!important}.lime.darken-2{background-color:#afb42b!important}.lime.darken-3{background-color:#9e9d24!important}.lime.darken-4{background-color:#827717!important}.lime.accent-1{background-color:#f4ff81!important}.lime.accent-2{background-color:#eeff41!important}.lime.accent-3{background-color:#c6ff00!important}.lime.accent-4{background-color:#aeea00!important}.yellow.lighten-5{background-color:#fffde7!important}.yellow.lighten-4{background-color:#fff9c4!important}.yellow.lighten-3{background-color:#fff59d!important}.yellow.lighten-2{background-color:#fff176!important}.yellow.lighten-1{background-color:#ffee58!important}.yellow{background-color:#ffeb3b!important}.yellow-text{color:#ffeb3b!important}.rgba-yellow-slight,.rgba-yellow-slight:after{background-color:rgba(255,235,59,.1)}.rgba-yellow-light,.rgba-yellow-light:after{background-color:rgba(255,235,59,.3)}.rgba-yellow-strong,.rgba-yellow-strong:after{background-color:rgba(255,235,59,.7)}.yellow.darken-1{background-color:#fdd835!important}.yellow.darken-2{background-color:#fbc02d!important}.yellow.darken-3{background-color:#f9a825!important}.yellow.darken-4{background-color:#f57f17!important}.yellow.accent-1{background-color:#ffff8d!important}.yellow.accent-2{background-color:#ff0!important}.yellow.accent-3{background-color:#ffea00!important}.yellow.accent-4{background-color:#ffd600!important}.amber.lighten-5{background-color:#fff8e1!important}.amber.lighten-4{background-color:#ffecb3!important}.amber.lighten-3{background-color:#ffe082!important}.amber.lighten-2{background-color:#ffd54f!important}.amber.lighten-1{background-color:#ffca28!important}.amber{background-color:#ffc107!important}.amber-text{color:#ffc107!important}.rgba-amber-slight,.rgba-amber-slight:after{background-color:rgba(255,193,7,.1)}.rgba-amber-light,.rgba-amber-light:after{background-color:rgba(255,193,7,.3)}.rgba-amber-strong,.rgba-amber-strong:after{background-color:rgba(255,193,7,.7)}.amber.darken-1{background-color:#ffb300!important}.amber.darken-2{background-color:#ffa000!important}.amber.darken-3{background-color:#ff8f00!important}.amber.darken-4{background-color:#ff6f00!important}.amber.accent-1{background-color:#ffe57f!important}.amber.accent-2{background-color:#ffd740!important}.amber.accent-3{background-color:#ffc400!important}.amber.accent-4{background-color:#ffab00!important}.orange.lighten-5{background-color:#fff3e0!important}.orange.lighten-4{background-color:#ffe0b2!important}.orange.lighten-3{background-color:#ffcc80!important}.orange.lighten-2{background-color:#ffb74d!important}.orange.lighten-1{background-color:#ffa726!important}.orange{background-color:#ff9800!important}.orange-text{color:#ff9800!important}.rgba-orange-slight,.rgba-orange-slight:after{background-color:rgba(255,152,0,.1)}.rgba-orange-light,.rgba-orange-light:after{background-color:rgba(255,152,0,.3)}.rgba-orange-strong,.rgba-orange-strong:after{background-color:rgba(255,152,0,.7)}.orange.darken-1{background-color:#fb8c00!important}.orange.darken-2{background-color:#f57c00!important}.orange.darken-3{background-color:#ef6c00!important}.orange.darken-4{background-color:#e65100!important}.orange.accent-1{background-color:#ffd180!important}.orange.accent-2{background-color:#ffab40!important}.orange.accent-3{background-color:#ff9100!important}.orange.accent-4{background-color:#ff6d00!important}.deep-orange.lighten-5{background-color:#fbe9e7!important}.deep-orange.lighten-4{background-color:#ffccbc!important}.deep-orange.lighten-3{background-color:#ffab91!important}.deep-orange.lighten-2{background-color:#ff8a65!important}.deep-orange.lighten-1{background-color:#ff7043!important}.deep-orange{background-color:#ff5722!important}.deep-orange-text{color:#ff5722!important}.rgba-deep-orange-slight,.rgba-deep-orange-slight:after{background-color:rgba(255,87,34,.1)}.rgba-deep-orange-light,.rgba-deep-orange-light:after{background-color:rgba(255,87,34,.3)}.rgba-deep-orange-strong,.rgba-deep-orange-strong:after{background-color:rgba(255,87,34,.7)}.deep-orange.darken-1{background-color:#f4511e!important}.deep-orange.darken-2{background-color:#e64a19!important}.deep-orange.darken-3{background-color:#d84315!important}.deep-orange.darken-4{background-color:#bf360c!important}.deep-orange.accent-1{background-color:#ff9e80!important}.deep-orange.accent-2{background-color:#ff6e40!important}.deep-orange.accent-3{background-color:#ff3d00!important}.deep-orange.accent-4{background-color:#dd2c00!important}.brown.lighten-5{background-color:#efebe9!important}.brown.lighten-4{background-color:#d7ccc8!important}.brown.lighten-3{background-color:#bcaaa4!important}.brown.lighten-2{background-color:#a1887f!important}.brown.lighten-1{background-color:#8d6e63!important}.brown{background-color:#795548!important}.brown-text{color:#795548!important}.rgba-brown-slight,.rgba-brown-slight:after{background-color:rgba(121,85,72,.1)}.rgba-brown-light,.rgba-brown-light:after{background-color:rgba(121,85,72,.3)}.rgba-brown-strong,.rgba-brown-strong:after{background-color:rgba(121,85,72,.7)}.brown.darken-1{background-color:#6d4c41!important}.brown.darken-2{background-color:#5d4037!important}.brown.darken-3{background-color:#4e342e!important}.brown.darken-4{background-color:#3e2723!important}.blue-grey.lighten-5{background-color:#eceff1!important}.blue-grey.lighten-4{background-color:#cfd8dc!important}.blue-grey.lighten-3{background-color:#b0bec5!important}.blue-grey.lighten-2{background-color:#90a4ae!important}.blue-grey.lighten-1{background-color:#78909c!important}.blue-grey{background-color:#607d8b!important}.blue-grey-text{color:#607d8b!important}.rgba-blue-grey-slight,.rgba-blue-grey-slight:after{background-color:rgba(96,125,139,.1)}.rgba-blue-grey-light,.rgba-blue-grey-light:after{background-color:rgba(96,125,139,.3)}.rgba-blue-grey-strong,.rgba-blue-grey-strong:after{background-color:rgba(96,125,139,.7)}.blue-grey.darken-1{background-color:#546e7a!important}.blue-grey.darken-2{background-color:#455a64!important}.blue-grey.darken-3{background-color:#37474f!important}.blue-grey.darken-4{background-color:#263238!important}.grey.lighten-5{background-color:#fafafa!important}.grey.lighten-4{background-color:#f5f5f5!important}.grey.lighten-3{background-color:#eee!important}.grey.lighten-2{background-color:#e0e0e0!important}.grey.lighten-1{background-color:#bdbdbd!important}.grey{background-color:#9e9e9e!important}.grey-text{color:#9e9e9e!important}.rgba-grey-slight,.rgba-grey-slight:after{background-color:rgba(158,158,158,.1)}.rgba-grey-light,.rgba-grey-light:after{background-color:rgba(158,158,158,.3)}.rgba-grey-strong,.rgba-grey-strong:after{background-color:rgba(158,158,158,.7)}.grey.darken-1{background-color:#757575!important}.grey.darken-2{background-color:#616161!important}.grey.darken-3{background-color:#424242!important}.grey.darken-4{background-color:#212121!important}.black,.picker__list-item:hover{background-color:#000!important}.black-text{color:#000!important}.rgba-black-slight,.rgba-black-slight:after{background-color:rgba(0,0,0,.1)}.rgba-black-light,.rgba-black-light:after{background-color:rgba(0,0,0,.3)}.rgba-black-strong,.rgba-black-strong:after{background-color:rgba(0,0,0,.7)}.picker__list-item,.white{background-color:#fff!important}.clockpicker-display .clockpicker-display-column #click-am.text-primary,.clockpicker-display .clockpicker-display-column #click-pm.text-primary,.clockpicker-display .clockpicker-display-column .clockpicker-span-hours.text-primary,.clockpicker-display .clockpicker-display-column .clockpicker-span-minutes.text-primary,.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-tick,.darktheme .picker__box .picker__date-display .clockpicker-display,.darktheme .picker__box .picker__date-display .clockpicker-display .clockpicker-span-am-pm,.darktheme .picker__box .picker__footer button,.picker--focused .picker__list-item--selected,.picker--time .picker__button--clear:focus,.picker--time .picker__button--clear:focus:before,.picker--time .picker__button--clear:hover,.picker--time .picker__button--clear:hover:before,.picker__date-display,.picker__date-display .clockpicker-display .clockpicker-display-column #click-am.text-primary,.picker__date-display .clockpicker-display .clockpicker-display-column #click-pm.text-primary,.picker__date-display .clockpicker-display .clockpicker-display-column .clockpicker-span-hours.text-primary,.picker__date-display .clockpicker-display .clockpicker-display-column .clockpicker-span-minutes.text-primary,.picker__list-item--selected,.picker__list-item--selected:hover,.white-text{color:#fff!important}.rgba-white-slight,.rgba-white-slight:after{background-color:rgba(255,255,255,.1)}.rgba-white-light,.rgba-white-light:after{background-color:rgba(255,255,255,.3)}.rgba-white-strong,.rgba-white-strong:after{background-color:rgba(255,255,255,.7)}.rgba-stylish-slight{background-color:rgba(62,69,81,.1)}.rgba-stylish-light{background-color:rgba(62,69,81,.3)}.rgba-stylish-strong{background-color:rgba(62,69,81,.7)}.primary-color{background-color:#4285f4!important}.primary-color-dark{background-color:#0d47a1!important}.secondary-color{background-color:#a6c!important}.secondary-color-dark{background-color:#93c!important}.default-color{background-color:#2bbbad!important}.default-color-dark{background-color:#00695c!important}.info-color{background-color:#33b5e5!important}.info-color-dark{background-color:#09c!important}.success-color{background-color:#00c851!important}.success-color-dark{background-color:#007e33!important}.warning-color{background-color:#fb3!important}.warning-color-dark{background-color:#f80!important}.danger-color{background-color:#ff3547!important}.danger-color-dark{background-color:#c00!important}.elegant-color{background-color:#2e2e2e!important}.elegant-color-dark{background-color:#212121!important}.stylish-color{background-color:#4b515d!important}.stylish-color-dark{background-color:#3e4551!important}.unique-color{background-color:#3f729b!important}.unique-color-dark{background-color:#1c2331!important}.special-color{background-color:#37474f!important}.special-color-dark{background-color:#263238!important}.purple-gradient{background:linear-gradient(40deg,#ff6ec4,#7873f5)!important}.peach-gradient{background:linear-gradient(40deg,#ffd86f,#fc6262)!important}.aqua-gradient{background:linear-gradient(40deg,#2096ff,#05ffa3)!important}.blue-gradient{background:linear-gradient(40deg,#45cafc,#303f9f)!important}.purple-gradient-rgba{background:linear-gradient(40deg,rgba(255,110,196,.9),rgba(120,115,245,.9))!important}.peach-gradient-rgba{background:linear-gradient(40deg,rgba(255,216,111,.9),rgba(252,98,98,.9))!important}.aqua-gradient-rgba{background:linear-gradient(40deg,rgba(32,150,255,.9),rgba(5,255,163,.9))!important}.blue-gradient-rgba{background:linear-gradient(40deg,rgba(69,202,252,.9),rgba(48,63,159,.9))!important}.dark-grey-text,.dark-grey-text:focus,.dark-grey-text:hover{color:#4f4f4f!important}.hoverable{box-shadow:none;transition:.55s ease-in-out}.hoverable:hover{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);transition:.55s ease-in-out}.z-depth-0{box-shadow:none!important}.z-depth-1{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)!important}.z-depth-1-half{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)!important}.z-depth-2{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19)!important}.z-depth-3{box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19)!important}.z-depth-4{box-shadow:0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)!important}.z-depth-5{box-shadow:0 27px 24px 0 rgba(0,0,0,.2),0 40px 77px 0 rgba(0,0,0,.22)!important}.disabled,:disabled{pointer-events:none!important}a{cursor:pointer;text-decoration:none;color:#0275d8;transition:.2s ease-in-out}a:hover{text-decoration:none;color:#014c8c;transition:.2s ease-in-out}a.disabled:hover,a:disabled:hover{color:#0275d8}a:not([href]):not([tabindex]),a:not([href]):not([tabindex]):focus,a:not([href]):not([tabindex]):hover{color:inherit;text-decoration:none}.picker__input{cursor:default}.picker__input.picker__input--active{border-color:#0089ec}.picker{font-size:1rem;text-align:center;line-height:1.2;color:#000;position:absolute;z-index:10000;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none/*!\n   * Default mobile-first, responsive styling for pickadate.js\n   * Demo: http://amsul.github.io/pickadate.js\n   */}.picker .picker__holder{width:100%;overflow-y:auto;overflow-scrolling:touch;position:fixed;transition:background .15s ease-out,top .15s;-webkit-backface-visibility:hidden;backface-visibility:hidden}.picker .picker__frame,.picker .picker__holder{bottom:0;left:0;right:0;top:100%}.picker .picker__frame{position:absolute;margin:0 auto;min-width:16rem;max-width:20.3125rem;width:18.75rem;max-height:21.875rem;opacity:0;transition:.15s ease-out}@media (min-height:40.125em){.picker .picker__frame{margin-bottom:7.5%}}.picker .picker__frame .picker__wrap{display:table;width:100%;height:100%}.picker .picker__box{background:#fff;display:table-cell;vertical-align:middle}@media (min-height:28.875em){.picker .picker__frame{overflow:visible;top:auto;bottom:-100%;max-height:80%}.picker .picker__frame .picker__wrap{display:block}.picker .picker__box{display:block;border:1px solid #777;border-top-color:#898989;border-bottom-width:0;border-radius:5px 5px 0 0;box-shadow:0 .75rem 2.25rem 1rem rgba(0,0,0,.24)}}.picker--opened .picker__holder{top:0;background:rgba(0,0,0,.32);zoom:1;transition:background .15s ease-out}.picker--opened .picker__frame{top:0;opacity:1}@media (min-height:35.875em){.picker--opened .picker__frame{top:10%;bottom:auto}}.datepicker.picker__input.picker__input--active,.timepicker.picker__input.picker__input--active{border-bottom:1px solid #e3f2fd}.picker__list{list-style:none;padding:.75em 0 4.2em;margin:0}.picker__list-item{border-bottom:1px solid #ddd;border-top:1px solid #ddd;margin-bottom:-1px;position:relative;padding:.75em 1.25em}@media (min-height:46.75em){.picker__list-item{padding:.5em 1em}}.picker__list-item:hover{cursor:pointer;background:#b1dcfb;border-color:#0089ec;z-index:10}.picker__list-item--highlighted{border-color:#0089ec;z-index:10}.picker--focused .picker__list-item--highlighted,.picker__list-item--highlighted:hover{cursor:pointer;color:#000;background:#b1dcfb}.picker--focused .picker__list-item--selected,.picker__list-item--selected,.picker__list-item--selected:hover{background:#0089ec;z-index:10}.picker--focused .picker__list-item--disabled,.picker__list-item--disabled,.picker__list-item--disabled:hover{background:#f5f5f5;border-color:#ddd;color:#ddd;cursor:default;z-index:auto}.picker--time .picker__button--clear{display:block;width:80%;margin:1em auto 0;padding:1em 1.25em;background:0 0;border:0;font-weight:500;font-size:.67em;text-align:center;text-transform:uppercase;color:#666}.picker--time .picker__button--clear:focus,.picker--time .picker__button--clear:hover{color:#000;background:#b1dcfb;border-color:#e20;cursor:pointer;outline:0}.picker--time .picker__button--clear:before{top:-.25em;color:#666;font-size:1.25em;font-weight:700}.picker--time .picker__frame{min-width:16rem;max-width:20rem}.picker--time .picker__box{font-size:1em;background:#f2f2f2;padding:0}@media (min-height:40.125em){.picker--time .picker__box{margin-bottom:5em}}/*!\n * ClockPicker v0.0.7 for jQuery (http://weareoutman.github.io/clockpicker/)\n * Copyright 2014 Wang Shenwei.\n * Licensed under MIT (https://github.com/weareoutman/clockpicker/blob/gh-pages/LICENSE)\n *\n * Further modified\n * Copyright 2015 Ching Yaw Hao.\n *\n * Bootstrap v3.1.1 (http://getbootstrap.com)\n * Copyright 2011-2014 Twitter, Inc.\n * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)\n */.picker__date-display{text-align:center;background-color:#4285f4;padding-bottom:.9375rem;font-weight:300;margin-bottom:1rem}.picker__date-display .clockpicker-display{vertical-align:middle;display:inline-block;margin:auto;height:5.3125rem;font-size:4.375rem;padding:.625rem .625rem 0;color:#b2dfdb}.picker__date-display .clockpicker-display .clockpicker-display-column{float:left}.picker__date-display .clockpicker-display .clockpicker-display-column #click-am.text-primary,.picker__date-display .clockpicker-display .clockpicker-display-column #click-pm.text-primary,.picker__date-display .clockpicker-display .clockpicker-display-column .clockpicker-span-hours.text-primary,.picker__date-display .clockpicker-display .clockpicker-display-column .clockpicker-span-minutes.text-primary{-webkit-animation-name:pulse;animation-name:pulse}.picker__date-display .clockpicker-display .clockpicker-display-column #click-am,.picker__date-display .clockpicker-display .clockpicker-display-column #click-pm{cursor:pointer}.picker__date-display .clockpicker-display .clockpicker-display-am-pm{padding-left:.3125rem;vertical-align:bottom;height:5.3125rem}.picker__date-display .clockpicker-display .clockpicker-display-am-pm .clockpicker-span-am-pm{display:inline-block;font-size:1.4375rem;line-height:1.5625rem;color:#b2dfdb}.picker__date-display .clockpicker-display .clockpicker-span-hours,.picker__date-display .clockpicker-display .clockpicker-span-minutes{-webkit-animation-duration:.5s;animation-duration:.5s;-webkit-animation-fill-mode:both;animation-fill-mode:both;transition:color .5s;cursor:pointer}.clockpicker-display{text-align:center;vertical-align:middle;display:inline-block;margin:auto;height:5.3125rem;font-size:4.375rem;padding:.625rem .625rem 0;color:#b2dfdb}.clockpicker-display .clockpicker-display-column{float:left}.clockpicker-display .clockpicker-display-column #click-am.text-primary,.clockpicker-display .clockpicker-display-column #click-pm.text-primary,.clockpicker-display .clockpicker-display-column .clockpicker-span-hours.text-primary,.clockpicker-display .clockpicker-display-column .clockpicker-span-minutes.text-primary{-webkit-animation-name:pulse;animation-name:pulse}.clockpicker-display .clockpicker-display-column #click-am,.clockpicker-display .clockpicker-display-column #click-pm{cursor:pointer}.clockpicker-display .clockpicker-display-am-pm{padding-left:.3125rem;vertical-align:bottom;height:5.3125rem}.clockpicker-display .clockpicker-display-am-pm .clockpicker-span-am-pm{display:inline-block;font-size:1.4375rem;line-height:1.5625rem;color:#b2dfdb}.clockpicker-display .clockpicker-span-hours,.clockpicker-display .clockpicker-span-minutes{-webkit-animation-duration:.5s;animation-duration:.5s;-webkit-animation-fill-mode:both;animation-fill-mode:both;cursor:pointer;transition:color .5s}@-webkit-keyframes pulse{from,to{-webkit-transform:scale3d(1,1,1);transform:scale3d(1,1,1)}50%{-webkit-transform:scale3d(1.1,1.1,1.1);transform:scale3d(1.1,1.1,1.1)}}@keyframes pulse{from,to{-webkit-transform:scale3d(1,1,1);transform:scale3d(1,1,1)}50%{-webkit-transform:scale3d(1.1,1.1,1.1);transform:scale3d(1.1,1.1,1.1)}}.clockpicker-moving{cursor:move}.clockpicker-plate{background-color:#eee;border-radius:50%;width:16.875rem;height:16.875rem;overflow:visible;position:relative;margin:1.25rem auto auto;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.clockpicker-plate .clockpicker-canvas,.clockpicker-plate .clockpicker-dial{width:16.875rem;height:16.875rem;position:absolute;left:-1px;top:-1px}.clockpicker-plate .clockpicker-dial{transition:transform 350ms,opacity 350ms,-webkit-transform 350ms}.clockpicker-plate .clockpicker-dial .clockpicker-tick{border-radius:50%;color:#666;line-height:2.5rem;text-align:center;width:2.5rem;height:2.5rem;position:absolute;cursor:pointer;transition:background-color .3s;background-color:rgba(0,150,136,0)}.clockpicker-plate .clockpicker-dial .clockpicker-tick.active,.clockpicker-plate .clockpicker-dial .clockpicker-tick:hover{background-color:rgba(0,150,136,.25)}.clockpicker-plate .clockpicker-minutes{visibility:hidden}.clockpicker-plate .clockpicker-dial-out{opacity:0}.clockpicker-plate .clockpicker-hours.clockpicker-dial-out{-webkit-transform:scale(1.2,1.2);transform:scale(1.2,1.2)}.clockpicker-plate .clockpicker-minutes.clockpicker-dial-out{-webkit-transform:scale(.8,.8);transform:scale(.8,.8)}.clockpicker-canvas{transition:opacity .3s}.clockpicker-canvas line{stroke:rgba(0,150,136,.25);stroke-width:1}.clockpicker-canvas-out{opacity:.25}.clockpicker-canvas-bearing{stroke:none;fill:rgba(0,77,64,.75)}.clockpicker-canvas-fg{stroke:none;fill:rgba(0,77,64,0)}.clockpicker-canvas-fg.active{fill:rgba(0,77,64,.5)}.clockpicker-canvas-bg{stroke:none;fill:rgba(0,150,136,.25)}.clockpicker-canvas-bg-trans{fill:rgba(0,150,136,.25)}.clockpicker-am-pm-block{margin-top:-.625rem;width:100%;height:3.125rem}.clockpicker-am-pm-block .clockpicker-button.am-button{height:2.8125rem;width:2.8125rem;float:left;border:0}.clockpicker-am-pm-block .clockpicker-button.pm-button{height:2.8125rem;width:2.8125rem;float:right;border:0}.btn-floating.btn-flat{color:#fff;padding:0;background:#4285f4}.btn-floating.btn-flat:hover{box-shadow:none}.btn-floating.btn-flat:focus,.btn-floating.btn-flat:hover{background-color:#5a95f5!important}.btn-floating.btn-flat.active{background-color:#0b51c5!important;box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.picker__footer{width:100%}.picker__footer .clockpicker-button{margin:.9375rem auto auto;background-color:transparent;text-transform:uppercase}.picker__footer .clockpicker-button:focus{background-color:transparent}.picker__footer .clockpicker-button:active{background-color:rgba(0,150,136,.25)}.darktheme .picker__box{background-color:#212121}.darktheme .picker__box .picker__calendar-container .clockpicker-plate,.darktheme .picker__box .picker__date-display{background-color:transparent}.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-tick{background-color:rgba(255,64,129,0)}.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-tick.active,.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-tick:hover{background-color:rgba(255,64,129,.25)}.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-canvas line{stroke:rgba(255,64,129,.25)}.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-canvas-bearing{fill:#fff}.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-canvas-fg{fill:rgba(255,64,129,0)}.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-canvas-fg.active{fill:rgba(255,64,129,.5)}.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-canvas-bg{fill:rgba(255,64,129,.25)}.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-canvas-bg-trans{fill:rgba(255,64,129,.5)}.darktheme .picker__box .picker__footer .clockpicker-button:active{background-color:rgba(255,64,129,.25)}.hand-move .clockpicker-tick{cursor:all-scroll!important}.clockpicker-button{cursor:pointer;transition:.3s}.clockpicker-button:hover{background-color:rgba(0,150,136,.25)}.darktheme .clockpicker-button:hover{background-color:rgba(255,64,129,.25)}.validate-success.ng-valid .timepicker{border-bottom:1px solid #00c851!important;box-shadow:0 1px 0 0 #00c851!important}.validate-success.ng-valid .tp label{color:#00c851!important}.form-submitted .validate-error.ng-invalid .timepicker,.validate-error.ng-invalid.ng-touched .timepicker{border-bottom:1px solid #f44336!important;box-shadow:0 1px 0 0 #f44336!important}.form-submitted .validate-error.ng-invalid .tp label,.validate-error.ng-invalid.ng-touched .tp label{color:#f44336!important}.timepicker{height:32px!important}.md-outline input:focus>label.active{color:#4285f4}.md-outline .timepicker{height:36px!important}.clockpicker-button.am-button,.clockpicker-button.pm-button{color:#fff!important}"]
                 }] }
     ];
     /** @nocollapse */
@@ -31300,27 +29433,28 @@ var ClockPickerComponent = /** @class */ (function () {
         { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
     ]; };
     ClockPickerComponent.propDecorators = {
-        hoursPlate: [{ type: ViewChild, args: ['hoursPlate',] }],
-        minutesPlate: [{ type: ViewChild, args: ['minutesPlate',] }],
-        plate: [{ type: ViewChild, args: ['plate',] }],
-        svg: [{ type: ViewChild, args: ['svg',] }],
-        g: [{ type: ViewChild, args: ['g',] }],
-        hand: [{ type: ViewChild, args: ['hand',] }],
-        fg: [{ type: ViewChild, args: ['fg',] }],
-        bg: [{ type: ViewChild, args: ['bg',] }],
-        bearing: [{ type: ViewChild, args: ['bearing',] }],
-        twelvehour: [{ type: Input, args: ['twelvehour',] }],
-        darktheme: [{ type: Input, args: ['darktheme',] }],
-        placeholder: [{ type: Input, args: ['placeholder',] }],
-        label: [{ type: Input, args: ['label',] }],
-        duration: [{ type: Input, args: ['duration',] }],
-        showClock: [{ type: Input, args: ['showClock',] }],
+        hoursPlate: [{ type: ViewChild, args: ['hoursPlate', { static: true },] }],
+        minutesPlate: [{ type: ViewChild, args: ['minutesPlate', { static: true },] }],
+        plate: [{ type: ViewChild, args: ['plate', { static: true },] }],
+        svg: [{ type: ViewChild, args: ['svg', { static: true },] }],
+        g: [{ type: ViewChild, args: ['g', { static: true },] }],
+        hand: [{ type: ViewChild, args: ['hand', { static: true },] }],
+        fg: [{ type: ViewChild, args: ['fg', { static: true },] }],
+        bg: [{ type: ViewChild, args: ['bg', { static: true },] }],
+        bearing: [{ type: ViewChild, args: ['bearing', { static: true },] }],
+        twelvehour: [{ type: Input }],
+        darktheme: [{ type: Input }],
+        placeholder: [{ type: Input }],
+        label: [{ type: Input }],
+        duration: [{ type: Input }],
+        showClock: [{ type: Input }],
         buttonLabel: [{ type: Input }],
         disabled: [{ type: Input }],
         tabIndex: [{ type: Input }],
         outlineInput: [{ type: Input }],
         timeChanged: [{ type: Output }],
-        ontouchmove: [{ type: HostListener, args: ['touchmove', ['$event'],] }]
+        ontouchmove: [{ type: HostListener, args: ['touchmove', ['$event'],] }],
+        onMouseMove: [{ type: HostListener, args: ['mousemove', ['$event'],] }]
     };
     return ClockPickerComponent;
 }());
@@ -31334,9 +29468,9 @@ var TimePickerModule = /** @class */ (function () {
     }
     TimePickerModule.decorators = [
         { type: NgModule, args: [{
-                    imports: [CommonModule, FormsModule],
+                    imports: [CommonModule, FormsModule, ButtonsModule.forRoot(), WavesModule.forRoot()],
                     declarations: [ClockPickerComponent],
-                    exports: [ClockPickerComponent]
+                    exports: [ClockPickerComponent],
                 },] }
     ];
     return TimePickerModule;
@@ -31353,10 +29487,10 @@ var TimePickerModule = /** @class */ (function () {
  */
 /** @type {?} */
 var MODULES$1 = [
-    AutocompleteModule,
-    CardsModule,
+    AnimatedCardsModule,
     FileInputModule,
-    MaterialChipsModule,
+    ChipsModule,
+    // tslint:disable-next-line: deprecation
     ProgressBars,
     TabsModule,
     SelectModule,
@@ -31373,7 +29507,7 @@ var MODULES$1 = [
     AutoFormatModule,
     RangeModule,
     AutoCompleterModule,
-    StepperModule
+    StepperModule,
 ];
 var MDBRootModulePro = /** @class */ (function () {
     function MDBRootModulePro() {
@@ -31381,9 +29515,9 @@ var MDBRootModulePro = /** @class */ (function () {
     MDBRootModulePro.decorators = [
         { type: NgModule, args: [{
                     imports: [
-                        AutocompleteModule,
-                        CardsModule.forRoot(),
-                        MaterialChipsModule,
+                        AnimatedCardsModule.forRoot(),
+                        ChipsModule,
+                        // tslint:disable-next-line: deprecation
                         ProgressBars.forRoot(),
                         TabsModule.forRoot(),
                         SelectModule,
@@ -31400,11 +29534,11 @@ var MDBRootModulePro = /** @class */ (function () {
                         AutoFormatModule,
                         RangeModule,
                         AutoCompleterModule,
-                        StepperModule
+                        StepperModule,
                     ],
                     exports: [MODULES$1],
                     providers: [],
-                    schemas: [NO_ERRORS_SCHEMA]
+                    schemas: [NO_ERRORS_SCHEMA],
                 },] }
     ];
     return MDBRootModulePro;
@@ -31480,6 +29614,6 @@ var MDBBootstrapModulesPro = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { BadgeModule, MDBBadgeComponent, MdbBreadcrumbComponent, MdbBreadcrumbItemComponent, BreadcrumbModule, MdbBtnDirective, ButtonsModule, ButtonRadioDirective, ButtonCheckboxDirective, FixedButtonCaptionDirective, CardsFreeModule, MdbCardComponent, MdbCardBodyComponent, MdbCardImageComponent, MdbCardTextComponent, MdbCardTitleComponent, MdbCardFooterComponent, MdbCardHeaderComponent, CarouselComponent, CarouselModule, SlideComponent, CarouselConfig, ChartsModule, BaseChartDirective, CHECKBOX_VALUE_ACCESSOR, CheckboxComponent, MdbCheckboxChange, CheckboxModule, CollapseComponent, CollapseModule, BsDropdownDirective, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownContainerComponent, BsDropdownState, BsDropdownConfig, DropdownModule, MdbIconComponent, FalDirective, FarDirective, FasDirective, FabDirective, IconsModule, InputUtilitiesModule, MdbErrorDirective, MdbSuccessDirective, MdbValidateDirective, InputsModule, EqualValidatorDirective, MdbInputDirective, MdbInput, ModalBackdropComponent, ModalBackdropOptions, ModalOptions, MDBModalRef, ModalDirective, ModalModule, MDBModalService, ModalContainerComponent, NavbarComponent, NavbarModule, LinksComponent, NavlinksComponent, LogoComponent, NavbarService, PopoverDirective, PopoverModule, PopoverConfig, PopoverContainerComponent, StickyHeaderDirective, StickyHeaderModule, TableModule, MdbTablePaginationComponent, MdbTableRowDirective, MdbTableScrollDirective, MdbTableSortDirective, MdbTableDirective, MdbTableService, TooltipContainerComponent, TooltipDirective, TooltipModule, TooltipConfig, WavesDirective, WavesModule, MDBRootModule, MDBBootstrapModule, SQUEEZEBOX_COMPONENTS, SBItemComponent, SBItemHeadComponent, SBItemBodyComponent, SqueezeBoxComponent, AccordionModule, ComponentPortal, BasePortalHost, Overlay, OVERLAY_PROVIDERS, OverlayContainer, OverlayRef, ToastContainerDirective, ToastContainerModule, ToastComponent, ToastService, GlobalConfig, ToastPackage, tsConfig, ToastModule, ToastRef, ToastInjector, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, MdbAutoCompleterComponent, MdbOptionComponent, MdbAutoCompleterDirective, MdbAutoCompleterOptionDirective, AutoCompleterModule, AutoFormatModule, MdbDateFormatDirective, MdbCreditCardDirective, MdbCvvDirective, AutocompleteModule, CompleterComponent, CompleterListItemComponent, CompleterService, localDataFactory, LocalDataFactoryProvider, remoteDataFactory, RemoteDataFactoryProvider, LocalData, RemoteData, CompleterBaseData, MdbCompleterDirective, MdbDropdownDirective, MdbInputCompleteDirective, MdbListDirective, MdbRowDirective, CardsModule, CardRevealComponent, CardRotatingComponent, LocaleService, UtilService, FocusDirective, InputAutoFillDirective, MDBDatePickerComponent, MYDP_VALUE_ACCESSOR, DatepickerModule, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, FileInputModule, UploadStatus, humanizeBytes, MDBUploaderService, MDBFileSelectDirective, MDBFileDropDirective, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, Option, OptionList, SELECT_VALUE_ACCESSOR, SelectComponent, SelectDropdownComponent, SelectModule, MDBSpinningPreloader, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, BarComponent, ProgressDirective, ProgressbarComponent, ProgressbarModule, ProgressbarConfigComponent, ProgressSpinnerComponent, PreloadersModule, ProgressBars, RangeModule, MdbRangeInputComponent, MdbMultiRangeInputComponent, ScrollSpyDirective, ScrollSpyWindowDirective, ScrollSpyElementDirective, ScrollSpyLinkDirective, ScrollSpyService, ScrollSpyModule, SidenavComponent, SidenavModule, PageScrollDirective, PageScrollService, EasingLogic, PageScrollConfig, PageScrollInstance, PageScrollUtilService, SmoothscrollModule, MdbStepperComponent, MdbStepComponent, StepperModule, MdbStickyDirective, StickyContentModule, NgTranscludeDirective, TabDirective, TabHeadingDirective, TabsetComponent, TabsetConfig, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, MaterialChipsModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, TimePickerModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, CHECKBOX_CONTROL_VALUE_ACCESSOR as ɵb, RADIO_CONTROL_VALUE_ACCESSOR as ɵa, CHECKBOX_VALUE_ACCESSOR as ɵc, CheckboxComponent as ɵd, ComponentLoaderFactory as ɵdq, OnChange$1 as ɵds, PositioningService as ɵdr, SBItemComponent as ɵf, SBItemBodyComponent as ɵh, SBItemHeadComponent as ɵg, SqueezeBoxComponent as ɵi, AccordionModule as ɵe, MdbAccordionService as ɵdt, TOAST_CONFIG as ɵdu, AutoCompleterModule as ɵn, MdbAutoCompleterComponent as ɵj, MdbOptionComponent as ɵk, MdbAutoCompleterOptionDirective as ɵm, MdbAutoCompleterDirective as ɵl, AutoFormatModule as ɵo, MdbCreditCardDirective as ɵq, MdbCvvDirective as ɵr, MdbDateFormatDirective as ɵp, CompleterListItemComponent as ɵu, CompleterComponent as ɵt, MdbInputCompleteDirective as ɵba, MdbCompleterDirective as ɵy, MdbDropdownDirective as ɵz, CtrListContext as ɵbb, MdbListDirective as ɵbc, MdbRowDirective as ɵbd, AutocompleteModule as ɵs, CompleterService as ɵv, LocalDataFactoryProvider as ɵw, RemoteDataFactoryProvider as ɵx, CardRevealComponent as ɵbf, CardRotatingComponent as ɵbg, CardsModule as ɵbe, MDBDatePickerComponent as ɵbm, MYDP_VALUE_ACCESSOR as ɵbl, DatepickerModule as ɵbn, InputAutoFillDirective as ɵbk, FocusDirective as ɵbj, LocaleService as ɵbh, UtilService as ɵbi, SimpleChartComponent as ɵbo, ChartSimpleModule as ɵbq, EasyPieChartComponent as ɵbp, MDBFileDropDirective as ɵbt, MDBFileSelectDirective as ɵbs, FileInputModule as ɵbr, CharCounterDirective as ɵbu, CharCounterModule as ɵbv, ImageModalComponent as ɵbw, LightBoxModule as ɵbx, SelectDropdownComponent as ɵcb, SELECT_VALUE_ACCESSOR as ɵbz, SelectComponent as ɵca, SelectModule as ɵcc, MDBRootModulePro as ɵdp, BarComponent as ɵce, ProgressBars as ɵcd, MdProgressBarModule as ɵdv, ProgressBarComponent as ɵdw, MdProgressSpinnerModule as ɵdx, MdProgressSpinnerComponent as ɵdz, MdProgressSpinnerCssMatStylerDirective as ɵdy, MdSpinnerComponent as ɵea, ProgressSpinnerComponent as ɵcj, ProgressDirective as ɵcf, ProgressbarComponent as ɵcg, ProgressbarConfigComponent as ɵci, ProgressbarModule as ɵch, MdbRangeInputComponent as ɵcm, RANGE_VALUE_ACCESOR as ɵcl, RANGE_VALUE_ACCESOR$1 as ɵcn, RangeModule as ɵck, ScrollSpyElementDirective as ɵcq, ScrollSpyLinkDirective as ɵcr, ScrollSpyWindowDirective as ɵcp, ScrollSpyDirective as ɵco, ScrollSpyModule as ɵct, ScrollSpyService as ɵcs, SidenavComponent as ɵcu, SidenavModule as ɵcv, PageScrollDirective as ɵcw, PageScrollInstance as ɵcy, SmoothscrollModule as ɵcz, PageScrollService as ɵcx, MdbStepComponent as ɵdb, MdbStepperComponent as ɵda, StepperModule as ɵdc, MdbStickyDirective as ɵdd, StickyContentModule as ɵde, TabHeadingDirective as ɵdh, TabDirective as ɵdg, TabsetComponent as ɵdi, TabsetConfig as ɵdj, TabsModule as ɵdk, NgTranscludeDirective as ɵdf, MaterialChipsComponent as ɵdl, MaterialChipsModule as ɵdm, ClockPickerComponent as ɵdn, TimePickerModule as ɵdo };
+export { BadgeModule, MDBBadgeComponent, MdbBreadcrumbComponent, MdbBreadcrumbItemComponent, BreadcrumbModule, MdbBtnDirective, ButtonsModule, ButtonRadioDirective, ButtonCheckboxDirective, FixedButtonCaptionDirective, CardsModule, MdbCardComponent, MdbCardBodyComponent, MdbCardImageComponent, MdbCardTextComponent, MdbCardTitleComponent, MdbCardFooterComponent, MdbCardHeaderComponent, CarouselComponent, CarouselModule, SlideComponent, CarouselConfig, ChartsModule, BaseChartDirective, CHECKBOX_VALUE_ACCESSOR, CheckboxComponent, MdbCheckboxChange, CheckboxModule, CollapseComponent, CollapseModule, BsDropdownDirective, BsDropdownMenuDirective, BsDropdownToggleDirective, BsDropdownContainerComponent, BsDropdownState, BsDropdownConfig, DropdownModule, MdbIconComponent, FalDirective, FarDirective, FasDirective, FabDirective, IconsModule, InputUtilitiesModule, MdbErrorDirective, MdbSuccessDirective, MdbValidateDirective, InputsModule, EqualValidatorDirective, MdbInputDirective, MdbInput, ModalBackdropComponent, ModalBackdropOptions, ModalOptions, MDBModalRef, ModalDirective, ModalModule, MDBModalService, ModalContainerComponent, NavbarComponent, NavbarModule, LinksComponent, NavlinksComponent, LogoComponent, NavbarService, PopoverDirective, PopoverModule, PopoverConfig, PopoverContainerComponent, StickyHeaderDirective, StickyHeaderModule, TableModule, MdbTablePaginationComponent, MdbTableRowDirective, MdbTableScrollDirective, MdbTableSortDirective, MdbTableDirective, MdbTableService, TooltipContainerComponent, TooltipDirective, TooltipModule, TooltipConfig, WavesDirective, WavesModule, MDBRootModule, MDBBootstrapModule, SQUEEZEBOX_COMPONENTS, SBItemComponent, SBItemHeadComponent, SBItemBodyComponent, SqueezeBoxComponent, AccordionModule, ComponentPortal, BasePortalHost, Overlay, OVERLAY_PROVIDERS, OverlayContainer, OverlayRef, ToastContainerDirective, ToastContainerModule, ToastComponent, ToastService, GlobalConfig, ToastPackage, tsConfig, ToastModule, ToastRef, ToastInjector, slideIn, fadeIn, slideOut, flipState, turnState, iconsState, socialsState, flyInOut, MdbAutoCompleterComponent, MdbOptionComponent, MdbAutoCompleterDirective, MdbAutoCompleterOptionDirective, AutoCompleterModule, AutoFormatModule, MdbDateFormatDirective, MdbCreditCardDirective, MdbCvvDirective, AnimatedCardsModule, CardRevealComponent, CardRotatingComponent, LocaleService, UtilService, FocusDirective, InputAutoFillDirective, MDBDatePickerComponent, MYDP_VALUE_ACCESSOR, DatepickerModule, SimpleChartComponent, EasyPieChartComponent, ChartSimpleModule, FileInputModule, UploadStatus, humanizeBytes, MDBUploaderService, MDBFileSelectDirective, MDBFileDropDirective, CharCounterDirective, CharCounterModule, ImageModalComponent, LightBoxModule, Diacritics, Option, OptionList, SELECT_VALUE_ACCESSOR, SelectComponent, SelectDropdownComponent, SelectModule, MDBSpinningPreloader, TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE, EMULATE_ELEMENT_NAME, CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME, BarComponent, ProgressDirective, ProgressbarComponent, ProgressbarModule, ProgressbarConfigComponent, ProgressSpinnerComponent, PreloadersModule, ProgressBars, RangeModule, MdbRangeInputComponent, MdbMultiRangeInputComponent, ScrollSpyDirective, ScrollSpyWindowDirective, ScrollSpyElementDirective, ScrollSpyLinkDirective, ScrollSpyService, ScrollSpyModule, SidenavComponent, SidenavModule, PageScrollDirective, PageScrollService, EasingLogic, PageScrollConfig, PageScrollInstance, PageScrollUtilService, SmoothscrollModule, MdbStepperComponent, MdbStepComponent, StepperModule, MdbStickyDirective, StickyContentModule, NgTranscludeDirective, TabDirective, TabHeadingDirective, TabsetComponent, TabsetConfig, TabsModule, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, MaterialChipsComponent, ChipsModule, TIME_PIRCKER_VALUE_ACCESSOT, ClockPickerComponent, TimePickerModule, MDBBootstrapModulePro, MDBRootModules, MDBBootstrapModulesPro, CHECKBOX_CONTROL_VALUE_ACCESSOR as ɵb, RADIO_CONTROL_VALUE_ACCESSOR as ɵa, CHECKBOX_VALUE_ACCESSOR as ɵc, CheckboxComponent as ɵd, ComponentLoaderFactory as ɵdf, OnChange$1 as ɵdh, PositioningService as ɵdg, SBItemComponent as ɵf, SBItemBodyComponent as ɵh, SBItemHeadComponent as ɵg, SqueezeBoxComponent as ɵi, AccordionModule as ɵe, MdbAccordionService as ɵdi, ToastRef$1 as ɵdj, TOAST_CONFIG as ɵdk, AnimatedCardsModule as ɵt, CardRevealComponent as ɵu, CardRotatingComponent as ɵv, AutoCompleterModule as ɵo, MdbAutoCompleterComponent as ɵj, MdbOptionComponent as ɵk, MdbAutoCompleterOptionDirective as ɵn, MAT_AUTOCOMPLETE_VALUE_ACCESSOR as ɵl, MdbAutoCompleterDirective as ɵm, AutoFormatModule as ɵp, MdbCreditCardDirective as ɵr, MdbCvvDirective as ɵs, MdbDateFormatDirective as ɵq, MaterialChipsComponent as ɵda, ChipsModule as ɵdb, MDBDatePickerComponent as ɵbb, MYDP_VALUE_ACCESSOR as ɵba, DatepickerModule as ɵbc, InputAutoFillDirective as ɵz, FocusDirective as ɵy, LocaleService as ɵw, UtilService as ɵx, SimpleChartComponent as ɵbd, ChartSimpleModule as ɵbf, EasyPieChartComponent as ɵbe, MDBFileDropDirective as ɵbi, MDBFileSelectDirective as ɵbh, FileInputModule as ɵbg, CharCounterDirective as ɵbj, CharCounterModule as ɵbk, ImageModalComponent as ɵbl, LightBoxModule as ɵbm, SelectDropdownComponent as ɵbq, SELECT_VALUE_ACCESSOR as ɵbo, SelectComponent as ɵbp, SelectModule as ɵbr, MDBRootModulePro as ɵde, BarComponent as ɵbt, ProgressBars as ɵbs, MdProgressBarModule as ɵdl, ProgressBarComponent as ɵdm, MdProgressSpinnerModule as ɵdn, MdProgressSpinnerComponent as ɵdp, MdProgressSpinnerCssMatStylerDirective as ɵdo, MdSpinnerComponent as ɵdq, ProgressSpinnerComponent as ɵby, ProgressDirective as ɵbu, ProgressbarComponent as ɵbv, ProgressbarConfigComponent as ɵbx, ProgressbarModule as ɵbw, MdbRangeInputComponent as ɵcb, RANGE_VALUE_ACCESOR as ɵca, RANGE_VALUE_ACCESOR$1 as ɵcc, RangeModule as ɵbz, ScrollSpyElementDirective as ɵcf, ScrollSpyLinkDirective as ɵcg, ScrollSpyWindowDirective as ɵce, ScrollSpyDirective as ɵcd, ScrollSpyModule as ɵci, ScrollSpyService as ɵch, SidenavComponent as ɵcj, SidenavModule as ɵck, PageScrollDirective as ɵcl, PageScrollInstance as ɵcn, SmoothscrollModule as ɵco, PageScrollService as ɵcm, MdbStepComponent as ɵcq, MdbStepperComponent as ɵcp, StepperModule as ɵcr, MdbStickyDirective as ɵcs, StickyContentModule as ɵct, TabHeadingDirective as ɵcw, TabDirective as ɵcv, TabsetComponent as ɵcx, TabsetConfig as ɵcy, TabsModule as ɵcz, NgTranscludeDirective as ɵcu, ClockPickerComponent as ɵdc, TimePickerModule as ɵdd };
 
 //# sourceMappingURL=ng-uikit-pro-standard.js.map
