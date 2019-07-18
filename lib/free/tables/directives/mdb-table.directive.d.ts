@@ -1,6 +1,6 @@
-import { ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { AfterViewInit, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { Observable } from 'rxjs';
-export declare class MdbTableDirective implements OnInit {
+export declare class MdbTableDirective implements OnInit, AfterViewInit {
     private el;
     private renderer;
     striped: boolean;
@@ -27,4 +27,5 @@ export declare class MdbTableDirective implements OnInit {
     searchLocalDataBy(searchKey: any): any;
     searchDataObservable(searchKey: any): Observable<any>;
     ngOnInit(): void;
+    ngAfterViewInit(): void;
 }

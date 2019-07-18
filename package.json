@@ -1,6 +1,6 @@
 {
   "name": "ng-uikit-pro-standard",
-  "version": "8.0.0",
+  "version": "8.1.0",
   "files": [
     "assets/**/*",
     "bundles/**/*",
@@ -18,7 +18,7 @@
     "public_api.d.ts"
   ],
   "peerDependencies": {
-    "@angular/common": "^8.0.0",
+    "@angular/common": "^8.1.0",
     "@angular/core": "^8.0.0"
   },
   "main": "bundles/ng-uikit-pro-standard.umd.js",

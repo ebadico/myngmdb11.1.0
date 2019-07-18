@@ -65,6 +65,7 @@ export declare class PopoverDirective implements OnInit, OnDestroy {
     toggle(): void;
     onclick(event: any): void;
     onblur(): void;
+    onTouchStart(event: any): void;
     ngOnInit(): any;
     dispose(): void;
     ngOnDestroy(): any;
