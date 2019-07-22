@@ -1,5 +1,5 @@
-import { AfterViewInit, ElementRef, OnInit, Renderer2 } from '@angular/core';
-export declare class FixedButtonCaptionDirective implements OnInit, AfterViewInit {
+import { ElementRef, OnInit, Renderer2 } from '@angular/core';
+export declare class FixedButtonCaptionDirective implements OnInit {
     private renderer;
     private el;
     caption: string;
@@ -7,6 +7,6 @@ export declare class FixedButtonCaptionDirective implements OnInit, AfterViewIni
     private paragraphEl;
     constructor(renderer: Renderer2, el: ElementRef);
     ngOnInit(): void;
-    ngAfterViewInit(): void;
     createCaptionElement(): void;
+    showCaption(): void;
 }

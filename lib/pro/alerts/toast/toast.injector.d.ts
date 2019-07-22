@@ -32,5 +32,5 @@ export declare class ToastInjector implements Injector {
     private _toastPackage;
     private _parentInjector;
     constructor(_toastPackage: ToastPackage, _parentInjector: Injector);
-    get(token: any, notFoundValue?: any): any;
+    get<T>(token: any, notFoundValue?: T): T | ToastPackage;
 }

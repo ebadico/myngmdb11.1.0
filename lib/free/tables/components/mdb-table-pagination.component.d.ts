@@ -38,6 +38,8 @@ export declare class MdbTablePaginationComponent implements OnInit, OnChanges, A
     calculateHowManyPagesShouldBe(): number;
     previousPage(): void;
     nextPage(): void;
+    firstPage(): void;
+    lastPage(): void;
     nextPageObservable(): Observable<any>;
     previousPageObservable(): Observable<any>;
     checkIfNextShouldBeDisabled(): true | undefined;

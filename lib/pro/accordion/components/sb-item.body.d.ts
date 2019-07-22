@@ -1,4 +1,4 @@
-import { ElementRef, AfterContentInit, QueryList, EventEmitter } from '@angular/core';
+import { ElementRef, AfterContentInit, QueryList, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { RouterLinkWithHref } from '@angular/router';
 export interface IAccordionAnimationState {
     state: string;
@@ -6,6 +6,7 @@ export interface IAccordionAnimationState {
 }
 export declare class SBItemBodyComponent implements AfterContentInit {
     private el;
+    private _cdRef;
     customClass: string;
     animationStateChange: EventEmitter<IAccordionAnimationState>;
     routerLinks: QueryList<RouterLinkWithHref>;
@@ -14,7 +15,7 @@ export declare class SBItemBodyComponent implements AfterContentInit {
     id: string;
     ariaLabelledBy: string;
     bodyEl: ElementRef;
-    constructor(el: ElementRef);
+    constructor(el: ElementRef, _cdRef: ChangeDetectorRef);
     toggle(collapsed: boolean): void;
     animationCallback(): void;
     openSidenavOnActiveLink(): void;
