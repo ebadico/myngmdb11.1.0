@@ -31,7 +31,7 @@ export declare class MdbRangeInputComponent implements ControlValueAccessor, Aft
     constructor(renderer: Renderer2, cdRef: ChangeDetectorRef);
     focusRangeInput(): void;
     blurRangeInput(): void;
-    coverage(event: any): string | undefined;
+    coverage(event: any, value?: any): string | undefined;
     checkIfSafari(): boolean;
     ngAfterViewInit(): void;
     onChange: (_: any) => void;

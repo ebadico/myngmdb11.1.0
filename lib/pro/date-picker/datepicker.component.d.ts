@@ -34,6 +34,8 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     clearButtonClicked: EventEmitter<MDBDatePickerComponent>;
     todayButtonClicked: EventEmitter<MDBDatePickerComponent>;
     divFocus: any;
+    inlineInput: any;
+    inlineIconToggle: any;
     pickerFrame: ElementRef;
     isDateSelected: boolean;
     labelActive: boolean;
@@ -66,11 +68,11 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     months: any;
     years: any;
     elementNumber: any;
-    private utils;
     firstTimeOpenedModal: boolean;
     modalHeightBefore: any;
     isMobile: any;
     isBrowser: any;
+    documentClickFun: Function;
     constructor(elem: ElementRef, renderer: Renderer2, localeService: LocaleService, utilService: UtilService, cdRef: ChangeDetectorRef, document: any, platformId: string);
     ngAfterViewInit(): void;
     ChangeZIndex(): void;
@@ -132,5 +134,4 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     setHeaderBtnDisabledState(m: number, y: number): void;
     checkActive(): boolean;
     toggleInlineDatePicker(): void;
-    onWindowClick(event: any): void;
 }

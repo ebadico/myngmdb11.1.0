@@ -7,8 +7,6 @@ export { ProgressbarConfigComponent } from './progressbar.config.component';
 export { ProgressSpinnerComponent } from './progress-spinner.component';
 export declare class PreloadersModule {
 }
-/** @deprecated */
 export declare class ProgressBars {
-    /** @deprecated */
     static forRoot(): ModuleWithProviders;
 }
