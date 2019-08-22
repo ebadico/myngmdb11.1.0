@@ -1,10 +1,11 @@
-import { EventEmitter, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { EventEmitter, OnChanges, OnInit, SimpleChanges, ChangeDetectorRef } from '@angular/core';
 export declare const CHECKBOX_VALUE_ACCESSOR: any;
 export declare class MdbCheckboxChange {
     element: CheckboxComponent;
     checked: boolean;
 }
 export declare class CheckboxComponent implements OnInit, OnChanges {
+    private _cdRef;
     inputEl: any;
     private defaultId;
     class: string;
@@ -23,7 +24,7 @@ export declare class CheckboxComponent implements OnInit, OnChanges {
     tabIndex: number;
     change: EventEmitter<MdbCheckboxChange>;
     private checkboxClicked;
-    constructor();
+    constructor(_cdRef: ChangeDetectorRef);
     onLabelClick(event: any): void;
     onDocumentClick(): void;
     ngOnInit(): void;

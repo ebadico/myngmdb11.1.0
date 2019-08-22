@@ -27,7 +27,7 @@ export declare class ToastService {
     overlayContainer: ToastContainerDirective;
     constructor(toastConfig: GlobalConfig | any, overlay: Overlay, _injector: Injector, sanitizer: DomSanitizer);
     /** show successful toast */
-    show(message: string, title?: string | any, override?: IndividualConfig, type?: string): any;
+    show(message: string, title?: string | any, override?: IndividualConfig | any, type?: string): any;
     /** show successful toast */
     success(message: string, title?: string | any, override?: IndividualConfig): any;
     /** show error toast */

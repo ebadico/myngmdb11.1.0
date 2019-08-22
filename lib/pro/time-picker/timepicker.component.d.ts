@@ -1,9 +1,12 @@
-import { AfterContentChecked, AfterViewInit, ElementRef, EventEmitter, OnInit, Renderer2 } from '@angular/core';
+import { AfterContentChecked, AfterViewInit, ElementRef, EventEmitter, OnInit, Renderer2, ChangeDetectorRef, NgZone } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 export declare const TIME_PIRCKER_VALUE_ACCESSOT: any;
 export declare class ClockPickerComponent implements OnInit, AfterViewInit, ControlValueAccessor, AfterContentChecked {
     elem: ElementRef;
     renderer: Renderer2;
+    private _cdRef;
+    private _ngZone;
+    private _document;
     hoursPlate: ElementRef;
     minutesPlate: ElementRef;
     plate: ElementRef;
@@ -27,6 +30,8 @@ export declare class ClockPickerComponent implements OnInit, AfterViewInit, Cont
     isMobile: any;
     touchDevice: boolean;
     showHours: boolean;
+    moveEvent: string;
+    tapEvent: string;
     elements: HTMLCollectionOf<Element>;
     elementNumber: any;
     dialRadius: number;
@@ -44,13 +49,11 @@ export declare class ClockPickerComponent implements OnInit, AfterViewInit, Cont
     mousemoveEvent: any;
     mouseupEvent: any;
     isMouseDown: boolean;
-    constructor(elem: ElementRef, renderer: Renderer2, platformId: string);
+    constructor(elem: ElementRef, renderer: Renderer2, _cdRef: ChangeDetectorRef, _ngZone: NgZone, _document: any, platformId: string);
     ontouchmove(event: any): void;
-    onMouseMove(event: any): void;
     ngOnInit(): void;
     ngAfterViewInit(): void;
     ngAfterContentChecked(): void;
-    private rotateTimePickerArrow;
     checkDraw(): void;
     mousedown(e: any, space?: any): void;
     hideKeyboard(): void;

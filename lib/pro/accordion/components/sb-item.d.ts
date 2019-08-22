@@ -6,6 +6,7 @@ export declare class SBItemComponent implements AfterViewInit, AfterContentInit 
     private _cdRef;
     collapsed: boolean;
     customClass: string;
+    autoExpand: boolean;
     idModifier: number;
     body: SBItemBodyComponent;
     constructor(accordionService: MdbAccordionService, _cdRef: ChangeDetectorRef);
