@@ -5,6 +5,7 @@ export declare class SqueezeBoxComponent implements OnInit, AfterContentInit, On
     private accordionService;
     private itemsChanges;
     multiple: boolean;
+    autoExpand: boolean;
     private _multiple;
     items: QueryList<SBItemComponent>;
     constructor(accordionService: MdbAccordionService);

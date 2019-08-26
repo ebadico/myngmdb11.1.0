@@ -1,10 +1,10 @@
-import { ElementRef, AfterContentInit, QueryList, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { ElementRef, QueryList, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { RouterLinkWithHref } from '@angular/router';
 export interface IAccordionAnimationState {
     state: string;
     accordionEl: ElementRef;
 }
-export declare class SBItemBodyComponent implements AfterContentInit {
+export declare class SBItemBodyComponent {
     private el;
     private _cdRef;
     customClass: string;
@@ -19,5 +19,4 @@ export declare class SBItemBodyComponent implements AfterContentInit {
     toggle(collapsed: boolean): void;
     animationCallback(): void;
     openSidenavOnActiveLink(): void;
-    ngAfterContentInit(): void;
 }

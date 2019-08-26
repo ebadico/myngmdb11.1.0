@@ -14,6 +14,10 @@ export declare class MdbAutoCompleterComponent implements AfterContentInit, OnDe
         text: string;
         element: any;
     }>;
+    selected: EventEmitter<{
+        text: string;
+        element: any;
+    }>;
     optionList: Array<any>;
     mdbOptions: QueryList<MdbOptionComponent>;
     dropdown: ElementRef;
@@ -42,6 +46,7 @@ export declare class MdbAutoCompleterComponent implements AfterContentInit, OnDe
     getSelectedItem(): ISelectedOption;
     selectedItemChanged(): Observable<any>;
     isOpen(): boolean;
+    _calculatePosition(): void;
     show(): void;
     hide(): void;
     isDropdownOpen(): Observable<any>;

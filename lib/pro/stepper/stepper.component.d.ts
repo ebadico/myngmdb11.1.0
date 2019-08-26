@@ -1,4 +1,4 @@
-import { QueryList, OnInit, AfterContentInit, ElementRef, AfterViewInit, Renderer2, AfterContentChecked, EventEmitter, OnDestroy } from '@angular/core';
+import { QueryList, OnInit, AfterContentInit, ElementRef, AfterViewInit, Renderer2, AfterContentChecked, EventEmitter, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { MdbStepComponent } from './step.component';
 import { WavesDirective } from '../../free/waves/waves-effect.directive';
 import { Observable, Subject } from 'rxjs';
@@ -11,6 +11,7 @@ export declare class StepChangeEvent {
 export declare class MdbStepperComponent implements OnInit, AfterContentInit, AfterViewInit, AfterContentChecked, OnDestroy {
     ripple: WavesDirective;
     private _renderer;
+    private _cdRef;
     steps: QueryList<MdbStepComponent>;
     stepTitles: QueryList<ElementRef>;
     stepContents: QueryList<ElementRef>;
@@ -20,7 +21,7 @@ export declare class MdbStepperComponent implements OnInit, AfterContentInit, Af
     vertical: boolean;
     private _vertical;
     stepChange: EventEmitter<StepChangeEvent>;
-    constructor(ripple: WavesDirective, _renderer: Renderer2, platformId: string);
+    constructor(ripple: WavesDirective, _renderer: Renderer2, _cdRef: ChangeDetectorRef, platformId: string);
     private _destroy;
     isBrowser: boolean;
     horizontal: boolean;

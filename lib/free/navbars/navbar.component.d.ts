@@ -1,10 +1,13 @@
 import { NavbarService } from './navbar.service';
-import { AfterContentChecked, AfterViewInit, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { AfterContentChecked, AfterViewInit, ElementRef, OnInit, Renderer2, ChangeDetectorRef, NgZone } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LinksComponent } from './links.component';
 export declare class NavbarComponent implements AfterViewInit, OnInit, AfterContentChecked {
     renderer: Renderer2;
     private _navbarService;
+    private _cdRef;
+    private _ngZone;
+    private _document;
     iconBackground: string | string[];
     SideClass: string;
     containerInside: boolean;
@@ -28,9 +31,10 @@ export declare class NavbarComponent implements AfterViewInit, OnInit, AfterCont
     container: ElementRef;
     toggler: ElementRef;
     links: LinksComponent;
-    constructor(renderer: Renderer2, _navbarService: NavbarService);
+    constructor(renderer: Renderer2, _navbarService: NavbarService, _cdRef: ChangeDetectorRef, _ngZone: NgZone, _document: any);
     closeNavbarOnClick(navbarLinkClicks: any): void;
     addTogglerIconClasses(): void;
+    private _listenToScroll;
     ngOnInit(): void;
     ngAfterViewInit(): void;
     toggle(): void;
@@ -38,6 +42,5 @@ export declare class NavbarComponent implements AfterViewInit, OnInit, AfterCont
     hide(): void;
     readonly displayStyle: "" | "flex";
     onResize(event: any): void;
-    onScroll(): void;
     ngAfterContentChecked(): void;
 }

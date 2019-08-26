@@ -1,7 +1,8 @@
-import { AfterViewInit, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { AfterViewInit, ElementRef, OnDestroy, OnInit, Renderer2, ChangeDetectorRef } from '@angular/core';
 export declare class SidenavComponent implements AfterViewInit, OnDestroy, OnInit {
     el: ElementRef;
     renderer: Renderer2;
+    private _cdRef;
     windwosWidth: number;
     shown: boolean;
     slimSidenav: boolean;
@@ -14,7 +15,7 @@ export declare class SidenavComponent implements AfterViewInit, OnDestroy, OnIni
     private _side;
     sideNav: ElementRef;
     overlay: any;
-    constructor(platformId: string, el: ElementRef, renderer: Renderer2);
+    constructor(platformId: string, el: ElementRef, renderer: Renderer2, _cdRef: ChangeDetectorRef);
     ngOnInit(): void;
     ngAfterViewInit(): void;
     windwosResize(): void;

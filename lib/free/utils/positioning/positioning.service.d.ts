@@ -1,4 +1,4 @@
-import { ElementRef, RendererFactory2 } from '@angular/core';
+import { ElementRef, RendererFactory2, NgZone } from '@angular/core';
 import { Options } from './models/index';
 export interface PositioningOptions {
     /** The DOM element, ElementRef, or a selector string of an element which will be moved */
@@ -27,10 +27,11 @@ export interface PositioningOptions {
     appendToBody?: boolean;
 }
 export declare class PositioningService {
+    private _ngZone;
     options: Options;
     private update$$;
     private positionElements;
-    constructor(rendererFactory: RendererFactory2, platformId: number);
+    constructor(rendererFactory: RendererFactory2, platformId: number, _ngZone: NgZone);
     position(options: PositioningOptions): void;
     addPositionElement(options: PositioningOptions): void;
     calcPosition(): void;
