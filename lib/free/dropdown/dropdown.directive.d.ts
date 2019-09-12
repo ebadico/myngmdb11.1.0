@@ -27,10 +27,12 @@ export declare class BsDropdownDirective implements OnInit, OnDestroy {
      * Currently only supports "body".
      */
     container: string;
+    dropup: boolean;
+    dropupDefault: boolean;
     /**
      * This attribute indicates that the dropdown should be opened upwards
      */
-    dropup: boolean;
+    readonly isDropup: true | undefined;
     /**
      * Indicates that dropdown will be closed on item or document click,
      * and after pressing ESC
@@ -66,6 +68,7 @@ export declare class BsDropdownDirective implements OnInit, OnDestroy {
     _dropdown: ComponentLoader<BsDropdownContainerComponent>;
     _subscriptions: Subscription[];
     _isInited: boolean;
+    _isDropupDefault: boolean;
     constructor(_elementRef: ElementRef, _renderer: Renderer2, _viewContainerRef: ViewContainerRef, _cis: ComponentLoaderFactory, _config: BsDropdownConfig, _state: BsDropdownState);
     ngOnInit(): void;
     /**

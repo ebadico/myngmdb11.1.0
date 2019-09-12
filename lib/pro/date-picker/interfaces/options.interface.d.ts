@@ -44,6 +44,7 @@ export interface IMyOptions {
     componentDisabled?: boolean;
     showSelectorArrow?: boolean;
     showInputField?: boolean;
+    useDateObject?: boolean;
     openSelectorOnInputClick?: boolean;
     inputAutoFill?: boolean;
     ariaLabelInputField?: string;

@@ -1,7 +1,7 @@
 import { IMyLocales } from './interfaces/locale.interface';
 import { EventEmitter, OnChanges, SimpleChanges, ElementRef, Renderer2, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { IMyDate, IMyMonth, IMyWeek, IMyInputFieldChanged, IMyCalendarViewChanged, IMyInputFocusBlur } from './interfaces/index';
+import { IMyDate, IMyMonth, IMyWeek, IMyInputFieldChanged, IMyCalendarViewChanged, IMyInputFocusBlur, IMyOptions } from './interfaces/index';
 import { LocaleService } from './services/datepickerLocale.service';
 import { UtilService } from './services/datepickerUtil.service';
 export declare const MYDP_VALUE_ACCESSOR: any;
@@ -11,6 +11,7 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     private localeService;
     private utilService;
     private cdRef;
+    private _globalOptions;
     private document;
     tabIndex: any;
     options: any;
@@ -73,7 +74,7 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     isMobile: any;
     isBrowser: any;
     documentClickFun: Function;
-    constructor(elem: ElementRef, renderer: Renderer2, localeService: LocaleService, utilService: UtilService, cdRef: ChangeDetectorRef, document: any, platformId: string);
+    constructor(elem: ElementRef, renderer: Renderer2, localeService: LocaleService, utilService: UtilService, cdRef: ChangeDetectorRef, _globalOptions: IMyOptions, document: any, platformId: string);
     ngAfterViewInit(): void;
     ChangeZIndex(): void;
     onChangeCb: (_: any) => void;

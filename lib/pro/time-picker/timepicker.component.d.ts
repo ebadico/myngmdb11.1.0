@@ -26,7 +26,9 @@ export declare class ClockPickerComponent implements OnInit, AfterViewInit, Cont
     disabled: boolean;
     tabIndex: any;
     outlineInput: boolean;
+    openOnFocus: boolean;
     timeChanged: EventEmitter<string>;
+    isOpen: boolean;
     isMobile: any;
     touchDevice: boolean;
     showHours: boolean;
@@ -49,6 +51,7 @@ export declare class ClockPickerComponent implements OnInit, AfterViewInit, Cont
     mousemoveEvent: any;
     mouseupEvent: any;
     isMouseDown: boolean;
+    documentClickFun: Function;
     constructor(elem: ElementRef, renderer: Renderer2, _cdRef: ChangeDetectorRef, _ngZone: NgZone, _document: any, platformId: string);
     ontouchmove(event: any): void;
     ngOnInit(): void;
@@ -57,8 +60,11 @@ export declare class ClockPickerComponent implements OnInit, AfterViewInit, Cont
     checkDraw(): void;
     mousedown(e: any, space?: any): void;
     hideKeyboard(): void;
+    onFocusInput(): void;
     openBtnClicked(): void;
+    private _handleOutsideClick;
     closeBtnClicked(): void;
+    close(): void;
     clearTimeInput(): void;
     setHour(hour: String): void;
     setMinute(min: String): void;
