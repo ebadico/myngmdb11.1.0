@@ -1,8 +1,8 @@
-import { AfterContentInit, ElementRef, EventEmitter, Renderer2, QueryList, OnDestroy } from '@angular/core';
+import { AfterContentInit, ElementRef, EventEmitter, Renderer2, QueryList, OnDestroy, AfterViewInit } from '@angular/core';
 import { MdbOptionComponent } from './mdb-option.component';
 import { ISelectedOption } from '../interfaces/selected-option.interface';
 import { Observable } from 'rxjs';
-export declare class MdbAutoCompleterComponent implements AfterContentInit, OnDestroy {
+export declare class MdbAutoCompleterComponent implements AfterContentInit, AfterViewInit, OnDestroy {
     private renderer;
     private el;
     textNoResults: string;
@@ -10,6 +10,11 @@ export declare class MdbAutoCompleterComponent implements AfterContentInit, OnDe
     clearButtonTabIndex: number;
     appendToBody: boolean;
     disabled: boolean;
+    visibleOptions: number;
+    _visibleOptions: number;
+    optionHeight: any;
+    _optionHeight: number;
+    displayValue: ((value: any) => string) | null;
     select: EventEmitter<{
         text: string;
         element: any;
@@ -39,7 +44,6 @@ export declare class MdbAutoCompleterComponent implements AfterContentInit, OnDe
     private _selectedItemChanged;
     private _isBrowser;
     constructor(renderer: Renderer2, el: ElementRef, platformId: string);
-    windowMouseDown(event: any): void;
     private _listenToOptionClick;
     private _handleOptionClick;
     setSelectedItem(item: ISelectedOption): void;
@@ -66,6 +70,8 @@ export declare class MdbAutoCompleterComponent implements AfterContentInit, OnDe
         width: any;
         bottom: number;
     }): void;
+    setSingleOptionHeight(): void;
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
+    ngAfterViewInit(): void;
 }

@@ -1,6 +1,6 @@
-import { AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, OnInit } from '@angular/core';
 import { SBItemComponent } from './sb-item';
-export declare class SBItemHeadComponent implements AfterViewInit {
+export declare class SBItemHeadComponent implements OnInit, AfterViewInit {
     private sbItem;
     private _cdRef;
     isDisabled: boolean;
@@ -12,5 +12,6 @@ export declare class SBItemHeadComponent implements AfterViewInit {
     constructor(sbItem: SBItemComponent, _cdRef: ChangeDetectorRef);
     onKeyDown(event: KeyboardEvent): void;
     toggleClick(event: any): void;
+    ngOnInit(): void;
     ngAfterViewInit(): void;
 }
