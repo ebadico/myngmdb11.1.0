@@ -1,8 +1,8 @@
-import { AfterContentInit, ElementRef, EventEmitter, Renderer2, QueryList, OnDestroy, AfterViewInit } from '@angular/core';
+import { AfterContentInit, ElementRef, EventEmitter, Renderer2, QueryList, OnDestroy } from '@angular/core';
 import { MdbOptionComponent } from './mdb-option.component';
 import { ISelectedOption } from '../interfaces/selected-option.interface';
 import { Observable } from 'rxjs';
-export declare class MdbAutoCompleterComponent implements AfterContentInit, AfterViewInit, OnDestroy {
+export declare class MdbAutoCompleterComponent implements AfterContentInit, OnDestroy {
     private renderer;
     private el;
     textNoResults: string;
@@ -73,5 +73,4 @@ export declare class MdbAutoCompleterComponent implements AfterContentInit, Afte
     setSingleOptionHeight(): void;
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
-    ngAfterViewInit(): void;
 }

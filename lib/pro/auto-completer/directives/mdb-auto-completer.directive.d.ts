@@ -16,9 +16,9 @@ export declare class MdbAutoCompleterDirective implements AfterViewInit, OnDestr
     listenFunc: Function;
     isBrowser: boolean;
     onKeydown(event: any): void;
-    handleInput(event: any): void;
+    _handleInput(event: any): void;
     _handleFocusIn(): void;
-    _handleBlurIn(event: any): void;
+    _handleBlurIn(): void;
     handleMouseDown(): void;
     constructor(renderer: Renderer2, el: ElementRef, platformId: string, document: any);
     private _getClosestEl;

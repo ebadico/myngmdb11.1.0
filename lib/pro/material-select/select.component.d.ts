@@ -32,6 +32,7 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     appendToBody: boolean;
     selectAllLabel: string;
     outline: boolean;
+    compareWith: (o1: any, o2: any) => boolean;
     opened: EventEmitter<any>;
     closed: EventEmitter<any>;
     selected: EventEmitter<IOption>;
@@ -71,6 +72,7 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     itemsBefore: Array<any>;
     onChange: (_: any) => void;
     onTouched: () => void;
+    private _compareWith;
     /** Event handlers. **/
     constructor(el: ElementRef, renderer: Renderer2, document: any, platformId: string, cdRef: ChangeDetectorRef);
     ngOnInit(): void;
@@ -83,7 +85,7 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     ngOnChanges(changes: SimpleChanges): void;
     isChild(elemnt: any): boolean;
     onWindowResize(): void;
-    onSelectContainerClick(event: any): void;
+    onSelectContainerClick(event: any): false | undefined;
     onSelectContainerFocus(): void;
     onSelectContainerBlur(): void;
     onSelectContainerKeydown(event: any): void;
@@ -99,7 +101,9 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     /** API. **/
     open(): void;
     close(): void;
-    value: string | string[];
+    value: any | any[];
+    private _setSelection;
+    private _selectByValue;
     clear(): void;
     select(value: string): void;
     /** ControlValueAccessor interface methods. **/
