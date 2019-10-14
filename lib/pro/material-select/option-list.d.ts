@@ -1,6 +1,7 @@
 import { Option } from './option';
 import { IOption } from './option-interface';
 export declare class OptionList {
+    private _multiple;
     private _options;
     private _highlightedOption;
     private _hasShown;
@@ -8,15 +9,15 @@ export declare class OptionList {
     highlightFirst: boolean;
     setToNullValue: any;
     static equalValues(v0: Array<string>, v1: Array<string>): boolean;
-    constructor(options: Array<IOption>);
+    constructor(options: Array<IOption>, _multiple?: boolean);
     /** Options. **/
     readonly options: Array<Option>;
     getOptionsByValue(value: string): Array<Option>;
     /** Value. **/
-    value: Array<string>;
+    readonly value: Array<string>;
     /** Selection. **/
     readonly selection: Array<Option>;
-    select(option: Option, multiple: boolean): void;
+    select(option: Option): void;
     deselect(option: Option): void;
     clearSelection(): void;
     /** Filter. **/

@@ -26,6 +26,8 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     outlineInput: boolean;
     inline: boolean;
     inlineIcon: string;
+    id: string;
+    private _id;
     dateChanged: EventEmitter<any>;
     inputFieldChanged: EventEmitter<IMyInputFieldChanged>;
     calendarViewChanged: EventEmitter<IMyCalendarViewChanged>;
@@ -62,6 +64,7 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     prevMonthId: number;
     currMonthId: number;
     nextMonthId: number;
+    private _uid;
     isOpen: boolean;
     isDisabled: boolean;
     tmp: IMyDate;
