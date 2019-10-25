@@ -14,6 +14,8 @@ export declare class MdbAutoCompleterComponent implements AfterContentInit, OnDe
     _visibleOptions: number;
     optionHeight: any;
     _optionHeight: number;
+    dropdownHeight: number;
+    _dropdownHeight: number;
     displayValue: ((value: any) => string) | null;
     select: EventEmitter<{
         text: string;
