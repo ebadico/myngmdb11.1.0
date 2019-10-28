@@ -3,6 +3,7 @@ import { ISelectedOption } from '../interfaces/selected-option.interface';
 import { Subject, Observable } from 'rxjs';
 export interface MdbOptionParent {
     optionHeight: number;
+    visibleOptions: number;
 }
 export declare const MDB_OPTION_PARENT: InjectionToken<MdbOptionParent>;
 export declare class MdbOptionComponent implements OnInit {
@@ -11,7 +12,7 @@ export declare class MdbOptionComponent implements OnInit {
     value: string;
     disabled: boolean;
     _optionHeight: any;
-    optionHeight: any;
+    readonly optionHeight: any;
     clicked: boolean;
     selectedItem: ISelectedOption;
     clickSource: Subject<MdbOptionComponent>;
