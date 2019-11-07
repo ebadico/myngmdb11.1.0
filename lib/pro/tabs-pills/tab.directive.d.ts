@@ -1,6 +1,8 @@
 import { EventEmitter, TemplateRef, ElementRef, OnInit, OnDestroy, Renderer2 } from '@angular/core';
 import { TabsetComponent } from './tabset.component';
 export declare class TabDirective implements OnInit, OnDestroy {
+    tabset: TabsetComponent;
+    el: ElementRef;
     private renderer;
     type: string;
     /** tab header text */
@@ -24,9 +26,6 @@ export declare class TabDirective implements OnInit, OnDestroy {
     addClass: boolean;
     test: boolean;
     headingRef: TemplateRef<any>;
-    tabset: TabsetComponent;
-    el: ElementRef | any;
-    thus: this;
     private _active;
     isBrowser: any;
     constructor(platformId: string, tabset: TabsetComponent, el: ElementRef, renderer: Renderer2);

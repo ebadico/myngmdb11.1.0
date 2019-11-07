@@ -6,17 +6,15 @@ export interface ComponentType<T> {
  * A `ComponentPortal` is a portal that instantiates some Component upon attachment.
  */
 export declare class ComponentPortal<T> {
-    private _attachedHost;
-    /** The type of the component that will be instantiated for attachment. */
     component: ComponentType<T>;
+    injector: Injector;
+    private _attachedHost;
     /**
      * [Optional] Where the attached component should live in Angular's *logical* component tree.
      * This is different from where the component *renders*, which is determined by the PortalHost.
      * The origin necessary when the host is outside of the Angular application context.
      */
     viewContainerRef: ViewContainerRef;
-    /** Injector used for the instantiation of the component. */
-    injector: Injector;
     constructor(component: ComponentType<T>, injector: Injector);
     /** Attach this portal to a host. */
     attach(host: BasePortalHost, newestOnTop: boolean): any;

@@ -32,6 +32,8 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     appendToBody: boolean;
     selectAllLabel: string;
     outline: boolean;
+    required: boolean;
+    private _required;
     compareWith: (o1: any, o2: any) => boolean;
     opened: EventEmitter<any>;
     closed: EventEmitter<any>;
@@ -43,13 +45,15 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     dropdown: SelectDropdownComponent;
     filterInput: ElementRef;
     clearButton: ElementRef;
-    KEYS: any;
+    singleContainer: ElementRef;
+    multipleContainer: ElementRef;
     _value: Array<any>;
     optionList: OptionList;
     optionsLength: number;
     visibleOptionsDefault: number;
     hasSelected: boolean;
     isBrowser: boolean;
+    canOpenOnFocus: boolean;
     hasFocus: boolean;
     isOpen: boolean;
     isBelow: boolean;
@@ -58,6 +62,7 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     placeholderView: string;
     labelActive: boolean;
     labelRef: HTMLElement;
+    prefixRef: HTMLElement;
     labelRefActive: boolean;
     dropdownAnimationDone: boolean;
     clearClicked: boolean;
@@ -65,18 +70,22 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     filterHeight: number;
     dropdownHeight: number;
     dropdownMaxHeight: number;
+    OUTLINE_DROPDOWN_BOTTOM_OFFSET: number;
+    OUTLINE_DROPDOWN_TOP_OFFSET: number;
     width: number;
     top: number;
     left: number;
     documentClickFun: Function;
     itemsBefore: Array<any>;
+    readonly focused: boolean;
+    private _focused;
     onChange: (_: any) => void;
     onTouched: () => void;
     private _compareWith;
-    /** Event handlers. **/
     constructor(el: ElementRef, renderer: Renderer2, document: any, platformId: string, cdRef: ChangeDetectorRef);
     ngOnInit(): void;
     private _getLabelRef;
+    private _getPrefixRef;
     updateFilterHeight(): void;
     updateDropdownHeight(): void;
     onDropdownAnimationDone(): void;

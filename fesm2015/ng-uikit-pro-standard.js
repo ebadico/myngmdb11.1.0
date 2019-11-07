@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterLinkWithHref, Router, NavigationEnd, NavigationError, NavigationCancel } from '@angular/router';
 import { state, style, trigger, transition, animate } from '@angular/animations';
 import { Subject, timer, fromEvent, merge, of, animationFrameScheduler, Observable, from } from 'rxjs';
-import { take, distinctUntilChanged, filter, map, pairwise, share, skip, throttleTime, takeUntil, startWith, switchMap, mergeMap } from 'rxjs/operators';
+import { take, distinctUntilChanged, filter, map, pairwise, share, skip, throttleTime, takeUntil, startWith, switchMap, mergeMap, debounceTime, tap } from 'rxjs/operators';
 import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
 import { NG_VALUE_ACCESSOR, FormsModule, NG_VALIDATORS, FormControl } from '@angular/forms';
 import { Component, ElementRef, HostBinding, Input, Renderer2, ViewEncapsulation, ChangeDetectionStrategy, NgModule, Directive, HostListener, forwardRef, ViewChild, Injectable, ChangeDetectorRef, ContentChildren, EventEmitter, Inject, Output, PLATFORM_ID, isDevMode, Injector, TemplateRef, RendererFactory2, NgZone, ApplicationRef, ComponentFactoryResolver, ViewContainerRef, Attribute, NO_ERRORS_SCHEMA, ContentChild, Optional, InjectionToken, Host, ViewChildren, SecurityContext, SkipSelf, ɵɵdefineInjectable } from '@angular/core';
@@ -185,63 +185,127 @@ class MdbBtnDirective {
      * @return {?}
      */
     ngOnInit() {
-        /** @type {?} */
-        const colorClass = 'btn-' + this.color;
-        /** @type {?} */
-        const gradientClass = this.gradient + '-gradient';
-        /** @type {?} */
-        const outlineClass = 'btn-outline-' + this.color;
-        /** @type {?} */
-        const flatClass = 'btn-flat';
-        /** @type {?} */
-        const roundedClass = 'btn-rounded';
-        /** @type {?} */
-        const sizeClass = 'btn-' + this.size;
-        /** @type {?} */
-        const blockClass = 'btn-block';
-        /** @type {?} */
-        const floatingClass = 'btn-floating';
+        this.colorClass = 'btn-' + this.color;
+        this.gradientClass = this.gradient + '-gradient';
+        this.outlineClass = 'btn-outline-' + this.color;
+        this.flatClass = 'btn-flat';
+        this.roundedClass = 'btn-rounded';
+        this.sizeClass = 'btn-' + this.size;
+        this.blockClass = 'btn-block';
+        this.floatingClass = 'btn-floating';
         this.renderer.addClass(this.el.nativeElement, 'btn');
+        this.initClasses();
+    }
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    ngOnChanges(changes) {
+        if (changes.color) {
+            this.renderer.removeClass(this.el.nativeElement, this.colorClass);
+            if (this.color !== '') {
+                this.colorClass = 'btn-' + this.color;
+                this.renderer.addClass(this.el.nativeElement, this.colorClass);
+            }
+        }
+        if (changes.gradient) {
+            this.renderer.removeClass(this.el.nativeElement, this.gradientClass);
+            if (this.gradient !== '') {
+                this.gradientClass = this.gradient + '-gradient';
+                this.renderer.addClass(this.el.nativeElement, this.gradientClass);
+            }
+        }
+        if (changes.outline) {
+            this.renderer.removeClass(this.el.nativeElement, this.outlineClass);
+            if (this.outline) {
+                this.outlineClass = 'btn-outline-' + this.color;
+                this.renderer.addClass(this.el.nativeElement, this.outlineClass);
+            }
+        }
+        if (changes.flat) {
+            this.renderer.removeClass(this.el.nativeElement, this.flatClass);
+            if (this.flat) {
+                this.flatClass = 'btn-flat';
+                this.renderer.addClass(this.el.nativeElement, this.flatClass);
+            }
+        }
+        if (changes.rounded) {
+            this.renderer.removeClass(this.el.nativeElement, this.roundedClass);
+            if (this.rounded) {
+                this.roundedClass = 'btn-rounded';
+                this.renderer.addClass(this.el.nativeElement, this.roundedClass);
+            }
+        }
+        if (changes.size) {
+            this.renderer.removeClass(this.el.nativeElement, this.sizeClass);
+            if (this.size !== '') {
+                this.sizeClass = 'btn-' + this.size;
+                this.renderer.addClass(this.el.nativeElement, this.sizeClass);
+            }
+        }
+        if (changes.block) {
+            this.renderer.removeClass(this.el.nativeElement, this.blockClass);
+            if (this.block) {
+                this.blockClass = 'btn-block';
+                this.renderer.addClass(this.el.nativeElement, this.blockClass);
+            }
+        }
+        if (changes.floating) {
+            if (!this.floating) {
+                this.renderer.removeClass(this.el.nativeElement, this.floatingClass);
+                this.renderer.addClass(this.el.nativeElement, 'btn');
+            }
+            if (this.floating) {
+                this.floatingClass = 'btn-floating';
+                this.renderer.addClass(this.el.nativeElement, this.floatingClass);
+                this.renderer.removeClass(this.el.nativeElement, 'btn');
+            }
+        }
+    }
+    /**
+     * @return {?}
+     */
+    initClasses() {
         if (this.color !== '') {
-            this.renderer.addClass(this.el.nativeElement, colorClass);
+            this.renderer.addClass(this.el.nativeElement, this.colorClass);
         }
         if (this.rounded) {
-            this.renderer.addClass(this.el.nativeElement, roundedClass);
+            this.renderer.addClass(this.el.nativeElement, this.roundedClass);
         }
         if (this.gradient) {
             if (this.color !== '') {
-                this.renderer.removeClass(this.el.nativeElement, colorClass);
+                this.renderer.removeClass(this.el.nativeElement, this.colorClass);
             }
-            this.renderer.addClass(this.el.nativeElement, gradientClass);
+            this.renderer.addClass(this.el.nativeElement, this.gradientClass);
         }
         if (this.outline) {
-            this.renderer.removeClass(this.el.nativeElement, colorClass);
-            this.renderer.addClass(this.el.nativeElement, outlineClass);
+            this.renderer.removeClass(this.el.nativeElement, this.colorClass);
+            this.renderer.addClass(this.el.nativeElement, this.outlineClass);
         }
         if (this.flat) {
             if (this.color) {
-                this.renderer.removeClass(this.el.nativeElement, colorClass);
+                this.renderer.removeClass(this.el.nativeElement, this.colorClass);
             }
             if (this.gradient) {
-                this.renderer.removeClass(this.el.nativeElement, gradientClass);
+                this.renderer.removeClass(this.el.nativeElement, this.gradientClass);
             }
             if (this.outline) {
-                this.renderer.removeClass(this.el.nativeElement, outlineClass);
+                this.renderer.removeClass(this.el.nativeElement, this.outlineClass);
             }
             if (this.rounded) {
-                this.renderer.removeClass(this.el.nativeElement, roundedClass);
+                this.renderer.removeClass(this.el.nativeElement, this.roundedClass);
             }
-            this.renderer.addClass(this.el.nativeElement, flatClass);
+            this.renderer.addClass(this.el.nativeElement, this.flatClass);
         }
         if (this.size) {
-            this.renderer.addClass(this.el.nativeElement, sizeClass);
+            this.renderer.addClass(this.el.nativeElement, this.sizeClass);
         }
         if (this.block) {
-            this.renderer.addClass(this.el.nativeElement, blockClass);
+            this.renderer.addClass(this.el.nativeElement, this.blockClass);
         }
         if (this.floating) {
+            this.renderer.addClass(this.el.nativeElement, this.floatingClass);
             this.renderer.removeClass(this.el.nativeElement, 'btn');
-            this.renderer.addClass(this.el.nativeElement, floatingClass);
         }
     }
 }
@@ -274,7 +338,6 @@ MdbBtnDirective.propDecorators = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-// TODO: config: activeClass - Class to apply to the checked buttons
 /** @type {?} */
 const CHECKBOX_CONTROL_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -407,11 +470,11 @@ class ButtonRadioDirective {
      * @param {?} renderer
      */
     constructor(el, renderer) {
+        this.el = el;
         this.renderer = renderer;
         this.onChange = Function.prototype;
         this.onTouched = Function.prototype;
         this.radioElementsArray = [];
-        this.el = el;
     }
     /**
      * @return {?}
@@ -419,7 +482,6 @@ class ButtonRadioDirective {
     get isActive() {
         return this.mdbRadio === this.value;
     }
-    // @HostBinding('class.active')
     /**
      * @param {?=} event
      * @return {?}
@@ -601,7 +663,6 @@ ButtonsModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MdbCardFooterComponent {
-    // @Input() class: string;
     /**
      * @param {?} _el
      * @param {?} _r
@@ -615,11 +676,6 @@ class MdbCardFooterComponent {
      */
     ngOnInit() {
         this._r.addClass(this._el.nativeElement, 'card-footer');
-        // if (this.class) {
-        //     this.class.split(' ').forEach((element: any) => {
-        //         this._r.addClass(this._el.nativeElement, element);
-        //     });
-        // }
     }
 }
 MdbCardFooterComponent.decorators = [
@@ -786,7 +842,7 @@ class MdbCardComponent {
         if (dark) {
             this._r.addClass(this._el.nativeElement, 'card-dark');
         }
-        else if (!dark && this._el.nativeElement.classList.contains('card-dard')) {
+        else if (!dark && this._el.nativeElement.classList.contains('card-dark')) {
             this._r.removeClass(this._el.nativeElement, 'card-dark');
         }
     }
@@ -836,7 +892,7 @@ class MdbCardComponent {
 MdbCardComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-card',
-                template: "<!--<div-->\n<!--class=\"card\"-->\n<!--[ngClass]=\"{ 'card-cascade': cascade, wider: wider, 'card-image': imageBackground }\"-->\n<!--#card-->\n<!--[ngStyle]=\"{ 'background-image': imageBackground }\"-->\n<!--&gt;-->\n<!--<ng-content></ng-content>-->\n<!--</div>-->\n<ng-content></ng-content>\n",
+                template: "<ng-content></ng-content>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 encapsulation: ViewEncapsulation.None,
                 styles: [".mdb-color.lighten-5{background-color:#d0d6e2!important}.mdb-color.lighten-4{background-color:#b1bace!important}.mdb-color.lighten-3{background-color:#929fba!important}.mdb-color.lighten-2{background-color:#7283a7!important}.mdb-color.lighten-1{background-color:#59698d!important}.mdb-color{background-color:#45526e!important}.mdb-color-text{color:#45526e!important}.rgba-mdb-color-slight,.rgba-mdb-color-slight:after{background-color:rgba(69,82,110,.1)}.rgba-mdb-color-light,.rgba-mdb-color-light:after{background-color:rgba(69,82,110,.3)}.rgba-mdb-color-strong,.rgba-mdb-color-strong:after{background-color:rgba(69,82,110,.7)}.mdb-color.darken-1{background-color:#3b465e!important}.mdb-color.darken-2{background-color:#2e3951!important}.mdb-color.darken-3{background-color:#1c2a48!important}.mdb-color.darken-4{background-color:#1c2331!important}.red.lighten-5{background-color:#ffebee!important}.red.lighten-4{background-color:#ffcdd2!important}.red.lighten-3{background-color:#ef9a9a!important}.red.lighten-2{background-color:#e57373!important}.red.lighten-1{background-color:#ef5350!important}.red{background-color:#f44336!important}.red-text{color:#f44336!important}.rgba-red-slight,.rgba-red-slight:after{background-color:rgba(244,67,54,.1)}.rgba-red-light,.rgba-red-light:after{background-color:rgba(244,67,54,.3)}.rgba-red-strong,.rgba-red-strong:after{background-color:rgba(244,67,54,.7)}.red.darken-1{background-color:#e53935!important}.red.darken-2{background-color:#d32f2f!important}.red.darken-3{background-color:#c62828!important}.red.darken-4{background-color:#b71c1c!important}.red.accent-1{background-color:#ff8a80!important}.red.accent-2{background-color:#ff5252!important}.red.accent-3{background-color:#ff1744!important}.red.accent-4{background-color:#d50000!important}.pink.lighten-5{background-color:#fce4ec!important}.pink.lighten-4{background-color:#f8bbd0!important}.pink.lighten-3{background-color:#f48fb1!important}.pink.lighten-2{background-color:#f06292!important}.pink.lighten-1{background-color:#ec407a!important}.pink{background-color:#e91e63!important}.pink-text{color:#e91e63!important}.rgba-pink-slight,.rgba-pink-slight:after{background-color:rgba(233,30,99,.1)}.rgba-pink-light,.rgba-pink-light:after{background-color:rgba(233,30,99,.3)}.rgba-pink-strong,.rgba-pink-strong:after{background-color:rgba(233,30,99,.7)}.pink.darken-1{background-color:#d81b60!important}.pink.darken-2{background-color:#c2185b!important}.pink.darken-3{background-color:#ad1457!important}.pink.darken-4{background-color:#880e4f!important}.pink.accent-1{background-color:#ff80ab!important}.pink.accent-2{background-color:#ff4081!important}.pink.accent-3{background-color:#f50057!important}.pink.accent-4{background-color:#c51162!important}.purple.lighten-5{background-color:#f3e5f5!important}.purple.lighten-4{background-color:#e1bee7!important}.purple.lighten-3{background-color:#ce93d8!important}.purple.lighten-2{background-color:#ba68c8!important}.purple.lighten-1{background-color:#ab47bc!important}.purple{background-color:#9c27b0!important}.purple-text{color:#9c27b0!important}.rgba-purple-slight,.rgba-purple-slight:after{background-color:rgba(156,39,176,.1)}.rgba-purple-light,.rgba-purple-light:after{background-color:rgba(156,39,176,.3)}.rgba-purple-strong,.rgba-purple-strong:after{background-color:rgba(156,39,176,.7)}.purple.darken-1{background-color:#8e24aa!important}.purple.darken-2{background-color:#7b1fa2!important}.purple.darken-3{background-color:#6a1b9a!important}.purple.darken-4{background-color:#4a148c!important}.purple.accent-1{background-color:#ea80fc!important}.purple.accent-2{background-color:#e040fb!important}.purple.accent-3{background-color:#d500f9!important}.purple.accent-4{background-color:#a0f!important}.deep-purple.lighten-5{background-color:#ede7f6!important}.deep-purple.lighten-4{background-color:#d1c4e9!important}.deep-purple.lighten-3{background-color:#b39ddb!important}.deep-purple.lighten-2{background-color:#9575cd!important}.deep-purple.lighten-1{background-color:#7e57c2!important}.deep-purple{background-color:#673ab7!important}.deep-purple-text{color:#673ab7!important}.rgba-deep-purple-slight,.rgba-deep-purple-slight:after{background-color:rgba(103,58,183,.1)}.rgba-deep-purple-light,.rgba-deep-purple-light:after{background-color:rgba(103,58,183,.3)}.rgba-deep-purple-strong,.rgba-deep-purple-strong:after{background-color:rgba(103,58,183,.7)}.deep-purple.darken-1{background-color:#5e35b1!important}.deep-purple.darken-2{background-color:#512da8!important}.deep-purple.darken-3{background-color:#4527a0!important}.deep-purple.darken-4{background-color:#311b92!important}.deep-purple.accent-1{background-color:#b388ff!important}.deep-purple.accent-2{background-color:#7c4dff!important}.deep-purple.accent-3{background-color:#651fff!important}.deep-purple.accent-4{background-color:#6200ea!important}.indigo.lighten-5{background-color:#e8eaf6!important}.indigo.lighten-4{background-color:#c5cae9!important}.indigo.lighten-3{background-color:#9fa8da!important}.indigo.lighten-2{background-color:#7986cb!important}.indigo.lighten-1{background-color:#5c6bc0!important}.indigo{background-color:#3f51b5!important}.indigo-text{color:#3f51b5!important}.rgba-indigo-slight,.rgba-indigo-slight:after{background-color:rgba(63,81,181,.1)}.rgba-indigo-light,.rgba-indigo-light:after{background-color:rgba(63,81,181,.3)}.rgba-indigo-strong,.rgba-indigo-strong:after{background-color:rgba(63,81,181,.7)}.indigo.darken-1{background-color:#3949ab!important}.indigo.darken-2{background-color:#303f9f!important}.indigo.darken-3{background-color:#283593!important}.indigo.darken-4{background-color:#1a237e!important}.indigo.accent-1{background-color:#8c9eff!important}.indigo.accent-2{background-color:#536dfe!important}.indigo.accent-3{background-color:#3d5afe!important}.indigo.accent-4{background-color:#304ffe!important}.blue.lighten-5{background-color:#e3f2fd!important}.blue.lighten-4{background-color:#bbdefb!important}.blue.lighten-3{background-color:#90caf9!important}.blue.lighten-2{background-color:#64b5f6!important}.blue.lighten-1{background-color:#42a5f5!important}.blue{background-color:#2196f3!important}.blue-text{color:#2196f3!important}.rgba-blue-slight,.rgba-blue-slight:after{background-color:rgba(33,150,243,.1)}.rgba-blue-light,.rgba-blue-light:after{background-color:rgba(33,150,243,.3)}.rgba-blue-strong,.rgba-blue-strong:after{background-color:rgba(33,150,243,.7)}.blue.darken-1{background-color:#1e88e5!important}.blue.darken-2{background-color:#1976d2!important}.blue.darken-3{background-color:#1565c0!important}.blue.darken-4{background-color:#0d47a1!important}.blue.accent-1{background-color:#82b1ff!important}.blue.accent-2{background-color:#448aff!important}.blue.accent-3{background-color:#2979ff!important}.blue.accent-4{background-color:#2962ff!important}.light-blue.lighten-5{background-color:#e1f5fe!important}.light-blue.lighten-4{background-color:#b3e5fc!important}.light-blue.lighten-3{background-color:#81d4fa!important}.light-blue.lighten-2{background-color:#4fc3f7!important}.light-blue.lighten-1{background-color:#29b6f6!important}.light-blue{background-color:#03a9f4!important}.light-blue-text{color:#03a9f4!important}.rgba-light-blue-slight,.rgba-light-blue-slight:after{background-color:rgba(3,169,244,.1)}.rgba-light-blue-light,.rgba-light-blue-light:after{background-color:rgba(3,169,244,.3)}.rgba-light-blue-strong,.rgba-light-blue-strong:after{background-color:rgba(3,169,244,.7)}.light-blue.darken-1{background-color:#039be5!important}.light-blue.darken-2{background-color:#0288d1!important}.light-blue.darken-3{background-color:#0277bd!important}.light-blue.darken-4{background-color:#01579b!important}.light-blue.accent-1{background-color:#80d8ff!important}.light-blue.accent-2{background-color:#40c4ff!important}.light-blue.accent-3{background-color:#00b0ff!important}.light-blue.accent-4{background-color:#0091ea!important}.cyan.lighten-5{background-color:#e0f7fa!important}.cyan.lighten-4{background-color:#b2ebf2!important}.cyan.lighten-3{background-color:#80deea!important}.cyan.lighten-2{background-color:#4dd0e1!important}.cyan.lighten-1{background-color:#26c6da!important}.cyan{background-color:#00bcd4!important}.cyan-text{color:#00bcd4!important}.rgba-cyan-slight,.rgba-cyan-slight:after{background-color:rgba(0,188,212,.1)}.rgba-cyan-light,.rgba-cyan-light:after{background-color:rgba(0,188,212,.3)}.rgba-cyan-strong,.rgba-cyan-strong:after{background-color:rgba(0,188,212,.7)}.cyan.darken-1{background-color:#00acc1!important}.cyan.darken-2{background-color:#0097a7!important}.cyan.darken-3{background-color:#00838f!important}.cyan.darken-4{background-color:#006064!important}.cyan.accent-1{background-color:#84ffff!important}.cyan.accent-2{background-color:#18ffff!important}.cyan.accent-3{background-color:#00e5ff!important}.cyan.accent-4{background-color:#00b8d4!important}.teal.lighten-5{background-color:#e0f2f1!important}.teal.lighten-4{background-color:#b2dfdb!important}.teal.lighten-3{background-color:#80cbc4!important}.teal.lighten-2{background-color:#4db6ac!important}.teal.lighten-1{background-color:#26a69a!important}.teal{background-color:#009688!important}.teal-text{color:#009688!important}.rgba-teal-slight,.rgba-teal-slight:after{background-color:rgba(0,150,136,.1)}.rgba-teal-light,.rgba-teal-light:after{background-color:rgba(0,150,136,.3)}.rgba-teal-strong,.rgba-teal-strong:after{background-color:rgba(0,150,136,.7)}.teal.darken-1{background-color:#00897b!important}.teal.darken-2{background-color:#00796b!important}.teal.darken-3{background-color:#00695c!important}.teal.darken-4{background-color:#004d40!important}.teal.accent-1{background-color:#a7ffeb!important}.teal.accent-2{background-color:#64ffda!important}.teal.accent-3{background-color:#1de9b6!important}.teal.accent-4{background-color:#00bfa5!important}.green.lighten-5{background-color:#e8f5e9!important}.green.lighten-4{background-color:#c8e6c9!important}.green.lighten-3{background-color:#a5d6a7!important}.green.lighten-2{background-color:#81c784!important}.green.lighten-1{background-color:#66bb6a!important}.green{background-color:#4caf50!important}.green-text{color:#4caf50!important}.rgba-green-slight,.rgba-green-slight:after{background-color:rgba(76,175,80,.1)}.rgba-green-light,.rgba-green-light:after{background-color:rgba(76,175,80,.3)}.rgba-green-strong,.rgba-green-strong:after{background-color:rgba(76,175,80,.7)}.green.darken-1{background-color:#43a047!important}.green.darken-2{background-color:#388e3c!important}.green.darken-3{background-color:#2e7d32!important}.green.darken-4{background-color:#1b5e20!important}.green.accent-1{background-color:#b9f6ca!important}.green.accent-2{background-color:#69f0ae!important}.green.accent-3{background-color:#00e676!important}.green.accent-4{background-color:#00c853!important}.light-green.lighten-5{background-color:#f1f8e9!important}.light-green.lighten-4{background-color:#dcedc8!important}.light-green.lighten-3{background-color:#c5e1a5!important}.light-green.lighten-2{background-color:#aed581!important}.light-green.lighten-1{background-color:#9ccc65!important}.light-green{background-color:#8bc34a!important}.light-green-text{color:#8bc34a!important}.rgba-light-green-slight,.rgba-light-green-slight:after{background-color:rgba(139,195,74,.1)}.rgba-light-green-light,.rgba-light-green-light:after{background-color:rgba(139,195,74,.3)}.rgba-light-green-strong,.rgba-light-green-strong:after{background-color:rgba(139,195,74,.7)}.light-green.darken-1{background-color:#7cb342!important}.light-green.darken-2{background-color:#689f38!important}.light-green.darken-3{background-color:#558b2f!important}.light-green.darken-4{background-color:#33691e!important}.light-green.accent-1{background-color:#ccff90!important}.light-green.accent-2{background-color:#b2ff59!important}.light-green.accent-3{background-color:#76ff03!important}.light-green.accent-4{background-color:#64dd17!important}.lime.lighten-5{background-color:#f9fbe7!important}.lime.lighten-4{background-color:#f0f4c3!important}.lime.lighten-3{background-color:#e6ee9c!important}.lime.lighten-2{background-color:#dce775!important}.lime.lighten-1{background-color:#d4e157!important}.lime{background-color:#cddc39!important}.lime-text{color:#cddc39!important}.rgba-lime-slight,.rgba-lime-slight:after{background-color:rgba(205,220,57,.1)}.rgba-lime-light,.rgba-lime-light:after{background-color:rgba(205,220,57,.3)}.rgba-lime-strong,.rgba-lime-strong:after{background-color:rgba(205,220,57,.7)}.lime.darken-1{background-color:#c0ca33!important}.lime.darken-2{background-color:#afb42b!important}.lime.darken-3{background-color:#9e9d24!important}.lime.darken-4{background-color:#827717!important}.lime.accent-1{background-color:#f4ff81!important}.lime.accent-2{background-color:#eeff41!important}.lime.accent-3{background-color:#c6ff00!important}.lime.accent-4{background-color:#aeea00!important}.yellow.lighten-5{background-color:#fffde7!important}.yellow.lighten-4{background-color:#fff9c4!important}.yellow.lighten-3{background-color:#fff59d!important}.yellow.lighten-2{background-color:#fff176!important}.yellow.lighten-1{background-color:#ffee58!important}.yellow{background-color:#ffeb3b!important}.yellow-text{color:#ffeb3b!important}.rgba-yellow-slight,.rgba-yellow-slight:after{background-color:rgba(255,235,59,.1)}.rgba-yellow-light,.rgba-yellow-light:after{background-color:rgba(255,235,59,.3)}.rgba-yellow-strong,.rgba-yellow-strong:after{background-color:rgba(255,235,59,.7)}.yellow.darken-1{background-color:#fdd835!important}.yellow.darken-2{background-color:#fbc02d!important}.yellow.darken-3{background-color:#f9a825!important}.yellow.darken-4{background-color:#f57f17!important}.yellow.accent-1{background-color:#ffff8d!important}.yellow.accent-2{background-color:#ff0!important}.yellow.accent-3{background-color:#ffea00!important}.yellow.accent-4{background-color:#ffd600!important}.amber.lighten-5{background-color:#fff8e1!important}.amber.lighten-4{background-color:#ffecb3!important}.amber.lighten-3{background-color:#ffe082!important}.amber.lighten-2{background-color:#ffd54f!important}.amber.lighten-1{background-color:#ffca28!important}.amber{background-color:#ffc107!important}.amber-text{color:#ffc107!important}.rgba-amber-slight,.rgba-amber-slight:after{background-color:rgba(255,193,7,.1)}.rgba-amber-light,.rgba-amber-light:after{background-color:rgba(255,193,7,.3)}.rgba-amber-strong,.rgba-amber-strong:after{background-color:rgba(255,193,7,.7)}.amber.darken-1{background-color:#ffb300!important}.amber.darken-2{background-color:#ffa000!important}.amber.darken-3{background-color:#ff8f00!important}.amber.darken-4{background-color:#ff6f00!important}.amber.accent-1{background-color:#ffe57f!important}.amber.accent-2{background-color:#ffd740!important}.amber.accent-3{background-color:#ffc400!important}.amber.accent-4{background-color:#ffab00!important}.orange.lighten-5{background-color:#fff3e0!important}.orange.lighten-4{background-color:#ffe0b2!important}.orange.lighten-3{background-color:#ffcc80!important}.orange.lighten-2{background-color:#ffb74d!important}.orange.lighten-1{background-color:#ffa726!important}.orange{background-color:#ff9800!important}.orange-text{color:#ff9800!important}.rgba-orange-slight,.rgba-orange-slight:after{background-color:rgba(255,152,0,.1)}.rgba-orange-light,.rgba-orange-light:after{background-color:rgba(255,152,0,.3)}.rgba-orange-strong,.rgba-orange-strong:after{background-color:rgba(255,152,0,.7)}.orange.darken-1{background-color:#fb8c00!important}.orange.darken-2{background-color:#f57c00!important}.orange.darken-3{background-color:#ef6c00!important}.orange.darken-4{background-color:#e65100!important}.orange.accent-1{background-color:#ffd180!important}.orange.accent-2{background-color:#ffab40!important}.orange.accent-3{background-color:#ff9100!important}.orange.accent-4{background-color:#ff6d00!important}.deep-orange.lighten-5{background-color:#fbe9e7!important}.deep-orange.lighten-4{background-color:#ffccbc!important}.deep-orange.lighten-3{background-color:#ffab91!important}.deep-orange.lighten-2{background-color:#ff8a65!important}.deep-orange.lighten-1{background-color:#ff7043!important}.deep-orange{background-color:#ff5722!important}.deep-orange-text{color:#ff5722!important}.rgba-deep-orange-slight,.rgba-deep-orange-slight:after{background-color:rgba(255,87,34,.1)}.rgba-deep-orange-light,.rgba-deep-orange-light:after{background-color:rgba(255,87,34,.3)}.rgba-deep-orange-strong,.rgba-deep-orange-strong:after{background-color:rgba(255,87,34,.7)}.deep-orange.darken-1{background-color:#f4511e!important}.deep-orange.darken-2{background-color:#e64a19!important}.deep-orange.darken-3{background-color:#d84315!important}.deep-orange.darken-4{background-color:#bf360c!important}.deep-orange.accent-1{background-color:#ff9e80!important}.deep-orange.accent-2{background-color:#ff6e40!important}.deep-orange.accent-3{background-color:#ff3d00!important}.deep-orange.accent-4{background-color:#dd2c00!important}.brown.lighten-5{background-color:#efebe9!important}.brown.lighten-4{background-color:#d7ccc8!important}.brown.lighten-3{background-color:#bcaaa4!important}.brown.lighten-2{background-color:#a1887f!important}.brown.lighten-1{background-color:#8d6e63!important}.brown{background-color:#795548!important}.brown-text{color:#795548!important}.rgba-brown-slight,.rgba-brown-slight:after{background-color:rgba(121,85,72,.1)}.rgba-brown-light,.rgba-brown-light:after{background-color:rgba(121,85,72,.3)}.rgba-brown-strong,.rgba-brown-strong:after{background-color:rgba(121,85,72,.7)}.brown.darken-1{background-color:#6d4c41!important}.brown.darken-2{background-color:#5d4037!important}.brown.darken-3{background-color:#4e342e!important}.brown.darken-4{background-color:#3e2723!important}.blue-grey.lighten-5{background-color:#eceff1!important}.blue-grey.lighten-4{background-color:#cfd8dc!important}.blue-grey.lighten-3{background-color:#b0bec5!important}.blue-grey.lighten-2{background-color:#90a4ae!important}.blue-grey.lighten-1{background-color:#78909c!important}.blue-grey{background-color:#607d8b!important}.blue-grey-text{color:#607d8b!important}.rgba-blue-grey-slight,.rgba-blue-grey-slight:after{background-color:rgba(96,125,139,.1)}.rgba-blue-grey-light,.rgba-blue-grey-light:after{background-color:rgba(96,125,139,.3)}.rgba-blue-grey-strong,.rgba-blue-grey-strong:after{background-color:rgba(96,125,139,.7)}.blue-grey.darken-1{background-color:#546e7a!important}.blue-grey.darken-2{background-color:#455a64!important}.blue-grey.darken-3{background-color:#37474f!important}.blue-grey.darken-4{background-color:#263238!important}.grey.lighten-5{background-color:#fafafa!important}.grey.lighten-4{background-color:#f5f5f5!important}.grey.lighten-3{background-color:#eee!important}.grey.lighten-2{background-color:#e0e0e0!important}.grey.lighten-1{background-color:#bdbdbd!important}.grey{background-color:#9e9e9e!important}.grey-text{color:#9e9e9e!important}.rgba-grey-slight,.rgba-grey-slight:after{background-color:rgba(158,158,158,.1)}.rgba-grey-light,.rgba-grey-light:after{background-color:rgba(158,158,158,.3)}.rgba-grey-strong,.rgba-grey-strong:after{background-color:rgba(158,158,158,.7)}.grey.darken-1{background-color:#757575!important}.grey.darken-2{background-color:#616161!important}.grey.darken-3{background-color:#424242!important}.grey.darken-4{background-color:#212121!important}.black{background-color:#000!important}.black-text{color:#000!important}.rgba-black-slight,.rgba-black-slight:after{background-color:rgba(0,0,0,.1)}.rgba-black-light,.rgba-black-light:after{background-color:rgba(0,0,0,.3)}.rgba-black-strong,.rgba-black-strong:after{background-color:rgba(0,0,0,.7)}.white{background-color:#fff!important}.card.card-cascade .view.view-cascade.gradient-card-header,.white-text{color:#fff!important}.rgba-white-slight,.rgba-white-slight:after{background-color:rgba(255,255,255,.1)}.rgba-white-light,.rgba-white-light:after{background-color:rgba(255,255,255,.3)}.rgba-white-strong,.rgba-white-strong:after{background-color:rgba(255,255,255,.7)}.rgba-stylish-slight{background-color:rgba(62,69,81,.1)}.rgba-stylish-light{background-color:rgba(62,69,81,.3)}.rgba-stylish-strong{background-color:rgba(62,69,81,.7)}.primary-color{background-color:#4285f4!important}.primary-color-dark{background-color:#0d47a1!important}.secondary-color{background-color:#a6c!important}.secondary-color-dark{background-color:#93c!important}.default-color{background-color:#2bbbad!important}.default-color-dark{background-color:#00695c!important}.info-color{background-color:#33b5e5!important}.info-color-dark{background-color:#09c!important}.success-color{background-color:#00c851!important}.success-color-dark{background-color:#007e33!important}.warning-color{background-color:#fb3!important}.warning-color-dark{background-color:#f80!important}.danger-color{background-color:#ff3547!important}.danger-color-dark{background-color:#c00!important}.elegant-color{background-color:#2e2e2e!important}.elegant-color-dark{background-color:#212121!important}.stylish-color{background-color:#4b515d!important}.stylish-color-dark{background-color:#3e4551!important}.unique-color{background-color:#3f729b!important}.unique-color-dark{background-color:#1c2331!important}.special-color{background-color:#37474f!important}.special-color-dark{background-color:#263238!important}.purple-gradient{background:linear-gradient(40deg,#ff6ec4,#7873f5)!important}.peach-gradient{background:linear-gradient(40deg,#ffd86f,#fc6262)!important}.aqua-gradient{background:linear-gradient(40deg,#2096ff,#05ffa3)!important}.blue-gradient{background:linear-gradient(40deg,#45cafc,#303f9f)!important}.purple-gradient-rgba{background:linear-gradient(40deg,rgba(255,110,196,.9),rgba(120,115,245,.9))!important}.peach-gradient-rgba{background:linear-gradient(40deg,rgba(255,216,111,.9),rgba(252,98,98,.9))!important}.aqua-gradient-rgba{background:linear-gradient(40deg,rgba(32,150,255,.9),rgba(5,255,163,.9))!important}.blue-gradient-rgba{background:linear-gradient(40deg,rgba(69,202,252,.9),rgba(48,63,159,.9))!important}.dark-grey-text,.dark-grey-text:focus,.dark-grey-text:hover{color:#4f4f4f!important}.hoverable{box-shadow:none;transition:.55s ease-in-out}.hoverable:hover{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);transition:.55s ease-in-out}.z-depth-0{box-shadow:none!important}.z-depth-1{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)!important}.z-depth-1-half{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)!important}.z-depth-2{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19)!important}.z-depth-3{box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19)!important}.z-depth-4{box-shadow:0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)!important}.z-depth-5{box-shadow:0 27px 24px 0 rgba(0,0,0,.2),0 40px 77px 0 rgba(0,0,0,.22)!important}.disabled,:disabled{pointer-events:none!important}a{cursor:pointer;text-decoration:none;color:#0275d8;transition:.2s ease-in-out}a:hover{text-decoration:none;color:#014c8c;transition:.2s ease-in-out}a.disabled:hover,a:disabled:hover{color:#0275d8}a:not([href]):not([tabindex]),a:not([href]):not([tabindex]):focus,a:not([href]):not([tabindex]):hover{color:inherit;text-decoration:none}.card{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);border:0;font-weight:400}.card[class*=border]{border:1px solid #9e9e9e;box-shadow:none}.card .card-body h1,.card .card-body h2,.card .card-body h3,.card .card-body h4,.card .card-body h5,.card .card-body h6{font-weight:400}.card .card-body .card-title a,.card .card-body .card-title a:hover{transition:.2s ease-in-out}.card .card-body .card-text{color:#747373;font-size:.9rem;font-weight:400}.card .md-form label{font-weight:300}.card-text:last-child{margin-bottom:1rem!important}mdb-card-img img.img-fluid{width:100%}.card.card-image{background-size:cover;background-position:center;width:100%}.card.card-image [class*=rgba-]{border-radius:.25rem}.card.card-cascade .view.view-cascade{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);border-radius:.25rem}.card.card-cascade .view.view-cascade.gradient-card-header{padding:1.6rem 1rem;text-align:center}.card.card-cascade .view.view-cascade.gradient-card-header .card-header-title{font-weight:500}.card.card-cascade .view.view-cascade.gradient-card-header .btn-floating{background-color:rgba(255,255,255,.2)}.card.card-cascade.wider{box-shadow:none;background-color:transparent}.card.card-cascade.wider .view.view-cascade{z-index:2}.card.card-cascade.wider .card-body.card-body-cascade{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);margin-left:4%;margin-right:4%;background:#fff;z-index:1;border-radius:0 0 .25rem .25rem}.card.card-cascade.wider .card-body.card-body-cascade .card-footer{margin-left:-1.25rem;margin-right:-1.25rem}.card.card-cascade.wider.reverse .card-body.card-body-cascade{z-index:3;margin-top:-1rem;border-radius:.25rem;box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.card.card-cascade.narrower{margin-top:1.25rem}.card.card-cascade.narrower .view.view-cascade{margin-left:4%;margin-right:4%;margin-top:-1.25rem}.card.card-cascade.panel-cascade .view{text-align:center;color:#fff}.card.card-cascade.panel-cascade .list-group .list-group-item{margin-bottom:0;border:0;border-bottom:1px solid #eee;color:#495057}.card.card-cascade.panel-cascade .list-group .list-group-item:hover{background-color:#eee}.card .btn-action{margin-top:-1.44rem;margin-bottom:-1.44rem}.card .activator{position:absolute;right:0;font-size:1.2rem}.card .card-reveal{position:absolute;width:100%;overflow-y:auto;top:100%;height:100%;z-index:1;display:none}.card .card-reveal .content{position:relative}.card.ovf-hidden{overflow:hidden}.card .card-share{position:relative}.card .card-share .social-reveal{position:absolute;top:-1.44rem;right:1.88rem;visibility:hidden;width:auto;-webkit-transform:translateZ(0);transform:translateZ(0);-webkit-transform:translateX(0);transform:translateX(0);transition:transform .35s;transition:transform .35s,-webkit-transform .35s}.card .card-share .social-reveal-active{z-index:11;visibility:visible;-webkit-transform:translateZ(0);transform:translateZ(0);-webkit-transform:translateX(-48px);transform:translateX(-48px);transition:transform .35s;transition:transform .35s,-webkit-transform .35s}.card .card-reveal .card-title,.card-wrapper .card-rotating .card-title{cursor:pointer}.card .card-reveal .card-title i,.card-wrapper .card-rotating .card-title i{color:#9e9e9e;position:absolute;right:.63rem}.card-wrapper{-webkit-perspective:800px;perspective:800px;position:relative;margin:0;width:100%}.card-wrapper .card-up{height:200px;overflow:hidden}.card-wrapper .card-up img{vertical-align:middle}.card-wrapper .avatar{display:block;margin-top:-60px;overflow:hidden;width:120px}.card-wrapper .avatar img{border:5px solid #fff;background:#fff;width:100%}.card-wrapper .card-rotating{height:100%;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;transition:.5s}.card-wrapper .card-rotating .face{width:100%;position:absolute;background:#fff;-webkit-backface-visibility:hidden;backface-visibility:hidden;z-index:2}.card-wrapper .card-rotating.flipped{-webkit-transform:rotateY(180deg);transform:rotateY(180deg)}.card-wrapper .card-rotating .front{z-index:1}.card-wrapper .card-rotating .back,.card-wrapper .card-rotating .front{transition:1s}.testimonial-card .card-up{overflow:hidden;height:120px;border-top-left-radius:.25rem;border-top-right-radius:.25rem}.testimonial-card .avatar{border-radius:50%;width:120px;margin-top:-60px;overflow:hidden;border:5px solid #fff}.testimonial-card .avatar img{width:100%}.testimonial-card .card-body{text-align:center}"]
@@ -1027,7 +1083,6 @@ function isBs3() {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-// import { CarouselComponent } from './carousel.component';
 class SlideComponent {
     /**
      * @param {?} el
@@ -1042,29 +1097,14 @@ class SlideComponent {
          * Wraps element by appropriate CSS classes
          */
         this.el = null;
-        // this.carousel = carousel;
         this.el = el;
-    }
-    /**
-     * Fires changes in container collection after adding a new slide instance
-     * @return {?}
-     */
-    ngOnInit() {
-        // this.carousel.addSlide(this);
-    }
-    /**
-     * Fires changes in container collection after removing of this slide instance
-     * @return {?}
-     */
-    ngOnDestroy() {
-        // this.carousel.removeSlide(this);
     }
 }
 SlideComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-slide, mdb-carousel-item',
                 template: `
-  <ng-content></ng-content>
+    <ng-content></ng-content>
   `
             }] }
 ];
@@ -1111,6 +1151,39 @@ CarouselConfig.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @type {?} */
+const BACKSPACE = 8;
+/** @type {?} */
+const TAB = 9;
+/** @type {?} */
+const ENTER = 13;
+/** @type {?} */
+const ESCAPE = 27;
+/** @type {?} */
+const SPACE = 32;
+/** @type {?} */
+const LEFT_ARROW = 37;
+/** @type {?} */
+const UP_ARROW = 38;
+/** @type {?} */
+const RIGHT_ARROW = 39;
+/** @type {?} */
+const DOWN_ARROW = 40;
+/** @type {?} */
+const DELETE = 46;
+/** @type {?} */
+const ZERO = 48;
+/** @type {?} */
+const NINE = 57;
+/** @type {?} */
+const A = 65;
+/** @type {?} */
+const Z = 90;
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 /** @enum {number} */
 const Direction = {
     UNKNOWN: 0,
@@ -1132,11 +1205,11 @@ class CarouselComponent {
      * @param {?} renderer
      */
     constructor(config, el, platformId, cdRef, renderer) {
+        this.el = el;
         this.cdRef = cdRef;
         this.renderer = renderer;
         this.SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
         this.destroyed = false;
-        this.el = null;
         this.animationEnd = true;
         this.isBrowser = false;
         this.isControls = true;
@@ -1146,7 +1219,6 @@ class CarouselComponent {
         this.activeSlideChange = new EventEmitter(false);
         this.isBrowser = isPlatformBrowser(platformId);
         Object.assign(this, config);
-        this.el = el;
     }
     /**
      * @return {?}
@@ -1681,11 +1753,11 @@ class CarouselComponent {
     keyboardControl(event) {
         if (this.keyboard) {
             // tslint:disable-next-line: deprecation
-            if (event.keyCode === 39) {
+            if (event.keyCode === RIGHT_ARROW) {
                 this.nextSlide();
             }
             // tslint:disable-next-line: deprecation
-            if (event.keyCode === 37) {
+            if (event.keyCode === LEFT_ARROW) {
                 this.previousSlide();
             }
         }
@@ -1769,16 +1841,14 @@ class BaseChartDirective {
      * @param {?} platformId
      */
     constructor(element, platformId) {
+        this.element = element;
         this.labels = [];
-        this.options = {
-            legend: { display: false },
-        };
+        this.options = { legend: { display: false } };
         this.legend = false;
         this.chartClick = new EventEmitter();
         this.chartHover = new EventEmitter();
         this.initFlag = false;
         this.isBrowser = false;
-        this.element = element;
         this.isBrowser = isPlatformBrowser(platformId);
     }
     /**
@@ -1830,7 +1900,7 @@ class BaseChartDirective {
      * @param {?} ctx
      * @return {?}
      */
-    getChartBuilder(ctx /*, data:Array<any>, options:any*/) {
+    getChartBuilder(ctx) {
         /** @type {?} */
         const datasets = this.getDatasets();
         /** @type {?} */
@@ -1965,7 +2035,7 @@ class BaseChartDirective {
      */
     refresh() {
         this.ngOnDestroy();
-        this.chart = this.getChartBuilder(this.ctx /*, data, this.options*/);
+        this.chart = this.getChartBuilder(this.ctx);
     }
 }
 BaseChartDirective.defaultColors = [
@@ -2165,13 +2235,8 @@ class ChartsModule {
 }
 ChartsModule.decorators = [
     { type: NgModule, args: [{
-                declarations: [
-                    BaseChartDirective
-                ],
-                exports: [
-                    BaseChartDirective
-                ],
-                imports: []
+                declarations: [BaseChartDirective],
+                exports: [BaseChartDirective],
             },] }
 ];
 
@@ -2386,16 +2451,9 @@ class CheckboxModule {
 }
 CheckboxModule.decorators = [
     { type: NgModule, args: [{
-                declarations: [
-                    CheckboxComponent
-                ],
-                exports: [
-                    CheckboxComponent
-                ],
-                imports: [
-                    CommonModule,
-                    FormsModule
-                ]
+                declarations: [CheckboxComponent],
+                exports: [CheckboxComponent],
+                imports: [CommonModule, FormsModule],
             },] }
 ];
 
@@ -4824,7 +4882,6 @@ class BsDropdownDirective {
         this._state = _state;
         this.cdRef = cdRef;
         this.dropupDefault = false;
-        // todo: move to component loader
         this._isInlineOpen = false;
         this._subscriptions = [];
         this._isInited = false;
@@ -5001,7 +5058,6 @@ class BsDropdownDirective {
             return;
         }
         // material and dropup dropdown animation
-        // const parent = this._elementRef.nativeElement.classList;
         /** @type {?} */
         const button = this._elementRef.nativeElement.children[0];
         /** @type {?} */
@@ -5095,10 +5151,8 @@ class BsDropdownDirective {
         if (!this.isOpen) {
             return;
         }
-        // const parent = this._elementRef.nativeElement.classList;
         /** @type {?} */
         const container = this._elementRef.nativeElement.querySelector('.dropdown-menu');
-        // if (parent.value.includes('dropdown')) {
         container.classList.remove('fadeInDropdown');
         if (container.parentNode.classList.contains('dropdown') ||
             container.parentNode.classList.contains('dropup-material')) {
@@ -5135,16 +5189,6 @@ class BsDropdownDirective {
                 this._state.isOpenChange.emit(false);
             }), 0);
         }
-        // } else {
-        //   if (this._showInline) {
-        //     this._isInlineOpen = false;
-        //     this.onHidden.emit(true);
-        //     this.hidden.emit(true);
-        //   } else {
-        //     this._dropdown.hide();
-        //   }
-        //   this._state.isOpenChange.emit(false);
-        // }
     }
     /**
      * Toggles an element’s popover. This is considered a “manual” triggering of
@@ -5251,24 +5295,19 @@ class BsDropdownToggleDirective {
         this._element = _element;
         this._subscriptions = [];
         this.ariaHaspopup = true;
-        // @HostBinding('attr.disabled') isDisabled: boolean = null;
         this.isDisabled = null;
         // sync is open value with state
-        this._subscriptions.push(this._state
-            .isOpenChange.subscribe((/**
+        this._subscriptions.push(this._state.isOpenChange.subscribe((/**
          * @param {?} value
          * @return {?}
          */
-        (value) => this.isOpen = value)));
+        (value) => (this.isOpen = value))));
         // populate disabled state
-        this._subscriptions.push(this._state
-            .isDisabledChange
-            // .subscribe((value: boolean) => this.isDisabled = value || null));
-            .subscribe((/**
+        this._subscriptions.push(this._state.isDisabledChange.subscribe((/**
          * @param {?} value
          * @return {?}
          */
-        (value) => this.isDisabled = value || null)));
+        (value) => (this.isDisabled = value || null))));
     }
     /**
      * @return {?}
@@ -5284,7 +5323,8 @@ class BsDropdownToggleDirective {
      * @return {?}
      */
     onDocumentClick(event) {
-        if (this._state.autoClose && event.button !== 2 &&
+        if (this._state.autoClose &&
+            event.button !== 2 &&
             !this._element.nativeElement.contains(event.target)) {
             this._state.toggleClick.emit(false);
         }
@@ -5309,7 +5349,7 @@ class BsDropdownToggleDirective {
 BsDropdownToggleDirective.decorators = [
     { type: Directive, args: [{
                 selector: '[mdbDropdownToggle],[dropdownToggle]',
-                exportAs: 'bs-dropdown-toggle'
+                exportAs: 'bs-dropdown-toggle',
             },] }
 ];
 /** @nocollapse */
@@ -5372,6 +5412,168 @@ DropdownModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/*tslint:disable:no-invalid-this */
+/**
+ * @return {?}
+ */
+function OnChange$1() {
+    /** @type {?} */
+    const sufix = 'Change';
+    return (/**
+     * @param {?} target
+     * @param {?} propertyKey
+     * @return {?}
+     */
+    function OnChangeHandler(target, propertyKey) {
+        /** @type {?} */
+        const _key = ` __${propertyKey}Value`;
+        Object.defineProperty(target, propertyKey, {
+            /**
+             * @return {?}
+             */
+            get() { return this[_key]; },
+            /**
+             * @param {?} value
+             * @return {?}
+             */
+            set(value) {
+                /** @type {?} */
+                const prevValue = this[_key];
+                this[_key] = value;
+                if (prevValue !== value && this[propertyKey + sufix]) {
+                    this[propertyKey + sufix].emit(value);
+                }
+            }
+        });
+    });
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class Utils$1 {
+    constructor() {
+    }
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    static reflow(element) {
+        ((/**
+         * @param {?} bs
+         * @return {?}
+         */
+        (bs) => bs))(element.offsetHeight);
+    }
+    // source: https://github.com/jquery/jquery/blob/master/src/css/var/getStyles.js
+    /**
+     * @param {?} elem
+     * @return {?}
+     */
+    static getStyles(elem) {
+        // Support: IE <=11 only, Firefox <=30 (#15098, #14150)
+        // IE throws on elements created in popups
+        // FF meanwhile throws on frame elements through "defaultView.getComputedStyle"
+        /** @type {?} */
+        let view = elem.ownerDocument.defaultView;
+        if (!view || !view.opener) {
+            view = win;
+        }
+        return view.getComputedStyle(elem);
+    }
+    /**
+     * @param {?} event
+     * @param {?} el
+     * @return {?}
+     */
+    focusTrapModal(event, el) {
+        /** @type {?} */
+        let focusableElements;
+        /** @type {?} */
+        let firstFocusableElement;
+        /** @type {?} */
+        let lastFocusableElement;
+        /** @type {?} */
+        const KEYCODE_TAB = 9;
+        /*tslint:disable-next-line:max-line-length */
+        focusableElements = el.nativeElement.querySelectorAll('a[href], button, textarea, input, select, form, mdb-select, mdb-auto-completer, mdb-checkbox, mdb-range-input');
+        firstFocusableElement = focusableElements[0];
+        lastFocusableElement = focusableElements[focusableElements.length - 1];
+        if (event.key === 'Tab' || event.keyCode === KEYCODE_TAB) {
+            if (event.shiftKey) {
+                if (document$1 && document$1.activeElement === firstFocusableElement) {
+                    lastFocusableElement.focus();
+                    event.preventDefault();
+                }
+            }
+            else {
+                if (document$1 && document$1.activeElement === lastFocusableElement) {
+                    firstFocusableElement.focus();
+                    event.preventDefault();
+                }
+            }
+        }
+    }
+    /**
+     * @param {?} el
+     * @param {?} selector
+     * @return {?}
+     */
+    getClosestEl(el, selector) {
+        for (; el && el !== document$1; el = el.parentNode) {
+            if (el.matches && el.matches(selector)) {
+                return el;
+            }
+        }
+        return null;
+    }
+    /**
+     * @param {?} elem
+     * @return {?}
+     */
+    getCoords(elem) {
+        /** @type {?} */
+        const box = elem.getBoundingClientRect();
+        /** @type {?} */
+        const body = document$1.body;
+        /** @type {?} */
+        const docEl = document$1.documentElement;
+        /** @type {?} */
+        const scrollTop = win.pageYOffset || docEl.scrollTop || body.scrollTop;
+        /** @type {?} */
+        const scrollLeft = win.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+        /** @type {?} */
+        const clientTop = docEl.clientTop || body.clientTop || 0;
+        /** @type {?} */
+        const clientLeft = docEl.clientLeft || body.clientLeft || 0;
+        /** @type {?} */
+        const top = box.top + scrollTop - clientTop;
+        /** @type {?} */
+        const left = box.left + scrollLeft - clientLeft;
+        return { top: Math.round(top), left: Math.round(left) };
+    }
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class MdbIconComponent {
     /**
      * @param {?} _el
@@ -5385,6 +5587,7 @@ class MdbIconComponent {
         this.fal = false;
         this.fas = true;
         this.sizeClass = '';
+        this.utils = new Utils$1();
     }
     /**
      * @return {?}
@@ -5403,8 +5606,8 @@ class MdbIconComponent {
         this.fas = classList.contains('fas');
         this.fal = classList.contains('fal');
         /** @type {?} */
-        const formWrapper = this._getClosestEl(this._el.nativeElement, '.md-form') ||
-            this._getClosestEl(this._el.nativeElement, '.md-outline');
+        const formWrapper = this.utils.getClosestEl(this._el.nativeElement, '.md-form') ||
+            this.utils.getClosestEl(this._el.nativeElement, '.md-outline');
         if (formWrapper) {
             formWrapper.childNodes.forEach((/**
              * @param {?} el
@@ -5427,20 +5630,6 @@ class MdbIconComponent {
                 }
             }));
         }
-    }
-    /**
-     * @private
-     * @param {?} el
-     * @param {?} selector
-     * @return {?}
-     */
-    _getClosestEl(el, selector) {
-        for (; el && el !== document$1; el = el.parentNode) {
-            if (el.matches && el.matches(selector)) {
-                return el;
-            }
-        }
-        return null;
     }
 }
 MdbIconComponent.decorators = [
@@ -5570,21 +5759,9 @@ class IconsModule {
 }
 IconsModule.decorators = [
     { type: NgModule, args: [{
-                declarations: [
-                    MdbIconComponent,
-                    FabDirective,
-                    FarDirective,
-                    FasDirective,
-                    FalDirective
-                ],
+                declarations: [MdbIconComponent, FabDirective, FarDirective, FasDirective, FalDirective],
                 imports: [CommonModule],
-                exports: [
-                    MdbIconComponent,
-                    FabDirective,
-                    FarDirective,
-                    FasDirective,
-                    FalDirective
-                ]
+                exports: [MdbIconComponent, FabDirective, FarDirective, FasDirective, FalDirective],
             },] }
 ];
 
@@ -5611,20 +5788,7 @@ class MdbErrorDirective {
         this.id = `mdb-error-${defaultIdNumber$1++}`;
         this.errorMsg = true;
         this.messageId = this.id;
-    }
-    /**
-     * @private
-     * @param {?} el
-     * @param {?} selector
-     * @return {?}
-     */
-    _getClosestEl(el, selector) {
-        for (; el && el !== document; el = el.previousElementSibling) {
-            if (el.matches(selector)) {
-                return el;
-            }
-        }
-        return null;
+        this.utils = new Utils$1();
     }
     /**
      * @private
@@ -5646,7 +5810,7 @@ class MdbErrorDirective {
      */
     ngOnInit() {
         /** @type {?} */
-        const textarea = this._getClosestEl(this.el.nativeElement, '.md-textarea');
+        const textarea = this.utils.getClosestEl(this.el.nativeElement, '.md-textarea');
         this._calculateMarginTop();
         if (textarea) {
             /** @type {?} */
@@ -5707,20 +5871,7 @@ class MdbSuccessDirective {
         this.id = `mdb-success-${defaultIdNumber$2++}`;
         this.successMsg = true;
         this.messageId = this.id;
-    }
-    /**
-     * @private
-     * @param {?} el
-     * @param {?} selector
-     * @return {?}
-     */
-    _getClosestEl(el, selector) {
-        for (; el && el !== document; el = el.previousElementSibling) {
-            if (el.matches(selector)) {
-                return el;
-            }
-        }
-        return null;
+        this.utils = new Utils$1();
     }
     /**
      * @private
@@ -5742,7 +5893,7 @@ class MdbSuccessDirective {
      */
     ngOnInit() {
         /** @type {?} */
-        const textarea = this._getClosestEl(this.el.nativeElement, '.md-textarea');
+        const textarea = this.utils.getClosestEl(this.el.nativeElement, '.md-textarea');
         this._calculateMarginTop();
         if (textarea) {
             /** @type {?} */
@@ -5939,13 +6090,10 @@ class EqualValidatorDirective {
      * @return {?}
      */
     validate(c) {
-        /** @type {?} */
-        const setToNullValue = null;
         // self value (e.g. retype password)
         /** @type {?} */
         const v = c.value;
         // control value (e.g. password)
-        // const e: any = c.root.get(this.validateEqual);
         /** @type {?} */
         const e = c.root.get(this.validateEqual);
         // value not equal
@@ -5962,11 +6110,11 @@ class EqualValidatorDirective {
         // value not equal and reverse
         if (e && v !== e.value && this.isReverse) {
             e.setErrors({
-                validateEqual: false
+                validateEqual: false,
             });
         }
         // return null;
-        return setToNullValue;
+        return null;
     }
 }
 EqualValidatorDirective.decorators = [
@@ -5976,8 +6124,8 @@ EqualValidatorDirective.decorators = [
                     { provide: NG_VALIDATORS, useExisting: forwardRef((/**
                          * @return {?}
                          */
-                        () => EqualValidatorDirective)), multi: true }
-                ]
+                        () => EqualValidatorDirective)), multi: true },
+                ],
             },] }
 ];
 /** @nocollapse */
@@ -6010,7 +6158,6 @@ class MdbInputDirective {
         this.focusRadio = true;
         this.isBrowser = false;
         this.isClicked = false;
-        this.el = _elRef;
         this.isBrowser = isPlatformBrowser(platformId);
     }
     /**
@@ -6060,20 +6207,20 @@ class MdbInputDirective {
             if (event.target.type === 'number') {
                 if (event.shiftKey) {
                     switch (event.keyCode) {
-                        case 38:
+                        case UP_ARROW:
                             event.target.value = +event.target.value + 10;
                             break;
-                        case 40:
+                        case DOWN_ARROW:
                             event.target.value = +event.target.value - 10;
                             break;
                     }
                 }
                 if (event.altKey) {
                     switch (event.keyCode) {
-                        case 38:
+                        case UP_ARROW:
                             event.target.value = +event.target.value + 0.1;
                             break;
-                        case 40:
+                        case DOWN_ARROW:
                             event.target.value = +event.target.value - 0.1;
                             break;
                     }
@@ -6311,10 +6458,6 @@ class MdbInputDirective {
     ngAfterViewChecked() {
         this.initComponent();
         this.checkValue();
-        // tslint:disable-next-line:max-line-length
-        /* if (this.el.nativeElement.tagName === 'MDB-COMPLETER' && this.el.nativeElement.getAttribute('ng-reflect-model') == null && !this.isClicked) {
-            this._renderer.removeClass(this.elLabel, 'active');
-        } */
     }
     /**
      * @return {?}
@@ -6385,7 +6528,6 @@ class MdbInputDirective {
                 (value === '' && this.el.nativeElement.attributes.placeholder)) {
                 this._renderer.addClass(this.elLabel, 'active');
             }
-            if (this.el.nativeElement.getAttribute('ng-reflect-model') != null) ;
         }
     }
 }
@@ -6436,11 +6578,11 @@ class MdbInput {
         this._renderer = _renderer;
         this.elLabel = null;
         this.elIcon = null;
-        this.element = null;
         this.focusCheckbox = true;
         this.focusRadio = true;
         this.isBrowser = false;
         this.isClicked = false;
+        this.element = null;
         this.isBrowser = isPlatformBrowser(platformId);
     }
     /**
@@ -6475,10 +6617,6 @@ class MdbInput {
         catch (error) { }
     }
     /**
-     * @return {?}
-     */
-    oniput() { }
-    /**
      * @param {?} event
      * @return {?}
      */
@@ -6487,20 +6625,20 @@ class MdbInput {
             if (event.target.type === 'number') {
                 if (event.shiftKey) {
                     switch (event.keyCode) {
-                        case 38:
+                        case UP_ARROW:
                             event.target.value = +event.target.value + 10;
                             break;
-                        case 40:
+                        case DOWN_ARROW:
                             event.target.value = +event.target.value - 10;
                             break;
                     }
                 }
                 if (event.altKey) {
                     switch (event.keyCode) {
-                        case 38:
+                        case UP_ARROW:
                             event.target.value = +event.target.value + 0.1;
                             break;
-                        case 40:
+                        case DOWN_ARROW:
                             event.target.value = +event.target.value - 0.1;
                             break;
                     }
@@ -6666,7 +6804,6 @@ MdbInput.propDecorators = {
     onfocus: [{ type: HostListener, args: ['focus',] }],
     onblur: [{ type: HostListener, args: ['blur',] }],
     onchange: [{ type: HostListener, args: ['change',] }],
-    oniput: [{ type: HostListener, args: ['input',] }],
     onkeydown: [{ type: HostListener, args: ['keydown', ['$event'],] }],
     oncut: [{ type: HostListener, args: ['cut',] }],
     onpaste: [{ type: HostListener, args: ['paste',] }],
@@ -6729,7 +6866,7 @@ const modalConfigDefaults = {
     containerClass: '',
     animated: true,
     scroll: false,
-    data: ɵ0
+    data: ɵ0,
 };
 /** @type {?} */
 const ClassName = {
@@ -6739,125 +6876,18 @@ const ClassName = {
     FADE: 'fade',
     IN: 'in',
     // bs3
-    SHOW: 'show' // bs4
+    SHOW: 'show',
 };
 /** @type {?} */
 const TransitionDurations = {
     MODAL: 300,
-    BACKDROP: 150
+    BACKDROP: 150,
 };
 /** @type {?} */
 const DISMISS_REASONS = {
     BACKRDOP: 'backdrop-click',
-    ESC: 'esc'
+    ESC: 'esc',
 };
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class Utils$1 {
-    constructor() {
-    }
-    /**
-     * @param {?} element
-     * @return {?}
-     */
-    static reflow(element) {
-        ((/**
-         * @param {?} bs
-         * @return {?}
-         */
-        (bs) => bs))(element.offsetHeight);
-    }
-    // source: https://github.com/jquery/jquery/blob/master/src/css/var/getStyles.js
-    /**
-     * @param {?} elem
-     * @return {?}
-     */
-    static getStyles(elem) {
-        // Support: IE <=11 only, Firefox <=30 (#15098, #14150)
-        // IE throws on elements created in popups
-        // FF meanwhile throws on frame elements through "defaultView.getComputedStyle"
-        /** @type {?} */
-        let view = elem.ownerDocument.defaultView;
-        if (!view || !view.opener) {
-            view = win;
-        }
-        return view.getComputedStyle(elem);
-    }
-    /**
-     * @param {?} event
-     * @param {?} el
-     * @return {?}
-     */
-    focusTrapModal(event, el) {
-        /** @type {?} */
-        let focusableElements;
-        /** @type {?} */
-        let firstFocusableElement;
-        /** @type {?} */
-        let lastFocusableElement;
-        /** @type {?} */
-        const KEYCODE_TAB = 9;
-        /*tslint:disable-next-line:max-line-length */
-        focusableElements = el.nativeElement.querySelectorAll('a[href], button, textarea, input, select, form, mdb-select, mdb-auto-completer, mdb-checkbox, mdb-range-input');
-        firstFocusableElement = focusableElements[0];
-        lastFocusableElement = focusableElements[focusableElements.length - 1];
-        if (event.key === 'Tab' || event.keyCode === KEYCODE_TAB) {
-            if (event.shiftKey) {
-                if (document$1 && document$1.activeElement === firstFocusableElement) {
-                    lastFocusableElement.focus();
-                    event.preventDefault();
-                }
-            }
-            else {
-                if (document$1 && document$1.activeElement === lastFocusableElement) {
-                    firstFocusableElement.focus();
-                    event.preventDefault();
-                }
-            }
-        }
-    }
-    /**
-     * @param {?} el
-     * @param {?} selector
-     * @return {?}
-     */
-    getClosestEl(el, selector) {
-        for (; el && el !== document$1; el = el.parentNode) {
-            if (el.matches && el.matches(selector)) {
-                return el;
-            }
-        }
-        return null;
-    }
-    /**
-     * @param {?} elem
-     * @return {?}
-     */
-    getCoords(elem) {
-        /** @type {?} */
-        const box = elem.getBoundingClientRect();
-        /** @type {?} */
-        const body = document$1.body;
-        /** @type {?} */
-        const docEl = document$1.documentElement;
-        /** @type {?} */
-        const scrollTop = win.pageYOffset || docEl.scrollTop || body.scrollTop;
-        /** @type {?} */
-        const scrollLeft = win.pageXOffset || docEl.scrollLeft || body.scrollLeft;
-        /** @type {?} */
-        const clientTop = docEl.clientTop || body.clientTop || 0;
-        /** @type {?} */
-        const clientLeft = docEl.clientLeft || body.clientLeft || 0;
-        /** @type {?} */
-        const top = box.top + scrollTop - clientTop;
-        /** @type {?} */
-        const left = box.left + scrollLeft - clientLeft;
-        return { top: Math.round(top), left: Math.round(left) };
-    }
-}
 
 /**
  * @fileoverview added by tsickle
@@ -6881,10 +6911,10 @@ class ModalBackdropComponent {
      * @param {?} renderer
      */
     constructor(element, renderer) {
-        this.classNameBackDrop = true;
-        this._isShown = false;
         this.element = element;
         this.renderer = renderer;
+        this.classNameBackDrop = true;
+        this._isShown = false;
     }
     /**
      * @return {?}
@@ -6974,6 +7004,8 @@ class ModalDirective {
      * @param {?} clf
      */
     constructor(_element, _viewContainerRef, _renderer, clf) {
+        this._element = _element;
+        this._renderer = _renderer;
         /**
          * This event fires immediately when the `show` instance method is called.
          */
@@ -7008,8 +7040,6 @@ class ModalDirective {
         this.timerRmBackDrop = 0;
         this.isNested = false;
         this.utils = new Utils$1();
-        this._element = _element;
-        this._renderer = _renderer;
         this._backdrop = clf.createLoader(_element, _viewContainerRef, _renderer);
     }
     /**
@@ -7020,7 +7050,6 @@ class ModalDirective {
     set config(conf) {
         this._config = this.getConfig(conf);
     }
-    // public get config(): ModalOptions {
     /**
      * @return {?}
      */
@@ -7127,12 +7156,7 @@ class ModalDirective {
             this.showElement();
         }));
         if (!this.config.backdrop && this.config.ignoreBackdropClick) {
-            // const style = window.getComputedStyle(this._element.nativeElement.firstElementChild);
-            // const modalHeight = ['height', 'padding-top', 'padding-bottom', 'margin-top', 'margin-bottom']
-            //   .map(key => parseInt(style.getPropertyValue(key), 10))
-            //   .reduce((prev, cur) => prev + cur);
             this._renderer.setStyle(this._element.nativeElement, 'position', 'fixed');
-            // this._renderer.setStyle(this._element.nativeElement, 'height', `${modalHeight}px`);
             if (navigator$1.userAgent.indexOf('Safari') !== -1 &&
                 navigator$1.userAgent.indexOf('Chrome') === -1) {
                 this._renderer.setStyle(this._element.nativeElement, 'overflow', 'unset');
@@ -7173,7 +7197,6 @@ class ModalDirective {
         }));
         this.onHide.emit(this);
         this.close.emit(this);
-        // todo: add an option to prevent hiding
         if (!this._isShown) {
             return;
         }
@@ -7210,7 +7233,6 @@ class ModalDirective {
      * @return {?}
      */
     showElement() {
-        // todo: replace this with component loader usage
         if (!this._element.nativeElement.parentNode ||
             this._element.nativeElement.parentNode.nodeType !== Node.ELEMENT_NODE) {
             // don't move modals dom position
@@ -7269,7 +7291,6 @@ class ModalDirective {
             this.closed.emit(this);
         }));
     }
-    // todo: original show was calling a callback when done, but we can use promise
     /**
      * \@internal
      * @protected
@@ -7337,7 +7358,6 @@ class ModalDirective {
             if (!otherOpenedModals.length) {
                 return;
             }
-            //  this._renderer.invokeElementMethod(otherOpenedModals[otherOpenedModals.length - 1], 'focus');
             otherOpenedModals[otherOpenedModals.length - 1].nativeElement.focus();
         }
         catch (error) { }
@@ -7418,61 +7438,6 @@ ModalDirective.propDecorators = {
     onClick: [{ type: HostListener, args: ['click', ['$event'],] }],
     onEsc: [{ type: HostListener, args: ['keydown.esc',] }]
 };
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/*tslint:disable:no-invalid-this */
-/**
- * @return {?}
- */
-function OnChange$1() {
-    /** @type {?} */
-    const sufix = 'Change';
-    return (/**
-     * @param {?} target
-     * @param {?} propertyKey
-     * @return {?}
-     */
-    function OnChangeHandler(target, propertyKey) {
-        /** @type {?} */
-        const _key = ` __${propertyKey}Value`;
-        Object.defineProperty(target, propertyKey, {
-            /**
-             * @return {?}
-             */
-            get() { return this[_key]; },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
-            set(value) {
-                /** @type {?} */
-                const prevValue = this[_key];
-                this[_key] = value;
-                if (prevValue !== value && this[propertyKey + sufix]) {
-                    this[propertyKey + sufix].emit(value);
-                }
-            }
-        });
-    });
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 
 /**
  * @fileoverview added by tsickle
@@ -7671,14 +7636,12 @@ ModalContainerComponent.propDecorators = {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MDBModalService {
-    // public constructor(private clf: ComponentLoaderFactory) {
     /**
      * @param {?} rendererFactory
      * @param {?} clf
      */
     constructor(rendererFactory, clf) {
         this.clf = clf;
-        // constructor props
         this.config = modalConfigDefaults;
         this.open = new EventEmitter();
         this.opened = new EventEmitter();
@@ -7688,10 +7651,8 @@ class MDBModalService {
         this.originalBodyPadding = 0;
         this.scrollbarWidth = 0;
         this.modalsCount = 0;
-        // private lastDismissReason = '';
         this.lastDismissReason = '';
         this.loaders = [];
-        //   this._backdropLoader = this.clf.createLoader<ModalBackdropComponent>(null, null, null);
         this._backdropLoader = this.clf.createLoader(this.el, this.vcr, this.renderer);
         this.renderer = rendererFactory.createRenderer(null, null);
     }
@@ -7871,7 +7832,6 @@ class MDBModalService {
      * @return {?}
      */
     _createLoaders() {
-        // const loader = this.clf.createLoader<ModalContainerComponent>(null, null, null);
         /** @type {?} */
         const loader = this.clf.createLoader(this.el, this.vcr, this.renderer);
         this.copyEvent(loader.onBeforeShow, this.open);
@@ -7978,32 +7938,32 @@ NavbarService.decorators = [
 class LinksComponent {
     /**
      * @param {?} _navbarService
+     * @param {?} renderer
      */
-    constructor(_navbarService) {
+    constructor(_navbarService, renderer) {
         this._navbarService = _navbarService;
+        this.renderer = renderer;
         this.linkClick = new EventEmitter();
     }
     /**
      * @return {?}
      */
     ngAfterContentInit() {
-        /** @type {?} */
-        const that = this;
         setTimeout((/**
          * @return {?}
          */
-        function () {
-            that.links.forEach((/**
-             * @param {?} element
+        () => {
+            this.links.forEach((/**
+             * @param {?} link
              * @return {?}
              */
-            function (element) {
-                element.nativeElement.onclick = (/**
+            (link) => {
+                this.renderer.listen(link.nativeElement, 'click', (/**
                  * @return {?}
                  */
-                function () {
-                    that._navbarService.setNavbarLinkClicks();
-                });
+                () => {
+                    this._navbarService.setNavbarLinkClicks();
+                }));
             }));
         }), 0);
     }
@@ -8019,7 +7979,8 @@ LinksComponent.decorators = [
 ];
 /** @nocollapse */
 LinksComponent.ctorParameters = () => [
-    { type: NavbarService }
+    { type: NavbarService },
+    { type: Renderer2 }
 ];
 LinksComponent.propDecorators = {
     links: [{ type: ContentChildren, args: [RouterLinkWithHref, { read: ElementRef, descendants: true },] }],
@@ -8122,12 +8083,7 @@ class NavbarComponent {
     ngOnInit() {
         /** @type {?} */
         const isDoubleNav = this.SideClass.split(' ');
-        if (isDoubleNav.indexOf('double-nav') !== -1) {
-            this.doubleNav = true;
-        }
-        else {
-            this.doubleNav = false;
-        }
+        this.doubleNav = isDoubleNav.indexOf('double-nav') !== -1;
     }
     /**
      * @return {?}
@@ -8295,7 +8251,7 @@ class NavbarComponent {
 NavbarComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-navbar',
-                template: "<nav class=\"{{SideClass}}\" #nav>\n  <div [ngClass]=\"{'container': containerInside}\" [ngStyle]=\"{'display': displayStyle}\" #container>\n      <ng-content select=\"mdb-navbar-brand\"></ng-content>\n      <ng-content select=\"logo\"></ng-content>\n      <ng-content></ng-content>\n    <ng-content *ngIf=\"this.doubleNav == true\" select=\"navlinks\"></ng-content>\n    <div *ngIf=\"this.doubleNav == false\">\n      <button #toggler class=\"navbar-toggler\" type=\"button\" [attr.aria-controls]=\"collapseId\" [attr.aria-expanded]=\"ariaExpanded\" aria-label=\"Toggle navigation\" (click)=\"toggle(); $event.preventDefault()\" mdbWavesEffect *ngIf=\"this.el.nativeElement.children.length !== 0\">\n        <span class=\"navbar-toggler-icon\">\n        </span>\n      </button>\n    </div>\n    <div #navbar [attr.id]=\"collapseId\" [style.height]=\"height\" class=\"navbar-collapse collapse\" [ngClass]=\"{'collapse': collapse, 'show': showClass, 'collapsing': collapsing}\">\n      <ng-content select=\"links\"></ng-content>\n    </div>\n  </div>\n</nav>\n",
+                template: "<nav class=\"{{ SideClass }}\" #nav>\n  <div [ngClass]=\"{ container: containerInside }\" [ngStyle]=\"{ display: displayStyle }\" #container>\n    <ng-content select=\"mdb-navbar-brand\"></ng-content>\n    <ng-content select=\"logo\"></ng-content>\n    <ng-content></ng-content>\n    <ng-content *ngIf=\"this.doubleNav == true\" select=\"navlinks\"></ng-content>\n    <div *ngIf=\"this.doubleNav == false\">\n      <button\n        #toggler\n        class=\"navbar-toggler\"\n        type=\"button\"\n        [attr.aria-controls]=\"collapseId\"\n        [attr.aria-expanded]=\"ariaExpanded\"\n        aria-label=\"Toggle navigation\"\n        (click)=\"toggle(); $event.preventDefault()\"\n        mdbWavesEffect\n        *ngIf=\"this.el.nativeElement.children.length !== 0\"\n      >\n        <span class=\"navbar-toggler-icon\"> </span>\n      </button>\n    </div>\n    <div\n      #navbar\n      [attr.id]=\"collapseId\"\n      [style.height]=\"height\"\n      class=\"navbar-collapse collapse\"\n      [ngClass]=\"{ collapse: collapse, show: showClass, collapsing: collapsing }\"\n    >\n      <ng-content select=\"links\"></ng-content>\n    </div>\n  </div>\n</nav>\n",
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 styles: [".navbar{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);font-weight:300}.navbar form .md-form input{margin:0 5px 1px 8px}.navbar .breadcrumb{margin:0;padding:.3rem 0 0 1rem;background-color:inherit;font-size:15px;font-weight:300}.navbar .breadcrumb .breadcrumb-item{color:#fff}.navbar .breadcrumb .breadcrumb-item.active,.navbar .breadcrumb .breadcrumb-item:before{color:rgba(255,255,255,.65)}.navbar .navbar-toggler{outline:0;border-width:0}.navbar .nav-flex-icons{flex-direction:row}.navbar .nav-item .nav-link{display:block}.navbar .nav-item .nav-link.disabled:active{pointer-events:none}.navbar .nav-item .nav-link .fab,.navbar .nav-item .nav-link .far,.navbar .nav-item .nav-link .fas{padding-right:3px;padding-left:3px}@media (max-width:992px){.navbar .container{width:100%}.navbar .container .navbar-toggler-right{right:0}.navbar .nav-item .nav-link{padding-right:6px;padding-left:6px}.double-nav{padding-top:4px;padding-bottom:4px}}.navbar .dropdown-menu{position:absolute!important;margin-top:0}.navbar .dropdown-menu a{padding:10px;font-size:.9375rem;font-weight:300;color:#000}@media (max-width:600px){.navbar .dropdown-menu form{width:17rem}}.navbar.navbar-light .navbar-nav .nav-item .nav-link.disbled,.navbar.navbar-light .navbar-nav .nav-item .nav-link.disbled:hover{color:rgba(0,0,0,.5)}.navbar.navbar-light .navbar-toggler-icon{background-image:url(\"data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E\");cursor:pointer}.navbar.navbar-light .breadcrumb .nav-item .nav-link,.navbar.navbar-light .navbar-nav .nav-item .nav-link{color:#000;transition:.35s}.navbar.navbar-light .breadcrumb .nav-item .nav-link:hover,.navbar.navbar-light .navbar-nav .nav-item .nav-link:hover{color:rgba(0,0,0,.75)}.navbar.navbar-light .breadcrumb .nav-item.active>.nav-link,.navbar.navbar-light .navbar-nav .nav-item.active>.nav-link{background-color:rgba(0,0,0,.1)}.navbar.navbar-light .breadcrumb .nav-item.active>.nav-link:hover,.navbar.navbar-light .navbar-nav .nav-item.active>.nav-link:hover,.navbar.navbar-light .navbar-toggler{color:#000}.navbar.navbar-light form .md-form input{border-bottom:1px solid #000}.navbar.navbar-light form .md-form input:focus:not([readonly]){border-color:#4285f4}.navbar.navbar-light form .md-form .form-control{color:#000}.navbar.navbar-light form .md-form .form-control::-webkit-input-placeholder{color:#000;font-weight:300}.navbar.navbar-light form .md-form .form-control::-moz-placeholder{color:#000;font-weight:300}.navbar.navbar-light form .md-form .form-control::-ms-input-placeholder{color:#000;font-weight:300}.navbar.navbar-light form .md-form .form-control::placeholder{color:#000;font-weight:300}.navbar.navbar-dark .navbar-nav .nav-item .nav-link.disbled,.navbar.navbar-dark .navbar-nav .nav-item .nav-link.disbled:hover{color:rgba(255,255,255,.5)}.navbar.navbar-dark .navbar-toggler-icon{background-image:url(\"data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E\");cursor:pointer}.navbar.navbar-dark .breadcrumb .nav-item .nav-link,.navbar.navbar-dark .navbar-nav .nav-item .nav-link{color:#fff;transition:.35s}.navbar.navbar-dark .breadcrumb .nav-item .nav-link:hover,.navbar.navbar-dark .navbar-nav .nav-item .nav-link:hover{color:rgba(255,255,255,.75)}.navbar.navbar-dark .breadcrumb .nav-item.active>.nav-link,.navbar.navbar-dark .navbar-nav .nav-item.active>.nav-link{background-color:rgba(255,255,255,.1)}.navbar.navbar-dark .breadcrumb .nav-item.active>.nav-link:hover,.navbar.navbar-dark .navbar-nav .nav-item.active>.nav-link:hover,.navbar.navbar-dark .navbar-toggler{color:#fff}.navbar.navbar-dark form .md-form input{border-bottom:1px solid #fff}.navbar.navbar-dark form .md-form input:focus:not([readonly]){border-color:#4285f4}.navbar.navbar-dark form .md-form .form-control{color:#fff}.navbar.navbar-dark form .md-form .form-control::-webkit-input-placeholder{color:#fff;font-weight:300}.navbar.navbar-dark form .md-form .form-control::-moz-placeholder{color:#fff;font-weight:300}.navbar.navbar-dark form .md-form .form-control::-ms-input-placeholder{color:#fff;font-weight:300}.navbar.navbar-dark form .md-form .form-control::placeholder{color:#fff;font-weight:300}@media (min-width:600px){.navbar .dropdown-menu form{width:22rem}.navbar.scrolling-navbar{transition:background .5s ease-in-out,padding .5s ease-in-out;padding-top:12px;padding-bottom:12px}.navbar.scrolling-navbar .navbar-nav>li{transition-duration:1s}.navbar.scrolling-navbar.top-nav-collapse{padding-top:5px;padding-bottom:5px}}@media (min-width:1200px){.navbar.navbar-expand-xl links,.navbar.navbar-expand-xl navlinks{display:flex;flex-direction:row;align-items:center!important;align-self:center!important;width:100%}}@media (min-width:992px){.navbar>logo>div>a img{margin-left:20px}.navbar.navbar-expand-lg links,.navbar.navbar-expand-lg navlinks{display:flex;flex-direction:row;align-items:center!important;align-self:center!important;width:100%}}@media (min-width:768px){.navbar.navbar-expand-md links,.navbar.navbar-expand-md navlinks{display:flex;flex-direction:row;width:100%}}@media (min-width:576px){.navbar.navbar-expand-sm links,.navbar.navbar-expand-sm navlinks{display:flex;flex-direction:row;width:100%}}@media all and (max-width:992px){.collapsed-navbar-scroll{max-height:calc(100vh - 40px);overflow-y:scroll}}.navbar-container{order:-1;width:50px!important;padding-left:5px;padding-right:5px}.navbar-nav .dropdown-menu-right.dropdown-menu{left:unset}.navbar-nav .dropdown-menu{top:100%!important;-webkit-transform:translate3d(0,0,0)!important;transform:translate3d(0,0,0)!important}.breadcrumbs{display:flex;padding-left:5px;padding-right:5px;order:0;align-items:center}@media (min-width:1441px){.breadcrumbs{margin-left:-.6rem}}@supports (-ms-ime-align:auto){.ie-nav .navbar-toggler{position:absolute;margin-top:-40px;right:0}@media all and (min-width:992px){.ie-nav .navbar-nav.nav-flex-icons{position:absolute;top:30%;right:0}.ie-nav .navbar-nav{position:absolute;top:30%;margin-left:88px}.ie-nav .navbar-brand>img{margin-top:-2px;padding-right:16px}.intro-non-fixed-nav>links .navbar-collapse{display:inline-flex!important;align-items:center!important;justify-content:space-between!important}.intro-fixed-nav .navbar-nav.nav-flex-icons{position:absolute;top:30%;right:0}.intro-fixed-nav .navbar-nav{position:absolute;top:30%;margin-left:88px}.intro-fixed-nav .navbar-brand img{margin-top:-2px;padding-right:16px}}.intro-fixed-nav .navbar-toggler{position:absolute;margin-top:-40px;right:0}}@media all and (-ms-high-contrast:none) and (min-width:992px),all and (-ms-high-contrast:active) and (min-width:992px){.ie-nav .navbar-nav.nav-flex-icons{position:absolute;top:30%;right:0}.ie-nav .navbar-nav{position:absolute;top:30%;margin-left:88px}.ie-nav .navbar-brand>img{margin-top:-2px;padding-right:16px}.intro-non-fixed-nav>links .navbar-collapse{display:inline-flex!important;align-items:center!important;justify-content:space-between!important}.intro-fixed-nav .navbar-nav.nav-flex-icons{position:absolute;top:30%;right:0}.intro-fixed-nav .navbar-nav{position:absolute;top:30%;margin-left:88px}.intro-fixed-nav .navbar-brand img{margin-top:-2px;padding-right:16px}}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.ie-nav .navbar-toggler,.intro-fixed-nav .navbar-toggler{position:absolute;margin-top:-40px;right:0}}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:none}.navbar .nav-item.avatar{padding:0}.navbar .nav-item.avatar.active{background-color:transparent!important}.navbar .nav-item.avatar .dropdown-toggle{padding:0}.navbar .nav-item.avatar .dropdown-toggle img{height:35px}.navbar .nav-item.avatar .dropdown-toggle:after{display:none}@media (max-width:768px){.double-nav .container{padding-left:0;padding-right:0}}.double-nav a{font-size:15px;color:#fff}.double-nav .breadcrumb-dn p{margin:0;padding-top:0;padding-left:1rem}@media (max-width:993px){.double-nav .breadcrumb-dn{display:none}}.double-nav .button-collapse{left:10px;font-size:1.5rem}@media (min-width:1440px){.double-nav .button-collapse{display:none}}@media (max-width:1440px){.double-nav .button-collapse{display:block;position:relative;font-size:1.4rem;margin-right:10px;margin-left:10px}}"]
@@ -8345,32 +8301,32 @@ LogoComponent.decorators = [
 class NavlinksComponent {
     /**
      * @param {?} _navbarService
+     * @param {?} renderer
      */
-    constructor(_navbarService) {
+    constructor(_navbarService, renderer) {
         this._navbarService = _navbarService;
+        this.renderer = renderer;
         this.linkClick = new EventEmitter();
     }
     /**
      * @return {?}
      */
     ngAfterContentInit() {
-        /** @type {?} */
-        const that = this;
         setTimeout((/**
          * @return {?}
          */
-        function () {
-            that.links.forEach((/**
-             * @param {?} element
+        () => {
+            this.links.forEach((/**
+             * @param {?} link
              * @return {?}
              */
-            function (element) {
-                element.nativeElement.onclick = (/**
+            (link) => {
+                this.renderer.listen(link.nativeElement, 'click', (/**
                  * @return {?}
                  */
-                function () {
-                    that._navbarService.setNavbarLinkClicks();
-                });
+                () => {
+                    this._navbarService.setNavbarLinkClicks();
+                }));
             }));
         }), 0);
     }
@@ -8386,7 +8342,8 @@ NavlinksComponent.decorators = [
 ];
 /** @nocollapse */
 NavlinksComponent.ctorParameters = () => [
-    { type: NavbarService }
+    { type: NavbarService },
+    { type: Renderer2 }
 ];
 NavlinksComponent.propDecorators = {
     links: [{ type: ContentChildren, args: [RouterLinkWithHref, { read: ElementRef, descendants: true },] }],
@@ -8819,9 +8776,7 @@ StickyHeaderModule.decorators = [
     { type: NgModule, args: [{
                 declarations: [StickyHeaderDirective],
                 exports: [StickyHeaderDirective],
-                imports: [
-                    CommonModule,
-                ]
+                imports: [CommonModule],
             },] }
 ];
 
@@ -9073,6 +9028,7 @@ MdbTableDirective.propDecorators = {
 const SortDirection = {
     ASC: 'ascending',
     DESC: 'descending',
+    CONST: 'constant',
 };
 class MdbTableSortDirective {
     /**
@@ -9161,9 +9117,11 @@ class MdbTableSortDirective {
                 return this.sortedInto ? -1 : 1;
             }
             else if (a == null || b == null) {
+                this.order = SortDirection.CONST;
                 return 1;
             }
             else {
+                this.order = SortDirection.CONST;
                 return 0;
             }
         }));
@@ -9756,17 +9714,17 @@ TableModule.decorators = [
                     MdbTableRowDirective,
                     MdbTableScrollDirective,
                     MdbTableSortDirective,
-                    MdbTableDirective
+                    MdbTableDirective,
                 ],
                 exports: [
                     MdbTablePaginationComponent,
                     MdbTableRowDirective,
                     MdbTableScrollDirective,
                     MdbTableSortDirective,
-                    MdbTableDirective
+                    MdbTableDirective,
                 ],
                 entryComponents: [MdbTablePaginationComponent],
-                providers: [MdbTableService]
+                providers: [MdbTableService],
             },] }
 ];
 
@@ -9808,9 +9766,9 @@ class TooltipContainerComponent {
      * @param {?} elem
      */
     constructor(config, elem) {
+        this.elem = elem;
         this.containerClass = '';
         this.show = !this.isBs3;
-        this.el = elem;
         Object.assign(this, config);
     }
     /**
@@ -10134,7 +10092,6 @@ class WavesDirective {
      * @return {?}
      */
     click(event) {
-        // event.stopPropagation();
         if (!this.el.nativeElement.classList.contains('disabled')) {
             /** @type {?} */
             const button = this.el.nativeElement;
@@ -10310,10 +10267,10 @@ class SBItemBodyComponent {
         this._cdRef = _cdRef;
         this.router = router;
         this.animationStateChange = new EventEmitter();
-        this.height = '0';
-        this.expandAnimationState = 'collapsed';
-        this._destroy$ = new Subject();
         this.id = `mdb-accordion-`;
+        this.height = '0';
+        this._destroy$ = new Subject();
+        this.expandAnimationState = 'collapsed';
         this.ariaLabelledBy = '';
     }
     /**
@@ -10731,7 +10688,7 @@ class SBItemHeadComponent {
      */
     onKeyDown(event) {
         // tslint:disable-next-line: deprecation
-        if (event.keyCode === 32) {
+        if (event.keyCode === SPACE) {
             this.toggleClick(event);
         }
     }
@@ -10855,7 +10812,6 @@ class ComponentPortal {
      * @param {?} host
      * @return {?}
      */
-    // setAttachedHost(host: BasePortalHost) {
     setAttachedHost(host) {
         this._attachedHost = host;
     }
@@ -10888,7 +10844,6 @@ class BasePortalHost {
         this._attachedPortal = null;
         if (this._disposeFn != null) {
             this._disposeFn();
-            // this._disposeFn = null;
             this._disposeFn = this.setToNullValue;
         }
     }
@@ -11707,7 +11662,6 @@ class ToastService {
      * @param {?=} type
      * @return {?}
      */
-    // show(message: string, title?: string, override?: IndividualConfig, type = '') {
     show(message, title, override, type = '') {
         /** @type {?} */
         const config = override ? this.applyConfig(override) : this.applyConfig({});
@@ -11722,9 +11676,7 @@ class ToastService {
      * @param {?=} override
      * @return {?}
      */
-    // success(message: string, title?: string, override?: IndividualConfig) {
     success(message, title, override) {
-        //   const type = this.toastConfig.iconClasses.success;
         /** @type {?} */
         const type = this.toastConfig.iconClasses.success;
         return this._buildNotification(type, message, title, this.applyConfig(override));
@@ -11736,9 +11688,7 @@ class ToastService {
      * @param {?=} override
      * @return {?}
      */
-    // error(message: string, title?: string, override?: IndividualConfig) {
     error(message, title, override) {
-        //   const type = this.toastConfig.iconClasses.error;
         /** @type {?} */
         const type = this.toastConfig.iconClasses.error;
         return this._buildNotification(type, message, title, this.applyConfig(override));
@@ -11750,9 +11700,7 @@ class ToastService {
      * @param {?=} override
      * @return {?}
      */
-    // info(message: string, title?: string, override?: IndividualConfig) {
     info(message, title, override) {
-        //   const type = this.toastConfig.iconClasses.info;
         /** @type {?} */
         const type = this.toastConfig.iconClasses.info;
         return this._buildNotification(type, message, title, this.applyConfig(override));
@@ -11764,9 +11712,7 @@ class ToastService {
      * @param {?=} override
      * @return {?}
      */
-    // warning(message: string, title?: string, override?: IndividualConfig) {
     warning(message, title, override) {
-        //   const type = this.toastConfig.iconClasses.warning;
         /** @type {?} */
         const type = this.toastConfig.iconClasses.warning;
         return this._buildNotification(type, message, title, this.applyConfig(override));
@@ -11777,7 +11723,6 @@ class ToastService {
      * @return {?}
      */
     clear(toastId) {
-        // Call every toastRef manualClose function
         /** @type {?} */
         let toast;
         for (toast of this.toasts) {
@@ -11798,7 +11743,6 @@ class ToastService {
      * @return {?}
      */
     remove(toastId) {
-        // const found = this._findToast(toastId);
         /** @type {?} */
         const found = this._findToast(toastId);
         if (!found) {
@@ -11811,7 +11755,6 @@ class ToastService {
             return false;
         }
         if (this.currentlyActive <= +this.toastConfig.maxOpened && this.toasts[this.currentlyActive]) {
-            // const p = this.toasts[this.currentlyActive].toastRef;
             /** @type {?} */
             const p = this.toasts[this.currentlyActive].toastRef;
             if (!p.isInactive()) {
@@ -11913,7 +11856,6 @@ class ToastService {
         /** @type {?} */
         const overlayRef = this.overlay.create(config.positionClass, this.overlayContainer);
         this.index = this.index + 1;
-        // let sanitizedMessage = message;
         /** @type {?} */
         let sanitizedMessage = message;
         if (message && config.enableHtml) {
@@ -11923,7 +11865,6 @@ class ToastService {
         const toastRef = new ToastRef$1(overlayRef);
         /** @type {?} */
         const toastPackage = new ToastPackage(this.index, config, sanitizedMessage, title, toastType, toastRef);
-        // const ins: ActiveToast = {
         /** @type {?} */
         const ins = {
             toastId: this.index,
@@ -12063,16 +12004,6 @@ const socialsState = trigger('socialsState', [
     transition('* => void', animate('200ms ease-in')),
     transition('void => *', animate('200ms ease-out')),
 ]);
-// image popup
-// export const zoomState: any = trigger('zoomState', [
-//   state('active', style({ transform: 'scale(1, 1)', cursor: 'zoom-out' })),
-//   state('inactive', style({ transform: 'scale(0.9, 0.9)', cursor: 'zoom-in' })),
-//   transition('active => inactive', animate('300ms ease-in')),
-//   transition('inactive => active', animate('300ms ease-out')),
-// ]);
-// export const restartState: any = trigger('restartState', [
-//   state('inactive', style({ transform: 'scale(0.9, 0.9)' })),
-// ]);
 // alerts
 /** @type {?} */
 const flyInOut = trigger('flyInOut', [
@@ -12423,8 +12354,8 @@ class MdbAutoCompleterComponent {
      */
     navigateUsingKeyboard(event) {
         if (this.dropdown) {
-            switch (event.key) {
-                case 'ArrowDown':
+            switch (event.keyCode) {
+                case DOWN_ARROW:
                     event.preventDefault();
                     this.moveHighlightedIntoView(event.key);
                     if (!this.isOpen()) {
@@ -12450,7 +12381,7 @@ class MdbAutoCompleterComponent {
                         this.select.emit({ text: selectedElement.value, element: selectedElement });
                     }
                     break;
-                case 'ArrowUp':
+                case UP_ARROW:
                     event.preventDefault();
                     this.moveHighlightedIntoView(event.key);
                     if (this._selectedItemIndex === -1 || this._selectedItemIndex === 0) {
@@ -12470,11 +12401,11 @@ class MdbAutoCompleterComponent {
                         this.select.emit({ text: selectedItem.value, element: selectedItem });
                     }
                     break;
-                case 'Escape':
+                case ESCAPE:
                     event.preventDefault();
                     this.hide();
                     break;
-                case 'Enter':
+                case ENTER:
                     event.preventDefault();
                     /** @type {?} */
                     const selectedOption = this.mdbOptions.map((/**
@@ -12671,6 +12602,7 @@ class MdbAutoCompleterDirective {
         this.ngModelChange = new EventEmitter();
         this.clearBtnClicked = new EventEmitter();
         this._canOpenOnFocus = true;
+        this.utils = new Utils$1();
         this._onChange = (/**
          * @return {?}
          */
@@ -12688,7 +12620,7 @@ class MdbAutoCompleterDirective {
     onKeydown(event) {
         this._handleKeyDown(event);
         /** @type {?} */
-        const isTabKey = event.keyCode === 9;
+        const isTabKey = event.keyCode === TAB;
         if (isTabKey) {
             this._hide();
         }
@@ -12744,20 +12676,6 @@ class MdbAutoCompleterDirective {
     }
     /**
      * @private
-     * @param {?} el
-     * @param {?} selector
-     * @return {?}
-     */
-    _getClosestEl(el, selector) {
-        for (; el && el !== document; el = el.parentNode) {
-            if (el.matches && el.matches(selector)) {
-                return el;
-            }
-        }
-        return null;
-    }
-    /**
-     * @private
      * @return {?}
      */
     _renderClearButton() {
@@ -12781,7 +12699,7 @@ class MdbAutoCompleterDirective {
         }));
         if (this.isBrowser) {
             /** @type {?} */
-            const parent = this._getClosestEl(this.el.nativeElement, '.md-form') || this.el.nativeElement;
+            const parent = this.utils.getClosestEl(this.el.nativeElement, '.md-form') || this.el.nativeElement;
             this.renderer.appendChild(parent, el);
         }
     }
@@ -12887,7 +12805,7 @@ class MdbAutoCompleterDirective {
          */
         () => {
             if (this.mdbAutoCompleter.appendToBody) {
-                if (this._getClosestEl(this.el.nativeElement, '.modal-body')) {
+                if (this.utils.getClosestEl(this.el.nativeElement, '.modal-body')) {
                     setTimeout((/**
                      * @return {?}
                      */
@@ -13173,8 +13091,18 @@ class AutoCompleterModule {
 AutoCompleterModule.decorators = [
     { type: NgModule, args: [{
                 imports: [CommonModule, HttpClientModule, FormsModule],
-                declarations: [MdbAutoCompleterComponent, MdbOptionComponent, MdbAutoCompleterDirective, MdbAutoCompleterOptionDirective],
-                exports: [MdbAutoCompleterComponent, MdbOptionComponent, MdbAutoCompleterDirective, MdbAutoCompleterOptionDirective],
+                declarations: [
+                    MdbAutoCompleterComponent,
+                    MdbOptionComponent,
+                    MdbAutoCompleterDirective,
+                    MdbAutoCompleterOptionDirective,
+                ],
+                exports: [
+                    MdbAutoCompleterComponent,
+                    MdbOptionComponent,
+                    MdbAutoCompleterDirective,
+                    MdbAutoCompleterOptionDirective,
+                ],
             },] }
 ];
 
@@ -13226,7 +13154,7 @@ class MdbDateFormatDirective {
          * @param {?} value
          * @return {?}
          */
-        (value) => {
+        value => {
             resLength += value.length;
         }));
         this.resultLength = resLength + this.separatorsNumber;
@@ -13245,7 +13173,7 @@ class MdbDateFormatDirective {
          * @return {?}
          */
         (part, index) => {
-            return part = this.formatDateParts(part, index);
+            return this.formatDateParts(part, index);
         }));
         return result.join(this.separator).slice(0, this.resultLength);
     }
@@ -13261,7 +13189,7 @@ class MdbDateFormatDirective {
         const partsIndex = {
             first: this.format[0].length,
             mid: this.format[0].length + this.format[1].length,
-            last: this.resultLength
+            last: this.resultLength,
         };
         parts[0] = date.slice(0, partsIndex.first);
         if (date.length > partsIndex.first) {
@@ -13874,13 +13802,9 @@ LocaleService.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
-const M = 'm';
-/* const MM = 'mm'; */
-/* const MMM = 'mmm'; */
+const M$1 = 'm';
 /** @type {?} */
-const D = 'd';
-/* const DD = 'dd'; */
-/* const YYYY = 'yyyy'; */
+const D$1 = 'd';
 class UtilService {
     /**
      * @param {?} dateStr
@@ -13955,10 +13879,10 @@ class UtilService {
             if (df[i].indexOf('yy') !== -1) {
                 da[0] = { value: ds[i], format: df[i] };
             }
-            if (df[i].indexOf(M) !== -1) {
+            if (df[i].indexOf(M$1) !== -1) {
                 da[1] = { value: ds[i], format: df[i] };
             }
-            if (df[i].indexOf(D) !== -1) {
+            if (df[i].indexOf(D$1) !== -1) {
                 da[2] = { value: ds[i], format: df[i] };
             }
         }
@@ -13989,7 +13913,8 @@ class UtilService {
         }
         /** @type {?} */
         let nbr = Number(df.value);
-        if (df.format.length === 1 && df.value.length !== 1 && nbr < 10 || df.format.length === 1 && df.value.length !== 2 && nbr >= 10) {
+        if ((df.format.length === 1 && df.value.length !== 1 && nbr < 10) ||
+            (df.format.length === 1 && df.value.length !== 2 && nbr >= 10)) {
             nbr = -1;
         }
         else if (df.format.length === 2 && df.value.length > 2) {
@@ -14078,7 +14003,6 @@ class UtilService {
     getDatePartIndex(dateFormat, datePart) {
         return dateFormat.indexOf(datePart);
     }
-    // parseDefaultMonth(monthString: string): IMyMonth {
     /**
      * @param {?} monthString
      * @return {?}
@@ -14117,10 +14041,12 @@ class UtilService {
         }
         /** @type {?} */
         const dateMs = this.getTimeInMilliseconds(date);
-        if (this.isInitializedDate(disableUntil) && dateMs <= this.getTimeInMilliseconds(disableUntil)) {
+        if (this.isInitializedDate(disableUntil) &&
+            dateMs <= this.getTimeInMilliseconds(disableUntil)) {
             return true;
         }
-        if (this.isInitializedDate(disableSince) && dateMs >= this.getTimeInMilliseconds(disableSince)) {
+        if (this.isInitializedDate(disableSince) &&
+            dateMs >= this.getTimeInMilliseconds(disableSince)) {
             return true;
         }
         if (disableWeekends) {
@@ -14181,7 +14107,7 @@ class UtilService {
         /** @type {?} */
         const d = new Date(date.year, date.month - 1, date.day, 0, 0, 0, 0);
         d.setDate(d.getDate() + (d.getDay() === 0 ? -3 : 4 - d.getDay()));
-        return Math.round(((d.getTime() - new Date(d.getFullYear(), 0, 4).getTime()) / 86400000) / 7) + 1;
+        return Math.round((d.getTime() - new Date(d.getFullYear(), 0, 4).getTime()) / 86400000 / 7) + 1;
     }
     /**
      * @param {?} date
@@ -14189,7 +14115,8 @@ class UtilService {
      * @return {?}
      */
     isMonthDisabledByDisableUntil(date, disableUntil) {
-        return this.isInitializedDate(disableUntil) && this.getTimeInMilliseconds(date) <= this.getTimeInMilliseconds(disableUntil);
+        return (this.isInitializedDate(disableUntil) &&
+            this.getTimeInMilliseconds(date) <= this.getTimeInMilliseconds(disableUntil));
     }
     /**
      * @param {?} date
@@ -14197,7 +14124,8 @@ class UtilService {
      * @return {?}
      */
     isMonthDisabledByDisableSince(date, disableSince) {
-        return this.isInitializedDate(disableSince) && this.getTimeInMilliseconds(date) >= this.getTimeInMilliseconds(disableSince);
+        return (this.isInitializedDate(disableSince) &&
+            this.getTimeInMilliseconds(date) >= this.getTimeInMilliseconds(disableSince));
     }
     /**
      * @param {?} date
@@ -14238,26 +14166,16 @@ class FocusDirective {
     constructor(el) {
         this.el = el;
     }
-    // Focus to element: if value 0 = don't set focus, 1 = set only focus, 2 = set focus and set cursor position
     /**
      * @return {?}
      */
     ngAfterViewInit() {
-        // if (this.value === "0") {
-        //     return;
-        // }
-        // this.renderer.invokeElementMethod(this.el.nativeElement, 'focus', []);
         this.el.nativeElement.focus();
-        // // Set cursor position at the end of text if input element
-        // if (this.value === "2") {
-        //     let len = this.el.nativeElement.value.length;
-        //     this.el.nativeElement.setSelectionRange(len, len);
-        // }
     }
 }
 FocusDirective.decorators = [
     { type: Directive, args: [{
-                selector: '[mdbDpFocus]'
+                selector: '[mdbDpFocus]',
             },] }
 ];
 /** @nocollapse */
@@ -14274,8 +14192,8 @@ FocusDirective.propDecorators = {
  */
 /** @enum {number} */
 const KeyCode = {
-    backspace: 8,
-    delete: 46,
+    backspace: BACKSPACE,
+    delete: DELETE,
 };
 KeyCode[KeyCode.backspace] = 'backspace';
 KeyCode[KeyCode.delete] = 'delete';
@@ -14455,8 +14373,8 @@ InputFocusBlur[InputFocusBlur.focus] = 'focus';
 InputFocusBlur[InputFocusBlur.blur] = 'blur';
 /** @enum {number} */
 const KeyCode$1 = {
-    enter: 13,
-    space: 32,
+    enter: ENTER,
+    space: SPACE,
 };
 KeyCode$1[KeyCode$1.enter] = 'enter';
 KeyCode$1[KeyCode$1.space] = 'space';
@@ -14700,6 +14618,7 @@ class MDBDatePickerComponent {
                 this.cdRef.detectChanges();
             }
         }
+        this.cdRef.markForCheck();
     }
     /**
      * @return {?}
@@ -14826,7 +14745,6 @@ class MDBDatePickerComponent {
         }
         this.inputFocusBlur.emit({ reason: InputFocusBlur.focus, value: event.target.value });
         ((/** @type {?} */ (this.document.documentElement))).style.overflow = 'hidden';
-        // this.divFocus.nativeElement.focus();
     }
     /**
      * @param {?} event
@@ -15117,7 +15035,9 @@ class MDBDatePickerComponent {
             this.hideKeyboard();
         }
         this.labelActive = true;
-        this.ChangeZIndex();
+        if (!this.inline) {
+            this.ChangeZIndex();
+        }
         this.cdRef.markForCheck();
     }
     /**
@@ -15191,7 +15111,7 @@ class MDBDatePickerComponent {
         this.visibleMonth = { monthTxt: this.monthText(m), monthNbr: m, year: y };
         this.generateCalendar(m, y, true);
         // Prevents trigger (click) event when using Enter
-        if (event.code === 'Enter') {
+        if (event.keyCode === ENTER) {
             event.preventDefault();
             event.stopPropagation();
         }
@@ -15320,7 +15240,6 @@ class MDBDatePickerComponent {
         this.tmp = date;
         /** @type {?} */
         const dateModel = this.getDateModel(date);
-        // this.dateChanged.emit({ previousDate: this.selectionDayTxt, actualDate: dateModel });
         this.dateChanged.emit({
             date: date,
             jsdate: this.getDate(date.year, date.month, date.day),
@@ -15338,8 +15257,6 @@ class MDBDatePickerComponent {
             this.closeBtnClicked();
         }
         this.labelActive = true;
-        // hide calendar when date was clicked
-        // this.showSelector = false;
     }
     /**
      * @param {?} date
@@ -15955,10 +15872,10 @@ class EasyPieChartComponent {
      * @param {?} _r
      */
     constructor(el, platformId, _r) {
+        this.el = el;
         this._r = _r;
         this.isBrowser = false;
         this.isBrowser = isPlatformBrowser(platformId);
-        this.element = el;
         /** @type {?} */
         const options = {
             barColor: '#ef1e25',
@@ -15983,8 +15900,8 @@ class EasyPieChartComponent {
         if (this.isBrowser) {
             /** @type {?} */
             const size = this.options.size;
-            this.element.nativeElement.innerHTML = '';
-            this.pieChart = new EasyPieChart(this.element.nativeElement, this.options);
+            this.el.nativeElement.innerHTML = '';
+            this.pieChart = new EasyPieChart(this.el.nativeElement, this.options);
             this.pieChart.update(this.percent);
             // Positioning text in center of chart
             /** @type {?} */
@@ -16032,13 +15949,9 @@ class ChartSimpleModule {
 }
 ChartSimpleModule.decorators = [
     { type: NgModule, args: [{
-                declarations: [
-                    SimpleChartComponent, EasyPieChartComponent
-                ],
-                exports: [
-                    SimpleChartComponent, EasyPieChartComponent
-                ],
-                imports: [CommonModule]
+                declarations: [SimpleChartComponent, EasyPieChartComponent],
+                exports: [SimpleChartComponent, EasyPieChartComponent],
+                imports: [CommonModule],
             },] }
 ];
 
@@ -16260,8 +16173,7 @@ class MDBUploaderService {
          */
         observer => {
             /** @type {?} */
-            const sub = this.uploadFile(upload.file, upload.event)
-                .subscribe((/**
+            const sub = this.uploadFile(upload.file, upload.event).subscribe((/**
              * @param {?} output
              * @return {?}
              */
@@ -16322,8 +16234,9 @@ class MDBUploaderService {
                     const percentage = Math.round((e.loaded * 100) / e.total);
                     /** @type {?} */
                     const diff = new Date().getTime() - time;
-                    speed = Math.round(e.loaded / diff * 1000);
-                    progressStartTime = (file.progress.data && file.progress.data.startTime) || new Date().getTime();
+                    speed = Math.round((e.loaded / diff) * 1000);
+                    progressStartTime =
+                        (file.progress.data && file.progress.data.startTime) || new Date().getTime();
                     eta = Math.ceil((e.total - e.loaded) / speed);
                     file.progress = {
                         status: UploadStatus.Uploading,
@@ -16334,8 +16247,8 @@ class MDBUploaderService {
                             startTime: progressStartTime,
                             endTime: null,
                             eta: eta,
-                            etaHuman: this.secondsToHuman(eta)
-                        }
+                            etaHuman: this.secondsToHuman(eta),
+                        },
                     };
                     observer.next({ type: 'uploading', file: file });
                 }
@@ -16354,7 +16267,7 @@ class MDBUploaderService {
             () => {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     /** @type {?} */
-                    const speedAverage = Math.round(file.size / (new Date().getTime() - progressStartTime) * 1000);
+                    const speedAverage = Math.round((file.size / (new Date().getTime() - progressStartTime)) * 1000);
                     file.progress = {
                         status: UploadStatus.Done,
                         data: {
@@ -16364,8 +16277,8 @@ class MDBUploaderService {
                             startTime: progressStartTime,
                             endTime: new Date().getTime(),
                             eta: eta,
-                            etaHuman: this.secondsToHuman(eta || 0)
-                        }
+                            etaHuman: this.secondsToHuman(eta || 0),
+                        },
                     };
                     file.responseStatus = xhr.status;
                     try {
@@ -16429,7 +16342,9 @@ class MDBUploaderService {
      * @return {?}
      */
     generateId() {
-        return Math.random().toString(36).substring(7);
+        return Math.random()
+            .toString(36)
+            .substring(7);
     }
     /**
      * @param {?} contentTypes
@@ -16497,12 +16412,12 @@ class MDBUploaderService {
                     startTime: null,
                     endTime: null,
                     eta: null,
-                    etaHuman: null
-                }
+                    etaHuman: null,
+                },
             },
             lastModifiedDate: file.lastModified,
             sub: undefined,
-            nativeFile: file
+            nativeFile: file,
         };
     }
     /**
@@ -16514,7 +16429,8 @@ class MDBUploaderService {
         if (!httpHeaders) {
             return;
         }
-        return httpHeaders.split('\n')
+        return httpHeaders
+            .split('\n')
             .map((/**
          * @param {?} x
          * @return {?}
@@ -16824,7 +16740,7 @@ class CharCounterDirective {
 }
 CharCounterDirective.decorators = [
     { type: Directive, args: [{
-                selector: '[mdbCharCounter]'
+                selector: '[mdbCharCounter]',
             },] }
 ];
 /** @nocollapse */
@@ -18032,11 +17948,6 @@ class OptionList {
      */
     constructor(options, _multiple = false) {
         this._multiple = _multiple;
-        /* Consider using these for performance improvement. */
-        // private _selection: Array<Option>;
-        // private _filtered: Array<Option>;
-        // private _value: Array<string>;
-        // private _highlightedOption: Option = null;
         this._highlightedOption = null;
         this.setToNullValue = null;
         if (typeof options === 'undefined' || options === null) {
@@ -18356,7 +18267,6 @@ class OptionList {
                 return option;
             }
         }
-        // return null;
         return this.setToNullValue;
     }
     /**
@@ -18369,7 +18279,6 @@ class OptionList {
                 return option;
             }
         }
-        // return null;
         return this.setToNullValue;
     }
 }
@@ -18407,6 +18316,9 @@ class SelectDropdownComponent {
         this.startHeight = 0;
         this.endHeight = 45;
         this.hasOptionsItems = true;
+        this._destroy = new Subject();
+        this._pressedKeysStream = new Subject();
+        this._pressedKeys = [];
         this.selectAllSelected = false;
         this.searchIndex = 0;
         this.previousKey = '';
@@ -18415,28 +18327,50 @@ class SelectDropdownComponent {
      * @param {?} event
      * @return {?}
      */
-    onWindowKeyUp(event) {
-        /** @type {?} */
-        const searchKey = event.key.toString().replace('"', '');
-        /** @type {?} */
-        const items = Array.from(this.optionList['_options'])
-            .filter((/**
-         * @param {?} elem
+    onWindowKeydown(event) {
+        if ((event.keyCode >= A && event.keyCode <= Z) ||
+            (event.keyCode >= ZERO && event.keyCode <= NINE)) {
+            this._pressedKeysStream.next(String.fromCharCode(event.keyCode));
+        }
+    }
+    /**
+     * @return {?}
+     */
+    highlightOptionByTyping() {
+        this._pressedKeysStream
+            .pipe(tap((/**
+         * @param {?} key
          * @return {?}
          */
-        (elem) => !elem.group))
-            .filter((/**
-         * @param {?} elem
+        (key) => this._pressedKeys.push(key))), map((/**
          * @return {?}
          */
-        (elem) => !elem.disabled))
-            .map((/**
-         * @param {?} el
+        () => this._pressedKeys.join('').toLocaleLowerCase())), debounceTime(200), takeUntil(this._destroy))
+            .subscribe((/**
+         * @param {?} searchKey
          * @return {?}
          */
-        (el) => el.wrappedOption.label || el.wrappedOption.value));
-        this.navigateThroughArray(searchKey, items);
-        this.previousKey = searchKey;
+        (searchKey) => {
+            /** @type {?} */
+            const items = Array.from(this.optionList['_options'])
+                .filter((/**
+             * @param {?} elem
+             * @return {?}
+             */
+            (elem) => !elem.group))
+                .filter((/**
+             * @param {?} elem
+             * @return {?}
+             */
+            (elem) => !elem.disabled))
+                .map((/**
+             * @param {?} el
+             * @return {?}
+             */
+            (el) => el.wrappedOption.label || el.wrappedOption.value));
+            this.navigateThroughArray(searchKey, items);
+            this.previousKey = searchKey;
+        }));
     }
     /**
      * @param {?} key
@@ -18452,8 +18386,7 @@ class SelectDropdownComponent {
         (el) => el
             .toString()
             .toLowerCase()
-            .charAt(0)
-            .includes(key.toString().toLowerCase())));
+            .startsWith(key.toString().toLowerCase())));
         if (this.searchIndex > items.length - 1 || key !== this.previousKey) {
             this.searchIndex = 0;
         }
@@ -18465,14 +18398,15 @@ class SelectDropdownComponent {
         this.searchIndex++;
         if (this.highlightedItem) {
             this.optionList.highlightOption(this.highlightedItem);
+            this.cdRef.markForCheck();
         }
         this.moveHighlightedIntoView();
+        this._pressedKeys = [];
     }
     /**
      * Event handlers. *
      * @return {?}
      */
-    // Angular life cycle hooks.
     onkeyup() {
         this.hasOptionsItems = this.optionList.filtered.length > 0;
         this.updateSelectAllState();
@@ -18491,6 +18425,7 @@ class SelectDropdownComponent {
         this.optionsReset();
         this.setDropdownHeight();
         this.setVisibleOptionsNumber();
+        this.highlightOptionByTyping();
     }
     /**
      * @return {?}
@@ -18757,11 +18692,18 @@ class SelectDropdownComponent {
             e.preventDefault();
         }
     }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        this._destroy.next();
+        this._destroy.complete();
+    }
 }
 SelectDropdownComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-select-dropdown',
-                template: "<div\n  (click)=\"$event.stopPropagation()\"\n  class=\"dropdown-content\"\n  #dropdownContent\n  [ngStyle]=\"{ 'top.px': top, 'left.px': left, 'width.px': width }\"\n  [@dropdownAnimation]=\"{\n    value: state,\n    params: { startHeight: startHeight, endHeight: endHeight }\n  }\"\n  (@dropdownAnimation.done)=\"onAnimationDone()\"\n  (@dropdownAnimation.start)=\"onAnimationStart()\"\n>\n  <div class=\"filter md-form px-2\" *ngIf=\"filterEnabled\" [ngClass]=\"{ 'md-outline': outline }\">\n    <input\n      type=\"text\"\n      class=\"search form-control w-100 d-block\"\n      #filterInput\n      [attr.autocomplete]=\"filterAutocomplete ? 'on' : 'off'\"\n      [placeholder]=\"placeholder\"\n      (input)=\"onSingleFilterInput($event)\"\n      (keydown)=\"onSingleFilterKeydown($event)\"\n    />\n  </div>\n\n  <div class=\"options\" #optionsList>\n    <ul\n      class=\"select-dropdown\"\n      [ngClass]=\"{ 'multiple-select-dropdown': multiple }\"\n      (wheel)=\"onOptionsWheel($event)\"\n    >\n      <li\n        [ngStyle]=\"{ 'height.px': optionHeight }\"\n        *ngIf=\"multiple && enableSelectAll && this.hasOptionsItems\"\n        (click)=\"onSelectAllClick()\"\n      >\n        <span class=\"filtrable\" *ngIf=\"multiple\">\n          <input\n            type=\"checkbox\"\n            [checked]=\"selectAllSelected\"\n            class=\"form-check-input {{ customClass }}\"\n          />\n          <label></label>\n          {{ selectAllLabel }}\n        </span>\n      </li>\n      <li\n        *ngFor=\"let option of optionList.filtered\"\n        [ngClass]=\"{\n          active: option.highlighted,\n          selected: option.selected,\n          disabled: option.disabled,\n          optgroup: option.group,\n          'd-flex justify-content-between flex-row-reverse align-items-center': option.icon\n        }\"\n        [ngStyle]=\"{\n          'height.px': optionHeight,\n          'line-height.px': optionHeight,\n          'background-color': getOptionStyle(option)['background-color'],\n          color: getOptionStyle(option)['color']\n        }\"\n        (click)=\"onOptionClick(option)\"\n        (mouseover)=\"option.hovered = true\"\n        (mouseleave)=\"option.hovered = false\"\n      >\n        <img class=\"rounded-circle\" [src]=\"option.icon\" *ngIf=\"option.icon !== ''\" />\n        <span\n          class=\"deselect-option\"\n          *ngIf=\"!multiple\"\n          [ngStyle]=\"{\n            'background-color': getOptionStyle(option)['background-color'],\n            color: getOptionStyle(option)['color']\n          }\"\n          >{{ option.label }}</span\n        >\n        <span\n          class=\"deselect-option\"\n          [ngStyle]=\"{\n            'background-color': getOptionStyle(option)['background-color'],\n            color: getOptionStyle(option)['color']\n          }\"\n          *ngIf=\"multiple\"\n        >\n          <input\n            type=\"checkbox\"\n            [checked]=\"option.selected\"\n            class=\"form-check-input {{ customClass }}\"\n            [disabled]=\"option.disabled\"\n          />\n          <label></label>\n          {{ option.label }}\n        </span>\n      </li>\n      <li\n        *ngIf=\"!this.hasOptionsItems\"\n        class=\"message disabled\"\n        [ngStyle]=\"{ 'height.px': optionHeight }\"\n      >\n        <span>{{ notFoundMsg }}</span>\n      </li>\n      <li #customContent class=\"custom-select-content\">\n        <ng-content></ng-content>\n      </li>\n    </ul>\n  </div>\n</div>\n",
+                template: "<div\n  (click)=\"$event.stopPropagation()\"\n  class=\"dropdown-content\"\n  #dropdownContent\n  [ngStyle]=\"{ 'top.px': top, 'left.px': left, 'width.px': width }\"\n  [@dropdownAnimation]=\"{\n    value: state,\n    params: { startHeight: startHeight, endHeight: endHeight }\n  }\"\n  (@dropdownAnimation.done)=\"onAnimationDone()\"\n  (@dropdownAnimation.start)=\"onAnimationStart()\"\n>\n  <div class=\"filter md-form px-2\" *ngIf=\"filterEnabled\">\n    <input\n      type=\"text\"\n      class=\"search form-control w-100 d-block\"\n      #filterInput\n      [attr.autocomplete]=\"filterAutocomplete ? 'on' : 'off'\"\n      [attr.role]=\"'searchbox'\"\n      [placeholder]=\"placeholder\"\n      (input)=\"onSingleFilterInput($event)\"\n      (keydown)=\"onSingleFilterKeydown($event)\"\n    />\n  </div>\n\n  <div class=\"options\" #optionsList>\n    <ul\n      class=\"select-dropdown\"\n      [ngClass]=\"{ 'multiple-select-dropdown': multiple }\"\n      (wheel)=\"onOptionsWheel($event)\"\n    >\n      <li\n        [ngStyle]=\"{ 'height.px': optionHeight }\"\n        *ngIf=\"multiple && enableSelectAll && this.hasOptionsItems\"\n        (click)=\"onSelectAllClick()\"\n      >\n        <span class=\"filtrable\" *ngIf=\"multiple\">\n          <input\n            type=\"checkbox\"\n            [checked]=\"selectAllSelected\"\n            class=\"form-check-input {{ customClass }}\"\n          />\n          <label></label>\n          {{ selectAllLabel }}\n        </span>\n      </li>\n      <li\n        *ngFor=\"let option of optionList.filtered\"\n        [ngClass]=\"{\n          'heavy-rain-gradient': option.highlighted && !highlightColor,\n          active: option.highlighted,\n          selected: option.selected,\n          disabled: option.disabled,\n          optgroup: option.group,\n          'd-flex justify-content-between flex-row-reverse align-items-center': option.icon\n        }\"\n        [ngStyle]=\"{\n          'height.px': optionHeight,\n          'line-height.px': optionHeight,\n          'background-color': getOptionStyle(option)['background-color'],\n          color: getOptionStyle(option)['color']\n        }\"\n        [attr.role]=\"'option'\"\n        [attr.aria-selected]=\"option.selected\"\n        [attr.aria-disabled]=\"option.disabled\"\n        (click)=\"onOptionClick(option)\"\n        (mouseover)=\"option.hovered = true\"\n        (mouseleave)=\"option.hovered = false\"\n      >\n        <img class=\"rounded-circle\" [src]=\"option.icon\" *ngIf=\"option.icon !== ''\" />\n        <span\n          class=\"deselect-option\"\n          *ngIf=\"!multiple\"\n          [ngStyle]=\"{\n            'background-color': getOptionStyle(option)['background-color'],\n            color: getOptionStyle(option)['color']\n          }\"\n          >{{ option.label }}</span\n        >\n        <span\n          class=\"deselect-option\"\n          [ngStyle]=\"{\n            'background-color': getOptionStyle(option)['background-color'],\n            color: getOptionStyle(option)['color']\n          }\"\n          *ngIf=\"multiple\"\n        >\n          <input\n            type=\"checkbox\"\n            [checked]=\"option.selected\"\n            class=\"form-check-input {{ customClass }}\"\n            [disabled]=\"option.disabled\"\n          />\n          <label></label>\n          {{ option.label }}\n        </span>\n      </li>\n      <li\n        *ngIf=\"!this.hasOptionsItems\"\n        class=\"message disabled\"\n        [ngStyle]=\"{ 'height.px': optionHeight }\"\n      >\n        <span>{{ notFoundMsg }}</span>\n      </li>\n      <li #customContent class=\"custom-select-content\">\n        <ng-content></ng-content>\n      </li>\n    </ul>\n  </div>\n</div>\n",
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 animations: [
@@ -18812,7 +18754,7 @@ SelectDropdownComponent.propDecorators = {
     optionsList: [{ type: ViewChild, args: ['optionsList', { static: true },] }],
     dropdownContent: [{ type: ViewChild, args: ['dropdownContent', { static: true },] }],
     customContent: [{ type: ViewChild, args: ['customContent', { static: true },] }],
-    onWindowKeyUp: [{ type: HostListener, args: ['window:keyup', ['$event'],] }],
+    onWindowKeydown: [{ type: HostListener, args: ['window: keydown', ['$event'],] }],
     onkeyup: [{ type: HostListener, args: ['keyup',] }],
     onkeydown: [{ type: HostListener, args: ['input',] }]
 };
@@ -18833,14 +18775,12 @@ const SELECT_VALUE_ACCESSOR = {
 };
 class SelectComponent {
     /**
-     * Event handlers. *
      * @param {?} el
      * @param {?} renderer
      * @param {?} document
      * @param {?} platformId
      * @param {?} cdRef
      */
-    // Angular lifecycle hooks.
     constructor(el, renderer, document, platformId, cdRef) {
         this.el = el;
         this.renderer = renderer;
@@ -18862,27 +18802,19 @@ class SelectComponent {
         this.enableSelectAll = true;
         this.selectAllLabel = 'Select all';
         this.outline = false;
+        this._required = false;
         this.opened = new EventEmitter();
         this.closed = new EventEmitter();
         this.selected = new EventEmitter();
         this.deselected = new EventEmitter();
         this.noOptionsFound = new EventEmitter();
         this.changed = new EventEmitter();
-        // Angular lifecycle hooks.
-        this.KEYS = {
-            BACKSPACE: 8,
-            TAB: 9,
-            ENTER: 13,
-            ESC: 27,
-            SPACE: 32,
-            UP: 38,
-            DOWN: 40,
-        };
         this._value = [];
         this.visibleOptionsDefault = 4;
         // Selection state variables.
         this.hasSelected = false;
         // View state variables.
+        this.canOpenOnFocus = true;
         this.hasFocus = false;
         this.isOpen = false;
         this.isBelow = true;
@@ -18895,7 +18827,10 @@ class SelectComponent {
         this.clearClicked = false;
         this.selectContainerClicked = false;
         this.filterHeight = 0;
+        this.OUTLINE_DROPDOWN_BOTTOM_OFFSET = 5;
+        this.OUTLINE_DROPDOWN_TOP_OFFSET = -20;
         this.itemsBefore = [];
+        this._focused = false;
         this.onChange = (/**
          * @param {?} _
          * @return {?}
@@ -18916,6 +18851,19 @@ class SelectComponent {
     /**
      * @return {?}
      */
+    get required() {
+        return this._required;
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set required(value) {
+        this._required = value;
+    }
+    /**
+     * @return {?}
+     */
     get compareWith() {
         return this._compareWith;
     }
@@ -18932,6 +18880,12 @@ class SelectComponent {
     /**
      * @return {?}
      */
+    get focused() {
+        return this._focused;
+    }
+    /**
+     * @return {?}
+     */
     ngOnInit() {
         this.placeholderView = this.placeholder;
         this.updateFilterHeight();
@@ -18940,6 +18894,7 @@ class SelectComponent {
             this.updateLabelState();
         }
         this.labelRef = this._getLabelRef();
+        this.prefixRef = this._getPrefixRef();
         if (this.labelRef) {
             this.updateLabelRefState();
         }
@@ -18959,32 +18914,37 @@ class SelectComponent {
         return labelRef;
     }
     /**
+     * @private
+     * @return {?}
+     */
+    _getPrefixRef() {
+        /** @type {?} */
+        const selectParentEl = this.el.nativeElement.parentNode;
+        /** @type {?} */
+        const prefixRef = selectParentEl.querySelector('.prefix');
+        return prefixRef;
+    }
+    /**
      * @return {?}
      */
     updateFilterHeight() {
-        this.filterEnabled ? (this.filterHeight = 78) : (this.filterHeight = 0);
+        this.filterEnabled ? (this.filterHeight = 50) : (this.filterHeight = 0);
     }
     /**
      * @return {?}
      */
     updateDropdownHeight() {
-        /** @type {?} */
-        const customContentHeight = this.dropdown
-            ? this.dropdown.customContent.nativeElement.clientHeight
-            : 0;
         if (this.multiple && this.enableSelectAll) {
             this.dropdownMaxHeight = this.visibleOptions
-                ? this.optionHeight * (this.visibleOptions + 1) + customContentHeight
-                : this.optionHeight * (this.visibleOptionsDefault + 1) + customContentHeight;
-            this.dropdownHeight =
-                this.optionHeight * (this.optionList.options.length + 1) + customContentHeight;
+                ? this.optionHeight * (this.visibleOptions + 1)
+                : this.optionHeight * (this.visibleOptionsDefault + 1);
+            this.dropdownHeight = this.optionHeight * (this.optionList.options.length + 1);
         }
         else {
             this.dropdownMaxHeight = this.visibleOptions
-                ? this.optionHeight * this.visibleOptions + customContentHeight
-                : this.optionHeight * this.visibleOptionsDefault + customContentHeight;
-            this.dropdownHeight =
-                this.optionHeight * this.optionList.options.length + customContentHeight;
+                ? this.optionHeight * this.visibleOptions
+                : this.optionHeight * this.visibleOptionsDefault;
+            this.dropdownHeight = this.optionHeight * this.optionList.options.length;
         }
     }
     /**
@@ -19085,23 +19045,37 @@ class SelectComponent {
      * @return {?}
      */
     onSelectContainerFocus() {
+        this._focused = true;
         if (this.label) {
             this.labelActive = true;
         }
         if (this.labelRef) {
             this.renderer.addClass(this.labelRef, 'active');
+            this.renderer.addClass(this.labelRef, 'focused');
         }
-        this.openDropdown();
+        if (this.prefixRef) {
+            this.renderer.addClass(this.prefixRef, 'focused');
+        }
+        if (this.canOpenOnFocus) {
+            this.openDropdown();
+        }
+        this.canOpenOnFocus = true;
     }
     /**
      * @return {?}
      */
     onSelectContainerBlur() {
+        this._focused = false;
+        this.canOpenOnFocus = true;
         if (this.label) {
             this.updateLabelState();
         }
         if (this.labelRef) {
             this.updateLabelRefState();
+            this.renderer.removeClass(this.labelRef, 'focused');
+        }
+        if (this.prefixRef) {
+            this.renderer.removeClass(this.prefixRef, 'focused');
         }
         if (!this.isOpen && !this.disabled) {
             this.onTouched();
@@ -19217,7 +19191,6 @@ class SelectComponent {
      * API. *
      * @return {?}
      */
-    // TODO fix issues with global click/key handler that closes the dropdown.
     open() {
         Promise.resolve().then((/**
          * @return {?}
@@ -19260,7 +19233,7 @@ class SelectComponent {
      */
     _setSelection(value) {
         if (this.multiple && value) {
-            this.optionList.clearSelection();
+            this.clearSelection();
             value.forEach((/**
              * @param {?} selectionValue
              * @return {?}
@@ -19319,7 +19292,7 @@ class SelectComponent {
         this.value = value;
         this.hasSelected = true;
         if (!value && value !== 0) {
-            this.hasSelected = false;
+            this.clearSelection();
         }
         if (this.label) {
             this.updateLabelState();
@@ -19566,6 +19539,8 @@ class SelectComponent {
         if (!this.multiple && option !== null) {
             this.selectOption(option);
             this.closeDropdown(true);
+            this.canOpenOnFocus = false;
+            this.selectionSpan.nativeElement.focus();
         }
     }
     /**
@@ -19642,9 +19617,11 @@ class SelectComponent {
         /** @type {?} */
         const key = event.keyCode;
         if (this.isOpen) {
-            if (key === this.KEYS.ESC || (key === this.KEYS.UP && event.altKey)) {
+            if (key === ESCAPE || (key === UP_ARROW && event.altKey)) {
                 event.preventDefault();
-                this.closeDropdown(true);
+                this.closeDropdown();
+                this.canOpenOnFocus = false;
+                this.selectionSpan.nativeElement.focus();
                 if (this.label) {
                     this.updateLabelState();
                 }
@@ -19652,30 +19629,31 @@ class SelectComponent {
                     this.updateLabelRefState();
                 }
             }
-            else if (key === this.KEYS.TAB) {
+            else if (key === TAB) {
+                // Restore focus from search input to select input. Ensures that the next
+                // or previous element will be focused corretly on tab or shift-tab
+                this.selectionSpan.nativeElement.focus();
                 this.closeDropdown();
             }
-            else if (key === this.KEYS.ENTER) {
+            else if (key === ENTER) {
                 this.selectHighlightedOption();
                 if (this.multiple && this.enableSelectAll) {
                     this.dropdown.updateSelectAllState();
                 }
             }
-            else if (key === this.KEYS.UP) {
+            else if (key === UP_ARROW) {
                 event.preventDefault();
                 this.optionList.highlightPreviousOption();
                 this.dropdown.moveHighlightedIntoView();
             }
-            else if (key === this.KEYS.DOWN) {
+            else if (key === DOWN_ARROW) {
                 event.preventDefault();
                 this.optionList.highlightNextOption();
                 this.dropdown.moveHighlightedIntoView();
             }
         }
         else {
-            if (key === this.KEYS.ENTER ||
-                key === this.KEYS.SPACE ||
-                (key === this.KEYS.DOWN && event.altKey)) {
+            if (key === ENTER || key === SPACE || (key === DOWN_ARROW && event.altKey)) {
                 event.preventDefault();
                 this.openDropdown();
             }
@@ -19688,7 +19666,7 @@ class SelectComponent {
     handleMultipleFilterKeydown(event) {
         /** @type {?} */
         const key = event.which;
-        if (key === this.KEYS.BACKSPACE) {
+        if (key === BACKSPACE) {
             if (this.hasSelected && this.filterEnabled && this.filterInput.nativeElement.value === '') {
                 this.deselectLast();
             }
@@ -19701,11 +19679,7 @@ class SelectComponent {
     handleSingleFilterKeydown(event) {
         /** @type {?} */
         const key = event.which;
-        if (key === this.KEYS.ESC ||
-            key === this.KEYS.TAB ||
-            key === this.KEYS.UP ||
-            key === this.KEYS.DOWN ||
-            key === this.KEYS.ENTER) {
+        if (key === ESCAPE || key === TAB || key === UP_ARROW || key === DOWN_ARROW || key === ENTER) {
             this.handleSelectContainerKeydown(event);
         }
     }
@@ -19736,7 +19710,12 @@ class SelectComponent {
      * @return {?}
      */
     updateWidth() {
-        this.width = this.selectionSpan.nativeElement.offsetWidth;
+        if (!this.multiple) {
+            this.width = this.singleContainer.nativeElement.offsetWidth;
+        }
+        else {
+            this.width = this.multipleContainer.nativeElement.offsetWidth;
+        }
     }
     /**
      * @return {?}
@@ -19757,6 +19736,10 @@ class SelectComponent {
             }
             /** @type {?} */
             const selectSpan = this.selectionSpan.nativeElement;
+            /** @type {?} */
+            const originHeight = this.outline
+                ? this.OUTLINE_DROPDOWN_TOP_OFFSET
+                : selectSpan.offsetHeight;
             this.left = selectSpan.offsetLeft;
             /** @type {?} */
             const bottom = docEl.scrollTop + docEl.clientHeight;
@@ -19764,10 +19747,10 @@ class SelectComponent {
             const dropdownHeight = this.dropdownMaxHeight > this.dropdownHeight ? this.dropdownHeight : this.dropdownMaxHeight;
             this.updateDropdownHeight();
             if (elPosition + dropdownHeight >= bottom) {
-                this.top = selectSpan.offsetHeight - dropdownHeight - this.filterHeight;
+                this.top = originHeight - dropdownHeight - this.filterHeight;
             }
             else {
-                this.top = 0;
+                this.top = this.outline ? selectSpan.offsetHeight + this.OUTLINE_DROPDOWN_BOTTOM_OFFSET : 0;
             }
             this.cdRef.markForCheck();
         }), 0);
@@ -19791,10 +19774,18 @@ class SelectComponent {
             this.left = selectRect.left;
             if (offsetTop + dropdownHeight + this.filterHeight >
                 scrollTop + this.document.documentElement.clientHeight) {
-                this.top = offsetTop - dropdownHeight + height - this.filterHeight;
+                if (this.outline) {
+                    this.top =
+                        offsetTop - dropdownHeight + this.OUTLINE_DROPDOWN_TOP_OFFSET - this.filterHeight;
+                }
+                else {
+                    this.top = offsetTop - dropdownHeight + height - this.filterHeight;
+                }
             }
             else {
-                this.top = offsetTop;
+                this.top = this.outline
+                    ? offsetTop + height + this.OUTLINE_DROPDOWN_BOTTOM_OFFSET
+                    : offsetTop;
             }
         }
     }
@@ -19828,11 +19819,11 @@ class SelectComponent {
 SelectComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-select',
-                template: "<label *ngIf=\"label !== ''\" [ngClass]=\"{ active: labelActive }\">\n  {{ label }}\n</label>\n<div\n  #selection\n  [attr.tabindex]=\"disabled ? null : 0\"\n  [ngClass]=\"{ open: isOpen, focus: hasFocus, below: isBelow, disabled: disabled }\"\n  [tabindex]=\"tabindex\"\n  (mousedown)=\"onSelectContainerClick($event)\"\n  (focus)=\"onSelectContainerFocus()\"\n  (blur)=\"onSelectContainerBlur()\"\n  (keydown)=\"onSelectContainerKeydown($event)\"\n  (window:resize)=\"onWindowResize()\"\n>\n  <div class=\"single form-control\" *ngIf=\"!multiple\">\n    <div class=\"value\" *ngIf=\"optionList.hasSelected()\">\n      {{ optionList.selection[0].label }}\n    </div>\n    <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\">\n      {{ placeholderView }}\n    </div>\n    <div\n      #clear\n      class=\"clear\"\n      *ngIf=\"allowClear && hasSelected\"\n      (mousedown)=\"onClearSelectionClick($event)\"\n    >\n      &#x2715;\n    </div>\n    <span class=\"mdb-select-toggle\"></span>\n  </div>\n\n  <div class=\"multiple form-control\" *ngIf=\"multiple\">\n    <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\">\n      {{ placeholderView }}\n    </div>\n\n    <div [ngStyle]=\"allowClear && { 'width.%': 90 }\" class=\"option\">\n      <span *ngFor=\"let option of optionList.selection\">\n        {{ option.label }}<span class=\"deselect-option\">,</span>\n      </span>\n    </div>\n\n    <div\n      #clear\n      class=\"clear\"\n      *ngIf=\"allowClear && hasSelected\"\n      (mousedown)=\"onClearSelectionClick($event)\"\n    >\n      &#x2715;\n    </div>\n\n    <span class=\"mdb-select-toggle\"></span>\n  </div>\n</div>\n<mdb-select-dropdown\n  *ngIf=\"isOpen\"\n  #dropdown\n  [enableSelectAll]=\"enableSelectAll\"\n  [multiple]=\"multiple\"\n  [dropdownHeight]=\"dropdownHeight\"\n  [dropdownMaxHeight]=\"dropdownMaxHeight\"\n  [optionHeight]=\"optionHeight\"\n  [optionList]=\"optionList\"\n  [notFoundMsg]=\"notFoundMsg\"\n  [customClass]=\"customClass\"\n  [highlightColor]=\"highlightColor\"\n  [highlightTextColor]=\"highlightTextColor\"\n  [filterEnabled]=\"filterEnabled\"\n  [filterAutocomplete]=\"filterAutocomplete\"\n  [placeholder]=\"filterPlaceholder\"\n  [selectAllLabel]=\"selectAllLabel\"\n  [outline]=\"outline\"\n  [top]=\"top\"\n  [left]=\"left\"\n  [width]=\"width\"\n  (close)=\"onDropdownClose($event)\"\n  (optionClicked)=\"onDropdownOptionClicked($event)\"\n  (singleFilterClick)=\"onSingleFilterClick()\"\n  (singleFilterInput)=\"onSingleFilterInput($event)\"\n  (singleFilterKeydown)=\"onSingleFilterKeydown($event)\"\n  (selectAll)=\"onSelectAll($event)\"\n  (animationDone)=\"onDropdownAnimationDone()\"\n  (animationStart)=\"onDropdownAnimationStart()\"\n>\n  <ng-content></ng-content>\n</mdb-select-dropdown>\n",
+                template: "<label *ngIf=\"label !== ''\" [ngClass]=\"{ active: labelActive, focused: focused }\">\n  {{ label }}\n</label>\n<div\n  #selection\n  [attr.tabindex]=\"disabled ? null : 0\"\n  [ngClass]=\"{ open: isOpen, focus: hasFocus, below: isBelow, disabled: disabled }\"\n  [tabindex]=\"tabindex\"\n  (mousedown)=\"onSelectContainerClick($event)\"\n  (focus)=\"onSelectContainerFocus()\"\n  (blur)=\"onSelectContainerBlur()\"\n  (keydown)=\"onSelectContainerKeydown($event)\"\n  (window:resize)=\"onWindowResize()\"\n  [attr.role]=\"filterEnabled ? 'combobox' : 'listbox'\"\n  [attr.aria-disabled]=\"disabled\"\n  [attr.multiselectable]=\"multiple\"\n  [attr.aria-expanded]=\"isOpen\"\n  [attr.aria-required]=\"required\"\n  [attr.aria-haspopup]=\"true\"\n>\n  <div\n    #singleContainer\n    class=\"single form-control\"\n    *ngIf=\"!multiple\"\n    [ngClass]=\"{ focused: focused }\"\n  >\n    <div class=\"value\" *ngIf=\"optionList.hasSelected()\">\n      {{ optionList.selection[0].label }}\n    </div>\n    <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\">\n      {{ placeholderView }}\n    </div>\n    <div\n      #clear\n      class=\"clear\"\n      *ngIf=\"allowClear && hasSelected\"\n      (mousedown)=\"onClearSelectionClick($event)\"\n    >\n      &#x2715;\n    </div>\n    <span class=\"mdb-select-toggle\" [ngClass]=\"{ focused: focused }\"></span>\n  </div>\n\n  <div\n    #multipleContainer\n    class=\"multiple form-control\"\n    *ngIf=\"multiple\"\n    [ngClass]=\"{ focused: focused }\"\n  >\n    <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\">\n      {{ placeholderView }}\n    </div>\n\n    <div [ngStyle]=\"allowClear && { 'width.%': 90 }\" class=\"option\">\n      <span *ngFor=\"let option of optionList.selection\">\n        {{ option.label }}<span class=\"deselect-option\">,</span>\n      </span>\n    </div>\n\n    <div\n      #clear\n      class=\"clear\"\n      *ngIf=\"allowClear && hasSelected\"\n      (mousedown)=\"onClearSelectionClick($event)\"\n    >\n      &#x2715;\n    </div>\n\n    <span class=\"mdb-select-toggle\" [ngClass]=\"{ focused: focused }\"></span>\n  </div>\n</div>\n<mdb-select-dropdown\n  *ngIf=\"isOpen\"\n  #dropdown\n  [enableSelectAll]=\"enableSelectAll\"\n  [multiple]=\"multiple\"\n  [dropdownHeight]=\"dropdownHeight\"\n  [dropdownMaxHeight]=\"dropdownMaxHeight\"\n  [optionHeight]=\"optionHeight\"\n  [optionList]=\"optionList\"\n  [notFoundMsg]=\"notFoundMsg\"\n  [customClass]=\"customClass\"\n  [highlightColor]=\"highlightColor\"\n  [highlightTextColor]=\"highlightTextColor\"\n  [filterEnabled]=\"filterEnabled\"\n  [filterAutocomplete]=\"filterAutocomplete\"\n  [placeholder]=\"filterPlaceholder\"\n  [selectAllLabel]=\"selectAllLabel\"\n  [outline]=\"outline\"\n  [top]=\"top\"\n  [left]=\"left\"\n  [width]=\"width\"\n  (close)=\"onDropdownClose($event)\"\n  (optionClicked)=\"onDropdownOptionClicked($event)\"\n  (singleFilterClick)=\"onSingleFilterClick()\"\n  (singleFilterInput)=\"onSingleFilterInput($event)\"\n  (singleFilterKeydown)=\"onSingleFilterKeydown($event)\"\n  (selectAll)=\"onSelectAll($event)\"\n  (animationDone)=\"onDropdownAnimationDone()\"\n  (animationStart)=\"onDropdownAnimationStart()\"\n>\n  <ng-content></ng-content>\n</mdb-select-dropdown>\n",
                 providers: [SELECT_VALUE_ACCESSOR],
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush,
-                styles: [".select-wrapper .select-dropdown{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.select-label{position:absolute}.select-wrapper{position:relative}.select-wrapper input.select-dropdown{position:relative;cursor:pointer;background-color:transparent;border:none;border-bottom:1px solid #ced4da;outline:0;height:38px;line-height:2.9rem;width:100%;font-size:1rem;margin:0 0 .94rem;padding:0;display:block;text-overflow:ellipsis;z-index:2}.select-wrapper input.select-dropdown:disabled{color:rgba(0,0,0,.3);border-bottom-color:rgba(0,0,0,.2);cursor:default}.select-wrapper input.select-dropdown .selected,.select-wrapper input.select-dropdown li:focus{background-color:rgba(0,0,0,.15)}.select-wrapper input.select-dropdown li.active{background:0 0}.select-wrapper input.select-dropdown .fab,.select-wrapper input.select-dropdown .far,.select-wrapper input.select-dropdown .fas{color:inherit}.select-wrapper input.active{box-shadow:0 1px 0 0 #4285f4;border-bottom:1px solid #4285f4}.select-wrapper .search-wrap{padding:1rem 0 0;display:block;margin:0 .7rem}.select-wrapper .search-wrap .md-form{margin-top:0;margin-bottom:1rem}.select-wrapper .search-wrap .md-form input{padding-bottom:.4rem;margin-bottom:0}.select-wrapper span.caret{color:initial;position:absolute;right:0;top:.8rem;font-size:.63rem}.select-wrapper span.caret.disabled{color:rgba(0,0,0,.3)}.select-wrapper+label{position:absolute;top:2.125rem;transition:.2s ease-out;color:#757575;font-weight:300}.select-wrapper+label.active{-webkit-transform:translateY(-14px);transform:translateY(-14px);font-size:.8rem;top:1.5rem;left:15px}.select-wrapper+label.active-check{color:#4285f4}.select-wrapper+label.mdb-main-label{z-index:1}.select-wrapper i,.select-wrapper+label.disabled{color:rgba(0,0,0,.3)}.select-wrapper ul{list-style-type:none;padding-left:0}.select-wrapper.md-form>ul li label{top:0;color:#4285f4;font-size:.9rem;-webkit-transform:none;transform:none}.select-wrapper.md-form>ul li.select-toggle-all label{padding-left:38px}.select-wrapper.md-form.colorful-select>ul li.select-toggle-all:hover label{color:#fff}.select-wrapper.md-form.md-outline span.caret{padding-right:.75rem;padding-left:.75rem;color:#495057!important}.select-wrapper.md-form.md-outline span.caret.active{color:#4285f4!important}.select-wrapper.md-form.md-outline .dropdown-content{top:2.7rem!important}.select-wrapper.md-form.md-outline input.select-dropdown{padding:.375rem .75rem;color:#495057}.select-wrapper.md-form.md-outline input.select-dropdown:focus{border-color:#4285f4;box-shadow:inset 0 0 0 1px #4285f4}.select-wrapper.md-form.md-outline+label{position:absolute;-webkit-transform:translateY(40%);transform:translateY(40%);left:23px;color:#757575;background:#fff;font-size:13px;font-weight:500;padding-right:5px;padding-left:5px;top:.5em!important;z-index:2!important}.select-wrapper.md-form.md-outline+label.active{color:#4285f4}select{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}select.browser-default{display:block!important}select:disabled{color:rgba(0,0,0,.3)}.select-dropdown [type=checkbox]:disabled:not(:checked)+label:before{margin-left:0;margin-top:3px}.select-dropdown ul{list-style-type:none;padding:0}.select-dropdown li img{height:30px;width:30px;margin:.3rem .75rem;float:right}.select-dropdown li.disabled,.select-dropdown li.disabled>span,.select-dropdown li.optgroup{color:rgba(0,0,0,.3);background-color:transparent!important;cursor:context-menu}.select-dropdown li.optgroup{border-top:1px solid #eee}.select-dropdown li.optgroup.selected>span{color:rgba(0,0,0,.7)}.select-dropdown li.optgroup>span{color:rgba(0,0,0,.4)}.dropdown-content{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);background-color:#fff;margin:0;display:none;min-width:6.25rem;max-height:40.625rem;overflow-y:auto;opacity:0;position:absolute;z-index:999;will-change:width,height}.dropdown-content li{clear:both;color:#000;cursor:pointer;line-height:1.3rem;width:100%;text-align:left;text-transform:none}.dropdown-content li.active,.dropdown-content li:hover{background-color:#eee}.dropdown-content li>a,.dropdown-content li>span{color:#4285f4;display:block;padding:.5rem}.dropdown-content li>a>i{height:inherit;line-height:inherit}.colorful-select .dropdown-content{padding:.5rem}.colorful-select .dropdown-content li.active span{color:#fff!important;box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.colorful-select .dropdown-content li.active span [type=checkbox]:checked+label:before{border-color:transparent #fff #fff transparent}.colorful-select .dropdown-content li a:hover,.colorful-select .dropdown-content li span:hover{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);color:#fff!important;transition:.15s;border-radius:.125rem}.colorful-select .dropdown-content li a:hover [type=checkbox]+label:before,.colorful-select .dropdown-content li span:hover [type=checkbox]+label:before{border-color:#fff}.colorful-select .dropdown-content li a:hover [type=checkbox]:checked+label:before,.colorful-select .dropdown-content li span:hover [type=checkbox]:checked+label:before{border-color:transparent #fff #fff transparent}.colorful-select .dropdown-content li.disabled.active span,.colorful-select .dropdown-content li.optgroup.active span,.colorful-select .dropdown-content li:disabled.active span{box-shadow:none;color:rgba(0,0,0,.3)!important;border-bottom-color:rgba(0,0,0,.3);cursor:default}.colorful-select .dropdown-content li.disabled a:hover,.colorful-select .dropdown-content li.disabled span:hover,.colorful-select .dropdown-content li.optgroup a:hover,.colorful-select .dropdown-content li.optgroup span:hover,.colorful-select .dropdown-content li:disabled a:hover,.colorful-select .dropdown-content li:disabled span:hover{box-shadow:none;color:rgba(0,0,0,.3)!important;border-bottom-color:rgba(0,0,0,.3);cursor:default;background-color:#fff!important}.colorful-select .dropdown-content li.disabled label,.colorful-select .dropdown-content li.optgroup label,.colorful-select .dropdown-content li:disabled label{cursor:default}.dropdown-primary .dropdown-content li a,.dropdown-primary .dropdown-content li span:hover,.dropdown-primary .dropdown-content li.active{background-color:#4285f4!important}.dropdown-primary .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-primary .search-wrap input:focus{border-bottom:1px solid #4285f4;box-shadow:0 1px 0 0 #4285f4}.dropdown-danger .dropdown-content li a,.dropdown-danger .dropdown-content li span:hover,.dropdown-danger .dropdown-content li.active{background-color:#c00!important}.dropdown-danger .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-danger .search-wrap input:focus{border-bottom:1px solid #c00;box-shadow:0 1px 0 0 #c00}.dropdown-default .dropdown-content li a,.dropdown-default .dropdown-content li span:hover,.dropdown-default .dropdown-content li.active{background-color:#2bbbad!important}.dropdown-default .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-default .search-wrap input:focus{border-bottom:1px solid #2bbbad;box-shadow:0 1px 0 0 #2bbbad}.dropdown-secondary .dropdown-content li a,.dropdown-secondary .dropdown-content li span:hover,.dropdown-secondary .dropdown-content li.active{background-color:#a6c!important}.dropdown-secondary .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-secondary .search-wrap input:focus{border-bottom:1px solid #a6c;box-shadow:0 1px 0 0 #a6c}.dropdown-success .dropdown-content li a,.dropdown-success .dropdown-content li span:hover,.dropdown-success .dropdown-content li.active{background-color:#00c851!important}.dropdown-success .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-success .search-wrap input:focus{border-bottom:1px solid #00c851;box-shadow:0 1px 0 0 #00c851}.dropdown-info .dropdown-content li a,.dropdown-info .dropdown-content li span:hover,.dropdown-info .dropdown-content li.active{background-color:#33b5e5!important}.dropdown-info .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-info .search-wrap input:focus{border-bottom:1px solid #33b5e5;box-shadow:0 1px 0 0 #33b5e5}.dropdown-warning .dropdown-content li a,.dropdown-warning .dropdown-content li span:hover,.dropdown-warning .dropdown-content li.active{background-color:#fb3!important}.dropdown-warning .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-warning .search-wrap input:focus{border-bottom:1px solid #fb3;box-shadow:0 1px 0 0 #fb3}.dropdown-dark .dropdown-content li a,.dropdown-dark .dropdown-content li span:hover,.dropdown-dark .dropdown-content li.active{background-color:#2e2e2e!important}.dropdown-dark .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-dark .search-wrap input:focus{border-bottom:1px solid #2e2e2e;box-shadow:0 1px 0 0 #2e2e2e}.dropdown-ins .dropdown-content li a,.dropdown-ins .dropdown-content li span:hover,.dropdown-ins .dropdown-content li.active{background-color:#2e5e86!important}.dropdown-ins .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-ins .search-wrap input:focus{border-bottom:1px solid #2e5e86;box-shadow:0 1px 0 0 #2e5e86}.md-dropdown li.disabled.active{background-color:transparent!important}mdb-select{display:inline-block;margin:0;position:relative;vertical-align:middle;width:100%}mdb-select *{box-sizing:border-box;font-family:Roboto,sans-serif;outline:0}mdb-select.mdb-select-outline{transition:.2s}mdb-select.mdb-select-outline>label{padding-left:10px}mdb-select.mdb-select-outline:active label,mdb-select.mdb-select-outline:focus label,mdb-select.mdb-select-outline:focus-within label{color:#4285f4}mdb-select.mdb-select-outline:active .below>.form-control,mdb-select.mdb-select-outline:focus .below>.form-control,mdb-select.mdb-select-outline:focus-within .below>.form-control{border-color:#4285f4;box-shadow:inset 0 0 0 1px #4285f4}mdb-select.mdb-select-outline .form-control{padding:6px 12px;border:1px solid #dadce0;border-radius:4px}mdb-select.mdb-select-outline>label.active{-webkit-transform:translateY(-22px);transform:translateY(-22px);background:#fff;font-weight:500;padding:0;font-size:.8rem;z-index:1}mdb-select>div{border:transparent;box-sizing:border-box;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;width:100%}mdb-select>div.disabled{color:#aaa!important;cursor:default;pointer-events:none;background-color:transparent}mdb-select>div.disabled .placeholder,mdb-select>div.disabled .value,mdb-select>div.disabled span{color:#aaa!important}mdb-select>div.disabled>div.single>div.clear,mdb-select>div.disabled>div.single>div.placeholder,mdb-select>div.disabled>div.single>div.toggle{color:rgba(0,0,0,.3)}mdb-select>div>div.single{position:relative;cursor:pointer;background-color:transparent;border:none;border-bottom:1px solid #ced4da;outline:0;line-height:2rem;width:100%;font-size:1rem;margin:0;height:24px;box-sizing:content-box;padding:.6rem 0 .4rem;display:block;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;text-align:start}mdb-select>div>div.single>div.value{flex:1;line-height:24px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;padding-right:1.2rem!important;color:#292b2c;padding:0 0 5px}mdb-select>div>div.single>div.placeholder{flex:1;line-height:24px;width:80%;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;color:#6c757d;padding:0 0 5px}mdb-select>div>div.single>div.clear,mdb-select>div>div.single>div.toggle{float:right;color:#000;line-height:2rem;text-align:center;width:30px;position:absolute;right:20px;top:55%;margin-top:0;-webkit-transform:translateY(-50%);transform:translateY(-50%)}mdb-select>div>div.single>div.toggle:before{content:'\\25B2'}mdb-select>div>div.single>div.clear:hover,mdb-select>div>div.single>div.toggle:hover{background-color:#ececec}mdb-select>div>div.single>div.clear,mdb-select>div>div.single>div.toggle:hover{background-color:transparent}mdb-select>div>div.single>div.clear{font-size:18px}mdb-select>div>div.single>div.toggle{font-size:14px}mdb-select>div>div.multiple{position:relative;cursor:pointer;background-color:transparent;border:none;border-bottom:1px solid #ced4da;outline:0;line-height:2rem;width:100%;font-size:1rem;margin:0;height:24px;box-sizing:content-box;padding:.6rem 0 .4rem;display:block;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;text-align:start}mdb-select>div>div.multiple .placeholder{flex:1;line-height:24px;max-width:95%;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;color:#6c757d;padding:0 0 5px}mdb-select>div>div.multiple>div.clear,mdb-select>div>div.multiple>div.toggle{float:right;color:#000;line-height:2rem;text-align:center;width:30px;position:absolute;right:20px;top:60%;margin-top:-2px;-webkit-transform:translateY(-50%);transform:translateY(-50%)}mdb-select>div>div.multiple>div.clear:hover,mdb-select>div>div.multiple>div.toggle:hover{background-color:#ececec}mdb-select>div>div.multiple>div.clear,mdb-select>div>div.multiple>div.toggle:hover{background-color:transparent}mdb-select>div>div.multiple>div.clear{font-size:18px}mdb-select>div>div.multiple>div.toggle{font-size:14px}mdb-select>div>div.multiple>div.option{overflow:hidden;min-width:0;width:80%;text-overflow:ellipsis;white-space:nowrap;cursor:default;line-height:24px}mdb-select>div>div.multiple>div.option span:last-child .deselect-option{display:none}mdb-select>div>div.multiple>div.option span.deselect-option{cursor:pointer;height:20px;line-height:24px;background-color:transparent;border:0;border-radius:0;color:#292b2c;font-size:1rem;margin:0;padding:0}mdb-select>div>div.multiple>div.option span.deselect-option:hover{color:#555}mdb-select>div>div.multiple input{background-color:transparent;border:none;height:30px;line-height:2rem;padding:0}mdb-select>div>div.multiple input:focus{outline:0}mdb-select>label{color:#757575;font-size:1rem;position:absolute;top:11px;left:0;transition:.2s ease-out;cursor:text;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:95%}mdb-select>label.active{font-size:.8rem;-webkit-transform:translateY(-22px);transform:translateY(-22px);max-width:100%}mdb-select-dropdown{box-sizing:border-box;font-family:Sans-Serif;color:#4285f4;font-size:19.2px}mdb-select-dropdown *{box-sizing:border-box;font-family:Sans-Serif}mdb-select-dropdown>div{background-color:#fff;outline:transparent;border:0;box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);border-top:none;box-sizing:border-box;position:absolute;z-index:1}mdb-select-dropdown>div .filter{margin-bottom:9.6px!important;margin-top:9.6px!important;height:38px}mdb-select-dropdown>div .options{position:relative;overflow-y:auto}mdb-select-dropdown>div .options ul{list-style:none;margin:0;padding:0}mdb-select-dropdown>div .options ul li{cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}mdb-select-dropdown>div .options ul li .filtrable{flex-direction:row;align-items:center}mdb-select-dropdown>div .options ul .selected{background-color:#eee}mdb-select-dropdown>div .options ul .highlighted{background-color:#eee;color:#4285f4}mdb-select-dropdown>div .options ul .disabled{background-color:#fff;color:#9e9e9e;cursor:default;pointer-events:none}mdb-select-dropdown>div .options::-webkit-scrollbar{width:4px;height:4px}mdb-select-dropdown>div .options::-webkit-scrollbar-button:end:increment,mdb-select-dropdown>div .options::-webkit-scrollbar-button:start:decrement{display:block;height:0;background-color:transparent}mdb-select-dropdown>div .options::-webkit-scrollbar-track-piece{background-color:transparent;border-radius:0 0 4px 4px}mdb-select-dropdown>div .options::-webkit-scrollbar-thumb:vertical{height:50px;background-color:#999;border-radius:4px}mdb-select-dropdown .dropdown-content{background-color:#fff;margin:0;width:100%;display:block;min-width:100px;max-height:unset;overflow-y:hidden;opacity:1;position:absolute;z-index:1000;will-change:width,height}mdb-select-dropdown .dropdown-content li>a,mdb-select-dropdown .dropdown-content li>span{color:#4285f4;padding:0 .5rem}mdb-select-dropdown .dropdown-content li.disabled,mdb-select-dropdown .dropdown-content li.disabled>span{color:rgba(0,0,0,.3);background-color:transparent!important}mdb-select-dropdown .dropdown-content li.optgroup{color:rgba(0,0,0,.3);background-color:transparent!important;border-top:1px solid #eee}mdb-select-dropdown .dropdown-content li.optgroup:first-child{border-top:0}mdb-select-dropdown .dropdown-content li.optgroup>span{color:rgba(0,0,0,.4)!important}.dropdown-content li>a,.dropdown-content li>span{font-size:.9rem}.select-dropdown li{overflow:hidden;text-overflow:ellipsis}.colorful-select .multiple-select-dropdown li.active span.filtrable,.colorful-select .multiple-select-dropdown li.selected span.filtrable{color:#fff}.colorful-select .multiple-select-dropdown li.active [type=checkbox]:checked+label:before,.colorful-select .multiple-select-dropdown li.selected [type=checkbox]:checked+label:before{border-color:transparent #fff #fff transparent!important}.dropdown-primary.colorful-select .dropdown-content li.active,.dropdown-primary.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-primary.colorful-select .dropdown-content li.active span,.dropdown-primary.colorful-select .dropdown-content li.selected span{background-color:#4285f4;color:#fff}.dropdown-danger.colorful-select .dropdown-content li.active,.dropdown-danger.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-danger.colorful-select .dropdown-content li.active span,.dropdown-danger.colorful-select .dropdown-content li.selected span{background-color:#c00;color:#fff}.dropdown-default.colorful-select .dropdown-content li.active,.dropdown-default.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-default.colorful-select .dropdown-content li.active span,.dropdown-default.colorful-select .dropdown-content li.selected span{background-color:#2bbbad;color:#fff}.dropdown-secondary.colorful-select .dropdown-content li.active,.dropdown-secondary.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-secondary.colorful-select .dropdown-content li.active span,.dropdown-secondary.colorful-select .dropdown-content li.selected span{background-color:#a6c;color:#fff}.dropdown-success.colorful-select .dropdown-content li.active,.dropdown-success.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-success.colorful-select .dropdown-content li.active span,.dropdown-success.colorful-select .dropdown-content li.selected span{background-color:#00c851;color:#fff}.dropdown-info.colorful-select .dropdown-content li.active,.dropdown-info.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-info.colorful-select .dropdown-content li.active span,.dropdown-info.colorful-select .dropdown-content li.selected span{background-color:#33b5e5;color:#fff}.dropdown-warning.colorful-select .dropdown-content li.active,.dropdown-warning.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-warning.colorful-select .dropdown-content li.active span,.dropdown-warning.colorful-select .dropdown-content li.selected span{background-color:#fb3;color:#fff}.dropdown-ins.colorful-select .dropdown-content li.active,.dropdown-ins.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-ins.colorful-select .dropdown-content li.active span,.dropdown-ins.colorful-select .dropdown-content li.selected span{background-color:#3f729b;color:#fff}.dropdown-dark.colorful-select .dropdown-content li.active,.dropdown-dark.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-dark.colorful-select .dropdown-content li.active span,.dropdown-dark.colorful-select .dropdown-content li.selected span{background-color:#2e2e2e;color:#fff}.multiple-select-dropdown li [type=checkbox]+label{height:10px;top:0!important;margin-top:-2px!important;-webkit-transform:translateY(0);transform:translateY(0);overflow:visible;width:auto}mdb-select .clear{position:absolute;font-size:18px;color:#000;width:30px;margin-top:-2px;-webkit-transform:translateY(-50%);transform:translateY(-50%)}.md-form mdb-select .form-control{height:24px;box-sizing:content-box}.md-form mdb-select label{color:#757575;font-size:1rem;position:absolute;top:12px;left:0;transition:.2s ease-out;-webkit-transform:translateY(0);transform:translateY(0);cursor:text;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:95%}.md-form mdb-select label.active{font-size:.8rem;-webkit-transform:translateY(-22px);transform:translateY(-22px);width:100%}.md-form mdb-select+label{color:#757575;font-size:1rem;position:absolute;top:12px;left:0;transition:.2s ease-out;-webkit-transform:translateY(0);transform:translateY(0);cursor:text;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:95%}.md-form mdb-select+label.active{font-size:.8rem;-webkit-transform:translateY(-22px);transform:translateY(-22px);max-width:100%}mdb-select+label{color:#757575;font-size:1rem;position:absolute;top:12px;left:15px;transition:.2s ease-out;-webkit-transform:translateY(0);transform:translateY(0);cursor:text;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:90%;z-index:-1}mdb-select+label.active{font-size:.8rem;-webkit-transform:translateY(-22px);transform:translateY(-22px);max-width:95%;z-index:0}mdb-select .form-control{border-radius:0}mdb-select.validate-success.ng-valid.ng-touched div.multiple,mdb-select.validate-success.ng-valid.ng-touched div.single{border-bottom:1px solid #00c851!important;box-shadow:0 1px 0 0 #00c851!important}mdb-select.validate-success.ng-valid.ng-touched label,mdb-select.validate-success.ng-valid.ng-touched+label{color:#00c851!important}.form-submitted mdb-select.validate-error.ng-invalid div.multiple,.form-submitted mdb-select.validate-error.ng-invalid div.single,mdb-select.validate-error.ng-invalid.ng-touched div.multiple,mdb-select.validate-error.ng-invalid.ng-touched div.single{border-bottom:1px solid #f44336!important;box-shadow:0 1px 0 0 #f44336!important}.form-submitted mdb-select.validate-error.ng-invalid.ng-touched label .form-submitted mdb-select.validate-error.ng-invalid.ng-touched+label,mdb-select.validate-error.ng-invalid.ng-touched label,mdb-select.validate-error.ng-invalid.ng-touched+label{color:#f44336!important}mdb-select.colorful-select .select-dropdown li.selected,mdb-select.colorful-select .select-dropdown li:hover{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.mdb-select-toggle{float:right;color:#000;line-height:2rem;text-align:center;width:30px;position:absolute;right:0;top:calc(50% + 9.4px);margin-top:-.5rem;-webkit-transform:translateY(-50%);transform:translateY(-50%);font-size:14px}.mdb-select-toggle:before{content:'\\25BC'}.dropdown-content .custom-select-content:hover{background-color:transparent}[type=checkbox]:checked,[type=checkbox]:not(:checked){position:absolute;opacity:0;pointer-events:none}.form-check-input[type=checkbox]+label,label.btn input[type=checkbox]+label{position:relative;padding-left:35px;cursor:pointer;display:inline-block;height:1.5625rem;line-height:1.5625rem;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.form-check-input[type=checkbox]+label:before,.form-check-input[type=checkbox]:not(.filled-in)+label:after,label.btn input[type=checkbox]+label:before,label.btn input[type=checkbox]:not(.filled-in)+label:after{content:'';position:absolute;top:0;left:0;width:18px;height:18px;z-index:0;border:2px solid #8a8a8a;border-radius:1px;margin-top:3px;transition:.2s}.form-check-input[type=checkbox]:not(.filled-in)+label:after,label.btn input[type=checkbox]:not(.filled-in)+label:after{border:0;-webkit-transform:scale(0);transform:scale(0)}.form-check-input[type=checkbox]:not(:checked):disabled+label:before,label.btn input[type=checkbox]:not(:checked):disabled+label:before{border:none;background-color:#bdbdbd}.form-check-input[type=checkbox]:checked+label:before,label.btn input[type=checkbox]:checked+label:before{top:-4px;left:-5px;width:12px;height:1.375rem;border-top:2px solid transparent;border-left:2px solid transparent;border-right:2px solid #4285f4;border-bottom:2px solid #4285f4;-webkit-transform:rotate(40deg);transform:rotate(40deg);-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform-origin:100% 100%;transform-origin:100% 100%}.form-check-input[type=checkbox]:checked:disabled+label:before,label.btn input[type=checkbox]:checked:disabled+label:before{border-right:2px solid #bdbdbd;border-bottom:2px solid #bdbdbd}.form-check-input[type=checkbox]:indeterminate+label:before,label.btn input[type=checkbox]:indeterminate+label:before{top:-11px;left:-12px;width:10px;height:1.375rem;border-top:none;border-left:none;border-right:2px solid #4285f4;border-bottom:none;-webkit-transform:rotate(90deg);transform:rotate(90deg);-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform-origin:100% 100%;transform-origin:100% 100%}.form-check-input[type=checkbox]:indeterminate:disabled+label:before,label.btn input[type=checkbox]:indeterminate:disabled+label:before{border-right:2px solid rgba(0,0,0,.46);background-color:transparent}.form-check-input[type=checkbox].filled-in+label:after,label.btn input[type=checkbox].filled-in+label:after{border-radius:.125rem}.form-check-input[type=checkbox].filled-in+label:after,.form-check-input[type=checkbox].filled-in+label:before,label.btn input[type=checkbox].filled-in+label:after,label.btn input[type=checkbox].filled-in+label:before{content:'';left:0;position:absolute;transition:border .25s,background-color .25s,width .2s .1s,height .2s .1s,top .2s .1s,left .2s .1s;z-index:1}.form-check-input[type=checkbox].filled-in:not(:checked)+label:before,label.btn input[type=checkbox].filled-in:not(:checked)+label:before{width:0;height:0;border:3px solid transparent;left:6px;top:10px;-webkit-transform:rotateZ(37deg);transform:rotateZ(37deg);-webkit-transform-origin:100% 100%;transform-origin:100% 100%}.form-check-input[type=checkbox].filled-in:not(:checked)+label:after,label.btn input[type=checkbox].filled-in:not(:checked)+label:after{height:20px;width:20px;background-color:transparent;border:2px solid #5a5a5a;top:0;z-index:0}.form-check-input[type=checkbox].filled-in:checked+label:before,label.btn input[type=checkbox].filled-in:checked+label:before{top:0;left:1px;width:8px;height:13px;border-top:2px solid transparent;border-left:2px solid transparent;border-right:2px solid #fff;border-bottom:2px solid #fff;-webkit-transform:rotateZ(37deg);transform:rotateZ(37deg);-webkit-transform-origin:100% 100%;transform-origin:100% 100%}.form-check-input[type=checkbox].filled-in:checked+label:after,label.btn input[type=checkbox].filled-in:checked+label:after{top:0;width:20px;height:20px;border:2px solid #a6c;background-color:#a6c;z-index:0}.form-check-input[type=checkbox].filled-in.filled-in-danger:checked+label:after,label.btn input[type=checkbox].filled-in.filled-in-danger:checked+label:after{background-color:#f44336;border-color:#f44336}.form-check-input[type=checkbox]:disabled:not(:checked)+label:before,label.btn input[type=checkbox]:disabled:not(:checked)+label:before{background-color:#bdbdbd;border-color:#bdbdbd}.form-check-input[type=checkbox]:disabled:not(:checked)+label:after,label.btn input[type=checkbox]:disabled:not(:checked)+label:after{border-color:#bdbdbd;background-color:#bdbdbd}.form-check-input[type=checkbox]:disabled:checked+label:before,label.btn input[type=checkbox]:disabled:checked+label:before{background-color:transparent}.form-check-input[type=checkbox]:disabled:checked+label:after,label.btn input[type=checkbox]:disabled:checked+label:after{background-color:#bdbdbd;border-color:#bdbdbd}"]
+                styles: [".select-wrapper .select-dropdown{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.select-label{position:absolute}.select-wrapper{position:relative}.select-wrapper input.select-dropdown{position:relative;cursor:pointer;background-color:transparent;border:none;border-bottom:1px solid #ced4da;outline:0;height:38px;line-height:2.9rem;width:100%;font-size:1rem;margin:0 0 .94rem;padding:0;display:block;text-overflow:ellipsis;z-index:2}.select-wrapper input.select-dropdown:disabled{color:rgba(0,0,0,.3);border-bottom-color:rgba(0,0,0,.2);cursor:default}.select-wrapper input.select-dropdown .selected,.select-wrapper input.select-dropdown li:focus{background-color:rgba(0,0,0,.15)}.select-wrapper input.select-dropdown li.active{background:0 0}.select-wrapper input.select-dropdown .fab,.select-wrapper input.select-dropdown .far,.select-wrapper input.select-dropdown .fas{color:inherit}.select-wrapper input.active{box-shadow:0 1px 0 0 #4285f4;border-bottom:1px solid #4285f4}.select-wrapper .search-wrap{padding:1rem 0 0;display:block;margin:0 .7rem}.select-wrapper .search-wrap .md-form{margin-top:0;margin-bottom:1rem}.select-wrapper .search-wrap .md-form input{padding-bottom:.4rem;margin-bottom:0}.select-wrapper span.caret{color:initial;position:absolute;right:0;top:.8rem;font-size:.63rem}.select-wrapper span.caret.disabled{color:rgba(0,0,0,.3)}.select-wrapper+label{position:absolute;top:2.125rem;transition:.2s ease-out;color:#757575;font-weight:300}.select-wrapper+label.active{-webkit-transform:translateY(-14px);transform:translateY(-14px);font-size:.8rem;top:1.5rem;left:15px}.select-wrapper+label.active-check{color:#4285f4}.select-wrapper+label.mdb-main-label{z-index:1}.select-wrapper i,.select-wrapper+label.disabled{color:rgba(0,0,0,.3)}.select-wrapper ul{list-style-type:none;padding-left:0}.select-wrapper.md-form>ul li label{top:0;color:#4285f4;font-size:.9rem;-webkit-transform:none;transform:none}.select-wrapper.md-form>ul li.select-toggle-all label{padding-left:38px}.select-wrapper.md-form.colorful-select>ul li.select-toggle-all:hover label{color:#fff}.select-wrapper.md-form.md-outline span.caret{padding-right:.75rem;padding-left:.75rem;color:#495057!important}.select-wrapper.md-form.md-outline span.caret.active{color:#4285f4!important}.select-wrapper.md-form.md-outline .dropdown-content{top:2.7rem!important}.select-wrapper.md-form.md-outline input.select-dropdown{padding:.375rem .75rem;color:#495057}.select-wrapper.md-form.md-outline input.select-dropdown:focus{border-color:#4285f4;box-shadow:inset 0 0 0 1px #4285f4}.select-wrapper.md-form.md-outline+label{position:absolute;-webkit-transform:translateY(40%);transform:translateY(40%);left:23px;color:#757575;background:#fff;font-size:13px;font-weight:500;padding-right:5px;padding-left:5px;top:.5em!important;z-index:2!important}.select-wrapper.md-form.md-outline+label.active{color:#4285f4}select{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}select.browser-default{display:block!important}select:disabled{color:rgba(0,0,0,.3)}.select-dropdown [type=checkbox]:disabled:not(:checked)+label:before{margin-left:0;margin-top:3px}.select-dropdown ul{list-style-type:none;padding:0}.select-dropdown li img{height:30px;width:30px;margin:.3rem .75rem;float:right}.select-dropdown li.disabled,.select-dropdown li.disabled>span,.select-dropdown li.optgroup{color:rgba(0,0,0,.3);background-color:transparent!important;cursor:context-menu}.select-dropdown li.optgroup{border-top:1px solid #eee}.select-dropdown li.optgroup.selected>span{color:rgba(0,0,0,.7)}.select-dropdown li.optgroup>span{color:rgba(0,0,0,.4)}.dropdown-content{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);background-color:#fff;margin:0;display:none;min-width:6.25rem;max-height:40.625rem;overflow-y:auto;opacity:0;position:absolute;z-index:999;will-change:width,height}.dropdown-content li{clear:both;color:#000;cursor:pointer;line-height:1.3rem;width:100%;text-align:left;text-transform:none}.dropdown-content li.active,.dropdown-content li:hover{background-color:#eee}.dropdown-content li>a,.dropdown-content li>span{color:#4285f4;display:block;padding:.5rem}.dropdown-content li>a>i{height:inherit;line-height:inherit}.colorful-select .dropdown-content{padding:.5rem}.colorful-select .dropdown-content li.active span{color:#fff!important;box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.colorful-select .dropdown-content li.active span [type=checkbox]:checked+label:before{border-color:transparent #fff #fff transparent}.colorful-select .dropdown-content li a:hover,.colorful-select .dropdown-content li span:hover{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);color:#fff!important;transition:.15s;border-radius:.125rem}.colorful-select .dropdown-content li a:hover [type=checkbox]+label:before,.colorful-select .dropdown-content li span:hover [type=checkbox]+label:before{border-color:#fff}.colorful-select .dropdown-content li a:hover [type=checkbox]:checked+label:before,.colorful-select .dropdown-content li span:hover [type=checkbox]:checked+label:before{border-color:transparent #fff #fff transparent}.colorful-select .dropdown-content li.disabled.active span,.colorful-select .dropdown-content li.optgroup.active span,.colorful-select .dropdown-content li:disabled.active span{box-shadow:none;color:rgba(0,0,0,.3)!important;border-bottom-color:rgba(0,0,0,.3);cursor:default}.colorful-select .dropdown-content li.disabled a:hover,.colorful-select .dropdown-content li.disabled span:hover,.colorful-select .dropdown-content li.optgroup a:hover,.colorful-select .dropdown-content li.optgroup span:hover,.colorful-select .dropdown-content li:disabled a:hover,.colorful-select .dropdown-content li:disabled span:hover{box-shadow:none;color:rgba(0,0,0,.3)!important;border-bottom-color:rgba(0,0,0,.3);cursor:default;background-color:#fff!important}.colorful-select .dropdown-content li.disabled label,.colorful-select .dropdown-content li.optgroup label,.colorful-select .dropdown-content li:disabled label{cursor:default}.dropdown-primary .dropdown-content li a,.dropdown-primary .dropdown-content li span:hover,.dropdown-primary .dropdown-content li.active{background-color:#4285f4!important}.dropdown-primary .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-primary .search-wrap input:focus{border-bottom:1px solid #4285f4;box-shadow:0 1px 0 0 #4285f4}.dropdown-danger .dropdown-content li a,.dropdown-danger .dropdown-content li span:hover,.dropdown-danger .dropdown-content li.active{background-color:#c00!important}.dropdown-danger .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-danger .search-wrap input:focus{border-bottom:1px solid #c00;box-shadow:0 1px 0 0 #c00}.dropdown-default .dropdown-content li a,.dropdown-default .dropdown-content li span:hover,.dropdown-default .dropdown-content li.active{background-color:#2bbbad!important}.dropdown-default .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-default .search-wrap input:focus{border-bottom:1px solid #2bbbad;box-shadow:0 1px 0 0 #2bbbad}.dropdown-secondary .dropdown-content li a,.dropdown-secondary .dropdown-content li span:hover,.dropdown-secondary .dropdown-content li.active{background-color:#a6c!important}.dropdown-secondary .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-secondary .search-wrap input:focus{border-bottom:1px solid #a6c;box-shadow:0 1px 0 0 #a6c}.dropdown-success .dropdown-content li a,.dropdown-success .dropdown-content li span:hover,.dropdown-success .dropdown-content li.active{background-color:#00c851!important}.dropdown-success .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-success .search-wrap input:focus{border-bottom:1px solid #00c851;box-shadow:0 1px 0 0 #00c851}.dropdown-info .dropdown-content li a,.dropdown-info .dropdown-content li span:hover,.dropdown-info .dropdown-content li.active{background-color:#33b5e5!important}.dropdown-info .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-info .search-wrap input:focus{border-bottom:1px solid #33b5e5;box-shadow:0 1px 0 0 #33b5e5}.dropdown-warning .dropdown-content li a,.dropdown-warning .dropdown-content li span:hover,.dropdown-warning .dropdown-content li.active{background-color:#fb3!important}.dropdown-warning .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-warning .search-wrap input:focus{border-bottom:1px solid #fb3;box-shadow:0 1px 0 0 #fb3}.dropdown-dark .dropdown-content li a,.dropdown-dark .dropdown-content li span:hover,.dropdown-dark .dropdown-content li.active{background-color:#2e2e2e!important}.dropdown-dark .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-dark .search-wrap input:focus{border-bottom:1px solid #2e2e2e;box-shadow:0 1px 0 0 #2e2e2e}.dropdown-ins .dropdown-content li a,.dropdown-ins .dropdown-content li span:hover,.dropdown-ins .dropdown-content li.active{background-color:#2e5e86!important}.dropdown-ins .dropdown-content li.disabled.active{background-color:transparent!important}.dropdown-ins .search-wrap input:focus{border-bottom:1px solid #2e5e86;box-shadow:0 1px 0 0 #2e5e86}.md-dropdown li.disabled.active{background-color:transparent!important}mdb-select{display:inline-block;margin:0;position:relative;vertical-align:middle;width:100%}mdb-select *{box-sizing:border-box;font-family:Roboto,sans-serif;outline:0}mdb-select.mdb-select-outline{transition:.2s}mdb-select.mdb-select-outline>label{padding-left:10px;top:8px;left:4px}mdb-select.mdb-select-outline:active label,mdb-select.mdb-select-outline:focus label,mdb-select.mdb-select-outline:focus-within label{color:#4285f4}mdb-select.mdb-select-outline:active .below>.form-control,mdb-select.mdb-select-outline:focus .below>.form-control,mdb-select.mdb-select-outline:focus-within .below>.form-control{border-color:#4285f4;box-shadow:inset 0 0 0 1px #4285f4}mdb-select.mdb-select-outline .form-control{padding:6px 12px;border:1px solid #dadce0;border-radius:4px}mdb-select.mdb-select-outline>label.active{-webkit-transform:translateY(-22px);transform:translateY(-22px);background:#fff;font-weight:500;padding:0 5px;font-size:.8rem;z-index:1;top:12px;left:9px}mdb-select>div{border:transparent;box-sizing:border-box;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;width:100%}mdb-select>div.disabled{color:#aaa!important;cursor:default;pointer-events:none;background-color:transparent}mdb-select>div.disabled .placeholder,mdb-select>div.disabled .value,mdb-select>div.disabled span{color:#aaa!important}mdb-select>div.disabled>div.single>div.clear,mdb-select>div.disabled>div.single>div.placeholder,mdb-select>div.disabled>div.single>div.toggle{color:rgba(0,0,0,.3)}mdb-select>div>div.single{position:relative;cursor:pointer;background-color:transparent;border:none;border-bottom:1px solid #ced4da;outline:0;line-height:2rem;width:100%;font-size:1rem;margin:0;height:24px;box-sizing:content-box;padding:.6rem 0 .4rem;display:block;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;text-align:start}mdb-select>div>div.single.focused{box-shadow:0 1px 0 0 #4285f4;border-bottom:1px solid #4285f4}mdb-select>div>div.single>div.value{flex:1;line-height:24px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;padding-right:1.2rem!important;color:#292b2c;padding:0 0 5px}mdb-select>div>div.single>div.placeholder{flex:1;line-height:24px;width:80%;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;color:#6c757d;padding:0 0 5px}mdb-select>div>div.single>div.clear,mdb-select>div>div.single>div.toggle{float:right;color:#000;line-height:2rem;text-align:center;width:30px;position:absolute;right:20px;top:55%;margin-top:0;-webkit-transform:translateY(-50%);transform:translateY(-50%)}mdb-select>div>div.single>div.toggle:before{content:'\\25B2'}mdb-select>div>div.single>div.clear:hover,mdb-select>div>div.single>div.toggle:hover{background-color:#ececec}mdb-select>div>div.single>div.clear,mdb-select>div>div.single>div.toggle:hover{background-color:transparent}mdb-select>div>div.single>div.clear{font-size:18px}mdb-select>div>div.single>div.toggle{font-size:14px}mdb-select>div>div.multiple{position:relative;cursor:pointer;background-color:transparent;border:none;border-bottom:1px solid #ced4da;outline:0;line-height:2rem;width:100%;font-size:1rem;margin:0;height:24px;box-sizing:content-box;padding:.6rem 0 .4rem;display:block;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;text-align:start}mdb-select>div>div.multiple.focused{box-shadow:0 1px 0 0 #4285f4;border-bottom:1px solid #4285f4}mdb-select>div>div.multiple .placeholder{flex:1;line-height:24px;max-width:95%;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;color:#6c757d;padding:0 0 5px}mdb-select>div>div.multiple>div.clear,mdb-select>div>div.multiple>div.toggle{float:right;color:#000;line-height:2rem;text-align:center;width:30px;position:absolute;right:20px;top:60%;margin-top:-2px;-webkit-transform:translateY(-50%);transform:translateY(-50%)}mdb-select>div>div.multiple>div.clear:hover,mdb-select>div>div.multiple>div.toggle:hover{background-color:#ececec}mdb-select>div>div.multiple>div.clear,mdb-select>div>div.multiple>div.toggle:hover{background-color:transparent}mdb-select>div>div.multiple>div.clear{font-size:18px}mdb-select>div>div.multiple>div.toggle{font-size:14px}mdb-select>div>div.multiple>div.option{overflow:hidden;min-width:0;width:80%;text-overflow:ellipsis;white-space:nowrap;cursor:default;line-height:24px}mdb-select>div>div.multiple>div.option span:last-child .deselect-option{display:none}mdb-select>div>div.multiple>div.option span.deselect-option{cursor:pointer;height:20px;line-height:24px;background-color:transparent;border:0;border-radius:0;color:#292b2c;font-size:1rem;margin:0;padding:0}mdb-select>div>div.multiple>div.option span.deselect-option:hover{color:#555}mdb-select>div>div.multiple input{background-color:transparent;border:none;height:30px;line-height:2rem;padding:0}mdb-select>div>div.multiple input:focus{outline:0}mdb-select>label{color:#757575;font-size:1rem;position:absolute;top:11px;left:0;transition:.2s ease-out;cursor:text;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:95%}mdb-select>label.active{font-size:.8rem;-webkit-transform:translateY(-22px);transform:translateY(-22px);max-width:100%}mdb-select>label.focused{color:#4285f4}.md-form .mdb-select-outline .form-control{margin-bottom:0}.md-form mdb-select.mdb-select-outline+label{top:8px;left:4px;padding-left:10px}.md-form mdb-select.mdb-select-outline+label.active{top:12px;left:9px;padding-left:5px;padding-right:5px;background-color:#fff;z-index:1000}mdb-select-dropdown{box-sizing:border-box;font-family:Sans-Serif;color:#4285f4;font-size:19.2px}mdb-select-dropdown *{box-sizing:border-box;font-family:Sans-Serif}mdb-select-dropdown>div{background-color:#fff;outline:transparent;border:0;box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);border-top:none;box-sizing:border-box;position:absolute;z-index:1}mdb-select-dropdown>div .filter{margin-bottom:9.6px!important;margin-top:9.6px!important;height:38px}mdb-select-dropdown>div .options{position:relative;overflow-y:auto}mdb-select-dropdown>div .options ul{list-style:none;margin:0;padding:0}mdb-select-dropdown>div .options ul li{cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}mdb-select-dropdown>div .options ul li .filtrable{flex-direction:row;align-items:center}mdb-select-dropdown>div .options ul .selected{background-color:#eee}mdb-select-dropdown>div .options ul .highlighted{background-color:#eee;color:#4285f4}mdb-select-dropdown>div .options ul .disabled{background-color:#fff;color:#9e9e9e;cursor:default;pointer-events:none}mdb-select-dropdown>div .options::-webkit-scrollbar{width:4px;height:4px}mdb-select-dropdown>div .options::-webkit-scrollbar-button:end:increment,mdb-select-dropdown>div .options::-webkit-scrollbar-button:start:decrement{display:block;height:0;background-color:transparent}mdb-select-dropdown>div .options::-webkit-scrollbar-track-piece{background-color:transparent;border-radius:0 0 4px 4px}mdb-select-dropdown>div .options::-webkit-scrollbar-thumb:vertical{height:50px;background-color:#999;border-radius:4px}mdb-select-dropdown .dropdown-content{background-color:#fff;margin:0;width:100%;display:block;min-width:100px;max-height:unset;overflow-y:hidden;opacity:1;position:absolute;z-index:1000;will-change:width,height}mdb-select-dropdown .dropdown-content li>a,mdb-select-dropdown .dropdown-content li>span{color:#4285f4;padding:0 .5rem}mdb-select-dropdown .dropdown-content li.disabled,mdb-select-dropdown .dropdown-content li.disabled>span{color:rgba(0,0,0,.3);background-color:transparent!important}mdb-select-dropdown .dropdown-content li.optgroup{color:rgba(0,0,0,.3);background-color:transparent!important;border-top:1px solid #eee}mdb-select-dropdown .dropdown-content li.optgroup:first-child{border-top:0}mdb-select-dropdown .dropdown-content li.optgroup>span{color:rgba(0,0,0,.4)!important}.dropdown-content li>a,.dropdown-content li>span{font-size:.9rem}.select-dropdown li{overflow:hidden;text-overflow:ellipsis}.colorful-select .multiple-select-dropdown li.active span.filtrable,.colorful-select .multiple-select-dropdown li.selected span.filtrable{color:#fff}.colorful-select .multiple-select-dropdown li.active [type=checkbox]:checked+label:before,.colorful-select .multiple-select-dropdown li.selected [type=checkbox]:checked+label:before{border-color:transparent #fff #fff transparent!important}.dropdown-primary.colorful-select .dropdown-content li.active,.dropdown-primary.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-primary.colorful-select .dropdown-content li.active span,.dropdown-primary.colorful-select .dropdown-content li.selected span{background-color:#4285f4;color:#fff}.dropdown-danger.colorful-select .dropdown-content li.active,.dropdown-danger.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-danger.colorful-select .dropdown-content li.active span,.dropdown-danger.colorful-select .dropdown-content li.selected span{background-color:#c00;color:#fff}.dropdown-default.colorful-select .dropdown-content li.active,.dropdown-default.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-default.colorful-select .dropdown-content li.active span,.dropdown-default.colorful-select .dropdown-content li.selected span{background-color:#2bbbad;color:#fff}.dropdown-secondary.colorful-select .dropdown-content li.active,.dropdown-secondary.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-secondary.colorful-select .dropdown-content li.active span,.dropdown-secondary.colorful-select .dropdown-content li.selected span{background-color:#a6c;color:#fff}.dropdown-success.colorful-select .dropdown-content li.active,.dropdown-success.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-success.colorful-select .dropdown-content li.active span,.dropdown-success.colorful-select .dropdown-content li.selected span{background-color:#00c851;color:#fff}.dropdown-info.colorful-select .dropdown-content li.active,.dropdown-info.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-info.colorful-select .dropdown-content li.active span,.dropdown-info.colorful-select .dropdown-content li.selected span{background-color:#33b5e5;color:#fff}.dropdown-warning.colorful-select .dropdown-content li.active,.dropdown-warning.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-warning.colorful-select .dropdown-content li.active span,.dropdown-warning.colorful-select .dropdown-content li.selected span{background-color:#fb3;color:#fff}.dropdown-ins.colorful-select .dropdown-content li.active,.dropdown-ins.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-ins.colorful-select .dropdown-content li.active span,.dropdown-ins.colorful-select .dropdown-content li.selected span{background-color:#3f729b;color:#fff}.dropdown-dark.colorful-select .dropdown-content li.active,.dropdown-dark.colorful-select .dropdown-content li.selected{background-color:transparent!important}.dropdown-dark.colorful-select .dropdown-content li.active span,.dropdown-dark.colorful-select .dropdown-content li.selected span{background-color:#2e2e2e;color:#fff}.multiple-select-dropdown li [type=checkbox]+label{height:10px;top:0!important;margin-top:-2px!important;-webkit-transform:translateY(0);transform:translateY(0);overflow:visible;width:auto}mdb-select .clear{position:absolute;font-size:18px;color:#000;width:30px;margin-top:-2px;-webkit-transform:translateY(-50%);transform:translateY(-50%)}.md-form mdb-select .form-control{height:24px;box-sizing:content-box}.md-form .prefix+mdb-select{left:40px}.md-form .prefix.focused{color:#4285f4}.md-form mdb-select label{color:#757575;font-size:1rem;position:absolute;top:12px;left:0;transition:.2s ease-out;-webkit-transform:translateY(0);transform:translateY(0);cursor:text;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:95%}.md-form mdb-select label.active{font-size:.8rem;-webkit-transform:translateY(-22px);transform:translateY(-22px);width:100%}.md-form mdb-select label.focused{color:#4285f4}.md-form mdb-select+label{color:#757575;font-size:1rem;position:absolute;top:12px;left:0;transition:.2s ease-out;-webkit-transform:translateY(0);transform:translateY(0);cursor:text;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:95%}.md-form mdb-select+label.active{font-size:.8rem;-webkit-transform:translateY(-22px);transform:translateY(-22px);max-width:100%}.md-form mdb-select+label.focused{color:#4285f4}mdb-select+label{color:#757575;font-size:1rem;position:absolute;top:12px;left:15px;transition:.2s ease-out;-webkit-transform:translateY(0);transform:translateY(0);cursor:text;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:90%;z-index:-1}mdb-select+label.active{font-size:.8rem;-webkit-transform:translateY(-22px);transform:translateY(-22px);max-width:95%;z-index:0}mdb-select+label.focused{color:#4285f4}mdb-select .form-control{border-radius:0}mdb-select.validate-success.ng-valid.ng-touched div.multiple,mdb-select.validate-success.ng-valid.ng-touched div.single{border-bottom:1px solid #00c851!important;box-shadow:0 1px 0 0 #00c851!important}mdb-select.validate-success.ng-valid.ng-touched label,mdb-select.validate-success.ng-valid.ng-touched+label{color:#00c851!important}.form-submitted mdb-select.validate-error.ng-invalid div.multiple,.form-submitted mdb-select.validate-error.ng-invalid div.single,mdb-select.validate-error.ng-invalid.ng-touched div.multiple,mdb-select.validate-error.ng-invalid.ng-touched div.single{border-bottom:1px solid #f44336!important;box-shadow:0 1px 0 0 #f44336!important}.form-submitted mdb-select.validate-error.ng-invalid.ng-touched label .form-submitted mdb-select.validate-error.ng-invalid.ng-touched+label,mdb-select.validate-error.ng-invalid.ng-touched label,mdb-select.validate-error.ng-invalid.ng-touched+label{color:#f44336!important}mdb-select.colorful-select .select-dropdown li.selected,mdb-select.colorful-select .select-dropdown li:hover{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.mdb-select-toggle{float:right;color:#000;line-height:2rem;text-align:center;width:30px;position:absolute;right:0;top:calc(50% + 9.4px);margin-top:-.5rem;-webkit-transform:translateY(-50%);transform:translateY(-50%);font-size:14px}.mdb-select-toggle.focused{color:#4285f4}.mdb-select-toggle:before{content:'\\25BC'}.dropdown-content .custom-select-content:hover{background-color:transparent}[type=checkbox]:checked,[type=checkbox]:not(:checked){position:absolute;opacity:0;pointer-events:none}.form-check-input[type=checkbox]+label,label.btn input[type=checkbox]+label{position:relative;padding-left:35px;cursor:pointer;display:inline-block;height:1.5625rem;line-height:1.5625rem;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.form-check-input[type=checkbox]+label:before,.form-check-input[type=checkbox]:not(.filled-in)+label:after,label.btn input[type=checkbox]+label:before,label.btn input[type=checkbox]:not(.filled-in)+label:after{content:'';position:absolute;top:0;left:0;width:18px;height:18px;z-index:0;border:2px solid #8a8a8a;border-radius:1px;margin-top:3px;transition:.2s}.form-check-input[type=checkbox]:not(.filled-in)+label:after,label.btn input[type=checkbox]:not(.filled-in)+label:after{border:0;-webkit-transform:scale(0);transform:scale(0)}.form-check-input[type=checkbox]:not(:checked):disabled+label:before,label.btn input[type=checkbox]:not(:checked):disabled+label:before{border:none;background-color:#bdbdbd}.form-check-input[type=checkbox]:checked+label:before,label.btn input[type=checkbox]:checked+label:before{top:-4px;left:-5px;width:12px;height:1.375rem;border-top:2px solid transparent;border-left:2px solid transparent;border-right:2px solid #4285f4;border-bottom:2px solid #4285f4;-webkit-transform:rotate(40deg);transform:rotate(40deg);-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform-origin:100% 100%;transform-origin:100% 100%}.form-check-input[type=checkbox]:checked:disabled+label:before,label.btn input[type=checkbox]:checked:disabled+label:before{border-right:2px solid #bdbdbd;border-bottom:2px solid #bdbdbd}.form-check-input[type=checkbox]:indeterminate+label:before,label.btn input[type=checkbox]:indeterminate+label:before{top:-11px;left:-12px;width:10px;height:1.375rem;border-top:none;border-left:none;border-right:2px solid #4285f4;border-bottom:none;-webkit-transform:rotate(90deg);transform:rotate(90deg);-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform-origin:100% 100%;transform-origin:100% 100%}.form-check-input[type=checkbox]:indeterminate:disabled+label:before,label.btn input[type=checkbox]:indeterminate:disabled+label:before{border-right:2px solid rgba(0,0,0,.46);background-color:transparent}.form-check-input[type=checkbox].filled-in+label:after,label.btn input[type=checkbox].filled-in+label:after{border-radius:.125rem}.form-check-input[type=checkbox].filled-in+label:after,.form-check-input[type=checkbox].filled-in+label:before,label.btn input[type=checkbox].filled-in+label:after,label.btn input[type=checkbox].filled-in+label:before{content:'';left:0;position:absolute;transition:border .25s,background-color .25s,width .2s .1s,height .2s .1s,top .2s .1s,left .2s .1s;z-index:1}.form-check-input[type=checkbox].filled-in:not(:checked)+label:before,label.btn input[type=checkbox].filled-in:not(:checked)+label:before{width:0;height:0;border:3px solid transparent;left:6px;top:10px;-webkit-transform:rotateZ(37deg);transform:rotateZ(37deg);-webkit-transform-origin:100% 100%;transform-origin:100% 100%}.form-check-input[type=checkbox].filled-in:not(:checked)+label:after,label.btn input[type=checkbox].filled-in:not(:checked)+label:after{height:20px;width:20px;background-color:transparent;border:2px solid #5a5a5a;top:0;z-index:0}.form-check-input[type=checkbox].filled-in:checked+label:before,label.btn input[type=checkbox].filled-in:checked+label:before{top:0;left:1px;width:8px;height:13px;border-top:2px solid transparent;border-left:2px solid transparent;border-right:2px solid #fff;border-bottom:2px solid #fff;-webkit-transform:rotateZ(37deg);transform:rotateZ(37deg);-webkit-transform-origin:100% 100%;transform-origin:100% 100%}.form-check-input[type=checkbox].filled-in:checked+label:after,label.btn input[type=checkbox].filled-in:checked+label:after{top:0;width:20px;height:20px;border:2px solid #a6c;background-color:#a6c;z-index:0}.form-check-input[type=checkbox].filled-in.filled-in-danger:checked+label:after,label.btn input[type=checkbox].filled-in.filled-in-danger:checked+label:after{background-color:#f44336;border-color:#f44336}.form-check-input[type=checkbox]:disabled:not(:checked)+label:before,label.btn input[type=checkbox]:disabled:not(:checked)+label:before{background-color:#bdbdbd;border-color:#bdbdbd}.form-check-input[type=checkbox]:disabled:not(:checked)+label:after,label.btn input[type=checkbox]:disabled:not(:checked)+label:after{border-color:#bdbdbd;background-color:#bdbdbd}.form-check-input[type=checkbox]:disabled:checked+label:before,label.btn input[type=checkbox]:disabled:checked+label:before{background-color:transparent}.form-check-input[type=checkbox]:disabled:checked+label:after,label.btn input[type=checkbox]:disabled:checked+label:after{background-color:#bdbdbd;border-color:#bdbdbd}"]
             }] }
 ];
 /** @nocollapse */
@@ -19866,6 +19857,7 @@ SelectComponent.propDecorators = {
     appendToBody: [{ type: Input }],
     selectAllLabel: [{ type: Input }],
     outline: [{ type: Input }],
+    required: [{ type: Input }],
     compareWith: [{ type: Input }],
     opened: [{ type: Output }],
     closed: [{ type: Output }],
@@ -19876,7 +19868,9 @@ SelectComponent.propDecorators = {
     selectionSpan: [{ type: ViewChild, args: ['selection', { static: true },] }],
     dropdown: [{ type: ViewChild, args: ['dropdown', { static: false },] }],
     filterInput: [{ type: ViewChild, args: ['filterInput', { static: false },] }],
-    clearButton: [{ type: ViewChild, args: ['clear', { static: false },] }]
+    clearButton: [{ type: ViewChild, args: ['clear', { static: false },] }],
+    singleContainer: [{ type: ViewChild, args: ['singleContainer', { static: false },] }],
+    multipleContainer: [{ type: ViewChild, args: ['multipleContainer', { static: false },] }]
 };
 
 /**
@@ -19989,8 +19983,6 @@ MDBSpinningPreloader.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-// todo: progress element conflict with bootstrap.css
-// todo: need hack: replace host element with div
 class ProgressDirective {
     constructor() {
         this.addClass = true;
@@ -20049,8 +20041,6 @@ ProgressDirective.propDecorators = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-// todo: number pipe
-// todo: use query from progress?
 class BarComponent {
     /**
      * @param {?} progress
@@ -20093,7 +20083,7 @@ class BarComponent {
      * @return {?}
      */
     recalculatePercentage() {
-        this.percent = +(100 * this.value / this.progress.max).toFixed(2);
+        this.percent = +((100 * this.value) / this.progress.max).toFixed(2);
         /** @type {?} */
         const totalPercentage = this.progress.bars.reduce((/**
          * @param {?} total
@@ -20205,12 +20195,12 @@ class ProgressSpinnerComponent {
      * @param {?} platformId
      */
     constructor(el, platformId) {
+        this.el = el;
         this.addClass = 'spinner-blue-only';
         this.isBrowser = false;
         this.spinnerType = '';
         this.spinnerColor = 'rainbow';
         this.isBrowser = isPlatformBrowser(platformId);
-        this.el = el;
     }
     /**
      * @return {?}
@@ -20301,7 +20291,6 @@ ProgressSpinnerComponent.propDecorators = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-// TODO(josephperrott): Benchpress tests.
 /**
  * A single degree in radians.
  * @type {?}
@@ -20338,7 +20327,7 @@ class MdProgressSpinnerCssMatStylerDirective {
 }
 MdProgressSpinnerCssMatStylerDirective.decorators = [
     { type: Directive, args: [{
-                selector: '[mdbSpinners], mat-progress-spinner'
+                selector: '[mdbSpinners], mat-progress-spinner',
             },] }
 ];
 MdProgressSpinnerCssMatStylerDirective.propDecorators = {
@@ -20409,7 +20398,9 @@ class MdProgressSpinnerComponent {
      * The color of the progress-spinner. Can be primary, accent, or warn.
      * @return {?}
      */
-    get color() { return this._color; }
+    get color() {
+        return this._color;
+    }
     /**
      * @param {?} value
      * @return {?}
@@ -20566,7 +20557,7 @@ class MdProgressSpinnerComponent {
     _renderArc(currentValue, rotation = 0) {
         // Caches the path reference so it doesn't have to be looked up every time.
         /** @type {?} */
-        const path = this._path = this._path || this._elementRef.nativeElement.querySelector('path');
+        const path = (this._path = this._path || this._elementRef.nativeElement.querySelector('path'));
         // Ensure that the path was found. This may not be the case if the
         // animation function fires too early.
         if (path) {
@@ -20594,7 +20585,6 @@ class MdProgressSpinnerComponent {
      */
     _setElementColor(color, isAdd) {
         if (color != null && color !== '') {
-            // this._renderer.setElementClass(this._elementRef.nativeElement, `mat-${color}`, isAdd);
             if (isAdd) {
                 this._renderer.addClass(this._elementRef.nativeElement, `mat-${color}`);
             }
@@ -20663,8 +20653,8 @@ MdSpinnerComponent.propDecorators = {
     true: [{ type: HostBinding, args: ['class.mat-spinner',] }]
 };
 /**
-* Module functions.
-*/
+ * Module functions.
+ */
 /**
  * Clamps a value to be between 0 and 100.
  * @param {?} v
@@ -20683,8 +20673,10 @@ function clamp(v) {
 function polarToCartesian(radius, pathRadius, angleInDegrees) {
     /** @type {?} */
     const angleInRadians = (angleInDegrees - 90) * DEGREE_IN_RADIANS;
-    return (radius + (pathRadius * Math.cos(angleInRadians))) +
-        ',' + (radius + (pathRadius * Math.sin(angleInRadians)));
+    return (radius +
+        pathRadius * Math.cos(angleInRadians) +
+        ',' +
+        (radius + pathRadius * Math.sin(angleInRadians)));
 }
 /**
  * Easing function for linear animation.
@@ -20695,7 +20687,7 @@ function polarToCartesian(radius, pathRadius, angleInDegrees) {
  * @return {?}
  */
 function linearEase(currentTime, startValue, changeInValue, duration) {
-    return changeInValue * currentTime / duration + startValue;
+    return (changeInValue * currentTime) / duration + startValue;
 }
 /**
  * Easing function to match material design indeterminate animation.
@@ -20714,7 +20706,7 @@ function materialEase(currentTime, startValue, changeInValue, duration) {
     const timeQuad = Math.pow(time, 4);
     /** @type {?} */
     const timeQuint = Math.pow(time, 5);
-    return startValue + changeInValue * ((6 * timeQuint) + (-15 * timeQuad) + (10 * timeCubed));
+    return startValue + changeInValue * (6 * timeQuint + -15 * timeQuad + 10 * timeCubed);
 }
 /**
  * Determines the path value to define the arc.  Converting percentage values to to polar
@@ -20790,8 +20782,6 @@ MdProgressSpinnerModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-// TODO(josephperrott): Benchpress tests.
-// TODO(josephperrott): Add ARIA attributes for progressbar "for".
 /**
  * <md-progress-bar> component.
  */
@@ -21137,7 +21127,7 @@ class MdbRangeInputComponent {
 MdbRangeInputComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-range-input',
-                template: "<div *ngIf=\"!default\" class=\"range-field\" #rangeField>\n  <div class=\"track\">\n    <div #rangeCloud class=\"range-cloud\" title=\"range\"\n         [ngClass]=\"{'visible': this.visibility, 'hidden': !this.visibility}\">\n      <span class=\"text-transform\">{{range}}</span>\n    </div>\n  </div>\n  <input #input\n         [name]=\"name\"\n         type=\"range\"\n         [disabled]=\"disabled\"\n         [id]=\"id\"\n         [min]=\"min\"\n         [max]=\"max\"\n         [step]=\"step\"\n         [value]=\"value\"\n         [(ngModel)]=\"range\"\n         (focus)=\"this.visibility = true\"\n         (blur)=\"this.visibility = false\"\n         (input)=\"coverage($event)\">\n</div>\n\n<div *ngIf=\"default\">\n  <label for=\"customRange1\">Example range</label>\n  <input #input\n         class=\"custom-range\"\n         [name]=\"name\"\n         type=\"range\"\n         [id]=\"id\"\n         [min]=\"min\"\n         [max]=\"max\"\n         [step]=\"step\"\n         [attr.value]=\"value\"\n         [value]=\"value\"\n         [(ngModel)]=\"range\"\n         (focus)=\"this.visibility = true\"\n         (blur)=\"this.visibility = false\"\n         (input)=\"coverage($event)\"\n         (touchend)=\"blurRangeInput()\">\n  <span class=\"{{defaultRangeCounterClass}}\">{{ range }}</span>\n</div>\n",
+                template: "<div *ngIf=\"!default\" class=\"range-field\" #rangeField>\n  <div class=\"track\">\n    <div\n      #rangeCloud\n      class=\"range-cloud\"\n      title=\"range\"\n      [ngClass]=\"{ visible: this.visibility, hidden: !this.visibility }\"\n    >\n      <span class=\"text-transform\">{{ range }}</span>\n    </div>\n  </div>\n  <input\n    #input\n    [name]=\"name\"\n    type=\"range\"\n    [disabled]=\"disabled\"\n    [id]=\"id\"\n    [min]=\"min\"\n    [max]=\"max\"\n    [step]=\"step\"\n    [value]=\"value\"\n    [(ngModel)]=\"range\"\n    (focus)=\"this.visibility = true\"\n    (blur)=\"this.visibility = false\"\n    (input)=\"coverage($event)\"\n  />\n</div>\n\n<div *ngIf=\"default\">\n  <input\n    #input\n    class=\"custom-range\"\n    [name]=\"name\"\n    type=\"range\"\n    [id]=\"id\"\n    [min]=\"min\"\n    [max]=\"max\"\n    [step]=\"step\"\n    [attr.value]=\"value\"\n    [value]=\"value\"\n    [(ngModel)]=\"range\"\n    (focus)=\"this.visibility = true\"\n    (blur)=\"this.visibility = false\"\n    (input)=\"coverage($event)\"\n    (touchend)=\"blurRangeInput()\"\n  />\n  <span class=\"{{ defaultRangeCounterClass }}\">{{ range }}</span>\n</div>\n",
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 providers: [RANGE_VALUE_ACCESOR],
@@ -22055,7 +22045,6 @@ class SidenavComponent {
                 }
                 this.renderer.setStyle(sidenavMask, 'min-height', sidenavChildrenHeight + 16 + 'px');
             }
-            // pobraneie szerokosci okna po init
             this.windwosWidth = win.innerWidth;
             if (this.sidenavBreakpoint) {
                 if (this.fixed) {
@@ -22361,7 +22350,7 @@ class SidenavComponent {
 SidenavComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-sidenav, mdb-side-nav',
-                template: "<ul #sidenav id=\"slide-out\" class=\"{{ class }} side-nav\">\n  <ng-content></ng-content>\n<!-- <div class=\"sidenav-bg mask-strong\"></div> -->\n\n</ul>\n\n<div (click)=\"hide()\" (touchstart)=\"hide()\" #overlay id=\"sidenav-overlay\" style=\"display: none;\"></div>\n",
+                template: "<ul #sidenav id=\"slide-out\" class=\"{{ class }} side-nav\">\n  <ng-content></ng-content>\n</ul>\n\n<div\n  (click)=\"hide()\"\n  (touchstart)=\"hide()\"\n  #overlay\n  id=\"sidenav-overlay\"\n  style=\"display: none;\"\n></div>\n",
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 styles: [".mdb-color.lighten-5{background-color:#d0d6e2!important}.mdb-color.lighten-4{background-color:#b1bace!important}.mdb-color.lighten-3{background-color:#929fba!important}.mdb-color.lighten-2{background-color:#7283a7!important}.mdb-color.lighten-1{background-color:#59698d!important}.mdb-color{background-color:#45526e!important}.mdb-color-text{color:#45526e!important}.rgba-mdb-color-slight,.rgba-mdb-color-slight:after{background-color:rgba(69,82,110,.1)}.rgba-mdb-color-light,.rgba-mdb-color-light:after{background-color:rgba(69,82,110,.3)}.rgba-mdb-color-strong,.rgba-mdb-color-strong:after{background-color:rgba(69,82,110,.7)}.mdb-color.darken-1{background-color:#3b465e!important}.mdb-color.darken-2{background-color:#2e3951!important}.mdb-color.darken-3{background-color:#1c2a48!important}.mdb-color.darken-4{background-color:#1c2331!important}.red.lighten-5{background-color:#ffebee!important}.red.lighten-4{background-color:#ffcdd2!important}.red.lighten-3{background-color:#ef9a9a!important}.red.lighten-2{background-color:#e57373!important}.red.lighten-1{background-color:#ef5350!important}.red{background-color:#f44336!important}.red-text{color:#f44336!important}.rgba-red-slight,.rgba-red-slight:after{background-color:rgba(244,67,54,.1)}.rgba-red-light,.rgba-red-light:after{background-color:rgba(244,67,54,.3)}.rgba-red-strong,.rgba-red-strong:after{background-color:rgba(244,67,54,.7)}.red.darken-1{background-color:#e53935!important}.red.darken-2{background-color:#d32f2f!important}.red.darken-3{background-color:#c62828!important}.red.darken-4{background-color:#b71c1c!important}.red.accent-1{background-color:#ff8a80!important}.red.accent-2{background-color:#ff5252!important}.red.accent-3{background-color:#ff1744!important}.red.accent-4{background-color:#d50000!important}.pink.lighten-5{background-color:#fce4ec!important}.pink.lighten-4{background-color:#f8bbd0!important}.pink.lighten-3{background-color:#f48fb1!important}.pink.lighten-2{background-color:#f06292!important}.pink.lighten-1{background-color:#ec407a!important}.pink{background-color:#e91e63!important}.pink-text{color:#e91e63!important}.rgba-pink-slight,.rgba-pink-slight:after{background-color:rgba(233,30,99,.1)}.rgba-pink-light,.rgba-pink-light:after{background-color:rgba(233,30,99,.3)}.rgba-pink-strong,.rgba-pink-strong:after{background-color:rgba(233,30,99,.7)}.pink.darken-1{background-color:#d81b60!important}.pink.darken-2{background-color:#c2185b!important}.pink.darken-3{background-color:#ad1457!important}.pink.darken-4{background-color:#880e4f!important}.pink.accent-1{background-color:#ff80ab!important}.pink.accent-2{background-color:#ff4081!important}.pink.accent-3{background-color:#f50057!important}.pink.accent-4{background-color:#c51162!important}.purple.lighten-5{background-color:#f3e5f5!important}.purple.lighten-4{background-color:#e1bee7!important}.purple.lighten-3{background-color:#ce93d8!important}.purple.lighten-2{background-color:#ba68c8!important}.purple.lighten-1{background-color:#ab47bc!important}.purple{background-color:#9c27b0!important}.purple-text{color:#9c27b0!important}.rgba-purple-slight,.rgba-purple-slight:after{background-color:rgba(156,39,176,.1)}.rgba-purple-light,.rgba-purple-light:after{background-color:rgba(156,39,176,.3)}.rgba-purple-strong,.rgba-purple-strong:after{background-color:rgba(156,39,176,.7)}.purple.darken-1{background-color:#8e24aa!important}.purple.darken-2{background-color:#7b1fa2!important}.purple.darken-3{background-color:#6a1b9a!important}.purple.darken-4{background-color:#4a148c!important}.purple.accent-1{background-color:#ea80fc!important}.purple.accent-2{background-color:#e040fb!important}.purple.accent-3{background-color:#d500f9!important}.purple.accent-4{background-color:#a0f!important}.deep-purple.lighten-5{background-color:#ede7f6!important}.deep-purple.lighten-4{background-color:#d1c4e9!important}.deep-purple.lighten-3{background-color:#b39ddb!important}.deep-purple.lighten-2{background-color:#9575cd!important}.deep-purple.lighten-1{background-color:#7e57c2!important}.deep-purple{background-color:#673ab7!important}.deep-purple-text{color:#673ab7!important}.rgba-deep-purple-slight,.rgba-deep-purple-slight:after{background-color:rgba(103,58,183,.1)}.rgba-deep-purple-light,.rgba-deep-purple-light:after{background-color:rgba(103,58,183,.3)}.rgba-deep-purple-strong,.rgba-deep-purple-strong:after{background-color:rgba(103,58,183,.7)}.deep-purple.darken-1{background-color:#5e35b1!important}.deep-purple.darken-2{background-color:#512da8!important}.deep-purple.darken-3{background-color:#4527a0!important}.deep-purple.darken-4{background-color:#311b92!important}.deep-purple.accent-1{background-color:#b388ff!important}.deep-purple.accent-2{background-color:#7c4dff!important}.deep-purple.accent-3{background-color:#651fff!important}.deep-purple.accent-4{background-color:#6200ea!important}.indigo.lighten-5{background-color:#e8eaf6!important}.indigo.lighten-4{background-color:#c5cae9!important}.indigo.lighten-3{background-color:#9fa8da!important}.indigo.lighten-2{background-color:#7986cb!important}.indigo.lighten-1{background-color:#5c6bc0!important}.indigo{background-color:#3f51b5!important}.indigo-text{color:#3f51b5!important}.rgba-indigo-slight,.rgba-indigo-slight:after{background-color:rgba(63,81,181,.1)}.rgba-indigo-light,.rgba-indigo-light:after{background-color:rgba(63,81,181,.3)}.rgba-indigo-strong,.rgba-indigo-strong:after{background-color:rgba(63,81,181,.7)}.indigo.darken-1{background-color:#3949ab!important}.indigo.darken-2{background-color:#303f9f!important}.indigo.darken-3{background-color:#283593!important}.indigo.darken-4{background-color:#1a237e!important}.indigo.accent-1{background-color:#8c9eff!important}.indigo.accent-2{background-color:#536dfe!important}.indigo.accent-3{background-color:#3d5afe!important}.indigo.accent-4{background-color:#304ffe!important}.blue.lighten-5{background-color:#e3f2fd!important}.blue.lighten-4{background-color:#bbdefb!important}.blue.lighten-3{background-color:#90caf9!important}.blue.lighten-2{background-color:#64b5f6!important}.blue.lighten-1{background-color:#42a5f5!important}.blue{background-color:#2196f3!important}.blue-text{color:#2196f3!important}.rgba-blue-slight,.rgba-blue-slight:after{background-color:rgba(33,150,243,.1)}.rgba-blue-light,.rgba-blue-light:after{background-color:rgba(33,150,243,.3)}.rgba-blue-strong,.rgba-blue-strong:after{background-color:rgba(33,150,243,.7)}.blue.darken-1{background-color:#1e88e5!important}.blue.darken-2{background-color:#1976d2!important}.blue.darken-3{background-color:#1565c0!important}.blue.darken-4{background-color:#0d47a1!important}.blue.accent-1{background-color:#82b1ff!important}.blue.accent-2{background-color:#448aff!important}.blue.accent-3{background-color:#2979ff!important}.blue.accent-4{background-color:#2962ff!important}.light-blue.lighten-5{background-color:#e1f5fe!important}.light-blue.lighten-4{background-color:#b3e5fc!important}.light-blue.lighten-3{background-color:#81d4fa!important}.light-blue.lighten-2{background-color:#4fc3f7!important}.light-blue.lighten-1{background-color:#29b6f6!important}.light-blue{background-color:#03a9f4!important}.light-blue-text{color:#03a9f4!important}.rgba-light-blue-slight,.rgba-light-blue-slight:after{background-color:rgba(3,169,244,.1)}.rgba-light-blue-light,.rgba-light-blue-light:after{background-color:rgba(3,169,244,.3)}.rgba-light-blue-strong,.rgba-light-blue-strong:after{background-color:rgba(3,169,244,.7)}.light-blue.darken-1{background-color:#039be5!important}.light-blue.darken-2{background-color:#0288d1!important}.light-blue.darken-3{background-color:#0277bd!important}.light-blue.darken-4{background-color:#01579b!important}.light-blue.accent-1{background-color:#80d8ff!important}.light-blue.accent-2{background-color:#40c4ff!important}.light-blue.accent-3{background-color:#00b0ff!important}.light-blue.accent-4{background-color:#0091ea!important}.cyan.lighten-5{background-color:#e0f7fa!important}.cyan.lighten-4{background-color:#b2ebf2!important}.cyan.lighten-3{background-color:#80deea!important}.cyan.lighten-2{background-color:#4dd0e1!important}.cyan.lighten-1{background-color:#26c6da!important}.cyan{background-color:#00bcd4!important}.cyan-text{color:#00bcd4!important}.rgba-cyan-slight,.rgba-cyan-slight:after{background-color:rgba(0,188,212,.1)}.rgba-cyan-light,.rgba-cyan-light:after{background-color:rgba(0,188,212,.3)}.rgba-cyan-strong,.rgba-cyan-strong:after{background-color:rgba(0,188,212,.7)}.cyan.darken-1{background-color:#00acc1!important}.cyan.darken-2{background-color:#0097a7!important}.cyan.darken-3{background-color:#00838f!important}.cyan.darken-4{background-color:#006064!important}.cyan.accent-1{background-color:#84ffff!important}.cyan.accent-2{background-color:#18ffff!important}.cyan.accent-3{background-color:#00e5ff!important}.cyan.accent-4{background-color:#00b8d4!important}.teal.lighten-5{background-color:#e0f2f1!important}.teal.lighten-4{background-color:#b2dfdb!important}.teal.lighten-3{background-color:#80cbc4!important}.teal.lighten-2{background-color:#4db6ac!important}.teal.lighten-1{background-color:#26a69a!important}.teal{background-color:#009688!important}.teal-text{color:#009688!important}.rgba-teal-slight,.rgba-teal-slight:after{background-color:rgba(0,150,136,.1)}.rgba-teal-light,.rgba-teal-light:after{background-color:rgba(0,150,136,.3)}.rgba-teal-strong,.rgba-teal-strong:after{background-color:rgba(0,150,136,.7)}.teal.darken-1{background-color:#00897b!important}.teal.darken-2{background-color:#00796b!important}.teal.darken-3{background-color:#00695c!important}.teal.darken-4{background-color:#004d40!important}.teal.accent-1{background-color:#a7ffeb!important}.teal.accent-2{background-color:#64ffda!important}.teal.accent-3{background-color:#1de9b6!important}.teal.accent-4{background-color:#00bfa5!important}.green.lighten-5{background-color:#e8f5e9!important}.green.lighten-4{background-color:#c8e6c9!important}.green.lighten-3{background-color:#a5d6a7!important}.green.lighten-2{background-color:#81c784!important}.green.lighten-1{background-color:#66bb6a!important}.green{background-color:#4caf50!important}.green-text{color:#4caf50!important}.rgba-green-slight,.rgba-green-slight:after{background-color:rgba(76,175,80,.1)}.rgba-green-light,.rgba-green-light:after{background-color:rgba(76,175,80,.3)}.rgba-green-strong,.rgba-green-strong:after{background-color:rgba(76,175,80,.7)}.green.darken-1{background-color:#43a047!important}.green.darken-2{background-color:#388e3c!important}.green.darken-3{background-color:#2e7d32!important}.green.darken-4{background-color:#1b5e20!important}.green.accent-1{background-color:#b9f6ca!important}.green.accent-2{background-color:#69f0ae!important}.green.accent-3{background-color:#00e676!important}.green.accent-4{background-color:#00c853!important}.light-green.lighten-5{background-color:#f1f8e9!important}.light-green.lighten-4{background-color:#dcedc8!important}.light-green.lighten-3{background-color:#c5e1a5!important}.light-green.lighten-2{background-color:#aed581!important}.light-green.lighten-1{background-color:#9ccc65!important}.light-green{background-color:#8bc34a!important}.light-green-text{color:#8bc34a!important}.rgba-light-green-slight,.rgba-light-green-slight:after{background-color:rgba(139,195,74,.1)}.rgba-light-green-light,.rgba-light-green-light:after{background-color:rgba(139,195,74,.3)}.rgba-light-green-strong,.rgba-light-green-strong:after{background-color:rgba(139,195,74,.7)}.light-green.darken-1{background-color:#7cb342!important}.light-green.darken-2{background-color:#689f38!important}.light-green.darken-3{background-color:#558b2f!important}.light-green.darken-4{background-color:#33691e!important}.light-green.accent-1{background-color:#ccff90!important}.light-green.accent-2{background-color:#b2ff59!important}.light-green.accent-3{background-color:#76ff03!important}.light-green.accent-4{background-color:#64dd17!important}.lime.lighten-5{background-color:#f9fbe7!important}.lime.lighten-4{background-color:#f0f4c3!important}.lime.lighten-3{background-color:#e6ee9c!important}.lime.lighten-2{background-color:#dce775!important}.lime.lighten-1{background-color:#d4e157!important}.lime{background-color:#cddc39!important}.lime-text{color:#cddc39!important}.rgba-lime-slight,.rgba-lime-slight:after{background-color:rgba(205,220,57,.1)}.rgba-lime-light,.rgba-lime-light:after{background-color:rgba(205,220,57,.3)}.rgba-lime-strong,.rgba-lime-strong:after{background-color:rgba(205,220,57,.7)}.lime.darken-1{background-color:#c0ca33!important}.lime.darken-2{background-color:#afb42b!important}.lime.darken-3{background-color:#9e9d24!important}.lime.darken-4{background-color:#827717!important}.lime.accent-1{background-color:#f4ff81!important}.lime.accent-2{background-color:#eeff41!important}.lime.accent-3{background-color:#c6ff00!important}.lime.accent-4{background-color:#aeea00!important}.yellow.lighten-5{background-color:#fffde7!important}.yellow.lighten-4{background-color:#fff9c4!important}.yellow.lighten-3{background-color:#fff59d!important}.yellow.lighten-2{background-color:#fff176!important}.yellow.lighten-1{background-color:#ffee58!important}.yellow{background-color:#ffeb3b!important}.yellow-text{color:#ffeb3b!important}.rgba-yellow-slight,.rgba-yellow-slight:after{background-color:rgba(255,235,59,.1)}.rgba-yellow-light,.rgba-yellow-light:after{background-color:rgba(255,235,59,.3)}.rgba-yellow-strong,.rgba-yellow-strong:after{background-color:rgba(255,235,59,.7)}.yellow.darken-1{background-color:#fdd835!important}.yellow.darken-2{background-color:#fbc02d!important}.yellow.darken-3{background-color:#f9a825!important}.yellow.darken-4{background-color:#f57f17!important}.yellow.accent-1{background-color:#ffff8d!important}.yellow.accent-2{background-color:#ff0!important}.yellow.accent-3{background-color:#ffea00!important}.yellow.accent-4{background-color:#ffd600!important}.amber.lighten-5{background-color:#fff8e1!important}.amber.lighten-4{background-color:#ffecb3!important}.amber.lighten-3{background-color:#ffe082!important}.amber.lighten-2{background-color:#ffd54f!important}.amber.lighten-1{background-color:#ffca28!important}.amber{background-color:#ffc107!important}.amber-text{color:#ffc107!important}.rgba-amber-slight,.rgba-amber-slight:after{background-color:rgba(255,193,7,.1)}.rgba-amber-light,.rgba-amber-light:after{background-color:rgba(255,193,7,.3)}.rgba-amber-strong,.rgba-amber-strong:after{background-color:rgba(255,193,7,.7)}.amber.darken-1{background-color:#ffb300!important}.amber.darken-2{background-color:#ffa000!important}.amber.darken-3{background-color:#ff8f00!important}.amber.darken-4{background-color:#ff6f00!important}.amber.accent-1{background-color:#ffe57f!important}.amber.accent-2{background-color:#ffd740!important}.amber.accent-3{background-color:#ffc400!important}.amber.accent-4{background-color:#ffab00!important}.orange.lighten-5{background-color:#fff3e0!important}.orange.lighten-4{background-color:#ffe0b2!important}.orange.lighten-3{background-color:#ffcc80!important}.orange.lighten-2{background-color:#ffb74d!important}.orange.lighten-1{background-color:#ffa726!important}.orange{background-color:#ff9800!important}.orange-text{color:#ff9800!important}.rgba-orange-slight,.rgba-orange-slight:after{background-color:rgba(255,152,0,.1)}.rgba-orange-light,.rgba-orange-light:after{background-color:rgba(255,152,0,.3)}.rgba-orange-strong,.rgba-orange-strong:after{background-color:rgba(255,152,0,.7)}.orange.darken-1{background-color:#fb8c00!important}.orange.darken-2{background-color:#f57c00!important}.orange.darken-3{background-color:#ef6c00!important}.orange.darken-4{background-color:#e65100!important}.orange.accent-1{background-color:#ffd180!important}.orange.accent-2{background-color:#ffab40!important}.orange.accent-3{background-color:#ff9100!important}.orange.accent-4{background-color:#ff6d00!important}.deep-orange.lighten-5{background-color:#fbe9e7!important}.deep-orange.lighten-4{background-color:#ffccbc!important}.deep-orange.lighten-3{background-color:#ffab91!important}.deep-orange.lighten-2{background-color:#ff8a65!important}.deep-orange.lighten-1{background-color:#ff7043!important}.deep-orange{background-color:#ff5722!important}.deep-orange-text{color:#ff5722!important}.rgba-deep-orange-slight,.rgba-deep-orange-slight:after{background-color:rgba(255,87,34,.1)}.rgba-deep-orange-light,.rgba-deep-orange-light:after{background-color:rgba(255,87,34,.3)}.rgba-deep-orange-strong,.rgba-deep-orange-strong:after{background-color:rgba(255,87,34,.7)}.deep-orange.darken-1{background-color:#f4511e!important}.deep-orange.darken-2{background-color:#e64a19!important}.deep-orange.darken-3{background-color:#d84315!important}.deep-orange.darken-4{background-color:#bf360c!important}.deep-orange.accent-1{background-color:#ff9e80!important}.deep-orange.accent-2{background-color:#ff6e40!important}.deep-orange.accent-3{background-color:#ff3d00!important}.deep-orange.accent-4{background-color:#dd2c00!important}.brown.lighten-5{background-color:#efebe9!important}.brown.lighten-4{background-color:#d7ccc8!important}.brown.lighten-3{background-color:#bcaaa4!important}.brown.lighten-2{background-color:#a1887f!important}.brown.lighten-1{background-color:#8d6e63!important}.brown{background-color:#795548!important}.brown-text{color:#795548!important}.rgba-brown-slight,.rgba-brown-slight:after{background-color:rgba(121,85,72,.1)}.rgba-brown-light,.rgba-brown-light:after{background-color:rgba(121,85,72,.3)}.rgba-brown-strong,.rgba-brown-strong:after{background-color:rgba(121,85,72,.7)}.brown.darken-1{background-color:#6d4c41!important}.brown.darken-2{background-color:#5d4037!important}.brown.darken-3{background-color:#4e342e!important}.brown.darken-4{background-color:#3e2723!important}.blue-grey.lighten-5{background-color:#eceff1!important}.blue-grey.lighten-4{background-color:#cfd8dc!important}.blue-grey.lighten-3{background-color:#b0bec5!important}.blue-grey.lighten-2{background-color:#90a4ae!important}.blue-grey.lighten-1{background-color:#78909c!important}.blue-grey{background-color:#607d8b!important}.blue-grey-text{color:#607d8b!important}.rgba-blue-grey-slight,.rgba-blue-grey-slight:after{background-color:rgba(96,125,139,.1)}.rgba-blue-grey-light,.rgba-blue-grey-light:after{background-color:rgba(96,125,139,.3)}.rgba-blue-grey-strong,.rgba-blue-grey-strong:after{background-color:rgba(96,125,139,.7)}.blue-grey.darken-1{background-color:#546e7a!important}.blue-grey.darken-2{background-color:#455a64!important}.blue-grey.darken-3{background-color:#37474f!important}.blue-grey.darken-4{background-color:#263238!important}.grey.lighten-5{background-color:#fafafa!important}.grey.lighten-4{background-color:#f5f5f5!important}.grey.lighten-3{background-color:#eee!important}.grey.lighten-2{background-color:#e0e0e0!important}.grey.lighten-1{background-color:#bdbdbd!important}.grey{background-color:#9e9e9e!important}.grey-text{color:#9e9e9e!important}.rgba-grey-slight,.rgba-grey-slight:after{background-color:rgba(158,158,158,.1)}.rgba-grey-light,.rgba-grey-light:after{background-color:rgba(158,158,158,.3)}.rgba-grey-strong,.rgba-grey-strong:after{background-color:rgba(158,158,158,.7)}.grey.darken-1{background-color:#757575!important}.grey.darken-2{background-color:#616161!important}.grey.darken-3{background-color:#424242!important}.grey.darken-4{background-color:#212121!important}.black{background-color:#000!important}.black-text{color:#000!important}.rgba-black-slight,.rgba-black-slight:after{background-color:rgba(0,0,0,.1)}.rgba-black-light,.rgba-black-light:after{background-color:rgba(0,0,0,.3)}.rgba-black-strong,.rgba-black-strong:after{background-color:rgba(0,0,0,.7)}.white{background-color:#fff!important}.side-nav,.side-nav .search-form .form-control,.white-text{color:#fff!important}.rgba-white-slight,.rgba-white-slight:after{background-color:rgba(255,255,255,.1)}.rgba-white-light,.rgba-white-light:after{background-color:rgba(255,255,255,.3)}.rgba-white-strong,.rgba-white-strong:after{background-color:rgba(255,255,255,.7)}.rgba-stylish-slight{background-color:rgba(62,69,81,.1)}.rgba-stylish-light{background-color:rgba(62,69,81,.3)}.rgba-stylish-strong{background-color:rgba(62,69,81,.7)}.primary-color{background-color:#4285f4!important}.primary-color-dark{background-color:#0d47a1!important}.secondary-color{background-color:#a6c!important}.secondary-color-dark{background-color:#93c!important}.default-color{background-color:#2bbbad!important}.default-color-dark{background-color:#00695c!important}.info-color{background-color:#33b5e5!important}.info-color-dark{background-color:#09c!important}.success-color{background-color:#00c851!important}.success-color-dark{background-color:#007e33!important}.warning-color{background-color:#fb3!important}.warning-color-dark{background-color:#f80!important}.danger-color{background-color:#ff3547!important}.danger-color-dark{background-color:#c00!important}.elegant-color{background-color:#2e2e2e!important}.elegant-color-dark{background-color:#212121!important}.stylish-color{background-color:#4b515d!important}.stylish-color-dark{background-color:#3e4551!important}.unique-color{background-color:#3f729b!important}.unique-color-dark{background-color:#1c2331!important}.special-color{background-color:#37474f!important}.special-color-dark{background-color:#263238!important}.purple-gradient{background:linear-gradient(40deg,#ff6ec4,#7873f5)!important}.peach-gradient{background:linear-gradient(40deg,#ffd86f,#fc6262)!important}.aqua-gradient{background:linear-gradient(40deg,#2096ff,#05ffa3)!important}.blue-gradient{background:linear-gradient(40deg,#45cafc,#303f9f)!important}.purple-gradient-rgba{background:linear-gradient(40deg,rgba(255,110,196,.9),rgba(120,115,245,.9))!important}.peach-gradient-rgba{background:linear-gradient(40deg,rgba(255,216,111,.9),rgba(252,98,98,.9))!important}.aqua-gradient-rgba{background:linear-gradient(40deg,rgba(32,150,255,.9),rgba(5,255,163,.9))!important}.blue-gradient-rgba{background:linear-gradient(40deg,rgba(69,202,252,.9),rgba(48,63,159,.9))!important}.dark-grey-text,.dark-grey-text:focus,.dark-grey-text:hover{color:#4f4f4f!important}.hoverable{box-shadow:none;transition:.55s ease-in-out}.hoverable:hover{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);transition:.55s ease-in-out}.z-depth-0{box-shadow:none!important}.z-depth-1{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)!important}.z-depth-1-half{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)!important}.z-depth-2{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19)!important}.z-depth-3{box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19)!important}.z-depth-4{box-shadow:0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)!important}.z-depth-5{box-shadow:0 27px 24px 0 rgba(0,0,0,.2),0 40px 77px 0 rgba(0,0,0,.22)!important}.disabled,:disabled{pointer-events:none!important}a{cursor:pointer;text-decoration:none;color:#0275d8;transition:.2s ease-in-out}a:hover{text-decoration:none;color:#014c8c;transition:.2s ease-in-out}a.disabled:hover,a:disabled:hover{color:#0275d8}a:not([href]):not([tabindex]),a:not([href]):not([tabindex]):focus,a:not([href]):not([tabindex]):hover{color:inherit;text-decoration:none}.sn-bg-1{background-image:url(https://mdbootstrap.com/img/Photos/Others/sidenav1.jpg)}.sn-bg-2{background-image:url(https://mdbootstrap.com/img/Photos/Others/sidenav2.jpg)}.sn-bg-3{background-image:url(https://mdbootstrap.com/img/Photos/Others/sidenav3.jpg)}.sn-bg-4{background-image:url(https://mdbootstrap.com/img/Photos/Others/sidenav4.jpg)}.side-nav{position:fixed;width:15rem;left:0;top:0;margin:0;-webkit-transform:translateX(-100%);transform:translateX(-100%);height:100%;background-size:cover;background-repeat:no-repeat;background-position:center;z-index:1040;-webkit-backface-visibility:hidden;backface-visibility:hidden;overflow:hidden;will-change:transform;backface-visibility:hidden;list-style-type:none;padding:0;box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);transition:.5s;background-color:#2c2f34;overflow-y:auto}.side-nav.wide{width:15rem;transition-property:all;transition-duration:.2s,.2s,.35s;transition-timing-function:linear,linear,ease}.side-nav.wide .logo-wrapper.sn-ad-avatar-wrapper{height:5rem;padding:19px 10px;border-bottom:1px solid rgba(255,255,255,.65)}.side-nav.wide .logo-wrapper.sn-ad-avatar-wrapper a{line-height:2.6rem;color:#fff}.side-nav.wide .logo-wrapper.sn-ad-avatar-wrapper a span{padding-left:.7rem;margin-top:-1rem}.side-nav.wide .logo-wrapper.sn-ad-avatar-wrapper a img{max-width:2.5rem;padding:0}.side-nav.wide .collapsible a{padding-left:23px;transition:.3s ease-in-out}.side-nav.wide .collapsible a .sv-normal{opacity:1;transition:.1s linear}.side-nav.wide .collapsible a .sv-slim{opacity:0;display:none;transition:.1s linear}.side-nav.wide .collapsible .sv-slim-icon{padding-left:0;width:30px;height:36px;text-align:left;margin-right:0}.side-nav.wide .collapsible-body a{padding-left:47px}.side-nav.wide .fa-angle-down.rotate-icon{opacity:1;display:block}.side-nav.wide.slim{width:3.75rem;transition-property:top,bottom,width;transition-duration:.2s,.2s,.35s;transition-timing-function:linear,linear,ease;right:3.75rem}.side-nav.wide.slim .collapsible a{padding-left:23px;transition:.3s ease-in-out}.side-nav.wide.slim .collapsible a .sv-normal{opacity:0;transition:.1s linear}.side-nav.wide.slim .collapsible a .sv-slim{display:block;opacity:1;transition:.1s linear}.side-nav.wide.slim .collapsible .sv-slim-icon{padding-left:0;width:30px;height:36px;text-align:left;margin-right:0}.side-nav.wide.slim .fa-angle-down.rotate-icon{opacity:0;display:none}.side-nav>ul{max-height:100vh}.side-nav ul{list-style:none;padding-left:0}.side-nav ul li{padding:0}.side-nav.right-aligned{right:0;left:auto;-webkit-transform:translateX(100%);transform:translateX(100%)}.side-nav.side-nav-light .logo-wrapper{border-bottom:1px solid rgba(153,153,153,.3)}.side-nav.side-nav-light .logo-wrapper.sn-ad-avatar-wrapper{color:#555}.side-nav.side-nav-light .about{border-bottom:1px solid rgba(153,153,153,.3)}.side-nav.side-nav-light .about p{color:#555}.side-nav.side-nav-light .social{border-bottom:1px solid rgba(153,153,153,.3)}.side-nav.side-nav-light .social .fab,.side-nav.side-nav-light .social .far,.side-nav.side-nav-light .social .fas{color:#555}.side-nav.side-nav-light .search-form input[type=text]{border-bottom-color:rgba(153,153,153,.3);color:#555!important}.side-nav.side-nav-light .search-form input[type=text]::-webkit-input-placeholder{color:#555!important}.side-nav.side-nav-light .search-form input[type=text]::-moz-placeholder{color:#555!important}.side-nav.side-nav-light .search-form input[type=text]::-ms-input-placeholder{color:#555!important}.side-nav.side-nav-light .search-form input[type=text]::placeholder{color:#555!important}.side-nav.side-nav-light .collapsible a{color:#555}.side-nav.side-nav-light .collapsible-body a{background-color:rgba(0,0,0,.1)}.side-nav.side-nav-light .collapsible li .collapsible-header:hover{background-color:rgba(0,0,0,.05)}.side-nav.side-nav-light .collapsible li .collapsible-header.active{color:#4285f4;background-color:transparent}.side-nav.fixed{left:0;-webkit-transform:translateX(0);transform:translateX(0);position:fixed}.side-nav.fixed.right-aligned{right:0;left:auto}@media only screen and (max-width:1440px){.side-nav.fixed{-webkit-transform:translateX(-105%);transform:translateX(-105%)}.side-nav.fixed.right-aligned{-webkit-transform:translateX(105%);transform:translateX(105%)}}.side-nav .collapsible{margin:1rem 0 0;padding:0}.side-nav .collapsible li a:hover{background-color:rgba(0,0,0,.15)}.side-nav .collapsible>li{border-radius:2px}.side-nav .collapsible>li a.collapsible-header.active,.side-nav .collapsible>li a.collapsible-header:hover{background-color:rgba(255,255,255,.15)}.side-nav .collapsible ul{padding:0;list-style-type:none}.side-nav .collapsible a{color:#fff;font-weight:300;font-size:.8rem;height:36px;line-height:36px}.side-nav .collapsible a.active,.side-nav .collapsible a:hover{border-radius:2px}.side-nav .collapsible .fab,.side-nav .collapsible .far,.side-nav .collapsible .fas{font-size:.8rem;margin-right:13px}.side-nav .collapsible-body a{padding-left:47px;height:36px;line-height:36px;background-color:rgba(0,0,0,.15)}.side-nav a{display:block;font-size:1rem;height:56px;line-height:56px;padding-left:20px}.side-nav .fa-angle-down.rotate-icon{position:absolute;right:0;top:.8rem;margin-right:1.25rem}.side-nav .sidenav-bg{top:0;bottom:0;left:0;right:0;width:15rem;z-index:-1;background-attachment:fixed;position:fixed}.side-nav .sidenav-bg:after{width:100%;display:block;content:'';position:absolute;height:100%;top:0;left:0;bottom:0;z-index:-1;margin-bottom:-99999px;padding-bottom:99999px}.side-nav .logo-wrapper{border-bottom:1px solid rgba(153,153,153,.3);height:8.75rem}.side-nav .logo-wrapper a{height:8.75rem;width:15rem;padding:0}.side-nav .logo-wrapper img{height:auto;padding:20% 50px}@media (max-height:992px){.side-nav .logo-wrapper,.side-nav .logo-wrapper a{height:80px}.side-nav .logo-wrapper img{padding-top:7%;padding-bottom:7%}}.side-nav .logo-wrapper.sn-avatar-wrapper{padding:10% 33%}.side-nav .logo-wrapper.sn-avatar-wrapper img{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);margin:0;padding:0;max-width:90px}@media only screen and (max-height:992px){.side-nav .logo-wrapper.sn-avatar-wrapper{padding-left:40%;padding-right:40%}.side-nav .logo-wrapper.sn-avatar-wrapper img{max-width:50px}}.side-nav .logo-wrapper.sn-ad-avatar-wrapper{height:auto;margin-bottom:0}.side-nav .logo-wrapper.sn-ad-avatar-wrapper img{max-width:3.75rem;padding:1.25rem .63rem;float:left}.side-nav .logo-wrapper.sn-ad-avatar-wrapper p{font-size:.94rem;padding-top:1.25rem;padding-bottom:1.25rem;margin:0}.side-nav .about{padding:1rem;border-bottom:1px solid rgba(255,255,255,.65)}.side-nav .about p{margin-bottom:0;text-align:center}.side-nav .social{padding-top:0;text-align:center;border-bottom:1px solid rgba(255,255,255,.65)}.side-nav .social li{display:inline-block;padding-top:.6rem;padding-bottom:.6rem;margin:0}.side-nav .social a{margin:0;padding:0}.side-nav .social .fab,.side-nav .social .far,.side-nav .social .fas{font-size:.9rem;padding-right:.6rem;padding-left:.6rem;color:#dbe4e7;transition:.3s}.side-nav .social .fab:hover,.side-nav .social .far:hover,.side-nav .social .fas:hover{color:#afc4cb;transition:.3s}.side-nav .search-form{padding:0}.side-nav .search-form input[type=text]{border-bottom:1px solid rgba(255,255,255,.65);font-weight:300;padding-left:1.88rem}.side-nav .search-form input[type=text]::-webkit-input-placeholder{color:#fff}.side-nav .search-form input[type=text]::-moz-placeholder{color:#fff}.side-nav .search-form input[type=text]::-ms-input-placeholder{color:#fff}.side-nav .search-form input[type=text]::placeholder{color:#fff}.side-nav .search-form .form-control{margin-bottom:0}.drag-target{height:100%;width:10px;position:fixed;top:0;z-index:998}#sidenav-overlay{position:fixed;top:0;left:0;right:0;height:120vh;background-color:rgba(0,0,0,.5);z-index:997;will-change:opacity;transition:.5s}.transform-fix-input{-webkit-transform:translateX(0)!important;transform:translateX(0)!important}.side-nav .sidenav-bg::after{margin-bottom:unset;padding-bottom:unset}.side-nav.side-nav-right{left:auto;right:0!important}.side-nav.side-nav-light{background-color:#e5e5e5}.side-nav.side-nav-light .collapsible .card .card-header a h5{color:#555}.side-nav.side-nav-light .collapsible .card .card-header a:hover{background-color:rgba(0,0,0,.05)}.side-nav.side-nav-light .collapsible .card.active .card-header a{background-color:transparent}.side-nav.side-nav-light .collapsible .card.active .card-header a h5,.side-nav.side-nav-light .collapsible .card.active .card-header a h5 i{color:#4285f4}.side-nav.side-nav-light .collapsible .card-body li a{color:#555;background-color:rgba(0,0,0,.1)}.side-nav.side-nav-light .collapsible .card-body li a:hover{background-color:rgba(0,0,0,.15)}.side-nav.side-nav-light a{color:#555;font-weight:400}.side-nav.side-nav-light a .fa{color:#555}.side-nav.side-nav-light input[type=text]{border-bottom-color:rgba(153,153,153,.3);color:#555!important}.side-nav.side-nav-light input[type=text]::-webkit-input-placeholder{color:#555!important}.side-nav.side-nav-light input[type=text]::-moz-placeholder{color:#555!important}.side-nav.side-nav-light input[type=text]:-ms-input-placeholder{color:#555!important}.side-nav.side-nav-light input[type=text]:-moz-placeholder{color:#555!important}.side-nav::-webkit-scrollbar{width:4px;height:4px}.side-nav::-webkit-scrollbar-button:end:increment,.side-nav::-webkit-scrollbar-button:start:decrement{display:block;height:0;background-color:transparent}.side-nav::-webkit-scrollbar-track-piece{background-color:transparent;border-radius:0 0 4px 4px}.side-nav::-webkit-scrollbar-thumb:vertical{height:50px;background-color:#999;border-radius:4px}.side-nav input[type=text]:focus:not([readonly]){border-bottom:1px solid #4285f4;box-shadow:0 1px 0 0 #4285f4}.side-nav .collapsible .no-collase .rotate-icon{display:none}.side-nav .collapsible .card{background-color:transparent;border-bottom:0!important}.side-nav .collapsible .card .card-header{padding:0!important}.side-nav .collapsible .card .card-header a{transition:.3s;height:40px;line-height:40px;border-radius:2px;padding:0}.side-nav .collapsible .card .card-header a h5{padding-left:20px;font-size:.8rem;line-height:40px;font-weight:300;position:relative;color:#fff}.side-nav .collapsible .card .card-header a .fa{font-size:.8rem;margin-right:13px;padding:0}.side-nav .collapsible .card .card-header a .rotate-icon{top:13px;margin-right:20px}.side-nav .collapsible .card.active>mdb-accordion-item-head{background:rgba(255,255,255,.15)}.side-nav .collapsible .card.active .card-header a h5{font-weight:300}.side-nav .collapsible .card-body{padding:0!important}.side-nav .collapsible .card-body li a{background-color:rgba(0,0,0,.15);font-size:.8rem;line-height:32px;height:32px;padding-left:47px;font-weight:300;color:#fff}.side-nav .collapsible .card-body li:first-of-type{border-top:0!important;margin-top:0}.side-nav.wide .slim{width:3.75rem;transition-property:top,bottom,width;transition-duration:.2s,.2s,.35s;transition-timing-function:linear,linear,ease;right:3.75rem}.side-nav.wide .slim .collapsible a{padding-left:23px;transition:.3s ease-in-out}.side-nav.wide .slim .collapsible a .sv-normal{opacity:0;transition:.1s linear}.side-nav.wide .slim .collapsible a .sv-slim{display:block;opacity:1;transition:.1s linear}.side-nav.wide .slim .collapsible .sv-slim-icon{padding-left:0;width:30px;height:36px;text-align:left;margin-right:0}.side-nav.wide .slim .fa-angle-down.rotate-icon{opacity:0;display:none}.slim .mdb-accordion-indicator{display:none}doublenavbar #sidenav-overlay,doublenavbar .side-nav{transition:.2s}doublenavbar links,doublenavbar navlinks{display:flex}header{height:0!important}@media all and (min-width:992px){.double-nav logo{display:flex;flex-direction:row;align-items:center!important;align-self:center!important;width:100%!important}.double-nav .navbar-brand img{margin-top:2px}}@media (max-width:1440px){.double-nav .button-collapse{display:block;left:10px;top:25%;font-size:1.4rem;margin-top:-2px!important;margin-right:10px;margin-left:10px}}.double-nav .button-collapse-non-fixed{left:10px;font-size:1.5rem}@media (min-width:1440px){.double-nav .button-collapse-non-fixed{display:none}}@media all and (max-width:599px){.double-nav .button-collapse-non-fixed{margin-top:-6px}}@media (max-width:1440px){.double-nav .button-collapse-non-fixed{display:block;left:10px;top:15px;font-size:1.4rem;margin-right:10px;margin-left:10px}}.double-nav .hidden-nav-button-collapse{display:block!important}@media all and (min-width:600px) and (max-width:993px){.double-nav .button-collapse-non-fixed{top:10px;margin-top:5px}.double-nav .button-collapse-non-fixed.hidden-nav>i{top:5px!important;margin-top:-5px!important}.double-nav .hidden-nav-button-collapse{top:25%;margin-top:-3px}}@media all and (min-width:994px){.double-nav .hidden-nav-button-collapse{margin-top:-3px}}.double-nav .hidden-nav{display:block;top:13px;left:10px;font-size:1.5rem;margin-left:10px}.double-nav .dropdown .dropdown-menu{margin-left:-68px;display:none;position:absolute;-webkit-transform:translate3d(6px,49px,0);transform:translate3d(6px,49px,0);top:0;left:0;will-change:transform}.double-nav .mega-menu{margin-left:0!important;left:240px!important;width:calc(100% - 240px)!important}@media (max-width:1440px){.double-nav .mega-menu{left:0!important;width:100%!important}}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.ie-hidden-double-nav{box-sizing:content-box;max-height:40.5px}.breadcrumbs{margin-left:25px!important;margin-top:2px}.breadcrumbs img{margin-left:20px}.ie-double-nav{position:absolute;top:30%;right:0}nav.double-nav{min-height:50px!important}.nav-link{padding-top:0!important;padding-bottom:0!important}.button-collapse,.button-collapse-non-fixed{position:absolute;top:30%!important}.hidden-nav-button-collapse{position:absolute}}@media all and (-ms-high-contrast:none) and (max-width:599px),all and (-ms-high-contrast:active) and (max-width:599px){.ie-double-nav{margin-top:-4px}.ie-hidden-double-nav .ie-double-nav{margin-top:0}.button-collapse,.button-collapse-non-fixed{top:5px!important;margin-left:0!important;margin-right:0!important}}@media all and (-ms-high-contrast:none) and (min-width:600px) and (max-width:992px),all and (-ms-high-contrast:active) and (min-width:600px) and (max-width:992px){.button-collapse-non-fixed{margin-top:-4px!important}.button-collapse{margin-top:-6px!important}.ie-double-nav{margin-top:0!important}.hidden-nav-button-collapse i{margin-top:10px!important}.breadcrumbs p{margin-top:-8px!important}}@media all and (-ms-high-contrast:none) and (min-width:993px) and (max-width:1441px),all and (-ms-high-contrast:active) and (min-width:993px) and (max-width:1441px){.button-collapse,.button-collapse-non-fixed{margin-top:-6px!important}.breadcrumbs>p{margin-top:-2px!important}.navbar-brand>img{margin-top:-2px}.breadcrumbs-non-fixed p{margin-top:2px!important}.hidden-nav-button-collapse{position:absolute!important;margin-left:10px!important}}@media all and (-ms-high-contrast:none) and (min-width:1441px),all and (-ms-high-contrast:active) and (min-width:1441px){.hidden-nav-button-collapse{position:absolute!important;margin-left:10px!important}.button-collapse-non-fixed{margin-top:-5px}.breadcrumbs>.navbar-brand img{margin-top:-2px}}@supports (-ms-ime-align:auto){.ie-hidden-double-nav{box-sizing:content-box;max-height:40.5px}.breadcrumbs{margin-left:25px!important;margin-top:2px}.breadcrumbs img{margin-left:20px}.ie-double-nav{position:absolute;top:30%;right:0}nav.double-nav{min-height:50px!important}.nav-link{padding-top:0!important;padding-bottom:0!important}.button-collapse,.button-collapse-non-fixed{position:absolute;top:30%!important}.hidden-nav-button-collapse{position:absolute}@media all and (max-width:599px){.ie-double-nav{margin-top:-4px}.ie-hidden-double-nav .ie-double-nav{margin-top:0}.button-collapse,.button-collapse-non-fixed{top:5px!important;margin-left:0!important;margin-right:0!important}}@media all and (min-width:600px) and (max-width:992px){.button-collapse-non-fixed{margin-top:-4px!important}.button-collapse{margin-top:-6px!important}.ie-double-nav{margin-top:0!important}.hidden-nav-button-collapse i{margin-top:10px!important}.breadcrumbs p{margin-top:-8px!important}}@media all and (min-width:993px) and (max-width:1441px){.button-collapse,.button-collapse-non-fixed{margin-top:-6px!important}.breadcrumbs>p{margin-top:-2px!important}.breadcrumbs>.navbar-brand>img{margin-top:-2px}.breadcrumbs-non-fixed p{margin-top:2px!important}.hidden-nav-button-collapse{position:absolute!important;margin-left:10px!important}}@media all and (min-width:1441px){.hidden-nav-button-collapse{position:absolute!important;margin-left:10px!important}.button-collapse-non-fixed{margin-top:-5px}.breadcrumbs>.navbar-brand img{margin-top:-2px}}}"]
@@ -22485,7 +22474,14 @@ PageScrollConfig.defaultAdvancedInlineOffsetCalculation = false;
 /**
  * The events that are listened to on the body to decide whether a scroll animation has been interfered/interrupted by the user
  */
-PageScrollConfig._interruptEvents = ['mousedown', 'wheel', 'DOMMouseScroll', 'mousewheel', 'keyup', 'touchmove'];
+PageScrollConfig._interruptEvents = [
+    'mousedown',
+    'wheel',
+    'DOMMouseScroll',
+    'mousewheel',
+    'keyup',
+    'touchmove',
+];
 /**
  * The keys that are considered to interrupt a scroll animation (mainly the arrow keys). All other key presses will not stop the
  * scroll animation.
@@ -22506,8 +22502,8 @@ PageScrollConfig._easingLogic = {
      */
     (t, b, c, d) => {
         // Linear easing
-        return c * t / d + b;
-    })
+        return (c * t) / d + b;
+    }),
 };
 
 /**
@@ -22525,7 +22521,7 @@ class PageScrollUtilService {
      * @return {?}
      */
     static isUndefinedOrNull(variable) {
-        return (typeof variable === 'undefined') || variable === undefined || variable === null;
+        return typeof variable === 'undefined' || variable === undefined || variable === null;
     }
     /**
      * @param {?} document
@@ -22537,12 +22533,10 @@ class PageScrollUtilService {
         const body = document.body;
         /** @type {?} */
         const docEl = document.documentElement;
-        // const windowPageYOffset: number = document.defaultView && document.defaultView.pageYOffset || undefined;
         /** @type {?} */
-        const windowPageYOffset = document.defaultView && (/** @type {?} */ (document.defaultView.pageYOffset)) || undefined;
-        // const windowPageXOffset: number = document.defaultView && document.defaultView.pageXOffset || undefined;
+        const windowPageYOffset = (document.defaultView && ((/** @type {?} */ (document.defaultView.pageYOffset)))) || undefined;
         /** @type {?} */
-        const windowPageXOffset = document.defaultView && (/** @type {?} */ (document.defaultView.pageXOffset)) || undefined;
+        const windowPageXOffset = (document.defaultView && ((/** @type {?} */ (document.defaultView.pageXOffset)))) || undefined;
         /** @type {?} */
         const scrollTop = windowPageYOffset || docEl.scrollTop || body.scrollTop;
         /** @type {?} */
@@ -22780,7 +22774,6 @@ class PageScrollService {
      * @param {?=} namespace
      * @return {?}
      */
-    //   public stopAll(namespace?: string): boolean {
     stopAll(namespace) {
         if (this.runningInstances.length > 0) {
             /** @type {?} */
@@ -22881,7 +22874,6 @@ class PageScrollInstance {
             namespace,
         });
     }
-    //   public static newInstance(options: PageScrollOptions) {
     /**
      * @param {?} options
      * @return {?}
@@ -22890,7 +22882,6 @@ class PageScrollInstance {
         if (PageScrollUtilService.isUndefinedOrNull(options.namespace) || options.namespace.length <= 0) {
             options.namespace = PageScrollConfig._defaultNamespace;
         }
-        // const pageScrollInstance: PageScrollInstance = new PageScrollInstance(options.namespace, document);
         /** @type {?} */
         const pageScrollInstance = new PageScrollInstance(options.namespace, document);
         if (PageScrollUtilService.isUndefinedOrNull(options.scrollingViews) || options.scrollingViews.length === 0) {
@@ -23052,7 +23043,6 @@ class PageScrollInstance {
      * @return {?}
      */
     extractScrollTargetPosition() {
-        // let scrollTargetElement: HTMLElement;
         /** @type {?} */
         let scrollTargetElement;
         if (typeof this._scrollTarget === 'string') {
@@ -23400,7 +23390,6 @@ class PageScrollDirective {
         }
         return undefined;
     }
-    // private generatePageScrollInstance(): PageScrollInstance {
     /**
      * @private
      * @return {?}
@@ -23418,7 +23407,7 @@ class PageScrollDirective {
                 pageScrollEasingLogic: this.pageScrollEasing,
                 pageScrollDuration: this.pageScrollDuration,
                 pageScrollSpeed: this.pageScrollSpeed,
-                pageScrollFinishListener: this.pageScrollFinish
+                pageScrollFinishListener: this.pageScrollFinish,
             });
         }
         return this.pageScrollInstance;
@@ -23428,12 +23417,13 @@ class PageScrollDirective {
      * @return {?}
      */
     pushRouterState() {
-        if (this.pageScrollAdjustHash && typeof this.pageScrollInstance.scrollTarget === 'string'
-            && this.pageScrollInstance.scrollTarget.substr(0, 1) === '#') {
+        if (this.pageScrollAdjustHash &&
+            typeof this.pageScrollInstance.scrollTarget === 'string' &&
+            this.pageScrollInstance.scrollTarget.substr(0, 1) === '#') {
             // "Navigate" to the current route again and this time set the fragment/hash
             this.router.navigate([], {
                 fragment: (/** @type {?} */ (this.pageScrollInstance.scrollTarget.substr(1))),
-                queryParamsHandling: 'preserve'
+                queryParamsHandling: 'preserve',
             });
         }
     }
@@ -23469,12 +23459,13 @@ class PageScrollDirective {
                  * @param {?} routerEvent
                  * @return {?}
                  */
-                (routerEvent) => {
+                routerEvent => {
                     if (routerEvent instanceof NavigationEnd) {
                         subscription.unsubscribe();
                         this.scroll();
                     }
-                    else if (routerEvent instanceof NavigationError || routerEvent instanceof NavigationCancel) {
+                    else if (routerEvent instanceof NavigationError ||
+                        routerEvent instanceof NavigationCancel) {
                         subscription.unsubscribe();
                     }
                 }))));
@@ -23487,7 +23478,7 @@ class PageScrollDirective {
 }
 PageScrollDirective.decorators = [
     { type: Directive, args: [{
-                selector: '[mdbPageScroll]'
+                selector: '[mdbPageScroll]',
             },] }
 ];
 /** @nocollapse */
@@ -23720,10 +23711,6 @@ class MdbStepperComponent {
             this.ripple.click(event);
         }
     }
-    /**
-     * @return {?}
-     */
-    ngOnInit() { }
     /**
      * @private
      * @param {?} step
@@ -24104,11 +24091,10 @@ StepperModule.decorators = [
  * @param {?} styleProp
  * @return {?}
  */
-// export function computedStyle(element: string | HTMLElement, styleProp: string): string {
 function computedStyle(element, styleProp) {
     /** @type {?} */
     let el;
-    el = (typeof element === 'string') ? ((/** @type {?} */ (document.querySelector((/** @type {?} */ (element)))))) : element;
+    el = typeof element === 'string' ? (/** @type {?} */ (document.querySelector((/** @type {?} */ (element))))) : element;
     /** @type {?} */
     let value;
     /** @type {?} */
@@ -24120,7 +24106,8 @@ function computedStyle(element, styleProp) {
         styleProp = styleProp.replace(/([A-Z])/g, '-$1').toLowerCase();
         return defaultView.getComputedStyle(el, null).getPropertyValue(styleProp);
     }
-    else if (el['currentStyle']) { // IE
+    else if (el['currentStyle']) {
+        // IE
         // sanitize property name to camelCase
         styleProp = styleProp.replace(/\-(\w)/g, (/**
          * @param {?} letter
@@ -24170,7 +24157,6 @@ class MdbStickyDirective {
          * @return {?}
          */
         () => {
-            // let elRect: ClientRect = this.el.getBoundingClientRect();
             /** @type {?} */
             const parentRect = this.el.parentElement.getBoundingClientRect();
             /** @type {?} */
@@ -24188,16 +24174,13 @@ class MdbStickyDirective {
                 dynProps = { left: left + 'px' };
             }
             else {
-                // console.log('parentRect..............', parentRect.width);
                 dynProps = { width: parentRect.width + 'px' };
             }
-            // console.log('dynProps', dynProps);
             if (this.original.marginTop +
                 this.original.marginBottom +
                 this.original.boundingClientRect.height +
                 this.stickyOffsetTop >=
                 parentRect.bottom) {
-                // console.log('case 1 (absolute)', parentRect.bottom, this.original.marginBottom);
                 /**
                  * stikcy element reached to the bottom of the container
                  * @type {?}
@@ -24219,7 +24202,6 @@ class MdbStickyDirective {
                 /**
                  * stikcy element is in the middle of container
                  */
-                // console.log('case 2 (fixed)', parentRect.top * -1, this.original.marginTop, this.original.offsetTop);
                 // if not floating, add an empty filler element, since the original elements becames 'fixed'
                 if (this.original.float !== 'left' && this.original.float !== 'right' && !this.fillerEl) {
                     this.fillerEl = document.createElement('div');
@@ -24238,7 +24220,6 @@ class MdbStickyDirective {
                 /**
                  * stikcy element is in the original position
                  */
-                // console.log('case 3 (original)');
                 if (this.fillerEl) {
                     this.parentEl.removeChild(this.fillerEl); // IE11 does not work with el.remove()
                     this.fillerEl = undefined;
@@ -24300,7 +24281,6 @@ class MdbStickyDirective {
                 top: computedStyle(this.el, 'top'),
                 bottom: computedStyle(this.el, 'bottom'),
                 width: computedStyle(this.el, 'width'),
-                // left: computedStyle(this.el, 'left'),
                 left: '',
                 offsetTop: this.el.offsetTop,
                 offsetLeft: this.el.offsetLeft,
@@ -24428,7 +24408,6 @@ TabsetConfig.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-// todo: add active event to tab
 class TabsetComponent {
     /**
      * @param {?} platformId
@@ -24555,7 +24534,6 @@ class TabsetComponent {
     ngOnDestroy() {
         this.isDestroyed = true;
     }
-    // public getActive() {
     /**
      * @return {?}
      */
@@ -24845,6 +24823,8 @@ class TabDirective {
      * @param {?} renderer
      */
     constructor(platformId, tabset, el, renderer) {
+        this.tabset = tabset;
+        this.el = el;
         this.renderer = renderer;
         this._disabled = false;
         /**
@@ -24861,12 +24841,9 @@ class TabDirective {
         this.removed = new EventEmitter();
         this.addClass = true;
         this.test = true;
-        // public el: ElementRef = null;
-        this.el = null;
         this._active = false;
         this.isBrowser = null;
         this.isBrowser = isPlatformBrowser(platformId);
-        this.el = el;
         this.tabset = tabset;
     }
     /**
@@ -25036,8 +25013,8 @@ class MaterialChipsComponent {
         this.placeholder = '';
         this.isTagsFocused = false;
         this.keyCodes = {
-            backspace: 8,
-            delete: 46,
+            backspace: BACKSPACE,
+            delete: DELETE,
         };
         this.tagsfocusedChange = new EventEmitter();
         this.labelsChange = new EventEmitter();
@@ -25239,6 +25216,7 @@ class ClockPickerComponent {
         this.disabled = false;
         this.outlineInput = false;
         this.openOnFocus = true;
+        this.readonly = false;
         this.timeChanged = new EventEmitter();
         this.isOpen = false;
         this.isMobile = null;
@@ -25350,15 +25328,6 @@ class ClockPickerComponent {
             catch (error) { }
         }
     }
-    /*   private rotateTimePickerArrow(event: any) {
-        if (event.target.parentElement.classList.contains('clockpicker-dial')) {
-          (this.elem.nativeElement.querySelectorAll('.clockpicker-tick') as any).forEach(
-            (element: any) => {
-              this.renderer.setStyle(element, 'background-color', 'rgba(0, 150, 136, 0');
-            }
-          );
-        }
-      } */
     /**
      * @return {?}
      */
@@ -25480,7 +25449,6 @@ class ClockPickerComponent {
              */
             () => {
                 // creating temp field
-                // const field = document.createElement('input');
                 /** @type {?} */
                 const field = this.renderer.createElement('input');
                 this.renderer.appendChild(this.elem.nativeElement, field);
@@ -25617,7 +25585,6 @@ class ClockPickerComponent {
      * @return {?}
      */
     setMinute(min) {
-        // event.stopPropagation();
         this.selectedHours.m = min;
     }
     /**
@@ -25625,7 +25592,6 @@ class ClockPickerComponent {
      * @return {?}
      */
     setAmPm(ampm) {
-        // event.stopPropagation();
         this.selectedHours.ampm = ampm;
     }
     /**
@@ -25855,7 +25821,7 @@ class ClockPickerComponent {
 ClockPickerComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mdb-time-picker',
-                template: "<div class=\"tp\">\n  <div class=\"md-form\" [ngClass]=\"{ 'md-outline': outlineInput }\">\n    <input\n      (focus)=\"onFocusInput()\"\n      [disabled]=\"disabled\"\n      [tabindex]=\"tabIndex\"\n      [placeholder]=\"placeholder\"\n      [value]=\"endHours\"\n      type=\"text\"\n      class=\"form-control timepicker\"\n      (mousedown)=\"openBtnClicked()\"\n      [(ngModel)]=\"endHours\"\n    />\n    <label class=\"active\">{{ label }}</label>\n  </div>\n  <div\n    class=\"clockpicker picker\"\n    [hidden]=\"!showClock\"\n    [ngClass]=\"{ 'picker--opened': showClock, darktheme: darktheme }\"\n  >\n    <div class=\"picker__holder\">\n      <div class=\"picker__frame\">\n        <div class=\"picker__wrap\">\n          <div class=\"picker__box\">\n            <div class=\"picker__date-display\">\n              <div class=\"clockpicker-display\">\n                <div class=\"clockpicker-display-column\">\n                  <span\n                    class=\"clockpicker-span-hours text-primary\"\n                    [ngClass]=\"{ 'text-primary': showHours }\"\n                    (click)=\"showHoursClock()\"\n                  >\n                    {{ selectedHours.h }}</span\n                  >:<span\n                    class=\"clockpicker-span-minutes\"\n                    [ngClass]=\"{ 'text-primary': !showHours }\"\n                    (click)=\"showMinutesClock()\"\n                    >{{ selectedHours.m }}</span\n                  >\n                </div>\n                <div\n                  class=\"clockpicker-display-column clockpicker-display-am-pm\"\n                  *ngIf=\"twelvehour\"\n                >\n                  <div class=\"clockpicker-span-am-pm\">{{ selectedHours.ampm }}</div>\n                </div>\n              </div>\n            </div>\n            <div class=\"picker__calendar-container\">\n              <div class=\"clockpicker-plate\" #plate>\n                <div class=\"clockpicker-canvas\">\n                  <svg class=\"clockpicker-svg\" width=\"270\" height=\"270\" #svg>\n                    <g transform=\"translate(135,135)\" #g>\n                      <line\n                        x1=\"0\"\n                        y1=\"0\"\n                        x2=\"77.94228634059948\"\n                        y2=\"-45.00000000000001\"\n                        #hand\n                      ></line>\n                      <circle\n                        class=\"clockpicker-canvas-fg\"\n                        r=\"5\"\n                        cx=\"95.26279441628824\"\n                        cy=\"-55.000000000000014\"\n                        #fg\n                      ></circle>\n                      <circle\n                        class=\"clockpicker-canvas-bg\"\n                        r=\"20\"\n                        cx=\"95.26279441628824\"\n                        cy=\"-55.000000000000014\"\n                        #bg\n                      ></circle>\n                      <circle\n                        class=\"clockpicker-canvas-bearing\"\n                        cx=\"0\"\n                        cy=\"0\"\n                        r=\"2\"\n                        #bearing\n                      ></circle>\n                    </g>\n                  </svg>\n                </div>\n                <div\n                  class=\"clockpicker-dial clockpicker-hours\"\n                  #hoursPlate\n                  [ngClass]=\"{ 'clockpicker-dial-out': !showHours }\"\n                  [ngStyle]=\"{ visibility: !showHours ? 'hidden' : 'visible' }\"\n                >\n                  <div\n                    *ngFor=\"let tick of hoursTicks\"\n                    class=\"clockpicker-tick\"\n                    style=\"font-size: 140%;\"\n                    [ngStyle]=\"{ left: tick.left + 'px', top: tick.top + 'px' }\"\n                    id=\"{{ tick.hour }}\"\n                  >\n                    {{ tick.hour }}\n                  </div>\n                </div>\n                <div\n                  class=\"clockpicker-dial clockpicker-minutes\"\n                  #minutesPlate\n                  [ngClass]=\"{ 'clockpicker-dial-out': showHours }\"\n                  [ngStyle]=\"{ visibility: showHours ? 'hidden' : 'visible' }\"\n                >\n                  <div\n                    *ngFor=\"let tick of minutesTicks\"\n                    class=\"clockpicker-tick\"\n                    style=\"font-size: 120%;\"\n                    [ngStyle]=\"{ left: tick.left + 'px', top: tick.top + 'px' }\"\n                  >\n                    {{ tick.min }}\n                  </div>\n                </div>\n              </div>\n              <div class=\"clockpicker-am-pm-block\" *ngIf=\"twelvehour\">\n                <button\n                  type=\"button\"\n                  mdbBtn\n                  floating=\"true\"\n                  flat=\"true\"\n                  mdbWavesEffect\n                  class=\"clockpicker-button am-button\"\n                  [ngClass]=\"{ active: selectedHours.ampm == 'AM' }\"\n                  (click)=\"setAmPm('AM')\"\n                >\n                  AM\n                </button>\n\n                <button\n                  type=\"button\"\n                  mdbBtn\n                  floating=\"true\"\n                  flat=\"true\"\n                  mdbWavesEffect\n                  class=\"clockpicker-button pm-button white-text\"\n                  [ngClass]=\"{ active: selectedHours.ampm == 'PM' }\"\n                  (click)=\"setAmPm('PM')\"\n                >\n                  PM\n                </button>\n              </div>\n            </div>\n            <div class=\"picker__footer\">\n              <button\n                type=\"button\"\n                *ngIf=\"buttonLabel\"\n                mdbBtn\n                flat=\"true\"\n                mdbWavesEffect\n                class=\"clockpicker-button\"\n                (click)=\"closeBtnClicked()\"\n              >\n                {{ buttonLabel }}\n              </button>\n              <button\n                type=\"button\"\n                *ngIf=\"!buttonLabel\"\n                mdbBtn\n                flat=\"true\"\n                mdbWavesEffect\n                class=\"clockpicker-button\"\n                (click)=\"closeBtnClicked()\"\n              >\n                Done\n              </button>\n\n              <button\n                type=\"button\"\n                mdbBtn\n                flat=\"true\"\n                mdbWavesEffect\n                class=\"clockpicker-button\"\n                (click)=\"clearTimeInput(); close()\"\n              >\n                Clear\n              </button>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                template: "<div class=\"tp\">\n  <div class=\"md-form\" [ngClass]=\"{ 'md-outline': outlineInput }\">\n    <input\n      (focus)=\"onFocusInput()\"\n      [disabled]=\"disabled\"\n      [tabindex]=\"tabIndex\"\n      [placeholder]=\"placeholder\"\n      [value]=\"endHours\"\n      type=\"text\"\n      class=\"form-control timepicker\"\n      (mousedown)=\"openBtnClicked()\"\n      [(ngModel)]=\"endHours\"\n      [readonly]=\"readonly\"\n    />\n    <label class=\"active\">{{ label }}</label>\n  </div>\n  <div\n    class=\"clockpicker picker\"\n    [hidden]=\"!showClock\"\n    [ngClass]=\"{ 'picker--opened': showClock, darktheme: darktheme }\"\n  >\n    <div class=\"picker__holder\">\n      <div class=\"picker__frame\">\n        <div class=\"picker__wrap\">\n          <div class=\"picker__box\">\n            <div class=\"picker__date-display\">\n              <div class=\"clockpicker-display\">\n                <div class=\"clockpicker-display-column\">\n                  <span\n                    class=\"clockpicker-span-hours text-primary\"\n                    [ngClass]=\"{ 'text-primary': showHours }\"\n                    (click)=\"showHoursClock()\"\n                  >\n                    {{ selectedHours.h }}</span\n                  >:<span\n                    class=\"clockpicker-span-minutes\"\n                    [ngClass]=\"{ 'text-primary': !showHours }\"\n                    (click)=\"showMinutesClock()\"\n                    >{{ selectedHours.m }}</span\n                  >\n                </div>\n                <div\n                  class=\"clockpicker-display-column clockpicker-display-am-pm\"\n                  *ngIf=\"twelvehour\"\n                >\n                  <div class=\"clockpicker-span-am-pm\">{{ selectedHours.ampm }}</div>\n                </div>\n              </div>\n            </div>\n            <div class=\"picker__calendar-container\">\n              <div class=\"clockpicker-plate\" #plate>\n                <div class=\"clockpicker-canvas\">\n                  <svg class=\"clockpicker-svg\" width=\"270\" height=\"270\" #svg>\n                    <g transform=\"translate(135,135)\" #g>\n                      <line\n                        x1=\"0\"\n                        y1=\"0\"\n                        x2=\"77.94228634059948\"\n                        y2=\"-45.00000000000001\"\n                        #hand\n                      ></line>\n                      <circle\n                        class=\"clockpicker-canvas-fg\"\n                        r=\"5\"\n                        cx=\"95.26279441628824\"\n                        cy=\"-55.000000000000014\"\n                        #fg\n                      ></circle>\n                      <circle\n                        class=\"clockpicker-canvas-bg\"\n                        r=\"20\"\n                        cx=\"95.26279441628824\"\n                        cy=\"-55.000000000000014\"\n                        #bg\n                      ></circle>\n                      <circle\n                        class=\"clockpicker-canvas-bearing\"\n                        cx=\"0\"\n                        cy=\"0\"\n                        r=\"2\"\n                        #bearing\n                      ></circle>\n                    </g>\n                  </svg>\n                </div>\n                <div\n                  class=\"clockpicker-dial clockpicker-hours\"\n                  #hoursPlate\n                  [ngClass]=\"{ 'clockpicker-dial-out': !showHours }\"\n                  [ngStyle]=\"{ visibility: !showHours ? 'hidden' : 'visible' }\"\n                >\n                  <div\n                    *ngFor=\"let tick of hoursTicks\"\n                    class=\"clockpicker-tick\"\n                    style=\"font-size: 140%;\"\n                    [ngStyle]=\"{ left: tick.left + 'px', top: tick.top + 'px' }\"\n                    id=\"{{ tick.hour }}\"\n                  >\n                    {{ tick.hour }}\n                  </div>\n                </div>\n                <div\n                  class=\"clockpicker-dial clockpicker-minutes\"\n                  #minutesPlate\n                  [ngClass]=\"{ 'clockpicker-dial-out': showHours }\"\n                  [ngStyle]=\"{ visibility: showHours ? 'hidden' : 'visible' }\"\n                >\n                  <div\n                    *ngFor=\"let tick of minutesTicks\"\n                    class=\"clockpicker-tick\"\n                    style=\"font-size: 120%;\"\n                    [ngStyle]=\"{ left: tick.left + 'px', top: tick.top + 'px' }\"\n                  >\n                    {{ tick.min }}\n                  </div>\n                </div>\n              </div>\n              <div class=\"clockpicker-am-pm-block\" *ngIf=\"twelvehour\">\n                <button\n                  type=\"button\"\n                  mdbBtn\n                  floating=\"true\"\n                  flat=\"true\"\n                  mdbWavesEffect\n                  class=\"clockpicker-button am-button\"\n                  [ngClass]=\"{ active: selectedHours.ampm == 'AM' }\"\n                  (click)=\"setAmPm('AM')\"\n                >\n                  AM\n                </button>\n\n                <button\n                  type=\"button\"\n                  mdbBtn\n                  floating=\"true\"\n                  flat=\"true\"\n                  mdbWavesEffect\n                  class=\"clockpicker-button pm-button white-text\"\n                  [ngClass]=\"{ active: selectedHours.ampm == 'PM' }\"\n                  (click)=\"setAmPm('PM')\"\n                >\n                  PM\n                </button>\n              </div>\n            </div>\n            <div class=\"picker__footer\">\n              <button\n                type=\"button\"\n                *ngIf=\"buttonLabel\"\n                mdbBtn\n                flat=\"true\"\n                mdbWavesEffect\n                class=\"clockpicker-button\"\n                (click)=\"closeBtnClicked()\"\n              >\n                {{ buttonLabel }}\n              </button>\n              <button\n                type=\"button\"\n                *ngIf=\"!buttonLabel\"\n                mdbBtn\n                flat=\"true\"\n                mdbWavesEffect\n                class=\"clockpicker-button\"\n                (click)=\"closeBtnClicked()\"\n              >\n                Done\n              </button>\n\n              <button\n                type=\"button\"\n                mdbBtn\n                flat=\"true\"\n                mdbWavesEffect\n                class=\"clockpicker-button\"\n                (click)=\"clearTimeInput(); close()\"\n              >\n                Clear\n              </button>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 providers: [TIME_PIRCKER_VALUE_ACCESSOT],
@@ -25892,6 +25858,7 @@ ClockPickerComponent.propDecorators = {
     tabIndex: [{ type: Input }],
     outlineInput: [{ type: Input }],
     openOnFocus: [{ type: Input }],
+    readonly: [{ type: Input }],
     timeChanged: [{ type: Output }],
     ontouchmove: [{ type: HostListener, args: ['touchmove', ['$event'],] }]
 };
