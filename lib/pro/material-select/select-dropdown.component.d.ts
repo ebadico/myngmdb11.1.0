@@ -1,7 +1,7 @@
-import { AfterViewInit, EventEmitter, OnChanges, OnInit, ElementRef, Renderer2, ChangeDetectorRef, SimpleChanges } from '@angular/core';
+import { AfterViewInit, EventEmitter, OnChanges, OnInit, ElementRef, Renderer2, ChangeDetectorRef, SimpleChanges, OnDestroy } from '@angular/core';
 import { Option } from './option';
 import { OptionList } from './option-list';
-export declare class SelectDropdownComponent implements AfterViewInit, OnChanges, OnInit {
+export declare class SelectDropdownComponent implements AfterViewInit, OnChanges, OnInit, OnDestroy {
     _elementRef: ElementRef;
     _renderer: Renderer2;
     private cdRef;
@@ -42,12 +42,16 @@ export declare class SelectDropdownComponent implements AfterViewInit, OnChanges
     startHeight: any;
     endHeight: any;
     hasOptionsItems: boolean;
+    private _destroy;
+    private _pressedKeysStream;
+    private _pressedKeys;
     selectAllSelected: boolean;
     constructor(_elementRef: ElementRef, _renderer: Renderer2, cdRef: ChangeDetectorRef);
     highlightedItem: any;
     searchIndex: number;
     previousKey: string;
-    onWindowKeyUp(event: any): void;
+    onWindowKeydown(event: any): void;
+    highlightOptionByTyping(): void;
     navigateThroughArray(key: string, itemSource: any): void;
     /** Event handlers. **/
     onkeyup(): void;
@@ -74,4 +78,5 @@ export declare class SelectDropdownComponent implements AfterViewInit, OnChanges
     onAnimationStart(): void;
     moveHighlightedIntoView(): void;
     private handleOptionsWheel;
+    ngOnDestroy(): void;
 }

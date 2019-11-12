@@ -11,14 +11,14 @@ export declare class SBItemBodyComponent implements AfterContentInit, OnDestroy 
     customClass: string;
     animationStateChange: EventEmitter<IAccordionAnimationState>;
     routerLinks: QueryList<RouterLinkWithHref>;
+    bodyEl: ElementRef;
     autoExpand: boolean;
     collapsed: boolean;
-    height: string;
-    expandAnimationState: string;
-    private _destroy$;
     id: string;
+    height: string;
+    private _destroy$;
+    expandAnimationState: string;
     ariaLabelledBy: string;
-    bodyEl: ElementRef;
     constructor(el: ElementRef, _cdRef: ChangeDetectorRef, router: Router);
     toggle(collapsed: boolean): void;
     animationCallback(): void;

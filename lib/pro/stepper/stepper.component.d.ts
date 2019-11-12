@@ -1,4 +1,4 @@
-import { QueryList, OnInit, AfterContentInit, ElementRef, AfterViewInit, Renderer2, AfterContentChecked, EventEmitter, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { QueryList, AfterContentInit, ElementRef, AfterViewInit, Renderer2, AfterContentChecked, EventEmitter, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { MdbStepComponent } from './step.component';
 import { WavesDirective } from '../../free/waves/waves-effect.directive';
 import { Observable, Subject } from 'rxjs';
@@ -8,7 +8,7 @@ export declare class StepChangeEvent {
     previousStep: MdbStepComponent;
     previousStepIndex: number;
 }
-export declare class MdbStepperComponent implements OnInit, AfterContentInit, AfterViewInit, AfterContentChecked, OnDestroy {
+export declare class MdbStepperComponent implements AfterContentInit, AfterViewInit, AfterContentChecked, OnDestroy {
     ripple: WavesDirective;
     private _renderer;
     private _cdRef;
@@ -33,7 +33,6 @@ export declare class MdbStepperComponent implements OnInit, AfterContentInit, Af
     stepChange$: Observable<any>;
     getStepChange$(): Observable<any>;
     onClick(index: number, event: any): void;
-    ngOnInit(): void;
     private _isStepValid;
     getAnimationState(index: number): string;
     private _getStepByIndex;

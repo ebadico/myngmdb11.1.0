@@ -12,6 +12,7 @@ export declare class MdbAutoCompleterDirective implements AfterViewInit, OnDestr
     private _autocompleterInputChanges;
     private _clearButton;
     private _canOpenOnFocus;
+    private utils;
     listenToClearClick: Function;
     listenFunc: Function;
     isBrowser: boolean;
@@ -21,7 +22,6 @@ export declare class MdbAutoCompleterDirective implements AfterViewInit, OnDestr
     _handleBlurIn(): void;
     handleMouseDown(): void;
     constructor(renderer: Renderer2, el: ElementRef, platformId: string, document: any);
-    private _getClosestEl;
     private _renderClearButton;
     private _setStyles;
     private _addClass;
