@@ -1,5 +1,5 @@
-import { AfterViewInit, ElementRef, EventEmitter, OnInit, Renderer2 } from '@angular/core';
-export declare class ImageModalComponent implements OnInit, AfterViewInit {
+import { ElementRef, EventEmitter, OnInit, Renderer2 } from '@angular/core';
+export declare class ImageModalComponent implements OnInit {
     element: ElementRef;
     renderer: Renderer2;
     _element: any;
@@ -30,7 +30,6 @@ export declare class ImageModalComponent implements OnInit, AfterViewInit {
     constructor(platformId: string, element: ElementRef, renderer: Renderer2);
     toggleZoomed(): void;
     toggleRestart(): void;
-    ngAfterViewInit(): void;
     ngOnInit(): void;
     closeGallery(): void;
     prevImage(): void;

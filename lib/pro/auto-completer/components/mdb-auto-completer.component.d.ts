@@ -31,6 +31,7 @@ export declare class MdbAutoCompleterComponent implements AfterContentInit, OnDe
     noResultsEl: ElementRef;
     private _destroy;
     private utils;
+    origin: ElementRef;
     parameters: {
         left: number;
         top: number;
@@ -53,6 +54,7 @@ export declare class MdbAutoCompleterComponent implements AfterContentInit, OnDe
     selectedItemChanged(): Observable<any>;
     isOpen(): boolean;
     _calculatePosition(): void;
+    private _calculateAppendPosition;
     show(): void;
     hide(): void;
     isDropdownOpen(): Observable<any>;
@@ -66,12 +68,7 @@ export declare class MdbAutoCompleterComponent implements AfterContentInit, OnDe
         width: number;
         bottom: number;
     }): void;
-    appendDropdown(parameters: {
-        left: any;
-        top: any;
-        width: any;
-        bottom: number;
-    }): void;
+    appendDropdown(): void;
     setSingleOptionHeight(): void;
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
