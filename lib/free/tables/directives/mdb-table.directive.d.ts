@@ -23,11 +23,13 @@ export declare class MdbTableDirective implements OnInit, AfterViewInit {
     getDataSource(): any;
     setDataSource(data: any): void;
     dataSourceChange(): Observable<any>;
-    filterLocalDataBy(searchKey: any): any;
-    filterLocalDataByFields(searchKey: any, keys: string[]): any;
-    searchLocalDataBy(searchKey: any): any;
-    searchLocalDataByFields(searchKey: any, keys: string[]): any;
-    searchDataObservable(searchKey: any): Observable<any>;
+    filterLocalDataBy(searchKey: string): any;
+    filterLocalDataByFields(searchKey: string, keys: string[]): any;
+    filterLocalDataByMultipleFields(searchKey: string, keys?: string[]): any;
+    searchLocalDataBy(searchKey: string): any;
+    searchLocalDataByFields(searchKey: string, keys: string[]): any;
+    searchLocalDataByMultipleFields(searchKey: string, keys?: string[]): any;
+    searchDataObservable(searchKey: string): Observable<any>;
     ngOnInit(): void;
     ngAfterViewInit(): void;
 }

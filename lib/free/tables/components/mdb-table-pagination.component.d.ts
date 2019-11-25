@@ -1,6 +1,10 @@
 import { OnInit, EventEmitter, ChangeDetectorRef, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { MdbTableDirective } from '../directives/mdb-table.directive';
+export interface MdbPaginationIndex {
+    first: number;
+    last: number;
+}
 export declare class MdbTablePaginationComponent implements OnInit, OnChanges, AfterViewInit {
     private cdRef;
     tableEl: MdbTableDirective;
@@ -19,12 +23,11 @@ export declare class MdbTablePaginationComponent implements OnInit, OnChanges, A
     nextShouldBeDisabled: boolean;
     previousShouldBeDisabled: boolean;
     searchText: string;
-    pagination: Subject<{
-        first: number;
-        last: number;
-    }>;
-    nextPageClick: EventEmitter<any>;
-    previousPageClick: EventEmitter<any>;
+    pagination: Subject<MdbPaginationIndex>;
+    nextPageClick: EventEmitter<MdbPaginationIndex>;
+    previousPageClick: EventEmitter<MdbPaginationIndex>;
+    firstPageClick: EventEmitter<MdbPaginationIndex>;
+    lastPageClick: EventEmitter<MdbPaginationIndex>;
     constructor(cdRef: ChangeDetectorRef);
     ngOnInit(): void;
     ngAfterViewInit(): void;
