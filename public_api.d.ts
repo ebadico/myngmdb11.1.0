@@ -41,4 +41,5 @@ export * from './lib/pro/sticky-content/index';
 export * from './lib/pro/tabs-pills/index';
 export * from './lib/pro/chips/index';
 export * from './lib/pro/time-picker/index';
+export * from './lib/pro/tree-view/index';
 export * from './lib/mdb.module';

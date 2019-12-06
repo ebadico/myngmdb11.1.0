@@ -48,6 +48,7 @@ export declare class TooltipDirective implements OnInit, OnDestroy, OnChanges {
     delay: number;
     customHeight: string;
     fadeDuration: number;
+    private _destroy$;
     protected _delayTimeoutId: any;
     private _tooltip;
     isBrowser: any;

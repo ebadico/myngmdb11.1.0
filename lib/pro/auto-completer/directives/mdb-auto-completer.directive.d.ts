@@ -9,6 +9,7 @@ export declare class MdbAutoCompleterDirective implements AfterViewInit, OnDestr
     mdbAutoCompleter: MdbAutoCompleterComponent;
     ngModelChange: EventEmitter<any>;
     clearBtnClicked: EventEmitter<any>;
+    private _destroy$;
     private _autocompleterInputChanges;
     private _clearButton;
     private _canOpenOnFocus;

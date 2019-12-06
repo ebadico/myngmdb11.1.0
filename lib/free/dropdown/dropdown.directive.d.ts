@@ -61,6 +61,7 @@ export declare class BsDropdownDirective implements OnInit, OnDestroy {
      */
     onHidden: EventEmitter<any>;
     hidden: EventEmitter<any>;
+    private _destroy$;
     readonly isBs4: boolean;
     _isInlineOpen: boolean;
     _showInline: boolean;

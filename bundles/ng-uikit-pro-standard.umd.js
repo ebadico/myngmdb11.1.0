@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/platform-browser'), require('@angular/common/http'), require('@angular/router'), require('@angular/animations'), require('rxjs'), require('rxjs/operators'), require('@angular/common'), require('@angular/forms'), require('@angular/core')) :
-    typeof define === 'function' && define.amd ? define('ng-uikit-pro-standard', ['exports', '@angular/platform-browser', '@angular/common/http', '@angular/router', '@angular/animations', 'rxjs', 'rxjs/operators', '@angular/common', '@angular/forms', '@angular/core'], factory) :
-    (factory((global['ng-uikit-pro-standard'] = {}),global.ng.platformBrowser,global.ng.common.http,global.ng.router,global.ng.animations,global.rxjs,global.rxjs.operators,global.ng.common,global.ng.forms,global.ng.core));
-}(this, (function (exports,platformBrowser,http,router,animations,rxjs,operators,common,forms,i0) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/platform-browser'), require('@angular/common/http'), require('@angular/router'), require('@angular/animations'), require('rxjs'), require('rxjs/operators'), require('@angular/forms'), require('@angular/common'), require('@angular/core')) :
+    typeof define === 'function' && define.amd ? define('ng-uikit-pro-standard', ['exports', '@angular/platform-browser', '@angular/common/http', '@angular/router', '@angular/animations', 'rxjs', 'rxjs/operators', '@angular/forms', '@angular/common', '@angular/core'], factory) :
+    (factory((global['ng-uikit-pro-standard'] = {}),global.ng.platformBrowser,global.ng.common.http,global.ng.router,global.ng.animations,global.rxjs,global.rxjs.operators,global.ng.forms,global.ng.common,global.ng.core));
+}(this, (function (exports,platformBrowser,http,router,animations,rxjs,operators,forms,common,i0) { 'use strict';
 
     /**
      * @fileoverview added by tsickle
@@ -1357,6 +1357,7 @@
             this.cdRef = cdRef;
             this.renderer = renderer;
             this.SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
+            this._destroy$ = new rxjs.Subject();
             this.destroyed = false;
             this.animationEnd = true;
             this.isBrowser = false;
@@ -1462,6 +1463,8 @@
          */
             function () {
                 this.destroyed = true;
+                this._destroy$.next();
+                this._destroy$.complete();
             };
         /**
          * @return {?}
@@ -1472,10 +1475,12 @@
             function () {
                 var _this = this;
                 this.play();
-                this._slidesList.changes.subscribe(( /**
-                 * @param {?} slidesList
-                 * @return {?}
-                 */function (slidesList) {
+                this._slidesList.changes
+                    .pipe(operators.takeUntil(this._destroy$))
+                    .subscribe(( /**
+             * @param {?} slidesList
+             * @return {?}
+             */function (slidesList) {
                     _this._slidesList = slidesList;
                     setTimeout(( /**
                      * @return {?}
@@ -2978,102 +2983,6 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
-    /*! *****************************************************************************
-    Copyright (c) Microsoft Corporation. All rights reserved.
-    Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-    this file except in compliance with the License. You may obtain a copy of the
-    License at http://www.apache.org/licenses/LICENSE-2.0
-
-    THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-    KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-    WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-    MERCHANTABLITY OR NON-INFRINGEMENT.
-
-    See the Apache Version 2.0 License for specific language governing permissions
-    and limitations under the License.
-    ***************************************************************************** */
-    /* global Reflect, Promise */
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b)
-                if (b.hasOwnProperty(p))
-                    d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    function __extends(d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    }
-    var __assign = function () {
-        __assign = Object.assign || function __assign(t) {
-            for (var s, i = 1, n = arguments.length; i < n; i++) {
-                s = arguments[i];
-                for (var p in s)
-                    if (Object.prototype.hasOwnProperty.call(s, p))
-                        t[p] = s[p];
-            }
-            return t;
-        };
-        return __assign.apply(this, arguments);
-    };
-    function __decorate(decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-            r = Reflect.decorate(decorators, target, key, desc);
-        else
-            for (var i = decorators.length - 1; i >= 0; i--)
-                if (d = decorators[i])
-                    r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
-    }
-    function __metadata(metadataKey, metadataValue) {
-        if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-            return Reflect.metadata(metadataKey, metadataValue);
-    }
-    function __values(o) {
-        var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-        if (m)
-            return m.call(o);
-        return {
-            next: function () {
-                if (o && i >= o.length)
-                    o = void 0;
-                return { value: o && o[i++], done: !o };
-            }
-        };
-    }
-    function __read(o, n) {
-        var m = typeof Symbol === "function" && o[Symbol.iterator];
-        if (!m)
-            return o;
-        var i = m.call(o), r, ar = [], e;
-        try {
-            while ((n === void 0 || n-- > 0) && !(r = i.next()).done)
-                ar.push(r.value);
-        }
-        catch (error) {
-            e = { error: error };
-        }
-        finally {
-            try {
-                if (r && !r.done && (m = i["return"]))
-                    m.call(i);
-            }
-            finally {
-                if (e)
-                    throw e.error;
-            }
-        }
-        return ar;
-    }
-    function __spread() {
-        for (var ar = [], i = 0; i < arguments.length; i++)
-            ar = ar.concat(__read(arguments[i]));
-        return ar;
-    }
-
     /**
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
@@ -3812,6 +3721,102 @@
             };
         return ComponentLoader;
     }());
+
+    /*! *****************************************************************************
+    Copyright (c) Microsoft Corporation. All rights reserved.
+    Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+    this file except in compliance with the License. You may obtain a copy of the
+    License at http://www.apache.org/licenses/LICENSE-2.0
+
+    THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+    WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+    MERCHANTABLITY OR NON-INFRINGEMENT.
+
+    See the Apache Version 2.0 License for specific language governing permissions
+    and limitations under the License.
+    ***************************************************************************** */
+    /* global Reflect, Promise */
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b)
+                if (b.hasOwnProperty(p))
+                    d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    function __extends(d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    }
+    var __assign = function () {
+        __assign = Object.assign || function __assign(t) {
+            for (var s, i = 1, n = arguments.length; i < n; i++) {
+                s = arguments[i];
+                for (var p in s)
+                    if (Object.prototype.hasOwnProperty.call(s, p))
+                        t[p] = s[p];
+            }
+            return t;
+        };
+        return __assign.apply(this, arguments);
+    };
+    function __decorate(decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+            r = Reflect.decorate(decorators, target, key, desc);
+        else
+            for (var i = decorators.length - 1; i >= 0; i--)
+                if (d = decorators[i])
+                    r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    }
+    function __metadata(metadataKey, metadataValue) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+            return Reflect.metadata(metadataKey, metadataValue);
+    }
+    function __values(o) {
+        var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+        if (m)
+            return m.call(o);
+        return {
+            next: function () {
+                if (o && i >= o.length)
+                    o = void 0;
+                return { value: o && o[i++], done: !o };
+            }
+        };
+    }
+    function __read(o, n) {
+        var m = typeof Symbol === "function" && o[Symbol.iterator];
+        if (!m)
+            return o;
+        var i = m.call(o), r, ar = [], e;
+        try {
+            while ((n === void 0 || n-- > 0) && !(r = i.next()).done)
+                ar.push(r.value);
+        }
+        catch (error) {
+            e = { error: error };
+        }
+        finally {
+            try {
+                if (r && !r.done && (m = i["return"]))
+                    m.call(i);
+            }
+            finally {
+                if (e)
+                    throw e.error;
+            }
+        }
+        return ar;
+    }
+    function __spread() {
+        for (var ar = [], i = 0; i < arguments.length; i++)
+            ar = ar.concat(__read(arguments[i]));
+        return ar;
+    }
 
     /**
      * @fileoverview added by tsickle
@@ -5457,6 +5462,7 @@
             this._state = _state;
             this.cdRef = cdRef;
             this.dropupDefault = false;
+            this._destroy$ = new rxjs.Subject();
             this._isInlineOpen = false;
             this._subscriptions = [];
             this._isInited = false;
@@ -5602,19 +5608,21 @@
                      */function () { return _this.show(); }),
                 });
                 // toggle visibility on toggle element click
-                this._subscriptions.push(this._state.toggleClick.subscribe(( /**
-                 * @param {?} value
-                 * @return {?}
-                 */function (value) { return _this.toggle(value); })));
+                this._state.toggleClick
+                    .pipe(operators.takeUntil(this._destroy$))
+                    .subscribe(( /**
+             * @param {?} value
+             * @return {?}
+             */function (value) { return _this.toggle(value); }));
                 // hide dropdown if set disabled while opened
-                this._subscriptions.push(this._state.isDisabledChange.subscribe(( /**
+                this._state.isDisabledChange.pipe(operators.takeUntil(this._destroy$)).subscribe(( /**
                  * @param {?} element
                  * @return {?}
                  */function (element) {
                     if (element === true) {
                         _this.hide();
                     }
-                })));
+                }));
                 // attach dropdown menu inside of dropdown
                 if (this._showInline) {
                     this._state.dropdownMenu.then(( /**
@@ -5624,7 +5632,7 @@
                         _this._inlinedMenu = dropdownMenu.viewContainer.createEmbeddedView(dropdownMenu.templateRef);
                     }));
                 }
-                this._state.isOpenChange.subscribe(( /**
+                this._state.isOpenChange.pipe(operators.takeUntil(this._destroy$)).subscribe(( /**
                  * @return {?}
                  */function () {
                     setTimeout(( /**
@@ -5831,27 +5839,9 @@
          * @return {?}
          */
             function () {
-                var e_1, _a;
-                try {
-                    // clean up subscriptions and destroy dropdown
-                    for (var _b = __values(this._subscriptions), _c = _b.next(); !_c.done; _c = _b.next()) {
-                        var sub = _c.value;
-                        sub.unsubscribe();
-                    }
-                }
-                catch (e_1_1) {
-                    e_1 = { error: e_1_1 };
-                }
-                finally {
-                    try {
-                        if (_c && !_c.done && (_a = _b.return))
-                            _a.call(_b);
-                    }
-                    finally {
-                        if (e_1)
-                            throw e_1.error;
-                    }
-                }
+                // clean up subscriptions and destroy dropdown
+                this._destroy$.next();
+                this._destroy$.complete();
                 this._dropdown.dispose();
             };
         BsDropdownDirective.decorators = [
@@ -9071,6 +9061,7 @@
             this.collapseId = 'navbarCollapse';
             this.scrollSensitivity = 120;
             this.scrollableNavbar = false;
+            this._destroy$ = new rxjs.Subject();
             this.shown = false;
             this.duration = 350; // ms
             // ms
@@ -9079,11 +9070,13 @@
             this.collapsing = false;
             this._itemsLength = 0;
             this.ariaExpanded = false;
-            // tslint:disable-next-line:max-line-length
-            this.subscription = this._navbarService.getNavbarLinkClicks().subscribe(( /**
-             * @param {?} navbarLinkClicks
-             * @return {?}
-             */function (navbarLinkClicks) {
+            this._navbarService
+                .getNavbarLinkClicks()
+                .pipe(operators.takeUntil(this._destroy$))
+                .subscribe(( /**
+         * @param {?} navbarLinkClicks
+         * @return {?}
+         */function (navbarLinkClicks) {
                 _this.closeNavbarOnClick(navbarLinkClicks);
             }));
         }
@@ -9136,9 +9129,11 @@
                 this._ngZone.runOutsideAngular(( /**
                  * @return {?}
                  */function () {
-                    rxjs.fromEvent(_this._document, 'scroll').subscribe(( /**
-                     * @return {?}
-                     */function () {
+                    rxjs.fromEvent(_this._document, 'scroll')
+                        .pipe(operators.takeUntil(_this._destroy$))
+                        .subscribe(( /**
+                 * @return {?}
+                 */function () {
                         if (window.pageYOffset > _this.scrollSensitivity) {
                             _this.renderer.addClass(_this.navbar.nativeElement, 'top-nav-collapse');
                         }
@@ -9340,6 +9335,16 @@
                     this._itemsLength = this.el.nativeElement.firstElementChild.firstElementChild.children.length;
                 }
                 this._cdRef.markForCheck();
+            };
+        /**
+         * @return {?}
+         */
+        NavbarComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+            function () {
+                this._destroy$.next();
+                this._destroy$.complete();
             };
         NavbarComponent.decorators = [
             { type: i0.Component, args: [{
@@ -9855,6 +9860,7 @@
             this._el = _el;
             this.animationDuration = 200;
             this.transitionEnd = new i0.EventEmitter();
+            this._destroy$ = new rxjs.Subject();
         }
         /**
          * @return {?}
@@ -9885,24 +9891,39 @@
                 this._renderer.setStyle(this._el.nativeElement, 'position', 'fixed');
                 this._renderer.setStyle(this._el.nativeElement, 'top', '0');
                 this._renderer.setStyle(this._el.nativeElement, 'width', '100%');
+                this._renderer.setStyle(this._el.nativeElement, 'z-index', '1030');
                 setTimeout(( /**
                  * @return {?}
                  */function () {
-                    _this.scrollUp$.pipe(operators.skip(0)).subscribe(( /**
-                     * @return {?}
-                     */function () {
+                    _this.scrollUp$
+                        .pipe(operators.skip(0), operators.takeUntil(_this._destroy$))
+                        .subscribe(( /**
+                 * @return {?}
+                 */function () {
                         _this._renderer.setStyle(_this._el.nativeElement, 'transition', "all " + _this.animationDuration + "ms ease-in");
                         _this._renderer.setStyle(_this._el.nativeElement, 'transform', 'translateY(0%)');
                         _this.transitionEnd.emit({ state: 'Visible' });
                     }));
-                    _this.scrollDown$.pipe(operators.skip(0)).subscribe(( /**
-                     * @return {?}
-                     */function () {
+                    _this.scrollDown$
+                        .pipe(operators.skip(0), operators.takeUntil(_this._destroy$))
+                        .subscribe(( /**
+                 * @return {?}
+                 */function () {
                         _this._renderer.setStyle(_this._el.nativeElement, 'transition', "all " + _this.animationDuration + "ms ease-in");
                         _this._renderer.setStyle(_this._el.nativeElement, 'transform', 'translateY(-100%)');
                         _this.transitionEnd.emit({ state: 'Hidden' });
                     }));
                 }), 0);
+            };
+        /**
+         * @return {?}
+         */
+        StickyHeaderDirective.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+            function () {
+                this._destroy$.next();
+                this._destroy$.complete();
             };
         StickyHeaderDirective.decorators = [
             { type: i0.Directive, args: [{
@@ -10095,9 +10116,11 @@
                      * @param {?} key
                      * @return {?}
                      */function (key) {
-                        if (keys.includes(key)) {
-                            if (obj[key].toLowerCase().includes(searchKey)) {
-                                return obj[key];
+                        if (obj[key]) {
+                            if (keys.includes(key)) {
+                                if (obj[key].toLowerCase().includes(searchKey)) {
+                                    return obj[key];
+                                }
                             }
                         }
                     }));
@@ -10131,10 +10154,12 @@
                             var flag = false;
                             if (keys !== undefined) {
                                 for (var prop in x) {
-                                    if (keys.includes(prop)) {
-                                        if (x[prop].toLowerCase().indexOf(item) !== -1) {
-                                            flag = true;
-                                            break;
+                                    if (x[prop]) {
+                                        if (keys.includes(prop)) {
+                                            if (x[prop].toLowerCase().indexOf(item) !== -1) {
+                                                flag = true;
+                                                break;
+                                            }
                                         }
                                     }
                                 }
@@ -10795,6 +10820,7 @@
             this.dashKeyword = '-';
             this.paginationAlign = '';
             this.hideDescription = false;
+            this._destroy$ = new rxjs.Subject();
             this.maxVisibleItems = 10;
             this.firstItemIndex = 0;
             this.lastItemIndex = this.maxVisibleItems;
@@ -10830,10 +10856,13 @@
             function () {
                 var _this = this;
                 if (this.tableEl) {
-                    this.tableEl.dataSourceChange().subscribe(( /**
-                     * @param {?} data
-                     * @return {?}
-                     */function (data) {
+                    this.tableEl
+                        .dataSourceChange()
+                        .pipe(operators.takeUntil(this._destroy$))
+                        .subscribe(( /**
+                 * @param {?} data
+                 * @return {?}
+                 */function (data) {
                         _this.allItemsLength = data.length;
                         _this.lastVisibleItemIndex = data.length;
                         _this.calculateFirstItemIndex();
@@ -10851,10 +10880,12 @@
                         }
                     }));
                 }
-                this.paginationChange().subscribe(( /**
-                 * @param {?} data
-                 * @return {?}
-                 */function (data) {
+                this.paginationChange()
+                    .pipe(operators.takeUntil(this._destroy$))
+                    .subscribe(( /**
+             * @param {?} data
+             * @return {?}
+             */function (data) {
                     _this.firstItemIndex = data.first;
                     _this.lastVisibleItemIndex = data.last;
                 }));
@@ -11105,6 +11136,16 @@
                     return true;
                 }
             };
+        /**
+         * @return {?}
+         */
+        MdbTablePaginationComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+            function () {
+                this._destroy$.next();
+                this._destroy$.complete();
+            };
         MdbTablePaginationComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'mdb-table-pagination',
@@ -11282,6 +11323,7 @@
             this.dynamicPosition = true;
             this.delay = 0;
             this.fadeDuration = 150;
+            this._destroy$ = new rxjs.Subject();
             this.isBrowser = false;
             this.isBrowser = common.isPlatformBrowser(this.platformId);
             this._tooltip = cis
@@ -11331,7 +11373,7 @@
                      * @return {?}
                      */function () { return _this.show(); }),
                 });
-                this.tooltipChange.subscribe(( /**
+                this.tooltipChange.pipe(operators.takeUntil(this._destroy$)).subscribe(( /**
                  * @param {?} value
                  * @return {?}
                  */function (value) {
@@ -11486,6 +11528,8 @@
          */
             function () {
                 this._tooltip.dispose();
+                this._destroy$.next();
+                this._destroy$.complete();
             };
         TooltipDirective.decorators = [
             { type: i0.Directive, args: [{
@@ -14679,6 +14723,7 @@
             this.document = document;
             this.ngModelChange = new i0.EventEmitter();
             this.clearBtnClicked = new i0.EventEmitter();
+            this._destroy$ = new rxjs.Subject();
             this._canOpenOnFocus = true;
             this.utils = new Utils$1();
             this._onChange = ( /**
@@ -15031,10 +15076,13 @@
          */
             function () {
                 var _this = this;
-                this.mdbAutoCompleter.selectedItemChanged().subscribe(( /**
-                 * @param {?} item
-                 * @return {?}
-                 */function (item) {
+                this.mdbAutoCompleter
+                    .selectedItemChanged()
+                    .pipe(operators.takeUntil(this._destroy$))
+                    .subscribe(( /**
+             * @param {?} item
+             * @return {?}
+             */function (item) {
                     /** @type {?} */
                     var displayedValue = _this.mdbAutoCompleter && _this.mdbAutoCompleter.displayValue
                         ? _this.mdbAutoCompleter.displayValue(item.text)
@@ -15053,10 +15101,13 @@
                     }
                 }));
                 this.mdbAutoCompleter.origin = this.el;
-                this.mdbAutoCompleter.isDropdownOpen().subscribe(( /**
-                 * @param {?} state
-                 * @return {?}
-                 */function (state) {
+                this.mdbAutoCompleter
+                    .isDropdownOpen()
+                    .pipe(operators.takeUntil(this._destroy$))
+                    .subscribe(( /**
+             * @param {?} state
+             * @return {?}
+             */function (state) {
                     if (state) {
                         _this._appendDropdownToInput();
                     }
@@ -15152,6 +15203,8 @@
                 if (this.listenFunc) {
                     this.listenFunc();
                 }
+                this._destroy$.next();
+                this._destroy$.complete();
             };
         /**
          * @param {?} value
@@ -16922,8 +16975,8 @@
     CalToggle[CalToggle.CloseByOutClick] = 'CloseByOutClick';
     /** @enum {number} */
     var Year = {
-        min: 1000,
-        max: 9999,
+        min: new Date().getFullYear() - 7,
+        max: new Date().getFullYear() + 7,
     };
     Year[Year.min] = 'min';
     Year[Year.max] = 'max';
@@ -17248,10 +17301,6 @@
             function () {
                 var _this = this;
                 /** @type {?} */
-                var thisYear = new Date();
-                /** @type {?} */
-                var currentYear = thisYear.getFullYear();
-                /** @type {?} */
                 var options = Object.assign({}, this._globalOptions, this.options);
                 if (options && options !== undefined) {
                     Object.keys(options).forEach(( /**
@@ -17263,12 +17312,6 @@
                 }
                 if (this.disabled !== undefined) {
                     this.opts.componentDisabled = this.disabled;
-                }
-                if (this.opts.minYear === 1000) {
-                    this.opts.minYear = currentYear - 7;
-                }
-                if (this.opts.maxYear === 9999) {
-                    this.opts.maxYear = currentYear + 7;
                 }
             };
         /**
@@ -19280,6 +19323,7 @@
         function MDBFileDropDirective(platform_id, elementRef) {
             this.platform_id = platform_id;
             this.elementRef = elementRef;
+            this._destroy$ = new rxjs.Subject();
             this.isServer = common.isPlatformServer(this.platform_id);
             this.stopEvent = ( /**
              * @param {?} e
@@ -19309,7 +19353,7 @@
                 var maxUploads = (this.options && this.options.maxUploads) || Number.POSITIVE_INFINITY;
                 this.upload = new MDBUploaderService(concurrency, allowedContentTypes, maxUploads);
                 this.el = this.elementRef.nativeElement;
-                this.upload.serviceEvents.subscribe(( /**
+                this.upload.serviceEvents.pipe(operators.takeUntil(this._destroy$)).subscribe(( /**
                  * @param {?} event
                  * @return {?}
                  */function (event) {
@@ -19336,6 +19380,8 @@
                 if (this.uploadInput) {
                     this.uploadInput.unsubscribe();
                 }
+                this._destroy$.next();
+                this._destroy$.complete();
             };
         /**
          * @param {?} e
@@ -19421,6 +19467,7 @@
             var _this = this;
             this.platform_id = platform_id;
             this.elementRef = elementRef;
+            this._destroy$ = new rxjs.Subject();
             this.isServer = common.isPlatformServer(this.platform_id);
             this.fileListener = ( /**
              * @return {?}
@@ -19450,7 +19497,7 @@
                 this.upload = new MDBUploaderService(concurrency, allowedContentTypes, maxUploads);
                 this.el = this.elementRef.nativeElement;
                 this.el.addEventListener('change', this.fileListener, false);
-                this.upload.serviceEvents.subscribe(( /**
+                this.upload.serviceEvents.pipe(operators.takeUntil(this._destroy$)).subscribe(( /**
                  * @param {?} event
                  * @return {?}
                  */function (event) {
@@ -19476,6 +19523,8 @@
                 if (this.uploadInput) {
                     this.uploadInput.unsubscribe();
                 }
+                this._destroy$.next();
+                this._destroy$.complete();
             };
         MDBFileSelectDirective.decorators = [
             { type: i0.Component, args: [{
@@ -21971,6 +22020,7 @@
                 this.hasSelected = true;
                 if (!value && value !== 0) {
                     this.clearSelection();
+                    this.hasSelected = false;
                 }
                 if (this.label) {
                     this.updateLabelState();
@@ -30257,6 +30307,29 @@
                 return { left: left, top: top };
             };
         /**
+         * @private
+         * @param {?} value
+         * @return {?}
+         */
+        ClockPickerComponent.prototype._getFormattedTime = /**
+         * @private
+         * @param {?} value
+         * @return {?}
+         */
+            function (value) {
+                /** @type {?} */
+                var timeArr = value.split(':');
+                /** @type {?} */
+                var minutesVal = timeArr[1];
+                /** @type {?} */
+                var h = timeArr[0];
+                /** @type {?} */
+                var m = minutesVal.slice(0, 2);
+                /** @type {?} */
+                var ampm = minutesVal.length > 2 ? minutesVal.slice(-2) : '';
+                return { h: h, m: m, ampm: ampm };
+            };
+        /**
          * @param {?} value
          * @return {?}
          */
@@ -30265,7 +30338,18 @@
          * @return {?}
          */
             function (value) {
-                this.endHours = value;
+                if (value) {
+                    this.showHours = true;
+                    /** @type {?} */
+                    var time = this._getFormattedTime(value);
+                    this.setHour(time.h);
+                    this.setMinute(time.m);
+                    this.setAmPm(time.ampm);
+                    this.endHours = value;
+                }
+                else {
+                    this.clearTimeInput();
+                }
                 this._cdRef.markForCheck();
             };
         /**
@@ -30365,6 +30449,607 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var MdbTreeComponent = /** @class */ (function () {
+        function MdbTreeComponent(_cdRef) {
+            this._cdRef = _cdRef;
+            this.checked = new i0.EventEmitter();
+            this.checkedKeys = new i0.EventEmitter();
+            this.nodesChanged = new i0.EventEmitter();
+            this.checkboxes = false;
+            this.toggleOnTitleClick = false;
+            this._expandAll = false;
+            this.checkedValues = [];
+            this.toggle = {};
+        }
+        Object.defineProperty(MdbTreeComponent.prototype, "expandAll", {
+            set: /**
+             * @param {?} value
+             * @return {?}
+             */ function (value) {
+                this._expandAll = value;
+                this.toggleExpandAll();
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * @return {?}
+         */
+        MdbTreeComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                this.toggleExpandAll();
+                this._setInitialCheckedKeys();
+            };
+        /**
+         * @return {?}
+         */
+        MdbTreeComponent.prototype.toggleExpandAll = /**
+         * @return {?}
+         */
+            function () {
+                if (this._expandAll) {
+                    this.expandAllNodes();
+                }
+                else if (!this._expandAll) {
+                    this.closeAllNodes();
+                }
+            };
+        /**
+         * @return {?}
+         */
+        MdbTreeComponent.prototype.expandAllNodes = /**
+         * @return {?}
+         */
+            function () {
+                var e_1, _a;
+                try {
+                    for (var _b = __values(this.nodes.entries()), _c = _b.next(); !_c.done; _c = _b.next()) {
+                        var _d = __read(_c.value, 2), index = _d[0], node = _d[1];
+                        /** @type {?} */
+                        var idx = index;
+                        this.toggle[idx] = true;
+                        if (node[this.childrenField] && node[this.childrenField].length > 0) {
+                            this._expandAllChildren(node, idx);
+                        }
+                    }
+                }
+                catch (e_1_1) {
+                    e_1 = { error: e_1_1 };
+                }
+                finally {
+                    try {
+                        if (_c && !_c.done && (_a = _b.return))
+                            _a.call(_b);
+                    }
+                    finally {
+                        if (e_1)
+                            throw e_1.error;
+                    }
+                }
+            };
+        /**
+         * @return {?}
+         */
+        MdbTreeComponent.prototype.closeAllNodes = /**
+         * @return {?}
+         */
+            function () {
+                var e_2, _a;
+                try {
+                    for (var _b = __values(this.nodes.entries()), _c = _b.next(); !_c.done; _c = _b.next()) {
+                        var _d = __read(_c.value, 2), index = _d[0], node = _d[1];
+                        /** @type {?} */
+                        var idx = index;
+                        this.toggle[idx] = false;
+                        if (node[this.childrenField] && node[this.childrenField].length > 0) {
+                            this._closeAllChildren(node, idx);
+                        }
+                    }
+                }
+                catch (e_2_1) {
+                    e_2 = { error: e_2_1 };
+                }
+                finally {
+                    try {
+                        if (_c && !_c.done && (_a = _b.return))
+                            _a.call(_b);
+                    }
+                    finally {
+                        if (e_2)
+                            throw e_2.error;
+                    }
+                }
+            };
+        /**
+         * @private
+         * @param {?} node
+         * @param {?} idx
+         * @return {?}
+         */
+        MdbTreeComponent.prototype._expandAllChildren = /**
+         * @private
+         * @param {?} node
+         * @param {?} idx
+         * @return {?}
+         */
+            function (node, idx) {
+                var e_3, _a;
+                try {
+                    for (var _b = __values(node[this.childrenField].entries()), _c = _b.next(); !_c.done; _c = _b.next()) {
+                        var _d = __read(_c.value, 2), childIndex = _d[0], childNode = _d[1];
+                        /** @type {?} */
+                        var childIdx = idx + '_' + childIndex;
+                        this.toggle[childIdx] = true;
+                        if (childNode[this.childrenField] && childNode[this.childrenField].length > 0) {
+                            this._expandAllChildren(childNode, childIdx);
+                        }
+                    }
+                }
+                catch (e_3_1) {
+                    e_3 = { error: e_3_1 };
+                }
+                finally {
+                    try {
+                        if (_c && !_c.done && (_a = _b.return))
+                            _a.call(_b);
+                    }
+                    finally {
+                        if (e_3)
+                            throw e_3.error;
+                    }
+                }
+            };
+        /**
+         * @private
+         * @param {?} node
+         * @param {?} idx
+         * @return {?}
+         */
+        MdbTreeComponent.prototype._closeAllChildren = /**
+         * @private
+         * @param {?} node
+         * @param {?} idx
+         * @return {?}
+         */
+            function (node, idx) {
+                var e_4, _a;
+                try {
+                    for (var _b = __values(node[this.childrenField].entries()), _c = _b.next(); !_c.done; _c = _b.next()) {
+                        var _d = __read(_c.value, 2), childIndex = _d[0], childNode = _d[1];
+                        /** @type {?} */
+                        var childIdx = idx + '_' + childIndex;
+                        this.toggle[childIdx] = false;
+                        if (childNode[this.childrenField] && childNode[this.childrenField].length > 0) {
+                            this._closeAllChildren(childNode, childIdx);
+                        }
+                    }
+                }
+                catch (e_4_1) {
+                    e_4 = { error: e_4_1 };
+                }
+                finally {
+                    try {
+                        if (_c && !_c.done && (_a = _b.return))
+                            _a.call(_b);
+                    }
+                    finally {
+                        if (e_4)
+                            throw e_4.error;
+                    }
+                }
+            };
+        /**
+         * @private
+         * @return {?}
+         */
+        MdbTreeComponent.prototype._setInitialCheckedKeys = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                var e_5, _a;
+                try {
+                    for (var _b = __values(this.nodes.entries()), _c = _b.next(); !_c.done; _c = _b.next()) {
+                        var _d = __read(_c.value, 2), index = _d[0], node = _d[1];
+                        if (node[this.checkboxesField]) {
+                            /** @type {?} */
+                            var idx = index;
+                            this.checkedValues.push(idx);
+                            if (node[this.childrenField] && node[this.childrenField].length > 0) {
+                                this._hasInitialCheckedKeysChildren(node[this.childrenField], idx);
+                            }
+                        }
+                    }
+                }
+                catch (e_5_1) {
+                    e_5 = { error: e_5_1 };
+                }
+                finally {
+                    try {
+                        if (_c && !_c.done && (_a = _b.return))
+                            _a.call(_b);
+                    }
+                    finally {
+                        if (e_5)
+                            throw e_5.error;
+                    }
+                }
+            };
+        /**
+         * @private
+         * @param {?} childrenNode
+         * @param {?} i
+         * @return {?}
+         */
+        MdbTreeComponent.prototype._hasInitialCheckedKeysChildren = /**
+         * @private
+         * @param {?} childrenNode
+         * @param {?} i
+         * @return {?}
+         */
+            function (childrenNode, i) {
+                var e_6, _a;
+                try {
+                    for (var _b = __values(childrenNode.entries()), _c = _b.next(); !_c.done; _c = _b.next()) {
+                        var _d = __read(_c.value, 2), childrenIdx = _d[0], node = _d[1];
+                        /** @type {?} */
+                        var idx = childrenIdx + '_' + i;
+                        if (node[this.checkboxesField]) {
+                            this.checkedValues.push(idx);
+                        }
+                        if (node[this.childrenField] && node[this.childrenField].length > 0) {
+                            this._hasInitialCheckedKeysChildren(node[this.childrenField], idx);
+                        }
+                    }
+                }
+                catch (e_6_1) {
+                    e_6 = { error: e_6_1 };
+                }
+                finally {
+                    try {
+                        if (_c && !_c.done && (_a = _b.return))
+                            _a.call(_b);
+                    }
+                    finally {
+                        if (e_6)
+                            throw e_6.error;
+                    }
+                }
+            };
+        /**
+         * @param {?} i
+         * @return {?}
+         */
+        MdbTreeComponent.prototype.toggleByNode = /**
+         * @param {?} i
+         * @return {?}
+         */
+            function (i) {
+                var e_7, _a;
+                try {
+                    for (var _b = __values(this.nodes.entries()), _c = _b.next(); !_c.done; _c = _b.next()) {
+                        var _d = __read(_c.value, 2), index = _d[0], node = _d[1];
+                        if (node[this.childrenField] && node[this.childrenField].length > 0) {
+                            /** @type {?} */
+                            var idx = index;
+                            /** @type {?} */
+                            var toggleIdx = i;
+                            if (idx === toggleIdx) {
+                                this.toggle[idx] = !this.toggle[idx];
+                                this._cdRef.markForCheck();
+                            }
+                            else {
+                                this._childrenToggleByNode(node, idx, toggleIdx);
+                            }
+                        }
+                    }
+                }
+                catch (e_7_1) {
+                    e_7 = { error: e_7_1 };
+                }
+                finally {
+                    try {
+                        if (_c && !_c.done && (_a = _b.return))
+                            _a.call(_b);
+                    }
+                    finally {
+                        if (e_7)
+                            throw e_7.error;
+                    }
+                }
+            };
+        /**
+         * @private
+         * @param {?} node
+         * @param {?} i
+         * @param {?} toggleIdx
+         * @return {?}
+         */
+        MdbTreeComponent.prototype._childrenToggleByNode = /**
+         * @private
+         * @param {?} node
+         * @param {?} i
+         * @param {?} toggleIdx
+         * @return {?}
+         */
+            function (node, i, toggleIdx) {
+                var e_8, _a;
+                try {
+                    for (var _b = __values(node[this.childrenField].entries()), _c = _b.next(); !_c.done; _c = _b.next()) {
+                        var _d = __read(_c.value, 2), childIndex = _d[0], childNode = _d[1];
+                        /** @type {?} */
+                        var nodeHasChildren = childNode[this.childrenField] && childNode[this.childrenField].length > 0;
+                        if (nodeHasChildren) {
+                            /** @type {?} */
+                            var idx = i + '_' + childIndex;
+                            if (idx === toggleIdx) {
+                                this.toggle[idx] = !this.toggle[idx];
+                                this._cdRef.markForCheck();
+                            }
+                            else {
+                                this._childrenToggleByNode(childNode, idx, toggleIdx);
+                            }
+                        }
+                        else {
+                            return;
+                        }
+                    }
+                }
+                catch (e_8_1) {
+                    e_8 = { error: e_8_1 };
+                }
+                finally {
+                    try {
+                        if (_c && !_c.done && (_a = _b.return))
+                            _a.call(_b);
+                    }
+                    finally {
+                        if (e_8)
+                            throw e_8.error;
+                    }
+                }
+            };
+        /**
+         * @param {?} e
+         * @param {?} node
+         * @param {?} i
+         * @return {?}
+         */
+        MdbTreeComponent.prototype.onKeydownCheckbox = /**
+         * @param {?} e
+         * @param {?} node
+         * @param {?} i
+         * @return {?}
+         */
+            function (e, node, i) {
+                // tslint:disable-next-line: deprecation
+                if (e.keyCode === SPACE || e.keyCode === ENTER) {
+                    e.preventDefault();
+                    this.checkNodes(node);
+                    this.updateNodesCheckedValues(node, i);
+                }
+            };
+        /**
+         * @param {?} e
+         * @param {?} i
+         * @return {?}
+         */
+        MdbTreeComponent.prototype.onKeydown = /**
+         * @param {?} e
+         * @param {?} i
+         * @return {?}
+         */
+            function (e, i) {
+                // tslint:disable-next-line: deprecation
+                if (e.keyCode === SPACE || e.keyCode === ENTER) {
+                    e.preventDefault();
+                    this.toggle[i] = !this.toggle[i];
+                }
+            };
+        /**
+         * @param {?} node
+         * @return {?}
+         */
+        MdbTreeComponent.prototype.checkNodes = /**
+         * @param {?} node
+         * @return {?}
+         */
+            function (node) {
+                var _this = this;
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
+                    node[_this.checkboxesField] = !node[_this.checkboxesField];
+                    _this.checked.emit(node);
+                    _this.nodesChanged.emit(_this.nodes);
+                }), 0);
+                /** @type {?} */
+                var nodeHasChildren = node[this.childrenField] && node[this.childrenField].length > 0;
+                if (nodeHasChildren) {
+                    this._checkChildNodes(node[this.childrenField], !node[this.checkboxesField]);
+                }
+                this._cdRef.markForCheck();
+            };
+        /**
+         * @private
+         * @param {?} children
+         * @param {?} checked
+         * @return {?}
+         */
+        MdbTreeComponent.prototype._checkChildNodes = /**
+         * @private
+         * @param {?} children
+         * @param {?} checked
+         * @return {?}
+         */
+            function (children, checked) {
+                var _this = this;
+                children.forEach(( /**
+                 * @param {?} childNode
+                 * @return {?}
+                 */function (childNode) {
+                    if (childNode[_this.checkboxesField] !== undefined) {
+                        childNode[_this.checkboxesField] = checked;
+                        /** @type {?} */
+                        var nodeHasChildren = childNode[_this.childrenField] && childNode[_this.childrenField].length > 0;
+                        if (nodeHasChildren) {
+                            _this._checkChildNodes(childNode[_this.childrenField], checked);
+                        }
+                    }
+                }));
+            };
+        /**
+         * @param {?} node
+         * @param {?} idx
+         * @return {?}
+         */
+        MdbTreeComponent.prototype.updateNodesCheckedValues = /**
+         * @param {?} node
+         * @param {?} idx
+         * @return {?}
+         */
+            function (node, idx) {
+                var _this = this;
+                setTimeout(( /**
+                 * @return {?}
+                 */function () {
+                    if (node[_this.checkboxesField] && !_this.checkedValues.includes(idx)) {
+                        _this.checkedValues.push(idx);
+                    }
+                    else if (!node[_this.checkboxesField] && _this.checkedValues.includes(idx)) {
+                        /** @type {?} */
+                        var removeIndex = _this.checkedValues.findIndex(( /**
+                         * @param {?} e
+                         * @return {?}
+                         */function (e) { return e === idx; }));
+                        if (removeIndex !== -1) {
+                            _this.checkedValues.splice(removeIndex, 1);
+                        }
+                    }
+                    /** @type {?} */
+                    var nodeHasChildren = node[_this.childrenField] && node[_this.childrenField].length > 0;
+                    if (nodeHasChildren) {
+                        _this._updateChildNodesCheckedValues(node[_this.childrenField], idx);
+                    }
+                    _this.checkedKeys.emit(_this.checkedValues);
+                }), 0);
+            };
+        /**
+         * @private
+         * @param {?} childrenNode
+         * @param {?} childrenIdx
+         * @return {?}
+         */
+        MdbTreeComponent.prototype._updateChildNodesCheckedValues = /**
+         * @private
+         * @param {?} childrenNode
+         * @param {?} childrenIdx
+         * @return {?}
+         */
+            function (childrenNode, childrenIdx) {
+                var e_9, _a;
+                var _loop_1 = function (index, node) {
+                    /** @type {?} */
+                    var idx = childrenIdx + '_' + index;
+                    if (node[this_1.checkboxesField] && !this_1.checkedValues.includes(idx)) {
+                        this_1.checkedValues.push(idx);
+                    }
+                    else if (!node[this_1.checkboxesField] && this_1.checkedValues.includes(idx)) {
+                        /** @type {?} */
+                        var removeIndex = this_1.checkedValues.findIndex(( /**
+                         * @param {?} e
+                         * @return {?}
+                         */function (e) { return e === idx; }));
+                        if (removeIndex !== -1) {
+                            this_1.checkedValues.splice(removeIndex, 1);
+                        }
+                    }
+                    /** @type {?} */
+                    var nodeHasChildren = node[this_1.childrenField] && node[this_1.childrenField].length > 0;
+                    if (nodeHasChildren) {
+                        this_1._updateChildNodesCheckedValues(node[this_1.childrenField], idx);
+                    }
+                };
+                var this_1 = this;
+                try {
+                    for (var _b = __values(childrenNode.entries()), _c = _b.next(); !_c.done; _c = _b.next()) {
+                        var _d = __read(_c.value, 2), index = _d[0], node = _d[1];
+                        _loop_1(index, node);
+                    }
+                }
+                catch (e_9_1) {
+                    e_9 = { error: e_9_1 };
+                }
+                finally {
+                    try {
+                        if (_c && !_c.done && (_a = _b.return))
+                            _a.call(_b);
+                    }
+                    finally {
+                        if (e_9)
+                            throw e_9.error;
+                    }
+                }
+            };
+        MdbTreeComponent.decorators = [
+            { type: i0.Component, args: [{
+                        // tslint:disable-next-line: component-selector
+                        selector: 'mdb-tree',
+                        template: "<!-- child nodes -->\n<ng-template #tree let-nodeChildren let-idx=\"idx\">\n  <ul class=\"mdb-tree-list\">\n    <li *ngFor=\"let node of nodeChildren; let n = index\" class=\"mdb-tree-list-node\">\n      <div class=\"mdb-tree-container\">\n        <div *ngIf=\"node[childrenField] && node[childrenField].length > 0; else emptyIcon\">\n          <span class=\"mdb-tree-icon-container\">\n            <i\n              tabindex=\"1\"\n              aria-hidden=\"true\"\n              [ngClass]=\"\n                toggle[idx + '_' + n] ? 'mdb-tree-rotate-icon-open' : 'mdb-tree-rotate-icon-closed'\n              \"\n              (keydown)=\"onKeydown($event, idx + '_' + n)\"\n              (click)=\"toggle[idx + '_' + n] = !toggle[idx + '_' + n]\"\n              class=\"mdb-tree-indicator \"\n            ></i>\n          </span>\n        </div>\n        <ng-template #emptyIcon\n          ><span class=\"mdb-tree-icon-container\"\n            ><i class=\"mdb-tree-empty-icon\" style=\"display: block\" aria-hidden=\"true\"></i\n          ></span>\n        </ng-template>\n        <div\n          class=\"mdb-tree-checkbox-container\"\n          *ngIf=\"checkboxes && node[checkboxesField] !== undefined\"\n        >\n          <mdb-checkbox\n            class=\"checkbox-filled\"\n            [filledIn]=\"true\"\n            [tabIndex]=\"1\"\n            [attr.id]=\"node[textField]\"\n            (keydown)=\"onKeydownCheckbox($event, node, idx + '_' + n)\"\n            (click)=\"checkNodes(node); updateNodesCheckedValues(node, idx + '_' + n)\"\n            [checked]=\"node[checkboxesField]\"\n          ></mdb-checkbox>\n        </div>\n        <div *ngIf=\"checkboxes && node[checkboxesField] === undefined\">\n          <div class=\"mdb-tree-checkbox-null-container\"></div>\n        </div>\n\n        <div\n          *ngIf=\"toggleOnTitleClick\"\n          class=\"mdb-tree-text-field\"\n          [ngStyle]=\"{\n            cursor: node[childrenField] && node[childrenField].length > 0 ? 'pointer' : 'default'\n          }\"\n          (click)=\"toggle[idx + '_' + n] = !toggle[idx + '_' + n]\"\n        >\n          {{ node[textField] }}\n        </div>\n\n        <div *ngIf=\"!toggleOnTitleClick\" class=\"mdb-tree-text-field mdb-tree-text-ellipsis\">\n          {{ node[textField] }}\n        </div>\n      </div>\n      <div *ngIf=\"node[childrenField] && toggle[idx + '_' + n]\">\n        <ng-container\n          *ngTemplateOutlet=\"tree; context: { $implicit: node[childrenField], idx: idx + '_' + n }\"\n        ></ng-container>\n      </div>\n    </li>\n  </ul>\n</ng-template>\n<!-- first nodes -->\n<ul class=\"mdb-tree-list\">\n  <li *ngFor=\"let node of nodes; let i = index\" class=\"mdb-tree-list-node\">\n    <div class=\"mdb-tree-container\">\n      <div *ngIf=\"node[childrenField] && node[childrenField].length > 0; else emptyIcon\">\n        <span class=\"mdb-tree-icon-container\">\n          <i\n            tabindex=\"1\"\n            aria-hidden=\"true\"\n            [ngClass]=\"toggle[i] ? 'mdb-tree-rotate-icon-open' : 'mdb-tree-rotate-icon-closed'\"\n            (keydown)=\"onKeydown($event, i)\"\n            (click)=\"toggle[i] = !toggle[i]\"\n            class=\"mdb-tree-indicator\"\n          ></i>\n        </span>\n      </div>\n      <ng-template #emptyIcon\n        ><span class=\"mdb-tree-icon-container\"\n          ><i class=\"mdb-tree-empty-icon\" style=\"display: block\" aria-hidden=\"true\"></i\n        ></span>\n      </ng-template>\n      <div\n        class=\"mdb-tree-checkbox-container\"\n        *ngIf=\"checkboxes && node[checkboxesField] !== undefined\"\n      >\n        <mdb-checkbox\n          class=\"checkbox-filled\"\n          [checked]=\"node[checkboxesField]\"\n          [filledIn]=\"true\"\n          [tabIndex]=\"1\"\n          [attr.id]=\"node[textField]\"\n          (keydown)=\"onKeydownCheckbox($event, node, i)\"\n          (click)=\"checkNodes(node); updateNodesCheckedValues(node, i)\"\n        ></mdb-checkbox>\n      </div>\n      <div *ngIf=\"checkboxes && node[checkboxesField] === undefined\">\n        <div class=\"mdb-tree-checkbox-null-container\"></div>\n      </div>\n\n      <div\n        *ngIf=\"toggleOnTitleClick\"\n        class=\"mdb-tree-text-field\"\n        [ngStyle]=\"{\n          cursor: node[childrenField] && node[childrenField].length > 0 ? 'pointer' : 'default'\n        }\"\n        (click)=\"toggle[i] = !toggle[i]\"\n      >\n        {{ node[textField] }}\n      </div>\n\n      <div *ngIf=\"!toggleOnTitleClick\" class=\"mdb-tree-text-field mdb-tree-text-ellipsis\">\n        {{ node[textField] }}\n      </div>\n    </div>\n    <div *ngIf=\"node[childrenField] && toggle[i]\">\n      <ng-container\n        *ngTemplateOutlet=\"tree; context: { $implicit: node[childrenField], idx: i }\"\n      ></ng-container>\n    </div>\n  </li>\n</ul>\n",
+                        encapsulation: i0.ViewEncapsulation.None,
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                        styles: [".mdb-tree-list{list-style-type:none;margin:0;padding:0}.mdb-tree-list-node{list-style-type:none;margin:.8rem .8rem .8rem .95rem}.mdb-tree-container{display:flex;min-width:230px}.mdb-tree-icon-container{display:inline-block;width:2rem;height:auto}.mdb-tree-empty-icon{cursor:default}.mdb-tree-text-field{margin-top:.15rem;max-width:90%;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}.mdb-tree-checkbox-null-container{min-width:2.2rem}.mdb-tree-indicator{position:relative;right:0;-webkit-transform-origin:50% 79%;transform-origin:50% 79%;display:inline-block;margin-right:0;margin-top:.025rem;cursor:pointer;font-size:1.3rem}.mdb-tree-indicator::after{content:'';display:block;border-style:solid;padding:5px;margin-top:.15rem;border-width:0 3px 3px 0;font-size:1.3rem;-webkit-transform:rotate(45deg);transform:rotate(45deg)}.mdb-tree-indicator:focus{color:#4285f4;outline:0}.mdb-tree-rotate-icon-open{-webkit-transform:rotate(0);transform:rotate(0)}.mdb-tree-rotate-icon-closed{-webkit-transform:rotate(270deg);transform:rotate(270deg)}.mdb-tree-checkbox-container{margin-top:.25rem}.mdb-tree-checkbox-container mdb-checkbox.checkbox-filled [type=checkbox][class*=filled-in]:checked+label:after{border-color:#4285f4;background-color:#4285f4}"]
+                    }] }
+        ];
+        /** @nocollapse */
+        MdbTreeComponent.ctorParameters = function () {
+            return [
+                { type: i0.ChangeDetectorRef }
+            ];
+        };
+        MdbTreeComponent.propDecorators = {
+            checked: [{ type: i0.HostBinding, args: ['class.mdb-tree',] }, { type: i0.Output }],
+            checkedKeys: [{ type: i0.Output }],
+            nodesChanged: [{ type: i0.Output }],
+            nodes: [{ type: i0.Input }],
+            textField: [{ type: i0.Input }],
+            childrenField: [{ type: i0.Input }],
+            checkboxesField: [{ type: i0.Input }],
+            expandAll: [{ type: i0.Input }],
+            checkboxes: [{ type: i0.Input }],
+            toggleOnTitleClick: [{ type: i0.Input }]
+        };
+        return MdbTreeComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var MdbTreeModule = /** @class */ (function () {
+        function MdbTreeModule() {
+        }
+        MdbTreeModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [common.CommonModule, CheckboxModule],
+                        declarations: [MdbTreeComponent],
+                        exports: [MdbTreeComponent],
+                    },] }
+        ];
+        return MdbTreeModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     /** @type {?} */
     var MODULES$1 = [
         AnimatedCardsModule,
@@ -30388,6 +31073,7 @@
         RangeModule,
         AutoCompleterModule,
         StepperModule,
+        MdbTreeModule,
     ];
     var MDBRootModulePro = /** @class */ (function () {
         function MDBRootModulePro() {
@@ -30415,6 +31101,7 @@
                             RangeModule,
                             AutoCompleterModule,
                             StepperModule,
+                            MdbTreeModule,
                         ],
                         exports: [MODULES$1],
                         providers: [],
@@ -30700,6 +31387,8 @@
     exports.TIME_PIRCKER_VALUE_ACCESSOT = TIME_PIRCKER_VALUE_ACCESSOT;
     exports.ClockPickerComponent = ClockPickerComponent;
     exports.TimePickerModule = TimePickerModule;
+    exports.MdbTreeComponent = MdbTreeComponent;
+    exports.MdbTreeModule = MdbTreeModule;
     exports.MDBBootstrapModulePro = MDBBootstrapModulePro;
     exports.MDBRootModules = MDBRootModules;
     exports.MDBBootstrapModulesPro = MDBBootstrapModulesPro;
@@ -30707,17 +31396,17 @@
     exports.ɵa = RADIO_CONTROL_VALUE_ACCESSOR;
     exports.ɵc = CHECKBOX_VALUE_ACCESSOR;
     exports.ɵd = CheckboxComponent;
-    exports.ɵdh = ComponentLoaderFactory;
-    exports.ɵdj = OnChange$1;
-    exports.ɵdi = PositioningService;
+    exports.ɵdj = ComponentLoaderFactory;
+    exports.ɵdl = OnChange$1;
+    exports.ɵdk = PositioningService;
     exports.ɵf = SBItemComponent;
     exports.ɵh = SBItemBodyComponent;
     exports.ɵg = SBItemHeadComponent;
     exports.ɵi = SqueezeBoxComponent;
     exports.ɵe = AccordionModule;
-    exports.ɵdk = MdbAccordionService;
-    exports.ɵdl = ToastRef$1;
-    exports.ɵdm = TOAST_CONFIG;
+    exports.ɵdm = MdbAccordionService;
+    exports.ɵdn = ToastRef$1;
+    exports.ɵdo = TOAST_CONFIG;
     exports.ɵu = AnimatedCardsModule;
     exports.ɵv = CardRevealComponent;
     exports.ɵw = CardRotatingComponent;
@@ -30755,15 +31444,15 @@
     exports.ɵbq = SELECT_VALUE_ACCESSOR;
     exports.ɵbr = SelectComponent;
     exports.ɵbt = SelectModule;
-    exports.ɵdg = MDBRootModulePro;
+    exports.ɵdi = MDBRootModulePro;
     exports.ɵbv = BarComponent;
     exports.ɵbu = ProgressBars;
-    exports.ɵdn = MdProgressBarModule;
-    exports.ɵdo = ProgressBarComponent;
-    exports.ɵdp = MdProgressSpinnerModule;
-    exports.ɵdr = MdProgressSpinnerComponent;
-    exports.ɵdq = MdProgressSpinnerCssMatStylerDirective;
-    exports.ɵds = MdSpinnerComponent;
+    exports.ɵdp = MdProgressBarModule;
+    exports.ɵdq = ProgressBarComponent;
+    exports.ɵdr = MdProgressSpinnerModule;
+    exports.ɵdt = MdProgressSpinnerComponent;
+    exports.ɵds = MdProgressSpinnerCssMatStylerDirective;
+    exports.ɵdu = MdSpinnerComponent;
     exports.ɵca = ProgressSpinnerComponent;
     exports.ɵbw = ProgressDirective;
     exports.ɵbx = ProgressbarComponent;
@@ -30798,6 +31487,8 @@
     exports.ɵcw = NgTranscludeDirective;
     exports.ɵde = ClockPickerComponent;
     exports.ɵdf = TimePickerModule;
+    exports.ɵdg = MdbTreeComponent;
+    exports.ɵdh = MdbTreeModule;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

@@ -7,6 +7,7 @@ export declare class MDBFileSelectDirective implements OnInit, OnDestroy {
     uploadInput: EventEmitter<any>;
     options: UploaderOptions;
     uploadOutput: EventEmitter<UploadOutput>;
+    private _destroy$;
     upload: MDBUploaderService;
     isServer: boolean;
     el: HTMLInputElement | any;
