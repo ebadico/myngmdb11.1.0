@@ -19,6 +19,7 @@ export declare class CarouselComponent implements OnDestroy, AfterViewInit {
     };
     _slidesList: QueryList<SlideComponent>;
     readonly slides: SlideComponent[];
+    private _destroy$;
     protected currentInterval: any;
     protected isPlaying: boolean;
     protected destroyed: boolean;

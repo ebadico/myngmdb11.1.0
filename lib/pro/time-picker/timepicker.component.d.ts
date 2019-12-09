@@ -78,6 +78,7 @@ export declare class ClockPickerComponent implements OnInit, AfterViewInit, Cont
         left: number;
         top: number;
     };
+    private _getFormattedTime;
     onChangeCb: (_: any) => void;
     onTouchedCb: () => void;
     writeValue(value: any): void;

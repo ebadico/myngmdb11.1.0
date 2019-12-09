@@ -1,4 +1,5 @@
 import { ModuleWithProviders } from '@angular/core';
+export { MdbTreeModule, MdbTreeComponent } from './tree-view/index';
 export { MdbStepperComponent, MdbStepComponent, StepperModule } from './stepper/index';
 export { MdbAutoCompleterComponent, MdbOptionComponent, MdbAutoCompleterDirective, AutoCompleterModule, MdbAutoCompleterOptionDirective, } from './auto-completer/index';
 export { RangeModule, MdbRangeInputComponent } from './range/index';

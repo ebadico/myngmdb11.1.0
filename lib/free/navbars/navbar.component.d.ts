@@ -1,8 +1,7 @@
 import { NavbarService } from './navbar.service';
-import { AfterContentChecked, AfterViewInit, ElementRef, OnInit, Renderer2, ChangeDetectorRef, NgZone } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { AfterContentChecked, AfterViewInit, ElementRef, OnInit, Renderer2, ChangeDetectorRef, NgZone, OnDestroy } from '@angular/core';
 import { LinksComponent } from './links.component';
-export declare class NavbarComponent implements AfterViewInit, OnInit, AfterContentChecked {
+export declare class NavbarComponent implements AfterViewInit, OnInit, AfterContentChecked, OnDestroy {
     renderer: Renderer2;
     private _navbarService;
     private _cdRef;
@@ -14,7 +13,7 @@ export declare class NavbarComponent implements AfterViewInit, OnInit, AfterCont
     collapseId: string;
     scrollSensitivity: number;
     scrollableNavbar: boolean;
-    subscription: Subscription;
+    private _destroy$;
     navbarLinkClicks: any;
     shown: boolean;
     doubleNav: boolean;
@@ -43,4 +42,5 @@ export declare class NavbarComponent implements AfterViewInit, OnInit, AfterCont
     readonly displayStyle: "" | "flex";
     onResize(event: any): void;
     ngAfterContentChecked(): void;
+    ngOnDestroy(): void;
 }
