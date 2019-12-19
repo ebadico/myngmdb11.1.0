@@ -24,6 +24,7 @@ export declare class MdbAutoCompleterDirective implements AfterViewInit, OnDestr
     handleMouseDown(): void;
     constructor(renderer: Renderer2, el: ElementRef, platformId: string, document: any);
     private _renderClearButton;
+    private _updateClearButtonVisibility;
     private _setStyles;
     private _addClass;
     private _clearInput;

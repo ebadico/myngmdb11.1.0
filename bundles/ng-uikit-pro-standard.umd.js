@@ -6286,9 +6286,6 @@
                 if (this.size) {
                     this.sizeClass = "fa-" + this.size;
                 }
-                if (this._el.nativeElement.parentElement.classList.contains('md-form')) {
-                    this._renderer.addClass(this._el.nativeElement, 'prefix');
-                }
                 /** @type {?} */
                 var classList = this._el.nativeElement.classList;
                 this.fab = classList.contains('fab');
@@ -6303,7 +6300,7 @@
                      * @param {?} el
                      * @return {?}
                      */function (el) {
-                        if (el.tagName === 'INPUT') {
+                        if (el.tagName === 'INPUT' || 'TEXTAREA') {
                             _this._renderer.listen(el, 'focus', ( /**
                              * @return {?}
                              */function () {
@@ -6532,7 +6529,7 @@
                         selector: 'mdb-error',
                         template: '<ng-content></ng-content>',
                         encapsulation: i0.ViewEncapsulation.None,
-                        styles: [".error-message{position:absolute;top:40px;left:0;font-size:.8rem;color:#f44336}.success-message{position:absolute;top:40px;left:0;font-size:.8rem;color:#00c851}"]
+                        styles: [".error-message,.success-message{position:absolute;bottom:-20px;left:0;top:unset;font-size:.8rem}.error-message{color:#f44336}.success-message{color:#00c851}"]
                     }] }
         ];
         /** @nocollapse */
@@ -6623,7 +6620,7 @@
                         selector: 'mdb-success',
                         template: '<ng-content></ng-content>',
                         encapsulation: i0.ViewEncapsulation.None,
-                        styles: [".error-message{position:absolute;top:40px;left:0;font-size:.8rem;color:#f44336}.success-message{position:absolute;top:40px;left:0;font-size:.8rem;color:#00c851}"]
+                        styles: [".error-message,.success-message{position:absolute;bottom:-20px;left:0;top:unset;font-size:.8rem}.error-message{color:#f44336}.success-message{color:#00c851}"]
                     }] }
         ];
         /** @nocollapse */
@@ -7580,9 +7577,6 @@
                         this._renderer.addClass(this.elLabel, 'active');
                     }
                     this.elIcon = inputP.querySelector('i') || false;
-                    if (this.elIcon) {
-                        this._renderer.addClass(this.elIcon, 'active');
-                    }
                 }
             };
         /**
@@ -11891,7 +11885,7 @@
                             sbItem.classList.remove('is-collapsed');
                         }
                         _this._cdRef.markForCheck();
-                    }), 0);
+                    }), 10);
                 }
                 else if (this.expandAnimationState !== 'collapsed' && activeLink) {
                     setTimeout(( /**
@@ -11903,7 +11897,7 @@
                             sbItem.classList.add('is-collapsed');
                         }
                         _this._cdRef.markForCheck();
-                    }), 0);
+                    }), 10);
                 }
             };
         /**
@@ -14765,13 +14759,7 @@
                 this._onChange(event.target.value);
                 this.mdbAutoCompleter.removeHighlight(0);
                 this.mdbAutoCompleter.highlightRow(0);
-                /** @type {?} */
-                var clearButtonVisibility = event.target.value.length > 0 ? 'visible' : 'hidden';
-                if (this.mdbAutoCompleter.clearButton) {
-                    /** @type {?} */
-                    var clearButton = this.el.nativeElement.parentElement.lastElementChild;
-                    this._setStyles(clearButton, { visibility: clearButtonVisibility });
-                }
+                this._updateClearButtonVisibility();
             };
         /**
          * @return {?}
@@ -14855,6 +14843,23 @@
                     /** @type {?} */
                     var parent_1 = this.utils.getClosestEl(this.el.nativeElement, '.md-form') || this.el.nativeElement;
                     this.renderer.appendChild(parent_1, el);
+                }
+            };
+        /**
+         * @private
+         * @return {?}
+         */
+        MdbAutoCompleterDirective.prototype._updateClearButtonVisibility = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                /** @type {?} */
+                var clearButtonVisibility = this.el.nativeElement.value.length > 0 ? 'visible' : 'hidden';
+                if (this.mdbAutoCompleter.clearButton) {
+                    /** @type {?} */
+                    var clearButton = this.el.nativeElement.parentElement.lastElementChild;
+                    this._setStyles(clearButton, { visibility: clearButtonVisibility });
                 }
             };
         /**
@@ -15218,7 +15223,10 @@
                 var _this = this;
                 Promise.resolve(null).then(( /**
                  * @return {?}
-                 */function () { return (_this.el.nativeElement.value = value); }));
+                 */function () {
+                    _this.el.nativeElement.value = value;
+                    _this._updateClearButtonVisibility();
+                }));
             };
         /**
          * @param {?} fn
@@ -17221,19 +17229,32 @@
          * @return {?}
          */
             function (isDisabled) {
-                this.isDisabled = isDisabled;
                 if (this.inline) {
-                    if (isDisabled) {
-                        this.inlineIcon += ' disabled grey-text';
-                    }
-                    else {
-                        /** @type {?} */
-                        var to = this.inlineIcon.indexOf('disabled');
+                    this.setDisabled(isDisabled);
+                }
+                this.cdRef.markForCheck();
+            };
+        /**
+         * @param {?} isDisabled
+         * @return {?}
+         */
+        MDBDatePickerComponent.prototype.setDisabled = /**
+         * @param {?} isDisabled
+         * @return {?}
+         */
+            function (isDisabled) {
+                this.isDisabled = isDisabled;
+                if (isDisabled) {
+                    this.inlineIcon += ' disabled grey-text';
+                }
+                else {
+                    /** @type {?} */
+                    var to = this.inlineIcon.indexOf('disabled');
+                    if (to >= 0) {
                         this.inlineIcon = this.inlineIcon.substr(0, to);
                         this.cdRef.detectChanges();
                     }
                 }
-                this.cdRef.markForCheck();
             };
         /**
          * @return {?}
@@ -17534,6 +17555,10 @@
                 var _this = this;
                 if (changes.hasOwnProperty('selector') && changes['selector'].currentValue > 0) {
                     this.openBtnClicked();
+                }
+                if (changes.hasOwnProperty('disabled')) {
+                    this.disabled = changes['disabled'].currentValue;
+                    this.setDisabled(this.disabled);
                 }
                 if (changes.hasOwnProperty('placeholder')) {
                     this.placeholder = changes['placeholder'].currentValue;
