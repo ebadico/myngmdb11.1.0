@@ -83,6 +83,7 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     onChangeCb: (_: any) => void;
     onTouchedCb: () => void;
     setDisabledState(isDisabled: boolean): void;
+    setDisabled(isDisabled: boolean): void;
     removeInlineStyle(): void;
     setLocaleOptions(): void;
     addLocale(locale: IMyLocales): void;

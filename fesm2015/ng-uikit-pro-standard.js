@@ -5624,9 +5624,6 @@ class MdbIconComponent {
         if (this.size) {
             this.sizeClass = `fa-${this.size}`;
         }
-        if (this._el.nativeElement.parentElement.classList.contains('md-form')) {
-            this._renderer.addClass(this._el.nativeElement, 'prefix');
-        }
         /** @type {?} */
         const classList = this._el.nativeElement.classList;
         this.fab = classList.contains('fab');
@@ -5642,7 +5639,7 @@ class MdbIconComponent {
              * @return {?}
              */
             (el) => {
-                if (el.tagName === 'INPUT') {
+                if (el.tagName === 'INPUT' || 'TEXTAREA') {
                     this._renderer.listen(el, 'focus', (/**
                      * @return {?}
                      */
@@ -5867,7 +5864,7 @@ MdbErrorDirective.decorators = [
                 selector: 'mdb-error',
                 template: '<ng-content></ng-content>',
                 encapsulation: ViewEncapsulation.None,
-                styles: [".error-message{position:absolute;top:40px;left:0;font-size:.8rem;color:#f44336}.success-message{position:absolute;top:40px;left:0;font-size:.8rem;color:#00c851}"]
+                styles: [".error-message,.success-message{position:absolute;bottom:-20px;left:0;top:unset;font-size:.8rem}.error-message{color:#f44336}.success-message{color:#00c851}"]
             }] }
 ];
 /** @nocollapse */
@@ -5950,7 +5947,7 @@ MdbSuccessDirective.decorators = [
                 selector: 'mdb-success',
                 template: '<ng-content></ng-content>',
                 encapsulation: ViewEncapsulation.None,
-                styles: [".error-message{position:absolute;top:40px;left:0;font-size:.8rem;color:#f44336}.success-message{position:absolute;top:40px;left:0;font-size:.8rem;color:#00c851}"]
+                styles: [".error-message,.success-message{position:absolute;bottom:-20px;left:0;top:unset;font-size:.8rem}.error-message{color:#f44336}.success-message{color:#00c851}"]
             }] }
 ];
 /** @nocollapse */
@@ -6787,9 +6784,6 @@ class MdbInput {
                 this._renderer.addClass(this.elLabel, 'active');
             }
             this.elIcon = inputP.querySelector('i') || false;
-            if (this.elIcon) {
-                this._renderer.addClass(this.elIcon, 'active');
-            }
         }
     }
     /**
@@ -10470,7 +10464,7 @@ class SBItemBodyComponent {
                     sbItem.classList.remove('is-collapsed');
                 }
                 this._cdRef.markForCheck();
-            }), 0);
+            }), 10);
         }
         else if (this.expandAnimationState !== 'collapsed' && activeLink) {
             setTimeout((/**
@@ -10483,7 +10477,7 @@ class SBItemBodyComponent {
                     sbItem.classList.add('is-collapsed');
                 }
                 this._cdRef.markForCheck();
-            }), 0);
+            }), 10);
         }
     }
     /**
@@ -12816,13 +12810,7 @@ class MdbAutoCompleterDirective {
         this._onChange(event.target.value);
         this.mdbAutoCompleter.removeHighlight(0);
         this.mdbAutoCompleter.highlightRow(0);
-        /** @type {?} */
-        const clearButtonVisibility = event.target.value.length > 0 ? 'visible' : 'hidden';
-        if (this.mdbAutoCompleter.clearButton) {
-            /** @type {?} */
-            const clearButton = this.el.nativeElement.parentElement.lastElementChild;
-            this._setStyles(clearButton, { visibility: clearButtonVisibility });
-        }
+        this._updateClearButtonVisibility();
     }
     /**
      * @return {?}
@@ -12881,6 +12869,19 @@ class MdbAutoCompleterDirective {
             /** @type {?} */
             const parent = this.utils.getClosestEl(this.el.nativeElement, '.md-form') || this.el.nativeElement;
             this.renderer.appendChild(parent, el);
+        }
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    _updateClearButtonVisibility() {
+        /** @type {?} */
+        const clearButtonVisibility = this.el.nativeElement.value.length > 0 ? 'visible' : 'hidden';
+        if (this.mdbAutoCompleter.clearButton) {
+            /** @type {?} */
+            const clearButton = this.el.nativeElement.parentElement.lastElementChild;
+            this._setStyles(clearButton, { visibility: clearButtonVisibility });
         }
     }
     /**
@@ -13201,7 +13202,10 @@ class MdbAutoCompleterDirective {
         Promise.resolve(null).then((/**
          * @return {?}
          */
-        () => (this.el.nativeElement.value = value)));
+        () => {
+            this.el.nativeElement.value = value;
+            this._updateClearButtonVisibility();
+        }));
     }
     /**
      * @param {?} fn
@@ -14812,19 +14816,28 @@ class MDBDatePickerComponent {
      * @return {?}
      */
     setDisabledState(isDisabled) {
-        this.isDisabled = isDisabled;
         if (this.inline) {
-            if (isDisabled) {
-                this.inlineIcon += ' disabled grey-text';
-            }
-            else {
-                /** @type {?} */
-                const to = this.inlineIcon.indexOf('disabled');
+            this.setDisabled(isDisabled);
+        }
+        this.cdRef.markForCheck();
+    }
+    /**
+     * @param {?} isDisabled
+     * @return {?}
+     */
+    setDisabled(isDisabled) {
+        this.isDisabled = isDisabled;
+        if (isDisabled) {
+            this.inlineIcon += ' disabled grey-text';
+        }
+        else {
+            /** @type {?} */
+            const to = this.inlineIcon.indexOf('disabled');
+            if (to >= 0) {
                 this.inlineIcon = this.inlineIcon.substr(0, to);
                 this.cdRef.detectChanges();
             }
         }
-        this.cdRef.markForCheck();
     }
     /**
      * @return {?}
@@ -15066,6 +15079,10 @@ class MDBDatePickerComponent {
     ngOnChanges(changes) {
         if (changes.hasOwnProperty('selector') && changes['selector'].currentValue > 0) {
             this.openBtnClicked();
+        }
+        if (changes.hasOwnProperty('disabled')) {
+            this.disabled = changes['disabled'].currentValue;
+            this.setDisabled(this.disabled);
         }
         if (changes.hasOwnProperty('placeholder')) {
             this.placeholder = changes['placeholder'].currentValue;

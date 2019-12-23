@@ -69,7 +69,7 @@ MdbErrorDirective.decorators = [
                 selector: 'mdb-error',
                 template: '<ng-content></ng-content>',
                 encapsulation: ViewEncapsulation.None,
-                styles: [".error-message{position:absolute;top:40px;left:0;font-size:.8rem;color:#f44336}.success-message{position:absolute;top:40px;left:0;font-size:.8rem;color:#00c851}"]
+                styles: [".error-message,.success-message{position:absolute;bottom:-20px;left:0;top:unset;font-size:.8rem}.error-message{color:#f44336}.success-message{color:#00c851}"]
             }] }
 ];
 /** @nocollapse */
