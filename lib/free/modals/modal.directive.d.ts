@@ -1,10 +1,10 @@
-import { AfterViewInit, ComponentRef, ElementRef, EventEmitter, OnDestroy, Renderer2, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ComponentRef, ElementRef, EventEmitter, OnDestroy, OnChanges, Renderer2, ViewContainerRef } from '@angular/core';
 import { Utils } from '../utils/utils.class';
 import { ModalBackdropComponent } from './modalBackdrop.component';
 import { ModalOptions } from './modal.options';
 import { ComponentLoaderFactory } from '../utils/component-loader/component-loader.factory';
 /** Mark any code with directive to show it's content in modal */
-export declare class ModalDirective implements AfterViewInit, OnDestroy {
+export declare class ModalDirective implements AfterViewInit, OnDestroy, OnChanges {
     protected _element: ElementRef;
     protected _renderer: Renderer2;
     /** allows to set modal configuration via element property */
@@ -33,7 +33,7 @@ export declare class ModalDirective implements AfterViewInit, OnDestroy {
     protected scrollbarWidth: number;
     protected timerHideModal: any;
     protected timerRmBackDrop: any;
-    protected backdrop: ComponentRef<ModalBackdropComponent>;
+    protected backdrop: ComponentRef<ModalBackdropComponent> | undefined;
     private _backdrop;
     _dialog: any;
     isNested: boolean;
@@ -44,6 +44,7 @@ export declare class ModalDirective implements AfterViewInit, OnDestroy {
     constructor(_element: ElementRef, _viewContainerRef: ViewContainerRef, _renderer: Renderer2, clf: ComponentLoaderFactory);
     ngOnDestroy(): any;
     ngAfterViewInit(): any;
+    ngOnChanges(): any;
     /** Allows to manually toggle modal visibility */
     toggle(): void;
     /** Allows to manually open modal */
