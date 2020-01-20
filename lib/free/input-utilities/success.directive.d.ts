@@ -2,6 +2,7 @@ import { ElementRef, Renderer2, OnInit, OnDestroy } from '@angular/core';
 export declare class MdbSuccessDirective implements OnInit, OnDestroy {
     private el;
     private renderer;
+    prefix: HTMLElement;
     id: string;
     successMsg: boolean;
     messageId: string;
