@@ -30,6 +30,7 @@ export declare class BsDropdownDirective implements OnInit, OnDestroy {
     container: string;
     dropup: boolean;
     dropupDefault: boolean;
+    dynamicPosition: boolean;
     /**
      * This attribute indicates that the dropdown should be opened upwards
      */
@@ -68,6 +69,7 @@ export declare class BsDropdownDirective implements OnInit, OnDestroy {
     _inlinedMenu: EmbeddedViewRef<BsDropdownMenuDirective>;
     _isDisabled: boolean;
     _dropdown: ComponentLoader<BsDropdownContainerComponent>;
+    _dropup: boolean;
     _subscriptions: Subscription[];
     _isInited: boolean;
     _isDropupDefault: boolean;
