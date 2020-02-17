@@ -35,6 +35,7 @@ export declare class CarouselComponent implements OnDestroy, AfterViewInit {
     type: String;
     animation: String;
     activeSlideIndex: number;
+    allowSwipe: boolean;
     activeSlideChange: EventEmitter<any>;
     activeSlide: number;
     protected _interval: number;

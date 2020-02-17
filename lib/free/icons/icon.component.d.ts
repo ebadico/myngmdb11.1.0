@@ -10,6 +10,7 @@ export declare class MdbIconComponent implements OnInit {
     fab: boolean;
     far: boolean;
     fal: boolean;
+    fad: boolean;
     fas: boolean;
     sizeClass: string;
     utils: Utils;
