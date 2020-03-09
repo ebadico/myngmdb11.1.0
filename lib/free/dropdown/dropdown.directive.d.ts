@@ -34,20 +34,23 @@ export declare class BsDropdownDirective implements OnInit, OnDestroy {
     /**
      * This attribute indicates that the dropdown should be opened upwards
      */
-    readonly isDropup: true | undefined;
+    get isDropup(): true | undefined;
     /**
      * Indicates that dropdown will be closed on item or document click,
      * and after pressing ESC
      */
-    autoClose: boolean;
+    set autoClose(value: boolean);
+    get autoClose(): boolean;
     /**
      * Disables dropdown toggle and hides dropdown menu if opened
      */
-    isDisabled: boolean;
+    set isDisabled(value: boolean);
+    get isDisabled(): boolean;
     /**
      * Returns whether or not the popover is currently being shown
      */
-    isOpen: boolean;
+    get isOpen(): boolean;
+    set isOpen(value: boolean);
     /**
      * Emits an event when isOpen change
      */
@@ -63,7 +66,7 @@ export declare class BsDropdownDirective implements OnInit, OnDestroy {
     onHidden: EventEmitter<any>;
     hidden: EventEmitter<any>;
     private _destroy$;
-    readonly isBs4: boolean;
+    get isBs4(): boolean;
     _isInlineOpen: boolean;
     _showInline: boolean;
     _inlinedMenu: EmbeddedViewRef<BsDropdownMenuDirective>;

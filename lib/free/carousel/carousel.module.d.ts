@@ -1,4 +1,4 @@
 import { ModuleWithProviders } from '@angular/core';
 export declare class CarouselModule {
-    static forRoot(): ModuleWithProviders;
+    static forRoot(): ModuleWithProviders<CarouselModule>;
 }

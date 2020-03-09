@@ -1,8 +1,5 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-import { Component, Input, ViewChild, TemplateRef, ElementRef, ChangeDetectionStrategy, } from '@angular/core';
+import { __decorate, __metadata } from "tslib";
+import { Component, Input, ViewChild, TemplateRef, ElementRef, OnInit, ChangeDetectionStrategy, } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 var MdbStepComponent = /** @class */ (function () {
     function MdbStepComponent(el) {
@@ -11,137 +8,80 @@ var MdbStepComponent = /** @class */ (function () {
         this._isActive = false;
     }
     Object.defineProperty(MdbStepComponent.prototype, "isDone", {
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             return this._isDone;
         },
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
+        set: function (value) {
             this._isDone = value;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(MdbStepComponent.prototype, "isWrong", {
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             return this._isWrong;
         },
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
+        set: function (value) {
             this._isWrong = value;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(MdbStepComponent.prototype, "isActive", {
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             return this._isActive;
         },
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
+        set: function (value) {
             this._isActive = value;
         },
         enumerable: true,
         configurable: true
     });
-    /**
-     * @private
-     * @return {?}
-     */
-    MdbStepComponent.prototype._removeClasses = /**
-     * @private
-     * @return {?}
-     */
-    function () {
+    MdbStepComponent.prototype._removeClasses = function () {
         this.isActive = false;
         this.isDone = false;
         this.isWrong = false;
     };
-    /**
-     * @return {?}
-     */
-    MdbStepComponent.prototype.reset = /**
-     * @return {?}
-     */
-    function () {
+    MdbStepComponent.prototype.reset = function () {
         if (this.stepForm) {
             this.stepForm.reset();
         }
         this._removeClasses();
     };
-    /**
-     * @return {?}
-     */
-    MdbStepComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () { };
-    MdbStepComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'mdb-step',
-                    exportAs: 'mdbStep',
-                    template: '<ng-template><ng-content></ng-content></ng-template>',
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                }] }
-    ];
-    /** @nocollapse */
+    MdbStepComponent.prototype.ngOnInit = function () { };
     MdbStepComponent.ctorParameters = function () { return [
         { type: ElementRef }
     ]; };
-    MdbStepComponent.propDecorators = {
-        content: [{ type: ViewChild, args: [TemplateRef, { static: true },] }],
-        editable: [{ type: Input }],
-        name: [{ type: Input }],
-        label: [{ type: Input }],
-        stepForm: [{ type: Input }]
-    };
+    __decorate([
+        ViewChild(TemplateRef, { static: true }),
+        __metadata("design:type", TemplateRef)
+    ], MdbStepComponent.prototype, "content", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], MdbStepComponent.prototype, "editable", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], MdbStepComponent.prototype, "name", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], MdbStepComponent.prototype, "label", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", FormGroup)
+    ], MdbStepComponent.prototype, "stepForm", void 0);
+    MdbStepComponent = __decorate([
+        Component({
+            selector: 'mdb-step',
+            exportAs: 'mdbStep',
+            template: '<ng-template><ng-content></ng-content></ng-template>',
+            changeDetection: ChangeDetectionStrategy.OnPush
+        }),
+        __metadata("design:paramtypes", [ElementRef])
+    ], MdbStepComponent);
     return MdbStepComponent;
 }());
 export { MdbStepComponent };
-if (false) {
-    /** @type {?} */
-    MdbStepComponent.prototype.content;
-    /** @type {?} */
-    MdbStepComponent.prototype.editable;
-    /** @type {?} */
-    MdbStepComponent.prototype.name;
-    /** @type {?} */
-    MdbStepComponent.prototype.label;
-    /** @type {?} */
-    MdbStepComponent.prototype.stepForm;
-    /**
-     * @type {?}
-     * @private
-     */
-    MdbStepComponent.prototype._isDone;
-    /**
-     * @type {?}
-     * @private
-     */
-    MdbStepComponent.prototype._isWrong;
-    /**
-     * @type {?}
-     * @private
-     */
-    MdbStepComponent.prototype._isActive;
-    /** @type {?} */
-    MdbStepComponent.prototype.el;
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RlcC5jb21wb25lbnQuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9uZy11aWtpdC1wcm8tc3RhbmRhcmQvIiwic291cmNlcyI6WyJsaWIvcHJvL3N0ZXBwZXIvc3RlcC5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLE9BQU8sRUFDTCxTQUFTLEVBQ1QsS0FBSyxFQUNMLFNBQVMsRUFDVCxXQUFXLEVBQ1gsVUFBVSxFQUVWLHVCQUF1QixHQUN4QixNQUFNLGVBQWUsQ0FBQztBQUN2QixPQUFPLEVBQUUsU0FBUyxFQUFFLE1BQU0sZ0JBQWdCLENBQUM7QUFFM0M7SUFhRSwwQkFBbUIsRUFBYztRQUFkLE9BQUUsR0FBRixFQUFFLENBQVk7UUFMeEIsYUFBUSxHQUFHLElBQUksQ0FBQztRQTZCakIsY0FBUyxHQUFHLEtBQUssQ0FBQztJQXhCVSxDQUFDO0lBRXJDLHNCQUFJLG9DQUFNOzs7O1FBQVY7WUFDRSxPQUFPLElBQUksQ0FBQyxPQUFPLENBQUM7UUFDdEIsQ0FBQzs7Ozs7UUFDRCxVQUFXLEtBQWM7WUFDdkIsSUFBSSxDQUFDLE9BQU8sR0FBRyxLQUFLLENBQUM7UUFDdkIsQ0FBQzs7O09BSEE7SUFNRCxzQkFBSSxxQ0FBTzs7OztRQUFYO1lBQ0UsT0FBTyxJQUFJLENBQUMsUUFBUSxDQUFDO1FBQ3ZCLENBQUM7Ozs7O1FBQ0QsVUFBWSxLQUFjO1lBQ3hCLElBQUksQ0FBQyxRQUFRLEdBQUcsS0FBSyxDQUFDO1FBQ3hCLENBQUM7OztPQUhBO0lBTUQsc0JBQUksc0NBQVE7Ozs7UUFBWjtZQUNFLE9BQU8sSUFBSSxDQUFDLFNBQVMsQ0FBQztRQUN4QixDQUFDOzs7OztRQUNELFVBQWEsS0FBYztZQUN6QixJQUFJLENBQUMsU0FBUyxHQUFHLEtBQUssQ0FBQztRQUN6QixDQUFDOzs7T0FIQTs7Ozs7SUFNTyx5Q0FBYzs7OztJQUF0QjtRQUNFLElBQUksQ0FBQyxRQUFRLEdBQUcsS0FBSyxDQUFDO1FBQ3RCLElBQUksQ0FBQyxNQUFNLEdBQUcsS0FBSyxDQUFDO1FBQ3BCLElBQUksQ0FBQyxPQUFPLEdBQUcsS0FBSyxDQUFDO0lBQ3ZCLENBQUM7Ozs7SUFFRCxnQ0FBSzs7O0lBQUw7UUFDRSxJQUFJLElBQUksQ0FBQyxRQUFRLEVBQUU7WUFDakIsSUFBSSxDQUFDLFFBQVEsQ0FBQyxLQUFLLEVBQUUsQ0FBQztTQUN2QjtRQUNELElBQUksQ0FBQyxjQUFjLEVBQUUsQ0FBQztJQUN4QixDQUFDOzs7O0lBRUQsbUNBQVE7OztJQUFSLGNBQVksQ0FBQzs7Z0JBcERkLFNBQVMsU0FBQztvQkFDVCxRQUFRLEVBQUUsVUFBVTtvQkFDcEIsUUFBUSxFQUFFLFNBQVM7b0JBQ25CLFFBQVEsRUFBRSxzREFBc0Q7b0JBQ2hFLGVBQWUsRUFBRSx1QkFBdUIsQ0FBQyxNQUFNO2lCQUNoRDs7OztnQkFYQyxVQUFVOzs7MEJBYVQsU0FBUyxTQUFDLFdBQVcsRUFBRSxFQUFFLE1BQU0sRUFBRSxJQUFJLEVBQUU7MkJBQ3ZDLEtBQUs7dUJBQ0wsS0FBSzt3QkFDTCxLQUFLOzJCQUNMLEtBQUs7O0lBMENSLHVCQUFDO0NBQUEsQUFyREQsSUFxREM7U0EvQ1ksZ0JBQWdCOzs7SUFDM0IsbUNBQW9FOztJQUNwRSxvQ0FBeUI7O0lBQ3pCLGdDQUFzQjs7SUFDdEIsaUNBQXVCOztJQUN2QixvQ0FBNkI7Ozs7O0lBVTdCLG1DQUF5Qjs7Ozs7SUFRekIsb0NBQTBCOzs7OztJQVExQixxQ0FBMEI7O0lBeEJkLDhCQUFxQiIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7XG4gIENvbXBvbmVudCxcbiAgSW5wdXQsXG4gIFZpZXdDaGlsZCxcbiAgVGVtcGxhdGVSZWYsXG4gIEVsZW1lbnRSZWYsXG4gIE9uSW5pdCxcbiAgQ2hhbmdlRGV0ZWN0aW9uU3RyYXRlZ3ksXG59IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHsgRm9ybUdyb3VwIH0gZnJvbSAnQGFuZ3VsYXIvZm9ybXMnO1xuXG5AQ29tcG9uZW50KHtcbiAgc2VsZWN0b3I6ICdtZGItc3RlcCcsXG4gIGV4cG9ydEFzOiAnbWRiU3RlcCcsXG4gIHRlbXBsYXRlOiAnPG5nLXRlbXBsYXRlPjxuZy1jb250ZW50PjwvbmctY29udGVudD48L25nLXRlbXBsYXRlPicsXG4gIGNoYW5nZURldGVjdGlvbjogQ2hhbmdlRGV0ZWN0aW9uU3RyYXRlZ3kuT25QdXNoLFxufSlcbmV4cG9ydCBjbGFzcyBNZGJTdGVwQ29tcG9uZW50IGltcGxlbWVudHMgT25Jbml0IHtcbiAgQFZpZXdDaGlsZChUZW1wbGF0ZVJlZiwgeyBzdGF0aWM6IHRydWUgfSkgY29udGVudDogVGVtcGxhdGVSZWY8YW55PjtcbiAgQElucHV0KCkgZWRpdGFibGUgPSB0cnVlO1xuICBASW5wdXQoKSBuYW1lOiBzdHJpbmc7XG4gIEBJbnB1dCgpIGxhYmVsOiBzdHJpbmc7XG4gIEBJbnB1dCgpIHN0ZXBGb3JtOiBGb3JtR3JvdXA7XG5cbiAgY29uc3RydWN0b3IocHVibGljIGVsOiBFbGVtZW50UmVmKSB7fVxuXG4gIGdldCBpc0RvbmUoKSB7XG4gICAgcmV0dXJuIHRoaXMuX2lzRG9uZTtcbiAgfVxuICBzZXQgaXNEb25lKHZhbHVlOiBib29sZWFuKSB7XG4gICAgdGhpcy5faXNEb25lID0gdmFsdWU7XG4gIH1cbiAgcHJpdmF0ZSBfaXNEb25lOiBib29sZWFuO1xuXG4gIGdldCBpc1dyb25nKCkge1xuICAgIHJldHVybiB0aGlzLl9pc1dyb25nO1xuICB9XG4gIHNldCBpc1dyb25nKHZhbHVlOiBib29sZWFuKSB7XG4gICAgdGhpcy5faXNXcm9uZyA9IHZhbHVlO1xuICB9XG4gIHByaXZhdGUgX2lzV3Jvbmc6IGJvb2xlYW47XG5cbiAgZ2V0IGlzQWN0aXZlKCkge1xuICAgIHJldHVybiB0aGlzLl9pc0FjdGl2ZTtcbiAgfVxuICBzZXQgaXNBY3RpdmUodmFsdWU6IGJvb2xlYW4pIHtcbiAgICB0aGlzLl9pc0FjdGl2ZSA9IHZhbHVlO1xuICB9XG4gIHByaXZhdGUgX2lzQWN0aXZlID0gZmFsc2U7XG5cbiAgcHJpdmF0ZSBfcmVtb3ZlQ2xhc3NlcygpIHtcbiAgICB0aGlzLmlzQWN0aXZlID0gZmFsc2U7XG4gICAgdGhpcy5pc0RvbmUgPSBmYWxzZTtcbiAgICB0aGlzLmlzV3JvbmcgPSBmYWxzZTtcbiAgfVxuXG4gIHJlc2V0KCkge1xuICAgIGlmICh0aGlzLnN0ZXBGb3JtKSB7XG4gICAgICB0aGlzLnN0ZXBGb3JtLnJlc2V0KCk7XG4gICAgfVxuICAgIHRoaXMuX3JlbW92ZUNsYXNzZXMoKTtcbiAgfVxuXG4gIG5nT25Jbml0KCkge31cbn1cbiJdfQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RlcC5jb21wb25lbnQuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9uZy11aWtpdC1wcm8tc3RhbmRhcmQvIiwic291cmNlcyI6WyJsaWIvcHJvL3N0ZXBwZXIvc3RlcC5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLE9BQU8sRUFDTCxTQUFTLEVBQ1QsS0FBSyxFQUNMLFNBQVMsRUFDVCxXQUFXLEVBQ1gsVUFBVSxFQUNWLE1BQU0sRUFDTix1QkFBdUIsR0FDeEIsTUFBTSxlQUFlLENBQUM7QUFDdkIsT0FBTyxFQUFFLFNBQVMsRUFBRSxNQUFNLGdCQUFnQixDQUFDO0FBUTNDO0lBT0UsMEJBQW1CLEVBQWM7UUFBZCxPQUFFLEdBQUYsRUFBRSxDQUFZO1FBTHhCLGFBQVEsR0FBRyxJQUFJLENBQUM7UUE2QmpCLGNBQVMsR0FBRyxLQUFLLENBQUM7SUF4QlUsQ0FBQztJQUVyQyxzQkFBSSxvQ0FBTTthQUFWO1lBQ0UsT0FBTyxJQUFJLENBQUMsT0FBTyxDQUFDO1FBQ3RCLENBQUM7YUFDRCxVQUFXLEtBQWM7WUFDdkIsSUFBSSxDQUFDLE9BQU8sR0FBRyxLQUFLLENBQUM7UUFDdkIsQ0FBQzs7O09BSEE7SUFNRCxzQkFBSSxxQ0FBTzthQUFYO1lBQ0UsT0FBTyxJQUFJLENBQUMsUUFBUSxDQUFDO1FBQ3ZCLENBQUM7YUFDRCxVQUFZLEtBQWM7WUFDeEIsSUFBSSxDQUFDLFFBQVEsR0FBRyxLQUFLLENBQUM7UUFDeEIsQ0FBQzs7O09BSEE7SUFNRCxzQkFBSSxzQ0FBUTthQUFaO1lBQ0UsT0FBTyxJQUFJLENBQUMsU0FBUyxDQUFDO1FBQ3hCLENBQUM7YUFDRCxVQUFhLEtBQWM7WUFDekIsSUFBSSxDQUFDLFNBQVMsR0FBRyxLQUFLLENBQUM7UUFDekIsQ0FBQzs7O09BSEE7SUFNTyx5Q0FBYyxHQUF0QjtRQUNFLElBQUksQ0FBQyxRQUFRLEdBQUcsS0FBSyxDQUFDO1FBQ3RCLElBQUksQ0FBQyxNQUFNLEdBQUcsS0FBSyxDQUFDO1FBQ3BCLElBQUksQ0FBQyxPQUFPLEdBQUcsS0FBSyxDQUFDO0lBQ3ZCLENBQUM7SUFFRCxnQ0FBSyxHQUFMO1FBQ0UsSUFBSSxJQUFJLENBQUMsUUFBUSxFQUFFO1lBQ2pCLElBQUksQ0FBQyxRQUFRLENBQUMsS0FBSyxFQUFFLENBQUM7U0FDdkI7UUFDRCxJQUFJLENBQUMsY0FBYyxFQUFFLENBQUM7SUFDeEIsQ0FBQztJQUVELG1DQUFRLEdBQVIsY0FBWSxDQUFDOztnQkF2Q1UsVUFBVTs7SUFOUztRQUF6QyxTQUFTLENBQUMsV0FBVyxFQUFFLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRSxDQUFDO2tDQUFVLFdBQVc7cURBQU07SUFDM0Q7UUFBUixLQUFLLEVBQUU7O3NEQUFpQjtJQUNoQjtRQUFSLEtBQUssRUFBRTs7a0RBQWM7SUFDYjtRQUFSLEtBQUssRUFBRTs7bURBQWU7SUFDZDtRQUFSLEtBQUssRUFBRTtrQ0FBVyxTQUFTO3NEQUFDO0lBTGxCLGdCQUFnQjtRQU41QixTQUFTLENBQUM7WUFDVCxRQUFRLEVBQUUsVUFBVTtZQUNwQixRQUFRLEVBQUUsU0FBUztZQUNuQixRQUFRLEVBQUUsc0RBQXNEO1lBQ2hFLGVBQWUsRUFBRSx1QkFBdUIsQ0FBQyxNQUFNO1NBQ2hELENBQUM7eUNBUXVCLFVBQVU7T0FQdEIsZ0JBQWdCLENBK0M1QjtJQUFELHVCQUFDO0NBQUEsQUEvQ0QsSUErQ0M7U0EvQ1ksZ0JBQWdCIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHtcbiAgQ29tcG9uZW50LFxuICBJbnB1dCxcbiAgVmlld0NoaWxkLFxuICBUZW1wbGF0ZVJlZixcbiAgRWxlbWVudFJlZixcbiAgT25Jbml0LFxuICBDaGFuZ2VEZXRlY3Rpb25TdHJhdGVneSxcbn0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBGb3JtR3JvdXAgfSBmcm9tICdAYW5ndWxhci9mb3Jtcyc7XG5cbkBDb21wb25lbnQoe1xuICBzZWxlY3RvcjogJ21kYi1zdGVwJyxcbiAgZXhwb3J0QXM6ICdtZGJTdGVwJyxcbiAgdGVtcGxhdGU6ICc8bmctdGVtcGxhdGU+PG5nLWNvbnRlbnQ+PC9uZy1jb250ZW50PjwvbmctdGVtcGxhdGU+JyxcbiAgY2hhbmdlRGV0ZWN0aW9uOiBDaGFuZ2VEZXRlY3Rpb25TdHJhdGVneS5PblB1c2gsXG59KVxuZXhwb3J0IGNsYXNzIE1kYlN0ZXBDb21wb25lbnQgaW1wbGVtZW50cyBPbkluaXQge1xuICBAVmlld0NoaWxkKFRlbXBsYXRlUmVmLCB7IHN0YXRpYzogdHJ1ZSB9KSBjb250ZW50OiBUZW1wbGF0ZVJlZjxhbnk+O1xuICBASW5wdXQoKSBlZGl0YWJsZSA9IHRydWU7XG4gIEBJbnB1dCgpIG5hbWU6IHN0cmluZztcbiAgQElucHV0KCkgbGFiZWw6IHN0cmluZztcbiAgQElucHV0KCkgc3RlcEZvcm06IEZvcm1Hcm91cDtcblxuICBjb25zdHJ1Y3RvcihwdWJsaWMgZWw6IEVsZW1lbnRSZWYpIHt9XG5cbiAgZ2V0IGlzRG9uZSgpIHtcbiAgICByZXR1cm4gdGhpcy5faXNEb25lO1xuICB9XG4gIHNldCBpc0RvbmUodmFsdWU6IGJvb2xlYW4pIHtcbiAgICB0aGlzLl9pc0RvbmUgPSB2YWx1ZTtcbiAgfVxuICBwcml2YXRlIF9pc0RvbmU6IGJvb2xlYW47XG5cbiAgZ2V0IGlzV3JvbmcoKSB7XG4gICAgcmV0dXJuIHRoaXMuX2lzV3Jvbmc7XG4gIH1cbiAgc2V0IGlzV3JvbmcodmFsdWU6IGJvb2xlYW4pIHtcbiAgICB0aGlzLl9pc1dyb25nID0gdmFsdWU7XG4gIH1cbiAgcHJpdmF0ZSBfaXNXcm9uZzogYm9vbGVhbjtcblxuICBnZXQgaXNBY3RpdmUoKSB7XG4gICAgcmV0dXJuIHRoaXMuX2lzQWN0aXZlO1xuICB9XG4gIHNldCBpc0FjdGl2ZSh2YWx1ZTogYm9vbGVhbikge1xuICAgIHRoaXMuX2lzQWN0aXZlID0gdmFsdWU7XG4gIH1cbiAgcHJpdmF0ZSBfaXNBY3RpdmUgPSBmYWxzZTtcblxuICBwcml2YXRlIF9yZW1vdmVDbGFzc2VzKCkge1xuICAgIHRoaXMuaXNBY3RpdmUgPSBmYWxzZTtcbiAgICB0aGlzLmlzRG9uZSA9IGZhbHNlO1xuICAgIHRoaXMuaXNXcm9uZyA9IGZhbHNlO1xuICB9XG5cbiAgcmVzZXQoKSB7XG4gICAgaWYgKHRoaXMuc3RlcEZvcm0pIHtcbiAgICAgIHRoaXMuc3RlcEZvcm0ucmVzZXQoKTtcbiAgICB9XG4gICAgdGhpcy5fcmVtb3ZlQ2xhc3NlcygpO1xuICB9XG5cbiAgbmdPbkluaXQoKSB7fVxufVxuIl19

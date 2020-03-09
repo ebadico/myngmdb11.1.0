@@ -17,7 +17,7 @@ export declare class ButtonRadioDirective implements ControlValueAccessor, OnIni
     uncheckable: boolean;
     /** Current value of radio component or group */
     value: any;
-    readonly isActive: boolean;
+    get isActive(): boolean;
     onClick(event?: any): void;
     constructor(el: ElementRef, renderer: Renderer2);
     ngOnInit(): void;

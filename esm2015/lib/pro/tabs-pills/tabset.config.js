@@ -1,24 +1,13 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+import { __decorate } from "tslib";
 import { Injectable } from '@angular/core';
-export class TabsetConfig {
+let TabsetConfig = class TabsetConfig {
     constructor() {
-        /**
-         * provides default navigation context class: 'tabs' or 'pills'
-         */
+        /** provides default navigation context class: 'tabs' or 'pills' */
         this.type = 'tabs';
     }
-}
-TabsetConfig.decorators = [
-    { type: Injectable }
-];
-if (false) {
-    /**
-     * provides default navigation context class: 'tabs' or 'pills'
-     * @type {?}
-     */
-    TabsetConfig.prototype.type;
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGFic2V0LmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiJuZzovL25nLXVpa2l0LXByby1zdGFuZGFyZC8iLCJzb3VyY2VzIjpbImxpYi9wcm8vdGFicy1waWxscy90YWJzZXQuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7QUFBQSxPQUFPLEVBQUUsVUFBVSxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBRzNDLE1BQU0sT0FBTyxZQUFZO0lBRHpCOzs7O1FBR1MsU0FBSSxHQUFHLE1BQU0sQ0FBQztJQUN2QixDQUFDOzs7WUFKQSxVQUFVOzs7Ozs7O0lBR1QsNEJBQXFCIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgSW5qZWN0YWJsZSB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuXG5ASW5qZWN0YWJsZSgpXG5leHBvcnQgY2xhc3MgVGFic2V0Q29uZmlnIHtcbiAgLyoqIHByb3ZpZGVzIGRlZmF1bHQgbmF2aWdhdGlvbiBjb250ZXh0IGNsYXNzOiAndGFicycgb3IgJ3BpbGxzJyAqL1xuICBwdWJsaWMgdHlwZSA9ICd0YWJzJztcbn1cbiJdfQ==
+};
+TabsetConfig = __decorate([
+    Injectable()
+], TabsetConfig);
+export { TabsetConfig };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGFic2V0LmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiJuZzovL25nLXVpa2l0LXByby1zdGFuZGFyZC8iLCJzb3VyY2VzIjpbImxpYi9wcm8vdGFicy1waWxscy90YWJzZXQuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxPQUFPLEVBQUUsVUFBVSxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBRzNDLElBQWEsWUFBWSxHQUF6QixNQUFhLFlBQVk7SUFBekI7UUFDRSxtRUFBbUU7UUFDNUQsU0FBSSxHQUFHLE1BQU0sQ0FBQztJQUN2QixDQUFDO0NBQUEsQ0FBQTtBQUhZLFlBQVk7SUFEeEIsVUFBVSxFQUFFO0dBQ0EsWUFBWSxDQUd4QjtTQUhZLFlBQVkiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBJbmplY3RhYmxlIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5cbkBJbmplY3RhYmxlKClcbmV4cG9ydCBjbGFzcyBUYWJzZXRDb25maWcge1xuICAvKiogcHJvdmlkZXMgZGVmYXVsdCBuYXZpZ2F0aW9uIGNvbnRleHQgY2xhc3M6ICd0YWJzJyBvciAncGlsbHMnICovXG4gIHB1YmxpYyB0eXBlID0gJ3RhYnMnO1xufVxuIl19

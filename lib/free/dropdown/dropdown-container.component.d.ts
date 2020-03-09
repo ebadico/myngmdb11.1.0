@@ -5,7 +5,7 @@ export declare class BsDropdownContainerComponent implements OnDestroy {
     isOpen: boolean;
     display: string;
     position: string;
-    readonly direction: 'down' | 'up';
+    get direction(): 'down' | 'up';
     private _subscription;
     constructor(_state: BsDropdownState);
     ngOnDestroy(): void;

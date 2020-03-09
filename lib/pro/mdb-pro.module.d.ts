@@ -24,5 +24,5 @@ export { MDBFileDropDirective, MDBFileSelectDirective, FileInputModule, MDBUploa
 export declare class MDBRootModulePro {
 }
 export declare class MDBBootstrapModulePro {
-    static forRoot(): ModuleWithProviders;
+    static forRoot(): ModuleWithProviders<MDBRootModulePro>;
 }

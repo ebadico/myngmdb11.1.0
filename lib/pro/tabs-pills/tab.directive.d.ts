@@ -8,7 +8,8 @@ export declare class TabDirective implements OnInit, OnDestroy {
     /** tab header text */
     heading: string;
     /** if true tab can not be activated */
-    disabled: boolean;
+    get disabled(): boolean;
+    set disabled(value: boolean);
     private _disabled;
     /** if true tab can be removable, additional button will appear */
     removable: boolean;
@@ -16,7 +17,8 @@ export declare class TabDirective implements OnInit, OnDestroy {
     customClass: string;
     tabOrder: number;
     /** tab active state toggle */
-    active: boolean;
+    get active(): boolean;
+    set active(active: boolean);
     /** fired when tab became active, $event:Tab equals to selected instance of Tab component */
     select: EventEmitter<TabDirective>;
     /** fired when tab became inactive, $event:Tab equals to deselected instance of Tab component */

@@ -10,11 +10,14 @@ export declare class MdbAutoCompleterComponent implements AfterContentInit, OnDe
     clearButtonTabIndex: number;
     appendToBody: boolean;
     disabled: boolean;
-    visibleOptions: number;
+    get visibleOptions(): number;
+    set visibleOptions(value: number);
     _visibleOptions: number;
-    optionHeight: any;
+    get optionHeight(): any;
+    set optionHeight(value: any);
     _optionHeight: number;
-    dropdownHeight: number;
+    get dropdownHeight(): number;
+    set dropdownHeight(value: number);
     _dropdownHeight: number;
     displayValue: ((value: any) => string) | null;
     select: EventEmitter<{

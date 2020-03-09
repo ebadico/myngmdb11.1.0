@@ -29,12 +29,15 @@ export declare class TabsetComponent implements OnDestroy, OnInit, AfterViewInit
     hiddenBsTab: EventEmitter<any>;
     getActiveTab: EventEmitter<any>;
     /** if true tabs will be placed vertically */
-    vertical: boolean;
+    get vertical(): boolean;
+    set vertical(value: boolean);
     setActiveTab(index: number): void;
     /** if true tabs fill the container and have a consistent width */
-    justified: boolean;
+    get justified(): boolean;
+    set justified(value: boolean);
     /** navigation context class: 'tabs' or 'pills' */
-    type: string;
+    get type(): string;
+    set type(value: string);
     constructor(platformId: string, config: TabsetConfig, ripple: WavesDirective, cdRef: ChangeDetectorRef, renderer: Renderer2);
     click(event: any, index: any): void;
     ngOnDestroy(): void;

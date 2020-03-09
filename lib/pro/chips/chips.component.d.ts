@@ -16,9 +16,9 @@ export declare class MaterialChipsComponent {
         backspace: number;
         delete: number;
     };
-    tagsfocusedChange: EventEmitter<{}>;
+    tagsfocusedChange: EventEmitter<any>;
     labelsChange: EventEmitter<string[]>;
-    readonly tagsfocused: boolean;
+    get tagsfocused(): boolean;
     private onTouchedCallback;
     private onChangeCallback;
     registerOnChange(fn: any): void;

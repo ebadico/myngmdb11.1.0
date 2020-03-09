@@ -29,7 +29,8 @@ export declare class TooltipDirective implements OnInit, OnDestroy, OnChanges {
     /**
      * Returns whether or not the tooltip is currently being shown
      */
-    isOpen: boolean;
+    get isOpen(): boolean;
+    set isOpen(value: boolean);
     /**
      * Allows to disable tooltip
      */

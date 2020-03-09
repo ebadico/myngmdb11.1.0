@@ -39,7 +39,7 @@ export declare class NavbarComponent implements AfterViewInit, OnInit, AfterCont
     toggle(): void;
     show(): void;
     hide(): void;
-    readonly displayStyle: "" | "flex";
+    get displayStyle(): "" | "flex";
     onResize(event: any): void;
     ngAfterContentChecked(): void;
     ngOnDestroy(): void;

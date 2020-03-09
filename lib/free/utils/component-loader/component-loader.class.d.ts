@@ -25,7 +25,7 @@ export declare class ComponentLoader<T> {
     private _contentRef;
     private _innerComponent;
     private _unregisterListenersFn;
-    readonly isShown: boolean;
+    get isShown(): boolean;
     private _isHiding;
     /**
      * Placement of a component. Accepts: "top", "bottom", "left", "right"

@@ -16,8 +16,8 @@ export declare class ButtonCheckboxDirective implements ControlValueAccessor, On
     protected onTouched: any;
     onClick(): void;
     ngOnInit(): any;
-    protected readonly trueValue: boolean;
-    protected readonly falseValue: boolean;
+    protected get trueValue(): boolean;
+    protected get falseValue(): boolean;
     toggle(state: boolean): void;
     writeValue(value: any): void;
     setDisabledState(isDisabled: boolean): void;

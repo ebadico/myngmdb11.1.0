@@ -6,9 +6,12 @@ export declare class MdbValidateDirective implements OnInit {
     private _validateSuccess;
     private _validateError;
     mdbValidate: boolean;
-    validate: boolean;
-    validateSuccess: boolean;
-    validateError: boolean;
+    get validate(): boolean;
+    set validate(value: boolean);
+    get validateSuccess(): boolean;
+    set validateSuccess(value: boolean);
+    get validateError(): boolean;
+    set validateError(value: boolean);
     constructor(renderer: Renderer2, el: ElementRef);
     updateSuccessClass(): void;
     updateErrorClass(): void;

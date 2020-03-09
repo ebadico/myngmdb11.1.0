@@ -32,15 +32,17 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     appendToBody: boolean;
     selectAllLabel: string;
     outline: boolean;
-    required: boolean;
+    get required(): boolean;
+    set required(value: boolean);
     private _required;
-    compareWith: (o1: any, o2: any) => boolean;
+    get compareWith(): (o1: any, o2: any) => boolean;
+    set compareWith(fn: (o1: any, o2: any) => boolean);
     opened: EventEmitter<any>;
     closed: EventEmitter<any>;
     selected: EventEmitter<IOption>;
     deselected: EventEmitter<IOption | IOption[]>;
     noOptionsFound: EventEmitter<string>;
-    changed: EventEmitter<{}>;
+    changed: EventEmitter<any>;
     selectionSpan: ElementRef;
     dropdown: SelectDropdownComponent;
     filterInput: ElementRef;
@@ -77,7 +79,7 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     left: number;
     documentClickFun: Function;
     itemsBefore: Array<any>;
-    readonly focused: boolean;
+    get focused(): boolean;
     private _focused;
     onChange: (_: any) => void;
     onTouched: () => void;
@@ -110,7 +112,8 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     /** API. **/
     open(): void;
     close(): void;
-    value: any | any[];
+    get value(): any | any[];
+    set value(v: any | any[]);
     private _setSelection;
     private _selectByValue;
     clear(): void;

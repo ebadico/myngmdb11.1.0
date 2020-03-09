@@ -36,7 +36,7 @@ export declare class ImageModalComponent implements OnInit {
     nextImage(): void;
     openGallery(index: any): void;
     fullScreen(): any;
-    readonly is_iPhone_or_iPod: boolean | undefined;
+    get is_iPhone_or_iPod(): boolean | undefined;
     keyboardControl(event: KeyboardEvent): void;
     swipe(action?: String): void;
 }

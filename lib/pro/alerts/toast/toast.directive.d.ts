@@ -5,5 +5,5 @@ export declare class ToastContainerDirective {
     getContainerElement(): HTMLElement;
 }
 export declare class ToastContainerModule {
-    static forRoot(): ModuleWithProviders;
+    static forRoot(): ModuleWithProviders<ToastContainerModule>;
 }

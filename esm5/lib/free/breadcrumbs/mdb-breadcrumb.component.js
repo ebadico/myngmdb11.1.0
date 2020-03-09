@@ -1,29 +1,24 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+import { __decorate, __metadata } from "tslib";
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 var MdbBreadcrumbComponent = /** @class */ (function () {
     function MdbBreadcrumbComponent() {
     }
-    MdbBreadcrumbComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'mdb-breadcrumb',
-                    template: "<ol class=\"breadcrumb list-inline list-unstyled {{customClass}} text-{{textTransform}}\">\n  <ng-content></ng-content>\n</ol>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                }] }
-    ];
-    MdbBreadcrumbComponent.propDecorators = {
-        customClass: [{ type: Input }],
-        textTransform: [{ type: Input }]
-    };
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], MdbBreadcrumbComponent.prototype, "customClass", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], MdbBreadcrumbComponent.prototype, "textTransform", void 0);
+    MdbBreadcrumbComponent = __decorate([
+        Component({
+            selector: 'mdb-breadcrumb',
+            template: "<ol class=\"breadcrumb list-inline list-unstyled {{customClass}} text-{{textTransform}}\">\n  <ng-content></ng-content>\n</ol>\n",
+            changeDetection: ChangeDetectionStrategy.OnPush
+        })
+    ], MdbBreadcrumbComponent);
     return MdbBreadcrumbComponent;
 }());
 export { MdbBreadcrumbComponent };
-if (false) {
-    /** @type {?} */
-    MdbBreadcrumbComponent.prototype.customClass;
-    /** @type {?} */
-    MdbBreadcrumbComponent.prototype.textTransform;
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWRiLWJyZWFkY3J1bWIuY29tcG9uZW50LmpzIiwic291cmNlUm9vdCI6Im5nOi8vbmctdWlraXQtcHJvLXN0YW5kYXJkLyIsInNvdXJjZXMiOlsibGliL2ZyZWUvYnJlYWRjcnVtYnMvbWRiLWJyZWFkY3J1bWIuY29tcG9uZW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7QUFBQSxPQUFPLEVBQUUsU0FBUyxFQUFFLEtBQUssRUFBRSx1QkFBdUIsRUFBRSxNQUFNLGVBQWUsQ0FBQztBQUUxRTtJQUFBO0lBUUEsQ0FBQzs7Z0JBUkEsU0FBUyxTQUFDO29CQUNULFFBQVEsRUFBRSxnQkFBZ0I7b0JBQzFCLDRJQUE4QztvQkFDOUMsZUFBZSxFQUFFLHVCQUF1QixDQUFDLE1BQU07aUJBQ2hEOzs7OEJBRUUsS0FBSztnQ0FDTCxLQUFLOztJQUNSLDZCQUFDO0NBQUEsQUFSRCxJQVFDO1NBSFksc0JBQXNCOzs7SUFDakMsNkNBQTZCOztJQUM3QiwrQ0FBK0IiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDb21wb25lbnQsIElucHV0LCBDaGFuZ2VEZXRlY3Rpb25TdHJhdGVneSB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuXG5AQ29tcG9uZW50KHtcbiAgc2VsZWN0b3I6ICdtZGItYnJlYWRjcnVtYicsXG4gIHRlbXBsYXRlVXJsOiAnLi9tZGItYnJlYWRjcnVtYi5jb21wb25lbnQuaHRtbCcsXG4gIGNoYW5nZURldGVjdGlvbjogQ2hhbmdlRGV0ZWN0aW9uU3RyYXRlZ3kuT25QdXNoLFxufSlcbmV4cG9ydCBjbGFzcyBNZGJCcmVhZGNydW1iQ29tcG9uZW50IHtcbiAgQElucHV0KCkgY3VzdG9tQ2xhc3M6IHN0cmluZztcbiAgQElucHV0KCkgdGV4dFRyYW5zZm9ybTogc3RyaW5nO1xufVxuIl19
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWRiLWJyZWFkY3J1bWIuY29tcG9uZW50LmpzIiwic291cmNlUm9vdCI6Im5nOi8vbmctdWlraXQtcHJvLXN0YW5kYXJkLyIsInNvdXJjZXMiOlsibGliL2ZyZWUvYnJlYWRjcnVtYnMvbWRiLWJyZWFkY3J1bWIuY29tcG9uZW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxPQUFPLEVBQUUsU0FBUyxFQUFFLEtBQUssRUFBRSx1QkFBdUIsRUFBRSxNQUFNLGVBQWUsQ0FBQztBQU8xRTtJQUFBO0lBR0EsQ0FBQztJQUZVO1FBQVIsS0FBSyxFQUFFOzsrREFBcUI7SUFDcEI7UUFBUixLQUFLLEVBQUU7O2lFQUF1QjtJQUZwQixzQkFBc0I7UUFMbEMsU0FBUyxDQUFDO1lBQ1QsUUFBUSxFQUFFLGdCQUFnQjtZQUMxQiw0SUFBOEM7WUFDOUMsZUFBZSxFQUFFLHVCQUF1QixDQUFDLE1BQU07U0FDaEQsQ0FBQztPQUNXLHNCQUFzQixDQUdsQztJQUFELDZCQUFDO0NBQUEsQUFIRCxJQUdDO1NBSFksc0JBQXNCIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQ29tcG9uZW50LCBJbnB1dCwgQ2hhbmdlRGV0ZWN0aW9uU3RyYXRlZ3kgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcblxuQENvbXBvbmVudCh7XG4gIHNlbGVjdG9yOiAnbWRiLWJyZWFkY3J1bWInLFxuICB0ZW1wbGF0ZVVybDogJy4vbWRiLWJyZWFkY3J1bWIuY29tcG9uZW50Lmh0bWwnLFxuICBjaGFuZ2VEZXRlY3Rpb246IENoYW5nZURldGVjdGlvblN0cmF0ZWd5Lk9uUHVzaCxcbn0pXG5leHBvcnQgY2xhc3MgTWRiQnJlYWRjcnVtYkNvbXBvbmVudCB7XG4gIEBJbnB1dCgpIGN1c3RvbUNsYXNzOiBzdHJpbmc7XG4gIEBJbnB1dCgpIHRleHRUcmFuc2Zvcm06IHN0cmluZztcbn1cbiJdfQ==

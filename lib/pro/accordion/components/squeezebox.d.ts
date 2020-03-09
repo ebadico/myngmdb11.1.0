@@ -4,7 +4,8 @@ import { MdbAccordionService } from '../mdb-accordion.service';
 export declare class SqueezeBoxComponent implements OnInit, AfterContentInit, OnDestroy {
     private accordionService;
     private itemsChanges;
-    multiple: boolean;
+    get multiple(): boolean;
+    set multiple(value: boolean);
     autoExpand: boolean;
     private _multiple;
     items: QueryList<SBItemComponent>;

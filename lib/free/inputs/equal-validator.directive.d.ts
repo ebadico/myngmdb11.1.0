@@ -3,7 +3,7 @@ export declare class EqualValidatorDirective implements Validator {
     validateEqual: string;
     reverse: string;
     constructor(validateEqual: string, reverse: string);
-    private readonly isReverse;
+    private get isReverse();
     validate(c: AbstractControl): {
         [key: string]: any;
     } | null;

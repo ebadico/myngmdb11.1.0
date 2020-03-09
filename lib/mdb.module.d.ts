@@ -4,5 +4,5 @@ export { MDBBootstrapModulePro } from './pro/mdb-pro.module';
 export declare class MDBRootModules {
 }
 export declare class MDBBootstrapModulesPro {
-    static forRoot(): ModuleWithProviders;
+    static forRoot(): ModuleWithProviders<MDBRootModules>;
 }

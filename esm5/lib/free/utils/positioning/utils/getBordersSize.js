@@ -1,21 +1,10 @@
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
  * Helper to detect borders of a given element
  */
-/**
- * @param {?} styles
- * @param {?} axis
- * @return {?}
- */
 export function getBordersSize(styles, axis) {
-    /** @type {?} */
     var sideA = axis === 'x' ? 'Left' : 'Top';
-    /** @type {?} */
     var sideB = sideA === 'Left' ? 'Right' : 'Bottom';
-    return (parseFloat(styles[(/** @type {?} */ ("border" + sideA + "Width"))]) +
-        parseFloat(styles[(/** @type {?} */ ("border" + sideB + "Width"))]));
+    return (parseFloat(styles["border" + sideA + "Width"]) +
+        parseFloat(styles["border" + sideB + "Width"]));
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2V0Qm9yZGVyc1NpemUuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9uZy11aWtpdC1wcm8tc3RhbmRhcmQvIiwic291cmNlcyI6WyJsaWIvZnJlZS91dGlscy9wb3NpdGlvbmluZy91dGlscy9nZXRCb3JkZXJzU2l6ZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7QUFJQSxNQUFNLFVBQVUsY0FBYyxDQUFDLE1BQTJCLEVBQUUsSUFBWTs7UUFDaEUsS0FBSyxHQUFHLElBQUksS0FBSyxHQUFHLENBQUMsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsS0FBSzs7UUFDckMsS0FBSyxHQUFHLEtBQUssS0FBSyxNQUFNLENBQUMsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsUUFBUTtJQUVuRCxPQUFPLENBQ0wsVUFBVSxDQUFDLE1BQU0sQ0FBQyxtQkFBQSxXQUFTLEtBQUssVUFBTyxFQUFPLENBQUMsQ0FBQztRQUNoRCxVQUFVLENBQUMsTUFBTSxDQUFDLG1CQUFBLFdBQVMsS0FBSyxVQUFPLEVBQU8sQ0FBQyxDQUFDLENBQ2pELENBQUM7QUFDSixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBIZWxwZXIgdG8gZGV0ZWN0IGJvcmRlcnMgb2YgYSBnaXZlbiBlbGVtZW50XG4gKi9cblxuZXhwb3J0IGZ1bmN0aW9uIGdldEJvcmRlcnNTaXplKHN0eWxlczogQ1NTU3R5bGVEZWNsYXJhdGlvbiwgYXhpczogc3RyaW5nKSB7XG4gIGNvbnN0IHNpZGVBID0gYXhpcyA9PT0gJ3gnID8gJ0xlZnQnIDogJ1RvcCc7XG4gIGNvbnN0IHNpZGVCID0gc2lkZUEgPT09ICdMZWZ0JyA/ICdSaWdodCcgOiAnQm90dG9tJztcblxuICByZXR1cm4gKFxuICAgIHBhcnNlRmxvYXQoc3R5bGVzW2Bib3JkZXIke3NpZGVBfVdpZHRoYCBhcyBhbnldKSArXG4gICAgcGFyc2VGbG9hdChzdHlsZXNbYGJvcmRlciR7c2lkZUJ9V2lkdGhgIGFzIGFueV0pXG4gICk7XG59XG4iXX0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2V0Qm9yZGVyc1NpemUuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9uZy11aWtpdC1wcm8tc3RhbmRhcmQvIiwic291cmNlcyI6WyJsaWIvZnJlZS91dGlscy9wb3NpdGlvbmluZy91dGlscy9nZXRCb3JkZXJzU2l6ZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7R0FFRztBQUVILE1BQU0sVUFBVSxjQUFjLENBQUMsTUFBMkIsRUFBRSxJQUFZO0lBQ3RFLElBQU0sS0FBSyxHQUFHLElBQUksS0FBSyxHQUFHLENBQUMsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsS0FBSyxDQUFDO0lBQzVDLElBQU0sS0FBSyxHQUFHLEtBQUssS0FBSyxNQUFNLENBQUMsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsUUFBUSxDQUFDO0lBRXBELE9BQU8sQ0FDTCxVQUFVLENBQUMsTUFBTSxDQUFDLFdBQVMsS0FBSyxVQUFjLENBQUMsQ0FBQztRQUNoRCxVQUFVLENBQUMsTUFBTSxDQUFDLFdBQVMsS0FBSyxVQUFjLENBQUMsQ0FBQyxDQUNqRCxDQUFDO0FBQ0osQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogSGVscGVyIHRvIGRldGVjdCBib3JkZXJzIG9mIGEgZ2l2ZW4gZWxlbWVudFxuICovXG5cbmV4cG9ydCBmdW5jdGlvbiBnZXRCb3JkZXJzU2l6ZShzdHlsZXM6IENTU1N0eWxlRGVjbGFyYXRpb24sIGF4aXM6IHN0cmluZykge1xuICBjb25zdCBzaWRlQSA9IGF4aXMgPT09ICd4JyA/ICdMZWZ0JyA6ICdUb3AnO1xuICBjb25zdCBzaWRlQiA9IHNpZGVBID09PSAnTGVmdCcgPyAnUmlnaHQnIDogJ0JvdHRvbSc7XG5cbiAgcmV0dXJuIChcbiAgICBwYXJzZUZsb2F0KHN0eWxlc1tgYm9yZGVyJHtzaWRlQX1XaWR0aGAgYXMgYW55XSkgK1xuICAgIHBhcnNlRmxvYXQoc3R5bGVzW2Bib3JkZXIke3NpZGVCfVdpZHRoYCBhcyBhbnldKVxuICApO1xufVxuIl19

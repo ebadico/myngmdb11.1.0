@@ -7,7 +7,8 @@ export declare class ScrollSpyWindowDirective implements OnInit, AfterViewInit {
     private ngZone;
     private scrollSpyService;
     private id;
-    scrollSpyId: string;
+    get scrollSpyId(): string;
+    set scrollSpyId(newId: string);
     private _scrollSpyId;
     offset: number;
     constructor(document: any, el: ElementRef, renderer: Renderer2, ngZone: NgZone, scrollSpyService: ScrollSpyService);

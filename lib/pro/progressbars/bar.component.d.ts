@@ -5,7 +5,8 @@ export declare class BarComponent implements OnInit, OnDestroy {
     /** provide one of the four supported contextual classes: `success`, `info`, `warning`, `danger` */
     type: string;
     /** current value of progress bar */
-    value: number;
+    get value(): number;
+    set value(v: number);
     percent: number;
     transition: string;
     progress: ProgressDirective;

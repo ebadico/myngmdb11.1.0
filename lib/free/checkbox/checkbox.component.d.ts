@@ -29,7 +29,7 @@ export declare class CheckboxComponent implements OnInit, OnChanges {
     onDocumentClick(): void;
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
-    readonly changeEvent: MdbCheckboxChange;
+    get changeEvent(): MdbCheckboxChange;
     toggle(): void;
     onCheckboxClick(event: any): void;
     onCheckboxChange(event: any): void;

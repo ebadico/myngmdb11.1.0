@@ -3,6 +3,7 @@ export declare class NgTranscludeDirective {
     viewRef: ViewContainerRef;
     protected _viewRef: ViewContainerRef;
     protected _ngTransclude: TemplateRef<any>;
-    mdbNgTransclude: TemplateRef<any>;
+    set mdbNgTransclude(templateRef: TemplateRef<any>);
+    get mdbNgTransclude(): TemplateRef<any>;
     constructor(viewRef: ViewContainerRef);
 }

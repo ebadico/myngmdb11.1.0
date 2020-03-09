@@ -1,9 +1,6 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+import { __decorate, __metadata } from "tslib";
 import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy, } from '@angular/core';
-export class SimpleChartComponent {
+let SimpleChartComponent = class SimpleChartComponent {
     constructor() {
         this.options = {
             barColor: null,
@@ -23,9 +20,6 @@ export class SimpleChartComponent {
             },
         };
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.options.barColor = '#' + this.barColor;
         this.options.trackColor = '#' + this.trackColor;
@@ -39,58 +33,64 @@ export class SimpleChartComponent {
         this.options.animate.duration = this.animate.duration;
         this.options.animate.enabled = this.animate.enabled;
     }
-}
-SimpleChartComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'mdb-simple-chart',
-                template: "<span class=\"min-chart\">\n  <span \n  *ngIf=\"customText\"  \n  class=\"chart-custom-text\"\n  [ngStyle]=\"{\n  'line-height': size + 'px',\n  'width': size + 'px',\n  'height': size + 'px'}\">{{ customText }}</span>\n  <span \n  *ngIf=\"!customText\" \n  class=\"percent\">{{ percent }}</span>\n  <mdb-easy-pie-chart [percent]=\"percent\" [options]=\"options\"></mdb-easy-pie-chart>\n</span>",
-                encapsulation: ViewEncapsulation.None,
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                styles: [".min-chart{position:relative;display:inline-block;width:110px;height:110px;margin-top:50px;margin-bottom:50px;text-align:center}.min-chart canvas{position:absolute;top:0;left:0}.min-chart .percent{display:inline-block;line-height:110px;z-index:2}.min-chart .percent:after{content:'%';margin-left:.1em;font-size:.8rem}.chart-custom-text{display:inline-block;overflow:hidden;z-index:2}"]
-            }] }
-];
-/** @nocollapse */
-SimpleChartComponent.ctorParameters = () => [];
-SimpleChartComponent.propDecorators = {
-    customText: [{ type: Input }],
-    percent: [{ type: Input }],
-    barColor: [{ type: Input }],
-    trackColor: [{ type: Input }],
-    scaleColor: [{ type: Input }],
-    scaleLength: [{ type: Input }],
-    lineCap: [{ type: Input }],
-    lineWidth: [{ type: Input }],
-    trackWidth: [{ type: Input }],
-    size: [{ type: Input }],
-    rotate: [{ type: Input }],
-    animate: [{ type: Input }]
 };
-if (false) {
-    /** @type {?} */
-    SimpleChartComponent.prototype.customText;
-    /** @type {?} */
-    SimpleChartComponent.prototype.percent;
-    /** @type {?} */
-    SimpleChartComponent.prototype.barColor;
-    /** @type {?} */
-    SimpleChartComponent.prototype.trackColor;
-    /** @type {?} */
-    SimpleChartComponent.prototype.scaleColor;
-    /** @type {?} */
-    SimpleChartComponent.prototype.scaleLength;
-    /** @type {?} */
-    SimpleChartComponent.prototype.lineCap;
-    /** @type {?} */
-    SimpleChartComponent.prototype.lineWidth;
-    /** @type {?} */
-    SimpleChartComponent.prototype.trackWidth;
-    /** @type {?} */
-    SimpleChartComponent.prototype.size;
-    /** @type {?} */
-    SimpleChartComponent.prototype.rotate;
-    /** @type {?} */
-    SimpleChartComponent.prototype.animate;
-    /** @type {?} */
-    SimpleChartComponent.prototype.options;
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2hhcnQtc2ltcGxlLmNvbXBvbmVudC5qcyIsInNvdXJjZVJvb3QiOiJuZzovL25nLXVpa2l0LXByby1zdGFuZGFyZC8iLCJzb3VyY2VzIjpbImxpYi9wcm8vZWFzeS1jaGFydHMvY2hhcnQtc2ltcGxlLmNvbXBvbmVudC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7O0FBQUEsT0FBTyxFQUNMLFNBQVMsRUFDVCxLQUFLLEVBRUwsaUJBQWlCLEVBQ2pCLHVCQUF1QixHQUN4QixNQUFNLGVBQWUsQ0FBQztBQVN2QixNQUFNLE9BQU8sb0JBQW9CO0lBK0IvQjtRQWxCTyxZQUFPLEdBQVE7WUFDcEIsUUFBUSxFQUFFLElBQUk7WUFDZCxVQUFVLEVBQUUsSUFBSTtZQUNoQixVQUFVLEVBQUUsSUFBSTtZQUNoQixXQUFXLEVBQUUsRUFBRTtZQUNmLE9BQU8sRUFBRSxJQUFJO1lBQ2IsU0FBUyxFQUFFLElBQUk7WUFDZixVQUFVLEVBQUUsSUFBSTtZQUNoQixJQUFJLEVBQUUsSUFBSTtZQUNWLE1BQU0sRUFBRSxJQUFJO1lBQ1osUUFBUSxFQUFFLElBQUk7WUFDZCxlQUFlLEVBQUUsSUFBSTtZQUNyQixPQUFPLEVBQUU7Z0JBQ1AsUUFBUSxFQUFFLElBQUk7Z0JBQ2QsT0FBTyxFQUFFLElBQUk7YUFDZDtTQUNGLENBQUM7SUFFYSxDQUFDOzs7O0lBRWhCLFFBQVE7UUFDTixJQUFJLENBQUMsT0FBTyxDQUFDLFFBQVEsR0FBRyxHQUFHLEdBQUcsSUFBSSxDQUFDLFFBQVEsQ0FBQztRQUM1QyxJQUFJLENBQUMsT0FBTyxDQUFDLFVBQVUsR0FBRyxHQUFHLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQztRQUNoRCxJQUFJLENBQUMsT0FBTyxDQUFDLFVBQVUsR0FBRyxHQUFHLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQztRQUNoRCxJQUFJLENBQUMsT0FBTyxDQUFDLFdBQVcsR0FBRyxJQUFJLENBQUMsV0FBVyxDQUFDO1FBQzVDLElBQUksQ0FBQyxPQUFPLENBQUMsT0FBTyxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUM7UUFDcEMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxTQUFTLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBQztRQUN4QyxJQUFJLENBQUMsT0FBTyxDQUFDLFVBQVUsR0FBRyxJQUFJLENBQUMsVUFBVSxDQUFDO1FBQzFDLElBQUksQ0FBQyxPQUFPLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQyxJQUFJLENBQUM7UUFDOUIsSUFBSSxDQUFDLE9BQU8sQ0FBQyxNQUFNLEdBQUcsSUFBSSxDQUFDLE1BQU0sQ0FBQztRQUNsQyxJQUFJLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxRQUFRLEdBQUcsSUFBSSxDQUFDLE9BQU8sQ0FBQyxRQUFRLENBQUM7UUFDdEQsSUFBSSxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUMsT0FBTyxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDO0lBQ3RELENBQUM7OztZQXBERixTQUFTLFNBQUM7Z0JBQ1QsUUFBUSxFQUFFLGtCQUFrQjtnQkFDNUIsc1pBQTRDO2dCQUU1QyxhQUFhLEVBQUUsaUJBQWlCLENBQUMsSUFBSTtnQkFDckMsZUFBZSxFQUFFLHVCQUF1QixDQUFDLE1BQU07O2FBQ2hEOzs7Ozt5QkFFRSxLQUFLO3NCQUNMLEtBQUs7dUJBQ0wsS0FBSzt5QkFDTCxLQUFLO3lCQUNMLEtBQUs7MEJBQ0wsS0FBSztzQkFDTCxLQUFLO3dCQUNMLEtBQUs7eUJBQ0wsS0FBSzttQkFDTCxLQUFLO3FCQUNMLEtBQUs7c0JBQ0wsS0FBSzs7OztJQVhOLDBDQUE0Qjs7SUFDNUIsdUNBQXlCOztJQUN6Qix3Q0FBMEI7O0lBQzFCLDBDQUE0Qjs7SUFDNUIsMENBQTRCOztJQUM1QiwyQ0FBNkI7O0lBQzdCLHVDQUF5Qjs7SUFDekIseUNBQTJCOztJQUMzQiwwQ0FBNEI7O0lBQzVCLG9DQUFzQjs7SUFDdEIsc0NBQXdCOztJQUN4Qix1Q0FBeUQ7O0lBQ3pELHVDQWdCRSIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7XG4gIENvbXBvbmVudCxcbiAgSW5wdXQsXG4gIE9uSW5pdCxcbiAgVmlld0VuY2Fwc3VsYXRpb24sXG4gIENoYW5nZURldGVjdGlvblN0cmF0ZWd5LFxufSBmcm9tICdAYW5ndWxhci9jb3JlJztcblxuQENvbXBvbmVudCh7XG4gIHNlbGVjdG9yOiAnbWRiLXNpbXBsZS1jaGFydCcsXG4gIHRlbXBsYXRlVXJsOiAnLi9jaGFydC1zaW1wbGUuY29tcG9uZW50Lmh0bWwnLFxuICBzdHlsZVVybHM6IFsnLi9lYXN5LWNoYXJ0cy1tb2R1bGUuc2NzcyddLFxuICBlbmNhcHN1bGF0aW9uOiBWaWV3RW5jYXBzdWxhdGlvbi5Ob25lLFxuICBjaGFuZ2VEZXRlY3Rpb246IENoYW5nZURldGVjdGlvblN0cmF0ZWd5Lk9uUHVzaCxcbn0pXG5leHBvcnQgY2xhc3MgU2ltcGxlQ2hhcnRDb21wb25lbnQgaW1wbGVtZW50cyBPbkluaXQge1xuICBASW5wdXQoKSBjdXN0b21UZXh0OiBzdHJpbmc7XG4gIEBJbnB1dCgpIHBlcmNlbnQ6IG51bWJlcjtcbiAgQElucHV0KCkgYmFyQ29sb3I6IHN0cmluZztcbiAgQElucHV0KCkgdHJhY2tDb2xvcjogc3RyaW5nO1xuICBASW5wdXQoKSBzY2FsZUNvbG9yOiBzdHJpbmc7XG4gIEBJbnB1dCgpIHNjYWxlTGVuZ3RoOiBudW1iZXI7XG4gIEBJbnB1dCgpIGxpbmVDYXA6IHN0cmluZztcbiAgQElucHV0KCkgbGluZVdpZHRoOiBudW1iZXI7XG4gIEBJbnB1dCgpIHRyYWNrV2lkdGg6IG51bWJlcjtcbiAgQElucHV0KCkgc2l6ZTogbnVtYmVyO1xuICBASW5wdXQoKSByb3RhdGU6IG51bWJlcjtcbiAgQElucHV0KCkgYW5pbWF0ZTogeyBkdXJhdGlvbjogc3RyaW5nOyBlbmFibGVkOiBib29sZWFuIH07XG4gIHB1YmxpYyBvcHRpb25zOiBhbnkgPSB7XG4gICAgYmFyQ29sb3I6IG51bGwsXG4gICAgdHJhY2tDb2xvcjogbnVsbCxcbiAgICBzY2FsZUNvbG9yOiBudWxsLFxuICAgIHNjYWxlTGVuZ3RoOiAnJyxcbiAgICBsaW5lQ2FwOiBudWxsLFxuICAgIGxpbmVXaWR0aDogbnVsbCxcbiAgICB0cmFja1dpZHRoOiBudWxsLFxuICAgIHNpemU6IG51bGwsXG4gICAgcm90YXRlOiBudWxsLFxuICAgIGR1cmF0aW9uOiBudWxsLFxuICAgIGVuYWJsZUFuaW1hdGlvbjogbnVsbCxcbiAgICBhbmltYXRlOiB7XG4gICAgICBkdXJhdGlvbjogMTAwMCxcbiAgICAgIGVuYWJsZWQ6IHRydWUsXG4gICAgfSxcbiAgfTtcblxuICBjb25zdHJ1Y3RvcigpIHt9XG5cbiAgbmdPbkluaXQoKSB7XG4gICAgdGhpcy5vcHRpb25zLmJhckNvbG9yID0gJyMnICsgdGhpcy5iYXJDb2xvcjtcbiAgICB0aGlzLm9wdGlvbnMudHJhY2tDb2xvciA9ICcjJyArIHRoaXMudHJhY2tDb2xvcjtcbiAgICB0aGlzLm9wdGlvbnMuc2NhbGVDb2xvciA9ICcjJyArIHRoaXMuc2NhbGVDb2xvcjtcbiAgICB0aGlzLm9wdGlvbnMuc2NhbGVMZW5ndGggPSB0aGlzLnNjYWxlTGVuZ3RoO1xuICAgIHRoaXMub3B0aW9ucy5saW5lQ2FwID0gdGhpcy5saW5lQ2FwO1xuICAgIHRoaXMub3B0aW9ucy5saW5lV2lkdGggPSB0aGlzLmxpbmVXaWR0aDtcbiAgICB0aGlzLm9wdGlvbnMudHJhY2tXaWR0aCA9IHRoaXMudHJhY2tXaWR0aDtcbiAgICB0aGlzLm9wdGlvbnMuc2l6ZSA9IHRoaXMuc2l6ZTtcbiAgICB0aGlzLm9wdGlvbnMucm90YXRlID0gdGhpcy5yb3RhdGU7XG4gICAgdGhpcy5vcHRpb25zLmFuaW1hdGUuZHVyYXRpb24gPSB0aGlzLmFuaW1hdGUuZHVyYXRpb247XG4gICAgdGhpcy5vcHRpb25zLmFuaW1hdGUuZW5hYmxlZCA9IHRoaXMuYW5pbWF0ZS5lbmFibGVkO1xuICB9XG59XG4iXX0=
+__decorate([
+    Input(),
+    __metadata("design:type", String)
+], SimpleChartComponent.prototype, "customText", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Number)
+], SimpleChartComponent.prototype, "percent", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", String)
+], SimpleChartComponent.prototype, "barColor", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", String)
+], SimpleChartComponent.prototype, "trackColor", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", String)
+], SimpleChartComponent.prototype, "scaleColor", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Number)
+], SimpleChartComponent.prototype, "scaleLength", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", String)
+], SimpleChartComponent.prototype, "lineCap", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Number)
+], SimpleChartComponent.prototype, "lineWidth", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Number)
+], SimpleChartComponent.prototype, "trackWidth", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Number)
+], SimpleChartComponent.prototype, "size", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Number)
+], SimpleChartComponent.prototype, "rotate", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], SimpleChartComponent.prototype, "animate", void 0);
+SimpleChartComponent = __decorate([
+    Component({
+        selector: 'mdb-simple-chart',
+        template: "<span class=\"min-chart\">\n  <span \n  *ngIf=\"customText\"  \n  class=\"chart-custom-text\"\n  [ngStyle]=\"{\n  'line-height': size + 'px',\n  'width': size + 'px',\n  'height': size + 'px'}\">{{ customText }}</span>\n  <span \n  *ngIf=\"!customText\" \n  class=\"percent\">{{ percent }}</span>\n  <mdb-easy-pie-chart [percent]=\"percent\" [options]=\"options\"></mdb-easy-pie-chart>\n</span>",
+        encapsulation: ViewEncapsulation.None,
+        changeDetection: ChangeDetectionStrategy.OnPush,
+        styles: [".min-chart{position:relative;display:inline-block;width:110px;height:110px;margin-top:50px;margin-bottom:50px;text-align:center}.min-chart canvas{position:absolute;top:0;left:0}.min-chart .percent{display:inline-block;line-height:110px;z-index:2}.min-chart .percent:after{content:\"%\";margin-left:.1em;font-size:.8rem}.chart-custom-text{display:inline-block;overflow:hidden;z-index:2}"]
+    }),
+    __metadata("design:paramtypes", [])
+], SimpleChartComponent);
+export { SimpleChartComponent };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2hhcnQtc2ltcGxlLmNvbXBvbmVudC5qcyIsInNvdXJjZVJvb3QiOiJuZzovL25nLXVpa2l0LXByby1zdGFuZGFyZC8iLCJzb3VyY2VzIjpbImxpYi9wcm8vZWFzeS1jaGFydHMvY2hhcnQtc2ltcGxlLmNvbXBvbmVudC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsT0FBTyxFQUNMLFNBQVMsRUFDVCxLQUFLLEVBRUwsaUJBQWlCLEVBQ2pCLHVCQUF1QixHQUN4QixNQUFNLGVBQWUsQ0FBQztBQVN2QixJQUFhLG9CQUFvQixHQUFqQyxNQUFhLG9CQUFvQjtJQStCL0I7UUFsQk8sWUFBTyxHQUFRO1lBQ3BCLFFBQVEsRUFBRSxJQUFJO1lBQ2QsVUFBVSxFQUFFLElBQUk7WUFDaEIsVUFBVSxFQUFFLElBQUk7WUFDaEIsV0FBVyxFQUFFLEVBQUU7WUFDZixPQUFPLEVBQUUsSUFBSTtZQUNiLFNBQVMsRUFBRSxJQUFJO1lBQ2YsVUFBVSxFQUFFLElBQUk7WUFDaEIsSUFBSSxFQUFFLElBQUk7WUFDVixNQUFNLEVBQUUsSUFBSTtZQUNaLFFBQVEsRUFBRSxJQUFJO1lBQ2QsZUFBZSxFQUFFLElBQUk7WUFDckIsT0FBTyxFQUFFO2dCQUNQLFFBQVEsRUFBRSxJQUFJO2dCQUNkLE9BQU8sRUFBRSxJQUFJO2FBQ2Q7U0FDRixDQUFDO0lBRWEsQ0FBQztJQUVoQixRQUFRO1FBQ04sSUFBSSxDQUFDLE9BQU8sQ0FBQyxRQUFRLEdBQUcsR0FBRyxHQUFHLElBQUksQ0FBQyxRQUFRLENBQUM7UUFDNUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxVQUFVLEdBQUcsR0FBRyxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUM7UUFDaEQsSUFBSSxDQUFDLE9BQU8sQ0FBQyxVQUFVLEdBQUcsR0FBRyxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUM7UUFDaEQsSUFBSSxDQUFDLE9BQU8sQ0FBQyxXQUFXLEdBQUcsSUFBSSxDQUFDLFdBQVcsQ0FBQztRQUM1QyxJQUFJLENBQUMsT0FBTyxDQUFDLE9BQU8sR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDO1FBQ3BDLElBQUksQ0FBQyxPQUFPLENBQUMsU0FBUyxHQUFHLElBQUksQ0FBQyxTQUFTLENBQUM7UUFDeEMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxVQUFVLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQztRQUMxQyxJQUFJLENBQUMsT0FBTyxDQUFDLElBQUksR0FBRyxJQUFJLENBQUMsSUFBSSxDQUFDO1FBQzlCLElBQUksQ0FBQyxPQUFPLENBQUMsTUFBTSxHQUFHLElBQUksQ0FBQyxNQUFNLENBQUM7UUFDbEMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUMsUUFBUSxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUMsUUFBUSxDQUFDO1FBQ3RELElBQUksQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDLE9BQU8sR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQztJQUN0RCxDQUFDO0NBQ0YsQ0FBQTtBQTdDVTtJQUFSLEtBQUssRUFBRTs7d0RBQW9CO0FBQ25CO0lBQVIsS0FBSyxFQUFFOztxREFBaUI7QUFDaEI7SUFBUixLQUFLLEVBQUU7O3NEQUFrQjtBQUNqQjtJQUFSLEtBQUssRUFBRTs7d0RBQW9CO0FBQ25CO0lBQVIsS0FBSyxFQUFFOzt3REFBb0I7QUFDbkI7SUFBUixLQUFLLEVBQUU7O3lEQUFxQjtBQUNwQjtJQUFSLEtBQUssRUFBRTs7cURBQWlCO0FBQ2hCO0lBQVIsS0FBSyxFQUFFOzt1REFBbUI7QUFDbEI7SUFBUixLQUFLLEVBQUU7O3dEQUFvQjtBQUNuQjtJQUFSLEtBQUssRUFBRTs7a0RBQWM7QUFDYjtJQUFSLEtBQUssRUFBRTs7b0RBQWdCO0FBQ2Y7SUFBUixLQUFLLEVBQUU7O3FEQUFpRDtBQVo5QyxvQkFBb0I7SUFQaEMsU0FBUyxDQUFDO1FBQ1QsUUFBUSxFQUFFLGtCQUFrQjtRQUM1QixzWkFBNEM7UUFFNUMsYUFBYSxFQUFFLGlCQUFpQixDQUFDLElBQUk7UUFDckMsZUFBZSxFQUFFLHVCQUF1QixDQUFDLE1BQU07O0tBQ2hELENBQUM7O0dBQ1csb0JBQW9CLENBOENoQztTQTlDWSxvQkFBb0IiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQge1xuICBDb21wb25lbnQsXG4gIElucHV0LFxuICBPbkluaXQsXG4gIFZpZXdFbmNhcHN1bGF0aW9uLFxuICBDaGFuZ2VEZXRlY3Rpb25TdHJhdGVneSxcbn0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5cbkBDb21wb25lbnQoe1xuICBzZWxlY3RvcjogJ21kYi1zaW1wbGUtY2hhcnQnLFxuICB0ZW1wbGF0ZVVybDogJy4vY2hhcnQtc2ltcGxlLmNvbXBvbmVudC5odG1sJyxcbiAgc3R5bGVVcmxzOiBbJy4vZWFzeS1jaGFydHMtbW9kdWxlLnNjc3MnXSxcbiAgZW5jYXBzdWxhdGlvbjogVmlld0VuY2Fwc3VsYXRpb24uTm9uZSxcbiAgY2hhbmdlRGV0ZWN0aW9uOiBDaGFuZ2VEZXRlY3Rpb25TdHJhdGVneS5PblB1c2gsXG59KVxuZXhwb3J0IGNsYXNzIFNpbXBsZUNoYXJ0Q29tcG9uZW50IGltcGxlbWVudHMgT25Jbml0IHtcbiAgQElucHV0KCkgY3VzdG9tVGV4dDogc3RyaW5nO1xuICBASW5wdXQoKSBwZXJjZW50OiBudW1iZXI7XG4gIEBJbnB1dCgpIGJhckNvbG9yOiBzdHJpbmc7XG4gIEBJbnB1dCgpIHRyYWNrQ29sb3I6IHN0cmluZztcbiAgQElucHV0KCkgc2NhbGVDb2xvcjogc3RyaW5nO1xuICBASW5wdXQoKSBzY2FsZUxlbmd0aDogbnVtYmVyO1xuICBASW5wdXQoKSBsaW5lQ2FwOiBzdHJpbmc7XG4gIEBJbnB1dCgpIGxpbmVXaWR0aDogbnVtYmVyO1xuICBASW5wdXQoKSB0cmFja1dpZHRoOiBudW1iZXI7XG4gIEBJbnB1dCgpIHNpemU6IG51bWJlcjtcbiAgQElucHV0KCkgcm90YXRlOiBudW1iZXI7XG4gIEBJbnB1dCgpIGFuaW1hdGU6IHsgZHVyYXRpb246IHN0cmluZzsgZW5hYmxlZDogYm9vbGVhbiB9O1xuICBwdWJsaWMgb3B0aW9uczogYW55ID0ge1xuICAgIGJhckNvbG9yOiBudWxsLFxuICAgIHRyYWNrQ29sb3I6IG51bGwsXG4gICAgc2NhbGVDb2xvcjogbnVsbCxcbiAgICBzY2FsZUxlbmd0aDogJycsXG4gICAgbGluZUNhcDogbnVsbCxcbiAgICBsaW5lV2lkdGg6IG51bGwsXG4gICAgdHJhY2tXaWR0aDogbnVsbCxcbiAgICBzaXplOiBudWxsLFxuICAgIHJvdGF0ZTogbnVsbCxcbiAgICBkdXJhdGlvbjogbnVsbCxcbiAgICBlbmFibGVBbmltYXRpb246IG51bGwsXG4gICAgYW5pbWF0ZToge1xuICAgICAgZHVyYXRpb246IDEwMDAsXG4gICAgICBlbmFibGVkOiB0cnVlLFxuICAgIH0sXG4gIH07XG5cbiAgY29uc3RydWN0b3IoKSB7fVxuXG4gIG5nT25Jbml0KCkge1xuICAgIHRoaXMub3B0aW9ucy5iYXJDb2xvciA9ICcjJyArIHRoaXMuYmFyQ29sb3I7XG4gICAgdGhpcy5vcHRpb25zLnRyYWNrQ29sb3IgPSAnIycgKyB0aGlzLnRyYWNrQ29sb3I7XG4gICAgdGhpcy5vcHRpb25zLnNjYWxlQ29sb3IgPSAnIycgKyB0aGlzLnNjYWxlQ29sb3I7XG4gICAgdGhpcy5vcHRpb25zLnNjYWxlTGVuZ3RoID0gdGhpcy5zY2FsZUxlbmd0aDtcbiAgICB0aGlzLm9wdGlvbnMubGluZUNhcCA9IHRoaXMubGluZUNhcDtcbiAgICB0aGlzLm9wdGlvbnMubGluZVdpZHRoID0gdGhpcy5saW5lV2lkdGg7XG4gICAgdGhpcy5vcHRpb25zLnRyYWNrV2lkdGggPSB0aGlzLnRyYWNrV2lkdGg7XG4gICAgdGhpcy5vcHRpb25zLnNpemUgPSB0aGlzLnNpemU7XG4gICAgdGhpcy5vcHRpb25zLnJvdGF0ZSA9IHRoaXMucm90YXRlO1xuICAgIHRoaXMub3B0aW9ucy5hbmltYXRlLmR1cmF0aW9uID0gdGhpcy5hbmltYXRlLmR1cmF0aW9uO1xuICAgIHRoaXMub3B0aW9ucy5hbmltYXRlLmVuYWJsZWQgPSB0aGlzLmFuaW1hdGUuZW5hYmxlZDtcbiAgfVxufVxuIl19
