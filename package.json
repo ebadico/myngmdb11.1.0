@@ -9,6 +9,7 @@
     "fesm5/**/*",
     "fesm2015/**/*",
     "lib/**/*",
+    "schematics/**/*",
     ".gitignore",
     "changelog",
     "license.pdf",
