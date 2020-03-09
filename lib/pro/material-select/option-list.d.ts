@@ -6,26 +6,27 @@ export declare class OptionList {
     private _highlightedOption;
     private _hasShown;
     private _highlightFirst;
-    highlightFirst: boolean;
+    get highlightFirst(): boolean;
+    set highlightFirst(value: boolean);
     setToNullValue: any;
     static equalValues(v0: Array<string>, v1: Array<string>): boolean;
     constructor(options: Array<IOption>, _multiple?: boolean);
     /** Options. **/
-    readonly options: Array<Option>;
+    get options(): Array<Option>;
     getOptionsByValue(value: string): Array<Option>;
     /** Value. **/
-    readonly value: Array<string>;
+    get value(): Array<string>;
     /** Selection. **/
-    readonly selection: Array<Option>;
+    get selection(): Array<Option>;
     select(option: Option): void;
     deselect(option: Option): void;
     clearSelection(): void;
     /** Filter. **/
-    readonly filtered: Array<Option>;
+    get filtered(): Array<Option>;
     filter(term: string): boolean;
     private resetFilter;
     /** Highlight. **/
-    readonly highlightedOption: Option;
+    get highlightedOption(): Option;
     highlight(): void;
     highlightOption(option: Option): void;
     highlightNextOption(): void;
@@ -34,7 +35,7 @@ export declare class OptionList {
     private getHighlightedIndexFromList;
     getHighlightedIndex(): number;
     /** Util. **/
-    readonly hasShown: boolean;
+    get hasShown(): boolean;
     hasSelected(): boolean;
     hasShownSelected(): boolean;
     private getFirstShown;

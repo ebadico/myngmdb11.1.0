@@ -5,7 +5,8 @@ import { Subscription } from 'rxjs';
 export declare class ScrollSpyDirective implements OnInit, AfterContentInit, OnDestroy {
     private scrollSpyService;
     links: QueryList<ScrollSpyLinkDirective>;
-    id: string;
+    get id(): string;
+    set id(newId: string);
     private _id;
     activeLinkChange: EventEmitter<any>;
     activeSub: Subscription;

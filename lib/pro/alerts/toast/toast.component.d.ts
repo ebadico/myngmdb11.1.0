@@ -14,7 +14,7 @@ export declare class ToastComponent implements OnDestroy {
     /** a combination of toast type and options.toastClass */
     toastClasses: string;
     /** controls animation */
-    readonly animationParams: {
+    get animationParams(): {
         value: string;
         params: {
             opacity: number | undefined;

@@ -36,7 +36,8 @@ export declare class PopoverDirective implements OnInit, OnDestroy {
     /**
      * Returns whether or not the popover is currently being shown
      */
-    isOpen: boolean;
+    get isOpen(): boolean;
+    set isOpen(value: boolean);
     dynamicPosition: boolean;
     outsideClick: boolean;
     /**

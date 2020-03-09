@@ -199,22 +199,29 @@ export declare class PageScrollInstance {
      * interrupt" events.
      */
     detachInterruptListeners(): void;
-    readonly namespace: string;
-    readonly scrollTarget: PageScrollTarget;
-    readonly verticalScrolling: boolean;
-    readonly scrollingViews: any[];
-    startScrollPosition: number;
-    targetScrollPosition: number;
-    distanceToScroll: number;
-    executionDuration: number;
-    readonly duration: number;
-    readonly speed: number;
-    readonly easingLogic: EasingLogic;
-    readonly interruptible: boolean;
-    startTime: number;
-    endTime: number;
-    timer: any;
-    readonly interruptListenersAttached: boolean;
+    get namespace(): string;
+    get scrollTarget(): PageScrollTarget;
+    get verticalScrolling(): boolean;
+    get scrollingViews(): any[];
+    set startScrollPosition(value: number);
+    get startScrollPosition(): number;
+    set targetScrollPosition(value: number);
+    get targetScrollPosition(): number;
+    set distanceToScroll(value: number);
+    get distanceToScroll(): number;
+    get executionDuration(): number;
+    set executionDuration(value: number);
+    get duration(): number;
+    get speed(): number;
+    get easingLogic(): EasingLogic;
+    get interruptible(): boolean;
+    set startTime(value: number);
+    get startTime(): number;
+    set endTime(value: number);
+    get endTime(): number;
+    set timer(value: any);
+    get timer(): any;
+    get interruptListenersAttached(): boolean;
 }
 /**
  * An Interface a listener should implement to be notified about possible interrupt events

@@ -1,6 +1,6 @@
 {
   "name": "ng-uikit-pro-standard",
-  "version": "8.10.1",
+  "version": "9.0.0",
   "files": [
     "assets/**/*",
     "bundles/**/*",
@@ -18,8 +18,16 @@
     "public_api.d.ts"
   ],
   "peerDependencies": {
-    "@angular/common": "^8.0.0",
-    "@angular/core": "^8.0.0"
+    "@angular/common": "^9.0.0",
+    "@angular/core": "^9.0.0",
+    "@angular/animations": "^9.0.0",
+    "@angular/forms": "^9.0.0",
+    "@angular/cdk": "^9.0.0",
+    "tslib": "^1.10.0"
+  },
+  "schematics": "./schematics/collection.json",
+  "ng-update": {
+    "migrations": "./schematics/migration.json"
   },
   "main": "bundles/ng-uikit-pro-standard.umd.js",
   "module": "fesm5/ng-uikit-pro-standard.js",
@@ -30,8 +38,5 @@
   "fesm2015": "fesm2015/ng-uikit-pro-standard.js",
   "typings": "ng-uikit-pro-standard.d.ts",
   "metadata": "ng-uikit-pro-standard.metadata.json",
-  "sideEffects": false,
-  "dependencies": {
-    "tslib": "^1.9.0"
-  }
+  "sideEffects": false
 }

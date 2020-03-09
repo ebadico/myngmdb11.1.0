@@ -6,10 +6,12 @@ export declare class ProgressBarComponent {
     color: 'primary' | 'accent' | 'warn';
     private _value;
     /** Value of the progressbar. Defaults to zero. Mirrored to aria-valuenow. */
-    value: number;
+    get value(): number;
+    set value(v: number);
     private _bufferValue;
     /** Buffer value of the progress bar. Defaults to zero. */
-    bufferValue: number;
+    get bufferValue(): number;
+    set bufferValue(v: number);
     /**
      * Mode of the progress bar.
      *

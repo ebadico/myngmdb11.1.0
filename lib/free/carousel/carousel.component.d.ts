@@ -18,7 +18,7 @@ export declare class CarouselComponent implements OnDestroy, AfterViewInit {
         RIGHT: string;
     };
     _slidesList: QueryList<SlideComponent>;
-    readonly slides: SlideComponent[];
+    get slides(): SlideComponent[];
     private _destroy$;
     protected currentInterval: any;
     protected isPlaying: boolean;
@@ -37,13 +37,15 @@ export declare class CarouselComponent implements OnDestroy, AfterViewInit {
     activeSlideIndex: number;
     allowSwipe: boolean;
     activeSlideChange: EventEmitter<any>;
-    activeSlide: number;
+    set activeSlide(index: number);
+    get activeSlide(): number;
     protected _interval: number;
     checkNavigation(): boolean;
     checkDots(): boolean;
     getImg(slide: any): any;
-    interval: number;
-    readonly isBs4: boolean;
+    get interval(): number;
+    set interval(value: number);
+    get isBs4(): boolean;
     constructor(config: CarouselConfig, el: ElementRef, platformId: string, cdRef: ChangeDetectorRef, renderer: Renderer2);
     ngOnDestroy(): void;
     ngAfterViewInit(): void;

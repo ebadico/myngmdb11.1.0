@@ -30,26 +30,30 @@ export declare class MdProgressSpinnerComponent implements OnDestroy {
      * because voiceover does not report the progress indicator as indeterminate if the aria min
      * and/or max value are number values.
      */
-    readonly _ariaValueMin: 0 | null;
-    readonly _ariaValueMax: 100 | null;
+    get _ariaValueMin(): 0 | null;
+    get _ariaValueMax(): 100 | null;
     /** @docs-private */
+    get interdeterminateInterval(): any;
     /** @docs-private */
-    interdeterminateInterval: any;
+    set interdeterminateInterval(interval: any);
     /**
      * Clean up any animations that were running.
      */
     ngOnDestroy(): void;
     /** The color of the progress-spinner. Can be primary, accent, or warn. */
-    color: string;
+    get color(): string;
+    set color(value: string);
     /** Value of the progress circle. It is bound to the host as the attribute aria-valuenow. */
-    value: any;
+    get value(): any;
+    set value(v: number | any);
     /**
      * Mode of the progress circle
      *
      * Input must be one of the values from ProgressMode, defaults to 'determinate'.
      * mode is bound to the host as the attribute host.
      */
-    mode: ProgressSpinnerMode;
+    get mode(): ProgressSpinnerMode;
+    set mode(mode: ProgressSpinnerMode);
     constructor(_ngZone: NgZone, _elementRef: ElementRef, _renderer: Renderer2, platformId?: string | any);
     /**
      * Animates the circle from one percentage value to another.

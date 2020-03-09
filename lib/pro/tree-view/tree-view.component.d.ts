@@ -1,14 +1,14 @@
 import { EventEmitter, OnInit, ChangeDetectorRef } from '@angular/core';
 export declare class MdbTreeComponent implements OnInit {
     private _cdRef;
-    checked: EventEmitter<{}>;
-    checkedKeys: EventEmitter<{}>;
-    nodesChanged: EventEmitter<{}>;
+    checked: EventEmitter<any>;
+    checkedKeys: EventEmitter<any>;
+    nodesChanged: EventEmitter<any>;
     nodes: any;
     textField: string;
     childrenField: string;
     checkboxesField: string;
-    expandAll: boolean;
+    set expandAll(value: boolean);
     checkboxes: boolean;
     toggleOnTitleClick: boolean;
     private _expandAll;

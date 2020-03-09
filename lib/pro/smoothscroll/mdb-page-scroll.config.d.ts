@@ -74,5 +74,6 @@ export declare class PageScrollConfig {
      */
     static defaultInterruptible: boolean;
     private static _easingLogic;
-    static defaultEasingLogic: EasingLogic;
+    static get defaultEasingLogic(): EasingLogic;
+    static set defaultEasingLogic(easingLogic: EasingLogic);
 }

@@ -6,5 +6,6 @@ export declare class MDBSpinningPreloader {
     constructor(document: any);
     start(): void;
     stop(): void;
-    container: MDB_SPINNING_PRELOADER_TYPE;
+    get container(): MDB_SPINNING_PRELOADER_TYPE;
+    set container(element: MDB_SPINNING_PRELOADER_TYPE);
 }

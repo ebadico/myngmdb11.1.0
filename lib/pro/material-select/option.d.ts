@@ -8,7 +8,7 @@ export declare class Option {
     shown: boolean;
     group: boolean;
     constructor(option: IOption);
-    readonly value: string;
-    readonly label: string;
-    readonly icon: string;
+    get value(): string;
+    get label(): string;
+    get icon(): string;
 }

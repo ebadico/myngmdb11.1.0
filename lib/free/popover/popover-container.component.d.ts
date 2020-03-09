@@ -9,7 +9,7 @@ export declare class PopoverContainerComponent implements OnInit {
     show: string;
     role: string;
     class: any;
-    readonly isBs3: boolean;
+    get isBs3(): boolean;
     constructor(config: PopoverConfig);
     ngOnInit(): void;
 }

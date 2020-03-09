@@ -7,11 +7,11 @@ export declare class MdbCardComponent implements OnInit {
     wider: boolean;
     imageBackground: string;
     card: ElementRef;
-    narrower: boolean;
-    reverse: boolean;
-    dark: boolean;
-    bgColor: string;
-    borderColor: string;
+    set narrower(narrower: boolean);
+    set reverse(reverse: boolean);
+    set dark(dark: boolean);
+    set bgColor(color: string);
+    set borderColor(color: string);
     constructor(_el: ElementRef, _r: Renderer2);
     ngOnInit(): void;
 }

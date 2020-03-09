@@ -8,8 +8,10 @@ export declare class ModalBackdropComponent implements OnInit {
     element: ElementRef;
     renderer: Renderer2;
     classNameBackDrop: boolean;
-    isAnimated: boolean;
-    isShown: boolean;
+    get isAnimated(): boolean;
+    set isAnimated(value: boolean);
+    get isShown(): boolean;
+    set isShown(value: boolean);
     protected _isAnimated: boolean;
     protected _isShown: boolean;
     constructor(element: ElementRef, renderer: Renderer2);

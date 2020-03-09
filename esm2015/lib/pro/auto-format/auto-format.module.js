@@ -1,25 +1,23 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+import { __decorate } from "tslib";
 import { NgModule } from '@angular/core';
 import { MdbDateFormatDirective } from './mdb-date-format.directive';
 import { MdbCreditCardDirective } from './mdb-credit-card.directive';
 import { MdbCvvDirective } from './mdb-cvv.directive';
-export class AutoFormatModule {
-}
-AutoFormatModule.decorators = [
-    { type: NgModule, args: [{
-                declarations: [
-                    MdbDateFormatDirective,
-                    MdbCreditCardDirective,
-                    MdbCvvDirective
-                ],
-                exports: [
-                    MdbDateFormatDirective,
-                    MdbCreditCardDirective,
-                    MdbCvvDirective
-                ]
-            },] }
-];
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXV0by1mb3JtYXQubW9kdWxlLmpzIiwic291cmNlUm9vdCI6Im5nOi8vbmctdWlraXQtcHJvLXN0YW5kYXJkLyIsInNvdXJjZXMiOlsibGliL3Byby9hdXRvLWZvcm1hdC9hdXRvLWZvcm1hdC5tb2R1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLE9BQU8sRUFBRSxRQUFRLEVBQUUsTUFBTSxlQUFlLENBQUM7QUFDekMsT0FBTyxFQUFFLHNCQUFzQixFQUFFLE1BQU0sNkJBQTZCLENBQUM7QUFDckUsT0FBTyxFQUFFLHNCQUFzQixFQUFFLE1BQU0sNkJBQTZCLENBQUM7QUFDckUsT0FBTyxFQUFFLGVBQWUsRUFBRSxNQUFNLHFCQUFxQixDQUFDO0FBY3RELE1BQU0sT0FBTyxnQkFBZ0I7OztZQVo1QixRQUFRLFNBQUM7Z0JBQ1IsWUFBWSxFQUFFO29CQUNaLHNCQUFzQjtvQkFDdEIsc0JBQXNCO29CQUN0QixlQUFlO2lCQUNoQjtnQkFDRCxPQUFPLEVBQUU7b0JBQ1Asc0JBQXNCO29CQUN0QixzQkFBc0I7b0JBQ3RCLGVBQWU7aUJBQ2hCO2FBQ0YiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBOZ01vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHsgTWRiRGF0ZUZvcm1hdERpcmVjdGl2ZSB9IGZyb20gJy4vbWRiLWRhdGUtZm9ybWF0LmRpcmVjdGl2ZSc7XG5pbXBvcnQgeyBNZGJDcmVkaXRDYXJkRGlyZWN0aXZlIH0gZnJvbSAnLi9tZGItY3JlZGl0LWNhcmQuZGlyZWN0aXZlJztcbmltcG9ydCB7IE1kYkN2dkRpcmVjdGl2ZSB9IGZyb20gJy4vbWRiLWN2di5kaXJlY3RpdmUnO1xuXG5ATmdNb2R1bGUoe1xuICBkZWNsYXJhdGlvbnM6IFtcbiAgICBNZGJEYXRlRm9ybWF0RGlyZWN0aXZlLFxuICAgIE1kYkNyZWRpdENhcmREaXJlY3RpdmUsXG4gICAgTWRiQ3Z2RGlyZWN0aXZlXG4gIF0sXG4gIGV4cG9ydHM6IFtcbiAgICBNZGJEYXRlRm9ybWF0RGlyZWN0aXZlLFxuICAgIE1kYkNyZWRpdENhcmREaXJlY3RpdmUsXG4gICAgTWRiQ3Z2RGlyZWN0aXZlXG4gIF1cbn0pXG5leHBvcnQgY2xhc3MgQXV0b0Zvcm1hdE1vZHVsZSB7XG59XG4iXX0=
+let AutoFormatModule = class AutoFormatModule {
+};
+AutoFormatModule = __decorate([
+    NgModule({
+        declarations: [
+            MdbDateFormatDirective,
+            MdbCreditCardDirective,
+            MdbCvvDirective
+        ],
+        exports: [
+            MdbDateFormatDirective,
+            MdbCreditCardDirective,
+            MdbCvvDirective
+        ]
+    })
+], AutoFormatModule);
+export { AutoFormatModule };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXV0by1mb3JtYXQubW9kdWxlLmpzIiwic291cmNlUm9vdCI6Im5nOi8vbmctdWlraXQtcHJvLXN0YW5kYXJkLyIsInNvdXJjZXMiOlsibGliL3Byby9hdXRvLWZvcm1hdC9hdXRvLWZvcm1hdC5tb2R1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLE9BQU8sRUFBRSxRQUFRLEVBQUUsTUFBTSxlQUFlLENBQUM7QUFDekMsT0FBTyxFQUFFLHNCQUFzQixFQUFFLE1BQU0sNkJBQTZCLENBQUM7QUFDckUsT0FBTyxFQUFFLHNCQUFzQixFQUFFLE1BQU0sNkJBQTZCLENBQUM7QUFDckUsT0FBTyxFQUFFLGVBQWUsRUFBRSxNQUFNLHFCQUFxQixDQUFDO0FBY3RELElBQWEsZ0JBQWdCLEdBQTdCLE1BQWEsZ0JBQWdCO0NBQzVCLENBQUE7QUFEWSxnQkFBZ0I7SUFaNUIsUUFBUSxDQUFDO1FBQ1IsWUFBWSxFQUFFO1lBQ1osc0JBQXNCO1lBQ3RCLHNCQUFzQjtZQUN0QixlQUFlO1NBQ2hCO1FBQ0QsT0FBTyxFQUFFO1lBQ1Asc0JBQXNCO1lBQ3RCLHNCQUFzQjtZQUN0QixlQUFlO1NBQ2hCO0tBQ0YsQ0FBQztHQUNXLGdCQUFnQixDQUM1QjtTQURZLGdCQUFnQiIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IE5nTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBNZGJEYXRlRm9ybWF0RGlyZWN0aXZlIH0gZnJvbSAnLi9tZGItZGF0ZS1mb3JtYXQuZGlyZWN0aXZlJztcbmltcG9ydCB7IE1kYkNyZWRpdENhcmREaXJlY3RpdmUgfSBmcm9tICcuL21kYi1jcmVkaXQtY2FyZC5kaXJlY3RpdmUnO1xuaW1wb3J0IHsgTWRiQ3Z2RGlyZWN0aXZlIH0gZnJvbSAnLi9tZGItY3Z2LmRpcmVjdGl2ZSc7XG5cbkBOZ01vZHVsZSh7XG4gIGRlY2xhcmF0aW9uczogW1xuICAgIE1kYkRhdGVGb3JtYXREaXJlY3RpdmUsXG4gICAgTWRiQ3JlZGl0Q2FyZERpcmVjdGl2ZSxcbiAgICBNZGJDdnZEaXJlY3RpdmVcbiAgXSxcbiAgZXhwb3J0czogW1xuICAgIE1kYkRhdGVGb3JtYXREaXJlY3RpdmUsXG4gICAgTWRiQ3JlZGl0Q2FyZERpcmVjdGl2ZSxcbiAgICBNZGJDdnZEaXJlY3RpdmVcbiAgXVxufSlcbmV4cG9ydCBjbGFzcyBBdXRvRm9ybWF0TW9kdWxlIHtcbn1cbiJdfQ==

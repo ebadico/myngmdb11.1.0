@@ -18,14 +18,16 @@ export declare class MdbStepperComponent implements AfterContentInit, AfterViewI
     container: ElementRef;
     linear: boolean;
     disableWaves: boolean;
-    vertical: boolean;
+    get vertical(): boolean;
+    set vertical(value: boolean);
     private _vertical;
     stepChange: EventEmitter<StepChangeEvent>;
     constructor(ripple: WavesDirective, _renderer: Renderer2, _cdRef: ChangeDetectorRef, platformId: string);
     private _destroy;
     isBrowser: boolean;
     horizontal: boolean;
-    activeStepIndex: number;
+    get activeStepIndex(): number;
+    set activeStepIndex(value: number);
     private _activeStepIndex;
     private _activeStep;
     private stepTextContent;

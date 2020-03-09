@@ -8,11 +8,14 @@ export declare class MdbStepComponent implements OnInit {
     label: string;
     stepForm: FormGroup;
     constructor(el: ElementRef);
-    isDone: boolean;
+    get isDone(): boolean;
+    set isDone(value: boolean);
     private _isDone;
-    isWrong: boolean;
+    get isWrong(): boolean;
+    set isWrong(value: boolean);
     private _isWrong;
-    isActive: boolean;
+    get isActive(): boolean;
+    set isActive(value: boolean);
     private _isActive;
     private _removeClasses;
     reset(): void;

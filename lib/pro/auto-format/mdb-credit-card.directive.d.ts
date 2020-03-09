@@ -12,9 +12,11 @@ export declare class MdbCreditCardDirective {
     cardFullName: string;
     private defaultCard;
     private cards;
-    additionalCards: CreditCard[];
+    get additionalCards(): CreditCard[];
+    set additionalCards(cards: CreditCard[]);
     private _additionalCards;
-    separator: string;
+    get separator(): string;
+    set separator(separator: string);
     private _separator;
     constructor();
     maxLength: string;

@@ -11,7 +11,8 @@ export declare class SidenavComponent implements AfterViewInit, OnDestroy, OnIni
     class: string;
     fixed: boolean;
     sidenavBreakpoint: any;
-    side: string;
+    get side(): string;
+    set side(position: string);
     private _side;
     sideNav: ElementRef;
     overlay: any;

@@ -1,43 +1,17 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+import { __decorate } from "tslib";
 import { Injectable } from '@angular/core';
-/**
- * Default values provider for tooltip
- */
+/** Default values provider for tooltip */
 var TooltipConfig = /** @class */ (function () {
     function TooltipConfig() {
-        /**
-         * tooltip placement, supported positions: 'top', 'bottom', 'left', 'right'
-         */
+        /** tooltip placement, supported positions: 'top', 'bottom', 'left', 'right' */
         this.placement = 'top';
-        /**
-         * array of event names which triggers tooltip opening
-         */
+        /** array of event names which triggers tooltip opening */
         this.triggers = 'hover focus';
     }
-    TooltipConfig.decorators = [
-        { type: Injectable }
-    ];
+    TooltipConfig = __decorate([
+        Injectable()
+    ], TooltipConfig);
     return TooltipConfig;
 }());
 export { TooltipConfig };
-if (false) {
-    /**
-     * tooltip placement, supported positions: 'top', 'bottom', 'left', 'right'
-     * @type {?}
-     */
-    TooltipConfig.prototype.placement;
-    /**
-     * array of event names which triggers tooltip opening
-     * @type {?}
-     */
-    TooltipConfig.prototype.triggers;
-    /**
-     * a selector specifying the element the tooltip should be appended to. Currently only supports "body"
-     * @type {?}
-     */
-    TooltipConfig.prototype.container;
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidG9vbHRpcC5zZXJ2aWNlLmpzIiwic291cmNlUm9vdCI6Im5nOi8vbmctdWlraXQtcHJvLXN0YW5kYXJkLyIsInNvdXJjZXMiOlsibGliL2ZyZWUvdG9vbHRpcC90b29sdGlwLnNlcnZpY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLE9BQU8sRUFBRSxVQUFVLEVBQUUsTUFBTSxlQUFlLENBQUM7Ozs7QUFHM0M7SUFBQTs7OztRQUdTLGNBQVMsR0FBRyxLQUFLLENBQUM7Ozs7UUFFbEIsYUFBUSxHQUFHLGFBQWEsQ0FBQztJQUdsQyxDQUFDOztnQkFSQSxVQUFVOztJQVFYLG9CQUFDO0NBQUEsQUFSRCxJQVFDO1NBUFksYUFBYTs7Ozs7O0lBRXhCLGtDQUF5Qjs7Ozs7SUFFekIsaUNBQWdDOzs7OztJQUVoQyxrQ0FBeUIiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBJbmplY3RhYmxlIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5cbi8qKiBEZWZhdWx0IHZhbHVlcyBwcm92aWRlciBmb3IgdG9vbHRpcCAqL1xuQEluamVjdGFibGUoKVxuZXhwb3J0IGNsYXNzIFRvb2x0aXBDb25maWcge1xuICAvKiogdG9vbHRpcCBwbGFjZW1lbnQsIHN1cHBvcnRlZCBwb3NpdGlvbnM6ICd0b3AnLCAnYm90dG9tJywgJ2xlZnQnLCAncmlnaHQnICovXG4gIHB1YmxpYyBwbGFjZW1lbnQgPSAndG9wJztcbiAgLyoqIGFycmF5IG9mIGV2ZW50IG5hbWVzIHdoaWNoIHRyaWdnZXJzIHRvb2x0aXAgb3BlbmluZyAqL1xuICBwdWJsaWMgdHJpZ2dlcnMgPSAnaG92ZXIgZm9jdXMnO1xuICAvKiogYSBzZWxlY3RvciBzcGVjaWZ5aW5nIHRoZSBlbGVtZW50IHRoZSB0b29sdGlwIHNob3VsZCBiZSBhcHBlbmRlZCB0by4gQ3VycmVudGx5IG9ubHkgc3VwcG9ydHMgXCJib2R5XCIgKi9cbiAgcHVibGljIGNvbnRhaW5lcjogc3RyaW5nO1xufVxuIl19
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidG9vbHRpcC5zZXJ2aWNlLmpzIiwic291cmNlUm9vdCI6Im5nOi8vbmctdWlraXQtcHJvLXN0YW5kYXJkLyIsInNvdXJjZXMiOlsibGliL2ZyZWUvdG9vbHRpcC90b29sdGlwLnNlcnZpY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLE9BQU8sRUFBRSxVQUFVLEVBQUUsTUFBTSxlQUFlLENBQUM7QUFFM0MsMENBQTBDO0FBRTFDO0lBQUE7UUFDRSwrRUFBK0U7UUFDeEUsY0FBUyxHQUFHLEtBQUssQ0FBQztRQUN6QiwwREFBMEQ7UUFDbkQsYUFBUSxHQUFHLGFBQWEsQ0FBQztJQUdsQyxDQUFDO0lBUFksYUFBYTtRQUR6QixVQUFVLEVBQUU7T0FDQSxhQUFhLENBT3pCO0lBQUQsb0JBQUM7Q0FBQSxBQVBELElBT0M7U0FQWSxhQUFhIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgSW5qZWN0YWJsZSB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuXG4vKiogRGVmYXVsdCB2YWx1ZXMgcHJvdmlkZXIgZm9yIHRvb2x0aXAgKi9cbkBJbmplY3RhYmxlKClcbmV4cG9ydCBjbGFzcyBUb29sdGlwQ29uZmlnIHtcbiAgLyoqIHRvb2x0aXAgcGxhY2VtZW50LCBzdXBwb3J0ZWQgcG9zaXRpb25zOiAndG9wJywgJ2JvdHRvbScsICdsZWZ0JywgJ3JpZ2h0JyAqL1xuICBwdWJsaWMgcGxhY2VtZW50ID0gJ3RvcCc7XG4gIC8qKiBhcnJheSBvZiBldmVudCBuYW1lcyB3aGljaCB0cmlnZ2VycyB0b29sdGlwIG9wZW5pbmcgKi9cbiAgcHVibGljIHRyaWdnZXJzID0gJ2hvdmVyIGZvY3VzJztcbiAgLyoqIGEgc2VsZWN0b3Igc3BlY2lmeWluZyB0aGUgZWxlbWVudCB0aGUgdG9vbHRpcCBzaG91bGQgYmUgYXBwZW5kZWQgdG8uIEN1cnJlbnRseSBvbmx5IHN1cHBvcnRzIFwiYm9keVwiICovXG4gIHB1YmxpYyBjb250YWluZXI6IHN0cmluZztcbn1cbiJdfQ==

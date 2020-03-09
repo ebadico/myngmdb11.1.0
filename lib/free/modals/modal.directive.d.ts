@@ -8,7 +8,8 @@ export declare class ModalDirective implements AfterViewInit, OnDestroy, OnChang
     protected _element: ElementRef;
     protected _renderer: Renderer2;
     /** allows to set modal configuration via element property */
-    config: ModalOptions | any;
+    set config(conf: ModalOptions | any);
+    get config(): ModalOptions | any;
     /** This event fires immediately when the `show` instance method is called. */
     onShow: EventEmitter<ModalDirective>;
     open: EventEmitter<ModalDirective>;
@@ -25,7 +26,7 @@ export declare class ModalDirective implements AfterViewInit, OnDestroy, OnChang
     /** This field contains last dismiss reason.
      Possible values: `backdrop-click`, `esc` and `null` (if modal was closed by direct call of `.hide()`). */
     dismissReason: string | any;
-    readonly isShown: boolean;
+    get isShown(): boolean;
     protected _config: ModalOptions | any;
     protected _isShown: boolean;
     protected isBodyOverflowing: boolean;

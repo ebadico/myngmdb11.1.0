@@ -1,21 +1,17 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var CharCounterModule_1;
+import { __decorate } from "tslib";
 import { NgModule } from '@angular/core';
 import { CharCounterDirective } from './char-counter.directive';
-export class CharCounterModule {
-    /**
-     * @return {?}
-     */
+let CharCounterModule = CharCounterModule_1 = class CharCounterModule {
     static forRoot() {
-        return { ngModule: CharCounterModule, providers: [] };
+        return { ngModule: CharCounterModule_1, providers: [] };
     }
-}
-CharCounterModule.decorators = [
-    { type: NgModule, args: [{
-                declarations: [CharCounterDirective],
-                exports: [CharCounterDirective]
-            },] }
-];
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2hhci1jb3VudGVyLm1vZHVsZS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL25nLXVpa2l0LXByby1zdGFuZGFyZC8iLCJzb3VyY2VzIjpbImxpYi9wcm8vaW5wdXRzL2NoYXItY291bnRlci5tb2R1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLE9BQU8sRUFBRSxRQUFRLEVBQXdCLE1BQU0sZUFBZSxDQUFDO0FBQy9ELE9BQU8sRUFBRSxvQkFBb0IsRUFBRSxNQUFNLDBCQUEwQixDQUFDO0FBT2hFLE1BQU0sT0FBTyxpQkFBaUI7Ozs7SUFDckIsTUFBTSxDQUFDLE9BQU87UUFDbkIsT0FBTyxFQUFDLFFBQVEsRUFBRSxpQkFBaUIsRUFBRSxTQUFTLEVBQUUsRUFBRSxFQUFDLENBQUM7SUFDdEQsQ0FBQzs7O1lBUkYsUUFBUSxTQUFDO2dCQUNSLFlBQVksRUFBRSxDQUFDLG9CQUFvQixDQUFDO2dCQUNwQyxPQUFPLEVBQUUsQ0FBQyxvQkFBb0IsQ0FBQzthQUNoQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IE5nTW9kdWxlLCBNb2R1bGVXaXRoUHJvdmlkZXJzICB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHsgQ2hhckNvdW50ZXJEaXJlY3RpdmUgfSBmcm9tICcuL2NoYXItY291bnRlci5kaXJlY3RpdmUnO1xuXG5ATmdNb2R1bGUoe1xuICBkZWNsYXJhdGlvbnM6IFtDaGFyQ291bnRlckRpcmVjdGl2ZV0sXG4gIGV4cG9ydHM6IFtDaGFyQ291bnRlckRpcmVjdGl2ZV1cbn0pXG5cbmV4cG9ydCBjbGFzcyBDaGFyQ291bnRlck1vZHVsZSB7XG4gIHB1YmxpYyBzdGF0aWMgZm9yUm9vdCgpOiBNb2R1bGVXaXRoUHJvdmlkZXJzIHtcbiAgICByZXR1cm4ge25nTW9kdWxlOiBDaGFyQ291bnRlck1vZHVsZSwgcHJvdmlkZXJzOiBbXX07XG4gIH1cbn1cbiJdfQ==
+};
+CharCounterModule = CharCounterModule_1 = __decorate([
+    NgModule({
+        declarations: [CharCounterDirective],
+        exports: [CharCounterDirective],
+    })
+], CharCounterModule);
+export { CharCounterModule };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2hhci1jb3VudGVyLm1vZHVsZS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL25nLXVpa2l0LXByby1zdGFuZGFyZC8iLCJzb3VyY2VzIjpbImxpYi9wcm8vaW5wdXRzL2NoYXItY291bnRlci5tb2R1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxPQUFPLEVBQUUsUUFBUSxFQUF1QixNQUFNLGVBQWUsQ0FBQztBQUM5RCxPQUFPLEVBQUUsb0JBQW9CLEVBQUUsTUFBTSwwQkFBMEIsQ0FBQztBQU1oRSxJQUFhLGlCQUFpQix5QkFBOUIsTUFBYSxpQkFBaUI7SUFDckIsTUFBTSxDQUFDLE9BQU87UUFDbkIsT0FBTyxFQUFFLFFBQVEsRUFBRSxtQkFBaUIsRUFBRSxTQUFTLEVBQUUsRUFBRSxFQUFFLENBQUM7SUFDeEQsQ0FBQztDQUNGLENBQUE7QUFKWSxpQkFBaUI7SUFKN0IsUUFBUSxDQUFDO1FBQ1IsWUFBWSxFQUFFLENBQUMsb0JBQW9CLENBQUM7UUFDcEMsT0FBTyxFQUFFLENBQUMsb0JBQW9CLENBQUM7S0FDaEMsQ0FBQztHQUNXLGlCQUFpQixDQUk3QjtTQUpZLGlCQUFpQiIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IE5nTW9kdWxlLCBNb2R1bGVXaXRoUHJvdmlkZXJzIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBDaGFyQ291bnRlckRpcmVjdGl2ZSB9IGZyb20gJy4vY2hhci1jb3VudGVyLmRpcmVjdGl2ZSc7XG5cbkBOZ01vZHVsZSh7XG4gIGRlY2xhcmF0aW9uczogW0NoYXJDb3VudGVyRGlyZWN0aXZlXSxcbiAgZXhwb3J0czogW0NoYXJDb3VudGVyRGlyZWN0aXZlXSxcbn0pXG5leHBvcnQgY2xhc3MgQ2hhckNvdW50ZXJNb2R1bGUge1xuICBwdWJsaWMgc3RhdGljIGZvclJvb3QoKTogTW9kdWxlV2l0aFByb3ZpZGVyczxDaGFyQ291bnRlck1vZHVsZT4ge1xuICAgIHJldHVybiB7IG5nTW9kdWxlOiBDaGFyQ291bnRlck1vZHVsZSwgcHJvdmlkZXJzOiBbXSB9O1xuICB9XG59XG4iXX0=

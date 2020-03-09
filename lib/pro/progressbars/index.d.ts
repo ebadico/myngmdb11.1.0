@@ -8,5 +8,5 @@ export { ProgressSpinnerComponent } from './progress-spinner.component';
 export declare class PreloadersModule {
 }
 export declare class ProgressBars {
-    static forRoot(): ModuleWithProviders;
+    static forRoot(): ModuleWithProviders<PreloadersModule>;
 }

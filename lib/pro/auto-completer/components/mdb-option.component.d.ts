@@ -12,13 +12,13 @@ export declare class MdbOptionComponent implements OnInit {
     value: string;
     disabled: boolean;
     _optionHeight: any;
-    readonly optionHeight: any;
+    get optionHeight(): any;
     clicked: boolean;
     selectedItem: ISelectedOption;
     clickSource: Subject<MdbOptionComponent>;
     click$: Observable<MdbOptionComponent>;
     constructor(el: ElementRef, _parent: MdbOptionParent);
     onClick(): void;
-    readonly label: any;
+    get label(): any;
     ngOnInit(): void;
 }

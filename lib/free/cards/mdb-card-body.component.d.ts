@@ -3,7 +3,7 @@ export declare class MdbCardBodyComponent implements OnInit {
     private _el;
     private _r;
     class: string;
-    cascade: boolean;
+    set cascade(cascade: boolean);
     constructor(_el: ElementRef, _r: Renderer2);
     ngOnInit(): void;
 }
