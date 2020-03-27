@@ -5,7 +5,7 @@ export declare class InputAutoFillDirective {
     private rndr;
     opts: IMyInputAutoFill;
     constructor(el: ElementRef, rndr: Renderer2);
-    onKeyUp(evt: KeyboardEvent): void;
+    onKeyUp(evt: any): void;
     private endsWith;
     private insertPos;
     private getPartLength;
