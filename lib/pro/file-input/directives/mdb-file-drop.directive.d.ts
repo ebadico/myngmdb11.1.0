@@ -15,6 +15,6 @@ export declare class MDBFileDropDirective implements OnInit, OnDestroy {
     ngOnDestroy(): void;
     stopEvent: (e: Event) => void;
     onDrop(e: any): void;
-    onDragOver(e: Event): void;
-    onDragLeave(e: Event): void;
+    onDragOver(e: any): void;
+    onDragLeave(e: any): void;
 }

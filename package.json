@@ -1,6 +1,6 @@
 {
   "name": "ng-uikit-pro-standard",
-  "version": "9.0.0",
+  "version": "9.0.1",
   "files": [
     "assets/**/*",
     "bundles/**/*",
@@ -19,7 +19,7 @@
     "public_api.d.ts"
   ],
   "peerDependencies": {
-    "@angular/common": "^9.0.0",
+    "@angular/common": "^9.0.1",
     "@angular/core": "^9.0.0",
     "@angular/animations": "^9.0.0",
     "@angular/forms": "^9.0.0",

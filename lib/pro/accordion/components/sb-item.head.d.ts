@@ -10,7 +10,7 @@ export declare class SBItemHeadComponent implements OnInit, AfterViewInit {
     ariaExpanded: boolean;
     ariaControls: string;
     constructor(sbItem: SBItemComponent, _cdRef: ChangeDetectorRef);
-    onKeyDown(event: KeyboardEvent): void;
+    onKeyDown(event: any): void;
     toggleClick(event: any): void;
     ngOnInit(): void;
     ngAfterViewInit(): void;
