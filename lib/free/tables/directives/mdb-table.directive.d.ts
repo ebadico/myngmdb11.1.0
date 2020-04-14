@@ -12,6 +12,9 @@ export declare class MdbTableDirective implements OnInit, AfterViewInit {
     stickyHeader: boolean;
     stickyHeaderBgColor: string;
     stickyHeaderTextColor: string;
+    stickyFooter: boolean;
+    stickyFooterBgColor: string;
+    stickyFooterTextColor: string;
     constructor(el: ElementRef, renderer: Renderer2);
     private _dataSource;
     private _dataSourceChanged;
@@ -32,4 +35,5 @@ export declare class MdbTableDirective implements OnInit, AfterViewInit {
     searchDataObservable(searchKey: string): Observable<any>;
     ngOnInit(): void;
     ngAfterViewInit(): void;
+    private makeSticky;
 }
