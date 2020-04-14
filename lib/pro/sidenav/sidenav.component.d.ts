@@ -19,7 +19,7 @@ export declare class SidenavComponent implements AfterViewInit, OnDestroy, OnIni
     constructor(platformId: string, el: ElementRef, renderer: Renderer2, _cdRef: ChangeDetectorRef);
     ngOnInit(): void;
     ngAfterViewInit(): void;
-    windwosResize(): void;
+    windowsResize(): void;
     show(): void;
     hide(): void;
     toggle(): void;
