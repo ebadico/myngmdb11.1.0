@@ -27,6 +27,9 @@
 
 @charset "UTF-8";
 
+// CDK
+@import '~@angular/cdk/overlay-prebuilt.css';
+
 // Bootstrap
 @import 'core/bootstrap/functions';
 @import 'core/bootstrap/variables';
