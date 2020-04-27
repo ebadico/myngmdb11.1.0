@@ -13,6 +13,7 @@ export { MDBSpinningPreloader } from './preloader/preloader.service';
 export { SelectModule, Diacritics, Option, OptionList, IOption, SELECT_VALUE_ACCESSOR, SelectComponent, SelectDropdownComponent, } from './material-select/index';
 export { MDBDatePickerComponent, DatepickerModule, IMyCalendarDay, IMyCalendarViewChanged, IMyDate, IMyDateModel, IMyDateRange, IMyDayLabels, IMyInputAutoFill, IMyInputFieldChanged, IMyInputFocusBlur, IMyLocales, IMyMarkedDate, IMyMarkedDates, IMyMonth, IMyMonthLabels, IMyOptions, IMyWeek, IMyWeekday, InputAutoFillDirective, MYDP_VALUE_ACCESSOR, UtilService, LocaleService, FocusDirective, } from './date-picker/index';
 export { TimePickerModule, ClockPickerComponent } from './time-picker/index';
+export { MdbTimePickerModule, MdbTimePickerDirective, MdbTimePickerComponent, MdbTimepickerToggleComponent, MDB_TIMEPICKER_VALUE_ACCESSOR, MdbTimePickerContentComponent, } from './timepicker/index';
 export { LightBoxModule, ImageModalComponent } from './lightbox/index';
 export { SidenavComponent, SidenavModule } from './sidenav/index';
 export { ChartSimpleModule, EasyPieChartComponent, SimpleChartComponent, } from './easy-charts/index';

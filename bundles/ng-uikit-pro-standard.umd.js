@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('@angular/forms'), require('rxjs/operators'), require('rxjs'), require('@angular/animations'), require('@angular/router'), require('@angular/platform-browser'), require('@angular/common/http')) :
-    typeof define === 'function' && define.amd ? define('ng-uikit-pro-standard', ['exports', '@angular/core', '@angular/common', '@angular/forms', 'rxjs/operators', 'rxjs', '@angular/animations', '@angular/router', '@angular/platform-browser', '@angular/common/http'], factory) :
-    (global = global || self, factory(global['ng-uikit-pro-standard'] = {}, global.ng.core, global.ng.common, global.ng.forms, global.rxjs.operators, global.rxjs, global.ng.animations, global.ng.router, global.ng.platformBrowser, global.ng.common.http));
-}(this, (function (exports, core, common, forms, operators, rxjs, animations, router, platformBrowser, http) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('@angular/forms'), require('rxjs/operators'), require('rxjs'), require('@angular/animations'), require('@angular/router'), require('@angular/platform-browser'), require('@angular/common/http'), require('@angular/cdk/overlay'), require('@angular/cdk/portal'), require('@angular/cdk/a11y')) :
+    typeof define === 'function' && define.amd ? define('ng-uikit-pro-standard', ['exports', '@angular/core', '@angular/common', '@angular/forms', 'rxjs/operators', 'rxjs', '@angular/animations', '@angular/router', '@angular/platform-browser', '@angular/common/http', '@angular/cdk/overlay', '@angular/cdk/portal', '@angular/cdk/a11y'], factory) :
+    (global = global || self, factory(global['ng-uikit-pro-standard'] = {}, global.ng.core, global.ng.common, global.ng.forms, global.rxjs.operators, global.rxjs, global.ng.animations, global.ng.router, global.ng.platformBrowser, global.ng.common.http, global.ng.cdk.overlay, global.ng.cdk.portal, global.ng.cdk.a11y));
+}(this, (function (exports, core, common, forms, operators, rxjs, animations, router, platformBrowser, http, overlay, portal, a11y) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -16897,7 +16897,7 @@
         SelectComponent.prototype.updatePosition = function () {
             var _this = this;
             setTimeout(function () {
-                var docEl = document.documentElement;
+                var docEl = _this.document.documentElement;
                 var elPosition = 0;
                 if (_this.isBrowser) {
                     elPosition =
@@ -22154,7 +22154,7 @@
                 encapsulation: core.ViewEncapsulation.None,
                 changeDetection: core.ChangeDetectionStrategy.OnPush,
                 providers: [TIME_PIRCKER_VALUE_ACCESSOT],
-                styles: [".picker__input{cursor:default}.picker__input.picker__input--active{border-color:#0089ec}.picker{font-size:1rem;text-align:center;line-height:1.2;color:#000;position:absolute;z-index:10000;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none/*!\n   * Default mobile-first, responsive styling for pickadate.js\n   * Demo: http://amsul.github.io/pickadate.js\n   */}.picker .picker__holder{width:100%;overflow-scrolling:touch;position:fixed;transition:background .15s ease-out,top .15s;-webkit-backface-visibility:hidden;backface-visibility:hidden;overflow-y:visible}.picker .picker__frame,.picker .picker__holder{bottom:0;left:0;right:0;top:100%}.picker .picker__frame{position:absolute;margin:0 auto;min-width:16rem;max-width:20.3125rem;width:18.75rem;max-height:21.875rem;opacity:0;transition:.15s ease-out}@media (min-height:40.125em){.picker .picker__frame{margin-bottom:7.5%}}.picker .picker__frame .picker__wrap{display:table;width:100%;height:100%}.picker .picker__box{background:#fff;display:table-cell;vertical-align:middle}@media (min-height:28.875em){.picker .picker__frame{overflow:visible;top:auto;bottom:-100%;max-height:80%}.picker .picker__frame .picker__wrap{display:block}.picker .picker__box{display:block;border:1px solid #777;border-top-color:#898989;border-bottom-width:0;border-radius:5px 5px 0 0;box-shadow:0 .75rem 2.25rem 1rem rgba(0,0,0,.24)}}.picker--opened .picker__holder{top:0;background:rgba(0,0,0,.32);zoom:1;transition:background .15s ease-out}.picker--opened .picker__frame{top:0;opacity:1}@media (min-height:35.875em){.picker--opened .picker__frame{top:10%;bottom:auto}}.datepicker.picker__input.picker__input--active,.timepicker.picker__input.picker__input--active{border-bottom:1px solid #e3f2fd}.picker__list{list-style:none;padding:.75em 0 4.2em;margin:0}.picker__list-item{border-bottom:1px solid #ddd;border-top:1px solid #ddd;margin-bottom:-1px;position:relative;background-color:#fff;padding:.75em 1.25em}@media (min-height:46.75em){.picker__list-item{padding:.5em 1em}}.picker__list-item:hover{cursor:pointer;background:#b1dcfb;border-color:#0089ec;z-index:10}.picker__list-item--highlighted{border-color:#0089ec;z-index:10}.picker--focused .picker__list-item--highlighted,.picker__list-item--highlighted:hover{cursor:pointer;color:#000;background:#b1dcfb}.picker--focused .picker__list-item--selected,.picker__list-item--selected,.picker__list-item--selected:hover{background:#0089ec;color:#fff;z-index:10}.picker--focused .picker__list-item--disabled,.picker__list-item--disabled,.picker__list-item--disabled:hover{background:#f5f5f5;border-color:#ddd;color:#ddd;cursor:default;z-index:auto}.picker--time .picker__button--clear{display:block;width:80%;margin:1em auto 0;padding:1em 1.25em;background:0 0;border:0;font-weight:500;font-size:.67em;text-align:center;text-transform:uppercase;color:#666}.picker--time .picker__button--clear:focus,.picker--time .picker__button--clear:hover{background:#b1dcfb;border-color:#e20;cursor:pointer;color:#fff;outline:0}.picker--time .picker__button--clear:focus:before,.picker--time .picker__button--clear:hover:before{color:#fff}.picker--time .picker__button--clear:before{top:-.25em;color:#666;font-size:1.25em;font-weight:700}.picker--time .picker__frame{min-width:16rem;max-width:20rem}.picker--time .picker__box{font-size:1em;background:#f2f2f2;padding:0}@media (min-height:40.125em){.picker--time .picker__box{margin-bottom:5em}}/*!\n * ClockPicker v0.0.7 for jQuery (http://weareoutman.github.io/clockpicker/)\n * Copyright 2014 Wang Shenwei.\n * Licensed under MIT (https://github.com/weareoutman/clockpicker/blob/gh-pages/LICENSE)\n *\n * Further modified\n * Copyright 2015 Ching Yaw Hao.\n *\n * Bootstrap v3.1.1 (http://getbootstrap.com)\n * Copyright 2011-2014 Twitter, Inc.\n * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)\n */.picker__date-display{text-align:center;background-color:#4285f4;color:#fff;padding-bottom:.9375rem;font-weight:300;margin-bottom:1rem}.picker__date-display .clockpicker-display{vertical-align:middle;display:inline-block;margin:auto;height:5.3125rem;font-size:4.375rem;padding:.625rem .625rem 0;color:#b2dfdb}.picker__date-display .clockpicker-display .clockpicker-display-column{float:left}.picker__date-display .clockpicker-display .clockpicker-display-column #click-am.text-primary,.picker__date-display .clockpicker-display .clockpicker-display-column #click-pm.text-primary,.picker__date-display .clockpicker-display .clockpicker-display-column .clockpicker-span-hours.text-primary,.picker__date-display .clockpicker-display .clockpicker-display-column .clockpicker-span-minutes.text-primary{-webkit-animation-name:pulse;animation-name:pulse;color:#fff!important}.picker__date-display .clockpicker-display .clockpicker-display-column #click-am,.picker__date-display .clockpicker-display .clockpicker-display-column #click-pm{cursor:pointer}.picker__date-display .clockpicker-display .clockpicker-display-am-pm{padding-left:.3125rem;vertical-align:bottom;height:5.3125rem}.picker__date-display .clockpicker-display .clockpicker-display-am-pm .clockpicker-span-am-pm{display:inline-block;font-size:1.4375rem;line-height:1.5625rem;color:#b2dfdb}.picker__date-display .clockpicker-display .clockpicker-span-hours,.picker__date-display .clockpicker-display .clockpicker-span-minutes{-webkit-animation-duration:.5s;animation-duration:.5s;-webkit-animation-fill-mode:both;animation-fill-mode:both;transition:color .5s;cursor:pointer}.clockpicker-display{text-align:center;vertical-align:middle;display:inline-block;margin:auto;height:5.3125rem;font-size:4.375rem;padding:.625rem .625rem 0;color:#b2dfdb}.clockpicker-display .clockpicker-display-column{float:left}.clockpicker-display .clockpicker-display-column #click-am.text-primary,.clockpicker-display .clockpicker-display-column #click-pm.text-primary,.clockpicker-display .clockpicker-display-column .clockpicker-span-hours.text-primary,.clockpicker-display .clockpicker-display-column .clockpicker-span-minutes.text-primary{-webkit-animation-name:pulse;animation-name:pulse;color:#fff}.clockpicker-display .clockpicker-display-column #click-am,.clockpicker-display .clockpicker-display-column #click-pm{cursor:pointer}.clockpicker-display .clockpicker-display-am-pm{padding-left:.3125rem;vertical-align:bottom;height:5.3125rem}.clockpicker-display .clockpicker-display-am-pm .clockpicker-span-am-pm{display:inline-block;font-size:1.4375rem;line-height:1.5625rem;color:#b2dfdb}.clockpicker-display .clockpicker-span-hours,.clockpicker-display .clockpicker-span-minutes{-webkit-animation-duration:.5s;animation-duration:.5s;-webkit-animation-fill-mode:both;animation-fill-mode:both;cursor:pointer;transition:color .5s}@-webkit-keyframes pulse{from,to{transform:scale3d(1,1,1)}50%{transform:scale3d(1.1,1.1,1.1)}}@keyframes pulse{from,to{transform:scale3d(1,1,1)}50%{transform:scale3d(1.1,1.1,1.1)}}.clockpicker-moving{cursor:move}.clockpicker-plate{background-color:#eee;border-radius:50%;width:16.875rem;height:16.875rem;overflow:visible;position:relative;margin:1.25rem auto auto;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.clockpicker-plate .clockpicker-canvas,.clockpicker-plate .clockpicker-dial{width:16.875rem;height:16.875rem;position:absolute;left:-1px;top:-1px}.clockpicker-plate .clockpicker-dial{transition:transform 350ms,opacity 350ms}.clockpicker-plate .clockpicker-dial .clockpicker-tick{border-radius:50%;color:#666;line-height:2.5rem;text-align:center;width:2.5rem;height:2.5rem;position:absolute;cursor:pointer;transition:background-color .3s;background-color:rgba(0,150,136,0)}.clockpicker-plate .clockpicker-dial .clockpicker-tick.active,.clockpicker-plate .clockpicker-dial .clockpicker-tick:hover{background-color:rgba(0,150,136,.25)}.clockpicker-plate .clockpicker-minutes{visibility:hidden}.clockpicker-plate .clockpicker-dial-out{opacity:0}.clockpicker-plate .clockpicker-hours.clockpicker-dial-out{transform:scale(1.2,1.2)}.clockpicker-plate .clockpicker-minutes.clockpicker-dial-out{transform:scale(.8,.8)}.clockpicker-canvas{transition:opacity .3s}.clockpicker-canvas line{stroke:rgba(0,150,136,.25);stroke-width:1}.clockpicker-canvas-out{opacity:.25}.clockpicker-canvas-bearing{stroke:none;fill:rgba(0,77,64,.75)}.clockpicker-canvas-fg{stroke:none;fill:rgba(0,77,64,0)}.clockpicker-canvas-fg.active{fill:rgba(0,77,64,.5)}.clockpicker-canvas-bg{stroke:none;fill:rgba(0,150,136,.25)}.clockpicker-canvas-bg-trans{fill:rgba(0,150,136,.25)}.clockpicker-am-pm-block{margin-top:-.625rem;width:100%;height:3.125rem}.clockpicker-am-pm-block .clockpicker-button.am-button{height:2.8125rem;width:2.8125rem;float:left;border:0}.clockpicker-am-pm-block .clockpicker-button.pm-button{height:2.8125rem;width:2.8125rem;float:right;border:0}.btn-floating.btn-flat{color:#fff;padding:0;background:#4285f4}.btn-floating.btn-flat:hover{box-shadow:none}.btn-floating.btn-flat:focus,.btn-floating.btn-flat:hover{background-color:#5a95f5!important}.btn-floating.btn-flat.active{background-color:#0b51c5!important;box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.picker__footer{width:100%}.picker__footer .clockpicker-button{margin:.9375rem auto auto;background-color:transparent;text-transform:uppercase}.picker__footer .clockpicker-button:focus{background-color:transparent}.picker__footer .clockpicker-button:active{background-color:rgba(0,150,136,.25)}.darktheme .picker__box{background-color:#212121}.darktheme .picker__box .picker__date-display{background-color:transparent}.darktheme .picker__box .picker__date-display .clockpicker-display,.darktheme .picker__box .picker__date-display .clockpicker-display .clockpicker-span-am-pm{color:#fff}.darktheme .picker__box .picker__calendar-container .clockpicker-plate{background-color:transparent}.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-tick{color:#fff;background-color:rgba(255,64,129,0)}.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-tick.active,.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-tick:hover{background-color:rgba(255,64,129,.25)}.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-canvas line{stroke:rgba(255,64,129,.25)}.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-canvas-bearing{fill:#fff}.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-canvas-fg{fill:rgba(255,64,129,0)}.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-canvas-fg.active{fill:rgba(255,64,129,.5)}.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-canvas-bg{fill:rgba(255,64,129,.25)}.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-canvas-bg-trans{fill:rgba(255,64,129,.5)}.darktheme .picker__box .picker__footer button{color:#fff!important}.darktheme .picker__box .picker__footer .clockpicker-button:active{background-color:rgba(255,64,129,.25)}.hand-move .clockpicker-tick{cursor:all-scroll!important}.clockpicker-button{cursor:pointer;transition:.3s}.clockpicker-button:hover{background-color:rgba(0,150,136,.25)}.darktheme .clockpicker-button:hover{background-color:rgba(255,64,129,.25)}.validate-success.ng-valid .timepicker{border-bottom:1px solid #00c851!important;box-shadow:0 1px 0 0 #00c851!important}.validate-success.ng-valid .md-outline .timepicker{border:1px solid #00c851!important;box-shadow:inset 0 0 0 1px #00c851!important}.validate-success.ng-valid .tp label{color:#00c851!important}.validate-success.ng-valid .tp .md-outline label{color:inherit!important;font-weight:400!important}.form-submitted .validate-error.ng-invalid .timepicker,.validate-error.ng-invalid.ng-touched .timepicker{border-bottom:1px solid #f44336!important;box-shadow:0 1px 0 0 #f44336!important}.form-submitted .validate-error.ng-invalid .md-outline .timepicker,.validate-error.ng-invalid.ng-touched .md-outline .timepicker{border:1px solid #f44336!important;box-shadow:inset 0 0 0 1px #f44336!important}.form-submitted .validate-error.ng-invalid .tp label,.validate-error.ng-invalid.ng-touched .tp label{color:#f44336!important}.form-submitted .validate-error.ng-invalid .tp .md-outline label,.validate-error.ng-invalid.ng-touched .tp .md-outline label{color:inherit!important;font-weight:400!important}.md-outline input:focus>label.active{color:#4285f4}.md-outline .timepicker{height:36px!important}.clockpicker-button.am-button,.clockpicker-button.pm-button{color:#fff!important}"]
+                styles: [".picker__input{cursor:default}.picker__input.picker__input--active{border-color:#0089ec}.picker{font-size:1rem;text-align:center;line-height:1.2;color:#000;position:absolute;z-index:10000;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none/*!\n   * Default mobile-first, responsive styling for pickadate.js\n   * Demo: http://amsul.github.io/pickadate.js\n   */}.picker .picker__holder{width:100%;overflow-scrolling:touch;position:fixed;transition:background .15s ease-out,top .15s;-webkit-backface-visibility:hidden;backface-visibility:hidden;overflow-y:visible}.picker .picker__frame,.picker .picker__holder{bottom:0;left:0;right:0;top:100%}.picker .picker__frame{position:absolute;margin:0 auto;min-width:16rem;max-width:20.3125rem;width:18.75rem;max-height:21.875rem;opacity:0;transition:.15s ease-out}@media (min-height:40.125em){.picker .picker__frame{margin-bottom:7.5%}}.picker .picker__frame .picker__wrap{display:table;width:100%;height:100%}.picker .picker__box{background:#fff;display:table-cell;vertical-align:middle}@media (min-height:28.875em){.picker .picker__frame{overflow:visible;top:auto;bottom:-100%;max-height:80%}.picker .picker__frame .picker__wrap{display:block}.picker .picker__box{display:block;border:1px solid #777;border-top-color:#898989;border-bottom-width:0;border-radius:5px 5px 0 0;box-shadow:0 .75rem 2.25rem 1rem rgba(0,0,0,.24)}}.picker--opened .picker__holder{top:0;background:rgba(0,0,0,.32);zoom:1;transition:background .15s ease-out}.picker--opened .picker__frame{top:0;opacity:1}@media (min-height:35.875em){.picker--opened .picker__frame{top:10%;bottom:auto}}.datepicker.picker__input.picker__input--active,.timepicker.picker__input.picker__input--active{border-bottom:1px solid #e3f2fd}.picker__list{list-style:none;padding:.75em 0 4.2em;margin:0}.picker__list-item{border-bottom:1px solid #ddd;border-top:1px solid #ddd;margin-bottom:-1px;position:relative;background-color:#fff;padding:.75em 1.25em}@media (min-height:46.75em){.picker__list-item{padding:.5em 1em}}.picker__list-item:hover{cursor:pointer;background:#b1dcfb;border-color:#0089ec;z-index:10}.picker__list-item--highlighted{border-color:#0089ec;z-index:10}.picker--focused .picker__list-item--highlighted,.picker__list-item--highlighted:hover{cursor:pointer;color:#000;background:#b1dcfb}.picker--focused .picker__list-item--selected,.picker__list-item--selected,.picker__list-item--selected:hover{background:#0089ec;color:#fff;z-index:10}.picker--focused .picker__list-item--disabled,.picker__list-item--disabled,.picker__list-item--disabled:hover{background:#f5f5f5;border-color:#ddd;color:#ddd;cursor:default;z-index:auto}.picker--time .picker__button--clear{display:block;width:80%;margin:1em auto 0;padding:1em 1.25em;background:0 0;border:0;font-weight:500;font-size:.67em;text-align:center;text-transform:uppercase;color:#666}.picker--time .picker__button--clear:focus,.picker--time .picker__button--clear:hover{background:#b1dcfb;border-color:#e20;cursor:pointer;color:#fff;outline:0}.picker--time .picker__button--clear:focus:before,.picker--time .picker__button--clear:hover:before{color:#fff}.picker--time .picker__button--clear:before{top:-.25em;color:#666;font-size:1.25em;font-weight:700}.picker--time .picker__frame{min-width:16rem;max-width:20rem}.picker--time .picker__box{font-size:1em;background:#f2f2f2;padding:0}@media (min-height:40.125em){.picker--time .picker__box{margin-bottom:5em}}/*!\n * ClockPicker v0.0.7 for jQuery (http://weareoutman.github.io/clockpicker/)\n * Copyright 2014 Wang Shenwei.\n * Licensed under MIT (https://github.com/weareoutman/clockpicker/blob/gh-pages/LICENSE)\n *\n * Further modified\n * Copyright 2015 Ching Yaw Hao.\n *\n * Bootstrap v3.1.1 (http://getbootstrap.com)\n * Copyright 2011-2014 Twitter, Inc.\n * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)\n */.picker__date-display{text-align:center;background-color:#4285f4;color:#fff;padding-bottom:.9375rem;font-weight:300;margin-bottom:1rem}.picker__date-display .clockpicker-display{vertical-align:middle;display:inline-block;margin:auto;height:5.3125rem;font-size:4.375rem;padding:.625rem .625rem 0;color:rgba(255,255,255,.65)}.picker__date-display .clockpicker-display .clockpicker-display-column{float:left}.picker__date-display .clockpicker-display .clockpicker-display-column #click-am.text-primary,.picker__date-display .clockpicker-display .clockpicker-display-column #click-pm.text-primary,.picker__date-display .clockpicker-display .clockpicker-display-column .clockpicker-span-hours.text-primary,.picker__date-display .clockpicker-display .clockpicker-display-column .clockpicker-span-minutes.text-primary{-webkit-animation-name:pulse;animation-name:pulse;color:#fff!important}.picker__date-display .clockpicker-display .clockpicker-display-column #click-am,.picker__date-display .clockpicker-display .clockpicker-display-column #click-pm{cursor:pointer}.picker__date-display .clockpicker-display .clockpicker-display-am-pm{padding-left:.3125rem;vertical-align:bottom;height:5.3125rem}.picker__date-display .clockpicker-display .clockpicker-display-am-pm .clockpicker-span-am-pm{display:inline-block;font-size:1.4375rem;line-height:1.5625rem;color:rgba(255,255,255,.65)}.picker__date-display .clockpicker-display .clockpicker-span-hours,.picker__date-display .clockpicker-display .clockpicker-span-minutes{-webkit-animation-duration:.5s;animation-duration:.5s;-webkit-animation-fill-mode:both;animation-fill-mode:both;transition:color .5s;cursor:pointer}.clockpicker-display{text-align:center;vertical-align:middle;display:inline-block;margin:auto;height:5.3125rem;font-size:4.375rem;padding:.625rem .625rem 0;color:rgba(255,255,255,.65)}.clockpicker-display .clockpicker-display-column{float:left}.clockpicker-display .clockpicker-display-column #click-am.text-primary,.clockpicker-display .clockpicker-display-column #click-pm.text-primary,.clockpicker-display .clockpicker-display-column .clockpicker-span-hours.text-primary,.clockpicker-display .clockpicker-display-column .clockpicker-span-minutes.text-primary{-webkit-animation-name:pulse;animation-name:pulse;color:#fff}.clockpicker-display .clockpicker-display-column #click-am,.clockpicker-display .clockpicker-display-column #click-pm{cursor:pointer}.clockpicker-display .clockpicker-display-am-pm{padding-left:.3125rem;vertical-align:bottom;height:5.3125rem}.clockpicker-display .clockpicker-display-am-pm .clockpicker-span-am-pm{display:inline-block;font-size:1.4375rem;line-height:1.5625rem;color:rgba(255,255,255,.65)}.clockpicker-display .clockpicker-span-hours,.clockpicker-display .clockpicker-span-minutes{-webkit-animation-duration:.5s;animation-duration:.5s;-webkit-animation-fill-mode:both;animation-fill-mode:both;cursor:pointer;transition:color .5s}@-webkit-keyframes pulse{from,to{transform:scale3d(1,1,1)}50%{transform:scale3d(1.1,1.1,1.1)}}@keyframes pulse{from,to{transform:scale3d(1,1,1)}50%{transform:scale3d(1.1,1.1,1.1)}}.clockpicker-moving{cursor:move}.clockpicker-plate{background-color:#eee;border-radius:50%;width:16.875rem;height:16.875rem;overflow:visible;position:relative;margin:1.25rem auto auto;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.clockpicker-plate .clockpicker-canvas,.clockpicker-plate .clockpicker-dial{width:16.875rem;height:16.875rem;position:absolute;left:-1px;top:-1px}.clockpicker-plate .clockpicker-dial{transition:transform 350ms,opacity 350ms}.clockpicker-plate .clockpicker-dial .clockpicker-tick{border-radius:50%;color:#666;line-height:2.5rem;text-align:center;width:2.5rem;height:2.5rem;position:absolute;cursor:pointer;transition:background-color .3s;background-color:rgba(0,150,136,0)}.clockpicker-plate .clockpicker-dial .clockpicker-tick.active,.clockpicker-plate .clockpicker-dial .clockpicker-tick:hover{background-color:rgba(0,150,136,.25)}.clockpicker-plate .clockpicker-minutes{visibility:hidden}.clockpicker-plate .clockpicker-dial-out{opacity:0}.clockpicker-plate .clockpicker-hours.clockpicker-dial-out{transform:scale(1.2,1.2)}.clockpicker-plate .clockpicker-minutes.clockpicker-dial-out{transform:scale(.8,.8)}.clockpicker-canvas{transition:opacity .3s}.clockpicker-canvas line{stroke:rgba(0,150,136,.25);stroke-width:1}.clockpicker-canvas-out{opacity:.25}.clockpicker-canvas-bearing{stroke:none;fill:rgba(0,77,64,.75)}.clockpicker-canvas-fg{stroke:none;fill:rgba(0,77,64,0)}.clockpicker-canvas-fg.active{fill:rgba(0,77,64,.5)}.clockpicker-canvas-bg{stroke:none;fill:rgba(0,150,136,.25)}.clockpicker-canvas-bg-trans{fill:rgba(0,150,136,.25)}.clockpicker-am-pm-block{margin-top:-.625rem;width:100%;height:3.125rem}.clockpicker-am-pm-block .clockpicker-button.am-button{height:2.8125rem;width:2.8125rem;float:left;border:0}.clockpicker-am-pm-block .clockpicker-button.pm-button{height:2.8125rem;width:2.8125rem;float:right;border:0}.btn-floating.btn-flat{color:#fff;padding:0;background:#4285f4}.btn-floating.btn-flat:hover{box-shadow:none}.btn-floating.btn-flat:focus,.btn-floating.btn-flat:hover{background-color:#5a95f5!important}.btn-floating.btn-flat.active{background-color:#0b51c5!important;box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)}.picker__footer{width:100%}.picker__footer .clockpicker-button{margin:.9375rem auto auto;background-color:transparent;text-transform:uppercase}.picker__footer .clockpicker-button:focus{background-color:transparent}.picker__footer .clockpicker-button:active{background-color:rgba(0,150,136,.25)}.darktheme .picker__box{background-color:#212121}.darktheme .picker__box .picker__date-display{background-color:transparent}.darktheme .picker__box .picker__date-display .clockpicker-display,.darktheme .picker__box .picker__date-display .clockpicker-display .clockpicker-span-am-pm{color:#fff}.darktheme .picker__box .picker__calendar-container .clockpicker-plate{background-color:transparent}.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-tick{color:#fff;background-color:rgba(255,64,129,0)}.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-tick.active,.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-tick:hover{background-color:rgba(255,64,129,.25)}.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-canvas line{stroke:rgba(255,64,129,.25)}.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-canvas-bearing{fill:#fff}.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-canvas-fg{fill:rgba(255,64,129,0)}.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-canvas-fg.active{fill:rgba(255,64,129,.5)}.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-canvas-bg{fill:rgba(255,64,129,.25)}.darktheme .picker__box .picker__calendar-container .clockpicker-plate .clockpicker-canvas-bg-trans{fill:rgba(255,64,129,.5)}.darktheme .picker__box .picker__footer button{color:#fff!important}.darktheme .picker__box .picker__footer .clockpicker-button:active{background-color:rgba(255,64,129,.25)}.hand-move .clockpicker-tick{cursor:all-scroll!important}.clockpicker-button{cursor:pointer;transition:.3s}.clockpicker-button:hover{background-color:rgba(0,150,136,.25)}.darktheme .clockpicker-button:hover{background-color:rgba(255,64,129,.25)}.validate-success.ng-valid .timepicker{border-bottom:1px solid #00c851!important;box-shadow:0 1px 0 0 #00c851!important}.validate-success.ng-valid .md-outline .timepicker{border:1px solid #00c851!important;box-shadow:inset 0 0 0 1px #00c851!important}.validate-success.ng-valid .tp label{color:#00c851!important}.validate-success.ng-valid .tp .md-outline label{color:inherit!important;font-weight:400!important}.form-submitted .validate-error.ng-invalid .timepicker,.validate-error.ng-invalid.ng-touched .timepicker{border-bottom:1px solid #f44336!important;box-shadow:0 1px 0 0 #f44336!important}.form-submitted .validate-error.ng-invalid .md-outline .timepicker,.validate-error.ng-invalid.ng-touched .md-outline .timepicker{border:1px solid #f44336!important;box-shadow:inset 0 0 0 1px #f44336!important}.form-submitted .validate-error.ng-invalid .tp label,.validate-error.ng-invalid.ng-touched .tp label{color:#f44336!important}.form-submitted .validate-error.ng-invalid .tp .md-outline label,.validate-error.ng-invalid.ng-touched .tp .md-outline label{color:inherit!important;font-weight:400!important}.md-outline input:focus>label.active{color:#4285f4}.md-outline .timepicker{height:36px!important}.clockpicker-button.am-button,.clockpicker-button.pm-button{color:#fff!important}"]
             }),
             __param(4, core.Inject(common.DOCUMENT)),
             __param(5, core.Inject(core.PLATFORM_ID)),
@@ -22177,6 +22177,900 @@
             })
         ], TimePickerModule);
         return TimePickerModule;
+    }());
+
+    var MdbTimePickerContentComponent = /** @class */ (function () {
+        function MdbTimePickerContentComponent(_cdRef, _ngZone, focusMonitor, elem, renderer, _document) {
+            var _this = this;
+            this._cdRef = _cdRef;
+            this._ngZone = _ngZone;
+            this.focusMonitor = focusMonitor;
+            this.elem = elem;
+            this.renderer = renderer;
+            this._document = _document;
+            this._disabledHours = [];
+            this._disabledMinutes = [];
+            this._isMouseDown = false;
+            this._hoursTicks = [];
+            this._minuteDigitalDisabled = false;
+            this._minutesTicks = [];
+            this._okButtonDisabled = false;
+            this._showHours = true;
+            this._radius = {
+                dial: 135,
+                inner: 80,
+                outer: 110,
+                tick: 20,
+            };
+            this._denominator = {
+                1: 30,
+                5: 6,
+                10: 3,
+                15: 2,
+                20: 1.5,
+            };
+            this.touchSupported = 'ontouchstart' in window;
+            this._setOkBtnDisabled = function () {
+                var hour = Number(_this._to24(_this._selectedTime).h);
+                _this._okButtonDisabled = _this._disabledHours[hour];
+                if (!_this._okButtonDisabled) {
+                    if (_this._min &&
+                        _this._selectedTime.h === _this._min.h &&
+                        _this._selectedTime.ampm === _this._min.ampm) {
+                        _this._okButtonDisabled = _this._selectedTime.m < _this._min.m;
+                    }
+                    if (_this._max &&
+                        _this._selectedTime.h === _this._max.h &&
+                        _this._selectedTime.ampm === _this._max.ampm) {
+                        _this._okButtonDisabled = _this._selectedTime.m > _this._max.m;
+                    }
+                }
+            };
+        }
+        MdbTimePickerContentComponent.prototype.ngOnInit = function () {
+            this._max = this.max;
+            this._min = this.min;
+            this._selectedTime = this.value;
+            var ampm = this._selectedTime.ampm;
+            // Add disabled hours to array for PM and AM Hours
+            if (this.twelveHour) {
+                this._selectedTime.ampm = ampm === 'PM' ? 'AM' : 'PM';
+                this._generateTick();
+                this._selectedTime.ampm = this._selectedTime.ampm === 'PM' ? 'AM' : 'PM';
+            }
+            this._generateTick();
+            this._setOkBtnDisabled();
+            this._setMinuteDigitalDisabled();
+        };
+        MdbTimePickerContentComponent.prototype.ngAfterViewInit = function () {
+            var _this = this;
+            ['mousedown', 'mouseup', 'touchend', 'touchstart'].forEach(function (event) {
+                _this.renderer.listen(_this.plate.nativeElement, event, function (ev) {
+                    if (event === 'mousedown' || event === 'touchstart') {
+                        _this._mousedown(ev, false);
+                    }
+                });
+            });
+            this._checkDraw();
+            setTimeout(function () {
+                _this.focusMonitor.focusVia(_this.focus, 'keyboard');
+            }, 0);
+        };
+        MdbTimePickerContentComponent.prototype._checkDraw = function () {
+            var _a = this._selectedTime, h = _a.h, m = _a.m;
+            var value = this._showHours ? parseInt(h, 0) : parseInt(m, 0);
+            var unit = Math.PI / (this._showHours ? 6 : 30), radian = value * unit, radius = this._showHours && value > 0 && value < 13 ? this._radius.inner : this._radius.outer, xd = Math.sin(radian) * radius, yd = -Math.cos(radian) * radius;
+            this.setClockHand(xd, yd);
+        };
+        MdbTimePickerContentComponent.prototype._mousedown = function (e, space) {
+            var _this = this;
+            this._isMouseDown = true;
+            var offset = this.plate.nativeElement.getBoundingClientRect(), isTouch = /^touch/.test(e.type), x0 = offset.left + this._radius.dial, y0 = offset.top + this._radius.dial, dx = (isTouch ? e.touches[0] : e).clientX - x0, dy = (isTouch ? e.touches[0] : e).clientY - y0, z = Math.sqrt(dx * dx + dy * dy);
+            var moved = false;
+            if (space &&
+                (z < this._radius.outer - this._radius.tick || z > this._radius.outer + this._radius.tick)) {
+                return;
+            }
+            e.preventDefault();
+            e.stopPropagation();
+            if (this._showHours) {
+                this.setClockHand(dx, dy);
+            }
+            else {
+                this.setClockHand(dx, dy, this.rounding);
+            }
+            var mousemoveEventMethod = function (event) {
+                if (!_this.touchSupported) {
+                    event.preventDefault();
+                }
+                event.stopPropagation();
+                // tslint:disable-next-line:no-shadowed-variable
+                var isTouch = /^touch/.test(event.type), x = (isTouch ? event.touches[0] : event).clientX - x0, y = (isTouch ? event.touches[0] : event).clientY - y0;
+                if (!moved && x === dx && y === dy) {
+                    return;
+                }
+                moved = true;
+                _this._ngZone.run(function () {
+                    _this.setClockHand(x, y, _this.rounding);
+                });
+            };
+            var mouseupEventMethod = function (event) {
+                _this._document.removeEventListener('mousemove', mousemoveEventMethod);
+                if (_this.touchSupported) {
+                    _this._document.removeEventListener('touchmove', mousemoveEventMethod);
+                }
+                if (!_this.touchSupported) {
+                    event.preventDefault();
+                }
+                var x = event.clientX - x0, y = event.clientY - y0;
+                if ((space || moved) && x === dx && y === dy) {
+                    _this.setClockHand(x, y);
+                }
+                _this._ngZone.run(function () {
+                    if (_this.autoClose && !_this._showHours) {
+                        _this._okBtnClicked();
+                    }
+                });
+                _this._showMinutesClock();
+                _this.digitalMinute.nativeElement.focus();
+                _this._isMouseDown = false;
+                _this._document.removeEventListener('mouseup', mouseupEventMethod);
+                if (_this.touchSupported) {
+                    _this._document.removeEventListener('touchend', mouseupEventMethod);
+                }
+                _this.picker._emitTimeChangeEvent(_this._selectedTime);
+            };
+            this._document.addEventListener('mousemove', mousemoveEventMethod);
+            if (this.touchSupported) {
+                this._document.addEventListener('touchmove', mousemoveEventMethod);
+            }
+            this._document.addEventListener('mouseup', mouseupEventMethod);
+            if (this.touchSupported) {
+                this._document.addEventListener('touchend', mouseupEventMethod);
+            }
+        };
+        MdbTimePickerContentComponent.prototype._closeBtnClicked = function () {
+            // todo this.isOpen = false;
+            var _a = this._selectedTime, ampm = _a.ampm, h = _a.h, m = _a.m;
+            this._returnHours = this.twelveHour ? h + ":" + m + ampm : h + ":" + m + ampm;
+            this.picker.close(false);
+        };
+        MdbTimePickerContentComponent.prototype._clearBtnClicked = function () {
+            this._setAmPm('AM');
+            this._setHour(12);
+            this._setMinute(0);
+            this._generateTick();
+            this._showHoursClock();
+            this.picker._setValue('');
+            this.picker._selectionChange$.next('');
+        };
+        MdbTimePickerContentComponent.prototype._okBtnClicked = function () {
+            if (!this._okButtonDisabled) {
+                var _a = this._selectedTime, ampm = _a.ampm, h = _a.h, m = _a.m;
+                this._returnHours = this.twelveHour ? h + ":" + m + ampm : h + ":" + m + ampm;
+                this.picker._setValue(this._returnHours);
+                this.picker._emitTimeDoneEvent(this._selectedTime);
+                this.picker.onChangeCb(this._returnHours);
+                this.picker.close(true);
+            }
+        };
+        MdbTimePickerContentComponent.prototype._arrowChangeHour = function (key) {
+            var _a = this._to24(this._selectedTime), h = _a.h, ampm = _a.ampm;
+            var selectedHour = Number(h);
+            var availableHours = [];
+            this._disabledHours.map(function (hour, index) { return !hour && availableHours.push(index); });
+            var toChange;
+            var value = key === 'ArrowUp'
+                ? availableHours.indexOf(selectedHour) + 1
+                : availableHours.indexOf(selectedHour) - 1;
+            value = value < 0 ? availableHours.length - 1 : value;
+            value = value > availableHours.length - 1 ? 0 : value;
+            toChange = availableHours[value];
+            if (this.twelveHour) {
+                if (toChange >= 12) {
+                    toChange = toChange - 12;
+                    if (ampm === 'AM') {
+                        this._setAmPm('PM');
+                    }
+                }
+                else if (toChange <= 0 || toChange < 12) {
+                    if (ampm === 'PM') {
+                        this._setAmPm('AM');
+                    }
+                }
+            }
+            this._showHoursClock();
+            this._setHour(toChange);
+            this._checkDraw();
+        };
+        MdbTimePickerContentComponent.prototype._arrowChangeMinute = function (key) {
+            if (!this._minuteDigitalDisabled) {
+                if (this._showHours) {
+                    this._showMinutesClock();
+                }
+                var m = this._selectedTime.m;
+                var availableMinutes_1 = [];
+                this._generateMinutesDisable();
+                this._disabledMinutes.map(function (disabled, i) {
+                    if (!disabled) {
+                        availableMinutes_1.push(i);
+                    }
+                });
+                var toChange = void 0;
+                var value = key === 'ArrowUp'
+                    ? availableMinutes_1.indexOf(Number(m)) + 1
+                    : availableMinutes_1.indexOf(Number(m)) - 1;
+                value = value < 0 ? availableMinutes_1.length - 1 : value;
+                value = value > availableMinutes_1.length - 1 ? 0 : value;
+                toChange = availableMinutes_1[value];
+                this._setMinute(toChange);
+                this._checkDraw();
+            }
+        };
+        MdbTimePickerContentComponent.prototype._generateMinutesDisable = function () {
+            for (var i = 0; i < 60; i++) {
+                var disableByRounding = this.rounding > 1 && i % this.rounding !== 0;
+                var disabled = this._rangeMinute(i, 'min') || this._rangeMinute(i, 'max') || disableByRounding;
+                this._disabledMinutes[i] = disabled;
+            }
+        };
+        MdbTimePickerContentComponent.prototype._setHour = function (hour) {
+            if (Number(this._selectedTime.h) !== hour) {
+                if (this.twelveHour) {
+                    hour = hour <= 0 ? 12 : hour;
+                    hour = hour > 12 ? 1 : hour;
+                }
+                else {
+                    hour = hour >= 24 ? 0 : hour;
+                    hour = hour <= -1 ? 23 : hour;
+                }
+                this._selectedTime.h = hour >= 10 ? "" + hour : "0" + hour;
+                this._setMinuteDigitalDisabled();
+            }
+        };
+        MdbTimePickerContentComponent.prototype._setMinute = function (min) {
+            if (Number(this._selectedTime.m) !== min) {
+                min = min >= 60 ? 0 : min;
+                min = min <= -1 ? 59 : min;
+                this._selectedTime.m = min >= 10 ? "" + min : "0" + min;
+                this._setOkBtnDisabled();
+            }
+        };
+        MdbTimePickerContentComponent.prototype._setAmPm = function (ampm) {
+            this._selectedTime.ampm = ampm;
+            this._generateTick();
+            this._setOkBtnDisabled();
+            this._setMinuteDigitalDisabled();
+            this._checkDraw();
+            this.picker._emitTimeChangeEvent(this._selectedTime);
+        };
+        MdbTimePickerContentComponent.prototype._showHoursClock = function () {
+            this._generateTick();
+            this._showHours = true;
+            this._setOkBtnDisabled();
+            this._checkDraw();
+        };
+        MdbTimePickerContentComponent.prototype._showMinutesClock = function () {
+            if (!this._minuteDigitalDisabled) {
+                this._showHours = false;
+                this._generateTick();
+                this._setOkBtnDisabled();
+                this._generateMinutesDisable();
+                if (this._disabledMinutes[Number(this._selectedTime.m)] === true) {
+                    this._setMinute(this._disabledMinutes.indexOf(false));
+                }
+                this._checkDraw();
+            }
+        };
+        MdbTimePickerContentComponent.prototype._generateTick = function () {
+            if (this.twelveHour) {
+                this._hoursTicks = [];
+                for (var i = 1; i < 13; i++) {
+                    var radian = (i / 6) * Math.PI;
+                    var tick = {
+                        hour: i.toString(),
+                        left: this._radius.dial + Math.sin(radian) * this._radius.outer - this._radius.tick,
+                        top: this._radius.dial - Math.cos(radian) * this._radius.outer - this._radius.tick,
+                        disabled: this._rangeHour(i, 'min') || this._rangeHour(i, 'max'),
+                    };
+                    this._hoursTicks.push(tick);
+                }
+            }
+            else {
+                this._hoursTicks = [];
+                for (var i = 0; i < 24; i++) {
+                    var radian = (i / 6) * Math.PI;
+                    var inner = i > 0 && i < 13;
+                    var radius = inner ? this._radius.inner : this._radius.outer;
+                    var hour = i === 0 ? '0' + i.toString() : i.toString();
+                    var tick = {
+                        hour: hour,
+                        left: this._radius.dial + Math.sin(radian) * radius - this._radius.tick,
+                        top: this._radius.dial - Math.cos(radian) * radius - this._radius.tick,
+                        disabled: this._rangeHour(i, 'min') || this._rangeHour(i, 'max'),
+                    };
+                    this._hoursTicks.push(tick);
+                }
+            }
+            this._minutesTicks = [];
+            for (var i = 0; i < 60; i += 5) {
+                var radian = (i / 30) * Math.PI;
+                var disableByRounding = this.rounding > 1 && i % this.rounding !== 0;
+                var min = i < 10 ? '0' + i.toString() : i.toString();
+                var tick = {
+                    min: min,
+                    left: this._radius.dial + Math.sin(radian) * this._radius.outer - this._radius.tick,
+                    top: this._radius.dial - Math.cos(radian) * this._radius.outer - this._radius.tick,
+                    disabled: this._rangeMinute(i, 'min') || this._rangeMinute(i, 'max') || disableByRounding,
+                };
+                this._minutesTicks.push(tick);
+            }
+        };
+        MdbTimePickerContentComponent.prototype.setClockHand = function (x, y, roundBy) {
+            var radian = Math.atan2(x, -y);
+            var isHours = this._showHours;
+            var unit = Math.PI / (isHours ? 6 : roundBy ? this._denominator[roundBy] : 30);
+            var z = Math.sqrt(x * x + y * y);
+            var inner = isHours && z < (this._radius.outer + this._radius.inner) / 2;
+            var value = this._showHours
+                ? parseInt(this._selectedTime.h, 0)
+                : parseInt(this._selectedTime.m, 0);
+            var radius = inner && !this.twelveHour ? this._radius.inner : this._radius.outer;
+            if (radian < 0) {
+                radian = Math.PI * 2 + radian;
+            }
+            value = Math.round(radian / unit);
+            radian = value * unit;
+            if (this.twelveHour && isHours) {
+                if (value === 0) {
+                    value = 12;
+                }
+                if (this._isMouseDown) {
+                    if (isHours && (this._rangeHour(value, 'min') || this._rangeHour(value, 'max'))) {
+                        return;
+                    }
+                }
+            }
+            else if (!this.twelveHour && isHours) {
+                value = !inner ? value + 12 : value;
+                value = value === 24 ? 0 : value;
+                value = inner && value === 0 ? 12 : value;
+                value = !inner && value === 12 ? 0 : value;
+                if (this._isMouseDown) {
+                    if (isHours && (this._rangeHour(value, 'min') || this._rangeHour(value, 'max'))) {
+                        return;
+                    }
+                }
+            }
+            else {
+                if (roundBy) {
+                    value *= roundBy;
+                }
+                if (value === 60) {
+                    value = 0;
+                }
+            }
+            if (isHours) {
+                this.fg.nativeElement.setAttribute('class', 'mdb-timepicker-canvas-fg');
+            }
+            else {
+                if (this._rangeMinute(value, 'min') || this._rangeMinute(value, 'max')) {
+                    this._cdRef.markForCheck();
+                    return;
+                }
+                if (value % 5 === 0) {
+                    this.fg.nativeElement.setAttribute('class', 'mdb-timepicker-canvas-fg');
+                }
+                else {
+                    this.fg.nativeElement.setAttribute('class', 'mdb-timepicker-canvas-fg active');
+                }
+            }
+            var cx1 = Math.sin(radian) * (radius - this._radius.tick), cy1 = -Math.cos(radian) * (radius - this._radius.tick), cx2 = Math.sin(radian) * radius, cy2 = -Math.cos(radian) * radius;
+            this.hand.nativeElement.setAttribute('x2', cx1);
+            this.hand.nativeElement.setAttribute('y2', cy1);
+            this.bg.nativeElement.setAttribute('cx', cx2);
+            this.bg.nativeElement.setAttribute('cy', cy2);
+            this.fg.nativeElement.setAttribute('cx', cx2);
+            this.fg.nativeElement.setAttribute('cy', cy2);
+            if (this._showHours) {
+                if (value !== Number(this._selectedTime.h)) {
+                    this._setHour(value);
+                    this._setMinuteDigitalDisabled();
+                }
+            }
+            else {
+                if (value !== Number(this._selectedTime.m)) {
+                    this._setMinute(value);
+                }
+            }
+            this._cdRef.markForCheck();
+        };
+        MdbTimePickerContentComponent.prototype._to24 = function (time) {
+            var hour = time.ampm === 'PM' ? Number(time.h) + 12 : Number(time.h);
+            hour = hour === 12 ? 0 : hour;
+            hour = hour === 24 ? 12 : hour;
+            return __assign(__assign({}, time), { h: "" + hour });
+        };
+        MdbTimePickerContentComponent.prototype._rangeHour = function (index, range) {
+            var status = false;
+            var i = Number(this._to24(__assign(__assign({}, this._selectedTime), { h: "" + index })).h);
+            if (!this.twelveHour) {
+                var minH = this.min && Number(this._min.h);
+                var maxH = this.max && Number(this._max.h);
+                if (range === 'min' && this.min) {
+                    status = index < minH;
+                    if (status && this._max && this._max.h < this._min.h) {
+                        status = false;
+                    }
+                }
+                else if (range === 'max' && this.max) {
+                    status = index > maxH;
+                    if (status && this._min && this._min.h > this._max.h && minH <= index) {
+                        status = false;
+                    }
+                }
+            }
+            else {
+                var min = this._min && Number(this._to24(this._min).h);
+                var max = this._max && Number(this._to24(this._max).h);
+                if (range === 'min' && this.min) {
+                    status = i < min;
+                }
+                if (range === 'max' && this.max) {
+                    status = i > max;
+                }
+                if (min > max) {
+                    status = false;
+                    status = min > i && i > max;
+                }
+            }
+            this._disabledHours[i] = status;
+            return status;
+        };
+        MdbTimePickerContentComponent.prototype._rangeMinute = function (index, range) {
+            var status = false;
+            if (!this._showHours) {
+                if (range === 'min' && this.min) {
+                    var isSameHour = this._min.h === this._selectedTime.h;
+                    var value = index < Number(this._min.m);
+                    status = value && isSameHour;
+                }
+                else if (range === 'max' && this.max) {
+                    var isSameHour = this._max.h === this._selectedTime.h;
+                    var value = index > Number(this._max.m);
+                    status = value && isSameHour;
+                }
+            }
+            if (this.twelveHour) {
+                var min = this._min && Number(this._to24(this._min).h);
+                var max = this._max && Number(this._to24(this._max).h);
+                var i = Number(this._to24(this._selectedTime).h);
+                if (range === 'min' && min) {
+                    status = i === min && index < Number(this._min.m);
+                }
+                else if (range === 'max' && max) {
+                    status = i === max && index > Number(this._max.m);
+                }
+                status = status || this._disabledHours[i];
+            }
+            return status;
+        };
+        MdbTimePickerContentComponent.prototype._setMinuteDigitalDisabled = function () {
+            var h = this._to24(this._selectedTime).h;
+            this._minuteDigitalDisabled = this._disabledHours[Number(h)];
+        };
+        MdbTimePickerContentComponent.ctorParameters = function () { return [
+            { type: core.ChangeDetectorRef },
+            { type: core.NgZone },
+            { type: a11y.FocusMonitor },
+            { type: core.ElementRef },
+            { type: core.Renderer2 },
+            { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] }
+        ]; };
+        __decorate([
+            core.ViewChild('plate', { static: false }),
+            __metadata("design:type", core.ElementRef)
+        ], MdbTimePickerContentComponent.prototype, "plate", void 0);
+        __decorate([
+            core.ViewChild('hand', { static: false }),
+            __metadata("design:type", core.ElementRef)
+        ], MdbTimePickerContentComponent.prototype, "hand", void 0);
+        __decorate([
+            core.ViewChild('fg', { static: false }),
+            __metadata("design:type", core.ElementRef)
+        ], MdbTimePickerContentComponent.prototype, "fg", void 0);
+        __decorate([
+            core.ViewChild('bg', { static: false }),
+            __metadata("design:type", core.ElementRef)
+        ], MdbTimePickerContentComponent.prototype, "bg", void 0);
+        __decorate([
+            core.ViewChild('focus', { static: false }),
+            __metadata("design:type", core.ElementRef)
+        ], MdbTimePickerContentComponent.prototype, "focus", void 0);
+        __decorate([
+            core.ViewChild('digitalMinute', { static: false }),
+            __metadata("design:type", core.ElementRef)
+        ], MdbTimePickerContentComponent.prototype, "digitalMinute", void 0);
+        MdbTimePickerContentComponent = __decorate([
+            core.Component({
+                selector: 'mdb-timepicker-content',
+                template: "<div class=\"mdb-timepicker-modal\" cdkTrapFocus>\n  <!-- HEADER -->\n  <div class=\"mdb-timepicker-header\">\n    <!-- TIME -->\n    <div class=\"mdb-timepicker-time\">\n      <span\n        (click)=\"_showHoursClock()\"\n        (keydown.arrowdown)=\"_arrowChangeHour($event.key)\"\n        (keydown.arrowup)=\"_arrowChangeHour($event.key)\"\n        (keydown.enter)=\"_showHoursClock()\"\n        [ngClass]=\"{ active: _showHours }\"\n        class=\"hour-digital\"\n        #focus\n        tabindex=\"0\"\n      >\n        {{ _selectedTime.h }}</span\n      >:<span\n        (click)=\"_showMinutesClock()\"\n        (keydown.arrowdown)=\"_arrowChangeMinute($event.key)\"\n        (keydown.arrowup)=\"_arrowChangeMinute($event.key)\"\n        (keydown.enter)=\"_showMinutesClock()\"\n        [ngClass]=\"{ 'active': !_showHours, 'disabled': _minuteDigitalDisabled }\"\n        class=\"minute-digital\"\n        #digitalMinute\n        tabindex=\"0\"\n        >{{ _selectedTime.m }}</span\n      >\n    </div>\n    <div class=\"mdb-timepicker-ampm\" *ngIf=\"twelveHour\">\n      <span\n        (click)=\"_setAmPm('AM')\"\n        (keydown.enter)=\"_setAmPm('AM')\"\n        [ngClass]=\"{ active: _selectedTime.ampm == 'AM' }\"\n        tabindex=\"0\"\n        >AM</span\n      >\n      <span\n        (click)=\"_setAmPm('PM')\"\n        (keydown.enter)=\"_setAmPm('PM')\"\n        [ngClass]=\"{ active: _selectedTime.ampm == 'PM' }\"\n        tabindex=\"0\"\n        >PM</span\n      >\n    </div>\n  </div>\n  <!-- /Header -->\n  <!-- Body -->\n  <div class=\"mdb-timepicker-body\">\n    <div class=\"mdb-timepicker-plate\" #plate>\n      <div class=\"mdb-timepicker-canvas\">\n        <svg class=\"mdb-timepicker-svg\" width=\"270\" height=\"270\" #svg>\n          <g transform=\"translate(135,135)\" #g>\n            <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"-90\" #hand></line>\n            <circle class=\"mdb-timepicker-canvas-fg\" r=\"5\" cx=\"0\" cy=\"-110\" #fg></circle>\n            <circle class=\"mdb-timepicker-canvas-bg\" r=\"20\" cx=\"0\" cy=\"-110\" #bg></circle>\n            <circle class=\"mdb-timepicker-canvas-bearing\" cx=\"0\" cy=\"0\" r=\"2\" #bearing></circle>\n          </g>\n        </svg>\n      </div>\n\n      <div\n        [ngClass]=\"{ 'mdb-timepicker-dial-out': !_showHours }\"\n        [ngStyle]=\"{ visibility: !_showHours ? 'hidden' : 'visible' }\"\n        #hoursPlate\n        class=\"mdb-timepicker-dial mdb-timepicker-hours\"\n      >\n        <div\n          [ngClass]=\"{ disabled: tick.disabled }\"\n          [ngStyle]=\"{ left: tick.left + 'px', top: tick.top + 'px' }\"\n          *ngFor=\"let tick of _hoursTicks\"\n          class=\"mdb-timepicker-tick\"\n          id=\"{{ tick.hour }}\"\n          style=\"font-size: 140%;\"\n        >\n          {{ tick.hour }}\n        </div>\n      </div>\n      <div\n        [ngClass]=\"{ 'mdb-timepicker-dial-out': _showHours }\"\n        [ngStyle]=\"{ visibility: _showHours ? 'hidden' : 'visible' }\"\n        #minutesPlate\n        class=\"mdb-timepicker-dial mdb-timepicker-minutes\"\n      >\n        <div\n          [ngClass]=\"{ disabled: tick.disabled }\"\n          [ngStyle]=\"{ left: tick.left + 'px', top: tick.top + 'px' }\"\n          *ngFor=\"let tick of _minutesTicks\"\n          class=\"mdb-timepicker-tick\"\n          style=\"font-size: 120%;\"\n        >\n          {{ tick.min }}\n        </div>\n      </div>\n    </div>\n  </div>\n  <!-- /Boody -->\n  <!-- Footer -->\n  <div class=\"mdb-timepicker-footer\">\n    <button\n      (click)=\"_clearBtnClicked()\"\n      *ngIf=\"clearButton\"\n      class=\"mdb-timepicker-btn mdb-timepicker-clear\"\n      mdbWavesEffect\n      type=\"button\"\n    >\n      {{ clearButton }}\n    </button>\n    <button\n      (click)=\"_closeBtnClicked()\"\n      *ngIf=\"closeButton\"\n      class=\"mdb-timepicker-btn mdb-timepicker-close\"\n      mdbWavesEffect\n      type=\"button\"\n    >\n      {{ closeButton }}\n    </button>\n    <button\n      (click)=\"_okBtnClicked()\"\n      [ngClass]=\"{ disabled: _okButtonDisabled }\"\n      class=\"mdb-timepicker-btn mdb-timepicker-ok\"\n      mdbWavesEffect\n      type=\"button\"\n    >\n      {{ okButton }}\n    </button>\n  </div>\n  <!-- /Footer -->\n</div>\n",
+                encapsulation: core.ViewEncapsulation.None,
+                changeDetection: core.ChangeDetectionStrategy.OnPush,
+                styles: ["@-webkit-keyframes pulse{from,to{transform:scale3d(1,1,1)}50%{transform:scale3d(1.1,1.1,1.1)}}@keyframes pulse{from,to{transform:scale3d(1,1,1)}50%{transform:scale3d(1.1,1.1,1.1)}}.disabled{cursor:default;opacity:.5}.mdb-timepicker-modal{min-width:328px;box-shadow:rgba(0,0,0,.2) 0 11px 15px -7px,rgba(0,0,0,.14) 0 24px 38px 3px,rgba(0,0,0,.12) 0 9px 46px 8px;background:#fff;display:table-cell;vertical-align:middle}@media (min-height:28.875em){.mdb-timepicker-modal{display:block;border:1px solid #777;border-top-color:#898989;border-bottom-width:0;border-radius:5px 5px 0 0;box-shadow:0 .75rem 2.25rem 1rem rgba(0,0,0,.24)}}.mdb-timepicker-header{height:120px;box-sizing:border-box;background-color:#4285f4;padding:24px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.55)}.mdb-timepicker-time{font-size:4.375rem;color:rgba(255,255,255,.65)}.mdb-timepicker-ampm{margin-left:15px;font-size:18px;display:flex;flex-direction:column;justify-content:space-around;height:100%}span{cursor:pointer}span.active{color:#fff}.mdb-timepicker-tick{border-radius:50%;color:#666;line-height:2.5rem;text-align:center;width:2.5rem;height:2.5rem;position:absolute;cursor:pointer;transition:.3s;background-color:rgba(0,150,136,0)}.mdb-timepicker-tick:hover{background-color:rgba(0,150,136,.25)}.mdb-timepicker-footer{display:flex;justify-content:flex-end;width:100%;padding:12px}.mdb-timepicker-btn{padding:6px 8px;text-transform:uppercase;background:0 0;border:0;border-radius:4px;min-width:64px;transition:.3s}.mdb-timepicker-btn:not(.mdb-timepicker-btn.mdb-timepicker-clear){margin-left:8px}.mdb-timepicker-btn.mdb-timepicker-clear{margin-right:auto}.mdb-timepicker-btn:hover{background-color:rgba(0,150,136,.25)}.mdb-timepicker-plate{background-color:#eee;border-radius:50%;width:16.875rem;height:16.875rem;overflow:visible;position:relative;margin:1.25rem auto auto;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.mdb-timepicker-plate .mdb-timepicker-minutes{visibility:hidden}.mdb-timepicker-plate .mdb-timepicker-dial-out{opacity:0}.mdb-timepicker-plate .mdb-timepicker-hours.mdb-timepicker-dial-out{transform:scale(1.2,1.2)}.mdb-timepicker-plate .mdb-timepicker-minutes.mdb-timepicker-dial-out{transform:scale(.8,.8)}.mdb-timepicker-canvas,.mdb-timepicker-dial{width:16.875rem;height:16.875rem;position:absolute;left:-1px;top:-1px}.mdb-timepicker-dial{transition:transform 350ms,opacity 350ms}.mdb-timepicker-dial .mdb-timepicker-tick{border-radius:50%;color:#666;line-height:2.5rem;text-align:center;width:2.5rem;height:2.5rem;position:absolute;cursor:pointer;transition:background-color .3s;background-color:rgba(0,150,136,0)}.mdb-timepicker-dial .mdb-timepicker-tick.active,.mdb-timepicker-dial .mdb-timepicker-tick:hover{background-color:rgba(0,150,136,.25)}.mdb-timepicker-canvas{transition:opacity .3s}.mdb-timepicker-canvas line{stroke:rgba(0,150,136,.25);stroke-width:1}.mdb-timepicker-canvas-out{opacity:.25}.mdb-timepicker-canvas-bearing{stroke:none;fill:rgba(0,77,64,.75)}.mdb-timepicker-canvas-fg{stroke:none;fill:rgba(0,77,64,0)}.mdb-timepicker-canvas-fg.active{fill:rgba(0,77,64,.5)}.mdb-timepicker-canvas-bg{stroke:none;fill:rgba(0,150,136,.25)}.mdb-timepicker-canvas-bg-trans{fill:rgba(0,150,136,.25)}"]
+            }),
+            __param(5, core.Inject(common.DOCUMENT)),
+            __metadata("design:paramtypes", [core.ChangeDetectorRef,
+                core.NgZone,
+                a11y.FocusMonitor,
+                core.ElementRef,
+                core.Renderer2, Object])
+        ], MdbTimePickerContentComponent);
+        return MdbTimePickerContentComponent;
+    }());
+
+    var MdbTimePickerComponent = /** @class */ (function () {
+        function MdbTimePickerComponent(_overlay, _vcr // private _cdRef: ChangeDetectorRef
+        ) {
+            this._overlay = _overlay;
+            this._vcr = _vcr;
+            this.autoClose = false;
+            this.clearButton = 'clear';
+            this.closeButton = 'close';
+            this.okButton = 'ok';
+            this.rounding = 1;
+            this.twelveHour = true;
+            this.timeChange = new core.EventEmitter();
+            this.cancel = new core.EventEmitter();
+            this.done = new core.EventEmitter();
+            this.show = new core.EventEmitter();
+            this._value = '12:00AM';
+            this._selectionChange$ = new rxjs.Subject();
+            this.onChangeCb = function () { };
+            this.onTouchedCb = function () { };
+        }
+        MdbTimePickerComponent.prototype._patchInputValues = function () {
+            this._contentRef.instance.picker = this;
+            this._contentRef.instance.autoClose = this.autoClose;
+            this._contentRef.instance.clearButton = this.clearButton;
+            this._contentRef.instance.closeButton = this.closeButton;
+            this._contentRef.instance.okButton = this.okButton;
+            this._contentRef.instance.rounding = this.rounding;
+            this._contentRef.instance.twelveHour = this.twelveHour;
+            this._contentRef.instance.value = this._timeToObj(this._value);
+            if (this.max) {
+                this._contentRef.instance.max = this._timeToObj(this.max);
+            }
+            if (this.min) {
+                this._contentRef.instance.min = this._timeToObj(this.min);
+            }
+        };
+        MdbTimePickerComponent.prototype._timeToObj = function (time) {
+            var round = function (x, roundBy) {
+                return x % roundBy < Math.round(roundBy / 2)
+                    ? x % roundBy === 0
+                        ? x
+                        : Math.ceil(x / roundBy) * roundBy
+                    : Math.floor(x / roundBy) * roundBy;
+            };
+            function toString(val) {
+                return val < 10 ? "0" + val : "" + val;
+            }
+            var hour = Number(time.split(':')[0]);
+            var minute = Number(time.split(':')[1].match(/\d+/g));
+            var ampm = time.match(/AM|PM/) || [''];
+            if (this.rounding) {
+                minute = round(minute, this.rounding);
+            }
+            return {
+                h: toString(hour),
+                m: toString(minute),
+                ampm: ampm[0],
+            };
+        };
+        MdbTimePickerComponent.prototype.open = function () {
+            var overlayRef = this._overlayRef;
+            if (!overlayRef) {
+                this._portal = new portal.ComponentPortal(MdbTimePickerContentComponent, this._vcr);
+                overlayRef = this._overlay.create(this._getOverlayConfig());
+                this._overlayRef = overlayRef;
+            }
+            if (overlayRef && this._overlayRef && !overlayRef.hasAttached()) {
+                this._contentRef = this._overlayRef.attach(this._portal);
+                this._patchInputValues();
+                this._listenToOutsideClick();
+            }
+            this._emitTimeShowEvent(this._timeToObj(this._value));
+        };
+        MdbTimePickerComponent.prototype.close = function (doneClicked, value) {
+            if (this._overlayRef && this._overlayRef.hasAttached()) {
+                if (!doneClicked) {
+                    this._emitTimeCancelEvent(value || this._timeToObj(this._value));
+                }
+            }
+            this._destroyOverlay();
+        };
+        MdbTimePickerComponent.prototype._emitTimeChangeEvent = function (value) {
+            this.timeChange.emit({ status: 'change', value: value });
+        };
+        MdbTimePickerComponent.prototype._emitTimeCancelEvent = function (value) {
+            this.cancel.emit({ status: 'cancel', value: value });
+        };
+        MdbTimePickerComponent.prototype._emitTimeDoneEvent = function (value) {
+            var h = value.h, m = value.m, ampm = value.ampm;
+            this.done.emit({ status: 'done', value: value });
+            this._selectionChange$.next(this.twelveHour ? h + ":" + m + ampm : h + ":" + m);
+        };
+        MdbTimePickerComponent.prototype._emitTimeShowEvent = function (value) {
+            this.show.emit({ status: 'open', value: value });
+        };
+        MdbTimePickerComponent.prototype._setValue = function (value) {
+            if (value) {
+                this._value = value;
+            }
+            else {
+                this._value = '12:00AM';
+            }
+        };
+        MdbTimePickerComponent.prototype.setInput = function (input) {
+            var _this = this;
+            this.input = input;
+            input._valueChange.subscribe(function (val) {
+                var match = val.match(/\d\d:\d\d(AM|PM)?/gi);
+                if (match) {
+                    _this._value = match[0];
+                }
+                else {
+                    _this._value = '12:00AM';
+                }
+            });
+        };
+        MdbTimePickerComponent.prototype.registerOnChange = function (fn) {
+            this.onChangeCb = fn;
+        };
+        MdbTimePickerComponent.prototype.registerOnTouched = function (fn) {
+            this.onTouchedCb = fn;
+        };
+        MdbTimePickerComponent.prototype._getOverlayConfig = function () {
+            var positionStrategy = this._overlay
+                .position()
+                .global()
+                .centerHorizontally()
+                .centerVertically();
+            var overlayConfig = new overlay.OverlayConfig({
+                hasBackdrop: true,
+                scrollStrategy: this._overlay.scrollStrategies.block(),
+                positionStrategy: positionStrategy,
+            });
+            return overlayConfig;
+        };
+        MdbTimePickerComponent.prototype._destroyOverlay = function () {
+            if (this._overlayRef) {
+                this._overlayRef.dispose();
+                this._overlayRef = null;
+            }
+        };
+        MdbTimePickerComponent.prototype._listenToOutsideClick = function () {
+            var _this = this;
+            if (this._overlayRef) {
+                rxjs.merge(this._overlayRef.backdropClick(), this._overlayRef.detachments(), this._overlayRef.keydownEvents().pipe(operators.filter(function (event) {
+                    // Closing on alt + up is only valid when there's an input associated with the datepicker.
+                    // tslint:disable-next-line: deprecation
+                    return event.keyCode === ESCAPE;
+                }))).subscribe(function (event) {
+                    if (event) {
+                        event.preventDefault();
+                    }
+                    _this.close();
+                    _this._destroyOverlay();
+                });
+            }
+        };
+        MdbTimePickerComponent.prototype.ngOnDestroy = function () {
+            this._destroyOverlay();
+        };
+        MdbTimePickerComponent.ctorParameters = function () { return [
+            { type: overlay.Overlay },
+            { type: core.ViewContainerRef // private _cdRef: ChangeDetectorRef
+             }
+        ]; };
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Object)
+        ], MdbTimePickerComponent.prototype, "autoClose", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Object)
+        ], MdbTimePickerComponent.prototype, "clearButton", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Object)
+        ], MdbTimePickerComponent.prototype, "closeButton", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", String)
+        ], MdbTimePickerComponent.prototype, "max", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", String)
+        ], MdbTimePickerComponent.prototype, "min", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Object)
+        ], MdbTimePickerComponent.prototype, "okButton", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Number)
+        ], MdbTimePickerComponent.prototype, "rounding", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Object)
+        ], MdbTimePickerComponent.prototype, "twelveHour", void 0);
+        __decorate([
+            core.Output(),
+            __metadata("design:type", core.EventEmitter)
+        ], MdbTimePickerComponent.prototype, "timeChange", void 0);
+        __decorate([
+            core.Output(),
+            __metadata("design:type", core.EventEmitter)
+        ], MdbTimePickerComponent.prototype, "cancel", void 0);
+        __decorate([
+            core.Output(),
+            __metadata("design:type", core.EventEmitter)
+        ], MdbTimePickerComponent.prototype, "done", void 0);
+        __decorate([
+            core.Output(),
+            __metadata("design:type", core.EventEmitter)
+        ], MdbTimePickerComponent.prototype, "show", void 0);
+        MdbTimePickerComponent = __decorate([
+            core.Component({
+                template: '',
+                selector: 'mdb-timepicker',
+                exportAs: 'mdbTimePicker',
+                encapsulation: core.ViewEncapsulation.None,
+                changeDetection: core.ChangeDetectionStrategy.OnPush
+            }),
+            __metadata("design:paramtypes", [overlay.Overlay,
+                core.ViewContainerRef // private _cdRef: ChangeDetectorRef
+            ])
+        ], MdbTimePickerComponent);
+        return MdbTimePickerComponent;
+    }());
+
+    var MdbTimepickerToggleComponent = /** @class */ (function () {
+        function MdbTimepickerToggleComponent() {
+        }
+        MdbTimepickerToggleComponent.prototype.handleClick = function () {
+            this.mdbTimePickerToggle.open();
+        };
+        MdbTimepickerToggleComponent.prototype.ngOnInit = function () { };
+        __decorate([
+            core.Input(),
+            __metadata("design:type", MdbTimePickerComponent)
+        ], MdbTimepickerToggleComponent.prototype, "mdbTimePickerToggle", void 0);
+        __decorate([
+            core.HostListener('click'),
+            __metadata("design:type", Function),
+            __metadata("design:paramtypes", []),
+            __metadata("design:returntype", void 0)
+        ], MdbTimepickerToggleComponent.prototype, "handleClick", null);
+        MdbTimepickerToggleComponent = __decorate([
+            core.Component({
+                template: "<button class=\"mdb-timepicker-toggle\">\n  <svg\n    aria-hidden=\"true\"\n    focusable=\"false\"\n    data-prefix=\"fas\"\n    data-icon=\"clock\"\n    class=\"svg-inline--fa fa-clock fa-w-16\"\n    role=\"img\"\n    xmlns=\"http://www.w3.org/2000/svg\"\n    viewBox=\"0 0 512 512\"\n  >\n    <path\n      fill=\"currentColor\"\n      d=\"M256,8C119,8,8,119,8,256S119,504,256,504,504,393,504,256,393,8,256,8Zm92.49,313h0l-20,25a16,16,0,0,1-22.49,2.5h0l-67-49.72a40,40,0,0,1-15-31.23V112a16,16,0,0,1,16-16h32a16,16,0,0,1,16,16V256l58,42.5A16,16,0,0,1,348.49,321Z\"\n    ></path>\n  </svg>\n</button>\n",
+                selector: 'mdb-timepicker-toggle',
+                encapsulation: core.ViewEncapsulation.None,
+                changeDetection: core.ChangeDetectionStrategy.OnPush,
+                styles: [".mdb-timepicker-toggle{position:absolute;right:0;top:50%;transform:translateY(-50%);border-color:transparent;background-color:transparent}.mdb-timepicker-toggle svg{height:1em}"]
+            }),
+            __metadata("design:paramtypes", [])
+        ], MdbTimepickerToggleComponent);
+        return MdbTimepickerToggleComponent;
+    }());
+
+    var MDB_TIMEPICKER_VALUE_ACCESSOR = {
+        provide: forms.NG_VALUE_ACCESSOR,
+        // tslint:disable-next-line: no-use-before-declare
+        useExisting: core.forwardRef(function () { return MdbTimePickerDirective; }),
+        multi: true,
+    };
+    var MdbTimePickerDirective = /** @class */ (function () {
+        function MdbTimePickerDirective(el) {
+            this.el = el;
+            this._valueChange = new core.EventEmitter();
+            this.onChange = function () { };
+            this.onTouched = function () { };
+        }
+        Object.defineProperty(MdbTimePickerDirective.prototype, "value", {
+            get: function () {
+                return this._value;
+            },
+            set: function (value) {
+                this._value = value;
+                this._valueChange.emit(this._value);
+                this.el.nativeElement.value = value;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        MdbTimePickerDirective.prototype.handleInput = function (event) {
+            this.onChange(event.target.value);
+            this._valueChange.emit(event.target.value);
+        };
+        MdbTimePickerDirective.prototype.ngOnInit = function () {
+            var _this = this;
+            this.mdbTimePicker.setInput(this);
+            this.mdbTimePicker._selectionChange$.subscribe(function (selectedValue) {
+                _this.value = selectedValue;
+                _this.onChange(selectedValue);
+                _this.onTouched();
+            });
+        };
+        MdbTimePickerDirective.prototype.writeValue = function (value) {
+            if (value || value === '') {
+                this.el.nativeElement.value = value;
+                this.mdbTimePicker._selectionChange$.next(this._value);
+            }
+        };
+        MdbTimePickerDirective.prototype.registerOnChange = function (fn) {
+            this.onChange = fn;
+        };
+        MdbTimePickerDirective.prototype.registerOnTouched = function (fn) {
+            this.onTouched = fn;
+        };
+        MdbTimePickerDirective.ctorParameters = function () { return [
+            { type: core.ElementRef }
+        ]; };
+        __decorate([
+            core.Input(),
+            __metadata("design:type", MdbTimePickerComponent)
+        ], MdbTimePickerDirective.prototype, "mdbTimePicker", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", String),
+            __metadata("design:paramtypes", [String])
+        ], MdbTimePickerDirective.prototype, "value", null);
+        __decorate([
+            core.HostListener('input', ['$event']),
+            __metadata("design:type", Function),
+            __metadata("design:paramtypes", [Object]),
+            __metadata("design:returntype", void 0)
+        ], MdbTimePickerDirective.prototype, "handleInput", null);
+        MdbTimePickerDirective = __decorate([
+            core.Directive({
+                selector: '[mdbTimePicker]',
+                // tslint:disable-next-line: no-host-metadata-property
+                host: { '(blur)': 'onTouched($event)', '(change)': 'onChange($event.target.value)' },
+                providers: [MDB_TIMEPICKER_VALUE_ACCESSOR],
+            }),
+            __metadata("design:paramtypes", [core.ElementRef])
+        ], MdbTimePickerDirective);
+        return MdbTimePickerDirective;
+    }());
+
+    var MdbTimePickerModule = /** @class */ (function () {
+        function MdbTimePickerModule() {
+        }
+        MdbTimePickerModule = __decorate([
+            core.NgModule({
+                imports: [
+                    common.CommonModule,
+                    overlay.OverlayModule,
+                    a11y.A11yModule,
+                    ButtonsModule.forRoot(),
+                    WavesModule.forRoot(),
+                ],
+                declarations: [
+                    MdbTimePickerComponent,
+                    MdbTimepickerToggleComponent,
+                    MdbTimePickerDirective,
+                    MdbTimePickerContentComponent,
+                ],
+                exports: [MdbTimePickerComponent, MdbTimepickerToggleComponent, MdbTimePickerDirective],
+                bootstrap: [MdbTimePickerContentComponent],
+                entryComponents: [MdbTimePickerContentComponent],
+            })
+        ], MdbTimePickerModule);
+        return MdbTimePickerModule;
     }());
 
     var MdbTreeComponent = /** @class */ (function () {
@@ -22567,6 +23461,7 @@
         SelectModule,
         DatepickerModule,
         TimePickerModule,
+        MdbTimePickerModule,
         LightBoxModule,
         SidenavModule,
         ChartSimpleModule,
@@ -22595,6 +23490,7 @@
                     SelectModule,
                     DatepickerModule,
                     TimePickerModule,
+                    MdbTimePickerModule,
                     LightBoxModule,
                     SidenavModule,
                     ChartSimpleModule,
@@ -22729,6 +23625,7 @@
     exports.MDBSpinningPreloader = MDBSpinningPreloader;
     exports.MDBUploaderService = MDBUploaderService;
     exports.MDB_DATE_OPTIONS = MDB_DATE_OPTIONS;
+    exports.MDB_TIMEPICKER_VALUE_ACCESSOR = MDB_TIMEPICKER_VALUE_ACCESSOR;
     exports.MYDP_VALUE_ACCESSOR = MYDP_VALUE_ACCESSOR;
     exports.MaterialChipsComponent = MaterialChipsComponent;
     exports.MdbAutoCompleterComponent = MdbAutoCompleterComponent;
@@ -22765,6 +23662,11 @@
     exports.MdbTableScrollDirective = MdbTableScrollDirective;
     exports.MdbTableService = MdbTableService;
     exports.MdbTableSortDirective = MdbTableSortDirective;
+    exports.MdbTimePickerComponent = MdbTimePickerComponent;
+    exports.MdbTimePickerContentComponent = MdbTimePickerContentComponent;
+    exports.MdbTimePickerDirective = MdbTimePickerDirective;
+    exports.MdbTimePickerModule = MdbTimePickerModule;
+    exports.MdbTimepickerToggleComponent = MdbTimepickerToggleComponent;
     exports.MdbTreeComponent = MdbTreeComponent;
     exports.MdbTreeModule = MdbTreeModule;
     exports.MdbValidateDirective = MdbValidateDirective;
@@ -22919,22 +23821,28 @@
     exports.ɵdd = ChipsModule;
     exports.ɵde = ClockPickerComponent;
     exports.ɵdf = TimePickerModule;
-    exports.ɵdg = MdbTreeComponent;
-    exports.ɵdh = MdbTreeModule;
-    exports.ɵdi = MDBRootModulePro;
-    exports.ɵdj = ComponentLoaderFactory;
-    exports.ɵdk = PositioningService;
-    exports.ɵdl = OnChange$1;
-    exports.ɵdm = MdbAccordionService;
-    exports.ɵdn = ToastRef$1;
-    exports.ɵdo = TOAST_CONFIG;
-    exports.ɵdp = MdProgressBarModule;
-    exports.ɵdq = ProgressBarComponent;
-    exports.ɵdr = MdProgressSpinnerModule;
-    exports.ɵds = MdProgressSpinnerCssMatStylerDirective;
-    exports.ɵdt = MdProgressSpinnerComponent;
-    exports.ɵdu = MdSpinnerComponent;
+    exports.ɵdg = MdbTimePickerComponent;
+    exports.ɵdh = MdbTimepickerToggleComponent;
+    exports.ɵdi = MDB_TIMEPICKER_VALUE_ACCESSOR;
+    exports.ɵdj = MdbTimePickerDirective;
+    exports.ɵdk = MdbTimePickerModule;
+    exports.ɵdl = MdbTimePickerContentComponent;
+    exports.ɵdm = MdbTreeComponent;
+    exports.ɵdn = MdbTreeModule;
+    exports.ɵdo = MDBRootModulePro;
+    exports.ɵdp = ComponentLoaderFactory;
+    exports.ɵdq = PositioningService;
+    exports.ɵdr = OnChange$1;
+    exports.ɵds = MdbAccordionService;
+    exports.ɵdt = ToastRef$1;
+    exports.ɵdu = TOAST_CONFIG;
+    exports.ɵdv = MdProgressBarModule;
+    exports.ɵdw = ProgressBarComponent;
+    exports.ɵdx = MdProgressSpinnerModule;
+    exports.ɵdy = MdProgressSpinnerCssMatStylerDirective;
+    exports.ɵdz = MdProgressSpinnerComponent;
     exports.ɵe = AccordionModule;
+    exports.ɵea = MdSpinnerComponent;
     exports.ɵf = SBItemComponent;
     exports.ɵg = SBItemHeadComponent;
     exports.ɵh = SBItemBodyComponent;
