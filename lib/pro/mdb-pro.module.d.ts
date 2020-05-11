@@ -1,4 +1,6 @@
 import { ModuleWithProviders } from '@angular/core';
+export { MdbSelectModule, MdbSelectComponent, MdbSelectFilterComponent, MDB_SELECT_FILTER_VALUE_ACCESSOR, } from './select/index';
+export { OptionComponent, OptionGroupComponent, SelectAllOptionComponent, MdbOptionModule, } from './option/index';
 export { MdbTreeModule, MdbTreeComponent } from './tree-view/index';
 export { MdbStepperComponent, MdbStepComponent, StepperModule } from './stepper/index';
 export { MdbAutoCompleterComponent, MdbOptionComponent, MdbAutoCompleterDirective, AutoCompleterModule, MdbAutoCompleterOptionDirective, } from './auto-completer/index';
