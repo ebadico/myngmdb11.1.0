@@ -13,10 +13,8 @@ export declare class ModalContainerComponent implements OnInit, OnDestroy {
     isAnimated: boolean;
     protected _element: ElementRef;
     private isModalHiding;
-    private utils;
     onClick(event: any): void;
     onEsc(): void;
-    onKeyDown(event: any): void;
     constructor(options: ModalOptions, _element: ElementRef, _renderer: Renderer2);
     ngOnInit(): void;
     focusModalElement(): void;

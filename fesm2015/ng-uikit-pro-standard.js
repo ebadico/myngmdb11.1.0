@@ -1,16 +1,17 @@
 import { __decorate, __metadata, __param } from 'tslib';
-import { ElementRef, Renderer2, Input, HostBinding, Component, ViewEncapsulation, ChangeDetectionStrategy, NgModule, forwardRef, HostListener, Directive, ViewChild, Injectable, EventEmitter, Inject, PLATFORM_ID, ChangeDetectorRef, ContentChildren, QueryList, Output, isDevMode, Injector, TemplateRef, RendererFactory2, NgZone, ComponentFactoryResolver, ApplicationRef, ViewContainerRef, Attribute, NO_ERRORS_SCHEMA, ContentChild, ɵɵdefineInjectable, Optional, InjectionToken, SecurityContext, SkipSelf, Host, ViewChildren } from '@angular/core';
+import { ElementRef, Renderer2, Input, HostBinding, Component, ViewEncapsulation, ChangeDetectionStrategy, NgModule, forwardRef, HostListener, Directive, ViewChild, Injectable, EventEmitter, Inject, PLATFORM_ID, ChangeDetectorRef, ContentChildren, QueryList, Output, isDevMode, Injector, TemplateRef, RendererFactory2, NgZone, ComponentFactoryResolver, ApplicationRef, ViewContainerRef, Attribute, NO_ERRORS_SCHEMA, ContentChild, ɵɵdefineInjectable, Optional, InjectionToken, SecurityContext, SkipSelf, Self, Host, ViewChildren } from '@angular/core';
 import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
-import { NG_VALUE_ACCESSOR, FormsModule, NG_VALIDATORS, FormGroup, FormControl } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, FormsModule, NG_VALIDATORS, NgControl, FormGroup, FormControl } from '@angular/forms';
 import { takeUntil, take, throttleTime, map, pairwise, distinctUntilChanged, share, filter, skip, startWith, switchMap, mergeMap, tap, debounceTime } from 'rxjs/operators';
 import { Subject, timer, merge, fromEvent, of, animationFrameScheduler, Observable, from } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { ConfigurableFocusTrapFactory, A11yModule, ActiveDescendantKeyManager, FocusMonitor } from '@angular/cdk/a11y';
 import { RouterLinkWithHref, NavigationEnd, Router, NavigationError, NavigationCancel } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { OverlayConfig, Overlay as Overlay$1, OverlayModule } from '@angular/cdk/overlay';
-import { ComponentPortal as ComponentPortal$1 } from '@angular/cdk/portal';
-import { FocusMonitor, A11yModule } from '@angular/cdk/a11y';
+import { Overlay as Overlay$1, ViewportRuler, OverlayModule, OverlayConfig } from '@angular/cdk/overlay';
+import { TemplatePortal, ComponentPortal as ComponentPortal$1 } from '@angular/cdk/portal';
+import { SelectionModel } from '@angular/cdk/collections';
 
 let MDBBadgeComponent = class MDBBadgeComponent {
     constructor(_el, _renderer) {
@@ -6044,8 +6045,9 @@ const BACKDROP_TRANSITION_DURATION = 150;
 let ModalDirective = 
 // tslint:disable-next-line:component-class-suffix
 class ModalDirective {
-    constructor(_element, _viewContainerRef, _renderer, clf) {
+    constructor(_element, _focusTrapFactory, _viewContainerRef, _renderer, clf) {
         this._element = _element;
+        this._focusTrapFactory = _focusTrapFactory;
         this._renderer = _renderer;
         /** This event fires immediately when the `show` instance method is called. */
         // tslint:disable-next-line:no-output-on-prefix
@@ -6085,9 +6087,10 @@ class ModalDirective {
     get isShown() {
         return this._isShown;
     }
-    onKeyDown(event) {
-        this.utils.focusTrapModal(event, this._element);
+    /*   @HostListener('keydown', ['$event']) onKeyDown(event: any) {
+      this.utils.focusTrapModal(event, this._element);
     }
+   */
     onClick(event) {
         if (this.config.ignoreBackdropClick ||
             this.config.backdrop === 'static' ||
@@ -6119,6 +6122,7 @@ class ModalDirective {
                 this.show();
             }
         }, 0);
+        this._createFocusTrap();
     }
     ngOnChanges() {
         this.config.backdrop ? this.showBackdrop() : this.removeBackdrop();
@@ -6236,6 +6240,11 @@ class ModalDirective {
             transitionComplete();
         }
     }
+    _createFocusTrap() {
+        if (!this._focusTrap) {
+            this._focusTrap = this._focusTrapFactory.create(this._element.nativeElement);
+        }
+    }
     /** @internal */
     hideModal() {
         this._renderer.setAttribute(this._element.nativeElement, 'aria-hidden', 'true');
@@ -6335,6 +6344,7 @@ class ModalDirective {
 };
 ModalDirective.ctorParameters = () => [
     { type: ElementRef },
+    { type: ConfigurableFocusTrapFactory },
     { type: ViewContainerRef },
     { type: Renderer2 },
     { type: ComponentLoaderFactory }
@@ -6377,12 +6387,6 @@ __decorate([
     __metadata("design:type", EventEmitter)
 ], ModalDirective.prototype, "closed", void 0);
 __decorate([
-    HostListener('keydown', ['$event']),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], ModalDirective.prototype, "onKeyDown", null);
-__decorate([
     HostListener('click', ['$event']),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -6406,6 +6410,7 @@ ModalDirective = __decorate([
     // tslint:disable-next-line:component-class-suffix
     ,
     __metadata("design:paramtypes", [ElementRef,
+        ConfigurableFocusTrapFactory,
         ViewContainerRef,
         Renderer2,
         ComponentLoaderFactory])
@@ -6421,7 +6426,6 @@ let ModalContainerComponent = class ModalContainerComponent {
         this.modal = true;
         this.isShown = false;
         this.isModalHiding = false;
-        this.utils = new Utils$1();
         this._element = _element;
         this.config = Object.assign({}, options);
     }
@@ -6439,9 +6443,6 @@ let ModalContainerComponent = class ModalContainerComponent {
             this.mdbModalService.setDismissReason(DISMISS_REASONS.ESC);
             this.hide();
         }
-    }
-    onKeyDown(event) {
-        this.utils.focusTrapModal(event, this._element);
     }
     ngOnInit() {
         if (this.config.animated) {
@@ -6555,16 +6556,10 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], ModalContainerComponent.prototype, "onEsc", null);
-__decorate([
-    HostListener('keydown', ['$event']),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], ModalContainerComponent.prototype, "onKeyDown", null);
 ModalContainerComponent = __decorate([
     Component({
         selector: 'mdb-modal-container',
-        template: "<div [class]=\"'modal-dialog' + (config.class ? ' ' + config.class : '')\" role=\"document\">\n  <div class=\"modal-content modal-dynamic\"><ng-content></ng-content></div>\n</div>\n",
+        template: "<div\n  [class]=\"'modal-dialog' + (config.class ? ' ' + config.class : '')\"\n  role=\"document\"\n  cdkTrapFocus\n>\n  <div class=\"modal-content modal-dynamic\"><ng-content></ng-content></div>\n</div>\n",
         encapsulation: ViewEncapsulation.None,
         styles: [".img-fluid,.modal-dialog.cascading-modal.modal-avatar .modal-header,.video-fluid{max-width:100%;height:auto}.flex-center{display:flex;justify-content:center;align-items:center;height:100%}.flex-center p{margin:0}.flex-center ul{text-align:center}.flex-center ul li{margin-bottom:1rem}.flex-center ul li:last-of-type{margin-bottom:0}.hr-light{border-top:1px solid #fff}.hr-dark{border-top:1px solid #666}.w-responsive{width:75%}@media (max-width:740px){.w-responsive{width:100%}}.collapsible-body{display:none}.jumbotron{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);border-radius:.125rem;background-color:#fff}.bg-primary{background-color:#4285f4!important}a.bg-primary:focus,a.bg-primary:hover,button.bg-primary:focus,button.bg-primary:hover{background-color:#1266f1!important}.border-primary{border-color:#4285f4!important}.bg-danger{background-color:#ff3547!important}a.bg-danger:focus,a.bg-danger:hover,button.bg-danger:focus,button.bg-danger:hover{background-color:#ff0219!important}.border-danger{border-color:#ff3547!important}.bg-warning{background-color:#fb3!important}a.bg-warning:focus,a.bg-warning:hover,button.bg-warning:focus,button.bg-warning:hover{background-color:#fa0!important}.border-warning{border-color:#fb3!important}.bg-success{background-color:#00c851!important}a.bg-success:focus,a.bg-success:hover,button.bg-success:focus,button.bg-success:hover{background-color:#00953c!important}.border-success{border-color:#00c851!important}.bg-info{background-color:#33b5e5!important}a.bg-info:focus,a.bg-info:hover,button.bg-info:focus,button.bg-info:hover{background-color:#1a9bcb!important}.border-info{border-color:#33b5e5!important}.bg-default{background-color:#2bbbad!important}a.bg-default:focus,a.bg-default:hover,button.bg-default:focus,button.bg-default:hover{background-color:#219287!important}.border-default{border-color:#2bbbad!important}.bg-secondary{background-color:#a6c!important}a.bg-secondary:focus,a.bg-secondary:hover,button.bg-secondary:focus,button.bg-secondary:hover{background-color:#9540bf!important}.border-secondary{border-color:#a6c!important}.bg-dark{background-color:#212121!important}a.bg-dark:focus,a.bg-dark:hover,button.bg-dark:focus,button.bg-dark:hover{background-color:#080808!important}.border-dark{border-color:#212121!important}.bg-light{background-color:#e0e0e0!important}a.bg-light:focus,a.bg-light:hover,button.bg-light:focus,button.bg-light:hover{background-color:#c7c7c7!important}.border-light{border-color:#e0e0e0!important}.card-img-100{width:100px;height:100px}.card-img-64{width:64px;height:64px}.mml-1{margin-left:-.25rem!important}.flex-1{flex:1}body.modal-open{overflow:auto}.modal-dialog .modal-content .modal-header{border-top-left-radius:.125rem;border-top-right-radius:.125rem}.modal-dialog.cascading-modal .close{opacity:1;text-shadow:none;color:#fff;outline:0}.modal-dialog.cascading-modal .modal-header{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);border-radius:.125rem}.modal-dialog.cascading-modal .modal-header .title .fab,.modal-dialog.cascading-modal .modal-header .title .far,.modal-dialog.cascading-modal .modal-header .title .fas{margin-right:9px}.modal-dialog.cascading-modal .modal-c-tabs .md-tabs{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);display:flex}.modal-dialog.cascading-modal .modal-c-tabs .md-tabs li{flex:1}.modal-dialog.cascading-modal .modal-c-tabs .md-tabs li a{text-align:center}.modal-dialog.cascading-modal .modal-c-tabs .tab-content{box-shadow:unset;padding:1.7rem 0 0}.modal-dialog.cascading-modal.modal-avatar .modal-header img{box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);margin-left:auto;margin-right:auto;width:130px}.modal-dialog.modal-notify.modal-primary .modal-header{background-color:#4285f4}.modal-dialog.modal-notify.modal-primary .fab,.modal-dialog.modal-notify.modal-primary .far,.modal-dialog.modal-notify.modal-primary .fas{color:#4285f4}.modal-dialog.modal-notify.modal-primary .badge{background-color:#4285f4}.modal-dialog.modal-notify.modal-primary .btn .fab,.modal-dialog.modal-notify.modal-primary .btn .far,.modal-dialog.modal-notify.modal-primary .btn .fas{color:#fff}.modal-dialog.modal-notify.modal-primary .btn.btn-outline-primary .fab,.modal-dialog.modal-notify.modal-primary .btn.btn-outline-primary .far,.modal-dialog.modal-notify.modal-primary .btn.btn-outline-primary .fas{color:#4285f4}.modal-dialog.modal-notify.modal-danger .fab,.modal-dialog.modal-notify.modal-danger .far,.modal-dialog.modal-notify.modal-danger .fas{color:#ff3547}.modal-dialog.modal-notify.modal-danger .btn .fab,.modal-dialog.modal-notify.modal-danger .btn .far,.modal-dialog.modal-notify.modal-danger .btn .fas{color:#fff}.modal-dialog.modal-notify.modal-danger .btn.btn-outline-danger .fab,.modal-dialog.modal-notify.modal-danger .btn.btn-outline-danger .far,.modal-dialog.modal-notify.modal-danger .btn.btn-outline-danger .fas{color:#ff3547}.modal-dialog.modal-notify.modal-warning .fab,.modal-dialog.modal-notify.modal-warning .far,.modal-dialog.modal-notify.modal-warning .fas{color:#fb3}.modal-dialog.modal-notify.modal-warning .btn .fab,.modal-dialog.modal-notify.modal-warning .btn .far,.modal-dialog.modal-notify.modal-warning .btn .fas{color:#fff}.modal-dialog.modal-notify.modal-warning .btn.btn-outline-warning .fab,.modal-dialog.modal-notify.modal-warning .btn.btn-outline-warning .far,.modal-dialog.modal-notify.modal-warning .btn.btn-outline-warning .fas{color:#fb3}.modal-dialog.modal-notify.modal-success .fab,.modal-dialog.modal-notify.modal-success .far,.modal-dialog.modal-notify.modal-success .fas{color:#00c851}.modal-dialog.modal-notify.modal-success .btn .fab,.modal-dialog.modal-notify.modal-success .btn .far,.modal-dialog.modal-notify.modal-success .btn .fas{color:#fff}.modal-dialog.modal-notify.modal-success .btn.btn-outline-success .fab,.modal-dialog.modal-notify.modal-success .btn.btn-outline-success .far,.modal-dialog.modal-notify.modal-success .btn.btn-outline-success .fas{color:#00c851}.modal-dialog.modal-notify.modal-info .fab,.modal-dialog.modal-notify.modal-info .far,.modal-dialog.modal-notify.modal-info .fas{color:#33b5e5}.modal-dialog.modal-notify.modal-info .btn .fab,.modal-dialog.modal-notify.modal-info .btn .far,.modal-dialog.modal-notify.modal-info .btn .fas{color:#fff}.modal-dialog.modal-notify.modal-info .btn.btn-outline-info .fab,.modal-dialog.modal-notify.modal-info .btn.btn-outline-info .far,.modal-dialog.modal-notify.modal-info .btn.btn-outline-info .fas{color:#33b5e5}@media (min-width:768px){.modal .modal-dialog.modal-top{top:0}.modal .modal-dialog.modal-left{left:0}.modal .modal-dialog.modal-right{right:0}.modal .modal-dialog.modal-bottom{bottom:0}.modal .modal-dialog.modal-top-left{top:10px;left:10px}.modal .modal-dialog.modal-top-right{top:10px;right:10px}.modal .modal-dialog.modal-bottom-left{bottom:10px;left:10px}.modal .modal-dialog.modal-bottom-right{bottom:10px;right:10px}}@media (min-width:992px){.modal.modal-scrolling{position:relative}.modal.modal-scrolling .modal-dialog{position:fixed;z-index:1050}.modal.modal-content-clickable{top:auto;bottom:auto}.modal.modal-content-clickable .modal-dialog{position:fixed}.modal .modal-fluid{width:100%;max-width:100%}.modal .modal-fluid .modal-content{width:100%}.modal .modal-frame{position:absolute;margin:0!important;width:100%;max-width:100%!important}.modal .modal-frame.modal-bottom{bottom:0}.modal .modal-frame.modal-dialog{height:inherit}.modal .modal-full-height{position:absolute;display:flex;margin:0;width:400px;min-height:100%;height:auto;min-height:100%;top:0;right:0}.modal .modal-full-height.modal-bottom,.modal .modal-full-height.modal-top{display:block;width:100%;max-width:100%;height:auto}.modal .modal-full-height.modal-top{bottom:auto}.modal .modal-full-height.modal-bottom{min-height:0;top:auto}.modal .modal-full-height .modal-content{width:100%}.modal .modal-full-height.modal-lg{width:90%;max-width:90%}.modal .modal-side{position:absolute;bottom:10px;right:10px;margin:0;width:400px}}@media (min-width:992px) and (min-width:992px){.modal .modal-full-height.modal-lg{width:800px;max-width:800px}}@media (min-width:992px) and (min-width:1200px){.modal .modal-full-height.modal-lg{width:1000px;max-width:1000px}}body.scrollable{overflow-y:auto}.modal-dialog .modal-content{box-shadow:0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);border-radius:.125rem;border:0}.modal{padding-right:0!important}@media (min-width:768px){.modal .modal-dialog.modal-top{top:0;left:0;right:0}.modal .modal-dialog.modal-left{left:0}.modal .modal-dialog.modal-right{right:0}.modal .modal-dialog.modal-bottom>.modal-content{position:absolute;bottom:0}.modal .modal-dialog.modal-top-left{top:10px;left:10px}.modal .modal-dialog.modal-top-right{top:10px;right:10px}.modal .modal-dialog.modal-bottom-left{left:10px;bottom:10px}.modal .modal-dialog.modal-bottom-right{right:10px;bottom:10px}.modal-sm{max-width:300px}}.modal .modal-side.modal-top{top:0}.modal .modal-side.modal-left{left:0}.modal .modal-side.modal-right{right:0}.modal .modal-side.modal-bottom{bottom:0}.modal .modal-side.modal-top-left{top:10px;left:10px}.modal .modal-side.modal-top-right{top:10px;right:10px}.modal .modal-side.modal-bottom-left{left:10px;bottom:10px}.modal .modal-side.modal-bottom-right{right:10px;bottom:10px}.modal.fade.top:not(.show) .modal-dialog{transform:translate3d(0,-25%,0)}.modal.fade.left:not(.show) .modal-dialog{transform:translate3d(-25%,0,0)}.modal.fade.right:not(.show) .modal-dialog{transform:translate3d(25%,0,0)}.modal.fade.bottom:not(.show) .modal-dialog{transform:translate3d(0,25%,0)}.modal.fade.in{opacity:1}.modal.fade.in .modal-dialog{transform:translate(0,0)}.modal.fade.in .modal-dialog .relative{display:inline-block}.modal.modal-scrolling{position:relative}.modal.modal-scrolling .modal-dialog{position:fixed;z-index:1050}.modal.modal-content-clickable{top:auto;bottom:auto}.modal.modal-content-clickable .modal-dialog{position:fixed}.modal .modal-fluid{max-width:100%}.modal .modal-fluid .modal-content{width:100%}.modal .modal-frame{position:absolute;max-width:100%;margin:0}@media (max-width:767px){.modal .modal-frame{padding:.5rem}}.modal .modal-frame.modal-bottom{bottom:0}.modal .modal-full-height{display:flex;position:absolute;width:400px;min-height:100%;margin:0;top:0;right:0}@media (max-width:576px){.modal .modal-full-height{width:100%;padding:.5rem}}@media (max-width:992px){.modal .modal-full-height{width:100%;height:unset;position:unset}.modal .modal-full-height.modal-left,.modal .modal-full-height.modal-right,.modal .modal-full-height.modal-top{margin:1.75rem auto;min-height:unset}.modal .modal-full-height.modal-bottom,.modal .modal-full-height.modal-left,.modal .modal-full-height.modal-right,.modal .modal-full-height.modal-top{margin-left:auto;margin-right:auto}}@media (min-width:768px) and (max-width:992px){.modal .modal-full-height.modal-bottom{margin-bottom:1.75rem}.modal .modal-full-height.modal-bottom .modal-content{bottom:1rem}}.modal .modal-full-height.modal-bottom,.modal .modal-full-height.modal-top{display:block;width:100%;height:auto}.modal .modal-full-height.modal-top{bottom:auto}.modal .modal-full-height.modal-bottom{bottom:0}.modal .modal-full-height .modal-content{width:100%}.modal .modal-full-height.modal-lg{max-width:90%;width:90%}@media (min-width:992px){.modal .modal-full-height.modal-lg{max-width:800px;width:800px}}@media (min-width:1200px){.modal .modal-full-height.modal-lg{max-width:1000px;width:1000px}}.modal .modal-side{position:absolute;right:10px;bottom:10px;margin:0;min-width:100px}@media (max-width:768px){.modal .modal-full-height.modal-bottom{margin-top:1.75rem}.modal .modal-side{padding-left:.5rem}}.modal-dialog.cascading-modal{margin-top:10%}.modal-dialog.cascading-modal .modal-header{text-align:center;margin:-2rem 1rem 1rem;padding:1.5rem;border:none;flex-direction:column}.modal-dialog.cascading-modal .modal-header .close{margin-right:2.5rem}.modal-dialog.cascading-modal .modal-header.white-text .close{color:#fff;opacity:1}.modal-dialog.cascading-modal .modal-header .title{width:100%;margin-bottom:0;font-size:1.25rem}.modal-dialog.cascading-modal .modal-header .title .fa{margin-right:9px}.modal-dialog.cascading-modal .modal-header .social-buttons{margin-top:1.5rem}.modal-dialog.cascading-modal .modal-header .social-buttons a{font-size:1rem}.modal-dialog.cascading-modal .modal-c-tabs .md-tabs{margin:-1.5rem 1rem 0}.modal-dialog.cascading-modal .modal-body,.modal-dialog.cascading-modal .modal-footer{color:#616161;padding-right:2rem;padding-left:2rem}.modal-dialog.cascading-modal .modal-body .additional-option,.modal-dialog.cascading-modal .modal-footer .additional-option{text-align:center;margin-top:1rem}.modal-dialog.cascading-modal.modal-avatar{margin-top:6rem}.modal-dialog.cascading-modal.modal-avatar .modal-header{box-shadow:none;margin:-6rem 2rem -1rem}.modal-dialog.modal-notify .heading{margin:0;padding:.3rem;color:#fff;font-size:1.15rem}.modal-dialog.modal-notify .modal-header{box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);border:0}.modal-dialog.modal-notify .close{opacity:1}.modal-dialog.modal-notify .modal-body{padding:1.5rem;color:#616161}.modal-dialog.modal-notify .btn-outline-secondary-modal{background-color:transparent}.modal-dialog.modal-notify.modal-info .modal-header{background-color:#5394ff}.modal-dialog.modal-notify.modal-info .fa{color:#5394ff}.modal-dialog.modal-notify.modal-info .badge{background-color:#5394ff}.modal-dialog.modal-notify.modal-info .btn-primary-modal{background:#5394ff}.modal-dialog.modal-notify.modal-info .btn-primary-modal:active,.modal-dialog.modal-notify.modal-info .btn-primary-modal:focus,.modal-dialog.modal-notify.modal-info .btn-primary-modal:hover{background-color:#6da4ff!important}.modal-dialog.modal-notify.modal-info .btn-primary-modal.active{background-color:#0059ec!important}.modal-dialog.modal-notify.modal-info .btn-outline-secondary-modal{border:2px solid #5394ff;color:#5394ff!important}.modal-dialog.modal-notify.modal-warning .modal-header{background-color:#ff8e38}.modal-dialog.modal-notify.modal-warning .fa{color:#ff8e38}.modal-dialog.modal-notify.modal-warning .badge{background-color:#ff8e38}.modal-dialog.modal-notify.modal-warning .btn-primary-modal{background:#ff8e38}.modal-dialog.modal-notify.modal-warning .btn-primary-modal:active,.modal-dialog.modal-notify.modal-warning .btn-primary-modal:focus,.modal-dialog.modal-notify.modal-warning .btn-primary-modal:hover{background-color:#ff9c52!important}.modal-dialog.modal-notify.modal-warning .btn-primary-modal.active{background-color:#d15a00!important}.modal-dialog.modal-notify.modal-warning .btn-outline-secondary-modal{border:2px solid #ff8e38;color:#ff8e38!important}.modal-dialog.modal-notify.modal-success .modal-header{background-color:#01d36b}.modal-dialog.modal-notify.modal-success .fa{color:#01d36b}.modal-dialog.modal-notify.modal-success .badge{background-color:#01d36b}.modal-dialog.modal-notify.modal-success .btn-primary-modal{background:#01d36b}.modal-dialog.modal-notify.modal-success .btn-primary-modal:active,.modal-dialog.modal-notify.modal-success .btn-primary-modal:focus,.modal-dialog.modal-notify.modal-success .btn-primary-modal:hover{background-color:#01ec78!important}.modal-dialog.modal-notify.modal-success .btn-primary-modal.active{background-color:#016d38!important}.modal-dialog.modal-notify.modal-success .btn-outline-secondary-modal{border:2px solid #01d36b;color:#01d36b!important}.modal-dialog.modal-notify.modal-danger .modal-header{background-color:#ff4b4b}.modal-dialog.modal-notify.modal-danger .fa{color:#ff4b4b}.modal-dialog.modal-notify.modal-danger .badge{background-color:#ff4b4b}.modal-dialog.modal-notify.modal-danger .btn-primary-modal{background:#ff4b4b}.modal-dialog.modal-notify.modal-danger .btn-primary-modal:active,.modal-dialog.modal-notify.modal-danger .btn-primary-modal:focus,.modal-dialog.modal-notify.modal-danger .btn-primary-modal:hover{background-color:#ff6565!important}.modal-dialog.modal-notify.modal-danger .btn-primary-modal.active{background-color:#e40000!important}.modal-dialog.modal-notify.modal-danger .btn-outline-secondary-modal{border:2px solid #ff4b4b;color:#ff4b4b!important}.modal-sm .modal-content{margin:0 auto;max-width:300px}.modal .modal-fluid,.modal .modal-frame{width:100%;max-width:100%}.modal-ext .modal-content .modal-header{text-align:center}.modal-ext .modal-content .options{float:left}.modal-ext .modal-content .modal-body .text-xs-center fieldset{margin-top:20px}.modal-ext .modal-content .call{margin-top:1rem}.modal-ext .modal-content .modal-body{padding:2rem 2rem 1rem}.modal-content:not(.card-image) .close{position:absolute;right:15px}.modal-cart li p{margin:5px;font-weight:400}.modal-cart li p .badge{margin-left:10px;margin-top:3px;font-weight:400;position:absolute}.modal-cart li p .quantity{font-size:16px;margin-right:7px;font-weight:300}.modal-cart .cartPageLink{margin-left:10px}.modal-cart .cartPageLink a{text-decoration:underline;color:#666}.modal-cart .total{float:right;font-weight:400}.cf-phone{margin-left:7px}.side-modal{position:fixed;height:100%;width:100%;z-index:9999}.side-modal .modal-dialog{position:absolute;bottom:10px;right:10px;width:400px;margin:10px}@media (max-width:760px){.side-modal .modal-dialog{display:none}}.side-modal .modal-header{padding:1rem}.side-modal .modal-header .heading{margin:0;padding:0}.side-modal .modal-content{border:none}.modal-dynamic>:first-child{display:flex;flex-direction:column;height:100%}.side-modal.fade:not(.show) .modal-dialog{transform:translate3d(25%,0,0)}.transparent-bd{opacity:0!important}.modal-backdrop,.modal-backdrop.in{opacity:.5}#exampleModalScroll{overflow-x:hidden;overflow-y:auto}.modal-open .modal{overflow-x:hidden;overflow-y:hidden}.form-dark .card-image{background-size:100%}"]
     }),
@@ -6734,6 +6729,7 @@ let ModalModule = ModalModule_1 = class ModalModule {
 ModalModule = ModalModule_1 = __decorate([
     NgModule({
         declarations: [ModalBackdropComponent, ModalDirective, ModalContainerComponent],
+        imports: [A11yModule],
         exports: [ModalBackdropComponent, ModalDirective],
         entryComponents: [ModalBackdropComponent, ModalContainerComponent],
         schemas: [NO_ERRORS_SCHEMA],
@@ -15307,6 +15303,7 @@ let SelectComponent = class SelectComponent {
         this.filterEnabled = false;
         this.filterAutocomplete = true;
         this.optionHeight = 37;
+        this.tabindex = 0;
         this.enableSelectAll = true;
         this.selectAllLabel = 'Select all';
         this.outline = false;
@@ -16066,7 +16063,7 @@ __decorate([
 ], SelectComponent.prototype, "optionHeight", void 0);
 __decorate([
     Input(),
-    __metadata("design:type", Number)
+    __metadata("design:type", Object)
 ], SelectComponent.prototype, "tabindex", void 0);
 __decorate([
     Input(),
@@ -16145,7 +16142,7 @@ __decorate([
 SelectComponent = __decorate([
     Component({
         selector: 'mdb-select',
-        template: "<label *ngIf=\"label !== ''\" [ngClass]=\"{ active: labelActive, focused: focused }\">\n  {{ label }}\n</label>\n<div\n  #selection\n  [attr.tabindex]=\"disabled ? null : 0\"\n  [ngClass]=\"{ open: isOpen, focus: hasFocus, below: isBelow, disabled: disabled }\"\n  [tabindex]=\"tabindex\"\n  (mousedown)=\"onSelectContainerClick($event)\"\n  (focus)=\"onSelectContainerFocus()\"\n  (blur)=\"onSelectContainerBlur()\"\n  (keydown)=\"onSelectContainerKeydown($event)\"\n  (window:resize)=\"onWindowResize()\"\n  [attr.role]=\"filterEnabled ? 'combobox' : 'listbox'\"\n  [attr.aria-disabled]=\"disabled\"\n  [attr.multiselectable]=\"multiple\"\n  [attr.aria-expanded]=\"isOpen\"\n  [attr.aria-required]=\"required\"\n  [attr.aria-haspopup]=\"true\"\n>\n  <div\n    #singleContainer\n    class=\"single form-control\"\n    *ngIf=\"!multiple\"\n    [ngClass]=\"{ focused: focused }\"\n  >\n    <div class=\"value\" *ngIf=\"optionList.hasSelected()\">\n      {{ optionList.selection[0].label }}\n    </div>\n    <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\">\n      {{ placeholderView }}\n    </div>\n    <div\n      #clear\n      class=\"clear\"\n      *ngIf=\"allowClear && hasSelected\"\n      (mousedown)=\"onClearSelectionClick($event)\"\n    >\n      &#x2715;\n    </div>\n    <span class=\"mdb-select-toggle\" [ngClass]=\"{ focused: focused }\"></span>\n  </div>\n\n  <div\n    #multipleContainer\n    class=\"multiple form-control\"\n    *ngIf=\"multiple\"\n    [ngClass]=\"{ focused: focused }\"\n  >\n    <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\">\n      {{ placeholderView }}\n    </div>\n\n    <div [ngStyle]=\"allowClear && { 'width.%': 90 }\" class=\"option\">\n      <span *ngFor=\"let option of optionList.selection\">\n        {{ option.label }}<span class=\"deselect-option\">,</span>\n      </span>\n    </div>\n\n    <div\n      #clear\n      class=\"clear\"\n      *ngIf=\"allowClear && hasSelected\"\n      (mousedown)=\"onClearSelectionClick($event)\"\n    >\n      &#x2715;\n    </div>\n\n    <span class=\"mdb-select-toggle\" [ngClass]=\"{ focused: focused }\"></span>\n  </div>\n</div>\n<mdb-select-dropdown\n  *ngIf=\"isOpen\"\n  #dropdown\n  [enableSelectAll]=\"enableSelectAll\"\n  [multiple]=\"multiple\"\n  [dropdownHeight]=\"dropdownHeight\"\n  [dropdownMaxHeight]=\"dropdownMaxHeight\"\n  [optionHeight]=\"optionHeight\"\n  [optionList]=\"optionList\"\n  [notFoundMsg]=\"notFoundMsg\"\n  [customClass]=\"customClass\"\n  [highlightColor]=\"highlightColor\"\n  [highlightTextColor]=\"highlightTextColor\"\n  [filterEnabled]=\"filterEnabled\"\n  [filterAutocomplete]=\"filterAutocomplete\"\n  [placeholder]=\"filterPlaceholder\"\n  [selectAllLabel]=\"selectAllLabel\"\n  [outline]=\"outline\"\n  [top]=\"top\"\n  [left]=\"left\"\n  [width]=\"width\"\n  (close)=\"onDropdownClose($event)\"\n  (optionClicked)=\"onDropdownOptionClicked($event)\"\n  (singleFilterClick)=\"onSingleFilterClick()\"\n  (singleFilterInput)=\"onSingleFilterInput($event)\"\n  (singleFilterKeydown)=\"onSingleFilterKeydown($event)\"\n  (selectAll)=\"onSelectAll($event)\"\n  (animationDone)=\"onDropdownAnimationDone()\"\n  (animationStart)=\"onDropdownAnimationStart()\"\n>\n  <ng-content></ng-content>\n</mdb-select-dropdown>\n",
+        template: "<label *ngIf=\"label !== ''\" [ngClass]=\"{ active: labelActive, focused: focused }\">\n  {{ label }}\n</label>\n<div\n  #selection\n  [attr.tabindex]=\"disabled ? -1 : tabindex\"\n  [ngClass]=\"{ open: isOpen, focus: hasFocus, below: isBelow, disabled: disabled }\"\n  (mousedown)=\"onSelectContainerClick($event)\"\n  (focus)=\"onSelectContainerFocus()\"\n  (blur)=\"onSelectContainerBlur()\"\n  (keydown)=\"onSelectContainerKeydown($event)\"\n  (window:resize)=\"onWindowResize()\"\n  [attr.role]=\"filterEnabled ? 'combobox' : 'listbox'\"\n  [attr.aria-disabled]=\"disabled\"\n  [attr.multiselectable]=\"multiple\"\n  [attr.aria-expanded]=\"isOpen\"\n  [attr.aria-required]=\"required\"\n  [attr.aria-haspopup]=\"true\"\n>\n  <div\n    #singleContainer\n    class=\"single form-control\"\n    *ngIf=\"!multiple\"\n    [ngClass]=\"{ focused: focused }\"\n  >\n    <div class=\"value\" *ngIf=\"optionList.hasSelected()\">\n      {{ optionList.selection[0].label }}\n    </div>\n    <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\">\n      {{ placeholderView }}\n    </div>\n    <div\n      #clear\n      class=\"clear\"\n      *ngIf=\"allowClear && hasSelected\"\n      (mousedown)=\"onClearSelectionClick($event)\"\n    >\n      &#x2715;\n    </div>\n    <span class=\"mdb-select-toggle\" [ngClass]=\"{ focused: focused }\"></span>\n  </div>\n\n  <div\n    #multipleContainer\n    class=\"multiple form-control\"\n    *ngIf=\"multiple\"\n    [ngClass]=\"{ focused: focused }\"\n  >\n    <div class=\"placeholder\" *ngIf=\"!optionList.hasSelected()\">\n      {{ placeholderView }}\n    </div>\n\n    <div [ngStyle]=\"allowClear && { 'width.%': 90 }\" class=\"option\">\n      <span *ngFor=\"let option of optionList.selection\">\n        {{ option.label }}<span class=\"deselect-option\">,</span>\n      </span>\n    </div>\n\n    <div\n      #clear\n      class=\"clear\"\n      *ngIf=\"allowClear && hasSelected\"\n      (mousedown)=\"onClearSelectionClick($event)\"\n    >\n      &#x2715;\n    </div>\n\n    <span class=\"mdb-select-toggle\" [ngClass]=\"{ focused: focused }\"></span>\n  </div>\n</div>\n<mdb-select-dropdown\n  *ngIf=\"isOpen\"\n  #dropdown\n  [enableSelectAll]=\"enableSelectAll\"\n  [multiple]=\"multiple\"\n  [dropdownHeight]=\"dropdownHeight\"\n  [dropdownMaxHeight]=\"dropdownMaxHeight\"\n  [optionHeight]=\"optionHeight\"\n  [optionList]=\"optionList\"\n  [notFoundMsg]=\"notFoundMsg\"\n  [customClass]=\"customClass\"\n  [highlightColor]=\"highlightColor\"\n  [highlightTextColor]=\"highlightTextColor\"\n  [filterEnabled]=\"filterEnabled\"\n  [filterAutocomplete]=\"filterAutocomplete\"\n  [placeholder]=\"filterPlaceholder\"\n  [selectAllLabel]=\"selectAllLabel\"\n  [outline]=\"outline\"\n  [top]=\"top\"\n  [left]=\"left\"\n  [width]=\"width\"\n  (close)=\"onDropdownClose($event)\"\n  (optionClicked)=\"onDropdownOptionClicked($event)\"\n  (singleFilterClick)=\"onSingleFilterClick()\"\n  (singleFilterInput)=\"onSingleFilterInput($event)\"\n  (singleFilterKeydown)=\"onSingleFilterKeydown($event)\"\n  (selectAll)=\"onSelectAll($event)\"\n  (animationDone)=\"onDropdownAnimationDone()\"\n  (animationStart)=\"onDropdownAnimationStart()\"\n>\n  <ng-content></ng-content>\n</mdb-select-dropdown>\n",
         providers: [SELECT_VALUE_ACCESSOR],
         encapsulation: ViewEncapsulation.None,
         changeDetection: ChangeDetectionStrategy.OnPush,
@@ -16174,6 +16171,1263 @@ SelectModule = __decorate([
         ]
     })
 ], SelectModule);
+
+const dropdownAnimation = trigger('dropdownAnimation', [
+    state('void', style({
+        transform: 'scaleY(0.8)',
+        opacity: 0,
+    })),
+    state('visible', style({
+        opacity: 1,
+        transform: 'scaleY(1)',
+    })),
+    transition('void => *', animate('200ms ease')),
+    transition('* => void', animate('200ms ease')),
+]);
+
+const MDB_OPTION_PARENT$1 = new InjectionToken('MDB_OPTION_PARENT');
+const MDB_OPTION_GROUP = new InjectionToken('MDB_OPTION_GROUP');
+let OptionComponent = class OptionComponent {
+    constructor(_el, _cdRef, _parent, group) {
+        this._el = _el;
+        this._cdRef = _cdRef;
+        this._parent = _parent;
+        this.group = group;
+        this.disabled = false;
+        this.selectionChange = new EventEmitter();
+        this._selected = false;
+        this._active = false;
+        this._multiple = false;
+        this.clicked = false;
+        this.clickSource = new Subject();
+        this.click$ = this.clickSource.asObservable();
+        this.option = true;
+        this.clicked = false;
+    }
+    get active() {
+        return this._active;
+    }
+    get selected() {
+        return this._selected;
+    }
+    get optionHeight() {
+        return this._optionHeight;
+    }
+    get role() {
+        return 'option';
+    }
+    get isDisabled() {
+        return this.disabled ? true : false;
+    }
+    get isSelected() {
+        return this.selected;
+    }
+    onClick() {
+        this.clickSource.next(this);
+    }
+    get label() {
+        return this._el.nativeElement.textContent;
+    }
+    getLabel() {
+        return this._el.nativeElement.textContent;
+    }
+    get offsetHeight() {
+        return this._el.nativeElement.offsetHeight;
+    }
+    ngOnInit() {
+        if (this._parent && this._parent.visibleOptions && this._parent.optionHeight) {
+            this._optionHeight = this._parent.optionHeight;
+        }
+        if (this._parent && this._parent.multiple) {
+            this._multiple = true;
+        }
+    }
+    select() {
+        if (!this._selected) {
+            this._selected = this._multiple ? !this._selected : true;
+            this.selectionChange.emit(this);
+            this._cdRef.markForCheck();
+        }
+    }
+    deselect() {
+        if (this._selected) {
+            this._selected = false;
+            this.selectionChange.emit(this);
+            this._cdRef.markForCheck();
+        }
+    }
+    setActiveStyles() {
+        if (!this._active) {
+            this._active = true;
+            this._cdRef.markForCheck();
+        }
+    }
+    setInactiveStyles() {
+        if (this._active) {
+            this._active = false;
+            this._cdRef.markForCheck();
+        }
+    }
+};
+OptionComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: ChangeDetectorRef },
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MDB_OPTION_PARENT$1,] }] },
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MDB_OPTION_GROUP,] }] }
+];
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], OptionComponent.prototype, "value", void 0);
+__decorate([
+    HostBinding('class.disabled'),
+    Input(),
+    __metadata("design:type", Object)
+], OptionComponent.prototype, "disabled", void 0);
+__decorate([
+    Output(),
+    __metadata("design:type", Object)
+], OptionComponent.prototype, "selectionChange", void 0);
+__decorate([
+    HostBinding('class.mdb-option'),
+    __metadata("design:type", Object)
+], OptionComponent.prototype, "option", void 0);
+__decorate([
+    HostBinding('class.active'),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [])
+], OptionComponent.prototype, "active", null);
+__decorate([
+    HostBinding('class.selected'),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [])
+], OptionComponent.prototype, "selected", null);
+__decorate([
+    HostBinding('style.height.px'),
+    __metadata("design:type", Number),
+    __metadata("design:paramtypes", [])
+], OptionComponent.prototype, "optionHeight", null);
+__decorate([
+    HostBinding('attr.role'),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [])
+], OptionComponent.prototype, "role", null);
+__decorate([
+    HostBinding('attr.aria-disabled'),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [])
+], OptionComponent.prototype, "isDisabled", null);
+__decorate([
+    HostBinding('attr.aria-selected'),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [])
+], OptionComponent.prototype, "isSelected", null);
+__decorate([
+    HostListener('click'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], OptionComponent.prototype, "onClick", null);
+OptionComponent = __decorate([
+    Component({
+        selector: 'mdb-select-option',
+        template: "<span class=\"mdb-option-checkbox-wrapper\" *ngIf=\"_multiple\">\n  <input type=\"checkbox\" [checked]=\"selected\" class=\"form-check-input mdb-option-checkbox\" />\n  <label class=\"mdb-option-checkbox-label\"></label>\n</span>\n<span class=\"mdb-option-text\" ngClass=\"{'active', active}\">\n  <ng-content></ng-content>\n</span>\n",
+        encapsulation: ViewEncapsulation.None,
+        styles: [".mdb-option{width:100%;height:48px;white-space:nowrap;text-overflow:ellipsis;cursor:pointer;display:flex;flex-direction:row;align-items:center;color:rgba(0,0,0,.87);padding-left:16px;padding-right:16px;font-size:1rem;font-weight:400;background-color:transparent}.mdb-option.active,.mdb-option.selected.active,.mdb-option:hover{background-color:#ddd}.mdb-option.selected.disabled{cursor:default;color:#9e9e9e;background-color:transparent}.mdb-option.selected{background-color:#eee}.mdb-option.disabled{cursor:default;color:#9e9e9e}.mdb-option.mdb-select-all-option.selected.active{background-color:#ddd}.mdb-option.mdb-select-all-option.selected{background-color:#fff}.mdb-option-label{display:flex;align-items:center;justify-content:space-between;width:100%;height:37px;line-height:37px}.mdb-option-checkbox-label{height:10px!important;top:0!important;margin-top:-2px!important}.mdb-option-text{width:100%}.mdb-option-text.active{background-color:#00f}.mdb-option-icon{height:34px;width:34px}[type=checkbox]:checked,[type=checkbox]:not(:checked){position:absolute;opacity:0;pointer-events:none}.form-check-input[type=checkbox]+label,label.btn input[type=checkbox]+label{position:relative;padding-left:35px;cursor:pointer;display:inline-block;height:1.5625rem;line-height:1.5625rem;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.form-check-input[type=checkbox]+label:before,.form-check-input[type=checkbox]:not(.filled-in)+label:after,label.btn input[type=checkbox]+label:before,label.btn input[type=checkbox]:not(.filled-in)+label:after{content:\"\";position:absolute;top:0;left:0;width:18px;height:18px;z-index:0;border:2px solid #8a8a8a;border-radius:1px;margin-top:3px;transition:.2s}.form-check-input[type=checkbox]:not(.filled-in)+label:after,label.btn input[type=checkbox]:not(.filled-in)+label:after{border:0;transform:scale(0)}.form-check-input[type=checkbox]:not(:checked):disabled+label:before,label.btn input[type=checkbox]:not(:checked):disabled+label:before{border:none;background-color:#bdbdbd}.form-check-input[type=checkbox]:checked+label:before,label.btn input[type=checkbox]:checked+label:before{top:-4px;left:-5px;width:12px;height:1.375rem;border-top:2px solid transparent;border-left:2px solid transparent;border-right:2px solid #4285f4;border-bottom:2px solid #4285f4;transform:rotate(40deg);-webkit-backface-visibility:hidden;backface-visibility:hidden;transform-origin:100% 100%}.form-check-input[type=checkbox]:checked:disabled+label:before,label.btn input[type=checkbox]:checked:disabled+label:before{border-right:2px solid #bdbdbd;border-bottom:2px solid #bdbdbd}.form-check-input[type=checkbox]:indeterminate+label:before,label.btn input[type=checkbox]:indeterminate+label:before{top:-11px;left:-12px;width:10px;height:1.375rem;border-top:none;border-left:none;border-right:2px solid #4285f4;border-bottom:none;transform:rotate(90deg);-webkit-backface-visibility:hidden;backface-visibility:hidden;transform-origin:100% 100%}.form-check-input[type=checkbox]:indeterminate:disabled+label:before,label.btn input[type=checkbox]:indeterminate:disabled+label:before{border-right:2px solid rgba(0,0,0,.46);background-color:transparent}.form-check-input[type=checkbox].filled-in+label:after,label.btn input[type=checkbox].filled-in+label:after{border-radius:.125rem}.form-check-input[type=checkbox].filled-in+label:after,.form-check-input[type=checkbox].filled-in+label:before,label.btn input[type=checkbox].filled-in+label:after,label.btn input[type=checkbox].filled-in+label:before{content:\"\";left:0;position:absolute;transition:border .25s,background-color .25s,width .2s .1s,height .2s .1s,top .2s .1s,left .2s .1s;z-index:1}.form-check-input[type=checkbox].filled-in:not(:checked)+label:before,label.btn input[type=checkbox].filled-in:not(:checked)+label:before{width:0;height:0;border:3px solid transparent;left:6px;top:10px;transform:rotateZ(37deg);transform-origin:100% 100%}.form-check-input[type=checkbox].filled-in:not(:checked)+label:after,label.btn input[type=checkbox].filled-in:not(:checked)+label:after{height:20px;width:20px;background-color:transparent;border:2px solid #5a5a5a;top:0;z-index:0}.form-check-input[type=checkbox].filled-in:checked+label:before,label.btn input[type=checkbox].filled-in:checked+label:before{top:0;left:1px;width:8px;height:13px;border-top:2px solid transparent;border-left:2px solid transparent;border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotateZ(37deg);transform-origin:100% 100%}.form-check-input[type=checkbox].filled-in:checked+label:after,label.btn input[type=checkbox].filled-in:checked+label:after{top:0;width:20px;height:20px;border:2px solid #a6c;background-color:#a6c;z-index:0}.form-check-input[type=checkbox].filled-in.filled-in-danger:checked+label:after,label.btn input[type=checkbox].filled-in.filled-in-danger:checked+label:after{background-color:#f44336;border-color:#f44336}.form-check-input[type=checkbox]:disabled:not(:checked)+label:before,label.btn input[type=checkbox]:disabled:not(:checked)+label:before{background-color:#bdbdbd;border-color:#bdbdbd}.form-check-input[type=checkbox]:disabled:not(:checked)+label:after,label.btn input[type=checkbox]:disabled:not(:checked)+label:after{border-color:#bdbdbd;background-color:#bdbdbd}.form-check-input[type=checkbox]:disabled:checked+label:before,label.btn input[type=checkbox]:disabled:checked+label:before{background-color:transparent}.form-check-input[type=checkbox]:disabled:checked+label:after,label.btn input[type=checkbox]:disabled:checked+label:after{background-color:#bdbdbd;border-color:#bdbdbd}"]
+    }),
+    __param(2, Optional()), __param(2, Inject(MDB_OPTION_PARENT$1)),
+    __param(3, Optional()), __param(3, Inject(MDB_OPTION_GROUP)),
+    __metadata("design:paramtypes", [ElementRef,
+        ChangeDetectorRef, Object, Object])
+], OptionComponent);
+
+var OptionGroupComponent_1;
+let OptionGroupComponent = OptionGroupComponent_1 = class OptionGroupComponent {
+    constructor(_parent) {
+        this._parent = _parent;
+        this.optionGroup = true;
+        this._optionHeight = 48;
+        this._disabled = false;
+    }
+    get disabled() {
+        return this._disabled;
+    }
+    set disabled(value) {
+        this._disabled = value;
+    }
+    ngOnInit() {
+        if (this._parent && this._parent.visibleOptions && this._parent.optionHeight) {
+            this._optionHeight = this._parent.optionHeight;
+        }
+    }
+    ngAfterContentInit() { }
+};
+OptionGroupComponent.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MDB_OPTION_PARENT$1,] }] }
+];
+__decorate([
+    HostBinding('class.mdb-option-group'),
+    __metadata("design:type", Object)
+], OptionGroupComponent.prototype, "optionGroup", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", String)
+], OptionGroupComponent.prototype, "label", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Boolean),
+    __metadata("design:paramtypes", [Boolean])
+], OptionGroupComponent.prototype, "disabled", null);
+OptionGroupComponent = OptionGroupComponent_1 = __decorate([
+    Component({
+        selector: 'mdb-option-group',
+        template: "<label\n  class=\"mdb-option-group-label\"\n  [style.height.px]=\"_optionHeight\"\n  [style.line-height.px]=\"_optionHeight\"\n  >{{ label }}</label\n>\n<ng-content select=\"mdb-select-option\"></ng-content>\n",
+        encapsulation: ViewEncapsulation.None,
+        changeDetection: ChangeDetectionStrategy.OnPush,
+        providers: [{ provide: MDB_OPTION_GROUP, useExisting: OptionGroupComponent_1 }],
+        styles: [".mdb-option-group{display:flex;flex-direction:column}.mdb-option-group-label{white-space:nowrap;text-overflow:ellipsis;color:#9e9e9e;padding-left:16px;padding-right:16px;margin:0;border-top:1px solid #eee}.mdb-option-group:first-child .mdb-option-group-label{border-top:0}"]
+    }),
+    __param(0, Optional()), __param(0, Inject(MDB_OPTION_PARENT$1)),
+    __metadata("design:paramtypes", [Object])
+], OptionGroupComponent);
+
+let SelectAllOptionComponent = class SelectAllOptionComponent extends OptionComponent {
+    constructor(_el, _cdRef, _parent, group) {
+        super(_el, _cdRef, _parent, group);
+        this._multiple = true;
+        this.option = true;
+    }
+    ngOnInit() { }
+};
+SelectAllOptionComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: ChangeDetectorRef },
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MDB_OPTION_PARENT$1,] }] },
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MDB_OPTION_GROUP,] }] }
+];
+__decorate([
+    HostBinding('class.mdb-select-all-option'),
+    __metadata("design:type", Object)
+], SelectAllOptionComponent.prototype, "option", void 0);
+SelectAllOptionComponent = __decorate([
+    Component({
+        selector: 'mdb-select-all-option',
+        template: "<span class=\"mdb-option-checkbox-wrapper\" *ngIf=\"_multiple\">\n  <input type=\"checkbox\" [checked]=\"selected\" class=\"form-check-input mdb-option-checkbox\" />\n  <label class=\"mdb-option-checkbox-label\"></label>\n</span>\n<span class=\"mdb-option-text\" ngClass=\"{'active', active}\">\n  <ng-content></ng-content>\n</span>\n",
+        styles: [".mdb-option{width:100%;height:48px;white-space:nowrap;text-overflow:ellipsis;cursor:pointer;display:flex;flex-direction:row;align-items:center;color:rgba(0,0,0,.87);padding-left:16px;padding-right:16px;font-size:1rem;font-weight:400;background-color:transparent}.mdb-option.active,.mdb-option.selected.active,.mdb-option:hover{background-color:#ddd}.mdb-option.selected.disabled{cursor:default;color:#9e9e9e;background-color:transparent}.mdb-option.selected{background-color:#eee}.mdb-option.disabled{cursor:default;color:#9e9e9e}.mdb-option.mdb-select-all-option.selected.active{background-color:#ddd}.mdb-option.mdb-select-all-option.selected{background-color:#fff}.mdb-option-label{display:flex;align-items:center;justify-content:space-between;width:100%;height:37px;line-height:37px}.mdb-option-checkbox-label{height:10px!important;top:0!important;margin-top:-2px!important}.mdb-option-text{width:100%}.mdb-option-text.active{background-color:#00f}.mdb-option-icon{height:34px;width:34px}[type=checkbox]:checked,[type=checkbox]:not(:checked){position:absolute;opacity:0;pointer-events:none}.form-check-input[type=checkbox]+label,label.btn input[type=checkbox]+label{position:relative;padding-left:35px;cursor:pointer;display:inline-block;height:1.5625rem;line-height:1.5625rem;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.form-check-input[type=checkbox]+label:before,.form-check-input[type=checkbox]:not(.filled-in)+label:after,label.btn input[type=checkbox]+label:before,label.btn input[type=checkbox]:not(.filled-in)+label:after{content:\"\";position:absolute;top:0;left:0;width:18px;height:18px;z-index:0;border:2px solid #8a8a8a;border-radius:1px;margin-top:3px;transition:.2s}.form-check-input[type=checkbox]:not(.filled-in)+label:after,label.btn input[type=checkbox]:not(.filled-in)+label:after{border:0;transform:scale(0)}.form-check-input[type=checkbox]:not(:checked):disabled+label:before,label.btn input[type=checkbox]:not(:checked):disabled+label:before{border:none;background-color:#bdbdbd}.form-check-input[type=checkbox]:checked+label:before,label.btn input[type=checkbox]:checked+label:before{top:-4px;left:-5px;width:12px;height:1.375rem;border-top:2px solid transparent;border-left:2px solid transparent;border-right:2px solid #4285f4;border-bottom:2px solid #4285f4;transform:rotate(40deg);-webkit-backface-visibility:hidden;backface-visibility:hidden;transform-origin:100% 100%}.form-check-input[type=checkbox]:checked:disabled+label:before,label.btn input[type=checkbox]:checked:disabled+label:before{border-right:2px solid #bdbdbd;border-bottom:2px solid #bdbdbd}.form-check-input[type=checkbox]:indeterminate+label:before,label.btn input[type=checkbox]:indeterminate+label:before{top:-11px;left:-12px;width:10px;height:1.375rem;border-top:none;border-left:none;border-right:2px solid #4285f4;border-bottom:none;transform:rotate(90deg);-webkit-backface-visibility:hidden;backface-visibility:hidden;transform-origin:100% 100%}.form-check-input[type=checkbox]:indeterminate:disabled+label:before,label.btn input[type=checkbox]:indeterminate:disabled+label:before{border-right:2px solid rgba(0,0,0,.46);background-color:transparent}.form-check-input[type=checkbox].filled-in+label:after,label.btn input[type=checkbox].filled-in+label:after{border-radius:.125rem}.form-check-input[type=checkbox].filled-in+label:after,.form-check-input[type=checkbox].filled-in+label:before,label.btn input[type=checkbox].filled-in+label:after,label.btn input[type=checkbox].filled-in+label:before{content:\"\";left:0;position:absolute;transition:border .25s,background-color .25s,width .2s .1s,height .2s .1s,top .2s .1s,left .2s .1s;z-index:1}.form-check-input[type=checkbox].filled-in:not(:checked)+label:before,label.btn input[type=checkbox].filled-in:not(:checked)+label:before{width:0;height:0;border:3px solid transparent;left:6px;top:10px;transform:rotateZ(37deg);transform-origin:100% 100%}.form-check-input[type=checkbox].filled-in:not(:checked)+label:after,label.btn input[type=checkbox].filled-in:not(:checked)+label:after{height:20px;width:20px;background-color:transparent;border:2px solid #5a5a5a;top:0;z-index:0}.form-check-input[type=checkbox].filled-in:checked+label:before,label.btn input[type=checkbox].filled-in:checked+label:before{top:0;left:1px;width:8px;height:13px;border-top:2px solid transparent;border-left:2px solid transparent;border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotateZ(37deg);transform-origin:100% 100%}.form-check-input[type=checkbox].filled-in:checked+label:after,label.btn input[type=checkbox].filled-in:checked+label:after{top:0;width:20px;height:20px;border:2px solid #a6c;background-color:#a6c;z-index:0}.form-check-input[type=checkbox].filled-in.filled-in-danger:checked+label:after,label.btn input[type=checkbox].filled-in.filled-in-danger:checked+label:after{background-color:#f44336;border-color:#f44336}.form-check-input[type=checkbox]:disabled:not(:checked)+label:before,label.btn input[type=checkbox]:disabled:not(:checked)+label:before{background-color:#bdbdbd;border-color:#bdbdbd}.form-check-input[type=checkbox]:disabled:not(:checked)+label:after,label.btn input[type=checkbox]:disabled:not(:checked)+label:after{border-color:#bdbdbd;background-color:#bdbdbd}.form-check-input[type=checkbox]:disabled:checked+label:before,label.btn input[type=checkbox]:disabled:checked+label:before{background-color:transparent}.form-check-input[type=checkbox]:disabled:checked+label:after,label.btn input[type=checkbox]:disabled:checked+label:after{background-color:#bdbdbd;border-color:#bdbdbd}"]
+    }),
+    __param(2, Optional()), __param(2, Inject(MDB_OPTION_PARENT$1)),
+    __param(3, Optional()), __param(3, Inject(MDB_OPTION_GROUP)),
+    __metadata("design:paramtypes", [ElementRef,
+        ChangeDetectorRef, Object, Object])
+], SelectAllOptionComponent);
+
+const MDB_SELECT_FILTER_VALUE_ACCESSOR = {
+    provide: NG_VALUE_ACCESSOR,
+    // tslint:disable-next-line: no-use-before-declare
+    useExisting: forwardRef(() => MdbSelectFilterComponent),
+    multi: true,
+};
+let MdbSelectFilterComponent = class MdbSelectFilterComponent {
+    constructor(_el) {
+        this._el = _el;
+        this.placeholder = '';
+        this.autocomplete = true;
+        this.inputChange = new EventEmitter();
+        this._onChange = () => { };
+        this._onTouched = () => { };
+    }
+    _handleInput(event) {
+        const valueChanged = this.value !== event.target.value;
+        if (valueChanged) {
+            this._onChange(event.target.value);
+            this.inputChange.emit(event.target.value);
+            this.value = event.target.value;
+        }
+    }
+    ngOnInit() { }
+    focus() {
+        this.input.nativeElement.focus();
+    }
+    /** Control value accessor methods */
+    setDisabledState(isDisabled) {
+        this._el.nativeElement.disabled = isDisabled;
+    }
+    writeValue(value) {
+        Promise.resolve(null).then(() => {
+            this._el.nativeElement.value = value;
+        });
+    }
+    registerOnChange(fn) {
+        this._onChange = fn;
+    }
+    registerOnTouched(fn) {
+        this._onTouched = fn;
+    }
+};
+MdbSelectFilterComponent.ctorParameters = () => [
+    { type: ElementRef }
+];
+__decorate([
+    ViewChild('input'),
+    __metadata("design:type", ElementRef)
+], MdbSelectFilterComponent.prototype, "input", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], MdbSelectFilterComponent.prototype, "placeholder", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], MdbSelectFilterComponent.prototype, "autocomplete", void 0);
+__decorate([
+    Output(),
+    __metadata("design:type", EventEmitter)
+], MdbSelectFilterComponent.prototype, "inputChange", void 0);
+__decorate([
+    HostListener('input', ['$event']),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], MdbSelectFilterComponent.prototype, "_handleInput", null);
+MdbSelectFilterComponent = __decorate([
+    Component({
+        selector: 'mdb-select-filter',
+        template: "<div #filter class=\"mdb-select-filter md-form px-2\">\n  <input\n    #input\n    [placeholder]=\"placeholder\"\n    [attr.autocomplete]=\"autocomplete\"\n    [attr.role]=\"'searchbox'\"\n    type=\"text\"\n    class=\"mdb-select-filter-input search form-control w-100 d-block\"\n  />\n</div>\n",
+        providers: [MDB_SELECT_FILTER_VALUE_ACCESSOR]
+    }),
+    __metadata("design:paramtypes", [ElementRef])
+], MdbSelectFilterComponent);
+
+var MdbSelectComponent_1;
+let MdbSelectComponent = MdbSelectComponent_1 = 
+// tslint:disable-next-line:component-class-suffix
+class MdbSelectComponent {
+    constructor(_overlay, _viewportRuler, _vcr, _cdRef, _renderer, ngControl) {
+        this._overlay = _overlay;
+        this._viewportRuler = _viewportRuler;
+        this._vcr = _vcr;
+        this._cdRef = _cdRef;
+        this._renderer = _renderer;
+        this.ngControl = ngControl;
+        this.allowClear = false;
+        this.clearButtonTabindex = 0;
+        this.disabled = false;
+        this.highlightFirst = true;
+        this.label = '';
+        this.multiple = false;
+        this.notFoundMsg = 'No results found';
+        this.outline = false;
+        this.tabindex = 0;
+        this.required = false;
+        this.ariaLabel = '';
+        this._visibleOptions = 5;
+        this._optionHeight = 48;
+        // Equal to 4 * optionHeight (which is 48px by default)
+        this._dropdownHeight = 240;
+        this.valueChange = new EventEmitter();
+        this.opened = new EventEmitter();
+        this.closed = new EventEmitter();
+        this.selected = new EventEmitter();
+        // tslint:disable-next-line:max-line-length
+        this.deselected = new EventEmitter();
+        this.noOptionsFound = new EventEmitter();
+        this._destroy = new Subject();
+        this._isOpen = false;
+        this._hasFocus = false;
+        this._labelActive = false;
+        this._showNoResultsMsg = false;
+        this._selectAllChecked = false;
+        this._compareWith = (o1, o2) => o1 === o2;
+        /** ControlValueAccessor interface methods. **/
+        this._onChange = (_) => { };
+        this._onTouched = () => { };
+        if (this.ngControl) {
+            this.ngControl.valueAccessor = this;
+        }
+    }
+    get visibleOptions() {
+        return this._visibleOptions;
+    }
+    set visibleOptions(value) {
+        if (value !== 0) {
+            this._visibleOptions = value;
+        }
+    }
+    get optionHeight() {
+        return this._optionHeight;
+    }
+    set optionHeight(value) {
+        if (value !== 0) {
+            this._optionHeight = value;
+        }
+    }
+    get dropdownHeight() {
+        return this._dropdownHeight;
+    }
+    set dropdownHeight(value) {
+        if (value !== 0) {
+            this._dropdownHeight = value;
+        }
+    }
+    get value() {
+        return this._value;
+    }
+    set value(newValue) {
+        if (this._value !== newValue) {
+            this._value = newValue;
+            this.writeValue(newValue);
+        }
+    }
+    get compareWith() {
+        return this._compareWith;
+    }
+    set compareWith(fn) {
+        if (typeof fn === 'function') {
+            this._compareWith = fn;
+        }
+    }
+    get activeOption() {
+        if (this._keyManager) {
+            return this._keyManager.activeItem;
+        }
+        return null;
+    }
+    get selectionView() {
+        if (this.multiple) {
+            const selectedOptions = this._selectionModel.selected.map(option => option.label.trim());
+            return selectedOptions.join(', ');
+        }
+        if (this._selectionModel.selected[0]) {
+            return this._selectionModel.selected[0].label;
+        }
+        return '';
+    }
+    get hasSelection() {
+        return this._selectionModel && !this._selectionModel.isEmpty();
+    }
+    get allChecked() {
+        const selectionsNumber = this._selectionModel.selected.length;
+        const optionsNumber = this.options.length;
+        return selectionsNumber === optionsNumber;
+    }
+    handleKeydown(event) {
+        if (!this.disabled) {
+            this._handleClosedKeydown(event);
+        }
+    }
+    get select() {
+        return true;
+    }
+    get isOutline() {
+        return this.outline;
+    }
+    get isMultiselectable() {
+        return this.multiple;
+    }
+    get hasPopup() {
+        return true;
+    }
+    get isDisabled() {
+        return this.disabled;
+    }
+    get isExpanded() {
+        return this._isOpen;
+    }
+    get role() {
+        return this.filter ? 'combobox' : 'listbox';
+    }
+    ngAfterContentInit() {
+        this._initKeyManager();
+        this._setInitialValue();
+        this._listenToOptionClick();
+        if (this.selectAllOption) {
+            this._listenToSelectAllClick();
+        }
+        if (this.filter) {
+            this.filter.inputChange.pipe(takeUntil(this._destroy)).subscribe(() => {
+                if (this.multiple && !this.filter.value) {
+                    this.previousSelectedValues = this.options
+                        .filter(option => option.selected)
+                        .map(option => option.value);
+                }
+            });
+        }
+    }
+    restoreMultipleOptions() {
+        if (this.multiple && this.filter) {
+            if (this.filter.value &&
+                this.filter.value.length &&
+                this.previousSelectedValues &&
+                Array.isArray(this.previousSelectedValues)) {
+                if (!this.value || !Array.isArray(this.value)) {
+                    this.value = [];
+                }
+                const optionValues = this.options.map(option => option.value);
+                this.previousSelectedValues.forEach(previousValue => {
+                    if (!this.value.some((v) => this.compareWith(v, previousValue)) &&
+                        !optionValues.some(v => this.compareWith(v, previousValue))) {
+                        // if a value that was selected before is deselected and not found in the options, it was deselected
+                        // due to the filtering, so we restore it.
+                        this.value.push(previousValue);
+                    }
+                });
+            }
+            this.previousSelectedValues = this.value;
+        }
+    }
+    _initKeyManager() {
+        const options = this.selectAllOption ? [this.selectAllOption, ...this.options] : this.options;
+        if (this.filter) {
+            this._keyManager = new ActiveDescendantKeyManager(options).withVerticalOrientation();
+        }
+        else {
+            this._keyManager = new ActiveDescendantKeyManager(options)
+                .withTypeAhead(200)
+                .withVerticalOrientation();
+        }
+    }
+    _listenToOptionClick() {
+        this.options.changes
+            .pipe(startWith(this.options), tap(() => {
+            this._setInitialValue();
+            setTimeout(() => {
+                this._showNoResultsMsg = this.options.length === 0;
+                this._keyManager.setActiveItem(null);
+                this._initKeyManager();
+                if (this._isOpen) {
+                    this._highlightFirstOption();
+                    if (this._keyManager.activeItem) {
+                        this._scrollToOption(this._keyManager.activeItem);
+                    }
+                }
+            }, 0);
+        }), switchMap((options) => {
+            return merge(...options.map((option) => option.click$));
+        }), takeUntil(this._destroy))
+            .subscribe((clickedOption) => this._handleOptionClick(clickedOption));
+    }
+    _listenToSelectAllClick() {
+        this.selectAllOption.click$
+            .pipe(takeUntil(this._destroy))
+            .subscribe((option) => {
+            this.onSelectAll(option);
+        });
+    }
+    _updateValue() {
+        let updatedValue = null;
+        if (this.multiple) {
+            updatedValue = this._selectionModel.selected.map(option => option.value);
+        }
+        else {
+            updatedValue = this._selectionModel.selected[0].value;
+        }
+        this._value = updatedValue;
+        this.restoreMultipleOptions();
+        this._cdRef.markForCheck();
+    }
+    _handleOptionClick(option) {
+        if (option.disabled) {
+            return;
+        }
+        if (this.multiple) {
+            this._handleMultipleSelection(option);
+        }
+        else {
+            this._handleSingleSelection(option);
+        }
+        this._updateLabeLPosition();
+        this._cdRef.markForCheck();
+    }
+    _handleSingleSelection(option) {
+        const currentSelection = this._selectionModel.selected[0];
+        this._selectionModel.select(option);
+        option.select();
+        if (currentSelection && currentSelection !== option) {
+            this._selectionModel.deselect(currentSelection);
+            currentSelection.deselect();
+            this.deselected.emit(currentSelection.value);
+        }
+        if (!currentSelection || (currentSelection && currentSelection !== option)) {
+            this._updateValue();
+            this.valueChange.emit(this.value);
+            this._onChange(this.value);
+            this.selected.emit(option.value);
+        }
+        this.close();
+        this._focus();
+        this._updateLabeLPosition();
+    }
+    _handleMultipleSelection(option) {
+        const currentSelections = this._selectionModel.selected;
+        if (option.selected) {
+            this._selectionModel.deselect(option);
+            option.deselect();
+            this.deselected.emit(currentSelections);
+        }
+        else {
+            this._selectionModel.select(option);
+            option.select();
+            this.selected.emit(option.value);
+        }
+        this._selectAllChecked = this.allChecked ? true : false;
+        if (this.selectAllOption && !this._selectAllChecked) {
+            this.selectAllOption.deselect();
+        }
+        this._updateValue();
+        this._sortValues();
+        this.valueChange.emit(this.value);
+        this._onChange(this.value);
+        this._cdRef.markForCheck();
+    }
+    _setSelection(selectValue) {
+        if (selectValue) {
+            if (this.multiple) {
+                this._selectionModel.clear();
+                selectValue.forEach((value) => this._selectByValue(value));
+                this._sortValues();
+            }
+            else {
+                this._selectByValue(selectValue);
+            }
+        }
+        this._cdRef.markForCheck();
+    }
+    _selectByValue(value) {
+        const matchingOption = this.options
+            .toArray()
+            .find((option) => this._compareWith(option.value, value));
+        if (matchingOption) {
+            this._selectionModel.select(matchingOption);
+            matchingOption.select();
+            this.selected.emit(matchingOption.value);
+        }
+    }
+    _setInitialValue() {
+        const value = this.ngControl ? this.ngControl.value : this._value;
+        Promise.resolve().then(() => {
+            this._setSelection(value);
+        });
+    }
+    onSelectAll(selectAlloption) {
+        if (!selectAlloption.selected && !this._selectAllChecked) {
+            this._selectAllChecked = true;
+            this.options.forEach((option) => {
+                if (!option.disabled) {
+                    this._selectionModel.select(option);
+                    option.select();
+                }
+            });
+            this._updateValue();
+            this._sortValues();
+            this.valueChange.emit(this.value);
+            this._onChange(this.value);
+            this._updateLabeLPosition();
+            selectAlloption.select();
+        }
+        else {
+            this._selectAllChecked = false;
+            this._selectionModel.clear();
+            this.options.forEach((option) => {
+                option.deselect();
+            });
+            selectAlloption.deselect();
+            this._updateValue();
+            this.valueChange.emit(this.value);
+            this._onChange(this.value);
+            this._updateLabeLPosition();
+        }
+    }
+    open() {
+        if (this.disabled) {
+            return;
+        }
+        let overlayRef = this._overlayRef;
+        if (!overlayRef) {
+            this._portal = new TemplatePortal(this._dropdownTemplate, this._vcr);
+            overlayRef = this._overlay.create({
+                width: this._selectWrapper.nativeElement.offsetWidth,
+                scrollStrategy: this._overlay.scrollStrategies.reposition(),
+                positionStrategy: this._getOverlayPosition(),
+            });
+            this._overlayRef = overlayRef;
+            overlayRef.keydownEvents().subscribe((event) => {
+                // tslint:disable-next-line: deprecation
+                const key = event.keyCode;
+                if (key === ESCAPE || (key === UP_ARROW && event.altKey)) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    this.close();
+                    this._focus();
+                }
+            });
+        }
+        if (overlayRef && !overlayRef.hasAttached()) {
+            overlayRef.attach(this._portal);
+            this._listenToOutSideCick(overlayRef, this._selectValue.nativeElement).subscribe(() => this.close());
+            if (this.filter) {
+                this.filter.focus();
+            }
+            this._highlightFirstOption();
+        }
+        if (this._viewportRuler) {
+            this._viewportRuler
+                .change()
+                .pipe(takeUntil(this._destroy))
+                .subscribe(() => {
+                if (this._isOpen && overlayRef) {
+                    overlayRef.updateSize({ width: this._selectWrapper.nativeElement.offsetWidth });
+                }
+            });
+        }
+        setTimeout(() => {
+            const firstSelected = this._selectionModel.selected[0];
+            if (firstSelected) {
+                this._scrollToOption(firstSelected);
+            }
+        }, 0);
+        this.opened.emit();
+        setTimeout(() => {
+            this._renderer.listen(this.dropdown.nativeElement, 'keydown', (event) => {
+                this._handleOpenKeydown(event);
+            });
+        }, 0);
+        this._updateLabeLPosition();
+        if (!this.filter) {
+            setTimeout(() => {
+                this.dropdown.nativeElement.focus();
+            }, 0);
+        }
+        this._isOpen = true;
+        this._cdRef.markForCheck();
+    }
+    _sortValues() {
+        if (this.multiple) {
+            const options = this.options.toArray();
+            this._selectionModel.sort((a, b) => {
+                return this.sortComparator
+                    ? this.sortComparator(a, b, options)
+                    : options.indexOf(a) - options.indexOf(b);
+            });
+        }
+    }
+    _listenToOutSideCick(overlayRef, origin) {
+        return fromEvent(document, 'click').pipe(filter((event) => {
+            const target = event.target;
+            const notOrigin = target !== origin;
+            const notValue = !this._selectValue.nativeElement.contains(target);
+            const notOverlay = !!overlayRef && overlayRef.overlayElement.contains(target) === false;
+            return notOrigin && notValue && notOverlay;
+        }), takeUntil(overlayRef.detachments()));
+    }
+    _getOverlayPosition() {
+        const positionStrategy = this._overlay
+            .position()
+            .flexibleConnectedTo(this._selectWrapper)
+            .withPositions(this._getPositions())
+            .withFlexibleDimensions(false);
+        return positionStrategy;
+    }
+    _getPositions() {
+        const bottomOffset = this.outline ? 4 : 6;
+        const topOffset = this.outline ? -7 : -3;
+        if (!this.outline) {
+            return [
+                {
+                    originX: 'start',
+                    originY: 'top',
+                    offsetY: bottomOffset,
+                    overlayX: 'start',
+                    overlayY: 'top',
+                },
+                {
+                    originX: 'start',
+                    originY: 'bottom',
+                    offsetY: topOffset,
+                    overlayX: 'start',
+                    overlayY: 'bottom',
+                },
+            ];
+        }
+        else {
+            return [
+                {
+                    originX: 'start',
+                    originY: 'bottom',
+                    offsetY: bottomOffset,
+                    overlayX: 'start',
+                    overlayY: 'top',
+                },
+                {
+                    originX: 'start',
+                    originY: 'top',
+                    offsetY: topOffset,
+                    overlayX: 'start',
+                    overlayY: 'bottom',
+                },
+            ];
+        }
+    }
+    close() {
+        if (!this._isOpen) {
+            return;
+        }
+        if (this._overlayRef && this._overlayRef.hasAttached()) {
+            this._overlayRef.detach();
+            this._isOpen = false;
+        }
+        this.closed.emit();
+        this._updateLabeLPosition();
+        this._keyManager.setActiveItem(null);
+        this._onTouched();
+        this._cdRef.markForCheck();
+    }
+    toggle() {
+        this._isOpen ? this.close() : this.open();
+    }
+    _updateLabeLPosition() {
+        if (!this.placeholder && !this.hasSelected) {
+            this._labelActive = false;
+        }
+        else {
+            this._labelActive = true;
+        }
+    }
+    get hasSelected() {
+        return this._selectionModel.selected.length !== 0;
+    }
+    _scrollToOption(option) {
+        let optionIndex;
+        if (this.multiple && this.selectAllOption) {
+            optionIndex = this.options.toArray().indexOf(option) + 1;
+        }
+        else {
+            optionIndex = this.options.toArray().indexOf(option);
+        }
+        const groupsNumber = this._getNumberOfGroupsBeforeOption(optionIndex);
+        const scrollToIndex = optionIndex + groupsNumber;
+        const list = this._optionsWrapper.nativeElement;
+        const listHeight = list.offsetHeight;
+        if (optionIndex > -1) {
+            const optionTop = scrollToIndex * this.optionHeight;
+            const optionBottom = optionTop + this.optionHeight;
+            const viewTop = list.scrollTop;
+            const viewBottom = this.dropdownHeight;
+            if (optionBottom > viewBottom) {
+                list.scrollTop = optionBottom - listHeight;
+            }
+            else if (optionTop < viewTop) {
+                list.scrollTop = optionTop;
+            }
+        }
+    }
+    _getNumberOfGroupsBeforeOption(optionIndex) {
+        if (this.optionGroups.length) {
+            const optionsList = this.options.toArray();
+            const groupsList = this.optionGroups.toArray();
+            const index = this.multiple ? optionIndex - 1 : optionIndex;
+            let groupsNumber = 0;
+            for (let i = 0; i <= index; i++) {
+                if (optionsList[i].group && optionsList[i].group === groupsList[groupsNumber]) {
+                    groupsNumber++;
+                }
+            }
+            return groupsNumber;
+        }
+        return 0;
+    }
+    handleSelectionClear(event) {
+        if (event.button === 2) {
+            return;
+        }
+        this._selectionModel.clear();
+        this.options.forEach((option) => {
+            option.deselect();
+        });
+        if (this.selectAllOption && this._selectAllChecked) {
+            this.selectAllOption.deselect();
+            this._selectAllChecked = false;
+        }
+        this.value = null;
+        this.valueChange.emit(null);
+        this._onChange(null);
+        this._updateLabeLPosition();
+        this._selectAllChecked = false;
+    }
+    _handleOpenKeydown(event) {
+        const key = event.keyCode;
+        const manager = this._keyManager;
+        const isUserTyping = manager.isTyping();
+        const previousActiveItem = manager.activeItem;
+        manager.onKeydown(event);
+        if (key === HOME || key === END) {
+            event.preventDefault();
+            key === HOME ? manager.setFirstItemActive() : manager.setLastItemActive();
+            if (manager.activeItem) {
+                this._scrollToOption(manager.activeItem);
+            }
+        }
+        else if (this._overlayRef &&
+            this._overlayRef.hasAttached() &&
+            !isUserTyping &&
+            manager.activeItem &&
+            (key === ENTER || (key === SPACE && !this.filter))) {
+            event.preventDefault();
+            if (this.multiple && this.selectAllOption && manager.activeItemIndex === 0) {
+                this.onSelectAll(this.selectAllOption);
+            }
+            else {
+                this._handleOptionClick(manager.activeItem);
+            }
+        }
+        else if (key === UP_ARROW && event.altKey) {
+            event.preventDefault();
+            this.close();
+            this._focus();
+        }
+        else if (key === UP_ARROW || key === DOWN_ARROW) {
+            if (manager.activeItem && manager.activeItem !== previousActiveItem) {
+                this._scrollToOption(manager.activeItem);
+            }
+        }
+    }
+    _handleClosedKeydown(event) {
+        const key = event.keyCode;
+        const manager = this._keyManager;
+        if ((key === DOWN_ARROW && event.altKey) || key === ENTER) {
+            event.preventDefault();
+            this.open();
+        }
+        else if (!this.multiple && key === DOWN_ARROW) {
+            event.preventDefault();
+            manager.setNextItemActive();
+            if (manager.activeItem) {
+                this._handleOptionClick(manager.activeItem);
+            }
+        }
+        else if (!this.multiple && key === UP_ARROW) {
+            event.preventDefault();
+            manager.setPreviousItemActive();
+            if (manager.activeItem) {
+                this._handleOptionClick(manager.activeItem);
+            }
+        }
+        else if (!this.multiple && key === HOME) {
+            event.preventDefault();
+            manager.setFirstItemActive();
+            if (manager.activeItem) {
+                this._handleOptionClick(manager.activeItem);
+            }
+        }
+        else if (!this.multiple && key === END) {
+            event.preventDefault();
+            manager.setLastItemActive();
+            if (manager.activeItem) {
+                this._handleOptionClick(manager.activeItem);
+            }
+        }
+        else if (this.multiple && (key === DOWN_ARROW || key === UP_ARROW)) {
+            event.preventDefault();
+            this.open();
+        }
+    }
+    handleOptionsWheel(event) {
+        const optionsList = this._optionsWrapper.nativeElement;
+        const atTop = optionsList.scrollTop === 0;
+        const atBottom = optionsList.offsetHeight + optionsList.scrollTop === optionsList.scrollHeight;
+        if (atTop && event.deltaY < 0) {
+            event.preventDefault();
+        }
+        else if (atBottom && event.deltaY > 0) {
+            event.preventDefault();
+        }
+    }
+    _focus() {
+        this._hasFocus = true;
+        this._selectWrapper.nativeElement.focus();
+    }
+    _highlightFirstOption() {
+        if (!this.hasSelection) {
+            this._keyManager.setFirstItemActive();
+        }
+        else if (this.hasSelection && !this._selectionModel.selected[0].disabled) {
+            this._keyManager.setActiveItem(this._selectionModel.selected[0]);
+        }
+    }
+    onFocus() {
+        if (!this.disabled) {
+            this._focus();
+        }
+    }
+    onBlur() {
+        if (!this._isOpen && !this.disabled) {
+            this._onTouched();
+        }
+        this._hasFocus = false;
+    }
+    ngOnInit() {
+        this._selectionModel = new SelectionModel(this.multiple);
+        if (this.label) {
+            this._updateLabeLPosition();
+        }
+    }
+    ngOnDestroy() {
+        this._destroy.next();
+        this._destroy.complete();
+    }
+    writeValue(value) {
+        if (this.options) {
+            this._setSelection(value);
+        }
+    }
+    setDisabledState(isDisabled) {
+        this.disabled = isDisabled;
+        this._cdRef.markForCheck();
+    }
+    registerOnChange(fn) {
+        this._onChange = fn;
+    }
+    registerOnTouched(fn) {
+        this._onTouched = fn;
+    }
+};
+MdbSelectComponent.ctorParameters = () => [
+    { type: Overlay$1 },
+    { type: ViewportRuler },
+    { type: ViewContainerRef },
+    { type: ChangeDetectorRef },
+    { type: Renderer2 },
+    { type: NgControl, decorators: [{ type: Self }, { type: Optional }] }
+];
+__decorate([
+    ViewChild('selectWrapper'),
+    __metadata("design:type", ElementRef)
+], MdbSelectComponent.prototype, "_selectWrapper", void 0);
+__decorate([
+    ViewChild('selectValue'),
+    __metadata("design:type", ElementRef)
+], MdbSelectComponent.prototype, "_selectValue", void 0);
+__decorate([
+    ViewChild('dropdownTemplate'),
+    __metadata("design:type", TemplateRef)
+], MdbSelectComponent.prototype, "_dropdownTemplate", void 0);
+__decorate([
+    ViewChild('dropdown'),
+    __metadata("design:type", ElementRef)
+], MdbSelectComponent.prototype, "dropdown", void 0);
+__decorate([
+    ContentChild(MdbSelectFilterComponent),
+    __metadata("design:type", MdbSelectFilterComponent)
+], MdbSelectComponent.prototype, "filter", void 0);
+__decorate([
+    ViewChild('optionsWrapper'),
+    __metadata("design:type", ElementRef)
+], MdbSelectComponent.prototype, "_optionsWrapper", void 0);
+__decorate([
+    ViewChild('customContent'),
+    __metadata("design:type", ElementRef)
+], MdbSelectComponent.prototype, "_customContent", void 0);
+__decorate([
+    ContentChild(SelectAllOptionComponent),
+    __metadata("design:type", SelectAllOptionComponent)
+], MdbSelectComponent.prototype, "selectAllOption", void 0);
+__decorate([
+    ContentChildren(OptionComponent, { descendants: true }),
+    __metadata("design:type", QueryList)
+], MdbSelectComponent.prototype, "options", void 0);
+__decorate([
+    ContentChildren(OptionGroupComponent),
+    __metadata("design:type", QueryList)
+], MdbSelectComponent.prototype, "optionGroups", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], MdbSelectComponent.prototype, "allowClear", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], MdbSelectComponent.prototype, "clearButtonTabindex", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], MdbSelectComponent.prototype, "disabled", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", String)
+], MdbSelectComponent.prototype, "dropdownClass", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], MdbSelectComponent.prototype, "highlightFirst", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], MdbSelectComponent.prototype, "label", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], MdbSelectComponent.prototype, "multiple", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], MdbSelectComponent.prototype, "notFoundMsg", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], MdbSelectComponent.prototype, "outline", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", String)
+], MdbSelectComponent.prototype, "placeholder", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], MdbSelectComponent.prototype, "tabindex", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], MdbSelectComponent.prototype, "required", void 0);
+__decorate([
+    Input('aria-label'),
+    __metadata("design:type", Object)
+], MdbSelectComponent.prototype, "ariaLabel", void 0);
+__decorate([
+    Input('aria-labelledby'),
+    __metadata("design:type", String)
+], MdbSelectComponent.prototype, "ariaLabelledby", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Number),
+    __metadata("design:paramtypes", [Number])
+], MdbSelectComponent.prototype, "visibleOptions", null);
+__decorate([
+    Input(),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [Object])
+], MdbSelectComponent.prototype, "optionHeight", null);
+__decorate([
+    Input(),
+    __metadata("design:type", Number),
+    __metadata("design:paramtypes", [Number])
+], MdbSelectComponent.prototype, "dropdownHeight", null);
+__decorate([
+    Input(),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [Object])
+], MdbSelectComponent.prototype, "value", null);
+__decorate([
+    Input(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Function])
+], MdbSelectComponent.prototype, "compareWith", null);
+__decorate([
+    Input(),
+    __metadata("design:type", Function)
+], MdbSelectComponent.prototype, "sortComparator", void 0);
+__decorate([
+    Output(),
+    __metadata("design:type", EventEmitter)
+], MdbSelectComponent.prototype, "valueChange", void 0);
+__decorate([
+    Output(),
+    __metadata("design:type", EventEmitter)
+], MdbSelectComponent.prototype, "opened", void 0);
+__decorate([
+    Output(),
+    __metadata("design:type", EventEmitter)
+], MdbSelectComponent.prototype, "closed", void 0);
+__decorate([
+    Output(),
+    __metadata("design:type", EventEmitter)
+], MdbSelectComponent.prototype, "selected", void 0);
+__decorate([
+    Output(),
+    __metadata("design:type", EventEmitter)
+], MdbSelectComponent.prototype, "deselected", void 0);
+__decorate([
+    Output(),
+    __metadata("design:type", EventEmitter)
+], MdbSelectComponent.prototype, "noOptionsFound", void 0);
+__decorate([
+    HostListener('keydown', ['$event']),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], MdbSelectComponent.prototype, "handleKeydown", null);
+__decorate([
+    HostBinding('class.mdb-select'),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [])
+], MdbSelectComponent.prototype, "select", null);
+__decorate([
+    HostBinding('class.mdb-select-outline'),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [])
+], MdbSelectComponent.prototype, "isOutline", null);
+__decorate([
+    HostBinding('attr.aria-multiselectable'),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [])
+], MdbSelectComponent.prototype, "isMultiselectable", null);
+__decorate([
+    HostBinding('attr.aria-haspopup'),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [])
+], MdbSelectComponent.prototype, "hasPopup", null);
+__decorate([
+    HostBinding('attr.aria-disabled'),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [])
+], MdbSelectComponent.prototype, "isDisabled", null);
+__decorate([
+    HostBinding('attr.aria-expanded'),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [])
+], MdbSelectComponent.prototype, "isExpanded", null);
+__decorate([
+    HostBinding('attr.aria-role'),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [])
+], MdbSelectComponent.prototype, "role", null);
+MdbSelectComponent = MdbSelectComponent_1 = __decorate([
+    Component({
+        selector: 'mdb-select-2',
+        template: "<label\n  class=\"mdb-select-label\"\n  [ngClass]=\"{\n    active: _labelActive,\n    focused: _hasFocus || _isOpen,\n    outline: outline,\n    disabled: disabled\n  }\"\n  >{{ label }}</label\n>\n<div\n  #selectWrapper\n  [attr.tabindex]=\"disabled ? -1 : tabindex\"\n  (focus)=\"onFocus()\"\n  (blur)=\"onBlur()\"\n  class=\"mdb-select-wrapper\"\n  [ngClass]=\"{ disabled: disabled }\"\n  (click)=\"open()\"\n>\n  <div\n    #selectValue\n    class=\"mdb-select-value form-control\"\n    [ngClass]=\"{ focused: _hasFocus || _isOpen }\"\n  >\n    <span\n      *ngIf=\"placeholder && !selectionView\"\n      class=\"mdb-select-placeholder\"\n      [ngClass]=\"{ disabled: disabled }\"\n      >{{ placeholder }}</span\n    >\n    <span *ngIf=\"selectionView\" class=\"mdb-select-value-label\" [ngClass]=\"{ disabled: disabled }\">\n      <span>{{ selectionView }}</span>\n    </span>\n    <div class=\"mdb-select-icons-wrapper\">\n      <span\n        class=\"mdb-select-clear-btn\"\n        [ngClass]=\"{ disabled: disabled }\"\n        [attr.tabindex]=\"clearButtonTabindex\"\n        *ngIf=\"allowClear && hasSelected\"\n        [ngClass]=\"{ focused: _hasFocus || _isOpen }\"\n        (mousedown)=\"handleSelectionClear($event)\"\n        >&#x2715;</span\n      >\n      <span\n        class=\"mdb-select-arrow\"\n        [ngClass]=\"{ focused: _hasFocus || _isOpen, disabled: disabled }\"\n      ></span>\n    </div>\n  </div>\n</div>\n\n<ng-template #dropdownTemplate>\n  <div\n    #dropdown\n    [@dropdownAnimation]=\"'visible'\"\n    tabindex=\"-1\"\n    class=\"mdb-select-dropdown {{ dropdownClass }}\"\n  >\n    <ng-content select=\"mdb-select-filter\"></ng-content>\n    <div\n      #optionsWrapper\n      class=\"mdb-select-options-wrapper\"\n      [ngStyle]=\"{ 'max-height.px': dropdownHeight }\"\n    >\n      <div class=\"mdb-select-options\">\n        <ng-content select=\"mdb-select-all-option\"></ng-content>\n        <span class=\"mdb-select-no-results\" *ngIf=\"filter && _showNoResultsMsg && notFoundMsg\">{{\n          notFoundMsg\n        }}</span>\n        <ng-content select=\"mdb-select-option, mdb-option-group\"></ng-content>\n      </div>\n    </div>\n    <div #customContent class=\"mdb-select-custom-content\">\n      <ng-content></ng-content>\n    </div>\n  </div>\n</ng-template>\n",
+        encapsulation: ViewEncapsulation.None,
+        changeDetection: ChangeDetectionStrategy.OnPush,
+        animations: [dropdownAnimation],
+        providers: [{ provide: MDB_OPTION_PARENT$1, useExisting: MdbSelectComponent_1 }],
+        styles: ["@charset \"UTF-8\";.md-form .mdb-select .mdb-select-label{max-width:95%;color:#757575;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.md-form .mdb-select .mdb-select-label.outline{max-width:90%}.md-form .mdb-select .mdb-select-label.outline.active{max-width:110%;font-weight:500}.md-form .mdb-select .mdb-select-label.focused{color:#4285f4}.mdb-select{display:block}.mdb-select-label{color:#757575;font-size:1rem;position:absolute;top:12px;margin:0;transition:.2s ease-out;transform:translateY(0);cursor:text}.mdb-select-label.active{font-size:.8rem;transform:translateY(-22px)}.mdb-select-label.focused{color:#4285f4}.mdb-select-label.active.disabled,.mdb-select-label.disabled{color:#aaa}.mdb-select-label.outline{padding-left:13px}.mdb-select-label.outline.active{font-weight:500;background-color:#fff;left:10px;padding-left:5px;padding-right:5px;z-index:1;max-width:80%}.mdb-select-wrapper{position:relative;outline:0}.mdb-select-value{box-sizing:content-box;display:flex;justify-content:space-between;align-items:center;cursor:pointer;background-color:transparent;border:0;border-radius:0;border-bottom:1px solid #ced4da;width:100%;height:24px!important;font-size:1rem;margin:0 0 .5rem;padding:.6rem 0 .4rem;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out}.mdb-select-value.focused{box-shadow:0 1px 0 0 #4285f4;border-bottom:1px solid #4285f4;outline:0}.mdb-select-value.disabled{color:#aaa}.mdb-select-outline .mdb-select-value{border:1px solid #ced4da;border-radius:4px}.mdb-select-outline .mdb-select-value.focused{border:1px solid #4285f4;box-shadow:inset 0 0 0 1px #4285f4}.mdb-select-placeholder{color:#6c757d;opacity:1;font-weight:400;width:100%;max-width:90%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mdb-select-placeholder.disabled{color:#aaa}.mdb-select-outline .mdb-select-placeholder{padding-left:13px}.mdb-select-value-label{color:#292b2c;font-weight:400;overflow:hidden;min-width:0;width:90%;text-overflow:ellipsis;white-space:nowrap}.mdb-select-value-label.disabled{color:#aaa}.mdb-select-outline .mdb-select-value-label{padding-left:13px}.mdb-select-icons-wrapper{display:flex;align-items:center;margin-top:4px}.mdb-select-clear-btn{color:#000;font-size:.8rem;position:absolute;top:14px;right:20px}.mdb-select-clear-btn.focused{color:#4285f4}.mdb-select-clear-btn.disabled{color:#aaa}.mdb-select-outline .mdb-select-clear-btn{top:14px;right:22px}.mdb-select-arrow{color:#000;text-align:center;font-size:.63rem;position:absolute;right:4px;top:15.5px}.mdb-select-arrow.focused{color:#4285f4}.mdb-select-arrow.disabled{color:#aaa}.mdb-select-arrow:before{content:\"\u25BC\"}.mdb-select-outline .mdb-select-arrow{right:10px;top:15.5px}.mdb-select-dropdown{background-color:#fff;box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);margin:0;min-width:100px;width:100%;outline:0;position:relative}.mdb-select-options-wrapper{overflow-y:auto}.mdb-select-options-wrapper::-webkit-scrollbar{width:4px;height:4px}.mdb-select-options-wrapper:focus{background-color:red}.mdb-select-options-wrapper::-webkit-scrollbar-button:end:increment,.mdb-select-options-wrapper::-webkit-scrollbar-button:start:decrement{display:block;height:0;background-color:transparent}.mdb-select-options-wrapper::-webkit-scrollbar-track-piece{background-color:transparent;border-radius:0 0 4px 4px}.mdb-select-options-wrapper::-webkit-scrollbar-thumb:vertical{height:50px;background-color:#999;border-radius:4px}.mdb-select-no-results{height:48px;padding-left:16px;padding-right:16px;display:flex;align-items:center}.mdb-select-filter{height:38px;margin-bottom:1rem}.mdb-select-custom-content{background-color:transparent;padding:0 .5rem;font-size:.9rem}.mdb-select-dropdown-colorful .mdb-option.selected:not(.active):not(.mdb-select-all-option):not(.disabled) .mdb-option-checkbox:checked+.mdb-option-checkbox-label:before,.mdb-select-dropdown-colorful .mdb-option:hover .mdb-option-checkbox:checked+.mdb-option-checkbox-label:before{border-color:transparent #fff #fff transparent}.mdb-select-dropdown-colorful .mdb-option:hover .mdb-option-checkbox+.mdb-option-checkbox-label:before{border-color:#fff}.mdb-select-dropdown-primary .mdb-option.selected{color:#fff;background-color:#4285f4}.mdb-select-dropdown-primary .mdb-option.mdb-select-all-option.selected{background-color:transparent;color:rgba(0,0,0,.87)}.mdb-select-dropdown-primary .mdb-option.active{color:rgba(0,0,0,.87);background-color:#ddd}.mdb-select-dropdown-primary .mdb-option:hover{color:#fff!important;background-color:#4285f4!important}.mdb-select-dropdown-danger .mdb-option.selected{color:#fff;background-color:#c00}.mdb-select-dropdown-danger .mdb-option.mdb-select-all-option.selected{background-color:transparent;color:rgba(0,0,0,.87)}.mdb-select-dropdown-danger .mdb-option.active{color:rgba(0,0,0,.87);background-color:#ddd}.mdb-select-dropdown-danger .mdb-option:hover{color:#fff!important;background-color:#c00!important}.mdb-select-dropdown-default .mdb-option.selected{color:#fff;background-color:#2bbbad}.mdb-select-dropdown-default .mdb-option.mdb-select-all-option.selected{background-color:transparent;color:rgba(0,0,0,.87)}.mdb-select-dropdown-default .mdb-option.active{color:rgba(0,0,0,.87);background-color:#ddd}.mdb-select-dropdown-default .mdb-option:hover{color:#fff!important;background-color:#2bbbad!important}.mdb-select-dropdown-success .mdb-option.selected{color:#fff;background-color:#00c851}.mdb-select-dropdown-success .mdb-option.mdb-select-all-option.selected{background-color:transparent;color:rgba(0,0,0,.87)}.mdb-select-dropdown-success .mdb-option.active{color:rgba(0,0,0,.87);background-color:#ddd}.mdb-select-dropdown-success .mdb-option:hover{color:#fff!important;background-color:#00c851!important}.mdb-select-dropdown-info .mdb-option.selected{color:#fff;background-color:#33b5e5}.mdb-select-dropdown-info .mdb-option.mdb-select-all-option.selected{background-color:transparent;color:rgba(0,0,0,.87)}.mdb-select-dropdown-info .mdb-option.active{color:rgba(0,0,0,.87);background-color:#ddd}.mdb-select-dropdown-info .mdb-option:hover{color:#fff!important;background-color:#33b5e5!important}.mdb-select-dropdown-warning .mdb-option.selected{color:#fff;background-color:#fb3}.mdb-select-dropdown-warning .mdb-option.mdb-select-all-option.selected{background-color:transparent;color:rgba(0,0,0,.87)}.mdb-select-dropdown-warning .mdb-option.active{color:rgba(0,0,0,.87);background-color:#ddd}.mdb-select-dropdown-warning .mdb-option:hover{color:#fff!important;background-color:#fb3!important}.mdb-select-dropdown-unique .mdb-option.selected{color:#fff;background-color:#3f729b}.mdb-select-dropdown-unique .mdb-option.mdb-select-all-option.selected{background-color:transparent;color:rgba(0,0,0,.87)}.mdb-select-dropdown-unique .mdb-option.active{color:rgba(0,0,0,.87);background-color:#ddd}.mdb-select-dropdown-unique .mdb-option:hover{color:#fff!important;background-color:#3f729b!important}.mdb-select-dropdown-elegant .mdb-option.selected{color:#fff;background-color:#2e2e2e}.mdb-select-dropdown-elegant .mdb-option.mdb-select-all-option.selected{background-color:transparent;color:rgba(0,0,0,.87)}.mdb-select-dropdown-elegant .mdb-option.active{color:rgba(0,0,0,.87);background-color:#ddd}.mdb-select-dropdown-elegant .mdb-option:hover{color:#fff!important;background-color:#2e2e2e!important}.mdb-select.validate-success.ng-valid.ng-touched .mdb-select-value{border-bottom:1px solid #00c851!important;box-shadow:0 1px 0 0 #00c851!important}.mdb-select.mdb-select-outline.validate-success.ng-valid.ng-touched .mdb-select-value{border:1px solid #00c851!important;box-shadow:inset 0 0 0 1px #00c851!important}.mdb-select.validate-success.ng-valid.ng-touched .mdb-select-label{color:#00c851!important}.mdb-select.mdb-select-outline.validate-success.ng-valid.ng-touched .mdb-select-label{font-weight:400!important}.form-submitted .mdb-select.validate-error.ng-invalid .mdb-select-value,.mdb-select.validate-error.ng-invalid.ng-touched .mdb-select-value{border-bottom:1px solid #f44336!important;box-shadow:0 1px 0 0 #f44336!important}.mdb-select.mdb-select-outline.validate-error.ng-invalid.ng-touched .mdb-select-value{border:1px solid #f44336!important;box-shadow:inset 0 0 0 1px #f44336!important}.form-submitted .mdb-select.validate-error.ng-invalid.ng-touched .mdb-select-label,.mdb-select.validate-error.ng-invalid.ng-touched .mdb-select-label{color:#f44336!important}.mdb-select.mdb-select-outline.validate-error.ng-invalid.ng-touched .mdb-select-label{font-weight:400!important}"]
+    })
+    // tslint:disable-next-line:component-class-suffix
+    ,
+    __param(5, Self()), __param(5, Optional()),
+    __metadata("design:paramtypes", [Overlay$1,
+        ViewportRuler,
+        ViewContainerRef,
+        ChangeDetectorRef,
+        Renderer2,
+        NgControl])
+], MdbSelectComponent);
+
+let MdbOptionModule = class MdbOptionModule {
+};
+MdbOptionModule = __decorate([
+    NgModule({
+        imports: [CommonModule, CheckboxModule],
+        declarations: [OptionComponent, SelectAllOptionComponent, OptionGroupComponent],
+        exports: [OptionComponent, OptionGroupComponent, SelectAllOptionComponent],
+    })
+], MdbOptionModule);
+
+let MdbSelectModule = class MdbSelectModule {
+};
+MdbSelectModule = __decorate([
+    NgModule({
+        declarations: [MdbSelectComponent, MdbSelectFilterComponent],
+        imports: [CommonModule, MdbOptionModule, OverlayModule],
+        exports: [MdbSelectComponent, MdbSelectFilterComponent, MdbOptionModule],
+    })
+], MdbSelectModule);
 
 const CONTAINER_CLASS_NAME = 'spinning-preloader-container';
 const COMPLETE_CLASS_NAME = 'complete';
@@ -22015,6 +23269,8 @@ const MODULES$1 = [
     AutoCompleterModule,
     StepperModule,
     MdbTreeModule,
+    MdbSelectModule,
+    MdbOptionModule,
 ];
 let MDBRootModulePro = class MDBRootModulePro {
 };
@@ -22043,6 +23299,8 @@ MDBRootModulePro = __decorate([
             AutoCompleterModule,
             StepperModule,
             MdbTreeModule,
+            MdbSelectModule,
+            MdbOptionModule,
         ],
         exports: [MODULES$1],
         providers: [],
@@ -22086,5 +23344,5 @@ MDBBootstrapModulesPro = __decorate([
  * Generated bundle index. Do not edit.
  */
 
-export { AccordionModule, AnimatedCardsModule, AutoCompleterModule, AutoFormatModule, BadgeModule, BarComponent, BaseChartDirective, BasePortalHost, BreadcrumbModule, BsDropdownConfig, BsDropdownContainerComponent, BsDropdownDirective, BsDropdownMenuDirective, BsDropdownState, BsDropdownToggleDirective, ButtonCheckboxDirective, ButtonRadioDirective, ButtonsModule, CHECKBOX_VALUE_ACCESSOR, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, CardRevealComponent, CardRotatingComponent, CardsModule, CarouselComponent, CarouselConfig, CarouselModule, CharCounterDirective, CharCounterModule, ChartSimpleModule, ChartsModule, CheckboxComponent, CheckboxModule, ChipsModule, ClockPickerComponent, CollapseComponent, CollapseModule, ComponentPortal, DatepickerModule, Diacritics, DropdownModule, EasingLogic, EasyPieChartComponent, EqualValidatorDirective, FabDirective, FadDirective, FalDirective, FarDirective, FasDirective, FileInputModule, FixedButtonCaptionDirective, FocusDirective, GlobalConfig, IconsModule, ImageModalComponent, InputAutoFillDirective, InputUtilitiesModule, InputsModule, LightBoxModule, LinksComponent, LocaleService, LogoComponent, MDBBadgeComponent, MDBBootstrapModule, MDBBootstrapModulePro, MDBBootstrapModulesPro, MDBDatePickerComponent, MDBFileDropDirective, MDBFileSelectDirective, MDBModalRef, MDBModalService, MDBRootModule, MDBRootModules, MDBSpinningPreloader, MDBUploaderService, MDB_DATE_OPTIONS, MDB_TIMEPICKER_VALUE_ACCESSOR, MYDP_VALUE_ACCESSOR, MaterialChipsComponent, MdbAutoCompleterComponent, MdbAutoCompleterDirective, MdbAutoCompleterOptionDirective, MdbBreadcrumbComponent, MdbBreadcrumbItemComponent, MdbBtnDirective, MdbCardBodyComponent, MdbCardComponent, MdbCardFooterComponent, MdbCardHeaderComponent, MdbCardImageComponent, MdbCardTextComponent, MdbCardTitleComponent, MdbCheckboxChange, MdbCreditCardDirective, MdbCvvDirective, MdbDateFormatDirective, MdbErrorDirective, MdbIconComponent, MdbInput, MdbInputDirective, MdbMultiRangeInputComponent, MdbOptionComponent, MdbRangeInputComponent, MdbStepComponent, MdbStepperComponent, MdbStickyDirective, MdbSuccessDirective, MdbTableDirective, MdbTablePaginationComponent, MdbTableRowDirective, MdbTableScrollDirective, MdbTableService, MdbTableSortDirective, MdbTimePickerComponent, MdbTimePickerContentComponent, MdbTimePickerDirective, MdbTimePickerModule, MdbTimepickerToggleComponent, MdbTreeComponent, MdbTreeModule, MdbValidateDirective, ModalBackdropComponent, ModalBackdropOptions, ModalContainerComponent, ModalDirective, ModalModule, ModalOptions, NavbarComponent, NavbarModule, NavbarService, NavlinksComponent, NgTranscludeDirective, OVERLAY_PROVIDERS, Option, OptionList, Overlay, OverlayContainer, OverlayRef, PageScrollConfig, PageScrollDirective, PageScrollInstance, PageScrollService, PageScrollUtilService, PopoverConfig, PopoverContainerComponent, PopoverDirective, PopoverModule, PreloadersModule, ProgressBars, ProgressDirective, ProgressSpinnerComponent, ProgressbarComponent, ProgressbarConfigComponent, ProgressbarModule, RangeModule, SBItemBodyComponent, SBItemComponent, SBItemHeadComponent, SELECT_VALUE_ACCESSOR, SQUEEZEBOX_COMPONENTS, ScrollSpyDirective, ScrollSpyElementDirective, ScrollSpyLinkDirective, ScrollSpyModule, ScrollSpyService, ScrollSpyWindowDirective, SelectComponent, SelectDropdownComponent, SelectModule, SidenavComponent, SidenavModule, SimpleChartComponent, SlideComponent, SmoothscrollModule, SqueezeBoxComponent, StepperModule, StickyContentModule, StickyHeaderDirective, StickyHeaderModule, TIME_PIRCKER_VALUE_ACCESSOT, TabDirective, TabHeadingDirective, TableModule, TabsModule, TabsetComponent, TabsetConfig, TimePickerModule, ToastComponent, ToastContainerDirective, ToastContainerModule, ToastInjector, ToastModule, ToastPackage, ToastRef, ToastService, TooltipConfig, TooltipContainerComponent, TooltipDirective, TooltipModule, UploadStatus, UtilService, WavesDirective, WavesModule, fadeIn, flipState, flyInOut, humanizeBytes, iconsState, slideIn, slideOut, socialsState, tsConfig, turnState, RADIO_CONTROL_VALUE_ACCESSOR as ɵa, CHECKBOX_CONTROL_VALUE_ACCESSOR as ɵb, InputAutoFillDirective as ɵba, MYDP_VALUE_ACCESSOR as ɵbb, MDBDatePickerComponent as ɵbc, DatepickerModule as ɵbd, SimpleChartComponent as ɵbf, EasyPieChartComponent as ɵbg, ChartSimpleModule as ɵbh, FileInputModule as ɵbi, MDBFileSelectDirective as ɵbj, MDBFileDropDirective as ɵbk, CharCounterDirective as ɵbl, CharCounterModule as ɵbm, ImageModalComponent as ɵbn, LightBoxModule as ɵbo, SELECT_VALUE_ACCESSOR as ɵbq, SelectComponent as ɵbr, SelectDropdownComponent as ɵbs, SelectModule as ɵbt, ProgressBars as ɵbu, BarComponent as ɵbv, ProgressDirective as ɵbw, ProgressbarComponent as ɵbx, ProgressbarModule as ɵby, ProgressbarConfigComponent as ɵbz, CHECKBOX_VALUE_ACCESSOR as ɵc, ProgressSpinnerComponent as ɵca, RangeModule as ɵcb, RANGE_VALUE_ACCESOR as ɵcc, MdbRangeInputComponent as ɵcd, RANGE_VALUE_ACCESOR$1 as ɵce, ScrollSpyDirective as ɵcf, ScrollSpyWindowDirective as ɵcg, ScrollSpyElementDirective as ɵch, ScrollSpyLinkDirective as ɵci, ScrollSpyService as ɵcj, ScrollSpyModule as ɵck, SidenavComponent as ɵcl, SidenavModule as ɵcm, PageScrollDirective as ɵcn, PageScrollService as ɵco, PageScrollInstance as ɵcp, SmoothscrollModule as ɵcq, MdbStepperComponent as ɵcr, MdbStepComponent as ɵcs, StepperModule as ɵct, MdbStickyDirective as ɵcu, StickyContentModule as ɵcv, NgTranscludeDirective as ɵcw, TabDirective as ɵcx, TabHeadingDirective as ɵcy, TabsetComponent as ɵcz, CheckboxComponent as ɵd, TabsetConfig as ɵda, TabsModule as ɵdb, MaterialChipsComponent as ɵdc, ChipsModule as ɵdd, ClockPickerComponent as ɵde, TimePickerModule as ɵdf, MdbTimePickerComponent as ɵdg, MdbTimepickerToggleComponent as ɵdh, MDB_TIMEPICKER_VALUE_ACCESSOR as ɵdi, MdbTimePickerDirective as ɵdj, MdbTimePickerModule as ɵdk, MdbTimePickerContentComponent as ɵdl, MdbTreeComponent as ɵdm, MdbTreeModule as ɵdn, MDBRootModulePro as ɵdo, ComponentLoaderFactory as ɵdp, PositioningService as ɵdq, OnChange$1 as ɵdr, MdbAccordionService as ɵds, ToastRef$1 as ɵdt, TOAST_CONFIG as ɵdu, MdProgressBarModule as ɵdv, ProgressBarComponent as ɵdw, MdProgressSpinnerModule as ɵdx, MdProgressSpinnerCssMatStylerDirective as ɵdy, MdProgressSpinnerComponent as ɵdz, AccordionModule as ɵe, MdSpinnerComponent as ɵea, SBItemComponent as ɵf, SBItemHeadComponent as ɵg, SBItemBodyComponent as ɵh, SqueezeBoxComponent as ɵi, MdbAutoCompleterComponent as ɵj, MDB_OPTION_PARENT as ɵk, MdbOptionComponent as ɵl, MAT_AUTOCOMPLETE_VALUE_ACCESSOR as ɵm, MdbAutoCompleterDirective as ɵn, MdbAutoCompleterOptionDirective as ɵo, AutoCompleterModule as ɵp, AutoFormatModule as ɵq, MdbDateFormatDirective as ɵr, MdbCreditCardDirective as ɵs, MdbCvvDirective as ɵt, AnimatedCardsModule as ɵu, CardRevealComponent as ɵv, CardRotatingComponent as ɵw, LocaleService as ɵx, UtilService as ɵy, FocusDirective as ɵz };
+export { AccordionModule, AnimatedCardsModule, AutoCompleterModule, AutoFormatModule, BadgeModule, BarComponent, BaseChartDirective, BasePortalHost, BreadcrumbModule, BsDropdownConfig, BsDropdownContainerComponent, BsDropdownDirective, BsDropdownMenuDirective, BsDropdownState, BsDropdownToggleDirective, ButtonCheckboxDirective, ButtonRadioDirective, ButtonsModule, CHECKBOX_VALUE_ACCESSOR, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, CardRevealComponent, CardRotatingComponent, CardsModule, CarouselComponent, CarouselConfig, CarouselModule, CharCounterDirective, CharCounterModule, ChartSimpleModule, ChartsModule, CheckboxComponent, CheckboxModule, ChipsModule, ClockPickerComponent, CollapseComponent, CollapseModule, ComponentPortal, DatepickerModule, Diacritics, DropdownModule, EasingLogic, EasyPieChartComponent, EqualValidatorDirective, FabDirective, FadDirective, FalDirective, FarDirective, FasDirective, FileInputModule, FixedButtonCaptionDirective, FocusDirective, GlobalConfig, IconsModule, ImageModalComponent, InputAutoFillDirective, InputUtilitiesModule, InputsModule, LightBoxModule, LinksComponent, LocaleService, LogoComponent, MDBBadgeComponent, MDBBootstrapModule, MDBBootstrapModulePro, MDBBootstrapModulesPro, MDBDatePickerComponent, MDBFileDropDirective, MDBFileSelectDirective, MDBModalRef, MDBModalService, MDBRootModule, MDBRootModules, MDBSpinningPreloader, MDBUploaderService, MDB_DATE_OPTIONS, MDB_SELECT_FILTER_VALUE_ACCESSOR, MDB_TIMEPICKER_VALUE_ACCESSOR, MYDP_VALUE_ACCESSOR, MaterialChipsComponent, MdbAutoCompleterComponent, MdbAutoCompleterDirective, MdbAutoCompleterOptionDirective, MdbBreadcrumbComponent, MdbBreadcrumbItemComponent, MdbBtnDirective, MdbCardBodyComponent, MdbCardComponent, MdbCardFooterComponent, MdbCardHeaderComponent, MdbCardImageComponent, MdbCardTextComponent, MdbCardTitleComponent, MdbCheckboxChange, MdbCreditCardDirective, MdbCvvDirective, MdbDateFormatDirective, MdbErrorDirective, MdbIconComponent, MdbInput, MdbInputDirective, MdbMultiRangeInputComponent, MdbOptionComponent, MdbOptionModule, MdbRangeInputComponent, MdbSelectComponent, MdbSelectFilterComponent, MdbSelectModule, MdbStepComponent, MdbStepperComponent, MdbStickyDirective, MdbSuccessDirective, MdbTableDirective, MdbTablePaginationComponent, MdbTableRowDirective, MdbTableScrollDirective, MdbTableService, MdbTableSortDirective, MdbTimePickerComponent, MdbTimePickerContentComponent, MdbTimePickerDirective, MdbTimePickerModule, MdbTimepickerToggleComponent, MdbTreeComponent, MdbTreeModule, MdbValidateDirective, ModalBackdropComponent, ModalBackdropOptions, ModalContainerComponent, ModalDirective, ModalModule, ModalOptions, NavbarComponent, NavbarModule, NavbarService, NavlinksComponent, NgTranscludeDirective, OVERLAY_PROVIDERS, Option, OptionComponent, OptionGroupComponent, OptionList, Overlay, OverlayContainer, OverlayRef, PageScrollConfig, PageScrollDirective, PageScrollInstance, PageScrollService, PageScrollUtilService, PopoverConfig, PopoverContainerComponent, PopoverDirective, PopoverModule, PreloadersModule, ProgressBars, ProgressDirective, ProgressSpinnerComponent, ProgressbarComponent, ProgressbarConfigComponent, ProgressbarModule, RangeModule, SBItemBodyComponent, SBItemComponent, SBItemHeadComponent, SELECT_VALUE_ACCESSOR, SQUEEZEBOX_COMPONENTS, ScrollSpyDirective, ScrollSpyElementDirective, ScrollSpyLinkDirective, ScrollSpyModule, ScrollSpyService, ScrollSpyWindowDirective, SelectAllOptionComponent, SelectComponent, SelectDropdownComponent, SelectModule, SidenavComponent, SidenavModule, SimpleChartComponent, SlideComponent, SmoothscrollModule, SqueezeBoxComponent, StepperModule, StickyContentModule, StickyHeaderDirective, StickyHeaderModule, TIME_PIRCKER_VALUE_ACCESSOT, TabDirective, TabHeadingDirective, TableModule, TabsModule, TabsetComponent, TabsetConfig, TimePickerModule, ToastComponent, ToastContainerDirective, ToastContainerModule, ToastInjector, ToastModule, ToastPackage, ToastRef, ToastService, TooltipConfig, TooltipContainerComponent, TooltipDirective, TooltipModule, UploadStatus, UtilService, WavesDirective, WavesModule, fadeIn, flipState, flyInOut, humanizeBytes, iconsState, slideIn, slideOut, socialsState, tsConfig, turnState, RADIO_CONTROL_VALUE_ACCESSOR as ɵa, CHECKBOX_CONTROL_VALUE_ACCESSOR as ɵb, InputAutoFillDirective as ɵba, MYDP_VALUE_ACCESSOR as ɵbb, MDBDatePickerComponent as ɵbc, DatepickerModule as ɵbd, SimpleChartComponent as ɵbf, EasyPieChartComponent as ɵbg, ChartSimpleModule as ɵbh, FileInputModule as ɵbi, MDBFileSelectDirective as ɵbj, MDBFileDropDirective as ɵbk, CharCounterDirective as ɵbl, CharCounterModule as ɵbm, ImageModalComponent as ɵbn, LightBoxModule as ɵbo, SELECT_VALUE_ACCESSOR as ɵbq, SelectComponent as ɵbr, SelectDropdownComponent as ɵbs, SelectModule as ɵbt, MdbSelectComponent as ɵbu, MDB_SELECT_FILTER_VALUE_ACCESSOR as ɵbv, MdbSelectFilterComponent as ɵbw, MdbSelectModule as ɵbx, CHECKBOX_VALUE_ACCESSOR as ɵc, MDB_OPTION_PARENT$1 as ɵca, MDB_OPTION_GROUP as ɵcb, OptionComponent as ɵcc, OptionGroupComponent as ɵcd, SelectAllOptionComponent as ɵce, MdbOptionModule as ɵcf, ProgressBars as ɵcg, BarComponent as ɵch, ProgressDirective as ɵci, ProgressbarComponent as ɵcj, ProgressbarModule as ɵck, ProgressbarConfigComponent as ɵcl, ProgressSpinnerComponent as ɵcm, RangeModule as ɵcn, RANGE_VALUE_ACCESOR as ɵco, MdbRangeInputComponent as ɵcp, RANGE_VALUE_ACCESOR$1 as ɵcq, ScrollSpyDirective as ɵcr, ScrollSpyWindowDirective as ɵcs, ScrollSpyElementDirective as ɵct, ScrollSpyLinkDirective as ɵcu, ScrollSpyService as ɵcv, ScrollSpyModule as ɵcw, SidenavComponent as ɵcx, SidenavModule as ɵcy, PageScrollDirective as ɵcz, CheckboxComponent as ɵd, PageScrollService as ɵda, PageScrollInstance as ɵdb, SmoothscrollModule as ɵdc, MdbStepperComponent as ɵdd, MdbStepComponent as ɵde, StepperModule as ɵdf, MdbStickyDirective as ɵdg, StickyContentModule as ɵdh, NgTranscludeDirective as ɵdi, TabDirective as ɵdj, TabHeadingDirective as ɵdk, TabsetComponent as ɵdl, TabsetConfig as ɵdm, TabsModule as ɵdn, MaterialChipsComponent as ɵdo, ChipsModule as ɵdp, ClockPickerComponent as ɵdq, TimePickerModule as ɵdr, MdbTimePickerComponent as ɵds, MdbTimepickerToggleComponent as ɵdt, MDB_TIMEPICKER_VALUE_ACCESSOR as ɵdu, MdbTimePickerDirective as ɵdv, MdbTimePickerModule as ɵdw, MdbTimePickerContentComponent as ɵdx, MdbTreeComponent as ɵdy, MdbTreeModule as ɵdz, AccordionModule as ɵe, MDBRootModulePro as ɵea, ComponentLoaderFactory as ɵeb, PositioningService as ɵec, OnChange$1 as ɵed, MdbAccordionService as ɵee, ToastRef$1 as ɵef, TOAST_CONFIG as ɵeg, dropdownAnimation as ɵeh, MdProgressBarModule as ɵei, ProgressBarComponent as ɵej, MdProgressSpinnerModule as ɵek, MdProgressSpinnerCssMatStylerDirective as ɵel, MdProgressSpinnerComponent as ɵem, MdSpinnerComponent as ɵen, SBItemComponent as ɵf, SBItemHeadComponent as ɵg, SBItemBodyComponent as ɵh, SqueezeBoxComponent as ɵi, MdbAutoCompleterComponent as ɵj, MDB_OPTION_PARENT as ɵk, MdbOptionComponent as ɵl, MAT_AUTOCOMPLETE_VALUE_ACCESSOR as ɵm, MdbAutoCompleterDirective as ɵn, MdbAutoCompleterOptionDirective as ɵo, AutoCompleterModule as ɵp, AutoFormatModule as ɵq, MdbDateFormatDirective as ɵr, MdbCreditCardDirective as ɵs, MdbCvvDirective as ɵt, AnimatedCardsModule as ɵu, CardRevealComponent as ɵv, CardRotatingComponent as ɵw, LocaleService as ɵx, UtilService as ɵy, FocusDirective as ɵz };
 //# sourceMappingURL=ng-uikit-pro-standard.js.map

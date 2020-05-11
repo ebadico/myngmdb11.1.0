@@ -3,9 +3,11 @@ import { Utils } from '../utils/utils.class';
 import { ModalBackdropComponent } from './modalBackdrop.component';
 import { ModalOptions } from './modal.options';
 import { ComponentLoaderFactory } from '../utils/component-loader/component-loader.factory';
+import { ConfigurableFocusTrapFactory } from '@angular/cdk/a11y';
 /** Mark any code with directive to show it's content in modal */
 export declare class ModalDirective implements AfterViewInit, OnDestroy, OnChanges {
     protected _element: ElementRef;
+    private _focusTrapFactory;
     protected _renderer: Renderer2;
     /** allows to set modal configuration via element property */
     set config(conf: ModalOptions | any);
@@ -36,13 +38,13 @@ export declare class ModalDirective implements AfterViewInit, OnDestroy, OnChang
     protected timerRmBackDrop: any;
     protected backdrop: ComponentRef<ModalBackdropComponent> | undefined;
     private _backdrop;
+    private _focusTrap;
     _dialog: any;
     isNested: boolean;
     utils: Utils;
-    onKeyDown(event: any): void;
     onClick(event: any): void;
     onEsc(): void;
-    constructor(_element: ElementRef, _viewContainerRef: ViewContainerRef, _renderer: Renderer2, clf: ComponentLoaderFactory);
+    constructor(_element: ElementRef, _focusTrapFactory: ConfigurableFocusTrapFactory, _viewContainerRef: ViewContainerRef, _renderer: Renderer2, clf: ComponentLoaderFactory);
     ngOnDestroy(): any;
     ngAfterViewInit(): any;
     ngOnChanges(): any;
@@ -59,6 +61,7 @@ export declare class ModalDirective implements AfterViewInit, OnDestroy, OnChang
      *  @internal
      */
     protected showElement(): void;
+    private _createFocusTrap;
     /** @internal */
     protected hideModal(): void;
     /** @internal */

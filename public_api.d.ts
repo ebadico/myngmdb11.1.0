@@ -30,6 +30,8 @@ export * from './lib/pro/file-input/index';
 export * from './lib/pro/inputs/index';
 export * from './lib/pro/lightbox/index';
 export * from './lib/pro/material-select/index';
+export * from './lib/pro/select/index';
+export * from './lib/pro/option/index';
 export * from './lib/pro/preloader/index';
 export * from './lib/pro/progressbars/index';
 export * from './lib/pro/range/index';
