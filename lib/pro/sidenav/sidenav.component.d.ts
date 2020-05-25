@@ -3,6 +3,7 @@ export declare class SidenavComponent implements AfterViewInit, OnDestroy, OnIni
     el: ElementRef;
     renderer: Renderer2;
     private _cdRef;
+    private document;
     windwosWidth: number;
     shown: boolean;
     slimSidenav: boolean;
@@ -16,7 +17,7 @@ export declare class SidenavComponent implements AfterViewInit, OnDestroy, OnIni
     private _side;
     sideNav: ElementRef;
     overlay: any;
-    constructor(platformId: string, el: ElementRef, renderer: Renderer2, _cdRef: ChangeDetectorRef);
+    constructor(platformId: string, el: ElementRef, renderer: Renderer2, _cdRef: ChangeDetectorRef, document: any);
     ngOnInit(): void;
     ngAfterViewInit(): void;
     windowsResize(): void;
