@@ -54,4 +54,6 @@ export interface IMyOptions {
     ariaLabelNextMonth?: string;
     ariaLabelPrevYear?: string;
     ariaLabelNextYear?: string;
+    inputIcon?: boolean;
+    inlineInputIcon?: boolean;
 }

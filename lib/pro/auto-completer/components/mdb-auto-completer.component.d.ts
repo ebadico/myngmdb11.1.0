@@ -2,6 +2,7 @@ import { AfterContentInit, ElementRef, EventEmitter, Renderer2, QueryList, OnDes
 import { MdbOptionComponent } from './mdb-option.component';
 import { ISelectedOption } from '../interfaces/selected-option.interface';
 import { Observable } from 'rxjs';
+export declare type AutocompleteDropdownPosition = 'below' | 'above' | 'auto';
 export declare class MdbAutoCompleterComponent implements AfterContentInit, OnDestroy {
     private renderer;
     private el;
@@ -9,6 +10,7 @@ export declare class MdbAutoCompleterComponent implements AfterContentInit, OnDe
     clearButton: boolean;
     clearButtonTabIndex: number;
     appendToBody: boolean;
+    dropdownPosition: AutocompleteDropdownPosition;
     disabled: boolean;
     get visibleOptions(): number;
     set visibleOptions(value: number);
