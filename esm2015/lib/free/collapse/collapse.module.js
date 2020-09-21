@@ -1,17 +1,14 @@
-var CollapseModule_1;
-import { __decorate } from "tslib";
 import { NgModule } from '@angular/core';
 import { CollapseComponent } from './collapse.component';
-let CollapseModule = CollapseModule_1 = class CollapseModule {
+export class CollapseModule {
     static forRoot() {
-        return { ngModule: CollapseModule_1, providers: [] };
+        return { ngModule: CollapseModule, providers: [] };
     }
-};
-CollapseModule = CollapseModule_1 = __decorate([
-    NgModule({
-        declarations: [CollapseComponent],
-        exports: [CollapseComponent],
-    })
-], CollapseModule);
-export { CollapseModule };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29sbGFwc2UubW9kdWxlLmpzIiwic291cmNlUm9vdCI6Im5nOi8vbmctdWlraXQtcHJvLXN0YW5kYXJkLyIsInNvdXJjZXMiOlsibGliL2ZyZWUvY29sbGFwc2UvY29sbGFwc2UubW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsT0FBTyxFQUFFLFFBQVEsRUFBdUIsTUFBTSxlQUFlLENBQUM7QUFDOUQsT0FBTyxFQUFFLGlCQUFpQixFQUFFLE1BQU0sc0JBQXNCLENBQUM7QUFNekQsSUFBYSxjQUFjLHNCQUEzQixNQUFhLGNBQWM7SUFDbEIsTUFBTSxDQUFDLE9BQU87UUFDbkIsT0FBTyxFQUFFLFFBQVEsRUFBRSxnQkFBYyxFQUFFLFNBQVMsRUFBRSxFQUFFLEVBQUUsQ0FBQztJQUNyRCxDQUFDO0NBQ0YsQ0FBQTtBQUpZLGNBQWM7SUFKMUIsUUFBUSxDQUFDO1FBQ1IsWUFBWSxFQUFFLENBQUMsaUJBQWlCLENBQUM7UUFDakMsT0FBTyxFQUFFLENBQUMsaUJBQWlCLENBQUM7S0FDN0IsQ0FBQztHQUNXLGNBQWMsQ0FJMUI7U0FKWSxjQUFjIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgTmdNb2R1bGUsIE1vZHVsZVdpdGhQcm92aWRlcnMgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IENvbGxhcHNlQ29tcG9uZW50IH0gZnJvbSAnLi9jb2xsYXBzZS5jb21wb25lbnQnO1xuXG5ATmdNb2R1bGUoe1xuICBkZWNsYXJhdGlvbnM6IFtDb2xsYXBzZUNvbXBvbmVudF0sXG4gIGV4cG9ydHM6IFtDb2xsYXBzZUNvbXBvbmVudF0sXG59KVxuZXhwb3J0IGNsYXNzIENvbGxhcHNlTW9kdWxlIHtcbiAgcHVibGljIHN0YXRpYyBmb3JSb290KCk6IE1vZHVsZVdpdGhQcm92aWRlcnM8Q29sbGFwc2VNb2R1bGU+IHtcbiAgICByZXR1cm4geyBuZ01vZHVsZTogQ29sbGFwc2VNb2R1bGUsIHByb3ZpZGVyczogW10gfTtcbiAgfVxufVxuIl19
+}
+CollapseModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [CollapseComponent],
+                exports: [CollapseComponent],
+            },] }
+];
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29sbGFwc2UubW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vLi4vcHJvamVjdHMvbmctdWlraXQtcHJvLXN0YW5kYXJkL3NyYy9saWIvZnJlZS9jb2xsYXBzZS9jb2xsYXBzZS5tb2R1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxFQUFFLFFBQVEsRUFBdUIsTUFBTSxlQUFlLENBQUM7QUFDOUQsT0FBTyxFQUFFLGlCQUFpQixFQUFFLE1BQU0sc0JBQXNCLENBQUM7QUFNekQsTUFBTSxPQUFPLGNBQWM7SUFDbEIsTUFBTSxDQUFDLE9BQU87UUFDbkIsT0FBTyxFQUFFLFFBQVEsRUFBRSxjQUFjLEVBQUUsU0FBUyxFQUFFLEVBQUUsRUFBRSxDQUFDO0lBQ3JELENBQUM7OztZQVBGLFFBQVEsU0FBQztnQkFDUixZQUFZLEVBQUUsQ0FBQyxpQkFBaUIsQ0FBQztnQkFDakMsT0FBTyxFQUFFLENBQUMsaUJBQWlCLENBQUM7YUFDN0IiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBOZ01vZHVsZSwgTW9kdWxlV2l0aFByb3ZpZGVycyB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHsgQ29sbGFwc2VDb21wb25lbnQgfSBmcm9tICcuL2NvbGxhcHNlLmNvbXBvbmVudCc7XG5cbkBOZ01vZHVsZSh7XG4gIGRlY2xhcmF0aW9uczogW0NvbGxhcHNlQ29tcG9uZW50XSxcbiAgZXhwb3J0czogW0NvbGxhcHNlQ29tcG9uZW50XSxcbn0pXG5leHBvcnQgY2xhc3MgQ29sbGFwc2VNb2R1bGUge1xuICBwdWJsaWMgc3RhdGljIGZvclJvb3QoKTogTW9kdWxlV2l0aFByb3ZpZGVyczxDb2xsYXBzZU1vZHVsZT4ge1xuICAgIHJldHVybiB7IG5nTW9kdWxlOiBDb2xsYXBzZU1vZHVsZSwgcHJvdmlkZXJzOiBbXSB9O1xuICB9XG59XG4iXX0=

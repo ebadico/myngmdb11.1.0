@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.updateToV9 = void 0;
 const config_1 = require("@schematics/angular/utility/config");
 const schematics_1 = require("@angular/cdk/schematics");
 function updateToV9() {

@@ -34,7 +34,7 @@ export declare class TooltipDirective implements OnInit, OnDestroy, OnChanges {
     /**
      * Allows to disable tooltip
      */
-    isDisabled: boolean;
+    tooltipDisabled: boolean;
     dynamicPosition: boolean;
     /**
      * Emits an event when the tooltip is shown

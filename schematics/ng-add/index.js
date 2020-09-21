@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ngAdd = void 0;
 const tasks_1 = require("@angular-devkit/schematics/tasks");
 const package_1 = require("./package");
 // Just return the tree

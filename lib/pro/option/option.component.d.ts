@@ -17,6 +17,9 @@ export declare class OptionComponent implements OnInit {
     private _parent;
     group: MdbOptionGroup;
     value: any;
+    get label(): string;
+    set label(newValue: string);
+    private _label;
     disabled: boolean;
     readonly selectionChange: EventEmitter<OptionComponent>;
     _optionHeight: number;
@@ -35,7 +38,6 @@ export declare class OptionComponent implements OnInit {
     get isDisabled(): boolean;
     get isSelected(): boolean;
     onClick(): void;
-    get label(): any;
     getLabel(): any;
     get offsetHeight(): any;
     ngOnInit(): void;

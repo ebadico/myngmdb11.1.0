@@ -1,7 +1,5 @@
 import { ViewContainerRef, ComponentRef, Injector } from '@angular/core';
-export interface ComponentType<T> {
-    new (...args: any[]): T;
-}
+export declare type ComponentType<T> = new (...args: any[]) => T;
 /**
  * A `ComponentPortal` is a portal that instantiates some Component upon attachment.
  */

@@ -11,7 +11,6 @@ export declare class MaterialChipsComponent {
     labelToAdd: string;
     focused: string;
     selected: string;
-    noop: any;
     keyCodes: {
         backspace: number;
         delete: number;
@@ -19,15 +18,15 @@ export declare class MaterialChipsComponent {
     tagsfocusedChange: EventEmitter<any>;
     labelsChange: EventEmitter<string[]>;
     get tagsfocused(): boolean;
-    private onTouchedCallback;
-    private onChangeCallback;
-    registerOnChange(fn: any): void;
-    registerOnTouched(fn: any): void;
     constructor(_cdRef: ChangeDetectorRef);
     removeValue(value: string): void;
     handleKeydown(event: any): void;
     private _removeLast;
     addValue(value: string, event: any): void;
+    _onChange: (_: any) => void;
+    _onTouched: () => void;
+    registerOnChange(fn: any): void;
+    registerOnTouched(fn: any): void;
     writeValue(value: string[]): void;
     onFocus(): void;
     focusOutFunction(): void;
