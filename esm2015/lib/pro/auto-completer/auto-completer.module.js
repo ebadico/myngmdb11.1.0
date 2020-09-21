@@ -1,4 +1,3 @@
-import { __decorate } from "tslib";
 import { NgModule } from '@angular/core';
 import { MdbAutoCompleterComponent } from './components/mdb-auto-completer.component';
 import { MdbOptionComponent } from './components/mdb-option.component';
@@ -7,24 +6,23 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { MdbAutoCompleterOptionDirective } from './directives/mdb-auto-completer-option.directive';
-let AutoCompleterModule = class AutoCompleterModule {
-};
-AutoCompleterModule = __decorate([
-    NgModule({
-        imports: [CommonModule, HttpClientModule, FormsModule],
-        declarations: [
-            MdbAutoCompleterComponent,
-            MdbOptionComponent,
-            MdbAutoCompleterDirective,
-            MdbAutoCompleterOptionDirective,
-        ],
-        exports: [
-            MdbAutoCompleterComponent,
-            MdbOptionComponent,
-            MdbAutoCompleterDirective,
-            MdbAutoCompleterOptionDirective,
-        ],
-    })
-], AutoCompleterModule);
-export { AutoCompleterModule };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXV0by1jb21wbGV0ZXIubW9kdWxlLmpzIiwic291cmNlUm9vdCI6Im5nOi8vbmctdWlraXQtcHJvLXN0YW5kYXJkLyIsInNvdXJjZXMiOlsibGliL3Byby9hdXRvLWNvbXBsZXRlci9hdXRvLWNvbXBsZXRlci5tb2R1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLE9BQU8sRUFBRSxRQUFRLEVBQUUsTUFBTSxlQUFlLENBQUM7QUFFekMsT0FBTyxFQUFFLHlCQUF5QixFQUFFLE1BQU0sMkNBQTJDLENBQUM7QUFDdEYsT0FBTyxFQUFFLGtCQUFrQixFQUFFLE1BQU0sbUNBQW1DLENBQUM7QUFDdkUsT0FBTyxFQUFFLHlCQUF5QixFQUFFLE1BQU0sMkNBQTJDLENBQUM7QUFDdEYsT0FBTyxFQUFFLFlBQVksRUFBRSxNQUFNLGlCQUFpQixDQUFDO0FBQy9DLE9BQU8sRUFBRSxnQkFBZ0IsRUFBRSxNQUFNLHNCQUFzQixDQUFDO0FBQ3hELE9BQU8sRUFBRSxXQUFXLEVBQUUsTUFBTSxnQkFBZ0IsQ0FBQztBQUM3QyxPQUFPLEVBQUUsK0JBQStCLEVBQUUsTUFBTSxrREFBa0QsQ0FBQztBQWlCbkcsSUFBYSxtQkFBbUIsR0FBaEMsTUFBYSxtQkFBbUI7Q0FBRyxDQUFBO0FBQXRCLG1CQUFtQjtJQWYvQixRQUFRLENBQUM7UUFDUixPQUFPLEVBQUUsQ0FBQyxZQUFZLEVBQUUsZ0JBQWdCLEVBQUUsV0FBVyxDQUFDO1FBQ3RELFlBQVksRUFBRTtZQUNaLHlCQUF5QjtZQUN6QixrQkFBa0I7WUFDbEIseUJBQXlCO1lBQ3pCLCtCQUErQjtTQUNoQztRQUNELE9BQU8sRUFBRTtZQUNQLHlCQUF5QjtZQUN6QixrQkFBa0I7WUFDbEIseUJBQXlCO1lBQ3pCLCtCQUErQjtTQUNoQztLQUNGLENBQUM7R0FDVyxtQkFBbUIsQ0FBRztTQUF0QixtQkFBbUIiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBOZ01vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuXG5pbXBvcnQgeyBNZGJBdXRvQ29tcGxldGVyQ29tcG9uZW50IH0gZnJvbSAnLi9jb21wb25lbnRzL21kYi1hdXRvLWNvbXBsZXRlci5jb21wb25lbnQnO1xuaW1wb3J0IHsgTWRiT3B0aW9uQ29tcG9uZW50IH0gZnJvbSAnLi9jb21wb25lbnRzL21kYi1vcHRpb24uY29tcG9uZW50JztcbmltcG9ydCB7IE1kYkF1dG9Db21wbGV0ZXJEaXJlY3RpdmUgfSBmcm9tICcuL2RpcmVjdGl2ZXMvbWRiLWF1dG8tY29tcGxldGVyLmRpcmVjdGl2ZSc7XG5pbXBvcnQgeyBDb21tb25Nb2R1bGUgfSBmcm9tICdAYW5ndWxhci9jb21tb24nO1xuaW1wb3J0IHsgSHR0cENsaWVudE1vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL2NvbW1vbi9odHRwJztcbmltcG9ydCB7IEZvcm1zTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvZm9ybXMnO1xuaW1wb3J0IHsgTWRiQXV0b0NvbXBsZXRlck9wdGlvbkRpcmVjdGl2ZSB9IGZyb20gJy4vZGlyZWN0aXZlcy9tZGItYXV0by1jb21wbGV0ZXItb3B0aW9uLmRpcmVjdGl2ZSc7XG5cbkBOZ01vZHVsZSh7XG4gIGltcG9ydHM6IFtDb21tb25Nb2R1bGUsIEh0dHBDbGllbnRNb2R1bGUsIEZvcm1zTW9kdWxlXSxcbiAgZGVjbGFyYXRpb25zOiBbXG4gICAgTWRiQXV0b0NvbXBsZXRlckNvbXBvbmVudCxcbiAgICBNZGJPcHRpb25Db21wb25lbnQsXG4gICAgTWRiQXV0b0NvbXBsZXRlckRpcmVjdGl2ZSxcbiAgICBNZGJBdXRvQ29tcGxldGVyT3B0aW9uRGlyZWN0aXZlLFxuICBdLFxuICBleHBvcnRzOiBbXG4gICAgTWRiQXV0b0NvbXBsZXRlckNvbXBvbmVudCxcbiAgICBNZGJPcHRpb25Db21wb25lbnQsXG4gICAgTWRiQXV0b0NvbXBsZXRlckRpcmVjdGl2ZSxcbiAgICBNZGJBdXRvQ29tcGxldGVyT3B0aW9uRGlyZWN0aXZlLFxuICBdLFxufSlcbmV4cG9ydCBjbGFzcyBBdXRvQ29tcGxldGVyTW9kdWxlIHt9XG4iXX0=
+export class AutoCompleterModule {
+}
+AutoCompleterModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule, HttpClientModule, FormsModule],
+                declarations: [
+                    MdbAutoCompleterComponent,
+                    MdbOptionComponent,
+                    MdbAutoCompleterDirective,
+                    MdbAutoCompleterOptionDirective,
+                ],
+                exports: [
+                    MdbAutoCompleterComponent,
+                    MdbOptionComponent,
+                    MdbAutoCompleterDirective,
+                    MdbAutoCompleterOptionDirective,
+                ],
+            },] }
+];
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXV0by1jb21wbGV0ZXIubW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vLi4vcHJvamVjdHMvbmctdWlraXQtcHJvLXN0YW5kYXJkL3NyYy9saWIvcHJvL2F1dG8tY29tcGxldGVyL2F1dG8tY29tcGxldGVyLm1vZHVsZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBRXpDLE9BQU8sRUFBRSx5QkFBeUIsRUFBRSxNQUFNLDJDQUEyQyxDQUFDO0FBQ3RGLE9BQU8sRUFBRSxrQkFBa0IsRUFBRSxNQUFNLG1DQUFtQyxDQUFDO0FBQ3ZFLE9BQU8sRUFBRSx5QkFBeUIsRUFBRSxNQUFNLDJDQUEyQyxDQUFDO0FBQ3RGLE9BQU8sRUFBRSxZQUFZLEVBQUUsTUFBTSxpQkFBaUIsQ0FBQztBQUMvQyxPQUFPLEVBQUUsZ0JBQWdCLEVBQUUsTUFBTSxzQkFBc0IsQ0FBQztBQUN4RCxPQUFPLEVBQUUsV0FBVyxFQUFFLE1BQU0sZ0JBQWdCLENBQUM7QUFDN0MsT0FBTyxFQUFFLCtCQUErQixFQUFFLE1BQU0sa0RBQWtELENBQUM7QUFpQm5HLE1BQU0sT0FBTyxtQkFBbUI7OztZQWYvQixRQUFRLFNBQUM7Z0JBQ1IsT0FBTyxFQUFFLENBQUMsWUFBWSxFQUFFLGdCQUFnQixFQUFFLFdBQVcsQ0FBQztnQkFDdEQsWUFBWSxFQUFFO29CQUNaLHlCQUF5QjtvQkFDekIsa0JBQWtCO29CQUNsQix5QkFBeUI7b0JBQ3pCLCtCQUErQjtpQkFDaEM7Z0JBQ0QsT0FBTyxFQUFFO29CQUNQLHlCQUF5QjtvQkFDekIsa0JBQWtCO29CQUNsQix5QkFBeUI7b0JBQ3pCLCtCQUErQjtpQkFDaEM7YUFDRiIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IE5nTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5cbmltcG9ydCB7IE1kYkF1dG9Db21wbGV0ZXJDb21wb25lbnQgfSBmcm9tICcuL2NvbXBvbmVudHMvbWRiLWF1dG8tY29tcGxldGVyLmNvbXBvbmVudCc7XG5pbXBvcnQgeyBNZGJPcHRpb25Db21wb25lbnQgfSBmcm9tICcuL2NvbXBvbmVudHMvbWRiLW9wdGlvbi5jb21wb25lbnQnO1xuaW1wb3J0IHsgTWRiQXV0b0NvbXBsZXRlckRpcmVjdGl2ZSB9IGZyb20gJy4vZGlyZWN0aXZlcy9tZGItYXV0by1jb21wbGV0ZXIuZGlyZWN0aXZlJztcbmltcG9ydCB7IENvbW1vbk1vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL2NvbW1vbic7XG5pbXBvcnQgeyBIdHRwQ2xpZW50TW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvY29tbW9uL2h0dHAnO1xuaW1wb3J0IHsgRm9ybXNNb2R1bGUgfSBmcm9tICdAYW5ndWxhci9mb3Jtcyc7XG5pbXBvcnQgeyBNZGJBdXRvQ29tcGxldGVyT3B0aW9uRGlyZWN0aXZlIH0gZnJvbSAnLi9kaXJlY3RpdmVzL21kYi1hdXRvLWNvbXBsZXRlci1vcHRpb24uZGlyZWN0aXZlJztcblxuQE5nTW9kdWxlKHtcbiAgaW1wb3J0czogW0NvbW1vbk1vZHVsZSwgSHR0cENsaWVudE1vZHVsZSwgRm9ybXNNb2R1bGVdLFxuICBkZWNsYXJhdGlvbnM6IFtcbiAgICBNZGJBdXRvQ29tcGxldGVyQ29tcG9uZW50LFxuICAgIE1kYk9wdGlvbkNvbXBvbmVudCxcbiAgICBNZGJBdXRvQ29tcGxldGVyRGlyZWN0aXZlLFxuICAgIE1kYkF1dG9Db21wbGV0ZXJPcHRpb25EaXJlY3RpdmUsXG4gIF0sXG4gIGV4cG9ydHM6IFtcbiAgICBNZGJBdXRvQ29tcGxldGVyQ29tcG9uZW50LFxuICAgIE1kYk9wdGlvbkNvbXBvbmVudCxcbiAgICBNZGJBdXRvQ29tcGxldGVyRGlyZWN0aXZlLFxuICAgIE1kYkF1dG9Db21wbGV0ZXJPcHRpb25EaXJlY3RpdmUsXG4gIF0sXG59KVxuZXhwb3J0IGNsYXNzIEF1dG9Db21wbGV0ZXJNb2R1bGUge31cbiJdfQ==

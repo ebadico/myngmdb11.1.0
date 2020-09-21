@@ -1,6 +1,6 @@
 {
   "name": "ng-uikit-pro-standard",
-  "version": "9.4.0",
+  "version": "10.0.0",
   "files": [
     "assets/**/*",
     "bundles/**/*",
@@ -18,13 +18,15 @@
     "package.json",
     "public_api.d.ts"
   ],
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
   "peerDependencies": {
-    "@angular/common": "^9.0.0",
-    "@angular/core": "^9.0.0",
-    "@angular/animations": "^9.0.0",
-    "@angular/forms": "^9.0.0",
-    "@angular/cdk": "^9.0.0",
-    "tslib": "^1.10.0"
+    "@angular/common": "^10.0.0",
+    "@angular/core": "^10.0.0",
+    "@angular/animations": "^10.0.0",
+    "@angular/forms": "^10.0.0",
+    "@angular/cdk": "^10.0.0"
   },
   "schematics": "./schematics/collection.json",
   "ng-update": {

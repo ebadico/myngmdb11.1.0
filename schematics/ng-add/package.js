@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.addPackageToPackageJson = void 0;
 function sortObjectByKeys(obj) {
     return Object.keys(obj)
         .sort()
