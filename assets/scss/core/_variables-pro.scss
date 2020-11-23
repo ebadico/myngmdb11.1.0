@@ -706,7 +706,7 @@ $timepicker-pickerdate-display-font-weight: 300 !default;
 $timepicker-pickerdate-display-mb: 1rem !default;
 
 $timepicker-clockpicker-display-height: 5.3125rem !default;
-$timepicker-clockpicker-display-font-size: 4.375rem !default;
+$timepicker-clockpicker-display-font-size: 70px !default;
 $timepicker-clockpicker-display-padding: 0.625rem !default;
 $timepicker-clockpicker-display-color: rgba(255, 255, 255, 0.65) !default;
 $timepicker-clockpicker-display-animate-name: pulse !default;
@@ -726,9 +726,9 @@ $timepicker-keyframes-transform-pulse: scale3d(1, 1, 1) !default;
 $timepicker-keyframes-transform-pulse-middle: scale3d(1.1, 1.1, 1.1) !default;
 
 $timepicker-clockpicker-plate-border-radius: 50% !default;
-$timepicker-clockpicker-plate-width: 16.875rem !default;
+$timepicker-clockpicker-plate-width: 270px !default;
 $timepicker-clockpicker-plate-height: $timepicker-clockpicker-plate-width !default;
-$timepicker-clockpicker-plate-margin-top: 1.25rem !default;
+$timepicker-clockpicker-plate-margin-top: 20px !default;
 
 $timepicker-clockpicker-canvas-width: $timepicker-clockpicker-plate-width !default;
 $timepicker-clockpicker-canvas-height: $timepicker-clockpicker-plate-width !default;
@@ -740,8 +740,8 @@ $timepicker-clockpicker-dial-transition-opacity: opacity 350ms !default;
 
 $timepicker-clockpicker-dial-tick-border-radius: 50% !default;
 $timepicker-clockpicker-dial-tick-line-height: 2.5rem !default;
-$timepicker-clockpicker-dial-tick-width: 2.5rem !default;
-$timepicker-clockpicker-dial-tick-height: 2.5rem !default;
+$timepicker-clockpicker-dial-tick-width: 40px !default;
+$timepicker-clockpicker-dial-tick-height: 40px !default;
 $timepicker-clockpicker-dial-tick-transition: background-color 300ms !default;
 $timepicker-clockpicker-dial-tick-hover-bg: rgba($teal-base, 0) !default;
 $timepicker-clockpicker-dial-tick-hover-bg-opacity: rgba($teal-base, 0.25) !default;
