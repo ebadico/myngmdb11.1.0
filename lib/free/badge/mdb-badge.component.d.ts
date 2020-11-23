@@ -4,6 +4,7 @@ export declare class MDBBadgeComponent implements OnInit {
     private _renderer;
     default: boolean;
     primary: boolean;
+    secondary: boolean;
     success: boolean;
     info: boolean;
     warning: boolean;
