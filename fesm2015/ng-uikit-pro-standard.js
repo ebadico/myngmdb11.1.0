@@ -372,11 +372,15 @@ class ButtonRadioDirective {
         this.onChange = Function.prototype;
         this.onTouched = Function.prototype;
         this.radioElementsArray = [];
+        this.disabled = false;
     }
     get isActive() {
         return this.mdbRadio === this.value;
     }
     onClick(event) {
+        if (this.disabled) {
+            return;
+        }
         try {
             this.el.nativeElement.parentElement.childNodes.forEach((element) => {
                 this.radioElementsArray.push(element);
@@ -428,6 +432,7 @@ ButtonRadioDirective.propDecorators = {
     mdbRadio: [{ type: Input }],
     uncheckable: [{ type: Input }],
     value: [{ type: Input }],
+    disabled: [{ type: HostBinding, args: ['class.disabled',] }, { type: Input }],
     isActive: [{ type: HostBinding, args: ['class.active',] }],
     onClick: [{ type: HostListener, args: ['click', ['$event'],] }]
 };
@@ -7934,7 +7939,7 @@ SBItemBodyComponent.ctorParameters = () => [
 SBItemBodyComponent.propDecorators = {
     customClass: [{ type: Input }],
     animationStateChange: [{ type: Output }],
-    routerLinks: [{ type: ContentChildren, args: [RouterLinkWithHref,] }],
+    routerLinks: [{ type: ContentChildren, args: [RouterLinkWithHref, { descendants: true },] }],
     bodyEl: [{ type: ViewChild, args: ['body', { static: true },] }]
 };
 
