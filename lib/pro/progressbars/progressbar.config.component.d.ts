@@ -4,3 +4,4 @@ export declare class ProgressbarConfigComponent {
     /** maximum total value of progress element */
     max: number;
 }
+//# sourceMappingURL=progressbar.config.component.d.ts.map

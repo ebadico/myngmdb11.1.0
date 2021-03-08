@@ -25,3 +25,4 @@ export interface SelectedTime {
     date?: any;
 }
 export {};
+//# sourceMappingURL=timepicker.interface.d.ts.map

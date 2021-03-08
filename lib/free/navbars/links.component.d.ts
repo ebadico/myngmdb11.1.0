@@ -8,3 +8,4 @@ export declare class LinksComponent implements AfterContentInit {
     constructor(_navbarService: NavbarService, renderer: Renderer2);
     ngAfterContentInit(): void;
 }
+//# sourceMappingURL=links.component.d.ts.map

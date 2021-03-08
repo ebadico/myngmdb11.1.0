@@ -45,3 +45,4 @@ export declare class MdbMultiRangeInputComponent implements OnInit, AfterViewIni
     registerOnTouched(fn: () => void): void;
     setDisabledState(isDisabled: boolean): void;
 }
+//# sourceMappingURL=mdb-multi-range.component.d.ts.map

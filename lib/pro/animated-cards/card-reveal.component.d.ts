@@ -15,3 +15,4 @@ export declare class CardRevealComponent {
     onAnimationStart(): void;
     onAnimationDone(): void;
 }
+//# sourceMappingURL=card-reveal.component.d.ts.map

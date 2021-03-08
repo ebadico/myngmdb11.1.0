@@ -6,3 +6,4 @@ export { MDBDatePickerComponent, MYDP_VALUE_ACCESSOR } from './datepicker.compon
 export { DatepickerModule } from './datepicker.module';
 export { IMyDate, IMyDateRange, IMyDayLabels, IMyMonthLabels, IMyMonth, IMyCalendarDay, IMyWeek, IMyOptions, IMyLocales, IMyDateModel, IMyInputFieldChanged, IMyInputFocusBlur, IMyWeekday, IMyCalendarViewChanged, IMyInputAutoFill, IMyMarkedDate, IMyMarkedDates, } from './interfaces/index';
 export { MDB_DATE_OPTIONS } from './options.token';
+//# sourceMappingURL=index.d.ts.map

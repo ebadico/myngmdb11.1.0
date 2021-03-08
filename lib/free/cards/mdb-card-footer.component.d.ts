@@ -5,3 +5,4 @@ export declare class MdbCardFooterComponent implements OnInit {
     constructor(_el: ElementRef, _r: Renderer2);
     ngOnInit(): void;
 }
+//# sourceMappingURL=mdb-card-footer.component.d.ts.map

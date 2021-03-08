@@ -27,7 +27,7 @@ OptionGroupComponent.decorators = [
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 providers: [{ provide: MDB_OPTION_GROUP, useExisting: OptionGroupComponent }],
-                styles: [".mdb-option-group{display:flex;flex-direction:column}.mdb-option-group-label{border-top:1px solid #eee;color:#9e9e9e;margin:0;padding-left:16px;padding-right:16px;text-overflow:ellipsis;white-space:nowrap}.mdb-option-group:first-child .mdb-option-group-label{border-top:0}"]
+                styles: [".mdb-option-group{display:flex;flex-direction:column}.mdb-option-group-label{white-space:nowrap;text-overflow:ellipsis;color:#9e9e9e;padding-left:16px;padding-right:16px;margin:0;border-top:1px solid #eee}.mdb-option-group:first-child .mdb-option-group-label{border-top:0}"]
             },] }
 ];
 OptionGroupComponent.ctorParameters = () => [

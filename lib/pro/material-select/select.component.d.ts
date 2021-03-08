@@ -156,3 +156,4 @@ export declare class SelectComponent implements ControlValueAccessor, OnChanges,
     private _appendDropdown;
     updateFilterWidth(): void;
 }
+//# sourceMappingURL=select.component.d.ts.map

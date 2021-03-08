@@ -4,3 +4,4 @@ export declare class NavbarService {
     getNavbarLinkClicks(): Observable<any>;
     setNavbarLinkClicks(): void;
 }
+//# sourceMappingURL=navbar.service.d.ts.map

@@ -77,3 +77,4 @@ export declare class ModalDirective implements AfterViewInit, OnDestroy, OnChang
     protected setScrollbar(): void;
     protected getScrollbarWidth(): number;
 }
+//# sourceMappingURL=modal.directive.d.ts.map

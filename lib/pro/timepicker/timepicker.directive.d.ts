@@ -18,3 +18,4 @@ export declare class MdbTimePickerDirective implements ControlValueAccessor, OnI
     registerOnChange(fn: any): void;
     registerOnTouched(fn: any): void;
 }
+//# sourceMappingURL=timepicker.directive.d.ts.map

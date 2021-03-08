@@ -6,3 +6,4 @@ export declare class MDBRootModules {
 export declare class MDBBootstrapModulesPro {
     static forRoot(): ModuleWithProviders<MDBRootModules>;
 }
+//# sourceMappingURL=mdb.module.d.ts.map

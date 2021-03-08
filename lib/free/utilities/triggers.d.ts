@@ -20,3 +20,4 @@ export declare function listenToTriggers(renderer: Renderer2, target: any, trigg
 export declare function listenToTriggersV2(renderer: Renderer2, options: ListenOptions): Function;
 export declare function registerOutsideClick(renderer: Renderer2, options: ListenOptions): Function;
 export declare function registerEscClick(renderer: Renderer2, options: ListenOptions): Function;
+//# sourceMappingURL=triggers.d.ts.map

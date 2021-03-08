@@ -21,3 +21,4 @@ export declare const EventTarget: any;
 export declare const History: any;
 export declare const Location: any;
 export declare const EventListener: any;
+//# sourceMappingURL=browser.d.ts.map

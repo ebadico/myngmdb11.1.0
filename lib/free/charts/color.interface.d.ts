@@ -20,3 +20,4 @@ export interface Color {
     hoverBorderColor?: string | string[];
     hoverBorderWidth?: number;
 }
+//# sourceMappingURL=color.interface.d.ts.map

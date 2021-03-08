@@ -24,3 +24,4 @@ export declare class LinkedList<T> {
     protected getNode(position: number): any;
     protected createInternalArrayRepresentation(): void;
 }
+//# sourceMappingURL=linked-list.class.d.ts.map

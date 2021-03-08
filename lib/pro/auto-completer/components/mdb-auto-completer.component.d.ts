@@ -1,7 +1,7 @@
 import { AfterContentInit, ElementRef, EventEmitter, Renderer2, QueryList, OnDestroy } from '@angular/core';
 import { MdbOptionComponent } from './mdb-option.component';
 import { ISelectedOption } from '../interfaces/selected-option.interface';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 export declare type AutocompleteDropdownPosition = 'below' | 'above' | 'auto';
 export declare class MdbAutoCompleterComponent implements AfterContentInit, OnDestroy {
     private renderer;
@@ -44,7 +44,7 @@ export declare class MdbAutoCompleterComponent implements AfterContentInit, OnDe
         bottom: number;
         inputHeight: number;
     };
-    private _isDropdownOpen;
+    readonly _isDropdownOpen: Subject<any>;
     private _allItems;
     private _isOpen;
     private _selectedItemIndex;
@@ -78,3 +78,4 @@ export declare class MdbAutoCompleterComponent implements AfterContentInit, OnDe
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
 }
+//# sourceMappingURL=mdb-auto-completer.component.d.ts.map

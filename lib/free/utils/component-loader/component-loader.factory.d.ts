@@ -10,3 +10,4 @@ export declare class ComponentLoaderFactory {
     constructor(_componentFactoryResolver: ComponentFactoryResolver, _ngZone: NgZone, _injector: Injector, _posService: PositioningService, _applicationRef: ApplicationRef);
     createLoader<T>(_elementRef: ElementRef, _viewContainerRef: ViewContainerRef, _renderer: Renderer2): ComponentLoader<T>;
 }
+//# sourceMappingURL=component-loader.factory.d.ts.map

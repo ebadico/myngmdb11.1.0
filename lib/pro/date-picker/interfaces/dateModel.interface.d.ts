@@ -5,3 +5,4 @@ export interface IMyDateModel {
     formatted: string;
     epoc: number;
 }
+//# sourceMappingURL=dateModel.interface.d.ts.map

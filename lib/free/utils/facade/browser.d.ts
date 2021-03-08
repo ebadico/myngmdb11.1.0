@@ -22,3 +22,4 @@ export declare const History: any;
 export declare const Location: any;
 export declare const EventListener: any;
 export declare const navigator: any;
+//# sourceMappingURL=browser.d.ts.map

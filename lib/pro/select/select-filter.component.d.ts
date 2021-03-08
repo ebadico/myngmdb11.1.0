@@ -19,3 +19,4 @@ export declare class MdbSelectFilterComponent implements OnInit {
     registerOnChange(fn: (value: any) => {}): void;
     registerOnTouched(fn: () => {}): void;
 }
+//# sourceMappingURL=select-filter.component.d.ts.map

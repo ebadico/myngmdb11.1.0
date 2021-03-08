@@ -16,3 +16,4 @@ export declare class MDBFileSelectDirective implements OnInit, OnDestroy {
     ngOnDestroy(): void;
     fileListener: () => void;
 }
+//# sourceMappingURL=mdb-file-select.directive.d.ts.map

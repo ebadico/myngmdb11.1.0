@@ -10,3 +10,4 @@ export declare class CharCounterDirective implements OnInit {
     hide(): void;
     show(): void;
 }
+//# sourceMappingURL=char-counter.directive.d.ts.map

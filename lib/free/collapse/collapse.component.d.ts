@@ -21,3 +21,4 @@ export declare class CollapseComponent implements OnInit {
     initializeCollapseState(): void;
     ngOnInit(): void;
 }
+//# sourceMappingURL=collapse.component.d.ts.map

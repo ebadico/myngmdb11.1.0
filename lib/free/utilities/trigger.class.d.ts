@@ -8,3 +8,4 @@ export declare class Trigger {
     constructor(open: string, close?: string);
     isManual(): boolean;
 }
+//# sourceMappingURL=trigger.class.d.ts.map

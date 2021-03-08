@@ -23,3 +23,4 @@ export declare class MDBRootModule {
 export declare class MDBBootstrapModule {
     static forRoot(): ModuleWithProviders<MDBRootModule>;
 }
+//# sourceMappingURL=mdb-free.module.d.ts.map

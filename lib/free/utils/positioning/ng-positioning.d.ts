@@ -10,3 +10,4 @@ export declare class Positioning {
     positionElements(hostElement: HTMLElement, targetElement: HTMLElement, position: string, _appendToBody?: boolean, options?: any): Data;
 }
 export declare function positionElements(hostElement: HTMLElement, targetElement: HTMLElement, placement: string, appendToBody?: boolean, options?: Options, renderer?: Renderer2): void;
+//# sourceMappingURL=ng-positioning.d.ts.map

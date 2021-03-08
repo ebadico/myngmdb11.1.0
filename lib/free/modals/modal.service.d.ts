@@ -42,3 +42,4 @@ export declare class MDBModalService {
     private removeLoaders;
     private copyEvent;
 }
+//# sourceMappingURL=modal.service.d.ts.map

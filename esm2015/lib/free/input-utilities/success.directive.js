@@ -49,7 +49,7 @@ MdbSuccessDirective.decorators = [
                 selector: 'mdb-success',
                 template: '<ng-content></ng-content>',
                 encapsulation: ViewEncapsulation.None,
-                styles: [".error-message,.success-message{font-size:.8rem;left:0;position:absolute;top:40px}textarea~.error-message,textarea~.success-message{bottom:-20px;top:unset}.error-message{color:#f44336}.success-message{color:#00c851}"]
+                styles: [".error-message,.success-message{position:absolute;top:40px;left:0;font-size:.8rem}textarea~.error-message,textarea~.success-message{top:unset;bottom:-20px}.error-message{color:#f44336}.success-message{color:#00c851}"]
             },] }
 ];
 MdbSuccessDirective.ctorParameters = () => [

@@ -13,3 +13,4 @@ export declare class PopoverContainerComponent implements OnInit {
     constructor(config: PopoverConfig);
     ngOnInit(): void;
 }
+//# sourceMappingURL=popover-container.component.d.ts.map

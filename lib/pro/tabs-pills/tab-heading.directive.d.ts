@@ -5,3 +5,4 @@ export declare class TabHeadingDirective {
     templateRef: TemplateRef<any>;
     constructor(templateRef: TemplateRef<any>, tab: TabDirective);
 }
+//# sourceMappingURL=tab-heading.directive.d.ts.map

@@ -57,3 +57,4 @@ export declare class TabsetComponent implements OnDestroy, OnInit, AfterViewInit
     ngOnInit(): void;
     ngAfterViewInit(): void;
 }
+//# sourceMappingURL=tabset.component.d.ts.map

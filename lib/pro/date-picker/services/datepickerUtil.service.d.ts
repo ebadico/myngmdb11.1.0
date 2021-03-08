@@ -27,3 +27,4 @@ export declare class UtilService {
     getTimeInMilliseconds(date: IMyDate): number;
     getDayNumber(date: IMyDate): number;
 }
+//# sourceMappingURL=datepickerUtil.service.d.ts.map

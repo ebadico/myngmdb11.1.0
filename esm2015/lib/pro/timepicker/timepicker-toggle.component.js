@@ -13,7 +13,7 @@ MdbTimepickerToggleComponent.decorators = [
                 selector: 'mdb-timepicker-toggle',
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush,
-                styles: [".mdb-timepicker-toggle{background-color:transparent;border-color:transparent;position:absolute;right:0;top:50%;transform:translateY(-50%)}.mdb-timepicker-toggle svg{height:1em}"]
+                styles: [".mdb-timepicker-toggle{position:absolute;right:0;top:50%;transform:translateY(-50%);border-color:transparent;background-color:transparent}.mdb-timepicker-toggle svg{height:1em}"]
             },] }
 ];
 MdbTimepickerToggleComponent.ctorParameters = () => [];

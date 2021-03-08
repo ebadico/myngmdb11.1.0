@@ -14,9 +14,11 @@ export declare class MdbAutoCompleterDirective implements AfterViewInit, OnDestr
     private _clearButton;
     private _canOpenOnFocus;
     private utils;
+    private _disabled;
     listenToClearClick: Function;
-    listenFunc: Function;
+    listenFunc: Function | null;
     isBrowser: boolean;
+    get isDisabled(): boolean;
     onKeydown(event: any): void;
     _handleInput(event: any): void;
     _handleFocusIn(): void;
@@ -40,6 +42,8 @@ export declare class MdbAutoCompleterDirective implements AfterViewInit, OnDestr
     _onChange: (value: any) => void;
     _onTouched: () => void;
     writeValue(value: any): void;
+    setDisabledState(isDisabled: boolean): void;
     registerOnChange(fn: (value: any) => {}): void;
     registerOnTouched(fn: () => {}): void;
 }
+//# sourceMappingURL=mdb-auto-completer.directive.d.ts.map

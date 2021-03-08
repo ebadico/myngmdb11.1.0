@@ -98,3 +98,4 @@ export declare class MdSpinnerComponent extends MdProgressSpinnerComponent imple
     constructor(elementRef: ElementRef, ngZone: NgZone, renderer: Renderer2);
     ngOnDestroy(): void;
 }
+//# sourceMappingURL=progress-spinner.component.d.ts.map

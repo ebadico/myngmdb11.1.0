@@ -12,3 +12,4 @@ export declare class OptionGroupComponent implements OnInit, AfterContentInit {
     ngOnInit(): void;
     ngAfterContentInit(): void;
 }
+//# sourceMappingURL=option-group.component.d.ts.map

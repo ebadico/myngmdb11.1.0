@@ -57,3 +57,4 @@ export declare class MdbStepperComponent implements AfterContentInit, AfterViewI
     ngAfterContentChecked(): void;
     ngOnDestroy(): void;
 }
+//# sourceMappingURL=stepper.component.d.ts.map

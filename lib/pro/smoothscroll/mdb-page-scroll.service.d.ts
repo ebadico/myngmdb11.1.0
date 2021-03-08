@@ -19,3 +19,4 @@ export declare class PageScrollService {
     stop(pageScrollInstance: PageScrollInstance): boolean;
     constructor();
 }
+//# sourceMappingURL=mdb-page-scroll.service.d.ts.map

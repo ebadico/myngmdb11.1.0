@@ -7,3 +7,4 @@ export declare class NgTranscludeDirective {
     get mdbNgTransclude(): TemplateRef<any>;
     constructor(viewRef: ViewContainerRef);
 }
+//# sourceMappingURL=transclude.directive.d.ts.map

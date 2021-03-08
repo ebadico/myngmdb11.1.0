@@ -17,3 +17,4 @@ export declare class ModalBackdropComponent implements OnInit {
     constructor(element: ElementRef, renderer: Renderer2);
     ngOnInit(): void;
 }
+//# sourceMappingURL=modalBackdrop.component.d.ts.map

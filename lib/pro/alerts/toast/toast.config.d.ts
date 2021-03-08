@@ -140,3 +140,4 @@ export declare class ToastPackage {
 export declare const tsConfig: {
     serviceInstance: Object;
 };
+//# sourceMappingURL=toast.config.d.ts.map

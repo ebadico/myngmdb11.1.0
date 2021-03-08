@@ -32,3 +32,4 @@ export declare class MdbTreeComponent implements OnInit {
     updateNodesCheckedValues(node: any, idx: string): void;
     private _updateChildNodesCheckedValues;
 }
+//# sourceMappingURL=tree-view.component.d.ts.map

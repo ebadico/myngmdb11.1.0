@@ -26,3 +26,4 @@ export declare class SBItemBodyComponent implements AfterContentInit, OnDestroy 
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
 }
+//# sourceMappingURL=sb-item.body.d.ts.map

@@ -4,3 +4,4 @@ declare class MdProgressSpinnerModule {
 }
 export { MdProgressSpinnerModule };
 export { ProgressSpinnerMode, MdProgressSpinnerCssMatStylerDirective, MdProgressSpinnerComponent, MdSpinnerComponent, } from './progress-spinner.component';
+//# sourceMappingURL=index.d.ts.map

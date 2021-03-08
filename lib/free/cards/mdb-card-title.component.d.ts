@@ -5,3 +5,4 @@ export declare class MdbCardTitleComponent implements OnInit {
     constructor(_el: ElementRef, _r: Renderer2);
     ngOnInit(): void;
 }
+//# sourceMappingURL=mdb-card-title.component.d.ts.map

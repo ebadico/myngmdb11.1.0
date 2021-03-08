@@ -24,3 +24,4 @@ export declare class ButtonCheckboxDirective implements ControlValueAccessor, On
     registerOnChange(fn: (_: any) => {}): void;
     registerOnTouched(fn: () => {}): void;
 }
+//# sourceMappingURL=checkbox.directive.d.ts.map

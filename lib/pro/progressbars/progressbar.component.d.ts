@@ -10,3 +10,4 @@ export declare class ProgressbarComponent {
     value: number;
     constructor(config: ProgressbarConfigComponent);
 }
+//# sourceMappingURL=progressbar.component.d.ts.map

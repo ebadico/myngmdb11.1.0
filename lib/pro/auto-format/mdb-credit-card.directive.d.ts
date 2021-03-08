@@ -30,3 +30,4 @@ export declare class MdbCreditCardDirective {
     private findCardByNumber;
     addCards(newCards: CreditCard[]): void;
 }
+//# sourceMappingURL=mdb-credit-card.directive.d.ts.map

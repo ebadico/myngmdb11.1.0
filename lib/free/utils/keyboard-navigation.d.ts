@@ -123,3 +123,4 @@ export declare const BACKSLASH = 220;
 export declare const CLOSE_SQUARE_BRACKET = 221;
 export declare const SINGLE_QUOTE = 222;
 export declare const MAC_META = 224;
+//# sourceMappingURL=keyboard-navigation.d.ts.map

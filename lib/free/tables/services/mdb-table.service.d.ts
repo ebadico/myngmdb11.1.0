@@ -15,3 +15,4 @@ export declare class MdbTableService {
     searchLocalDataBy(searchKey: any): any;
     searchDataObservable(searchKey: any): Observable<any>;
 }
+//# sourceMappingURL=mdb-table.service.d.ts.map

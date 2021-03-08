@@ -16,3 +16,4 @@ export declare class MDBBadgeComponent implements OnInit {
     constructor(_el: ElementRef, _renderer: Renderer2);
     ngOnInit(): void;
 }
+//# sourceMappingURL=mdb-badge.component.d.ts.map

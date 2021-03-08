@@ -7,3 +7,4 @@ export declare class Utils {
     getClosestEl(el: any, selector: string): any;
     getCoords(elem: any): any;
 }
+//# sourceMappingURL=utils.class.d.ts.map

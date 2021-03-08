@@ -26,3 +26,4 @@ export declare class PageScrollDirective implements OnChanges, OnDestroy {
     private scroll;
     handleClick(): boolean;
 }
+//# sourceMappingURL=mdb-page-scroll.directive.d.ts.map

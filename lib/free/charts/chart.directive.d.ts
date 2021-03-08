@@ -27,3 +27,4 @@ export declare class BaseChartDirective implements OnDestroy, OnChanges, OnInit,
     private getDatasets;
     private refresh;
 }
+//# sourceMappingURL=chart.directive.d.ts.map

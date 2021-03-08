@@ -5,3 +5,4 @@ export interface IMyCalendarViewChanged {
     first: IMyWeekday;
     last: IMyWeekday;
 }
+//# sourceMappingURL=calendarViewChanged.interface.d.ts.map

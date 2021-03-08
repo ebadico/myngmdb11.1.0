@@ -19,3 +19,4 @@ export declare class DomPortalHost extends BasePortalHost {
     /** Gets the root HTMLElement for an instantiated component. */
     private _getComponentRootNode;
 }
+//# sourceMappingURL=dom-portal-host.d.ts.map

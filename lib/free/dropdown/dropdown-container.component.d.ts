@@ -10,3 +10,4 @@ export declare class BsDropdownContainerComponent implements OnDestroy {
     constructor(_state: BsDropdownState);
     ngOnDestroy(): void;
 }
+//# sourceMappingURL=dropdown-container.component.d.ts.map

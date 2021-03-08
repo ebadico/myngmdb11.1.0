@@ -4,3 +4,4 @@ export declare class FabDirective {
     private _r;
     constructor(_el: ElementRef, _r: Renderer2);
 }
+//# sourceMappingURL=fab.directive.d.ts.map

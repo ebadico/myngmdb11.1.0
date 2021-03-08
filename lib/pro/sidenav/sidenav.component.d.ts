@@ -30,3 +30,4 @@ export declare class SidenavComponent implements AfterViewInit, OnDestroy, OnIni
     setShown(value: boolean): void;
     ngOnDestroy(): void;
 }
+//# sourceMappingURL=sidenav.component.d.ts.map

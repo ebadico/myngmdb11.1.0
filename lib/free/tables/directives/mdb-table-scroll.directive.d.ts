@@ -12,3 +12,4 @@ export declare class MdbTableScrollDirective implements OnInit {
     wrapTableWithHorizontalAndVerticalScrollingWrapper(tableWrapper: ElementRef): void;
     ngOnInit(): void;
 }
+//# sourceMappingURL=mdb-table-scroll.directive.d.ts.map

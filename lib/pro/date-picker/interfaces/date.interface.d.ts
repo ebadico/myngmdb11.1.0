@@ -3,3 +3,4 @@ export interface IMyDate {
     month: number;
     day: number;
 }
+//# sourceMappingURL=date.interface.d.ts.map

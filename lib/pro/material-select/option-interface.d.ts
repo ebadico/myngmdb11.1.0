@@ -5,3 +5,4 @@ export interface IOption {
     group?: boolean;
     icon: string;
 }
+//# sourceMappingURL=option-interface.d.ts.map

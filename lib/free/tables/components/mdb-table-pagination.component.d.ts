@@ -50,3 +50,4 @@ export declare class MdbTablePaginationComponent implements OnInit, OnChanges, A
     checkIfPreviousShouldBeDisabled(): true | undefined;
     ngOnDestroy(): void;
 }
+//# sourceMappingURL=mdb-table-pagination.component.d.ts.map

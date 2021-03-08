@@ -7,3 +7,4 @@ export declare class CarouselConfig {
     noWrap: boolean;
     keyboard: boolean;
 }
+//# sourceMappingURL=carousel.config.d.ts.map

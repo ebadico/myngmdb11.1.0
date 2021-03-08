@@ -13,3 +13,4 @@ export declare class PageScrollUtilService {
         left: number;
     };
 }
+//# sourceMappingURL=mdb-page-scroll-util.service.d.ts.map

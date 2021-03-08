@@ -4,3 +4,4 @@ export { EasingLogic, PageScrollTarget, PageScrollingViews, PageScrollConfig } f
 export { PageScrollOptions, PageScrollInstance, InterruptReporter } from './mdb-page-scroll.instance';
 export { PageScrollUtilService } from './mdb-page-scroll-util.service';
 export { SmoothscrollModule } from './mdb-page-scroll.module';
+//# sourceMappingURL=index.d.ts.map

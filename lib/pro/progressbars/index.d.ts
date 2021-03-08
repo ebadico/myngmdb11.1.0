@@ -10,3 +10,4 @@ export declare class PreloadersModule {
 export declare class ProgressBars {
     static forRoot(): ModuleWithProviders<PreloadersModule>;
 }
+//# sourceMappingURL=index.d.ts.map

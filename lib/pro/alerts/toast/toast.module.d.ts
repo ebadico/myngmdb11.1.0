@@ -4,3 +4,4 @@ export declare class ToastModule {
     static forRoot(config?: GlobalConfig): ModuleWithProviders<ToastModule>;
     constructor(parentModule: ToastModule);
 }
+//# sourceMappingURL=toast.module.d.ts.map

@@ -25,3 +25,4 @@ export declare class MdbBtnDirective implements OnInit, OnChanges {
     ngOnChanges(changes: SimpleChanges): void;
     initClasses(): void;
 }
+//# sourceMappingURL=buttons.directive.d.ts.map

@@ -5,3 +5,4 @@ export declare function getOuterSizes(element: any): {
     width: number;
     height: number;
 };
+//# sourceMappingURL=getOuterSizes.d.ts.map

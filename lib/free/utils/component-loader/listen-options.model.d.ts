@@ -9,3 +9,4 @@ export interface ListenOptions {
     hide?: BsEventCallback;
     toggle?: BsEventCallback;
 }
+//# sourceMappingURL=listen-options.model.d.ts.map

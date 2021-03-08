@@ -18,3 +18,4 @@ export declare class MDBFileDropDirective implements OnInit, OnDestroy {
     onDragOver(e: any): void;
     onDragLeave(e: any): void;
 }
+//# sourceMappingURL=mdb-file-drop.directive.d.ts.map

@@ -17,3 +17,4 @@ export declare class OverlayContainer {
      */
     private _createContainer;
 }
+//# sourceMappingURL=overlay-container.d.ts.map

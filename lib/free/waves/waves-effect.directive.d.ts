@@ -5,3 +5,4 @@ export declare class WavesDirective {
     click(event: any): void;
     removeRipple(button: any, ripple: any): void;
 }
+//# sourceMappingURL=waves-effect.directive.d.ts.map

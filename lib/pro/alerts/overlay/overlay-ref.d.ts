@@ -14,3 +14,4 @@ export declare class OverlayRef {
      */
     detach(): void;
 }
+//# sourceMappingURL=overlay-ref.d.ts.map

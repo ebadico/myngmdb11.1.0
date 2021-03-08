@@ -9,3 +9,4 @@ export { SBItemBodyComponent } from './components/sb-item.body';
 export { SqueezeBoxComponent } from './components/squeezebox';
 export declare class AccordionModule {
 }
+//# sourceMappingURL=index.d.ts.map

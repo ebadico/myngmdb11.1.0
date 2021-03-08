@@ -7,3 +7,4 @@ export declare class MdbTableRowDirective implements OnInit, OnDestroy {
     ngOnInit(): void;
     ngOnDestroy(): void;
 }
+//# sourceMappingURL=mdb-table-row.directive.d.ts.map

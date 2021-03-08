@@ -4,3 +4,4 @@ export declare class FasDirective {
     private _r;
     constructor(_el: ElementRef, _r: Renderer2);
 }
+//# sourceMappingURL=fas.directive.d.ts.map

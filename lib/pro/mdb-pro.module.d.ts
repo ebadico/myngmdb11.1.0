@@ -29,3 +29,4 @@ export declare class MDBRootModulePro {
 export declare class MDBBootstrapModulePro {
     static forRoot(): ModuleWithProviders<MDBRootModulePro>;
 }
+//# sourceMappingURL=mdb-pro.module.d.ts.map

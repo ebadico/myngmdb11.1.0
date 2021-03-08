@@ -4,3 +4,4 @@ export declare class LocaleService {
     setLocaleOptions(locale: IMyLocales): void;
     getLocaleOptions(locale: string): IMyOptions;
 }
+//# sourceMappingURL=datepickerLocale.service.d.ts.map

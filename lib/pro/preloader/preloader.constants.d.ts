@@ -5,3 +5,4 @@ declare const CONTAINER_NAME: string;
 export declare const TYPE_ERROR_CONTAINER_WAS_NOT_FOUND_MESSAGE: string;
 export declare const EMULATE_ELEMENT_NAME = "div";
 export { CONTAINER_QUERY, COMPLETE_CLASS_NAME, CONTAINER_CLASS_NAME, CONTAINER_NAME };
+//# sourceMappingURL=preloader.constants.d.ts.map
