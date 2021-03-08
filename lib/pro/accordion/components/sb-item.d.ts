@@ -15,3 +15,4 @@ export declare class SBItemComponent implements AfterViewInit, AfterContentInit 
     toggle(collapsed: boolean): void;
     applyToggle(collapsed: boolean): void;
 }
+//# sourceMappingURL=sb-item.d.ts.map

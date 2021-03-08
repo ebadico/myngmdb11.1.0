@@ -22,3 +22,4 @@ export declare class MdbOptionComponent implements OnInit {
     get label(): any;
     ngOnInit(): void;
 }
+//# sourceMappingURL=mdb-option.component.d.ts.map

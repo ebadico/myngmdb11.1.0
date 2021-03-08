@@ -5,3 +5,4 @@ export { OptionList } from './option-list';
 export { SELECT_VALUE_ACCESSOR, SelectComponent } from './select.component';
 export { SelectDropdownComponent } from './select-dropdown.component';
 export { SelectModule } from './select.module';
+//# sourceMappingURL=index.d.ts.map

@@ -37,3 +37,4 @@ export declare class MdbTableDirective implements OnInit, AfterViewInit {
     ngAfterViewInit(): void;
     private makeSticky;
 }
+//# sourceMappingURL=mdb-table.directive.d.ts.map

@@ -27,3 +27,4 @@ export declare class ButtonRadioDirective implements ControlValueAccessor, OnIni
     registerOnChange(fn: any): void;
     registerOnTouched(fn: any): void;
 }
+//# sourceMappingURL=radio.directive.d.ts.map

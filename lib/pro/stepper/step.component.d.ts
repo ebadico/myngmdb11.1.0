@@ -21,3 +21,4 @@ export declare class MdbStepComponent implements OnInit {
     reset(): void;
     ngOnInit(): void;
 }
+//# sourceMappingURL=step.component.d.ts.map

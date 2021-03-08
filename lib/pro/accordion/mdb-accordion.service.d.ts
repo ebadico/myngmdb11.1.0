@@ -7,3 +7,4 @@ export declare class MdbAccordionService {
     updateMultipleState(value: boolean): void;
     didItemToggled(item: SBItemComponent): void;
 }
+//# sourceMappingURL=mdb-accordion.service.d.ts.map

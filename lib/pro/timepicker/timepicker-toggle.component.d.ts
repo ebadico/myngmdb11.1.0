@@ -6,3 +6,4 @@ export declare class MdbTimepickerToggleComponent implements OnInit {
     constructor();
     ngOnInit(): void;
 }
+//# sourceMappingURL=timepicker-toggle.component.d.ts.map

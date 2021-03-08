@@ -73,3 +73,4 @@ export declare class ComponentLoader<T> {
     private _unsubscribePositioning;
     private _getContentRef;
 }
+//# sourceMappingURL=component-loader.class.d.ts.map

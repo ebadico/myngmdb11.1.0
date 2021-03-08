@@ -106,3 +106,4 @@ export { MDB_TIMEPICKER_VALUE_ACCESSOR as ɵdu, MdbTimePickerDirective as ɵdv }
 export { MdbTimePickerModule as ɵdw } from './lib/pro/timepicker/timepicker.module';
 export { MdbTreeComponent as ɵdy } from './lib/pro/tree-view/tree-view.component';
 export { MdbTreeModule as ɵdz } from './lib/pro/tree-view/tree-view.module';
+//# sourceMappingURL=ng-uikit-pro-standard.d.ts.map

@@ -38,3 +38,4 @@ export declare class PositioningService {
     deletePositionElement(elRef: ElementRef): void;
     setOptions(options: Options): void;
 }
+//# sourceMappingURL=positioning.service.d.ts.map

@@ -13,3 +13,4 @@ export declare class MdbErrorDirective implements OnInit, OnDestroy {
     ngOnInit(): void;
     ngOnDestroy(): void;
 }
+//# sourceMappingURL=error.directive.d.ts.map

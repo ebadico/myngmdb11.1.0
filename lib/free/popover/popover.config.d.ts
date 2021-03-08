@@ -20,3 +20,4 @@ export declare class PopoverConfig {
      */
     container: string;
 }
+//# sourceMappingURL=popover.config.d.ts.map

@@ -15,3 +15,4 @@ export declare class ScrollSpyDirective implements OnInit, AfterContentInit, OnD
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
 }
+//# sourceMappingURL=scroll-spy.directive.d.ts.map

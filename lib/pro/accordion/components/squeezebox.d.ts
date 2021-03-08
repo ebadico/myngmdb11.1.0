@@ -14,3 +14,4 @@ export declare class SqueezeBoxComponent implements OnInit, AfterContentInit, On
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
 }
+//# sourceMappingURL=squeezebox.d.ts.map

@@ -10,3 +10,4 @@ export declare class FixedButtonCaptionDirective implements OnInit {
     createCaptionElement(): void;
     showCaption(): void;
 }
+//# sourceMappingURL=fixed-caption.directive.d.ts.map

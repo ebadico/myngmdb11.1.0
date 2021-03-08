@@ -41,3 +41,4 @@ export declare class CheckboxComponent implements OnInit, OnChanges {
     registerOnTouched(fn: () => void): void;
     setDisabledState(isDisabled: boolean): void;
 }
+//# sourceMappingURL=checkbox.component.d.ts.map

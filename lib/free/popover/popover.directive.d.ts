@@ -74,3 +74,4 @@ export declare class PopoverDirective implements OnInit, OnDestroy {
     dispose(): void;
     ngOnDestroy(): any;
 }
+//# sourceMappingURL=popover.directive.d.ts.map

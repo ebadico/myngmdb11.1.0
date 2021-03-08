@@ -24,3 +24,4 @@ export declare class LinkedList<T> {
     find(fn: any): T | any;
     findIndex(fn: any): number;
 }
+//# sourceMappingURL=linked-list.class.d.ts.map

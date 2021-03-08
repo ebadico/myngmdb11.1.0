@@ -13,3 +13,4 @@ export declare class StickyHeaderDirective implements AfterViewInit, OnDestroy {
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
 }
+//# sourceMappingURL=sticky-header.directive.d.ts.map

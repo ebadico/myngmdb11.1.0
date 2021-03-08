@@ -25,9 +25,6 @@ export declare class MdbRangeInputComponent implements ControlValueAccessor, Aft
     visibility: boolean;
     onchange(event: any): void;
     oninput(event: any): void;
-    onclick(): void;
-    onTouchStart(): void;
-    onmouseleave(): void;
     constructor(renderer: Renderer2, cdRef: ChangeDetectorRef);
     focusRangeInput(): void;
     blurRangeInput(): void;
@@ -41,3 +38,4 @@ export declare class MdbRangeInputComponent implements ControlValueAccessor, Aft
     registerOnTouched(fn: () => void): void;
     setDisabledState(isDisabled: boolean): void;
 }
+//# sourceMappingURL=mdb-range.component.d.ts.map

@@ -19,3 +19,4 @@ export declare class SimpleChartComponent implements OnInit {
     constructor();
     ngOnInit(): void;
 }
+//# sourceMappingURL=chart-simple.component.d.ts.map

@@ -16,3 +16,4 @@ export declare class MdbStickyDirective implements OnDestroy, AfterViewInit {
     detach(): void;
     scrollHandler: () => void;
 }
+//# sourceMappingURL=sticky-content.directive.d.ts.map

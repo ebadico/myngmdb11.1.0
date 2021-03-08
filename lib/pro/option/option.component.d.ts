@@ -46,3 +46,4 @@ export declare class OptionComponent implements OnInit {
     setActiveStyles(): void;
     setInactiveStyles(): void;
 }
+//# sourceMappingURL=option.component.d.ts.map

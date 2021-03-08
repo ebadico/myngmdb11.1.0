@@ -69,3 +69,4 @@ export declare class CarouselComponent implements OnDestroy, AfterViewInit {
     keyboardControl(event: any): void;
     focus(): void;
 }
+//# sourceMappingURL=carousel.component.d.ts.map

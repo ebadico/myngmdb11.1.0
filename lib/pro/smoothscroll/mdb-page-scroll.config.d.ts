@@ -77,3 +77,4 @@ export declare class PageScrollConfig {
     static get defaultEasingLogic(): EasingLogic;
     static set defaultEasingLogic(easingLogic: EasingLogic);
 }
+//# sourceMappingURL=mdb-page-scroll.config.d.ts.map

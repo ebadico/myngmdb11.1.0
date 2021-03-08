@@ -3,3 +3,4 @@ export interface IMyMonth {
     monthNbr: number;
     year: number;
 }
+//# sourceMappingURL=month.interface.d.ts.map

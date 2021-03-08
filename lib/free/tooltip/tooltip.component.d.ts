@@ -15,3 +15,4 @@ export declare class TooltipContainerComponent implements AfterViewInit {
     constructor(config: TooltipConfig, elem: ElementRef);
     ngAfterViewInit(): void;
 }
+//# sourceMappingURL=tooltip.component.d.ts.map

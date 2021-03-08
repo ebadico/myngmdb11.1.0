@@ -41,3 +41,4 @@ export declare abstract class BasePortalHost {
     detach(): void;
     setDisposeFn(fn: () => void): void;
 }
+//# sourceMappingURL=portal.d.ts.map

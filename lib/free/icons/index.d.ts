@@ -5,3 +5,4 @@ export { FasDirective } from './directives/fas.directive';
 export { FabDirective } from './directives/fab.directive';
 export { FadDirective } from './directives/fad.directive';
 export { IconsModule } from './icon.module';
+//# sourceMappingURL=index.d.ts.map

@@ -32,3 +32,4 @@ export declare class ProgressBarComponent {
         transform: string;
     } | undefined;
 }
+//# sourceMappingURL=progressbar.component.d.ts.map

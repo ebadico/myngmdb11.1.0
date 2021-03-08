@@ -43,3 +43,4 @@ export declare class MdbTimePickerComponent implements OnDestroy {
     private _listenToOutsideClick;
     ngOnDestroy(): void;
 }
+//# sourceMappingURL=timepicker.component.d.ts.map

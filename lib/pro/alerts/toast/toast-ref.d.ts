@@ -25,3 +25,4 @@ export declare class ToastRef<T> {
     /** Gets an observable that is notified when the toast has started opening. */
     afterActivate(): Observable<any>;
 }
+//# sourceMappingURL=toast-ref.d.ts.map

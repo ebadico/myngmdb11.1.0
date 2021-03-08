@@ -7,3 +7,4 @@ export declare class MdbCardBodyComponent implements OnInit {
     constructor(_el: ElementRef, _r: Renderer2);
     ngOnInit(): void;
 }
+//# sourceMappingURL=mdb-card-body.component.d.ts.map

@@ -13,3 +13,4 @@ export declare class BsDropdownState {
     resolveDropdownMenu: (componentRef: BsComponentRef<any>) => void;
     constructor();
 }
+//# sourceMappingURL=dropdown.state.d.ts.map

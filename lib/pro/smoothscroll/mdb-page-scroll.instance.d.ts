@@ -233,3 +233,4 @@ export declare class PageScrollInstance {
 export interface InterruptReporter {
     report: (event: Event, pageScrollInstance: PageScrollInstance) => any;
 }
+//# sourceMappingURL=mdb-page-scroll.instance.d.ts.map

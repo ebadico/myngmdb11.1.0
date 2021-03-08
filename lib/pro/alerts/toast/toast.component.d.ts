@@ -46,3 +46,4 @@ export declare class ToastComponent implements OnDestroy {
     stickAround(): void;
     delayedHideToast(): void;
 }
+//# sourceMappingURL=toast.component.d.ts.map

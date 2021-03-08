@@ -9,3 +9,4 @@ export declare class MDBSpinningPreloader {
     get container(): MDB_SPINNING_PRELOADER_TYPE;
     set container(element: MDB_SPINNING_PRELOADER_TYPE);
 }
+//# sourceMappingURL=preloader.service.d.ts.map

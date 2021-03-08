@@ -4,3 +4,4 @@ export declare class MdbAutoCompleterOptionDirective {
     value: string;
     constructor(_el: ElementRef);
 }
+//# sourceMappingURL=mdb-auto-completer-option.directive.d.ts.map

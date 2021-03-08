@@ -17,3 +17,4 @@ export declare class MdbIconComponent implements OnInit {
     constructor(_el: ElementRef, _renderer: Renderer2);
     ngOnInit(): void;
 }
+//# sourceMappingURL=icon.component.d.ts.map

@@ -31,3 +31,4 @@ export declare class MaterialChipsComponent {
     onFocus(): void;
     focusOutFunction(): void;
 }
+//# sourceMappingURL=chips.component.d.ts.map

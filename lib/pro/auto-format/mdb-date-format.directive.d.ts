@@ -15,3 +15,4 @@ export declare class MdbDateFormatDirective implements OnInit {
     getFormattedDay(value: string): string | undefined;
     getFormattedMonth(value: string): string | undefined;
 }
+//# sourceMappingURL=mdb-date-format.directive.d.ts.map

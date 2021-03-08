@@ -141,3 +141,4 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     checkActive(): boolean;
     toggleInlineDatePicker(): void;
 }
+//# sourceMappingURL=datepicker.component.d.ts.map

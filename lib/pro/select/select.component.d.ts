@@ -124,3 +124,4 @@ export declare class MdbSelectComponent implements OnInit, OnDestroy, AfterConte
     registerOnChange(fn: (_: any) => void): void;
     registerOnTouched(fn: () => void): void;
 }
+//# sourceMappingURL=select.component.d.ts.map

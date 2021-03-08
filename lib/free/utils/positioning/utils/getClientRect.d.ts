@@ -3,3 +3,4 @@
  */
 import { Offsets } from '../models/index';
 export declare function getClientRect(offsets: any): Offsets;
+//# sourceMappingURL=getClientRect.d.ts.map

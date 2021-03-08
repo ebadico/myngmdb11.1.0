@@ -35,3 +35,4 @@ export interface Options {
         };
     };
 }
+//# sourceMappingURL=index.d.ts.map

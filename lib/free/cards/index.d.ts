@@ -6,3 +6,4 @@ export { MdbCardTextComponent } from './mdb-card-text.component';
 export { MdbCardTitleComponent } from './mdb-card-title.component';
 export { MdbCardFooterComponent } from './mdb-card-footer.component';
 export { MdbCardHeaderComponent } from './mdb-card-header.component';
+//# sourceMappingURL=index.d.ts.map

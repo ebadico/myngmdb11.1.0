@@ -21,3 +21,4 @@ export { isModifierEnabled } from './isModifierEnabled';
 export { isNumeric } from './isNumeric';
 export { setAllStyles } from './setAllStyles';
 export { setStyles } from './setStyles';
+//# sourceMappingURL=index.d.ts.map

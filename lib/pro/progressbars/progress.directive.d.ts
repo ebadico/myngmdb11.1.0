@@ -11,3 +11,4 @@ export declare class ProgressDirective {
     addBar(bar: BarComponent): void;
     removeBar(bar: BarComponent): void;
 }
+//# sourceMappingURL=progress.directive.d.ts.map

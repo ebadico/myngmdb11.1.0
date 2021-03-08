@@ -12,3 +12,4 @@ export declare class Option {
     get label(): string;
     get icon(): string;
 }
+//# sourceMappingURL=option.d.ts.map

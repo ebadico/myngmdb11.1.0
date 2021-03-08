@@ -41,3 +41,4 @@ export declare class Overlay {
 }
 /** Providers for Overlay and its related injectables. */
 export declare const OVERLAY_PROVIDERS: (typeof OverlayContainer | typeof Overlay)[];
+//# sourceMappingURL=overlay.d.ts.map

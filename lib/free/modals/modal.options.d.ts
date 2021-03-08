@@ -46,3 +46,4 @@ export declare const DISMISS_REASONS: {
     BACKRDOP: string;
     ESC: string;
 };
+//# sourceMappingURL=modal.options.d.ts.map

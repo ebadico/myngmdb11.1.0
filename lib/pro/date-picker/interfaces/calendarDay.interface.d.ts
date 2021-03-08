@@ -8,3 +8,4 @@ export interface IMyCalendarDay {
     disabled: boolean;
     markedDate: IMyMarkedDate;
 }
+//# sourceMappingURL=calendarDay.interface.d.ts.map

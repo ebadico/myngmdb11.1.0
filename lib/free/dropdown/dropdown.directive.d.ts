@@ -95,3 +95,4 @@ export declare class BsDropdownDirective implements OnInit, OnDestroy {
     toggle(value?: boolean): void;
     ngOnDestroy(): void;
 }
+//# sourceMappingURL=dropdown.directive.d.ts.map

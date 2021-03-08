@@ -8,3 +8,4 @@ export declare class NavlinksComponent implements AfterContentInit {
     constructor(_navbarService: NavbarService, renderer: Renderer2);
     ngAfterContentInit(): void;
 }
+//# sourceMappingURL=navlinks.component.d.ts.map

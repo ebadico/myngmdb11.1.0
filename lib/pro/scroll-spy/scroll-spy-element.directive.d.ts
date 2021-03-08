@@ -18,3 +18,4 @@ export declare class ScrollSpyElementDirective implements OnInit, AfterViewInit 
     ngOnInit(): void;
     ngAfterViewInit(): void;
 }
+//# sourceMappingURL=scroll-spy-element.directive.d.ts.map

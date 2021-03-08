@@ -9,3 +9,4 @@ export declare class ContentRef {
     componentRef?: ComponentRef<any>;
     constructor(nodes: any[], viewRef?: ViewRef, componentRef?: ComponentRef<any>);
 }
+//# sourceMappingURL=content-ref.class.d.ts.map

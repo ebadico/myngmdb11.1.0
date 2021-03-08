@@ -34,3 +34,4 @@ export declare class ToastInjector implements Injector {
     constructor(_toastPackage: ToastPackage, _parentInjector: Injector);
     get<T>(token: any, notFoundValue?: T): T | ToastPackage;
 }
+//# sourceMappingURL=toast.injector.d.ts.map

@@ -16,3 +16,4 @@ export declare class ScrollSpyService {
     setActiveLink(activeLink: ScrollSpyLinkDirective | any): void;
     removeActiveLinks(scrollSpyId: string): void;
 }
+//# sourceMappingURL=scroll-spy.service.d.ts.map

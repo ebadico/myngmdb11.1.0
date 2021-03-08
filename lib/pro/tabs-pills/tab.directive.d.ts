@@ -34,3 +34,4 @@ export declare class TabDirective implements OnInit, OnDestroy {
     ngOnInit(): void;
     ngOnDestroy(): void;
 }
+//# sourceMappingURL=tab.directive.d.ts.map

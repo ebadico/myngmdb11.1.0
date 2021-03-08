@@ -15,3 +15,4 @@ export declare class BsDropdownToggleDirective implements OnDestroy {
     constructor(_state: BsDropdownState, _element: ElementRef, _renderer: Renderer2, _cdRef: ChangeDetectorRef);
     ngOnDestroy(): void;
 }
+//# sourceMappingURL=dropdown-toggle.directive.d.ts.map

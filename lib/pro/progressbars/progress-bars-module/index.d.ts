@@ -3,3 +3,4 @@ export { ProgressBarComponent } from './progressbar.component';
 export declare class MdProgressBarModule {
     static forRoot(): ModuleWithProviders<MdProgressBarModule>;
 }
+//# sourceMappingURL=index.d.ts.map

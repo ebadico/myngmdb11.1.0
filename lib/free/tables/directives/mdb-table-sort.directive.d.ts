@@ -32,3 +32,4 @@ export declare class MdbTableSortDirective implements OnInit, AfterViewInit {
     removeSort(): void;
 }
 export {};
+//# sourceMappingURL=mdb-table-sort.directive.d.ts.map

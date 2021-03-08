@@ -94,3 +94,4 @@ export declare class MDBUploaderService {
     makeUploadFile(file: File, index: number): UploadFile;
     private parseResponseHeaders;
 }
+//# sourceMappingURL=mdb-uploader.class.d.ts.map

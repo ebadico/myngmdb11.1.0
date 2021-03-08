@@ -6,3 +6,4 @@ export declare class MdbBreadcrumbItemComponent implements OnInit {
     constructor(_el: ElementRef, _renderer: Renderer2);
     ngOnInit(): void;
 }
+//# sourceMappingURL=mdb-breadcrumb-item.component.d.ts.map

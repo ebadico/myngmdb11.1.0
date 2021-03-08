@@ -16,3 +16,4 @@ export declare class BarComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void;
     recalculatePercentage(): void;
 }
+//# sourceMappingURL=bar.component.d.ts.map

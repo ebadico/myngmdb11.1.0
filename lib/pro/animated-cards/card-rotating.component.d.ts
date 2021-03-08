@@ -8,3 +8,4 @@ export declare class CardRotatingComponent {
     constructor(_cdRef: ChangeDetectorRef);
     toggle(): void;
 }
+//# sourceMappingURL=card-rotating.component.d.ts.map

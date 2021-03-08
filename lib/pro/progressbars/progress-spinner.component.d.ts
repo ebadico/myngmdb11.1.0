@@ -9,3 +9,4 @@ export declare class ProgressSpinnerComponent implements AfterViewInit {
     ngAfterViewInit(): void;
     spinerRun(): void;
 }
+//# sourceMappingURL=progress-spinner.component.d.ts.map

@@ -57,3 +57,4 @@ export interface IMyOptions {
     inputIcon?: boolean;
     inlineInputIcon?: boolean;
 }
+//# sourceMappingURL=options.interface.d.ts.map

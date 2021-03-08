@@ -40,3 +40,4 @@ export declare class ImageModalComponent implements OnInit {
     keyboardControl(event: any): void;
     swipe(action?: String): void;
 }
+//# sourceMappingURL=image-popup.d.ts.map

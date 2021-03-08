@@ -13,3 +13,4 @@ export declare class MdbSuccessDirective implements OnInit, OnDestroy {
     ngOnInit(): void;
     ngOnDestroy(): void;
 }
+//# sourceMappingURL=success.directive.d.ts.map

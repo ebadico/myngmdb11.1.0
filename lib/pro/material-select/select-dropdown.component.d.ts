@@ -80,3 +80,4 @@ export declare class SelectDropdownComponent implements AfterViewInit, OnChanges
     private handleOptionsWheel;
     ngOnDestroy(): void;
 }
+//# sourceMappingURL=select-dropdown.component.d.ts.map

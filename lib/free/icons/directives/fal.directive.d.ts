@@ -4,3 +4,4 @@ export declare class FalDirective {
     private _r;
     constructor(_el: ElementRef, _r: Renderer2);
 }
+//# sourceMappingURL=fal.directive.d.ts.map

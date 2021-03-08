@@ -18,3 +18,4 @@ export declare class ScrollSpyLinkDirective implements OnInit {
     assignSectionToId(): void;
     ngOnInit(): void;
 }
+//# sourceMappingURL=scroll-spy-link.directive.d.ts.map

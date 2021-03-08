@@ -8,3 +8,4 @@ export { Trigger } from './trigger.class';
 export { Utils } from './utils.class';
 export { window, document } from './facade/browser';
 export { warnOnce } from './warn-once';
+//# sourceMappingURL=index.d.ts.map

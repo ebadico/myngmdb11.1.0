@@ -6,3 +6,4 @@ export declare class SelectAllOptionComponent extends OptionComponent implements
     option: boolean;
     ngOnInit(): void;
 }
+//# sourceMappingURL=select-all-option.d.ts.map

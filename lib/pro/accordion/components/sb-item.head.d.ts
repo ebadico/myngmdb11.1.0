@@ -15,3 +15,4 @@ export declare class SBItemHeadComponent implements OnInit, AfterViewInit {
     ngOnInit(): void;
     ngAfterViewInit(): void;
 }
+//# sourceMappingURL=sb-item.head.d.ts.map

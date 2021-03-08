@@ -10,3 +10,4 @@ export declare class EasyPieChartComponent implements OnInit, OnChanges {
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
 }
+//# sourceMappingURL=chart-smallpie.component.d.ts.map

@@ -11,3 +11,4 @@ export declare class SlideComponent {
     el: ElementRef | any;
     constructor(el: ElementRef);
 }
+//# sourceMappingURL=slide.component.d.ts.map

@@ -15,3 +15,4 @@ export declare class MdbCardComponent implements OnInit {
     constructor(_el: ElementRef, _r: Renderer2);
     ngOnInit(): void;
 }
+//# sourceMappingURL=mdb-card.component.d.ts.map

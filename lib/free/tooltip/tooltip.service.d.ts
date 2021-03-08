@@ -7,3 +7,4 @@ export declare class TooltipConfig {
     /** a selector specifying the element the tooltip should be appended to. Currently only supports "body" */
     container: string;
 }
+//# sourceMappingURL=tooltip.service.d.ts.map

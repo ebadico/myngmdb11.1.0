@@ -22,3 +22,4 @@ export declare class ModalContainerComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void;
     hide(): void;
 }
+//# sourceMappingURL=modalContainer.component.d.ts.map

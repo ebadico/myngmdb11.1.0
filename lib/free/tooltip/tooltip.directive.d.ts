@@ -75,3 +75,4 @@ export declare class TooltipDirective implements OnInit, OnDestroy, OnChanges {
     dispose(): void;
     ngOnDestroy(): void;
 }
+//# sourceMappingURL=tooltip.directive.d.ts.map

@@ -5,3 +5,4 @@ import { ModuleWithProviders } from '@angular/core';
 export declare class SmoothscrollModule {
     static forRoot(): ModuleWithProviders<SmoothscrollModule>;
 }
+//# sourceMappingURL=mdb-page-scroll.module.d.ts.map

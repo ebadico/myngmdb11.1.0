@@ -91,3 +91,4 @@ export declare class ClockPickerComponent implements OnInit, AfterViewInit, Cont
     registerOnChange(fn: any): void;
     registerOnTouched(fn: any): void;
 }
+//# sourceMappingURL=timepicker.component.d.ts.map
