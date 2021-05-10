@@ -1,12 +1,14 @@
-import { TemplateRef, ElementRef, OnInit } from '@angular/core';
+import { TemplateRef, ElementRef, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-export declare class MdbStepComponent implements OnInit {
+import { Subject } from 'rxjs';
+export declare class MdbStepComponent implements OnInit, OnChanges {
     el: ElementRef;
     content: TemplateRef<any>;
     editable: boolean;
     name: string;
     label: string;
     stepForm: FormGroup;
+    _onChanges: Subject<void>;
     constructor(el: ElementRef);
     get isDone(): boolean;
     set isDone(value: boolean);
@@ -20,5 +22,6 @@ export declare class MdbStepComponent implements OnInit {
     private _removeClasses;
     reset(): void;
     ngOnInit(): void;
+    ngOnChanges(changes: SimpleChanges): void;
 }
 //# sourceMappingURL=step.component.d.ts.map

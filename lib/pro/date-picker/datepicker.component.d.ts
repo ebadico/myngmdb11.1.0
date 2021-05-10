@@ -39,6 +39,7 @@ export declare class MDBDatePickerComponent implements OnChanges, ControlValueAc
     todayButtonClicked: EventEmitter<MDBDatePickerComponent>;
     divFocus: any;
     inlineInput: any;
+    inlineLabel: ElementRef<HTMLElement>;
     inlineIconToggle: any;
     pickerFrame: ElementRef;
     isDateSelected: boolean;

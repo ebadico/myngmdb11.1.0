@@ -1,5 +1,5 @@
 import { NavbarService } from './navbar.service';
-import { AfterContentChecked, AfterViewInit, ElementRef, OnInit, Renderer2, ChangeDetectorRef, NgZone, OnDestroy } from '@angular/core';
+import { AfterContentChecked, AfterViewInit, ElementRef, OnInit, Renderer2, ChangeDetectorRef, NgZone, OnDestroy, EventEmitter } from '@angular/core';
 import { LinksComponent } from './links.component';
 export declare class NavbarComponent implements AfterViewInit, OnInit, AfterContentChecked, OnDestroy {
     renderer: Renderer2;
@@ -13,9 +13,11 @@ export declare class NavbarComponent implements AfterViewInit, OnInit, AfterCont
     collapseId: string;
     scrollSensitivity: number;
     scrollableNavbar: boolean;
+    shown: EventEmitter<any>;
+    hidden: EventEmitter<any>;
     private _destroy$;
     navbarLinkClicks: any;
-    shown: boolean;
+    isShown: boolean;
     doubleNav: boolean;
     height: number;
     duration: number;

@@ -40,6 +40,7 @@ export declare class PopoverDirective implements OnInit, OnDestroy {
     set isOpen(value: boolean);
     dynamicPosition: boolean;
     outsideClick: boolean;
+    popoverDisabled: boolean;
     /**
      * Emits an event when the popover is shown
      */
@@ -52,6 +53,7 @@ export declare class PopoverDirective implements OnInit, OnDestroy {
     hidden: EventEmitter<any>;
     private _popover;
     constructor(_elementRef: ElementRef, _renderer: Renderer2, _viewContainerRef: ViewContainerRef, _config: PopoverConfig, cis: ComponentLoaderFactory, _positionService: PositioningService);
+    get hasContent(): boolean;
     /**
      * Opens an element’s popover. This is considered a “manual” triggering of
      * the popover.
