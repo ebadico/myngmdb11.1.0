@@ -1,11 +1,11 @@
-import { AfterViewInit, ElementRef, OnDestroy, OnInit, Renderer2, ChangeDetectorRef } from '@angular/core';
+import { AfterViewInit, ElementRef, OnDestroy, OnInit, Renderer2, ChangeDetectorRef, EventEmitter } from '@angular/core';
 export declare class SidenavComponent implements AfterViewInit, OnDestroy, OnInit {
     el: ElementRef;
     renderer: Renderer2;
     private _cdRef;
     private document;
     windwosWidth: number;
-    shown: boolean;
+    isShown: boolean;
     slimSidenav: boolean;
     isBrowser: any;
     private _sidenavTransform;
@@ -14,6 +14,8 @@ export declare class SidenavComponent implements AfterViewInit, OnDestroy, OnIni
     sidenavBreakpoint: any;
     get side(): string;
     set side(position: string);
+    shown: EventEmitter<any>;
+    hidden: EventEmitter<any>;
     private _side;
     sideNav: ElementRef;
     overlay: any;
